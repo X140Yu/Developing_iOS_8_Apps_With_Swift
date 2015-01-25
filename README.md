@@ -7,6 +7,6 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 
 每集视频和课件百度网盘下载地址：
 
-[1. Logistics, iOS 8 Overview](http://pan.baidu.com/s/1i3lAS77)
+[1. Logistics, iOS 8 Overview](http://pan.baidu.com/s/1kTIaP4V)
 
 [2. More Xcode and Swift, MVC](http://pan.baidu.com/s/1gdkYYDd)

@@ -11,4 +11,6 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 
 [2. More Xcode and Swift, MVC](http://pan.baidu.com/s/1gdkYYDd)
 
+The original work by Stanford University is licensed under a Creative Commons Attribution-Noncommercial-Share Alike 3.0 United States License.
+
 This projected is licensed under the terms of the Attribution-NonCommercial-ShareAlike 3.0 United States (CC BY-NC-SA 3.0 US) license.

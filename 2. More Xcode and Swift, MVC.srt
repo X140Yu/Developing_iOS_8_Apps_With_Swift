@@ -7112,581 +7112,694 @@
 
 1500
 01:06:43,221 --> 01:06:46,455
- Now simple data, like if I had
-  a view, if I invented a view
+ Now simple data, like if I had 
+  a view, if I invented a view  
+ 一些简单的数据，比如我给纸牌游戏
 
 1501
 01:06:46,457 --> 01:06:49,224
-    for my card game called
-     playing card view and
+    for my card game called     
+     playing card view and      
+     创建了一个叫playing card view的视图
 
 1502
 01:06:49,226 --> 01:06:51,109
- it just has a suit and a rank.
+ it just has a suit and a rank. 
+ 它仅有花色和点数两点属性。
 
 1503
 01:06:51,110 --> 01:06:52,993
-    Okay, we're not going to
-     do count data app for
+    Okay, we're not going to    
+     do count data app for   
+     我们不会为了花色和点数
 
 1504
 01:06:52,996 --> 01:06:54,262
-      just suit and rank.
+      just suit and rank.     
+进行计算。
 
 1505
 01:06:54,264 --> 01:06:56,030
-      We are going to set
-       those properties.
+      We are going to set       
+       those properties. 
+       我们会把它们设置成属性。
 
 1506
 01:06:56,032 --> 01:06:58,766
-   And so the view then would
-  have that data set in it but
+   And so the view then would   
+  have that data set in it but  
+  所以view里会有设置好的数据，但是
 
 1507
 01:06:58,768 --> 01:07:00,267
-   it wouldn't be owning it.
+   it wouldn't be owning it. 
+   它不会拥有这些数据。   
 
 1508
 01:07:00,269 --> 01:07:02,536
-             Right?
-    The model would still be
+             Right?             
+    The model would still be    
+    model仍然会是花色和点数的
 
 1509
 01:07:02,538 --> 01:07:04,571
-      owning the suit and
+      owning the suit and 
+      拥有者，      
 
 1510
 01:07:04,572 --> 01:07:06,605
- rank, the view is just getting
-    that data to present it.
+ rank, the view is just getting 
+    that data to present it.    
+    view仅仅是为了显示而获取那些数据。
 
 1511
 01:07:06,608 --> 01:07:07,840
-             'Kay.
+             'Kay.              
         So simple data,
+        所以对于简单的数据，         
 
 1512
 01:07:07,842 --> 01:07:10,743
-      we might transfer to
-  the view but it's merely for
+      we might transfer to      
+  the view but it's merely for  
+  我们会把它传送到view里，但是
 
 1513
 01:07:10,745 --> 01:07:12,878
-       it to display it.
+       it to display it.     
+       只是给view来显示。   
 
 1514
 01:07:12,880 --> 01:07:14,312
-             Okay.
+             Okay.         
 
 1515
 01:07:14,314 --> 01:07:17,615
-      This all adds up to
- the controller's job being to
+      This all adds up to       
+ the controller's job being to  
+ 所以controller的工作就是
 
 1516
 01:07:17,617 --> 01:07:22,520
-      interpret and format
- the model's data for the view.
+      interpret and format      
+ the model's data for the view. 
+ 给view解释并格式化这些model提供的数据。
 
 1517
 01:07:22,522 --> 01:07:23,654
-  That's the controller's job.
+  That's the controller's job.  
+  这就是controller的工作。
 
 1518
 01:07:23,656 --> 01:07:25,188
-    And when we do our demo,
+    And when we do our demo,    
+    在我们做deomo的时候，
 
 1519
 01:07:25,190 --> 01:07:28,758
- I'm going to be marking like,
- oh see I'm writing this code.
+ I'm going to be marking like,  
+ oh see I'm writing this code.  
+ 我会在写代码的时候提示大家，
 
 1520
 01:07:28,760 --> 01:07:31,494
- This is to make the controller
+ This is to make the controller 
         perform its job,
+ 这段代码是为了让controller执行它的工作，        
 
 1521
 01:07:31,496 --> 01:07:34,430
-        which is to take
-       the model data and
+        which is to take        
+       the model data and       
+       也就是从model中取出数据然后
 
 1522
 01:07:34,432 --> 01:07:36,265
-     using its view minion
-      to put it on screen.
+     using its view minion      
+      to put it on screen. 
+      运用到view中去，然后显示到屏幕上。
 
 1523
 01:07:36,267 --> 01:07:37,132
-             Okay?
-          That's what
+             Okay?              
+          That's what           
+          这就是
 
 1524
 01:07:37,134 --> 01:07:38,667
-      the controller does.
+      the controller does.      
+      controller做的事情。
 
 1525
 01:07:38,669 --> 01:07:40,468
- What about this communication?
+ What about this communication? 
+ 那关于通信呢？
 
 1526
 01:07:40,470 --> 01:07:42,970
-       Can the model talk
-       to the controller?
+       Can the model talk       
+       to the controller?       
+       model可以和controller通信吗？
 
 1527
 01:07:42,972 --> 01:07:46,040
-    Again, obviously that's
-  verboten because model knows
+    Again, obviously that's     
+  verboten because model knows  
+同样的，显然是不可以。因为model对于UI
 
 1528
 01:07:46,042 --> 01:07:47,708
-      nothing about UI, so
+      nothing about UI, so      
+      一无所知，所以
 
 1529
 01:07:47,710 --> 01:07:50,710
- it couldn't possibly talk to a
- UI object like the controller.
+ it couldn't possibly talk to a 
+ UI object like the controller. 
+ 它不可能同像controller一样的UI对象进行通信。
 
 1530
 01:07:50,712 --> 01:07:53,046
-      But sometimes things
-    change in the model, and
+      But sometimes things      
+    change in the model, and    
+    但是有些时候，model中的数据变了，
 
 1531
 01:07:53,048 --> 01:07:54,580
-    the controller needs to
-      know about it, okay?
+    the controller needs to     
+      know about it, okay?      
+      controller需要只要这个变化，OK?
 
 1532
 01:07:54,582 --> 01:07:56,782
-         Data changes,
-     a database changes or
+         Data changes,          
+     a database changes or      
+     数据改变了，数据库改变了，或者
 
 1533
 01:07:56,784 --> 01:07:59,017
-       the model is some
-     network database, and
+       the model is some        
+     network database, and    
+     model是网络数据库，  
 
 1534
 01:07:59,019 --> 01:08:01,186
- somebody changes something on
-  the network and it changes.
+ somebody changes something on  
+  the network and it changes.   
+  某人在网络上修改了数据，数据改变了。
 
 1535
 01:08:01,188 --> 01:08:02,587
-       And the controller
-       needs to find out.
+       And the controller       
+       needs to find out.       
+       controller需要了解这些。
 
 1536
 01:08:02,589 --> 01:08:04,555
-        So, how do we do
-      that communication?
+        So, how do we do        
+      that communication?    
+      所以，我们怎样做这种通信呢？   
 
 1537
 01:08:05,958 --> 01:08:09,592
-    We do that using kind of
-     a radio station model.
+    We do that using kind of    
+     a radio station model.  
+     这可以通过一种电台的模型来理解
 
 1538
 01:08:09,594 --> 01:08:11,928
-             Okay?
+             Okay?              
 
 1539
 01:08:11,929 --> 01:08:14,263
- So, the model, a radio station
-  concept, the model will use
+ So, the model, a radio station 
+  concept, the model will use   
+  所以，model是一种电台的概念，
 
 1540
 01:08:14,265 --> 01:08:17,866
-  this concept to essentially
-    broadcast information to
+  this concept to essentially   
+    broadcast information to 
+    model将会利用这一 概念，把信息广播给   
 
 1541
 01:08:17,868 --> 01:08:19,768
-    anyone who's interested.
+    anyone who's interested.    
+    感兴趣的任何人。
 
 1542
 01:08:19,770 --> 01:08:21,937
-             Okay?
+             Okay?              
 
 1543
 01:08:21,938 --> 01:08:24,105
-     And the mechanisms for
-  doing this in iOS are called
+     And the mechanisms for     
+  doing this in iOS are called  
+  在iOS中为了解决这种问题而使用的技术我们叫做
 
 1544
 01:08:24,107 --> 01:08:28,476
-   Notification and Key Value
-   Observing, KVO we call it.
+   Notification and Key Value   
+   Observing, KVO we call it.   
+   Notification和KVO。
 
 1545
 01:08:28,478 --> 01:08:31,211
-     And so, the model can
-     just say, oh, anytime
+     And so, the model can      
+     just say, oh, anytime      
+     所以，model可以说，
 
 1546
 01:08:31,213 --> 01:08:33,547
- something changes in my model
-  I'm just gonna broadcast on
+ something changes in my model  
+  I'm just gonna broadcast on   
+我当中的任何东西发生了变化，我会通过我的电台
 
 1547
 01:08:33,549 --> 01:08:37,484
- my radio station, and then the
-  controller simply tunes into
+ my radio station, and then the 
+  controller simply tunes into  
+  广播一下，随后，controller
 
 1548
 01:08:37,486 --> 01:08:40,453
- that radio station, and he can
- find out things are changing.
+ that radio station, and he can 
+ find out things are changing.  
+ 会接收到来自电台的信息，它会发现数据在变化
 
 1549
 01:08:40,455 --> 01:08:42,254
-     And when he finds out
-       something changes,
+     And when he finds out      
+       something changes,       
+       发现数据变化以后，
 
 1550
 01:08:42,256 --> 01:08:46,058
- it's gonna communicate via its
-  green arrow to the model and
+ it's gonna communicate via its 
+  green arrow to the model and  
+  它就会通过它的绿剪头同model进行通信，
 
 1551
 01:08:46,060 --> 01:08:47,659
-       say, okay, give me
-    that data that changed.
+       say, okay, give me       
+    that data that changed.     
+    给我那个改变过的数据。
 
 1552
 01:08:48,962 --> 01:08:49,560
-             Right?
+             Right?   
 
 1553
 01:08:49,562 --> 01:08:50,978
-        That make sense?
+        That make sense?        
+        能听懂吗？
 
 1554
 01:08:50,979 --> 01:08:52,395
-     So, towards the end of
- the quarter we'll start seeing
+     So, towards the end of     
+ the quarter we'll start seeing 
+ 所以在课程的1/4处，我们将会学习
 
 1555
 01:08:52,398 --> 01:08:54,531
-       a little how to do
+       a little how to do       
  notification to find out, for
+ 如何利用通知得知
 
 1556
 01:08:54,533 --> 01:08:57,334
-      example, if the data
-     in a database changes.
+      example, if the data      
+     in a database changes.     
+     数据库中的数据发生了改变。
 
 1557
 01:08:57,336 --> 01:09:00,070
-   We'll get a notification,
-   the UI can then, you know,
+   We'll get a notification,    
+   the UI can then, you know, 
+   我们将会获取这个通知，UI中的controller  
 
 1558
 01:09:00,072 --> 01:09:03,272
-  controller can then go talk
- to the model to get the info.
+  controller can then go talk   
+ to the model to get the info.  
+ 随后可以同model通信来获取信息。
 
 1559
 01:09:05,309 --> 01:09:06,286
-             Okay?
+             Okay?         
 
 1560
 01:09:06,287 --> 01:09:07,264
-    Some people have asked,
+    Some people have asked,     
+    有些人会问，
 
 1561
 01:09:07,265 --> 01:09:08,242
-      can a view tune into
-       the radio station?
+      can a view tune into      
+       the radio station?       
+       view可以接收广播吗？
 
 1562
 01:09:08,245 --> 01:09:09,878
-    They probably could, but
+    They probably could, but    
+    它们也许可以，但是
 
 1563
 01:09:09,880 --> 01:09:11,179
-     you probably wouldn't
-        want to do that.
+     you probably wouldn't      
+        want to do that.        
+        你最好不要这样做。
 
 1564
 01:09:11,181 --> 01:09:12,980
-     That would probably be
-      a violation of MVC.
+     That would probably be     
+      a violation of MVC.       
+      这可能违背了MVC的原则。
 
 1565
 01:09:12,982 --> 01:09:14,749
-           All right.
+           All right.     
+           好的。      
 
 1566
 01:09:14,751 --> 01:09:16,750
-         So we do this.
+         So we do this.         
+         我们这样做，
 
 1567
 01:09:16,752 --> 01:09:18,785
-     We have all this nice
-       communication and
+     We have all this nice      
+       communication and        
+       我们有这些很好的通信和
 
 1568
 01:09:18,787 --> 01:09:21,288
-        all these rules,
+        all these rules,        
+        所有的这些规则。
 
 1569
 01:09:21,289 --> 01:09:23,790
-  and we can imagine building
-  something simple using this.
+  and we can imagine building   
+  something simple using this.  
+  我们可以利用这些来制作一些小的应用。
 
 1570
 01:09:23,792 --> 01:09:26,259
-   But what if we wanna build
-     a big complicated app?
+   But what if we wanna build   
+     a big complicated app?     
+     但是如果我们想要制作一个巨大复杂的应用呢？
 
 1571
 01:09:26,261 --> 01:09:28,861
-    An app that has multiple
-   screens on our iPhone, or
+    An app that has multiple    
+   screens on our iPhone, or  
+   一个在iPhone或iPad上运行，有多个屏幕，  
 
 1572
 01:09:28,863 --> 01:09:30,863
-   an iPad, it's got three or
+   an iPad, it's got three or   
+   在屏幕上有三个或四个不同的区域，
 
 1573
 01:09:30,865 --> 01:09:34,166
- four different areas on screen
-  where things are happening.
+ four different areas on screen 
+  where things are happening. 
+    都发生着事情。
 
 1574
 01:09:34,168 --> 01:09:35,433
-       How do we do that?
+       How do we do that?       
+       我们该怎么做？
 
 1575
 01:09:35,435 --> 01:09:36,834
-          Well, we're
-      essentially going to
+          Well, we're           
+      essentially going to      
+      我们
 
 1576
 01:09:36,836 --> 01:09:40,071
-  combine multiple MVCs, okay?
+  combine multiple MVCs, okay?  
+  会结合多个MVC
 
 1577
 01:09:40,073 --> 01:09:47,244
- Because an MVC can use as part
-   of its view, another MVC.
+ Because an MVC can use as part 
+   of its view, another MVC.    
+因为一个MVC可以将另一个MVC当做视图的一部分。
 
 1578
 01:09:47,246 --> 01:09:48,311
-             Okay?
+             Okay?           
 
 1579
 01:09:48,313 --> 01:09:52,114
-           So an MVC,
-  an entire MVC can be one of
+           So an MVC,           
+  an entire MVC can be one of   
+  所以一个完整的MVC可以被一个稍大些的
 
 1580
 01:09:52,116 --> 01:09:56,051
-         the minions of
-        some bigger MVC.
+         the minions of         
+        some bigger MVC.       
+        MVC当做仆人使用。 
 
 1581
 01:09:56,053 --> 01:09:57,803
-             'Kay?
+             'Kay?      
 
 1582
 01:09:57,804 --> 01:09:59,554
-     And by doing that and
-       cascading it down,
+     And by doing that and      
+       cascading it down,       
+       我们可以一层一层地这样堆叠，
 
 1583
 01:09:59,556 --> 01:10:01,756
-     we can build more and
- more complicated applications.
+     we can build more and      
+ more complicated applications. 
+ 就可以制作出越来越复杂的应用。
 
 1584
 01:10:01,758 --> 01:10:07,561
- So, an example of this is, you
- might have your calendar app,
+ So, an example of this is, you 
+ might have your calendar app,  
+ 例如，你可能有一个日历应用，
 
 1585
 01:10:07,563 --> 01:10:09,930
-      and it's showing you
-        the entire year.
+      and it's showing you      
+        the entire year.        
+        它展示给你一整年的信息。
 
 1586
 01:10:09,932 --> 01:10:12,599
- And you click on a month, and
- now it shows you a month view.
+ And you click on a month, and  
+ now it shows you a month view. 
+ 随后你点击了一个月份，于是它展示给你月视图。
 
 1587
 01:10:12,601 --> 01:10:14,567
- Well, a month view looks a lot
-  different than a year view.
+ Well, a month view looks a lot 
+  different than a year view.   
+  月视图看起来和年视图就不太一样了。
 
 1588
 01:10:14,569 --> 01:10:17,503
-   A month view just has all
- the days and maybe some circle
+   A month view just has all    
+ the days and maybe some circle 
+ 一个月视图只含有所有的日期，也许在日期上
 
 1589
 01:10:17,505 --> 01:10:19,204
- that tells you where you have
-    an appointment on a day.
+ that tells you where you have  
+    an appointment on a day.    
+    会有一些通知你在某天会有任务的圈圈。
 
 1590
 01:10:19,206 --> 01:10:20,939
-       And then when you
-      click on a day, and
+       And then when you        
+      click on a day, and    
+      随后，你点击了一天，然后你   
 
 1591
 01:10:20,941 --> 01:10:23,074
- now you get a day view, okay?
+ now you get a day view, okay?  
+ 获得了一个日视图
 
 1592
 01:10:23,076 --> 01:10:25,043
-   And the day is showing you
-     the hours and what all
+   And the day is showing you   
+     the hours and what all     
+     日视图会显示小时信息和这天你的所有
 
 1593
 01:10:25,045 --> 01:10:27,611
- your appointments are, and you
-  click on the Appointment now
+ your appointments are, and you 
+  click on the Appointment now  
+  任务，随后你点击了任务，
 
 1594
 01:10:27,613 --> 01:10:29,947
-  you get an appointment view
-  and it showing the detail of
+  you get an appointment view   
+  and it showing the detail of  
+你会获得任务视图，它会显示任务的细节，
 
 1595
 01:10:29,949 --> 01:10:32,182
-     where you're going and
-  when it is et cetera, okay?
+     where you're going and     
+  when it is et cetera, okay?  
+  将要去哪，何时动身还有其它一些东西
 
 1596
 01:10:32,184 --> 01:10:36,452
-   Well, each of those views,
- year view, month view, the day
+   Well, each of those views,   
+ year view, month view, the day 
+ 这些view中的每一个，年视图，月视图，日视图，
 
 1597
 01:10:36,454 --> 01:10:40,155
-   view, and the appointment
-    view are their own MVCs.
+   view, and the appointment    
+    view are their own MVCs.    
+    任务视图，都有他们自己的MVC。
 
 1598
 01:10:40,157 --> 01:10:41,857
-             Okay?
+             Okay?           
 
 1599
 01:10:41,858 --> 01:10:43,558
-      But you can see how
-     the last three, okay,
+      But you can see how       
+     the last three, okay,      
+     但是你可以发现，最后三个view,
 
 1600
 01:10:43,560 --> 01:10:47,628
-   are used as essentially a
+   are used as essentially a    
  minion of the top level view,
+ 都被最顶层的年视图为了展示更多的细节
 
 1601
 01:10:47,630 --> 01:10:51,032
-           year view,
-   to show more detail, okay?
+           year view,           
+   to show more detail, okay?   
+   而被当做仆人使用。
 
 1602
 01:10:51,034 --> 01:10:52,766
-       So the year view,
-     you click on a month,
+       So the year view,        
+     you click on a month,      
+     所以在年视图里，你点击了一个月份，
 
 1603
 01:10:52,768 --> 01:10:57,404
-  it's going to use the month
- view MVC to show more detail.
+  it's going to use the month   
+ view MVC to show more detail.  
+ 它会利用月份视图的MVC来展现更多细节。
 
 1604
 01:10:57,406 --> 01:11:00,406
-   So it's part of its view,
-             okay?
+   So it's part of its view,    
+             okay?              
+    所以它是它视图的一部分，
 
 1605
 01:11:00,408 --> 01:11:03,476
-     So, you see this also
-      in iOS with tab bar
+     So, you see this also      
+      in iOS with tab bar  
+所以你也在带有便签控制栏的iOS应用
 
 1606
 01:11:03,478 --> 01:11:05,228
-      controllers, right?
+      controllers, right?       
+      中见过这些吧
 
 1607
 01:11:05,229 --> 01:11:06,979
-    You have the tab bar at
-   the bottom, I have four or
+    You have the tab bar at     
+   the bottom, I have four or   
+   在底部有一个标签栏，有四个或五个
 
 1608
 01:11:06,981 --> 01:11:09,615
-  five things you can choose.
+  five things you can choose.  
+  项可以供你选择。 
 
 1609
 01:11:09,616 --> 01:11:12,250
-  Well there's some MVC at the
- top whose has four pointers to
+  Well there's some MVC at the  
+ top whose has four pointers to 
+ 在上面有一个MVC，它指向四个仆人，
 
 1610
 01:11:12,252 --> 01:11:15,120
-  four minions, which are the
- four MVCs that are each going
+  four minions, which are the   
+ four MVCs that are each going  
+也就是将要出现在标签栏中的MVC，
 
 1611
 01:11:15,122 --> 01:11:17,488
- to appear in a tab bar, okay?
+ to appear in a tab bar, okay?  
 
 1612
 01:11:17,490 --> 01:11:18,673
-    We'll be doing that for
+    We'll be doing that for    
+    我们将会做一个这方面的例子， 
 
 1613
 01:11:18,674 --> 01:11:19,857
-     example, in assignment
-         number two or
+     example, in assignment     
+         number two or     
+      在第二次或第三次作业，我们会        
 
 1614
 01:11:19,859 --> 01:11:21,792
-      three where we'll be
-      making a tab bar and
+      three where we'll be      
+      making a tab bar and   
+      制作一个标签栏，   
 
 1615
 01:11:21,794 --> 01:11:25,328
-    you're gonna have to do
-      multiple MVCs, okay?
+    you're gonna have to do     
+      multiple MVCs, okay?      
+      你们将会学习如何使用多个MVC
 
 1616
 01:11:25,330 --> 01:11:28,531
-   So, that basically results
-    in a picture looks kinda
+   So, that basically results   
+    in a picture looks kinda    
+  所以使用多个MVC的效果看起来就像
 
 1617
 01:11:28,533 --> 01:11:29,899
-           like this.
+           like this.       
+           这张图片一样。    
 
 1618
 01:11:29,901 --> 01:11:31,434
-           All right?
+           All right?           
 
 1619
 01:11:31,435 --> 01:11:32,968
-  Where you got this MVC, and
+  Where you got this MVC, and   
+  在你看到的这个MVC里，
 
 1620
 01:11:32,969 --> 01:11:34,502
- you see the purple one that's
-    like underneath the word
+ you see the purple one that's  
+    like underneath the word    
+    找到'together'下面的那个
 
 1621
 01:11:34,505 --> 01:11:37,239
-      together there, and
+      together there, and 
+      紫色的，      
 
 1622
 01:11:37,240 --> 01:11:39,974
- it points to three other MVCs
-   outside of its view thing.
+ it points to three other MVCs  
+   outside of its view thing.   
+   它从view指向了另外三个MVC，
 
 1623
 01:11:39,977 --> 01:11:40,542
@@ -7694,323 +7807,389 @@
 
 1624
 01:11:41,478 --> 01:11:42,710
-        That's how we're
-     going to build it, so
+        That's how we're        
+     going to build it, so      
+     这就是我们创建标签栏控制器的方式，
 
 1625
 01:11:42,712 --> 01:11:43,944
-      that might be a tab
-        bar control and
+      that might be a tab       
+        bar control and     
+      这些可能就是它的
 
 1626
 01:11:43,946 --> 01:11:45,812
- those might be the three tabs.
+ those might be the three tabs. 
+三个标签。
 
 1627
 01:11:45,814 --> 01:11:47,614
-           Okay, and
- each one is its own little MVC
+           Okay, and            
+ each one is its own little MVC 
+ 并且它们每一个都是
 
 1628
 01:11:47,616 --> 01:11:50,249
-    completely independent,
-      operates on its own.
+    completely independent,     
+      operates on its own.      
+      完全独立的，可以独自行动的小MVC。
 
 1629
 01:11:50,251 --> 01:11:52,418
-       Doesn't even know,
+       Doesn't even know,       
+      这时它就是一个
 
 1630
 01:11:52,419 --> 01:11:54,586
-  it's a generic reusable view
-   like thing at this point.
+  it's a generic reusable view  
+   like thing at this point.    
+普通的可重用的view之类的东西，
 
 1631
 01:11:54,589 --> 01:11:56,689
-     Doesn't even know that
-       it's in a tab bar.
+     Doesn't even know that     
+       it's in a tab bar.  
+       它甚至不知道它在标签栏中。
 
 1632
 01:11:56,691 --> 01:11:58,090
-    Okay, it just knows that
-      it's supposed to do
+    Okay, it just knows that    
+      it's supposed to do   
+      它只知道它应该做
 
 1633
 01:11:58,092 --> 01:11:59,591
-       whatever it does.
+       whatever it does.        
+       这些事情。
 
 1634
 01:11:59,593 --> 01:12:01,192
-             And so
-   it's modular in that way.
+             And so             
+   it's modular in that way.    
+   所以在这方面，它是模块化的。
 
 1635
 01:12:01,194 --> 01:12:04,328
- You can also see that there's
-  no communication between any
+ You can also see that there's  
+  no communication between any 
+  可以看到这里不再有其他箭头， 
 
 1636
 01:12:04,330 --> 01:12:06,397
-    other, there's no other
+    other, there's no other     
        arrows, except for
+       除了一些模型。       
 
 1637
 01:12:06,399 --> 01:12:08,249
-      some of the models.
+      some of the models.       
 
 1638
 01:12:08,250 --> 01:12:10,100
- You see some of the models are
- communicating with each other.
+ You see some of the models are 
+ communicating with each other. 
+ 某些模型之间在互相通信。
 
 1639
 01:12:10,102 --> 01:12:11,852
-         You know a big
+         You know a big         
+         要知道，
 
 1640
 01:12:11,853 --> 01:12:13,603
-     application might have
-     a single shared model.
+     application might have     
+     a single shared model.     
+     一个大型的应用也许会有一个单独的共享模型。
 
 1641
 01:12:13,605 --> 01:12:17,606
-  Or the models might be split
- off into pieces to be used by
+  Or the models might be split  
+ off into pieces to be used by  
+ 或者，模型会被分开来供子MVC使用。
 
 1642
 01:12:18,876 --> 01:12:20,208
-           sub MVCs.
+           sub MVCs.            
 
 1643
 01:12:20,210 --> 01:12:21,326
-             Okay?
-              But
+             Okay?              
+              But          
+              但是，     
 
 1644
 01:12:21,327 --> 01:12:22,443
-    that's the only kind of
- communication you have there.
+    that's the only kind of     
+ communication you have there.  
+ 这里只能使用这种通信方式。
 
 1645
 01:12:22,446 --> 01:12:23,678
-   All other communication is
+   All other communication is   
+   其它所有的通信
 
 1646
 01:12:23,680 --> 01:12:26,681
-   either the structure view
-  communication we saw on MVC,
+   either the structure view    
+  communication we saw on MVC,  
+  要么是MVC中的结构化通信，
 
 1647
 01:12:26,683 --> 01:12:29,716
-   or it's using MVCs as part
-  of the view of another MVC.
+   or it's using MVCs as part   
+  of the view of another MVC.   
+  要么是将MVC用作另一个MVC视图的一部分。
 
 1648
 01:12:31,386 --> 01:12:32,385
-    Any question about that?
+    Any question about that?    
+    有问题吗？
 
 1649
 01:12:33,688 --> 01:12:36,689
-  So we definitely don't want
-   to be having designs that
+  So we definitely don't want   
+   to be having designs that    
+   所以我们当然不希望设计成这样，
 
 1650
 01:12:36,691 --> 01:12:38,190
-     look like this, okay?
+     look like this, okay?  
 
 1651
 01:12:38,192 --> 01:12:39,824
-       Where everybody's
-     talking to everybody.
+       Where everybody's        
+     talking to everybody.      
+     所有都在互相通信，
 
 1652
 01:12:39,826 --> 01:12:41,459
-      We can't tell who's
-        talking to what.
+      We can't tell who's       
+        talking to what.        
+        我们不能分清谁在和什么通信。
 
 1653
 01:12:41,461 --> 01:12:43,994
- It's just impossible to debug
-    a program like this, and
+ It's just impossible to debug  
+    a program like this, and   
+    这会让调试程序变得异常艰难， 
 
 1654
 01:12:43,996 --> 01:12:45,446
        it doesn't scale.
+       而且它无法规模化。        
 
 1655
 01:12:45,447 --> 01:12:46,897
-     You can't build really
-     big programs this way.
+     You can't build really     
+     big programs this way.     
+     你不能通过这种方式创建出大程序。
 
 1656
 01:12:46,899 --> 01:12:48,165
- It just becomes impossible to
+ It just becomes impossible to 
+ 这样的话， 
 
 1657
 01:12:48,167 --> 01:12:51,634
-   know how touching anything
- would break everything, right?
+   know how touching anything   
+ would break everything, right? 
+ 你无法弄清楚，什么地方会引发整个程序的崩溃。
 
 1658
 01:12:51,636 --> 01:12:53,469
-    So we're definitely not
-    going to be doing that.
+    So we're definitely not     
+    going to be doing that.     
+    所以我们绝对不会这样做的。
 
 1659
 01:12:54,639 --> 01:12:57,573
-  All right so that's MVC and,
+  All right so that's MVC and,  
+  所以，这就是MVC，
 
 1660
 01:12:57,575 --> 01:13:00,875
-  like I say, on Monday we'll
-  apply MVC to our calculator.
+  like I say, on Monday we'll   
+  apply MVC to our calculator.  
+  我们将会在周一的课里把MVC应用到我们的计算器程序中。
 
 1661
 01:13:01,845 --> 01:13:02,977
-      So what's coming up?
+      So what's coming up?      
+      所以，接下来是什么？
 
 1662
 01:13:02,979 --> 01:13:06,146
-     I always try to get to
-   this slide every lecture.
+     I always try to get to     
+   this slide every lecture.  
+   我每节课都尽量讲到这里，
 
 1663
 01:13:06,148 --> 01:13:09,716
-     Sometimes I forget but
-   it's posted in the slides.
+     Sometimes I forget but     
+   it's posted in the slides.   
+   有时我会忘记，但是它被放到了课件中。
 
 1664
 01:13:09,718 --> 01:13:12,018
-  It says tomorrow is Friday.
+  It says tomorrow is Friday.   
+  周五也就是明天，
 
 1665
 01:13:12,020 --> 01:13:14,320
-         No, day after
-      tomorrow is Friday.
+         No, day after          
+      tomorrow is Friday.       
+      不对，后天的周五，
 
 1666
 01:13:14,322 --> 01:13:17,256
-         And people who
-   are watching on iTunes U,
+         And people who         
+   are watching on iTunes U,    
+   在iTunes U上观看的同学们，
 
 1667
 01:13:17,258 --> 01:13:19,858
-   these Friday sections will
-     not be on iTunes U so
+   these Friday sections will   
+     not be on iTunes U so      
+     周五的部分不会被放到iTunes U上，
 
 1668
 01:13:19,860 --> 01:13:22,461
-      don't go looking for
+      don't go looking for      
   them only the normal Monday,
+  只有周一和周三的课件才会被放上去，  
 
 1669
 01:13:22,463 --> 01:13:24,596
-       Wednesday lectures
-       went on iTunes U.
+       Wednesday lectures       
+       went on iTunes U.      
+       所以不要到处找。  
 
 1670
 01:13:25,999 --> 01:13:27,164
-  But, for Stanford students,
+  But, for Stanford students,   
+  但是对于在坐的同学，
 
 1671
 01:13:27,166 --> 01:13:30,300
-  Friday we have this debugger
-    section we talked about.
+  Friday we have this debugger  
+    section we talked about.    
+    周五我们将讨论之前谈到的调试部分。
 
 1672
 01:13:30,302 --> 01:13:32,769
-     And then next Monday,
+     And then next Monday,      
+     下周一，你们的阅读作业
 
 1673
 01:13:32,771 --> 01:13:35,638
-    your reading assignment
-        is gonna be due.
+    your reading assignment     
+        is gonna be due.        
+        将会截至。
 
 1674
 01:13:35,640 --> 01:13:37,040
-        In other words,
-  you should be done with that
+        In other words,         
+  you should be done with that  
+  换句话说，你应当在周一上课之前
 
 1675
 01:13:37,042 --> 01:13:40,176
-   reading assignment before
- the start of Monday's lecture.
+   reading assignment before    
+ the start of Monday's lecture. 
+ 完成阅读作业。
 
 1676
 01:13:40,178 --> 01:13:43,045
-    And I'm gonna assign you
-  another reading assignment.
+    And I'm gonna assign you    
+  another reading assignment.   
+  我会再布置给你们一个阅读作业。
 
 1677
 01:13:43,047 --> 01:13:45,180
-     It might be your only
-   other reading assignment.
+     It might be your only      
+   other reading assignment.    
+   它将会是你们最后一个阅读作业。
 
 1678
 01:13:45,182 --> 01:13:46,815
-      Perhaps there'll be
-     a reassignment three,
+      Perhaps there'll be       
+     a reassignment three,  
+    也许以后还会有阅读作业，
 
 1679
 01:13:46,817 --> 01:13:48,383
-      but it won't be any
-        more than that.
+      but it won't be any       
+        more than that. 
+        但是不会像那个一样多。        
 
 1680
 01:13:49,318 --> 01:13:50,351
-   And then on Wednesday I'm
+   And then on Wednesday I'm    
+   下周三，我会深入介绍
 
 1681
 01:13:50,353 --> 01:13:53,420
-     really gonna dive into
-     swift and foundation.
+     really gonna dive into     
+     swift and foundation.      
+     Swift语言和Foundation框架。
 
 1682
 01:13:53,422 --> 01:13:56,556
-  I'm gonna talk a little bit
- about the Objective C legacy,
+  I'm gonna talk a little bit   
+ about the Objective C legacy,  
+ 我将会介绍一点遗留下来的Objective-C。
 
 1683
 01:13:57,625 --> 01:13:59,425
-    and then your assignment
-        one is gonna be
+    and then your assignment    
+        one is gonna be         
+        你们的作业一将会在
 
 1684
 01:13:59,427 --> 01:14:00,792
-     due a week from today.
+     due a week from today.     
+     一周后截至。
 
 1685
 01:14:00,794 --> 01:14:05,129
- It's been posted for you, and
-  your assignment two is gonna
+ It's been posted for you, and  
+  your assignment two is gonna  
+  你们已经看到了，作业二将会在
 
 1686
 01:14:05,131 --> 01:14:08,032
-  go out next Wednesday and be
- due the Wednesday after that.
+  go out next Wednesday and be  
+ due the Wednesday after that.  
+ 下周三布置下去，下下周三截至。
 
 1687
 01:14:08,034 --> 01:14:09,900
-    Just for a little bit of
-     advanced planning for
+    Just for a little bit of    
+     advanced planning for      
+     提前为你们所有人
 
 1688
 01:14:09,902 --> 01:14:11,335
-          all of you.
+          all of you.  
+          做一些计划。         
 
 1689
 01:14:11,337 --> 01:14:12,235
-             Okay?
+             Okay?              
 
 1690
 01:14:12,237 --> 01:14:13,202
-      Any other questions?
+      Any other questions?      
+      还有问题吗？
 
 1691
 01:14:14,439 --> 01:14:15,904
-        Okay, thank you.
+        Okay, thank you.        
+        好的，谢谢。
 
 1692
 01:14:15,906 --> 01:14:19,808
-   >> For more, please visit
-      us at stanford.edu.
+   >> For more, please visit    
+      us at stanford.edu.       
+  >> 想了解更多，请登录 stanford.edu
+

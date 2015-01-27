@@ -1413,324 +1413,396 @@
 00:12:38,214 --> 00:12:41,248
         We want to enter
         the guts of it.
+        我们开始着手实现它的内部。
 
 301
 00:12:41,250 --> 00:12:44,150
   And so we are going to need
  another property here which is
+ 我们需要在这定义另一个属性，
 
 302
 00:12:44,152 --> 00:12:45,702
         going to be that
+        它将会是
 
 303
 00:12:45,703 --> 00:12:47,253
    internal stack that these
   numbers are going to go on.
+  这些数字的内部栈。
+
 
 304
 00:12:47,255 --> 00:12:52,057
       And so that's gonna
        be a var just like
+       所以它会是一个变量，就像
 
 305
 00:12:52,059 --> 00:12:54,393
      this var up here that
        we've created and
+       我们刚创建的这个变量。
 
 306
 00:12:54,395 --> 00:12:57,562
    I'm call it operand stack
    that's a good name for it.
+   我叫它操作符栈，不错的名字。
+
 
 307
 00:12:57,564 --> 00:12:58,730
   And it's gonna have a type,
+  它会有一个类型，
+
 
 308
 00:12:58,732 --> 00:13:02,233
        it's type is going
        to be an array and
+       它的类型是数组，
 
 309
 00:13:02,235 --> 00:13:05,869
   just like in other languages
   like Java when you specify,
+  就像在其他语言中，比如说Java——
 
 310
 00:13:05,871 --> 00:13:08,805
     when you create an array
    type you have to specify.
+   当你创建一个数组，你必须指明它的类型，
 
 311
 00:13:08,807 --> 00:13:10,840
        What kind of thing
         is in the array.
+        表明数组里面存储的是什么。
 
 312
 00:13:10,842 --> 00:13:15,211
      And so, I'm gonna put
       doubles in my array.
+      因此，我打算在里面存放double元素
 
 313
 00:13:17,214 --> 00:13:20,782
   And that's, even though you
     might say, well we can't
+    嗯。也许你会说，好吧我们并不能
 
 314
 00:13:20,784 --> 00:13:25,286
   enter doubles, because these
   are all integers, basically.
+  输入double，因为这里大都是些integer。
 
 315
 00:13:25,288 --> 00:13:29,723
      But if I were to say,
   3 enter 6 divide, I get .5.
+  但是假如我说，输入3除以6，我会得到0.5，
 
 316
 00:13:29,725 --> 00:13:31,925
  So than a double would appear.
+ 这样就出现了一个double。
 
 317
 00:13:31,927 --> 00:13:34,661
        So that's why I'm
       going to use double.
+      这就是我为什么要使用double。
 
 318
 00:13:34,663 --> 00:13:38,964
   Now, you can see that we've
  got this error up here again.
+ 现在，你们可以看到这里又弹出了这个错误，
 
 319
 00:13:38,966 --> 00:13:41,133
     It says stored property
      operandStack does not
+     上面说存储的属性operandStack并没有
 
 320
 00:13:41,135 --> 00:13:43,368
       have initial value.
+      初始值。
 
 321
 00:13:43,370 --> 00:13:45,036
        So we have to give
      this an initial value.
+     所以我们得赋给它初始值。
 
 322
 00:13:45,038 --> 00:13:47,071
       So I'm going to give
     this an initial value of
+    我准备把初始值赋为
 
 323
 00:13:47,073 --> 00:13:48,472
         an empty array.
+        一个空的数组。
 
 324
 00:13:48,474 --> 00:13:51,608
   So now you're seeing for the
   first time how you actually.
+  现在你们第一次看到实际上如何
 
 325
 00:13:51,610 --> 00:13:57,480
      Create an instance of
    a class or of a data type.
+   创建一个类或者数据类型的实例。
 
 326
 00:13:57,482 --> 00:14:00,249
     And you do that just by
     specifying the type and
+    你只需要在这指明类型
 
 327
 00:14:00,251 --> 00:14:01,984
      then use parenthesis.
+     然后写上分号。
 
 328
 00:14:01,986 --> 00:14:03,752
         Now, we're not,
+        现在，我们没有，
 
 329
 00:14:03,754 --> 00:14:05,554
     again we haven't talked
       about initializers.
+      我们还没有讨论过构造器。
 
 330
 00:14:05,556 --> 00:14:06,888
            A class or
+           一个类或者
 
 331
 00:14:06,890 --> 00:14:09,390
    a data structure can have
      multiple initializers.
+     一种数据类型可以有许多构造器。
 
 332
 00:14:09,392 --> 00:14:11,158
        Some of them might
     have arguments in here.
+    其中的一些可能会在这里有参数。
 
 333
 00:14:12,128 --> 00:14:16,863
    But most, if it's possible
       they'll allow you to
+      但大多数情况，如果允许，你都可以
 
 334
 00:14:16,865 --> 00:14:21,133
       create them with no
    arguments and in a case on
+   创建没有参数的构造器，对于
 
 335
 00:14:21,135 --> 00:14:22,835
-      our right it's very
+      our right(!!array，我听的是这个，请校验) it's very
       obvious what to do.
+      数组，该做什么一目了然。
 
 336
 00:14:22,837 --> 00:14:25,103
    No arguments just creates
      an empty array right,
+     不需要参数，只要创建一个空的数组，在右边
 
 337
 00:14:25,105 --> 00:14:27,739
     with no elements in it.
+    这里不需要任何参数。
 
 338
 00:14:27,741 --> 00:14:31,142
  Now, one thing I want to talk
    about is this right here.
+   现在，我想说一下这里这个东西，
 
 339
 00:14:31,144 --> 00:14:32,376
       This type, you know?
+      这种类型，你们知道吗，
 
 340
 00:14:32,378 --> 00:14:34,078
    It's kind of annoying that
     we have to type this and
+    你会觉得很烦，如果在这定义了类型，
 
 341
 00:14:34,080 --> 00:14:36,147
       then we have to type
         it right again.
+        然后在这又得定义一遍。
 
 342
 00:14:36,148 --> 00:14:38,215
        And the answer is,
    we don't have to do that,
+   而事实上，我们并不需要这么做，
+
 
 343
 00:14:38,217 --> 00:14:41,051
        because in swift,
  swift is very strongly typed.
+ 因为swift是严格强类型的。
 
 344
 00:14:41,053 --> 00:14:43,252
       You know there's all
        the variables, but
+       你要知道所有的变量，
 
 345
 00:14:43,254 --> 00:14:45,221
          the properties
       are strongly typed.
+      属性都是强类型的。
 
 346
 00:14:45,223 --> 00:14:48,724
      But they, there's also
     a lot of type inference.
+    而且它们都有许多类型推断。
 
 347
 00:14:48,726 --> 00:14:50,625
-      So swift can infer.
+      So swift can infer.（此处应该没有句号，this type应该在这里）
+      因此swift可以推断类型。
 
 348
 00:14:50,627 --> 00:14:53,995
   This type in the exact same
  way that digit had no type and
+ 比如说这里的digit并没有类型，
 
 349
 00:14:53,997 --> 00:14:55,596
    it inferred it from here.
+   但它可以从这里推断出来。
 
 350
 00:14:55,598 --> 00:14:58,366
   OperandStack, we don't have
    to specify they type, and
+   OperandStack，我们并不需要指明它的类型，因为
 
 351
 00:14:58,368 --> 00:14:59,633
    it can infer it from here.
+   可以从这里推断出来。
 
 352
 00:14:59,635 --> 00:15:02,302
    And if we option click on
   operandStack you'll see that
+  如果我们按住option点击operandStack，你会看到
 
 353
 00:15:02,304 --> 00:15:05,271
  indeed, it's figured out that
    that's an array of double.
+   它确实可以辨识出这是一个double类型的数组。
 
 354
 00:15:05,273 --> 00:15:07,824
           And in fact,
+          事实上，
 
 355
 00:15:07,825 --> 00:15:10,376
     putting the type in here
     is considered bad form.
+    在这里指明类型被认为是不好的书写形式。
 
 356
 00:15:10,378 --> 00:15:14,080
      If it can be inferred,
   you should let it infer, so,
+  如果可以推断出类型，你就应该让它自己去推断，所以
 
 357
 00:15:14,082 --> 00:15:16,915
- if we didn't have this blue up
+ if we didn't have this blue（for example，而且明明是bool！英文是机器录入的么） up
  here we shouldn't that either,
+ 拿这里的Bool来说，我们其实也需要声明类型。
 
 358
 00:15:16,917 --> 00:15:21,419
  because, false, and true are,
-  can only be blue values so,
+  can only be blue values so,（bool！！！）
+  因为false和true只可能是Bool的值。
 
 359
 00:15:21,421 --> 00:15:22,887
         we're gonna take
        that off as well.
+       所以我们也可以把它去掉。
 
 360
 00:15:22,889 --> 00:15:28,025
-    Okay, so, now, our brand
+    Okay, so, now, our brand（operand好伐，我真是醉了，好累）
+    好了，那么现在，我们这里有操作符栈，
 
 361
 00:15:28,027 --> 00:15:30,994
      stack right here what
     do we wanna do with it?
+    我们打算把怎么处理它呢？
 
 362
 00:15:30,996 --> 00:15:34,597
    Well, when we press enter,
     we just want to append.
+    嗯，我们按下回车，然后我们想要append，
 
 363
 00:15:34,599 --> 00:15:35,798
           So, append.
+          所以，append。
 
 364
 00:15:35,800 --> 00:15:39,034
    This is actually the first
   time we're sending an actual
+  事实上这是我们第一次发送一条
 
 365
 00:15:39,036 --> 00:15:41,703
       message to an object
     looks just like when we
+    消息给一个对象。就像去
 
 366
 00:15:41,705 --> 00:15:43,738
       accessed a property.
+      获取了一个属性一样。
 
 367
 00:15:43,740 --> 00:15:47,375
  The dot and it's just the name
     of the method that we're
+    输入点号，然后就出现了我们想要在数组上调用的方法名字。
 
 368
 00:15:47,377 --> 00:15:49,110
@@ -1740,705 +1812,861 @@
 369
 00:15:49,112 --> 00:15:51,478
  Just an array, an array method
-    right here called a pen.
+    right here called a pen（append！！）.
+    这是一个数组；这是一个叫做append的数组方法。
 
 370
 00:15:51,480 --> 00:15:54,414
  I think you see the arguments
        as newElement: T.
+       我想你们看到了这个参数——newElement: T
 
 371
 00:15:54,416 --> 00:15:57,517
      This : T means it has
       to be of this type.
+      这个 : T 意味着它必须是这个类型。
 
 372
 00:15:57,519 --> 00:16:00,853
  Type of things in the array so
     this has to be a double.
+    这个数组里面东西的类型，所以它必须是一个double。
 
 373
 00:16:00,855 --> 00:16:04,223
   So that's kind of a problem,
    cuz really what I want to
+   这也是一个问题，因为事实上我想要在
 
 374
 00:16:04,225 --> 00:16:08,060
  append onto my stack is what's
  up here in this display text.
+ 我的栈上附加的是，这里display text的内容。
 
 375
 00:16:08,062 --> 00:16:11,830
    And, you know, I'd like to
  say something along the lines
+ 然后在这行输入display.text
 
 376
 00:16:11,832 --> 00:16:13,164
         of display.text.
 
+
 377
 00:16:13,166 --> 00:16:15,099
              Okay?
      But what type is this?
+     好吧，它的类型是什么呢？
 
 378
 00:16:15,101 --> 00:16:16,767
-    I can type display.text.
+    I can type display.text.（type of display.text？？）
+    display.text的类型。
 
 379
 00:16:18,437 --> 00:16:19,936
      Now that's not string.
+     它不是string。
 
 380
 00:16:19,938 --> 00:16:22,205
       That is an optional.
+      它是一个optional。
 
 381
 00:16:22,207 --> 00:16:24,874
    Remember that display.text
         is an optional.
+        记住这里的display.text是一个optional，
 
 382
 00:16:24,876 --> 00:16:28,043
         So we can unwrap
          it even though
+         所以我们可以把它拆包，但
 
 383
 00:16:28,045 --> 00:16:29,911
         that's not gonna
        solve the problem.
+       这并不能解决问题。
 
 384
 00:16:29,913 --> 00:16:31,212
    This is still a string and
+   这仍是一个string，
 
 385
 00:16:31,214 --> 00:16:33,381
       you're still seeing
          an error here.
+         你们还是可以看到这里有一个错误。
 
 386
 00:16:33,383 --> 00:16:36,217
      The same string is not
  convertible to double [COUGH].
+ 这个string不可以转化为double[咳]。
 
 387
 00:16:36,219 --> 00:16:37,651
      Because we're supposed
     to be putting doubles in
+    因为我们本应把double放入
 
 388
 00:16:37,653 --> 00:16:39,086
   this array putting strings.
+  这个数组而不是string。
 
 389
 00:16:39,088 --> 00:16:40,987
   So, we have a problem here.
+  所以，我们在这有个问题。
 
 390
 00:16:40,989 --> 00:16:44,323
    We have somehow to convert
   this string into a double so
+  我们得用某种方式把string转化成double以便
 
 391
 00:16:44,325 --> 00:16:45,358
   we can put it on this stack.
+  我们把它放入栈中。
 
 392
 00:16:46,394 --> 00:16:48,994
          I'm gonna use
        this opportunity.
+       我要借用这个机会，
 
 393
 00:16:48,996 --> 00:16:51,129
      Just show you another
         feature which we
+        向你们展示另一个特性，我们
 
 394
 00:16:51,131 --> 00:16:52,930
    call Computed Properties.
+   称之为计算型属性。
+
 
 395
 00:16:52,932 --> 00:16:56,000
   So I'm gonna create another
    property display value and
+   所以我要在这里创建另一个属性displayValue,
 
 396
 00:16:56,002 --> 00:16:57,401
     it's gonna be a double.
+    它是一个double。
 
 397
 00:16:57,403 --> 00:17:00,671
    And what I want this to be
  equal to is, I always want it
+ 然后我想让它等于，我想让它
 
 398
 00:17:00,673 --> 00:17:03,773
     to be whatever's in this
  display converted to a double.
+ 等于这里的显示转化成double的值。
 
 399
 00:17:04,742 --> 00:17:05,786
              Okay?
          And I want to
+         好了，然后我想
 
 400
 00:17:05,787 --> 00:17:06,831
  be able to set it or get it so
+ 有办法对它进行设值以及取值，以便
 
 401
 00:17:06,832 --> 00:17:07,876
     I'm gonna be able to get
    the value of this double.
+   我能够取到这个double的值。
 
 402
 00:17:07,878 --> 00:17:10,112
    I just want to be able to
      set it as a double and
+     我想把它设值成一个double然后
 
 403
 00:17:10,114 --> 00:17:11,413
     have it turn into text.
+    把它转化成文本。
 
 404
 00:17:13,016 --> 00:17:15,616
        Well, that kind of
+       好吧，这种类型的
 
 405
 00:17:15,618 --> 00:17:19,886
    property really is tied to
    some data somewhere else.
+   属性实际上是与其他地方的某些数据绑定的。
 
 406
 00:17:19,888 --> 00:17:22,756
   So, I don't ever want to set
  it equal to some initial value
+ 所以，我不想把它设成某个初始值
 
 407
 00:17:22,758 --> 00:17:25,125
          or something.
+         还是什么。
 
 408
 00:17:25,126 --> 00:17:27,493
  Really, I want it to always be
  calculated and we can do that.
+ 实际上，我想让它总是可计算的，而我们可以做到。
 
 409
 00:17:27,495 --> 00:17:29,295
        Instead of saying
        equals something,
+       与其说等于什么，
 
 410
 00:17:29,297 --> 00:17:32,364
        you just put curly
          braces after.
+         你只需要在后面写上大括号。
 
 411
 00:17:32,366 --> 00:17:37,168
        And you say, get,
         and we say, set.
+        然后写下get，再写set。
 
 412
 00:17:37,170 --> 00:17:39,871
              Okay?
+             好了。
 
 413
 00:17:39,872 --> 00:17:42,573
   And inside here we are gonna
    compute the value of this.
+   然后在这里面，我们要对它的值进行计算了。
 
 414
 00:17:42,575 --> 00:17:46,010
      Which is we are gonna
    convert this display text
+   这将会把这里的显示文本转化成
 
 415
 00:17:46,012 --> 00:17:49,479
   to a double and then inside
   here, we are, someone said,
+  double，然后在这里，我们要，要让
 
 416
 00:17:49,481 --> 00:17:52,449
  display value equal something
       and we are going to
+      显示值等于什么，我们要做的是
 
 417
 00:17:52,451 --> 00:17:55,251
         somehow compute,
   not really compute it, but.
+  想办法能够计算它，并不是真的去计算“它”，而是
 
 418
 00:17:55,253 --> 00:17:58,854
     We're gonna de, decide,
  what code we need to put that
+ 我们要决定我们需要什么样的代码能够把
 
 419
 00:17:58,856 --> 00:18:02,024
  number that they tried to set
  the display value to in here.
+ 那个显示值在这里设值。
 
 420
 00:18:03,126 --> 00:18:05,393
             'Kay, so
   let's do the set side first.
+  好吧，那么让我们先来写set方法。
 
 421
 00:18:05,395 --> 00:18:07,695
          It's actually
        a little simpler.
+       这其实会简单一些。
 
 422
 00:18:07,697 --> 00:18:08,929
         Inside this set,
+        在set方法里，
 
 423
 00:18:08,931 --> 00:18:11,231
     there's a magic variable
        called new value.
+       会有一个叫作newValue的魔法变量，
 
 424
 00:18:12,300 --> 00:18:14,901
   It doesn't, it's not purple
      for some reason, but.
+     它不是，因为某些原因它并不是紫色的
 
 425
 00:18:14,903 --> 00:18:16,235
        New value in this,
      this is the new value.
+     这里的newValue。
 
 426
 00:18:16,237 --> 00:18:17,903
        So if someone says
      somewhere in our code,
+     如果说在我们的代码里，
 
 427
 00:18:17,905 --> 00:18:19,338
    display value equals five,
+   显示值等于5，
 
 428
 00:18:19,340 --> 00:18:21,306
       this new value will
          have the five.
+         那这个newValue就会是5。
 
 429
 00:18:22,442 --> 00:18:23,541
-  And so all I really wanna do
+  And so all I really wanna do。
+  我所想做的
 
 430
 00:18:23,543 --> 00:18:26,276
     here is say display text
      equals the new value.
+     就是在这让display.text等于newValue。
 
 431
 00:18:26,278 --> 00:18:30,480
    But again, of course this
      is an optional string.
+     但同样的问题，这是个optional string，
 
 432
 00:18:30,482 --> 00:18:33,216
   You can't set it to a double
   because displayValue equals
+  你不能把它设成一个double因为displayValue等于
 
 433
 00:18:33,218 --> 00:18:36,419
      five, this new values
      going to be a double.
+     5，这个newValue将会是一个double。
 
 434
 00:18:36,421 --> 00:18:41,557
    But we know how to convert
     something to a string by
+    但是我们知道如何把它转化成string，只需要写上
 
 435
 00:18:41,559 --> 00:18:45,260
   using backlash parenthesis.
+  反斜线，圆括号。
 
 436
 00:18:45,262 --> 00:18:48,129
       And this is the same
       thing we did when we
+      这其实和我们
 
 437
 00:18:48,131 --> 00:18:51,399
       printed out [COUGH]
        our digit up here.
+       输出[咳]这里digit是一样的。
 
 438
 00:18:51,401 --> 00:18:53,501
       We just use the back
        slash parenthesis.
+       我们只需要写上反斜线和圆括号。
 
 439
 00:18:53,503 --> 00:18:55,336
       It tries to convert
     this thing inside here,
+    它会试着在这里转化这个东西，
 
 440
 00:18:55,338 --> 00:18:57,938
      which is a double into
       a string of doubles.
+      把一个double转化成string。
 
 441
 00:18:57,940 --> 00:19:00,540
        You know how to do
         that themselves.
+        你知道该怎么做了。
 
 442
 00:19:00,542 --> 00:19:02,575
          And so bingo,
  we've got our display text and
+ 没错。我们得到了display.text，
 
 443
 00:19:02,577 --> 00:19:04,477
    that's all that necessary.
+   这就够了。
 
 444
 00:19:04,479 --> 00:19:07,479
  also, every time someone sets
    this value and then we're
+   而且，每次有人设值时，很明显我们
 
 445
 00:19:07,481 --> 00:19:10,282
    clearly not in the middle
   of typing a number anymore.
+  不再是在输入一个数字了。
 
 446
 00:19:10,284 --> 00:19:14,085
      [INAUDIBLE] Say that.
+     说。
 
 447
 00:19:14,087 --> 00:19:17,221
      [INAUDIBLE] All right,
     what about the getting?
+    好吧，那关于取值呢？
 
 448
 00:19:17,223 --> 00:19:19,290
        Now in the getting
       all we have to do is
+      在取值方法中，我们所要做的就是
 
 449
 00:19:19,292 --> 00:19:21,258
    return this display value.
+   返回displayValue。
 
 450
 00:19:21,260 --> 00:19:24,161
       So it's do something
      to calculate what this
+     就是要去计算
 
 451
 00:19:24,163 --> 00:19:26,363
      display value is here.
+     这里的displayValue。
 
 452
 00:19:27,399 --> 00:19:29,215
       And then return it.
+      然后返回它。
 
 453
 00:19:29,216 --> 00:19:31,032
       Now this one I'm not
      gonna take time to go
+     这次我不会花时间去
 
 454
 00:19:31,035 --> 00:19:32,801
    through the details here.
+   详细说明细节。
 
 455
 00:19:32,803 --> 00:19:37,205
   And actually I've made it an
  extra credit item that you can
+ 实际上我把它算作一个给你们去做的额外加分项，
 
 456
 00:19:37,207 --> 00:19:40,008
        do, which requires
        you to figure out
+       需要你们利用文档，去搞清楚我要在这写什么，
 
 457
 00:19:40,010 --> 00:19:44,345
     what I'm gonna type here
     using the documentation.
 
+
 458
 00:19:44,347 --> 00:19:45,879
        But I'm not going
       to explain it here.
+      而我不会在这解释它。
 
 459
 00:19:45,881 --> 00:19:49,382
   I'm gonna use a class that's
    in this number formatter.
+   我要在这个使用一个叫作NumberFormatter的类
 
 460
 00:19:49,384 --> 00:19:52,051
        I'm actually gonna
          create one and
+         我先创建一个，然后
 
 461
 00:19:52,053 --> 00:19:56,822
   I'm gonna use a method on it
    called number from string.
+   我要使用它的一个方法叫numberFromString。
 
 462
 00:19:57,858 --> 00:19:59,624
      And I'm gonna give it
       this string which is
+      然后我会把这个string传给他，
+
 
 463
 00:19:59,626 --> 00:20:02,593
     the display values text,
       unwrapped of course.
+      display.text,当然得拆包。
+
 
 464
 00:20:03,596 --> 00:20:06,497
  The result is acting optional
    so I'm gonna unwrap that.
+   结果是一个optional，所以我要把它拆包。
 
 465
 00:20:06,499 --> 00:20:09,499
    And then I'm gonna get the
   double value of the thing I
+  然后我要得到它返回的的double值。
+
 
 466
 00:20:09,501 --> 00:20:11,067
        get back [COUGH].
+       [咳]
 
 467
 00:20:11,068 --> 00:20:12,634
       Number gives me this
    kind of generic number so
+   Number给了我这种泛型的数字，所以
 
 468
 00:20:12,637 --> 00:20:14,637
      I am gonna take it and
      turn it into a double.
+     我把它转化成一个double。
 
 469
 00:20:14,639 --> 00:20:15,738
         So there we go.
+        好了。
 
 470
 00:20:15,739 --> 00:20:16,838
          So you can go
       the next spread and
+      你们可以继续下一步了，
 
 471
 00:20:16,841 --> 00:20:18,374
        look at that later
           if you want.
+          以后再考虑它，如果你想的话。
 
 472
 00:20:19,410 --> 00:20:20,959
     But surprising to say we
+    高兴的是我们
+
 
 473
 00:20:20,960 --> 00:20:22,509
   now have a property display
  value that when we set it and
+ 现在有了一个displayValue的属性，我们可以调用set和
 
 474
 00:20:22,512 --> 00:20:24,579
      get it, it's gonna be
       setting and getting.
+      get方法来设值和取值。
 
 475
 00:20:24,581 --> 00:20:27,415
     It has a string here, so
    that is really convenient.
+   这里有一个string，所以它也挺方便的。
 
 476
 00:20:27,417 --> 00:20:29,400
          Especially for
+         尤其是这里，
 
 477
 00:20:29,401 --> 00:20:31,384
       right here, where we
     wanna say display value.
+    其实我们想写的是displayValue
 
 478
 00:20:31,387 --> 00:20:32,285
              'Kay?
+             好。
 
 479
 00:20:32,287 --> 00:20:33,953
     So let's see the double.
+    让我们来看看这个double
 
 480
 00:20:33,955 --> 00:20:34,987
           No problem.
+          没错。
 
 481
 00:20:34,989 --> 00:20:37,256
        We're pinning that
        onto operandStack.
+       我们把它附到operandStack上了。
 
 482
 00:20:37,258 --> 00:20:40,058
      So let's print in our
        operandStack here.
+       所以让我们把operandStack在这打印出来。
 
 483
 00:20:42,362 --> 00:20:45,162
  Just so, I mean we can do the
  same thing here, operandStack.
+ 就像这样，一样的方式，operandStack。
 
 484
 00:20:46,632 --> 00:20:48,649
              Okay?
 
+
 485
 00:20:48,650 --> 00:20:50,667
     And this worked because
  operandStack is an array, and
+ 这种方式可行是因为operandStack是一个数组，
 
 486
 00:20:50,669 --> 00:20:53,636
     arrays know how to turn
     themselves into strings.
+    数组是知道如何把他们自身转化成string的。
 
 487
 00:20:53,638 --> 00:20:55,938
  You'll see how they do that in
  the console in a moment here.
+ 你一会儿就会在console里看到它们是怎么做到的了。
 
 488
 00:20:56,874 --> 00:20:58,040
      So let's go ahead and
+     所以我们继续
 
 489
 00:20:58,042 --> 00:21:00,842
    see if our application is
    actually putting things on
+   来看看我们的程序是否真的正确地能够把东西放到
 
 490
 00:21:00,844 --> 00:21:02,343
     our stack properly here.
+    我们的栈里。
 
 491
 00:21:04,547 --> 00:21:14,054
             [NOISE]
            All right.
+           好的。
 
 492
 00:21:14,056 --> 00:21:14,854
         Let's try here.
+        我们试着在这里，
 
 493
 00:21:14,856 --> 00:21:18,591
       Let's try 56 enter.
+      在这里输入56，
 
 494
 00:21:18,593 --> 00:21:21,761
      And look, operandStack
      equals 56 doing good.
+     看，operandStack是等于56，运行正常。
 
 495
 00:21:21,763 --> 00:21:23,128
           Seven enter.
+          输入7，
 
 496
 00:21:23,130 --> 00:21:24,429
     All right, 56.0 and 7.0.
+    好的，56.0和7.0。
 
 497
 00:21:24,431 --> 00:21:27,699
   So, you can see that arrays
   turn themselves into strings
+  所以你们看到了数组是如何把自身转化成string的，
 
 498
 00:21:27,701 --> 00:21:30,735
   by doing open square bracket
    and then they turn each of
+   在这个方括号里，它们把自身的每个
 
 499
 00:21:30,737 --> 00:21:33,937
   their elements into strings
     and separated by commas.
+    元素转化成string并以逗号分隔。
 
 500
 00:21:35,507 --> 00:21:37,207
        Now this is good.
+       这个就搞定了。
 
 501
 00:21:37,209 --> 00:21:39,642
      So we got our operand,
   operandStack building here.
+  我们这的operandStack就创建好了。
+
 
 502
 00:21:41,179 --> 00:21:44,713
   So all we need to do is have
    some times, and plus, and
+   所以我们现在需要做的就是要有乘法，加法和
 
 503
 00:21:44,715 --> 00:21:45,947
    minus buttons, et cetera.
+   减法之类的按钮。
 
 504
 00:21:45,949 --> 00:21:47,549
  I'm gonna put them right here.
+ 我要把他们放在这里。
 
 505
 00:21:47,551 --> 00:21:50,385
    That will operate on these
      items uh,on the stack.
+     它在在这些项上进行运算，在栈上。
 
 506
 00:21:50,387 --> 00:21:52,119
         So, if I pressed
         plus right now,
+        所以，如果我现在按下加，
 
 507
 00:21:52,121 --> 00:21:55,122
   it would pull the seven and
     the eight off the stack.
+    它就会把7和8从栈中拉出来，
 
 508
 00:21:55,124 --> 00:21:57,057
        Add them together,
         it would be 15.
+        把他们相加，得到15。
 
 509
 00:21:57,059 --> 00:21:58,758
      Show that 15 here, and
+     在这里显示15，
 
 510
 00:21:58,760 --> 00:22:00,560
       it actually will put
    the 15 back on the stack.
+   实际上15会被放回到栈里。
 
 511
 00:22:00,562 --> 00:22:03,696
    So then, we'd have 56 and
         15 on our stack.
+        然后，我们的栈里就有了56和15。
 
 512
 00:22:03,698 --> 00:22:04,863
      Then we could, maybe.
+     接着我们就可以，
 
 513
 00:22:04,865 --> 00:22:08,400
     Plus those together and
   we wanted by it plus again.
+  把它们加到一起，再运行一次加法。
 
 514
 00:22:08,402 --> 00:22:08,933
            All right?
+           没错吧？
 
 515
 00:22:08,935 --> 00:22:12,036
          [COUGH] Okay.
+         好的。
 
 516
 00:22:12,038 --> 00:22:15,539
   So how are we gonna do that?
+  所以我们应该怎么做呢？
 
 517
 00:22:15,541 --> 00:22:17,040
       Well, we would make
        our buttons here.
+       嗯，我们把按钮放到这。
 
 518
 00:22:17,042 --> 00:22:22,245
  And I'm gonna make the buttons
       again by copying and
+      我通过复制粘贴数字按钮来创建这些按钮。
 
 519
 00:22:22,247 --> 00:22:24,580
@@ -2448,375 +2676,456 @@
 00:22:24,582 --> 00:22:26,648
       But this time I know
       about that problem,
+      但是这次我已经知道那个问题了，
 
 521
 00:22:26,650 --> 00:22:29,584
     so right off the bat I'm
     gonna right click on it.
+    所以马上就点击它。
 
 522
 00:22:29,586 --> 00:22:31,353
-  And disconnect appendage it.
+  And disconnect appendage it.（appendDigit。。。）
+  然后取消和appendDigit的关联。
 
 523
 00:22:31,355 --> 00:22:34,472
              Okay?
                So
+               好的，那么
 
 524
 00:22:34,473 --> 00:22:37,590
     now this button sends no
      messages, yet anyway.
+     这个按钮现在就不会发送任何消息了。
 
 525
 00:22:37,593 --> 00:22:40,461
        And then we could
       put a type on here.
+      然后我们要在这上面设置一个符号。
 
 526
 00:22:40,463 --> 00:22:44,331
  So here I'm gonna have my all
    my operations buttons use
+   这里我要让所有的运算按钮使用
 
 527
 00:22:44,333 --> 00:22:47,000
  mathematical symbols so if we
  go down here to math symbols.
+ 数学符号，所以我们看这里的math symbols。
 
 528
 00:22:47,002 --> 00:22:49,936
       See there's a bunch
      of math symbols here.
+     看这里有好多数学符号。
 
 529
 00:22:49,938 --> 00:22:51,737
  So let's do times, right here,
+ 我们来给乘法设置符号，就在这里。
 
 530
 00:22:51,739 --> 00:22:56,775
   first, we'll put times right
  there, and we can wire it up.
+ 首先，把乘法放到这，然后我们可以把他嵌入代码。
 
 531
 00:22:56,777 --> 00:22:59,511
     I'm just gonna hold that
     Ctrl and drag out here.
+    按住Ctrl然后拉到这里来。
 
 532
 00:23:00,580 --> 00:23:03,881
         We're gonna call
       this action method.
+      我们把这个action称作方法
 
 533
 00:23:03,883 --> 00:23:05,549
             Operate.
+            operate。
 
 534
 00:23:05,551 --> 00:23:09,052
    And because I'm gonna have
  multiple operation buttons and
+ 因为会有许多运算按钮，而且
 
 535
 00:23:09,054 --> 00:23:11,588
        they're all going
         to send operate.
+        他们都会发送operate。
 
 536
 00:23:11,590 --> 00:23:13,289
         Just like I did
        with append digit,
+       就像附加digit一样，
 
 537
 00:23:13,291 --> 00:23:14,457
  I am going to use the sender.
+ 我要使用这个sender，
 
 538
 00:23:14,459 --> 00:23:18,193
       So I'm gonna be very
    careful to change this any
+   所以我得仔细地
 
 539
 00:23:18,195 --> 00:23:19,661
       object to be button.
+      把这个按钮上的anyObject改称UIButton。
 
 540
 00:23:20,697 --> 00:23:22,129
       Do not forget that.
+      不要忘记这点。
 
 541
 00:23:22,131 --> 00:23:24,965
         'Kay, so action,
- we are gonna have it centered.
+ we are gonna have it centered.(set sender!!)
+ 好了，action，设置好的sender。
 
 542
 00:23:24,967 --> 00:23:25,932
            UIButton.
+           UIButton。
 
 543
 00:23:25,934 --> 00:23:26,666
         Call it operate.
+        operate。
 
 544
 00:23:27,669 --> 00:23:28,868
           There it is.
+          就是这样。
 
 545
 00:23:28,870 --> 00:23:30,269
   That's method doing operate.
+  这就是operate方法。
 
 546
 00:23:31,338 --> 00:23:33,438
         We can copy and
  paste this button now, right?
+ 我们现在可以复制粘贴按钮了。
 
 547
 00:23:33,440 --> 00:23:34,639
       We got this one, so
+      我们用这个，
 
 548
 00:23:34,641 --> 00:23:37,775
     let's copy and paste and
     make some more of these.
+    让我们复制粘贴然后重复。
 
 549
 00:23:37,777 --> 00:23:41,778
       We'll start out with
     four of them, let's say.
+    我们先搞出4个。
 
 550
 00:23:41,780 --> 00:23:43,680
              'Kay?
+             好。
 
 551
 00:23:43,681 --> 00:23:45,581
        Let's get back our
     special characters here.
+    我们回到特殊符号这里。
 
 552
 00:23:45,584 --> 00:23:51,087
      [COUGH] All right, so
  let's make this one be divide.
+ [咳]好的，我们来把它做成除法。
 
 553
 00:23:51,089 --> 00:23:53,522
    Let's make this one plus.
+   我们把这个做成加法。
 
 554
 00:23:53,524 --> 00:23:55,924
      And this one be minus.
+     这个是减法。
 
 555
 00:23:55,926 --> 00:23:58,660
            All right.
+           好了。
 
 556
 00:23:58,662 --> 00:24:00,461
        So we've got these
         buttons [COUGH].
+        按钮就完成了。
 
 557
 00:24:00,463 --> 00:24:02,930
     And they're all sending,
     if we look at this here,
+    它们都会发送，如果我们看这里，
 
 558
 00:24:02,932 --> 00:24:04,598
   they're all sending operate.
+  它们都会发送operate。
 
 559
 00:24:05,701 --> 00:24:08,535
   Luckily, they're not sending
   anything except operate, so
+  幸运的是它们并不会发送运算之外的东西，
 
 560
 00:24:08,537 --> 00:24:09,869
           that's good.
+          这样刚好。
 
 561
 00:24:09,871 --> 00:24:12,905
   And when they send operate,
      we're gonna figure out
+     当他们发送operate的时候，我们要搞清楚
 
 562
 00:24:12,907 --> 00:24:15,808
  which one is sending it by the
   same exact way we did above.
+  哪个是按照我们之前的方式去发送的。
 
 563
 00:24:15,810 --> 00:24:18,543
     We're gonna say what is
   the sender's current title?
+  sender的currentTitle是什么？
 
 564
 00:24:18,545 --> 00:24:20,111
      We're gonna unwrap it.
+     我们要把它拆包。
 
 565
 00:24:20,113 --> 00:24:24,582
       So operation here is
        gonna be a string.
+       这里的operation是一个string。
 
 566
 00:24:24,584 --> 00:24:28,418
    And it's going to tell us
   the title of the buttons so
+  它会告诉我们按钮的title，所以
 
 567
 00:24:28,420 --> 00:24:31,721
        we know which one
          to use there.
+         我们就知道了该用哪个。
 
 568
 00:24:31,723 --> 00:24:35,758
     Now I'm gonna show you a
  control flow operator here in
+ 现在我要给你们展示swfit中的控制流符号，
 
 569
 00:24:35,760 --> 00:24:39,128
   Swift that's very powerful,
     much more powerful than
+    它非常强大，比其他语言中的强大多了。
 
 570
 00:24:39,130 --> 00:24:41,463
       this operator is in
         other languages.
 
+
 571
 00:24:41,465 --> 00:24:43,432
          And also very,
-   very important to switch.
+   very important to switch.（swift）
+   而且对Swfit来说很重要。
 
 572
 00:24:43,434 --> 00:24:46,401
   I'm only gonna show you the
  simplest usage of it here, but
+ 这里我只会向你们展示它的最简单用法，但是
 
 573
 00:24:46,403 --> 00:24:49,170
       you're gonna see on
    Monday's demonstration and
+   你们会在周一的展示和
+
 
 574
 00:24:49,172 --> 00:24:51,906
     later in the quarter how
   important this operator is.
+  接下来的一个季度感受到它的强大。
 
 575
 00:24:51,908 --> 00:24:54,541
   But, it's switch, okay, and
+  它是就switch，而且
 
 576
 00:24:54,543 --> 00:24:59,846
     switch looks like switch
   in other languages, like C.
+  它和其他语言中的switch看起来很像，比如C。
 
 577
 00:24:59,848 --> 00:25:01,080
     You switch on something.
+    你在某种东西上switch。
 
 578
 00:25:01,082 --> 00:25:03,015
      In this case I'm gonna
      switch on this string.
+     这里我会在string上switch。
 
 579
 00:25:03,017 --> 00:25:04,483
       This is the string.
+      这就是那个string，
 
 580
 00:25:04,485 --> 00:25:06,852
      Then you just specify
     the case of each thing.
+    然后你要指明所有case。
 
 581
 00:25:06,854 --> 00:25:10,822
              So for
   example here I have a case.
+  所以举例来说，有一个case，
 
 582
 00:25:10,824 --> 00:25:17,561
      Let's do the multiply.
+     进行乘法，
 
 583
 00:25:17,563 --> 00:25:21,031
        Okay, so we've got
    multiply case right here.
+   这就是一个乘法case，
 
 584
 00:25:21,033 --> 00:25:24,234
       And then we just put
    the code that we want here
+   接着我们把需要的代码放到这里，
 
 585
 00:25:24,236 --> 00:25:26,203
          for multiply.
+         做乘法。
 
 586
 00:25:26,204 --> 00:25:28,171
       And we'd do that for
    all the other cases here.
+   接着对其他的case也这么做。
 
 587
 00:25:28,173 --> 00:25:30,439
     So let's copy and paste.
+    复制然后粘贴。
 
 588
 00:25:30,441 --> 00:25:36,478
        And we'll do this
       be our divide case.
+      这个是除法case，
 
 589
 00:25:36,480 --> 00:25:39,347
       And we'll have this
       be our plus case and
+      这个是加法case，
 
 590
 00:25:39,349 --> 00:25:41,215
     we'll have this be our,
+    这个是，
 
 591
 00:25:41,217 --> 00:25:45,753
  make sure we're doing the same
   [INAUDIBLE] here, plus case.
+  要确保方式一致，加法
 
 592
 00:25:47,923 --> 00:25:49,689
     Again, you've got to be
      a little careful here.
+     这里你们又得仔细一点了，
 
 593
 00:25:49,691 --> 00:25:51,858
     You know, this minus is
   slightly different from this
+  这里的减法符号是和
 
 594
 00:25:51,860 --> 00:25:54,593
  minus which might be slightly
     different than the minus
+    这个减法符号和
 
 595
 00:25:54,595 --> 00:25:55,828
   you type with the keyboard.
+  你们键盘上输入的减法符号是有一些不同的。
 
 596
 00:25:55,830 --> 00:25:59,164
     So, when you're putting
        the symbols here,
+       所以，当你们在这放置这个符号的时候，
 
 597
 00:25:59,166 --> 00:26:03,434
  you wanna use exactly the same
    symbols here in your case.
+   你们要确定使用的是同一个符号。
 
 598
 00:26:03,436 --> 00:26:06,871
   Now, one thing about Switch
      on Swift though is it
+     关于Swift的Switch的要注意的一件事就是
 
 599
 00:26:06,873 --> 00:26:11,274
   absolutely requires that you
     have every case covered.
+    你必须确保覆盖所有情况。
 
 600
 00:26:11,276 --> 00:26:13,877

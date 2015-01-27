@@ -21,4 +21,3 @@
 - 不需要翻译的词汇
     - model, view, controller
     - view controller
-    - 

@@ -1,1710 +1,1499 @@
- 1
+1
 00:00:00,001 --> 00:00:04,803
-            [MUSIC]             
+欢迎同学们观看
 
 2
 00:00:04,805 --> 00:00:06,637
-      Stanford University.      
+Stanford University.
+斯坦福大学公开课。
 
 3
 00:00:06,639 --> 00:00:10,508
-         [BLANK_AUDIO]          
+本字幕由志愿者义务贡献
+http://github.com/x140yu/
+Developing_iOS_8_Apps_With_Swift
 
 4
 00:00:10,510 --> 00:00:17,147
- >> Welcome to Stanford CS193P, 
-            this is             
-      winter quarter 2015.      
+>> Welcome to Stanford CS193P,this is winter quarter 2015.
+欢迎参加斯坦福大学2015年冬季学期的CS193P课程。
 
 5
 00:00:17,149 --> 00:00:21,718
- And we're gonna dive right in  
-            today to            
-     some brief slide work.     
+And we're gonna dive right in today to some brief slide work.
+我们首先简要的看一下今天课程的内容
 
 6
 00:00:22,720 --> 00:00:26,221
-This people at Stanford, you've 
-             got a              
-    document that describe,     
+This people at Stanford, you've got a document that describe,
+斯坦福的学生，你们都有一份文档，
 
 7
 00:00:26,223 --> 00:00:28,357
- describes all the grading and  
-            all that            
-            stuff so            
+describes all the grading and all that stuff
+里面有每个学期所有东西的描述
 
 8
 00:00:28,359 --> 00:00:32,126
- I'm not gonna go over that in  
-          lecture like          
-I often do to start the quarter.
+so I'm not gonna go over that in lecture like I often do to start the quarter.
+所以我不想像以往开课那样说一些乱七八糟的东西。
 
 9
 00:00:33,663 --> 00:00:36,296
-Instead I'm gonna talk a little 
-           bit about,           
-   what this class is about.    
+Instead I'm gonna talk a little bit about, what this class is about.
+相反我首先要谈一谈关于本课程的内容。
 
 10
 00:00:37,566 --> 00:00:42,068
-      Brief mention of the      
-       prerequisites cuz        
-they're pretty important in this
-             class.             
+Brief mention of the prerequisites cuz they're pretty important in this class.
+接下来要提一下学习本课程的先决条件，
 
 11
 00:00:42,070 --> 00:00:44,870
- Then just the [NOISE] quickest 
-          overview of           
-              iOS.              
+Then just the [NOISE] quickest overview of iOS.
+然后会对IOS进行快速的预览。
 
 12
 00:00:44,872 --> 00:00:49,508
-I'm gonna assume that anyone who
-            is here             
-or is watching this, knows what 
-            that is.            
+I'm gonna assume that anyone who is here or is watching this, knows what that is.
+我想在座各位或者观看视频的同学都知道那是什么吧。
 
 13
 00:00:49,510 --> 00:00:51,609
-And then, we're gonna dive right
-             into a             
-         big old demo.          
+And then, we're gonna dive right into a big old demo.
+再然后，我们会演示一个大的Demo。
 
 14
 00:00:51,611 --> 00:00:54,779
- It's gonna be a two-day thing, 
-           where I'm            
-    really going to try and     
+It's gonna be a two-day thing, where I'm really going to try and
+这将是一个为期两天的事情，我将
 
 15
 00:00:54,781 --> 00:00:57,381
- introduce you to Xcode and the 
-          development           
-        environment and         
+introduce you to Xcode and the development environment and
+向你们介绍XCode，开发环境，
 
 16
 00:00:57,383 --> 00:01:01,818
-this language Swift, that you're
-             gonna              
-  have to learn to develop for  
-              iOS.              
+this language Swift, that you're gonna have to learn to develop for iOS.
+和Swift语言，同学们将学会用这些工具来为IOS做开发。
 
 17
 00:01:02,854 --> 00:01:04,120
-All right, so what is this class
-             about?             
+All right, so what is this class about?
+好了，那么本课程是讲什么的呢？
 
 18
 00:01:04,122 --> 00:01:06,455
- It's about building cool apps, 
-          as we know.           
+It's about building cool apps, as we know.
+它是讲关于创建我们知道的一些很酷的应用的课程。
 
 19
 00:01:06,457 --> 00:01:09,091
-Why are these iOS apps so cool? 
+Why are these iOS apps so cool?
+为什么这些IOS应用如此之酷？
 
 20
 00:01:09,093 --> 00:01:11,960
-Well, because the device you're 
-           gonna run            
-  them on is in your pocket or  
+Well, because the device you're gonna run them on is in your pocket or
+因为运行这些应用的设备要么在你的口袋里，
 
 21
 00:01:11,962 --> 00:01:14,229
-       in your backpack.        
+in your backpack.
+要么在你的背包里。
 
 22
 00:01:14,230 --> 00:01:16,497
-Either, if you write an app, you
-            can just            
-   pull it out and show your    
-          friends and           
+Either, if you write an app, you can just pull it out and show your friends and
+如果你写了一个应用，你可以将它展示给你的朋友
 
 23
 00:01:16,500 --> 00:01:20,535
-   it's highly networked and    
-           incredible           
-    graphics with animation.    
+it's highly networked and incredible graphics with animation.
+它是高度网络化的，并有令人难以置信的图形和动画效果。
 
 24
 00:01:20,537 --> 00:01:23,371
-   It's just cool all the way   
-          around and I          
-think you guys all know that or 
+It's just cool all the way around and I think you guys all know that or
+它在各个方面都很酷。我想你们应该都知道这些，
 
 25
 00:01:23,373 --> 00:01:24,605
-     you wouldn't be here.      
+you wouldn't be here.
+否则你们就不会坐在这里了。
 
 26
 00:01:24,607 --> 00:01:26,490
- But you're also gonna learn in 
+But you're also gonna learn in
+但是你们可能要学习一些
 
 27
 00:01:26,491 --> 00:01:28,374
- this class a lot of real life  
-  Object-Oriented Programming.  
+this class a lot of real life Object-Oriented Programming.
+关于面向对象编程的知识。
 
 28
 00:01:28,377 --> 00:01:32,578
-  You're taking a lot of other  
-          classes here          
-   at Stanford on things like   
-         graphics, and          
+You're taking a lot of other classes here at Stanford on things like graphics, and
+你们也可能在斯坦福选一些有关于图形、
 
 29
 00:01:32,580 --> 00:01:36,849
- networking, and databases, and 
-             maybe              
-           animation.           
+networking, and databases, and maybe animation.
+网络、数据库、动画
 
 30
 00:01:36,851 --> 00:01:39,718
-       Things like that.        
+Things like that.
+或者其他类似的课程。
 
 31
 00:01:39,719 --> 00:01:42,586
-  And we're gonna is kinda tie  
-            that all            
-   together into a real world   
-             class.             
+And we're gonna is kinda tie that all together into a real world class.
+然而我们将这些内容融合在一起，
 
 32
 00:01:42,589 --> 00:01:44,055
-             'Kay?              
-You're gonna get to see all this
-             stuff.             
+'Kay? You're gonna get to see all this stuff.
+你们会在本课程内看到所有这些东西。
 
 33
 00:01:44,057 --> 00:01:46,891
-  Now, you know, it's gonna be  
-           kind of a            
-     survey course in that,     
+Now, you know, it's gonna be kind of a survey course in that,
+现在，你应该知道这会是一个概述型课程，
 
 34
 00:01:46,893 --> 00:01:49,426
-    I can't go too deep into    
-          networking.           
+I can't go too deep into networking.
+我不会深入讲述网络的内容，
 
 35
 00:01:49,428 --> 00:01:52,462
-    I can't go too deep into    
-           databases.           
+I can't go too deep into databases.
+我不会深入讲述数据库的内容，
 
 36
 00:01:52,464 --> 00:01:56,366
-    I can't go too deep into    
-         animation, but         
- you'll get to see it all in a  
-          really real           
+I can't go too deep into animation, but you'll get to see it all in a really real
+我不会深入讲述动画的内容，但是你们会在
 
 37
 00:01:56,368 --> 00:01:59,569
-world environment, where people 
-           out there            
-    building apps using that    
-          technology.           
+world environment, where people out there building apps using that technology.
+真实项目的环境中用到所有的这些技术。
 
 38
 00:01:59,571 --> 00:02:03,906
-For some of you who haven't seen
-              that              
-before that'll be a big bonus of
+For some of you who haven't seen that before that'll be a big bonus of
+我认为，对于一些之前没有接触过这些的同学，
 
 39
 00:02:03,908 --> 00:02:04,940
-      this class, I think.      
+this class, I think.
+本课程对他们会有很大的提升。
 
 40
 00:02:06,243 --> 00:02:07,975
 The prerequisites of this class.
+学习本课程的先决条件。
 
 41
 00:02:07,977 --> 00:02:11,712
-Number one thing is you have to 
-              be a              
- pretty strong Object-Oriented  
-          programmer.           
+Number one thing is you have to be a pretty strong Object-Oriented programmer.
+最重要的，你要是一个很给力的面向对象开发者。
 
 42
 00:02:11,714 --> 00:02:14,014
-     If you're not a strong     
-        Object-Oriented         
-        programmer, and         
+If you're not a strong Object-Oriented programmer, and
+如果你不是，
 
 43
 00:02:14,016 --> 00:02:18,018
-   you hit this class, you're   
-         probably gonna         
- go under water, pretty quick.  
+you hit this class, you're probably gonna go under water, pretty quick.
+还选了这个课，基本上你就要挂了，很快。
 
 44
 00:02:18,020 --> 00:02:19,519
-             Okay?              
-   I'm gonna assume you know,   
+Okay? I'm gonna assume you know,
+我需要你知道
 
 45
 00:02:19,521 --> 00:02:22,188
-everything about Object-Oriented
-          Programming.          
+everything about Object-Oriented Programming.
+关于面向对象编程的一切。
 
 46
 00:02:22,190 --> 00:02:24,456
-      IOS is a completely       
-        Object-Oriented         
-       Programming envir,       
+IOS is a completely Object-Oriented Programming envir,
+IOS是一个完全的面向对象编程的环...
 
 47
 00:02:24,458 --> 00:02:26,658
-    development environment,    
+development environment,
+额，开发环境，
 
 48
 00:02:26,659 --> 00:02:28,859
- I just don't mean I'm not just 
-            talking             
-     about the language is      
-        Object-Oriented.        
+I just don't mean I'm not just talking about the language is Object-Oriented.
+我的意思不是说，我说的不只是编程语言是面向对象的。
 
 49
 00:02:28,862 --> 00:02:31,863
-But the entire design of it the 
-            way you             
-      use it if you're not      
+But the entire design of it the way you use it if you're not
+整个的设计方式都是面向对象的。如果你不能
 
 50
 00:02:31,865 --> 00:02:33,965
-  comfortable with things like  
-          subclassing           
-              and               
+comfortable with things like subclassing and
+熟练的使用像是子类之类的东西，
 
 51
 00:02:33,967 --> 00:02:37,935
-stuff like that then you're just
-             really             
-   gonna be behind the curve.   
+stuff like that then you're just really gonna be behind the curve.
+那么你真的离挂科不远了。
 
 52
 00:02:37,937 --> 00:02:42,239
-In iOS so at Stanford here that 
-             means              
-         CS16A and B or         
+In iOS so at Stanford here that means CS16A and B or
+斯坦福的IOS相关课程有CS16A，CA16B或者
 
 53
 00:02:42,241 --> 00:02:47,344
-CS16X, and then you know, CS107,
-             while              
-it's not really Object-Oriented 
-            course,             
+CS16X, and then you know, CS107, while it's not really Object-Oriented course,
+CS16X，以及众所周知的CS107，虽然它并不是专门的面向对象课程，
 
 54
 00:02:47,346 --> 00:02:49,746
-   at least it's a heavy duty   
-          programming           
-            course.             
+at least it's a heavy duty programming course.
+但至少是一门重量级的编程课程。
 
 55
 00:02:49,748 --> 00:02:52,615
-CS108 is a great Object-Oriented
-           course so            
+CS108 is a great Object-Oriented course so
+CS108是非常好的面向对象课程，所以
 
 56
 00:02:52,617 --> 00:02:55,918
-  if you have, if you've taken  
-          CS108 you'll          
-    probably, be really well    
-            prepped.            
+if you have, if you've taken CS108 you'll probably, be really well prepped.
+如果你曾经，如果你上过CS108，你可能会觉得很轻松。
 
 57
 00:02:55,920 --> 00:03:00,555
- 110, again not really too much 
-               an               
-  Object-Oriented program but   
+110, again not really too much an Object-Oriented program but
+110，同样也不是非常专门的面向对象课程，
 
 58
 00:03:00,557 --> 00:03:03,057
-  good programming course cuz   
-         there's a lot          
- of programming in this class,  
+good programming course cuz there's a lot of programming in this class,
+但同样是一门非常好的编程课程，因为其中有大量的编程实践。
 
 59
 00:03:03,059 --> 00:03:05,159
- in fact, all the work in this  
-            class is            
-          programming.          
+in fact, all the work in this class is programming.
+事实上，所有这些课程的内容都是关于编程的。
 
 60
 00:03:05,161 --> 00:03:08,395
-You will not have, a little bit 
-           of reading           
- the first couple of weeks just 
-               to               
+You will not have, a little bit of reading the first couple of weeks just to
+在头几个星期，你仅仅
 
 61
 00:03:08,397 --> 00:03:12,299
- kinda learn this new language, 
-            but it's            
-  almost all programming after  
-            that all            
+kinda learn this new language, but it's almost all programming after that all
+只会学到一点这个新语言的内容，但是直到课程结束
 
 62
 00:03:12,301 --> 00:03:14,467
- the way til the end, including 
-           your final           
-            project.            
+the way til the end, including your final project.
+所有的编程任务都需要它，包括你们的最终项目。
 
 63
 00:03:14,469 --> 00:03:17,804
-    So if you're not really     
-        comfortable with        
-        all these terms,        
+So if you're not really comfortable with all these terms,
+所以，如果你真的不适应面向对象编程，
 
 64
 00:03:17,806 --> 00:03:21,674
-this Object-Oriented terms or if
-             you're             
-just not really comfortable with
+this Object-Oriented terms or if you're just not really comfortable with
+或者你真的只是不喜欢写大程序，
 
 65
 00:03:21,676 --> 00:03:26,178
- writing big programs then this 
-           class will           
- definitely be a challenge for  
-              you.              
+writing big programs then this class will definitely be a challenge for you.
+那么这个课程对你来说就是一个挑战。
 
 66
 00:03:27,848 --> 00:03:30,682
-okay, so what's in iOS, what are
-           the parts            
-             of it?             
+okay, so what's in iOS, what are the parts of it?
+那么，IOS中有什么？都包括哪些部分呢？
 
 67
 00:03:30,684 --> 00:03:34,085
- You know, it's ha, it's such a 
-          big system,           
-    it's got so much in it.     
+You know, it's ha, it's such a big system, it's got so much in it.
+它是...哈，它是一个庞大的系统，其中有很多东西。
 
 68
 00:03:34,087 --> 00:03:36,170
-   It's impossible for me to,   
+It's impossible for me to,
+用一两句话将其表述清楚
 
 69
 00:03:36,171 --> 00:03:38,254
-  like, encapsulate it into a   
-          small little          
-          summary but.          
+like, encapsulate it into a small little summary but.
+那是不可能的。
 
 70
 00:03:38,257 --> 00:03:42,659
-I do have this slide right here 
-              that              
-   divides it into these four   
-            layers.             
+I do have this slide right here that divides it into these four layers.
+我在这个课件中，将其分为四层。
 
 71
 00:03:42,661 --> 00:03:46,763
-     These four layers are      
-       approximately down       
-near the hardware at the bottom.
+These four layers are approximately down near the hardware at the bottom.
+这四层从靠近硬件的底层
 
 72
 00:03:46,765 --> 00:03:48,264
-  Up near the user at the top.  
+Up near the user at the top.
+到靠近用户的顶层。
 
 73
 00:03:48,266 --> 00:03:48,964
-             Okay?              
+Okay?
+OK？
 
 74
 00:03:48,966 --> 00:03:52,284
-      So at the bottom, so      
+So at the bottom, so
+在最下面一层，
 
 75
 00:03:52,285 --> 00:03:55,603
- a lot of people don't realize  
-          that iOS is           
-basically a Unix-based operating
-            system.             
+a lot of people don't realize that iOS is basically a Unix-based operating system.
+很多人没有意识到，IOS基本就是一个基于Unix的操作系统。
 
 76
 00:03:55,605 --> 00:03:57,772
-             'Kay?              
- It's very similar shares a lot 
-               of               
+'Kay? It's very similar shares a lot of
+它大量借鉴了
 
 77
 00:03:57,774 --> 00:03:59,206
-     the core of Mac OS 10.     
+the core of Mac OS 10.
+Mac OS 10的核心。
 
 78
 00:03:59,208 --> 00:04:01,559
-             Okay?              
+Okay?
+OK？
 
 79
 00:04:01,560 --> 00:04:03,911
- Now, it's certainly optimized  
-           for mobile           
-      devices, which have       
+Now, it's certainly optimized for mobile devices, which have
+当然，它是为有电池等等各方面限制的移动设备优化过的，
 
 80
 00:04:03,913 --> 00:04:08,748
-battery restrictions and things 
-           like that,           
- but that is basically what it  
-              is.               
+battery restrictions and things like that, but that is basically what it is.
+但基本上它仍可看作是一个Mac OS。
 
 81
 00:04:08,750 --> 00:04:11,517
-And so down at that layer you've
-              got               
-          sockets, and          
+And so down at that layer you've got sockets, and
+这样的话，在这层中包含了有关通信接口，
 
 82
 00:04:11,519 --> 00:04:15,121
-      you've got you know,      
-        permissions, and        
-       things like that,        
+you've got you know, permissions, and things like that,
+权限等等类似的功能，
 
 83
 00:04:15,123 --> 00:04:19,191
-that have to be near the oh you 
-             know,              
- hardware to, to work properly. 
+that have to be near the oh you know, hardware to, to work properly.
+它靠近底层硬件，并保证其正常工作。
 
 84
 00:04:19,193 --> 00:04:23,495
- But above that there's kind of 
-               an               
-Object-Oriented layer that lets 
-           you get at           
+But above that there's kind of an Object-Oriented layer that lets you get at
+在这之上，是一个面向对象的层，
 
 85
 00:04:23,497 --> 00:04:26,731
-   a lot of that stuff using    
-        Object-Oriented         
-          Programming.          
+a lot of that stuff using Object-Oriented Programming.
+其能够让你使用大量的面向对象编程技术。
 
 86
 00:04:26,733 --> 00:04:30,234
-             'Kay?              
-    And this stuff is not UI    
-         oriented it's          
+'Kay? And this stuff is not UI oriented it's
+但是这层不会处理用户界面，
 
 87
 00:04:30,236 --> 00:04:34,171
-   more kind of accessing the   
-            hardware            
-    through Object-Oriented     
-         Programming or         
+more kind of accessing the hardware through Object-Oriented Programming or
+其更多用于通过面向对象访问硬件，
 
 88
 00:04:34,173 --> 00:04:36,373
-  accessing networking through  
-Object-Oriented Programming but 
+accessing networking through Object-Oriented Programming but
+或者访问网络，等等。
 
 89
 00:04:36,375 --> 00:04:39,309
-it's a big layer there and so we
-              will              
-     spend a fair amount of     
+it's a big layer there and so we will spend a fair amount of
+它是一个很大的层，我们将花大量时间
 
 90
 00:04:39,311 --> 00:04:44,980
- time in this layer because we  
-           need those           
-   primitives to build at the   
-         higher layers.         
+time in this layer because we need those primitives to build at the higher layers.
+在该层上，因为我们需要这些原语来建立更高的层。
 
 91
 00:04:44,982 --> 00:04:48,450
-Then, there's this whole layer, 
-            which I             
- wish we had more time to spend 
-              on.               
+Then, there's this whole layer, which I wish we had more time to spend on.
+我希望我们有更多时间花在这一层，
 
 92
 00:04:48,452 --> 00:04:50,252
- We only get ten weeks in this  
-          whole class.          
+We only get ten weeks in this whole class.
+但是我们的课程只有十周。
 
 93
 00:04:50,254 --> 00:04:53,321
- It goes by so fast, you'll be  
-           amazed, as           
-        you're probably,        
+It goes by so fast, you'll be amazed, as you're probably,
+你会感叹在斯坦福的课程中，
 
 94
 00:04:53,323 --> 00:04:54,655
-   used to with your Stanford   
-            courses.            
+used to with your Stanford courses.
+时间过得如此之快。
 
 95
 00:04:55,758 --> 00:04:58,092
-But there's a whole media layer 
-           here, both           
-              for               
+But there's a whole media layer here, both for
+再往上，是整个的媒体层，
 
 96
 00:04:58,094 --> 00:05:02,062
-static images, as you know, JPEG
-              and               
-       things like that.        
+static images, as you know, JPEG and things like that.
+包括比如你们熟悉的JPEG等的静态图像，
 
 97
 00:05:02,064 --> 00:05:07,700
-And video both capturing video, 
-            editing             
-        video, all that.        
+And video both capturing video, editing video, all that.
+包括视频捕获、视频编辑等的视频处理，
 
 98
 00:05:07,702 --> 00:05:11,404
-Incredible audio, the frameworks
-            on this             
-           device for           
+Incredible audio, the frameworks on this device for
+不可思议的音频框架，用于处理3D音效，
 
 99
 00:05:11,406 --> 00:05:13,706
-doing 3D audio for games and all
-             that.              
+doing 3D audio for games and all that.
+以及游戏等等。
 
 100
 00:05:13,708 --> 00:05:16,675
-I get to, unfortunately I get to
-              very              
-     little of this layer.      
+I get to, unfortunately I get to very little of this layer.
+很不幸，我对这层知道的不多。
 
 101
 00:05:16,677 --> 00:05:20,879
- But I'll try to let you know,  
-          that it's in          
-there and then you'll know to go
-            out and             
+But I'll try to let you know, that it's in there and then you'll know to go out and
+但是我可以告诉你它里面有什么，这样你用到的时候就可以
 
 102
 00:05:20,881 --> 00:05:23,948
- seek out, if you're building a 
-           very audio           
-        intensive app or        
+seek out, if you're building a very audio intensive app or
+查资料，或者当你正在写一个用到大量音频视频技术
 
 103
 00:05:23,950 --> 00:05:26,484
-video intensive app, you'll seek
-            out that            
-             layer.             
+video intensive app, you'll seek out that layer.
+的应用的时候，你要知道去哪找这些资料。
 
 104
 00:05:26,486 --> 00:05:32,756
-    But we'll spend the vast    
-        majority of our         
- time at the Cocoa Touch layer. 
+But we'll spend the vast majority of our time at the Cocoa Touch layer.
+我们会在Cocoa Touch层上花费大量的时间。
 
 105
 00:05:32,758 --> 00:05:35,325
-So the Cocoa Touch layer, that's
-           where the            
-          buttons and           
+So the Cocoa Touch layer, that's where the buttons and
+Cocoa Touch层里包含了按钮，
 
 106
 00:05:35,327 --> 00:05:38,895
-sliders and things like that are
-            it's the            
-             layer,             
+sliders and things like that are it's the layer,
+滑动条等类似的控件，
 
 107
 00:05:38,897 --> 00:05:43,032
-  where you're gonna build the  
-         interactivity          
-      with your end user.       
+where you're gonna build the interactivity with your end user.
+通过它们来和你的用户建立互动。
 
 108
 00:05:43,034 --> 00:05:46,135
-And so, that's where we probably
-            spend 70            
-        plus percent of         
+And so, that's where we probably spend 70 plus percent of
+我们会在Cocoa Touch层上
 
 109
 00:05:46,137 --> 00:05:47,936
-  our time in the Cocoa Touch   
-             layer.             
+our time in the Cocoa Touch layer.
+花费70%甚至更多的时间。
 
 110
 00:05:47,938 --> 00:05:50,271
-  And this is a very powerful   
-             layer.             
+And this is a very powerful layer.
+这也是一个非常强大的层。
 
 111
 00:05:50,273 --> 00:05:54,809
-  You know, you've seen things  
-         like the maps          
-       app on the phone.        
+You know, you've seen things like the maps app on the phone.
+你们可能在手机上见过地图类的应用。
 
 112
 00:05:54,811 --> 00:05:58,346
-  There's basically, an object  
-           that does            
-almost the entire maps app, that
-            you can             
+There's basically, an object that does almost the entire maps app, that you can
+基本上，有一个几乎完整的地图应用对象，
 
 113
 00:05:58,348 --> 00:06:01,482
-   just drop right into your    
-        program, and now        
- you have maps in your program. 
+just drop right into your program, and now you have maps in your program.
+你只需要直接拖进你的程序里，现在你的程序中就有地图了。
 
 114
 00:06:01,484 --> 00:06:04,051
-  Same thing with web browser.  
+Same thing with web browser.
+同样的还有浏览器。
 
 115
 00:06:04,052 --> 00:06:06,619
-If you wanna put web browsing in
-           your app,            
-it's just boom, pop an object in
-             there,             
+If you wanna put web browsing in your app, it's just boom, pop an object in there,
+如果你想让你的应用有浏览网页的功能，那么仅仅需要拖拽一个对象，
 
 116
 00:06:06,622 --> 00:06:08,655
-  call a couple methods and in  
-         your, on your          
-              way.              
+call a couple methods and in your, on your way.
+再调用几个方法即可。
 
 117
 00:06:08,657 --> 00:06:13,592
-  So very powerful, very high   
-            level in            
-there's a lot going on in there 
-              and               
+So very powerful, very high level in there's a lot going on in there and
+在我这里你将学到非常NB的技术。
 
 118
 00:06:13,594 --> 00:06:16,195
-that's where we will spend most 
-             of our             
-          time, 'kay?           
+that's where we will spend most of our time, 'kay?
+我们将在此花费大量的时间。
 
 119
 00:06:16,197 --> 00:06:19,831
-And by the way, if you have any 
-           questions            
-     I try to glance up, so     
+And by the way, if you have any questions I try to glance up, so
+顺便说一嘴，如果你有任何问题，你就说嘛。
 
 120
 00:06:19,833 --> 00:06:21,499
-  the bright lights over there  
-          sometimes in          
-            my way,             
+the bright lights over there sometimes in my way,
+你不说我怎么知道呢？
 
 121
 00:06:21,501 --> 00:06:25,302
-  but, shout out or you know,   
-         otherwise get          
-         my attention.          
+but, shout out or you know, otherwise get my attention.
+虽然你很有诚意的看着我，
 
 122
 00:06:25,304 --> 00:06:28,105
- If you feel free to interrupt. 
+If you feel free to interrupt.
+可是你还是要跟我说啊。
 
 123
 00:06:28,107 --> 00:06:29,806
-  Then there's the development  
-            platform            
-            itself.             
+Then there's the development platform itself.
+接下来就是开发平台本身。
 
 124
 00:06:29,808 --> 00:06:31,308
-             'Kay?              
+'Kay?
+OK？
 
 125
 00:06:31,309 --> 00:06:32,809
- With the tools we use to build 
-           these iOS            
-             apps.              
+With the tools we use to build these iOS apps.
+我们会用这些工具来创建IOS应用。
 
 126
 00:06:32,811 --> 00:06:34,978
-        What's in that?         
+What's in that?
+那么问题来了。都有什么？
 
 127
 00:06:34,979 --> 00:06:37,146
- Well, it's all pretty much now 
-              been              
-     funneled into this one     
+Well, it's all pretty much now been funneled into this one
+有很多很棒的工具
 
 128
 00:06:37,148 --> 00:06:39,048
-  application called Xcode 6.   
+application called Xcode 6.
+都集成在一个名为Xcode6的应用内。
 
 129
 00:06:39,050 --> 00:06:42,418
- There are some little adjuncts 
-            that it             
-        calls out to but        
+There are some little adjuncts that it calls out to but
+其中还有一些附件。
 
 130
 00:06:42,420 --> 00:06:45,287
-Xcode 6 is everything, it's your
-              code              
-            editor,             
+Xcode 6 is everything, it's your code editor,
+Xcode6，你值得拥有，它是一个代码编辑器，
 
 131
 00:06:45,289 --> 00:06:50,024
-    it's your compiler, your    
-        debugger all of         
-that in one, pretty awesome app.
+it's your compiler, your debugger all of that in one, pretty awesome app.
+它是一个编译器，是一个调试器，总之是一个很棒的应用。
 
 132
 00:06:50,026 --> 00:06:54,395
-  And so we'll be learning all  
-         about Xcode 6          
-       in this class, and       
+And so we'll be learning all about Xcode 6 in this class, and
+所以我们学习的所有课程都会用到Xcode6。
 
 133
 00:06:54,397 --> 00:06:59,366
-that's where you'll be spend all
-           your time            
-developing, you're not gonna be 
-               at               
+that's where you'll be spend all your time developing, you're not gonna be at
+你所有编程的时间都在用Xcode，你不需要
 
 134
 00:06:59,368 --> 00:07:04,337
- a terminal typing in Emacs or  
-           something,           
-  you're gonna be in Xcode 6.   
+a terminal typing in Emacs or something, you're gonna be in Xcode 6.
+在终端下用Emacs或其他的编辑器，一切尽在Xcode6。
 
 135
 00:07:04,339 --> 00:07:08,874
-    Languages I have there's    
-         actually, two          
-     languages in iOS now.      
+Languages I have there's actually, two languages in iOS now.
+现在为IOS开发应用可以使用两种语言。
 
 136
 00:07:08,876 --> 00:07:12,044
-  There are peers that you can  
-          pretty much           
-        use either one.         
+There are peers that you can pretty much use either one.
+你可以选择使用任何一个。
 
 137
 00:07:12,046 --> 00:07:14,079
-     One of them is called      
-          Objective-C,          
+One of them is called Objective-C,
+其中一个名为Objective-C
 
 138
 00:07:14,081 --> 00:07:17,715
-that's the language that iOS was
-   originally developed for.    
+that's the language that iOS was originally developed for.
+它也是IOS一直以来使用的开发语言。
 
 139
 00:07:17,717 --> 00:07:22,553
- It's a language been around a  
-           long time,           
-  probably 30 years it's been   
-          around or 25          
+It's a language been around a long time, probably 30 years it's been around or 25
+这个语言已经有大概30年的历史了，
 
 140
 00:07:22,555 --> 00:07:27,123
-to 30 years that's it's actually
-           been used            
-to build stuff that's on the Mac
-             today.             
+to 30 years that's it's actually been used to build stuff that's on the Mac today.
+25到30年以来，人们用它为Mac开发应用。
 
 141
 00:07:27,125 --> 00:07:32,194
- So, it's very mature language  
-            but it's            
-     also 25, 30 years old.     
+So, it's very mature language but it's also 25, 30 years old.
+因此，它是非常成熟的语言，但是已经25，30岁了。
 
 142
 00:07:32,196 --> 00:07:36,965
-    And so Apple last summer    
-          introduced a          
- completely new language called 
-           Swift, and           
+And so Apple last summer introduced a completely new language called Swift, and
+所以苹果公司在去年夏天发布了一个全新的语言，Swift
 
 143
 00:07:36,967 --> 00:07:40,669
- Swift, you can do pretty much  
-           everything           
-     in iOS with Swift and      
+Swift, you can do pretty much everything in iOS with Swift and/nSwift，你可以使用Swift在IOS上开发任何应用，
 
 144
 00:07:40,671 --> 00:07:45,172
-that's the language we're gonna 
-             learn              
-because it's a modern language. 
+that's the language we're gonna learn because it's a modern language.
+她也是本次课我们要学习的语言，她是一门现代的语言。
 
 145
 00:07:45,174 --> 00:07:48,709
- Apple did a great job of kind  
-          of, building          
-     all the best stuff of      
+Apple did a great job of kind of, building all the best stuff of
+苹果公司做了很多伟大的工作创建Swift，
 
 146
 00:07:48,711 --> 00:07:52,346
-all the languages that have been
-            invented            
-    over the last, you know,    
+all the languages that have been invented over the last, you know,
+她吸收了很多已存在的编程语言的优点。
 
 147
 00:07:52,348 --> 00:07:57,684
-25 years of this especially the 
-           last five            
-or ten years into this language.
+25 years of this especially the last five or ten years into this language.
+25年来，特别是近五到十年的语言。
 
 148
 00:07:57,686 --> 00:08:02,988
- It's very concise it's a very  
-           type safe            
-language but has type inference 
-           and a lot            
+It's very concise it's a very type safe language but has type inference and a lot
+她语法简洁。她是类型安全的，并且还有类型推断以及
 
 149
 00:08:02,990 --> 00:08:06,991
- of things that make it so that 
-          you get the           
- best of both worlds by having  
-          type safety-          
+of things that make it so that you get the best of both worlds by having type safety-
+大量的特性使鱼与熊掌可以兼得。既有安全的类型
 
 150
 00:08:06,993 --> 00:08:08,292
-           >> [COUGH]           
-       >> And not have to       
+>> [COUGH] >> And not have to
+又不需要
 
 151
 00:08:08,294 --> 00:08:11,295
- be constantly over specifying  
-          everything.           
+be constantly over specifying everything.
+不断的指定各种类型。
 
 152
 00:08:11,297 --> 00:08:14,665
- So we're gonna go Swift only,  
-          I'm not even          
-    gonna really talk about     
-          Objective-C,          
+So we're gonna go Swift only, I'm not even gonna really talk about Objective-C,
+所以我们只使用Swift，而完全不用Objective-C，
 
 153
 00:08:14,667 --> 00:08:16,400
-  I just don't have time to do  
-              both              
-           languages.           
+I just don't have time to do both languages.
+我也没有时间讲两种语言
 
 154
 00:08:16,402 --> 00:08:19,786
-             Yeah.              
-     >> [INAUDIBLE] This is     
+Yeah. >> [INAUDIBLE] This is
+（学生提问）
 
 155
 00:08:19,787 --> 00:08:23,171
-a [INAUDIBLE] course [INAUDIBLE]
-            [COUGH]             
-     [INAUDIBLE] doing iOS      
-          development.          
+a [INAUDIBLE] course [INAUDIBLE] [COUGH] [INAUDIBLE] doing iOS development.
+（学生提问）
 
 156
 00:08:23,174 --> 00:08:26,275
- >> Yeah, so the question is if 
-           I'm going            
-    out into the world to do    
+>> Yeah, so the question is if I'm going out into the world to do
+这个同学的问题是，如果我将步入社会，
 
 157
 00:08:26,277 --> 00:08:29,244
-  iOS development in the real   
-         world for real         
-           companies.           
+iOS development in the real world for real companies.
+并想找一份做IOS开发的工作，
 
 158
 00:08:29,246 --> 00:08:30,912
-  Am I probably, gonna have to  
-             learn              
-          Objective-C?          
+Am I probably, gonna have to learn Objective-C?
+我是否还需要学习Objective-C？
 
 159
 00:08:30,914 --> 00:08:34,049
-  And the answer is [NOISE] it  
-           depends on           
-     the company you're at.     
+And the answer is [NOISE] it depends on the company you're at.
+答案是...这取决于你的公司。
 
 160
 00:08:34,051 --> 00:08:36,017
 Probably in the short term, yes.
+可能在短期内，答案是肯定的。
 
 161
 00:08:36,019 --> 00:08:39,920
-    But as the time goes by     
-       probably, more and       
-  more people switch to siff,   
-             Swift.             
+But as the time goes by probably, more and more people switch to siff, Swift.
+但是随着时间的推移，可能有越来越多的人会转到丝芙，哦不，Swift。
 
 162
 00:08:39,922 --> 00:08:43,490
-           >> [COUGH]           
-    >> The good thing is the    
-         underlying iOS         
+>> [COUGH] >> The good thing is the underlying iOS
+好消息就是基础的IOS
 
 163
 00:08:43,492 --> 00:08:45,926
- APIs are exactly the same for  
-           both, its            
-        just the syntax-        
+APIs are exactly the same for both, its just the syntax-
+API是完全相同的，仅仅只是语法上
 
 164
 00:08:45,928 --> 00:08:49,162
-           >> [COUGH]           
->> Of the language a little bit 
+>> [COUGH] >> Of the language a little bit
+对于一个语言如何调用API
 
 165
 00:08:49,163 --> 00:08:52,397
-     about how the language     
-       approaches calling       
- the API is slightly different, 
-            but any,            
+about how the language approaches calling the API is slightly different, but any,会有略微的不同，但是
 
 166
 00:08:52,400 --> 00:08:54,734
-  everything that you learn in  
-           here about           
-        the underlying,         
+everything that you learn in here about the underlying,
+你们在这里学的基础，
 
 167
 00:08:54,736 --> 00:08:57,636
-lying parts of iOS will totally 
-            work in             
-          Objective-C.          
+lying parts of iOS will totally work in Objective-C.
+使用Objective-C完全也可以实现。
 
 168
 00:08:57,638 --> 00:08:59,571
-All the methods are the same you
-             know,              
+All the methods are the same you know,
+所有的方法都是一样的，
 
 169
 00:08:59,573 --> 00:09:00,939
-it's just the syntax is a little
-           different.           
+it's just the syntax is a little different.
+仅仅只有语法上的一点区别。
 
 170
 00:09:00,941 --> 00:09:02,540
-           >> [COUGH]           
->> So, don't feel too bad about 
-              not               
+>> [COUGH] >> So, don't feel too bad about not
+所以对于没有学全两门语言，
 
 171
 00:09:02,542 --> 00:09:05,276
-  learning both languages, and  
-          once you've           
-     learned this language,     
+learning both languages, and once you've learned this language,
+不要感到沮丧。一旦你的Swift出师了，
 
 172
 00:09:05,278 --> 00:09:07,911
-learning Objective-C is gonna be
-             pretty             
-           easy, too.           
+learning Objective-C is gonna be pretty easy, too.
+再学Objective-C也只是分分钟的事。
 
 173
 00:09:07,913 --> 00:09:10,414
-              So.               
-     Good question though.      
+So. Good question though.
+这个问题问的很好。
 
 174
 00:09:10,416 --> 00:09:11,815
-           All right.           
+All right.
+很好。
 
 175
 00:09:11,817 --> 00:09:14,617
-  Of course iOS is filled with  
-            tons of             
-          frameworks.           
+Of course iOS is filled with tons of frameworks.
+当然，IOS内部拥有成吨的框架，
 
 176
 00:09:14,619 --> 00:09:18,320
-   Frameworks are libraries,    
-         basically, of          
-     objects that you use,      
+Frameworks are libraries, basically, of objects that you use,
+框架就是你会用到的类库以及基本对象。
 
 177
 00:09:18,322 --> 00:09:20,989
-as building blocks to build your
-          application.          
+as building blocks to build your application.
+作为搭建你的应用的模块，
 
 178
 00:09:20,991 --> 00:09:23,325
-And we are going to be covering 
-             them.              
+And we are going to be covering them.
+以供我们方便的使用。
 
 179
 00:09:23,327 --> 00:09:25,193
-     UIKit is the main one.     
+UIKit is the main one.
+UIKit就是其中主要的一个。
 
 180
 00:09:25,195 --> 00:09:27,829
-   It's got most of the user    
-        interface stuff         
-             in it.             
+It's got most of the user interface stuff in it.
+它包含了大量的关于用户界面的东西。
 
 181
 00:09:27,831 --> 00:09:32,266
-  Foundation is that most the   
-             course             
-   services layer that I was    
-         talking about,         
+Foundation is that most the course services layer that I was talking about,
+Foundation将是在Core Service层中我提到最多的框架。
 
 182
 00:09:32,268 --> 00:09:37,070
- and but there's tons of other  
-           ones, core           
-motion for doing the, the device
-             moving             
+and but there's tons of other ones, core motion for doing the, the device moving
+其他还有很多，core motion框架用于设备移动，
 
 183
 00:09:37,072 --> 00:09:42,075
-   around, you know, gyro and   
-         accelerometer,         
- core data for Object-Oriented  
-           database.            
+around, you know, gyro and accelerometer, core data for Object-Oriented database.
+旋转，陀螺及加速度等的响应，core data框架用于面向对象的数据库，
 
 184
 00:09:42,077 --> 00:09:44,961
-       Things like that.        
+Things like that.
+等等等等...
 
 185
 00:09:44,962 --> 00:09:47,846
-So I'll get to, as many as those
-           as I can,            
-    especially the big ones.    
+So I'll get to, as many as those as I can, especially the big ones.
+我会尽我所能尽可能多的讲给你们，特别是那些大的框架。
 
 186
 00:09:47,848 --> 00:09:50,849
-But there's just way too many to
-            cover in            
-           ten weeks.           
+But there's just way too many to cover in ten weeks.
+但是这对一个只有十周的课，显得太臃肿了。
 
 187
 00:09:51,851 --> 00:09:53,884
- And finally we I, I put this,  
+And finally we I, I put this,
+然而最终的，以上的那些东西
 
 188
 00:09:53,886 --> 00:09:58,188
-as a first class thing with all 
-           the rest,            
-   as a design strategy MVC.    
+as a first class thing with all the rest, as a design strategy MVC.
+均不是我们第一课要讲的内容。我首先要说的是一个叫做MVC的设计模式。
 
 189
 00:09:58,190 --> 00:10:01,124
-I think, I usually ask, I'll all
-            ask this            
-           year, too.           
+I think, I usually ask, I'll all ask this year, too.
+我想，我经常会问，同样今年我也要问一个问题，
 
 190
 00:10:01,126 --> 00:10:05,361
-How many people have used MVC in
-              some              
-          other class?          
+How many people have used MVC in some other class?
+你们有多少同学曾经在其他课上用过MVC？
 
 191
 00:10:05,363 --> 00:10:07,196
-   See, so it's half of you.    
+See, so it's half of you.
+哦，有一半的同学。
 
 192
 00:10:07,198 --> 00:10:09,698
- So I'll be teaching MVC, as if 
-           you don't            
-          know it, so           
+So I'll be teaching MVC, as if you don't know it, so
+有同学不知道，那么我先说说MVC。
 
 193
 00:10:09,700 --> 00:10:11,599
-   if you don't know it don't   
-             worry.             
+if you don't know it don't worry.
+就算你不知道它，也不用担心。
 
 194
 00:10:11,601 --> 00:10:15,636
- But MVC is a way of designing  
-              your              
-   application so that it's a   
-          little more           
+But MVC is a way of designing your application so that it's a little more
+MVC是你设计应用的一种方式，用它设计的代码
 
 195
 00:10:15,638 --> 00:10:21,141
-      debuggable, reusable      
-     understandable to you      
-and to anyone reading your code.
+debuggable, reusable understandable to you and to anyone reading your code.
+无论是你自己或者其他人去读都更易理解，也更易调试，易复用。
 
 196
 00:10:21,143 --> 00:10:25,278
- And iOS was designed with MVC  
-            from the            
-             start.             
+And iOS was designed with MVC from the start.
+而IOS从一开始就使用MVC设计。
 
 197
 00:10:25,280 --> 00:10:28,214
- So it's just integral part to  
-          building an           
-              iOS.              
+So it's just integral part to building an iOS.
+而这仅仅是创建一个IOS应用整体中的一部分。
 
 198
 00:10:28,216 --> 00:10:33,452
-   Now, I'm gonna do the demo   
-         today, and on          
- Wednesday I'm kinda not gonna  
-          follow MVC.           
+Now, I'm gonna do the demo today, and on Wednesday I'm kinda not gonna follow MVC.
+现在，我要做今天的演示。而在周三我有点不想遵循MVC。
 
 199
 00:10:33,454 --> 00:10:37,922
-But then next Monday we're gonna
-           apply MVC            
-to the demo I'm doing today and 
+But then next Monday we're gonna apply MVC to the demo I'm doing today and
+但是下周一我会应用MVC继续今天的演示，
 
 200
 00:10:37,924 --> 00:10:41,426
- Wednesday, so you're gonna get 
-            the full            
-      MVC treatment there.      
+Wednesday, so you're gonna get the full MVC treatment there.
+周三的时候你们要对MVC有充分的理解。
 
 201
 00:10:41,428 --> 00:10:45,262
- And I'll be having some slides 
-           on MVC on            
-  Wednesday to prepare you for  
-          next Monday.          
+And I'll be having some slides on MVC on Wednesday to prepare you for next Monday.然后我将一些周三用的MVC课件准备到下周一。
 
 202
 00:10:46,832 --> 00:10:49,699
-             Okay?              
- All right, so here's the demo. 
+Okay? All right, so here's the demo.
+OK？好，下面开始演示。
 
 203
 00:10:49,701 --> 00:10:51,818
-     The demo I'm gonna do,     
+The demo I'm gonna do,
+接下来我要做的演示
 
 204
 00:10:51,819 --> 00:10:53,936
- is something I actually did a  
-           few years            
-  ago that really works well-   
+is something I actually did a few years ago that really works well-
+是我前几年做的，运行起来还不错。
 
 205
 00:10:53,938 --> 00:10:55,971
-           >> [COUGH]           
-   >> With Swift, which is a    
-          calculator.           
+>> [COUGH] >> With Swift, which is a calculator.
+它是一个计算器，我们用Swift实现它。
 
 206
 00:10:55,973 --> 00:10:57,373
-   So, we're gonna build this   
-          calculator.           
+So, we're gonna build this calculator.
+现在，我们来创建这个计算器。
 
 207
 00:10:57,375 --> 00:11:00,509
- And we're gonna build it from  
-          scratch, all          
-            the way.            
+And we're gonna build it from scratch, all the way.
+我们将从头开始，一步一步创建它。
 
 208
 00:11:00,511 --> 00:11:04,545
-And I like to do my demos, where
-             I only             
-type in stuff, I don't copy and 
+And I like to do my demos, where I only type in stuff, I don't copy and
+我喜欢动手敲代码来做演示，而不会复制
 
 209
 00:11:04,547 --> 00:11:06,914
- paste big chunks of code in or 
-           whatever.            
+paste big chunks of code in or whatever.
+粘贴大段代码或者什么的。
 
 210
 00:11:06,916 --> 00:11:09,817
-I know, I'd see a lot of laptops
-            open, a             
- lot of people like to try and  
+I know, I'd see a lot of laptops open, a lot of people like to try and
+我知道，我看到很多人都打开了笔记本，很多人都喜欢
 
 211
 00:11:09,819 --> 00:11:12,736
-     follow along with me.      
+follow along with me.
+跟着我亲自动手尝试。
 
 212
 00:11:12,737 --> 00:11:15,654
-I'm a fast typer, but usually in
-              most              
- demos you can keep, keep up if 
-           you want.            
+I'm a fast typer, but usually in most demos you can keep, keep up if you want.
+我打字速度很快，但是通常在大多数演示中，你还是能够跟上我的速度，只要你想。
 
 213
 00:11:15,657 --> 00:11:20,426
-      I don't recommend it      
-        necessarily, or         
- certainly I don't require it.  
+I don't recommend it necessarily, or certainly I don't require it.
+我并不推荐这么做，或者说不必要这样。
 
 214
 00:11:20,428 --> 00:11:25,197
- I am going to, you, you'll be  
-           able to go           
-            back and            
+I am going to, you, you'll be able to go back and
+我想你，你可以回去
 
 215
 00:11:25,199 --> 00:11:28,400
- watch this particular demo on  
-             video.             
+watch this particular demo on video.
+看一遍这个演示视频。
 
 216
 00:11:28,402 --> 00:11:30,535
-  Even Stanford people will be  
-           able to do           
-             that.              
+Even Stanford people will be able to do that.
+即使斯坦福的学生可以这么做，
 
 217
 00:11:30,537 --> 00:11:34,805
-Because your first assignment is
-            gonna be            
-    to reproduce what I do.     
+Because your first assignment is gonna be to reproduce what I do.
+因为你的首要任务是要重现我所做的。
 
 218
 00:11:34,807 --> 00:11:37,041
-             'Kay?              
-   That is 90% of your first    
-          assignment.           
+'Kay? That is 90% of your first assignment.
+OK?这就是你第一份任务的90%
 
 219
 00:11:37,043 --> 00:11:40,277
-  Reproduce what I'm gonna do,  
-          today and on          
-           Wednesday.           
+Reproduce what I'm gonna do, today and on Wednesday.
+重现我要做的，今天和星期三。
 
 220
 00:11:40,279 --> 00:11:42,946
- So I'm not gonna post the code 
-           because I            
-   want you to go through the   
-         experience of          
+So I'm not gonna post the code because I want you to go through the experience of
+我不会将代码给你，因为我要你通过这个体验
 
 221
 00:11:42,948 --> 00:11:45,615
- typing the code in, and if you 
-          watch in on           
-             video,             
+typing the code in, and if you watch in on video,
+自己动手敲代码，即时你是在看这个视频，
 
 222
 00:11:45,617 --> 00:11:50,119
- watching what I do again, and  
-           and typing           
-           it all in.           
+watching what I do again, and and typing it all in.
+再看一遍我干了什么，然后自己敲代码。
 
 223
 00:11:50,121 --> 00:11:51,219
-        >> [COUGH] 'Kay?        
+>> [COUGH] 'Kay?
+OK？
 
 224
 00:11:51,221 --> 00:11:52,821
-  And I'll explain that all on  
-           Wednesday.           
+And I'll explain that all on Wednesday.
+我将在周三对所有问题做解释。
 
 225
 00:11:54,457 --> 00:11:56,340
-             Okay?              
+Okay?
+OK？
 
 226
 00:11:56,341 --> 00:11:58,224
- So, I put on the slide a bunch 
-           of things            
- that I'm gonna cover, but I'm  
-          not gonna go          
+So, I put on the slide a bunch of things that I'm gonna cover, but I'm not gonna go
+我要把课件盖住了。但是我不会
 
 227
 00:11:58,227 --> 00:12:01,628
-  over it in advance, I'm just  
-           gonna sit,           
- sit and soon I'll start doing  
-              it.               
+over it in advance, I'm just gonna sit, sit and soon I'll start doing it.
+向前翻，我要坐下，然后开始演示。
 
 228
 00:12:01,630 --> 00:12:04,498
- So any questions before I dive 
-            in here?            
+So any questions before I dive in here?
+在这之前还有什么问题吗？
 
 229
 00:12:04,500 --> 00:12:08,401
-I know we're gonna little fast, 
-             but I              
-  wanna maximize your learning  
-             time.              
+I know we're gonna little fast, but I wanna maximize your learning time.
+我知道我讲的有点快，因为我想最大化你们的学习时间。
 
 230
 00:12:08,403 --> 00:12:11,870
-          [INAUDIBLE]           
-            [NOISE].            
+[INAUDIBLE] [NOISE].
+（同学提问）
 
 231
 00:12:11,872 --> 00:12:12,771
-        Direct of what?         
+Direct of what?
+什么玩意？
 
 232
 00:12:12,773 --> 00:12:14,706
- Recommendation to which Xcode- 
+Recommendation to which Xcode-
+（同学提问）
 
 233
 00:12:14,708 --> 00:12:18,142
- So the questions, which Xcode  
-           should we            
-      use, should you use?      
+So the questions, which Xcode should we use, should you use?
+那么问题来了，我们应该用哪个版本的Xcode？你用的是哪个版本？
 
 234
 00:12:18,144 --> 00:12:20,811
- Well, you should just use the  
-           one on the           
-         Mac App store.         
+Well, you should just use the one on the Mac App store.
+你们用Mac App Store上下载的就好了。
 
 235
 00:12:20,813 --> 00:12:23,247
-   So, just go to the Mac App   
-          store, it's           
-             free.              
+So, just go to the Mac App store, it's free.
+去Mac App Store上免费下载。
 
 236
 00:12:23,249 --> 00:12:25,482
-Use the one there, whatever the 
-           latest one           
-              is.               
+Use the one there, whatever the latest one is.
+那里的是最新的版本。
 
 237
 00:12:25,484 --> 00:12:28,618
- If a new one comes out in the  
-            quarter,            
- well, let's all switch over to 
-              it.               
+If a new one comes out in the quarter, well, let's all switch over to it.
+如果有更新的版本出来，那么我们就换成那个。
 
 238
 00:12:28,620 --> 00:12:30,620
-Okay, let's just always be using
-              the               
-         latest Xcode.          
+Okay, let's just always be using the latest Xcode.
+总之我们用的是最新版本的Xcode。
 
 239
 00:12:30,622 --> 00:12:31,354
-           'Kay any-            
+'Kay any-
+OK，还有问题吗？
 
 240
 00:12:31,356 --> 00:12:32,621
 [INAUDIBLE] Beta [INAUDIBLE] No.
+（同学提问）[应该是问是否要用测试版]
 
 241
 00:12:32,623 --> 00:12:33,855
-              Not.              
-We're not gonna using a beta or 
+Not. We're not gonna using a beta or
+不，我们不用测试版
 
 242
 00:12:33,857 --> 00:12:35,624
-      anything like that.       
+anything like that.
+或者类似的一些版本。
 
 243
 00:12:35,625 --> 00:12:37,392
-  We'll just use whatever the   
-           currently            
-      published Xcode is.       
+We'll just use whatever the currently published Xcode is.
+我们只用当前最新的Xcode的发布版本。
 
 244
 00:12:38,995 --> 00:12:41,746
-             Okay.              
+Okay.
+OK
 
 245
 00:12:41,747 --> 00:12:44,498
-So, I'm going to start this demo
-            actually            
-      by launching Xcode.       
+So, I'm going to start this demo actually by launching Xcode.
+那么我要开始运行Xcode来演示了。
 
 246
 00:12:44,500 --> 00:12:46,265
-  So, here it is, right here.   
+So, here it is, right here.
+额，这，在这。
 
 247
 00:12:48,069 --> 00:12:50,669
-             Xcode.             
+Xcode.
 
 248
 00:12:50,670 --> 00:12:53,270
-And when you launch Xcode, let's
-              hide              
-          others here.          
+And when you launch Xcode, let's hide others here.
+运行Xcode以后，我们把其他东西隐藏起来。
 
 249
 00:12:53,273 --> 00:12:55,140
-  You're gonna get this splash  
-           screen and           
+You're gonna get this splash screen and
+你会看到这个欢迎界面
 
 250
 00:12:55,142 --> 00:12:58,376
-  on this splash screen on the  
-          right, this           
- is gonna be all your projects. 
+on this splash screen on the right, this is gonna be all your projects.
+在欢迎界面的右边，将展示你所有的项目。
 
 251
 00:12:58,378 --> 00:13:00,711
-Now, since it's the beginning of
-              the               
-   quarter, we don't have any   
-         projects yet,          
+Now, since it's the beginning of the quarter, we don't have any projects yet,
+现在，这学期刚刚开始，我们还没有任何的项目。
 
 252
 00:13:00,713 --> 00:13:04,048
-but they'll all be listed here, 
-           so as the            
- quarter goes by this will fill 
-              up.               
+but they'll all be listed here, so as the quarter goes by this will fill up.
+但是慢慢的，我们会逐渐将这个列表填满。
 
 253
 00:13:04,050 --> 00:13:07,284
-You can turn this splash screen 
-            off, if             
- you don't like it by the way.  
+You can turn this splash screen off, if you don't like it by the way.
+如果你不喜欢这个欢迎页面，可以将它关闭。
 
 254
 00:13:07,286 --> 00:13:10,820
-This splash screen also lets us 
-           do things            
-      like playgrounds and      
+This splash screen also lets us do things like playgrounds and
+欢迎界面中也可以创建例如playground，
 
 255
 00:13:10,822 --> 00:13:13,256
- a source code management right 
-           down here.           
+a source code management right down here.
+或者源代码管理，像这里。
 
 256
 00:13:13,258 --> 00:13:15,024
- We're not gonna be doing that  
-          for a while.          
+We're not gonna be doing that for a while.
+我们不会这么做很久，
 
 257
 00:13:15,026 --> 00:13:16,859
-We're gonna be focusing on this 
-            option,             
-          right here.           
+We're gonna be focusing on this option, right here.
+我们需要关注的是这个选项，这里。
 
 258
 00:13:16,861 --> 00:13:18,760
-  Create a new Xcode project.   
+Create a new Xcode project.
+创建新的Xcode项目。
 
 259
 00:13:18,762 --> 00:13:22,463
-  If you don't have the splash  
-          screen, you           
-can go to File > New > Project. 
+If you don't have the splash screen, you can go to File > New > Project.
+如果你看不到欢迎界面，你也可以用菜单文件>新建>项目
 
 260
 00:13:22,465 --> 00:13:23,748
-              Kay.              
+Kay.
+OK
 
 261
 00:13:23,749 --> 00:13:25,032
-Same thing, those both the same 
-             thing.             
+Same thing, those both the same thing.
+一样的，它们都是一样的。
 
 262
 00:13:25,034 --> 00:13:28,469
-So I'm gonna click right here on
-            Create a            
-          new project.          
+So I'm gonna click right here on Create a new project.
+下面我点击这里，创建一个新项目。
 
 263
 00:13:28,471 --> 00:13:31,605
-When I create a new project, it 
-            wants to            
- know what kind of project you  
-            want to             
+When I create a new project, it wants to know what kind of project you want to
+当我创建新项目的时候，她要知道你要创建的是什么类型的项目。
 
 264
 00:13:31,607 --> 00:13:35,908
-    create, because Xcode is    
-        actually used on        
-     Mac OS 10 and to build     
-         frameworks and         
+create, because Xcode is actually used on Mac OS 10 and to build frameworks and
+创建，Xcode用于在Mac OS 10上创建框架，
 
 265
 00:13:35,910 --> 00:13:38,494
-        all that stuff.         
+all that stuff.
+以及所有东西。
 
 266
 00:13:38,495 --> 00:13:41,079
-   But we're always gonna be    
-          building iOS          
-         Applications.          
+But we're always gonna be building iOS Applications.
+但是我们经常创建的是IOS，应用。
 
 267
 00:13:41,082 --> 00:13:43,382
-And in fact, we're always gonna 
-            use this            
-      template right here,      
+And in fact, we're always gonna use this template right here,
+事实上，我们经常用到的模板是在这里，
 
 268
 00:13:43,384 --> 00:13:44,783
-    Single View Application.    
+Single View Application.
+单页面（视图）应用。
 
 269
 00:13:44,785 --> 00:13:47,236
-             'Kay?              
+'Kay?
+OK？
 
 270
 00:13:47,237 --> 00:13:49,688
- That's kind of your basic MVC  
-            starter             
-        application and         
+That's kind of your basic MVC starter application and
+这就是你的基础MVC入门应用。
 
 271
 00:13:49,690 --> 00:13:53,724
-     we're gonna build very     
-        complicated apps        
-  out of that, but we're gonna  
-          start here,           
+we're gonna build very complicated apps out of that, but we're gonna start here,
+我们会用其他这些创建非常复杂的应用，但是我们从这里开始。
 
 272
 00:13:53,726 --> 00:13:55,592
 so you always click on that one.
+所以你会经常点这个。
 
 273
 00:13:55,594 --> 00:13:58,528
- Then it wants to know what you 
-            want to             
-       call your app, and       
+Then it wants to know what you want to call your app, and
+然后它想知道你会如何称呼你的应用。
 
 274
 00:13:58,530 --> 00:14:02,598
-we're building a calculator, so 
-             we're              
-gonna call our app, Calculator. 
+we're building a calculator, so we're gonna call our app, Calculator.
+我们正在创建的是计算器，所以我们给我们的应用起名为，Calculator。
 
 275
 00:14:02,600 --> 00:14:04,634
-             'Kay?              
+'Kay?
+OK？
 
 276
 00:14:04,635 --> 00:14:06,669
- This organization name doesn't 
-             really             
-matter that's just gonna appear 
-               in               
+This organization name doesn't really matter that's just gonna appear in
+这个组织名称并不重要，它只会出现在
 
 277
 00:14:06,671 --> 00:14:10,339
- copyright notice and the code  
-            that you            
-write at the top in a comment so
+copyright notice and the code that you write at the top in a comment so
+类似版权信息，或者你的代码开头的注释中，所以
 
 278
 00:14:10,341 --> 00:14:12,291
-    don't worry about that.     
+don't worry about that.
+不用管它。
 
 279
 00:14:12,292 --> 00:14:14,242
-But this organization identifier
-            that is             
-        very important.         
+But this organization identifier that is very important.
+但是这里的组织标识符是非常重要的。
 
 280
 00:14:14,244 --> 00:14:17,611
- 'Kay, this uniquely identifies 
-              you.              
+'Kay, this uniquely identifies you.
+它是你的唯一标识符。
 
 281
 00:14:17,613 --> 00:14:19,230
-             Okay?              
+Okay?
+OK？
 
 282
 00:14:19,231 --> 00:14:20,848
-So that on the next line we can 
-           you just,            
+So that on the next line we can you just,
+所以在下一行里我们，你会
 
 283
 00:14:20,850 --> 00:14:23,950
-  new uniquely idefy, identify  
-              your              
-          calculator.           
+new uniquely idefy, identify your calculator.
+有一个新的唯一的标识符，标识你的计算器。
 
 284
 00:14:23,952 --> 00:14:26,219
-   So here if your a Stanford   
-            student,            
+So here if your a Stanford student,
+所以如果你是斯坦福的学生，
 
 285
 00:14:26,221 --> 00:14:31,490
- you'll wanna use this reverse  
-          DNS notation          
-   here edu.stanford.cs1983p.   
+you'll wanna use this reverse DNS notation here edu.stanford.cs1983p.
+你要使用这个反转的DNS域名，edu.stanford.cs1983p。
 
 286
 00:14:31,492 --> 00:14:35,093
-And instead of instructor there,
-           you wanna            
-      put your SU net ID.       
+And instead of instructor there, you wanna put your SU net ID.
+并用你的SU网络ID将instructor替换
 
 287
 00:14:35,095 --> 00:14:36,661
-             'Kay?              
+'Kay?
+OK？
 
 288
 00:14:36,663 --> 00:14:37,929
-  Cuz nobody else has that but  
-              you.              
+Cuz nobody else has that but you.
+[因为：Nobody Nobody But You]
+Sorry，因为那东西只有你才有
 
 289
 00:14:37,931 --> 00:14:39,864
- And that'll uniquely identify  
-              you.              
+And that'll uniquely identify you.
+这样这个标识符就是唯一的了。
 
 290
 00:14:40,900 --> 00:14:44,201
-As I said, we're using Swift not
-          Objective-C.          
+As I said, we're using Swift not Objective-C.
+我说过，我们要用Swift而不是Objective-C。
 
 291
 00:14:44,203 --> 00:14:49,272
-  And we're gonna build an app  
-           that works           
-  be, equally well on iPad and  
+And we're gonna build an app that works be, equally well on iPad and
+我们要创建的应用要能同时工作在iPad和
 
 292
 00:14:49,274 --> 00:14:51,507
-    iPhone, that's called a     
-         universal app.         
+iPhone, that's called a universal app.
+iPhone上，所以选择Universal应用。
 
 293
 00:14:51,509 --> 00:14:54,209
-You can pick to develop for only
-             one or             
-           the other.           
+You can pick to develop for only one or the other.
+你也可以选择只为其中一种设备开发。
 
 294
 00:14:54,211 --> 00:14:56,745
-But we are going to go universal
-             here.              
+But we are going to go universal here.
+但是我们现在创建的是通用的。
 
 295
 00:14:56,747 --> 00:15:00,248
-We're not gonna really be doing 
-            the iPad            
- part of it for a couple weeks. 
+We're not gonna really be doing the iPad part of it for a couple weeks.
+在这几周之内我们不会真的做它的iPad部分。
 
 296
 00:15:00,250 --> 00:15:04,352
-    But it is our intent to     
-        eventually build        
-   an app that works on both.   
+But it is our intent to eventually build an app that works on both.
+但是它最终会创建一个通用的应用[同时运行在iPad和iPhone上]。
 
 297
 00:15:04,354 --> 00:15:06,186
-Okay we're not going to be using
-              core              
-             data,              
+Okay we're not going to be using core data,
+额，我们现在还用不到core data。
 
 298
 00:15:06,188 --> 00:15:09,322
-that's object oriented database 
-            stuff so            
- you just leave that unchecked. 
+that's object oriented database stuff so you just leave that unchecked.
+那是关于面向对象数据库的东西，现在先不要选它。
 
 299
 00:15:09,324 --> 00:15:13,993
-  And now it's asking where we  
-          want to save          
-it, I strongly recommend saving 
-            in your             
+And now it's asking where we want to save it, I strongly recommend saving in your
+现在，它问我们要把项目保存在哪里，我强烈建议保存在你的
 
 300
 00:15:13,995 --> 00:15:18,998
 home directory, this is my home directory here in a folder called Developer, okay?
-主目录，这是我的home目录，这里是叫作Developer的文件夹
+home目录下，这是我的home目录，里面有一个Developer的目录，看到没？
 
 301
 00:15:19,000 --> 00:15:22,001

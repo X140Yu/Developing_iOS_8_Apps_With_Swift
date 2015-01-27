@@ -6623,828 +6623,743 @@ So I'm going to Alt+Option down
              click.             
 
 1201
-01:00:29,096 --> 01:00:31,529
-   Look at this, this is the    
-         documentation          
-            for it.             
+01:00:31,531 --> 01:00:36,334
+It's an instance variable a, a,
+property
+on UI button.
+这是一个实例变量，UIButton的属性
 
 1202
-01:00:31,531 --> 01:00:36,334
-It's an instance variable a, a, 
-            property            
-         on UI button.          
+01:00:36,336 --> 01:00:37,267
+Name is current title.
+名字是current title
 
 1203
-01:00:36,336 --> 01:00:37,267
-     Name is current title.     
+01:00:37,269 --> 01:00:39,302
+The type is string, question mark.
+类型是string，问号标记。
 
 1204
-01:00:37,269 --> 01:00:39,302
-  The type is string, question  
-             mark.              
+01:00:39,304 --> 01:00:41,271
+And this little get means it's read-only.
+而这里的“get”表示这个是只读的。
 
 1205
-01:00:39,304 --> 01:00:41,271
- And this little get means it's 
-           read-only.           
+01:00:41,273 --> 01:00:42,672
+I can only get the current title.
+我只能获得current title。
 
 1206
-01:00:41,273 --> 01:00:42,672
-   I can only get the current   
-             title.             
+01:00:42,674 --> 01:00:44,807
+I can't set it, there are other ways to set a button's title.
+但是我不能设置，有其他方式进行设置。
 
 1207
-01:00:42,674 --> 01:00:44,807
-I can't set it, there are other 
-            ways to             
-     set a button's title.      
+01:00:44,809 --> 01:00:47,810
+You can't set it with this method or this property.
+你不能通过这个方法或者属性进行设置。
 
 1208
-01:00:44,809 --> 01:00:47,810
-   You can't set it with this   
-         method or this         
-           property.            
+01:00:47,812 --> 01:00:51,480
+So it's an optional, so that's why this ended up being an optional all right.
+所以这是一个选项，这就是为什么最后是一个选项。
 
 1209
-01:00:47,812 --> 01:00:51,480
- So it's an optional, so that's 
-            why this            
- ended up being an optional all 
-             right.             
+01:00:51,482 --> 01:00:53,081
+Well, that's all wonderful.
+嗯，这非常不错。
 
 1210
-01:00:51,482 --> 01:00:53,081
-  Well, that's all wonderful.   
+01:00:53,083 --> 01:00:54,549
+How do I get the string?
+我怎么获取这个string呢？
 
 1211
-01:00:53,083 --> 01:00:54,549
-    How do I get the string?    
+01:00:54,551 --> 01:00:57,318
+I don't want it optional, I want that button's string.
+我不需要它的选项，我要的是这个按钮的标题。
 
 1212
-01:00:54,551 --> 01:00:57,318
-I don't want it optional, I want
-              that              
-        button's string.        
+01:00:57,320 --> 01:01:02,923
+And the way you do that is you unwrap the optional, meaning you look in there and
+方法就是你可以打开这个方法，意思是你正在
 
 1213
-01:00:57,320 --> 01:01:02,923
- And the way you do that is you 
-           unwrap the           
- optional, meaning you look in  
-           there and            
+01:01:02,925 --> 01:01:08,061
+get the val, the associated value, with exclamation point, okay.
+用“!”从里边获取关联的值。
 
 1214
-01:01:02,925 --> 01:01:08,061
-  get the val, the associated   
-          value, with           
-    exclamation point, okay.    
+01:01:08,063 --> 01:01:11,330
+What happens if I put that exclamation point there?
+如果我把感叹号放在这里会怎么样？
 
 1215
-01:01:08,063 --> 01:01:11,330
-   What happens if I put that   
-          exclamation           
-          point there?          
+01:01:11,332 --> 01:01:13,732
+Well first of all, let me show you that when I put that exclamation point,
+首先我先会展示给你们看，我把感叹号放在这里
 
 1216
-01:01:11,332 --> 01:01:13,732
- Well first of all, let me show 
-            you that            
-  when I put that exclamation   
-             point,             
+01:01:13,734 --> 01:01:17,002
+look what happened to digit, I'm Option-clicking on digit.
+看看会有什么变化，我现在点击数字。
 
 1217
-01:01:13,734 --> 01:01:17,002
-look what happened to digit, I'm
-   Option-clicking on digit.    
+01:01:17,004 --> 01:01:19,270
+It's not an optional anymore.
+它不再是选项了。
 
 1218
-01:01:17,004 --> 01:01:19,270
- It's not an optional anymore.  
+01:01:19,272 --> 01:01:22,507
+Digit turned to a string because I unwrapped the optional that
+数字变成了string，因为我打开了选项
 
 1219
-01:01:19,272 --> 01:01:22,507
-Digit turned to a string because
-               I                
-  unwrapped the optional that   
+01:01:22,509 --> 01:01:25,576
+came back from current title, got the string out of there.
+从当前的标题里的到了string。
 
 1220
-01:01:22,509 --> 01:01:25,576
- came back from current title,  
-            got the             
-      string out of there.      
-
-1221
 01:01:25,578 --> 01:01:28,612
 But what happens if this is nil?
+但是如果这是个nil值会怎么样？
+
+1221
+01:01:28,614 --> 01:01:30,180
+What happened if this optional is nil?
+如果选项是nil会发生什么事情？
 
 1222
-01:01:28,614 --> 01:01:30,180
- What happened if this optional 
-            is nil?             
+01:01:30,182 --> 01:01:34,718
+In other words the button option has never been set, crash, 'kay,
+换句话说，就是这些按钮选项没有设置会怎么样？对的，会崩溃。
 
 1223
-01:01:30,182 --> 01:01:34,718
-In other words the button option
-           has never            
-     been set, crash, 'kay,     
+01:01:34,720 --> 01:01:39,855
+crashes your program, so if you use exclamation point to unwrap an optional,
+所以如果你使用"!"号来打开一个选项的时候。
 
 1224
-01:01:34,720 --> 01:01:39,855
-crashes your program, so if you 
-              use               
- exclamation point to unwrap an 
-           optional,            
+01:01:39,857 --> 01:01:45,660
+and that optional's current value is not set, nil, then it will crash your program.
+并且这个选项没有设值为空的时候，你的程序会崩溃。
 
 1225
-01:01:39,857 --> 01:01:45,660
-  and that optional's current   
-          value is not          
-  set, nil, then it will crash  
-         your program.          
+01:01:46,930 --> 01:01:50,498
+Now a lot of you might be like whoa, I'm, my products are gonna be crashing all over
+现在你们中的不少人肯定在想，怎么我的东西老是崩溃？
 
 1226
-01:01:46,930 --> 01:01:50,498
- Now a lot of you might be like 
-           whoa, I'm,           
-    my products are gonna be    
-       crashing all over        
+01:01:50,500 --> 01:01:55,903
+the place and, because there's a lot of optionals in iOS, I mean a lot, okay?
+这是因为iOS有着非常多的选项，记住是非常多。
 
 1227
-01:01:50,500 --> 01:01:55,903
-the place and, because there's a
-             lot of             
-optionals in iOS, I mean a lot, 
-             okay?              
+01:01:55,905 --> 01:01:58,939
+Most things are probably optionals, because most things, it make sense,
+多数东西都是选项，因为这些东西都是有意义的。
 
 1228
-01:01:55,905 --> 01:01:58,939
-    Most things are probably    
-           optionals,           
- because most things, it makes  
-             sense,             
+01:01:58,941 --> 01:02:00,840
+they can be in an not set state at some point.
+他们能在一些情况下出于不需设值的状态。
 
 1229
-01:01:58,941 --> 01:02:00,840
-they can be in an not set state 
-            at some             
-             point.             
+01:02:02,177 --> 01:02:07,746
+And yeah, in this case though, maybe you want your program to crash, okay?
+在这个情况下，说不定你就希望你的程序崩溃？对不对？
 
 1230
-01:02:02,177 --> 01:02:07,746
- And yeah, in this case though, 
-           maybe you            
-  want your program to crash,   
-             okay?              
+01:02:07,748 --> 01:02:11,850
+You might want your program to crash, because if you had a button, that never
+你也许就是希望自己的程序崩溃，因为你有一个按键，
 
 1231
-01:02:07,748 --> 01:02:11,850
- You might want your program to 
-             crash,             
-  because if you had a button,  
-           that never           
+01:02:11,852 --> 01:02:15,920
+had its title set, and it's sending a pen digit to your controller, you probably
+但是它的标题从未设值，并且它传了一个数字给你的控制器
 
 1232
-01:02:11,852 --> 01:02:15,920
-  had its title set, and it's   
-         sending a pen          
- digit to your controller, you  
-            probably            
+01:02:15,922 --> 01:02:20,358
+wanna have that crash, so you can find that bug, before you ship your program.
+在你分发你的程序之前，你就能找到bug，所以你希望它崩溃。
 
 1233
-01:02:15,922 --> 01:02:20,358
- wanna have that crash, so you  
-            can find            
- that bug, before you ship your 
-            program.            
+01:02:20,360 --> 01:02:23,360
+You see why sometimes fra, crashing is good?
+现在你知道为什么有时候程序崩溃是个好事吧。
 
 1234
-01:02:20,360 --> 01:02:23,360
-   You see why sometimes fra,   
-          crashing is           
-             good?              
+01:02:23,362 --> 01:02:26,763
+Now if you don't wanna crash, there's a way to get around that as well.
+现在如果你不想你的程序崩溃，这里有一个方法来解决。
 
 1235
-01:02:23,362 --> 01:02:26,763
- Now if you don't wanna crash,  
-           there's a            
-way to get around that as well. 
+01:02:26,765 --> 01:02:28,164
+And I'll show you that a little bit later.
+我等一下就和你们说。
 
 1236
-01:02:26,765 --> 01:02:28,164
-And I'll show you that a little 
-           bit later.           
+01:02:28,166 --> 01:02:32,802
+But for now understanding that that's what this exclamation point does.
+但是现在，先弄明白这个感叹号是干什么的。
 
 1237
-01:02:28,166 --> 01:02:32,802
- But for now understanding that 
-          that's what           
-  this exclamation point does.  
+01:02:32,804 --> 01:02:35,638
+It unwraps that optional and crashes if it's nil.
+它打开了选项，如果它是nil就崩溃。
 
 1238
-01:02:32,804 --> 01:02:35,638
-  It unwraps that optional and  
-           crashes if           
-           it's nil.            
+01:02:35,640 --> 01:02:38,040
+But if it's not nil, it gets to the string or
+但如果不是空，它是得到string还是
 
 1239
-01:02:35,640 --> 01:02:38,040
-But if it's not nil, it gets to 
-           the string           
-               or               
+01:02:38,042 --> 01:02:40,809
+whatever the optional type is out of there for you.
+给你其他的选项类型？
 
 1240
-01:02:38,042 --> 01:02:40,809
- whatever the optional type is  
-          out of there          
-            for you.            
+01:02:40,811 --> 01:02:44,579
+So now let's go ahead and run again and
+所以让我们继续，重新运行一次
 
 1241
-01:02:40,811 --> 01:02:44,579
- So now let's go ahead and run  
-           again and            
+01:02:44,581 --> 01:02:51,318
+we're gonna see that digit equals is gonna say the number, 'kay?
+我们将看看是不是能得到相等的数字？
 
 1242
-01:02:44,581 --> 01:02:51,318
-   we're gonna see that digit   
-        equals is gonna         
-     say the number, 'kay?      
+01:02:51,320 --> 01:02:56,556
+It's got the string off the current title, no more optional in there, okay?
+我们得到了当前的标题，没有更多的选项了。
 
 1243
-01:02:51,320 --> 01:02:56,556
-  It's got the string off the   
-         current title,         
-no more optional in there, okay?
+01:02:56,558 --> 01:02:59,492
+Good?
+看上去不错。
 
 1244
-01:02:56,558 --> 01:02:59,492
-             Good?              
+01:02:59,494 --> 01:03:03,362
+All right, so, now, what are we gonna do with that digit?
+好的，现在，我们要用这些按钮做什么呢？
 
 1245
-01:02:59,494 --> 01:03:03,362
-All right, so, now, what are we 
-            gonna do            
-        with that digit?        
+01:03:03,364 --> 01:03:06,715
+We got the digit,
+我们已经能得到数字。
 
 1246
-01:03:03,364 --> 01:03:06,715
-       We got the digit,        
+01:03:06,716 --> 01:03:10,067
+we want to append it onto the end of this display right here, okay.
+我们希望按的数字能显示在这里的末尾。
 
 1247
-01:03:06,716 --> 01:03:10,067
- we want to append it onto the  
-          end of this           
-   display right here, okay.    
+01:03:10,070 --> 01:03:13,972
+And so let's just do that by saying display, dot.
+所以让我们输入display.
 
 1248
-01:03:10,070 --> 01:03:13,972
-  And so let's just do that by  
-             saying             
-         display, dot.          
+01:03:13,974 --> 01:03:17,241
+Now, again, if we have the documentation,I'd go look in the documentation and
+现在继续，如果我们查文档。
 
 1249
-01:03:13,974 --> 01:03:17,241
-   Now, again, if we have the   
-         documentation,         
-I'd go look in the documentation
-              and               
+01:03:17,243 --> 01:03:21,712
+it would say oh, there's a property on UILabel, which is what display is,
+它会告诉我们，UILabel有一个属性
 
 1250
-01:03:17,243 --> 01:03:21,712
-   it would say oh, there's a   
-          property on           
- UILabel, which is what display 
-              is,               
+01:03:21,714 --> 01:03:23,046
+display is a UILabel.
+负责显示UILabel应该显示的什么。
 
 1251
-01:03:21,714 --> 01:03:23,046
-     display is a UILabel.      
+01:03:23,048 --> 01:03:25,982
+There's a property and it' called text.
+这个属性叫做text
 
 1252
-01:03:23,048 --> 01:03:25,982
-  There's a property and it's   
-          called text.          
+01:03:25,984 --> 01:03:28,518
+See it right there?
+就在这里。
 
 1253
-01:03:25,984 --> 01:03:28,518
-      See it right there?       
+01:03:28,519 --> 01:03:31,053
+And actually, you can even see right here, the type of that, it's an optional as
+而且实际上，输入这个，你能在这里看到，这是一个选项。
 
 1254
-01:03:28,519 --> 01:03:31,053
- And actually, you can even see 
-          right here,           
-   the type of that, it's an    
-          optional as           
+01:03:31,056 --> 01:03:36,225
+well, because this label's text might not have been set either, okay?
+所以这个label的text还没有设值。
 
 1255
-01:03:31,056 --> 01:03:36,225
-well, because this label's text 
-           might not            
-  have been set either, okay?   
+01:03:36,227 --> 01:03:39,061
+So it has to be an optional string, okay?
+所以这里是选项string。
 
 1256
-01:03:36,227 --> 01:03:39,061
-  So it has to be an optional   
-         string, okay?          
+01:03:39,063 --> 01:03:43,297
+So I'm just gonna set that equal now, display that text as an optional, so
+所以我现在要用等号设值，显示的text作为一个选项
 
 1257
-01:03:39,063 --> 01:03:43,297
-So I'm just gonna set that equal
-              now,              
-    display that text as an     
-          optional, so          
+01:03:43,299 --> 01:03:46,567
+what values can I send it to,set it to?
+什么值可以设给它？
 
 1258
-01:03:43,299 --> 01:03:46,567
- what values can I send it to,  
-           set it to?           
+01:03:46,569 --> 01:03:51,705
+I could set it to nil, that would be legal because it's an optional,
+我可以设成nil，因为它是一个选项，是完全合法的。
 
 1259
-01:03:46,569 --> 01:03:51,705
-  I could set it to nil, that   
-         would be legal         
-   because it's an optional,    
+01:03:51,707 --> 01:03:53,940
+see, no warnings, no errors.
+看，没有警告也没有错误。
 
 1260
-01:03:51,707 --> 01:03:53,940
-  see, no warnings, no errors.  
+01:03:53,942 --> 01:03:55,475
+That would clear out that display.
+这将什么也不显示。
 
 1261
-01:03:53,942 --> 01:03:55,475
-   That would clear out that    
-            display.            
+01:03:55,477 --> 01:03:57,943
+It would not be set to anything, or
+它不能设值成其他东西
 
 1262
-01:03:55,477 --> 01:03:57,943
-It would not be set to anything,
-               or               
+01:03:57,945 --> 01:04:00,979
+I can set it to a string because it's an optional string.
+我能给它设一个string值，因为它是一个选项string。
 
 1263
-01:03:57,945 --> 01:04:00,979
-I can set it to a string because
-            it's an             
-        optional string.        
+01:04:00,981 --> 01:04:03,682
+So I'm going to set it to a string and the string I'm going to set it
+所以我将把它设值一个string
 
 1264
-01:04:00,981 --> 01:04:03,682
-  So I'm going to set it to a   
-         string and the         
-   string I'm going to set it   
+01:04:03,684 --> 01:04:08,586
+to is display.text, what's currently in there, plus digit, okay?
+这个string我设置成display.text，这里加个数字。
 
 1265
-01:04:03,684 --> 01:04:08,586
-   to is display.text, what's   
-          currently in          
-    there, plus digit, okay?    
+01:04:08,588 --> 01:04:10,087
+So I'm going to append that digit on.
+这样子就能增加数字了。
 
 1266
-01:04:08,588 --> 01:04:10,087
-  So I'm going to append that   
-           digit on.            
+01:04:10,089 --> 01:04:11,655
+Let's get rid of that.
+让我们摆脱删掉这句。
 
 1267
-01:04:10,089 --> 01:04:11,655
-     Let's get rid of that.     
+01:04:11,657 --> 01:04:14,124
+Okay, now, this has an error here.
+好吧，现在又有一个错误。
 
 1268
-01:04:11,657 --> 01:04:14,124
-  Okay, now, this has an error  
-             here.              
+01:04:14,126 --> 01:04:15,025
+Why does this have an error?
+这个错误是为什么呢？为什么这里有个错误呢？
 
 1269
-01:04:14,126 --> 01:04:15,025
-  Why does this have an error?  
+01:04:15,027 --> 01:04:17,093
+Anyone volunteer why this is an error?
+有谁自愿回答这里为什么有个错误？
 
 1270
-01:04:15,027 --> 01:04:17,093
-Anyone volunteer why this is an 
-             error?             
+01:04:17,095 --> 01:04:18,661
+See it's pointing right here. 
+发现错误指向这里。
 
 1271
-01:04:17,095 --> 01:04:18,661
- See it's pointing right here.  
+01:04:18,663 --> 01:04:21,897
+There's an error, back there.
+这里有个错误，后面那位同学回答。
 
 1272
-01:04:18,663 --> 01:04:21,897
- There's an error, back there.  
+01:04:21,899 --> 01:04:24,733
+The display.text is an optional string.
+display.text是一个选项string。
 
 1273
-01:04:21,899 --> 01:04:24,733
-The display.text is an optional 
-            string.             
+01:04:24,735 --> 01:04:27,702
+Bingo. Because display.text right here is not
+答对了，因为这里的display.tex它不是个string。
 
 1274
-01:04:24,735 --> 01:04:27,702
-             Bingo.             
-Because display.text right here 
-             is not             
+01:04:27,704 --> 01:04:33,341
+a string, it's an optional, and you can't add a string to an optional.
+你不能将一个string加在一个选项上。
 
 1275
-01:04:27,704 --> 01:04:33,341
-a string, it's an optional, and 
-           you can't            
-  add a string to an optional.  
+01:04:33,343 --> 01:04:35,476
+You can only add strings to other strings.
+你只能将一个string加在另外的string上。
 
 1276
-01:04:33,343 --> 01:04:35,476
-  You can only add strings to   
-         other strings.         
+01:04:35,478 --> 01:04:39,813
+So we need to turn this into a string by unwrapping it.
+所以我们通过打开选项，将选项转变为string。
 
 1277
-01:04:35,478 --> 01:04:39,813
- So we need to turn this into a 
-           string by            
-         unwrapping it.         
+01:04:39,815 --> 01:04:44,250
+And again, yes, this would crash if the display currently has nothing in it,
+对的，这个东西会crash，如果display没有值。
 
 1278
-01:04:39,815 --> 01:04:44,250
-And again, yes, this would crash
-             if the             
-display currently has nothing in
-              it,               
+01:04:44,252 --> 01:04:46,185
+it's not set, okay?
+现在还没有设值。
 
 1279
-01:04:44,252 --> 01:04:46,185
-      it's not set, okay?       
+01:04:46,187 --> 01:04:48,887
+Are we cool with that? 
+大家都了解这个了吧？
 
 1280
-01:04:46,187 --> 01:04:48,887
-     Are we cool with that?     
+01:04:48,889 --> 01:04:49,821
+So let's run again.
+再让我们运行一次。
 
 1281
-01:04:48,889 --> 01:04:49,821
-      So let's run again.       
+01:04:49,823 --> 01:04:52,857
+[BLANK_AUDIO]
+[背景音]
 
 1282
-01:04:49,823 --> 01:04:52,857
-         [BLANK_AUDIO]          
+01:04:52,859 --> 01:04:54,058
+All right.
+好的。
 
 1283
-01:04:52,859 --> 01:04:54,058
-           All right.           
+01:04:54,060 --> 01:04:57,461
+So now 5, oh, it put the 5 on there.
+所以现在点击5，噢，5显示在这里了。
 
 1284
-01:04:54,060 --> 01:04:57,461
- So now 5, oh, it put the 5 on  
-             there.             
+01:04:57,463 --> 01:04:58,762
+6, excellent.
+点击6，好极了。
 
 1285
-01:04:57,463 --> 01:04:58,762
-         6, excellent.          
+01:04:58,764 --> 01:05:00,497
+It's kinda working.
+它能够工作了。
 
 1286
-01:04:58,764 --> 01:05:00,497
-      It's kinda working.       
+01:05:00,499 --> 01:05:02,565
+I don't really like that 0 though.
+这个0在这里我很不喜欢。
 
 1287
-01:05:00,499 --> 01:05:02,565
-   I don't really like that 0   
-            though.             
+01:05:02,567 --> 01:05:03,966
+That's kinda weak, 0, 5, 6.
+这里就有点不对劲了，5和6前面有个0。
 
 1288
-01:05:02,567 --> 01:05:03,966
-  That's kinda weak, 0, 5, 6.   
+01:05:03,968 --> 01:05:06,669
+That should not,
+这样子是不对的。
 
 1289
-01:05:03,968 --> 01:05:06,669
-        That should not,        
+01:05:06,670 --> 01:05:09,371
+that 0 should've gotten cleared out, right, when I first typed that 5.
+这个0应该在我按下5的时候就清除掉。
 
 1290
-01:05:06,670 --> 01:05:09,371
-that 0 should've gotten cleared 
-              out,              
- right, when I first typed that 
-               5.               
+01:05:09,374 --> 01:05:12,808
+And that's because we really need some way in our controller to know whether we're in
+这是因为我们确实需要一些方法让我们的controller知道我们是否在
 
 1291
-01:05:09,374 --> 01:05:12,808
-  And that's because we really  
-         need some way          
-   in our controller to know    
-        whether we're in        
+01:05:12,810 --> 01:05:14,777
+the middle of typing a number right now.
+一个数字膻中输入数字。
 
 1292
-01:05:12,810 --> 01:05:14,777
- the middle of typing a number  
-           right now.           
+01:05:14,778 --> 01:05:16,745
+Because if we're in the middle of typing a number, we want to append, but
+因为如果我们在一个已有数字中部输入数字，我们是希望数字加在输入的地方的。
 
 1293
-01:05:14,778 --> 01:05:16,745
- Because if we're in the middle 
-          of typing a           
- number, we want to append, but 
+01:05:16,747 --> 01:05:18,079
+if we're not in the middle of typing a number,
+但是如果我们不用从一个数字的中部进行输入。
 
 1294
-01:05:16,747 --> 01:05:18,079
- if we're not in the middle of  
-            typing a            
-            number,             
+01:05:18,081 --> 01:05:21,182
+we want to start a new number, right?
+也就是我们想要从头开始输入一个新的数字。
 
 1295
-01:05:18,081 --> 01:05:21,182
- we want to start a new number, 
-             right?             
+01:05:21,184 --> 01:05:27,021
+So, let's do that, and I'm going to do that by adding a property, okay?
+所以，让我们通过添加一个属性实现这个效果。
 
 1296
-01:05:21,184 --> 01:05:27,021
-So, let's do that, and I'm going
-             to do              
-that by adding a property, okay?
+01:05:27,023 --> 01:05:35,628
+Var userIsInTheMiddleOfTypingANumber , which you might say,
+设个叫做“userIsInTheMiddleOfTypingANumber”的变量，你也许会说
 
 1297
-01:05:27,023 --> 01:05:35,628
-              Var               
-userIsInTheMiddleOfTypingANumber
-               ,                
-      which you might say,      
+01:05:35,630 --> 01:05:38,464
+oh my God, that terrible variable, now I have to type that over and over.
+天哪，这么糟糕的变量名字，每次都得这么输入还不得累死？
 
 1298
-01:05:35,630 --> 01:05:38,464
-    oh my God, that terrible    
-        variable, now I         
-have to type that over and over.
+01:05:38,466 --> 01:05:40,900
+This is the last time I'll ever have to type that, okay?
+其实下次用到这个变量我可不需要输入这么多的。
 
 1299
-01:05:38,466 --> 01:05:40,900
-This is the last time I'll ever 
-            have to             
-        type that, okay?        
+01:05:40,902 --> 01:05:44,169
+Because Xcode is always going to escape complete it for me, okay?
+因为下次用到Xcode会帮我自动补齐的。
 
 1300
-01:05:40,902 --> 01:05:44,169
-Because Xcode is always going to
-             escape             
-   complete it for me, okay?    
+01:05:44,171 --> 01:05:48,840
+So long names are perfectly fine, in terms of typing load anyway.
+所以这么长的名字没有问题。
 
 1301
-01:05:44,171 --> 01:05:48,840
-  So long names are perfectly   
-         fine, in terms         
-     of typing load anyway.     
+01:05:48,842 --> 01:05:50,608
+So I like this name so I'm gonna keep it.
+我就挺喜欢这个名字的，就这么用了。
 
 1302
-01:05:48,842 --> 01:05:50,608
-So I like this name so I'm gonna
-            keep it.            
+01:05:50,610 --> 01:05:53,077
+And it's a bool, okay.
+这是一个布尔型数值。
 
 1303
-01:05:50,610 --> 01:05:53,077
-     And it's a bool, okay.     
+01:05:53,079 --> 01:05:54,845
+So I'm typing its, giving its type.
+所以输入它的类型。
 
 1304
-01:05:53,079 --> 01:05:54,845
- So I'm typing its, giving its  
-             type.              
+01:05:54,847 --> 01:06:01,618
+So here's var name type, and notice, look at this little error right here, 'kay.
+命名完变量的名字和类型，注意看这里，有一个小错误标记。
 
 1305
-01:05:54,847 --> 01:06:01,618
-  So here's var name type, and  
-          notice, look          
-at this little error right here,
-             'kay.              
+01:06:01,620 --> 01:06:06,222
+Okay, sometimes you're gonna get errors in Swift that are completely incomprehensible
+好吧，有时候你用Swift会遇到难以理解的错误。
 
 1306
-01:06:01,620 --> 01:06:06,222
-Okay, sometimes you're gonna get
-           errors in            
-   Swift that are completely    
-        incomprehensible        
+01:06:06,224 --> 01:06:08,724
+to you because you haven't learned enough of Swift.
+但是这是因为你对Swift的了解不够深入。
 
 1307
-01:06:06,224 --> 01:06:08,724
-   to you because you haven't   
-         learned enough         
-           of Swift.            
+01:06:08,726 --> 01:06:11,143
+This one's kind of like that.
+这个错误就是因为这个。
 
 1308
-01:06:08,726 --> 01:06:11,143
- This one's kind of like that.  
+01:06:11,144 --> 01:06:13,561
+You see, it says, class view controller has no initializers.
+你看，这里说类视图控制器没有初始化。
 
 1309
-01:06:11,144 --> 01:06:13,561
-  You see, it says, class view  
-           controller           
-      has no initializers.      
+01:06:13,564 --> 01:06:19,667
+And that's because, and pay attention, in Swift all properties
+请注意，这是因为，在Swift里
 
 1310
-01:06:13,564 --> 01:06:19,667
-  And that's because, and pay   
-         attention, in          
-      Swift all properties      
+01:06:19,669 --> 01:06:24,271
+have to be initialized when the object is initialized.
+一个对象没有初始化，那么对象的属性都不会初始化。
 
 1311
-01:06:19,669 --> 01:06:24,271
-have to be initialized when the 
-           object is            
-          initialized.          
+01:06:24,273 --> 01:06:29,142
+Okay, you can't have a property just sitting around not initialized,
+所以你不能用没有初始化的属性。
 
 1312
-01:06:24,273 --> 01:06:29,142
-Okay, you can't have a property 
-              just              
-sitting around not initialized, 
+01:06:29,144 --> 01:06:30,977
+they have to have a value.
+它们需要一个值。
 
 1313
-01:06:29,144 --> 01:06:30,977
-   they have to have a value.   
+01:06:30,979 --> 01:06:32,862
+Now if they're an optional,
+现在，它们是一个选项。
 
 1314
-01:06:30,979 --> 01:06:32,862
-  Now if they're an optional,   
+01:06:32,863 --> 01:06:34,746
+their value can be nil, but they have to have some value.
+它们的值可以为空，但是它们必须有值。
 
 1315
-01:06:32,863 --> 01:06:34,746
-their value can be nil, but they
-            have to             
-        have some value.        
+01:06:34,749 --> 01:06:37,750
+So we can't have this have no value.
+所以我们不能在它们没有值前使用。
 
 1316
-01:06:34,749 --> 01:06:37,750
- So we can't have this have no  
-             value.             
+01:06:37,752 --> 01:06:40,052
+Now there's two ways to give it a value.
+有两种方法给它设值。
 
 1317
-01:06:37,752 --> 01:06:40,052
-Now there's two ways to give it 
-            a value.            
+01:06:40,054 --> 01:06:42,087
+One is, with an initializer.
+一种就是用初始化。
 
 1318
-01:06:40,054 --> 01:06:42,087
-  One is, with an initializer.  
+01:06:42,089 --> 01:06:45,156
+Unfortunately, I'm not gonna teach that to you until next week, so
+但是不幸的是，这个方法要下周才讲。
 
 1319
-01:06:42,089 --> 01:06:45,156
-  Unfortunately, I'm not gonna  
-         teach that to          
-    you until next week, so     
+01:06:45,158 --> 01:06:46,557
+you can't do it that way.
+你还不能用这个方法。
 
 1320
-01:06:45,158 --> 01:06:46,557
-   you can't do it that way.    
+01:06:46,559 --> 01:06:51,228
+Another way is just to say what it equals right here, okay?
+所以另外一种方法就是对其直接赋值。
 
 1321
-01:06:46,559 --> 01:06:51,228
-Another way is just to say what 
-           it equals            
-       right here, okay?        
+01:06:51,230 --> 01:06:55,298
+And boom, gets rid of all our errors, obviously we don't start out in
+一下子，  所有问题都解决了。
 
 1322
-01:06:51,230 --> 01:06:55,298
- And boom, gets rid of all our  
-            errors,             
-obviously we don't start out in 
+01:06:55,300 --> 01:06:59,402
+the middle of typing a number,so we're good to go here, all right.
+很明显用户不会从中间输入数字，所以从这一点出发
 
 1323
-01:06:55,300 --> 01:06:59,402
- the middle of typing a number, 
-            so we're            
-  good to go here, all right.   
+01:07:01,105 --> 01:07:04,373
+So now we have, we know whether the use is in the middle of typing a number.
+现在我们知道了用户是否会从中间输入数字。
 
 1324
-01:07:01,105 --> 01:07:04,373
-So now we have, we know whether 
-            the user            
-  is in the middle of typing a  
-            number.             
+01:07:04,375 --> 01:07:06,241
+We can go down here and say if the user,
+我们能从这里继续深入，如果说用户
 
 1325
-01:07:04,375 --> 01:07:06,241
- We can go down here and say if 
-           the user,            
+01:07:06,243 --> 01:07:12,246
+now again, I'm just gonna hit Tab to jump past this, maybe a couple times.
+按一下Tab，可能要花点时间，找到这个
 
 1326
-01:07:06,243 --> 01:07:12,246
- now again, I'm just gonna hit  
-          Tab to jump           
-past this, maybe a couple times.
+01:07:12,248 --> 01:07:14,648
+But if the user's in the middle of typing a number,
+但是如果用户从中间输入数字。
 
 1327
-01:07:12,248 --> 01:07:14,648
-But if the user's in the middle 
-           of typing            
-           a number,            
+01:07:14,650 --> 01:07:17,184
+then we'll do what we were doing before.
+那就和刚才我们已经做得一样处理。
 
 1328
-01:07:14,650 --> 01:07:17,184
-then we'll do what we were doing
-            before.             
+01:07:17,186 --> 01:07:21,187
+Otherwise, we're just gonna set the display.text equal to the new digit we
+另外，如果我们计划设置display.text为一个新的数字
 
 1329
-01:07:17,186 --> 01:07:21,187
-Otherwise, we're just gonna set 
-              the               
- display.text equal to the new  
-            digit we            
+01:07:21,189 --> 01:07:24,557
+just typed, 'kay?
+只需要输入这个：
 
 1330
-01:07:21,189 --> 01:07:24,557
-       just typed, 'kay?        
+01:07:24,558 --> 01:07:27,926
+And we're gonna say that the user is now in the middle of typing a number.
+这句表示用户现在在数字的中间输入数字。
 
 1331
-01:07:24,558 --> 01:07:27,926
-  And we're gonna say that the  
-          user is now           
-   in the middle of typing a    
-            number.             
+01:07:27,928 --> 01:07:30,062
+Question?
+什么问题？
 
 1332
-01:07:27,928 --> 01:07:30,062
-           Question?            
+01:07:30,063 --> 01:07:32,197
+Why would we have to do
+[INAUDIBLE] to
+display it?
 
 1333
-01:07:30,063 --> 01:07:32,197
-    Why would we have to do     
-         [INAUDIBLE] to         
-          display it?           
+01:07:32,199 --> 01:07:34,833
+Initialize?
 
 1334
-01:07:32,199 --> 01:07:34,833
-          Initialize?           
+01:07:34,835 --> 01:07:37,669
+Why did we not have to initialize this?
+为什么我们部初始化这个？
 
 1335
-01:07:34,835 --> 01:07:37,669
-     Why did we not have to     
-        initialize this?        
+01:07:37,671 --> 01:07:39,988
+That's a fantastic question and
+这是个不错的问题
 
 1336
-01:07:37,671 --> 01:07:39,988
-That's a fantastic question and 
+01:07:39,989 --> 01:07:42,306
+I'm gonna talk about that on Wednesday cuz there's only one minute left.
+我将在下周三说这个问题，现在只剩下一分钟了。
 
 1337
-01:07:39,989 --> 01:07:42,306
-  I'm gonna talk about that on  
-         Wednesday cuz          
- there's only one minute left.  
+01:07:42,308 --> 01:07:44,908
+But that is a great question and it'll also, when I talk about it,
+在我下次说到的时候，这依然是个很好的问题。
 
 1338
-01:07:42,308 --> 01:07:44,908
-But that is a great question and
-             it'll              
-  also, when I talk about it,   
+01:07:44,910 --> 01:07:48,679
+I'm gonna tell you why this is an exclamation point and not a question mark.
+我说一下为什么这里是个感叹号而不是个问好。
 
 1339
-01:07:44,910 --> 01:07:48,679
- I'm gonna tell you why this is 
-               an               
-  exclamation point and not a   
-         question mark.         
+01:07:48,681 --> 01:07:52,548
+Because I told you that optionals are made with question marks.
+因为我之前说过选项都是用问号标记的。
 
 1340
-01:07:48,681 --> 01:07:52,548
-    Because I told you that     
-       optionals are made       
-      with question marks.      
+01:07:52,550 --> 01:07:55,318
+So why the heck is this optional?
+但是为什么这个东西是选项
 
 1341
-01:07:52,550 --> 01:07:55,318
-    So why the heck is this     
-           optional?            
+01:07:55,319 --> 01:07:58,087
+Cuz that's what it is, an exclamation point, so we'll talk about that next time.
+因为可是个感叹号，我们下次课再说这个问题。
 
 1342
-01:07:55,319 --> 01:07:58,087
-   Cuz that's what it is, an    
-          exclamation           
-point, so we'll talk about that 
-           next time.           
+01:07:58,089 --> 01:08:01,056
+All right, so let's go ahead and run one last time here.
+所以让我们下次课继续。
 
 1343
-01:07:58,089 --> 01:08:01,056
-All right, so let's go ahead and
-            run one             
-        last time here.         
+01:08:01,058 --> 01:08:04,793
+And hopefully this is gonna, this 0 will be cleared out, it is and
+我们之前希望这个0可以正确的清除掉，看来没问题，看看这个
 
 1344
-01:08:01,058 --> 01:08:04,793
-  And hopefully this is gonna,  
-          this 0 will           
-   be cleared out, it is and    
+01:08:04,795 --> 01:08:07,696
+hopefully this will continue to append, it is.
+希望这个可以正常的增加，看来也没问题。
 
 1345
-01:08:04,795 --> 01:08:07,696
-hopefully this will continue to 
-           append, it           
-              is.               
+01:08:07,698 --> 01:08:11,532
+So we're in a great spot right here, we've got a calculator,
+我们今天已经有了一个不错的开始，我们将会做一个计算器。
 
 1346
-01:08:07,698 --> 01:08:11,532
- So we're in a great spot right 
-          here, we've           
-       got a calculator,        
+01:08:11,534 --> 01:08:16,904
+we can enter numbers in it, next step is, we gotta make it do some calculating, and
+我们已经能够输入数字了，下一步我们将让其能够计算。
 
 1347
-01:08:11,534 --> 01:08:16,904
-we can enter numbers in it, next
-            step is,            
-    we gotta make it do some    
-        calculating, and        
+01:08:16,906 --> 01:08:19,406
+we're gonna do that next time so I will see you then.
+我们下节课再做，大家下节课见。
 
 1348
-01:08:16,906 --> 01:08:19,406
-we're gonna do that next time so
-             I will             
-         see you then.          
-
-1349
 01:08:21,042 --> 01:08:24,910
-  For more, please visit us at  
-         stanford.edu.          
-
+For more, please visit us at stanford.edu.
+想浏览更多？请访问stanford.edu。

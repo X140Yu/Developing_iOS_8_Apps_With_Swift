@@ -3787,61 +3787,73 @@ Just gonna be a basic swift, class.
 00:33:31,050 --> 00:33:32,882
    it's using the rest of the   
               ops.              
+   它使用剩下的op。             
 
 802
 00:33:32,884 --> 00:33:34,050
     So, you see what I mean?    
+    所以，你们明白我的意思了吗？
 
 803
 00:33:34,052 --> 00:33:35,618
            It's not,            
+           它不是，
 
 804
 00:33:35,619 --> 00:33:37,185
  it can't be looking at the big 
      opStack in our brain.      
+  也不可能在我们的大脑里面查看巨大的opStack。
 
 805
 00:33:37,188 --> 00:33:38,320
      It can't look at this.     
+     它不能这么查看。
 
 806
 00:33:38,322 --> 00:33:40,756
      'Kay, cuz it's kind of     
          consuming it.          
+      因为这有点太消耗了。
 
 807
 00:33:40,758 --> 00:33:42,991
              Right?             
     And every time I call it    
+    我每次递归调用
 
 808
 00:33:42,992 --> 00:33:45,225
    recursively, I'm gonna get   
   fewer operands to work with.  
+  都只需要处理更少的操作数。
 
 809
 00:33:45,228 --> 00:33:46,194
    So this is what I'm doing.   
+   所以这就是我做的事情。
 
 810
 00:33:46,196 --> 00:33:47,962
  Now, the first time I call it, 
+ 现在，我第一次调用，
 
 811
 00:33:47,964 --> 00:33:50,864
  right here, I'm gonna give it  
        the full opStack.        
+ 需要给出完整的opStack。
 
 812
 00:33:50,866 --> 00:33:53,767
  So, I'll call my recursive one 
            from here.           
-
+ 我从这里开始调用递归函数。
 813
 00:33:53,769 --> 00:33:56,036
   Now, what's this thing gonna  
             return?             
+  那么，这里将要返回什么？
 
 814
 00:33:56,038 --> 00:33:56,836
@@ -3850,120 +3862,139 @@ Just gonna be a basic swift, class.
 815
 00:33:56,838 --> 00:33:57,770
      That's interesting and     
+     很有意思
 
 816
 00:33:57,772 --> 00:34:00,873
  here's a big new thing for you 
             to see.             
+ 而且这里有个很大很新的东西等待你们发现
+
 
 817
 00:34:00,875 --> 00:34:03,709
    You've read about it I, I    
         can't remember I        
+   你们看过了吧，我不记得
 
 818
 00:34:03,711 --> 00:34:05,910
   even asked you to read about  
       this but I think I.       
+  有没有教你们去看相关内容不过我。。我
 
 819
 00:34:05,912 --> 00:34:06,811
      No, I guess I didn't.      
+     不，我猜我没有。     
 
 820
 00:34:06,813 --> 00:34:08,846
      Which is tuples, 'kay?     
+     什么是tuple（元组）？
 
 821
 00:34:08,848 --> 00:34:14,484
   So in Swift, you can combine  
     multiple things together    
+    在Swift里，你可以把多个东西组合起来
 
 822
 00:34:14,486 --> 00:34:16,853
   into one kind of really te,   
-
+  成为一个相当。。
 823
 00:34:16,855 --> 00:34:19,922
   mini data structure called a  
           tuple, 'kay?          
+  迷你的数据结构叫做tuple。
 
 824
 00:34:19,924 --> 00:34:22,124
  Don't let the tu [LAUGH] sound 
        in there fool you.       
+ 不要被tu的发音愚弄了。
 
 825
 00:34:22,126 --> 00:34:24,560
   It's not just two, it's any   
          number, okay?          
-
+  这不是two，它可以是任意数目。
 826
 00:34:24,562 --> 00:34:26,762
    And you just put them in a   
        parentheses, okay?       
-
+   你只需要把它们放进一对圆括号里。
 827
 00:34:26,764 --> 00:34:28,664
       And, and that's it.       
+      这就好了。
 
 828
 00:34:28,665 --> 00:34:30,565
  So you can use this for return 
             values.             
-
+ 你可以用它来做返回值。
 829
 00:34:30,567 --> 00:34:32,033
   So I've gotta function right  
              here,              
-
+  我在这里使用了这一功能，
 830
 00:34:32,035 --> 00:34:34,735
  and I actually need to return  
  two things from this evaluate. 
-
+ 实际上我需要在求值后返回两个东西。
 831
 00:34:35,771 --> 00:34:37,754
              'Kay?              
           One thing I           
-
+          一个是
 832
 00:34:37,755 --> 00:34:39,738
   need to return is the result  
       of a evaluating it.       
+      求值运算的结果。
 
 833
 00:34:40,975 --> 00:34:43,042
      But the other thing I      
+     另一个
 
 834
 00:34:43,043 --> 00:34:45,110
  need to return is the rest of  
   the stack that I didn't use.  
+  需要返回的是剩余未使用的栈。
 
 835
 00:34:45,112 --> 00:34:48,647
  Cuz as I'm working my way down 
     here and I take off that    
+    因此就像我在这里演示的，
 
 836
 00:34:48,649 --> 00:34:52,884
   times, and the 4 and the 5,   
  okay, I'm consuming things but 
+ 我取走了乘号，然后是4跟5。我消费了东西，
 
 837
 00:34:52,886 --> 00:34:54,652
   then I'm leaving the rest of  
          the stacks, so         
+  同时栈有剩余部分，
 
 838
 00:34:54,654 --> 00:34:56,920
     I have to keep returning    
    what's left of the stacks,   
+   所以我需要在求值过程中
 
 839
 00:34:56,922 --> 00:34:58,722
   while we keep consuming it.   
+  返回栈的剩余部分。
 
 840
 00:34:58,724 --> 00:34:59,689
@@ -3973,36 +4004,40 @@ Just gonna be a basic swift, class.
 00:34:59,691 --> 00:35:01,958
  So, I'm gonna return this in a 
              tuple.             
+ 所以，我要在tuple里返回这个。
 
 842
 00:35:01,960 --> 00:35:04,126
   Tuples could not be simpler   
             syntax,             
-
+  Tuple的语法不能再简单了，
 843
 00:35:04,128 --> 00:35:08,097
    just open parentheses, not   
     nine, open parentheses.     
+   只要左括号，不是9，左括号
 
 844
 00:35:08,099 --> 00:35:11,066
  Open parentheses, and just all 
       the types that you,       
-
+ 然后是所有你要的类型数据
 845
 00:35:11,068 --> 00:35:12,634
    of things that you want in   
              here.              
+   统统放在这里。             
 
 846
 00:35:12,636 --> 00:35:14,569
  So, I'm gonna return a double  
          question mark,         
+ 所以我要在这里返回 double？
 
 847
 00:35:14,571 --> 00:35:16,070
        that's my results.       
-
+       这是我的结果。
 848
 00:35:16,072 --> 00:35:17,683
              'Kay?              
@@ -4011,45 +4046,53 @@ Just gonna be a basic swift, class.
 00:35:17,684 --> 00:35:19,295
    That's what's eventually,    
             gonna be            
+   这是最终
 
 850
 00:35:19,296 --> 00:35:20,907
   returned out here after all   
      the recursion unwinds.     
+  所有递归都被展开后返回的结果。
 
 851
 00:35:20,910 --> 00:35:23,643
    And then also I'm going to   
+   同时我也需要
 
 852
 00:35:23,645 --> 00:35:28,348
    have the ops that are left   
              over.              
+   剩下的op。
 
 853
 00:35:28,350 --> 00:35:32,851
   Now, a tuple could look just  
       like this, unnamed.       
+  现在，一个tuple看上去像这样，未命名的。
 
 854
 00:35:32,853 --> 00:35:34,519
   Did you see how these things  
          are not named,         
+  你们看到这些未命名的格式，
 
 855
 00:35:34,521 --> 00:35:35,920
  each of these things in here.  
+ 里面每一个东西。
 
 856
 00:35:35,922 --> 00:35:38,956
  But you can also put names in  
  here as, if you want, as well. 
+ 如果你想要，也可以把名称放在这里。
 
 857
 00:35:38,958 --> 00:35:41,092
  So maybe I would call this one 
           the result.           
-
+ 所以大概我会把这个命名为result
 858
 00:35:42,061 --> 00:35:44,728
              Okay?              
@@ -4059,50 +4102,59 @@ Just gonna be a basic swift, class.
 00:35:44,729 --> 00:35:47,396
      I would call this one      
       remainingOps, 'kay?       
+      把这个命名为remainingOps
 
 860
 00:35:47,399 --> 00:35:49,666
  And I kinda recommend putting  
       those in there, and       
-
+ 我推荐这么做，
 861
 00:35:49,668 --> 00:35:52,601
    you'll see why in a second   
   because there's two ways to   
+  马上你门就会知道为什么 因为有两种方法
 
 862
 00:35:52,603 --> 00:35:56,138
  call a function that returns a 
    tuple and get the results.   
+  来调用返回tuple的函数，拿到返回值。
 
 863
 00:35:56,140 --> 00:36:00,208
   And one of the ways requires  
    that you name these, 'kay?   
+   其中一种强制要求命名。
 
 864
 00:36:00,210 --> 00:36:01,843
   So, it doesn't hurt to name   
     the, you might, as well.    
+  所以，加上名字没什么妨害的。
 
 865
 00:36:01,845 --> 00:36:03,111
     It's good documentation.    
+    这是很好的文档。
 
 866
 00:36:03,113 --> 00:36:05,379
   Someone looking at this now   
         knows, oh, yeah,        
+  有些人看到这里就会明白，对的，
 
 867
 00:36:05,381 --> 00:36:07,147
    this is the result of the    
         evaluation, and         
+    这个是求值的结果，        
 
 868
 00:36:07,149 --> 00:36:09,783
   these the ops that were left  
              over.              
+  这个是剩下的op。
 
 869
 00:36:09,785 --> 00:36:10,784
@@ -4115,39 +4167,46 @@ Just gonna be a basic swift, class.
 871
 00:36:13,421 --> 00:36:15,121
      So let's dive in here.     
+     我们从这里开始。
 
 872
 00:36:15,123 --> 00:36:16,956
         The first thing,        
+        第一件事，
 
 873
 00:36:16,957 --> 00:36:18,790
  line of code I'm gonna put in  
     this recursive function     
-
+ 放在这个递归函数的代码，
 874
 00:36:18,793 --> 00:36:21,193
   is the failure line of code,  
+  处理失败的情况，
 
 875
 00:36:21,195 --> 00:36:25,930
    which is return nil, ops,    
              okay?              
+   简单返回 （nil， ops）
 
 876
 00:36:25,932 --> 00:36:28,566
  So if I fail, okay, I'm gonna  
             try and             
+  所以如果失败了，我会努力。。
 
 877
 00:36:28,568 --> 00:36:33,303
  do my best in here to evaluate 
   these ops you passed me, but  
+  尽力在这里用传入的ops求值，
 
 878
 00:36:33,305 --> 00:36:36,272
     if I fail I'm just gonna    
     return my result of nil.    
+    如果失败了，就以nil为结果返回。
 
 879
 00:36:36,274 --> 00:36:37,974
@@ -4157,25 +4216,26 @@ Just gonna be a basic swift, class.
 00:36:37,975 --> 00:36:39,675
  And that's gonna be my default 
       is to return nil so       
-
+ 返回nil将是默认行为，
 881
 00:36:39,678 --> 00:36:40,643
         I know I failed.        
-
+        然后我就知道我失败了。
 882
 00:36:40,645 --> 00:36:42,344
   So, if I run out of operands  
                or               
-
+  比如，我处理完毕所有的操作数，
 883
 00:36:42,346 --> 00:36:44,613
  I run out of stack can't find  
              it for             
-
+ 或者处理完毕整个stack，
 884
 00:36:44,615 --> 00:36:47,915
  example, it's just gonna fall  
     out here and return nil.    
+ 那么就会跳转这里返回nil。
 
 885
 00:36:49,152 --> 00:36:49,683
@@ -4184,33 +4244,39 @@ Just gonna be a basic swift, class.
 886
 00:36:49,685 --> 00:36:50,784
         So that's good.         
+        这样挺不错的。
 
 887
 00:36:50,786 --> 00:36:52,619
  So, what do I need to do here? 
+ 这里需要我做什么呢？
 
 888
 00:36:52,621 --> 00:36:56,089
  Well, first thing is I need to 
    make sure I have some ops.   
+   首先我要确定这里有op。
 
 889
 00:36:56,091 --> 00:36:59,859
   So I'm gonna check to see if  
      the ops is not empty.      
-
+  我要检查ops是不是空的。
 890
 00:36:59,861 --> 00:37:04,529
   Okay, if you've handed me a   
  stack of no ops to evaluates,  
+  如果传入一个没有op的栈
 
 891
 00:37:04,531 --> 00:37:05,463
         I can't do that.        
+        我将无法求值。
 
 892
 00:37:05,465 --> 00:37:06,698
  So I'm just gonna return nil.  
+ 我简单地返回nil。
 
 893
 00:37:06,700 --> 00:37:07,615
@@ -4220,21 +4286,24 @@ Just gonna be a basic swift, class.
 894
 00:37:07,616 --> 00:37:08,531
   that's the very first thing,  
+  这是最开始要做的事，
 
 895
 00:37:08,534 --> 00:37:11,035
  I gotta make sure I have some  
        ops to work with.        
+ 我要确定我有待处理的op
 
 896
 00:37:11,037 --> 00:37:14,237
  Now, I'm gonna grab the first  
       op of the stack, so       
-
+ 现在，我要获取栈里的第一个op，
 897
 00:37:14,239 --> 00:37:16,639
    in this example, I'm gonna   
     grab that x off of here.    
+    在这个例子里，我要在这里获取x。
 
 898
 00:37:16,641 --> 00:37:17,206
@@ -4243,11 +4312,13 @@ Just gonna be a basic swift, class.
 899
 00:37:17,208 --> 00:37:18,574
        I'm gonna do that,       
+       我这么做，
 
 900
 00:37:18,576 --> 00:37:24,012
   I'm gonna try to do that by   
    saying, let op equal ops.    
+   这么实现： let op ＝ ops.
 
 901
 00:37:24,014 --> 00:37:26,114
@@ -6126,480 +6197,564 @@ Just gonna be a basic swift, class.
 
 1301
 00:54:13,239 --> 00:54:15,106
-  when we're getting associate  
-     values all that stuff.     
+when we're getting associate values all that stuff.
+当我们得到关联值的东西。
 
 1302
 00:54:15,108 --> 00:54:16,974
-   So hopefully, you got all    
-             that.              
+So hopefully, you got all that.
+所以希望你得到这一切。
 
 1303
 00:54:16,976 --> 00:54:19,676
- I see a few people still kinda 
-  catching up on their typing.  
+I see a few people still kinda catching up on their typing.
+我看到有些同学仍然在忙着敲代码
 
 1304
 00:54:19,678 --> 00:54:21,444
- So I'll break for second here. 
+So I'll break for second here.
+所以我会在这里等你们一下。
 
 1305
 00:54:21,446 --> 00:54:24,480
-         [BLANK_AUDIO]          
+[BLANK_AUDIO]
 
 1306
 00:54:24,482 --> 00:54:27,283
-  [SOUND] So that's it that's   
-  the entire implementation of  
+[SOUND] So that's it that's the entire implementation of
+这就是计算器
 
 1307
 00:54:27,285 --> 00:54:28,384
-     our calculator brain.      
+our calculator brain.
+全部的实现过程。
 
 1308
 00:54:28,386 --> 00:54:30,919
-   It wasn't really that bad    
-        actually, right?        
+It wasn't really that bad actually, right?
+其实它并没有那么难理解，对吗？
 
 1309
 00:54:30,921 --> 00:54:33,722
-   Pretty simple little data    
-        structure here.         
+Pretty simple little data structure here.
+很简单的数据结构。
 
 1310
 00:54:33,724 --> 00:54:36,858
-   Just have to say what our    
-         known ops are.         
+Just have to say what our known ops are.
+只需要明确我们已知的 ops。
 
 1311
 00:54:36,860 --> 00:54:38,726
- And have this recursion which  
-           you know,            
+And have this recursion which
+you know,
+这种递归
 
 1312
 00:54:38,728 --> 00:54:42,196
-   actually is quite simple,    
-         powerful code.         
+actually is quite simple,
+powerful code.
+它其实就是一段很简单的功能很强大的代码。
 
 1313
 00:54:42,198 --> 00:54:44,031
- If you're not comfortable with 
-        your recursion I        
+If you're not comfortable with
+your recursion I
+如果你不满意你的递归
 
 1314
 00:54:44,033 --> 00:54:46,533
-   can see how it might be a    
-     little bit disturbing.     
+can see how it might be a little bit disturbing.
+我可以帮你看下它哪里不合理
 
 1315
 00:54:46,535 --> 00:54:48,301
-     But go stare at it for     
+But go stare at it for
+如果你多看看你的代码，
 
 1316
 00:54:48,302 --> 00:54:50,068
- awhile and you'll, you'll get  
-       it, how it works.        
+awhile and you'll, you'll get
+it, how it works.
+你就会明白它是怎么实现的。
 
 1317
 00:54:50,071 --> 00:54:51,921
-             Okay.              
+Okay.
 
 1318
 00:54:51,922 --> 00:54:53,772
-  So, now that we've got this   
-     new calculator brain,      
+So, now that we've got this
+new calculator brain,
+现在我们完成了一个新的计算机
 
 1319
 00:54:53,775 --> 00:54:57,509
-  we have to use it in our old  
-          controller.           
+we have to use it in our old controller.
+我们得把它用在之前的 controller 上
 
 1320
 00:54:57,511 --> 00:54:59,678
-      Okay, yeah question?      
+Okay, yeah question?
+Okay，有什么问题？
 
 1321
 00:54:59,679 --> 00:55:01,846
- >> Do we have to let like the  
- op stack equal the remainder?  
+>> Do we have to let like the op stack equal the remainder?
+我们必须得让 opstack 等于 余数吗？
 
 1322
 00:55:01,848 --> 00:55:04,549
-  >> Do we have to let the op   
-   stack equal the remainder?   
+>> Do we have to let the op
+stack equal the remainder?
+我们必须得让 opstack 等于 余数吗？
 
 1323
 00:55:04,551 --> 00:55:05,349
-        Here, you mean?         
+Here, you mean?
+是个意思吗？
 
 1324
 00:55:05,351 --> 00:55:05,916
-            >> Yeah.            
+>> Yeah.
+对！
 
 1325
 00:55:07,119 --> 00:55:08,418
-  >> well, we're not gonna use  
-         remainder, so          
+>> well, we're not gonna use remainder, so
+呃，我们不会使用余数
 
 1326
 00:55:08,420 --> 00:55:10,620
-  actually, even I could put I  
-        don't care here.        
+actually, even I could put I
+don't care here.
+实际上，即使我可以用我也不用关心这里。
 
 1327
 00:55:10,622 --> 00:55:13,255
-   I only put that remainder    
-  there to show you could have  
+I only put that remainder
+there to show you could have
+我把余数放在这里是让你们知道
 
 1328
 00:55:13,257 --> 00:55:15,257
- a different name, but I'm not  
-      using the remainder.      
+a different name, but I'm not
+using the remainder.
+你们可以起一个不同的名称，而不是去引用它。
 
 1329
 00:55:15,259 --> 00:55:16,892
-    I only want the result.     
+I only want the result.
+我只需要结果就好了。
 
 1330
 00:55:16,894 --> 00:55:19,861
-            You see.            
- >> Won't the op stack contain  
+You see.
+>> Won't the op stack contain
+明白了吗？
+-在你计算它的值之前，
 
 1331
 00:55:19,862 --> 00:55:22,829
-   what was previously in it    
-    before you evaluate it?     
+what was previously in it
+before you evaluate it?
+自定义的数据结构不会包含它吗？
 
 1332
 00:55:22,832 --> 00:55:25,016
-  >> Yes, the op stack will be  
+>> Yes, the op stack will be
+是的，但是这不会影响到自定义的数据结构
 
 1333
 00:55:25,017 --> 00:55:27,201
- unaffected by this because op  
-       stack is an array.       
+unaffected by this because op
+stack is an array.
+因为它是一个数组。
 
 1334
 00:55:27,203 --> 00:55:28,702
- Arrays are passed by value so  
+Arrays are passed by value so
+数组是通过值传递的，
 
 1335
 00:55:28,704 --> 00:55:30,837
- a copy of it gets passed into  
-             here.              
+a copy of it gets passed into
+here.
+它的一个副本被传递到这里。
 
 1336
 00:55:30,839 --> 00:55:33,506
- So this would be untouched and 
-     which is what I want.      
+So this would be untouched and
+which is what I want.
+所以它不会改变，这正是我想要的。
 
 1337
 00:55:33,508 --> 00:55:36,242
-    I don't want evaluate to    
-      consume my op stack.      
+I don't want evaluate to
+consume my op stack.
+我不想 evaluate 方法耗尽我的运算栈。
 
 1338
 00:55:36,244 --> 00:55:38,010
-    I wanna be able to call     
-       evaluate over and        
+I wanna be able to call
+evaluate over and
+我希望它一遍又一遍的
 
 1339
 00:55:38,012 --> 00:55:38,744
-         over and over.         
+over and over.
+调用 evaluate 。
 
 1340
 00:55:38,746 --> 00:55:39,945
-             'Kay?              
-         Especially if,         
+'Kay?
+Especially if,
+好吗？特别是,如果
 
 1341
 00:55:39,947 --> 00:55:43,581
-     I let's say introduced     
-     variable operands and      
+I let's say introduced
+variable operands and
+我假设引入变量操作数
 
 1342
 00:55:43,583 --> 00:55:45,550
-  that's what you're homeworks  
-   gonna be, then I wouldn't    
+that's what you're homeworks
+gonna be, then I wouldn't
+留给你们当作业
 
 1343
 00:55:45,552 --> 00:55:47,685
-  want to change the variables  
-    to different things and     
+want to change the variables
+to different things and
+而且我不想改变这些变量
 
 1344
 00:55:47,687 --> 00:55:49,520
-     be calling it over and     
+be calling it over and
+然后通过不同的值，比如变量
 
 1345
 00:55:49,521 --> 00:55:51,354
- over with different values for 
-  the variable for example and  
+over with different values for
+the variable for example and
+一直调用它
 
 1346
 00:55:51,357 --> 00:55:53,690
-   then maybe next week I can   
-  have an assignment where I'm  
+then maybe next week I can
+have an assignment where I'm
+也许下周我可以有一项任务，
 
 1347
 00:55:53,692 --> 00:55:57,894
-  gonna make your graph such a  
- thing, which I'm going to do.  
+gonna make your graph such a
+thing, which I'm going to do.
+我会给你们画图表。
 
 1348
 00:55:57,896 --> 00:55:59,012
-             Okay?              
+Okay?
 
 1349
 00:55:59,013 --> 00:56:00,129
- So that's why I wanna do that. 
+So that's why I wanna do that.
+所以，那是为什么我这么做。
 
 1350
 00:56:00,131 --> 00:56:02,131
-   So anyway, yeah, remainder   
-   here can just be anything.   
+So anyway, yeah, remainder
+here can just be anything.
+所以，这里的余数可以是任何值。
 
 1351
 00:56:02,133 --> 00:56:03,532
-  I'm actually gonna put this   
-       here because we're       
+I'm actually gonna put this
+here because we're
+实际上，我把它放在这里，是因为
 
 1352
 00:56:03,534 --> 00:56:05,300
-   gonna print one this in a    
-         second just so         
+gonna print one this in a
+second just so
+我想打印它
 
 1353
 00:56:05,302 --> 00:56:06,567
-  we can get a better look at   
-        what's going on.        
+we can get a better look at
+what's going on.
+这样我们就可以明白它内部如何运行的。
 
 1354
 00:56:06,569 --> 00:56:10,904
-  But first, let's go back to   
-  our controller and use this   
+But first, let's go back to
+our controller and use this
+我们接着回到我们的 controller
 
 1355
 00:56:10,906 --> 00:56:14,007
-  calculator brain, this nice   
-    model we just invented.     
+calculator brain, this nice
+model we just invented.
+使用我们刚刚建立的 calculator brain  model
 
 1356
 00:56:14,009 --> 00:56:15,842
-         Let's use it.          
-              Now,              
+Let's use it.
+Now,
+我们开始使用它，现在
 
 1357
 00:56:15,843 --> 00:56:17,676
- I'm gonna show you how to get  
-    two things on screen at     
+I'm gonna show you how to get
+two things on screen at
+我来教你们怎样让这两个页面同时
 
 1358
 00:56:17,679 --> 00:56:18,644
-         the same time.         
+the same time.
+显示在你的界面上。
 
 1359
 00:56:18,646 --> 00:56:20,880
-    That aren't necessarily     
-       directly related.        
+That aren't necessarily
+directly related.
+它们之间不一定要直接相关。
 
 1360
 00:56:20,882 --> 00:56:23,549
- Before we have the story board 
-     and then I went up and     
+Before we have the story board
+and then I went up and
+之前我们用 story board 的时候，移动鼠标
 
 1361
 00:56:23,551 --> 00:56:25,784
-   clicked this system editor   
-         right here and         
+clicked this system editor
+right here and
+点击右上角的 editor 按钮之后
 
 1362
 00:56:25,786 --> 00:56:27,319
-  it showed me the controller.  
+it showed me the controller.
+它显示一个相关联的控制器。
 
 1363
 00:56:27,320 --> 00:56:28,853
-   Because the system editor    
-     figured out that, oh,      
+Because the system editor
+figured out that, oh,
+由于系统的 editor 自动识别
 
 1364
 00:56:28,855 --> 00:56:30,388
- if you have the story board up 
-       you probably want        
+if you have the story board up
+you probably want
+它自动显示和你选择的控制器
 
 1365
 00:56:30,390 --> 00:56:33,257
-  the controller for the scene  
-       you have selected.       
+the controller for the scene
+you have selected.
+直接相关的 story  board 。
 
 1366
 00:56:33,259 --> 00:56:34,992
-  But here it's like, I don't   
-     know what to show you.     
+But here it's like, I don't
+know what to show you.
+但是现在，这里啥也不显示。
 
 1367
 00:56:34,994 --> 00:56:36,827
-    So I'm gonna show you a     
-        different way to        
+So I'm gonna show you a
+different way to
+所以我叫你们另外一种方法
 
 1368
 00:56:36,829 --> 00:56:39,229
-   get something in here, two   
-         ways actually.         
+get something in here, two
+ways actually.
+来显示控制器界面，实际上是两种方法。
 
 1369
 00:56:39,231 --> 00:56:41,931
-  One is if you go to this top  
-           bar where            
+One is if you go to this top
+bar where
+看没看见 top bar 上
 
 1370
 00:56:41,933 --> 00:56:44,667
- it says counterparts, you can  
-         mouse down and         
+it says counterparts, you can
+mouse down and
+counterparts 这个选项，
 
 1371
 00:56:44,669 --> 00:56:47,603
-   you can find all kinds of    
-       things about this        
+you can find all kinds of
+things about this
+点击它你会发现更多选项
 
 1372
 00:56:47,605 --> 00:56:50,272
- like subclasses of this class  
-          on the left.          
+like subclasses of this class
+on the left.
+比如左边类的子类
 
 1373
 00:56:51,341 --> 00:56:54,642
- Superclasses of this [UNKNOWN] 
-       class on the left.       
+Superclasses of this [UNKNOWN]
+class on the left.
+他的父类
 
 1374
 00:56:54,644 --> 00:56:57,111
-      Of course it has no       
-  superclasses or subclasses.   
+Of course it has no
+superclasses or subclasses.
+当然他没有任何子类或者父类。
 
 1375
 00:56:57,113 --> 00:57:00,547
-  But other things, things it   
-  includes are included by it.  
+But other things, things it
+includes are included by it.
+此外，还有被它包含或者包含它的一些文件。
 
 1376
 00:57:00,549 --> 00:57:02,115
- You can also just manually go  
-              in.               
+You can also just manually go
+in.
+你也可以手动去找。
 
 1377
 00:57:02,117 --> 00:57:03,283
-    We can go over here for     
-          example and           
+We can go over here for
+example and
+比如我们可以在里面浏览
 
 1378
 00:57:03,285 --> 00:57:06,152
-  find our view controller and  
-    load it up that way, but    
+find our view controller and
+load it up that way, but
+找到目标控制器，并且加载它。
 
 1379
 00:57:06,154 --> 00:57:09,088
- I'm gonna show you a different 
-      way than doing that       
+I'm gonna show you a different
+way than doing that
+但是我还有另外一种方法。
 
 1380
 00:57:09,090 --> 00:57:11,423
-  which is to go over here to   
-        your navigator.         
+which is to go over here to
+your navigator.
+打开左侧的导航条，
 
 1381
 00:57:11,425 --> 00:57:14,893
-  If you hold down Option and   
-            press on            
+If you hold down Option and
+press on
+按住 option 键，同时点击
 
 1382
 00:57:14,895 --> 00:57:18,663
- a file like ViewController it  
-   will appear on the right.    
+a file like ViewController it
+will appear on the right.
+一个文件，比如这个 ViewControlle ，它就会显示在右边。
 
 1383
 00:57:18,665 --> 00:57:20,464
-             'Kay?              
+'Kay?
+看见没？
 
 1384
 00:57:20,466 --> 00:57:22,866
- So Option clicking in here is  
-      another good way to       
+So Option clicking in here is
+another good way to
+所以，按住 Option 键
 
 1385
 00:57:22,868 --> 00:57:23,767
-    put things on the right.    
+put things on the right.
+再点击这里是个非常方便的方法。
 
 1386
 00:57:25,437 --> 00:57:27,320
-             Okay?              
+Okay?
+对吧？
 
 1387
 00:57:27,321 --> 00:57:29,204
-    So now here we have our     
-  calculator brain on the left  
+So now here we have our
+calculator brain on the left
+现在  calculator brain 显示在左边，
 
 1388
 00:57:29,207 --> 00:57:31,040
- and we have our controller on  
-           the right,           
+and we have our controller on
+the right,
+同时 controller 显示在我们的右边。
 
 1389
 00:57:31,042 --> 00:57:34,943
- we are going to rip out all of 
-        the stuff in our        
+we are going to rip out all of
+the stuff in our
+我们将删掉 controller 里的
 
 1390
 00:57:34,945 --> 00:57:39,180
- controller that had to do with 
-       being calculator.        
+controller that had to do with
+being calculator.
+一些可以被 calculator 代替的东西。
 
 1391
 00:57:39,182 --> 00:57:41,716
- Okay, so that's all this stuff 
-         right in here.         
+Okay, so that's all this stuff
+right in here.
+Okay，所以这东西就在这里。
 
 1392
 00:57:41,718 --> 00:57:43,484
-             'Kay.              
+'Kay.
 
 1393
 00:57:43,485 --> 00:57:45,251
- All this calculating stuff, we 
-     don't need any of this     
+All this calculating stuff, we
+don't need any of this
+这些计算的代码我们再也不需要了，
 
 1394
 00:57:45,254 --> 00:57:47,254
- because those were only called 
-          from there.           
+because those were only called from there.
+因为那些代码只是在那边调用。
 
 1395
 00:57:47,256 --> 00:57:49,022
-   'Kay, so our controller's    
-     getting quite simple,      
+'Kay, so our controller's
+getting quite simple,
+okey，我们的 controller 变得更轻量级了，
 
 1396
 00:57:49,024 --> 00:57:50,757
-   our controller hardly has    
-      anything left in it.      
+our controller hardly has
+anything left in it.
+我们的 controller 几乎没有留下任何东西。
 
 1397
 00:57:50,759 --> 00:57:54,727
- And that's because the UI only 
-  needs this to be controlled.  
+And that's because the UI only
+needs this to be controlled.
+这是因为 UI 只需要 controller 被控制的。
 
 1398
 00:57:54,729 --> 00:57:56,579
-             'Kay?              
+'Kay?
 
 1399
 00:57:56,580 --> 00:57:58,430
- We also don't need our operand 
-   stack because the brain is   
+We also don't need our operand
+stack because the brain is
+我们也不需要我们的操作数栈，因为 brain
 
 1400
 00:57:58,432 --> 00:58:00,766
-         gonna do that.         
+gonna do that.
+因为 calculator brain  model 会处理这些东西。
 
 1401
 00:58:00,767 --> 00:58:03,101
@@ -7550,82 +7705,100 @@ Just gonna be a basic swift, class.
 
 1601
 01:06:23,163 --> 01:06:24,962
-       Okay, that's good.       
+       Okay, that's good. 
+	Okay,没有问题。      
 
 1602
 01:06:24,964 --> 01:06:26,397
-       Let's go 6, Enter.       
+       Let's go 6, Enter.   
+	点击6，然后点击 Enter    
 
 1603
 01:06:26,399 --> 01:06:30,734
   Oh, now we have enum enum on  
-  the stack equals optional 6,  
+  the stack equals optional 6,
+  哦，现在我们的栈里有两个 enum  一个赋值为 Opertional(6.0)
 
 1604
 01:06:30,736 --> 01:06:32,602
-      with enum left over.      
+      with enum left over.  
+	另一个为 enum。    
 
 1605
 01:06:32,604 --> 01:06:33,936
-    Well that's not so good.    
+    Well that's not so good. 
+	哦，出问题了。   
 
 1606
 01:06:33,938 --> 01:06:38,807
  Times enum, enum, enum equals  
-   it with, this is terrible.   
+   it with, this is terrible.  
+	点击 X (乘号), enum, enum, enum 等于这个以及… 糟糕
 
 1607
 01:06:38,809 --> 01:06:40,342
   This is, I can't understand   
-        what the heck is        
+        what the heck is
+	这是回事？      
 
 1608
 01:06:40,344 --> 01:06:41,342
-         going on here.         
+         going on here.  
+	我不理解怎么会是这样        
 
 1609
 01:06:41,344 --> 01:06:42,943
-     Why is this happening?     
+     Why is this happening? 
+	为什么会出现这些东西？    
 
 1610
 01:06:42,945 --> 01:06:47,014
   Okay, when you put something  
-   in parentheses like this,    
+   in parentheses like this,  
+	Okay, 当你往圆括号中放类似这样的东西。
 
 1611
 01:06:47,016 --> 01:06:49,315
   it tries to convert it to a   
-            string.             
+            string.   
+	它试图将它转化为 string。          
 
 1612
 01:06:49,317 --> 01:06:51,718
  Okay, well the thing that's in 
-       here is an array.        
+       here is an array.  
+	但是括号里的东西却是一个 array。      
 
 1613
 01:06:51,720 --> 01:06:54,520
    Arrays know how to convert   
-     themselves to strings.     
+     themselves to strings. 
+	Array 知道怎么自己转化为 string。    
 
 1614
 01:06:54,522 --> 01:06:57,623
  What they do is, they put open 
-        square bracket.         
+        square bracket.   
+ Array所做的是，在最外层加上方括号。      
 
 1615
 01:06:57,625 --> 01:07:00,759
    Then they ask every single   
-      thing in the array,       
+      thing in the array,   
+   然后要求 Array 里的所有元素    
 
 1616
 01:07:00,761 --> 01:07:04,462
   convert yourself to a string  
-  'kay, and it puts them here.  
+  'kay, and it puts them here. 
+  将你们自己转化为 string
+  Okey, 然后 Array 将转换后的元素放在方括号中。  
 
 1617
 01:07:04,464 --> 01:07:07,298
    Well our op is converting    
-     itself to this string.     
+     itself to this string. 
+  所以，op 将自己转化成了这个 string。  
 
 1618
 01:07:07,300 --> 01:07:10,334
@@ -7634,241 +7807,292 @@ Just gonna be a basic swift, class.
 1619
 01:07:10,336 --> 01:07:12,670
    That's because the system    
-   doesn't really know how to   
+   doesn't really know how to  
+   这是因为编译系统并不知道 
 
 1620
 01:07:12,672 --> 01:07:14,171
-  convert it any other way so   
+  convert it any other way so 
+  将它（op）转换为其他的类型。  
 
 1621
 01:07:14,173 --> 01:07:15,872
    it's just saying that's an   
-          enum value.           
+          enum value.  
+   它（op）只是简单的说，这是一个 enum value。         
 
 1622
 01:07:15,874 --> 01:07:18,241
  It doesn't know how to convert 
-      itself to a string.       
+      itself to a string.    
+ 它（op）不知道怎么将自己转化为 string。  
 
 1623
 01:07:18,243 --> 01:07:20,376
  So, you see, see what's going  
-            on here?            
+            on here?  
+ 现在，你知道这是怎么回事了吗？          
 
 1624
 01:07:20,378 --> 01:07:24,146
  So, I'm going to show you how  
-       to teach a type to       
+       to teach a type to
+ 接下来，我将给你们示范怎么让一种类型       
 
 1625
 01:07:24,148 --> 01:07:26,381
-   turn itself into a string.   
+   turn itself into a string.
+   将自己转换为 string。   
 
 1626
 01:07:26,383 --> 01:07:28,716
     Okay, cuz that's really     
-   valuable for debugging and   
+   valuable for debugging and 
+   Okay， 因为这 debugging 非常有用而且  
 
 1627
 01:07:28,718 --> 01:07:30,651
    also might be valuable for   
-         your homework.         
+         your homework.
+   可能对你们的家庭作业有很大帮助。         
 
 1628
 01:07:33,756 --> 01:07:35,356
-   So, how we gonna do that?    
+   So, how we gonna do that? 
+   那么，该怎么做呢？   
 
 1629
 01:07:35,357 --> 01:07:36,957
  All right, the way you do that 
-              is,               
+              is,
+  方法就是，               
 
 1630
 01:07:36,959 --> 01:07:42,595
    you have to add a computed   
-     property to your type.     
+     property to your type. 
+   你需要为你的类型添加一个 computed property (计算属性)。    
 
 1631
 01:07:42,597 --> 01:07:44,730
   And enums, just like structs  
-              and               
+              and  
+  enums, 和 structs 和 classes 一样             
 
 1632
 01:07:44,732 --> 01:07:47,599
  classes, can have properties,  
-             okay?              
+             okay?   
+  也可以拥有属性，           
 
 1633
 01:07:47,601 --> 01:07:50,435
   Only computer properties in   
-       enums, structs and       
+       enums, structs and   
+  只有在 enums, structs, 和 classes    
 
 1634
 01:07:50,437 --> 01:07:53,104
   classes can have properties   
-        that are values.        
+        that are values.   
+ 中的 computed properties (计算属性)可以有变量属性。     
 
 1635
 01:07:53,106 --> 01:07:56,240
    Like these, like this over   
-        here, all right.        
+        here, all right.  
+   比如这个，      
 
 1636
 01:07:56,242 --> 01:07:57,408
  But they can only be computed. 
+  但是它们只能被计算
 
 1637
 01:07:57,410 --> 01:08:00,344
     You remember a computer     
  property looks like this, var. 
+  一个 computed property (计算属性)应该是这样，var
 
 1638
 01:08:00,346 --> 01:08:01,929
-        The name of it.         
-
+        The name of it. 
+	computed property (计算属性)的属性名        
+	
 1639
 01:08:01,930 --> 01:08:03,513
       It has to be called       
-      description because       
+      description because 
+    它必须被称为 description，因为      
 
 1640
 01:08:03,515 --> 01:08:05,081
      it's gonna be a string     
-       description of it.       
+       description of it. 
+    它将是成为它（computed property）的文字描述。      
 
 1641
 01:08:05,083 --> 01:08:07,517
-   The type has to be string.   
+   The type has to be string.  
+   它的类型必须是 string。 
 
 1642
 01:08:07,519 --> 01:08:09,418
   It's a string description of  
-              it.               
+              it.  
+  这是它的文字描述。             
 
 1643
 01:08:09,420 --> 01:08:12,588
   And then of course you want   
-         your get here.         
+         your get here.  
+  然后，你必然需要 get 方法。       
 
 1644
 01:08:12,590 --> 01:08:18,360
  And, whoops, your get and your 
-            set set.            
+            set set.  
+  你的 get 方法和 set 方法。          
 
 1645
 01:08:18,362 --> 01:08:21,896
   But it has to not only be a   
-       computer property.       
+       computer property.  
+  但是它不可能仅仅只是一个 
+	computed property。     
 
 1646
 01:08:21,898 --> 01:08:24,165
  This description thing to make 
            this work.           
+  为了让这个 description 起作用
 
 1647
 01:08:24,167 --> 01:08:26,900
    It wants to be a read only   
-              one.              
+              one.  
+   它需要是一个只读的属性。            
 
 1648
 01:08:26,902 --> 01:08:28,068
  So we're not going to put the  
-              set,              
+              set,   
+  所以，我们不要 set 方法，           
 
 1649
 01:08:28,070 --> 01:08:29,769
  so there will be no set, just  
-             a get.             
-
+             a get.   
+  仅仅只有 get 方法。          
+  
 1650
 01:08:30,805 --> 01:08:36,108
  So this get just has to return 
-    this op as a string, so     
+    this op as a string, so 
+  因此，这个 get 方法仅需将 op 作为 string 返回，    
 
 1651
 01:08:36,110 --> 01:08:38,176
  I say someone turned it into a 
-            string.             
+            string.  
+  所以说得由其它人将它转化为 string。         
 
 1652
 01:08:38,178 --> 01:08:40,045
  Well how would we turn our op  
-         into a string.         
+         into a string.
+ 我们到底怎么将 op 转化为 string。    
 
 1653
 01:08:40,047 --> 01:08:44,749
  Well for the operations we're  
- just gonna return the symbol.  
+ just gonna return the symbol. 
+  对于运算法则，返回运算符号。 
 
 1654
 01:08:44,751 --> 01:08:47,484
      Okay if this is a plus     
-     operation turning into     
+     operation turning into 
+    如果这是一个加法运算，将它转化    
 
 1655
 01:08:47,486 --> 01:08:49,052
     string is I'm just gonna    
-         return a plus,         
+         return a plus,
+    为 string 的操作是返回 +（加号），         
 
 1656
 01:08:49,054 --> 01:08:53,389
  cuz that pretty well describes 
-   a plus operation, a plus.    
+   a plus operation, a plus. 
+ 因为一个加号很好的描述了一个加法操作。   
 
 1657
 01:08:53,391 --> 01:08:55,224
-        For the operand,        
+        For the operand,
+	对于操作数，        
 
 1658
 01:08:55,225 --> 01:08:57,058
   I'm gonna have to turn this   
-     double into a string.      
+     double into a string. 
+  我要将 double 类型 转化为 string。     
 
 1659
 01:08:57,061 --> 01:08:58,627
-        And return that.        
+        And return that.   
+  并返回这个 string。  
 
 1660
 01:08:58,629 --> 01:08:59,528
    Okay so how am I gonna do    
-             that?              
+             that?  
+   我要怎么实现它呢？            
 
 1661
 01:08:59,530 --> 01:09:03,131
     I'm gonna do that using     
-            switch,             
+            switch,   
+    我要使用 switch 来实现它          
 
 1662
 01:09:03,133 --> 01:09:05,867
-  I need to switch on myself.   
+  I need to switch on myself. 
+  我需要用 switch 为我自己处理分支。  
 
 1663
 01:09:07,070 --> 01:09:09,837
    Okay cuz I'm gonna do this   
  switch so that I can get these 
+  因为我要用 switch 所以我可以用这里
 
 1664
 01:09:09,839 --> 01:09:12,939
  same things out here, and you  
- do the same thing I did here,  
+ do the same thing I did here, 
+ 相同的逻辑，你们得按我的来， 
 
 1665
 01:09:12,941 --> 01:09:14,307
-   see how I did this switch.   
+   see how I did this switch. 
+  注意我怎么实现这个 switch。  
 
 1666
 01:09:14,309 --> 01:09:16,309
       So I could get these      
-     associated values out.     
+     associated values out.  
+   以便我可以获取这些相关的值。   
 
 1667
 01:09:16,311 --> 01:09:18,177
   I'm gonna do the same thing   
-             here.              
+             here. 
+  我将要在这里做相同的事情。             
 
 1668
 01:09:18,179 --> 01:09:20,512
  So how do I switch on my self? 
+  我怎么为自己添加 switch？
 
 1669
 01:09:20,514 --> 01:09:23,415
@@ -7881,74 +8105,89 @@ Just gonna be a basic swift, class.
 1671
 01:09:24,718 --> 01:09:28,019
   And then I just have to say   
-     the case for operand.      
+     the case for operand.     
+  然后，我仅需要写下 self 是操作数的 case。
 
 1672
 01:09:28,021 --> 01:09:29,987
     And I'll let that be the    
-            operand.            
+            operand.    
+   声明 operand。      
 
 1673
 01:09:29,989 --> 01:09:33,657
  And I have to do the case for  
-        unary operation.        
+        unary operation. 
+  然后，实现一元运算符的 case。       
 
 1674
 01:09:33,659 --> 01:09:34,624
    Now when I do the case for   
+   当我处理二元运算符的 case，
 
 1675
 01:09:34,626 --> 01:09:37,493
   unary operation, I want the   
-            symbol.             
+            symbol.  
+  我需要运算符号。           
 
 1676
 01:09:37,495 --> 01:09:40,529
    But I don't care about the   
-           function.            
+           function.
+   但是我并不关心实际的运算。            
 
 1677
 01:09:40,531 --> 01:09:42,831
    Cuz I'm not actually gonna   
-       compute anything.        
+       compute anything.
+  因为在这里我不会进行任何计算。        
 
 1678
 01:09:42,833 --> 01:09:45,500
   I'm just going to return the  
-            symbol.             
+            symbol.
+  我只是返回运算符。             
 
 1679
 01:09:45,502 --> 01:09:47,469
   And then for binary options   
              same,              
+ 二元运算符也一样。
 
 1680
 01:09:47,471 --> 01:09:51,972
   same thing I want the symbol  
-     but I don't want this.     
+     but I don't want this. 
+  我仅需要运算符，不需要这些。    
 
 1681
 01:09:51,974 --> 01:09:53,307
  So that's the, the don't care. 
+  所以，忽略这些东西。
 
 1682
 01:09:53,309 --> 01:09:55,609
  And what am I gonna do in each 
-        of these cases?         
+        of these cases?   
+ 在每个 case 中我要做什么？      
 
 1683
 01:09:55,611 --> 01:10:01,080
  Well in the operands case I'm  
-   gonna return a string that   
+   gonna return a string that 
+  在 self 为操作数的 case 中，我将  
 
 1684
 01:10:01,082 --> 01:10:02,848
-        is that operand.        
+        is that operand. 
+  返回这个操作数的 string。       
 
 1685
 01:10:02,850 --> 01:10:06,251
   Oops, don't like the way it   
-     puts that extra thing      
+     puts that extra thing   
+  Oops, 不喜欢编译器在这里添加额外代码的方法。
 
 1686
 01:10:06,253 --> 01:10:06,985
@@ -7961,65 +8200,78 @@ Just gonna be a basic swift, class.
 1688
 01:10:08,287 --> 01:10:09,586
      And then in the unary      
-       operation case I'm       
+       operation case I'm 
+   在一元运算的 case 中，我将      
 
 1689
 01:10:09,589 --> 01:10:11,522
- just gonna return the symbol.  
+ just gonna return the symbol. 
+ 返回运算符号。 
 
 1690
 01:10:11,524 --> 01:10:13,390
   And in the binary operation   
-       case I'm also just       
+       case I'm also just 
+  在二元运算中，因为我不仅需要      
 
 1691
 01:10:13,392 --> 01:10:14,224
-    gonna return the symbol.    
+    gonna return the symbol. 
+    返回运算符号   
 
 1692
 01:10:14,226 --> 01:10:19,329
  And we have, oops, don't want  
-     the parentheses there.     
+     the parentheses there. 
+ 并且需要…（返回操作数, oops， 不需要这个括号。    
 
 1693
 01:10:19,331 --> 01:10:22,965
   Kay and we've covered every   
-      case of this switch.      
+      case of this switch. 
+  Okay，我们覆盖了 switch 的每一个 case     
 
 1694
 01:10:22,967 --> 01:10:25,735
  So not only does it know that  
-   this switch is covered but   
+   this switch is covered but 
+   现在它（description）不仅知道这个 switch 列举了所有情况
 
 1695
 01:10:25,737 --> 01:10:28,604
  it knows that we for sure have 
-   returned something out of    
+   returned something out of 
+ 而且它知道我们肯定会从这里返回一些东西，   
 
 1696
 01:10:28,606 --> 01:10:31,506
  here, because we only have one 
-    expression here which is    
+    expression here which is 
+  因为我们这里只有一个表达式，即 swift（口误）， 不  
 
 1697
 01:10:31,508 --> 01:10:34,909
   this Swift and switch and we  
   know that covers every case.  
+  switch，并且我们知道 switch 覆盖了所有 case。 
 
 1698
 01:10:34,911 --> 01:10:36,377
  So there goes so we have this  
-       nice description.        
+       nice description.  
+  现在，我们有了一个很好的 description.      
 
 1699
 01:10:36,379 --> 01:10:40,814
   Now this is not quite enough  
-             'kay?              
+             'kay?      
+   但是，这还不够，        
 
 1700
 01:10:40,816 --> 01:10:42,916
    You have to implement this   
-           property,            
+           property, 
+   比必须实现这个 property（属性），           
 
 1701
 01:10:42,918 --> 01:10:44,784

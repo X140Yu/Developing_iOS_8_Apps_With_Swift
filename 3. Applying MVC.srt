@@ -3807,61 +3807,73 @@
 00:33:31,050 --> 00:33:32,882
    it's using the rest of the   
               ops.              
+   它使用剩下的op。             
 
 802
 00:33:32,884 --> 00:33:34,050
     So, you see what I mean?    
+    所以，你们明白我的意思了吗？
 
 803
 00:33:34,052 --> 00:33:35,618
            It's not,            
+           它不是，
 
 804
 00:33:35,619 --> 00:33:37,185
  it can't be looking at the big 
      opStack in our brain.      
+  也不可能在我们的大脑里面查看巨大的opStack。
 
 805
 00:33:37,188 --> 00:33:38,320
      It can't look at this.     
+     它不能这么查看。
 
 806
 00:33:38,322 --> 00:33:40,756
      'Kay, cuz it's kind of     
          consuming it.          
+      因为这有点太消耗了。
 
 807
 00:33:40,758 --> 00:33:42,991
              Right?             
     And every time I call it    
+    我每次递归调用
 
 808
 00:33:42,992 --> 00:33:45,225
    recursively, I'm gonna get   
   fewer operands to work with.  
+  都只需要处理更少的操作数。
 
 809
 00:33:45,228 --> 00:33:46,194
    So this is what I'm doing.   
+   所以这就是我做的事情。
 
 810
 00:33:46,196 --> 00:33:47,962
  Now, the first time I call it, 
+ 现在，我第一次调用，
 
 811
 00:33:47,964 --> 00:33:50,864
  right here, I'm gonna give it  
        the full opStack.        
+ 需要给出完整的opStack。
 
 812
 00:33:50,866 --> 00:33:53,767
  So, I'll call my recursive one 
            from here.           
-
+ 我从这里开始调用递归函数。
 813
 00:33:53,769 --> 00:33:56,036
   Now, what's this thing gonna  
             return?             
+  那么，这里将要返回什么？
 
 814
 00:33:56,038 --> 00:33:56,836
@@ -3870,120 +3882,139 @@
 815
 00:33:56,838 --> 00:33:57,770
      That's interesting and     
+     很有意思
 
 816
 00:33:57,772 --> 00:34:00,873
  here's a big new thing for you 
             to see.             
+ 而且这里有个很大很新的东西等待你们发现
+
 
 817
 00:34:00,875 --> 00:34:03,709
    You've read about it I, I    
         can't remember I        
+   你们看过了吧，我不记得
 
 818
 00:34:03,711 --> 00:34:05,910
   even asked you to read about  
       this but I think I.       
+  有没有教你们去看相关内容不过我。。我
 
 819
 00:34:05,912 --> 00:34:06,811
      No, I guess I didn't.      
+     不，我猜我没有。     
 
 820
 00:34:06,813 --> 00:34:08,846
      Which is tuples, 'kay?     
+     什么是tuple（元组）？
 
 821
 00:34:08,848 --> 00:34:14,484
   So in Swift, you can combine  
     multiple things together    
+    在Swift里，你可以把多个东西组合起来
 
 822
 00:34:14,486 --> 00:34:16,853
   into one kind of really te,   
-
+  成为一个相当。。
 823
 00:34:16,855 --> 00:34:19,922
   mini data structure called a  
           tuple, 'kay?          
+  迷你的数据结构叫做tuple。
 
 824
 00:34:19,924 --> 00:34:22,124
  Don't let the tu [LAUGH] sound 
        in there fool you.       
+ 不要被tu的发音愚弄了。
 
 825
 00:34:22,126 --> 00:34:24,560
   It's not just two, it's any   
          number, okay?          
-
+  这不是two，它可以是任意数目。
 826
 00:34:24,562 --> 00:34:26,762
    And you just put them in a   
        parentheses, okay?       
-
+   你只需要把它们放进一对圆括号里。
 827
 00:34:26,764 --> 00:34:28,664
       And, and that's it.       
+      这就好了。
 
 828
 00:34:28,665 --> 00:34:30,565
  So you can use this for return 
             values.             
-
+ 你可以用它来做返回值。
 829
 00:34:30,567 --> 00:34:32,033
   So I've gotta function right  
              here,              
-
+  我在这里使用了这一功能，
 830
 00:34:32,035 --> 00:34:34,735
  and I actually need to return  
  two things from this evaluate. 
-
+ 实际上我需要在求值后返回两个东西。
 831
 00:34:35,771 --> 00:34:37,754
              'Kay?              
           One thing I           
-
+          一个是
 832
 00:34:37,755 --> 00:34:39,738
   need to return is the result  
       of a evaluating it.       
+      求值运算的结果。
 
 833
 00:34:40,975 --> 00:34:43,042
      But the other thing I      
+     另一个
 
 834
 00:34:43,043 --> 00:34:45,110
  need to return is the rest of  
   the stack that I didn't use.  
+  需要返回的是剩余未使用的栈。
 
 835
 00:34:45,112 --> 00:34:48,647
  Cuz as I'm working my way down 
     here and I take off that    
+    因此就像我在这里演示的，
 
 836
 00:34:48,649 --> 00:34:52,884
   times, and the 4 and the 5,   
  okay, I'm consuming things but 
+ 我取走了乘号，然后是4跟5。我消费了东西，
 
 837
 00:34:52,886 --> 00:34:54,652
   then I'm leaving the rest of  
          the stacks, so         
+  同时栈有剩余部分，
 
 838
 00:34:54,654 --> 00:34:56,920
     I have to keep returning    
    what's left of the stacks,   
+   所以我需要在求值过程中
 
 839
 00:34:56,922 --> 00:34:58,722
   while we keep consuming it.   
+  返回栈的剩余部分。
 
 840
 00:34:58,724 --> 00:34:59,689
@@ -3993,36 +4024,40 @@
 00:34:59,691 --> 00:35:01,958
  So, I'm gonna return this in a 
              tuple.             
+ 所以，我要在tuple里返回这个。
 
 842
 00:35:01,960 --> 00:35:04,126
   Tuples could not be simpler   
             syntax,             
-
+  Tuple的语法不能再简单了，
 843
 00:35:04,128 --> 00:35:08,097
    just open parentheses, not   
     nine, open parentheses.     
+   只要左括号，不是9，左括号
 
 844
 00:35:08,099 --> 00:35:11,066
  Open parentheses, and just all 
       the types that you,       
-
+ 然后是所有你要的类型数据
 845
 00:35:11,068 --> 00:35:12,634
    of things that you want in   
              here.              
+   统统放在这里。             
 
 846
 00:35:12,636 --> 00:35:14,569
  So, I'm gonna return a double  
          question mark,         
+ 所以我要在这里返回 double？
 
 847
 00:35:14,571 --> 00:35:16,070
        that's my results.       
-
+       这是我的结果。
 848
 00:35:16,072 --> 00:35:17,683
              'Kay?              
@@ -4031,45 +4066,53 @@
 00:35:17,684 --> 00:35:19,295
    That's what's eventually,    
             gonna be            
+   这是最终
 
 850
 00:35:19,296 --> 00:35:20,907
   returned out here after all   
      the recursion unwinds.     
+  所有递归都被展开后返回的结果。
 
 851
 00:35:20,910 --> 00:35:23,643
    And then also I'm going to   
+   同时我也需要
 
 852
 00:35:23,645 --> 00:35:28,348
    have the ops that are left   
              over.              
+   剩下的op。
 
 853
 00:35:28,350 --> 00:35:32,851
   Now, a tuple could look just  
       like this, unnamed.       
+  现在，一个tuple看上去像这样，未命名的。
 
 854
 00:35:32,853 --> 00:35:34,519
   Did you see how these things  
          are not named,         
+  你们看到这些未命名的格式，
 
 855
 00:35:34,521 --> 00:35:35,920
  each of these things in here.  
+ 里面每一个东西。
 
 856
 00:35:35,922 --> 00:35:38,956
  But you can also put names in  
  here as, if you want, as well. 
+ 如果你想要，也可以把名称放在这里。
 
 857
 00:35:38,958 --> 00:35:41,092
  So maybe I would call this one 
           the result.           
-
+ 所以大概我会把这个命名为result
 858
 00:35:42,061 --> 00:35:44,728
              Okay?              
@@ -4079,50 +4122,59 @@
 00:35:44,729 --> 00:35:47,396
      I would call this one      
       remainingOps, 'kay?       
+      把这个命名为remainingOps
 
 860
 00:35:47,399 --> 00:35:49,666
  And I kinda recommend putting  
       those in there, and       
-
+ 我推荐这么做，
 861
 00:35:49,668 --> 00:35:52,601
    you'll see why in a second   
   because there's two ways to   
+  马上你门就会知道为什么 因为有两种方法
 
 862
 00:35:52,603 --> 00:35:56,138
  call a function that returns a 
    tuple and get the results.   
+  来调用返回tuple的函数，拿到返回值。
 
 863
 00:35:56,140 --> 00:36:00,208
   And one of the ways requires  
    that you name these, 'kay?   
+   其中一种强制要求命名。
 
 864
 00:36:00,210 --> 00:36:01,843
   So, it doesn't hurt to name   
     the, you might, as well.    
+  所以，加上名字没什么妨害的。
 
 865
 00:36:01,845 --> 00:36:03,111
     It's good documentation.    
+    这是很好的文档。
 
 866
 00:36:03,113 --> 00:36:05,379
   Someone looking at this now   
         knows, oh, yeah,        
+  有些人看到这里就会明白，对的，
 
 867
 00:36:05,381 --> 00:36:07,147
    this is the result of the    
         evaluation, and         
+    这个是求值的结果，        
 
 868
 00:36:07,149 --> 00:36:09,783
   these the ops that were left  
              over.              
+  这个是剩下的op。
 
 869
 00:36:09,785 --> 00:36:10,784
@@ -4135,39 +4187,46 @@
 871
 00:36:13,421 --> 00:36:15,121
      So let's dive in here.     
+     我们从这里开始。
 
 872
 00:36:15,123 --> 00:36:16,956
         The first thing,        
+        第一件事，
 
 873
 00:36:16,957 --> 00:36:18,790
  line of code I'm gonna put in  
     this recursive function     
-
+ 放在这个递归函数的代码，
 874
 00:36:18,793 --> 00:36:21,193
   is the failure line of code,  
+  处理失败的情况，
 
 875
 00:36:21,195 --> 00:36:25,930
    which is return nil, ops,    
              okay?              
+   简单返回 （nil， ops）
 
 876
 00:36:25,932 --> 00:36:28,566
  So if I fail, okay, I'm gonna  
             try and             
+  所以如果失败了，我会努力。。
 
 877
 00:36:28,568 --> 00:36:33,303
  do my best in here to evaluate 
   these ops you passed me, but  
+  尽力在这里用传入的ops求值，
 
 878
 00:36:33,305 --> 00:36:36,272
     if I fail I'm just gonna    
     return my result of nil.    
+    如果失败了，就以nil为结果返回。
 
 879
 00:36:36,274 --> 00:36:37,974
@@ -4177,25 +4236,26 @@
 00:36:37,975 --> 00:36:39,675
  And that's gonna be my default 
       is to return nil so       
-
+ 返回nil将是默认行为，
 881
 00:36:39,678 --> 00:36:40,643
         I know I failed.        
-
+        然后我就知道我失败了。
 882
 00:36:40,645 --> 00:36:42,344
   So, if I run out of operands  
                or               
-
+  比如，我处理完毕所有的操作数，
 883
 00:36:42,346 --> 00:36:44,613
  I run out of stack can't find  
              it for             
-
+ 或者处理完毕整个stack，
 884
 00:36:44,615 --> 00:36:47,915
  example, it's just gonna fall  
     out here and return nil.    
+ 那么就会跳转这里返回nil。
 
 885
 00:36:49,152 --> 00:36:49,683
@@ -4204,33 +4264,39 @@
 886
 00:36:49,685 --> 00:36:50,784
         So that's good.         
+        这样挺不错的。
 
 887
 00:36:50,786 --> 00:36:52,619
  So, what do I need to do here? 
+ 这里需要我做什么呢？
 
 888
 00:36:52,621 --> 00:36:56,089
  Well, first thing is I need to 
    make sure I have some ops.   
+   首先我要确定这里有op。
 
 889
 00:36:56,091 --> 00:36:59,859
   So I'm gonna check to see if  
      the ops is not empty.      
-
+  我要检查ops是不是空的。
 890
 00:36:59,861 --> 00:37:04,529
   Okay, if you've handed me a   
  stack of no ops to evaluates,  
+  如果传入一个没有op的栈
 
 891
 00:37:04,531 --> 00:37:05,463
         I can't do that.        
+        我将无法求值。
 
 892
 00:37:05,465 --> 00:37:06,698
  So I'm just gonna return nil.  
+ 我简单地返回nil。
 
 893
 00:37:06,700 --> 00:37:07,615
@@ -4240,21 +4306,24 @@
 894
 00:37:07,616 --> 00:37:08,531
   that's the very first thing,  
+  这是最开始要做的事，
 
 895
 00:37:08,534 --> 00:37:11,035
  I gotta make sure I have some  
        ops to work with.        
+ 我要确定我有待处理的op
 
 896
 00:37:11,037 --> 00:37:14,237
  Now, I'm gonna grab the first  
       op of the stack, so       
-
+ 现在，我要获取栈里的第一个op，
 897
 00:37:14,239 --> 00:37:16,639
    in this example, I'm gonna   
     grab that x off of here.    
+    在这个例子里，我要在这里获取x。
 
 898
 00:37:16,641 --> 00:37:17,206
@@ -4263,11 +4332,13 @@
 899
 00:37:17,208 --> 00:37:18,574
        I'm gonna do that,       
+       我这么做，
 
 900
 00:37:18,576 --> 00:37:24,012
   I'm gonna try to do that by   
    saying, let op equal ops.    
+   这么实现： let op ＝ ops.
 
 901
 00:37:24,014 --> 00:37:26,114

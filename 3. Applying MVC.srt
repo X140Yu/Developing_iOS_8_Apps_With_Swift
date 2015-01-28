@@ -7609,82 +7609,100 @@ knownOps参数symbol
 
 1601
 01:06:23,163 --> 01:06:24,962
-       Okay, that's good.       
+       Okay, that's good. 
+	Okay,没有问题。      
 
 1602
 01:06:24,964 --> 01:06:26,397
-       Let's go 6, Enter.       
+       Let's go 6, Enter.   
+	点击6，然后点击 Enter    
 
 1603
 01:06:26,399 --> 01:06:30,734
   Oh, now we have enum enum on  
-  the stack equals optional 6,  
+  the stack equals optional 6,
+  哦，现在我们的栈里有两个 enum  一个赋值为 Opertional(6.0)
 
 1604
 01:06:30,736 --> 01:06:32,602
-      with enum left over.      
+      with enum left over.  
+	另一个为 enum。    
 
 1605
 01:06:32,604 --> 01:06:33,936
-    Well that's not so good.    
+    Well that's not so good. 
+	哦，出问题了。   
 
 1606
 01:06:33,938 --> 01:06:38,807
  Times enum, enum, enum equals  
-   it with, this is terrible.   
+   it with, this is terrible.  
+	点击 X (乘号), enum, enum, enum 等于这个以及… 糟糕
 
 1607
 01:06:38,809 --> 01:06:40,342
   This is, I can't understand   
-        what the heck is        
+        what the heck is
+	这是回事？      
 
 1608
 01:06:40,344 --> 01:06:41,342
-         going on here.         
+         going on here.  
+	我不理解怎么会是这样        
 
 1609
 01:06:41,344 --> 01:06:42,943
-     Why is this happening?     
+     Why is this happening? 
+	为什么会出现这些东西？    
 
 1610
 01:06:42,945 --> 01:06:47,014
   Okay, when you put something  
-   in parentheses like this,    
+   in parentheses like this,  
+	Okay, 当你往圆括号中放类似这样的东西。
 
 1611
 01:06:47,016 --> 01:06:49,315
   it tries to convert it to a   
-            string.             
+            string.   
+	它试图将它转化为 string。          
 
 1612
 01:06:49,317 --> 01:06:51,718
  Okay, well the thing that's in 
-       here is an array.        
+       here is an array.  
+	但是括号里的东西却是一个 array。      
 
 1613
 01:06:51,720 --> 01:06:54,520
    Arrays know how to convert   
-     themselves to strings.     
+     themselves to strings. 
+	Array 知道怎么自己转化为 string。    
 
 1614
 01:06:54,522 --> 01:06:57,623
  What they do is, they put open 
-        square bracket.         
+        square bracket.   
+ Array所做的是，在最外层加上方括号。      
 
 1615
 01:06:57,625 --> 01:07:00,759
    Then they ask every single   
-      thing in the array,       
+      thing in the array,   
+   然后要求 Array 里的所有元素    
 
 1616
 01:07:00,761 --> 01:07:04,462
   convert yourself to a string  
-  'kay, and it puts them here.  
+  'kay, and it puts them here. 
+  将你们自己转化为 string
+  Okey, 然后 Array 将转换后的元素放在方括号中。  
 
 1617
 01:07:04,464 --> 01:07:07,298
    Well our op is converting    
-     itself to this string.     
+     itself to this string. 
+  所以，op 将自己转化成了这个 string。  
 
 1618
 01:07:07,300 --> 01:07:10,334
@@ -7693,241 +7711,292 @@ knownOps参数symbol
 1619
 01:07:10,336 --> 01:07:12,670
    That's because the system    
-   doesn't really know how to   
+   doesn't really know how to  
+   这是因为编译系统并不知道 
 
 1620
 01:07:12,672 --> 01:07:14,171
-  convert it any other way so   
+  convert it any other way so 
+  将它（op）转换为其他的类型。  
 
 1621
 01:07:14,173 --> 01:07:15,872
    it's just saying that's an   
-          enum value.           
+          enum value.  
+   它（op）只是简单的说，这是一个 enum value。         
 
 1622
 01:07:15,874 --> 01:07:18,241
  It doesn't know how to convert 
-      itself to a string.       
+      itself to a string.    
+ 它（op）不知道怎么将自己转化为 string。  
 
 1623
 01:07:18,243 --> 01:07:20,376
  So, you see, see what's going  
-            on here?            
+            on here?  
+ 现在，你知道这是怎么回事了吗？          
 
 1624
 01:07:20,378 --> 01:07:24,146
  So, I'm going to show you how  
-       to teach a type to       
+       to teach a type to
+ 接下来，我将给你们示范怎么让一种类型       
 
 1625
 01:07:24,148 --> 01:07:26,381
-   turn itself into a string.   
+   turn itself into a string.
+   将自己转换为 string。   
 
 1626
 01:07:26,383 --> 01:07:28,716
     Okay, cuz that's really     
-   valuable for debugging and   
+   valuable for debugging and 
+   Okay， 因为这 debugging 非常有用而且  
 
 1627
 01:07:28,718 --> 01:07:30,651
    also might be valuable for   
-         your homework.         
+         your homework.
+   可能对你们的家庭作业有很大帮助。         
 
 1628
 01:07:33,756 --> 01:07:35,356
-   So, how we gonna do that?    
+   So, how we gonna do that? 
+   那么，该怎么做呢？   
 
 1629
 01:07:35,357 --> 01:07:36,957
  All right, the way you do that 
-              is,               
+              is,
+  方法就是，               
 
 1630
 01:07:36,959 --> 01:07:42,595
    you have to add a computed   
-     property to your type.     
+     property to your type. 
+   你需要为你的类型添加一个 computed property (计算属性)。    
 
 1631
 01:07:42,597 --> 01:07:44,730
   And enums, just like structs  
-              and               
+              and  
+  enums, 和 structs 和 classes 一样             
 
 1632
 01:07:44,732 --> 01:07:47,599
  classes, can have properties,  
-             okay?              
+             okay?   
+  也可以拥有属性，           
 
 1633
 01:07:47,601 --> 01:07:50,435
   Only computer properties in   
-       enums, structs and       
+       enums, structs and   
+  只有在 enums, structs, 和 classes    
 
 1634
 01:07:50,437 --> 01:07:53,104
   classes can have properties   
-        that are values.        
+        that are values.   
+ 中的 computed properties (计算属性)可以有变量属性。     
 
 1635
 01:07:53,106 --> 01:07:56,240
    Like these, like this over   
-        here, all right.        
+        here, all right.  
+   比如这个，      
 
 1636
 01:07:56,242 --> 01:07:57,408
  But they can only be computed. 
+  但是它们只能被计算
 
 1637
 01:07:57,410 --> 01:08:00,344
     You remember a computer     
  property looks like this, var. 
+  一个 computed property (计算属性)应该是这样，var
 
 1638
 01:08:00,346 --> 01:08:01,929
-        The name of it.         
-
+        The name of it. 
+	computed property (计算属性)的属性名        
+	
 1639
 01:08:01,930 --> 01:08:03,513
       It has to be called       
-      description because       
+      description because 
+    它必须被称为 description，因为      
 
 1640
 01:08:03,515 --> 01:08:05,081
      it's gonna be a string     
-       description of it.       
+       description of it. 
+    它将是成为它（computed property）的文字描述。      
 
 1641
 01:08:05,083 --> 01:08:07,517
-   The type has to be string.   
+   The type has to be string.  
+   它的类型必须是 string。 
 
 1642
 01:08:07,519 --> 01:08:09,418
   It's a string description of  
-              it.               
+              it.  
+  这是它的文字描述。             
 
 1643
 01:08:09,420 --> 01:08:12,588
   And then of course you want   
-         your get here.         
+         your get here.  
+  然后，你必然需要 get 方法。       
 
 1644
 01:08:12,590 --> 01:08:18,360
  And, whoops, your get and your 
-            set set.            
+            set set.  
+  你的 get 方法和 set 方法。          
 
 1645
 01:08:18,362 --> 01:08:21,896
   But it has to not only be a   
-       computer property.       
+       computer property.  
+  但是它不可能仅仅只是一个 
+	computed property。     
 
 1646
 01:08:21,898 --> 01:08:24,165
  This description thing to make 
            this work.           
+  为了让这个 description 起作用
 
 1647
 01:08:24,167 --> 01:08:26,900
    It wants to be a read only   
-              one.              
+              one.  
+   它需要是一个只读的属性。            
 
 1648
 01:08:26,902 --> 01:08:28,068
  So we're not going to put the  
-              set,              
+              set,   
+  所以，我们不要 set 方法，           
 
 1649
 01:08:28,070 --> 01:08:29,769
  so there will be no set, just  
-             a get.             
-
+             a get.   
+  仅仅只有 get 方法。          
+  
 1650
 01:08:30,805 --> 01:08:36,108
  So this get just has to return 
-    this op as a string, so     
+    this op as a string, so 
+  因此，这个 get 方法仅需将 op 作为 string 返回，    
 
 1651
 01:08:36,110 --> 01:08:38,176
  I say someone turned it into a 
-            string.             
+            string.  
+  所以说得由其它人将它转化为 string。         
 
 1652
 01:08:38,178 --> 01:08:40,045
  Well how would we turn our op  
-         into a string.         
+         into a string.
+ 我们到底怎么将 op 转化为 string。    
 
 1653
 01:08:40,047 --> 01:08:44,749
  Well for the operations we're  
- just gonna return the symbol.  
+ just gonna return the symbol. 
+  对于运算法则，返回运算符号。 
 
 1654
 01:08:44,751 --> 01:08:47,484
      Okay if this is a plus     
-     operation turning into     
+     operation turning into 
+    如果这是一个加法运算，将它转化    
 
 1655
 01:08:47,486 --> 01:08:49,052
     string is I'm just gonna    
-         return a plus,         
+         return a plus,
+    为 string 的操作是返回 +（加号），         
 
 1656
 01:08:49,054 --> 01:08:53,389
  cuz that pretty well describes 
-   a plus operation, a plus.    
+   a plus operation, a plus. 
+ 因为一个加号很好的描述了一个加法操作。   
 
 1657
 01:08:53,391 --> 01:08:55,224
-        For the operand,        
+        For the operand,
+	对于操作数，        
 
 1658
 01:08:55,225 --> 01:08:57,058
   I'm gonna have to turn this   
-     double into a string.      
+     double into a string. 
+  我要将 double 类型 转化为 string。     
 
 1659
 01:08:57,061 --> 01:08:58,627
-        And return that.        
+        And return that.   
+  并返回这个 string。  
 
 1660
 01:08:58,629 --> 01:08:59,528
    Okay so how am I gonna do    
-             that?              
+             that?  
+   我要怎么实现它呢？            
 
 1661
 01:08:59,530 --> 01:09:03,131
     I'm gonna do that using     
-            switch,             
+            switch,   
+    我要使用 switch 来实现它          
 
 1662
 01:09:03,133 --> 01:09:05,867
-  I need to switch on myself.   
+  I need to switch on myself. 
+  我需要用 switch 为我自己处理分支。  
 
 1663
 01:09:07,070 --> 01:09:09,837
    Okay cuz I'm gonna do this   
  switch so that I can get these 
+  因为我要用 switch 所以我可以用这里
 
 1664
 01:09:09,839 --> 01:09:12,939
  same things out here, and you  
- do the same thing I did here,  
+ do the same thing I did here, 
+ 相同的逻辑，你们得按我的来， 
 
 1665
 01:09:12,941 --> 01:09:14,307
-   see how I did this switch.   
+   see how I did this switch. 
+  注意我怎么实现这个 switch。  
 
 1666
 01:09:14,309 --> 01:09:16,309
       So I could get these      
-     associated values out.     
+     associated values out.  
+   以便我可以获取这些相关的值。   
 
 1667
 01:09:16,311 --> 01:09:18,177
   I'm gonna do the same thing   
-             here.              
+             here. 
+  我将要在这里做相同的事情。             
 
 1668
 01:09:18,179 --> 01:09:20,512
  So how do I switch on my self? 
+  我怎么为自己添加 switch？
 
 1669
 01:09:20,514 --> 01:09:23,415
@@ -7940,74 +8009,89 @@ knownOps参数symbol
 1671
 01:09:24,718 --> 01:09:28,019
   And then I just have to say   
-     the case for operand.      
+     the case for operand.     
+  然后，我仅需要写下 self 是操作数的 case。
 
 1672
 01:09:28,021 --> 01:09:29,987
     And I'll let that be the    
-            operand.            
+            operand.    
+   声明 operand。      
 
 1673
 01:09:29,989 --> 01:09:33,657
  And I have to do the case for  
-        unary operation.        
+        unary operation. 
+  然后，实现一元运算符的 case。       
 
 1674
 01:09:33,659 --> 01:09:34,624
    Now when I do the case for   
+   当我处理二元运算符的 case，
 
 1675
 01:09:34,626 --> 01:09:37,493
   unary operation, I want the   
-            symbol.             
+            symbol.  
+  我需要运算符号。           
 
 1676
 01:09:37,495 --> 01:09:40,529
    But I don't care about the   
-           function.            
+           function.
+   但是我并不关心实际的运算。            
 
 1677
 01:09:40,531 --> 01:09:42,831
    Cuz I'm not actually gonna   
-       compute anything.        
+       compute anything.
+  因为在这里我不会进行任何计算。        
 
 1678
 01:09:42,833 --> 01:09:45,500
   I'm just going to return the  
-            symbol.             
+            symbol.
+  我只是返回运算符。             
 
 1679
 01:09:45,502 --> 01:09:47,469
   And then for binary options   
              same,              
+ 二元运算符也一样。
 
 1680
 01:09:47,471 --> 01:09:51,972
   same thing I want the symbol  
-     but I don't want this.     
+     but I don't want this. 
+  我仅需要运算符，不需要这些。    
 
 1681
 01:09:51,974 --> 01:09:53,307
  So that's the, the don't care. 
+  所以，忽略这些东西。
 
 1682
 01:09:53,309 --> 01:09:55,609
  And what am I gonna do in each 
-        of these cases?         
+        of these cases?   
+ 在每个 case 中我要做什么？      
 
 1683
 01:09:55,611 --> 01:10:01,080
  Well in the operands case I'm  
-   gonna return a string that   
+   gonna return a string that 
+  在 self 为操作数的 case 中，我将  
 
 1684
 01:10:01,082 --> 01:10:02,848
-        is that operand.        
+        is that operand. 
+  返回这个操作数的 string。       
 
 1685
 01:10:02,850 --> 01:10:06,251
   Oops, don't like the way it   
-     puts that extra thing      
+     puts that extra thing   
+  Oops, 不喜欢编译器在这里添加额外代码的方法。
 
 1686
 01:10:06,253 --> 01:10:06,985
@@ -8020,65 +8104,78 @@ knownOps参数symbol
 1688
 01:10:08,287 --> 01:10:09,586
      And then in the unary      
-       operation case I'm       
+       operation case I'm 
+   在一元运算的 case 中，我将      
 
 1689
 01:10:09,589 --> 01:10:11,522
- just gonna return the symbol.  
+ just gonna return the symbol. 
+ 返回运算符号。 
 
 1690
 01:10:11,524 --> 01:10:13,390
   And in the binary operation   
-       case I'm also just       
+       case I'm also just 
+  在二元运算中，因为我不仅需要      
 
 1691
 01:10:13,392 --> 01:10:14,224
-    gonna return the symbol.    
+    gonna return the symbol. 
+    返回运算符号   
 
 1692
 01:10:14,226 --> 01:10:19,329
  And we have, oops, don't want  
-     the parentheses there.     
+     the parentheses there. 
+ 并且需要…（返回操作数, oops， 不需要这个括号。    
 
 1693
 01:10:19,331 --> 01:10:22,965
   Kay and we've covered every   
-      case of this switch.      
+      case of this switch. 
+  Okay，我们覆盖了 switch 的每一个 case     
 
 1694
 01:10:22,967 --> 01:10:25,735
  So not only does it know that  
-   this switch is covered but   
+   this switch is covered but 
+   现在它（description）不仅知道这个 switch 列举了所有情况
 
 1695
 01:10:25,737 --> 01:10:28,604
  it knows that we for sure have 
-   returned something out of    
+   returned something out of 
+ 而且它知道我们肯定会从这里返回一些东西，   
 
 1696
 01:10:28,606 --> 01:10:31,506
  here, because we only have one 
-    expression here which is    
+    expression here which is 
+  因为我们这里只有一个表达式，即 swift（口误）， 不  
 
 1697
 01:10:31,508 --> 01:10:34,909
   this Swift and switch and we  
   know that covers every case.  
+  switch，并且我们知道 switch 覆盖了所有 case。 
 
 1698
 01:10:34,911 --> 01:10:36,377
  So there goes so we have this  
-       nice description.        
+       nice description.  
+  现在，我们有了一个很好的 description.      
 
 1699
 01:10:36,379 --> 01:10:40,814
   Now this is not quite enough  
-             'kay?              
+             'kay?      
+   但是，这还不够，        
 
 1700
 01:10:40,816 --> 01:10:42,916
    You have to implement this   
-           property,            
+           property, 
+   比必须实现这个 property（属性），           
 
 1701
 01:10:42,918 --> 01:10:44,784

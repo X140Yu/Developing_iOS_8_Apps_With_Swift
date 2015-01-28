@@ -6146,480 +6146,564 @@
 
 1301
 00:54:13,239 --> 00:54:15,106
-  when we're getting associate  
-     values all that stuff.     
+when we're getting associate values all that stuff.
+当我们得到关联值的东西。
 
 1302
 00:54:15,108 --> 00:54:16,974
-   So hopefully, you got all    
-             that.              
+So hopefully, you got all that.
+所以希望你得到这一切。
 
 1303
 00:54:16,976 --> 00:54:19,676
- I see a few people still kinda 
-  catching up on their typing.  
+I see a few people still kinda catching up on their typing.
+我看到有些同学仍然在忙着敲代码
 
 1304
 00:54:19,678 --> 00:54:21,444
- So I'll break for second here. 
+So I'll break for second here.
+所以我会在这里等你们一下。
 
 1305
 00:54:21,446 --> 00:54:24,480
-         [BLANK_AUDIO]          
+[BLANK_AUDIO]
 
 1306
 00:54:24,482 --> 00:54:27,283
-  [SOUND] So that's it that's   
-  the entire implementation of  
+[SOUND] So that's it that's the entire implementation of
+这就是计算器
 
 1307
 00:54:27,285 --> 00:54:28,384
-     our calculator brain.      
+our calculator brain.
+全部的实现过程。
 
 1308
 00:54:28,386 --> 00:54:30,919
-   It wasn't really that bad    
-        actually, right?        
+It wasn't really that bad actually, right?
+其实它并没有那么难理解，对吗？
 
 1309
 00:54:30,921 --> 00:54:33,722
-   Pretty simple little data    
-        structure here.         
+Pretty simple little data structure here.
+很简单的数据结构。
 
 1310
 00:54:33,724 --> 00:54:36,858
-   Just have to say what our    
-         known ops are.         
+Just have to say what our known ops are.
+只需要明确我们已知的 ops。
 
 1311
 00:54:36,860 --> 00:54:38,726
- And have this recursion which  
-           you know,            
+And have this recursion which
+you know,
+这种递归
 
 1312
 00:54:38,728 --> 00:54:42,196
-   actually is quite simple,    
-         powerful code.         
+actually is quite simple,
+powerful code.
+它其实就是一段很简单的功能很强大的代码。
 
 1313
 00:54:42,198 --> 00:54:44,031
- If you're not comfortable with 
-        your recursion I        
+If you're not comfortable with
+your recursion I
+如果你不满意你的递归
 
 1314
 00:54:44,033 --> 00:54:46,533
-   can see how it might be a    
-     little bit disturbing.     
+can see how it might be a little bit disturbing.
+我可以帮你看下它哪里不合理
 
 1315
 00:54:46,535 --> 00:54:48,301
-     But go stare at it for     
+But go stare at it for
+如果你多看看你的代码，
 
 1316
 00:54:48,302 --> 00:54:50,068
- awhile and you'll, you'll get  
-       it, how it works.        
+awhile and you'll, you'll get
+it, how it works.
+你就会明白它是怎么实现的。
 
 1317
 00:54:50,071 --> 00:54:51,921
-             Okay.              
+Okay.
 
 1318
 00:54:51,922 --> 00:54:53,772
-  So, now that we've got this   
-     new calculator brain,      
+So, now that we've got this
+new calculator brain,
+现在我们完成了一个新的计算机
 
 1319
 00:54:53,775 --> 00:54:57,509
-  we have to use it in our old  
-          controller.           
+we have to use it in our old controller.
+我们得把它用在之前的 controller 上
 
 1320
 00:54:57,511 --> 00:54:59,678
-      Okay, yeah question?      
+Okay, yeah question?
+Okay，有什么问题？
 
 1321
 00:54:59,679 --> 00:55:01,846
- >> Do we have to let like the  
- op stack equal the remainder?  
+>> Do we have to let like the op stack equal the remainder?
+我们必须得让 opstack 等于 余数吗？
 
 1322
 00:55:01,848 --> 00:55:04,549
-  >> Do we have to let the op   
-   stack equal the remainder?   
+>> Do we have to let the op
+stack equal the remainder?
+我们必须得让 opstack 等于 余数吗？
 
 1323
 00:55:04,551 --> 00:55:05,349
-        Here, you mean?         
+Here, you mean?
+是个意思吗？
 
 1324
 00:55:05,351 --> 00:55:05,916
-            >> Yeah.            
+>> Yeah.
+对！
 
 1325
 00:55:07,119 --> 00:55:08,418
-  >> well, we're not gonna use  
-         remainder, so          
+>> well, we're not gonna use remainder, so
+呃，我们不会使用余数
 
 1326
 00:55:08,420 --> 00:55:10,620
-  actually, even I could put I  
-        don't care here.        
+actually, even I could put I
+don't care here.
+实际上，即使我可以用我也不用关心这里。
 
 1327
 00:55:10,622 --> 00:55:13,255
-   I only put that remainder    
-  there to show you could have  
+I only put that remainder
+there to show you could have
+我把余数放在这里是让你们知道
 
 1328
 00:55:13,257 --> 00:55:15,257
- a different name, but I'm not  
-      using the remainder.      
+a different name, but I'm not
+using the remainder.
+你们可以起一个不同的名称，而不是去引用它。
 
 1329
 00:55:15,259 --> 00:55:16,892
-    I only want the result.     
+I only want the result.
+我只需要结果就好了。
 
 1330
 00:55:16,894 --> 00:55:19,861
-            You see.            
- >> Won't the op stack contain  
+You see.
+>> Won't the op stack contain
+明白了吗？
+-在你计算它的值之前，
 
 1331
 00:55:19,862 --> 00:55:22,829
-   what was previously in it    
-    before you evaluate it?     
+what was previously in it
+before you evaluate it?
+自定义的数据结构不会包含它吗？
 
 1332
 00:55:22,832 --> 00:55:25,016
-  >> Yes, the op stack will be  
+>> Yes, the op stack will be
+是的，但是这不会影响到自定义的数据结构
 
 1333
 00:55:25,017 --> 00:55:27,201
- unaffected by this because op  
-       stack is an array.       
+unaffected by this because op
+stack is an array.
+因为它是一个数组。
 
 1334
 00:55:27,203 --> 00:55:28,702
- Arrays are passed by value so  
+Arrays are passed by value so
+数组是通过值传递的，
 
 1335
 00:55:28,704 --> 00:55:30,837
- a copy of it gets passed into  
-             here.              
+a copy of it gets passed into
+here.
+它的一个副本被传递到这里。
 
 1336
 00:55:30,839 --> 00:55:33,506
- So this would be untouched and 
-     which is what I want.      
+So this would be untouched and
+which is what I want.
+所以它不会改变，这正是我想要的。
 
 1337
 00:55:33,508 --> 00:55:36,242
-    I don't want evaluate to    
-      consume my op stack.      
+I don't want evaluate to
+consume my op stack.
+我不想 evaluate 方法耗尽我的运算栈。
 
 1338
 00:55:36,244 --> 00:55:38,010
-    I wanna be able to call     
-       evaluate over and        
+I wanna be able to call
+evaluate over and
+我希望它一遍又一遍的
 
 1339
 00:55:38,012 --> 00:55:38,744
-         over and over.         
+over and over.
+调用 evaluate 。
 
 1340
 00:55:38,746 --> 00:55:39,945
-             'Kay?              
-         Especially if,         
+'Kay?
+Especially if,
+好吗？特别是,如果
 
 1341
 00:55:39,947 --> 00:55:43,581
-     I let's say introduced     
-     variable operands and      
+I let's say introduced
+variable operands and
+我假设引入变量操作数
 
 1342
 00:55:43,583 --> 00:55:45,550
-  that's what you're homeworks  
-   gonna be, then I wouldn't    
+that's what you're homeworks
+gonna be, then I wouldn't
+留给你们当作业
 
 1343
 00:55:45,552 --> 00:55:47,685
-  want to change the variables  
-    to different things and     
+want to change the variables
+to different things and
+而且我不想改变这些变量
 
 1344
 00:55:47,687 --> 00:55:49,520
-     be calling it over and     
+be calling it over and
+然后通过不同的值，比如变量
 
 1345
 00:55:49,521 --> 00:55:51,354
- over with different values for 
-  the variable for example and  
+over with different values for
+the variable for example and
+一直调用它
 
 1346
 00:55:51,357 --> 00:55:53,690
-   then maybe next week I can   
-  have an assignment where I'm  
+then maybe next week I can
+have an assignment where I'm
+也许下周我可以有一项任务，
 
 1347
 00:55:53,692 --> 00:55:57,894
-  gonna make your graph such a  
- thing, which I'm going to do.  
+gonna make your graph such a
+thing, which I'm going to do.
+我会给你们画图表。
 
 1348
 00:55:57,896 --> 00:55:59,012
-             Okay?              
+Okay?
 
 1349
 00:55:59,013 --> 00:56:00,129
- So that's why I wanna do that. 
+So that's why I wanna do that.
+所以，那是为什么我这么做。
 
 1350
 00:56:00,131 --> 00:56:02,131
-   So anyway, yeah, remainder   
-   here can just be anything.   
+So anyway, yeah, remainder
+here can just be anything.
+所以，这里的余数可以是任何值。
 
 1351
 00:56:02,133 --> 00:56:03,532
-  I'm actually gonna put this   
-       here because we're       
+I'm actually gonna put this
+here because we're
+实际上，我把它放在这里，是因为
 
 1352
 00:56:03,534 --> 00:56:05,300
-   gonna print one this in a    
-         second just so         
+gonna print one this in a
+second just so
+我想打印它
 
 1353
 00:56:05,302 --> 00:56:06,567
-  we can get a better look at   
-        what's going on.        
+we can get a better look at
+what's going on.
+这样我们就可以明白它内部如何运行的。
 
 1354
 00:56:06,569 --> 00:56:10,904
-  But first, let's go back to   
-  our controller and use this   
+But first, let's go back to
+our controller and use this
+我们接着回到我们的 controller
 
 1355
 00:56:10,906 --> 00:56:14,007
-  calculator brain, this nice   
-    model we just invented.     
+calculator brain, this nice
+model we just invented.
+使用我们刚刚建立的 calculator brain  model
 
 1356
 00:56:14,009 --> 00:56:15,842
-         Let's use it.          
-              Now,              
+Let's use it.
+Now,
+我们开始使用它，现在
 
 1357
 00:56:15,843 --> 00:56:17,676
- I'm gonna show you how to get  
-    two things on screen at     
+I'm gonna show you how to get
+two things on screen at
+我来教你们怎样让这两个页面同时
 
 1358
 00:56:17,679 --> 00:56:18,644
-         the same time.         
+the same time.
+显示在你的界面上。
 
 1359
 00:56:18,646 --> 00:56:20,880
-    That aren't necessarily     
-       directly related.        
+That aren't necessarily
+directly related.
+它们之间不一定要直接相关。
 
 1360
 00:56:20,882 --> 00:56:23,549
- Before we have the story board 
-     and then I went up and     
+Before we have the story board
+and then I went up and
+之前我们用 story board 的时候，移动鼠标
 
 1361
 00:56:23,551 --> 00:56:25,784
-   clicked this system editor   
-         right here and         
+clicked this system editor
+right here and
+点击右上角的 editor 按钮之后
 
 1362
 00:56:25,786 --> 00:56:27,319
-  it showed me the controller.  
+it showed me the controller.
+它显示一个相关联的控制器。
 
 1363
 00:56:27,320 --> 00:56:28,853
-   Because the system editor    
-     figured out that, oh,      
+Because the system editor
+figured out that, oh,
+由于系统的 editor 自动识别
 
 1364
 00:56:28,855 --> 00:56:30,388
- if you have the story board up 
-       you probably want        
+if you have the story board up
+you probably want
+它自动显示和你选择的控制器
 
 1365
 00:56:30,390 --> 00:56:33,257
-  the controller for the scene  
-       you have selected.       
+the controller for the scene
+you have selected.
+直接相关的 story  board 。
 
 1366
 00:56:33,259 --> 00:56:34,992
-  But here it's like, I don't   
-     know what to show you.     
+But here it's like, I don't
+know what to show you.
+但是现在，这里啥也不显示。
 
 1367
 00:56:34,994 --> 00:56:36,827
-    So I'm gonna show you a     
-        different way to        
+So I'm gonna show you a
+different way to
+所以我叫你们另外一种方法
 
 1368
 00:56:36,829 --> 00:56:39,229
-   get something in here, two   
-         ways actually.         
+get something in here, two
+ways actually.
+来显示控制器界面，实际上是两种方法。
 
 1369
 00:56:39,231 --> 00:56:41,931
-  One is if you go to this top  
-           bar where            
+One is if you go to this top
+bar where
+看没看见 top bar 上
 
 1370
 00:56:41,933 --> 00:56:44,667
- it says counterparts, you can  
-         mouse down and         
+it says counterparts, you can
+mouse down and
+counterparts 这个选项，
 
 1371
 00:56:44,669 --> 00:56:47,603
-   you can find all kinds of    
-       things about this        
+you can find all kinds of
+things about this
+点击它你会发现更多选项
 
 1372
 00:56:47,605 --> 00:56:50,272
- like subclasses of this class  
-          on the left.          
+like subclasses of this class
+on the left.
+比如左边类的子类
 
 1373
 00:56:51,341 --> 00:56:54,642
- Superclasses of this [UNKNOWN] 
-       class on the left.       
+Superclasses of this [UNKNOWN]
+class on the left.
+他的父类
 
 1374
 00:56:54,644 --> 00:56:57,111
-      Of course it has no       
-  superclasses or subclasses.   
+Of course it has no
+superclasses or subclasses.
+当然他没有任何子类或者父类。
 
 1375
 00:56:57,113 --> 00:57:00,547
-  But other things, things it   
-  includes are included by it.  
+But other things, things it
+includes are included by it.
+此外，还有被它包含或者包含它的一些文件。
 
 1376
 00:57:00,549 --> 00:57:02,115
- You can also just manually go  
-              in.               
+You can also just manually go
+in.
+你也可以手动去找。
 
 1377
 00:57:02,117 --> 00:57:03,283
-    We can go over here for     
-          example and           
+We can go over here for
+example and
+比如我们可以在里面浏览
 
 1378
 00:57:03,285 --> 00:57:06,152
-  find our view controller and  
-    load it up that way, but    
+find our view controller and
+load it up that way, but
+找到目标控制器，并且加载它。
 
 1379
 00:57:06,154 --> 00:57:09,088
- I'm gonna show you a different 
-      way than doing that       
+I'm gonna show you a different
+way than doing that
+但是我还有另外一种方法。
 
 1380
 00:57:09,090 --> 00:57:11,423
-  which is to go over here to   
-        your navigator.         
+which is to go over here to
+your navigator.
+打开左侧的导航条，
 
 1381
 00:57:11,425 --> 00:57:14,893
-  If you hold down Option and   
-            press on            
+If you hold down Option and
+press on
+按住 option 键，同时点击
 
 1382
 00:57:14,895 --> 00:57:18,663
- a file like ViewController it  
-   will appear on the right.    
+a file like ViewController it
+will appear on the right.
+一个文件，比如这个 ViewControlle ，它就会显示在右边。
 
 1383
 00:57:18,665 --> 00:57:20,464
-             'Kay?              
+'Kay?
+看见没？
 
 1384
 00:57:20,466 --> 00:57:22,866
- So Option clicking in here is  
-      another good way to       
+So Option clicking in here is
+another good way to
+所以，按住 Option 键
 
 1385
 00:57:22,868 --> 00:57:23,767
-    put things on the right.    
+put things on the right.
+再点击这里是个非常方便的方法。
 
 1386
 00:57:25,437 --> 00:57:27,320
-             Okay?              
+Okay?
+对吧？
 
 1387
 00:57:27,321 --> 00:57:29,204
-    So now here we have our     
-  calculator brain on the left  
+So now here we have our
+calculator brain on the left
+现在  calculator brain 显示在左边，
 
 1388
 00:57:29,207 --> 00:57:31,040
- and we have our controller on  
-           the right,           
+and we have our controller on
+the right,
+同时 controller 显示在我们的右边。
 
 1389
 00:57:31,042 --> 00:57:34,943
- we are going to rip out all of 
-        the stuff in our        
+we are going to rip out all of
+the stuff in our
+我们将删掉 controller 里的
 
 1390
 00:57:34,945 --> 00:57:39,180
- controller that had to do with 
-       being calculator.        
+controller that had to do with
+being calculator.
+一些可以被 calculator 代替的东西。
 
 1391
 00:57:39,182 --> 00:57:41,716
- Okay, so that's all this stuff 
-         right in here.         
+Okay, so that's all this stuff
+right in here.
+Okay，所以这东西就在这里。
 
 1392
 00:57:41,718 --> 00:57:43,484
-             'Kay.              
+'Kay.
 
 1393
 00:57:43,485 --> 00:57:45,251
- All this calculating stuff, we 
-     don't need any of this     
+All this calculating stuff, we
+don't need any of this
+这些计算的代码我们再也不需要了，
 
 1394
 00:57:45,254 --> 00:57:47,254
- because those were only called 
-          from there.           
+because those were only called from there.
+因为那些代码只是在那边调用。
 
 1395
 00:57:47,256 --> 00:57:49,022
-   'Kay, so our controller's    
-     getting quite simple,      
+'Kay, so our controller's
+getting quite simple,
+okey，我们的 controller 变得更轻量级了，
 
 1396
 00:57:49,024 --> 00:57:50,757
-   our controller hardly has    
-      anything left in it.      
+our controller hardly has
+anything left in it.
+我们的 controller 几乎没有留下任何东西。
 
 1397
 00:57:50,759 --> 00:57:54,727
- And that's because the UI only 
-  needs this to be controlled.  
+And that's because the UI only
+needs this to be controlled.
+这是因为 UI 只需要 controller 被控制的。
 
 1398
 00:57:54,729 --> 00:57:56,579
-             'Kay?              
+'Kay?
 
 1399
 00:57:56,580 --> 00:57:58,430
- We also don't need our operand 
-   stack because the brain is   
+We also don't need our operand
+stack because the brain is
+我们也不需要我们的操作数栈，因为 brain
 
 1400
 00:57:58,432 --> 00:58:00,766
-         gonna do that.         
+gonna do that.
+因为 calculator brain  model 会处理这些东西。
 
 1401
 00:58:00,767 --> 00:58:03,101

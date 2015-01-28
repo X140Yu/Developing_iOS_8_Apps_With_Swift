@@ -1,479 +1,575 @@
 1
 00:00:00,001 --> 00:00:04,636
-            [MUSIC]             
+[MUSIC]
+音乐
 
 2
 00:00:04,638 --> 00:00:07,171
-      Stanford University.      
+Stanford University.
+斯坦福大学
 
 3
-00:00:07,173 --> 00:00:09,807
-         [BLANK_AUDIO]          
+00:00:09,809 --> 00:00:13,343
+Okay, well welcome to
+CS193p, Winter 2015.
+好的,热烈欢迎来到CS193p 2015 冬季课程
 
 4
-00:00:09,809 --> 00:00:13,343
-    >> Okay, well welcome to    
-      CS193p, Winter 2015.      
+00:00:13,345 --> 00:00:15,445
+This is Lecture NO.3.
+这是第三堂课.
 
 5
-00:00:13,345 --> 00:00:15,445
-       This is Lecture 3.       
+00:00:15,447 --> 00:00:17,714
+This is gonna be all demo.
+这节课将全部是演示.
 
 6
-00:00:15,447 --> 00:00:17,714
-   This is gonna be all demo.   
+00:00:17,716 --> 00:00:21,283
+today, my voice is mostly
+recovered from last week,
+跟上周比我今天的声音基本上恢复了,
 
 7
-00:00:17,716 --> 00:00:21,283
-   today, my voice is mostly    
-   recovered from last week,    
+00:00:21,285 --> 00:00:22,918
+not 100% as you can tell.
+但如你们听到的, 我并没有完全恢复.
 
 8
-00:00:21,285 --> 00:00:22,918
-   not 100% as you can tell.    
+00:00:22,920 --> 00:00:23,985
+But it's getting there.
+但是差不多了.
 
 9
-00:00:22,920 --> 00:00:23,985
-    But it's getting there.     
+00:00:25,455 --> 00:00:29,924
+So what we're gonna be doing
+today is a demo.
+好的, 我们今天将要进行一个演示.
 
 10
-00:00:25,455 --> 00:00:29,924
-  So what we're gonna be doing  
-        today is a demo.        
+00:00:29,926 --> 00:00:31,825
+We're gonna extend our
+calculator a little bit,
+我们会给计算器加点东西
 
 11
-00:00:29,926 --> 00:00:31,825
-     We're gonna extend our     
-    calculator a little bit,    
+00:00:31,827 --> 00:00:33,460
+we're gonna make it more
+powerful.
+让它功能更强大.
 
 12
-00:00:31,827 --> 00:00:33,460
-    we're gonna make it more    
-           powerful.            
+00:00:33,462 --> 00:00:36,629
+But more importantly, we're
+gonna have it obey this MVC
+更重要的是, 我们将会让它遵从MVC
 
 13
-00:00:33,462 --> 00:00:36,629
-  But more importantly, we're   
-  gonna have it obey this MVC   
+00:00:36,631 --> 00:00:37,930
+design paradigm.
+设计范例.
 
 14
-00:00:36,631 --> 00:00:37,930
-        design paradigm.        
+00:00:37,932 --> 00:00:39,682
+'Kay?
+好么?
 
 15
-00:00:37,932 --> 00:00:39,682
-             'Kay?              
+00:00:39,683 --> 00:00:41,433
+So it's good, a pretty good
+example of showing how
+因此, 这是一个演示如何把(计算器里的)内容
 
 16
-00:00:39,683 --> 00:00:41,433
-  So it's good, a pretty good   
-     example of showing how     
+00:00:41,436 --> 00:00:44,670
+we're gonna separate the stuff
+into the camps here.
+分配到这里列出的区块的好例子.
 
 17
-00:00:41,436 --> 00:00:44,670
- we're gonna separate the stuff 
-      into the camps here.      
+00:00:44,672 --> 00:00:46,138
+Now, we're gonna cover a bunch
+of other things,
+现在我们要讲讲其他的, 比如
 
 18
-00:00:44,672 --> 00:00:46,138
- Now, we're gonna cover a bunch 
-        of other things,        
+00:00:46,140 --> 00:00:48,473
+language features and stuff as
+I always do.
+语言特性和用法这些惯例内容.
 
 19
-00:00:46,140 --> 00:00:48,473
- language features and stuff as 
-          I always do.          
+00:00:48,475 --> 00:00:52,143
+That's really the primary goal
+of these first three lectures
+这是前三节有演示的课的最主要目标.
 
 20
-00:00:48,475 --> 00:00:52,143
- That's really the primary goal 
- of these first three lectures  
+00:00:52,145 --> 00:00:54,078
+with the demo.
+我之所以向你们实时演示
 
 21
-00:00:52,145 --> 00:00:54,078
-         with the demo.         
+00:00:54,079 --> 00:00:56,012
+So I just mean for you to see
+it in action because you can
+我之所以将要向你们实时演示
 
 22
-00:00:54,079 --> 00:00:56,012
- So I just mean for you to see  
-  it in action because you can  
+00:00:56,015 --> 00:00:59,750
+read all you want about swift
+or, about iOS, but until you
+是因为虽然你们能读到所有你们想读的关于swift或者iOS的内容
 
 23
-00:00:56,015 --> 00:00:59,750
- read all you want about swift  
-  or, about iOS, but until you  
+00:00:59,752 --> 00:01:02,619
+actually see it act, turning
+into an app, it's not real.
+但直到你看到代码如何成为应用，才融会贯通.
 
 24
-00:00:59,752 --> 00:01:02,619
-  actually see it act, turning  
-  into an app, it's not real.   
+00:01:02,621 --> 00:01:04,420
+So I'm just trying to make it
+real for you.
+因此我会试着将应用的编写的过程展示给你们.
 
 25
-00:01:02,621 --> 00:01:04,420
- So I'm just trying to make it  
-         real for you.          
+00:01:06,057 --> 00:01:08,590
+I'm going to go to my last
+slide, because,
+我会讲完最后一张幻灯片, 因为,
 
 26
-00:01:06,057 --> 00:01:08,590
-   I'm going to go to my last   
-        slide, because,         
+00:01:08,592 --> 00:01:11,093
+once I go to the demo, I'll
+forget to come back.
+我一旦开始做演示就停不下来了.
 
 27
-00:01:08,592 --> 00:01:11,093
-  once I go to the demo, I'll   
-      forget to come back.      
+00:01:11,095 --> 00:01:13,895
+Which is just the what's
+coming up in this class.
+这张幻灯片仅仅是说明接下来这门课要讲什么.
 
 28
-00:01:11,095 --> 00:01:13,895
-    Which is just the what's    
-    coming up in this class.    
+00:01:13,897 --> 00:01:17,031
+On Wednesday, it's gonna be no
+demo, it's gonna be all
+本周三没有课上演示,全是幻灯片.
 
 29
-00:01:13,897 --> 00:01:17,031
- On Wednesday, it's gonna be no 
-    demo, it's gonna be all     
+00:01:17,033 --> 00:01:19,967
+slides, it's going to be one
+of the few lectures where it's all slides
+这种课不会多，但这节是其中之一.
 
 30
-00:01:17,033 --> 00:01:19,967
-  slides, it's going to be one  
- of the few lectures where it's 
+00:01:21,186 --> 00:01:22,402
+But what I'm gonna try to do,
+我会在周三的课上尝试划出
 
 31
-00:01:19,969 --> 00:01:21,185
-          all slides.           
+00:01:22,405 --> 00:01:25,205
+on Wednesday, is give you the
+highlights of this all
+划出你们
 
 32
-00:01:21,186 --> 00:01:22,402
- But what I'm gonna try to do,  
+00:01:25,207 --> 00:01:27,307
+this reading that you're doing.
+现阶段所学重点.
 
 33
-00:01:22,405 --> 00:01:25,205
- on Wednesday, is give you the  
-     highlights of this all     
+00:01:27,309 --> 00:01:28,658
+Okay?
+Because you're
+可以么？因为
 
 34
-00:01:25,207 --> 00:01:27,307
-    this reading that you're    
-             doing.             
+00:01:28,659 --> 00:01:30,008
+reading a lot of stuff and
+it's sometimes hard to
+你们要读很多的东西,有时候区分
 
 35
-00:01:27,309 --> 00:01:28,658
-             Okay?              
-         Because you're         
+00:01:30,011 --> 00:01:32,611
+tell what's really important
+in there and what's not.
+哪些是重点哪些不是会比较困难.
 
 36
-00:01:28,659 --> 00:01:30,008
-   reading a lot of stuff and   
-     it's sometimes hard to     
+00:01:32,613 --> 00:01:34,279
+So I'm gonna kinda give you
+the highlights so
+因此我会给你们划重点.
 
 37
-00:01:30,011 --> 00:01:32,611
-  tell what's really important  
-    in there and what's not.    
+00:01:34,281 --> 00:01:36,448
+you can get an idea of what's
+important.
+这样你们会对重点内容有些概念.
 
 38
-00:01:32,613 --> 00:01:34,279
-  So I'm gonna kinda give you   
-       the highlights so        
+00:01:36,450 --> 00:01:40,618
+And then I'm also gonna start
+talking about some of
+接着我会开始讲一些
 
 39
-00:01:34,281 --> 00:01:36,448
- you can get an idea of what's  
-           important.           
+00:01:40,620 --> 00:01:45,255
+the foundation layer API in
+IOS that's the non,
+iOS中基础层的非
 
 40
-00:01:36,450 --> 00:01:40,618
- And then I'm also gonna start  
-     talking about some of      
+00:01:45,257 --> 00:01:47,891
+user interface layer basically and
+用户界面 API, 大体上讲.
 
 41
-00:01:40,620 --> 00:01:45,255
-  the foundation layer API in   
-    IOS that's the non you,     
+00:01:47,893 --> 00:01:51,227
+kinda what some of the classes
+are in there.
+和其中包含的一些类.
 
 42
-00:01:45,257 --> 00:01:47,891
- user interface layer basically 
-              and               
+00:01:51,229 --> 00:01:54,130
+And then also just a little
+bit of how we use the language
+接着是一点点关于如何使用iOS中Swift 
 
 43
-00:01:47,893 --> 00:01:51,227
- kinda what some of the classes 
-         are in there.          
+00:01:54,132 --> 00:01:57,099
+features of swift, and
+foundation, in iOS so
+ 和Foundation 框架的语言特性.
 
 44
-00:01:51,229 --> 00:01:54,130
-  And then also just a little   
- bit of how we use the language 
+00:01:57,101 --> 00:02:00,169
+that you can kinda get this
+kind of your
+这样在一定程度上
 
 45
-00:01:54,132 --> 00:01:57,099
-     features of swift, and     
-     foundation, in iOS so      
+00:02:00,171 --> 00:02:01,870
+next Wednesday's lecture ,
+本周三的课
 
 46
-00:01:57,101 --> 00:02:00,169
-  that you can kinda get this   
-    kind of your, this want,    
+00:02:01,872 --> 00:02:03,772
+is gonna be your baseline lecture,
+会成为你的当做奠基课程.
 
 47
-00:02:00,171 --> 00:02:01,870
-  next Wednesday's lecture is,  
+00:02:03,774 --> 00:02:07,241
+can kinda get you grounded in
+how to do all this stuff.
+你在一定程度会获得如何做这些东西的根基.
 
 48
-00:02:01,872 --> 00:02:03,772
-   is gonna be your baseline    
-            lecture,            
+00:02:07,243 --> 00:02:10,044
+And then next week we'll start
+diving in,
+然后接下来一周我们开始深入,
 
 49
-00:02:03,774 --> 00:02:07,241
- can kinda get you grounded in  
-   how to do all this stuff.    
+00:02:10,046 --> 00:02:13,814
+to build a more sophisticated
+iOS application.
+写一个更成熟高端的iOS应用.
 
 50
-00:02:07,243 --> 00:02:10,044
- And then next week we'll start 
-           diving in,           
+00:02:13,816 --> 00:02:15,682
+Okay, I know this is kind of a
+whirlwind in first two
+好的, 我知道头两周会有些吃力,
 
 51
-00:02:10,046 --> 00:02:13,814
- to build a more sophisticated  
-        iOS application.        
+00:02:15,684 --> 00:02:18,752
+weeks, you're learning a new
+language, all new system.
+你们将在其间学一门新的编程语言, 一个全新的体系.
 
 52
-00:02:13,816 --> 00:02:15,682
- Okay, I know this is kind of a 
-   new whirlwind in first two   
+00:02:18,754 --> 00:02:20,920
+But hopefully by the end of
+this week and the end of your
+但是希望在这周以及
 
 53
-00:02:15,684 --> 00:02:18,752
-  weeks, you're learning a new  
-   language, all new system.    
+00:02:20,922 --> 00:02:24,757
+second assignment which will
+go out on Wednesday you'll be
+将在周三布置的第二个作业结束之后,
 
 54
-00:02:18,754 --> 00:02:20,920
-  But hopefully by the end of   
- this week and the end of your  
+00:02:24,759 --> 00:02:26,225
+pretty confident that you'll
+at least,
+你能够比较确信,至少自己,
 
 55
-00:02:20,922 --> 00:02:24,757
-  second assignment which will  
- go out on Wednesday you'll be  
+00:02:26,227 --> 00:02:30,595
+you know, have a, solid ground
+foundation to build from,
+额...有一个的坚实的基础.
 
 56
-00:02:24,759 --> 00:02:26,225
-  pretty confident that you'll  
-           at least,            
+00:02:30,597 --> 00:02:31,662
+no pun intended there.
+我不是在说笑.
 
 57
-00:02:26,227 --> 00:02:30,595
- you know, have a, solid ground 
-   foundation to build from,    
+00:02:33,032 --> 00:02:36,767
+There's a holiday weekend this
+weekend no Friday section and
+这周末有公众假期, 所以这周五没课,
 
 58
-00:02:30,597 --> 00:02:31,662
-     no pun intended there.     
+00:02:36,769 --> 00:02:39,603
+no class on Monday until we
+resume next Wednesday, and
+下周一也没课,直到下周三重新开始上课,
 
 59
-00:02:33,032 --> 00:02:36,767
- There's a holiday weekend this 
- weekend no Friday section and  
+00:02:39,605 --> 00:02:42,305
+the primary thing I'm gonna do
+next Wednesday,
+下周三我的首要任务是
 
 60
-00:02:36,769 --> 00:02:39,603
-  no class on Monday until we   
-   resume next Wednesday, and   
+00:02:42,307 --> 00:02:44,341
+not day after tomorrow but
+不是后天的周三
 
 61
-00:02:39,605 --> 00:02:42,305
- the primary thing I'm gonna do 
-        next Wednesday,         
+00:02:44,342 --> 00:02:46,376
+the next Wednesday, is talk a
+little more about auto layout.
+是下周周三, 是讲一些关于auto layout的内容.
 
 62
-00:02:42,307 --> 00:02:44,341
-   not day after tomorrow but   
+00:02:46,378 --> 00:02:49,445
+Cause you've only just seen
+kind of a glimpse of auto
+因为到目前为止你们只是瞥见了一点关于
 
 63
-00:02:44,342 --> 00:02:46,376
- the next Wednesday, is talk a  
- little more about auto layout. 
+00:02:49,447 --> 00:02:51,013
+layouts so far and
+auto layout的内容.
 
 64
-00:02:46,378 --> 00:02:49,445
-  Cause you've only just seen   
-   kind of a glimpse of auto    
+00:02:51,015 --> 00:02:53,849
+I haven't even really told you
+how to do auto layout and so
+我实际上并没有告诉你们如何做auto layout
 
 65
-00:02:49,447 --> 00:02:51,013
-       layouts so far and       
+00:02:53,851 --> 00:02:55,383
+you're kinda just fumbling
+around and trying,
+你们差不多只是在摸索和尝试
 
 66
-00:02:51,015 --> 00:02:53,849
- I haven't even really told you 
-  how to do auto layout and so  
+00:02:55,385 --> 00:02:58,619
+trying to reproduce what I do
+so next Wednesday we'll
+重现我做过的内容. 所以下周三
 
 67
-00:02:53,851 --> 00:02:55,383
-   you're kinda just fumbling   
-       around and trying,       
+00:02:58,621 --> 00:03:01,588
+talk about how to really do
+auto layout hm, and all that.
+我们会讲如何做真正的auto layout和相关内容.
 
 68
-00:02:55,385 --> 00:02:58,619
- trying to reproduce what I do  
-    so next Wednesday we'll     
+00:03:02,825 --> 00:03:05,225
+'Kay, any questions before I
+dive into this demo?
+好的,在我开始演示之前还有没有问题?
 
 69
-00:02:58,621 --> 00:03:01,588
-  talk about how to really do   
- auto layout hm, and all that.  
+00:03:06,194 --> 00:03:10,396
+Hopefully my voice will hold
+out I can already hear it
+希望我的声音能坚持住, 我已经感觉到
 
 70
-00:03:02,825 --> 00:03:05,225
-  'Kay, any questions before I  
-      dive into this demo?      
+00:03:10,398 --> 00:03:14,065
+starting to not hold out but
+we will see.
+嗓子有些挺不住了, 但是...看吧.
 
 71
-00:03:06,194 --> 00:03:10,396
-  Hopefully my voice will hold  
-   out I can already hear it    
+00:03:14,067 --> 00:03:15,266
+All right.
+好的.
 
 72
-00:03:10,398 --> 00:03:14,065
-  starting to not hold out but  
-          we will see.          
+00:03:15,268 --> 00:03:21,839
+So, I'm going to just go to
+Xcode here, launch Xcode.
+嗯,我现在点这里的Xcode, 运行Xcode.
 
 73
-00:03:14,067 --> 00:03:15,266
-           All right.           
+00:03:22,941 --> 00:03:25,942
+And we're gonna leave off
+right where we, were,
+我们将继续上次课程
 
 74
-00:03:15,268 --> 00:03:21,839
-  So, I'm going to just go to   
-   Xcode here, launch Xcode.    
+00:03:25,944 --> 00:03:27,410
+last time, in the calculator.
+计算器程序的编写.
 
 75
-00:03:22,941 --> 00:03:25,942
-   And we're gonna leave off    
-     right where we, were,      
+00:03:28,846 --> 00:03:32,681
+There it is right here, and so
+these are UI.
+都在这里了, 这是UI.
 
 76
-00:03:25,944 --> 00:03:27,410
- last time, in the calculator.  
+00:03:32,683 --> 00:03:34,783
+Hopefully you recognize that
+and you did,
+希望你们都认出来了并且
 
 77
-00:03:28,846 --> 00:03:32,681
- There it is right here, and so 
-         these are UI.          
+00:03:34,785 --> 00:03:36,051
+did your homework.
+做了作业.
 
 78
-00:03:32,683 --> 00:03:34,783
-  Hopefully you recognize that  
-          and you did,          
+00:03:36,053 --> 00:03:38,070
+I hope.
+我希望.
 
 79
-00:03:34,785 --> 00:03:36,051
-       did your homework.       
+00:03:38,071 --> 00:03:40,088
+And here is this area that I
+selected at the end,
+这是我在代码尾部选中的区域,
 
 80
-00:03:36,053 --> 00:03:38,070
-            I hope.             
+00:03:40,090 --> 00:03:43,290
+which is this area that's
+really has not,
+这块区域并不是,
 
 81
-00:03:38,071 --> 00:03:40,088
-  And here is this area that I  
-      selected at the end,      
+00:03:43,292 --> 00:03:47,928
+this is not about how, how the
+calculator gets presented on
+并不是负责计算器如何在屏幕上呈现的.
 
 82
-00:03:40,090 --> 00:03:43,290
-   which is this area that's    
-        really has not,         
+00:03:47,930 --> 00:03:51,064
+screen, this blue area is
+about how the calculator is
+这块蓝色的区域是关于这个计算器
 
 83
-00:03:43,292 --> 00:03:47,928
- this is not about how, how the 
-  calculator gets presented on  
+00:03:51,066 --> 00:03:52,165
+a calculator, okay?
+为什么是个计算器, 可以么?
 
 84
-00:03:47,930 --> 00:03:51,064
-   screen, this blue area is    
-  about how the calculator is   
+00:03:52,167 --> 00:03:54,367
+This is where all our
+calculations are and
+这里是存放运算的地方
 
 85
-00:03:51,066 --> 00:03:52,165
-      a calculator, okay?       
+00:03:54,369 --> 00:03:57,302
+this blue area really
+shouldn't be in this class,
+这个蓝色区域不应该出现在这个类里,
 
 86
-00:03:52,167 --> 00:03:54,367
-     This is where all our      
-      calculations are and      
+00:03:57,304 --> 00:04:00,839
+this view controller class
+because this is the C
+这个视图控制器类. 因为这是我们MVC模型的
 
 87
-00:03:54,369 --> 00:03:57,302
-     this blue area really      
-  shouldn't be in this class,   
+00:04:00,841 --> 00:04:01,973
+of our MVC, okay.
+控制器(Controller), 好么?
 
 88
-00:03:57,304 --> 00:04:00,839
-   this view controller class   
-     because this is the C      
+00:04:01,975 --> 00:04:06,910
+And our MVC, this is the C,
+this is the V, the view,
+我们的MVC模型, 这是控制器(Controller), 这是视图(View),
 
 89
-00:04:00,841 --> 00:04:01,973
-       of our MVC, okay.        
+00:04:06,912 --> 00:04:09,546
+these are the minions that
+this controller's using.
+它们是控制器使用的小兵们.
 
 90
-00:04:01,975 --> 00:04:06,910
-  And our MVC, this is the C,   
-    this is the V, the view,    
+00:04:09,548 --> 00:04:11,948
+And today we're gonna create
+the M.
+今天我们将构建计算器的模型(Model).
 
 91
-00:04:06,912 --> 00:04:09,546
-   these are the minions that   
-    this controller's using.    
+00:04:11,950 --> 00:04:13,349
+Okay?
+The model.
+好么?模型.
 
 92
-00:04:09,548 --> 00:04:11,948
-  And today we're gonna create  
-             the M.             
+00:04:13,351 --> 00:04:15,351
+The model is gonna be what our calcu,
+这个模型将会决定我们的计,
 
 93
-00:04:11,950 --> 00:04:13,349
-             Okay?              
-           The model.           
+00:04:15,353 --> 00:04:18,854
+what our application is, which
+is, it's a calculator.
+我们的应用是什么, 也就是一个计算器.
 
 94
-00:04:13,351 --> 00:04:15,351
- The model is gonna be what our 
-             calcu,             
+00:04:18,856 --> 00:04:20,155
+'Kay?
+好么?
 
 95
-00:04:15,353 --> 00:04:18,854
- what our application is, which 
-     is, it's a calculator.     
+00:04:20,157 --> 00:04:23,758
+We're also going to enhance
+our calculator the primary new
+我们将会加强这个计算器, 我们将赋予
 
 96
-00:04:18,856 --> 00:04:20,155
-             'Kay?              
+00:04:23,760 --> 00:04:26,360
+feature we're gonna give our
+calculator is that
+它的首要新特性是
 
 97
-00:04:20,157 --> 00:04:23,758
-  We're also going to enhance   
- our calculator the primary new 
+00:04:26,362 --> 00:04:30,030
+our calculators model is gonna
+remember every operand and
+我们的计算器模型将会记住所有我们要求的
 
 98
-00:04:23,760 --> 00:04:26,360
-  feature we're gonna give our  
-       calculator is that       
+00:04:30,032 --> 00:04:32,833
+operation you ever asked it to do.
+运算对象和运算.
 
 99
-00:04:26,362 --> 00:04:30,030
- our calculators model is gonna 
-   remember every operand and   
+00:04:32,835 --> 00:04:38,271
+Okay, so right now as we do
+operations we consume all
+好的, 现在当我们做运算的是时候我们假设所有
 
 100
-00:04:30,032 --> 00:04:32,833
- operation you ever asked it to 
-              do.               
+00:04:38,273 --> 00:04:39,505
+the operands.
+运算对象.
 
 101
 00:04:32,835 --> 00:04:38,271
@@ -3807,61 +3903,73 @@
 00:33:31,050 --> 00:33:32,882
    it's using the rest of the   
               ops.              
+   它使用剩下的op。             
 
 802
 00:33:32,884 --> 00:33:34,050
     So, you see what I mean?    
+    所以，你们明白我的意思了吗？
 
 803
 00:33:34,052 --> 00:33:35,618
            It's not,            
+           它不是，
 
 804
 00:33:35,619 --> 00:33:37,185
  it can't be looking at the big 
      opStack in our brain.      
+  也不可能在我们的大脑里面查看巨大的opStack。
 
 805
 00:33:37,188 --> 00:33:38,320
      It can't look at this.     
+     它不能这么查看。
 
 806
 00:33:38,322 --> 00:33:40,756
      'Kay, cuz it's kind of     
          consuming it.          
+      因为这有点太消耗了。
 
 807
 00:33:40,758 --> 00:33:42,991
              Right?             
     And every time I call it    
+    我每次递归调用
 
 808
 00:33:42,992 --> 00:33:45,225
    recursively, I'm gonna get   
   fewer operands to work with.  
+  都只需要处理更少的操作数。
 
 809
 00:33:45,228 --> 00:33:46,194
    So this is what I'm doing.   
+   所以这就是我做的事情。
 
 810
 00:33:46,196 --> 00:33:47,962
  Now, the first time I call it, 
+ 现在，我第一次调用，
 
 811
 00:33:47,964 --> 00:33:50,864
  right here, I'm gonna give it  
        the full opStack.        
+ 需要给出完整的opStack。
 
 812
 00:33:50,866 --> 00:33:53,767
  So, I'll call my recursive one 
            from here.           
-
+ 我从这里开始调用递归函数。
 813
 00:33:53,769 --> 00:33:56,036
   Now, what's this thing gonna  
             return?             
+  那么，这里将要返回什么？
 
 814
 00:33:56,038 --> 00:33:56,836
@@ -3870,120 +3978,139 @@
 815
 00:33:56,838 --> 00:33:57,770
      That's interesting and     
+     很有意思
 
 816
 00:33:57,772 --> 00:34:00,873
  here's a big new thing for you 
             to see.             
+ 而且这里有个很大很新的东西等待你们发现
+
 
 817
 00:34:00,875 --> 00:34:03,709
    You've read about it I, I    
         can't remember I        
+   你们看过了吧，我不记得
 
 818
 00:34:03,711 --> 00:34:05,910
   even asked you to read about  
       this but I think I.       
+  有没有教你们去看相关内容不过我。。我
 
 819
 00:34:05,912 --> 00:34:06,811
      No, I guess I didn't.      
+     不，我猜我没有。     
 
 820
 00:34:06,813 --> 00:34:08,846
      Which is tuples, 'kay?     
+     什么是tuple（元组）？
 
 821
 00:34:08,848 --> 00:34:14,484
   So in Swift, you can combine  
     multiple things together    
+    在Swift里，你可以把多个东西组合起来
 
 822
 00:34:14,486 --> 00:34:16,853
   into one kind of really te,   
-
+  成为一个相当。。
 823
 00:34:16,855 --> 00:34:19,922
   mini data structure called a  
           tuple, 'kay?          
+  迷你的数据结构叫做tuple。
 
 824
 00:34:19,924 --> 00:34:22,124
  Don't let the tu [LAUGH] sound 
        in there fool you.       
+ 不要被tu的发音愚弄了。
 
 825
 00:34:22,126 --> 00:34:24,560
   It's not just two, it's any   
          number, okay?          
-
+  这不是two，它可以是任意数目。
 826
 00:34:24,562 --> 00:34:26,762
    And you just put them in a   
        parentheses, okay?       
-
+   你只需要把它们放进一对圆括号里。
 827
 00:34:26,764 --> 00:34:28,664
       And, and that's it.       
+      这就好了。
 
 828
 00:34:28,665 --> 00:34:30,565
  So you can use this for return 
             values.             
-
+ 你可以用它来做返回值。
 829
 00:34:30,567 --> 00:34:32,033
   So I've gotta function right  
              here,              
-
+  我在这里使用了这一功能，
 830
 00:34:32,035 --> 00:34:34,735
  and I actually need to return  
  two things from this evaluate. 
-
+ 实际上我需要在求值后返回两个东西。
 831
 00:34:35,771 --> 00:34:37,754
              'Kay?              
           One thing I           
-
+          一个是
 832
 00:34:37,755 --> 00:34:39,738
   need to return is the result  
       of a evaluating it.       
+      求值运算的结果。
 
 833
 00:34:40,975 --> 00:34:43,042
      But the other thing I      
+     另一个
 
 834
 00:34:43,043 --> 00:34:45,110
  need to return is the rest of  
   the stack that I didn't use.  
+  需要返回的是剩余未使用的栈。
 
 835
 00:34:45,112 --> 00:34:48,647
  Cuz as I'm working my way down 
     here and I take off that    
+    因此就像我在这里演示的，
 
 836
 00:34:48,649 --> 00:34:52,884
   times, and the 4 and the 5,   
  okay, I'm consuming things but 
+ 我取走了乘号，然后是4跟5。我消费了东西，
 
 837
 00:34:52,886 --> 00:34:54,652
   then I'm leaving the rest of  
          the stacks, so         
+  同时栈有剩余部分，
 
 838
 00:34:54,654 --> 00:34:56,920
     I have to keep returning    
    what's left of the stacks,   
+   所以我需要在求值过程中
 
 839
 00:34:56,922 --> 00:34:58,722
   while we keep consuming it.   
+  返回栈的剩余部分。
 
 840
 00:34:58,724 --> 00:34:59,689
@@ -3993,36 +4120,40 @@
 00:34:59,691 --> 00:35:01,958
  So, I'm gonna return this in a 
              tuple.             
+ 所以，我要在tuple里返回这个。
 
 842
 00:35:01,960 --> 00:35:04,126
   Tuples could not be simpler   
             syntax,             
-
+  Tuple的语法不能再简单了，
 843
 00:35:04,128 --> 00:35:08,097
    just open parentheses, not   
     nine, open parentheses.     
+   只要左括号，不是9，左括号
 
 844
 00:35:08,099 --> 00:35:11,066
  Open parentheses, and just all 
       the types that you,       
-
+ 然后是所有你要的类型数据
 845
 00:35:11,068 --> 00:35:12,634
    of things that you want in   
              here.              
+   统统放在这里。             
 
 846
 00:35:12,636 --> 00:35:14,569
  So, I'm gonna return a double  
          question mark,         
+ 所以我要在这里返回 double？
 
 847
 00:35:14,571 --> 00:35:16,070
        that's my results.       
-
+       这是我的结果。
 848
 00:35:16,072 --> 00:35:17,683
              'Kay?              
@@ -4031,45 +4162,53 @@
 00:35:17,684 --> 00:35:19,295
    That's what's eventually,    
             gonna be            
+   这是最终
 
 850
 00:35:19,296 --> 00:35:20,907
   returned out here after all   
      the recursion unwinds.     
+  所有递归都被展开后返回的结果。
 
 851
 00:35:20,910 --> 00:35:23,643
    And then also I'm going to   
+   同时我也需要
 
 852
 00:35:23,645 --> 00:35:28,348
    have the ops that are left   
              over.              
+   剩下的op。
 
 853
 00:35:28,350 --> 00:35:32,851
   Now, a tuple could look just  
       like this, unnamed.       
+  现在，一个tuple看上去像这样，未命名的。
 
 854
 00:35:32,853 --> 00:35:34,519
   Did you see how these things  
          are not named,         
+  你们看到这些未命名的格式，
 
 855
 00:35:34,521 --> 00:35:35,920
  each of these things in here.  
+ 里面每一个东西。
 
 856
 00:35:35,922 --> 00:35:38,956
  But you can also put names in  
  here as, if you want, as well. 
+ 如果你想要，也可以把名称放在这里。
 
 857
 00:35:38,958 --> 00:35:41,092
  So maybe I would call this one 
           the result.           
-
+ 所以大概我会把这个命名为result
 858
 00:35:42,061 --> 00:35:44,728
              Okay?              
@@ -4079,50 +4218,59 @@
 00:35:44,729 --> 00:35:47,396
      I would call this one      
       remainingOps, 'kay?       
+      把这个命名为remainingOps
 
 860
 00:35:47,399 --> 00:35:49,666
  And I kinda recommend putting  
       those in there, and       
-
+ 我推荐这么做，
 861
 00:35:49,668 --> 00:35:52,601
    you'll see why in a second   
   because there's two ways to   
+  马上你门就会知道为什么 因为有两种方法
 
 862
 00:35:52,603 --> 00:35:56,138
  call a function that returns a 
    tuple and get the results.   
+  来调用返回tuple的函数，拿到返回值。
 
 863
 00:35:56,140 --> 00:36:00,208
   And one of the ways requires  
    that you name these, 'kay?   
+   其中一种强制要求命名。
 
 864
 00:36:00,210 --> 00:36:01,843
   So, it doesn't hurt to name   
     the, you might, as well.    
+  所以，加上名字没什么妨害的。
 
 865
 00:36:01,845 --> 00:36:03,111
     It's good documentation.    
+    这是很好的文档。
 
 866
 00:36:03,113 --> 00:36:05,379
   Someone looking at this now   
         knows, oh, yeah,        
+  有些人看到这里就会明白，对的，
 
 867
 00:36:05,381 --> 00:36:07,147
    this is the result of the    
         evaluation, and         
+    这个是求值的结果，        
 
 868
 00:36:07,149 --> 00:36:09,783
   these the ops that were left  
              over.              
+  这个是剩下的op。
 
 869
 00:36:09,785 --> 00:36:10,784
@@ -4135,39 +4283,46 @@
 871
 00:36:13,421 --> 00:36:15,121
      So let's dive in here.     
+     我们从这里开始。
 
 872
 00:36:15,123 --> 00:36:16,956
         The first thing,        
+        第一件事，
 
 873
 00:36:16,957 --> 00:36:18,790
  line of code I'm gonna put in  
     this recursive function     
-
+ 放在这个递归函数的代码，
 874
 00:36:18,793 --> 00:36:21,193
   is the failure line of code,  
+  处理失败的情况，
 
 875
 00:36:21,195 --> 00:36:25,930
    which is return nil, ops,    
              okay?              
+   简单返回 （nil， ops）
 
 876
 00:36:25,932 --> 00:36:28,566
  So if I fail, okay, I'm gonna  
             try and             
+  所以如果失败了，我会努力。。
 
 877
 00:36:28,568 --> 00:36:33,303
  do my best in here to evaluate 
   these ops you passed me, but  
+  尽力在这里用传入的ops求值，
 
 878
 00:36:33,305 --> 00:36:36,272
     if I fail I'm just gonna    
     return my result of nil.    
+    如果失败了，就以nil为结果返回。
 
 879
 00:36:36,274 --> 00:36:37,974
@@ -4177,25 +4332,26 @@
 00:36:37,975 --> 00:36:39,675
  And that's gonna be my default 
       is to return nil so       
-
+ 返回nil将是默认行为，
 881
 00:36:39,678 --> 00:36:40,643
         I know I failed.        
-
+        然后我就知道我失败了。
 882
 00:36:40,645 --> 00:36:42,344
   So, if I run out of operands  
                or               
-
+  比如，我处理完毕所有的操作数，
 883
 00:36:42,346 --> 00:36:44,613
  I run out of stack can't find  
              it for             
-
+ 或者处理完毕整个stack，
 884
 00:36:44,615 --> 00:36:47,915
  example, it's just gonna fall  
     out here and return nil.    
+ 那么就会跳转这里返回nil。
 
 885
 00:36:49,152 --> 00:36:49,683
@@ -4204,33 +4360,39 @@
 886
 00:36:49,685 --> 00:36:50,784
         So that's good.         
+        这样挺不错的。
 
 887
 00:36:50,786 --> 00:36:52,619
  So, what do I need to do here? 
+ 这里需要我做什么呢？
 
 888
 00:36:52,621 --> 00:36:56,089
  Well, first thing is I need to 
    make sure I have some ops.   
+   首先我要确定这里有op。
 
 889
 00:36:56,091 --> 00:36:59,859
   So I'm gonna check to see if  
      the ops is not empty.      
-
+  我要检查ops是不是空的。
 890
 00:36:59,861 --> 00:37:04,529
   Okay, if you've handed me a   
  stack of no ops to evaluates,  
+  如果传入一个没有op的栈
 
 891
 00:37:04,531 --> 00:37:05,463
         I can't do that.        
+        我将无法求值。
 
 892
 00:37:05,465 --> 00:37:06,698
  So I'm just gonna return nil.  
+ 我简单地返回nil。
 
 893
 00:37:06,700 --> 00:37:07,615
@@ -4240,21 +4402,24 @@
 894
 00:37:07,616 --> 00:37:08,531
   that's the very first thing,  
+  这是最开始要做的事，
 
 895
 00:37:08,534 --> 00:37:11,035
  I gotta make sure I have some  
        ops to work with.        
+ 我要确定我有待处理的op
 
 896
 00:37:11,037 --> 00:37:14,237
  Now, I'm gonna grab the first  
       op of the stack, so       
-
+ 现在，我要获取栈里的第一个op，
 897
 00:37:14,239 --> 00:37:16,639
    in this example, I'm gonna   
     grab that x off of here.    
+    在这个例子里，我要在这里获取x。
 
 898
 00:37:16,641 --> 00:37:17,206
@@ -4263,11 +4428,13 @@
 899
 00:37:17,208 --> 00:37:18,574
        I'm gonna do that,       
+       我这么做，
 
 900
 00:37:18,576 --> 00:37:24,012
   I'm gonna try to do that by   
    saying, let op equal ops.    
+   这么实现： let op ＝ ops.
 
 901
 00:37:24,014 --> 00:37:26,114
@@ -7655,12 +7822,12 @@ gonna do that.
 1601
 01:06:23,163 --> 01:06:24,962
        Okay, that's good. 
-	Okay,没有问题。      
+  Okay,没有问题。      
 
 1602
 01:06:24,964 --> 01:06:26,397
        Let's go 6, Enter.   
-	点击6，然后点击 Enter    
+  点击6，然后点击 Enter    
 
 1603
 01:06:26,399 --> 01:06:30,734
@@ -7671,58 +7838,58 @@ gonna do that.
 1604
 01:06:30,736 --> 01:06:32,602
       with enum left over.  
-	另一个为 enum。    
+  另一个为 enum。    
 
 1605
 01:06:32,604 --> 01:06:33,936
     Well that's not so good. 
-	哦，出问题了。   
+  哦，出问题了。   
 
 1606
 01:06:33,938 --> 01:06:38,807
  Times enum, enum, enum equals  
    it with, this is terrible.  
-	点击 X (乘号), enum, enum, enum 等于这个以及… 糟糕
+  点击 X (乘号), enum, enum, enum 等于这个以及… 糟糕
 
 1607
 01:06:38,809 --> 01:06:40,342
   This is, I can't understand   
         what the heck is
-	这是回事？      
+  这是回事？      
 
 1608
 01:06:40,344 --> 01:06:41,342
          going on here.  
-	我不理解怎么会是这样        
+  我不理解怎么会是这样        
 
 1609
 01:06:41,344 --> 01:06:42,943
      Why is this happening? 
-	为什么会出现这些东西？    
+  为什么会出现这些东西？    
 
 1610
 01:06:42,945 --> 01:06:47,014
   Okay, when you put something  
    in parentheses like this,  
-	Okay, 当你往圆括号中放类似这样的东西。
+  Okay, 当你往圆括号中放类似这样的东西。
 
 1611
 01:06:47,016 --> 01:06:49,315
   it tries to convert it to a   
             string.   
-	它试图将它转化为 string。          
+  它试图将它转化为 string。          
 
 1612
 01:06:49,317 --> 01:06:51,718
  Okay, well the thing that's in 
        here is an array.  
-	但是括号里的东西却是一个 array。      
+  但是括号里的东西却是一个 array。      
 
 1613
 01:06:51,720 --> 01:06:54,520
    Arrays know how to convert   
      themselves to strings. 
-	Array 知道怎么自己转化为 string。    
+  Array 知道怎么自己转化为 string。    
 
 1614
 01:06:54,522 --> 01:06:57,623
@@ -7866,8 +8033,8 @@ gonna do that.
 1638
 01:08:00,346 --> 01:08:01,929
         The name of it. 
-	computed property (计算属性)的属性名        
-	
+  computed property (计算属性)的属性名        
+  
 1639
 01:08:01,930 --> 01:08:03,513
       It has to be called       
@@ -7908,7 +8075,7 @@ gonna do that.
   But it has to not only be a   
        computer property.  
   但是它不可能仅仅只是一个 
-	computed property。     
+  computed property。     
 
 1646
 01:08:21,898 --> 01:08:24,165
@@ -7979,7 +8146,7 @@ gonna do that.
 1657
 01:08:53,391 --> 01:08:55,224
         For the operand,
-	对于操作数，        
+  对于操作数，        
 
 1658
 01:08:55,225 --> 01:08:57,058
@@ -8514,4 +8681,3 @@ gonna do that.
 01:13:44,074 --> 01:13:47,976
   For more, please visit us at  
          stanford.edu.          
-

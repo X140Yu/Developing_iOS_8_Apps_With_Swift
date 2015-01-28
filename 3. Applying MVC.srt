@@ -2381,26 +2381,23 @@
 501
 00:21:45,517 --> 00:21:47,450
      And it can be a named      
-          function, or  
-它可以是一个被命名的函数        
+          function, or          
 
 502
 00:21:47,452 --> 00:21:49,518
     we could use these curly    
-            braces. 
-或者可以用花括号            
+            braces.             
 
 503
 00:21:49,520 --> 00:21:52,754
    Now, this is really gonna    
  freak you out, cuz watch this. 
-现在，让你惊讶的事来了，看好了
 
 504
 00:21:52,756 --> 00:21:57,091
  For times, there's a function  
  that does times called times.  
-对于乘法，有一个做乘法运算的函数就叫做“*”
+
 505
 00:21:58,728 --> 00:22:00,728
              Okay.              
@@ -2409,18 +2406,17 @@
 00:22:00,729 --> 00:22:02,729
      So in Swift, all these     
       operators, times and      
-在Swift里，所有的运算符，乘号等等
+
 507
 00:22:02,732 --> 00:22:04,664
    all these things, are just   
-           functions.   
-        都是函数
+           functions.           
 
 508
 00:22:04,666 --> 00:22:06,966
      They just happen to be     
-  specified in a way that says
-  
+  specified in a way that says  
+
 509
 00:22:06,968 --> 00:22:09,068
  that they can be infix, right, 
@@ -2434,30 +2430,26 @@
 511
 00:22:11,372 --> 00:22:13,138
  And we do the same thing here  
-           with plus.  
-然后我们对加法做同样的事         
+           with plus.           
 
 512
 00:22:14,641 --> 00:22:16,074
         All right, plus.        
-好的，加号
+
 513
 00:22:16,076 --> 00:22:17,508
     Now, we can't do it with    
-           divide and  
-现在要注意，这种方法不适用于除法和减法         
+           divide and           
 
 514
 00:22:17,510 --> 00:22:20,378
    minus because the order is   
-           backwards.   
-因为运算方向是反的        
+           backwards.           
 
 515
 00:22:20,380 --> 00:22:22,146
   Right, we put the things on   
-           the stack,   
-好，我们把这些东西放到栈上
+           the stack,           
 
 516
 00:22:22,148 --> 00:22:23,513
@@ -2476,8 +2468,7 @@
 519
 00:22:31,088 --> 00:22:33,455
  Okay, so now we have this nice 
-           knownOps.     
-好，现在我们做好了这些KnwonOps       
+           knownOps.            
 
 520
 00:22:33,457 --> 00:22:34,222
@@ -2486,75 +2477,64 @@
 521
 00:22:34,224 --> 00:22:36,724
         It's loaded up.         
-它已经装载好了
+
 522
 00:22:36,725 --> 00:22:39,225
  It gets loaded up whenever the 
  CalculatorBrain gets created.  
-每当CalculatorBrain被创建它就会被装载
 
 523
 00:22:39,228 --> 00:22:41,612
-      So that's all good.  
-万事俱备     
+      So that's all good.       
 
 524
 00:22:41,613 --> 00:22:43,997
  Now we can use that down here  
-      in performOperation.  
-现在我们可以将它用在performOperation上    
+      in performOperation.      
 
 525
 00:22:43,999 --> 00:22:47,134
  All right, so how are we gonna 
  use this in performOperation?  
-好，那我们要怎么使用呢
 
 526
 00:22:47,136 --> 00:22:50,870
   Well, we basically wanna let  
-      the operation equal    
-我们让operation等于   
+      the operation equal       
 
 527
 00:22:50,872 --> 00:22:53,172
-      knownOps sub symbol.  
-knownOps参数symbol    
+      knownOps sub symbol.      
 
 528
 00:22:53,174 --> 00:22:55,240
              Okay?              
   Someone passed us a symbol.   
-明白了吗？使用者传递给我们一个参数symbol
 
 529
 00:22:55,242 --> 00:22:56,641
  They're trying to perform this 
-           operation.    
-当他们想用这个方法的时候       
+           operation.           
 
 530
 00:22:56,643 --> 00:22:58,810
  So this is either a plus or a  
              times.             
-参数可以是加法或者乘法
+
 531
 00:22:58,812 --> 00:23:00,111
    Hopefully an operation we    
-             know.   
-   是我们已知的运算符      
+             know.              
 
 532
 00:23:00,113 --> 00:23:02,747
  And we're gonna look it up in  
-           knownOps.   
-然后我们会来到KnownOps         
+           knownOps.            
 
 533
 00:23:02,749 --> 00:23:05,683
  And the way we do that is with 
   the subscript notation with   
-然后要做的就是在
 
 534
 00:23:05,685 --> 00:23:06,650
@@ -2573,108 +2553,91 @@ knownOps参数symbol
 537
 00:23:09,254 --> 00:23:11,454
    But what might be kind of    
-       surprising to you,  
-不过有一点可能会让你惊讶   
+       surprising to you,       
 
 538
 00:23:11,456 --> 00:23:13,622
   what type do you think this   
-      would be, operation?
-得到的operation，你觉得是什么类型的呢？   
+      would be, operation?      
 
 539
 00:23:15,292 --> 00:23:17,959
  Any guesses, yeah, some people 
-  are saying the right thing. 
-猜猜？哈，有人说出了正确答案  
+  are saying the right thing.   
 
 540
 00:23:17,961 --> 00:23:20,128
   You'd think this might be an  
-              Op,    
-你可能会觉得这个是一个Op           
+              Op,               
 
 541
 00:23:20,130 --> 00:23:24,498
    because I'm looking up in    
- knownOps right here, a string.
-因为我在KnownOps这里看，String：Op
+ knownOps right here, a string. 
 
 542
 00:23:24,500 --> 00:23:27,134
   And so hopefully I'm getting  
- an Op, but this is not an Op,
-因此可以预见得到的会是一个Op，事实上它并不是Op
+ an Op, but this is not an Op,  
 
 543
 00:23:27,136 --> 00:23:30,971
   this actually is an Optional  
-              Op.  
-实际上它是一个Optional Op             
+              Op.               
 
 544
 00:23:30,973 --> 00:23:33,173
     Okay, now why is that an    
-    Optional Op, because you
-好了，为什么它会是一个Optional Op，因为    
+    Optional Op, because you    
 
 545
 00:23:33,175 --> 00:23:35,541
  might be looking up something  
       that's not in there.      
-因为它可能不存在于此
+
 546
 00:23:35,543 --> 00:23:38,344
  And it has to return, oh, nil, 
-    sorry, couldn't find it, 
-而且它没有返回值。“噢，nil，不好意思找不到该值” 
+    sorry, couldn't find it,    
 
 547
 00:23:38,346 --> 00:23:41,413
  so that's why it has to be an  
-     optional, is returned. 
-所以这就是为什么它必须是optional    
+     optional, is returned.     
 
 548
 00:23:41,415 --> 00:23:43,015
-        So a dictionary, 
-比方说字典       
+        So a dictionary,        
 
 549
 00:23:43,016 --> 00:23:44,616
  whenever you look up something 
-        in a dictionary,    
-每当你要在字典里面寻找东西的时候    
+        in a dictionary,        
 
 550
 00:23:44,618 --> 00:23:47,118
  it always returns an Optional, 
-      okay, either nil or  
-它总是会返回一个Optional类型。nil或者是     
+      okay, either nil or       
 
 551
 00:23:47,120 --> 00:23:50,655
  the type of thing you said was 
-    supposed to be in there.   
-其他它原本的类型 
+    supposed to be in there.    
 
 552
 00:23:50,657 --> 00:23:53,457
  So I'm gonna if let here, I'm  
-           gonna say, 
-所以我在这里加上if          
+           gonna say,           
 
 553
 00:23:53,459 --> 00:23:56,827
    if I'm able to look up my    
-   operation in my knownOps, 
-如果 我能在knownOps里取得我的operation   
+   operation in my knownOps,    
 
 554
 00:23:56,829 --> 00:23:59,696
   then I'm going to push it on  
-        to my op stack. 
-那我就将它放进我的op stack.        
+        to my op stack.         
 
 555
 00:24:02,534 --> 00:24:03,232
@@ -2682,8 +2645,7 @@ knownOps参数symbol
 
 556
 00:24:03,234 --> 00:24:06,068
-    Are you cool with that? 
-明白了吗？    
+    Are you cool with that?     
 
 557
 00:24:06,070 --> 00:24:08,303
@@ -2695,8 +2657,7 @@ knownOps参数symbol
 
 559
 00:24:10,173 --> 00:24:12,407
-       Now, what's next?  
-好，下一步是什么呢      
+       Now, what's next?        
 
 560
 00:24:12,409 --> 00:24:13,908

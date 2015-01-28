@@ -3331,10 +3331,12 @@
 00:29:22,405 --> 00:29:25,606
    So we need another public    
           method here,          
+   这里我们还需要一个公共方法，
 
 702
 00:29:25,608 --> 00:29:29,876
  which I'm gonna call evaluate. 
+ 将其命名为 "evaluate" 
 
 703
 00:29:29,878 --> 00:29:31,344
@@ -3345,49 +3347,59 @@
 00:29:31,346 --> 00:29:34,880
    we could have it return a    
       double, for example.      
+像这样，我们可以设置其返回类型为 double
 
 705
 00:29:34,882 --> 00:29:38,917
    And it would just evaluate   
         this opStack and        
+   这个方法会对 opStack 估值然后
 
 706
 00:29:38,919 --> 00:29:40,535
        return the value.        
+       返回结果
 
 707
 00:29:40,536 --> 00:29:42,152
  But I really can't make this a 
             double.             
+但我不能设置这个 double
 
 708
 00:29:43,390 --> 00:29:46,524
    Really, this has to be an    
            optional.            
+   事实上，它必须为 optional
 
 709
 00:29:46,526 --> 00:29:48,892
  'Kay, why does this have to be 
           an optional?          
+为什么它必须为 optional ？
 
 710
 00:29:48,894 --> 00:29:52,295
   Well, that's because someone  
  might get my CalculatorBrain,  
+这是由于，当某人拿到我的 "CalculatorBrain" 时，
 
 711
 00:29:52,297 --> 00:29:53,963
   and the first thing they do   
               is,               
+他们如果第一时间
 
 712
 00:29:53,965 --> 00:29:55,932
   they say, perform operation   
              plus.              
+说"执行加法"
 
 713
 00:29:55,934 --> 00:29:57,600
  Okay, well I have no operands. 
+但我们并没有可以被加的数
 
 714
 00:29:57,602 --> 00:29:59,051
@@ -3398,142 +3410,171 @@
 00:29:59,052 --> 00:30:00,501
    you're asking to evaluate    
              plus.              
+可这个时候又被要求计算加法
 
 716
 00:30:00,504 --> 00:30:02,287
         I can't do that.        
+我不能执行这个操作
 
 717
 00:30:02,288 --> 00:30:04,071
  So, I have to return something 
   to you, that lets you know,   
+所以我必须返回一些东西，让你知道，
 
 718
 00:30:04,074 --> 00:30:07,776
  I could not evaluate what you  
       ask me to evaluate.       
+我无法计算你所需要我计算的东西。
 
 719
 00:30:07,778 --> 00:30:09,477
   So, I'm gonna return nil in   
            that case,           
+在这种情况下，我就会返回 nil，
 
 720
 00:30:09,479 --> 00:30:12,213
   so valuate here really needs  
-       to be an optional.       
+       to be an optional.   
+这里确实需要返回一个 optional。    
 
 721
 00:30:13,249 --> 00:30:14,848
   'Kay, so you can see some of  
          the thinking,          
+你可以看到我们对于什么时候
 
 722
 00:30:14,850 --> 00:30:17,283
  when do you make something an  
        optional when not.       
+应该使用 optional 的思考。
 
 723
 00:30:17,285 --> 00:30:19,285
    'Kay, so this is a classic   
          case of that,          
+这里就是一个典型的使用场景，
 
 724
 00:30:19,287 --> 00:30:21,787
   where you got sometimes you   
       wanna return it and       
+有时你想要返回一些东西，
 
 725
 00:30:21,789 --> 00:30:23,889
   you can't do it, so you have  
-         to return no.          
+         to return nil.          
+但又无法返回的时候，那么就返回 nil.
 
 726
 00:30:23,891 --> 00:30:28,793
  All right, so how we going to  
       implement evaluate?       
+那么，接下来我们应该怎么实现 "evaluate" 呢？
 
 727
 00:30:28,795 --> 00:30:30,595
   Okay, how many people in the  
              class,             
+对了，在这个班上有多少人
 
 728
 00:30:30,597 --> 00:30:34,365
  raise your hands don't be shy, 
     are you comfortable with    
+不要害羞，举起你们的手，
 
 729
 00:30:34,367 --> 00:30:37,067
   the computer science concept  
          of recursion?          
+有多少人熟悉计算机科学中递归的概念？
 
 730
 00:30:39,271 --> 00:30:40,903
              Okay.              
  Excellent, that's about 80 or  
+很好，大概有80~90%，
 
 731
 00:30:40,905 --> 00:30:43,939
  90%, so I'm gonna explain this 
        really fast then.        
+那么我将只是快速地解释一下
 
 732
 00:30:43,941 --> 00:30:45,974
   And if you don't understand   
            recursion,           
+如果你不明白递归
 
 733
 00:30:45,976 --> 00:30:47,309
  if you didn't raise your hand, 
+如果你刚才没有举手的话
 
 734
 00:30:47,311 --> 00:30:48,843
  that's something you should go 
             review.             
+那就意味着你需要回去复习
 
 735
 00:30:48,845 --> 00:30:50,378
              Okay?              
       [LAUGH] Recursion is      
+递归是
 
 736
 00:30:50,379 --> 00:30:51,912
  something, you should know by  
  the time you take this class,  
+当你在这个班级的时候，应该知道的东西。
 
 737
 00:30:51,915 --> 00:30:53,714
     so that's something you     
      definitely wanna know.     
+这是你必须知道的。
 
 738
 00:30:53,716 --> 00:30:57,317
   So, how are we going to use   
           recursion to          
+那么在这种情况下，
 
 739
 00:30:57,319 --> 00:30:59,252
       evaluate this stack?      
+我们应该怎样在 "evaluate" 中使用递归？
 
 740
 00:30:59,254 --> 00:31:00,653
   All right, looks like this.   
+好，看这里
 
 741
 00:31:00,655 --> 00:31:02,988
   I'm gonna do a sample stack,  
           right here.           
+我将会在这里写一个堆
 
 742
 00:31:02,990 --> 00:31:08,393
  So, let's say I put a 6 on the 
  stack, and then I put a 5, and 
+这样说吧，我放了一个6在这个堆上，然后我放了一个5，
 
 743
 00:31:08,395 --> 00:31:14,065
  then I put a plus, and then I  
  put a 4, and then I put times. 
+然后我放了加号，然后我放了4，最后加上次数
 
 744
 00:31:14,067 --> 00:31:15,166
@@ -3543,185 +3584,224 @@
 00:31:15,168 --> 00:31:17,968
   So here's our stack, and I'm  
       gonna evaluate this,      
+这就是我们的堆，我将要计算这个
 
 746
 00:31:17,970 --> 00:31:18,702
       I'm gonna recursion.      
+      我将要使用递归
 
 747
 00:31:18,704 --> 00:31:19,769
     How am I gonna do that?     
+    我要怎么做？
 
 748
 00:31:19,771 --> 00:31:21,437
   Well, really, what I'm gonna  
         do is I'm gonna         
+	  我要这样
 
 749
 00:31:21,439 --> 00:31:24,740
   have a helper method here, a  
     recursive helper method.    
+在这里我需要一个帮助方法，一个帮助实现递归的方法。
 
 750
 00:31:24,742 --> 00:31:27,543
    I'm gonna call it evaluate   
         also, actually.         
+事实上这个方法也叫 "evaluate"
 
 751
 00:31:27,545 --> 00:31:29,644
   And it's gonna take a stack,  
         as an argument,         
+它会将我们的堆当做一个参数，
 
 752
 00:31:29,646 --> 00:31:31,012
  a stack of things to evaluate. 
+一堆用来计算的东西
 
 753
 00:31:31,014 --> 00:31:34,449
   And it's only gonna evaluate  
   the top thing on the stack.   
+并且它只会计算处于这个堆顶部的元素
 
 754
 00:31:34,451 --> 00:31:36,717
  That's it just gonna value the 
       top of the stack and      
+它只是计算处于堆中最上面的元素，并且返回，
 
 755
 00:31:36,719 --> 00:31:38,819
   return it, but the top thing  
        of the stack might       
+但是计算堆栈最上的这个元素时，
 
 756
 00:31:38,821 --> 00:31:41,421
     involve looking at every    
  single of one of these, right? 
+可能也会涉及到堆中的每一个元素
 
 757
 00:31:41,423 --> 00:31:44,157
  Cuz, this times needed to two  
           operations.           
+因为，次数需要两个数才能进行。
 
 758
 00:31:44,159 --> 00:31:47,026
   So, lets look at this, this   
  recursive evaluates gonna come 
+让我们再来看看，这个递归计算将要到这里来
 
 759
 00:31:47,028 --> 00:31:48,961
   in here, it's gonna try and   
+  将尝试着计算处于最顶部的元素
 
 760
 00:31:48,962 --> 00:31:50,895
  evaluate the top of the stack, 
        which is a times.        
-
+       次数
+       
 761
 00:31:50,898 --> 00:31:51,597
              Okay?              
          So it's like,          
+将会像这样
 
 762
 00:31:51,599 --> 00:31:53,265
      okay, I'm doing times.     
+我在算次数
 
 763
 00:31:53,267 --> 00:31:56,101
    Now for times it needs two   
             operate,            
+现在需要要找到两个数，
 
 764
 00:31:56,103 --> 00:31:58,302
   two operands here for times.  
+两个数用于计算次数。
 
 765
 00:31:58,304 --> 00:31:59,737
    So, it recursively calls,    
+它开始递归
 
 766
 00:31:59,739 --> 00:32:03,807
  itself to say give me to first 
        operand for time.        
+它说给我第一个数作为次数。
 
 767
 00:32:03,809 --> 00:32:07,010
   And so recursively, comes in  
      here, it finds a 4 on      
+然后就开始递归，在最顶端它找到了一个4，
 
 768
 00:32:07,012 --> 00:32:10,913
  the top it's like, I know how  
      to evaluate 4, it's 4.     
+像这样，我当然知道怎样计算4，4次
 
 769
 00:32:10,915 --> 00:32:12,148
       So, it just returns.      
+所以直接返回
 
 770
 00:32:12,150 --> 00:32:15,751
   Okay, so now I have my first  
            operands.            
+好，现在我就有了第一个操作数
 
 771
 00:32:15,753 --> 00:32:16,618
              'Kay?              
               Now,              
+现在
 
 772
 00:32:16,620 --> 00:32:18,386
   I take the rest of the stack  
               and               
+我把堆栈中剩下的数进行计算，
 
 773
 00:32:18,388 --> 00:32:21,255
  evaluate it, to get the second 
               one.              
+用于得到第二个数。
 
 774
 00:32:21,257 --> 00:32:24,291
    And when I do that, I get    
           plus, 'kay?           
+当我这样做时，我得到一个加号
 
 775
 00:32:24,293 --> 00:32:26,393
   So, plus says, oh, I have to  
          evaluate plus.         
+然后加号说："噢，我要计算加法。"
 
 776
 00:32:26,395 --> 00:32:27,727
        It needs operands.       
+"那需要计算数才行"
 
 777
 00:32:27,729 --> 00:32:30,763
    So, I come over here, I'm    
         getting a plus.         
+然后我就到这里来，我有了一个加号。
 
 778
 00:32:30,765 --> 00:32:34,700
     And I gotta go recursive    
  again, to go get its operands. 
+我将再次递归，用于获取操作数。
 
 779
 00:32:34,702 --> 00:32:36,401
    I get the 5, that's good.    
+我得到5，很好。
 
 780
 00:32:36,403 --> 00:32:41,072
  I'm gonna go recursive again,  
      get the 6, over here.      
+我还要再次递归，得到一个6，到这里来。
 
 781
 00:32:41,074 --> 00:32:42,907
   And I've evaluated the whole  
              stack.             
+最后我将计算整个堆。
 
 782
 00:32:42,909 --> 00:32:45,876
  So, you see how I have to keep 
  going backward recursively to  
+就这样，你看到我这样通过来回
 
 783
 00:32:45,878 --> 00:32:46,576
           my evaluate-          
+递归
 
 784
 00:32:46,578 --> 00:32:47,911
@@ -3731,77 +3811,93 @@
 00:32:47,912 --> 00:32:49,245
  >> To get the operands for my  
           operations.           
+获取计算所需要的操作数。
 
 786
 00:32:49,247 --> 00:32:51,848
   Once, I get to an operand I   
            can stop,            
+一旦我取得了操作数，我就停下来，
 
 787
 00:32:51,850 --> 00:32:54,483
  okay number, I got it and I'm  
         out of of there.        
+好的，数字，我得到了然后我要离开这里
 
 788
 00:32:54,485 --> 00:32:56,418
    But every time I encounter   
        another operation,       
+但每一次我遇到另一个操作符时，
 
 789
 00:32:56,420 --> 00:32:58,153
       I have to keep going      
          recursively to         
+我就必须继续递归来
 
 790
 00:32:58,155 --> 00:33:00,822
    get all my arguments, any    
      questions about that?      
+获取所需要的参数，有人有疑问吗？
 
 791
 00:33:00,824 --> 00:33:06,327
   'Kay, so it's actually gonna  
   be pretty simple recursion.   
+这就是一个非常简单的递归算法。
 
 792
 00:33:06,329 --> 00:33:08,862
  When you see the code, you're  
   gonna be, that makes sense.   
+但你看到了代码，你就会觉得："哦，还真是这样"。
 
 793
 00:33:08,864 --> 00:33:12,832
     So, I'm gonna have this     
  separate I'm gonna put this up 
+所以我将把这个放在最上面
 
 794
 00:33:12,834 --> 00:33:15,201
  on top for scrolling reasons.  
+为了更好地滚动。
 
 795
 00:33:15,203 --> 00:33:18,237
              Oops.              
        Didn't mean that.        
+Opps，我不是故意地。
 
 796
 00:33:18,239 --> 00:33:19,672
      The separate evaluate.     
+这是分离的另一个 "evaluate"。
 
 797
 00:33:20,808 --> 00:33:25,677
  And this evaluate is going to  
       take a stack of ops,      
+这个 "evaluate" 将会取得堆上的操作数，
 
 798
 00:33:25,679 --> 00:33:27,078
         as its argument.        
+作为参数。
 
 799
 00:33:27,080 --> 00:33:28,645
   And why does it take a stack  
             of ops?             
+为什么他会获取堆上的操作数呢？
 
 800
 00:33:28,647 --> 00:33:31,048
    Because as it's recursing,   
+因为当他递归时，
 
 801
 00:33:31,050 --> 00:33:32,882

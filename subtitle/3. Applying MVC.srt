@@ -1535,479 +1535,504 @@ the operands.
 301
 00:12:57,868 --> 00:13:00,768
  I'm gonna have a string which  
-    is gonna be the symbol,     
+    is gonna be the symbol,
+首先我需要用一个字符串来表示符号，   
 
 302
 00:13:00,770 --> 00:13:01,936
   the mathematical symbol for   
-
+数学运算符
 303
 00:13:01,938 --> 00:13:04,238
    it and of course I'm gonna   
-        have a function.        
+        have a function.   
+我当然还需要一个函数来做这个运算。
 
 304
 00:13:05,341 --> 00:13:08,408
  Okay again functions are just  
         types in swift,         
+再重提一遍，函数在swift里也是一种类型，
 
 305
 00:13:08,410 --> 00:13:11,344
  it's no different than string  
  'kay we're just saying this is 
+与字符串相比并没有任何的不同，我们只需要知道
 
 306
 00:13:11,346 --> 00:13:13,612
  a function, put a function in  
              there.             
-
+这是个函数，放在这就好了。
 307
 00:13:13,614 --> 00:13:15,147
   A lot of times we'll do the   
-        curly braces and        
+        curly braces and      
+很多时候在这里我们会通过用花括号
 
 308
 00:13:15,149 --> 00:13:17,883
  put a closure use closures to  
     create our function but     
-
+写一个闭包来实现这个函数，
 309
 00:13:17,885 --> 00:13:19,584
      we could create actual     
-         functions and          
+         functions and
+但是我们也可以通过在其他地方写一个真正的函数
 
 310
 00:13:19,586 --> 00:13:21,185
    pass them in there, that's   
-             fine.              
+             fine. 
+然后传递进来，也是没有问题的。
 
 311
-00:13:21,187 --> 00:13:24,121
+00:13:21,187 --> 00:13:25,289
     So, and we'd also want a    
-   binary function here that    
+   binary function here that takes two arguments. 
+继续，我们还需要一个有2个参数的二元运算函数，
 
-312
-00:13:24,123 --> 00:13:25,289
-      takes two arguments.      
+ 
 
 313
 00:13:26,959 --> 00:13:28,625
-      Binary operation and      
+      Binary operation and  
+二元运算，然后
 
 314
-00:13:28,627 --> 00:13:30,726
+00:13:28,627 --> 00:13:34,296
  just those two arguments here  
-       in it's function.        
+       in it's function. Okay?         
+在里面加一个带2个参数的函数。
 
-315
-00:13:32,963 --> 00:13:34,296
-             Okay?              
 
 316
-00:13:34,297 --> 00:13:35,630
-   So now we have the stack.    
-
-317
-00:13:35,632 --> 00:13:37,499
-             Okay.              
-   Which is an array of ops.    
+00:13:34,297 --> 00:13:37,499
+   So now we have the stack. Okay. Which is an array of Ops.
+我们这里还有一个栈，是由Op组成的数组。
 
 318
 00:13:37,501 --> 00:13:41,369
  And these ops are either each  
  op in this, is array is either 
+这个数组的元素要么是一个操作数，
 
 319
 00:13:41,371 --> 00:13:44,638
    an operand or it's one of    
  these two kinds of operations. 
+要么是刚才这个枚举里两种运算中的一种。
 
 320
 00:13:46,308 --> 00:13:49,142
    Okay so so this is great.    
+很好
 
 321
 00:13:49,144 --> 00:13:53,979
  We got this op it's either an  
     operation or an operand.    
+我们现在有了Op，它是操作数或者是运算。
 
 322
-00:13:53,981 --> 00:13:56,882
+00:13:53,981 --> 00:13:59,251
  How are we going to, you know, 
-        put things into         
+        put things into this op stack for example and something like that.  
+下边我们要做的是往opStack这个数组里放东西。
 
-323
-00:13:56,884 --> 00:13:59,251
- this op stack for example and  
-      something like that.      
 
 324
 00:13:59,253 --> 00:14:01,653
   So let, let's go talk about,  
-            the API.            
+            the API.         
+这里简单说一下API。
 
 325
 00:14:01,655 --> 00:14:05,356
  A, API stands for application  
      programing interface.      
+API指的是应用程序接口。
 
 326
 00:14:05,358 --> 00:14:09,060
-  API is kind of the meth, all  
+  API is kind of the methods, all  
    the methods and properties   
+API就是组成你的类里边所有属性
+
 
 327
 00:14:09,062 --> 00:14:13,230
   that make up your class, the  
-      description of them.      
+      description of them.  
+和方法的描述。
 
 328
 00:14:13,232 --> 00:14:16,066
   So I'll use that word a lot,  
               API.              
+我之后会经常提到这个词。
 
 329
 00:14:16,068 --> 00:14:18,835
  And we really need to be able  
  to put an operand on there and 
+现在我们需要想办法往opStack这个栈里压入
 
 330
 00:14:18,837 --> 00:14:20,736
  stack, and we need to be able  
-    to put an operation on.     
+    to put an operation on.   
+操作符和运算。
 
 331
 00:14:20,738 --> 00:14:24,573
   So I'm gonna have a function  
     called pushOperand, and     
+所以我写一个叫pushOperand的函数，
 
 332
 00:14:24,575 --> 00:14:27,809
   it's gonna take an operand,   
        which is a double.       
+需要传入一个double类型的参数作为操作数。
 
 333
 00:14:27,811 --> 00:14:30,578
    Okay it's not gonna return   
       anything yet anyway.      
+不需要返回值。
 
 334
 00:14:30,580 --> 00:14:33,715
   And to push an operand on my  
   stack, could not be easier,   
+要把一个操作数压进栈非常简单，
 
 335
 00:14:33,717 --> 00:14:36,217
        I'm just gonna say       
-        opStack.append,         
+        opStack.append,       
+ 我只需要写opStack.append,   
 
 336
-00:14:36,219 --> 00:14:41,088
+00:14:36,219 --> 00:14:42,355
  you'll remember that append is 
-    a function in array and     
+    a function in array and the thing that you put on,   
+要记住append是数组从尾部添加元素的函数，
 
-337
-00:14:41,090 --> 00:14:42,355
-   the thing that you put on,   
 
 338
 00:14:42,357 --> 00:14:45,858
     obviously has to be this    
-         little type T.         
+         little type T.       
+这有一个类型T，
 
 339
 00:14:45,860 --> 00:14:48,627
  T is whatever you put in here, 
-      so op in this case.       
+      so op in this case.      
+T代表你添加到数组里的类型，在这里是Op。
 
 340
 00:14:48,629 --> 00:14:50,729
  So we have to have an op here. 
+我们要加一个Op进去。
 
 341
 00:14:50,731 --> 00:14:52,964
    How do you create an enum    
-             item?              
+             item?    
+我们怎么新建一个枚举项呢？
 
 342
-00:14:52,966 --> 00:14:58,436
+00:14:52,966 --> 00:15:01,539
   You just Op.Operand and you   
- give it the associated value.  
-
-343
-00:14:58,438 --> 00:15:01,539
-             'Kay?              
+ give it the associated value. Okay？
+只需要写Op.Operand然后给它一个相关值。
 
 344
-00:15:01,541 --> 00:15:06,777
+00:15:01,541 --> 00:15:10,013
  So, very simple kind of way to 
-     create these enums and     
+     create these enums and associate the value with them.    
+看，新建枚举项以及他们的相关值非常简单。
 
-345
-00:15:06,779 --> 00:15:10,013
- associate the value with them. 
 
 346
 00:15:10,015 --> 00:15:11,114
    Any questions about that?    
+这里有问题吗？
 
 347
 00:15:12,450 --> 00:15:13,749
     Okay, and then how about    
           operations?           
+���好，那运算呢？
 
 348
 00:15:13,751 --> 00:15:15,384
   We'll have instead of push,   
+我们这次不写push，
 
 349
 00:15:15,386 --> 00:15:18,720
      we're gonna call this      
-       performOperation.        
+       performOperation.     
+而是写一个叫performOperation （执行运算）的函数。
 
 350
 00:15:18,722 --> 00:15:20,922
      And I think when I do      
    performOperation, what I'm   
+并且我希望当我执行performOperation的时候，
 
 351
 00:15:20,924 --> 00:15:23,024
-  gonna have is, my calculator  
-     brain is going to have     
+  gonna have is, my CalculatorBrain is going to have  
+我的CalculatorBrain类已经有一些
 
 352
 00:15:23,026 --> 00:15:26,493
   a bunch of known operations,  
-   things it knows how to do.   
+   things it knows how to do.  
+已知的运算以及他们具体的运算方法。
 
 353
 00:15:26,495 --> 00:15:27,861
     And when you perform an     
-           operation,           
+           operation,          
+然后当你执行一个运算的时候，
 
 354
 00:15:27,863 --> 00:15:30,697
       you just specify the      
    mathematical symbol of it.   
+你只需要写出它的数学符号就可以了。
 
 355
-00:15:30,699 --> 00:15:33,533
+00:15:30,699 --> 00:15:36,301
  So the argument here is going  
-         to be symbol,          
-
-356
-00:15:33,535 --> 00:15:34,800
-       which is a string.       
-
-357
-00:15:34,802 --> 00:15:36,301
-             Okay?              
+         to be symbol, which is a string.Okay?       
+所以这个函数的参数是一个数学符号，也就是字符串。
 
 358
 00:15:36,303 --> 00:15:41,306
   So, to append an op on here   
-     that is, an operation,     
+     that is, an operation,  
+我们要把运算，也就是一个Op压进栈，
 
 359
 00:15:41,308 --> 00:15:43,274
   I'm gonna need to have these  
-       known operations.        
+       known operations.   
+我需要用到已知的运算。
 
 360
 00:15:43,276 --> 00:15:44,775
   So, how am I gonna do that?   
+要怎么做呢？
 
 361
 00:15:44,777 --> 00:15:47,878
       Well, to have known       
-  operations, I'm gonna create  
+  operations, I'm gonna create
+我们要新建另外一个实例变量knownOps作为
 
 362
 00:15:47,880 --> 00:15:51,048
  another instance variable here 
       called knownOps, so       
+ 存储已知运算的地方。
 
 363
-00:15:51,050 --> 00:15:52,816
-      my known operations.      
-
-364
-00:15:52,818 --> 00:15:55,251
-      And it's gonna be a       
+00:15:51,050 --> 00:15:55,251
+      my known operations. And it's gonna be a       
           dictionary.           
+这些已知的运算，是一个字典类型。
 
 365
-00:15:55,253 --> 00:15:57,019
+00:15:55,253 --> 00:15:58,987
    Okay, now, you read about    
-        dictionaries in         
+        dictionaries in  last week's reading assignment.  
+上周的阅读材料里你们应该已经读到过字典类型了。
+                
 
-366
-00:15:57,021 --> 00:15:58,987
-      last week's reading       
-          assignment.           
 
 367
 00:15:58,989 --> 00:16:00,489
  That's why I have the reading  
      assignment due today.      
+ 这就是为什么今天是阅读材料的截止日期，
 
 368
 00:16:00,491 --> 00:16:02,257
    Cuz then I can know you've   
-        read about them.        
+        read about them.       
+这样我就能知道你们已经读过了。
 
 369
 00:16:02,259 --> 00:16:02,824
-        I hope you have.        
+        I hope you have.    
+希望你们确实读了。
 
 370
 00:16:05,495 --> 00:16:07,428
    And so, how do I create a    
-          dictionary?           
+          dictionary?      
+我们如何新建一个字典？
 
 371
 00:16:07,430 --> 00:16:08,995
       It looks like this,       
-          Dictionary.           
+          Dictionary.      
+像这样。
 
 372
 00:16:08,997 --> 00:16:11,531
    And it's the same kind of    
-    thing with these angled     
+    thing with these angled   
+同样是使用尖括号，
 
 373
 00:16:11,533 --> 00:16:14,434
  brackets, because you have to  
-    say for the dictionary,     
+    say for the dictionary,    
+你必须为字典
 
 374
 00:16:14,436 --> 00:16:17,036
   what type are the keys, what  
-      type are the values.      
+      type are the values.   
+建立相对应的键值关系。
 
 375
 00:16:17,038 --> 00:16:20,506
   And our dictionary is gonna   
  have keys that are strings and 
+在这里，键是字符串
 
 376
 00:16:20,508 --> 00:16:22,874
   it's gonna have values that   
-            are ops.            
+            are ops.  
+值的类型是Op。
 
 377
 00:16:22,876 --> 00:16:26,478
        Oops, sorry, ops.        
+哦，对不起，Op
 
 378
-00:16:26,480 --> 00:16:28,913
+00:16:26,480 --> 00:16:29,947
    Okay, and I'm gonna create   
-              one.              
-
-379
-00:16:28,915 --> 00:16:29,947
-             'Kay?              
+              one. Okay?            
+好，新建了一个字典。
 
 380
 00:16:29,949 --> 00:16:32,316
-   Everyone understand this?    
+   Everyone understand this?   
+大家都明白这个了吗？
 
 381
 00:16:32,317 --> 00:16:34,684
   Now, this knownOps, I'm just  
  gonna put all of the ops that  
+现在在这个knownOps变量里，我要把所有
 
 382
 00:16:34,687 --> 00:16:38,955
  I know in there, where the key 
  is the symbol and the value is 
+我知道的运算放进去，键是运算符号
 
 383
 00:16:38,957 --> 00:16:42,392
   the actual op, and then when  
  someone says performOperation, 
+值是实际的Op也就是运算方法，每次我要执行performOperation时，
 
 384
 00:16:42,394 --> 00:16:44,527
   I'm gonna look it up in the   
-           knownOps.            
+           knownOps.      
+我会去knownOps里去找那些已知的运算。
 
 385
 00:16:44,529 --> 00:16:47,329
     And when I find it, then    
     that's the operation I'm    
+当我找到的时候，我就要把这个
 
 386
 00:16:47,331 --> 00:16:49,531
  gonna push onto the stack, all 
-             right?             
+             right?          
+运算压到opStack这个栈里。
 
 387
 00:16:49,533 --> 00:16:51,183
           Make sense?           
-
+能明白吗？
 388
 00:16:51,184 --> 00:16:52,834
     But I have to load this     
           knownOps up.          
-
+但是我需要预先载入knownOps。
 389
 00:16:52,836 --> 00:16:55,903
   Oh, but first of all, so let  
    me talk about this syntax.   
+哦，首先，我要说一下这个语法。
 
 390
-00:16:55,905 --> 00:16:58,973
+00:16:55,905 --> 00:17:00,941
  Just like array has a special  
-     syntax with the square     
-
-391
-00:16:58,975 --> 00:17:00,941
- brackets, so does dictionary.  
+     syntax with the square brackets, so does dictionary. 
+跟前边数组使用方括号的特殊语法一样，字典也可以这么写。
 
 392
 00:17:00,943 --> 00:17:03,510
   So to have a dictionary like  
-     this with this kind of     
+     this with this kind of  
+如果字典用这种写法，
 
 393
 00:17:03,512 --> 00:17:07,080
  special syntax, we're gonna do 
-      open square bracket.      
+      open square bracket.   
+我们需要用方括号，
 
 394
 00:17:07,082 --> 00:17:12,752
   And then a colon in between   
-          the key and           
+          the key and     
+然后中间用冒号隔开键和值，
 
 395
 00:17:12,754 --> 00:17:15,254
   the value type, so it looks   
-           like that.           
+           like that.     
+就像这样。
 
 396
 00:17:15,256 --> 00:17:17,789
   So it looks very similar to   
-           array, but           
+           array, but    
+跟数组很像，但是
 
 397
-00:17:17,791 --> 00:17:19,524
+00:17:17,791 --> 00:17:22,660
   you've got this thing where   
-     you've got the key and     
-
-398
-00:17:19,526 --> 00:17:22,093
-    the value separated by a    
-             colon.             
-
-399
-00:17:22,095 --> 00:17:22,660
-             'Kay?              
+     you've got the key and the value separated by a    
+     colon. Okay？  
+你需要用冒号把键和值分隔开。
 
 400
 00:17:23,796 --> 00:17:25,429
  Same thing, though, exact same 
-             thing.             
+             thing.       
+其实是完全一样的。
 
 401
 00:17:25,431 --> 00:17:27,430

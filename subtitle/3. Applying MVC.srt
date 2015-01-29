@@ -2950,478 +2950,490 @@ the operands.
      criteria is gonna be,      
 
 601
-00:25:42,518 --> 00:25:44,918
-  make private things private.  
-
-602
-00:25:44,920 --> 00:25:45,985
-             'Kay?              
+00:25:42,518 --> 00:25:45,985
+make private things private. OK?
+让 private 的东西 private。
 
 603
 00:25:45,987 --> 00:25:47,453
-  So that is important to do.   
+So that is important to do.
+所以这个很重要。
 
 604
 00:25:47,455 --> 00:25:48,354
-    And you could just say,     
+And you could just say,
+也许你会这么说，
 
 605
 00:25:48,356 --> 00:25:49,988
- well, I like everything to be  
-            public.             
+well, I like everything to be public.
+呃，我喜欢所有东西都是 public 的。
 
 606
 00:25:49,990 --> 00:25:51,156
-       Well, that's bad.        
+Well, that's bad.
+这样很糟糕。
 
 607
 00:25:51,158 --> 00:25:53,391
-             Okay?              
-        If you make your        
+Okay? If you make your internal structure public,
+好吧？如果你让内部的 structure（结构体）public，
 
 608
 00:25:53,392 --> 00:25:55,625
- internal structure public, and 
-   some other object in your    
+and some other object in your program
+然后它会和其他在你程序中的对象
 
 609
 00:25:55,628 --> 00:25:58,796
- program starts mucking with it 
-  and breaks your object, and   
+starts muck in with it and breaks your object, and
+开始乱搞在一起，然后你的对象崩了，
 
 610
 00:25:58,798 --> 00:26:00,931
- then you come to a new version 
-      of your program, and      
+then you come to a new version of your program, and      
+然后你程序版本号就+1了，
 
 611
 00:26:00,933 --> 00:26:03,467
- you change something, and now  
-     everybody's breaking.      
+you change something, and now everybody's breaking.      
+然后你改变了一些东西，导致所有人都崩了。
 
 612
 00:26:03,469 --> 00:26:05,335
-    That's bad, okay, that's    
-             chaos.             
+That's bad, okay, that's chaos.             
+然后就没有然后了。
 
 613
 00:26:05,337 --> 00:26:08,671
-  So the only things that want  
-  to be not private are things  
+So the only things that want to be not private are things
+所以只有当你想用来给别的类或对象提供支持的时候，
 
 614
 00:26:08,673 --> 00:26:11,507
- that you're committing to sign 
-         up to support.         
+that you're committing to sign up to support.
+你才会想让它不是 private 的。
 
 615
 00:26:11,509 --> 00:26:14,677
-   So in this class, the only   
-        public things so        
+So in this class, the only public things so
+因此在这个 class 里面，目前为止唯一是 public
 
 616
 00:26:14,679 --> 00:26:17,279
-    far are the initializer.    
+far are the initializer.
+的只有 initializer。
 
 617
 00:26:17,281 --> 00:26:18,513
-  Obviously, we want to allow   
-           people to            
+Obviously, we want to allow people to            
+很显然，我们希望允许别人
 
 618
 00:26:18,515 --> 00:26:19,847
-   create a CalculatorBrain.    
+create a CalculatorBrain.    
+创建一个 CalcualtorBrain 的对象。
 
 619
 00:26:19,849 --> 00:26:21,349
-     That's clearly public.     
+That's clearly public.
+这很明显是 public 的。
 
 620
 00:26:21,351 --> 00:26:25,385
-  Also pushing and performing   
-    operands and operations.    
+Also pushing and performing operands and operations.    
+同样的，将运算符和数字压栈然后计算的这些操作。
 
 621
-00:26:25,387 --> 00:26:26,586
-         That's public.         
-
-622
-00:26:26,588 --> 00:26:28,238
-             Okay?              
+00:26:25,387 --> 00:26:28,238
+That's public. Okay? 
+这些都该是 public 的。                          
 
 623
 00:26:28,239 --> 00:26:29,889
- Everything else, for now, I'm  
-      gonna make private.       
+Everything else, for now, I'm gonna make private.
+其他的东西，目前为止，我都会让它们是 private 的。
 
 624
 00:26:29,891 --> 00:26:31,657
-     So I'm gonna make this     
-            private.            
+So I'm gonna make this private.
+所以我将让这个 private 。
 
 625
 00:26:31,659 --> 00:26:33,592
-   Notice that if I make this   
-            private,            
+Notice that if I make this private,
+注意到当我把这个变成 private了以后，
 
 626
 00:26:33,594 --> 00:26:35,427
- it's gonna start saying, whoa, 
+it's gonna start saying, whoa, 
+这边将会提示，喂，
 
 627
 00:26:35,429 --> 00:26:38,730
-  wait a second, this can't be  
- public, you know, it can't be  
+wait a second, this can't be public, you know, it can't be
+等等，这不能是 public 的，你懂的，这不能是
 
 628
 00:26:38,732 --> 00:26:42,100
-  non-private because this is   
-    private and it uses it.     
+non-private because this is private and it uses it.
+非 private 的，因为这个是 private 的，然后这个用了它。
 
 629
 00:26:42,102 --> 00:26:44,368
-   That's what this warning's   
-   gonna say right here, see.   
+That's what this warning's gonna say right here, see.
+这个位置将会出现一个警告，你们看。
 
 630
 00:26:44,370 --> 00:26:45,720
-        Property must be        
+Property must be
+Property 必须
 
 631
 00:26:45,721 --> 00:26:47,071
-  declared private because its  
-        type is private.        
+declared private because its type is private.
+声明为 private，因为它的类型是 private 的。
 
 632
 00:26:47,073 --> 00:26:48,205
- Okay, that's the type of this. 
+Okay, that's the type of this.
+好的，这个就是它的类型。
+
 
 633
 00:26:48,207 --> 00:26:49,906
- But I want this to be private  
-            anyway,             
+But I want this to be private anyway,
+但是我无论如何都希望它是 private 的，
 
 634
 00:26:49,908 --> 00:26:52,742
-    this is my internal data    
-      structure, opStack.       
+this is my internal data structure, opStack.
+这是我的内部数据结构，opStack。
 
 635
 00:26:52,744 --> 00:26:56,278
-  Now, knownOps is kind of an   
-        interesting one.        
+Now, knownOps is kind of an interesting one.
+现在，knownOps 是个有趣的东西。
 
 636
 00:26:56,280 --> 00:26:58,614
- Maybe I would want that to be  
-        public one day,         
+Maybe I would want that to be public one day,
+也许我某天心血来潮会想让它变成 public 的，
 
 637
 00:26:58,616 --> 00:27:01,650
- because maybe I want people to 
-  use my calculator brain and   
+because maybe I want people to use my CalculatorBrain and
+因为也许我希望人们用我的 CalculatorBrain 然后
 
 638
 00:27:01,652 --> 00:27:03,685
-       teach it new ops.        
+teach it new ops.
+教会它新的运算。
 
 639
 00:27:03,687 --> 00:27:05,386
-     That wouldn't be that      
-         unreasonable.          
+That wouldn't be that unreasonable.
+这并不是那么过分的要求。
 
 640
 00:27:05,388 --> 00:27:08,356
-   However, I'm not ready to    
- support that functionality in  
+However, I'm not ready to support that functionality in
+但是呢，我现在还没准备好让我的 CalculatorBrain
 
 641
 00:27:08,358 --> 00:27:09,456
-      my CalculatorBrain.       
+my CalculatorBrain.
+支持这个功能。
 
 642
 00:27:09,458 --> 00:27:12,059
-  I'm just not sure I wanna do  
-          it this way.          
+I'm just not sure I wanna do it this way.
+我只是还没确定我想这么做。
 
 643
 00:27:12,061 --> 00:27:13,827
-    Maybe I don't want this     
-     property to be public,     
+Maybe I don't want this property to be public,
+也许我不想让这个 property 变成 public 的，
 
 644
 00:27:13,829 --> 00:27:17,263
- I might want to just have some 
-  functions to learn an op or   
+I might want to just have some functions to learn an op or
+我也许希望只是有些函数去学习一个运算操作或者
 
 645
 00:27:17,265 --> 00:27:18,982
-    something like that, so     
+something like that, so
+类似的东西，所以
 
 646
 00:27:18,983 --> 00:27:20,700
-   I'm just not sure, so I'm    
-    gonna start out private.    
+I'm just not sure, so I'm gonna start out private.
+我只是不确定，所以我一开始就设为 private 的。
 
 647
 00:27:20,702 --> 00:27:23,268
- And that's really, when you're 
-        designing APIs,         
+And that's really, when you're designing APIs,
+所以事实就是，当你在设计 APIs 的时候，
 
 648
 00:27:23,270 --> 00:27:24,536
-   you wanna kinda start out,   
+you wanna kinda start out,
+你总得找个地方入手，
 
 649
 00:27:24,538 --> 00:27:27,405
-   make it private first, and   
-   then open it up as you're    
+make it private first, and then open it up as you're
+先让它是 private 的，然后等到你想要支持一些功能
 
 650
 00:27:27,407 --> 00:27:30,308
-    willing to support that     
-         functionality.         
+willing to support that functionality.
+的时候，再让其变成 public 的。
 
 651
 00:27:30,310 --> 00:27:31,709
-           Question?            
-    >> Is the common view in    
+-Question? -Is the common view in    
+-问题？- [学生提问]
+
 
 652
 00:27:31,711 --> 00:27:34,278
-  Swift to make most instance   
-     variables private and      
+Swift to make most instance variables private and
+- [学生提问]
 
 653
 00:27:34,280 --> 00:27:36,980
- use getters and setters, or is 
-      it to make them, if,      
+use getters and setters, or is it to make them, if,      
+- [学生提问]
 
 654
 00:27:36,982 --> 00:27:38,882
-   if they are supposed to be   
-           public, or           
+if they are supposed to be public, or
+- [学生提问]
 
 655
 00:27:38,884 --> 00:27:40,683
- make them public and then let  
-              the?              
+make them public and then let the?
+- [学生提问]
 
 656
 00:27:40,685 --> 00:27:43,052
-         >> All right.          
-   So the question is, is it,   
+All right. So the question is, is it,
+好的。那么问题就是，
 
 657
 00:27:43,054 --> 00:27:45,854
-   is it kind of part of the    
-       Swift way to make        
+is it kind of part of the Swift way to make
+是不是有比较 Swift 的方式去让
 
 658
 00:27:45,856 --> 00:27:47,889
- most instant variables private 
-              and               
+most instant variables private and
+实例变量是 private 的，然后
 
 659
-00:27:47,891 --> 00:27:50,759
- then have getters and setters  
-  that are public to get them.  
+00:27:47,891 --> 00:27:50,75
+then have getters and setters that are public to get them.  
+用 public 的 getters 和 setters 去获取他们。
 
 660
 00:27:50,761 --> 00:27:52,226
- That doesn't really even make  
-        sense in Swift.         
+That doesn't really even make sense in Swift.
+这在 Swift 中甚至没有意义。
 
 661
 00:27:52,228 --> 00:27:53,961
- That's more of an Objective-C  
-             thing.             
+That's more of an Objective-C thing.
+这更像是 Objective-C 的方式。
 
 662
 00:27:53,963 --> 00:27:56,263
-    In Objective-C, you had     
-    instance variables, and     
+In Objective-C, you had instance variables, and
+在 Objective-C 中，你有一个实例变量，然后
 
 663
 00:27:56,265 --> 00:27:59,032
-  then you had properties that  
-    would get and set them.     
+then you had properties that would get and set them.
+你有 properties ，会用getter 和 setter 去获得和设定它们。
 
 664
 00:27:59,034 --> 00:28:00,967
-  And Swift has kind of merged  
-       those a little bit       
+And Swift has kind of merged those a little bit
+然后 Swift 会把这些东西融合得
 
 665
 00:28:00,969 --> 00:28:05,638
-    closer together so that     
- properties are really kind of  
+closer together so that properties are really kind of
+更紧凑些，所以 properties 事实上是一种
 
 666
 00:28:05,640 --> 00:28:08,907
- the public or private getters  
-          and setters.          
+the public or private getters and setters.
+public 或者 private 的 getters 和 setters。
 
 667
 00:28:08,909 --> 00:28:11,043
-  So, if you have a property,   
-        you just have to        
+So, if you have a property, you just have to        
+因此，如果你有一个 property，你只需要
 
 668
 00:28:11,045 --> 00:28:13,178
- decide whether you want people 
-        to access it or         
+decide whether you want people to access it or         
+决定你是否想要别人能够存取它，
 
-669
 00:28:13,180 --> 00:28:15,246
-    not, and if not, make it    
-            private.            
+not, and if not, make it private.
+如果不是，将它变成 private。
 
 670
 00:28:15,248 --> 00:28:16,681
-   And if so, make it public.   
+And if so, make it public.
+如果是，将它变成 public。
 
 671
 00:28:16,683 --> 00:28:19,350
- And that, you know, don't make 
-   it non-private, basically.   
+And that, you know, don't make it non-private, basically.
+然后，你知道，一般来说不要让它是非 private 的。
 
 672
 00:28:19,352 --> 00:28:21,685
-  And that's, just that's all   
-    you need to think about.    
+And that's, just that's all you need to think about.
+再然后呢，这将都是你所需要考虑的。
 
 673
 00:28:21,687 --> 00:28:24,854
- I wouldn't even think in Swift 
- in terms of instance variable  
+I wouldn't even think in Swift in terms of instance variable
+我甚至不会在 Swift 中考虑实例变量
 
 674
 00:28:24,856 --> 00:28:26,289
-      versus the property.      
+versus the property.      
+和 property 的区别。
 
 675
 00:28:26,291 --> 00:28:28,557
-  Now, it is still possible in  
-       Swift to do that,        
+Now, it is still possible in Swift to do that,
+现在，用 Swift 还是有可能做到的，
 
 676
 00:28:28,559 --> 00:28:30,526
-   because you have computed    
-          properties.           
+because you have computed properties.
+因为你有 computed properties（计算属性）。
 
 677
 00:28:30,528 --> 00:28:32,328
- And those could be setters and 
+And those could be setters and
+然后这些都可以成为设置 private properties 
 
 678
 00:28:32,329 --> 00:28:34,129
-    getters that are setting    
-      private properties.       
+getters that are setting private properties.
+的 setters 和 getters。
 
 679
 00:28:34,131 --> 00:28:36,464
-     But we're gonna see on     
-        Wednesday, even,        
+But we're gonna see on Wednesday, even,
+但是我们将会在周三看到，甚至
 
 680
 00:28:36,466 --> 00:28:39,634
- I'm gonna talk to you a little 
- bit about a way that when your 
+I'm gonna talk to you a little bit about a way that when your
+我将会和你们说一点点关于
 
 681
 00:28:39,636 --> 00:28:41,902
-  properties get set, you can   
-           intervene,           
+properties get set, you can intervene,
+properties 的 get 和 set，你可以介入，
 
 682
 00:28:41,904 --> 00:28:44,571
-   you can check them to make   
-    sure the value is okay.     
+you can check them to make sure the value is okay.
+你可以检查它们，保证它们的值是正常的。
 
 683
 00:28:44,573 --> 00:28:46,373
-    So if you have a public     
-           property,            
+So if you have a public property,
+所以如果你有一个 public 的 property，
 
 684
 00:28:46,375 --> 00:28:49,142
-  you can still protect it by   
-    intervening a little bit    
+you can still protect it by intervening a little bit
+当人们设了它的值或者尝试获取它的值，
 
 685
 00:28:49,144 --> 00:28:51,110
- when people set it or try and  
-            get it.             
+when people set it or try and get it.
+你仍然可以介入一点点来保护它。
 
 686
 00:28:51,112 --> 00:28:52,912
-   So it is possible to still   
-  have some protection there,   
+So it is possible to still have some protection there,
+所以有可能会有些保护机制在那里，
 
 687
 00:28:52,914 --> 00:28:53,545
-        we'll see that.         
+we'll see that.
+我们都会看到的。
 
 688
 00:28:56,016 --> 00:28:57,749
-  All right, so these are our   
-      only public things.       
+All right, so these are our only public things.
+好啦，所以这些就是我们仅有的 public 的东西。
 
 689
 00:28:57,751 --> 00:29:00,651
-  Now, there's only one other   
- public thing we need to do in  
+Now, there's only one other public thing we need to do in
+那么现在，这里还剩一个 public 的东西要
 
 690
 00:29:00,653 --> 00:29:02,420
- our CalculatorBrain, which is, 
+our CalculatorBrain, which is,
+在我们的 CalculatorBrain 里做的一些事情，这就是，
 
 691
 00:29:02,422 --> 00:29:04,688
- we need to let people evaluate 
-          this stack.           
+we need to let people evaluate this stack.           
+我们需要求这个 stack 的值。
 
 692
 00:29:06,058 --> 00:29:09,492
- So people are pushing operands 
-   and performing operations,   
+So people are pushing operands and performing operations,
+所以我们把操作符压栈然后进行运行，
 
 693
 00:29:09,494 --> 00:29:11,828
- now they wanna know what's the 
-            result.             
+now they wanna know what's the result.
+现在我们想知道结果是什么。
 
 694
-00:29:11,830 --> 00:29:12,979
-             Okay?              
-              They              
-
-695
-00:29:12,980 --> 00:29:14,129
-  pushed an operand of a five.  
+00:29:11,830 --> 00:29:14,129
+Okay? They pushed an operand of a five.
+好吧？我们往栈里压了一个数字5。   
 
 696
 00:29:14,132 --> 00:29:15,898
-  They pushed an operand of a   
-             four.              
+They pushed an operand of a four.
+然后我们再压一个数字4。
 
 697
 00:29:15,900 --> 00:29:18,166
- They performed operation plus, 
+They performed operation plus,
+我们做加法操作，
 
 698
 00:29:18,168 --> 00:29:19,668
-   they want to see four plus   
-             five.              
+they want to see four plus five.
+我们想看到的是4 + 5。
 
 699
 00:29:19,670 --> 00:29:21,202
-    Where's that nine, okay?    
+Where's that nine, okay?
+得到的答案应该是9，好吧？
 
 700
 00:29:21,204 --> 00:29:22,403
-     They need the result.      
+They need the result.
+我们想要的是结果。
 
 701
 00:29:22,405 --> 00:29:25,606
@@ -8681,3 +8693,8 @@ gonna do that.
 01:13:44,074 --> 01:13:47,976
   For more, please visit us at  
          stanford.edu.          
+643
+
+00:27:47,891 --> 00:27:50,759
+then have getters and setters  
+

@@ -4550,467 +4550,511 @@ Opps，我不是故意地。
    这么实现： let op ＝ ops.
 
 901
-00:37:24,014 --> 00:37:26,114
-  'Kay, ops is this argument,   
-          right here.           
+00:37:38,994 --> 00:37:40,594
+that's how we do it, okay?
+我们就会那样做，okay？
 
 902
-00:37:26,116 --> 00:37:28,483
- 'Kay, that's the ops, you told 
-         me to work on.         
+00:37:40,595 --> 00:37:42,195
+We push things by putting these on the end of the array.
+我们通过在数组的最后插入元素来压栈。
 
 903
-00:37:28,485 --> 00:37:31,519
- And we know how to removeLast. 
+00:37:42,197 --> 00:37:44,196
+We pop things by, by pulling it out.
+我们再把它拉出来出栈。
 
 904
-00:37:31,521 --> 00:37:33,687
- Remember, removeLast from last 
-             time?              
+00:37:44,198 --> 00:37:45,431
+But you can see I got an error there.
+但是，你们看到这里我犯了一个错误。
 
 905
-00:37:33,689 --> 00:37:36,156
- Removes the last thing off an  
-             array.             
+00:37:45,433 --> 00:37:48,166
+[BLANK_AUDIO]
 
 906
-00:37:36,158 --> 00:37:38,992
- And when we are trying to make 
-  an array look like a stack,   
+00:37:48,168 --> 00:37:49,768
+And it's very important to understand why I
+要理解为什么我在这里
 
 907
-00:37:38,994 --> 00:37:40,594
-   that's how we do it, okay?   
+00:37:49,770 --> 00:37:50,835
+have an error here, okay?
+犯了一个错误，这非常重要。okay?
 
 908
-00:37:40,595 --> 00:37:42,195
-   We push things by putting    
- these on the end of the array. 
+00:37:51,838 --> 00:37:53,704
+So I'm gonna click on it.
+我点击这里。
 
 909
-00:37:42,197 --> 00:37:44,196
-  We pop things by, by pulling  
-            it out.             
+00:37:53,706 --> 00:37:54,805
+We're gonna read what it says,
+我们看看它说什么。
 
 910
-00:37:44,198 --> 00:37:45,431
- But you can see I got an error 
-             there.             
+00:37:54,807 --> 00:38:00,009
+it says, immutable value of type array of op,
+它说，数组中的 op 是不可变类型，
 
 911
-00:37:45,433 --> 00:37:48,166
-         [BLANK_AUDIO]          
+00:38:00,011 --> 00:38:04,113
+only has a mutating member named removeLast.
+只有一个不可变的元素，命名是 removeLast 。
 
 912
-00:37:48,168 --> 00:37:49,768
-   And it's very important to   
-        understand why I        
+00:38:04,115 --> 00:38:06,548
+Okay, well this is kind of a formal way of saying,
+Okay，好吧这只是一种“正式”的说法。
 
 913
-00:37:49,770 --> 00:37:50,835
-   have an error here, okay?    
+00:38:06,550 --> 00:38:13,221
+you can't do removeLast on ops because ops is immutable.
+你不能在 ops 数组中移除最后一个元素，因为 ops 是不可变的
 
 914
-00:37:51,838 --> 00:37:53,704
-   So I'm gonna click on it.    
+00:38:13,223 --> 00:38:14,455
+It's read-only.
+它是只读的
 
 915
-00:37:53,706 --> 00:37:54,805
- We're gonna read what it says, 
+00:38:14,457 --> 00:38:15,556
+You cannot mutate it.
+你不能改变它。
 
 916
-00:37:54,807 --> 00:38:00,009
-  it says, immutable value of   
-       type array of op,        
+00:38:15,558 --> 00:38:16,990
+You cannot change it.
+你不能change它。
 
 917
-00:38:00,011 --> 00:38:04,113
-   only has a mutating member   
-       named removeLast.        
+00:38:16,992 --> 00:38:20,160
+Okay, why is ops read-only?
+Okay，ops 为什么是只读的？
 
 918
-00:38:04,115 --> 00:38:06,548
-  Okay, well this is kind of a  
-     formal way of saying,      
+00:38:20,162 --> 00:38:23,063
+Well, there's two things to think about here.
+Well，这里有两个问题需要大家思考。
 
 919
-00:38:06,550 --> 00:38:13,221
- you can't do removeLast on ops 
-   because ops is immutable.    
+00:38:23,065 --> 00:38:26,899
+One is, when you pass arguments into functions,
+一个是，当你给方法传递参数时
 
 920
-00:38:13,223 --> 00:38:14,455
-        It's read-only.         
+00:38:26,901 --> 00:38:29,702
+unless it's a class that you're passing,
+只要你传入的不是一个类。
 
 921
-00:38:14,457 --> 00:38:15,556
-     You cannot mutate it.      
+00:38:29,704 --> 00:38:32,137
+unless you're passing an instance of a class.
+只要你传入的不是一个类的实例。
 
 922
-00:38:15,558 --> 00:38:16,990
-     You cannot change it.      
+00:38:32,139 --> 00:38:34,172
+The thing you pass is copied.
+那么你传入的参数就是拷贝过的。
 
 923
-00:38:16,992 --> 00:38:20,160
-  Okay, why is ops read-only?   
+00:38:34,174 --> 00:38:35,791
+Okay?
+Okay?
 
 924
-00:38:20,162 --> 00:38:23,063
-  Well, there's two things to   
-       think about here.        
+00:38:35,792 --> 00:38:37,409
+It's very important to understand that,
+弄明白这一点非常重要。
 
 925
-00:38:23,065 --> 00:38:26,899
-     One is, when you pass      
-   arguments into functions,    
+00:38:37,411 --> 00:38:38,876
+that's passed by value.
+就是传入的是值。
 
 926
-00:38:26,901 --> 00:38:29,702
-    unless it's a class that    
-        you're passing,         
+00:38:38,878 --> 00:38:40,845
+You're used to it in other languages,
+你在其他语言中习惯了这一点，
 
 927
-00:38:29,704 --> 00:38:32,137
-    unless you're passing an    
-      instance of a class.      
+00:38:40,847 --> 00:38:43,313
+most languages do this, pass by value.
+大多数的语言是传递值的。
 
 928
-00:38:32,139 --> 00:38:34,172
- The thing you pass is copied.  
+00:38:43,315 --> 00:38:46,516
+Arrays and dictionaries are
+not classes.
+数组和字典不是类，
 
 929
-00:38:34,174 --> 00:38:35,791
-             'Kay?              
+00:38:47,652 --> 00:38:49,952
+They're not classes in Swift.
+它们在 Swift 中不是类。
 
 930
-00:38:35,792 --> 00:38:37,409
-     It's very important to     
-        understand that,        
+00:38:49,954 --> 00:38:50,886
+They're structs.
+它们是结构体。
 
 931
-00:38:37,411 --> 00:38:38,876
-    that's passed by value.     
+00:38:50,888 --> 00:38:52,754
+You know, like a C struct?
+你知道的，就像 C 语言中的结构体。
 
 932
-00:38:38,878 --> 00:38:40,845
-   You're used to it in other   
-           languages,           
+00:38:52,756 --> 00:38:53,955
+Okay?
+Okay?
 
 933
-00:38:40,847 --> 00:38:43,313
-  most languages do this, pass  
-           by value.            
+00:38:53,957 --> 00:38:55,723
+Arrays and dictionaries are structs.
+数组和字典是结构体。
 
 934
-00:38:43,315 --> 00:38:46,516
-  Arrays and dictionaries are   
-          not classes.          
+00:38:55,725 --> 00:38:58,759
+Structs in Swift look a lot like classes.
+结构体在 Swift 中看起来很像类。
 
 935
-00:38:47,652 --> 00:38:49,952
- They're not classes in Swift.  
+00:38:58,761 --> 00:39:00,594
+They have functions,
+它们有方法。
 
 936
-00:38:49,954 --> 00:38:50,886
-        They're structs.        
+00:39:00,595 --> 00:39:02,428
+they can even have properties that have storage.
+它们甚至拥有带有存取方法的属性。
 
 937
-00:38:50,888 --> 00:38:52,754
-   You know, like a C struct?   
+00:39:02,431 --> 00:39:04,865
+They're almost identical to a
+class, really.
+它们几乎等同于一个类，真的。
 
 938
-00:38:52,756 --> 00:38:53,955
-             'Kay?              
+00:39:04,867 --> 00:39:09,102
+The only two huge differences between structs and classes.
+这里的结构体和类仅有两大不同之处。
 
 939
-00:38:53,957 --> 00:38:55,723
-  Arrays and dictionaries are   
-            structs.            
+00:39:09,104 --> 00:39:12,638
+One is that classes can have inheritance.
+一个是，类可以继承。
 
 940
-00:38:55,725 --> 00:38:58,759
-  Structs in Swift look a lot   
-         like classes.          
+00:39:12,640 --> 00:39:15,274
+And structs cannot, okay?
+但结构体不可以，okay？
 
 941
-00:38:58,761 --> 00:39:00,594
-      They have functions,      
+00:39:15,276 --> 00:39:20,745
+But number two is that structs are passed by value and
+第二个就是，结构体传递的是值，
 
 942
-00:39:00,595 --> 00:39:02,428
- they can even have properties  
-       that have storage.       
+00:39:20,747 --> 00:39:25,049
+classes are passed by
+reference, okay?
+而类传递的是引用，okay?
 
 943
-00:39:02,431 --> 00:39:04,865
- They're almost identical to a  
-         class, really.         
+00:39:25,051 --> 00:39:27,751
+Very important that you understand that distinction.
+非常重要，你弄明白这里面的区别。
 
 944
-00:39:04,867 --> 00:39:09,102
- The only two huge differences  
-  between structs and classes.  
+00:39:27,753 --> 00:39:30,687
+So structs are usually only
+used for basic.
+因此结构体通常仅用于基础数据类型。
 
 945
-00:39:09,104 --> 00:39:12,638
-  One is that classes can have  
-          inheritance.          
+00:39:30,689 --> 00:39:33,289
+You know, components like arrays and dictionaries.
+你知道的，像数组和字典这样的元素。
 
 946
-00:39:12,640 --> 00:39:15,274
-   And structs cannot, okay?    
+00:39:33,291 --> 00:39:37,159
+Even doubles and ints are
+structs in Swift, okay?
+甚至 double 类型和 int 类型在 Swift 中都是结构体。
 
 947
-00:39:15,276 --> 00:39:20,745
- But number two is that structs 
-    are passed by value and     
+00:39:37,161 --> 00:39:38,627
+>> [COUGH]
 
 948
-00:39:20,747 --> 00:39:25,049
-     classes are passed by      
-        reference, okay?        
+00:39:38,628 --> 00:39:40,094
+>> And that's great because
+that means doubles and
+这非常棒，因为这意味着 double 和
 
 949
-00:39:25,051 --> 00:39:27,751
-    Very important that you     
-  understand that distinction.  
+00:39:40,097 --> 00:39:42,564
+ints can have functions on them and things like that,
+int 也拥有方法和其他类似的语法，
 
 950
-00:39:27,753 --> 00:39:30,687
-  So structs are usually only   
-        used for basic.         
+00:39:42,566 --> 00:39:44,599
+which we will see as the quarter goes by.
+随着时间的推移我们可能会看到。
 
 951
-00:39:30,689 --> 00:39:33,289
-   You know, components like    
-    arrays and dictionaries.    
+00:39:44,601 --> 00:39:46,501
+But those things are all passed by values.
+但是这里传递的都是值。
 
 952
-00:39:33,291 --> 00:39:37,159
-   Even doubles and ints are    
-    structs in Swift, okay?     
+00:39:46,503 --> 00:39:48,669
+So that's the first thing to understand is that this ops,
+因此首先要做的事是
 
 953
-00:39:37,161 --> 00:39:38,627
-           >> [COUGH]           
+00:39:48,671 --> 00:39:52,139
+when I call evaluate, whatever array of ops I pass to it,
+理解当我调用 evaluate 方法，无论我传什么给 ops 数组。
 
 954
-00:39:38,628 --> 00:39:40,094
-  >> And that's great because   
-     that means doubles and     
+00:39:52,141 --> 00:39:53,840
+it's gonna be copied.
+它都会被拷贝。
 
 955
-00:39:40,097 --> 00:39:42,564
-   ints can have functions on   
-   them and things like that,   
+00:39:53,842 --> 00:39:55,108
+Okay?
+Okay?
 
 956
-00:39:42,566 --> 00:39:44,599
-    which we will see as the    
-        quarter goes by.        
+00:39:55,110 --> 00:39:57,643
+The second thing to understand here is that they're kind of
+第二件事是理解在这里
 
 957
-00:39:44,601 --> 00:39:46,501
-    But those things are all    
-       passed by values.        
+00:39:57,645 --> 00:40:03,682
+an implicit let in front of all things you pass.
+在你传递的参数前面，实际上隐含了一个 let
 
 958
-00:39:46,503 --> 00:39:48,669
-  So that's the first thing to  
-  understand is that this ops,  
+00:40:03,684 --> 00:40:05,484
+In other words, they're read-only.
+换言之，它们是只读的。
 
 959
-00:39:48,671 --> 00:39:52,139
- when I call evaluate, whatever 
-   array of ops I pass to it,   
+00:40:05,486 --> 00:40:06,651
+Make sense?
+明白了吗？
 
 960
-00:39:52,141 --> 00:39:53,840
-     it's gonna be copied.      
+00:40:06,653 --> 00:40:12,390
+And a read-only array can't be mutated.
+一个只读的数组不能被改变。
 
 961
-00:39:53,842 --> 00:39:55,108
-             Okay?              
+00:40:12,392 --> 00:40:14,475
+I can't append things to it.
+我不能给它添加元素。
 
 962
-00:39:55,110 --> 00:39:57,643
- The second thing to understand 
-  here is that they're kind of  
+00:40:14,476 --> 00:40:16,559
+You can't remove things from it cuz it's read-only.
+你不能从它身上移除元素，因为它是只读的。
 
 963
-00:39:57,645 --> 00:40:03,682
-  an implicit let in front of   
-      all things you pass.      
+00:40:16,562 --> 00:40:21,364
+Now, I can actually put the word var here, okay?
+现在，你实际上可以写一个 var 在这 ，okay？
 
 964
-00:40:03,684 --> 00:40:05,484
-    In other words, they're     
-           read-only.           
+00:40:21,366 --> 00:40:22,999
+If I, sorry.
+如果我...抱歉。
 
 965
-00:40:05,486 --> 00:40:06,651
-          Make sense?           
+00:40:23,001 --> 00:40:25,267
+If I put the word var here,
+如果我写一个词 var 在这里。
 
 966
-00:40:06,653 --> 00:40:12,390
- And a read-only array can't be 
-            mutated.            
+00:40:25,269 --> 00:40:29,204
+then ops inside here look no error.
+那么 ops 在这个方法体里面看起来就没有错误了。
 
 967
-00:40:12,392 --> 00:40:14,475
-  I can't append things to it.  
+00:40:29,206 --> 00:40:32,674
+Ops is a mutable array.
+Ops 是一个可变数组了。
 
 968
-00:40:14,476 --> 00:40:16,559
-  You can't remove things from  
-     it cuz it's read-only.     
+00:40:32,676 --> 00:40:34,575
+It's still a copy though.
+不过它仍然是一个拷贝。
 
 969
-00:40:16,562 --> 00:40:21,364
-  Now, I can actually put the   
-      word var here, okay?      
+00:40:34,577 --> 00:40:36,711
+So they copied it, made it
+mutable.
+那么它们把 ops 拷贝成了一个可变的副本。
 
 970
-00:40:21,366 --> 00:40:22,999
-          If I, sorry.          
+00:40:36,713 --> 00:40:41,381
+And now inside here, I have a mutable copy to work with.
+于是在这里面，有一个可变的拷贝在工作了
 
 971
-00:40:23,001 --> 00:40:25,267
-  If I put the word var here,   
+00:40:41,383 --> 00:40:45,084
+Now, I'm not a big fan of doing that, kay?
+但现在我不喜欢这么做，okay？
 
 972
-00:40:25,269 --> 00:40:29,204
-  then ops inside here look no  
-             error.             
+00:40:45,086 --> 00:40:46,118
+Putting var up here.
+写一个 var 在这里。
 
 973
-00:40:29,206 --> 00:40:32,674
-    Ops is a mutable array.     
+00:40:46,120 --> 00:40:47,586
+I think it's a little confusing for readers of the code,
+我认为这对于读代码的人会造成一些困惑，
 
 974
-00:40:32,676 --> 00:40:34,575
-   It's still a copy though.    
+00:40:49,222 --> 00:40:50,855
+to understand exactly what's
+going on there.
+要确切地理解这里到底发生了什么。
 
 975
-00:40:34,577 --> 00:40:36,711
-   So they copied it, made it   
-            mutable.            
+00:40:50,858 --> 00:40:53,208
+So, I'm not gonna do that,
+因此，我不会这样做。
 
 976
-00:40:36,713 --> 00:40:41,381
- And now inside here, I have a  
-   mutable copy to work with.   
+00:40:53,209 --> 00:40:55,559
+instead, I'm gonna make a local variable here, which I'm
+而是替换成一个局部变量在这里，
 
 977
-00:40:41,383 --> 00:40:45,084
-   Now, I'm not a big fan of    
-       doing that, 'kay?        
+00:40:55,562 --> 00:41:00,865
+gonna call remainingOps and
+I'm gonna set it equal to ops.
+命名为 remainingOps ，让 remainingOps 等于 ops 。
 
 978
-00:40:45,086 --> 00:40:46,118
-      Putting var up here.      
+00:41:00,867 --> 00:41:03,000
+Now, when you set equals like this,
+注意，当你像这样赋值时，
 
 979
-00:40:46,120 --> 00:40:47,586
-     I think it's a little      
-         confusing for          
+00:41:04,103 --> 00:41:07,103
+that copies it if it's not a class.
+赋值的不能是一个类。
 
 980
-00:40:47,588 --> 00:40:49,221
-      readers of the code,      
+00:41:07,105 --> 00:41:08,571
+Classes are all by reference.
+类赋值的都是引用。
 
 981
-00:40:49,222 --> 00:40:50,855
-  to understand exactly what's  
-        going on there.         
+00:41:08,573 --> 00:41:09,438
+It's exactly, what you would think.
+就是这样，你们怎样想的。
 
 982
-00:40:50,858 --> 00:40:53,208
-   So, I'm not gonna do that,   
+00:41:09,440 --> 00:41:10,539
+>> [COUGH].>> But anything else,但是别的，
 
 983
-00:40:53,209 --> 00:40:55,559
-   instead, I'm gonna make a    
- local variable here, which I'm 
+00:41:10,541 --> 00:41:12,808
+strucks or enums or anything else.
+像结构体、枚举或者其他的什么。
 
 984
-00:40:55,562 --> 00:41:00,865
-  gonna call remainingOps and   
- I'm gonna set it equal to ops. 
+00:41:12,810 --> 00:41:14,543
+When you do equals here,
+当你像这样赋值时，
 
 985
-00:41:00,867 --> 00:41:03,000
- Now, when you set equals like  
-             this,              
+00:41:14,544 --> 00:41:16,277
+this is actually going to make a copy of this, and
+实际上是做了，这个的拷贝，
 
 986
-00:41:04,103 --> 00:41:07,103
-  that copies it if it's not a  
-             class.             
+00:41:16,279 --> 00:41:17,895
+put it in here.
+然后把它赋给这里。
 
 987
-00:41:07,105 --> 00:41:08,571
- Classes are all by reference.  
+00:41:17,896 --> 00:41:19,512
+And since it's a var, it's
+going to be mutable.
+因为它是一个变量，所以它是可变的。
 
 988
-00:41:08,573 --> 00:41:09,438
-  It's exactly, what you would  
-             think.             
+00:41:21,584 --> 00:41:23,083
+Okay?
+Okay?
 
 989
-00:41:09,440 --> 00:41:10,539
-          >> [COUGH].           
-     >> But anything else,      
+00:41:23,084 --> 00:41:24,583
+So now I have a mutable array of ops and
+因此现在我有了一个可变数组 ops
 
 990
-00:41:10,541 --> 00:41:12,808
-  strucks or enums or anything  
-             else.              
+00:41:24,586 --> 00:41:26,519
+now I can say remainingOps.
+现在我可以说 remainingOps
 
 991
-00:41:12,810 --> 00:41:14,543
-    When you do equals here,    
+00:41:26,521 --> 00:41:27,854
+Remove the last one.
+移除了最后一个元素。
 
 992
-00:41:14,544 --> 00:41:16,277
- this is actually going to make 
-      a copy of this, and       
+00:41:27,856 --> 00:41:30,122
+And now I truly do have the remainingOps.
+现在我真正有 remainingOps 了。
 
 993
-00:41:16,279 --> 00:41:17,895
-        put it in here.         
+00:41:30,124 --> 00:41:32,358
+I've removed the first thing in there.
+我在这里移除了最后一个元素（"the first thing" 感觉像口误，校对请！）。
 
 994
-00:41:17,896 --> 00:41:19,512
-   And since it's a var, it's   
-      going to be mutable.      
+00:41:32,360 --> 00:41:35,594
+[BLANK_AUDIO]
 
 995
-00:41:21,584 --> 00:41:23,083
-             Okay?              
+00:41:35,596 --> 00:41:38,463
+Did everyone understand that little tidbit there?每个人都理解这个小技巧了嘛？
 
 996
-00:41:23,084 --> 00:41:24,583
- So now I have a mutable array  
-          of opts and           
+00:41:38,465 --> 00:41:39,464
+Yeah? >> So there's a,Yeah？
+Yeah? -（学生提问）
 
 997
-00:41:24,586 --> 00:41:26,519
-  now I can say remainingOpts.  
+00:41:39,466 --> 00:41:42,800
+like a, a unseen let in sort
+of the opts?
+-（学生提问）
 
 998
-00:41:26,521 --> 00:41:27,854
-      Remove the last one.      
+00:41:42,802 --> 00:41:43,600
+>> Yeah.>> Why isn't that like in
+- Yeah. -（学生提问）
 
 999
-00:41:27,856 --> 00:41:30,122
-  And now I truly do have the   
-         remainingOpts.         
+00:41:43,602 --> 00:41:47,371
+front of doubles and
+-（学生提问）
 
 1000
-00:41:30,124 --> 00:41:32,358
-  I've removed the first thing  
-           in there.            
+00:41:47,373 --> 00:41:48,672
+like ends or straightened
+>> It is.
+是的
 
 1001
 00:41:32,360 --> 00:41:35,594

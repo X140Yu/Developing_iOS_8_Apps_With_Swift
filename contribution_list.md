@@ -7,8 +7,8 @@
  
 | 字幕序号 | 翻译人员 |校对人员|
 |---------|---------|---|
-|1 ~ 300 |ann2bad|	
-|301 ~ 600|jieyuanz|
+|1 ~ 300 |ann2bad|x140yu,beimen|	
+|301 ~ 600|jieyuanz|beimen|
 |601 ~ 900|hhgz9527|
 |901 ~ 1200|wdanxna|
 |1201 ~ 1349|beimen|

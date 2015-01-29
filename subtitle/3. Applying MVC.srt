@@ -579,6 +579,7 @@ Okay, so right now as we do operations we consume all the operands.
 103
 00:04:39,507 --> 00:04:41,040
 'Kay, they consume, kinda, they're gone.          
+他们没有了。
 
 104
 00:04:42,276 --> 00:04:43,792
@@ -588,40 +589,42 @@ So in this case,
 105
 00:04:43,793 --> 00:04:45,309
 we're going to actually collect all the operations and 
-我们要收集所有的操作和
+我们要收集所有在堆栈中的操作和
 
 106
 00:04:45,312 --> 00:04:48,346
 operands in our, in a stack and then we can  
-
+运算，然后我们可以
 
 107
 00:04:48,348 --> 00:04:53,350
 ask the model to, evaluate that stack of operations and  
-
+要求我们模型，求出我们所有操作运算的值，
 
 108
 00:04:53,352 --> 00:04:55,385
  operands at any time we want.  
+ 在任何时候。
 
 109
 00:04:55,387 --> 00:04:57,654
-  And the reason we're adding that ability is because your homework,  
-  我们增加这个功能的原因是因为你们的家庭作业，
+And the reason we're adding that ability is because your homework,  
+我们增加这个功能的原因是因为你们的家庭作业，
 
 110
 00:04:57,656 --> 00:05:00,256
-   assignment number two, you're gonna add two    
+assignment number two, you're gonna add two  
+任务二，你需要添加两个
 
 111
 00:05:00,258 --> 00:05:03,726
-  major features where having   
-    all the operands and the    
+major features where having all the operands and the 
+  主要功能，它包括所有的操作和运算   
 
 112
 00:05:03,728 --> 00:05:06,628
- operations in a stack is gonna 
-   be really valuable to you.   
+operations in a stack is gonna be really valuable to you. 
+这将会对你很有用。  
 
 113
 00:05:06,630 --> 00:05:09,264
@@ -631,7 +634,7 @@ So you'll be starting your second homework with what I
 114
 00:05:09,266 --> 00:05:12,334
 do today cause you'll need this capability to do what I  
-
+用我今天讲的东西，因为在里面你将会用到这些知识。
 
 115
 00:05:12,336 --> 00:05:13,735
@@ -664,11 +667,12 @@ So, how do we create a new class.
 121
 00:05:22,910 --> 00:05:25,911
 Because we're gonna put our model, 'kay, the calculator,  
-
+因为我们要把我们的模型，这个计算器，
 
 122
 00:05:25,913 --> 00:05:28,680
 kind of, it, it's the guts, in a different class.       
+它是一个内脏（一部分），放在不同的类里。
 
 123
 00:05:28,682 --> 00:05:31,983
@@ -748,7 +752,7 @@ you can see it's an empty Swift File.
 139
 00:06:08,950 --> 00:06:11,517
 And since our model is completely UI independent it doesn't inherit,  
-
+因为我们的模型是一个独立的UI，它不需要继承，
 
 140
 00:06:11,519 --> 00:06:15,287
@@ -758,12 +762,12 @@ it doesn't subclass any IOS class or anything,
 141
 00:06:15,289 --> 00:06:17,923
 it's just a basic, Swift File. 
-它只是一个基本的Swift文件。          
+它只是一个基本的 Swift 文件。          
 
 142
 00:06:17,925 --> 00:06:19,824
 So I'm gonna pick on this Swift File,
-所以我要选中这个Swift文件，           
+所以我要选中这个 Swift 文件，           
 
 143
 00:06:19,826 --> 00:06:23,394
@@ -778,7 +782,7 @@ click Next, and now it wants to know the name of
 145
 00:06:26,566 --> 00:06:29,466
 the same place that all our other swift files are. 
-和其他Swift文件相同的位置。    
+和其他 Swift 文件相同的位置。    
 
 146
 00:06:29,468 --> 00:06:30,901
@@ -808,15 +812,17 @@ And we're gonna call this new class CalculatorBrain.
 151
 00:06:41,912 --> 00:06:43,645
 Now, you don't have to have the name of  
-
+在这里，你不用非得把这个 Swift 文件的名字
 
 152
 00:06:43,647 --> 00:06:47,048
-this Swift File here be the name of the primary class but  
+this Swift File here be the name of the primary class but
+写成一个主类的名字  
 
 153
 00:06:47,050 --> 00:06:48,049
 we always do that.       
+但是我们一般都这么写。
 
 154
 00:06:48,051 --> 00:06:49,617
@@ -855,7 +861,7 @@ It's what's inside that matters.
 162
 00:07:00,361 --> 00:07:04,929
 But, CalculatorBrain is gonna be the name of our class, our model. 
-但是，CalculatorBrain是我们类和模型的名字，
+但是，CalculatorBrain将会是我们类和模型的名字，
 
 164
 00:07:04,930 --> 00:07:06,396
@@ -870,12 +876,12 @@ I'm trying to pick a descriptive name.
 166
 00:07:09,201 --> 00:07:12,302
 Notice the capitalization here, 
-注意这里的大写？？？？？？？？？             
+注意这里的大写，          
 
 167
 00:07:12,304 --> 00:07:16,306
 types in swift, we always capitalize them.   
-Swift里面的类型，我们一般都大写。？？？？？？？     
+Swift 里面的类型，我们一般都大写。     
 
 168
 00:07:16,308 --> 00:07:19,409
@@ -885,107 +891,112 @@ And we do not put underbars and other stuff in there.
 169
 00:07:19,411 --> 00:07:20,609
 Okay? We use what's called this    
+在这里我们使用一个叫做
 
 170
 00:07:20,611 --> 00:07:25,380
 camel notation here, where every word gets capitalized,  
+驼峰的命名法，每一个单词都要有大写，
 
 171
 00:07:25,382 --> 00:07:27,882
 including the first name, word for types. 
-
+包括名字和类型。
 
 172
 00:07:27,884 --> 00:07:31,219
 Everything else, we don't capitalize. 
-其他的东西，我们都不使用。
+其他的东西，我们都不用大写。
 
 173
 00:07:31,221 --> 00:07:34,755
 So property names and things like that, function names,   
-
+所有属性的名字和其他其他一些类似的，函数名，
 
 174
 00:07:34,757 --> 00:07:36,457
 those all start with lower case,              
+这些都要开头用小写，
 
 175
 00:07:36,459 --> 00:07:38,992
-  they still do the uppercase   
-      and the other words.      
+they still do the uppercase and the other words.      
+但是他们后面的单词的首字母要用大写。
 
 176
 00:07:38,994 --> 00:07:40,427
-  That way we, in our reading   
-          our code we           
+That way we, in our reading our code we           
+用这种方法，我们读代码的时候
 
 177
 00:07:40,429 --> 00:07:43,196
-  can really quickly pick out   
- what to type and what to not.  
+can really quickly pick out what to type and what to not.  
+我们可以很快的找到什么类型和不是的。
 
 178
 00:07:43,198 --> 00:07:45,164
-             'Kay?              
-   So please adhere to that.    
+'Kay? So please adhere to that.    
+所有请坚持这么写。
 
 179
 00:07:45,166 --> 00:07:48,334
-   If you don't, you're gonna   
-  look like a newb out there.   
+If you don't, you're gonna look like a newb out there.   
+如果你不这么做的话，那你看起来就像一个新手了。
 
 180
 00:07:48,336 --> 00:07:49,501
-             'Kay.              
-  Calculator brains what we're  
+'Kay. Calculator brains what we're  
+那个我们叫它计算器大脑的，
 
 181
 00:07:49,503 --> 00:07:50,835
-    gonna call it, I'm gonna    
-           create it.           
+gonna call it, I'm gonna create it.           
+下面我要开始创建它。
 
 182
 00:07:51,938 --> 00:07:53,121
-     Here it is right here.     
+Here it is right here.     
+这里
 
 183
 00:07:53,122 --> 00:07:54,305
-   I'm gonna make it my whole   
-            screen.             
+I'm gonna make it my whole screen.             
+我把它设置为全屏。
 
 184
 00:07:55,541 --> 00:07:58,975
-  You can see that the import   
-   here is not import UI kit,   
+You can see that the import here is not import UI kit,   
+你可以看到这里有一个import，但是没有导入UI kit，
 
 185
 00:07:58,977 --> 00:08:00,477
-    it's import Foundation.     
+it's import Foundation.     
+他导入了Foundation。
 
 186
 00:08:00,479 --> 00:08:03,379
- Foundation is that layer, that 
-  kinda core services layer I   
+Foundation is that layer, that kinda core services layer I   
+Foundation是一个核心的服务层，
 
 187
 00:08:03,381 --> 00:08:05,581
-   talked about in the first    
-            lecture.            
+talked about in the first lecture.            
+在第一节课里我已经讲了。
 
 188
 00:08:05,583 --> 00:08:07,883
- It don't have many UI stuff in 
-  it which is good because our  
+It don't have many UI stuff in it which is good because our  
+它没有太多UI的东西，这是很好的，因为
 
 189
 00:08:07,885 --> 00:08:11,687
-   model is UI independent so   
- there should be no UI in here. 
+model is UI independent so there should be no UI in here. 
+我们的模型是独立UI的，所以这里应该没有UI的东西。
 
 190
 00:08:11,689 --> 00:08:15,957
- So we would never be importing 
-   UI kit into a model class,   
+So we would never be importing UI kit into a model class,   
+所以我们永远不要再模型类里导入UI组件。
 
 191
 00:08:15,959 --> 00:08:17,392
@@ -993,42 +1004,43 @@ those all start with lower case,
 
 192
 00:08:17,393 --> 00:08:18,826
- You can feel free to stop me,  
-          by the way,           
+ You can feel free to stop me, by the way,           
+你可以随时让我停下来，
 
 193
 00:08:18,828 --> 00:08:19,793
-   if you have any questions.   
+if you have any questions.   
+如果你又任何的问题。
 
 194
 00:08:19,795 --> 00:08:22,095
-   All right, so we're gonna    
-      create a new class,       
+All right, so we're gonna create a new class,       
+所以我们要创建一个新类，
 
 195
 00:08:22,097 --> 00:08:23,029
 you already know how to do that.   
-
+你已经知道该怎么去做了。
 
 196
 00:08:23,031 --> 00:08:24,364
 We just type class and   
-
+我们创建这个类
 
 197
 00:08:24,366 --> 00:08:27,500
 then the name of the class, it's gonna be CalculatorBrain. 
-
+然后给这个类取一个名字，我们就叫它CalculatorBrain。
 
 198
 00:08:27,502 --> 00:08:32,537
-Now, this class is not going to inherit from any other class, 'kay?     
+Now, this class is not going to inherit from any other class,      
 现在，这个类不会继承其他的类。
 
 200
 00:08:32,539 --> 00:08:35,640
 Just gonna be a basic swift, class.  
-只是一个基本的 Swift 类
+只是一个基本的 Swift 类。
 
 201
 00:08:35,642 --> 00:08:38,509

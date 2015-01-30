@@ -4565,160 +4565,196 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:40:46,255 --> 00:40:48,389
   Because you're going to need
     them for your homework.
+    因为你等下做作业的时候会需要他们
 
 902
 00:40:48,391 --> 00:40:50,323
     But we gonna change this
   button right down here to be
+  但是我们将会改变这个按钮
 
 903
 00:40:50,325 --> 00:40:51,825
      a different operator.
+     把它成为一个不同的运算符.
+
 
 904
 00:40:52,894 --> 00:40:54,760
      Which is going to be,
           square root.
+          它将会变成一个平方根运算符
 
 905
 00:40:54,762 --> 00:40:57,629
       Which is right here,
      square root operator.
+     就在这里,一个平方根
 
 906
 00:40:58,732 --> 00:40:59,297
            All right?
+           好的.
 
 907
 00:40:59,299 --> 00:41:05,803
  And, so, I'm going to go back
    her to do square root, and
+   然后我回到这里,去添加一个平方根运算
 
 908
 00:41:05,805 --> 00:41:07,704
  it's just another case, right.
+ 只需要再添加一个case就可以搞定了.
 
 909
 00:41:07,706 --> 00:41:08,805
        Case square root.
+       case平方根
 
 910
 00:41:09,841 --> 00:41:12,808
     And, maybe I should just
     be able to use the same
+    也许我应该直接拷贝一样的
 
 911
 00:41:12,810 --> 00:41:13,709
        mechanism, right?
+       这句话,对吧.
 
 912
 00:41:13,711 --> 00:41:14,843
     Let's see if that works.
+    让我们看看,这样能不能行.
 
 913
 00:41:15,946 --> 00:41:18,897
       Place that in there.
+      把它们放在这
 
 914
 00:41:18,898 --> 00:41:21,849
   And instead of this bracket
   here, let's use the built in
+  把大括号里的内容删掉,用一个
 
 915
 00:41:21,851 --> 00:41:25,285
     function in Swift to do
     square root called sqrt.
+    swift里内置的平方根运算函数,叫做sqrt
 
 916
 00:41:25,287 --> 00:41:26,219
       And a dollar there.
+      还有一个$符号
 
 917
 00:41:26,221 --> 00:41:27,187
           Looks good.
+          看起来不错
 
 918
 00:41:27,189 --> 00:41:29,322
   And then we're ready to go.
+  好的,我们弄好了.
 
 919
 00:41:29,324 --> 00:41:32,591
    Let's just work, call it,
      what's going on here.
+     这里好像有什么问题.
 
 920
 00:41:32,593 --> 00:41:35,794
  They have some sort of error,
       what's the problem.
+      好像是某种错误,是什么问题呢?
 
 921
 00:41:35,796 --> 00:41:36,995
       I don't understand.
+      我也不清楚.
 
 922
 00:41:36,997 --> 00:41:38,163
    Let's take a look at this.
+   我们来看一看.
 
 923
 00:41:38,165 --> 00:41:42,867
    Now this error is a little
      hard to understand but
+     不过这个错误有点难理解不过
 
 924
 00:41:42,869 --> 00:41:46,970
    basically what it's saying
      is that you're calling
+     大概意思是说你使用的这个
 
 925
 00:41:46,972 --> 00:41:51,207
  performOperation here with an
  argument which is a function,
+ 带一个参数的performOperatin是个函数
 
 926
 00:41:51,209 --> 00:41:54,177
    it only takes on argument.
+   并且他只有一个参数
 
 927
 00:41:54,179 --> 00:41:55,378
    Goes Swift looks here and
+   我们看看这个函数
 
 928
 00:41:55,380 --> 00:41:57,579
     it's used that it's only
      using a dollar zero so
+     这个函数只是用了一个参数$
 
 929
 00:41:57,581 --> 00:42:00,849
      this is a one argument
       function this whole
+      确实是一个只有一个参数的函数
 
 930
 00:42:00,851 --> 00:42:03,785
      curly brace thing is a
  function that is one argument.
+ 大括号里只有一个参数
 
 931
 00:42:03,787 --> 00:42:07,121
       Well four operation
      takes a function that
+     上面的4各运算法调用的这个函数
 
 932
 00:42:07,123 --> 00:42:08,189
        has two arguments.
+       有两个参数
 
 933
 00:42:09,692 --> 00:42:11,591
       So that's a mismatch
        that doesn't work.
+       所以参数不匹配,导致了这个错误
 
 934
 00:42:12,594 --> 00:42:14,694
     So how can we fix this.
+    那么我们来修复这个错误
 
 935
 00:42:14,695 --> 00:42:16,795
   Well actually believe it or
  not we can just make a copy of
+ 我们来直接复制这个函数体
 
 936
 00:42:16,798 --> 00:42:19,398
@@ -4729,125 +4765,151 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:42:19,400 --> 00:42:22,067
      This one we are gonna
    have different arguments.
+   但是这个函数会有不同的参数个数
 
 938
 00:42:22,069 --> 00:42:24,736
        It's gonna have a,
       an argument which is
+      将只有一个参数
 
 939
 00:42:24,738 --> 00:42:27,605
  a function that only takes one
   double and returns a double.
+  只有一个double参数,返回值是一个double
 
 940
 00:42:28,574 --> 00:42:30,224
      And then inside here,
+     然后在这里
 
 941
 00:42:30,225 --> 00:42:31,875
    obviously we don't need to
  pull two things off the stack,
+ 显然我们不需要推出两个数字出栈
 
 942
 00:42:31,877 --> 00:42:32,609
            just one.
+           只推出一个就行了
 
 943
 00:42:32,611 --> 00:42:35,645
  And obviously we only need to
+ 我们只需要注意
 
 944
 00:42:35,647 --> 00:42:37,413
     check to make sure there
    is one thing on the stack.
+   确保只有一个数字会被推出栈
 
 945
 00:42:37,415 --> 00:42:41,950
            And look,
  all error warnings gone, okay?
+ 现在看一看,所有的错误都消失了,对吧.
 
 946
 00:42:41,952 --> 00:42:44,319
       So it automatically
      figured out that this
+     所以,它自动搞清楚了
 
 947
 00:42:44,321 --> 00:42:46,321
       performer operation
        must be this one,
+       他必须匹配的是这个函数
 
 948
 00:42:46,323 --> 00:42:49,857
    because this is a function
   that only has one argument.
+  因为这是个只有一个参数的函数
 
 949
 00:42:49,859 --> 00:42:52,460
     And so it matched it up
     with this version of it.
+    所以它匹配了这个版本的函数
 
 950
 00:42:52,462 --> 00:42:55,996
    So in Swift, you can have
  functions with the same name.
+ 所以在swift中,我们可以拥有相同名字的函数
 
 951
 00:42:55,998 --> 00:42:58,265
       As long as they have
       different arguments.
+      只要他们有不同的参数就可以了.
 
 952
 00:42:58,267 --> 00:42:59,399
       And that Swift will
+      swift将会
 
 953
 00:42:59,401 --> 00:43:02,168
        automatically pick
    the right one, if it can.
+   自动选择正确的一个
 
 954
 00:43:02,170 --> 00:43:03,936
       There are sometimes
       when it's just like,
+      某些时候这就好比
 
 955
 00:43:03,938 --> 00:43:05,971
       I can't really tell
       which one you mean.
+      你不告诉他你到底想要的是哪个
 
 956
 00:43:05,973 --> 00:43:08,673
      And it will certainly
     complain, in that case.
+    在这种情况下,它当然会发牢骚了.
 
 957
 00:43:11,378 --> 00:43:14,311
    But most of the type it's
   gonna be on [INAUDIBLE] from
+  但是,大部分情况
 
 958
 00:43:14,313 --> 00:43:16,647
       the types involved,
         what's going on.
+        它会通过参数类型判断到底使用哪个函数
 
 959
 00:43:16,649 --> 00:43:18,582
     So, just gonna run this
      one again real quick.
+     让我们运行一次这个程序
 
 960
 00:43:18,584 --> 00:43:22,852
   [INAUDIBLE] 36 square root.
+  36的平方根
 
 961
 00:43:22,854 --> 00:43:27,423
     Looks like it's working,
       9 times square root.
+      看起来答案正确.再乘以9然后开平方
 
 962
 00:43:27,425 --> 00:43:27,989
            Excellent.
+           很好
 
 963
 00:43:29,726 --> 00:43:30,291
@@ -4857,110 +4919,133 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:43:31,627 --> 00:43:33,894
            All right.
               So,
+              然后
 
 965
 00:43:33,895 --> 00:43:36,162
     the last thing I'm going
      to do here is work on
+     我们要做的最后一件事
 
 966
 00:43:36,165 --> 00:43:37,431
   the layout of these buttons.
+  就是设置这些按钮的布局
 
 967
 00:43:37,433 --> 00:43:38,531
  So that's all I'm gonna do for
            the code.
+           我用代码写的就是这么多
 
 968
 00:43:38,533 --> 00:43:40,333
       You can see that we
      really didn't have to
+     你可以看到,我们实际上
 
 969
 00:43:40,335 --> 00:43:41,367
      write that much code.
+     并没有写太多代码
 
 970
 00:43:42,436 --> 00:43:45,003
      To make this work and
+     来让这个程序运行起来
 
 971
 00:43:45,005 --> 00:43:47,939
      we got to do a lot of
      stuff in our UI here.
+     而是在UI上做了很多事
 
 972
 00:43:47,941 --> 00:43:50,708
  So, let's go ahead and make it
   so these buttons spread out.
+  好的,让我们继续,把这些按钮展开
 
 973
 00:43:50,710 --> 00:43:54,778
  Cuz right now you see all this
   space is wasted right here.
+  因为你现在可以看到,我们浪费了很多空间
 
 974
 00:43:54,780 --> 00:43:57,481
         And on an iPhone
        in portrait mode.
+       如果iPhone在横屏的时候
 
 975
 00:43:57,483 --> 00:43:59,549
  Whole bottom space is wasted.
+ 我们下面的空间都浪费了
 
 976
 00:43:59,551 --> 00:44:01,484
         And an iPhone on
         landscape mode,
+        如果在竖屏状态
 
 977
 00:44:01,486 --> 00:44:02,685
  this whole size can be wasted.
+ 这块区域被浪费了
 
 978
 00:44:02,687 --> 00:44:04,920
      So I really want these
     buttons much bigger, and
+    所以我很想把这些按钮弄得大一些
 
 979
 00:44:04,922 --> 00:44:05,687
         stretching out.
+        拉伸开
 
 980
 00:44:07,124 --> 00:44:09,791
    Now, when you do something
   like that, you have to think
+  现在,如果你想做这件事,你需要认真
 
 981
 00:44:09,793 --> 00:44:12,226
   a little bit of kind of what
    your strategy is gonna be.
+   思考一下到底应该怎么做合适
 
 982
 00:44:12,228 --> 00:44:15,696
    You can't just kinda root
      four start, you know,
+     而不是急匆匆就开始随便就开始
 
 983
 00:44:15,698 --> 00:44:17,597
         control drag it
         between things.
+        用鼠标随便拖动这些按钮之类的
 
 984
 00:44:17,599 --> 00:44:20,667
       And trying to set up
     the horizontal spacing,
+    或是试着设置水平区间
 
 985
 00:44:20,669 --> 00:44:24,437
   and maybe line up the, make
   the equal width and height.
+  对齐这些线,设置相同的宽度和高度
 
 986
 00:44:24,439 --> 00:44:27,106
   Oh my gosh, you'd be control
      dragging all day long,
+     我的天,要是这么做你肯定得用鼠标拖一整天
 
 987
 00:44:27,108 --> 00:44:28,374
@@ -4970,6 +5055,7 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:44:28,376 --> 00:44:30,475
     So I'm not going to use
     control drag to do this.
+    所以我不会使用鼠标拖动来做这些事
 
 989
 00:44:30,477 --> 00:44:33,945
@@ -4984,108 +5070,130 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:44:36,416 --> 00:44:40,451
        Let's go ahead and
    use the whole screen here.
+   我们先把这个界面扩大到全屏
 
 992
 00:44:40,453 --> 00:44:43,620
        Document outline.
+       把左边栏关掉
 
 993
 00:44:43,622 --> 00:44:45,939
         So what is going
        to be my strategy?
+       那么,我的策略是什么呢?
 
 994
 00:44:45,940 --> 00:44:48,257
  Well, my strategy is I'm going
   to make a perfect grid here.
+  我的策略就是在这做一个完美的网格
 
 995
 00:44:48,260 --> 00:44:52,195
  So, I almost have one, except
  for there's one missing here.
+ 这其实已经是一个差不多得了,不过还缺一个
 
 996
 00:44:52,197 --> 00:44:54,897
  So I'm actually going to take
   a button, copy and paste it.
+  我复制一个按钮,然后粘贴在这里
 
 997
 00:44:54,899 --> 00:44:59,167
      Okay, just kind of be
  a dummy button here actually.
+ 把这个当做一个占位按钮就行了
 
 998
 00:44:59,169 --> 00:45:00,969
          With no title.
+         不用添加任何标题
 
 999
 00:45:00,970 --> 00:45:02,770
  I'm going to right click on it
   also because I don't want it
+  然后右键单击这个按钮,因为我不想让它
 
 1000
 00:45:02,773 --> 00:45:04,939
       sending appendage or
        anything else, So
+       和controller里的任何事件或者属性关联
 
 1001
 00:45:04,941 --> 00:45:06,841
         its not going to
        send any messages.
+       现在它就不会发送任何消息了
 
 1002
 00:45:06,843 --> 00:45:09,309
      But it's just a dummy,
      so I'm kind of using.
+     但是,现在我得费点
 
 1003
 00:45:09,311 --> 00:45:12,245
      A little bit of brains
      over brawn here to do
+     脑筋来思考下这里的布局
 
 1004
 00:45:12,247 --> 00:45:13,680
        this perfect grid.
+       这个完美的网格布局
 
 1005
 00:45:13,682 --> 00:45:16,916
    Now if I have this perfect
    grid, then if I had a rule
+   现在我已经有了这个网格,接下来我需要一些规则
 
 1006
 00:45:16,918 --> 00:45:20,720
  where all these buttons had to
  be the same size, and they all
+ 例如,这些按钮需要相同的尺寸
 
 1007
 00:45:20,722 --> 00:45:24,857
   had the same spacing between
    their neighbors, not just.
+   所有的按钮都要和他相邻的按钮
 
 1008
 00:45:24,859 --> 00:45:28,160
    Between each other but the
  same spacing to this edge and
+ 有相同的间隔,还要和这个边界
 
 1009
 00:45:28,162 --> 00:45:30,929
         the same spacing
        to this top edge.
+       或者顶部有相同的间隔
 
 1010
 00:45:30,931 --> 00:45:33,631
    Okay, if I had a rule like
     that then they would get
+    那么,如果我有这么一个规则,那么
 
 1011
 00:45:33,633 --> 00:45:36,434
  big and of course the spacing
     is facing from this edge
+    我们的按钮自然就会变大并且
 
 1012
 00:45:36,436 --> 00:45:38,035
           to edge and
     this edge to this edge.
+    与四边有相同的间距
 
 1013
 00:45:38,037 --> 00:45:41,304

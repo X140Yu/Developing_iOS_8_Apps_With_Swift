@@ -22,6 +22,7 @@
     - Xcode 中的词语，例如：Story board。
     - model, view, controller, view controller 等。
     - true, false 等 Swift 中的关键字。
+    - UI, Auto Layout 
 
 ### 格式要求
 - 把一条字幕中的多行合并成一行。

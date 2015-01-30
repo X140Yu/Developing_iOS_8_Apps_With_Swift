@@ -4565,160 +4565,196 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:40:46,255 --> 00:40:48,389
   Because you're going to need
     them for your homework.
+    因为你等下做作业的时候会需要他们
 
 902
 00:40:48,391 --> 00:40:50,323
     But we gonna change this
   button right down here to be
+  但是我们将会改变这个按钮
 
 903
 00:40:50,325 --> 00:40:51,825
      a different operator.
+     把它成为一个不同的运算符.
+
 
 904
 00:40:52,894 --> 00:40:54,760
      Which is going to be,
           square root.
+          它将会变成一个平方根运算符
 
 905
 00:40:54,762 --> 00:40:57,629
       Which is right here,
      square root operator.
+     就在这里,一个平方根
 
 906
 00:40:58,732 --> 00:40:59,297
            All right?
+           好的.
 
 907
 00:40:59,299 --> 00:41:05,803
  And, so, I'm going to go back
    her to do square root, and
+   然后我回到这里,去添加一个平方根运算
 
 908
 00:41:05,805 --> 00:41:07,704
  it's just another case, right.
+ 只需要再添加一个case就可以搞定了.
 
 909
 00:41:07,706 --> 00:41:08,805
        Case square root.
+       case平方根
 
 910
 00:41:09,841 --> 00:41:12,808
     And, maybe I should just
     be able to use the same
+    也许我应该直接拷贝一样的
 
 911
 00:41:12,810 --> 00:41:13,709
        mechanism, right?
+       这句话,对吧.
 
 912
 00:41:13,711 --> 00:41:14,843
     Let's see if that works.
+    让我们看看,这样能不能行.
 
 913
 00:41:15,946 --> 00:41:18,897
       Place that in there.
+      把它们放在这
 
 914
 00:41:18,898 --> 00:41:21,849
   And instead of this bracket
   here, let's use the built in
+  把大括号里的内容删掉,用一个
 
 915
 00:41:21,851 --> 00:41:25,285
     function in Swift to do
     square root called sqrt.
+    swift里内置的平方根运算函数,叫做sqrt
 
 916
 00:41:25,287 --> 00:41:26,219
       And a dollar there.
+      还有一个$符号
 
 917
 00:41:26,221 --> 00:41:27,187
           Looks good.
+          看起来不错
 
 918
 00:41:27,189 --> 00:41:29,322
   And then we're ready to go.
+  好的,我们弄好了.
 
 919
 00:41:29,324 --> 00:41:32,591
    Let's just work, call it,
      what's going on here.
+     这里好像有什么问题.
 
 920
 00:41:32,593 --> 00:41:35,794
  They have some sort of error,
       what's the problem.
+      好像是某种错误,是什么问题呢?
 
 921
 00:41:35,796 --> 00:41:36,995
       I don't understand.
+      我也不清楚.
 
 922
 00:41:36,997 --> 00:41:38,163
    Let's take a look at this.
+   我们来看一看.
 
 923
 00:41:38,165 --> 00:41:42,867
    Now this error is a little
      hard to understand but
+     不过这个错误有点难理解不过
 
 924
 00:41:42,869 --> 00:41:46,970
    basically what it's saying
      is that you're calling
+     大概意思是说你使用的这个
 
 925
 00:41:46,972 --> 00:41:51,207
  performOperation here with an
  argument which is a function,
+ 带一个参数的performOperatin是个函数
 
 926
 00:41:51,209 --> 00:41:54,177
    it only takes on argument.
+   并且他只有一个参数
 
 927
 00:41:54,179 --> 00:41:55,378
    Goes Swift looks here and
+   我们看看这个函数
 
 928
 00:41:55,380 --> 00:41:57,579
     it's used that it's only
      using a dollar zero so
+     这个函数只是用了一个参数$
 
 929
 00:41:57,581 --> 00:42:00,849
      this is a one argument
       function this whole
+      确实是一个只有一个参数的函数
 
 930
 00:42:00,851 --> 00:42:03,785
      curly brace thing is a
  function that is one argument.
+ 大括号里只有一个参数
 
 931
 00:42:03,787 --> 00:42:07,121
       Well four operation
      takes a function that
+     上面的4各运算法调用的这个函数
 
 932
 00:42:07,123 --> 00:42:08,189
        has two arguments.
+       有两个参数
 
 933
 00:42:09,692 --> 00:42:11,591
       So that's a mismatch
        that doesn't work.
+       所以参数不匹配,导致了这个错误
 
 934
 00:42:12,594 --> 00:42:14,694
     So how can we fix this.
+    那么我们来修复这个错误
 
 935
 00:42:14,695 --> 00:42:16,795
   Well actually believe it or
  not we can just make a copy of
+ 我们来直接复制这个函数体
 
 936
 00:42:16,798 --> 00:42:19,398
@@ -4729,125 +4765,151 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:42:19,400 --> 00:42:22,067
      This one we are gonna
    have different arguments.
+   但是这个函数会有不同的参数个数
 
 938
 00:42:22,069 --> 00:42:24,736
        It's gonna have a,
       an argument which is
+      将只有一个参数
 
 939
 00:42:24,738 --> 00:42:27,605
  a function that only takes one
   double and returns a double.
+  只有一个double参数,返回值是一个double
 
 940
 00:42:28,574 --> 00:42:30,224
      And then inside here,
+     然后在这里
 
 941
 00:42:30,225 --> 00:42:31,875
    obviously we don't need to
  pull two things off the stack,
+ 显然我们不需要推出两个数字出栈
 
 942
 00:42:31,877 --> 00:42:32,609
            just one.
+           只推出一个就行了
 
 943
 00:42:32,611 --> 00:42:35,645
  And obviously we only need to
+ 我们只需要注意
 
 944
 00:42:35,647 --> 00:42:37,413
     check to make sure there
    is one thing on the stack.
+   确保只有一个数字会被推出栈
 
 945
 00:42:37,415 --> 00:42:41,950
            And look,
  all error warnings gone, okay?
+ 现在看一看,所有的错误都消失了,对吧.
 
 946
 00:42:41,952 --> 00:42:44,319
       So it automatically
      figured out that this
+     所以,它自动搞清楚了
 
 947
 00:42:44,321 --> 00:42:46,321
       performer operation
        must be this one,
+       他必须匹配的是这个函数
 
 948
 00:42:46,323 --> 00:42:49,857
    because this is a function
   that only has one argument.
+  因为这是个只有一个参数的函数
 
 949
 00:42:49,859 --> 00:42:52,460
     And so it matched it up
     with this version of it.
+    所以它匹配了这个版本的函数
 
 950
 00:42:52,462 --> 00:42:55,996
    So in Swift, you can have
  functions with the same name.
+ 所以在swift中,我们可以拥有相同名字的函数
 
 951
 00:42:55,998 --> 00:42:58,265
       As long as they have
       different arguments.
+      只要他们有不同的参数就可以了.
 
 952
 00:42:58,267 --> 00:42:59,399
       And that Swift will
+      swift将会
 
 953
 00:42:59,401 --> 00:43:02,168
        automatically pick
    the right one, if it can.
+   自动选择正确的一个
 
 954
 00:43:02,170 --> 00:43:03,936
       There are sometimes
       when it's just like,
+      某些时候这就好比
 
 955
 00:43:03,938 --> 00:43:05,971
       I can't really tell
       which one you mean.
+      你不告诉他你到底想要的是哪个
 
 956
 00:43:05,973 --> 00:43:08,673
      And it will certainly
     complain, in that case.
+    在这种情况下,它当然会发牢骚了.
 
 957
 00:43:11,378 --> 00:43:14,311
    But most of the type it's
   gonna be on [INAUDIBLE] from
+  但是,大部分情况
 
 958
 00:43:14,313 --> 00:43:16,647
       the types involved,
         what's going on.
+        它会通过参数类型判断到底使用哪个函数
 
 959
 00:43:16,649 --> 00:43:18,582
     So, just gonna run this
      one again real quick.
+     让我们运行一次这个程序
 
 960
 00:43:18,584 --> 00:43:22,852
   [INAUDIBLE] 36 square root.
+  36的平方根
 
 961
 00:43:22,854 --> 00:43:27,423
     Looks like it's working,
       9 times square root.
+      看起来答案正确.再乘以9然后开平方
 
 962
 00:43:27,425 --> 00:43:27,989
            Excellent.
+           很好
 
 963
 00:43:29,726 --> 00:43:30,291
@@ -4857,110 +4919,133 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:43:31,627 --> 00:43:33,894
            All right.
               So,
+              然后
 
 965
 00:43:33,895 --> 00:43:36,162
     the last thing I'm going
      to do here is work on
+     我们要做的最后一件事
 
 966
 00:43:36,165 --> 00:43:37,431
   the layout of these buttons.
+  就是设置这些按钮的布局
 
 967
 00:43:37,433 --> 00:43:38,531
  So that's all I'm gonna do for
            the code.
+           我用代码写的就是这么多
 
 968
 00:43:38,533 --> 00:43:40,333
       You can see that we
      really didn't have to
+     你可以看到,我们实际上
 
 969
 00:43:40,335 --> 00:43:41,367
      write that much code.
+     并没有写太多代码
 
 970
 00:43:42,436 --> 00:43:45,003
      To make this work and
+     来让这个程序运行起来
 
 971
 00:43:45,005 --> 00:43:47,939
      we got to do a lot of
      stuff in our UI here.
+     而是在UI上做了很多事
 
 972
 00:43:47,941 --> 00:43:50,708
  So, let's go ahead and make it
   so these buttons spread out.
+  好的,让我们继续,把这些按钮展开
 
 973
 00:43:50,710 --> 00:43:54,778
  Cuz right now you see all this
   space is wasted right here.
+  因为你现在可以看到,我们浪费了很多空间
 
 974
 00:43:54,780 --> 00:43:57,481
         And on an iPhone
        in portrait mode.
+       如果iPhone在横屏的时候
 
 975
 00:43:57,483 --> 00:43:59,549
  Whole bottom space is wasted.
+ 我们下面的空间都浪费了
 
 976
 00:43:59,551 --> 00:44:01,484
         And an iPhone on
         landscape mode,
+        如果在竖屏状态
 
 977
 00:44:01,486 --> 00:44:02,685
  this whole size can be wasted.
+ 这块区域被浪费了
 
 978
 00:44:02,687 --> 00:44:04,920
      So I really want these
     buttons much bigger, and
+    所以我很想把这些按钮弄得大一些
 
 979
 00:44:04,922 --> 00:44:05,687
         stretching out.
+        拉伸开
 
 980
 00:44:07,124 --> 00:44:09,791
    Now, when you do something
   like that, you have to think
+  现在,如果你想做这件事,你需要认真
 
 981
 00:44:09,793 --> 00:44:12,226
   a little bit of kind of what
    your strategy is gonna be.
+   思考一下到底应该怎么做合适
 
 982
 00:44:12,228 --> 00:44:15,696
    You can't just kinda root
      four start, you know,
+     而不是急匆匆就开始随便就开始
 
 983
 00:44:15,698 --> 00:44:17,597
         control drag it
         between things.
+        用鼠标随便拖动这些按钮之类的
 
 984
 00:44:17,599 --> 00:44:20,667
       And trying to set up
     the horizontal spacing,
+    或是试着设置水平区间
 
 985
 00:44:20,669 --> 00:44:24,437
   and maybe line up the, make
   the equal width and height.
+  对齐这些线,设置相同的宽度和高度
 
 986
 00:44:24,439 --> 00:44:27,106
   Oh my gosh, you'd be control
      dragging all day long,
+     我的天,要是这么做你肯定得用鼠标拖一整天
 
 987
 00:44:27,108 --> 00:44:28,374
@@ -4970,11 +5055,13 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:44:28,376 --> 00:44:30,475
     So I'm not going to use
     control drag to do this.
+    所以我不会使用鼠标拖动来做这些事
 
 989
 00:44:30,477 --> 00:44:33,945
  I'm going to use these buttons
   down here which will kind of
+  我们将使用下面的这些按钮来布局
 
 990
 00:44:33,947 --> 00:44:36,414
@@ -4984,531 +5071,548 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
 00:44:36,416 --> 00:44:40,451
        Let's go ahead and
    use the whole screen here.
+   我们先把这个界面扩大到全屏
 
 992
 00:44:40,453 --> 00:44:43,620
        Document outline.
+       把左边栏关掉
 
 993
 00:44:43,622 --> 00:44:45,939
         So what is going
        to be my strategy?
+       那么,我的策略是什么呢?
 
 994
 00:44:45,940 --> 00:44:48,257
  Well, my strategy is I'm going
   to make a perfect grid here.
+  我的策略就是在这做一个完美的网格
 
 995
 00:44:48,260 --> 00:44:52,195
  So, I almost have one, except
  for there's one missing here.
+ 这其实已经是一个差不多得了,不过还缺一个
 
 996
 00:44:52,197 --> 00:44:54,897
  So I'm actually going to take
   a button, copy and paste it.
+  我复制一个按钮,然后粘贴在这里
 
 997
 00:44:54,899 --> 00:44:59,167
      Okay, just kind of be
  a dummy button here actually.
+ 把这个当做一个占位按钮就行了
 
 998
 00:44:59,169 --> 00:45:00,969
          With no title.
+         不用添加任何标题
 
 999
 00:45:00,970 --> 00:45:02,770
  I'm going to right click on it
   also because I don't want it
+  然后右键单击这个按钮,因为我不想让它
 
 1000
 00:45:02,773 --> 00:45:04,939
-      sending appendage or
-       anything else, So
+sending appendage or anything else, So
+和controller里的任何事件或者属性关联
 
 1001
 00:45:04,941 --> 00:45:06,841
-        its not going to
-       send any messages.
+its not going to send any messages.
+现在它就不会发送任何消息了
 
 1002
 00:45:06,843 --> 00:45:09,309
-     But it's just a dummy,
-     so I'm kind of using.
+But it's just a dummy, so I'm kind of using.
+但是,现在我得费点
 
 1003
 00:45:09,311 --> 00:45:12,245
-     A little bit of brains
-     over brawn here to do
+A little bit of brains over brawn here to do
+脑筋来思考下这里的布局
 
 1004
 00:45:12,247 --> 00:45:13,680
-       this perfect grid.
+this perfect grid.
+这个完美的网格布局
 
 1005
 00:45:13,682 --> 00:45:16,916
-   Now if I have this perfect
-   grid, then if I had a rule
+Now if I have this perfect grid, then if I had a rule
+现在我已经有了这个网格,接下来我需要一些规则
 
 1006
 00:45:16,918 --> 00:45:20,720
- where all these buttons had to
- be the same size, and they all
+where all these buttons had to be the same size, and they all
+例如,这些按钮需要相同的尺寸
 
 1007
 00:45:20,722 --> 00:45:24,857
-  had the same spacing between
-   their neighbors, not just.
+had the same spacing between their neighbors, not just.
+所有的按钮都要和他相邻的按钮
 
 1008
 00:45:24,859 --> 00:45:28,160
-   Between each other but the
- same spacing to this edge and
+Between each other but the same spacing to this edge and
+有相同的间隔,还要和这个边界
 
 1009
 00:45:28,162 --> 00:45:30,929
-        the same spacing
-       to this top edge.
+the same spacing to this top edge.
+或者顶部有相同的间隔
 
 1010
 00:45:30,931 --> 00:45:33,631
-   Okay, if I had a rule like
-    that then they would get
+Okay, if I had a rule like that then they would get
+那么,如果我有这么一个规则,那么
 
 1011
 00:45:33,633 --> 00:45:36,434
- big and of course the spacing
-    is facing from this edge
+big and of course the spacing is facing from this edge
+我们的按钮自然就会变大并且
 
 1012
 00:45:36,436 --> 00:45:38,035
-          to edge and
-    this edge to this edge.
+to edge and this edge to this edge.
+与四边有相同的间距
 
 1013
 00:45:38,037 --> 00:45:41,304
- If it was all the exactly the
-  same, which I'll make it be
+If it was all the exactly the same, which I'll make it be
 
 1014
 00:45:41,306 --> 00:45:44,708
- whatever this is, whatever the
-  dash for the lines gave me.
+whatever this is, whatever the dash for the lines gave me.
 
 1015
 00:45:44,710 --> 00:45:47,443
- If that was the same then they
- would all have to spread out.
+If that was the same then they would all have to spread out.
+如果是一样的话，他们将都延伸
 
 1016
 00:45:48,479 --> 00:45:50,179
-  Okay, they'd get bigger but
+Okay, they'd get bigger but
+Okay，他们将会变大但是
 
 1017
 00:45:50,180 --> 00:45:51,880
-    they'd all stay the same
-   size because I'm going to
+they'd all stay the same size because I'm going to
+他们都会保持一样的大小，因为
 
 1018
 00:45:51,882 --> 00:45:54,516
-     make a rule that they
-   have to be the same size.
+make a rule that they have to be the same size.
+我将制定一个规则来使他们保持一样的大小
 
 1019
 00:45:54,518 --> 00:45:56,317
-      But they would move
-      out to this edge so
+But they would move out to this edge so
+这些按钮将移到这边
 
 1020
 00:45:56,319 --> 00:46:00,121
-   that this nearest neighbor
-  would be the same, you know,
+that this nearest neighbor would be the same, you know,
+并且近邻保持一样距离
 
 1021
 00:46:00,123 --> 00:46:02,322
-     this distance would be
-   the same as this distance.
+this distance would be the same as this distance.
+这个间距将和这个间距一样
 
 1022
 00:46:02,324 --> 00:46:05,092
-     So that's my strategy,
-  I'm going to try to do that.
+So that's my strategy, I'm going to try to do that.
+这就是我的想法，我们就试着来做下吧
 
 1023
 00:46:05,094 --> 00:46:06,760
-     Now to make that work,
+Now to make that work,
+现在就来做
 
 1024
 00:46:06,762 --> 00:46:09,128
- all these buttons need to know
- who their nearest neighbor is.
+all these buttons need to know who their nearest neighbor is.
+所有这些按钮需要知道他们的近邻是谁
 
 1025
 00:46:09,130 --> 00:46:11,564
-   Well, these all know their
-     nearest neighbor here,
+Well, these all know their nearest neighbor here,
+好，这些都知道他们的近邻
 
 1026
 00:46:11,566 --> 00:46:13,999
-   the other buttons, because
-   I made sure I used dashed,
+the other buttons, because I made sure I used dashed
+其他按钮,当我拖拽他们时
 
 1027
 00:46:14,001 --> 00:46:17,035
-       blue lines when I
-     dragged them in there.
+blue lines when I dragged them in there.
+确保使用的蓝色虚线
 
 1028
 00:46:17,037 --> 00:46:18,303
-    So, that's what kind of
+So, that's what kind of
 
 1029
 00:46:18,305 --> 00:46:19,904
-       teaches them their
-       nearest neighbor.
+teaches them their nearest neighbor.
 
 1030
 00:46:19,906 --> 00:46:22,573
-   And I'm also going to make
-   sure that the entire grid
+And I'm also going to make sure that the entire grid
+我们也要确保整个grid
 
 1031
 00:46:22,575 --> 00:46:25,442
-  knows that the left edge and
+knows that the left edge and
+知道它的左边距
 
 1032
 00:46:25,444 --> 00:46:29,046
-  just under the label there,
-     our nearest neighbor.
+just under the label there, our nearest neighbor.
+并且位于label下面
 
 1033
 00:46:29,048 --> 00:46:30,447
-  So now it knows on the top,
+So now it knows on the top,
+所以，在顶部它知道
 
 1034
 00:46:30,449 --> 00:46:32,348
-      the nearest neighbor
-       is the label, and
+the nearest neighbor is the label, and
+他的近邻是label，并且
 
 1035
 00:46:32,350 --> 00:46:34,383
-   on the left is this edge.
+on the left is this edge.
+左边是edge
 
 1036
 00:46:34,385 --> 00:46:37,386
-       And it's going to
-       pick this edge as
+And it's going to pick this edge as
+为这些按钮和底部边距
 
 1037
 00:46:37,388 --> 00:46:39,888
- the nearest neighbor for these
-  buttons and the bottom edge,
+the nearest neighbor for these buttons and the bottom edge,
+要选择这个边距作为近邻
 
 1038
 00:46:39,890 --> 00:46:41,356
-  cuz that's all there is and
+cuz that's all there is and
+这儿将没有其他的
 
 1039
 00:46:41,357 --> 00:46:42,823
-     nothing else out here
-      that's gonna become,
+nothing else out here that's gonna become,
+那将会成为仅有的近邻
 
 1040
 00:46:42,826 --> 00:46:45,326
- that's the only neighbor there
-   is, it's gonna pick those.
+that's the only neighbor there is, it's gonna pick those.
+就会选择那些
 
 1041
 00:46:47,263 --> 00:46:48,962
-        So now that I've
-        used my dash for
+So now that I've used my dash for
+那么，现在我已经使用这些虚线
 
 1042
 00:46:48,964 --> 00:46:51,898
-       the lines it makes
-      this all quite easy.
+the lines it makes this all quite easy.
+这将变的很容易
 
 1043
 00:46:51,900 --> 00:46:53,866
-     Now, if you don't use
-   the dash for the lines, or
+Now, if you don't use the dash for the lines, or
+如果你不使用这些虚线
 
 1044
 00:46:53,868 --> 00:46:56,602
-   if you make some mistakes
-  then it's not going to work.
+if you make some mistakes then it's not going to work.
+或者你做错了什么，它就不会工作
 
 1045
 00:46:56,604 --> 00:47:00,305
-  This strategy won't work and
-  I've made doing this part of
+This strategy won't work and I've made doing this part of
+我做这部分演示
 
 1046
 00:47:00,307 --> 00:47:03,809
-       this demonstration
-        be extra credit.
+this demonstration be extra credit.
+是额外的
 
 1047
 00:47:03,811 --> 00:47:06,044
-  And so if you can't get it,
- don't worry about it too much,
+And so if you can't get it, don't worry about it too much,
+因此，如果你不能做到，也不必太担心
 
 1048
 00:47:06,046 --> 00:47:09,247
- just keep all your buttons in
-   the upper left corner here
+just keep all your buttons in the upper left corner here
+只需保持你所有的按钮在左上角
 
 1049
 00:47:09,249 --> 00:47:11,199
-        and that's fine.
+and that's fine.
+这就好了
 
 1050
 00:47:11,200 --> 00:47:13,150
-    But if you want to give
-   this a try, the key is to
+But if you want to give this a try, the key is to
+如果你想尝试一下
 
 1051
 00:47:13,152 --> 00:47:15,753
-     use the dash lines to
-     make the perfect grid.
+use the dash lines to make the perfect grid.
+重点是使用虚线保证表格完美
 
 1052
 00:47:15,755 --> 00:47:18,822
-     Make sure that you set
- the nearest neighbors here by
+Make sure that you set the nearest neighbors here by
+在两侧通过拖拽整个表格使蓝色线条显示
 
 1053
-00:47:18,824 --> 00:47:22,225
-   dragging the whole grid to
-   make blue lines appear on
-
-1054
-00:47:22,227 --> 00:47:23,793
-           the sides.
+00:47:18,824 --> 00:47:23,793
+dragging the whole grid to make blue lines appear on the sides.
+来确保你设置的近邻间距
 
 1055
 00:47:23,795 --> 00:47:26,962
-   And then, we are going to
-  set these rules in bulk and
+And then, we are going to set these rules in bulk and
+然后，我们将设置这些规则
 
 1056
 00:47:26,964 --> 00:47:29,965
-     we do that with these
-       buttons down here.
+we do that with these buttons down here.
+我们可以用下面的这些按钮
 
 1057
 00:47:29,966 --> 00:47:32,967
-  So there's this button right
- here the left most button and
+So there's this button right here the left most button and
+在最左边的这个按钮
 
 1058
 00:47:32,969 --> 00:47:36,337
-  it let's you set things like
-   lining up leading edges or
+it let's you set things like lining up leading edges or
+它可以设置左边对齐、
 
 1059
 00:47:36,339 --> 00:47:37,872
-    the tops or the centers.
+the tops or the centers.
+上边对齐或者居中
 
 1060
 00:47:37,874 --> 00:47:40,174
-  And you could imagine there
-  might be a way to do this by
+And you could imagine there might be a way to do this by
+也许你能想到一种方法可以做到这点
 
 1061
 00:47:40,176 --> 00:47:42,542
-    doing that but I am not
-  going to use that strategy.
+doing that but I am not going to use that strategy.
+但是我们不使用这种方法
 
 1062
 00:47:42,544 --> 00:47:45,045
-    My strategy is just make
-     them the same size and
+My strategy is just make them the same size and
+我的方法就是让他们大小一样
 
 1063
 00:47:45,047 --> 00:47:48,447
-   make the space in between
-       them, be the same.
+make the space in between them, be the same.
+并且他们之间的间距也一样
 
 1064
 00:47:49,617 --> 00:47:51,450
-       But, I bet there's
-   probably a way to do it by
+But, I bet there's probably a way to do it by
+但是，我敢打赌，也许通过中点的方式
 
 1065
 00:47:51,452 --> 00:47:54,919
-  lining up their centers, or
-   something like that, too.
+lining up their centers, or something like that, too.
+或者类似的方式也可以做到
 
 1066
 00:47:54,921 --> 00:47:56,921
-        So I'm not going
-        to use this one.
+So I'm not going to use this one.
+因此，我不打算使用这一个
 
 1067
 00:47:56,923 --> 00:47:59,357
-       The next one over,
+The next one over,
+下一个
 
 1068
 00:47:59,358 --> 00:48:01,792
-  right here, is the one that
-     has the things I want.
+right here, is the one that has the things I want.
+这里就有我想要的东西
 
 1069
 00:48:01,794 --> 00:48:04,094
-       And so you can see
-     that it'll ask you to
+And so you can see that it'll ask you to
+正如你所看见的，它会让你选择
 
 1070
 00:48:04,096 --> 00:48:06,196
-      make all the buttons
-   equal widths and heights.
+make all the buttons equal widths and heights.
+是否让所有按钮的宽度相等、高度相等
 
 1071
 00:48:06,198 --> 00:48:07,464
-      Okay, not width and
+Okay, not width and
+Okay，没有勾选的这项
 
 1072
 00:48:07,466 --> 00:48:09,832
-    height, that fixes them
-     at a certain width and
+height, that fixes them at a certain width and
+用来修改成某个特定的宽度和高度
 
 1073
 00:48:09,834 --> 00:48:12,401
- height, this means that there,
-   they can be any width and
+height, this means that there,they can be any width and
+这里的意思是，宽度和高度可以是任何你想要的值
 
 1074
 00:48:12,403 --> 00:48:14,803
- height they want, but they all
- have to be the same width and
+height they want, but they all have to be the same width and
+但是他们必须是相等的宽度和相等的高度
 
 1075
 00:48:14,805 --> 00:48:16,938
-   height all these buttons.
+height all these buttons.
+所有的这些按钮
 
 1076
 00:48:16,940 --> 00:48:18,840
-   Of course I had these all
-  selected by the way, if you
+Of course I had these all selected by the way, if you
+当然，我把这些按钮都选中了
 
 1077
 00:48:18,842 --> 00:48:20,842
-    don't have them selected
-   it doesn't make any sense.
+don't have them selected it doesn't make any sense.
+如果你没选中那就没有意义
 
 1078
 00:48:22,011 --> 00:48:23,711
-   And then up here, you can
-    see there is spacing to
+And then up here, you can see there is spacing to
+然后在这里，你可以看到这是一个spacing to
 
 1079
 00:48:23,713 --> 00:48:25,679
-   nearest neighbor, so this
-   is where I am going to set
+nearest neighbor, so this is where I am going to set
+nearest neighbor面板，我们把这些
 
 1080
 00:48:25,681 --> 00:48:29,716
-    that spacing between all
-     these, to be the same.
+that spacing between all these, to be the same.
+按钮之间的间距设为一样
 
 1081
 00:48:29,718 --> 00:48:31,417
-      And you can see that
-      it's put eight here.
+And you can see that it's put eight here.
+正如你所看到的，我这里设置为8
 
 1082
 00:48:31,419 --> 00:48:33,585
-     That's because when I
-     did the the dash lines
+That's because when I did the dash lines
+这是因为当我使用虚线
 
 1083
 00:48:35,022 --> 00:48:39,323
-  to the top eight seems to be
-  kind of a standard number of
+to the top eight seems to be kind of a standard number of
+每个元素之间都是一种标准的数字
 
 1084
 00:48:39,325 --> 00:48:42,727
-    points between elements.
+points between elements.
 
 1085
 00:48:42,729 --> 00:48:45,429
- These are all multiple because
-     some of these buttons,
+These are all multiple because some of these buttons,
+这里所有的multiple，因为这些相同的按钮
 
 1086
 00:48:45,431 --> 00:48:48,432
-   their nearest neighbor is
-  way over here and it's huge.
+their nearest neighbor is way over here and it's huge.
+他们的近邻是在这里，这是巨大的
 
 1087
 00:48:48,434 --> 00:48:50,250
-           All right.
+All right.
+All right.
 
 1088
 00:48:50,251 --> 00:48:52,067
-   The bottom or their right.
+The bottom or their right.
+底部或者右边
 
 1089
 00:48:52,070 --> 00:48:55,838
-     But all these buttons,
-       the thing on top,
+But all these buttons,the thing on top,
+所有这些按钮，上面的内容
 
 1090
 00:48:55,840 --> 00:48:58,274
- whether it's another button or
-    whether it's this label,
+whether it's another button or whether it's this label,
+无论是另一个按钮或者label
 
 1091
 00:48:58,276 --> 00:49:01,343
- all of them happen to be this
-    eight points right here.
+all of them happen to be this eight points right here.
+这里他们的间距都会变成8
 
 1092
 00:49:01,345 --> 00:49:03,178
-        So I want all of
-       these to be eight.
+So I want all of these to be eight.
+所以我将这些都设置为8
 
 1093
 00:49:03,180 --> 00:49:07,482
- So I'm just going to turn this
- bar on right here, which says,
+So I'm just going to turn this bar on right here, which says,
+在这里我们只打开这一栏
 
 1094
 00:49:07,484 --> 00:49:11,018
-    yes please enforce, and
-   make the rule that all of
+yes please enforce, and make the rule that all of
+yes，请确保这些所有
 
 1095
 00:49:11,020 --> 00:49:15,255
- these are 8 points from their
-  nearest neighbor to the top.
+these are 8 points from their nearest neighbor to the top.
+按钮的顶部距离为8
 
 1096
 00:49:15,257 --> 00:49:18,124
-    And also, 8 to the left,
-      8 to the right, and
+And also, 8 to the left,8 to the right, and
+同样，左边间距为8，右边间距为8
 
 1097
 00:49:18,126 --> 00:49:19,459
-        8 to the bottom.
+8 to the bottom.
+底部间距也为8
 
 1098
 00:49:19,461 --> 00:49:21,060
-     Really wanna make sure
-      these beams are on,
+Really wanna make sure these beams are on,
+确保这里是打开的
 
 1099
 00:49:21,062 --> 00:49:23,362
-    if these beams are off,
- even if there's a number here,
+if these beams are off,even if there's a number here,
+如果他是关闭的，即使这里有数字
 
 1100
 00:49:23,364 --> 00:49:24,963
-      then it's not gonna
-         add this rule.
+then it's not gonna add this rule.
+也不会添加约束的
 
 1101
 00:49:24,965 --> 00:49:26,998

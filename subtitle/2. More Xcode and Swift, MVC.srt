@@ -2978,7 +2978,6 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
    Monday's demonstration and
    你们会在周一的展示和
 
-
 574
 00:24:49,172 --> 00:24:51,906
     later in the quarter how
@@ -3138,98 +3137,118 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
       every single string
         in the universe.
     穷举每一种情况
+
 602
 00:26:15,347 --> 00:26:18,280
     That is almost infinite,
        but luckily there,
     通常是无限多的,但是很幸运的是,
+
 603
 00:26:18,282 --> 00:26:22,584
    you can take defaults and
  just break out of the switch.
     可以再default后,使用break跳出switch
+
 604
 00:26:22,586 --> 00:26:26,187
  That means if it's not one of
   these cases by default just
     也就是如果不是上面列举的情况,
+
 605
 00:26:26,189 --> 00:26:27,088
     break out of the switch.
     就会默认跳出switch语句
+
 606
 00:26:27,090 --> 00:26:28,355
        You could put code
          here as well,
     代码也可以放在这里
+
 607
 00:26:28,357 --> 00:26:31,091
    but breaking out of it is
  what we wanna do in our case.
     在需要的地方break
+
 608
 00:26:33,028 --> 00:26:35,861
  now, in here, we're just going
  to put the code for multiply.
     现在,在这里,放乘法相关的语句
+
 609
 00:26:35,863 --> 00:26:37,896
  So, what do we need to do for
            multiply?
     那么,乘法需要做些什么?
+
 610
 00:26:37,898 --> 00:26:40,432
         For the moment,
   I'm gonna comment this out.
     我会暂时将这部分注视掉
+
 611
 00:26:40,434 --> 00:26:42,667
  I'm gonna use command, slash,
     使用command + / 来注释
+
 612
 00:26:42,669 --> 00:26:44,502
        which is a really
          nice feature.
     这种注释方法的确称得上是一个很不错的功能.
+
 613
 00:26:44,504 --> 00:26:46,103
      You do command slash.
      command + /之后,
+
 614
 00:26:46,105 --> 00:26:48,238
  And then command slash again,
          to uncomment.
     再次command + /来取消给代码注释.
+
 615
 00:26:48,240 --> 00:26:55,311
   [INAUDIBLE] real quick cuz I
    just wanna focus on times.
     这样就可以专注于当前的事情上,
+
 616
 00:26:55,313 --> 00:26:58,247
          Now any time I
       press any operator,
     任何时候,点击任何操作符,
+
 617
 00:26:58,249 --> 00:27:02,317
      I probably wanna give
   the user an automatic enter.
     可能会给用户自动按下enter键
+
 618
 00:27:02,319 --> 00:27:05,087
    That's so that six enter,
           three enter,
     也就是6,enter,3,enter
+
 619
 00:27:05,089 --> 00:27:07,989
       times is the same as
      six enter three times.
     乘,和6乘以3一样
+
 620
 00:27:09,392 --> 00:27:12,393
  Okay, so six enter three times
  is gonna do an automatic enter
     好了,6 enter 3 乘 会自动来一个enter
+
 621
 00:27:12,395 --> 00:27:13,927
          on that three.
@@ -3240,16 +3259,19 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
          Cuz obviously,
     I intend to have six and
  显然,在这种情况下,我想让6和
+
 623
 00:27:16,598 --> 00:27:18,998
       three be multiplied
          in that case.
 		 3相乘
+
 624
 00:27:19,000 --> 00:27:26,705
       So for all of these
   operations, I going to say,
 	对于所有的操作符,我要说的是
+
 625
 00:27:26,707 --> 00:27:29,708
    if the users in the middle
@@ -3267,622 +3289,752 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
      Okay, so [COUGH] what
       do we need to do in	
 		好了,我们需要
+
 628
 00:27:36,349 --> 00:27:39,516
   this specific case of times?
   在乘这里做什么?
 	
-
 629
 00:27:39,518 --> 00:27:42,886
    Well, really we just want
    to set our display value.
 	我们需要在这里显示计算的结果.
+
 630
 00:27:42,888 --> 00:27:46,856
    Remember we have our nice
     display value down here.
 	记住,我们有自己的显示值的方法.
+
 631
 00:27:46,858 --> 00:27:49,492
      And we can do setting
       as well as getting.
 	我们可以进行赋值,也可以进行取值
+
 632
 00:27:49,494 --> 00:27:52,094
   So I set that display value.
 	因此,在这里赋值.
+
 633
 00:27:52,096 --> 00:27:55,264
             Up here.
 	 这里.
+
 634
 00:27:55,265 --> 00:27:58,433
   Equal to multiplying the top
    two things on this stack.
 	等于将栈顶的两个数相乘
+
 635
 00:27:58,435 --> 00:28:02,270
     So I can actually remove
     something off our stack.
 	因此,我可以从栈里移除一些元素.
+
 636
 00:28:02,272 --> 00:28:04,705
      We're representing our
        stack as an array.
 	我们使用一个数组带代表栈结构.
+
 637
 00:28:05,941 --> 00:28:07,908
            Of course,
  they are stacked as an array.
 	当然了,确实是使用一个数组来表示的栈.
+
 638
 00:28:07,910 --> 00:28:11,311
   And so a stack is something
       you push things on,
 	栈是一个可以压入元素到栈离,
+
 639
 00:28:11,313 --> 00:28:12,979
       you pop things off.
 	可以从栈里弹出元素
+
 640
 00:28:12,981 --> 00:28:15,614
  And with an array, we're just
   gonna add something there at
 	使用数组的话,只要
+
 641
 00:28:15,616 --> 00:28:17,082
  the end to push something on,
               and
 	在数组的末尾添加一个元素来模拟元素入栈
+
 642
 00:28:17,084 --> 00:28:19,317
     that will just remove it
   from the end to pop it off.
 	在数组的末尾移除一个元素来模拟元素出栈
+
 643
 00:28:19,319 --> 00:28:21,653
        So there's a nice.
 	这种模拟看起来很酷吧.
+
 644
 00:28:21,655 --> 00:28:23,654
            All right.
     This is an array, right?
 	好了,这是一个数组,是么?
+
 645
 00:28:23,656 --> 00:28:26,007
         Operand stacks.
 	操作符栈.
+
 646
 00:28:26,008 --> 00:28:28,359
      There's a nice method
       called remove last.
 	有个很好使的方法叫做:移除最后一个元素
+
 647
 00:28:28,361 --> 00:28:30,894
    And if we option click on
   remove last, you'll see here
 	如果在removelast方法上按住option键,
+
 648
 00:28:30,896 --> 00:28:33,430
    that it removes an element
    from the end of the array.
 	可以看到说明:从数组的末尾移除一个元素
+
 649
 00:28:34,666 --> 00:28:37,567
       Now, it does require
    a count greater than zero.
 	需要数组的元素个数大于零.
+
 650
 00:28:37,569 --> 00:28:42,705
    So if our array were empty
  this would crash our program.
 	如果数组是空的话,移除元素会导致程序崩溃
+
 651
 00:28:42,707 --> 00:28:44,840
      So let's put a little
      protective thing here.
 	所以,在这里做一些保护性的措施.
+
 652
 00:28:44,842 --> 00:28:47,742
      If the operand stacks.
 	如果操作符栈
+
 653
 00:28:47,744 --> 00:28:50,411
     There's a nice property
    here called Count on that.
 	操作符栈变量有一个属性叫做Count
+
 654	
 00:28:50,413 --> 00:28:52,947
         It is greater or
 	如果大于或者
+
 655
 00:28:52,948 --> 00:28:55,482
  equal to two actually because
  multiply takes two operand so
 	等于2,因为乘法需要2个操作数
+
 656
 00:28:55,485 --> 00:28:57,484
         there better two
      things on this stack.
 	所以至少需要栈中有2个元素
+
 657
 00:28:58,921 --> 00:29:01,121
    Then we can do this and so
 	然后,我们可以这样做,
+
 658
 00:29:01,123 --> 00:29:05,324
    we're gonna multiply that
   by and remove the next one.
 	相乘,然后移除最后一个元素
+
 659
 00:29:05,326 --> 00:29:06,125
              Okay?
 	对么?
+
 660
 00:29:06,127 --> 00:29:07,259
         So here we got-
 	这样的话,
+
 661
 00:29:09,062 --> 00:29:12,463
  We're just taking the last two
   things off of this stack by
 	我们从栈中移除最后两个元素,
+
 662
 00:29:12,465 --> 00:29:14,832
        removing them from
     the end of the array and
 	通过从数组中移除元素
+
 663
 00:29:14,834 --> 00:29:17,334
        just assigning it
        to display value.
 	赋值给displayValue变量
+
 664
 00:29:17,336 --> 00:29:19,469
       And we probably also
    want to do an enter here,
 	这里可能需要做一个enter,
+
 665
 00:29:19,471 --> 00:29:22,539
     because [COUGH] if I go
      six enter three times,
 	如果单击6 enter 3 乘,
+
 666
 00:29:22,541 --> 00:29:25,108
   well then I want to be able
    to say then nine plus and
 	这样就得到9加
+
 667
 00:29:25,110 --> 00:29:28,744
         have it add onto
       the six times three.
 	然后加上6乘以3
+
 668
 00:29:29,713 --> 00:29:32,213
     So we want an automatic
       enter here, as well.
 	这里需要一个自动点击enter,
+
 669
 00:29:32,215 --> 00:29:34,149
              Okay?
 	是么?
+
 670
 00:29:34,150 --> 00:29:36,084
      So, that's pretty much
     all we need to do here.
 	这大概就是我们需要在这里做的了.
+
 671
 00:29:36,086 --> 00:29:41,021
   Let's go ahead and run this,
       see how this works.
 	继续,运行这个程序,看它是怎么工作的,
+
 672
 00:29:43,826 --> 00:29:47,527
      And so, six enter, or
     three enter, six enter.
 	6 确认 或者 3 确认 6 确认
+
 673
 00:29:47,529 --> 00:29:49,996
        Now we've got them
        both on the stack.
 	可以在栈上看到它们
+
 674
 00:29:49,998 --> 00:29:52,898
      Times and you can see
       we put our 18 here.
 	相乘,然后可以看到结果是18
+
 675
 00:29:52,900 --> 00:29:55,668
       It also put it back
         on the stack and
 	结果也被放入的栈中,
+
 676
 00:29:55,670 --> 00:29:57,536
      we can say five times.
 	比如,5 乘
+
 677
 00:29:57,538 --> 00:29:59,237
         That put a five
         on the stack and
 	将5放入栈中,
+
 678
 00:29:59,239 --> 00:30:01,372
      then multiplied them,
           took it off.
 	将它们相乘,从栈中移除,
+
 679
 00:30:01,374 --> 00:30:03,107
    So that's working nicely.
 	程序运行的不错啊
+
 680
 00:30:03,109 --> 00:30:05,576
   [COUGH] Now what about our-
 	现在,
+
 681
 00:30:05,578 --> 00:30:06,743
       Other buttons, here.
 	这里,我们的其他的按钮,
+
 682
 00:30:06,745 --> 00:30:08,745
    We gonna make those work.
 	我们要让它们工作.
+
 683
 00:30:08,747 --> 00:30:12,548
          Let's do that.
 	让我们完成这个工作.
+
 684
 00:30:12,550 --> 00:30:16,152
       Now, they do a very
       similar thing, here.
 	它们需要完成十分相似的事情, 
+
 685
 00:30:16,154 --> 00:30:20,088
     So, one temptation would
      be to just copy here.
 	所以,来复制下这部分,
+
 686
 00:30:20,090 --> 00:30:22,657
    Let's uncomment these out.
 	打开这部分的注释,
+
 687
 00:30:23,693 --> 00:30:25,459
     And then just paste it,
           repeatedly.
 	然后粘贴到这里,重复粘贴,
+
 688
 00:30:25,461 --> 00:30:26,827
        So, put it there.
 	放到这里.
+
 689
 00:30:27,996 --> 00:30:31,831
    There, there and then just
      changes times in here.
 	只需要更改这里的乘号.
+
 690
 00:30:31,833 --> 00:30:35,868
        D note to plus for
       example on this one.
 	这个换成一个加号,
+
 691
 00:30:35,870 --> 00:30:39,038
  But his is pretty messy code,
         look at all this
 	但是,这样的代码看起来很乱,
+
 692
 00:30:39,040 --> 00:30:42,841
       incredible amount of
    duplicating code, in here.
 	这里有大量的重复的代码,
+
 693
 00:30:42,843 --> 00:30:47,145
   We really probably wouldn't
   to write our code like this.
 	我们确实不希望我们的代码写成这样.
+
 694
 00:30:47,147 --> 00:30:49,780
    People would think we were
      terrible programmers I
 	别人会认为我们是很糟糕的程序员
+
 695
 00:30:49,782 --> 00:30:51,482
      think if we did that.
 	如果我们像这样写代码的话.
+
 696
 00:30:51,484 --> 00:30:54,251
       Really what would be
     nice is if we had some,
 	什么样的代码看起来会不错呢? 
+
 697
 00:30:54,253 --> 00:30:56,453
         could write some
        kind of function.
 	那就是如果我们可以把这些重复的代码写成函数
+
 698
 00:30:56,455 --> 00:31:00,990
      Maybe we could call it
       perform operation or
 	我们可能会给这个函数起名perfomOperation
+
 699
 00:31:00,992 --> 00:31:02,458
       something like that.
 	或者类似意思的名字.
+
 700
 00:31:02,460 --> 00:31:05,927
       And if the argument
        to that function.
 	至于函数的参数,
+
 701
 00:31:05,929 --> 00:31:08,196
          Remember that
      arguments have names.
 	注意,函数参数也是又名字的,
+
 702
 00:31:08,198 --> 00:31:09,163
         Here's the name.
 	这就是名字. 
+
 703
 00:31:09,165 --> 00:31:10,364
    And then we have the type.
 	然后是参数类型. 
+
 704
 00:31:11,434 --> 00:31:16,269
   The argument were something
     which basically was this
 	这里的参数就是
+
 705
 00:31:16,271 --> 00:31:19,305
   little operation in here, or
 	这里的操作符,
+
 706
 00:31:19,307 --> 00:31:21,707
    some sort of function that
     would do this operation.
 	这就是完成操作符操作的函数.
+
 707
 00:31:21,709 --> 00:31:24,576
     So if this could be some
      sort of function that
  	如果可以写成函数的话,
+
 708
 00:31:24,578 --> 00:31:25,277
          would be cool.
 	看起来就不错了.
+
 709
 00:31:25,279 --> 00:31:27,078
      Then, maybe we could.
 	然后,我们可能会,
+
 710
 00:31:27,080 --> 00:31:28,880
  I take this code out of here,
         put it in here.
 	将这段代码移动到这里,
+
 711
 00:31:30,149 --> 00:31:34,384
    Let's call it perform not
   pre-form, perform operation.
 	起码为perform,而不是pre-form
+
 712
 00:31:34,386 --> 00:31:36,353
    [LAUGH] Put it in here and
 	放在这里.
+
 713
 00:31:36,355 --> 00:31:38,921
        instead of doing,
     you know, multiply here.
 	你懂的,这里不是使用乘.
+
 714
 00:31:38,923 --> 00:31:41,190
    Let's go ahead and we can
   do this operation some how.
 	继续,完成这个操作.
+
 715
 00:31:41,192 --> 00:31:42,891
  I guess, well maybe operation,
 	可能是operation函数,
+
 716
 00:31:42,893 --> 00:31:48,196
     call it like a function
     with two arguments here.
 	像一个带两个参数的函数一样调用.
+
 717
 00:31:51,067 --> 00:31:52,500
              Okay.
          That would be
 	好了,看起来很不错了.
+
 718
 00:31:52,502 --> 00:31:55,202
  cool because we'd be sharing,
      you know, this check.
 	因为我们共用了这段代码.
+
 719
 00:31:55,204 --> 00:31:57,204
   We'd be sharing this enter.
 	公用了这enter方法
+
 720
 00:31:57,206 --> 00:31:59,472
     [COUGH] We'd be sharing
   the removal of the operator.
 	共用了removal操作方法.
+
 721
 00:31:59,474 --> 00:32:01,441
         We'd be sharing
     the same display value.
 	共用了displayValue变量. 
+
 722
 00:32:01,443 --> 00:32:04,209
     We'd be kind of sharing
      a lot of code here and
 	这样,公用了大段的代码,
+
 723
 00:32:05,746 --> 00:32:08,179
     then up here if we could
     just do something like,
 	在上面,只需要像这样做,
+
 724
 00:32:08,181 --> 00:32:12,850
        perform operation,
      and, somehow, specify,
 	调用函数,
+
 725
 00:32:12,852 --> 00:32:16,186
    multiply, as the operation
      we wanted to do here.
 	指定函数参数,
+
 726
 00:32:16,188 --> 00:32:23,593
    And then we wouldn't need
   all this stuff here, right?
 	这段代码就不需要了,对么?
+
 727
 00:32:23,595 --> 00:32:24,527
    So this is gonna be cool.
 	看起来很不错吧?
+
 728
 00:32:24,529 --> 00:32:25,995
       Now, can we do this?
 	可以这样做么?
+
 729
 00:32:25,997 --> 00:32:28,564
            Well, yes,
      the answer is we can.
 	当然了,可以的.
+
 730
 00:32:28,566 --> 00:32:33,134
    And so, types, functions.
 	参数类型,函数
+
 731
 00:32:33,136 --> 00:32:37,005
      Can be types in Swift,
    just like any other type.
 	在Swift里可以当做类型,就像其他的类型一样
+
 732
 00:32:37,007 --> 00:32:40,040
      So, you know, we have
   a double here, oops, double.
 	这里需要一个double,
+
 733
 00:32:41,844 --> 00:32:42,809
          That's a type.
 	就是这个类型,
+
 734
 00:32:42,811 --> 00:32:43,943
        You can also have
         a function type.
 	也可以有一个函数类型.
+
 735
 00:32:43,945 --> 00:32:45,611
      So how do you specify
         a function type?
 	那么,怎么指定一个函数类型呢?
+
 736
 00:32:45,613 --> 00:32:47,846
        Well multiple I or
 	比如multiple,
+
 737
 00:32:47,848 --> 00:32:49,981
      whatever function I'm
      about to perform here.
 	或者是任何其他想要执行的函数,
+
 738
 00:32:49,983 --> 00:32:54,686
  This is a function that takes
    two doubles as arguments.
 	这个函数需要两个double类型的参数
+
 739
 00:32:54,688 --> 00:32:56,354
     And it returns a double.
 	函数的返回值类型也是一个double类型
+
 740
 00:32:56,356 --> 00:33:00,190
       So, I can just say,
      I want operation to be
 	我想要一个函数,
+
 741
 00:33:00,192 --> 00:33:04,661
    a function that takes two
  doubles and returns a double.
 	带两个double类型参数,返回double类型
+
 742
 00:33:04,663 --> 00:33:07,363
  I can express that right here.
 	这就是我要表达的,
+
 743
 00:33:07,365 --> 00:33:11,300
         This is a type,
        the type of this.
 	这就是参数类型,这种类型.
+
 744
 00:33:12,369 --> 00:33:15,870
   Argument right here that you
    can click on and say yeah
 	在这里的参数上右键,
+
 745
 00:33:15,872 --> 00:33:18,639
  that type is double takes two
  doubles and returns a double.
 	可以看到信息:2个double类型的参数,一个double类型返回值.
+
 746
 00:33:20,276 --> 00:33:22,176
     So, just simple as that.
 	就是这么简单.
+
 747
 00:33:22,177 --> 00:33:24,077
        So all we need now
        is a function here
 	我们所知道的,这里是一个函数,
+
 748
 00:33:24,079 --> 00:33:26,379
       called multiply that
      takes two doubles and
 	函数名multiply,带2个参数,
+
 749
 00:33:26,381 --> 00:33:28,514
       returns a double and
       does multiplication.
 	返回double类型,完成乘法操作.
+
 750
 00:33:28,516 --> 00:33:33,118
   So we could go down here and
      say okay multiply and
 	好了,看下面的乘,
+
 751
 00:33:33,120 --> 00:33:35,587
      you'll have op1 which
        is double and op2.
 	有一个参数,double类型,第二个参数, 
+
 752
 00:33:35,589 --> 00:33:39,157
       [COUGH] A double and
     it returned the double.
 	double类型,返回一个double类型.
+
 753
 00:33:39,159 --> 00:33:41,926
       And it's just return
        one times out two.
 	这个函数返回参数1乘以参数2
+
 754
 00:33:42,962 --> 00:33:44,261
              Okay?
 	对么?
+
 755
 00:33:44,263 --> 00:33:45,729
      And that worked great.
 	看来起不错哟!
+
 756
 00:33:45,731 --> 00:33:51,600
     Back out again so we can
   see if this actually works.
 	回到上面,看它是否真的可以正常运行.
+
 757
 00:33:51,602 --> 00:33:53,168
   But there's no arrows here.
 	没有任何错误.
+
 758
 00:33:53,170 --> 00:33:55,387
              Right?
        It seems to work.
 	对么?看起来可行.
+
 759
 00:33:55,388 --> 00:33:57,605
       Multiply seems to be
@@ -3897,358 +4049,432 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
       And that's what this
       argument here is and
 	这里的这个参数,
+
 762
 00:34:00,944 --> 00:34:02,661
      I'm passing it along.
 	将它传入
+
 763
 00:34:02,662 --> 00:34:04,379
      It should all work so
       let's give it a try.
 	应该是可行的,那么试一下吧.
+
 764
 00:34:08,818 --> 00:34:10,684
         So here we go as
         it takes enter.
 	  点下enter
+
 765
 00:34:10,686 --> 00:34:15,188
           54 times and
   sure enough it's working it.
 	54乘以,好了,没问题.
+
 766
 00:34:15,190 --> 00:34:17,757
         It's doing that
         multiplication.
 	完成了乘法操作.
+
 767
 00:34:18,826 --> 00:34:23,428
  Works great and so what about
   all of our other cases here?
 	做的不错,其他的case语句呢?
+
 768
 00:34:23,430 --> 00:34:26,731
        Well we would just
     need to take this same.
 	只需要也像这样做.
+
 769
 00:34:26,733 --> 00:34:29,400
   Piece of code right here and
     put it for all of them.
 	所有的case语句,这里一段代码,
+
 770
 00:34:29,402 --> 00:34:32,169
  And of course we need a divide
      method, so we have to
 	当然了,我们需要除法函数,
+
 771
 00:34:32,171 --> 00:34:35,805
   come down here, and copy and
   paste that, and make divide.
 	来到下面,复制,粘贴,起名divide
+
 772
 00:34:35,807 --> 00:34:37,907
        Oh wait a second,
 	稍等, 
+
 773
 00:34:37,909 --> 00:34:41,210
   this is starting to be just
     as bad as I had before.
 	看起来又像之前的一样,很糟糕了.
+
 774
 00:34:41,212 --> 00:34:44,646
     Having to make all these
  extra functions, multiply and
 	需要这些额外的函数,乘法,
+
 775
 00:34:44,648 --> 00:34:46,081
       divide and all that.
 	触发,等等.
+
 776
 00:34:46,082 --> 00:34:47,515
         Well [COUGH] it
        turns out it's so
 	事情上,
+
 777
 00:34:47,518 --> 00:34:52,553
   common to pass functions as
   arguments in Swift, that it
-	字啊Swift中,把函数作为参数传递是很常见的.
+	在Swift中,把函数作为参数传递是很常见的.
+
 778
 00:34:52,555 --> 00:34:56,390
   allows you to put a function
      like multiply right in
 	允许你传递一个,比如multiply,的函数,
+
 779
 00:34:56,392 --> 00:35:00,327
  here without having to create
  a separate function like this.
 	不需要再创建一个函数
+
 780
 00:35:00,329 --> 00:35:02,195
        And all you do is
       you just pick it up.
 	需要做的是,选中,
+
 781
 00:35:02,197 --> 00:35:05,131
     So I'm just going to cut
     that from down here and
 	从这里剪切
+
 782
 00:35:05,133 --> 00:35:06,599
        I'm going to paste
        it right in here.
 	粘贴到这里来
+
 783
 00:35:07,702 --> 00:35:10,168
    The only thing you have to
  change syntactically when you
 	唯一需要做语法上的改变的是,
+
 784
 00:35:10,170 --> 00:35:13,738
   do that is this curly brace,
              okay.
 	这里是一个大括号.
+
 785
 00:35:13,740 --> 00:35:16,541
      Instead of being after
        the declaration of
 	而不是之前在声明
+
 786
 00:35:16,543 --> 00:35:21,779
   the arguments in the return
  value, it needs to be before.
 	函数,返回值之后.
+
 787
 00:35:21,781 --> 00:35:24,314
      So, you move the curly
          brace before.
 	把大括号放到前面.	
+
 788
 00:35:24,316 --> 00:35:25,648
          And then where
       the curly brace was,
 	之前这里是小括号.
+
 789
 00:35:25,650 --> 00:35:27,417
  you gonna put in, the word in.
 	这里添加一个单词in
+
 790
 00:35:28,586 --> 00:35:30,486
  And so that allows us to just.
 	允许我们稍微调整下.
+
 791
 00:35:30,488 --> 00:35:34,723
    Come and do that again to
  eliminate some of our errors.
 	现在把这些错误解决了,
+
 792
 00:35:34,725 --> 00:35:37,291
      And we can get rid of
   function multiply down here.
 	移除这里的mutiply
+
 793
 00:35:39,328 --> 00:35:42,862
  So that allows me to just put
  that multiplier right in here.
 	把乘法放在这里.
+
 794
 00:35:42,864 --> 00:35:44,030
          Right in line.
 	就是这里.
+
 795
 00:35:44,032 --> 00:35:46,032
      Write as the argument
        to this function.
 	给这个函数写一个参数.
+
 796
 00:35:46,034 --> 00:35:48,167
  And this things kind of wacky.
 	 看起来略古怪.
+
 797
 00:35:48,169 --> 00:35:49,701
         For those of you
        who don't know it,
 	对于一些不了解的人来讲,
+
 798
 00:35:49,703 --> 00:35:51,469
    user programming languages
       that allow this kind
  	编程语言中,
+
 799
 00:35:51,471 --> 00:35:53,604
        of thing to happen
       are called closures.
 	这种情况称之为闭包.
+
 800
 00:35:54,607 --> 00:35:56,540
  It basically allows you to put
    a function right in there.
 	允许在这里放一个函数.
+
 801
 00:35:56,542 --> 00:36:02,812
    And this, okay here, looks
  okay, I mean we can certainly
 	好了,这看起来还不错.
+
 802
 00:36:02,814 --> 00:36:05,481
  you know, now we can copy and
   paste this and put it here.
 	下面又是复制,粘贴,放着
+
 803
 00:36:05,483 --> 00:36:06,615
        You know, here and
 	放这里
+
 804
 00:36:06,617 --> 00:36:09,118
         change this and
   put it here and change this.
 	改了这个,放在这里,改了这个,	
+
 805
 00:36:09,120 --> 00:36:12,287
        But it can even be
        better than this.
 	但是,我们可以进一步改进.
+
 806
 00:36:12,289 --> 00:36:15,223
      So we know that Swift
        is really good at
 	我们知道Swift很擅长的
+
 807
 00:36:15,225 --> 00:36:17,658
         something called
         type inference.
 	一个特性称为类型引用.
+
 808
 00:36:17,660 --> 00:36:19,493
        Where I can kinda
       figure out the type,
  	从类型引用可以看出是什么类型,
+
 809
 00:36:19,495 --> 00:36:22,863
          of something,
        from the context.
 	结合上下文来看.
+
 810
 00:36:22,865 --> 00:36:25,165
          And you can do
       the same thing here.
 	这里也可以这么做.
+
 811
 00:36:25,167 --> 00:36:27,267
       Because its looking
      at perform operation.
 	看下这里的performOperation
+
 812
 00:36:27,269 --> 00:36:29,435
     It knows you're calling
        perform operation.
 	它知道你在调用performOperation
+
 813
 00:36:29,437 --> 00:36:33,039
    It knows this argument is
    a function that takes two
 	它知道这个函数的参数,
+
 814
 00:36:33,041 --> 00:36:34,940
  doubles and returns a double.
 	2个double类型,一个double类型的返回值.
+
 815
 00:36:34,942 --> 00:36:38,377
   So you really don't have to
  specify all the types in here.
 	所以,这里不需要明确的指定类型,
+
 816
 00:36:38,379 --> 00:36:39,978
    Cuz it knows all of this.
 	因为它知道这些事情.
+
 817
 00:36:39,980 --> 00:36:43,381
  So you can actually get rid of
   all these type decorations,
 	所以,可以删除这些类型声明.
+
 818
 00:36:43,383 --> 00:36:45,416
   right here, even the return.
 	甚至是返回值类型也可以省去.
+
 819
 00:36:45,418 --> 00:36:47,851
           And, again,
  seeing no warnings, no errors.
 	可以看到,没有任何警告,错误.
+
 820
 00:36:47,853 --> 00:36:49,553
      It knows that this has
       to be a double, and
 	它知道这个参数是double,
+
 821
 00:36:49,555 --> 00:36:51,454
     this has to be a double.
 	这个参数也是dobule类型.
+
 822
 00:36:51,456 --> 00:36:53,556
     Because it knows you're
    calling perform operation.
 	因为它知道你需要调用的函数.
+
 823
 00:36:53,558 --> 00:36:56,959
     So it knows the argument
      to that is like that.
 	就像这样,它知道函数的参数.
+
 824
 00:36:58,529 --> 00:37:00,962
   Okay, and you can even make
    this look a little nicer.
 	好了,可以进行进一步的改进.
+
 825
 00:37:00,964 --> 00:37:03,631
       We can move this all
        up onto one line.
 	把这些上移一行.
+
 826
 00:37:04,800 --> 00:37:08,168
         Really nice for
        readability here.
 	看来起更具有可读性.
+
 827
 00:37:08,170 --> 00:37:11,037
     But, we can actually do
      even better than this,
 	事实上,我们可以做的更好. 
+
 828
 00:37:11,039 --> 00:37:15,074
     because Swift knows that
   perform operations argument
 	因为Swift知道这个函数
+
 829
 00:37:15,076 --> 00:37:18,844
   returns something, you don't
   need this return key if your
 	返回一个值,所以你不需要return
+
 830
 00:37:18,846 --> 00:37:22,715
   whole is just an expression
    like this return key word.
 	如果所有的代码只有一个返回语句.
+
 831
 00:37:22,717 --> 00:37:25,717
   You don;t need that key word
     because it knows this is
 	不需要return这个关键字了,
+
 832
 00:37:25,719 --> 00:37:27,485
   going to return something so
 	因为程序知道你要返回什么.
+
 833
 00:37:27,487 --> 00:37:32,056
    this is just an expression
     it's going to return it.
 	这样只返回一个表达式就可以了.
+
 834
 00:37:33,325 --> 00:37:37,260
    But it's even better than
    that because a swift does
 	更好的做法是,
+
 835
 00:37:37,262 --> 00:37:40,597
      not force you to name
@@ -4259,308 +4485,371 @@ actually implement enter here.好了，那么现在我们在这里实现这个�
    If you don;t name them it
     will use the names Dar0.
 	如果不手动命名的话,程序自动给参数起码$0
+
 837
 00:37:44,969 --> 00:37:46,952
          Dollar 1, and
 	$1,
+
 838
 00:37:46,953 --> 00:37:48,936
   if you have more arguments,
  dollar 2, dollar 3, dollar 4.
 	如果有更多的参数,会命名为$2,$3,$4.
+
 839
 00:37:48,939 --> 00:37:50,706
   So you don't even need this.
 	所以,这也不要了.
+
 840
 00:37:52,142 --> 00:37:53,441
              Okay?
-	对么?
+
 841
 00:37:53,443 --> 00:37:55,710
      So this is a function
           right here.
 	这里是一个函数.
+
 842
 00:37:55,712 --> 00:37:58,112
      It takes two doubles,
    dollar 0 and dollar 1, and
 	这个函数有两个double类型参数,$0,$1	
+
 843
 00:37:58,114 --> 00:37:59,546
        returns a double.
 	返回一个double类型的值.
+
 844
 00:37:59,548 --> 00:38:02,916
   Now Swift knows that they're
  doubles because it knows that
 	Swift知道它们是double类型.
+
 845
 00:38:02,918 --> 00:38:04,517
      you're passing them to
      perform an operation.
 	因为你将它们传递给了这个函数.
+
 846
 00:38:04,519 --> 00:38:07,920
   If you were passing this to
   some other, a function that
 	如果把它们传递给其他的函数,
+
 847
 00:38:07,922 --> 00:38:10,789
      took different kind of
  function as an argument, then,
 	比如有不同类型的参数,
+
 848
 00:38:10,791 --> 00:38:14,126
  you know, these types might be
  different but in this case it
 	这些类型可能和上面不同.
+
 849
 00:38:14,128 --> 00:38:16,961
   knows that's what it is and
  it knows that it returns once
 	但是Swift知道该使用什么类型
+
 850
 00:38:16,963 --> 00:38:20,731
  it knows it's going to return
    what this calculation is.
 	这里就是这样的.
+
 851
 00:38:21,801 --> 00:38:22,366
            All right.
 	好了.
+
 852
 00:38:23,568 --> 00:38:26,536
   Now one more cool syntactic
    thing you can do is if you
 	更酷的事情是,
+
 853
 00:38:26,538 --> 00:38:29,305
       have a function like
      performOperation, and
 	如果有一个performOperation这样的函数,
+
 854
 00:38:29,307 --> 00:38:32,741
  it has an argument which is a
  function like operation here,
 	有个像operation这样的参数,
+
 855
 00:38:32,743 --> 00:38:36,445
       if this argument is
   the last argument, okay, so
 	如果是最后一个参数,
+
 856
 00:38:36,447 --> 00:38:38,446
     if I had other arguments
          before it, and
 	在之前又别的参数,
+
 857
 00:38:38,448 --> 00:38:42,917
   this was the argument, then
    you can move the function.
 	这是参数,可以移动这个函数的位置
+
 858
 00:38:43,886 --> 00:38:47,888
     Outside the parentheses,
       so other arguments,
 	移动到括号外,参数也是.
+
 859
 00:38:47,890 --> 00:38:50,123
  if there were other arguments
  before, they would go in here.
 	如果又其他类型的参数,可以放在这里. 
+
 860
 00:38:51,726 --> 00:38:54,327
     But this last argument,
 	但是这个最后的一个参数.
+
 861
 00:38:54,328 --> 00:38:56,929
  which is this operation, gets
  to go outside the parentheses.
 	这个函数,需要放在括号外.
+
 862
 00:38:56,931 --> 00:38:59,564
    And if there are no other
      arguments, if this is
 	如果没有其他的参数,
+
 863
 00:38:59,566 --> 00:39:02,033
    the only argument, you can
    actually get rid of that.
 	如果只有一个参数,可以删除它.
+
 864
 00:39:03,870 --> 00:39:05,269
              Okay.
-	好了.
+
 865
 00:39:05,271 --> 00:39:08,705
      So, we're cutting down
      to incredibly concise
 	 因此,我们把程序变得很简洁了	
+
 866
 00:39:08,707 --> 00:39:13,509
     language here and we can
     do this exact same deal,
 	可以再这样做.
+
 867
 00:39:13,511 --> 00:39:18,047
       of course with these
      other form operations.
 	其他的操作也可以这样做.
+
 868
 00:39:18,049 --> 00:39:19,848
   We just need to change the.
 	只需要改这里.
+
 869
 00:39:20,817 --> 00:39:21,382
          Nothing here.
 	这里不需要改.
+
 870	
 00:39:22,585 --> 00:39:24,184
     This one, we be a little
    careful with the order of
 	这里,需要注意参数的顺序,
+
 871
 00:39:24,186 --> 00:39:27,421
         operations here,
   we wanna do this because we
 	我们会这么做,
+
 872
 00:39:27,423 --> 00:39:30,824
    click the thing that we're
  dividing by on the stack last.
 	除以栈中的最后一个元素.
+
 873
 00:39:30,826 --> 00:39:34,660
    And that's the first thing
    that comes off the stack.
 	栈中最先离开的元素
+
 874
 00:39:34,662 --> 00:39:35,494
  And same thing here actually,
 	这里也要注意,
+
 875
 00:39:35,496 --> 00:39:38,163
         the subtraction
        minus dollar here.
 	减法,减号,$,	
+
 876
 00:39:38,165 --> 00:39:41,900
      Okay, so, this is our
       entire operate, and
 	好了,这就是我们的全部操作.
+
 877
 00:39:41,902 --> 00:39:44,469
      you can see that it's
       incredibly concise.
 	你可以看到,这相当的简洁.
+
 878
 00:39:44,471 --> 00:39:45,803
          Very readable.
 	很高的可读性.
+
 879
 00:39:45,805 --> 00:39:47,504
         TImes is clearly
       doing this function.
 	这里改成乘法. 
+
 880
 00:39:47,506 --> 00:39:48,905
       And very extensible.
 	也有很高的可扩展性
+
 881
 00:39:48,907 --> 00:39:50,206
         If you wanna add
         more functions,
 	如果需要添加更多的操作,
+
 882
 00:39:50,208 --> 00:39:51,974
     we just one liners here,
 	只需要这里添加一行代码.
+
 883
 00:39:51,976 --> 00:39:55,745
  but more these [COUGH] binary
   functions that have two So,
 	这里我们就只有这么多.
+
 884
 00:39:55,747 --> 00:39:58,814
     let's go ahead and make
   sure these are all working.
 	继续,确保我们程序运行问题.
+
 885
 00:40:02,753 --> 00:40:04,686
            All right.
 	好的.
+
 886
 00:40:04,687 --> 00:40:06,620
       So, 6 enter 5 times,
     that's 30, that's good.
 	6乘以5,结果是30,看起来不错.
+
 887
 00:40:06,623 --> 00:40:11,291
      How about 47 plus 77,
            excellent.
 	47加上77,不错.
+
 888
 00:40:11,293 --> 00:40:13,593
       How about 2 divide.
 	2除以
+
 889
 00:40:13,595 --> 00:40:14,928
              38.5.
 	     38.5
+
 890
 00:40:14,930 --> 00:40:17,397
    [INAUDIBLE] number there.
 	这个数,三十八点五.
+
 891
 00:40:17,399 --> 00:40:20,299
  Working, you can see the stack
   doing all the right things.
 	正常,可以看到做的还错.
+
 892
 00:40:21,368 --> 00:40:24,102
              Okay?
           Make sense?
 	对么?正确的吧?
+
 893
 00:40:24,104 --> 00:40:26,771
       Now, I'm going to do
      one more thing, here.
 	现在,还需要做一个事情.
+
 894
 00:40:27,840 --> 00:40:29,473
         Which is to add
        another operation,
 	就是添加另外的一个操作符.
+
 895
 00:40:29,475 --> 00:40:31,174
  this is going to be a slightly
       different operation.
 	稍有不同的一个操作.
+
 896
 00:40:31,176 --> 00:40:32,375
    So, I'm going to copy and
 	复制一下,
+
 897
 00:40:32,377 --> 00:40:35,144
      paste these operation
          buttons here.
-	粘贴到这里.
+	粘贴到操作符按钮这里.
+
 898
 00:40:35,146 --> 00:40:37,880
  Again, I'm going to make sure
     they are lined up really
 	确保真正的对齐了.
+
 899
 00:40:37,882 --> 00:40:41,350
    nice with as many of these
     blue lines as I can get.
 	使用蓝色的线来对齐.	
+
 900
 00:40:42,786 --> 00:40:44,919
      I'm actually going to
    leave these buttons here.
 	把按钮放在这.
+
 901
 00:40:46,255 --> 00:40:48,389
   Because you're going to need

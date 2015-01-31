@@ -9,30 +9,27 @@ Stanford University.
 
 3
 00:00:08,375 --> 00:00:11,942
->> All right, well,welcome
-to Stanford CS193P,
+>> All right, well,welcome to Stanford CS193P,
 好 欢迎来到斯坦福CS193P
 
 4
 00:00:11,944 --> 00:00:13,377
 winter of 2015.
-2015冬季课程
+2015冬季课程。
 
 5
 00:00:13,379 --> 00:00:14,744
 This is lecture number two.
-这是我们的第二讲
+这是我们的第二讲。
 
 6
 00:00:14,746 --> 00:00:18,581
-I apologize upfront for my
-terrible voice, we are going
+I apologize upfront for my terrible voice, we are going
 由于我糟糕的嗓音，预先向大家致歉。今天我们将要
 
 7
 00:00:18,583 --> 00:00:20,549
-to try to get through this
-as best we can today.
+to try to get through this as best we can today.
 尽可能去克服这个困难。
 
 8
@@ -42,26 +39,22 @@ Our topics are two fold.
 
 9
 00:00:23,821 --> 00:00:25,854
-[COUGH] We're going to
-continue the calculator 
+[COUGH] We're going to continue the calculator 
 我们将继续在上一讲中已经开始的计算器Demo，
 
 10
 00:00:25,856 --> 00:00:29,924
-demo that we started, in last
-lecture and then we're gonna
+demo that we started, in last lecture and then we're gonna
 然后我们将会有
 
 11
 00:00:29,926 --> 00:00:32,526
-have some slides about this
-model view controller,
+have some slides about this model view controller,
 一些关于模型视图控制器，
 
 12
 00:00:32,528 --> 00:00:35,462
-object-oriented design pattern
-that we're gonna use in
+object-oriented design pattern that we're gonna use in
 和面向对象设计模式的幻灯片
 
 13
@@ -71,8 +64,7 @@ everything we do.
 
 14
 00:00:36,799 --> 00:00:40,066
-When we build applications
-in this class.
+When we build applications in this class.
 当我们在这节课中开发应用时
 
 15
@@ -82,26 +74,22 @@ All right?
 
 16
 00:00:41,152 --> 00:00:42,235
-So let's get started
-with that demo.
+So let's get started with that demo.
 没问题就让我开始演示Demo
 
 17
 00:00:42,237 --> 00:00:44,136
-Again, here's a slide with
-the summary of kind of
+Again, here's a slide with the summary of kind of
 这里是一张总结
 
 18
 00:00:44,138 --> 00:00:46,538
-the important things
-we're gonna talk about.
+the important things we're gonna talk about.
 接下去我们即将要讲的重点的幻灯片
 
 19
 00:00:46,540 --> 00:00:48,540
-You don't need to read
-those in advance here,
+You don't need to read those in advance here,
 你们并不需要提前去阅读这些
 
 20
@@ -111,25 +99,22 @@ it's more for reference.
 
 21
 00:00:49,710 --> 00:00:52,410
-My slides in general,
-I post them,
+My slides in general, I post them,
 我做的幻灯片一般来讲，
 
 22
 00:00:52,412 --> 00:00:55,246
-it's mostly intended to almost
-be note taking for you.
+it's mostly intended to almost be note taking for you.
 主要是为了方便你们记笔记用
 
 23
 00:00:55,248 --> 00:00:56,580
-To be able go back and try and
+To be able go back and try and 
 为了你们在复习的时候能够
 
 24
 00:00:56,582 --> 00:00:58,515
-figure out, whoa, when did
-he talked about that day?
+figure out, whoa, when did he talked about that day?
 回忆出，哇哦，他什么时候讲过这些？
 
 25
@@ -143,14 +128,12 @@ What's important, et cetera.
 
 27
 00:01:00,985 --> 00:01:03,419
-So my slides do tend to
-be a little bit dense.
+So my slides do tend to be a little bit dense.
 所以，我的幻灯片也往往是有点多。
 
 28
 00:01:03,421 --> 00:01:05,187
-I tend to put a little
-more on them, than,
+I tend to put a little more on them, than,
 我更倾向于多放一些关于这个的内容，
 
 29
@@ -160,20 +143,17 @@ than just bullet items.
 
 30
 00:01:06,990 --> 00:01:08,790
-But that's because I want you
-to be able to look back and
+But that's because I want you to be able to look back and
 但是，那是因为我希望你们能够回过头来看的时候
 
 31
 00:01:08,792 --> 00:01:11,726
-kind of get just a little
-bit more depth to
+kind of get just a little bit more depth to
 对于我所说的
 
 32
 00:01:11,728 --> 00:01:14,162
-remind yourself what
-I talked about.
+remind yourself what I talked about.
 你们更深入的理解
 
 33
@@ -187,63 +167,53 @@ All right, so
 
 35
 00:01:17,883 --> 00:01:20,400
-this demo, if you'll remember
-last time, where we left off,
+this demo, if you'll remember last time, where we left off,
 关于这个Demo，如果你们还记得上次我们快结束时，
 
 36
 00:01:20,403 --> 00:01:23,603
-we had gotten the keypad
-fully working.
+we had gotten the keypad fully working.
 我们已经完全实现了计算器的键盘的功能
 
 37
 00:01:23,605 --> 00:01:26,606
-All right, and we were talking
-a little bit about properties
+All right, and we were talking a little bit about properties
 我们将要讲一些关于属性和
 
 38
 00:01:26,608 --> 00:01:28,808
-and instant variables and
-how we had to initialize them.
+and instant variables and how we had to initialize them.
 实例变量相关的内容，以及如何去初始化它们
 
 39
 00:01:28,810 --> 00:01:30,710
-And so I'm gonna ask
-a question right at
+And so I'm gonna ask a question right at
 我将会在这讲结束的时候问一个问题
 
 40
 00:01:30,712 --> 00:01:33,012
-the end of lecture,
-perfect timing.
+the end of lecture, perfect timing.
 多完美的时机
 
 41
 00:01:33,014 --> 00:01:37,248
-What about the little
-outlet that we dragged out
+What about the little outlet that we dragged out
 为什么我们拖出的
 
 42
 00:01:37,250 --> 00:01:40,284
-that display UI label
-exclamation point, how come we
+that display UI label exclamation point, how come we
 显示UI Lable的outlet后面有个感叹号
 
 43
 00:01:40,286 --> 00:01:43,888
-didn't have to make that
-equal to something, to start.
-以及为什么我们从一开始不需要将它赋值
+didn't have to make that equal to something, to start.
+以及为什么我们从一开始不需要将它赋值。
 
 44
 00:01:43,890 --> 00:01:46,123
-And that's where this
-demo is gonna pick up.
-我们将从这个地方继续上次的Demo
+And that's where this demo is gonna pick up.
+我们将从这个地方继续上次的Demo。
 
 45
 00:01:46,125 --> 00:01:46,890
@@ -255,55 +225,48 @@ Okay?
 
 47
 00:01:49,760 --> 00:01:52,627
-[COUGH] Well, let's dive back
-into this demonstration,
-好吧，让我们深入到演示中来
+[COUGH] Well, let's dive back into this demonstration,
+好吧，让我们深入到演示中来，
 
 48
 00:01:52,630 --> 00:01:54,647
 where we left off.
-接着我们上次讲的地方
+接着我们上次讲的地方。
 
 49
 00:01:54,648 --> 00:01:56,665
-Which it was this
-line of code, here.
-上次我们在这行代码结束的
+Which it was this line of code, here.
+上次我们在这行代码结束的。
 
 50
 00:01:56,668 --> 00:01:59,868
-And, we had just talked about
-the fact that we have to
+And, we had just talked about the fact that we have to
 我们之前讲过我们必须
 
 51
 00:01:59,870 --> 00:02:04,572
-initialize all of our
-variables [COUGH] in a class,
+initialize all of our variables [COUGH] in a class,
 在类中初始化我们的变量
 
 52
 00:02:04,574 --> 00:02:05,807
 in any class.
-在任何类中都必须这样做
+在任何类中都必须这样做。
 
 53
 00:02:05,809 --> 00:02:09,510
-And, so that's why we need
-this equals falls here.
+And, so that's why we need this equals falls here.
 所以我们需要在这个加个等号
 
 54
 00:02:09,512 --> 00:02:13,747
-They wanted the equal falls
-too but we needed it and yet
+They wanted the equal falls too but we needed it and yet
 这里也需要等号赋值，但是
 
 55
 00:02:13,749 --> 00:02:15,482
-it didn't seem like
-we needed one here.
-这里看起来并不需要等号赋值
+it didn't seem like we needed one here.
+这里看起来并不需要等号赋值。
 
 56
 00:02:15,484 --> 00:02:17,050
@@ -312,51 +275,43 @@ And why was that?
 
 57
 00:02:17,052 --> 00:02:19,085
-Well, it turns out
-that this right here,
+Well, it turns out that this right here,
 好吧，事实证明，在这里
 
 58
 00:02:19,087 --> 00:02:22,254
-even though it doesn't quite
-look like one, is an optional.
+even though it doesn't quite look like one, is an optional.
 即使它看起来不完全像之前那个，这是一个optional
 
 59
 00:02:23,490 --> 00:02:28,559
-And, optionals automatically
-get equaled nil, given to you.
+And, optionals automatically get equaled nil, given to you.
 而且optionals在你使用之前就赋了nil
 
 60
 00:02:29,595 --> 00:02:31,862
-So, you don't actually have
-to put the equals nil here.
+So, you don't actually have to put the equals nil here.
 所以，其实你们并不需要在这里给它赋nil
 
 61
 00:02:31,864 --> 00:02:35,365
-So that's why, so this one
-here is getting initialized.
+So that's why, so this one here is getting initialized.
 这就是为什么这里已经初始化了
 
 62
 00:02:35,367 --> 00:02:37,600
-It's just being done
-automatically for you.
+It's just being done automatically for you.
 它都自动帮你做好了
 
 63
 00:02:37,602 --> 00:02:39,635
-But, let's talk about
-the look of this thing.
-但是，我们来谈论一下这个东西的样子
+But, let's talk about the look of this thing.
+但是，我们来谈论一下这个东西的样子。
 
 64
 00:02:40,905 --> 00:02:43,772
-It's got this
-exclamation point here.
-在这里有个感叹号
+It's got this exclamation point here.
+在这里有个感叹号。
 
 65
 00:02:43,774 --> 00:02:45,040
@@ -365,15 +320,13 @@ And, if it were an optional,
 
 66
 00:02:45,042 --> 00:02:47,208
-you'd be used to it
-having a question mark.
+you'd be used to it having a question mark.
 你们通常会在这里看到一个问号
 
 67
 00:02:47,210 --> 00:02:49,310
-For example, we look at
-this optional right here,
-例如，我们来看这里这个optional
+For example, we look at this optional right here,
+例如，我们来看这里这个optional，
 
 68
 00:02:49,312 --> 00:02:51,028
@@ -382,19 +335,17 @@ current title,
 
 69
 00:02:51,029 --> 00:02:52,745
-you see it's string question
-mark not exclamation point,
-你们将会看到这里string是问号而不是感叹号
+you see it's string question mark not exclamation point,
+你们将会看到这里string是问号而不是感叹号，
 
 70
 00:02:52,748 --> 00:02:54,665
 question mark.
-这里是问号
+这里是问号。
 
 71
 00:02:54,666 --> 00:02:56,583
-So what's the difference
-between a question mark and
+So what's the difference between a question mark and
 那么，在问号和感叹号之间
 
 72
@@ -409,79 +360,67 @@ And the answer is,
 
 74
 00:03:00,571 --> 00:03:02,588
-it makes no difference to
-the actual type, it's still
+it makes no difference to the actual type, it's still
 对于实际类型而言它们没有区别，
 
 75
 00:03:02,590 --> 00:03:05,958
-an optional whose value
-here could be a UI label.
+an optional whose value here could be a UI label.
 它仍然是一个optional，其值在这里可能是一个UI label类型。
 
 76
 00:03:07,161 --> 00:03:09,761
-But it matters on
-the usage of it.
+But it matters on the usage of it.
 但是它的区别在于它的用法上
 
 77
 00:03:09,763 --> 00:03:12,597
-[COUGH] And
-this is purely just kind of
+[COUGH] And this is purely just kind of
 这完全是编译器
 
 78
 00:03:12,599 --> 00:03:15,466
-a compiler helping
-you out thing, here.
+a compiler helping you out thing, here.
 帮你把这事做掉了
 
 79
 00:03:16,502 --> 00:03:18,602
-But if we look at
-when I change this to
+But if we look at when I change this to
 但是如果我们将这个感叹号
 
 80
 00:03:18,604 --> 00:03:21,538
-a question mark you see that
-some errors appear down here.
+a question mark you see that some errors appear down here.
 改成问号。Xcode将会在这里报出一些错误提示
 
 81
 00:03:21,540 --> 00:03:23,940
-So then let's click on one of
-these errors, like this one,
+So then let's click on one of these errors, like this one,
 那么，让我们点击这其中的一个错误提示，比如说这个
 
 82
 00:03:23,942 --> 00:03:26,208
-and you can see
-the errors that UI label,
+and you can see the errors that UI label,
 你们将会看到UI label控件
 
 83
 00:03:26,210 --> 00:03:29,244
-question mark does not
-have a member named text.
+question mark does not have a member named text.
 问号没有叫text的成员变量
 
 84
 00:03:29,246 --> 00:03:31,279
-In other words you
-can't send text.
-换句话说，你不能将text赋给
+In other words you can't send text.
+换句话说，你不能将text赋给。
 
 85
 00:03:31,281 --> 00:03:32,580
 UI label question mark,
-UI label问号
+UI label问号，
 
 86
 00:03:32,582 --> 00:03:35,350
-which is what this is and that
-makes sense because UI label
+which is what this is and that makes sense because UI label
 因为UI label后面这个问号
 
 87
@@ -497,23 +436,21 @@ obviously an optional doesn't respond to text.
 89
 00:03:39,455 --> 00:03:42,889
 UI labels do, but optionals don't.
-UI label是这样的，但optional不一定这样
+UI label是这样的，但optional不一定这样。
 
 90
 00:03:42,891 --> 00:03:44,858
-So, why are we getting
-this error now when we
+So, why are we getting this error now when we
 那么，为什么我们会这出错
 
 91
 00:03:44,860 --> 00:03:46,726
 weren't getting it before.
-在这之前却没有
+在这之前却没有。
 
 92
 00:03:46,728 --> 00:03:47,993
-And how would we get
-rid of this error?
+And how would we get rid of this error?
 我们又如何去避免这个错误？
 
 93
@@ -523,19 +460,17 @@ Well, you could certainly get rid of
 
 94
 00:03:49,463 --> 00:03:51,630
-this error by just putting
-an exclamation point here,
+this error by just putting an exclamation point here,
 添加一个感叹号来避免这个错误
 
 95
 00:03:51,632 --> 00:03:54,399
 that would unwrap this optional.
-它将会去除这个optional
+它将会去除这个optional。
 
 96
 00:03:54,401 --> 00:03:56,734
-And now this would be
-an UI label right here and
+And now this would be an UI label right here and
 那么现在这里会变成UI label，而且
 
 97
@@ -545,32 +480,27 @@ we can send a text.
 
 98
 00:03:57,820 --> 00:03:58,903
-And we do the same
-thing up here.
+And we do the same thing up here.
 我们在这里也做同样的操作
 
 99
 00:03:58,905 --> 00:04:03,073
-We can unwrap it there and
-we can unwrap it there.
+We can unwrap it there and we can unwrap it there.
 我们可以在这里去除它，也可以在那里去除它
 
 100
 00:04:03,075 --> 00:04:05,742
-And that gets rid of
-all of our errors.
-这样一来避免了所有同样的错误
+And that gets rid of all of our errors.
+这样一来避免了所有同样的错误。
 
 101
 00:04:05,744 --> 00:04:09,012
-But [COUGH] this kind of an
-interesting property in that
+But [COUGH] this kind of an interesting property in that
 但是这里有个很有意思的属性
 
 102
 00:04:09,014 --> 00:04:11,213
-even though it's
-not initialized in
+even though it's not initialized in
 即使它并没有初始化
 
 103

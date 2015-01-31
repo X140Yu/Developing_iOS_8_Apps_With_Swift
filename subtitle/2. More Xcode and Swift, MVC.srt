@@ -9,30 +9,27 @@ Stanford University.
 
 3
 00:00:08,375 --> 00:00:11,942
->> All right, well,welcome
-to Stanford CS193P,
+>> All right, well,welcome to Stanford CS193P,
 好 欢迎来到斯坦福CS193P
 
 4
 00:00:11,944 --> 00:00:13,377
 winter of 2015.
-2015冬季课程
+2015冬季课程。
 
 5
 00:00:13,379 --> 00:00:14,744
 This is lecture number two.
-这是我们的第二讲
+这是我们的第二讲。
 
 6
 00:00:14,746 --> 00:00:18,581
-I apologize upfront for my
-terrible voice, we are going
+I apologize upfront for my terrible voice, we are going
 由于我糟糕的嗓音，预先向大家致歉。今天我们将要
 
 7
 00:00:18,583 --> 00:00:20,549
-to try to get through this
-as best we can today.
+to try to get through this as best we can today.
 尽可能去克服这个困难。
 
 8
@@ -42,26 +39,22 @@ Our topics are two fold.
 
 9
 00:00:23,821 --> 00:00:25,854
-[COUGH] We're going to
-continue the calculator 
+[COUGH] We're going to continue the calculator 
 我们将继续在上一讲中已经开始的计算器Demo，
 
 10
 00:00:25,856 --> 00:00:29,924
-demo that we started, in last
-lecture and then we're gonna
+demo that we started, in last lecture and then we're gonna
 然后我们将会有
 
 11
 00:00:29,926 --> 00:00:32,526
-have some slides about this
-model view controller,
+have some slides about this model view controller,
 一些关于模型视图控制器，
 
 12
 00:00:32,528 --> 00:00:35,462
-object-oriented design pattern
-that we're gonna use in
+object-oriented design pattern that we're gonna use in
 和面向对象设计模式的幻灯片
 
 13
@@ -71,8 +64,7 @@ everything we do.
 
 14
 00:00:36,799 --> 00:00:40,066
-When we build applications
-in this class.
+When we build applications in this class.
 当我们在这节课中开发应用时
 
 15
@@ -82,26 +74,22 @@ All right?
 
 16
 00:00:41,152 --> 00:00:42,235
-So let's get started
-with that demo.
+So let's get started with that demo.
 没问题就让我开始演示Demo
 
 17
 00:00:42,237 --> 00:00:44,136
-Again, here's a slide with
-the summary of kind of
+Again, here's a slide with the summary of kind of
 这里是一张总结
 
 18
 00:00:44,138 --> 00:00:46,538
-the important things
-we're gonna talk about.
+the important things we're gonna talk about.
 接下去我们即将要讲的重点的幻灯片
 
 19
 00:00:46,540 --> 00:00:48,540
-You don't need to read
-those in advance here,
+You don't need to read those in advance here,
 你们并不需要提前去阅读这些
 
 20
@@ -111,25 +99,22 @@ it's more for reference.
 
 21
 00:00:49,710 --> 00:00:52,410
-My slides in general,
-I post them,
+My slides in general, I post them,
 我做的幻灯片一般来讲，
 
 22
 00:00:52,412 --> 00:00:55,246
-it's mostly intended to almost
-be note taking for you.
+it's mostly intended to almost be note taking for you.
 主要是为了方便你们记笔记用
 
 23
 00:00:55,248 --> 00:00:56,580
-To be able go back and try and
+To be able go back and try and 
 为了你们在复习的时候能够
 
 24
 00:00:56,582 --> 00:00:58,515
-figure out, whoa, when did
-he talked about that day?
+figure out, whoa, when did he talked about that day?
 回忆出，哇哦，他什么时候讲过这些？
 
 25
@@ -143,14 +128,12 @@ What's important, et cetera.
 
 27
 00:01:00,985 --> 00:01:03,419
-So my slides do tend to
-be a little bit dense.
+So my slides do tend to be a little bit dense.
 所以，我的幻灯片也往往是有点多。
 
 28
 00:01:03,421 --> 00:01:05,187
-I tend to put a little
-more on them, than,
+I tend to put a little more on them, than,
 我更倾向于多放一些关于这个的内容，
 
 29
@@ -160,20 +143,17 @@ than just bullet items.
 
 30
 00:01:06,990 --> 00:01:08,790
-But that's because I want you
-to be able to look back and
+But that's because I want you to be able to look back and
 但是，那是因为我希望你们能够回过头来看的时候
 
 31
 00:01:08,792 --> 00:01:11,726
-kind of get just a little
-bit more depth to
+kind of get just a little bit more depth to
 对于我所说的
 
 32
 00:01:11,728 --> 00:01:14,162
-remind yourself what
-I talked about.
+remind yourself what I talked about.
 你们更深入的理解
 
 33
@@ -187,63 +167,53 @@ All right, so
 
 35
 00:01:17,883 --> 00:01:20,400
-this demo, if you'll remember
-last time, where we left off,
+this demo, if you'll remember last time, where we left off,
 关于这个Demo，如果你们还记得上次我们快结束时，
 
 36
 00:01:20,403 --> 00:01:23,603
-we had gotten the keypad
-fully working.
+we had gotten the keypad fully working.
 我们已经完全实现了计算器的键盘的功能
 
 37
 00:01:23,605 --> 00:01:26,606
-All right, and we were talking
-a little bit about properties
+All right, and we were talking a little bit about properties
 我们将要讲一些关于属性和
 
 38
 00:01:26,608 --> 00:01:28,808
-and instant variables and
-how we had to initialize them.
+and instant variables and how we had to initialize them.
 实例变量相关的内容，以及如何去初始化它们
 
 39
 00:01:28,810 --> 00:01:30,710
-And so I'm gonna ask
-a question right at
+And so I'm gonna ask a question right at
 我将会在这讲结束的时候问一个问题
 
 40
 00:01:30,712 --> 00:01:33,012
-the end of lecture,
-perfect timing.
+the end of lecture, perfect timing.
 多完美的时机
 
 41
 00:01:33,014 --> 00:01:37,248
-What about the little
-outlet that we dragged out
+What about the little outlet that we dragged out
 为什么我们拖出的
 
 42
 00:01:37,250 --> 00:01:40,284
-that display UI label
-exclamation point, how come we
+that display UI label exclamation point, how come we
 显示UI Lable的outlet后面有个感叹号
 
 43
 00:01:40,286 --> 00:01:43,888
-didn't have to make that
-equal to something, to start.
-以及为什么我们从一开始不需要将它赋值
+didn't have to make that equal to something, to start.
+以及为什么我们从一开始不需要将它赋值。
 
 44
 00:01:43,890 --> 00:01:46,123
-And that's where this
-demo is gonna pick up.
-我们将从这个地方继续上次的Demo
+And that's where this demo is gonna pick up.
+我们将从这个地方继续上次的Demo。
 
 45
 00:01:46,125 --> 00:01:46,890
@@ -255,55 +225,48 @@ Okay?
 
 47
 00:01:49,760 --> 00:01:52,627
-[COUGH] Well, let's dive back
-into this demonstration,
-好吧，让我们深入到演示中来
+[COUGH] Well, let's dive back into this demonstration,
+好吧，让我们深入到演示中来，
 
 48
 00:01:52,630 --> 00:01:54,647
 where we left off.
-接着我们上次讲的地方
+接着我们上次讲的地方。
 
 49
 00:01:54,648 --> 00:01:56,665
-Which it was this
-line of code, here.
-上次我们在这行代码结束的
+Which it was this line of code, here.
+上次我们在这行代码结束的。
 
 50
 00:01:56,668 --> 00:01:59,868
-And, we had just talked about
-the fact that we have to
+And, we had just talked about the fact that we have to
 我们之前讲过我们必须
 
 51
 00:01:59,870 --> 00:02:04,572
-initialize all of our
-variables [COUGH] in a class,
+initialize all of our variables [COUGH] in a class,
 在类中初始化我们的变量
 
 52
 00:02:04,574 --> 00:02:05,807
 in any class.
-在任何类中都必须这样做
+在任何类中都必须这样做。
 
 53
 00:02:05,809 --> 00:02:09,510
-And, so that's why we need
-this equals falls here.
+And, so that's why we need this equals falls here.
 所以我们需要在这个加个等号
 
 54
 00:02:09,512 --> 00:02:13,747
-They wanted the equal falls
-too but we needed it and yet
+They wanted the equal falls too but we needed it and yet
 这里也需要等号赋值，但是
 
 55
 00:02:13,749 --> 00:02:15,482
-it didn't seem like
-we needed one here.
-这里看起来并不需要等号赋值
+it didn't seem like we needed one here.
+这里看起来并不需要等号赋值。
 
 56
 00:02:15,484 --> 00:02:17,050
@@ -312,51 +275,43 @@ And why was that?
 
 57
 00:02:17,052 --> 00:02:19,085
-Well, it turns out
-that this right here,
+Well, it turns out that this right here,
 好吧，事实证明，在这里
 
 58
 00:02:19,087 --> 00:02:22,254
-even though it doesn't quite
-look like one, is an optional.
+even though it doesn't quite look like one, is an optional.
 即使它看起来不完全像之前那个，这是一个optional
 
 59
 00:02:23,490 --> 00:02:28,559
-And, optionals automatically
-get equaled nil, given to you.
+And, optionals automatically get equaled nil, given to you.
 而且optionals在你使用之前就赋了nil
 
 60
 00:02:29,595 --> 00:02:31,862
-So, you don't actually have
-to put the equals nil here.
+So, you don't actually have to put the equals nil here.
 所以，其实你们并不需要在这里给它赋nil
 
 61
 00:02:31,864 --> 00:02:35,365
-So that's why, so this one
-here is getting initialized.
+So that's why, so this one here is getting initialized.
 这就是为什么这里已经初始化了
 
 62
 00:02:35,367 --> 00:02:37,600
-It's just being done
-automatically for you.
+It's just being done automatically for you.
 它都自动帮你做好了
 
 63
 00:02:37,602 --> 00:02:39,635
-But, let's talk about
-the look of this thing.
-但是，我们来谈论一下这个东西的样子
+But, let's talk about the look of this thing.
+但是，我们来谈论一下这个东西的样子。
 
 64
 00:02:40,905 --> 00:02:43,772
-It's got this
-exclamation point here.
-在这里有个感叹号
+It's got this exclamation point here.
+在这里有个感叹号。
 
 65
 00:02:43,774 --> 00:02:45,040
@@ -365,15 +320,13 @@ And, if it were an optional,
 
 66
 00:02:45,042 --> 00:02:47,208
-you'd be used to it
-having a question mark.
+you'd be used to it having a question mark.
 你们通常会在这里看到一个问号
 
 67
 00:02:47,210 --> 00:02:49,310
-For example, we look at
-this optional right here,
-例如，我们来看这里这个optional
+For example, we look at this optional right here,
+例如，我们来看这里这个optional，
 
 68
 00:02:49,312 --> 00:02:51,028
@@ -382,19 +335,17 @@ current title,
 
 69
 00:02:51,029 --> 00:02:52,745
-you see it's string question
-mark not exclamation point,
-你们将会看到这里string是问号而不是感叹号
+you see it's string question mark not exclamation point,
+你们将会看到这里string是问号而不是感叹号，
 
 70
 00:02:52,748 --> 00:02:54,665
 question mark.
-这里是问号
+这里是问号。
 
 71
 00:02:54,666 --> 00:02:56,583
-So what's the difference
-between a question mark and
+So what's the difference between a question mark and
 那么，在问号和感叹号之间
 
 72
@@ -409,79 +360,67 @@ And the answer is,
 
 74
 00:03:00,571 --> 00:03:02,588
-it makes no difference to
-the actual type, it's still
+it makes no difference to the actual type, it's still
 对于实际类型而言它们没有区别，
 
 75
 00:03:02,590 --> 00:03:05,958
-an optional whose value
-here could be a UI label.
+an optional whose value here could be a UI label.
 它仍然是一个optional，其值在这里可能是一个UI label类型。
 
 76
 00:03:07,161 --> 00:03:09,761
-But it matters on
-the usage of it.
+But it matters on the usage of it.
 但是它的区别在于它的用法上
 
 77
 00:03:09,763 --> 00:03:12,597
-[COUGH] And
-this is purely just kind of
+[COUGH] And this is purely just kind of
 这完全是编译器
 
 78
 00:03:12,599 --> 00:03:15,466
-a compiler helping
-you out thing, here.
+a compiler helping you out thing, here.
 帮你把这事做掉了
 
 79
 00:03:16,502 --> 00:03:18,602
-But if we look at
-when I change this to
+But if we look at when I change this to
 但是如果我们将这个感叹号
 
 80
 00:03:18,604 --> 00:03:21,538
-a question mark you see that
-some errors appear down here.
+a question mark you see that some errors appear down here.
 改成问号。Xcode将会在这里报出一些错误提示
 
 81
 00:03:21,540 --> 00:03:23,940
-So then let's click on one of
-these errors, like this one,
+So then let's click on one of these errors, like this one,
 那么，让我们点击这其中的一个错误提示，比如说这个
 
 82
 00:03:23,942 --> 00:03:26,208
-and you can see
-the errors that UI label,
+and you can see the errors that UI label,
 你们将会看到UI label控件
 
 83
 00:03:26,210 --> 00:03:29,244
-question mark does not
-have a member named text.
+question mark does not have a member named text.
 问号没有叫text的成员变量
 
 84
 00:03:29,246 --> 00:03:31,279
-In other words you
-can't send text.
-换句话说，你不能将text赋给
+In other words you can't send text.
+换句话说，你不能将text赋给。
 
 85
 00:03:31,281 --> 00:03:32,580
 UI label question mark,
-UI label问号
+UI label问号，
 
 86
 00:03:32,582 --> 00:03:35,350
-which is what this is and that
-makes sense because UI label
+which is what this is and that makes sense because UI label
 因为UI label后面这个问号
 
 87
@@ -497,23 +436,21 @@ obviously an optional doesn't respond to text.
 89
 00:03:39,455 --> 00:03:42,889
 UI labels do, but optionals don't.
-UI label是这样的，但optional不一定这样
+UI label是这样的，但optional不一定这样。
 
 90
 00:03:42,891 --> 00:03:44,858
-So, why are we getting
-this error now when we
+So, why are we getting this error now when we
 那么，为什么我们会这出错
 
 91
 00:03:44,860 --> 00:03:46,726
 weren't getting it before.
-在这之前却没有
+在这之前却没有。
 
 92
 00:03:46,728 --> 00:03:47,993
-And how would we get
-rid of this error?
+And how would we get rid of this error?
 我们又如何去避免这个错误？
 
 93
@@ -523,19 +460,17 @@ Well, you could certainly get rid of
 
 94
 00:03:49,463 --> 00:03:51,630
-this error by just putting
-an exclamation point here,
+this error by just putting an exclamation point here,
 添加一个感叹号来避免这个错误
 
 95
 00:03:51,632 --> 00:03:54,399
 that would unwrap this optional.
-它将会去除这个optional
+它将会去除这个optional。
 
 96
 00:03:54,401 --> 00:03:56,734
-And now this would be
-an UI label right here and
+And now this would be an UI label right here and
 那么现在这里会变成UI label，而且
 
 97
@@ -545,79 +480,68 @@ we can send a text.
 
 98
 00:03:57,820 --> 00:03:58,903
-And we do the same
-thing up here.
+And we do the same thing up here.
 我们在这里也做同样的操作
 
 99
 00:03:58,905 --> 00:04:03,073
-We can unwrap it there and
-we can unwrap it there.
+We can unwrap it there and we can unwrap it there.
 我们可以在这里去除它，也可以在那里去除它
 
 100
 00:04:03,075 --> 00:04:05,742
-And that gets rid of
-all of our errors.
-这样一来避免了所有同样的错误
+And that gets rid of all of our errors.
+这样一来避免了所有同样的错误。
 
 101
 00:04:05,744 --> 00:04:09,012
-But [COUGH] this kind of an
-interesting property in that
+But [COUGH] this kind of an interesting property in that
 但是这里有个很有意思的属性
 
 102
 00:04:09,014 --> 00:04:11,213
-even though it's
-not initialized in
+even though it's not initialized in
 即使它并没有初始化
 
 103
 00:04:11,215 --> 00:04:14,450
-the very beginning of
-a colossus creation starts out
+the very beginning of a colossus creation starts out
 在庞大得创建方法中
 
 104
 00:04:14,452 --> 00:04:16,451
 as nil not set.
-都没有对其赋nil
+都没有对其赋nil。
 
 105
 00:04:16,453 --> 00:04:21,723
-As soon as as this user
-interface gets loaded up
+As soon as as this user interface gets loaded up
 只要这个接口被加载了
 
 106
 00:04:21,725 --> 00:04:23,891
 by this new controller.
-通过新的控制器
+通过新的控制器。
 
 107
 00:04:23,893 --> 00:04:26,794
-Then this gets wired up,
-alright, so, that gets
+Then this gets wired up, alright, so, that gets
 那么这个将连接起来，好了，那么那里
 
 108
 00:04:26,796 --> 00:04:30,497
-wired up, and this is set, and
-then this it's set forever.
-也将连接起来，只要这里被赋值了，那么所有的这个都被赋值了
+wired up, and this is set, and then this it's set forever.
+也将连接起来，只要这里被赋值了，那么所有的这个都被赋值了。
 
 109
 00:04:30,499 --> 00:04:33,199
-So it's really, kinda would
-be sad if we actually,
-假如这是真的，那么当我们每次在用的时候
+So it's really, kinda would be sad if we actually,
+假如这是真的，那么当我们每次在用的时候，
 
 110
 00:04:33,201 --> 00:04:36,536
-every time we used it had
-to unwrap it all the time.
-我们都将加上感叹号，这真是挺悲伤的
+every time we used it had to unwrap it all the time.
+我们都将加上感叹号，这真是挺悲伤的。
 
 111
 00:04:36,538 --> 00:04:38,437
@@ -626,20 +550,17 @@ So these kind of properties that.
 
 112
 00:04:38,439 --> 00:04:42,674
-Get set very early, maybe
-not right at creation like
+Get set very early, maybe not right at creation like
 很早就被赋值的，不一定像这个一样是正确地创建
 
 113
 00:04:42,676 --> 00:04:44,976
-this one, but very,
-they get set very early, and
+this one, but very, they get set very early, and
 但是，绝大部分还是会在创建的时候就赋值
 
 114
 00:04:44,978 --> 00:04:46,511
-then they stay
-set all the time.
+then they stay set all the time.
 然后之后就一直被赋值
 
 115
@@ -649,20 +570,17 @@ You can, instead of
 
 116
 00:04:49,031 --> 00:04:50,614
-putting a question mark
-in their decoration.
+putting a question mark in their decoration.
 在声明的地方加一个问号来代替
 
 117
 00:04:50,616 --> 00:04:52,683
-We're talking about
-their decoration here.
+We're talking about their decoration here.
 我们将在这里谈论他们的声明
 
 118
 00:04:52,685 --> 00:04:54,317
-You can put
-an exclamation point.
+You can put an exclamation point.
 你们可以在这里加一个感叹号
 
 119
@@ -677,32 +595,27 @@ This is just an optional, but
 
 121
 00:04:58,523 --> 00:05:03,625
-always automatically unwrap
-it so that you don't have to
+always automatically unwrap it so that you don't have to
 它会自动解开为了让你不用
 
 122
 00:05:03,627 --> 00:05:06,261
-put this exclamation
-point in here.
+put this exclamation point in here.
 在这里加感叹号
 
 123
 00:05:06,263 --> 00:05:07,695
-So I take this
-exclamation point out.
+So I take this exclamation point out.
 所以，我把这里的感叹号删掉了
 
 124
 00:05:07,697 --> 00:05:09,764
-You can see, it's not
-generating any errors.
+You can see, it's not generating any errors.
 你们可以看到，它将不再报错
 
 125
 00:05:10,933 --> 00:05:15,735
-And it's still going to
-unwrap this display and
+And it's still going to unwrap this display and
 它将把display转化成
 
 126
@@ -717,32 +630,27 @@ And.
 
 128
 00:05:18,840 --> 00:05:21,006
-It's still gonna crash
-your program if for
+It's still gonna crash your program if for
 它还是会崩溃由于
 
 129
 00:05:21,008 --> 00:05:22,307
-some reason
-the display were nil.
+some reason the display were nil.
 某些原因比如display是nil
 
 130
 00:05:22,309 --> 00:05:25,110
-If you tried to execute
-this code, that may
+If you tried to execute this code, that may
 如果你执意要执行这段代码，那是
 
 131
 00:05:25,112 --> 00:05:28,146
-be impossible because this
-is the button sending those.
+be impossible because this is the button sending those.
 不可能的，因为这里是由按钮来发送这些的
 
 132
 00:05:28,148 --> 00:05:31,716
-So the button wouldn't be here
-if this hadn't gotten already
+So the button wouldn't be here if this hadn't gotten already
 这个按钮不会在这里除非它加载的时候
 
 133
@@ -752,56 +660,47 @@ loaded up in the set.
 
 134
 00:05:33,819 --> 00:05:35,919
-But if somehow you had some
-place in your controller or
+But if somehow you had some place in your controller or
 但是如果在某种情况下你必须
 
 135
 00:05:35,921 --> 00:05:39,589
-you were accessing display
-before this UI got loaded.
+you were accessing display before this UI got loaded.
 在UI加载之前你要获取display
 
 136
 00:05:39,591 --> 00:05:42,158
-It would crash,
-because it is unwrapping this,
+It would crash, because it is unwrapping this,
 它将崩溃，因为它还没有解开联系
 
 137
 00:05:42,160 --> 00:05:44,327
-it's just that you don't have
-to put the explanation point,
+it's just that you don't have to put the explanation point,
 你不需要在这里写感叹号
 
 138
 00:05:44,329 --> 00:05:46,629
-it's kinda like auto
-explanation point.
+it's kinda like auto explanation point.
 它会自动解析
 
 139
 00:05:46,631 --> 00:05:51,066
-And, this is called a
-implicitly unwrapped optional.
+And, this is called a implicitly unwrapped optional.
 这个就叫做unwrapped optional
 
 140
 00:05:51,068 --> 00:05:53,968
-Okay?
-Implicitly unwrapped optional.
+Okay? Implicitly unwrapped optional.
 有问题嘛？隐式unwrapped optional
 
 141
 00:05:53,970 --> 00:05:56,704
-And it's really only useful
-for this kind, of property,
+And it's really only useful for this kind, of property,
 在这种情况下它真的很有用对于属性来说
 
 142
 00:05:56,706 --> 00:06:00,274
-that's, set very early, and
-then stay set, forever.
+that's, set very early, and then stay set, forever.
 在创建的时候就赋值，那么将一直被赋值
 
 143
@@ -816,32 +715,27 @@ Okay, so let's move on
 
 145
 00:06:07,248 --> 00:06:11,117
-to the next button in
-our [INAUDIBLE] here.
+to the next button in our [INAUDIBLE] here.
 接着下一个按钮
 
 146
 00:06:11,119 --> 00:06:13,285
-Which is going to
-be an enter button.
+Which is going to be an enter button.
 它就是Enter键
 
 147
 00:06:13,287 --> 00:06:16,655
-Now our calculator does
-not have an equals sign.
+Now our calculator does not have an equals sign.
 现在我们的计算器还没有等号
 
 148
 00:06:16,657 --> 00:06:18,223
-So you're probably used
-to calculators where you
+So you're probably used to calculators where you
 你们也许通常会这样使用计算器
 
 149
 00:06:18,225 --> 00:06:21,726
-say six plus three then when
-you hit equals it shows you
+say six plus three then when you hit equals it shows you
 6乘以3，然后你们按等号计算器展示
 
 150
@@ -856,8 +750,7 @@ This calculator is
 
 152
 00:06:24,913 --> 00:06:26,796
-a little more like
-a scientific calculator.
+a little more like a scientific calculator.
 更像科学计算器
 
 153
@@ -867,38 +760,32 @@ Has an enter key.
 
 154
 00:06:27,566 --> 00:06:31,668
-And so, instead you put
-the numbers you want to add or
+And so, instead you put the numbers you want to add or
 那么，你们按你们想相加的数字按钮或者
 
 155
 00:06:31,670 --> 00:06:35,671
-divide or multiply or whatever
-onto a stack and then when you
+divide or multiply or whatever onto a stack and then when you
 除以或者乘以无论什么都将会入栈，然后当你
 
 156
 00:06:35,673 --> 00:06:38,440
-press the operation keys it
-pulls them off the stack.
+press the operation keys it pulls them off the stack.
 按下操作按钮的时候，数字将会出栈
 
 157
 00:06:38,442 --> 00:06:43,011
-So that looks like this,
-6 enter 3 times.
+So that looks like this, 6 enter 3 times.
 比如这样 6 乘以 3
 
 158
 00:06:43,013 --> 00:06:45,279
-Four, six, enter,
-three, enter, times.
+Four, six, enter, three, enter, times.
 4 6 乘以 3
 
 159
 00:06:45,281 --> 00:06:48,449
-So the times is going
-to pull the six and
+So the times is going to pull the six and
 这个乘法操作符将会把6 和 
 
 160
@@ -908,9 +795,8 @@ the three off the stack.
 
 161
 00:06:50,736 --> 00:06:53,020
-You could even go six, enter,
-five, enter, four, enter, and
-你也可以按6，？，5， ？4？然后
+You could even go six, enter, five, enter, four, enter, and
+你也可以按6，回车，5，回车，4， 回车，然后
 
 162
 00:06:53,022 --> 00:06:54,521
@@ -919,8 +805,7 @@ then go times plus.
 
 163
 00:06:55,590 --> 00:06:58,624
-That would multiply the top
-two on the stack and
+That would multiply the top two on the stack and
 它将会把栈顶的两个元素出栈
 
 164
@@ -930,32 +815,27 @@ then add the last one on.
 
 165
 00:07:01,829 --> 00:07:04,629
-So we need an enter key
-here for our calculator.
+So we need an enter key here for our calculator.
 所以我们的计算器还是需要一个Enter键
 
 166
 00:07:04,631 --> 00:07:06,798
-Now, I'm gonna create that
-enter key in a way that's 
+Now, I'm gonna create that enter key in a way that's 
 现在，我将要通过这种方式创建一个enter键
 
 167
 00:07:06,800 --> 00:07:09,367
-actually gonna cause a problem
-for me in a moment, but
+actually gonna cause a problem for me in a moment, but
 它虽然会引起一些问题，但是
 
 168
 00:07:09,369 --> 00:07:12,370
-I wanna show you how to
-resolve that very problem.
+I wanna show you how to resolve that very problem.
 我将会展示给你们看如何解决这些问题
 
 169
 00:07:12,372 --> 00:07:16,039
-So I'm gonna create this enter
-key by copying and pasting.
+So I'm gonna create this enter key by copying and pasting.
 那么，我将通过复制粘贴
 
 170
@@ -965,8 +845,7 @@ This digit key right here.
 
 171
 00:07:18,610 --> 00:07:19,475
-And I'm just gonna
-put it in here.
+And I'm just gonna put it in here.
 那么我将会把这段代码放在这里
 
 172
@@ -976,74 +855,62 @@ Notice that I'm lining these,
 
 173
 00:07:22,113 --> 00:07:23,745
-blue lines up
-absolutely perfectly.
+blue lines up absolutely perfectly.
 蓝色的辅助线出现最好
 
 174
 00:07:23,747 --> 00:07:27,315
-I don't want them to be, like
-it's lined up with that one,
+I don't want them to be, like it's lined up with that one,
 我不想这些按钮像这个一样
 
 175
 00:07:27,317 --> 00:07:28,750
-but not that one or
-vice versa.
+but not that one or vice versa.
 或者那个一样
 
 176
 00:07:28,752 --> 00:07:30,685
-I want them
-perfectly lined up.
+I want them perfectly lined up.
 我希望它完全对齐
 
 177
 00:07:30,687 --> 00:07:33,520
-Cuz later I'm gonna spread
-these out over the whole UI
-因为我待会要在整个UI中放大这些按钮
+Cuz later I'm gonna spread these out over the whole UI
+因为我待会要在整个 UI 中放大这些按钮
 
 178
 00:07:33,522 --> 00:07:37,057
-and if I haven't lined these
-up just absolutely perfectly
+and if I haven't lined these up just absolutely perfectly
 如果我没有将这些按钮对齐的话
 
 179
 00:07:37,059 --> 00:07:39,693
-then Expo's not gonna quite
-know what I want here in Xcode
+then Expo's not gonna quite know what I want here in Xcode
 将不会知道我想把它放在这里
 
 180
 00:07:39,695 --> 00:07:41,828
-terms of the relationship
-between these.
+terms of the relationship between these.
 在这个和这个之间
 
 181
 00:07:43,264 --> 00:07:46,999
-All right so we don't want a
-three on here, we want to have
+All right so we don't want a three on here, we want to have
 好了，我们不希望这个按钮上还是3，所以我们需要修改一下
 
 182
 00:07:47,001 --> 00:07:52,237
-a,enter symbol so I'm gonna go
-up here to special characters.
+a,enter symbol so I'm gonna go up here to special characters.
 一个enter的符号，我将输入一个特殊的符号
 
 183
 00:07:52,239 --> 00:07:54,505
-This is on in most
-Mac applications.
-这个符号在很多的Mac应用中都有
+This is on in most Mac applications.
+这个符号在很多的 Mac 应用中都有
 
 184
 00:07:54,507 --> 00:07:57,174
-You can go to the edit menu
-to get special characters.
+You can go to the edit menu to get special characters.
 你们可以从编辑菜单中获取这些特殊符号
 
 185
@@ -1053,8 +920,7 @@ And I'm going to search for
 
 186
 00:07:58,344 --> 00:08:00,510
-this one actually, I think
-that's called a return.
+this one actually, I think that's called a return.
 这个特殊符号，我觉得它应该叫返回
 
 187
@@ -1069,14 +935,12 @@ Unicode字符
 
 189
 00:08:04,616 --> 00:08:06,615
-And so
-I want this one that looks,
+And so I want this one that looks,
 我想要这个
 
 190
 00:08:06,617 --> 00:08:09,551
-kind of like a return or
-enter key.
+kind of like a return or enter key.
 看起来像返回或者enter按钮的
 
 191
@@ -1086,20 +950,18 @@ So I have this.
 
 192
 00:08:11,688 --> 00:08:13,721
-And I'm gonna use the same
-mechanism we used before,
+And I'm gonna use the same mechanism we used before,
 我将使用之前使用过的机制
 
 193
 00:08:13,723 --> 00:08:14,822
 which is CTRL+drag.
-那就是CTRL+drag
+那就是 CTRL+drag
 
 194
 00:08:14,824 --> 00:08:18,958
-So I'm just gonna
-CTRL+drag out here.
-那么我想CTRL+drag拖到这里
+So I'm just gonna CTRL+drag out here.
+那么我想 CTRL+drag 拖到这里
 
 195
 00:08:18,960 --> 00:08:21,027
@@ -1108,37 +970,32 @@ And, we're creating an action,
 
 196
 00:08:21,029 --> 00:08:24,196
-of course, cuz we want this
-button to send us a message.
+of course, cuz we want this button to send us a message.
 当然，我们希望这个按钮传递给我们一个信息
 
 197
 00:08:24,198 --> 00:08:25,431
-I'm gonna call it Enter.
-我讲叫它Enter
+I'm gonna call it "enter".
+我讲叫它 “enter”
 
 198
 00:08:26,700 --> 00:08:28,333
-That's what it is
-the answer key
+That's what it is the answer key
 那就是我们的返回键.
 
 199
 00:08:28,335 --> 00:08:30,134
-Now one thing is
-different about this one,
+Now one thing is different about this one,
 现在有一件事会有一点不同
 
 200
 00:08:30,136 --> 00:08:32,470
-if you'll remember when
-we wired this action up,
-如果你记得当我们连接这个action的时候
+if you'll remember when we wired this action up,
+如果你记得当我们连接这个 action 的时候
 
 201
 00:08:32,472 --> 00:08:35,906
-we had the button that was
-sending it as an argument and
+we had the button that was sending it as an argument and
 我们让这个按钮传递给我们一个参数
 
 202
@@ -1148,39 +1005,33 @@ we don't want that this time.
 
 203
 00:08:37,443 --> 00:08:38,808
-Because there's only
-one answer key we
+Because there's only one answer key we
 因为这里只有一个返回键
 
 204
 00:08:38,810 --> 00:08:40,977
-really don't need to talk
-back to the answer key, so
+really don't need to talk back to the answer key, so
 我们并不需要让返回键传参，所以
 
 205
 00:08:40,979 --> 00:08:42,712
-we're going to say
-none right here.
+we're going to say none right here.
 我们在这里不需要参数
 
 206
 00:08:42,714 --> 00:08:45,714
-It also doesn't really matter
-about this type because we're
+It also doesn't really matter about this type because we're
 这里我们更不用关心它的类型，因为
 
 207
 00:08:45,716 --> 00:08:46,948
-not going to have
-an argument so
+not going to have an argument so
 我们这里并不需要参数
 
 208
 00:08:46,950 --> 00:08:48,750
-it doesn't matter
-what this type is.
-不用管它这里是什么类型
+it doesn't matter what this type is.
+不用管它这里是什么类型。
 
 209
 00:08:48,752 --> 00:08:49,717
@@ -1194,26 +1045,22 @@ As you can see right here.
 
 211
 00:08:51,688 --> 00:08:54,154
-We have Enter, and
-it has no arguments.
+We have enter, and it has no arguments.
 我们已经有一个enter键，没有参数的
 
 212
 00:08:55,691 --> 00:08:57,690
-Now, what are we gonna
-do inside Enter?
-那么现在，我们将在这个Enter里做什么操作？
+Now, what are we gonna do inside enter?
+那么现在，我们将在这个 enter 里做什么操作？
 
 213
 00:08:57,692 --> 00:08:59,558
-Well, the main thing
-we need to do is,
+Well, the main thing we need to do is,
 好吧，我们主要要做的是
 
 214
 00:08:59,560 --> 00:09:03,228
-put whatever number is
-in this display up here,
+put whatever number is in this display up here,
 把所有的数字在这里加起来
 
 215
@@ -1228,33 +1075,28 @@ So, we're gonna need
 
 217
 00:09:06,933 --> 00:09:09,367
-an internal stack,
-in a moment, here.
+an internal stack, in a moment, here.
 一个暂时的栈
 
 218
 00:09:09,369 --> 00:09:10,868
-Another thing we
-might wanna do, is.
+Another thing we might wanna do, is.
 另一件我们想做的事
 
 219
 00:09:11,904 --> 00:09:14,604
-Set users in the middle of
-typing the number to false.
-设置用户中间操作数字这个参数为false
+Set users in the middle of typing the number to false.
+设置用户中间操作数字这个参数为 false
 
 220
 00:09:14,606 --> 00:09:17,507
-Because we might have
-been typing a number, but
+Because we might have been typing a number, but
 因为我们可能已近输入了一个数字
 
 221
 00:09:17,509 --> 00:09:20,343
-as soon as we hit enter,
-we're putting it on the stack.
-但是，只要我们单击enter键，我们将把数字放入栈中
+as soon as we hit enter, we're putting it on the stack.
+但是，只要我们单击 enter 键，我们将把数字放入栈中
 
 222
 00:09:20,345 --> 00:09:21,977
@@ -1263,26 +1105,22 @@ Next time we type a digit,
 
 223
 00:09:21,979 --> 00:09:23,846
-we're going to be
-starting a new number.
+we're going to be starting a new number.
 我们将输入一个新的数字
 
 224
 00:09:23,848 --> 00:09:27,182
-[COUGH] All right, so we'll
-call that user [NOISE] in
+[COUGH] All right, so we'll call that user [NOISE] in
 好了，那么我们就叫它 输入好了
 
 225
 00:09:27,184 --> 00:09:29,451
-the middle of
-typing falls there.
+the middle of typing falls there.
 中间输入那里
 
 226
 00:09:29,453 --> 00:09:32,387
-Now, let's go ahead and,
-and actually run this and
+Now, let's go ahead and, and actually run this and
 现在，让我们继续，运行这个
 
 227
@@ -1292,8 +1130,7 @@ see how this is working.
 
 228
 00:09:33,790 --> 00:09:37,991
-Because there's going to
-be a little problem here.
+Because there's going to be a little problem here.
 因为这里有个小问题
 
 229
@@ -1303,9 +1140,8 @@ So, run this.
 
 230
 00:09:44,199 --> 00:09:47,499
-Alright, so
-let's try eight, enter.
-好了，让我们试一下输入8，然后enter
+Alright, so let's try eight, enter.
+好了，让我们试一下输入8，然后回车
 
 231
 00:09:47,501 --> 00:09:48,367
@@ -1313,26 +1149,23 @@ Oh.Oh
 
 232
 00:09:48,369 --> 00:09:50,001
-What's that?
-Oh, my god.
+What's that? Oh, my god.
 那是什么？上帝啊
 
 233
 00:09:50,003 --> 00:09:52,337
 Six, enter.
-6，然后 enter键
+6，然后回车
 
 234
 00:09:52,338 --> 00:09:54,672
-Well it's, it's kind of
-working because after we
-好吧，它能运行因为我们
+Well it's, it's kind of working because after we
+好吧，它能运行，但是我们
 
 235
 00:09:54,674 --> 00:09:57,241
-press enter the user is in
-the middle of typing numbers.
-按了enter键，the user is in the middle of typing numbers参数
+press enter the user is in the middle of typing numbers.
+所按的回车也一起出现在数字里面了。
 
 236
 00:09:57,243 --> 00:09:59,160
@@ -1341,25 +1174,22 @@ Starts over.
 
 237
 00:09:59,161 --> 00:10:01,078
-So that's good, but
-I had no intention for
+So that's good, but I had no intention for
 所以这是好的，但是我并不想
 
 238
 00:10:01,080 --> 00:10:03,380
-this to be showing up on
-the end of my display.
+this to be showing up on the end of my display.
 让这个在最后显示出来
 
 239
 00:10:03,382 --> 00:10:05,115
 This little enter.
-这个enter
+这个 enter
 
 240
 00:10:05,117 --> 00:10:06,749
-What the heck is
-that doing on there?
+What the heck is that doing on there?
 这个heck是做什么的？
 
 241
@@ -1374,14 +1204,12 @@ Let's take a look here.
 
 243
 00:10:11,988 --> 00:10:15,023
-The problem here, has to do
-with the messages being sent.
+The problem here, has to do with the messages being sent.
 问题出在这里，在信息传递之前
 
 244
 00:10:15,025 --> 00:10:17,358
-So, when we wire this up,
-that's good.
+So, when we wire this up, that's good.
 那么，当我们连接好了，它就好了
 
 245
@@ -1391,20 +1219,17 @@ We got enter.
 
 246
 00:10:20,162 --> 00:10:22,963
-The problem is that button
-also sends a pen digit.
+The problem is that button also sends a pen digit.
 问题是那个按钮还传递数字
 
 247
 00:10:22,965 --> 00:10:25,598
-That's because we copied and
-pasted this three, remember?
+That's because we copied and pasted this three, remember?
 那是因为我们复制粘贴的3的按钮，记得么？
 
 248
 00:10:25,600 --> 00:10:28,735
-And the three sends a pen
-digit, until we copy and
+And the three sends a pen digit, until we copy and
 而3按钮还传递了一个数字，直到我们复制
 
 249
@@ -1414,8 +1239,7 @@ paste it.
 
 250
 00:10:29,904 --> 00:10:31,070
-Now, this one sends,
-sends a pen digit.
+Now, this one sends, sends a pen digit.
 现在 ，这个按钮传递了一个数字
 
 251
@@ -1430,14 +1254,12 @@ ok，传递了两次
 
 253
 00:10:34,875 --> 00:10:36,942
-Now, that's a common
-mistake to make.
+Now, that's a common mistake to make.
 现在，这是一个很常见的错误
 
 254
 00:10:36,944 --> 00:10:39,744
-You know, you only think
-about that when you copy and
+You know, you only think about that when you copy and
 你们知道么，你们不会去想这些当你们复制
 
 255
@@ -1457,48 +1279,42 @@ Well if you right click, so
 
 258
 00:10:44,350 --> 00:10:46,717
-I'm going to right
-click on this button.
+I'm going to right click on this button.
 我将右键一下这个按钮
 
 259
 00:10:46,719 --> 00:10:48,885
-You'll get this
-window that comes up.
+You'll get this window that comes up.
 你们将会看到这个窗口
 
 260
 00:10:48,887 --> 00:10:51,687
-And it shows you all
-the connections from this
+And it shows you all the connections from this
 然后你们可以看到所有的连接
 
 261
 00:10:52,723 --> 00:10:54,189
-UY element to your code.
-UY元素到你们的代码 
+UI element to your code.
+UI 元素到你们的代码 
 
 262
 00:10:54,191 --> 00:10:57,025
-And you can see here
-both appendage and
+And you can see here both appendage and
 你们可以看到这里都连接
 
 263
 00:10:57,027 --> 00:10:58,826
 enter are connected.
-enter键
+enter 键
 
 264
 00:10:58,828 --> 00:11:01,562
-The great thing is I can just
-click this little X right here
-最棒的事我可以点击这里的X按钮
+The great thing is I can just click this little X right here
+最棒的事我可以点击这里的 X 按钮
 
 265
 00:11:01,564 --> 00:11:03,530
-and it'll take this
-connection away.
+and it'll take this connection away.
 然后这个连接就被取消了
 
 266
@@ -1518,56 +1334,47 @@ See it's,
 
 269
 00:11:09,854 --> 00:11:11,604
-it's not sending appendage,
-it is sending enter.
-它将不再传递附加物，它只传递enter
+it's not sending appendage, it is sending enter.
+它将不再传递附加物，它只传递 enter
 
 270
 00:11:11,606 --> 00:11:14,440
-And you can do this right
-clicking for anything.
+And you can do this right clicking for anything.
 你们可以右键操作任何你们想做的
 
 271
 00:11:14,442 --> 00:11:16,608
-Like we need to do it for
-our label up here.
-就像我们必须连接label一样
+Like we need to do it for our label up here.
+就像我们必须连接 label 一样
 
 272
 00:11:16,610 --> 00:11:21,112
-See there's the display
-connection we have right here.
+See there's the display connection we have right here.
 看到没，这里显示了我们的连接
 
 273
 00:11:21,114 --> 00:11:24,448
-So don't forget right click
-to disconnect things.
+So don't forget right click to disconnect things.
 不要忘记右键去除连接
 
 274
 00:11:24,450 --> 00:11:27,918
-Now if you forget about
-this and you don't do it.
+Now if you forget about this and you don't do it.
 现在，如果你们忘记这个，你们不要去操作它
 
 275
 00:11:27,920 --> 00:11:32,455
-Or maybe you have it wired to
-some thing that you change.
+Or maybe you have it wired to some thing that you change.
 否则你们会连接一些你们修改的东西
 
 276
 00:11:32,457 --> 00:11:35,391
-For example, if we have
-accidentally put an argument
+For example, if we have accidentally put an argument
 比如，我们需要传递一个参数
 
 277
 00:11:35,393 --> 00:11:40,062
-here to enter, if we had made
-it do descending button trick,
+here to enter, if we had made it do descending button trick,
 对于enter键来说，如果我们已经做过了
 
 278
@@ -1592,73 +1399,61 @@ I'll just delete that
 
 282
 00:11:46,669 --> 00:11:49,136
-Because that would
-not work because,
+Because that would not work because,
 因为它将会不工作
 
 283
 00:11:49,138 --> 00:11:52,072
-enter with an argument
-is actually a different
+enter with an argument is actually a different
 因为带有参数的enter键它是不同的
 
 284
 00:11:52,074 --> 00:11:54,774
-message than enter
-with no argument.
+message than enter with no argument.
 对于没参数的enter键来说
 
 285
 00:11:54,776 --> 00:11:57,510
-And so, if you just deleted
-that when you were running
+And so, if you just deleted that when you were running
 如果你们在运行的时候删除了这些
 
 286
 00:11:57,512 --> 00:11:58,978
-your program it
-would crash and
+your program it would crash and
 你的应用将会崩溃
 
 287
 00:11:58,980 --> 00:12:02,581
-it would say, couldn't
-send message enter colon.
-它会说，enter不能传递参数
+it would say, couldn't send message enter colon.
+它会说，enter 不能传递参数
 
 288
 00:12:02,583 --> 00:12:05,150
-When you touch this button
-cause enter colon means enter
-当你点击enter键的时候
+When you touch this button cause enter colon means enter
+当你点击 enter 键的时候
 
 289
 00:12:05,152 --> 00:12:08,853
-with an argument, only for the
-purpose of this tour It doe-,
+with an argument, only for the purpose of this tour It doe-,
 
 290
 00:12:08,855 --> 00:12:10,655
-we don't see enter
-colon in our code.
+we don't see enter colon in our code.
 我们看不到enter的代码
 
 291
 00:12:10,657 --> 00:12:12,656
-That's just something that's,
-this story board here.
+That's just something that's, this story board here.
 还好这里有story board
 
 292
 00:12:13,793 --> 00:12:17,661
-So if that happens, you need
-to right click on here and
+So if that happens, you need to right click on here and
 那么如果这个发生了，你必须点击这里
 
 293
 00:12:17,663 --> 00:12:21,431
-disconnect the enter colon,
-that happened in there and
+disconnect the enter colon, that happened in there and
 去除连接，然后再重新
 
 294
@@ -1668,14 +1463,12 @@ then you just recontrol drag.
 
 295
 00:12:23,568 --> 00:12:25,834
-When you recontrol
-drag it's nice it will.
+When you recontrol drag it's nice it will.
 当你重新连接好，它会变正常了
 
 296
 00:12:25,836 --> 00:12:28,103
-Kind of let you try to
-grab onto something, so
+Kind of let you try to grab onto something, so
 让你们尝试一下
 
 297
@@ -1689,237 +1482,206 @@ Kay?OK？
 
 299
 00:12:35,294 --> 00:12:38,212
-All right, so now we want to
-actually implement enter here.
+All right, so now we want to actually implement enter here.
 好了，那么现在我们在这里实现这个方法
 
 300
 00:12:38,214 --> 00:12:41,248
-        We want to enter
-        the guts of it.
-        我们开始着手实现它的内部。
+We want to enter the guts of it.
+我们开始着手实现它的内部。
 
 301
 00:12:41,250 --> 00:12:44,150
-  And so we are going to need
- another property here which is
- 我们需要在这定义另一个属性，
+And so we are going to need another property here which is
+我们需要在这定义另一个属性，
 
 302
 00:12:44,152 --> 00:12:45,702
-        going to be that
-        它将会是
+going to be that
+它将会是
 
 303
 00:12:45,703 --> 00:12:47,253
-   internal stack that these
-  numbers are going to go on.
-  这些数字的内部栈。
+internal stack that these numbers are going to go on.
+这些数字的内部栈。
 
 
 304
 00:12:47,255 --> 00:12:52,057
-      And so that's gonna
-       be a var just like
-       所以它会是一个变量，就像
+And so that's gonna be a var just like
+所以它会是一个变量，就像
 
 305
 00:12:52,059 --> 00:12:54,393
-     this var up here that
-       we've created and
-       我们刚创建的这个变量。
+this var up here that we've created and
+我们刚创建的这个变量。
 
 306
 00:12:54,395 --> 00:12:57,562
-   I'm call it operand stack
-   that's a good name for it.
-   我叫它操作符栈，不错的名字。
+I'm call it operand stack that's a good name for it.
+我叫它操作符栈，不错的名字。
 
 
 307
 00:12:57,564 --> 00:12:58,730
-  And it's gonna have a type,
-  它会有一个类型，
+And it's gonna have a type,
+它会有一个类型，
 
 
 308
 00:12:58,732 --> 00:13:02,233
-       it's type is going
-       to be an array and
-       它的类型是数组，
+it's type is going to be an array and
+它的类型是数组，
 
 309
 00:13:02,235 --> 00:13:05,869
-  just like in other languages
-  like Java when you specify,
-  就像在其他语言中，比如说Java——
+just like in other languages like Java when you specify,
+就像在其他语言中，比如说Java——
 
 310
 00:13:05,871 --> 00:13:08,805
-    when you create an array
-   type you have to specify.
-   当你创建一个数组，你必须指明它的类型，
+when you create an array type you have to specify.
+当你创建一个数组，你必须指明它的类型，
 
 311
 00:13:08,807 --> 00:13:10,840
-       What kind of thing
-        is in the array.
-        表明数组里面存储的是什么。
+What kind of thing is in the array.
+表明数组里面存储的是什么。
 
 312
 00:13:10,842 --> 00:13:15,211
-     And so, I'm gonna put
-      doubles in my array.
-      因此，我打算在里面存放double元素
+And so, I'm gonna put doubles in my array.
+因此，我打算在里面存放 double 元素
 
 313
 00:13:17,214 --> 00:13:20,782
-  And that's, even though you
-    might say, well we can't
-    嗯。也许你会说，好吧我们并不能
+And that's, even though you might say, well we can't
+嗯。也许你会说，好吧我们并不能
 
 314
 00:13:20,784 --> 00:13:25,286
-  enter doubles, because these
-  are all integers, basically.
-  输入double，因为这里大都是些integer。
+enter doubles, because these are all integers, basically.
+输入double，因为这里大都是些integer。
 
 315
 00:13:25,288 --> 00:13:29,723
-     But if I were to say,
-  3 enter 6 divide, I get .5.
-  但是假如我说，输入3除以6，我会得到0.5，
+But if I were to say, 3 enter 6 divide, I get .5.
+但是假如我说，输入3除以6，我会得到0.5，
 
 316
 00:13:29,725 --> 00:13:31,925
- So than a double would appear.
- 这样就出现了一个double。
+So than a double would appear.
+这样就出现了一个double。
 
 317
 00:13:31,927 --> 00:13:34,661
-       So that's why I'm
-      going to use double.
-      这就是我为什么要使用double。
+So that's why I'm going to use double.
+这就是我为什么要使用 double。
 
 318
 00:13:34,663 --> 00:13:38,964
-  Now, you can see that we've
- got this error up here again.
- 现在，你们可以看到这里又弹出了这个错误，
+Now, you can see that we've got this error up here again.
+现在，你们可以看到这里又弹出了这个错误，
 
 319
 00:13:38,966 --> 00:13:41,133
-    It says stored property
-     operandStack does not
-     上面说存储的属性operandStack并没有
+It says stored property operandStack does not
+上面说存储的属性operandStack并没有
 
 320
 00:13:41,135 --> 00:13:43,368
-      have initial value.
-      初始值。
+have initial value.
+初始值。
 
 321
 00:13:43,370 --> 00:13:45,036
-       So we have to give
-     this an initial value.
-     所以我们得赋给它初始值。
+So we have to give this an initial value.
+所以我们得赋给它初始值。
 
 322
 00:13:45,038 --> 00:13:47,071
-      So I'm going to give
-    this an initial value of
-    我准备把初始值赋为
+So I'm going to give this an initial value of
+我准备把初始值赋为
 
 323
 00:13:47,073 --> 00:13:48,472
-        an empty array.
-        一个空的数组。
+an empty array.
+一个空的数组。
 
 324
 00:13:48,474 --> 00:13:51,608
-  So now you're seeing for the
-  first time how you actually.
-  现在你们第一次看到实际上如何
+So now you're seeing for the first time how you actually.
+现在你们第一次看到实际上如何
 
 325
 00:13:51,610 --> 00:13:57,480
-     Create an instance of
-   a class or of a data type.
-   创建一个类或者数据类型的实例。
+Create an instance of a class or of a data type.
+创建一个类或者数据类型的实例。
 
 326
 00:13:57,482 --> 00:14:00,249
-    And you do that just by
-    specifying the type and
-    你只需要在这指明类型
+And you do that just by specifying the type and
+你只需要在这指明类型
 
 327
 00:14:00,251 --> 00:14:01,984
-     then use parenthesis.
-     然后写上分号。
+then use parenthesis.
+然后写上分号。
 
 328
 00:14:01,986 --> 00:14:03,752
-        Now, we're not,
-        现在，我们没有，
+Now, we're not,
+现在，我们没有，
 
 329
 00:14:03,754 --> 00:14:05,554
-    again we haven't talked
-      about initializers.
-      我们还没有讨论过构造器。
+again we haven't talked about initializers.
+我们还没有讨论过构造器。
 
 330
 00:14:05,556 --> 00:14:06,888
-           A class or
-           一个类或者
+A class or
+一个类或者
 
 331
 00:14:06,890 --> 00:14:09,390
-   a data structure can have
-     multiple initializers.
-     一种数据类型可以有许多构造器。
+a data structure can have multiple initializers.
+一种数据类型可以有许多构造器。
 
 332
 00:14:09,392 --> 00:14:11,158
-       Some of them might
-    have arguments in here.
-    其中的一些可能会在这里有参数。
+Some of them might have arguments in here.
+其中的一些可能会在这里有参数。
 
 333
 00:14:12,128 --> 00:14:16,863
-   But most, if it's possible
-      they'll allow you to
-      但大多数情况，如果允许，你都可以
+But most, if it's possible they'll allow you to
+但大多数情况，如果允许，你都可以
 
 334
 00:14:16,865 --> 00:14:21,133
-      create them with no
-   arguments and in a case on
-   创建没有参数的构造器，对于
+create them with no arguments and in a case on
+创建没有参数的构造器，对于
 
 335
 00:14:21,135 --> 00:14:22,835
-      our right(!!array，我听的是这个，请校验) it's very
-      obvious what to do.
-      数组，该做什么一目了然。
+array，it's very obvious what to do.
+数组，该做什么一目了然。
 
 336
 00:14:22,837 --> 00:14:25,103
-   No arguments just creates
-     an empty array right,
-     不需要参数，只要创建一个空的数组，在右边
+No arguments just creates an empty array right,
+不需要参数，只要创建一个空的数组，在右边
 
 337
 00:14:25,105 --> 00:14:27,739
-    with no elements in it.
-    这里不需要任何参数。
+with no elements in it.
+这里不需要任何参数。
 
 338
 00:14:27,741 --> 00:14:31,142
- Now, one thing I want to talk
-   about is this right here.
-   现在，我想说一下这里这个东西，
+Now, one thing I want to talk about is this right here.
+现在，我想说一下这里这个东西，
 
 339
 00:14:31,144 --> 00:14:32,376
@@ -1928,352 +1690,308 @@ actually implement enter here.
 
 340
 00:14:32,378 --> 00:14:34,078
-   It's kind of annoying that
-    we have to type this and
-    你会觉得很烦，如果在这定义了类型，
+It's kind of annoying that we have to type this and
+你会觉得很烦，如果在这定义了类型，
 
 341
 00:14:34,080 --> 00:14:36,147
-      then we have to type
-        it right again.
-        然后在这又得定义一遍。
+then we have to type it right again.
+然后在这又得定义一遍。
 
 342
 00:14:36,148 --> 00:14:38,215
-       And the answer is,
-   we don't have to do that,
-   而事实上，我们并不需要这么做，
+And the answer is, we don't have to do that,
+而事实上，我们并不需要这么做，
 
 
 343
 00:14:38,217 --> 00:14:41,051
-       because in swift,
- swift is very strongly typed.
- 因为swift是严格强类型的。
+because in swift, swift is very strongly typed.
+因为swift是严格强类型的。
 
 344
 00:14:41,053 --> 00:14:43,252
-      You know there's all
-       the variables, but
-       你要知道所有的变量，
+You know there's all the variables, but
+你要知道所有的变量，
 
 345
 00:14:43,254 --> 00:14:45,221
-         the properties
-      are strongly typed.
-      属性都是强类型的。
+the properties are strongly typed.
+属性都是强类型的。
 
 346
 00:14:45,223 --> 00:14:48,724
-     But they, there's also
-    a lot of type inference.
-    而且它们都有许多类型推断。
+But they, there's also a lot of type inference.
+而且它们都有许多类型推断。
 
 347
 00:14:48,726 --> 00:14:50,625
-      So swift can infer.（此处应该没有句号，this type应该在这里）
-      因此swift可以推断类型。
+So swift can infer.
+因此swift可以推断类型
 
 348
 00:14:50,627 --> 00:14:53,995
-  This type in the exact same
- way that digit had no type and
- 比如说这里的digit并没有类型，
+This type in the exact same way that digit had no type and
+比如说这里的digit并没有类型，
 
 349
 00:14:53,997 --> 00:14:55,596
-   it inferred it from here.
-   但它可以从这里推断出来。
+it inferred it from here.
+但它可以从这里推断出来。
 
 350
 00:14:55,598 --> 00:14:58,366
-  OperandStack, we don't have
-   to specify they type, and
-   OperandStack，我们并不需要指明它的类型，因为
+OperandStack, we don't have to specify they type, and
+OperandStack，我们并不需要指明它的类型，因为
 
 351
 00:14:58,368 --> 00:14:59,633
-   it can infer it from here.
-   可以从这里推断出来。
+it can infer it from here.
+可以从这里推断出来。
 
 352
 00:14:59,635 --> 00:15:02,302
-   And if we option click on
-  operandStack you'll see that
-  如果我们按住option点击operandStack，你会看到
+And if we option click on operandStack you'll see that
+如果我们按住 option 点击 operandStack，你会看到
 
 353
 00:15:02,304 --> 00:15:05,271
- indeed, it's figured out that
-   that's an array of double.
-   它确实可以辨识出这是一个double类型的数组。
+indeed, it's figured out that that's an array of double.
+它确实可以辨识出这是一个double类型的数组。
 
 354
 00:15:05,273 --> 00:15:07,824
-          And in fact,
-          事实上，
+And in fact,
+事实上，
 
 355
 00:15:07,825 --> 00:15:10,376
-    putting the type in here
-    is considered bad form.
-    在这里指明类型被认为是不好的书写形式。
+putting the type in here is considered bad form.
+在这里指明类型被认为是不好的书写形式。
 
 356
 00:15:10,378 --> 00:15:14,080
-     If it can be inferred,
-  you should let it infer, so,
-  如果可以推断出类型，你就应该让它自己去推断，所以
+If it can be inferred, you should let it infer, so,
+如果可以推断出类型，你就应该让它自己去推断，所以
 
 357
 00:15:14,082 --> 00:15:16,915
- if we didn't have this blue（for example，而且明明是bool！英文是机器录入的么） up
- here we shouldn't that either,
- 拿这里的Bool来说，我们其实也需要声明类型。
+if we didn't have this blue（for example，而且明明是bool！英文是机器录入的么） up here we shouldn't that either,
+拿这里的Bool来说，我们其实也需要声明类型。
 
 358
 00:15:16,917 --> 00:15:21,419
- because, false, and true are,
-  can only be blue values so,（bool！！！）
-  因为false和true只可能是Bool的值。
+because, false, and true are, can only be blue values so,（bool！！！）
+因为false和true只可能是 Bool 的值。
 
 359
 00:15:21,421 --> 00:15:22,887
-        we're gonna take
-       that off as well.
-       所以我们也可以把它去掉。
+we're gonna take that off as well.
+所以我们也可以把它去掉。
 
 360
 00:15:22,889 --> 00:15:28,025
-    Okay, so, now, our brand（operand好伐，我真是醉了，好累）
-    好了，那么现在，我们这里有操作符栈，
+Okay, so, now, our brand（operand好伐，我真是醉了，好累）
+好了，那么现在，我们这里有操作符栈，
 
 361
 00:15:28,027 --> 00:15:30,994
-     stack right here what
-    do we wanna do with it?
-    我们打算把怎么处理它呢？
+stack right here what do we wanna do with it?
+我们打算把怎么处理它呢？
 
 362
 00:15:30,996 --> 00:15:34,597
-   Well, when we press enter,
-    we just want to append.
-    嗯，我们按下回车，然后我们想要append，
+Well, when we press enter, we just want to append.
+嗯，我们按下回车，然后我们想要append，
 
 363
 00:15:34,599 --> 00:15:35,798
-          So, append.
-          所以，append。
+So, append.
+所以，append。
 
 364
 00:15:35,800 --> 00:15:39,034
-   This is actually the first
-  time we're sending an actual
-  事实上这是我们第一次发送一条
+This is actually the first time we're sending an actual
+事实上这是我们第一次发送一条
 
 365
 00:15:39,036 --> 00:15:41,703
-      message to an object
-    looks just like when we
-    消息给一个对象。就像去
+message to an object looks just like when we
+消息给一个对象。就像去
 
 366
 00:15:41,705 --> 00:15:43,738
-      accessed a property.
-      获取了一个属性一样。
+accessed a property.
+获取了一个属性一样。
 
 367
 00:15:43,740 --> 00:15:47,375
- The dot and it's just the name
-    of the method that we're
-    输入点号，然后就出现了我们想要在数组上调用的方法名字。
+The dot and it's just the name of the method that we're
+输入点号，然后就出现了我们想要在数组上调用的方法名字。
 
 368
 00:15:47,377 --> 00:15:49,110
-        trying to invoke
-         in our arrays.
+trying to invoke in our arrays.
 
 369
 00:15:49,112 --> 00:15:51,478
- Just an array, an array method
-    right here called a pen（append！！）.
-    这是一个数组；这是一个叫做append的数组方法。
+Just an array, an array method right here called a pen（append！！）.
+这是一个数组；这是一个叫做append的数组方法。
 
 370
 00:15:51,480 --> 00:15:54,414
- I think you see the arguments
-       as newElement: T.
-       我想你们看到了这个参数——newElement: T
+I think you see the arguments as newElement: T.
+我想你们看到了这个参数 —— newElement: T
 
 371
 00:15:54,416 --> 00:15:57,517
-     This : T means it has
-      to be of this type.
-      这个 : T 意味着它必须是这个类型。
+This : T means it has to be of this type.
+这个 : T 意味着它必须是这个类型。
 
 372
 00:15:57,519 --> 00:16:00,853
- Type of things in the array so
-    this has to be a double.
-    这个数组里面东西的类型，所以它必须是一个double。
+Type of things in the array so this has to be a double.
+这个数组里面东西的类型，所以它必须是一个double。
 
 373
 00:16:00,855 --> 00:16:04,223
-  So that's kind of a problem,
-   cuz really what I want to
-   这也是一个问题，因为事实上我想要在
+So that's kind of a problem, cuz really what I want to
+这也是一个问题，因为事实上我想要在
 
 374
 00:16:04,225 --> 00:16:08,060
- append onto my stack is what's
- up here in this display text.
- 我的栈上附加的是，这里display text的内容。
+append onto my stack is what's up here in this display text.
+我的栈上附加的是，这里display text的内容。
 
 375
 00:16:08,062 --> 00:16:11,830
-   And, you know, I'd like to
- say something along the lines
- 然后在这行输入display.text
+And, you know, I'd like to say something along the lines
+然后在这行输入display.text
 
 376
 00:16:11,832 --> 00:16:13,164
-        of display.text.
-
+of display.text.
 
 377
 00:16:13,166 --> 00:16:15,099
-             Okay?
-     But what type is this?
-     好吧，它的类型是什么呢？
+Okay? But what type is this?
+好吧，它的类型是什么呢？
 
 378
 00:16:15,101 --> 00:16:16,767
-    I can type display.text.（type of display.text？？）
-    display.text的类型。
+I can type display.text.（type of display.text？？）
+display.text 的类型。
 
 379
 00:16:18,437 --> 00:16:19,936
-     Now that's not string.
-     它不是string。
+Now that's not string.
+它不是 string。
 
 380
 00:16:19,938 --> 00:16:22,205
-      That is an optional.
-      它是一个optional。
+That is an optional.
+它是一个optional。
 
 381
 00:16:22,207 --> 00:16:24,874
-   Remember that display.text
-        is an optional.
-        记住这里的display.text是一个optional，
+Remember that display.text is an optional.
+记住这里的 display.text 是一个 optional，
 
 382
 00:16:24,876 --> 00:16:28,043
-        So we can unwrap
-         it even though
-         所以我们可以把它拆包，但
+So we can unwrap it even though
+所以我们可以把它拆包，但
 
 383
 00:16:28,045 --> 00:16:29,911
-        that's not gonna
-       solve the problem.
-       这并不能解决问题。
+that's not gonna solve the problem.
+这并不能解决问题。
 
 384
 00:16:29,913 --> 00:16:31,212
-   This is still a string and
-   这仍是一个string，
+This is still a string and
+这仍是一个string，
 
 385
 00:16:31,214 --> 00:16:33,381
-      you're still seeing
-         an error here.
-         你们还是可以看到这里有一个错误。
+you're still seeing an error here.
+你们还是可以看到这里有一个错误。
 
 386
 00:16:33,383 --> 00:16:36,217
-     The same string is not
- convertible to double [COUGH].
- 这个string不可以转化为double[咳]。
+The same string is not convertible to double [COUGH].
+这个string不可以转化为double。
 
 387
 00:16:36,219 --> 00:16:37,651
-     Because we're supposed
-    to be putting doubles in
-    因为我们本应把double放入
+Because we're supposed to be putting doubles in
+因为我们本应把 double 放入
 
 388
 00:16:37,653 --> 00:16:39,086
-  this array putting strings.
-  这个数组而不是string。
+this array putting strings.
+这个数组而不是string。
 
 389
 00:16:39,088 --> 00:16:40,987
-  So, we have a problem here.
-  所以，我们在这有个问题。
+So, we have a problem here.
+所以，我们在这有个问题。
 
 390
 00:16:40,989 --> 00:16:44,323
-   We have somehow to convert
-  this string into a double so
-  我们得用某种方式把string转化成double以便
+We have somehow to convert this string into a double so
+我们得用某种方式把string转化成double以便
 
 391
 00:16:44,325 --> 00:16:45,358
-  we can put it on this stack.
-  我们把它放入栈中。
+we can put it on this stack.
+我们把它放入栈中。
 
 392
 00:16:46,394 --> 00:16:48,994
-         I'm gonna use
-       this opportunity.
-       我要借用这个机会，
+I'm gonna use this opportunity.
+我要借用这个机会，
 
 393
 00:16:48,996 --> 00:16:51,129
-     Just show you another
-        feature which we
-        向你们展示另一个特性，我们
+Just show you another feature which we
+向你们展示另一个特性，我们
 
 394
 00:16:51,131 --> 00:16:52,930
-   call Computed Properties.
-   称之为计算型属性。
+call Computed Properties.
+称之为计算型属性。
 
 
 395
 00:16:52,932 --> 00:16:56,000
-  So I'm gonna create another
-   property display value and
-   所以我要在这里创建另一个属性displayValue,
+So I'm gonna create another property display value and
+所以我要在这里创建另一个属性displayValue,
 
 396
 00:16:56,002 --> 00:16:57,401
-    it's gonna be a double.
-    它是一个double。
+it's gonna be a Double.
+它是一个Double。
 
 397
 00:16:57,403 --> 00:17:00,671
-   And what I want this to be
- equal to is, I always want it
- 然后我想让它等于，我想让它
+And what I want this to be equal to is, I always want it
+然后我想让它等于，我想让它
 
 398
 00:17:00,673 --> 00:17:03,773
-    to be whatever's in this
- display converted to a double.
- 等于这里的显示转化成double的值。
+to be whatever's in this display converted to a double.
+等于这里的显示转化成double的值。
 
 399
 00:17:04,742 --> 00:17:05,786
-             Okay?
-         And I want to
-         好了，然后我想
+Okay? And I want to
+好了，然后我想
 
 400
 00:17:05,787 --> 00:17:06,831
- be able to set it or get it so
- 有办法对它进行设值以及取值，以便
+be able to set it or get it so
+有办法对它进行设值以及取值，以便
 
 401
 00:17:06,832 --> 00:17:07,876

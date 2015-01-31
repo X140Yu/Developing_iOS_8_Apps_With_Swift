@@ -9124,79 +9124,95 @@ opStack 等于
 01:10:42,918 --> 01:10:44,784
      this computer property
            read-only.
+这个 property 是只读的           
 
 1702
 01:10:44,786 --> 01:10:46,652
  But if you do one other thing,
+但如果我们在这里 
 
 1703
 01:10:46,654 --> 01:10:50,456
  which is up here, you have to
      put, colon printable.
+放一个 : printable     
 
 1704
 01:10:51,859 --> 01:10:56,961
    Now, I told you enums and
   structs have no inheritance.
+enum 和 struct 没有继承  
 
 1705
 01:10:56,963 --> 01:10:58,696
   So you're like what, wait a
          second, there.
+等一下，看这里         
 
 1706
 01:10:58,698 --> 01:11:01,098
  You're telling me op inherits
         from printable?
+你竟然告诉我让 op 继承于 printable?        
 
 1707
 01:11:01,100 --> 01:11:04,234
  And the answer is no, does not
   inherit, okay, it's an enum.
+不是这样的，这里不是继承  
 
 1708
 01:11:04,236 --> 01:11:07,070
       Enums don't have any
  inheritance, only classes do.
+enum 没有继承关系，只有 class 有 
 
 1709
 01:11:07,072 --> 01:11:10,540
    What this colon printable
          means is, and
+这个 : printable 代表         
 
 1710
 01:11:10,542 --> 01:11:12,842
   this can be true for classes
     or structs or whatever.
+这个也可以对 class 或者 struct 有效    
 
 1711
 01:11:12,844 --> 01:11:14,643
   You can put after the colon
              here.
+在这里写一个 :             
 
 1712
 01:11:15,713 --> 01:11:17,979
    This is called a protocol.
+这个叫做 protocol   
 
 1713
 01:11:17,981 --> 01:11:21,215
   And all this means is you're
     telling Swift that this
+这就代表，你告诉 Swift，    
 
 1714
 01:11:21,217 --> 01:11:24,852
  enum implements whatever is in
          this protocol.
+这个 enum 需要自己实现这个 protocol 的内容         
 
 1715
 01:11:24,854 --> 01:11:28,389
   And this protocol happens to
       just be one computer
+这个 protocol 恰好是 叫做 description 的 property 
 
 1716
 01:11:28,391 --> 01:11:30,590
   property called Description
-    that returns the string.
+    that returns the string.    
+可以返回一个 string    
 
 1717
 01:11:31,826 --> 01:11:33,326
@@ -9206,207 +9222,249 @@ opStack 等于
 01:11:33,327 --> 01:11:34,827
  Now we're going to talk about
       protocols in depth.
+我们来深入了解一下 protocol
 
 1719
 01:11:34,829 --> 01:11:37,062
    Because protocols are very
          important for
+因为 protocol 能够帮助我们了解，         
 
 1720
 01:11:37,064 --> 01:11:40,065
    explaining how things work
              'kay?
+这到底是怎么一回事儿             
 
 1721
 01:11:40,067 --> 01:11:43,501
   But we're not gonna cover it
          today, though.
+但是我们今天不会讲         
 
 1722
 01:11:43,503 --> 01:11:46,204
   Okay, so if you do those two
    things, put description in
+如果我这么做，加上 printable
 
 1723
 01:11:46,206 --> 01:11:52,209
   printable, now when we run,
   you'll see, I'll go 5 enter.
+再运行程序，5 enter，6,
 
 1724
 01:11:52,211 --> 01:11:54,511
   Six, and you see it's put a
          five in there.
+你就会看到这里有个5         
 
 1725
 01:11:54,513 --> 01:11:55,512
           There's a 6.
+这是6          
 
 1726
 01:11:55,514 --> 01:11:57,447
   Times, it's even putting the
              times.
+times，它竟然把 times 也放进去了             
 
 1727
 01:11:57,449 --> 01:11:59,915
   If I hit times again, now I
           get nil and
+如果我再点击 times，这里得到了 Nil      
 
 1728
 01:11:59,917 --> 01:12:03,652
  i tshows me the whole thing is
         leftover, okay.
+所有的东西都余下了        
 
 1729
 01:12:03,654 --> 01:12:06,454
   Let's go another thing here,
+再来一个测试
 
 1730
 01:12:06,456 --> 01:12:10,358
  what if I go 6 Enter 5 Enter 4
              Enter.
+输入 6 enter 5 enter 4 enter
 
 1731
 01:12:10,360 --> 01:12:13,661
    Now if I do times it says
          times of 4 and
+再做一次 times，它出现 4 * 5 = 20
 
 1732
 01:12:13,663 --> 01:12:18,098
  5 is 20 with the 6 left over,
          exactly right.
+6 被剩下了，这都是正确的         
 
 1733
 01:12:19,134 --> 01:12:22,368
  Kay now notice I had to rerun
        there to do that,
+为了这么做我得重新运行一次，       
 
 1734
 01:12:22,370 --> 01:12:24,303
    you're gonna have a clear
          button right,
+你得在这里放置一个 clear button         
 
 1735
 01:12:24,305 --> 01:12:25,571
  that you do in assignment one,
       you're gonna have to
+在作业一里的完成，      
 
 1736
 01:12:25,573 --> 01:12:27,239
   make that work in assignment
           two as well.
+作业二里也得让它起作用          
 
 1737
 01:12:28,308 --> 01:12:31,309
  Okay the last thing really out
  of time but I'm gonna show you
+最后一件事，尽管快没时间了 
 
 1738
 01:12:31,311 --> 01:12:34,311
  the last thing really quickly
    that I was gonna do is use
+我快速给你们展示一下   
 
 1739
 01:12:34,313 --> 01:12:38,182
   this description to fix this
    problem I said right here.
+利用 description 来回答我留在这里的问题   
 
 1740
 01:12:38,184 --> 01:12:41,385
     Which is what if I had a
      function called learn
+定义一个叫 learn 的函数
 
 1741
 01:12:41,387 --> 01:12:45,388
   op 'kay and it took an op as
        an argument here.
+它把 op 作为参数       
 
 1742
 01:12:45,390 --> 01:12:53,029
  And it just said known ops ops
   description equals that op.
+knownOps[op.description] = op  
 
 1743
 01:12:53,031 --> 01:12:59,368
   You see, now these could all
      just be learn op this.
+这些都可以变成 learnOp()     
 
 1744
 01:13:00,404 --> 01:13:03,438
   Okay which is a lot nicer, I
   only have to type this thing
+这看起来就好多了，我只需要把它敲一次  
 
 1745
 01:13:03,440 --> 01:13:05,306
     once, and I just use the
        description here.
+我在这里用到了 description       
 
 1746
 01:13:05,308 --> 01:13:08,875
   The other thing about this,
  notice where this function is.
+ 另一点，注意这个函数的位置 
 
 1747
 01:13:08,877 --> 01:13:10,143
         Inside the init.
+它在 init 内部        
 
 1748
 01:13:11,246 --> 01:13:12,545
     Okay you are allowed to
+你可以在    
 
 1749
 01:13:12,547 --> 01:13:14,513
    put functions inside other
            functions.
+一个函数的内部放另一个函数           
 
 1750
 01:13:14,515 --> 01:13:17,549
  If this is only called inside
  here, you can put it in here.
+如果只在内部被调用，你可以这么做 
 
 1751
 01:13:17,551 --> 01:13:20,518
  If if I put it outside in fact
   I'd have a little a problem,
+如果我把它放到外部，就会有点小问题  
 
 1752
 01:13:20,520 --> 01:13:22,387
   because it would have to be
             private.
+它得是 private 的            
 
 1753
 01:13:22,389 --> 01:13:26,390
  Because it uses op, and that's
  what this error right here is.
+因为它用到了 op，这就是 error 的提示 
 
 1754
 01:13:26,392 --> 01:13:29,460
  All right I'd have say private
   func, but I don't want to do
+我得把它变成 private 的，但是我不想这么做  
 
 1755
 01:13:29,462 --> 01:13:32,462
  private func, instead I'm just
    gonna put this right down
+所以我把它放到这里   
 
 1756
 01:13:32,464 --> 01:13:35,131
    here, okay and obviously I
     would do that one last.
+显然，我得再做一遍
 
 1757
 01:13:35,133 --> 01:13:37,333
     Okay that's it, hope you
        learned a lot and
+完成了，希望你们能学到很多知识
 
 1758
 01:13:37,335 --> 01:13:40,236
  stuff elsewhere for that and I
    will see you on Wednesday,
+周三再见
 
 1759
 01:13:40,238 --> 01:13:42,037
       I'm here if you have
            questions.
+如果有问题来这问我           
 
 1760
 01:13:44,074 --> 01:13:47,976

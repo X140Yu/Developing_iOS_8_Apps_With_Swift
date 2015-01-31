@@ -6287,35 +6287,42 @@ like ends or straightened
 00:49:34,101 --> 00:49:35,801
      It's almost always an
            optional.
+它总会是 optional           
 
 1202
 00:49:35,803 --> 00:49:37,168
    Cuz I usually don't ask if
            it's not.
+因为如果它不是，我就不会问了
 
 1203
 00:49:37,170 --> 00:49:40,672
  But it is indeed an optional,
       an optional double.
+它确实是个 optional，一个 optional double 类型的      
 
 1204
 00:49:40,674 --> 00:49:42,707
    It's this type right here,
              okay?
+这就是它的类型             
 
 1205
 00:49:42,709 --> 00:49:46,043
   So we need to turn it into a
  double if we're gonna pass it
+如果我们想把它传入这里， 
 
 1206
 00:49:46,045 --> 00:49:48,078
  to this operation right here.
+就得把它变成一个 double 类型的
 
 1207
 00:49:48,080 --> 00:49:52,648
    So I'm gonna use if let to
     turn that into a double.
+所以在这里我是用 if let 来把它变成 double    
 
 1208
 00:49:52,650 --> 00:49:55,084
@@ -6325,88 +6332,106 @@ like ends or straightened
 00:49:55,085 --> 00:49:57,519
   Now, I can actually do this
   because I have the operand.
+我确实可以这么做，因为我已经有了运算对象  
 
 1210
 00:49:57,521 --> 00:49:58,587
     Just got it right here.
+从这里获取到的    
 
 1211
 00:49:58,589 --> 00:50:00,755
              'Kay?
    This is now a double, see?
+它现在变成 double 了   
 
 1212
 00:50:00,757 --> 00:50:04,125
  And I can call this operation
           right here.
+我可以在这里调用这个运算          
 
 1213
 00:50:04,127 --> 00:50:06,327
  And this is the remaining ops,
       but this has got to
+这里是余下的 ops，但这里得放递归之后
 
 1214
 00:50:06,329 --> 00:50:09,229
  be the remaining ops after we
            recursed.
+余下的 ops           
 
 1215
 00:50:09,231 --> 00:50:13,233
  So it's gotta be the remaining
  ops in this operandEvaluation.
+所以它得是这个 operandEvalution 余下的 ops 
 
 1216
 00:50:13,235 --> 00:50:15,368
             So that
   operandEvaluation.remaining-
+所以这里放 operandEvaluation.remainingOps  
 
 1217
 00:50:15,370 --> 00:50:19,471
               Ops.
    Everybody cool with that?
+都懂了吗？   
 
 1218
 00:50:19,473 --> 00:50:21,206
          So that's it.
+就是这样         
 
 1219
 00:50:21,208 --> 00:50:25,343
    It's just recurse, we just
    recursed to evaluate that.
+我们为了计算而进行递归   
 
 1220
 00:50:25,345 --> 00:50:29,180
    If this fails if, if this
     recursion returned nil,
+如果这步失败了，这次递归返回 nil    
 
 1221
 00:50:29,182 --> 00:50:31,849
   then this is, this, if let's
      not gonna happen this
+这里都不会进行     
 
 1222
 00:50:31,851 --> 00:50:34,584
    return's not gonna happen,
  gonna fall all the way out and
+不会 return，然后一路向下运行， 
 
 1223
 00:50:34,586 --> 00:50:37,454
   return nill which is what we
           want, 'kay.
+最后返回我们期待的 nil          
 
 1224
 00:50:37,456 --> 00:50:39,522
     We failed in any of our
      recursive attempts to
+如果为了得到运算对象
 
 1225
 00:50:39,524 --> 00:50:40,756
    get the operands we need,
+递归失败了   
 
 1226
 00:50:40,758 --> 00:50:42,825
   we gotta fail all the way up
        to the top level.
+就是一路失败到最顶层的递归       
 
 1227
 00:50:42,827 --> 00:50:46,028
@@ -6415,11 +6440,13 @@ like ends or straightened
 1228
 00:50:46,030 --> 00:50:48,063
    Okay now binary operation.
+双目运算符   
 
 1229
 00:50:49,299 --> 00:50:52,466
    Also okay, let's do yeah,
        binary here case.
+在这个 case 处理双目运算符       
 
 1230
 00:50:53,535 --> 00:50:54,267
@@ -6429,35 +6456,42 @@ like ends or straightened
 00:50:55,470 --> 00:50:57,570
    Obviously same exact thing
              here.
+显然，跟上面一样             
 
 1232
 00:50:57,572 --> 00:50:59,438
    We don't care about that.
+我们不需要关心这个   
 
 1233
 00:50:59,440 --> 00:51:00,906
     And here we're gonna let
            operation.
+在这里，let operation           
 
 1234
 00:51:00,908 --> 00:51:03,708
  And we're gonna do the exactly
      the same thing we did
+跟之前做相同的事情
 
 1235
 00:51:03,710 --> 00:51:06,577
  here but we just have to do it
    twice because we have two
+但在这里得做两次
 
 1236
 00:51:06,579 --> 00:51:08,646
   operands to do here, through
              here.
+因为我们得获取到两个运算对象             
 
 1237
 00:51:08,648 --> 00:51:15,052
  So let's let opp1Evaluation =
     evaluate(remainingOps).
+所以，let opp1Evaluation = evaluate(remainingOps)
 
 1238
 00:51:16,088 --> 00:51:17,487
@@ -6467,20 +6501,24 @@ like ends or straightened
 00:51:17,488 --> 00:51:18,887
      And then if we can let
            operand1 =
+如果进行 let operand1 = op1Evaluation.result
 
 1240
 00:51:18,890 --> 00:51:20,756
      op1Evaluation.result.
 
+
 1241
 00:51:20,758 --> 00:51:23,625
  'Kay, then we got op1, that's
              good.
+我们就获得了 op1             
 
 1242
 00:51:23,627 --> 00:51:27,262
  So now let's let op2Evaluation
                =
+在这里 let op2Evaluation = evaluation(op1Evaluation.remainingOps)               
 
 1243
 00:51:27,264 --> 00:51:32,600
@@ -6495,16 +6533,19 @@ like ends or straightened
 00:51:36,371 --> 00:51:40,139
    And if we can let operand,
   oops, if we can let operand2
+如果在这里 let operand2 = op2Evaluation.result  
 
 1246
 00:51:40,142 --> 00:51:44,844
   = op2Evaluation.result, then
              we can
+我们就             
 
 1247
 00:51:44,846 --> 00:51:50,716
   return (operation(operand1,
            operand2).
+return (operation(operand1, operand2))           
 
 1248
 00:51:50,718 --> 00:51:53,185
@@ -6514,11 +6555,13 @@ like ends or straightened
 1249
 00:51:53,186 --> 00:51:55,653
            we'll have
- op2Evaluation.remainingOps) as
+ op2Evaluation.remainingOps as
+我们把 op2Evaluation.remainingOps 
 
 1250
 00:51:55,656 --> 00:51:57,355
        our remaining ops.
+作为我们余下的 ops       
 
 1251
 00:51:57,357 --> 00:52:00,825
@@ -6528,6 +6571,7 @@ like ends or straightened
 1252
 00:52:00,827 --> 00:52:01,692
           Make sense?
+我讲明白了吗？          
 
 1253
 00:52:01,694 --> 00:52:02,426
@@ -6537,6 +6581,7 @@ like ends or straightened
 1254
 00:52:02,428 --> 00:52:03,159
      We have an error here.
+在这里有个 error  
 
 1255
 00:52:03,161 --> 00:52:04,560
@@ -6551,21 +6596,25 @@ like ends or straightened
 00:52:05,696 --> 00:52:06,829
  this is a good error to cover
              here.
+这个 error 值得一讲        
 
 1258
 00:52:06,831 --> 00:52:09,665
   See this it says method must
   be declared private because
+它提到，这个方法必须声明为 private   
 
 1259
 00:52:09,667 --> 00:52:12,501
  this parameter uses a private
              value.
+因为参数使用了 private 的值             
 
 1260
 00:52:12,503 --> 00:52:16,137
  And sure enough op is private
    so this has to be private.
+op 是 private 的，所以这个方法得是 private 的   
 
 1261
 00:52:17,740 --> 00:52:19,273
@@ -6574,72 +6623,87 @@ like ends or straightened
 1262
 00:52:20,476 --> 00:52:21,875
      Now notice by the way,
+同时注意这里     
 
 1263
 00:52:21,877 --> 00:52:28,080
   I don't have default: break
       here in this switch.
+这个 switch 我没有写 default: break      
 
 1264
 00:52:28,082 --> 00:52:30,215
   And why do I not have that?
+我为什么没写？  
 
 1265
 00:52:30,217 --> 00:52:33,418
    Because I've handled every
      possible value of op.
+因为我已经处理了 op 的每一个可能情形     
 
 1266
 00:52:35,088 --> 00:52:35,986
              'Kay?
          There are only
+这里只有
 
 1267
 00:52:35,988 --> 00:52:37,254
        three kinds of op.
+三种 op       
 
 1268
 00:52:37,256 --> 00:52:38,522
      I've handled them all.
+我每一种都处理了     
 
 1269
 00:52:38,524 --> 00:52:40,374
   So I don't need any default.
+所以我不需要 default  
 
 1270
 00:52:40,375 --> 00:52:42,225
   It wasn't like in the other
  one where we had a string and
+这不像上一个处理 string 的 switch 
 
 1271
 00:52:42,227 --> 00:52:44,761
  we only handle a few strings,
     we had a default break.
+我们只处理了几个 string，所以有 default: break    
 
 1272
 00:52:44,763 --> 00:52:47,863
  You don't put default break in
   when you handle every thing.
+当你处理完所有情况，就不需要 default: break 了  
 
 1273
 00:52:47,865 --> 00:52:49,598
  And it's really bad programing
             style to
+在每一个单独的 switch 语句
 
 1274
 00:52:49,600 --> 00:52:51,633
   put a default break in every
          single switch.
+放一个 default: break 也是一种不好的编程风格         
 
 1275
 00:52:51,635 --> 00:52:54,903
  'Kay, you should only put them
     in on the ones where you
+你只应该把它们放在你真想 break 的地方    
 
 1276
 00:52:54,905 --> 00:52:58,373
  truly are breaking because you
     can't handle every case.
+因为你不能处理每一种情况    
 
 1277
 00:52:58,375 --> 00:53:00,574
@@ -6650,90 +6714,108 @@ like ends or straightened
 00:53:00,576 --> 00:53:03,844
  Now, the last thing we have to
  do is just call this recursive
+现在要做的最后一件事就是 
 
 1279
 00:53:03,846 --> 00:53:06,113
        version from here.
+调用这个递归       
 
 1280
 00:53:06,115 --> 00:53:08,782
   And I'm gonna call this one
               and
+我要调用它，              
 
 1281
 00:53:08,784 --> 00:53:11,117
     get these tuple values a
       little differently.
+用不一样的方式获取这些 tuple 的值
 
 1282
 00:53:11,119 --> 00:53:12,718
   I'm not gonna call it in the
          same way here.
+我不会跟上次一样那么调用         
 
 1283
 00:53:12,720 --> 00:53:14,920
      I'm not gonna say, let
         something equal.
+我不会这样        
 
 1284
 00:53:14,922 --> 00:53:20,091
   Instead I'm gonna say let a
  tuple which has let's call it
+我会 let 一个 tuple ， 
 
 1285
 00:53:20,093 --> 00:53:24,062
    say (result, remainder) =
           evaluate and
+像这样 (result, remainder) = evaluate          
 
 1286
 00:53:24,064 --> 00:53:28,666
     I'm gonna pass my whole
      (opStack) here, okay.
+我要把整个 opStack 传进去     
 
 1287
 00:53:28,668 --> 00:53:31,668
  So this is a different way to
   call a function that returns
+这里就是调用返回 tuple 的函数的不同方法  
 
 1288
 00:53:31,670 --> 00:53:35,305
  a tuple here you actually let
    a tuple equal the result.
+其实是 let 一个 tuple 等于函数的返回值   
 
 1289
 00:53:35,307 --> 00:53:37,974
   Instead of letting a single
      thing equal result and
+而不是让一个单独的东西等于返回值     
 
 1290
 00:53:37,976 --> 00:53:42,111
  then using the dots to get it,
  you let the tuple equal it and
+然后使用 . 来获取元素， 你 let tuple = 
 
 1291
 00:53:42,113 --> 00:53:45,547
  notice that these names don't
   have to be the same as these
+注意，这些命名不需要是一样的
 
 1292
 00:53:45,549 --> 00:53:48,283
   names so result is the same,
            but here I
+result 是一样的，但是这里           
 
 1293
 00:53:48,285 --> 00:53:52,286
  use the word remainder instead
    of the word remainingOps.
+我用 remainder 来取代 remainingOps   
 
 1294
 00:53:52,288 --> 00:53:53,754
   Okay they do not have to be
            the same.
+它们没必要是一样的           
 
 1295
 00:53:55,024 --> 00:54:00,694
   And then here we just return
           our result.
+在这里，返回我们的结果          
 
 1296
 00:54:00,696 --> 00:54:02,261
@@ -6743,20 +6825,24 @@ like ends or straightened
 00:54:02,263 --> 00:54:04,163
    So we learned a lot right
           there, okay.
+在这里我们学到了很多          
 
 1298
 00:54:04,165 --> 00:54:05,297
     We learned about tuple,
+我们学到了 tuple     
 
 1299
 00:54:05,299 --> 00:54:08,033
   passing you know things back
            tuples in
+通过不同的方式获取 tuple            
 
 1300
 00:54:08,035 --> 00:54:13,237
  different ways you know how to
    ignore things in enums and
+如何在 enum 里忽略一些东西   
 
 1301
 00:54:13,239 --> 00:54:15,106

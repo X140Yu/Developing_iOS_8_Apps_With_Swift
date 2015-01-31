@@ -1,0 +1,9340 @@
+1
+00:00:00,001 --> 00:00:04,636
+[MUSIC]
+
+2
+00:00:04,638 --> 00:00:08,373
+Stanford University.
+斯坦福大学
+
+3
+00:00:08,375 --> 00:00:11,942
+>> All right, well,welcome to Stanford CS193P,
+好 欢迎来到斯坦福CS193P
+
+4
+00:00:11,944 --> 00:00:13,377
+winter of 2015.
+2015冬季课程。
+
+5
+00:00:13,379 --> 00:00:14,744
+This is lecture number two.
+这是我们的第二讲。
+
+6
+00:00:14,746 --> 00:00:18,581
+I apologize upfront for my terrible voice, we are going
+由于我糟糕的嗓音，预先向大家致歉。今天我们将要
+
+7
+00:00:18,583 --> 00:00:20,549
+to try to get through this as best we can today.
+尽可能去克服这个困难。
+
+8
+00:00:22,153 --> 00:00:23,819
+Our topics are two fold.
+我们的话题有两个方面。
+
+9
+00:00:23,821 --> 00:00:25,854
+[COUGH] We're going to continue the calculator 
+我们将继续在上一讲中已经开始的计算器Demo，
+
+10
+00:00:25,856 --> 00:00:29,924
+demo that we started, in last lecture and then we're gonna
+然后我们将会有
+
+11
+00:00:29,926 --> 00:00:32,526
+have some slides about this model view controller,
+一些关于模型视图控制器，
+
+12
+00:00:32,528 --> 00:00:35,462
+object-oriented design pattern that we're gonna use in
+和面向对象设计模式的幻灯片
+
+13
+00:00:35,464 --> 00:00:36,797
+everything we do.
+这种设计模式我们已经广泛的使用。
+
+14
+00:00:36,799 --> 00:00:40,066
+When we build applications in this class.
+当我们在这节课中开发应用时
+
+15
+00:00:40,068 --> 00:00:41,151
+All right?
+有问题么？
+
+16
+00:00:41,152 --> 00:00:42,235
+So let's get started with that demo.
+没问题就让我开始演示Demo
+
+17
+00:00:42,237 --> 00:00:44,136
+Again, here's a slide with the summary of kind of
+这里是一张总结
+
+18
+00:00:44,138 --> 00:00:46,538
+the important things we're gonna talk about.
+接下去我们即将要讲的重点的幻灯片
+
+19
+00:00:46,540 --> 00:00:48,540
+You don't need to read those in advance here,
+你们并不需要提前去阅读这些
+
+20
+00:00:48,542 --> 00:00:49,708
+it's more for reference.
+它便于提供参考。
+
+21
+00:00:49,710 --> 00:00:52,410
+My slides in general, I post them,
+我做的幻灯片一般来讲，
+
+22
+00:00:52,412 --> 00:00:55,246
+it's mostly intended to almost be note taking for you.
+主要是为了方便你们记笔记用
+
+23
+00:00:55,248 --> 00:00:56,580
+To be able go back and try and 
+为了你们在复习的时候能够
+
+24
+00:00:56,582 --> 00:00:58,515
+figure out, whoa, when did he talked about that day?
+回忆出，哇哦，他什么时候讲过这些？
+
+25
+00:00:58,517 --> 00:00:59,382
+Oh yeah.
+
+26
+00:00:59,384 --> 00:01:00,983
+What's important, et cetera.
+什么是重要的，等等。
+
+27
+00:01:00,985 --> 00:01:03,419
+So my slides do tend to be a little bit dense.
+所以，我的幻灯片也往往是有点多。
+
+28
+00:01:03,421 --> 00:01:05,187
+I tend to put a little more on them, than,
+我更倾向于多放一些关于这个的内容，
+
+29
+00:01:05,189 --> 00:01:06,989
+than just bullet items.
+与项目相比
+
+30
+00:01:06,990 --> 00:01:08,790
+But that's because I want you to be able to look back and
+但是，那是因为我希望你们能够回过头来看的时候
+
+31
+00:01:08,792 --> 00:01:11,726
+kind of get just a little bit more depth to
+对于我所说的
+
+32
+00:01:11,728 --> 00:01:14,162
+remind yourself what I talked about.
+你们更深入的理解
+
+33
+00:01:14,164 --> 00:01:15,363
+Okay?
+
+34
+00:01:15,365 --> 00:01:17,882
+All right, so
+好了，
+
+35
+00:01:17,883 --> 00:01:20,400
+this demo, if you'll remember last time, where we left off,
+关于这个Demo，如果你们还记得上次我们快结束时，
+
+36
+00:01:20,403 --> 00:01:23,603
+we had gotten the keypad fully working.
+我们已经完全实现了计算器的键盘的功能
+
+37
+00:01:23,605 --> 00:01:26,606
+All right, and we were talking a little bit about properties
+我们将要讲一些关于属性和
+
+38
+00:01:26,608 --> 00:01:28,808
+and instant variables and how we had to initialize them.
+实例变量相关的内容，以及如何去初始化它们
+
+39
+00:01:28,810 --> 00:01:30,710
+And so I'm gonna ask a question right at
+我将会在这讲结束的时候问一个问题
+
+40
+00:01:30,712 --> 00:01:33,012
+the end of lecture, perfect timing.
+多完美的时机
+
+41
+00:01:33,014 --> 00:01:37,248
+What about the little outlet that we dragged out
+为什么我们拖出的
+
+42
+00:01:37,250 --> 00:01:40,284
+that display UI label exclamation point, how come we
+显示UI Lable的outlet后面有个感叹号
+
+43
+00:01:40,286 --> 00:01:43,888
+didn't have to make that equal to something, to start.
+以及为什么我们从一开始不需要将它赋值。
+
+44
+00:01:43,890 --> 00:01:46,123
+And that's where this demo is gonna pick up.
+我们将从这个地方继续上次的Demo。
+
+45
+00:01:46,125 --> 00:01:46,890
+Okay?
+
+46
+00:01:46,892 --> 00:01:49,759
+>> Okay.
+
+47
+00:01:49,760 --> 00:01:52,627
+[COUGH] Well, let's dive back into this demonstration,
+好吧，让我们深入到演示中来，
+
+48
+00:01:52,630 --> 00:01:54,647
+where we left off.
+接着我们上次讲的地方。
+
+49
+00:01:54,648 --> 00:01:56,665
+Which it was this line of code, here.
+上次我们在这行代码结束的。
+
+50
+00:01:56,668 --> 00:01:59,868
+And, we had just talked about the fact that we have to
+我们之前讲过我们必须
+
+51
+00:01:59,870 --> 00:02:04,572
+initialize all of our variables [COUGH] in a class,
+在类中初始化我们的变量
+
+52
+00:02:04,574 --> 00:02:05,807
+in any class.
+在任何类中都必须这样做。
+
+53
+00:02:05,809 --> 00:02:09,510
+And, so that's why we need this equals falls here.
+所以我们需要在这个加个等号
+
+54
+00:02:09,512 --> 00:02:13,747
+They wanted the equal falls too but we needed it and yet
+这里也需要等号赋值，但是
+
+55
+00:02:13,749 --> 00:02:15,482
+it didn't seem like we needed one here.
+这里看起来并不需要等号赋值。
+
+56
+00:02:15,484 --> 00:02:17,050
+And why was that?
+为什么会是这样？
+
+57
+00:02:17,052 --> 00:02:19,085
+Well, it turns out that this right here,
+好吧，事实证明，在这里
+
+58
+00:02:19,087 --> 00:02:22,254
+even though it doesn't quite look like one, is an optional.
+即使它看起来不完全像之前那个，这是一个optional
+
+59
+00:02:23,490 --> 00:02:28,559
+And, optionals automatically get equaled nil, given to you.
+而且optionals在你使用之前就赋了nil
+
+60
+00:02:29,595 --> 00:02:31,862
+So, you don't actually have to put the equals nil here.
+所以，其实你们并不需要在这里给它赋nil
+
+61
+00:02:31,864 --> 00:02:35,365
+So that's why, so this one here is getting initialized.
+这就是为什么这里已经初始化了
+
+62
+00:02:35,367 --> 00:02:37,600
+It's just being done automatically for you.
+它都自动帮你做好了
+
+63
+00:02:37,602 --> 00:02:39,635
+But, let's talk about the look of this thing.
+但是，我们来谈论一下这个东西的样子。
+
+64
+00:02:40,905 --> 00:02:43,772
+It's got this exclamation point here.
+在这里有个感叹号。
+
+65
+00:02:43,774 --> 00:02:45,040
+And, if it were an optional,
+如果它是一个optional
+
+66
+00:02:45,042 --> 00:02:47,208
+you'd be used to it having a question mark.
+你们通常会在这里看到一个问号
+
+67
+00:02:47,210 --> 00:02:49,310
+For example, we look at this optional right here,
+例如，我们来看这里这个optional，
+
+68
+00:02:49,312 --> 00:02:51,028
+current title,
+current title,
+
+69
+00:02:51,029 --> 00:02:52,745
+you see it's string question mark not exclamation point,
+你们将会看到这里string是问号而不是感叹号，
+
+70
+00:02:52,748 --> 00:02:54,665
+question mark.
+这里是问号。
+
+71
+00:02:54,666 --> 00:02:56,583
+So what's the difference between a question mark and
+那么，在问号和感叹号之间
+
+72
+00:02:56,585 --> 00:02:58,551
+an exclamation point here?
+有什么区别？
+
+73
+00:02:58,553 --> 00:03:00,570
+And the answer is,
+答案是
+
+74
+00:03:00,571 --> 00:03:02,588
+it makes no difference to the actual type, it's still
+对于实际类型而言它们没有区别，
+
+75
+00:03:02,590 --> 00:03:05,958
+an optional whose value here could be a UI label.
+它仍然是一个optional，其值在这里可能是一个UI label类型。
+
+76
+00:03:07,161 --> 00:03:09,761
+But it matters on the usage of it.
+但是它的区别在于它的用法上
+
+77
+00:03:09,763 --> 00:03:12,597
+[COUGH] And this is purely just kind of
+这完全是编译器
+
+78
+00:03:12,599 --> 00:03:15,466
+a compiler helping you out thing, here.
+帮你把这事做掉了
+
+79
+00:03:16,502 --> 00:03:18,602
+But if we look at when I change this to
+但是如果我们将这个感叹号
+
+80
+00:03:18,604 --> 00:03:21,538
+a question mark you see that some errors appear down here.
+改成问号。Xcode将会在这里报出一些错误提示
+
+81
+00:03:21,540 --> 00:03:23,940
+So then let's click on one of these errors, like this one,
+那么，让我们点击这其中的一个错误提示，比如说这个
+
+82
+00:03:23,942 --> 00:03:26,208
+and you can see the errors that UI label,
+你们将会看到UI label控件
+
+83
+00:03:26,210 --> 00:03:29,244
+question mark does not have a member named text.
+问号没有叫text的成员变量
+
+84
+00:03:29,246 --> 00:03:31,279
+In other words you can't send text.
+换句话说，你不能将text赋给。
+
+85
+00:03:31,281 --> 00:03:32,580
+UI label question mark,
+UI label问号，
+
+86
+00:03:32,582 --> 00:03:35,350
+which is what this is and that makes sense because UI label
+因为UI label后面这个问号
+
+87
+00:03:35,352 --> 00:03:36,784
+question mark is an optional and
+是一个optional，而且
+
+88
+00:03:36,786 --> 00:03:39,453
+obviously an optional doesn't respond to text.
+很显然这个optional不是回应text的
+
+89
+00:03:39,455 --> 00:03:42,889
+UI labels do, but optionals don't.
+UI label是这样的，但optional不一定这样。
+
+90
+00:03:42,891 --> 00:03:44,858
+So, why are we getting this error now when we
+那么，为什么我们会这出错
+
+91
+00:03:44,860 --> 00:03:46,726
+weren't getting it before.
+在这之前却没有。
+
+92
+00:03:46,728 --> 00:03:47,993
+And how would we get rid of this error?
+我们又如何去避免这个错误？
+
+93
+00:03:47,995 --> 00:03:49,461
+Well, you could certainly get rid of
+好了，我们当然可以通过
+
+94
+00:03:49,463 --> 00:03:51,630
+this error by just putting an exclamation point here,
+添加一个感叹号来避免这个错误
+
+95
+00:03:51,632 --> 00:03:54,399
+that would unwrap this optional.
+它将会去除这个optional。
+
+96
+00:03:54,401 --> 00:03:56,734
+And now this would be an UI label right here and
+那么现在这里会变成UI label，而且
+
+97
+00:03:56,736 --> 00:03:57,819
+we can send a text.
+我们可以将text赋值给它
+
+98
+00:03:57,820 --> 00:03:58,903
+And we do the same thing up here.
+我们在这里也做同样的操作
+
+99
+00:03:58,905 --> 00:04:03,073
+We can unwrap it there and we can unwrap it there.
+我们可以在这里去除它，也可以在那里去除它
+
+100
+00:04:03,075 --> 00:04:05,742
+And that gets rid of all of our errors.
+这样一来避免了所有同样的错误。
+
+101
+00:04:05,744 --> 00:04:09,012
+But [COUGH] this kind of an interesting property in that
+但是这里有个很有意思的属性
+
+102
+00:04:09,014 --> 00:04:11,213
+even though it's not initialized in
+即使它并没有初始化
+
+103
+00:04:11,215 --> 00:04:14,450
+the very beginning of a colossus creation starts out
+在庞大得创建方法中
+
+104
+00:04:14,452 --> 00:04:16,451
+as nil not set.
+都没有对其赋nil。
+
+105
+00:04:16,453 --> 00:04:21,723
+As soon as as this user interface gets loaded up
+只要这个接口被加载了
+
+106
+00:04:21,725 --> 00:04:23,891
+by this new controller.
+通过新的控制器。
+
+107
+00:04:23,893 --> 00:04:26,794
+Then this gets wired up, alright, so, that gets
+那么这个将连接起来，好了，那么那里
+
+108
+00:04:26,796 --> 00:04:30,497
+wired up, and this is set, and then this it's set forever.
+也将连接起来，只要这里被赋值了，那么所有的这个都被赋值了。
+
+109
+00:04:30,499 --> 00:04:33,199
+So it's really, kinda would be sad if we actually,
+假如这是真的，那么当我们每次在用的时候，
+
+110
+00:04:33,201 --> 00:04:36,536
+every time we used it had to unwrap it all the time.
+我们都将加上感叹号，这真是挺悲伤的。
+
+111
+00:04:36,538 --> 00:04:38,437
+So these kind of properties that.
+所以这些属性
+
+112
+00:04:38,439 --> 00:04:42,674
+Get set very early, maybe not right at creation like
+很早就被赋值的，不一定像这个一样是正确地创建
+
+113
+00:04:42,676 --> 00:04:44,976
+this one, but very, they get set very early, and
+但是，绝大部分还是会在创建的时候就赋值
+
+114
+00:04:44,978 --> 00:04:46,511
+then they stay set all the time.
+然后之后就一直被赋值
+
+115
+00:04:47,447 --> 00:04:49,030
+You can, instead of
+你也可以
+
+116
+00:04:49,031 --> 00:04:50,614
+putting a question mark in their decoration.
+在声明的地方加一个问号来代替
+
+117
+00:04:50,616 --> 00:04:52,683
+We're talking about their decoration here.
+我们将在这里谈论他们的声明
+
+118
+00:04:52,685 --> 00:04:54,317
+You can put an exclamation point.
+你们可以在这里加一个感叹号
+
+119
+00:04:54,319 --> 00:04:56,586
+And what that says is.
+那么它会提示你
+
+120
+00:04:56,588 --> 00:04:58,521
+This is just an optional, but
+这只是一个optional，但是
+
+121
+00:04:58,523 --> 00:05:03,625
+always automatically unwrap it so that you don't have to
+它会自动解开为了让你不用
+
+122
+00:05:03,627 --> 00:05:06,261
+put this exclamation point in here.
+在这里加感叹号
+
+123
+00:05:06,263 --> 00:05:07,695
+So I take this exclamation point out.
+所以，我把这里的感叹号删掉了
+
+124
+00:05:07,697 --> 00:05:09,764
+You can see, it's not generating any errors.
+你们可以看到，它将不再报错
+
+125
+00:05:10,933 --> 00:05:15,735
+And it's still going to unwrap this display and
+它将把display转化成
+
+126
+00:05:15,737 --> 00:05:17,670
+turn into a UI label.
+UI label
+
+127
+00:05:17,672 --> 00:05:18,838
+And.
+而且
+
+128
+00:05:18,840 --> 00:05:21,006
+It's still gonna crash your program if for
+它还是会崩溃由于
+
+129
+00:05:21,008 --> 00:05:22,307
+some reason the display were nil.
+某些原因比如display是nil
+
+130
+00:05:22,309 --> 00:05:25,110
+If you tried to execute this code, that may
+如果你执意要执行这段代码，那是
+
+131
+00:05:25,112 --> 00:05:28,146
+be impossible because this is the button sending those.
+不可能的，因为这里是由按钮来发送这些的
+
+132
+00:05:28,148 --> 00:05:31,716
+So the button wouldn't be here if this hadn't gotten already
+这个按钮不会在这里除非它加载的时候
+
+133
+00:05:31,718 --> 00:05:33,818
+loaded up in the set.
+被赋值
+
+134
+00:05:33,819 --> 00:05:35,919
+But if somehow you had some place in your controller or
+但是如果在某种情况下你必须
+
+135
+00:05:35,921 --> 00:05:39,589
+you were accessing display before this UI got loaded.
+在UI加载之前你要获取display
+
+136
+00:05:39,591 --> 00:05:42,158
+It would crash, because it is unwrapping this,
+它将崩溃，因为它还没有解开联系
+
+137
+00:05:42,160 --> 00:05:44,327
+it's just that you don't have to put the explanation point,
+你不需要在这里写感叹号
+
+138
+00:05:44,329 --> 00:05:46,629
+it's kinda like auto explanation point.
+它会自动解析
+
+139
+00:05:46,631 --> 00:05:51,066
+And, this is called a implicitly unwrapped optional.
+这个就叫做unwrapped optional
+
+140
+00:05:51,068 --> 00:05:53,968
+Okay? Implicitly unwrapped optional.
+有问题嘛？隐式unwrapped optional
+
+141
+00:05:53,970 --> 00:05:56,704
+And it's really only useful for this kind, of property,
+在这种情况下它真的很有用对于属性来说
+
+142
+00:05:56,706 --> 00:06:00,274
+that's, set very early, and then stay set, forever.
+在创建的时候就赋值，那么将一直被赋值
+
+143
+00:06:00,276 --> 00:06:02,642
+It's kind of sugar, really.
+这真是一个好的语法糖
+
+144
+00:06:04,379 --> 00:06:07,246
+Okay, so let's move on
+好了，我们将继续
+
+145
+00:06:07,248 --> 00:06:11,117
+to the next button in our [INAUDIBLE] here.
+接着下一个按钮
+
+146
+00:06:11,119 --> 00:06:13,285
+Which is going to be an enter button.
+它就是Enter键
+
+147
+00:06:13,287 --> 00:06:16,655
+Now our calculator does not have an equals sign.
+现在我们的计算器还没有等号
+
+148
+00:06:16,657 --> 00:06:18,223
+So you're probably used to calculators where you
+你们也许通常会这样使用计算器
+
+149
+00:06:18,225 --> 00:06:21,726
+say six plus three then when you hit equals it shows you
+6乘以3，然后你们按等号计算器展示
+
+150
+00:06:21,728 --> 00:06:23,027
+the result.
+结果
+
+151
+00:06:23,029 --> 00:06:24,912
+This calculator is
+我们的计算器会
+
+152
+00:06:24,913 --> 00:06:26,796
+a little more like a scientific calculator.
+更像科学计算器
+
+153
+00:06:26,799 --> 00:06:27,564
+Has an enter key.
+将没有等号按钮
+
+154
+00:06:27,566 --> 00:06:31,668
+And so, instead you put the numbers you want to add or
+那么，你们按你们想相加的数字按钮或者
+
+155
+00:06:31,670 --> 00:06:35,671
+divide or multiply or whatever onto a stack and then when you
+除以或者乘以无论什么都将会入栈，然后当你
+
+156
+00:06:35,673 --> 00:06:38,440
+press the operation keys it pulls them off the stack.
+按下操作按钮的时候，数字将会出栈
+
+157
+00:06:38,442 --> 00:06:43,011
+So that looks like this, 6 enter 3 times.
+比如这样 6 乘以 3
+
+158
+00:06:43,013 --> 00:06:45,279
+Four, six, enter, three, enter, times.
+4 6 乘以 3
+
+159
+00:06:45,281 --> 00:06:48,449
+So the times is going to pull the six and
+这个乘法操作符将会把6 和 
+
+160
+00:06:48,451 --> 00:06:50,735
+the three off the stack.
+3 出栈
+
+161
+00:06:50,736 --> 00:06:53,020
+You could even go six, enter, five, enter, four, enter, and
+你也可以按6，回车，5，回车，4， 回车，然后
+
+162
+00:06:53,022 --> 00:06:54,521
+then go times plus.
+按乘以
+
+163
+00:06:55,590 --> 00:06:58,624
+That would multiply the top two on the stack and
+它将会把栈顶的两个元素出栈
+
+164
+00:06:58,626 --> 00:07:00,893
+then add the last one on.
+操作完再将加上栈顶的元素
+
+165
+00:07:01,829 --> 00:07:04,629
+So we need an enter key here for our calculator.
+所以我们的计算器还是需要一个Enter键
+
+166
+00:07:04,631 --> 00:07:06,798
+Now, I'm gonna create that enter key in a way that's 
+现在，我将要通过这种方式创建一个enter键
+
+167
+00:07:06,800 --> 00:07:09,367
+actually gonna cause a problem for me in a moment, but
+它虽然会引起一些问题，但是
+
+168
+00:07:09,369 --> 00:07:12,370
+I wanna show you how to resolve that very problem.
+我将会展示给你们看如何解决这些问题
+
+169
+00:07:12,372 --> 00:07:16,039
+So I'm gonna create this enter key by copying and pasting.
+那么，我将通过复制粘贴
+
+170
+00:07:16,041 --> 00:07:18,608
+This digit key right here.
+这里的数字键来创建Enter键
+
+171
+00:07:18,610 --> 00:07:19,475
+And I'm just gonna put it in here.
+那么我将会把这段代码放在这里
+
+172
+00:07:19,477 --> 00:07:20,743
+Notice that I'm lining these,
+注意我要粘贴在这里
+
+173
+00:07:22,113 --> 00:07:23,745
+blue lines up absolutely perfectly.
+蓝色的辅助线出现最好
+
+174
+00:07:23,747 --> 00:07:27,315
+I don't want them to be, like it's lined up with that one,
+我不想这些按钮像这个一样
+
+175
+00:07:27,317 --> 00:07:28,750
+but not that one or vice versa.
+或者那个一样
+
+176
+00:07:28,752 --> 00:07:30,685
+I want them perfectly lined up.
+我希望它完全对齐
+
+177
+00:07:30,687 --> 00:07:33,520
+Cuz later I'm gonna spread these out over the whole UI
+因为我待会要在整个 UI 中放大这些按钮
+
+178
+00:07:33,522 --> 00:07:37,057
+and if I haven't lined these up just absolutely perfectly
+如果我没有将这些按钮对齐的话
+
+179
+00:07:37,059 --> 00:07:39,693
+then Expo's not gonna quite know what I want here in Xcode
+将不会知道我想把它放在这里
+
+180
+00:07:39,695 --> 00:07:41,828
+terms of the relationship between these.
+在这个和这个之间
+
+181
+00:07:43,264 --> 00:07:46,999
+All right so we don't want a three on here, we want to have
+好了，我们不希望这个按钮上还是3，所以我们需要修改一下
+
+182
+00:07:47,001 --> 00:07:52,237
+a,enter symbol so I'm gonna go up here to special characters.
+一个enter的符号，我将输入一个特殊的符号
+
+183
+00:07:52,239 --> 00:07:54,505
+This is on in most Mac applications.
+这个符号在很多的 Mac 应用中都有
+
+184
+00:07:54,507 --> 00:07:57,174
+You can go to the edit menu to get special characters.
+你们可以从编辑菜单中获取这些特殊符号
+
+185
+00:07:57,176 --> 00:07:58,342
+And I'm going to search for
+我想要搜索
+
+186
+00:07:58,344 --> 00:08:00,510
+this one actually, I think that's called a return.
+这个特殊符号，我觉得它应该叫返回
+
+187
+00:08:00,512 --> 00:08:01,945
+Yeah. And these are just
+是的，这些都是
+
+188
+00:08:01,947 --> 00:08:04,614
+Unicode characters right here.
+Unicode字符
+
+189
+00:08:04,616 --> 00:08:06,615
+And so I want this one that looks,
+我想要这个
+
+190
+00:08:06,617 --> 00:08:09,551
+kind of like a return or enter key.
+看起来像返回或者enter按钮的
+
+191
+00:08:10,487 --> 00:08:11,686
+So I have this.
+好了，我找到了
+
+192
+00:08:11,688 --> 00:08:13,721
+And I'm gonna use the same mechanism we used before,
+我将使用之前使用过的机制
+
+193
+00:08:13,723 --> 00:08:14,822
+which is CTRL+drag.
+那就是 CTRL+drag
+
+194
+00:08:14,824 --> 00:08:18,958
+So I'm just gonna CTRL+drag out here.
+那么我想 CTRL+drag 拖到这里
+
+195
+00:08:18,960 --> 00:08:21,027
+And, we're creating an action,
+然后，我们创建一个action
+
+196
+00:08:21,029 --> 00:08:24,196
+of course, cuz we want this button to send us a message.
+当然，我们希望这个按钮传递给我们一个信息
+
+197
+00:08:24,198 --> 00:08:25,431
+I'm gonna call it "enter".
+我讲叫它 “enter”
+
+198
+00:08:26,700 --> 00:08:28,333
+That's what it is the answer key
+那就是我们的返回键.
+
+199
+00:08:28,335 --> 00:08:30,134
+Now one thing is different about this one,
+现在有一件事会有一点不同
+
+200
+00:08:30,136 --> 00:08:32,470
+if you'll remember when we wired this action up,
+如果你记得当我们连接这个 action 的时候
+
+201
+00:08:32,472 --> 00:08:35,906
+we had the button that was sending it as an argument and
+我们让这个按钮传递给我们一个参数
+
+202
+00:08:35,908 --> 00:08:37,441
+we don't want that this time.
+但是我们这次不需要这么做
+
+203
+00:08:37,443 --> 00:08:38,808
+Because there's only one answer key we
+因为这里只有一个返回键
+
+204
+00:08:38,810 --> 00:08:40,977
+really don't need to talk back to the answer key, so
+我们并不需要让返回键传参，所以
+
+205
+00:08:40,979 --> 00:08:42,712
+we're going to say none right here.
+我们在这里不需要参数
+
+206
+00:08:42,714 --> 00:08:45,714
+It also doesn't really matter about this type because we're
+这里我们更不用关心它的类型，因为
+
+207
+00:08:45,716 --> 00:08:46,948
+not going to have an argument so
+我们这里并不需要参数
+
+208
+00:08:46,950 --> 00:08:48,750
+it doesn't matter what this type is.
+不用管它这里是什么类型。
+
+209
+00:08:48,752 --> 00:08:49,717
+So disconnect that.
+那么先断开他们的连接
+
+210
+00:08:49,719 --> 00:08:51,686
+As you can see right here.
+你们可以看这里
+
+211
+00:08:51,688 --> 00:08:54,154
+We have enter, and it has no arguments.
+我们已经有一个enter键，没有参数的
+
+212
+00:08:55,691 --> 00:08:57,690
+Now, what are we gonna do inside enter?
+那么现在，我们将在这个 enter 里做什么操作？
+
+213
+00:08:57,692 --> 00:08:59,558
+Well, the main thing we need to do is,
+好吧，我们主要要做的是
+
+214
+00:08:59,560 --> 00:09:03,228
+put whatever number is in this display up here,
+把所有的数字在这里加起来
+
+215
+00:09:03,230 --> 00:09:05,697
+okay, onto our internal stack.
+在我们的栈中
+
+216
+00:09:05,699 --> 00:09:06,931
+So, we're gonna need
+那么，我们需要
+
+217
+00:09:06,933 --> 00:09:09,367
+an internal stack, in a moment, here.
+一个暂时的栈
+
+218
+00:09:09,369 --> 00:09:10,868
+Another thing we might wanna do, is.
+另一件我们想做的事
+
+219
+00:09:11,904 --> 00:09:14,604
+Set users in the middle of typing the number to false.
+设置用户中间操作数字这个参数为 false
+
+220
+00:09:14,606 --> 00:09:17,507
+Because we might have been typing a number, but
+因为我们可能已近输入了一个数字
+
+221
+00:09:17,509 --> 00:09:20,343
+as soon as we hit enter, we're putting it on the stack.
+但是，只要我们单击 enter 键，我们将把数字放入栈中
+
+222
+00:09:20,345 --> 00:09:21,977
+Next time we type a digit,
+接下来我们再输入一个数字
+
+223
+00:09:21,979 --> 00:09:23,846
+we're going to be starting a new number.
+我们将输入一个新的数字
+
+224
+00:09:23,848 --> 00:09:27,182
+[COUGH] All right, so we'll call that user [NOISE] in
+好了，那么我们就叫它 输入好了
+
+225
+00:09:27,184 --> 00:09:29,451
+the middle of typing falls there.
+中间输入那里
+
+226
+00:09:29,453 --> 00:09:32,387
+Now, let's go ahead and, and actually run this and
+现在，让我们继续，运行这个
+
+227
+00:09:32,389 --> 00:09:33,788
+see how this is working.
+看看它是怎么工作的
+
+228
+00:09:33,790 --> 00:09:37,991
+Because there's going to be a little problem here.
+因为这里有个小问题
+
+229
+00:09:37,993 --> 00:09:44,197
+So, run this.
+那么，先运行一下
+
+230
+00:09:44,199 --> 00:09:47,499
+Alright, so let's try eight, enter.
+好了，让我们试一下输入8，然后回车
+
+231
+00:09:47,501 --> 00:09:48,367
+Oh.Oh
+
+232
+00:09:48,369 --> 00:09:50,001
+What's that? Oh, my god.
+那是什么？上帝啊
+
+233
+00:09:50,003 --> 00:09:52,337
+Six, enter.
+6，然后回车
+
+234
+00:09:52,338 --> 00:09:54,672
+Well it's, it's kind of working because after we
+好吧，它能运行，但是我们
+
+235
+00:09:54,674 --> 00:09:57,241
+press enter the user is in the middle of typing numbers.
+所按的回车也一起出现在数字里面了。
+
+236
+00:09:57,243 --> 00:09:59,160
+Starts over.
+重新开始
+
+237
+00:09:59,161 --> 00:10:01,078
+So that's good, but I had no intention for
+所以这是好的，但是我并不想
+
+238
+00:10:01,080 --> 00:10:03,380
+this to be showing up on the end of my display.
+让这个在最后显示出来
+
+239
+00:10:03,382 --> 00:10:05,115
+This little enter.
+这个 enter
+
+240
+00:10:05,117 --> 00:10:06,749
+What the heck is that doing on there?
+这个heck是做什么的？
+
+241
+00:10:06,751 --> 00:10:07,783
+Why is that happening?
+为什么会发生这样的事
+
+242
+00:10:09,086 --> 00:10:09,951
+Let's take a look here.
+让我们看看这里
+
+243
+00:10:11,988 --> 00:10:15,023
+The problem here, has to do with the messages being sent.
+问题出在这里，在信息传递之前
+
+244
+00:10:15,025 --> 00:10:17,358
+So, when we wire this up, that's good.
+那么，当我们连接好了，它就好了
+
+245
+00:10:17,360 --> 00:10:20,161
+We got enter.
+我们已经有enter键了
+
+246
+00:10:20,162 --> 00:10:22,963
+The problem is that button also sends a pen digit.
+问题是那个按钮还传递数字
+
+247
+00:10:22,965 --> 00:10:25,598
+That's because we copied and pasted this three, remember?
+那是因为我们复制粘贴的3的按钮，记得么？
+
+248
+00:10:25,600 --> 00:10:28,735
+And the three sends a pen digit, until we copy and
+而3按钮还传递了一个数字，直到我们复制
+
+249
+00:10:28,737 --> 00:10:29,903
+paste it.
+粘贴了它
+
+250
+00:10:29,904 --> 00:10:31,070
+Now, this one sends, sends a pen digit.
+现在 ，这个按钮传递了一个数字
+
+251
+00:10:31,072 --> 00:10:32,805
+So this is both.
+而且这个也是
+
+252
+00:10:32,807 --> 00:10:34,874
+Okay, sending two.
+ok，传递了两次
+
+253
+00:10:34,875 --> 00:10:36,942
+Now, that's a common mistake to make.
+现在，这是一个很常见的错误
+
+254
+00:10:36,944 --> 00:10:39,744
+You know, you only think about that when you copy and
+你们知道么，你们不会去想这些当你们复制
+
+255
+00:10:39,746 --> 00:10:41,145
+paste it.
+粘贴它
+
+256
+00:10:41,147 --> 00:10:42,947
+And how do we fix this?
+那么我们如何来修复这个问题？
+
+257
+00:10:42,949 --> 00:10:44,348
+Well if you right click, so
+好了，如果你们右击一下
+
+258
+00:10:44,350 --> 00:10:46,717
+I'm going to right click on this button.
+我将右键一下这个按钮
+
+259
+00:10:46,719 --> 00:10:48,885
+You'll get this window that comes up.
+你们将会看到这个窗口
+
+260
+00:10:48,887 --> 00:10:51,687
+And it shows you all the connections from this
+然后你们可以看到所有的连接
+
+261
+00:10:52,723 --> 00:10:54,189
+UI element to your code.
+UI 元素到你们的代码 
+
+262
+00:10:54,191 --> 00:10:57,025
+And you can see here both appendage and
+你们可以看到这里都连接
+
+263
+00:10:57,027 --> 00:10:58,826
+enter are connected.
+enter 键
+
+264
+00:10:58,828 --> 00:11:01,562
+The great thing is I can just click this little X right here
+最棒的事我可以点击这里的 X 按钮
+
+265
+00:11:01,564 --> 00:11:03,530
+and it'll take this connection away.
+然后这个连接就被取消了
+
+266
+00:11:04,666 --> 00:11:06,232
+So now I only have enter.
+那么，现在我们只有enter键的连接了
+
+267
+00:11:06,234 --> 00:11:08,101
+So now if I go back here.
+那么现在我们再回到之前的地方
+
+268
+00:11:08,103 --> 00:11:09,853
+See it's,
+看这里
+
+269
+00:11:09,854 --> 00:11:11,604
+it's not sending appendage, it is sending enter.
+它将不再传递附加物，它只传递 enter
+
+270
+00:11:11,606 --> 00:11:14,440
+And you can do this right clicking for anything.
+你们可以右键操作任何你们想做的
+
+271
+00:11:14,442 --> 00:11:16,608
+Like we need to do it for our label up here.
+就像我们必须连接 label 一样
+
+272
+00:11:16,610 --> 00:11:21,112
+See there's the display connection we have right here.
+看到没，这里显示了我们的连接
+
+273
+00:11:21,114 --> 00:11:24,448
+So don't forget right click to disconnect things.
+不要忘记右键去除连接
+
+274
+00:11:24,450 --> 00:11:27,918
+Now if you forget about this and you don't do it.
+现在，如果你们忘记这个，你们不要去操作它
+
+275
+00:11:27,920 --> 00:11:32,455
+Or maybe you have it wired to some thing that you change.
+否则你们会连接一些你们修改的东西
+
+276
+00:11:32,457 --> 00:11:35,391
+For example, if we have accidentally put an argument
+比如，我们需要传递一个参数
+
+277
+00:11:35,393 --> 00:11:40,062
+here to enter, if we had made it do descending button trick,
+对于enter键来说，如果我们已经做过了
+
+278
+00:11:40,064 --> 00:11:42,064
+kind of like this.
+像这样的
+
+279
+00:11:42,066 --> 00:11:44,432
+You can't just say, oh okay.
+你们不能说好的
+
+280
+00:11:44,434 --> 00:11:45,066
+I'll fix that.
+我将会修复它的
+
+281
+00:11:45,068 --> 00:11:46,667
+I'll just delete that
+我将会删除它的.
+
+282
+00:11:46,669 --> 00:11:49,136
+Because that would not work because,
+因为它将会不工作
+
+283
+00:11:49,138 --> 00:11:52,072
+enter with an argument is actually a different
+因为带有参数的enter键它是不同的
+
+284
+00:11:52,074 --> 00:11:54,774
+message than enter with no argument.
+对于没参数的enter键来说
+
+285
+00:11:54,776 --> 00:11:57,510
+And so, if you just deleted that when you were running
+如果你们在运行的时候删除了这些
+
+286
+00:11:57,512 --> 00:11:58,978
+your program it would crash and
+你的应用将会崩溃
+
+287
+00:11:58,980 --> 00:12:02,581
+it would say, couldn't send message enter colon.
+它会说，enter 不能传递参数
+
+288
+00:12:02,583 --> 00:12:05,150
+When you touch this button cause enter colon means enter
+当你点击 enter 键的时候
+
+289
+00:12:05,152 --> 00:12:08,853
+with an argument, only for the purpose of this tour It doe-,
+
+290
+00:12:08,855 --> 00:12:10,655
+we don't see enter colon in our code.
+我们看不到enter的代码
+
+291
+00:12:10,657 --> 00:12:12,656
+That's just something that's, this story board here.
+还好这里有story board
+
+292
+00:12:13,793 --> 00:12:17,661
+So if that happens, you need to right click on here and
+那么如果这个发生了，你必须点击这里
+
+293
+00:12:17,663 --> 00:12:21,431
+disconnect the enter colon, that happened in there and
+去除连接，然后再重新
+
+294
+00:12:21,433 --> 00:12:23,566
+then you just recontrol drag.
+拖拉连接
+
+295
+00:12:23,568 --> 00:12:25,834
+When you recontrol drag it's nice it will.
+当你重新连接好，它会变正常了
+
+296
+00:12:25,836 --> 00:12:28,103
+Kind of let you try to grab onto something, so
+让你们尝试一下
+
+297
+00:12:28,105 --> 00:12:32,373
+its easy to reconnect.
+它很容易重新连接。
+
+298
+00:12:32,375 --> 00:12:35,293
+Kay?OK？
+
+299
+00:12:35,294 --> 00:12:38,212
+All right, so now we want to actually implement enter here.
+好了，那么现在我们在这里实现这个方法
+
+300
+00:12:38,214 --> 00:12:41,248
+We want to enter the guts of it.
+我们开始着手实现它的内部。
+
+301
+00:12:41,250 --> 00:12:44,150
+And so we are going to need another property here which is
+我们需要在这定义另一个属性，
+
+302
+00:12:44,152 --> 00:12:45,702
+going to be that
+它将会是
+
+303
+00:12:45,703 --> 00:12:47,253
+internal stack that these numbers are going to go on.
+这些数字的内部栈。
+
+
+304
+00:12:47,255 --> 00:12:52,057
+And so that's gonna be a var just like
+所以它会是一个变量，就像
+
+305
+00:12:52,059 --> 00:12:54,393
+this var up here that we've created and
+我们刚创建的这个变量。
+
+306
+00:12:54,395 --> 00:12:57,562
+I'm call it operand stack that's a good name for it.
+我叫它操作符栈，不错的名字。
+
+
+307
+00:12:57,564 --> 00:12:58,730
+And it's gonna have a type,
+它会有一个类型，
+
+
+308
+00:12:58,732 --> 00:13:02,233
+it's type is going to be an array and
+它的类型是数组，
+
+309
+00:13:02,235 --> 00:13:05,869
+just like in other languages like Java when you specify,
+就像在其他语言中，比如说Java——
+
+310
+00:13:05,871 --> 00:13:08,805
+when you create an array type you have to specify.
+当你创建一个数组，你必须指明它的类型，
+
+311
+00:13:08,807 --> 00:13:10,840
+What kind of thing is in the array.
+表明数组里面存储的是什么。
+
+312
+00:13:10,842 --> 00:13:15,211
+And so, I'm gonna put doubles in my array.
+因此，我打算在里面存放 double 元素
+
+313
+00:13:17,214 --> 00:13:20,782
+And that's, even though you might say, well we can't
+嗯。也许你会说，好吧我们并不能
+
+314
+00:13:20,784 --> 00:13:25,286
+enter doubles, because these are all integers, basically.
+输入double，因为这里大都是些integer。
+
+315
+00:13:25,288 --> 00:13:29,723
+But if I were to say, 3 enter 6 divide, I get .5.
+但是假如我说，输入3除以6，我会得到0.5，
+
+316
+00:13:29,725 --> 00:13:31,925
+So than a double would appear.
+这样就出现了一个double。
+
+317
+00:13:31,927 --> 00:13:34,661
+So that's why I'm going to use double.
+这就是我为什么要使用 double。
+
+318
+00:13:34,663 --> 00:13:38,964
+Now, you can see that we've got this error up here again.
+现在，你们可以看到这里又弹出了这个错误，
+
+319
+00:13:38,966 --> 00:13:41,133
+It says stored property operandStack does not
+上面说存储的属性operandStack并没有
+
+320
+00:13:41,135 --> 00:13:43,368
+have initial value.
+初始值。
+
+321
+00:13:43,370 --> 00:13:45,036
+So we have to give this an initial value.
+所以我们得赋给它初始值。
+
+322
+00:13:45,038 --> 00:13:47,071
+So I'm going to give this an initial value of
+我准备把初始值赋为
+
+323
+00:13:47,073 --> 00:13:48,472
+an empty array.
+一个空的数组。
+
+324
+00:13:48,474 --> 00:13:51,608
+So now you're seeing for the first time how you actually.
+现在你们第一次看到实际上如何
+
+325
+00:13:51,610 --> 00:13:57,480
+Create an instance of a class or of a data type.
+创建一个类或者数据类型的实例。
+
+326
+00:13:57,482 --> 00:14:00,249
+And you do that just by specifying the type and
+你只需要在这指明类型
+
+327
+00:14:00,251 --> 00:14:01,984
+then use parenthesis.
+然后写上分号。
+
+328
+00:14:01,986 --> 00:14:03,752
+Now, we're not,
+现在，我们没有，
+
+329
+00:14:03,754 --> 00:14:05,554
+again we haven't talked about initializers.
+我们还没有讨论过构造器。
+
+330
+00:14:05,556 --> 00:14:06,888
+A class or
+一个类或者
+
+331
+00:14:06,890 --> 00:14:09,390
+a data structure can have multiple initializers.
+一种数据类型可以有许多构造器。
+
+332
+00:14:09,392 --> 00:14:11,158
+Some of them might have arguments in here.
+其中的一些可能会在这里有参数。
+
+333
+00:14:12,128 --> 00:14:16,863
+But most, if it's possible they'll allow you to
+但大多数情况，如果允许，你都可以
+
+334
+00:14:16,865 --> 00:14:21,133
+create them with no arguments and in a case on
+创建没有参数的构造器，对于
+
+335
+00:14:21,135 --> 00:14:22,835
+array，it's very obvious what to do.
+数组，该做什么一目了然。
+
+336
+00:14:22,837 --> 00:14:25,103
+No arguments just creates an empty array right,
+不需要参数，只要创建一个空的数组，在右边
+
+337
+00:14:25,105 --> 00:14:27,739
+with no elements in it.
+这里不需要任何参数。
+
+338
+00:14:27,741 --> 00:14:31,142
+Now, one thing I want to talk about is this right here.
+现在，我想说一下这里这个东西，
+
+339
+00:14:31,144 --> 00:14:32,376
+      This type, you know?
+      这种类型，你们知道吗，
+
+340
+00:14:32,378 --> 00:14:34,078
+It's kind of annoying that we have to type this and
+你会觉得很烦，如果在这定义了类型，
+
+341
+00:14:34,080 --> 00:14:36,147
+then we have to type it right again.
+然后在这又得定义一遍。
+
+342
+00:14:36,148 --> 00:14:38,215
+And the answer is, we don't have to do that,
+而事实上，我们并不需要这么做，
+
+
+343
+00:14:38,217 --> 00:14:41,051
+because in swift, swift is very strongly typed.
+因为swift是严格强类型的。
+
+344
+00:14:41,053 --> 00:14:43,252
+You know there's all the variables, but
+你要知道所有的变量，
+
+345
+00:14:43,254 --> 00:14:45,221
+the properties are strongly typed.
+属性都是强类型的。
+
+346
+00:14:45,223 --> 00:14:48,724
+But they, there's also a lot of type inference.
+而且它们都有许多类型推断。
+
+347
+00:14:48,726 --> 00:14:50,625
+So swift can infer.
+因此swift可以推断类型
+
+348
+00:14:50,627 --> 00:14:53,995
+This type in the exact same way that digit had no type and
+比如说这里的digit并没有类型，
+
+349
+00:14:53,997 --> 00:14:55,596
+it inferred it from here.
+但它可以从这里推断出来。
+
+350
+00:14:55,598 --> 00:14:58,366
+OperandStack, we don't have to specify they type, and
+OperandStack，我们并不需要指明它的类型，因为
+
+351
+00:14:58,368 --> 00:14:59,633
+it can infer it from here.
+可以从这里推断出来。
+
+352
+00:14:59,635 --> 00:15:02,302
+And if we option click on operandStack you'll see that
+如果我们按住 option 点击 operandStack，你会看到
+
+353
+00:15:02,304 --> 00:15:05,271
+indeed, it's figured out that that's an array of double.
+它确实可以辨识出这是一个double类型的数组。
+
+354
+00:15:05,273 --> 00:15:07,824
+And in fact,
+事实上，
+
+355
+00:15:07,825 --> 00:15:10,376
+putting the type in here is considered bad form.
+在这里指明类型被认为是不好的书写形式。
+
+356
+00:15:10,378 --> 00:15:14,080
+If it can be inferred, you should let it infer, so,
+如果可以推断出类型，你就应该让它自己去推断，所以
+
+357
+00:15:14,082 --> 00:15:16,915
+if we didn't have this blue（for example，而且明明是bool！英文是机器录入的么） up here we shouldn't that either,
+拿这里的Bool来说，我们其实也需要声明类型。
+
+358
+00:15:16,917 --> 00:15:21,419
+because, false, and true are, can only be blue values so,（bool！！！）
+因为false和true只可能是 Bool 的值。
+
+359
+00:15:21,421 --> 00:15:22,887
+we're gonna take that off as well.
+所以我们也可以把它去掉。
+
+360
+00:15:22,889 --> 00:15:28,025
+Okay, so, now, our brand（operand好伐，我真是醉了，好累）
+好了，那么现在，我们这里有操作符栈，
+
+361
+00:15:28,027 --> 00:15:30,994
+stack right here what do we wanna do with it?
+我们打算把怎么处理它呢？
+
+362
+00:15:30,996 --> 00:15:34,597
+Well, when we press enter, we just want to append.
+嗯，我们按下回车，然后我们想要append，
+
+363
+00:15:34,599 --> 00:15:35,798
+So, append.
+所以，append。
+
+364
+00:15:35,800 --> 00:15:39,034
+This is actually the first time we're sending an actual
+事实上这是我们第一次发送一条
+
+365
+00:15:39,036 --> 00:15:41,703
+message to an object looks just like when we
+消息给一个对象。就像去
+
+366
+00:15:41,705 --> 00:15:43,738
+accessed a property.
+获取了一个属性一样。
+
+367
+00:15:43,740 --> 00:15:47,375
+The dot and it's just the name of the method that we're
+输入点号，然后就出现了我们想要在数组上调用的方法名字。
+
+368
+00:15:47,377 --> 00:15:49,110
+trying to invoke in our arrays.
+
+369
+00:15:49,112 --> 00:15:51,478
+Just an array, an array method right here called a pen（append！！）.
+这是一个数组；这是一个叫做append的数组方法。
+
+370
+00:15:51,480 --> 00:15:54,414
+I think you see the arguments as newElement: T.
+我想你们看到了这个参数 —— newElement: T
+
+371
+00:15:54,416 --> 00:15:57,517
+This : T means it has to be of this type.
+这个 : T 意味着它必须是这个类型。
+
+372
+00:15:57,519 --> 00:16:00,853
+Type of things in the array so this has to be a double.
+这个数组里面东西的类型，所以它必须是一个double。
+
+373
+00:16:00,855 --> 00:16:04,223
+So that's kind of a problem, cuz really what I want to
+这也是一个问题，因为事实上我想要在
+
+374
+00:16:04,225 --> 00:16:08,060
+append onto my stack is what's up here in this display text.
+我的栈上附加的是，这里display text的内容。
+
+375
+00:16:08,062 --> 00:16:11,830
+And, you know, I'd like to say something along the lines
+然后在这行输入display.text
+
+376
+00:16:11,832 --> 00:16:13,164
+of display.text.
+
+377
+00:16:13,166 --> 00:16:15,099
+Okay? But what type is this?
+好吧，它的类型是什么呢？
+
+378
+00:16:15,101 --> 00:16:16,767
+I can type display.text.（type of display.text？？）
+display.text 的类型。
+
+379
+00:16:18,437 --> 00:16:19,936
+Now that's not string.
+它不是 string。
+
+380
+00:16:19,938 --> 00:16:22,205
+That is an optional.
+它是一个optional。
+
+381
+00:16:22,207 --> 00:16:24,874
+Remember that display.text is an optional.
+记住这里的 display.text 是一个 optional，
+
+382
+00:16:24,876 --> 00:16:28,043
+So we can unwrap it even though
+所以我们可以把它拆包，但
+
+383
+00:16:28,045 --> 00:16:29,911
+that's not gonna solve the problem.
+这并不能解决问题。
+
+384
+00:16:29,913 --> 00:16:31,212
+This is still a string and
+这仍是一个string，
+
+385
+00:16:31,214 --> 00:16:33,381
+you're still seeing an error here.
+你们还是可以看到这里有一个错误。
+
+386
+00:16:33,383 --> 00:16:36,217
+The same string is not convertible to double [COUGH].
+这个string不可以转化为double。
+
+387
+00:16:36,219 --> 00:16:37,651
+Because we're supposed to be putting doubles in
+因为我们本应把 double 放入
+
+388
+00:16:37,653 --> 00:16:39,086
+this array putting strings.
+这个数组而不是string。
+
+389
+00:16:39,088 --> 00:16:40,987
+So, we have a problem here.
+所以，我们在这有个问题。
+
+390
+00:16:40,989 --> 00:16:44,323
+We have somehow to convert this string into a double so
+我们得用某种方式把string转化成double以便
+
+391
+00:16:44,325 --> 00:16:45,358
+we can put it on this stack.
+我们把它放入栈中。
+
+392
+00:16:46,394 --> 00:16:48,994
+I'm gonna use this opportunity.
+我要借用这个机会，
+
+393
+00:16:48,996 --> 00:16:51,129
+Just show you another feature which we
+向你们展示另一个特性，我们
+
+394
+00:16:51,131 --> 00:16:52,930
+call Computed Properties.
+称之为计算型属性。
+
+
+395
+00:16:52,932 --> 00:16:56,000
+So I'm gonna create another property display value and
+所以我要在这里创建另一个属性displayValue,
+
+396
+00:16:56,002 --> 00:16:57,401
+it's gonna be a Double.
+它是一个Double。
+
+397
+00:16:57,403 --> 00:17:00,671
+And what I want this to be equal to is, I always want it
+然后我想让它等于，我想让它
+
+398
+00:17:00,673 --> 00:17:03,773
+to be whatever's in this display converted to a double.
+等于这里的显示转化成double的值。
+
+399
+00:17:04,742 --> 00:17:05,786
+Okay? And I want to
+好了，然后我想
+
+400
+00:17:05,787 --> 00:17:06,831
+be able to set it or get it so
+有办法对它进行设值以及取值，以便
+
+401
+00:17:06,832 --> 00:17:07,876
+    I'm gonna be able to get
+   the value of this double.
+   我能够取到这个double的值。
+
+402
+00:17:07,878 --> 00:17:10,112
+   I just want to be able to
+     set it as a double and
+     我想把它设值成一个double然后
+
+403
+00:17:10,114 --> 00:17:11,413
+    have it turn into text.
+    把它转化成文本。
+
+404
+00:17:13,016 --> 00:17:15,616
+       Well, that kind of
+       好吧，这种类型的
+
+405
+00:17:15,618 --> 00:17:19,886
+   property really is tied to
+   some data somewhere else.
+   属性实际上是与其他地方的某些数据绑定的。
+
+406
+00:17:19,888 --> 00:17:22,756
+  So, I don't ever want to set
+ it equal to some initial value
+ 所以，我不想把它设成某个初始值
+
+407
+00:17:22,758 --> 00:17:25,125
+         or something.
+         还是什么。
+
+408
+00:17:25,126 --> 00:17:27,493
+ Really, I want it to always be
+ calculated and we can do that.
+ 实际上，我想让它总是可计算的，而我们可以做到。
+
+409
+00:17:27,495 --> 00:17:29,295
+       Instead of saying
+       equals something,
+       与其说等于什么，
+
+410
+00:17:29,297 --> 00:17:32,364
+       you just put curly
+         braces after.
+         你只需要在后面写上大括号。
+
+411
+00:17:32,366 --> 00:17:37,168
+       And you say, get,
+        and we say, set.
+        然后写下get，再写set。
+
+412
+00:17:37,170 --> 00:17:39,871
+             Okay?
+             好了。
+
+413
+00:17:39,872 --> 00:17:42,573
+  And inside here we are gonna
+   compute the value of this.
+   然后在这里面，我们要对它的值进行计算了。
+
+414
+00:17:42,575 --> 00:17:46,010
+     Which is we are gonna
+   convert this display text
+   这将会把这里的显示文本转化成
+
+415
+00:17:46,012 --> 00:17:49,479
+  to a double and then inside
+  here, we are, someone said,
+  double，然后在这里，我们要，要让
+
+416
+00:17:49,481 --> 00:17:52,449
+ display value equal something
+      and we are going to
+      显示值等于什么，我们要做的是
+
+417
+00:17:52,451 --> 00:17:55,251
+        somehow compute,
+  not really compute it, but.
+  想办法能够计算它，并不是真的去计算“它”，而是
+
+418
+00:17:55,253 --> 00:17:58,854
+    We're gonna de, decide,
+ what code we need to put that
+ 我们要决定我们需要什么样的代码能够把
+
+419
+00:17:58,856 --> 00:18:02,024
+ number that they tried to set
+ the display value to in here.
+ 那个显示值在这里设值。
+
+420
+00:18:03,126 --> 00:18:05,393
+            'Kay, so
+  let's do the set side first.
+  好吧，那么让我们先来写set方法。
+
+421
+00:18:05,395 --> 00:18:07,695
+         It's actually
+       a little simpler.
+       这其实会简单一些。
+
+422
+00:18:07,697 --> 00:18:08,929
+        Inside this set,
+        在set方法里，
+
+423
+00:18:08,931 --> 00:18:11,231
+    there's a magic variable
+       called new value.
+       会有一个叫作newValue的魔法变量，
+
+424
+00:18:12,300 --> 00:18:14,901
+  It doesn't, it's not purple
+     for some reason, but.
+     它不是，因为某些原因它并不是紫色的
+
+425
+00:18:14,903 --> 00:18:16,235
+       New value in this,
+     this is the new value.
+     这里的newValue。
+
+426
+00:18:16,237 --> 00:18:17,903
+       So if someone says
+     somewhere in our code,
+     如果说在我们的代码里，
+
+427
+00:18:17,905 --> 00:18:19,338
+   display value equals five,
+   显示值等于5，
+
+428
+00:18:19,340 --> 00:18:21,306
+      this new value will
+         have the five.
+         那这个newValue就会是5。
+
+429
+00:18:22,442 --> 00:18:23,541
+  And so all I really wanna do。
+  我所想做的
+
+430
+00:18:23,543 --> 00:18:26,276
+    here is say display text
+     equals the new value.
+     就是在这让display.text等于newValue。
+
+431
+00:18:26,278 --> 00:18:30,480
+   But again, of course this
+     is an optional string.
+     但同样的问题，这是个optional string，
+
+432
+00:18:30,482 --> 00:18:33,216
+  You can't set it to a double
+  because displayValue equals
+  你不能把它设成一个double因为displayValue等于
+
+433
+00:18:33,218 --> 00:18:36,419
+     five, this new values
+     going to be a double.
+     5，这个newValue将会是一个double。
+
+434
+00:18:36,421 --> 00:18:41,557
+   But we know how to convert
+    something to a string by
+    但是我们知道如何把它转化成string，只需要写上
+
+435
+00:18:41,559 --> 00:18:45,260
+  using backlash parenthesis.
+  反斜线，圆括号。
+
+436
+00:18:45,262 --> 00:18:48,129
+      And this is the same
+      thing we did when we
+      这其实和我们
+
+437
+00:18:48,131 --> 00:18:51,399
+      printed out [COUGH]
+       our digit up here.
+       输出[咳]这里digit是一样的。
+
+438
+00:18:51,401 --> 00:18:53,501
+      We just use the back
+       slash parenthesis.
+       我们只需要写上反斜线和圆括号。
+
+439
+00:18:53,503 --> 00:18:55,336
+      It tries to convert
+    this thing inside here,
+    它会试着在这里转化这个东西，
+
+440
+00:18:55,338 --> 00:18:57,938
+     which is a double into
+      a string of doubles.
+      把一个double转化成string。
+
+441
+00:18:57,940 --> 00:19:00,540
+       You know how to do
+        that themselves.
+        你知道该怎么做了。
+
+442
+00:19:00,542 --> 00:19:02,575
+         And so bingo,
+ we've got our display text and
+ 没错。我们得到了display.text，
+
+443
+00:19:02,577 --> 00:19:04,477
+   that's all that necessary.
+   这就够了。
+
+444
+00:19:04,479 --> 00:19:07,479
+ also, every time someone sets
+   this value and then we're
+   而且，每次有人设值时，很明显我们
+
+445
+00:19:07,481 --> 00:19:10,282
+   clearly not in the middle
+  of typing a number anymore.
+  不再是在输入一个数字了。
+
+446
+00:19:10,284 --> 00:19:14,085
+     [INAUDIBLE] Say that.
+     说。
+
+447
+00:19:14,087 --> 00:19:17,221
+     [INAUDIBLE] All right,
+    what about the getting?
+    好吧，那关于取值呢？
+
+448
+00:19:17,223 --> 00:19:19,290
+       Now in the getting
+      all we have to do is
+      在取值方法中，我们所要做的就是
+
+449
+00:19:19,292 --> 00:19:21,258
+   return this display value.
+   返回displayValue。
+
+450
+00:19:21,260 --> 00:19:24,161
+      So it's do something
+     to calculate what this
+     就是要去计算
+
+451
+00:19:24,163 --> 00:19:26,363
+     display value is here.
+     这里的displayValue。
+
+452
+00:19:27,399 --> 00:19:29,215
+      And then return it.
+      然后返回它。
+
+453
+00:19:29,216 --> 00:19:31,032
+      Now this one I'm not
+     gonna take time to go
+     这次我不会花时间去
+
+454
+00:19:31,035 --> 00:19:32,801
+   through the details here.
+   详细说明细节。
+
+455
+00:19:32,803 --> 00:19:37,205
+  And actually I've made it an
+ extra credit item that you can
+ 实际上我把它算作一个给你们去做的额外加分项，
+
+456
+00:19:37,207 --> 00:19:40,008
+       do, which requires
+       you to figure out
+       需要你们利用文档，去搞清楚我要在这写什么，
+
+457
+00:19:40,010 --> 00:19:44,345
+    what I'm gonna type here
+    using the documentation.
+
+
+458
+00:19:44,347 --> 00:19:45,879
+       But I'm not going
+      to explain it here.
+      而我不会在这解释它。
+
+459
+00:19:45,881 --> 00:19:49,382
+  I'm gonna use a class that's
+   in this number formatter.
+   我要在这个使用一个叫作NumberFormatter的类
+
+460
+00:19:49,384 --> 00:19:52,051
+       I'm actually gonna
+         create one and
+         我先创建一个，然后
+
+461
+00:19:52,053 --> 00:19:56,822
+  I'm gonna use a method on it
+   called number from string.
+   我要使用它的一个方法叫numberFromString。
+
+462
+00:19:57,858 --> 00:19:59,624
+     And I'm gonna give it
+      this string which is
+      然后我会把这个string传给他，
+
+
+463
+00:19:59,626 --> 00:20:02,593
+    the display values text,
+      unwrapped of course.
+      display.text,当然得拆包。
+
+
+464
+00:20:03,596 --> 00:20:06,497
+ The result is acting optional
+   so I'm gonna unwrap that.
+   结果是一个optional，所以我要把它拆包。
+
+465
+00:20:06,499 --> 00:20:09,499
+   And then I'm gonna get the
+  double value of the thing I
+  然后我要得到它返回的的double值。
+
+
+466
+00:20:09,501 --> 00:20:11,067
+       get back [COUGH].
+       [咳]
+
+467
+00:20:11,068 --> 00:20:12,634
+      Number gives me this
+   kind of generic number so
+   Number给了我这种泛型的数字，所以
+
+468
+00:20:12,637 --> 00:20:14,637
+     I am gonna take it and
+     turn it into a double.
+     我把它转化成一个double。
+
+469
+00:20:14,639 --> 00:20:15,738
+        So there we go.
+        好了。
+
+470
+00:20:15,739 --> 00:20:16,838
+         So you can go
+      the next spread and
+      你们可以继续下一步了，
+
+471
+00:20:16,841 --> 00:20:18,374
+       look at that later
+          if you want.
+          以后再考虑它，如果你想的话。
+
+472
+00:20:19,410 --> 00:20:20,959
+    But surprising to say we
+    高兴的是我们
+
+
+473
+00:20:20,960 --> 00:20:22,509
+  now have a property display
+ value that when we set it and
+ 现在有了一个displayValue的属性，我们可以调用set和
+
+474
+00:20:22,512 --> 00:20:24,579
+     get it, it's gonna be
+      setting and getting.
+      get方法来设值和取值。
+
+475
+00:20:24,581 --> 00:20:27,415
+    It has a string here, so
+   that is really convenient.
+   这里有一个string，所以它也挺方便的。
+
+476
+00:20:27,417 --> 00:20:29,400
+         Especially for
+         尤其是这里，
+
+477
+00:20:29,401 --> 00:20:31,384
+      right here, where we
+    wanna say display value.
+    其实我们想写的是displayValue
+
+478
+00:20:31,387 --> 00:20:32,285
+             'Kay?
+             好。
+
+479
+00:20:32,287 --> 00:20:33,953
+    So let's see the double.
+    让我们来看看这个double
+
+480
+00:20:33,955 --> 00:20:34,987
+          No problem.
+          没错。
+
+481
+00:20:34,989 --> 00:20:37,256
+       We're pinning that
+       onto operandStack.
+       我们把它附到operandStack上了。
+
+482
+00:20:37,258 --> 00:20:40,058
+     So let's print in our
+       operandStack here.
+       所以让我们把operandStack在这打印出来。
+
+483
+00:20:42,362 --> 00:20:45,162
+ Just so, I mean we can do the
+ same thing here, operandStack.
+ 就像这样，一样的方式，operandStack。
+
+484
+00:20:46,632 --> 00:20:48,649
+             Okay?
+
+
+485
+00:20:48,650 --> 00:20:50,667
+    And this worked because
+ operandStack is an array, and
+ 这种方式可行是因为operandStack是一个数组，
+
+486
+00:20:50,669 --> 00:20:53,636
+    arrays know how to turn
+    themselves into strings.
+    数组是知道如何把他们自身转化成string的。
+
+487
+00:20:53,638 --> 00:20:55,938
+ You'll see how they do that in
+ the console in a moment here.
+ 你一会儿就会在console里看到它们是怎么做到的了。
+
+488
+00:20:56,874 --> 00:20:58,040
+     So let's go ahead and
+     所以我们继续
+
+489
+00:20:58,042 --> 00:21:00,842
+   see if our application is
+   actually putting things on
+   来看看我们的程序是否真的正确地能够把东西放到
+
+490
+00:21:00,844 --> 00:21:02,343
+    our stack properly here.
+    我们的栈里。
+
+491
+00:21:04,547 --> 00:21:14,054
+            [NOISE]
+           All right.
+           好的。
+
+492
+00:21:14,056 --> 00:21:14,854
+        Let's try here.
+        我们试着在这里，
+
+493
+00:21:14,856 --> 00:21:18,591
+      Let's try 56 enter.
+      在这里输入56，
+
+494
+00:21:18,593 --> 00:21:21,761
+     And look, operandStack
+     equals 56 doing good.
+     看，operandStack是等于56，运行正常。
+
+495
+00:21:21,763 --> 00:21:23,128
+          Seven enter.
+          输入7，
+
+496
+00:21:23,130 --> 00:21:24,429
+    All right, 56.0 and 7.0.
+    好的，56.0和7.0。
+
+497
+00:21:24,431 --> 00:21:27,699
+  So, you can see that arrays
+  turn themselves into strings
+  所以你们看到了数组是如何把自身转化成string的，
+
+498
+00:21:27,701 --> 00:21:30,735
+  by doing open square bracket
+   and then they turn each of
+   在这个方括号里，它们把自身的每个
+
+499
+00:21:30,737 --> 00:21:33,937
+  their elements into strings
+    and separated by commas.
+    元素转化成string并以逗号分隔。
+
+500
+00:21:35,507 --> 00:21:37,207
+       Now this is good.
+       这个就搞定了。
+
+501
+00:21:37,209 --> 00:21:39,642
+     So we got our operand,
+  operandStack building here.
+  我们这的operandStack就创建好了。
+
+
+502
+00:21:41,179 --> 00:21:44,713
+  So all we need to do is have
+   some times, and plus, and
+   所以我们现在需要做的就是要有乘法，加法和
+
+503
+00:21:44,715 --> 00:21:45,947
+   minus buttons, et cetera.
+   减法之类的按钮。
+
+504
+00:21:45,949 --> 00:21:47,549
+ I'm gonna put them right here.
+ 我要把他们放在这里。
+
+505
+00:21:47,551 --> 00:21:50,385
+   That will operate on these
+     items uh,on the stack.
+     它在在这些项上进行运算，在栈上。
+
+506
+00:21:50,387 --> 00:21:52,119
+        So, if I pressed
+        plus right now,
+        所以，如果我现在按下加，
+
+507
+00:21:52,121 --> 00:21:55,122
+  it would pull the seven and
+    the eight off the stack.
+    它就会把7和8从栈中拉出来，
+
+508
+00:21:55,124 --> 00:21:57,057
+       Add them together,
+        it would be 15.
+        把他们相加，得到15。
+
+509
+00:21:57,059 --> 00:21:58,758
+     Show that 15 here, and
+     在这里显示15，
+
+510
+00:21:58,760 --> 00:22:00,560
+      it actually will put
+   the 15 back on the stack.
+   实际上15会被放回到栈里。
+
+511
+00:22:00,562 --> 00:22:03,696
+   So then, we'd have 56 and
+        15 on our stack.
+        然后，我们的栈里就有了56和15。
+
+512
+00:22:03,698 --> 00:22:04,863
+     Then we could, maybe.
+     接着我们就可以，
+
+513
+00:22:04,865 --> 00:22:08,400
+    Plus those together and
+  we wanted by it plus again.
+  把它们加到一起，再运行一次加法。
+
+514
+00:22:08,402 --> 00:22:08,933
+           All right?
+           没错吧？
+
+515
+00:22:08,935 --> 00:22:12,036
+         [COUGH] Okay.
+         好的。
+
+516
+00:22:12,038 --> 00:22:15,539
+  So how are we gonna do that?
+  所以我们应该怎么做呢？
+
+517
+00:22:15,541 --> 00:22:17,040
+      Well, we would make
+       our buttons here.
+       嗯，我们把按钮放到这。
+
+518
+00:22:17,042 --> 00:22:22,245
+ And I'm gonna make the buttons
+      again by copying and
+      我通过复制粘贴数字按钮来创建这些按钮。
+
+519
+00:22:22,247 --> 00:22:24,580
+    pasting a digit button.
+
+520
+00:22:24,582 --> 00:22:26,648
+      But this time I know
+      about that problem,
+      但是这次我已经知道那个问题了，
+
+521
+00:22:26,650 --> 00:22:29,584
+    so right off the bat I'm
+    gonna right click on it.
+    所以马上就点击它。
+
+522
+00:22:29,586 --> 00:22:31,353
+  And disconnect appendage it.（appendDigit。。。）
+  然后取消和appendDigit的关联。
+
+523
+00:22:31,355 --> 00:22:34,472
+             Okay?
+               So
+               好的，那么
+
+524
+00:22:34,473 --> 00:22:37,590
+    now this button sends no
+     messages, yet anyway.
+     这个按钮现在就不会发送任何消息了。
+
+525
+00:22:37,593 --> 00:22:40,461
+       And then we could
+      put a type on here.
+      然后我们要在这上面设置一个符号。
+
+526
+00:22:40,463 --> 00:22:44,331
+ So here I'm gonna have my all
+   my operations buttons use
+   这里我要让所有的运算按钮使用
+
+527
+00:22:44,333 --> 00:22:47,000
+ mathematical symbols so if we
+ go down here to math symbols.
+ 数学符号，所以我们看这里的math symbols。
+
+528
+00:22:47,002 --> 00:22:49,936
+      See there's a bunch
+     of math symbols here.
+     看这里有好多数学符号。
+
+529
+00:22:49,938 --> 00:22:51,737
+ So let's do times, right here,
+ 我们来给乘法设置符号，就在这里。
+
+530
+00:22:51,739 --> 00:22:56,775
+  first, we'll put times right
+ there, and we can wire it up.
+ 首先，把乘法放到这，然后我们可以把他嵌入代码。
+
+531
+00:22:56,777 --> 00:22:59,511
+    I'm just gonna hold that
+    Ctrl and drag out here.
+    按住Ctrl然后拉到这里来。
+
+532
+00:23:00,580 --> 00:23:03,881
+        We're gonna call
+      this action method.
+      我们把这个action称作方法
+
+533
+00:23:03,883 --> 00:23:05,549
+            Operate.
+            operate。
+
+534
+00:23:05,551 --> 00:23:09,052
+   And because I'm gonna have
+ multiple operation buttons and
+ 因为会有许多运算按钮，而且
+
+535
+00:23:09,054 --> 00:23:11,588
+       they're all going
+        to send operate.
+        他们都会发送operate。
+
+536
+00:23:11,590 --> 00:23:13,289
+        Just like I did
+       with append digit,
+       就像附加digit一样，
+
+537
+00:23:13,291 --> 00:23:14,457
+ I am going to use the sender.
+ 我要使用这个sender，
+
+538
+00:23:14,459 --> 00:23:18,193
+      So I'm gonna be very
+   careful to change this any
+   所以我得仔细地
+
+539
+00:23:18,195 --> 00:23:19,661
+      object to be button.
+      把这个按钮上的anyObject改称UIButton。
+
+540
+00:23:20,697 --> 00:23:22,129
+      Do not forget that.
+      不要忘记这点。
+
+541
+00:23:22,131 --> 00:23:24,965
+        'Kay, so action,
+ we are gonna have it centered.(set sender!!)
+ 好了，action，设置好的sender。
+
+542
+00:23:24,967 --> 00:23:25,932
+           UIButton.
+           UIButton。
+
+543
+00:23:25,934 --> 00:23:26,666
+        Call it operate.
+        operate。
+
+544
+00:23:27,669 --> 00:23:28,868
+          There it is.
+          就是这样。
+
+545
+00:23:28,870 --> 00:23:30,269
+  That's method doing operate.
+  这就是operate方法。
+
+546
+00:23:31,338 --> 00:23:33,438
+        We can copy and
+ paste this button now, right?
+ 我们现在可以复制粘贴按钮了。
+
+547
+00:23:33,440 --> 00:23:34,639
+      We got this one, so
+      我们用这个，
+
+548
+00:23:34,641 --> 00:23:37,775
+    let's copy and paste and
+    make some more of these.
+    让我们复制粘贴然后重复。
+
+549
+00:23:37,777 --> 00:23:41,778
+      We'll start out with
+    four of them, let's say.
+    我们先搞出4个。
+
+550
+00:23:41,780 --> 00:23:43,680
+             'Kay?
+             好。
+
+551
+00:23:43,681 --> 00:23:45,581
+       Let's get back our
+    special characters here.
+    我们回到特殊符号这里。
+
+552
+00:23:45,584 --> 00:23:51,087
+     [COUGH] All right, so
+ let's make this one be divide.
+ [咳]好的，我们来把它做成除法。
+
+553
+00:23:51,089 --> 00:23:53,522
+   Let's make this one plus.
+   我们把这个做成加法。
+
+554
+00:23:53,524 --> 00:23:55,924
+     And this one be minus.
+     这个是减法。
+
+555
+00:23:55,926 --> 00:23:58,660
+           All right.
+           好了。
+
+556
+00:23:58,662 --> 00:24:00,461
+       So we've got these
+        buttons [COUGH].
+        按钮就完成了。
+
+557
+00:24:00,463 --> 00:24:02,930
+    And they're all sending,
+    if we look at this here,
+    它们都会发送，如果我们看这里，
+
+558
+00:24:02,932 --> 00:24:04,598
+  they're all sending operate.
+  它们都会发送operate。
+
+559
+00:24:05,701 --> 00:24:08,535
+  Luckily, they're not sending
+  anything except operate, so
+  幸运的是它们并不会发送运算之外的东西，
+
+560
+00:24:08,537 --> 00:24:09,869
+          that's good.
+          这样刚好。
+
+561
+00:24:09,871 --> 00:24:12,905
+  And when they send operate,
+     we're gonna figure out
+     当他们发送operate的时候，我们要搞清楚
+
+562
+00:24:12,907 --> 00:24:15,808
+ which one is sending it by the
+  same exact way we did above.
+  哪个是按照我们之前的方式去发送的。
+
+563
+00:24:15,810 --> 00:24:18,543
+    We're gonna say what is
+  the sender's current title?
+  sender的currentTitle是什么？
+
+564
+00:24:18,545 --> 00:24:20,111
+     We're gonna unwrap it.
+     我们要把它拆包。
+
+565
+00:24:20,113 --> 00:24:24,582
+      So operation here is
+       gonna be a string.
+       这里的operation是一个string。
+
+566
+00:24:24,584 --> 00:24:28,418
+   And it's going to tell us
+  the title of the buttons so
+  它会告诉我们按钮的title，所以
+
+567
+00:24:28,420 --> 00:24:31,721
+       we know which one
+         to use there.
+         我们就知道了该用哪个。
+
+568
+00:24:31,723 --> 00:24:35,758
+    Now I'm gonna show you a
+ control flow operator here in
+ 现在我要给你们展示swfit中的控制流符号，
+
+569
+00:24:35,760 --> 00:24:39,128
+  Swift that's very powerful,
+    much more powerful than
+    它非常强大，比其他语言中的强大多了。
+
+570
+00:24:39,130 --> 00:24:41,463
+      this operator is in
+        other languages.
+
+
+571
+00:24:41,465 --> 00:24:43,432
+         And also very,
+   very important to switch.（swift）
+   而且对Swfit来说很重要。
+
+572
+00:24:43,434 --> 00:24:46,401
+  I'm only gonna show you the
+ simplest usage of it here, but
+ 这里我只会向你们展示它的最简单用法，但是
+
+573
+00:24:46,403 --> 00:24:49,170
+      you're gonna see on
+   Monday's demonstration and
+   你们会在周一的展示和
+
+574
+00:24:49,172 --> 00:24:51,906
+    later in the quarter how
+  important this operator is.
+  接下来的一个季度感受到它的强大。
+
+575
+00:24:51,908 --> 00:24:54,541
+  But, it's switch, okay, and
+  它是就switch，而且
+
+576
+00:24:54,543 --> 00:24:59,846
+    switch looks like switch
+  in other languages, like C.
+  它和其他语言中的switch看起来很像，比如C。
+
+577
+00:24:59,848 --> 00:25:01,080
+    You switch on something.
+    你在某种东西上switch。
+
+578
+00:25:01,082 --> 00:25:03,015
+     In this case I'm gonna
+     switch on this string.
+     这里我会在string上switch。
+
+579
+00:25:03,017 --> 00:25:04,483
+      This is the string.
+      这就是那个string，
+
+580
+00:25:04,485 --> 00:25:06,852
+     Then you just specify
+    the case of each thing.
+    然后你要指明所有case。
+
+581
+00:25:06,854 --> 00:25:10,822
+             So for
+  example here I have a case.
+  所以举例来说，有一个case，
+
+582
+00:25:10,824 --> 00:25:17,561
+     Let's do the multiply.
+     进行乘法，
+
+583
+00:25:17,563 --> 00:25:21,031
+       Okay, so we've got
+   multiply case right here.
+   这就是一个乘法case，
+
+584
+00:25:21,033 --> 00:25:24,234
+      And then we just put
+   the code that we want here
+   接着我们把需要的代码放到这里，
+
+585
+00:25:24,236 --> 00:25:26,203
+         for multiply.
+         做乘法。
+
+586
+00:25:26,204 --> 00:25:28,171
+      And we'd do that for
+   all the other cases here.
+   接着对其他的case也这么做。
+
+587
+00:25:28,173 --> 00:25:30,439
+    So let's copy and paste.
+    复制然后粘贴。
+
+588
+00:25:30,441 --> 00:25:36,478
+       And we'll do this
+      be our divide case.
+      这个是除法case，
+
+589
+00:25:36,480 --> 00:25:39,347
+      And we'll have this
+      be our plus case and
+      这个是加法case，
+
+590
+00:25:39,349 --> 00:25:41,215
+    we'll have this be our,
+    这个是，
+
+591
+00:25:41,217 --> 00:25:45,753
+ make sure we're doing the same
+  [INAUDIBLE] here, plus case.
+  要确保方式一致，加法
+
+592
+00:25:47,923 --> 00:25:49,689
+    Again, you've got to be
+     a little careful here.
+     这里你们又得仔细一点了，
+
+593
+00:25:49,691 --> 00:25:51,858
+    You know, this minus is
+  slightly different from this
+  这里的减法符号是和
+
+594
+00:25:51,860 --> 00:25:54,593
+ minus which might be slightly
+    different than the minus
+    这个减法符号和
+
+595
+00:25:54,595 --> 00:25:55,828
+  you type with the keyboard.
+  你们键盘上输入的减法符号是有一些不同的。
+
+596
+00:25:55,830 --> 00:25:59,164
+    So, when you're putting
+       the symbols here,
+       所以，当你们在这放置这个符号的时候，
+
+597
+00:25:59,166 --> 00:26:03,434
+ you wanna use exactly the same
+   symbols here in your case.
+   你们要确定使用的是同一个符号。
+
+598
+00:26:03,436 --> 00:26:06,871
+  Now, one thing about Switch
+     on Swift though is it
+     关于Swift的Switch的要注意的一件事就是
+
+599
+00:26:06,873 --> 00:26:11,274
+  absolutely requires that you
+    have every case covered.
+    你必须确保覆盖所有情况。
+
+600
+00:26:11,276 --> 00:26:13,877
+  Now since this is a string,
+  obviously can't have case of
+    由于这是一个字符串,显然不可能
+
+601
+00:26:13,879 --> 00:26:15,345
+      every single string
+        in the universe.
+    穷举每一种情况
+
+602
+00:26:15,347 --> 00:26:18,280
+    That is almost infinite,
+       but luckily there,
+    通常是无限多的,但是很幸运的是,
+
+603
+00:26:18,282 --> 00:26:22,584
+   you can take defaults and
+ just break out of the switch.
+    可以再default后,使用break跳出switch
+
+604
+00:26:22,586 --> 00:26:26,187
+ That means if it's not one of
+  these cases by default just
+    也就是如果不是上面列举的情况,
+
+605
+00:26:26,189 --> 00:26:27,088
+    break out of the switch.
+    就会默认跳出switch语句
+
+606
+00:26:27,090 --> 00:26:28,355
+       You could put code
+         here as well,
+    代码也可以放在这里
+
+607
+00:26:28,357 --> 00:26:31,091
+   but breaking out of it is
+ what we wanna do in our case.
+    在需要的地方break
+
+608
+00:26:33,028 --> 00:26:35,861
+ now, in here, we're just going
+ to put the code for multiply.
+    现在,在这里,放乘法相关的语句
+
+609
+00:26:35,863 --> 00:26:37,896
+ So, what do we need to do for
+           multiply?
+    那么,乘法需要做些什么?
+
+610
+00:26:37,898 --> 00:26:40,432
+        For the moment,
+  I'm gonna comment this out.
+    我会暂时将这部分注视掉
+
+611
+00:26:40,434 --> 00:26:42,667
+ I'm gonna use command, slash,
+    使用command + / 来注释
+
+612
+00:26:42,669 --> 00:26:44,502
+       which is a really
+         nice feature.
+    这种注释方法的确称得上是一个很不错的功能.
+
+613
+00:26:44,504 --> 00:26:46,103
+     You do command slash.
+     command + /之后,
+
+614
+00:26:46,105 --> 00:26:48,238
+ And then command slash again,
+         to uncomment.
+    再次command + /来取消给代码注释.
+
+615
+00:26:48,240 --> 00:26:55,311
+  [INAUDIBLE] real quick cuz I
+   just wanna focus on times.
+    这样就可以专注于当前的事情上,
+
+616
+00:26:55,313 --> 00:26:58,247
+         Now any time I
+      press any operator,
+    任何时候,点击任何操作符,
+
+617
+00:26:58,249 --> 00:27:02,317
+     I probably wanna give
+  the user an automatic enter.
+    可能会给用户自动按下enter键
+
+618
+00:27:02,319 --> 00:27:05,087
+   That's so that six enter,
+          three enter,
+    也就是6,enter,3,enter
+
+619
+00:27:05,089 --> 00:27:07,989
+      times is the same as
+     six enter three times.
+    乘,和6乘以3一样
+
+620
+00:27:09,392 --> 00:27:12,393
+ Okay, so six enter three times
+ is gonna do an automatic enter
+    好了,6 enter 3 乘 会自动来一个enter
+
+621
+00:27:12,395 --> 00:27:13,927
+         on that three.
+		在那个3之上
+
+622
+00:27:14,996 --> 00:27:16,596
+         Cuz obviously,
+    I intend to have six and
+ 显然,在这种情况下,我想让6和
+
+623
+00:27:16,598 --> 00:27:18,998
+      three be multiplied
+         in that case.
+		 3相乘
+
+624
+00:27:19,000 --> 00:27:26,705
+      So for all of these
+  operations, I going to say,
+	对于所有的操作符,我要说的是
+
+625
+00:27:26,707 --> 00:27:29,708
+   if the users in the middle
+      of typing a number.
+	 如果用户在中间输入一个数字,
+
+626
+00:27:29,710 --> 00:27:32,443
+       Then hit enter for
+        me, right here.
+		然后点击enter键.
+
+627
+00:27:32,445 --> 00:27:36,347
+     Okay, so [COUGH] what
+      do we need to do in	
+		好了,我们需要
+
+628
+00:27:36,349 --> 00:27:39,516
+  this specific case of times?
+  在乘这里做什么?
+	
+629
+00:27:39,518 --> 00:27:42,886
+   Well, really we just want
+   to set our display value.
+	我们需要在这里显示计算的结果.
+
+630
+00:27:42,888 --> 00:27:46,856
+   Remember we have our nice
+    display value down here.
+	记住,我们有自己的显示值的方法.
+
+631
+00:27:46,858 --> 00:27:49,492
+     And we can do setting
+      as well as getting.
+	我们可以进行赋值,也可以进行取值
+
+632
+00:27:49,494 --> 00:27:52,094
+  So I set that display value.
+	因此,在这里赋值.
+
+633
+00:27:52,096 --> 00:27:55,264
+            Up here.
+	 这里.
+
+634
+00:27:55,265 --> 00:27:58,433
+  Equal to multiplying the top
+   two things on this stack.
+	等于将栈顶的两个数相乘
+
+635
+00:27:58,435 --> 00:28:02,270
+    So I can actually remove
+    something off our stack.
+	因此,我可以从栈里移除一些元素.
+
+636
+00:28:02,272 --> 00:28:04,705
+     We're representing our
+       stack as an array.
+	我们使用一个数组带代表栈结构.
+
+637
+00:28:05,941 --> 00:28:07,908
+           Of course,
+ they are stacked as an array.
+	当然了,确实是使用一个数组来表示的栈.
+
+638
+00:28:07,910 --> 00:28:11,311
+  And so a stack is something
+      you push things on,
+	栈是一个可以压入元素到栈离,
+
+639
+00:28:11,313 --> 00:28:12,979
+      you pop things off.
+	可以从栈里弹出元素
+
+640
+00:28:12,981 --> 00:28:15,614
+ And with an array, we're just
+  gonna add something there at
+	使用数组的话,只要
+
+641
+00:28:15,616 --> 00:28:17,082
+ the end to push something on,
+              and
+	在数组的末尾添加一个元素来模拟元素入栈
+
+642
+00:28:17,084 --> 00:28:19,317
+    that will just remove it
+  from the end to pop it off.
+	在数组的末尾移除一个元素来模拟元素出栈
+
+643
+00:28:19,319 --> 00:28:21,653
+       So there's a nice.
+	这种模拟看起来很酷吧.
+
+644
+00:28:21,655 --> 00:28:23,654
+           All right.
+    This is an array, right?
+	好了,这是一个数组,是么?
+
+645
+00:28:23,656 --> 00:28:26,007
+        Operand stacks.
+	操作符栈.
+
+646
+00:28:26,008 --> 00:28:28,359
+     There's a nice method
+      called remove last.
+	有个很好使的方法叫做:移除最后一个元素
+
+647
+00:28:28,361 --> 00:28:30,894
+   And if we option click on
+  remove last, you'll see here
+	如果在removelast方法上按住option键,
+
+648
+00:28:30,896 --> 00:28:33,430
+   that it removes an element
+   from the end of the array.
+	可以看到说明:从数组的末尾移除一个元素
+
+649
+00:28:34,666 --> 00:28:37,567
+      Now, it does require
+   a count greater than zero.
+	需要数组的元素个数大于零.
+
+650
+00:28:37,569 --> 00:28:42,705
+   So if our array were empty
+ this would crash our program.
+	如果数组是空的话,移除元素会导致程序崩溃
+
+651
+00:28:42,707 --> 00:28:44,840
+     So let's put a little
+     protective thing here.
+	所以,在这里做一些保护性的措施.
+
+652
+00:28:44,842 --> 00:28:47,742
+     If the operand stacks.
+	如果操作符栈
+
+653
+00:28:47,744 --> 00:28:50,411
+    There's a nice property
+   here called Count on that.
+	操作符栈变量有一个属性叫做Count
+
+654	
+00:28:50,413 --> 00:28:52,947
+        It is greater or
+	如果大于或者
+
+655
+00:28:52,948 --> 00:28:55,482
+ equal to two actually because
+ multiply takes two operand so
+	等于2,因为乘法需要2个操作数
+
+656
+00:28:55,485 --> 00:28:57,484
+        there better two
+     things on this stack.
+	所以至少需要栈中有2个元素
+
+657
+00:28:58,921 --> 00:29:01,121
+   Then we can do this and so
+	然后,我们可以这样做,
+
+658
+00:29:01,123 --> 00:29:05,324
+   we're gonna multiply that
+  by and remove the next one.
+	相乘,然后移除最后一个元素
+
+659
+00:29:05,326 --> 00:29:06,125
+             Okay?
+	对么?
+
+660
+00:29:06,127 --> 00:29:07,259
+        So here we got-
+	这样的话,
+
+661
+00:29:09,062 --> 00:29:12,463
+ We're just taking the last two
+  things off of this stack by
+	我们从栈中移除最后两个元素,
+
+662
+00:29:12,465 --> 00:29:14,832
+       removing them from
+    the end of the array and
+	通过从数组中移除元素
+
+663
+00:29:14,834 --> 00:29:17,334
+       just assigning it
+       to display value.
+	赋值给displayValue变量
+
+664
+00:29:17,336 --> 00:29:19,469
+      And we probably also
+   want to do an enter here,
+	这里可能需要做一个enter,
+
+665
+00:29:19,471 --> 00:29:22,539
+    because [COUGH] if I go
+     six enter three times,
+	如果单击6 enter 3 乘,
+
+666
+00:29:22,541 --> 00:29:25,108
+  well then I want to be able
+   to say then nine plus and
+	这样就得到9加
+
+667
+00:29:25,110 --> 00:29:28,744
+        have it add onto
+      the six times three.
+	然后加上6乘以3
+
+668
+00:29:29,713 --> 00:29:32,213
+    So we want an automatic
+      enter here, as well.
+	这里需要一个自动点击enter,
+
+669
+00:29:32,215 --> 00:29:34,149
+             Okay?
+	是么?
+
+670
+00:29:34,150 --> 00:29:36,084
+     So, that's pretty much
+    all we need to do here.
+	这大概就是我们需要在这里做的了.
+
+671
+00:29:36,086 --> 00:29:41,021
+  Let's go ahead and run this,
+      see how this works.
+	继续,运行这个程序,看它是怎么工作的,
+
+672
+00:29:43,826 --> 00:29:47,527
+     And so, six enter, or
+    three enter, six enter.
+	6 确认 或者 3 确认 6 确认
+
+673
+00:29:47,529 --> 00:29:49,996
+       Now we've got them
+       both on the stack.
+	可以在栈上看到它们
+
+674
+00:29:49,998 --> 00:29:52,898
+     Times and you can see
+      we put our 18 here.
+	相乘,然后可以看到结果是18
+
+675
+00:29:52,900 --> 00:29:55,668
+      It also put it back
+        on the stack and
+	结果也被放入的栈中,
+
+676
+00:29:55,670 --> 00:29:57,536
+     we can say five times.
+	比如,5 乘
+
+677
+00:29:57,538 --> 00:29:59,237
+        That put a five
+        on the stack and
+	将5放入栈中,
+
+678
+00:29:59,239 --> 00:30:01,372
+     then multiplied them,
+          took it off.
+	将它们相乘,从栈中移除,
+
+679
+00:30:01,374 --> 00:30:03,107
+   So that's working nicely.
+	程序运行的不错啊
+
+680
+00:30:03,109 --> 00:30:05,576
+  [COUGH] Now what about our-
+	现在,
+
+681
+00:30:05,578 --> 00:30:06,743
+      Other buttons, here.
+	这里,我们的其他的按钮,
+
+682
+00:30:06,745 --> 00:30:08,745
+   We gonna make those work.
+	我们要让它们工作.
+
+683
+00:30:08,747 --> 00:30:12,548
+         Let's do that.
+	让我们完成这个工作.
+
+684
+00:30:12,550 --> 00:30:16,152
+      Now, they do a very
+      similar thing, here.
+	它们需要完成十分相似的事情, 
+
+685
+00:30:16,154 --> 00:30:20,088
+    So, one temptation would
+     be to just copy here.
+	所以,来复制下这部分,
+
+686
+00:30:20,090 --> 00:30:22,657
+   Let's uncomment these out.
+	打开这部分的注释,
+
+687
+00:30:23,693 --> 00:30:25,459
+    And then just paste it,
+          repeatedly.
+	然后粘贴到这里,重复粘贴,
+
+688
+00:30:25,461 --> 00:30:26,827
+       So, put it there.
+	放到这里.
+
+689
+00:30:27,996 --> 00:30:31,831
+   There, there and then just
+     changes times in here.
+	只需要更改这里的乘号.
+
+690
+00:30:31,833 --> 00:30:35,868
+       D note to plus for
+      example on this one.
+	这个换成一个加号,
+
+691
+00:30:35,870 --> 00:30:39,038
+ But his is pretty messy code,
+        look at all this
+	但是,这样的代码看起来很乱,
+
+692
+00:30:39,040 --> 00:30:42,841
+      incredible amount of
+   duplicating code, in here.
+	这里有大量的重复的代码,
+
+693
+00:30:42,843 --> 00:30:47,145
+  We really probably wouldn't
+  to write our code like this.
+	我们确实不希望我们的代码写成这样.
+
+694
+00:30:47,147 --> 00:30:49,780
+   People would think we were
+     terrible programmers I
+	别人会认为我们是很糟糕的程序员
+
+695
+00:30:49,782 --> 00:30:51,482
+     think if we did that.
+	如果我们像这样写代码的话.
+
+696
+00:30:51,484 --> 00:30:54,251
+      Really what would be
+    nice is if we had some,
+	什么样的代码看起来会不错呢? 
+
+697
+00:30:54,253 --> 00:30:56,453
+        could write some
+       kind of function.
+	那就是如果我们可以把这些重复的代码写成函数
+
+698
+00:30:56,455 --> 00:31:00,990
+     Maybe we could call it
+      perform operation or
+	我们可能会给这个函数起名perfomOperation
+
+699
+00:31:00,992 --> 00:31:02,458
+      something like that.
+	或者类似意思的名字.
+
+700
+00:31:02,460 --> 00:31:05,927
+      And if the argument
+       to that function.
+	至于函数的参数,
+
+701
+00:31:05,929 --> 00:31:08,196
+         Remember that
+     arguments have names.
+	注意,函数参数也是又名字的,
+
+702
+00:31:08,198 --> 00:31:09,163
+        Here's the name.
+	这就是名字. 
+
+703
+00:31:09,165 --> 00:31:10,364
+   And then we have the type.
+	然后是参数类型. 
+
+704
+00:31:11,434 --> 00:31:16,269
+  The argument were something
+    which basically was this
+	这里的参数就是
+
+705
+00:31:16,271 --> 00:31:19,305
+  little operation in here, or
+	这里的操作符,
+
+706
+00:31:19,307 --> 00:31:21,707
+   some sort of function that
+    would do this operation.
+	这就是完成操作符操作的函数.
+
+707
+00:31:21,709 --> 00:31:24,576
+    So if this could be some
+     sort of function that
+ 	如果可以写成函数的话,
+
+708
+00:31:24,578 --> 00:31:25,277
+         would be cool.
+	看起来就不错了.
+
+709
+00:31:25,279 --> 00:31:27,078
+     Then, maybe we could.
+	然后,我们可能会,
+
+710
+00:31:27,080 --> 00:31:28,880
+ I take this code out of here,
+        put it in here.
+	将这段代码移动到这里,
+
+711
+00:31:30,149 --> 00:31:34,384
+   Let's call it perform not
+  pre-form, perform operation.
+	起码为perform,而不是pre-form
+
+712
+00:31:34,386 --> 00:31:36,353
+   [LAUGH] Put it in here and
+	放在这里.
+
+713
+00:31:36,355 --> 00:31:38,921
+       instead of doing,
+    you know, multiply here.
+	你懂的,这里不是使用乘.
+
+714
+00:31:38,923 --> 00:31:41,190
+   Let's go ahead and we can
+  do this operation some how.
+	继续,完成这个操作.
+
+715
+00:31:41,192 --> 00:31:42,891
+ I guess, well maybe operation,
+	可能是operation函数,
+
+716
+00:31:42,893 --> 00:31:48,196
+    call it like a function
+    with two arguments here.
+	像一个带两个参数的函数一样调用.
+
+717
+00:31:51,067 --> 00:31:52,500
+             Okay.
+         That would be
+	好了,看起来很不错了.
+
+718
+00:31:52,502 --> 00:31:55,202
+ cool because we'd be sharing,
+     you know, this check.
+	因为我们共用了这段代码.
+
+719
+00:31:55,204 --> 00:31:57,204
+  We'd be sharing this enter.
+	公用了这enter方法
+
+720
+00:31:57,206 --> 00:31:59,472
+    [COUGH] We'd be sharing
+  the removal of the operator.
+	共用了removal操作方法.
+
+721
+00:31:59,474 --> 00:32:01,441
+        We'd be sharing
+    the same display value.
+	共用了displayValue变量. 
+
+722
+00:32:01,443 --> 00:32:04,209
+    We'd be kind of sharing
+     a lot of code here and
+	这样,公用了大段的代码,
+
+723
+00:32:05,746 --> 00:32:08,179
+    then up here if we could
+    just do something like,
+	在上面,只需要像这样做,
+
+724
+00:32:08,181 --> 00:32:12,850
+       perform operation,
+     and, somehow, specify,
+	调用函数,
+
+725
+00:32:12,852 --> 00:32:16,186
+   multiply, as the operation
+     we wanted to do here.
+	指定函数参数,
+
+726
+00:32:16,188 --> 00:32:23,593
+   And then we wouldn't need
+  all this stuff here, right?
+	这段代码就不需要了,对么?
+
+727
+00:32:23,595 --> 00:32:24,527
+   So this is gonna be cool.
+	看起来很不错吧?
+
+728
+00:32:24,529 --> 00:32:25,995
+      Now, can we do this?
+	可以这样做么?
+
+729
+00:32:25,997 --> 00:32:28,564
+           Well, yes,
+     the answer is we can.
+	当然了,可以的.
+
+730
+00:32:28,566 --> 00:32:33,134
+   And so, types, functions.
+	参数类型,函数
+
+731
+00:32:33,136 --> 00:32:37,005
+     Can be types in Swift,
+   just like any other type.
+	在Swift里可以当做类型,就像其他的类型一样
+
+732
+00:32:37,007 --> 00:32:40,040
+     So, you know, we have
+  a double here, oops, double.
+	这里需要一个double,
+
+733
+00:32:41,844 --> 00:32:42,809
+         That's a type.
+	就是这个类型,
+
+734
+00:32:42,811 --> 00:32:43,943
+       You can also have
+        a function type.
+	也可以有一个函数类型.
+
+735
+00:32:43,945 --> 00:32:45,611
+     So how do you specify
+        a function type?
+	那么,怎么指定一个函数类型呢?
+
+736
+00:32:45,613 --> 00:32:47,846
+       Well multiple I or
+	比如multiple,
+
+737
+00:32:47,848 --> 00:32:49,981
+     whatever function I'm
+     about to perform here.
+	或者是任何其他想要执行的函数,
+
+738
+00:32:49,983 --> 00:32:54,686
+ This is a function that takes
+   two doubles as arguments.
+	这个函数需要两个double类型的参数
+
+739
+00:32:54,688 --> 00:32:56,354
+    And it returns a double.
+	函数的返回值类型也是一个double类型
+
+740
+00:32:56,356 --> 00:33:00,190
+      So, I can just say,
+     I want operation to be
+	我想要一个函数,
+
+741
+00:33:00,192 --> 00:33:04,661
+   a function that takes two
+ doubles and returns a double.
+	带两个double类型参数,返回double类型
+
+742
+00:33:04,663 --> 00:33:07,363
+ I can express that right here.
+	这就是我要表达的,
+
+743
+00:33:07,365 --> 00:33:11,300
+        This is a type,
+       the type of this.
+	这就是参数类型,这种类型.
+
+744
+00:33:12,369 --> 00:33:15,870
+  Argument right here that you
+   can click on and say yeah
+	在这里的参数上右键,
+
+745
+00:33:15,872 --> 00:33:18,639
+ that type is double takes two
+ doubles and returns a double.
+	可以看到信息:2个double类型的参数,一个double类型返回值.
+
+746
+00:33:20,276 --> 00:33:22,176
+    So, just simple as that.
+	就是这么简单.
+
+747
+00:33:22,177 --> 00:33:24,077
+       So all we need now
+       is a function here
+	我们所知道的,这里是一个函数,
+
+748
+00:33:24,079 --> 00:33:26,379
+      called multiply that
+     takes two doubles and
+	函数名multiply,带2个参数,
+
+749
+00:33:26,381 --> 00:33:28,514
+      returns a double and
+      does multiplication.
+	返回double类型,完成乘法操作.
+
+750
+00:33:28,516 --> 00:33:33,118
+  So we could go down here and
+     say okay multiply and
+	好了,看下面的乘,
+
+751
+00:33:33,120 --> 00:33:35,587
+     you'll have op1 which
+       is double and op2.
+	有一个参数,double类型,第二个参数, 
+
+752
+00:33:35,589 --> 00:33:39,157
+      [COUGH] A double and
+    it returned the double.
+	double类型,返回一个double类型.
+
+753
+00:33:39,159 --> 00:33:41,926
+      And it's just return
+       one times out two.
+	这个函数返回参数1乘以参数2
+
+754
+00:33:42,962 --> 00:33:44,261
+             Okay?
+	对么?
+
+755
+00:33:44,263 --> 00:33:45,729
+     And that worked great.
+	看来起不错哟!
+
+756
+00:33:45,731 --> 00:33:51,600
+    Back out again so we can
+  see if this actually works.
+	回到上面,看它是否真的可以正常运行.
+
+757
+00:33:51,602 --> 00:33:53,168
+  But there's no arrows here.
+	没有任何错误.
+
+758
+00:33:53,170 --> 00:33:55,387
+             Right?
+       It seems to work.
+	对么?看起来可行.
+
+759
+00:33:55,388 --> 00:33:57,605
+      Multiply seems to be
+ a function to take the $2 and
+
+760
+00:33:57,608 --> 00:33:59,274
+        turns it double.
+
+761
+00:33:59,275 --> 00:34:00,941
+      And that's what this
+      argument here is and
+	这里的这个参数,
+
+762
+00:34:00,944 --> 00:34:02,661
+     I'm passing it along.
+	将它传入
+
+763
+00:34:02,662 --> 00:34:04,379
+     It should all work so
+      let's give it a try.
+	应该是可行的,那么试一下吧.
+
+764
+00:34:08,818 --> 00:34:10,684
+        So here we go as
+        it takes enter.
+	  点下enter
+
+765
+00:34:10,686 --> 00:34:15,188
+          54 times and
+  sure enough it's working it.
+	54乘以,好了,没问题.
+
+766
+00:34:15,190 --> 00:34:17,757
+        It's doing that
+        multiplication.
+	完成了乘法操作.
+
+767
+00:34:18,826 --> 00:34:23,428
+ Works great and so what about
+  all of our other cases here?
+	做的不错,其他的case语句呢?
+
+768
+00:34:23,430 --> 00:34:26,731
+       Well we would just
+    need to take this same.
+	只需要也像这样做.
+
+769
+00:34:26,733 --> 00:34:29,400
+  Piece of code right here and
+    put it for all of them.
+	所有的case语句,这里一段代码,
+
+770
+00:34:29,402 --> 00:34:32,169
+ And of course we need a divide
+     method, so we have to
+	当然了,我们需要除法函数,
+
+771
+00:34:32,171 --> 00:34:35,805
+  come down here, and copy and
+  paste that, and make divide.
+	来到下面,复制,粘贴,起名divide
+
+772
+00:34:35,807 --> 00:34:37,907
+       Oh wait a second,
+	稍等, 
+
+773
+00:34:37,909 --> 00:34:41,210
+  this is starting to be just
+    as bad as I had before.
+	看起来又像之前的一样,很糟糕了.
+
+774
+00:34:41,212 --> 00:34:44,646
+    Having to make all these
+ extra functions, multiply and
+	需要这些额外的函数,乘法,
+
+775
+00:34:44,648 --> 00:34:46,081
+      divide and all that.
+	触发,等等.
+
+776
+00:34:46,082 --> 00:34:47,515
+        Well [COUGH] it
+       turns out it's so
+	事情上,
+
+777
+00:34:47,518 --> 00:34:52,553
+  common to pass functions as
+  arguments in Swift, that it
+	在Swift中,把函数作为参数传递是很常见的.
+
+778
+00:34:52,555 --> 00:34:56,390
+  allows you to put a function
+     like multiply right in
+	允许你传递一个,比如multiply,的函数,
+
+779
+00:34:56,392 --> 00:35:00,327
+ here without having to create
+ a separate function like this.
+	不需要再创建一个函数
+
+780
+00:35:00,329 --> 00:35:02,195
+       And all you do is
+      you just pick it up.
+	需要做的是,选中,
+
+781
+00:35:02,197 --> 00:35:05,131
+    So I'm just going to cut
+    that from down here and
+	从这里剪切
+
+782
+00:35:05,133 --> 00:35:06,599
+       I'm going to paste
+       it right in here.
+	粘贴到这里来
+
+783
+00:35:07,702 --> 00:35:10,168
+   The only thing you have to
+ change syntactically when you
+	唯一需要做语法上的改变的是,
+
+784
+00:35:10,170 --> 00:35:13,738
+  do that is this curly brace,
+             okay.
+	这里是一个大括号.
+
+785
+00:35:13,740 --> 00:35:16,541
+     Instead of being after
+       the declaration of
+	而不是之前在声明
+
+786
+00:35:16,543 --> 00:35:21,779
+  the arguments in the return
+ value, it needs to be before.
+	函数,返回值之后.
+
+787
+00:35:21,781 --> 00:35:24,314
+     So, you move the curly
+         brace before.
+	把大括号放到前面.	
+
+788
+00:35:24,316 --> 00:35:25,648
+         And then where
+      the curly brace was,
+	之前这里是小括号.
+
+789
+00:35:25,650 --> 00:35:27,417
+ you gonna put in, the word in.
+	这里添加一个单词in
+
+790
+00:35:28,586 --> 00:35:30,486
+ And so that allows us to just.
+	允许我们稍微调整下.
+
+791
+00:35:30,488 --> 00:35:34,723
+   Come and do that again to
+ eliminate some of our errors.
+	现在把这些错误解决了,
+
+792
+00:35:34,725 --> 00:35:37,291
+     And we can get rid of
+  function multiply down here.
+	移除这里的mutiply
+
+793
+00:35:39,328 --> 00:35:42,862
+ So that allows me to just put
+ that multiplier right in here.
+	把乘法放在这里.
+
+794
+00:35:42,864 --> 00:35:44,030
+         Right in line.
+	就是这里.
+
+795
+00:35:44,032 --> 00:35:46,032
+     Write as the argument
+       to this function.
+	给这个函数写一个参数.
+
+796
+00:35:46,034 --> 00:35:48,167
+ And this things kind of wacky.
+	 看起来略古怪.
+
+797
+00:35:48,169 --> 00:35:49,701
+        For those of you
+       who don't know it,
+	对于一些不了解的人来讲,
+
+798
+00:35:49,703 --> 00:35:51,469
+   user programming languages
+      that allow this kind
+ 	编程语言中,
+
+799
+00:35:51,471 --> 00:35:53,604
+       of thing to happen
+      are called closures.
+	这种情况称之为闭包.
+
+800
+00:35:54,607 --> 00:35:56,540
+ It basically allows you to put
+   a function right in there.
+	允许在这里放一个函数.
+
+801
+00:35:56,542 --> 00:36:02,812
+   And this, okay here, looks
+ okay, I mean we can certainly
+	好了,这看起来还不错.
+
+802
+00:36:02,814 --> 00:36:05,481
+ you know, now we can copy and
+  paste this and put it here.
+	下面又是复制,粘贴,放着
+
+803
+00:36:05,483 --> 00:36:06,615
+       You know, here and
+	放这里
+
+804
+00:36:06,617 --> 00:36:09,118
+        change this and
+  put it here and change this.
+	改了这个,放在这里,改了这个,	
+
+805
+00:36:09,120 --> 00:36:12,287
+       But it can even be
+       better than this.
+	但是,我们可以进一步改进.
+
+806
+00:36:12,289 --> 00:36:15,223
+     So we know that Swift
+       is really good at
+	我们知道Swift很擅长的
+
+807
+00:36:15,225 --> 00:36:17,658
+        something called
+        type inference.
+	一个特性称为类型引用.
+
+808
+00:36:17,660 --> 00:36:19,493
+       Where I can kinda
+      figure out the type,
+ 	从类型引用可以看出是什么类型,
+
+809
+00:36:19,495 --> 00:36:22,863
+         of something,
+       from the context.
+	结合上下文来看.
+
+810
+00:36:22,865 --> 00:36:25,165
+         And you can do
+      the same thing here.
+	这里也可以这么做.
+
+811
+00:36:25,167 --> 00:36:27,267
+      Because its looking
+     at perform operation.
+	看下这里的performOperation
+
+812
+00:36:27,269 --> 00:36:29,435
+    It knows you're calling
+       perform operation.
+	它知道你在调用performOperation
+
+813
+00:36:29,437 --> 00:36:33,039
+   It knows this argument is
+   a function that takes two
+	它知道这个函数的参数,
+
+814
+00:36:33,041 --> 00:36:34,940
+ doubles and returns a double.
+	2个double类型,一个double类型的返回值.
+
+815
+00:36:34,942 --> 00:36:38,377
+  So you really don't have to
+ specify all the types in here.
+	所以,这里不需要明确的指定类型,
+
+816
+00:36:38,379 --> 00:36:39,978
+   Cuz it knows all of this.
+	因为它知道这些事情.
+
+817
+00:36:39,980 --> 00:36:43,381
+ So you can actually get rid of
+  all these type decorations,
+	所以,可以删除这些类型声明.
+
+818
+00:36:43,383 --> 00:36:45,416
+  right here, even the return.
+	甚至是返回值类型也可以省去.
+
+819
+00:36:45,418 --> 00:36:47,851
+          And, again,
+ seeing no warnings, no errors.
+	可以看到,没有任何警告,错误.
+
+820
+00:36:47,853 --> 00:36:49,553
+     It knows that this has
+      to be a double, and
+	它知道这个参数是double,
+
+821
+00:36:49,555 --> 00:36:51,454
+    this has to be a double.
+	这个参数也是dobule类型.
+
+822
+00:36:51,456 --> 00:36:53,556
+    Because it knows you're
+   calling perform operation.
+	因为它知道你需要调用的函数.
+
+823
+00:36:53,558 --> 00:36:56,959
+    So it knows the argument
+     to that is like that.
+	就像这样,它知道函数的参数.
+
+824
+00:36:58,529 --> 00:37:00,962
+  Okay, and you can even make
+   this look a little nicer.
+	好了,可以进行进一步的改进.
+
+825
+00:37:00,964 --> 00:37:03,631
+      We can move this all
+       up onto one line.
+	把这些上移一行.
+
+826
+00:37:04,800 --> 00:37:08,168
+        Really nice for
+       readability here.
+	看来起更具有可读性.
+
+827
+00:37:08,170 --> 00:37:11,037
+    But, we can actually do
+     even better than this,
+	事实上,我们可以做的更好. 
+
+828
+00:37:11,039 --> 00:37:15,074
+    because Swift knows that
+  perform operations argument
+	因为Swift知道这个函数
+
+829
+00:37:15,076 --> 00:37:18,844
+  returns something, you don't
+  need this return key if your
+	返回一个值,所以你不需要return
+
+830
+00:37:18,846 --> 00:37:22,715
+  whole is just an expression
+   like this return key word.
+	如果所有的代码只有一个返回语句.
+
+831
+00:37:22,717 --> 00:37:25,717
+  You don;t need that key word
+    because it knows this is
+	不需要return这个关键字了,
+
+832
+00:37:25,719 --> 00:37:27,485
+  going to return something so
+	因为程序知道你要返回什么.
+
+833
+00:37:27,487 --> 00:37:32,056
+   this is just an expression
+    it's going to return it.
+	这样只返回一个表达式就可以了.
+
+834
+00:37:33,325 --> 00:37:37,260
+   But it's even better than
+   that because a swift does
+	更好的做法是,
+
+835
+00:37:37,262 --> 00:37:40,597
+     not force you to name
+      these two arguments.
+	swift不强制你给这两个参数命名.
+836
+00:37:40,599 --> 00:37:44,967
+   If you don;t name them it
+    will use the names Dar0.
+	如果不手动命名的话,程序自动给参数起码$0
+
+837
+00:37:44,969 --> 00:37:46,952
+         Dollar 1, and
+	$1,
+
+838
+00:37:46,953 --> 00:37:48,936
+  if you have more arguments,
+ dollar 2, dollar 3, dollar 4.
+	如果有更多的参数,会命名为$2,$3,$4.
+
+839
+00:37:48,939 --> 00:37:50,706
+  So you don't even need this.
+	所以,这也不要了.
+
+840
+00:37:52,142 --> 00:37:53,441
+             Okay?
+
+841
+00:37:53,443 --> 00:37:55,710
+     So this is a function
+          right here.
+	这里是一个函数.
+
+842
+00:37:55,712 --> 00:37:58,112
+     It takes two doubles,
+   dollar 0 and dollar 1, and
+	这个函数有两个double类型参数,$0,$1	
+
+843
+00:37:58,114 --> 00:37:59,546
+       returns a double.
+	返回一个double类型的值.
+
+844
+00:37:59,548 --> 00:38:02,916
+  Now Swift knows that they're
+ doubles because it knows that
+	Swift知道它们是double类型.
+
+845
+00:38:02,918 --> 00:38:04,517
+     you're passing them to
+     perform an operation.
+	因为你将它们传递给了这个函数.
+
+846
+00:38:04,519 --> 00:38:07,920
+  If you were passing this to
+  some other, a function that
+	如果把它们传递给其他的函数,
+
+847
+00:38:07,922 --> 00:38:10,789
+     took different kind of
+ function as an argument, then,
+	比如有不同类型的参数,
+
+848
+00:38:10,791 --> 00:38:14,126
+ you know, these types might be
+ different but in this case it
+	这些类型可能和上面不同.
+
+849
+00:38:14,128 --> 00:38:16,961
+  knows that's what it is and
+ it knows that it returns once
+	但是Swift知道该使用什么类型
+
+850
+00:38:16,963 --> 00:38:20,731
+ it knows it's going to return
+   what this calculation is.
+	这里就是这样的.
+
+851
+00:38:21,801 --> 00:38:22,366
+           All right.
+	好了.
+
+852
+00:38:23,568 --> 00:38:26,536
+  Now one more cool syntactic
+   thing you can do is if you
+	更酷的事情是,
+
+853
+00:38:26,538 --> 00:38:29,305
+      have a function like
+     performOperation, and
+	如果有一个performOperation这样的函数,
+
+854
+00:38:29,307 --> 00:38:32,741
+ it has an argument which is a
+ function like operation here,
+	有个像operation这样的参数,
+
+855
+00:38:32,743 --> 00:38:36,445
+      if this argument is
+  the last argument, okay, so
+	如果是最后一个参数,
+
+856
+00:38:36,447 --> 00:38:38,446
+    if I had other arguments
+         before it, and
+	在之前又别的参数,
+
+857
+00:38:38,448 --> 00:38:42,917
+  this was the argument, then
+   you can move the function.
+	这是参数,可以移动这个函数的位置
+
+858
+00:38:43,886 --> 00:38:47,888
+    Outside the parentheses,
+      so other arguments,
+	移动到括号外,参数也是.
+
+859
+00:38:47,890 --> 00:38:50,123
+ if there were other arguments
+ before, they would go in here.
+	如果又其他类型的参数,可以放在这里. 
+
+860
+00:38:51,726 --> 00:38:54,327
+    But this last argument,
+	但是这个最后的一个参数.
+
+861
+00:38:54,328 --> 00:38:56,929
+ which is this operation, gets
+ to go outside the parentheses.
+	这个函数,需要放在括号外.
+
+862
+00:38:56,931 --> 00:38:59,564
+   And if there are no other
+     arguments, if this is
+	如果没有其他的参数,
+
+863
+00:38:59,566 --> 00:39:02,033
+   the only argument, you can
+   actually get rid of that.
+	如果只有一个参数,可以删除它.
+
+864
+00:39:03,870 --> 00:39:05,269
+             Okay.
+
+865
+00:39:05,271 --> 00:39:08,705
+     So, we're cutting down
+     to incredibly concise
+	 因此,我们把程序变得很简洁了	
+
+866
+00:39:08,707 --> 00:39:13,509
+    language here and we can
+    do this exact same deal,
+	可以再这样做.
+
+867
+00:39:13,511 --> 00:39:18,047
+      of course with these
+     other form operations.
+	其他的操作也可以这样做.
+
+868
+00:39:18,049 --> 00:39:19,848
+  We just need to change the.
+	只需要改这里.
+
+869
+00:39:20,817 --> 00:39:21,382
+         Nothing here.
+	这里不需要改.
+
+870	
+00:39:22,585 --> 00:39:24,184
+    This one, we be a little
+   careful with the order of
+	这里,需要注意参数的顺序,
+
+871
+00:39:24,186 --> 00:39:27,421
+        operations here,
+  we wanna do this because we
+	我们会这么做,
+
+872
+00:39:27,423 --> 00:39:30,824
+   click the thing that we're
+ dividing by on the stack last.
+	除以栈中的最后一个元素.
+
+873
+00:39:30,826 --> 00:39:34,660
+   And that's the first thing
+   that comes off the stack.
+	栈中最先离开的元素
+
+874
+00:39:34,662 --> 00:39:35,494
+ And same thing here actually,
+	这里也要注意,
+
+875
+00:39:35,496 --> 00:39:38,163
+        the subtraction
+       minus dollar here.
+	减法,减号,$,	
+
+876
+00:39:38,165 --> 00:39:41,900
+     Okay, so, this is our
+      entire operate, and
+	好了,这就是我们的全部操作.
+
+877
+00:39:41,902 --> 00:39:44,469
+     you can see that it's
+      incredibly concise.
+	你可以看到,这相当的简洁.
+
+878
+00:39:44,471 --> 00:39:45,803
+         Very readable.
+	很高的可读性.
+
+879
+00:39:45,805 --> 00:39:47,504
+        TImes is clearly
+      doing this function.
+	这里改成乘法. 
+
+880
+00:39:47,506 --> 00:39:48,905
+      And very extensible.
+	也有很高的可扩展性
+
+881
+00:39:48,907 --> 00:39:50,206
+        If you wanna add
+        more functions,
+	如果需要添加更多的操作,
+
+882
+00:39:50,208 --> 00:39:51,974
+    we just one liners here,
+	只需要这里添加一行代码.
+
+883
+00:39:51,976 --> 00:39:55,745
+ but more these [COUGH] binary
+  functions that have two So,
+	这里我们就只有这么多.
+
+884
+00:39:55,747 --> 00:39:58,814
+    let's go ahead and make
+  sure these are all working.
+	继续,确保我们程序运行问题.
+
+885
+00:40:02,753 --> 00:40:04,686
+           All right.
+	好的.
+
+886
+00:40:04,687 --> 00:40:06,620
+      So, 6 enter 5 times,
+    that's 30, that's good.
+	6乘以5,结果是30,看起来不错.
+
+887
+00:40:06,623 --> 00:40:11,291
+     How about 47 plus 77,
+           excellent.
+	47加上77,不错.
+
+888
+00:40:11,293 --> 00:40:13,593
+      How about 2 divide.
+	2除以
+
+889
+00:40:13,595 --> 00:40:14,928
+             38.5.
+	     38.5
+
+890
+00:40:14,930 --> 00:40:17,397
+   [INAUDIBLE] number there.
+	这个数,三十八点五.
+
+891
+00:40:17,399 --> 00:40:20,299
+ Working, you can see the stack
+  doing all the right things.
+	正常,可以看到做的还错.
+
+892
+00:40:21,368 --> 00:40:24,102
+             Okay?
+          Make sense?
+	对么?正确的吧?
+
+893
+00:40:24,104 --> 00:40:26,771
+      Now, I'm going to do
+     one more thing, here.
+	现在,还需要做一个事情.
+
+894
+00:40:27,840 --> 00:40:29,473
+        Which is to add
+       another operation,
+	就是添加另外的一个操作符.
+
+895
+00:40:29,475 --> 00:40:31,174
+ this is going to be a slightly
+      different operation.
+	稍有不同的一个操作.
+
+896
+00:40:31,176 --> 00:40:32,375
+   So, I'm going to copy and
+	复制一下,
+
+897
+00:40:32,377 --> 00:40:35,144
+     paste these operation
+         buttons here.
+	粘贴到操作符按钮这里.
+
+898
+00:40:35,146 --> 00:40:37,880
+ Again, I'm going to make sure
+    they are lined up really
+	确保真正的对齐了.
+
+899
+00:40:37,882 --> 00:40:41,350
+   nice with as many of these
+    blue lines as I can get.
+	使用蓝色的线来对齐.	
+
+900
+00:40:42,786 --> 00:40:44,919
+     I'm actually going to
+   leave these buttons here.
+	把按钮放在这.
+
+901
+00:40:46,255 --> 00:40:48,389
+  Because you're going to need
+    them for your homework.
+    因为你等下做作业的时候会需要他们
+
+902
+00:40:48,391 --> 00:40:50,323
+    But we gonna change this
+  button right down here to be
+  但是我们将会改变这个按钮
+
+903
+00:40:50,325 --> 00:40:51,825
+     a different operator.
+     把它成为一个不同的运算符.
+
+
+904
+00:40:52,894 --> 00:40:54,760
+     Which is going to be,
+          square root.
+          它将会变成一个平方根运算符
+
+905
+00:40:54,762 --> 00:40:57,629
+      Which is right here,
+     square root operator.
+     就在这里,一个平方根
+
+906
+00:40:58,732 --> 00:40:59,297
+           All right?
+           好的.
+
+907
+00:40:59,299 --> 00:41:05,803
+ And, so, I'm going to go back
+   her to do square root, and
+   然后我回到这里,去添加一个平方根运算
+
+908
+00:41:05,805 --> 00:41:07,704
+ it's just another case, right.
+ 只需要再添加一个case就可以搞定了.
+
+909
+00:41:07,706 --> 00:41:08,805
+       Case square root.
+       case平方根
+
+910
+00:41:09,841 --> 00:41:12,808
+    And, maybe I should just
+    be able to use the same
+    也许我应该直接拷贝一样的
+
+911
+00:41:12,810 --> 00:41:13,709
+       mechanism, right?
+       这句话,对吧.
+
+912
+00:41:13,711 --> 00:41:14,843
+    Let's see if that works.
+    让我们看看,这样能不能行.
+
+913
+00:41:15,946 --> 00:41:18,897
+      Place that in there.
+      把它们放在这
+
+914
+00:41:18,898 --> 00:41:21,849
+  And instead of this bracket
+  here, let's use the built in
+  把大括号里的内容删掉,用一个
+
+915
+00:41:21,851 --> 00:41:25,285
+    function in Swift to do
+    square root called sqrt.
+    swift里内置的平方根运算函数,叫做sqrt
+
+916
+00:41:25,287 --> 00:41:26,219
+      And a dollar there.
+      还有一个$符号
+
+917
+00:41:26,221 --> 00:41:27,187
+          Looks good.
+          看起来不错
+
+918
+00:41:27,189 --> 00:41:29,322
+  And then we're ready to go.
+  好的,我们弄好了.
+
+919
+00:41:29,324 --> 00:41:32,591
+   Let's just work, call it,
+     what's going on here.
+     这里好像有什么问题.
+
+920
+00:41:32,593 --> 00:41:35,794
+ They have some sort of error,
+      what's the problem.
+      好像是某种错误,是什么问题呢?
+
+921
+00:41:35,796 --> 00:41:36,995
+      I don't understand.
+      我也不清楚.
+
+922
+00:41:36,997 --> 00:41:38,163
+   Let's take a look at this.
+   我们来看一看.
+
+923
+00:41:38,165 --> 00:41:42,867
+   Now this error is a little
+     hard to understand but
+     不过这个错误有点难理解不过
+
+924
+00:41:42,869 --> 00:41:46,970
+   basically what it's saying
+     is that you're calling
+     大概意思是说你使用的这个
+
+925
+00:41:46,972 --> 00:41:51,207
+ performOperation here with an
+ argument which is a function,
+ 带一个参数的performOperatin是个函数
+
+926
+00:41:51,209 --> 00:41:54,177
+   it only takes on argument.
+   并且他只有一个参数
+
+927
+00:41:54,179 --> 00:41:55,378
+   Goes Swift looks here and
+   我们看看这个函数
+
+928
+00:41:55,380 --> 00:41:57,579
+    it's used that it's only
+     using a dollar zero so
+     这个函数只是用了一个参数$
+
+929
+00:41:57,581 --> 00:42:00,849
+     this is a one argument
+      function this whole
+      确实是一个只有一个参数的函数
+
+930
+00:42:00,851 --> 00:42:03,785
+     curly brace thing is a
+ function that is one argument.
+ 大括号里只有一个参数
+
+931
+00:42:03,787 --> 00:42:07,121
+      Well four operation
+     takes a function that
+     上面的4各运算法调用的这个函数
+
+932
+00:42:07,123 --> 00:42:08,189
+       has two arguments.
+       有两个参数
+
+933
+00:42:09,692 --> 00:42:11,591
+      So that's a mismatch
+       that doesn't work.
+       所以参数不匹配,导致了这个错误
+
+934
+00:42:12,594 --> 00:42:14,694
+    So how can we fix this.
+    那么我们来修复这个错误
+
+935
+00:42:14,695 --> 00:42:16,795
+  Well actually believe it or
+ not we can just make a copy of
+ 我们来直接复制这个函数体
+
+936
+00:42:16,798 --> 00:42:19,398
+   form operation of another
+       method, same name.
+
+937
+00:42:19,400 --> 00:42:22,067
+     This one we are gonna
+   have different arguments.
+   但是这个函数会有不同的参数个数
+
+938
+00:42:22,069 --> 00:42:24,736
+       It's gonna have a,
+      an argument which is
+      将只有一个参数
+
+939
+00:42:24,738 --> 00:42:27,605
+ a function that only takes one
+  double and returns a double.
+  只有一个double参数,返回值是一个double
+
+940
+00:42:28,574 --> 00:42:30,224
+     And then inside here,
+     然后在这里
+
+941
+00:42:30,225 --> 00:42:31,875
+   obviously we don't need to
+ pull two things off the stack,
+ 显然我们不需要推出两个数字出栈
+
+942
+00:42:31,877 --> 00:42:32,609
+           just one.
+           只推出一个就行了
+
+943
+00:42:32,611 --> 00:42:35,645
+ And obviously we only need to
+ 我们只需要注意
+
+944
+00:42:35,647 --> 00:42:37,413
+    check to make sure there
+   is one thing on the stack.
+   确保只有一个数字会被推出栈
+
+945
+00:42:37,415 --> 00:42:41,950
+           And look,
+ all error warnings gone, okay?
+ 现在看一看,所有的错误都消失了,对吧.
+
+946
+00:42:41,952 --> 00:42:44,319
+      So it automatically
+     figured out that this
+     所以,它自动搞清楚了
+
+947
+00:42:44,321 --> 00:42:46,321
+      performer operation
+       must be this one,
+       他必须匹配的是这个函数
+
+948
+00:42:46,323 --> 00:42:49,857
+   because this is a function
+  that only has one argument.
+  因为这是个只有一个参数的函数
+
+949
+00:42:49,859 --> 00:42:52,460
+    And so it matched it up
+    with this version of it.
+    所以它匹配了这个版本的函数
+
+950
+00:42:52,462 --> 00:42:55,996
+   So in Swift, you can have
+ functions with the same name.
+ 所以在swift中,我们可以拥有相同名字的函数
+
+951
+00:42:55,998 --> 00:42:58,265
+      As long as they have
+      different arguments.
+      只要他们有不同的参数就可以了.
+
+952
+00:42:58,267 --> 00:42:59,399
+      And that Swift will
+      swift将会
+
+953
+00:42:59,401 --> 00:43:02,168
+       automatically pick
+   the right one, if it can.
+   自动选择正确的一个
+
+954
+00:43:02,170 --> 00:43:03,936
+      There are sometimes
+      when it's just like,
+      某些时候这就好比
+
+955
+00:43:03,938 --> 00:43:05,971
+      I can't really tell
+      which one you mean.
+      你不告诉他你到底想要的是哪个
+
+956
+00:43:05,973 --> 00:43:08,673
+     And it will certainly
+    complain, in that case.
+    在这种情况下,它当然会发牢骚了.
+
+957
+00:43:11,378 --> 00:43:14,311
+   But most of the type it's
+  gonna be on [INAUDIBLE] from
+  但是,大部分情况
+
+958
+00:43:14,313 --> 00:43:16,647
+      the types involved,
+        what's going on.
+        它会通过参数类型判断到底使用哪个函数
+
+959
+00:43:16,649 --> 00:43:18,582
+    So, just gonna run this
+     one again real quick.
+     让我们运行一次这个程序
+
+960
+00:43:18,584 --> 00:43:22,852
+  [INAUDIBLE] 36 square root.
+  36的平方根
+
+961
+00:43:22,854 --> 00:43:27,423
+    Looks like it's working,
+      9 times square root.
+      看起来答案正确.再乘以9然后开平方
+
+962
+00:43:27,425 --> 00:43:27,989
+           Excellent.
+           很好
+
+963
+00:43:29,726 --> 00:43:30,291
+             Okay.
+
+964
+00:43:31,627 --> 00:43:33,894
+           All right.
+              So,
+              然后
+
+965
+00:43:33,895 --> 00:43:36,162
+    the last thing I'm going
+     to do here is work on
+     我们要做的最后一件事
+
+966
+00:43:36,165 --> 00:43:37,431
+  the layout of these buttons.
+  就是设置这些按钮的布局
+
+967
+00:43:37,433 --> 00:43:38,531
+ So that's all I'm gonna do for
+           the code.
+           我用代码写的就是这么多
+
+968
+00:43:38,533 --> 00:43:40,333
+      You can see that we
+     really didn't have to
+     你可以看到,我们实际上
+
+969
+00:43:40,335 --> 00:43:41,367
+     write that much code.
+     并没有写太多代码
+
+970
+00:43:42,436 --> 00:43:45,003
+     To make this work and
+     来让这个程序运行起来
+
+971
+00:43:45,005 --> 00:43:47,939
+     we got to do a lot of
+     stuff in our UI here.
+     而是在UI上做了很多事
+
+972
+00:43:47,941 --> 00:43:50,708
+ So, let's go ahead and make it
+  so these buttons spread out.
+  好的,让我们继续,把这些按钮展开
+
+973
+00:43:50,710 --> 00:43:54,778
+ Cuz right now you see all this
+  space is wasted right here.
+  因为你现在可以看到,我们浪费了很多空间
+
+974
+00:43:54,780 --> 00:43:57,481
+        And on an iPhone
+       in portrait mode.
+       如果iPhone在横屏的时候
+
+975
+00:43:57,483 --> 00:43:59,549
+ Whole bottom space is wasted.
+ 我们下面的空间都浪费了
+
+976
+00:43:59,551 --> 00:44:01,484
+        And an iPhone on
+        landscape mode,
+        如果在竖屏状态
+
+977
+00:44:01,486 --> 00:44:02,685
+ this whole size can be wasted.
+ 这块区域被浪费了
+
+978
+00:44:02,687 --> 00:44:04,920
+     So I really want these
+    buttons much bigger, and
+    所以我很想把这些按钮弄得大一些
+
+979
+00:44:04,922 --> 00:44:05,687
+        stretching out.
+        拉伸开
+
+980
+00:44:07,124 --> 00:44:09,791
+   Now, when you do something
+  like that, you have to think
+  现在,如果你想做这件事,你需要认真
+
+981
+00:44:09,793 --> 00:44:12,226
+  a little bit of kind of what
+   your strategy is gonna be.
+   思考一下到底应该怎么做合适
+
+982
+00:44:12,228 --> 00:44:15,696
+   You can't just kinda root
+     four start, you know,
+     而不是急匆匆就开始随便就开始
+
+983
+00:44:15,698 --> 00:44:17,597
+        control drag it
+        between things.
+        用鼠标随便拖动这些按钮之类的
+
+984
+00:44:17,599 --> 00:44:20,667
+      And trying to set up
+    the horizontal spacing,
+    或是试着设置水平区间
+
+985
+00:44:20,669 --> 00:44:24,437
+  and maybe line up the, make
+  the equal width and height.
+  对齐这些线,设置相同的宽度和高度
+
+986
+00:44:24,439 --> 00:44:27,106
+  Oh my gosh, you'd be control
+     dragging all day long,
+     我的天,要是这么做你肯定得用鼠标拖一整天
+
+987
+00:44:27,108 --> 00:44:28,374
+         by doing that.
+
+988
+00:44:28,376 --> 00:44:30,475
+    So I'm not going to use
+    control drag to do this.
+    所以我不会使用鼠标拖动来做这些事
+
+989
+00:44:30,477 --> 00:44:33,945
+ I'm going to use these buttons
+  down here which will kind of
+  我们将使用下面的这些按钮来布局
+
+990
+00:44:33,947 --> 00:44:36,414
+   bulk out a layout buttons.
+
+991
+00:44:36,416 --> 00:44:40,451
+       Let's go ahead and
+   use the whole screen here.
+   我们先把这个界面扩大到全屏
+
+992
+00:44:40,453 --> 00:44:43,620
+       Document outline.
+       把左边栏关掉
+
+993
+00:44:43,622 --> 00:44:45,939
+        So what is going
+       to be my strategy?
+       那么,我的策略是什么呢?
+
+994
+00:44:45,940 --> 00:44:48,257
+ Well, my strategy is I'm going
+  to make a perfect grid here.
+  我的策略就是在这做一个完美的网格
+
+995
+00:44:48,260 --> 00:44:52,195
+ So, I almost have one, except
+ for there's one missing here.
+ 这其实已经是一个差不多得了,不过还缺一个
+
+996
+00:44:52,197 --> 00:44:54,897
+ So I'm actually going to take
+  a button, copy and paste it.
+  我复制一个按钮,然后粘贴在这里
+
+997
+00:44:54,899 --> 00:44:59,167
+     Okay, just kind of be
+ a dummy button here actually.
+ 把这个当做一个占位按钮就行了
+
+998
+00:44:59,169 --> 00:45:00,969
+         With no title.
+         不用添加任何标题
+
+999
+00:45:00,970 --> 00:45:02,770
+ I'm going to right click on it
+  also because I don't want it
+  然后右键单击这个按钮,因为我不想让它
+
+1000
+00:45:02,773 --> 00:45:04,939
+sending appendage or anything else, So
+和controller里的任何事件或者属性关联
+
+1001
+00:45:04,941 --> 00:45:06,841
+its not going to send any messages.
+现在它就不会发送任何消息了
+
+1002
+00:45:06,843 --> 00:45:09,309
+But it's just a dummy, so I'm kind of using.
+但是,现在我得费点
+
+1003
+00:45:09,311 --> 00:45:12,245
+A little bit of brains over brawn here to do
+脑筋来思考下这里的布局
+
+1004
+00:45:12,247 --> 00:45:13,680
+this perfect grid.
+这个完美的网格布局
+
+1005
+00:45:13,682 --> 00:45:16,916
+Now if I have this perfect grid, then if I had a rule
+现在我已经有了这个网格,接下来我需要一些规则
+
+1006
+00:45:16,918 --> 00:45:20,720
+where all these buttons had to be the same size, and they all
+例如,这些按钮需要相同的尺寸
+
+1007
+00:45:20,722 --> 00:45:24,857
+had the same spacing between their neighbors, not just.
+所有的按钮都要和他相邻的按钮
+
+1008
+00:45:24,859 --> 00:45:28,160
+Between each other but the same spacing to this edge and
+有相同的间隔,还要和这个边界
+
+1009
+00:45:28,162 --> 00:45:30,929
+the same spacing to this top edge.
+或者顶部有相同的间隔
+
+1010
+00:45:30,931 --> 00:45:33,631
+Okay, if I had a rule like that then they would get
+那么,如果我有这么一个规则,那么
+
+1011
+00:45:33,633 --> 00:45:36,434
+big and of course the spacing is facing from this edge
+我们的按钮自然就会变大并且
+
+1012
+00:45:36,436 --> 00:45:38,035
+to edge and this edge to this edge.
+与四边有相同的间距
+
+1013
+00:45:38,037 --> 00:45:41,304
+If it was all the exactly the same, which I'll make it be
+
+1014
+00:45:41,306 --> 00:45:44,708
+whatever this is, whatever the dash for the lines gave me.
+
+1015
+00:45:44,710 --> 00:45:47,443
+If that was the same then they would all have to spread out.
+如果是一样的话，他们将都延伸
+
+1016
+00:45:48,479 --> 00:45:50,179
+Okay, they'd get bigger but
+Okay，他们将会变大但是
+
+1017
+00:45:50,180 --> 00:45:51,880
+they'd all stay the same size because I'm going to
+他们都会保持一样的大小，因为
+
+1018
+00:45:51,882 --> 00:45:54,516
+make a rule that they have to be the same size.
+我将制定一个规则来使他们保持一样的大小
+
+1019
+00:45:54,518 --> 00:45:56,317
+But they would move out to this edge so
+这些按钮将移到这边
+
+1020
+00:45:56,319 --> 00:46:00,121
+that this nearest neighbor would be the same, you know,
+并且近邻保持一样距离
+
+1021
+00:46:00,123 --> 00:46:02,322
+this distance would be the same as this distance.
+这个间距将和这个间距一样
+
+1022
+00:46:02,324 --> 00:46:05,092
+So that's my strategy, I'm going to try to do that.
+这就是我的想法，我们就试着来做下吧
+
+1023
+00:46:05,094 --> 00:46:06,760
+Now to make that work,
+现在就来做
+
+1024
+00:46:06,762 --> 00:46:09,128
+all these buttons need to know who their nearest neighbor is.
+所有这些按钮需要知道他们的近邻是谁
+
+1025
+00:46:09,130 --> 00:46:11,564
+Well, these all know their nearest neighbor here,
+好，这些都知道他们的近邻
+
+1026
+00:46:11,566 --> 00:46:13,999
+the other buttons, because I made sure I used dashed
+其他按钮,当我拖拽他们时
+
+1027
+00:46:14,001 --> 00:46:17,035
+blue lines when I dragged them in there.
+确保使用的蓝色虚线
+
+1028
+00:46:17,037 --> 00:46:18,303
+So, that's what kind of
+
+1029
+00:46:18,305 --> 00:46:19,904
+teaches them their nearest neighbor.
+
+1030
+00:46:19,906 --> 00:46:22,573
+And I'm also going to make sure that the entire grid
+我们也要确保整个grid
+
+1031
+00:46:22,575 --> 00:46:25,442
+knows that the left edge and
+知道它的左边距
+
+1032
+00:46:25,444 --> 00:46:29,046
+just under the label there, our nearest neighbor.
+并且位于label下面
+
+1033
+00:46:29,048 --> 00:46:30,447
+So now it knows on the top,
+所以，在顶部它知道
+
+1034
+00:46:30,449 --> 00:46:32,348
+the nearest neighbor is the label, and
+他的近邻是label，并且
+
+1035
+00:46:32,350 --> 00:46:34,383
+on the left is this edge.
+左边是edge
+
+1036
+00:46:34,385 --> 00:46:37,386
+And it's going to pick this edge as
+为这些按钮和底部边距
+
+1037
+00:46:37,388 --> 00:46:39,888
+the nearest neighbor for these buttons and the bottom edge,
+要选择这个边距作为近邻
+
+1038
+00:46:39,890 --> 00:46:41,356
+cuz that's all there is and
+这儿将没有其他的
+
+1039
+00:46:41,357 --> 00:46:42,823
+nothing else out here that's gonna become,
+那将会成为仅有的近邻
+
+1040
+00:46:42,826 --> 00:46:45,326
+that's the only neighbor there is, it's gonna pick those.
+就会选择那些
+
+1041
+00:46:47,263 --> 00:46:48,962
+So now that I've used my dash for
+那么，现在我已经使用这些虚线
+
+1042
+00:46:48,964 --> 00:46:51,898
+the lines it makes this all quite easy.
+这将变的很容易
+
+1043
+00:46:51,900 --> 00:46:53,866
+Now, if you don't use the dash for the lines, or
+如果你不使用这些虚线
+
+1044
+00:46:53,868 --> 00:46:56,602
+if you make some mistakes then it's not going to work.
+或者你做错了什么，它就不会工作
+
+1045
+00:46:56,604 --> 00:47:00,305
+This strategy won't work and I've made doing this part of
+我做这部分演示
+
+1046
+00:47:00,307 --> 00:47:03,809
+this demonstration be extra credit.
+是额外的
+
+1047
+00:47:03,811 --> 00:47:06,044
+And so if you can't get it, don't worry about it too much,
+因此，如果你不能做到，也不必太担心
+
+1048
+00:47:06,046 --> 00:47:09,247
+just keep all your buttons in the upper left corner here
+只需保持你所有的按钮在左上角
+
+1049
+00:47:09,249 --> 00:47:11,199
+and that's fine.
+这就好了
+
+1050
+00:47:11,200 --> 00:47:13,150
+But if you want to give this a try, the key is to
+如果你想尝试一下
+
+1051
+00:47:13,152 --> 00:47:15,753
+use the dash lines to make the perfect grid.
+重点是使用虚线保证表格完美
+
+1052
+00:47:15,755 --> 00:47:18,822
+Make sure that you set the nearest neighbors here by
+在两侧通过拖拽整个表格使蓝色线条显示
+
+1053
+00:47:18,824 --> 00:47:23,793
+dragging the whole grid to make blue lines appear on the sides.
+来确保你设置的近邻间距
+
+1055
+00:47:23,795 --> 00:47:26,962
+And then, we are going to set these rules in bulk and
+然后，我们将设置这些规则
+
+1056
+00:47:26,964 --> 00:47:29,965
+we do that with these buttons down here.
+我们可以用下面的这些按钮
+
+1057
+00:47:29,966 --> 00:47:32,967
+So there's this button right here the left most button and
+在最左边的这个按钮
+
+1058
+00:47:32,969 --> 00:47:36,337
+it let's you set things like lining up leading edges or
+它可以设置左边对齐、
+
+1059
+00:47:36,339 --> 00:47:37,872
+the tops or the centers.
+上边对齐或者居中
+
+1060
+00:47:37,874 --> 00:47:40,174
+And you could imagine there might be a way to do this by
+也许你能想到一种方法可以做到这点
+
+1061
+00:47:40,176 --> 00:47:42,542
+doing that but I am not going to use that strategy.
+但是我们不使用这种方法
+
+1062
+00:47:42,544 --> 00:47:45,045
+My strategy is just make them the same size and
+我的方法就是让他们大小一样
+
+1063
+00:47:45,047 --> 00:47:48,447
+make the space in between them, be the same.
+并且他们之间的间距也一样
+
+1064
+00:47:49,617 --> 00:47:51,450
+But, I bet there's probably a way to do it by
+但是，我敢打赌，也许通过中点的方式
+
+1065
+00:47:51,452 --> 00:47:54,919
+lining up their centers, or something like that, too.
+或者类似的方式也可以做到
+
+1066
+00:47:54,921 --> 00:47:56,921
+So I'm not going to use this one.
+因此，我不打算使用这一个
+
+1067
+00:47:56,923 --> 00:47:59,357
+The next one over,
+下一个
+
+1068
+00:47:59,358 --> 00:48:01,792
+right here, is the one that has the things I want.
+这里就有我想要的东西
+
+1069
+00:48:01,794 --> 00:48:04,094
+And so you can see that it'll ask you to
+正如你所看见的，它会让你选择
+
+1070
+00:48:04,096 --> 00:48:06,196
+make all the buttons equal widths and heights.
+是否让所有按钮的宽度相等、高度相等
+
+1071
+00:48:06,198 --> 00:48:07,464
+Okay, not width and
+Okay，没有勾选的这项
+
+1072
+00:48:07,466 --> 00:48:09,832
+height, that fixes them at a certain width and
+用来修改成某个特定的宽度和高度
+
+1073
+00:48:09,834 --> 00:48:12,401
+height, this means that there,they can be any width and
+这里的意思是，宽度和高度可以是任何你想要的值
+
+1074
+00:48:12,403 --> 00:48:14,803
+height they want, but they all have to be the same width and
+但是他们必须是相等的宽度和相等的高度
+
+1075
+00:48:14,805 --> 00:48:16,938
+height all these buttons.
+所有的这些按钮
+
+1076
+00:48:16,940 --> 00:48:18,840
+Of course I had these all selected by the way, if you
+当然，我把这些按钮都选中了
+
+1077
+00:48:18,842 --> 00:48:20,842
+don't have them selected it doesn't make any sense.
+如果你没选中那就没有意义
+
+1078
+00:48:22,011 --> 00:48:23,711
+And then up here, you can see there is spacing to
+然后在这里，你可以看到这是一个spacing to
+
+1079
+00:48:23,713 --> 00:48:25,679
+nearest neighbor, so this is where I am going to set
+nearest neighbor面板，我们把这些
+
+1080
+00:48:25,681 --> 00:48:29,716
+that spacing between all these, to be the same.
+按钮之间的间距设为一样
+
+1081
+00:48:29,718 --> 00:48:31,417
+And you can see that it's put eight here.
+正如你所看到的，我这里设置为8
+
+1082
+00:48:31,419 --> 00:48:33,585
+That's because when I did the dash lines
+这是因为当我使用虚线
+
+1083
+00:48:35,022 --> 00:48:39,323
+to the top eight seems to be kind of a standard number of
+每个元素之间都是一种标准的数字
+
+1084
+00:48:39,325 --> 00:48:42,727
+points between elements.
+
+1085
+00:48:42,729 --> 00:48:45,429
+These are all multiple because some of these buttons,
+这里所有的multiple，因为这些相同的按钮
+
+1086
+00:48:45,431 --> 00:48:48,432
+their nearest neighbor is way over here and it's huge.
+他们的近邻是在这里，这是巨大的
+
+1087
+00:48:48,434 --> 00:48:50,250
+All right.
+All right.
+
+1088
+00:48:50,251 --> 00:48:52,067
+The bottom or their right.
+底部或者右边
+
+1089
+00:48:52,070 --> 00:48:55,838
+But all these buttons,the thing on top,
+所有这些按钮，上面的内容
+
+1090
+00:48:55,840 --> 00:48:58,274
+whether it's another button or whether it's this label,
+无论是另一个按钮或者label
+
+1091
+00:48:58,276 --> 00:49:01,343
+all of them happen to be this eight points right here.
+这里他们的间距都会变成8
+
+1092
+00:49:01,345 --> 00:49:03,178
+So I want all of these to be eight.
+所以我将这些都设置为8
+
+1093
+00:49:03,180 --> 00:49:07,482
+So I'm just going to turn this bar on right here, which says,
+在这里我们只打开这一栏
+
+1094
+00:49:07,484 --> 00:49:11,018
+yes please enforce, and make the rule that all of
+yes，请确保这些所有
+
+1095
+00:49:11,020 --> 00:49:15,255
+these are 8 points from their nearest neighbor to the top.
+按钮的顶部距离为8
+
+1096
+00:49:15,257 --> 00:49:18,124
+And also, 8 to the left,8 to the right, and
+同样，左边间距为8，右边间距为8
+
+1097
+00:49:18,126 --> 00:49:19,459
+8 to the bottom.
+底部间距也为8
+
+1098
+00:49:19,461 --> 00:49:21,060
+Really wanna make sure these beams are on,
+确保这里是打开的
+
+1099
+00:49:21,062 --> 00:49:23,362
+if these beams are off,even if there's a number here,
+如果他是关闭的，即使这里有数字
+
+1100
+00:49:23,364 --> 00:49:24,963
+then it's not gonna add this rule.
+也不会添加约束的
+
+1101
+00:49:24,965 --> 00:49:26,998
+ So we wanted to add this rule.·
+    我们想要添加这些规则。
+
+1102
+00:49:27,000 --> 00:49:30,101
+       So this adds up to
+      87 different rules.
+    所以总共有 87 个不同的规则。
+
+1103
+00:49:30,103 --> 00:49:32,554
+   All these equal widths and
+    所有相同宽度，相同高度
+
+1104
+00:49:32,555 --> 00:49:35,006
+    heights and all these So
+ if you don't have 87 in here,
+     以及这些，如果你的规则的数目不是87
+
+1105
+00:49:35,008 --> 00:49:36,974
+    if it says a hundred and
+           something,
+    假如是100或者其它，
+
+1106
+00:49:36,976 --> 00:49:39,209
+    probably you don't have
+   everything lined up right.
+    那么很可能你没有将所有东西正确连接起来
+
+1107
+00:49:39,211 --> 00:49:43,279
+  It only takes 87 constraints
+  to express all these rules.
+    只需要87个限制就可以表示这些排列规则。
+
+1108
+00:49:44,482 --> 00:49:45,547
+           All right.
+    好
+
+1109
+00:49:45,549 --> 00:49:48,316
+     Now, when I click this
+    Add 87 Constraints it's
+    现在，如果我按下“Add 87 Constraints”
+
+1110
+00:49:48,318 --> 00:49:51,886
+    going to add these rules
+   to all these buttons, and
+    就会在这些按钮上添加这些规则，
+
+1111
+00:49:51,888 --> 00:49:52,787
+      watch what happens.
+看看会发生什么。
+
+1112
+00:49:54,790 --> 00:49:56,723
+    So, I get all kinds of,
+    嗯，我得到了很多的（线）
+
+1113
+00:49:56,725 --> 00:49:59,392
+     first these blue lines
+   are showing me the rules.
+    首先这些蓝色的线表示规则。
+
+1114
+00:49:59,394 --> 00:50:01,094
+             'Kay?
+   A lot them are saying here
+    许多蓝色的线代表这里
+
+1115
+00:50:01,096 --> 00:50:03,062
+     that things are equal
+      widths and heights.
+的按钮都是相同大小的（长，宽）
+
+1116
+00:50:03,064 --> 00:50:05,531
+       So these are what
+      equals rules means.
+    这就是 equals 规则的要求。
+
+1117
+00:50:05,533 --> 00:50:08,700
+  But there's also tiny little
+     I beams right up here.
+  这里还有一些小的 I 形状的线。
+
+
+1118
+00:50:08,702 --> 00:50:13,671
+  That are showing this basing
+    to nearest neighbor, and
+  I 行的线表示以最近的物体为基准
+
+1119
+00:50:13,673 --> 00:50:16,073
+  also like there's a yellow,
+          yellow here.
+  这里还有一些黄色的线
+
+1120
+00:50:16,075 --> 00:50:18,409
+          This yellow,
+     remember, means yeah,
+	记住，这些黄色的线代表
+
+1121
+00:50:18,411 --> 00:50:21,044
+ there's constraints on these,
+ but they're not actually where
+	这里虽然有一些约束，
+	但是这些约束本不应该
+
+1122
+00:50:21,046 --> 00:50:23,113
+     they're supposed to be
+     based on those rules.
+	是基于这些规则的。
+
+1123
+00:50:24,049 --> 00:50:27,016
+   So we really want to move
+    them all to be in their
+	我们很需要将这些按钮，按照这些规则，
+
+1124
+00:50:27,018 --> 00:50:29,852
+      proper spaces based
+        on these rules.
+	移动到合适的地方
+
+1125
+00:50:29,854 --> 00:50:31,753
+    That's what these dashed
+       yellow lines mean.
+	这就是这些黄色的线的意思。
+
+1126
+00:50:31,755 --> 00:50:33,221
+     So we can do the same
+       thing to do that,
+	我们可以按刚开始
+
+1127
+00:50:33,223 --> 00:50:36,224
+  that we did at the beginning
+   with the label on the top
+	处理顶部的 label 那样
+
+1128
+00:50:36,226 --> 00:50:38,225
+       which is go to our
+     document outline here,
+	点击左下角的 document outline 菜单
+
+1129
+00:50:38,227 --> 00:50:39,393
+   in the lower left corner.
+ 
+
+1130
+00:50:39,395 --> 00:50:42,929
+    Okay these are document
+  outline when we last saw it,
+	这些是 UI 文档的缩略图，上一次我们观看时
+
+1131
+00:50:42,931 --> 00:50:45,331
+        it only had this
+      one label in there.
+	只有这一个 label 文档。
+
+1132
+00:50:46,401 --> 00:50:47,700
+      Now we got all these
+         buttons added.
+	现在所有的 button 都添加上来了。
+
+1133
+00:50:47,702 --> 00:50:50,002
+        And you can see
+     they're all selected.
+	而且所有 button 都处于选中状态
+
+1134
+00:50:50,004 --> 00:50:52,304
+   All selected here as well.
+	在这里也处于全部选中的状态。
+
+1135
+00:50:52,306 --> 00:50:54,673
+   And, we've got this little
+     yellow thing up here.
+	这上面有一个黄色的小箭头
+
+1136
+00:50:54,675 --> 00:50:58,643
+   Now, if this is red, okay,
+     if you do all this and
+	如果这里是红色箭头，如果你做了这些操作
+
+1137
+00:50:58,645 --> 00:51:02,747
+  this is red, well that means
+    that you've got not just
+	并且是红色箭头，那就意味着你所添加的
+
+1138
+00:51:02,749 --> 00:51:05,516
+ warnings that your constraints
+ aren't in the right place, but
+	constraints（限制）不仅是警告
+
+1139
+00:51:05,518 --> 00:51:08,452
+   you've got errors, usually
+    conflicting constraints,
+	而且有错误，通常由冲突的 constraints 引起
+
+1140
+00:51:08,454 --> 00:51:11,721
+       where you've asked
+         auto layout to
+	当你让 auto layout 强制
+
+1141
+00:51:11,723 --> 00:51:13,890
+     enforce two rules that
+   conflict with each other.
+	实施两种相互冲突的规则时。
+
+1142
+00:51:13,892 --> 00:51:17,626
+   So if you get to that red,
+   this is not going to work.
+ 所以如果箭头是红色，这些约束就不会正常工作。
+
+1143
+00:51:17,628 --> 00:51:20,295
+ So, you'll want to start over,
+              and
+ 那么，你可能想重新再设置一遍，
+
+1144
+00:51:20,297 --> 00:51:23,432
+ I'll show you in a minute how
+ you can start over if things,
+ 我稍后为大家展示怎么在重新开始，
+
+1145
+00:51:23,434 --> 00:51:26,234
+   or not going your way, but
+ if it's yellow that just means
+如果和你想的不同，黄色箭头
+
+1146
+00:51:26,236 --> 00:51:27,201
+         things were in
+        the wrong place.
+	仅代表有些东西在错误的位置。
+
+1147
+00:51:27,203 --> 00:51:29,136
+         So no problem,
+      we click the yellow.
+	很简单，点击黄色箭头
+
+1148
+00:51:29,138 --> 00:51:30,637
+   Here's all the things that
+    were in the wrong place.
+ 这里是在错误位置的东西。
+
+1149
+00:51:30,639 --> 00:51:31,972
+    This is all the buttons,
+	这是所有的 button
+
+1150
+00:51:31,974 --> 00:51:34,274
+   you can see they highlight
+     as I mouse over them.
+ 你可以看到当鼠标移到按钮上时，对应的按钮高亮
+
+1151
+00:51:34,276 --> 00:51:38,077
+   And you can really pick on
+  any one of them to fix this
+你可以任意选一个来修改
+
+1152
+00:51:38,079 --> 00:51:40,880
+ because there's a nice little
+  switch here called apply to
+因为这里有一个很方便的 switch 代表
+
+1153
+00:51:40,882 --> 00:51:42,047
+   all views and containers.
+ 将修改应用到所有 views（视图）和 containers（容器）
+
+1154
+00:51:42,049 --> 00:51:44,116
+       You don't have to
+     click on each one and
+ 你就不必每一个都点击
+
+1155
+00:51:44,118 --> 00:51:46,985
+    have it to frame update
+      to the proper thing.
+ 使它的 frame 更新到合适的大小。
+
+1156
+00:51:46,987 --> 00:51:50,588
+    You can just click quite
+ obvious in container and it's
+ 你可以很容易的选中复选框
+
+1157
+00:51:50,590 --> 00:51:55,125
+ going to move the frame of all
+  the buttons to fix the fact
+这样就会移动所有 button 的 frame，修改
+
+1158
+00:51:55,127 --> 00:51:57,494
+   that they're in the wrong
+  place based on their rules.
+  那些处于错误位置的
+
+1159
+00:51:57,496 --> 00:51:59,096
+       So let's try that.
+	让我们试试看。
+
+1160
+00:51:59,097 --> 00:52:00,697
+   I'm gonna hit this button
+    here, Fix Misplacement.
+ 我要点击这个按钮，Fix Misplacement
+
+1161
+00:52:01,933 --> 00:52:03,032
+     And it moved them all.
+ 所有的 button 都移动了
+
+1162
+00:52:03,034 --> 00:52:03,966
+    There's no more yellow.
+  没有黄色的警告了
+
+1163
+00:52:03,968 --> 00:52:06,101
+ There's no auto layout issues.
+ 也没有 auto layout 的问题。
+
+1164
+00:52:06,103 --> 00:52:07,435
+             Okay.
+      All looks good here.
+ 看起来不错。
+
+1165
+00:52:07,437 --> 00:52:09,070
+        We can close our
+       document outline.
+   可以关闭 document outline 视图了。
+
+1166
+00:52:10,306 --> 00:52:13,440
+    We zoom out, we can see,
+  wow, it spread them all out.
+ 将视图缩小，可以看到按钮充满了整个视图。
+
+1167
+00:52:13,442 --> 00:52:14,675
+             Okay?
+            Because,
+
+1168
+00:52:14,677 --> 00:52:18,444
+       maybe it's obeying
+     those rules I gave it.
+ 因为他们都遵守我定下的规则。
+
+1169
+00:52:18,446 --> 00:52:20,079
+             Okay?
+
+1170
+00:52:20,080 --> 00:52:21,713
+    So let's now run this on
+     some devices here and
+  现在，试试在不同的设备上运行
+
+1171
+00:52:21,716 --> 00:52:23,182
+   see what this looks like.
+  看看结果会怎样
+
+1172
+00:52:26,220 --> 00:52:30,221
+  So turn off on an iPhone 6,
+ which is a pretty tall device.
+  在 特别长的 iPhone 6 上
+
+1173
+00:52:30,223 --> 00:52:32,790
+      It's made, you know,
+     kind of tall and thin.
+   iPhone 6 做的既长又窄。
+
+1174
+00:52:32,792 --> 00:52:35,459
+        So if this still
+       works fine enter. 
+	一切正常。
+
+1175
+00:52:35,461 --> 00:52:39,763
+   69874 times 5 divide maybe
+   square root something like
+ 输入 69874 乘以 5 除以，或是开方
+
+1176
+00:52:39,765 --> 00:52:44,266
+       that, it all seems
+         to be working.
+    看起来运行正常。
+
+1177
+00:52:44,268 --> 00:52:48,804
+  Now, not only is it working
+  here in this portrait mode,
+  不但在设备直立时工作正常
+
+1178
+00:52:48,806 --> 00:52:51,023
+         tall and thin.
+   既长又窄
+
+1179
+00:52:51,024 --> 00:52:53,241
+ But if we go over here to this
+   we can rotate the device.
+  如果我们从这里旋转设备。
+
+1180
+00:52:54,277 --> 00:52:55,843
+            Okay, so
+  I'm going to rotate left and
+   我要通过 command 键来向左，向右
+
+1181
+00:52:55,845 --> 00:52:58,979
+   right and use the command
+        keys to do this.
+ 移动设备
+
+1182
+00:52:58,981 --> 00:53:02,449
+   And we rotate it right and
+           you see it
+   设备向右转可以看到
+
+1183
+00:53:02,451 --> 00:53:08,220
+   may the buttons spread out
+    to this new location and
+   buttons 均匀分布到新的位置
+
+1184
+00:53:09,190 --> 00:53:13,491
+    we can rotate back using
+     the command keys here.
+    可以用 command 键将设备转回来。
+
+1185
+00:53:14,627 --> 00:53:17,461
+      And it looks good in
+      either orientation.
+   可以看到，在两个方向上看起来都不错。
+
+1186
+00:53:17,463 --> 00:53:21,465
+ And in fact, it can look good
+   on other devices as well.
+ 实际上，在其他设备上同样看起来很棒
+
+1187
+00:53:21,467 --> 00:53:23,066
+   So let's go over here and
+  点击这里
+
+1188
+00:53:23,068 --> 00:53:26,235
+   instead of doing iPhone 6,
+ let's try it on an iPhone 4S.
+  这次不用 iPhone 6，试一下 iPhone 4S的效果
+
+1189
+00:53:26,237 --> 00:53:27,937
+            Okay so,
+
+1190
+00:53:27,939 --> 00:53:32,407
+  gonna switch the simulation
+     here, let's run that.
+  切换模拟器，运行
+
+1191
+00:53:34,077 --> 00:53:37,345
+   Now the iPhone 4s, you can
+    see is a little shorter,
+   现在时 iPhone 4s，它看起来短一点
+
+1192
+00:53:37,347 --> 00:53:39,280
+    it's not quite as tall.
+  并没有那么长。
+   
+1193
+00:53:39,282 --> 00:53:42,416
+   A little lower resolution,
+           obviously.
+   很明显，分辨率也有些低
+
+1194
+00:53:42,418 --> 00:53:46,986
+ But it relayed out the buttons
+ to look good in that case too.
+  但是在这种情况下也将 buttons 摆放的很棒。
+
+1195
+00:53:46,988 --> 00:53:52,558
+    9 times 9, divided by 8,
+    square root, et cetera.
+    9 × 9， 除以 8 ，开方，等等。
+
+1196
+00:53:52,560 --> 00:53:56,995
+      And same thing here
+       we can rotate and
+   同样我们可以旋转
+
+1197
+00:53:56,997 --> 00:54:00,131
+   look at this one as well.
+   这样看起来也不错。
+
+1198
+00:54:00,133 --> 00:54:03,067
+             Okay.
+
+1199
+00:54:03,069 --> 00:54:05,019
+          All righty.
+        好啦。
+
+1200
+00:54:05,020 --> 00:54:06,970
+ So the last thing I just want
+  to talk about briefly is if
+  最后我相简单的说下
+
+1201
+00:54:06,973 --> 00:54:10,207
+ you try this extra credit and
+    it doesn't work for you.
+你尝试得到额外加分，这是行不通的。
+
+1202
+00:54:10,209 --> 00:54:16,413
+   Get all messed up, you can
+ kind of start over by clicking
+打乱所有限制，你可以通过点击
+
+1203
+00:54:16,415 --> 00:54:21,450
+  on this and using the third
+ button over here on the right.
+	这个位置并使用右边第三个按钮重新开始。
+
+1204
+00:54:21,452 --> 00:54:23,852
+     And this allows you to
+   reset your constraints and
+这里允许你重置你的约束，
+
+1205
+00:54:23,854 --> 00:54:26,688
+  you can see the top section
+  here is the selected views.
+你能看到上面的部分是被选中的视图。
+
+1206
+00:54:26,690 --> 00:54:27,922
+        I don't have any
+        selected here so
+我这里没有任何选中的视图，因此
+
+1207
+00:54:27,924 --> 00:54:29,257
+        this wouldn't do
+      anything right now.
+现在这里不能做任何操作。
+
+1208
+00:54:29,259 --> 00:54:31,659
+     But the bottom is all
+     views in container and
+但是下面的部分是容器内的所有视图
+
+1209
+00:54:31,661 --> 00:54:34,161
+    I kinda recommend going
+     down here to all views
+我推荐到下面所有视图
+
+1210
+00:54:34,163 --> 00:54:37,164
+     container and clearing
+   the constraints entirely.
+容器内并清除所有约束。
+
+1211
+00:54:37,166 --> 00:54:40,000
+       Reset to suggested
+    constraints and try and
+重置到建议的约束条件, 
+
+1212
+00:54:40,002 --> 00:54:44,437
+ make some sense of your dashed
+ lines but if it's not working,
+但如果不工作，
+
+1213
+00:54:44,439 --> 00:54:47,673
+    you're probably, you're
+  dashed lines are off anyway.
+你很可能，
+
+1214
+00:54:47,675 --> 00:54:49,875
+  So you can just go here and
+因此你仅仅需要到这里
+
+1215
+00:54:49,877 --> 00:54:51,343
+       Clear Constraints,
+    that'll clear them all.
+清除所有约束条件，这将清除所有限制。
+
+1216
+00:54:51,345 --> 00:54:53,211
+     Now that's gonna clear
+   not just your buttons but
+现在不仅仅需要清除你的按钮，而且
+
+1217
+00:54:53,213 --> 00:54:55,880
+        also it's gonna
+       clear your labels.
+需要清除你的标签。
+
+1218
+00:54:55,882 --> 00:54:59,450
+  So you'll have to reposition
+ your label with blue lines and
+所以你必须使用蓝色线条重新放置你的标签并且
+
+1219
+00:54:59,452 --> 00:55:02,953
+    use control drag to say
+    your top space, and, and
+拖拽来确定你上部的空间
+
+1220
+00:55:02,955 --> 00:55:05,388
+   all that stuff, you know?
+所有东西，了解？
+
+1221
+00:55:05,390 --> 00:55:08,458
+   If your buttons are really
+  huge, they got really huge,
+如果你所有按钮确认很大，他们会变得很大，
+
+1222
+00:55:08,460 --> 00:55:10,726
+  but they're not in the right
+ place, you can actually change
+但是他们不能在正确的位置，你可以根据实际情况在工具窗口中调整
+
+1223
+00:55:10,728 --> 00:55:13,595
+  the size of all your buttons
+    in the utilities window.
+你的按钮的大小。
+
+1224
+00:55:14,565 --> 00:55:16,164
+     You can go to the size
+     inspector right here,
+有可以到尺寸查看器这里
+
+1225
+00:55:16,166 --> 00:55:19,467
+    that's this one, you can
+ actually type in the width and
+这个位置你可以输入所期望按钮的实际宽度和
+
+1226
+00:55:19,469 --> 00:55:22,370
+      the height you want
+  the buttons to be, make them
+高度，确保他们
+
+1227
+00:55:22,372 --> 00:55:25,272
+     smaller again, which,
+   you know, maybe 64 by 64.
+再次变小，就像你所知道的那样 可能是 64 x 64
+
+1228
+00:55:25,274 --> 00:55:29,376
+ That might make them easier to
+ re-drag them into position so
+这可以是他们变得容易再次拖拽到适当位置，
+
+1229
+00:55:29,378 --> 00:55:31,210
+  the blue lines are working.
+蓝色线条正常工作。
+
+1230
+00:55:32,313 --> 00:55:36,015
+   And don't forget the very
+ important blue line dragging,
+不要忘记这个很重要的蓝色线条的拖拽，
+
+1231
+00:55:36,017 --> 00:55:38,283
+   which is you want to take
+  the whole grid and drag it,
+你想要拖拽挣个格栏，
+
+1232
+00:55:38,285 --> 00:55:40,285
+      so that it's sitting
+     underneath your label.
+以至于它在你标签下方。
+
+1233
+00:55:41,654 --> 00:55:44,021
+ If you have problems dragging
+ the whole grid underneath your
+如果你拖拽你标签下面的整个格栏有问题，
+
+1234
+00:55:44,023 --> 00:55:46,490
+     label, sometimes it's
+     a good idea, clear all
+通常清除所有约束限制是个好的做法。
+
+1235
+00:55:46,492 --> 00:55:48,892
+ your constraints, kind of move
+  your buttons out of the way,
+移动你的按钮到远处，
+
+1236
+00:55:48,894 --> 00:55:51,761
+  just kind of move them down
+  to the bottom here and then
+仅仅移动他们到底部，然后
+
+1237
+00:55:51,763 --> 00:55:56,132
+ just for your label, do reset
+  to suggest your constraint.
+对你的标签，做重置到建议的约束条件。
+
+1238
+00:55:56,134 --> 00:55:57,499
+   This top one selected view
+最上面那个被选中的视图，
+
+1239
+00:55:57,501 --> 00:56:01,036
+  Rest Suggestion Constraints
+     cuz that will work for
+重置建议的约束条件英文这将对你的标签起作用
+
+1240
+00:56:01,038 --> 00:56:03,204
+    the label if you move it
+    into position as long as
+你可以移动他倒适当位置只要
+
+1241
+00:56:03,206 --> 00:56:06,407
+  the buttons aren't too close
+ and it thinks that, you know.
+按钮们不要靠的太近。
+
+1242
+00:56:06,409 --> 00:56:08,042
+     Those buttons are near
+    neighbors or something.
+这些按钮是进邻或者其他什么
+
+1243
+00:56:09,145 --> 00:56:11,945
+ And sometimes resetting it to
+  suggest the constraints will
+一些情况，重置到推荐约束
+
+1244
+00:56:11,947 --> 00:56:17,483
+  make it so that, that bottom
+   edge of your UI label will
+能做到，UI 标签下边缘是
+
+
+1245
+00:56:17,485 --> 00:56:21,253
+  be attainable when you drag
+  your buttons into position.
+可以达到的，当你拖拽一个按钮到一个位置。
+
+
+1246
+00:56:22,289 --> 00:56:23,538
+       But again, not to
+但是，不要
+
+1247
+00:56:23,539 --> 00:56:24,788
+      worry too much about
+    this auto layout stuff.
+太担心界面自动布局的内容。
+
+1248
+00:56:25,825 --> 00:56:27,158
+       It's extra credit
+       in assignment one.
+
+1249
+00:56:27,160 --> 00:56:29,493
+   It's not going to be extra
+   credit in assignment two,
+
+1250
+00:56:29,495 --> 00:56:31,728
+      so you're eventually
+    going to have to do it.
+最终你讲会来处理它。
+
+
+1251
+00:56:31,730 --> 00:56:34,197
+  I'm going to be giving a big
+ lecture on this in a couple of
+我讲话好几个星期给你好好讲一下，
+
+
+1252
+00:56:34,199 --> 00:56:35,465
+     weeks, on auto layout.
+自动布局。
+
+1253
+00:56:35,467 --> 00:56:38,968
+   I've really just shown you
+  just kind of what it can do,
+我仅仅向你们展示了它的小小一角。
+
+1254
+00:56:38,970 --> 00:56:41,770
+        I haven't really
+      taught you how to do
+我以前没有教你们如何设置
+
+1255
+00:56:41,772 --> 00:56:43,338
+   auto layout in particular.
+自动布局。
+
+1256
+00:56:44,374 --> 00:56:48,409
+ Auto layout is very important
+    because we work in this
+自动布局十分重要因为我们
+
+
+1257
+00:56:48,411 --> 00:56:50,745
+        square area and
+在这个方框被做工作。
+
+1258
+00:56:50,746 --> 00:56:53,080
+ we want our UIs to work on all
+  kinds of different devices.
+我想要我们的界面能再各种不同设备上正常工作。
+
+1259
+00:56:53,082 --> 00:56:54,614
+        That's why we're
+    starting off in the very
+这也是我们用它
+
+1260
+00:56:55,584 --> 00:56:57,717
+        start with some
+      experience with it.
+作为入门的原因。
+
+1261
+00:56:59,820 --> 00:57:00,686
+           All right.
+好了
+
+1262
+00:57:00,688 --> 00:57:02,520
+         So that is it.
+就这样。
+
+1263
+00:57:02,522 --> 00:57:06,190
+       Now, later today,
+  I'm gonna, in this lecture,
+稍后，这次课中
+
+
+1264
+00:57:06,192 --> 00:57:10,828
+   I'm gonna give you a talk
+   about this design paradigm
+我将要给你讲关于设计模式
+
+1265
+00:57:10,830 --> 00:57:14,197
+ called model-view-controller,
+  and we actually designed our
+叫做 模型-视图-控制器，事实上我们设计的
+
+1266
+00:57:14,199 --> 00:57:17,300
+   calculator kind of poorly,
+         because all of
+计算器很差，因为这里的所有
+
+1267
+00:57:17,302 --> 00:57:20,436
+    this code here is really
+     nothing to do with UI.
+代码和界面没有任何关系
+
+1268
+00:57:20,438 --> 00:57:26,141
+ This is all calculator brain,
+    calculator engine code.
+这是所有计算器的核心，计算器的引擎代码。
+
+1269
+00:57:26,143 --> 00:57:28,143
+    And this really wants to
+  meet a different object and
+这里需要接触一个不同的对象，
+
+1270
+00:57:28,145 --> 00:57:30,211
+ that's what NBC is all about.
+这也就是BNC
+
+1271
+00:57:30,213 --> 00:57:33,648
+   And so I'll give a little
+  talk about NBC later today.
+今天稍后我将讲关于NBC的内容。
+
+1272
+00:57:33,650 --> 00:57:36,650
+   And then on Monday, we're
+  going to fix our calculator
+然后再周一，我们将要解决我们计算器的问题，
+
+1273
+00:57:36,652 --> 00:57:41,855
+  to obey MVC and be a proper
+   citizen in the iOS world,
+达到遵循MVC架构，并成为iOS 世界里的一员，
+
+1274
+00:57:41,857 --> 00:57:45,258
+  where all apps need to obey
+  model V controller paradigm.
+在这里所有的程序都需要遵循MVC模式。
+
+1275
+00:57:46,294 --> 00:57:49,261
+      >> So let's try and
+ understand for, I mean half of
+来让我们尝试并理解，据你们说过半的人
+
+1276
+00:57:49,263 --> 00:57:52,764
+   you said that you already
+   know MVC or you've seen it
+知道MVC或者在其他
+
+1277
+00:57:52,766 --> 00:57:54,499
+   somewhere else so, this is
+   going to be mostly review.
+地方听过它，因此这里将是复习。
+
+1278
+00:57:54,501 --> 00:57:57,769
+   But the other half of you,
+  this will hopefully give you
+另外一半人，这里将给你
+
+1279
+00:57:57,771 --> 00:58:00,705
+        an idea of what
+       MVC is all about.
+一个MVC相关的概念。
+
+1280
+00:58:00,707 --> 00:58:04,975
+      So MVC is basically
+ a mechanism where we divide up
+ MVC 是一个基本机制，用于分类
+
+1281
+00:58:04,977 --> 00:58:09,379
+     all the objects in our
+    application into one of
+程序中的所有对象到
+
+1282
+00:58:09,381 --> 00:58:11,180
+       these three camps.
+三个营地中的任意一个
+
+1283
+00:58:11,182 --> 00:58:12,281
+             Okay?
+了解？
+
+1284
+00:58:12,283 --> 00:58:14,182
+      So, the three camps.
+三个营地 （或者叫三层）
+
+1285
+00:58:14,184 --> 00:58:15,884
+       On the left there
+       you see the model.
+在左边你看到的是模型
+
+
+1286
+00:58:15,886 --> 00:58:19,220
+ So, the model camp is gonna be
+ all the objects that are what
+模型层是那些对象的集合，这些对象是
+
+1287
+00:58:19,222 --> 00:58:21,355
+     your application does.
+是程序的行为
+
+
+1288
+00:58:21,357 --> 00:58:24,858
+  So, for our calculator its,
+         it calculates.
+在我们计算器中，计算是模型
+
+
+1289
+00:58:24,860 --> 00:58:26,794
+   Okay, that's what it does.
+那是计算器要做的。
+
+
+1290
+00:58:26,795 --> 00:58:28,729
+  So, all the parts what we're
+  doing perform operation, and
+我们用于做执行操作的部分，和
+
+1291
+00:58:28,731 --> 00:58:32,098
+   all that stuff, that's all
+   kind of calculator stuff.
+相关材料，也就是计算器相关的内容。
+
+1292
+00:58:32,100 --> 00:58:35,935
+ That should be in a calculator
+     object somewhere else,
+那些应属于计算器对象
+
+1293
+00:58:35,937 --> 00:58:37,569
+       it shouldn't be in
+        our controller.
+不应该在我们的控制器中。
+
+1294
+00:58:38,639 --> 00:58:43,841
+  And then the second camp is
+ the controller, the controller
+第二个阵营叫做控制器，控制器
+
+1295
+00:58:43,843 --> 00:58:48,178
+     controls how the model
+    is presented on screen.
+控制模型是如何显示在屏幕上。
+
+1296
+00:58:48,180 --> 00:58:51,348
+  And the view is the minions,
+        the classes that
+视图是控制器要
+
+1297
+00:58:51,350 --> 00:58:52,916
+    the controller is going
+       to use are kind of
+用到的的附属类，有点类似于
+
+1298
+00:58:52,918 --> 00:58:55,485
+ like the the building blocks,
+       the Lincoln Logs,
+
+1299
+00:58:55,487 --> 00:58:57,520
+      I know maybe that's
+    before all of your time.
+
+1300
+00:58:57,522 --> 00:59:00,289
+  But, you know, these things
+ we're gong to do to build our
+但是，这些事情是我们构建我们界面
+
+
+1301
+00:59:00,291 --> 00:59:02,524
+       UI, we're going to
+        use in the view.
+要做的事，我们在视图中要用到它。
+
+1302
+00:59:02,526 --> 00:59:06,127
+   So the stuff that's in the
+ view is pretty generic, okay,
+在视图中的内容是相当通用的
+
+
+1303
+00:59:06,129 --> 00:59:07,795
+      generic UI elements.
+的界面元素
+
+1304
+00:59:07,797 --> 00:59:10,030
+  The stuff in the controller
+      is very specific to
+在控制器中的内容是明确的，指出
+
+
+1305
+00:59:10,032 --> 00:59:11,498
+       how your UI works.
+	你的界面元素是如何工作的。
+
+1306
+00:59:11,500 --> 00:59:13,600
+   And the stuff in the model
+  is completely independent of
+模型中的内容完全独立于
+
+1307
+00:59:13,602 --> 00:59:15,234
+       how your UI works.
+界面如何工作的。
+
+1308
+00:59:15,236 --> 00:59:15,801
+             Okay?
+懂吗？
+
+1309
+00:59:15,803 --> 00:59:22,007
+  So doing MVC right is about
+  knowing where things go but
+因此正确的MVC不仅仅知道内容的存放位置而且
+
+1310
+00:59:22,009 --> 00:59:25,543
+ also about how to communicate
+   between these three camps.
+知道三层（camps）是如何通讯的。
+
+1311
+00:59:25,545 --> 00:59:27,412
+     And so we can try and
+         summarize how
+我们来尝试总结，
+
+1312
+00:59:27,414 --> 00:59:29,113
+    the communication works
+    between these camps, and
+三层之间是如何通讯的，
+
+1313
+00:59:29,115 --> 00:59:32,182
+  I've used road markings, you
+ see the double yellow line and
+我使用路面标线做讲解，你看到的黄色双线和
+
+1314
+00:59:32,184 --> 00:59:33,350
+  then the dashed white line.
+白色虚线。
+
+1315
+00:59:33,352 --> 00:59:34,884
+     So that's like you're
+      driving in your car.
+就像你驾驶你的汽车。
+
+1316
+00:59:35,887 --> 00:59:40,356
+  Try to use them as an image
+   for how this communication
+尝试用做以道路标线想象是如何通信的。
+
+1317
+00:59:40,358 --> 00:59:42,090
+  happens, where it's allowed,
+    where it's not allowed.
+哪里是允许通信的，哪里是不被允许的。
+
+1318
+00:59:43,093 --> 00:59:45,693
+      So let's talk about
+   the Controller talking to
+这样，我们描述控制器是如何与
+
+1319
+00:59:45,695 --> 00:59:47,294
+           the Model.
+模型
+
+1320
+00:59:47,296 --> 00:59:50,097
+  Going from that side of the
+ road over to the Model side is
+从控制器这侧到模型(Model)这侧是
+
+
+1321
+00:59:50,099 --> 00:59:51,565
+      a dashed white line,
+        in other words,
+白色虚线，换句话说，
+
+1322
+00:59:51,567 --> 00:59:52,799
+       you can head right
+         across there.
+你可以轧过虚线到另一侧。
+
+1323
+00:59:52,801 --> 00:59:54,267
+      You probably want to
+    look before you go, but
+你可能需要在你过对面之前观察一下，但是
+
+1324
+00:59:54,269 --> 00:59:56,603
+ you can go right across, okay?
+你可以正常穿越，对吗？
+
+1325
+00:59:56,604 --> 00:59:58,938
+   The controller has to know
+  everything about the model,
+控制器必须了解Model 的一切行为，
+
+1326
+00:59:58,940 --> 01:00:01,740
+  and it has to have complete
+       ability to talk to
+而且必须完全有能力和
+
+1327
+01:00:01,742 --> 01:00:04,776
+   the model, use its public
+    API as much as it wants
+模型（Model）通信，根据控制器需要，使用模型的开放API
+
+1328
+01:00:04,778 --> 01:00:08,313
+  because the controller's job
+   is to present the model to
+因为控制器的职责就是展示模型（Model）给
+
+1329
+01:00:08,315 --> 01:00:10,848
+       the user using its
+      view as its minions.
+用户，其视图作为它的对象
+
+1330
+01:00:10,850 --> 01:00:12,650
+ So it has to have this access.
+因此你必须有该权限。
+
+1331
+01:00:12,652 --> 01:00:16,319
+ That full, unrestricted access
+ the controller has talking to
+控制器拥有的完全访问权限可以与
+
+
+1332
+01:00:16,321 --> 01:00:17,320
+           the model.
+模型通信。
+
+1333
+01:00:17,322 --> 01:00:18,354
+    This is a one way arrow.
+这是个单向箭头。
+
+1334
+01:00:18,356 --> 01:00:20,289
+          Control, or
+控制器
+
+1335
+01:00:20,290 --> 01:00:22,223
+      one way arrow, from
+  the controller to the model.
+对模型的控制也是单向的。
+
+1336
+01:00:22,226 --> 01:00:25,160
+      And similarly, from
+  the controller to the view,
+类似的，也可以从控制器到视图，
+
+
+1337
+01:00:25,162 --> 01:00:27,095
+       is also unlimited
+         communication,
+也是允许通信的。
+
+
+1338
+01:00:27,097 --> 01:00:28,830
+     because the controller
+       is responsible for
+因为控制器负责通过自身对象
+
+1339
+01:00:28,832 --> 01:00:30,798
+         talking using
+       it's own minions.
+向视图发送指令。
+
+1340
+01:00:30,800 --> 01:00:32,667
+ The view is, the controller's
+         new meaning is
+视图是控制器设计
+
+1341
+01:00:32,669 --> 01:00:35,569
+ to lay out the user interface
+      and all that stuff.
+用户界面的新方式
+
+1342
+01:00:35,571 --> 01:00:37,671
+     So, the controller can
+     do anything it wants.
+因此，控制器可以做任何它想做的事。
+
+
+1343
+01:00:37,673 --> 01:00:39,305
+ I put that little green word,
+            outlet,
+我放置了一个绿色小字Outlet在上面，
+
+1344
+01:00:39,307 --> 01:00:42,809
+ up there because when we have
+   a property of a controller
+因为当我们有一个控制器的属性，
+
+1345
+01:00:42,811 --> 01:00:46,278
+   that points into the view,
+  we call it an outlet, okay?
+该属性指向视图，我们称它为Outlet，懂吗？
+
+1346
+01:00:46,280 --> 01:00:48,213
+   And you're gonna see that
+   in the demo on Wednesday.
+我们周三的演示中将要看到它。
+
+1347
+01:00:48,215 --> 01:00:51,249
+ I'm gonna say, oh let's create
+ an outlet from our controller
+我想说的，让我们创建一个outlet， 从我们的控制器
+
+
+1348
+01:00:51,251 --> 01:00:52,634
+         to our view so
+到我们的视图
+
+1349
+01:00:52,635 --> 01:00:54,018
+    our controller can talk
+    to it's view, all right?
+这样，我们控制器可以发送指令到对应视图。对吧？
+
+1350
+01:00:55,055 --> 01:00:56,354
+ What about this communication?
+这是如何通信的呢？
+
+1351
+01:00:56,356 --> 01:00:57,554
+         Model to view?
+可以从Model 到视图吗？
+
+1352
+01:00:57,556 --> 01:00:58,422
+             Never.
+不可能！
+
+1353
+01:00:58,424 --> 01:00:59,989
+        And why is that?
+为什么会这样呢？
+
+1354
+01:00:59,991 --> 01:01:03,292
+   100% obvious, the model is
+   completely UI independent.
+很明显，Model 是完全独立于UI的。
+
+1355
+01:01:03,294 --> 01:01:05,494
+     So, there's absolutely
+    no way it could talk to
+因此，Model 没有任何办法向
+
+1356
+01:01:05,496 --> 01:01:07,863
+       a viewer object or
+      anyone in that camp.
+视图对象发送指令，也不能和视图层的任何对象通讯。
+
+1357
+01:01:07,865 --> 01:01:10,399
+    Because the view objects
+ are fundamentally UI objects.
+因为视图对象是基本的UI对象。
+
+1358
+01:01:10,401 --> 01:01:11,466
+  They're kind of generic, but
+他们是某种程度上是通用的，但是
+
+1359
+01:01:11,468 --> 01:01:13,401
+         they're still
+   fundamentally UI objects.
+他们也是基本的UI 对象。
+
+1360
+01:01:13,403 --> 01:01:16,237
+   Similarly, since the view
+  objects are kind of generic,
+同样地，既然视图对象是通用的对象，
+
+1361
+01:01:16,239 --> 01:01:18,272
+     they can't be talking
+     to any specific model.
+他们就不能和任何特定的Model 对象通讯。
+
+1362
+01:01:18,274 --> 01:01:20,674
+     They need a controller
+      to interpret a model
+他们需要用一个控制器来传到信息
+
+1363
+01:01:20,676 --> 01:01:22,375
+        for them, okay?
+懂吗？
+
+1364
+01:01:22,377 --> 01:01:24,377
+      So there's never any
+    communication this way.
+因此这里没有任何通信。
+
+
+1365
+01:01:24,379 --> 01:01:25,911
+        That's why it's
+     a double yellow line.
+这也是这里使用黄色双线的原因。
+
+1366
+01:01:25,913 --> 01:01:27,780
+        That's why these
+         lines are red.
+这是这些线是红色的原因。
+
+
+1367
+01:01:27,782 --> 01:01:29,748
+ That's why there's fire, okay?
+这也是这里用火标注的原因。明白？
+
+1368
+01:01:29,750 --> 01:01:31,783
+   Never go across that line,
+             Never.
+永远不要跨越这条线。绝不！
+
+1369
+01:01:34,120 --> 01:01:36,520
+  What about the view talking
+    back to the controller?
+那视图怎么样向控制器发送指令呢？
+
+1370
+01:01:36,522 --> 01:01:38,588
+   You got these generic view
+     objects, like buttons.
+你得到这些通用的视图对象，例如按钮。
+
+1371
+01:01:38,590 --> 01:01:40,724
+        Can they talk to
+        the controller?
+他们能与控制器通信吗？
+
+1372
+01:01:40,726 --> 01:01:43,593
+      Well, yes, they can.
+对，当然可以。
+
+1373
+01:01:43,595 --> 01:01:46,495
+  But, they have to be careful
+    because the view objects
+但是你必须小心，因为视图对象
+
+1374
+01:01:46,497 --> 01:01:48,397
+          are generic.
+ 是通用的。
+
+
+1375
+01:01:48,398 --> 01:01:50,298
+   So they can't really know
+   much about the controller.
+这样，他们不能真正的了解控制器。
+
+1376
+01:01:50,301 --> 01:01:53,201
+ So, they can only communicate
+     back to the controller
+因此他们只能用盲目的方式和控制器通信，
+
+1377
+01:01:53,203 --> 01:01:55,437
+   in a blind way where they
+    don't know the class of
+视图并不知道他们所通信的类
+
+1378
+01:01:55,439 --> 01:01:58,673
+ the thing they're talking to,
+    and in a structured way.
+在什么位置，并用一种结构化的方式和控制器通信。
+
+1379
+01:01:58,675 --> 01:02:02,776
+ A way where we all agree we're
+   gonna communicate this way
+这是一种大家都认同的，视图和控制器通信的
+
+1380
+01:02:02,778 --> 01:02:03,844
+      between the view and
+        the controller.
+方式
+
+1381
+01:02:03,846 --> 01:02:05,512
+      So, whats an example
+      of a structured way?
+那，有没有是结构化的方式例子？
+
+1382
+01:02:05,514 --> 01:02:07,480
+       Well one is called
+         target action.
+其中一个方式叫做Target 操作。
+
+1383
+01:02:07,482 --> 01:02:10,816
+  So, the controller basically
+ drops a target on itself, and
+一般控制器本身写一个target 
+
+1384
+01:02:10,818 --> 01:02:15,087
+  then it hands out an action,
+    which is like an arrow,
+ 然后分给出一个操作方法，想一个箭头
+
+1385
+01:02:15,089 --> 01:02:17,389
+        to the view and
+       says to the view,
+指向视图，并和视图通信。
+
+1386
+01:02:17,391 --> 01:02:20,058
+ okay, when you do what you do,
+    like you're a button and
+当你想做了一个操作，比如你是一个按钮，
+
+1387
+01:02:20,060 --> 01:02:21,659
+     someone touches you or
+       your a slider and
+别人点击了你，或者你是个拖动条
+
+1388
+01:02:21,661 --> 01:02:24,828
+       someone moves you,
+      send me that action.
+别人移动了你，给向我发送那个操作。
+
+
+1389
+01:02:24,830 --> 01:02:26,430
+             Okay?
+懂吗？
+
+1390
+01:02:26,431 --> 01:02:28,031
+        So, in this way,
+     the generic button or
+这样，用这种方式，通用的按钮或者
+
+1391
+01:02:28,033 --> 01:02:30,600
+    slider is communicating
+    back to the controller.
+拖动条就可以反过来和控制器通信。
+
+1392
+01:02:30,602 --> 01:02:32,835
+    It has no idea that it's
+   a card game controller or
+它不知道这是一个纸牌游戏控制器还是
+
+1393
+01:02:32,837 --> 01:02:34,103
+    a space game controller.
+一个空间游戏控制器。
+
+1394
+01:02:34,105 --> 01:02:36,071
+      It doesn't know what
+   kind of controller it is.
+它并不知道它是什么类型的控制器
+
+1395
+01:02:36,073 --> 01:02:38,607
+   All it knows is that when
+  something happens in itself,
+它所知道的只是某一个事件何时在它身上发生。
+
+
+1396
+01:02:38,609 --> 01:02:40,108
+    boom, it sends a message
+         to the target.
+它发送一个消息给target
+
+1397
+01:02:40,110 --> 01:02:43,678
+   So that's a blind, simple,
+       structured way for
+这样就是一个盲目的，简单的，结构化的方式来做
+
+1398
+01:02:43,680 --> 01:02:45,780
+    the view to communicate
+      with the controller.
+到视图和控制器之间的通信。
+
+
+1399
+01:02:45,782 --> 01:02:47,465
+             Okay?
+明白吗？
+
+1400
+01:02:47,466 --> 01:02:49,149
+      But what about more
+       complicated ways?
+那什么是更复杂的通信方式呢？
+
+
+1401
+01:02:49,151 --> 01:02:52,119
+   Sometimes the view, things
+   are happening in the view
+有时，发生在视图上的事件
+
+1402
+01:02:52,121 --> 01:02:53,987
+ that are somewhat complicated,
+              and
+是比较复杂的，
+
+
+1403
+01:02:53,989 --> 01:02:56,456
+   the controller needs to be
+  informed of what's going on,
+控制器需要知道正在发生的事是什么，
+
+1404
+01:02:56,458 --> 01:02:58,791
+      synchronizing what's
+           happening.
+同步正在发生的事件。
+
+1405
+01:02:58,793 --> 01:03:01,694
+   And one way to think about
+     this is these words I
+理解这个的一种方法是我放着
+
+
+1406
+01:03:01,696 --> 01:03:04,096
+       put up here, will,
+        should and did.
+这里的单词，will, should 和did
+
+
+1407
+01:03:04,098 --> 01:03:06,598
+ When the view is kind of like,
+
+1408
+01:03:06,600 --> 01:03:08,132
+       let's say I am in
+      the scroll view and
+假如我在一个scroll 视图中，
+
+1409
+01:03:08,134 --> 01:03:11,669
+   I am scrolling around, and
+  I want to let the controller
+我正在到处滚动，并且我想要让控制器
+
+1410
+01:03:11,671 --> 01:03:15,806
+       somebody know that
+   the user just did scroll.
+知道用户刚刚做了滚动操作。
+
+1411
+01:03:15,808 --> 01:03:17,691
+             Okay?
+               Or
+懂吗？或者
+
+
+1412
+01:03:17,692 --> 01:03:19,575
+  the user puts down the touch
+ and is about to scroll, I want
+用户按住屏幕，将要滑动，我想让
+
+
+1413
+01:03:19,578 --> 01:03:23,413
+ to let the controller know the
+ user will be scrolling, okay?
+控制器知道用户将要执行滑动操作。 懂吗？
+
+
+1414
+01:03:23,415 --> 01:03:25,114
+       Or, the user puts
+       the touch down and
+或者用户按住屏幕
+
+
+1415
+01:03:25,116 --> 01:03:26,448
+       the scroll viewer
+         wants to know,
+scroll viewer需要知道
+
+1416
+01:03:26,450 --> 01:03:30,452
+   should I allow the user to
+ scroll here, is that allowed?
+是否允许用户这里执行滚动操作？
+
+
+1417
+01:03:30,454 --> 01:03:33,221
+  All those things, the scroll
+     view itself might not
+这里所有的事情，scroll 视图本身或许没有
+
+1418
+01:03:33,223 --> 01:03:36,190
+   have enough logic to know
+ the answer to those questions.
+足够的逻辑知道那些问题的答案。
+
+1419
+01:03:36,192 --> 01:03:39,727
+      So what it does is,
+ it delegates the authority to
+那它做的事情是，它代理给
+
+1420
+01:03:39,729 --> 01:03:42,730
+     answer those questions
+     to some other object.
+其他对象来回答那些问题。
+
+1421
+01:03:42,732 --> 01:03:44,664
+      Now, it doesn't know
+   the class of that object.
+现在，它并不知道那个对象的类是什么
+
+1422
+01:03:44,666 --> 01:03:46,199
+      All it knows is that
+        other object can
+他知道只是另一个对象可以
+
+
+1423
+01:03:46,201 --> 01:03:49,135
+ answer these questions, will,
+  should, did, this, that, or
+回答这些问题，will, should, did, this, that, 或者
+
+1424
+01:03:49,137 --> 01:03:51,570
+     the other thing like,
+    should allow scrolling.
+其他事情，像是否允许滑动。
+
+1425
+01:03:51,572 --> 01:03:53,939
+      Did scroll to point.
+滑动到一个点
+
+1426
+01:03:53,941 --> 01:03:54,539
+       Things like that.
+就像那样。
+
+1427
+01:03:54,541 --> 01:03:56,591
+    So those are the kind of
+这些是这样一类
+
+
+1428
+01:03:56,592 --> 01:03:58,642
+  methods you are going to see
+  in these delicate protocols.
+方法，你将要在那些代理协议中看到他们。
+
+1429
+01:03:58,645 --> 01:04:00,878
+  Now, I know this here is 1,
+           6 a and b,
+现在，我知道这里是1，6，a 和 b
+
+1430
+01:04:00,880 --> 01:04:02,847
+    do not teach protocols.
+没有教过协议，
+
+1431
+01:04:02,849 --> 01:04:04,582
+   How many people know what
+多人知道
+
+
+1432
+01:04:04,583 --> 01:04:06,316
+   the word protocol means an
+  object during a programming?
+协议在编程中代表什么对象？
+
+1433
+01:04:06,318 --> 01:04:07,117
+   I can see very few of you.
+很少能做到。
+
+1434
+01:04:07,119 --> 01:04:08,818
+  So, I will be teaching that.
+这里我将要讲它。
+
+1435
+01:04:08,820 --> 01:04:12,421
+ A protocol is just a blind way
+   to talk to another object.
+协议仅仅是blind和其他对象通信的方式。
+
+1436
+01:04:12,423 --> 01:04:13,556
+        When I teach it,
+我讲了它以后，
+
+1437
+01:04:13,557 --> 01:04:14,690
+    you're gonna be like oh,
+   yeah, I know what that is.
+你将会明白，这知道这就是它。
+
+1438
+01:04:14,692 --> 01:04:16,958
+    So we can really call it
+     protocol or whatever.
+我们实际上叫它协议，或者不管什么了
+
+1439
+01:04:16,960 --> 01:04:19,160
+      But that's how we do
+       delegation, okay,
+但这是我们如何实现一个代理，
+
+1440
+01:04:19,162 --> 01:04:20,862
+   this blind communication.
+盲目通信。
+
+1441
+01:04:21,931 --> 01:04:24,932
+          Also another
+       important thing is
+另一个重要事情是
+
+
+1442
+01:04:24,934 --> 01:04:28,502
+ that views should not own the
+ data that they're displaying.
+视图不应该持有他们展示的数据。
+
+1443
+01:04:28,504 --> 01:04:30,170
+    They should not own it.
+他们不应该持有数据。
+
+
+1444
+01:04:30,171 --> 01:04:31,837
+  In other words, it shouldn't
+ be a property inside of them,
+换句话说，数据不应该作为视图内部的属性，
+
+1445
+01:04:31,840 --> 01:04:34,707
+     where that's the truth
+         of that data.
+
+1446
+01:04:34,709 --> 01:04:37,810
+  And the easiest example for
+   this is, all the songs in
+最简单的例子就是，在
+
+1447
+01:04:37,812 --> 01:04:40,679
+  your iPod, on your iPhone or
+       your iPad, right?
+你iPod,iPhone 或者iPad 中的所有歌曲。 对吗？
+
+1448
+01:04:40,681 --> 01:04:43,281
+     You might have 10,000
+        songs in there.
+你可能有10000首歌曲。
+
+
+1449
+01:04:43,283 --> 01:04:46,017
+   So, if you have some kind
+    of generic list view in
+假如你有一些通用的视图列表在你视图中，
+
+1450
+01:04:46,019 --> 01:04:50,354
+ your view, you can't transfer
+    all 10,000 songs to its
+你不能传递10000首歌到它的
+
+1451
+01:04:50,356 --> 01:04:52,773
+    instance variables, and
+实例变量中，并
+
+1452
+01:04:52,774 --> 01:04:55,191
+ expect it to hold 10,000 songs
+   so it can list through it.
+期望它来持有10000首歌，这样你才能浏览他们。
+
+1453
+01:04:55,194 --> 01:04:56,860
+ A, that would be inefficient,
+              and
+第一，这样做是很低效的，
+
+1454
+01:04:56,862 --> 01:05:01,064
+   B that information, those
+  10,000 songs belongs where?
+第二，这10000首歌属于哪一层？
+
+
+1455
+01:05:01,066 --> 01:05:02,131
+         In the model.
+在Model 层
+
+1456
+01:05:02,133 --> 01:05:04,900
+    Okay, because your song
+      database is a model.
+OKay，因为你的音乐数据库是一个Model
+
+
+1457
+01:05:04,902 --> 01:05:06,468
+ It has nothing to do with UI.
+它和UI 没有任何关系
+
+1458
+01:05:06,469 --> 01:05:08,035
+ It's just a list of songs and
+     artists and albums and
+视图仅仅是歌曲，艺术家，专辑和其他信息的一个列表
+
+1459
+01:05:08,038 --> 01:05:09,604
+  all that, it's in the model.
+它在Model 层
+
+
+1460
+01:05:09,606 --> 01:05:12,073
+     Some controller has to
+   look at that database and
+一些控制器必须查询数据并
+
+1461
+01:05:12,075 --> 01:05:16,243
+       tell a view how to
+    display all those songs.
+告诉一个视图如何展示这些歌曲。
+
+1462
+01:05:16,245 --> 01:05:18,429
+             Okay?
+懂吗？
+
+1463
+01:05:18,430 --> 01:05:20,614
+ So, we need that communication
+ to happen here and the view is
+这里，我们这里需要通信产生,视图
+
+1464
+01:05:20,616 --> 01:05:23,249
+ displaying some sort of list,
+  and you're touching down and
+展示列表分类，并且当你按下屏幕，
+
+1465
+01:05:23,251 --> 01:05:26,619
+  you're flicking on the list
+ and trying to see more songs,
+你轻轻滑动列表，试图查看更多歌曲，
+
+1466
+01:05:26,621 --> 01:05:28,087
+         how does that
+     communication happen?
+这些通信如何发生的？
+
+1467
+01:05:28,089 --> 01:05:30,923
+   And the answer is, we have
+    another special kind of
+答案是我们 有另一种特殊的
+
+1468
+01:05:30,925 --> 01:05:33,992
+       delegate, which we
+      call a data source.
+代理，我们叫它数据源
+
+1469
+01:05:33,994 --> 01:05:36,928
+  Now the data source doesn't
+    do the will did should.
+ 数据源并不做will, did, should 的事。
+
+1470
+01:05:36,930 --> 01:05:39,230
+      It's gonna be asking
+     questions like count,
+它将回答类似，数量
+
+
+1471
+01:05:39,232 --> 01:05:41,098
+ like how many songs are there?
+像这里有多少首歌？
+
+1472
+01:05:41,100 --> 01:05:42,900
+       And the controller
+      looks in the model,
+控制器查找Model
+
+
+1473
+01:05:42,902 --> 01:05:45,435
+  10,000 response to the view.
+把10000 返回给视图
+
+1474
+01:05:45,437 --> 01:05:47,020
+        There's 10,000.
+            The view
+这里的10000, 视图
+
+1475
+01:05:47,021 --> 01:05:48,604
+   makes space internally for
+         10,000 things.
+为10000歌开辟内部空间。
+
+1476
+01:05:48,607 --> 01:05:50,340
+ It doesn't know what they are.
+视图并不知道这些歌曲是什么。
+
+
+1477
+01:05:50,342 --> 01:05:53,009
+      Moves the scroll bar
+   indicator a little bit so
+稍微移动滚动条
+
+1478
+01:05:53,011 --> 01:05:54,276
+   that you know where it is.
+你便能知道它在哪里。
+
+1479
+01:05:54,278 --> 01:05:57,779
+ And then you start scrolling,
+    flipping through it, and
+当你开始滚动,轻滑动它，
+
+1480
+01:05:57,781 --> 01:06:00,849
+ it starts sending the message
+       to the controller,
+它开始发送消息给控制器。
+
+1481
+01:06:00,851 --> 01:06:03,785
+      give me the data at
+    line 150 next 10 items.
+返回150 行后面的10条数据。
+
+1482
+01:06:03,787 --> 01:06:04,975
+      You see what I mean?
+你懂我意思吗？
+
+1483
+01:06:04,976 --> 01:06:06,164
+       And then you flick
+        down some more.
+然后你再往下轻轻滑动。
+
+1484
+01:06:06,165 --> 01:06:07,353
+      Now it's saying 250,
+         10 more items.
+现在显示250， 另外10条数据。
+
+
+1485
+01:06:07,357 --> 01:06:10,257
+  And so the control is going
+     back to the model and
+控制器再次与Model 通信，并
+
+1486
+01:06:10,259 --> 01:06:11,725
+      saying give me more,
+       give me more data.
+要求得到更多的数据。
+
+1487
+01:06:11,727 --> 01:06:14,361
+    And it's providing it to
+  the view in this blind way.
+控制器用这种blind 方式提供数据给视图。
+
+1488
+01:06:14,363 --> 01:06:17,230
+   So to see how the view is
+  getting data from the model
+来看一下视图如何从Model 得到数据,
+
+
+1489
+01:06:17,232 --> 01:06:20,232
+ through the controller in this
+ kind of blind structured way.
+是通过控制器用这种blind structured方式。
+
+1490
+01:06:20,234 --> 01:06:21,767
+             Okay?
+懂吗？
+
+1491
+01:06:21,768 --> 01:06:23,301
+ That makes sense to everybody?
+每个人都明白吗？
+
+1492
+01:06:23,304 --> 01:06:24,970
+     So data source is just
+      a kind of delegate,
+数据源只是一种代理
+
+1493
+01:06:24,972 --> 01:06:27,105
+    it's a specific kind of
+   delegate for getting data.
+它是一种特殊类型的用于获取数据的代理。
+
+1494
+01:06:27,107 --> 01:06:30,408
+ So you're gonna see that there
+  are classes in iOS that have
+因此你将在iOS 中看到一些类，
+
+1495
+01:06:30,410 --> 01:06:33,477
+    a data source, and they
+ usually also have a delegate.
+他们有一个数据源，并且通常有一个代理。
+
+
+1496
+01:06:33,479 --> 01:06:36,547
+ Most sophisticated classes in
+ iOS have a delegate, the will,
+大部分iOS高级类有代理，包括will,
+
+1497
+01:06:36,549 --> 01:06:38,415
+  did, should, kind of things.
+did, should, 等要做的事。
+
+1498
+01:06:38,417 --> 01:06:40,316
+       Some of them have
+         a data source,
+其中一些有数据源，
+
+
+1499
+01:06:40,318 --> 01:06:43,219
+ it depends on whether they are
+ showing a lot of data or not.
+这取决于他们是否要显示大量数据。
+
+
+1500
+01:06:43,221 --> 01:06:46,455
+ Now simple data, like if I had 
+  a view, if I invented a view  
+ 一些简单的数据，比如我给纸牌游戏
+
+1501
+01:06:46,457 --> 01:06:49,224
+    for my card game called     
+     playing card view and      
+     创建了一个叫playing card view的视图
+
+1502
+01:06:49,226 --> 01:06:51,109
+ it just has a suit and a rank. 
+ 它仅有花色和点数两点属性。
+
+1503
+01:06:51,110 --> 01:06:52,993
+    Okay, we're not going to    
+     do count data app for   
+     我们不会为了花色和点数
+
+1504
+01:06:52,996 --> 01:06:54,262
+      just suit and rank.     
+进行计算。
+
+1505
+01:06:54,264 --> 01:06:56,030
+      We are going to set       
+       those properties. 
+       我们会把它们设置成属性。
+
+1506
+01:06:56,032 --> 01:06:58,766
+   And so the view then would   
+  have that data set in it but  
+  所以view里会有设置好的数据，但是
+
+1507
+01:06:58,768 --> 01:07:00,267
+   it wouldn't be owning it. 
+   它不会拥有这些数据。   
+
+1508
+01:07:00,269 --> 01:07:02,536
+             Right?             
+    The model would still be    
+    model仍然会是花色和点数的
+
+1509
+01:07:02,538 --> 01:07:04,571
+      owning the suit and 
+      拥有者，      
+
+1510
+01:07:04,572 --> 01:07:06,605
+ rank, the view is just getting 
+    that data to present it.    
+    view仅仅是为了显示而获取那些数据。
+
+1511
+01:07:06,608 --> 01:07:07,840
+             'Kay.              
+        So simple data,
+        所以对于简单的数据，         
+
+1512
+01:07:07,842 --> 01:07:10,743
+      we might transfer to      
+  the view but it's merely for  
+  我们会把它传送到view里，但是
+
+1513
+01:07:10,745 --> 01:07:12,878
+       it to display it.     
+       只是给view来显示。   
+
+1514
+01:07:12,880 --> 01:07:14,312
+             Okay.         
+
+1515
+01:07:14,314 --> 01:07:17,615
+      This all adds up to       
+ the controller's job being to  
+ 所以controller的工作就是
+
+1516
+01:07:17,617 --> 01:07:22,520
+      interpret and format      
+ the model's data for the view. 
+ 给view解释并格式化这些model提供的数据。
+
+1517
+01:07:22,522 --> 01:07:23,654
+  That's the controller's job.  
+  这就是controller的工作。
+
+1518
+01:07:23,656 --> 01:07:25,188
+    And when we do our demo,    
+    在我们做deomo的时候，
+
+1519
+01:07:25,190 --> 01:07:28,758
+ I'm going to be marking like,  
+ oh see I'm writing this code.  
+ 我会在写代码的时候提示大家，
+
+1520
+01:07:28,760 --> 01:07:31,494
+ This is to make the controller 
+        perform its job,
+ 这段代码是为了让controller执行它的工作，        
+
+1521
+01:07:31,496 --> 01:07:34,430
+        which is to take        
+       the model data and       
+       也就是从model中取出数据然后
+
+1522
+01:07:34,432 --> 01:07:36,265
+     using its view minion      
+      to put it on screen. 
+      运用到view中去，然后显示到屏幕上。
+
+1523
+01:07:36,267 --> 01:07:37,132
+             Okay?              
+          That's what           
+          这就是
+
+1524
+01:07:37,134 --> 01:07:38,667
+      the controller does.      
+      controller做的事情。
+
+1525
+01:07:38,669 --> 01:07:40,468
+ What about this communication? 
+ 那关于通信呢？
+
+1526
+01:07:40,470 --> 01:07:42,970
+       Can the model talk       
+       to the controller?       
+       model可以和controller通信吗？
+
+1527
+01:07:42,972 --> 01:07:46,040
+    Again, obviously that's     
+  verboten because model knows  
+同样的，显然是不可以。因为model对于UI
+
+1528
+01:07:46,042 --> 01:07:47,708
+      nothing about UI, so      
+      一无所知，所以
+
+1529
+01:07:47,710 --> 01:07:50,710
+ it couldn't possibly talk to a 
+ UI object like the controller. 
+ 它不可能同像controller一样的UI对象进行通信。
+
+1530
+01:07:50,712 --> 01:07:53,046
+      But sometimes things      
+    change in the model, and    
+    但是有些时候，model中的数据变了，
+
+1531
+01:07:53,048 --> 01:07:54,580
+    the controller needs to     
+      know about it, okay?      
+      controller需要只要这个变化，OK?
+
+1532
+01:07:54,582 --> 01:07:56,782
+         Data changes,          
+     a database changes or      
+     数据改变了，数据库改变了，或者
+
+1533
+01:07:56,784 --> 01:07:59,017
+       the model is some        
+     network database, and    
+     model是网络数据库，  
+
+1534
+01:07:59,019 --> 01:08:01,186
+ somebody changes something on  
+  the network and it changes.   
+  某人在网络上修改了数据，数据改变了。
+
+1535
+01:08:01,188 --> 01:08:02,587
+       And the controller       
+       needs to find out.       
+       controller需要了解这些。
+
+1536
+01:08:02,589 --> 01:08:04,555
+        So, how do we do        
+      that communication?    
+      所以，我们怎样做这种通信呢？   
+
+1537
+01:08:05,958 --> 01:08:09,592
+    We do that using kind of    
+     a radio station model.  
+     这可以通过一种电台的模型来理解
+
+1538
+01:08:09,594 --> 01:08:11,928
+             Okay?              
+
+1539
+01:08:11,929 --> 01:08:14,263
+ So, the model, a radio station 
+  concept, the model will use   
+  所以，model是一种电台的概念，
+
+1540
+01:08:14,265 --> 01:08:17,866
+  this concept to essentially   
+    broadcast information to 
+    model将会利用这一 概念，把信息广播给   
+
+1541
+01:08:17,868 --> 01:08:19,768
+    anyone who's interested.    
+    感兴趣的任何人。
+
+1542
+01:08:19,770 --> 01:08:21,937
+             Okay?              
+
+1543
+01:08:21,938 --> 01:08:24,105
+     And the mechanisms for     
+  doing this in iOS are called  
+  在iOS中为了解决这种问题而使用的技术我们叫做
+
+1544
+01:08:24,107 --> 01:08:28,476
+   Notification and Key Value   
+   Observing, KVO we call it.   
+   Notification和KVO。
+
+1545
+01:08:28,478 --> 01:08:31,211
+     And so, the model can      
+     just say, oh, anytime      
+     所以，model可以说，
+
+1546
+01:08:31,213 --> 01:08:33,547
+ something changes in my model  
+  I'm just gonna broadcast on   
+我当中的任何东西发生了变化，我会通过我的电台
+
+1547
+01:08:33,549 --> 01:08:37,484
+ my radio station, and then the 
+  controller simply tunes into  
+  广播一下，随后，controller
+
+1548
+01:08:37,486 --> 01:08:40,453
+ that radio station, and he can 
+ find out things are changing.  
+ 会接收到来自电台的信息，它会发现数据在变化
+
+1549
+01:08:40,455 --> 01:08:42,254
+     And when he finds out      
+       something changes,       
+       发现数据变化以后，
+
+1550
+01:08:42,256 --> 01:08:46,058
+ it's gonna communicate via its 
+  green arrow to the model and  
+  它就会通过它的绿剪头同model进行通信，
+
+1551
+01:08:46,060 --> 01:08:47,659
+       say, okay, give me       
+    that data that changed.     
+    给我那个改变过的数据。
+
+1552
+01:08:48,962 --> 01:08:49,560
+             Right?   
+
+1553
+01:08:49,562 --> 01:08:50,978
+        That make sense?        
+        能听懂吗？
+
+1554
+01:08:50,979 --> 01:08:52,395
+     So, towards the end of     
+ the quarter we'll start seeing 
+ 所以在课程快要结束的时候，我们将会学习
+
+1555
+01:08:52,398 --> 01:08:54,531
+       a little how to do       
+ notification to find out, for
+ 如何利用通知得知
+
+1556
+01:08:54,533 --> 01:08:57,334
+      example, if the data      
+     in a database changes.     
+     数据库中的数据发生了改变。
+
+1557
+01:08:57,336 --> 01:09:00,070
+   We'll get a notification,    
+   the UI can then, you know, 
+   我们将会获取这个通知，UI中的controller  
+
+1558
+01:09:00,072 --> 01:09:03,272
+  controller can then go talk   
+ to the model to get the info.  
+ 随后可以同model通信来获取信息。
+
+1559
+01:09:05,309 --> 01:09:06,286
+             Okay?         
+
+1560
+01:09:06,287 --> 01:09:07,264
+    Some people have asked,     
+    有些人会问，
+
+1561
+01:09:07,265 --> 01:09:08,242
+      can a view tune into      
+       the radio station?       
+       view可以接收广播吗？
+
+1562
+01:09:08,245 --> 01:09:09,878
+    They probably could, but    
+    它们也许可以，但是
+
+1563
+01:09:09,880 --> 01:09:11,179
+     you probably wouldn't      
+        want to do that.        
+        你最好不要这样做。
+
+1564
+01:09:11,181 --> 01:09:12,980
+     That would probably be     
+      a violation of MVC.       
+      这可能违背了MVC的原则。
+
+1565
+01:09:12,982 --> 01:09:14,749
+           All right.     
+           好的。      
+
+1566
+01:09:14,751 --> 01:09:16,750
+         So we do this.         
+         我们这样做，
+
+1567
+01:09:16,752 --> 01:09:18,785
+     We have all this nice      
+       communication and        
+       我们有这些很好的通信和
+
+1568
+01:09:18,787 --> 01:09:21,288
+        all these rules,        
+        所有的这些规则。
+
+1569
+01:09:21,289 --> 01:09:23,790
+  and we can imagine building   
+  something simple using this.  
+  我们可以利用这些来制作一些小的应用。
+
+1570
+01:09:23,792 --> 01:09:26,259
+   But what if we wanna build   
+     a big complicated app?     
+     但是如果我们想要制作一个巨大复杂的应用呢？
+
+1571
+01:09:26,261 --> 01:09:28,861
+    An app that has multiple    
+   screens on our iPhone, or  
+   一个在iPhone或iPad上运行，有多个屏幕，  
+
+1572
+01:09:28,863 --> 01:09:30,863
+   an iPad, it's got three or   
+   在屏幕上有三个或四个不同的区域，
+
+1573
+01:09:30,865 --> 01:09:34,166
+ four different areas on screen 
+  where things are happening. 
+    都发生着事情。
+
+1574
+01:09:34,168 --> 01:09:35,433
+       How do we do that?       
+       我们该怎么做？
+
+1575
+01:09:35,435 --> 01:09:36,834
+          Well, we're           
+      essentially going to      
+      我们
+
+1576
+01:09:36,836 --> 01:09:40,071
+  combine multiple MVCs, okay?  
+  会结合多个MVC
+
+1577
+01:09:40,073 --> 01:09:47,244
+ Because an MVC can use as part 
+   of its view, another MVC.    
+因为一个MVC可以将另一个MVC当做视图的一部分。
+
+1578
+01:09:47,246 --> 01:09:48,311
+             Okay?           
+
+1579
+01:09:48,313 --> 01:09:52,114
+           So an MVC,           
+  an entire MVC can be one of   
+  所以一个完整的MVC可以被一个稍大些的
+
+1580
+01:09:52,116 --> 01:09:56,051
+         the minions of         
+        some bigger MVC.       
+        MVC当做仆人使用。 
+
+1581
+01:09:56,053 --> 01:09:57,803
+             'Kay?      
+
+1582
+01:09:57,804 --> 01:09:59,554
+     And by doing that and      
+       cascading it down,       
+       我们可以一层一层地这样堆叠，
+
+1583
+01:09:59,556 --> 01:10:01,756
+     we can build more and      
+ more complicated applications. 
+ 就可以制作出越来越复杂的应用。
+
+1584
+01:10:01,758 --> 01:10:07,561
+ So, an example of this is, you 
+ might have your calendar app,  
+ 例如，你可能有一个日历应用，
+
+1585
+01:10:07,563 --> 01:10:09,930
+      and it's showing you      
+        the entire year.        
+        它展示给你一整年的信息。
+
+1586
+01:10:09,932 --> 01:10:12,599
+ And you click on a month, and  
+ now it shows you a month view. 
+ 随后你点击了一个月份，于是它展示给你月视图。
+
+1587
+01:10:12,601 --> 01:10:14,567
+ Well, a month view looks a lot 
+  different than a year view.   
+  月视图看起来和年视图就不太一样了。
+
+1588
+01:10:14,569 --> 01:10:17,503
+   A month view just has all    
+ the days and maybe some circle 
+ 一个月视图只含有所有的日期，也许在日期上
+
+1589
+01:10:17,505 --> 01:10:19,204
+ that tells you where you have  
+    an appointment on a day.    
+    会有一些通知你在某天会有任务的圈圈。
+
+1590
+01:10:19,206 --> 01:10:20,939
+       And then when you        
+      click on a day, and    
+      随后，你点击了一天，然后你   
+
+1591
+01:10:20,941 --> 01:10:23,074
+ now you get a day view, okay?  
+ 获得了一个日视图
+
+1592
+01:10:23,076 --> 01:10:25,043
+   And the day is showing you   
+     the hours and what all     
+     日视图会显示小时信息和这天你的所有
+
+1593
+01:10:25,045 --> 01:10:27,611
+ your appointments are, and you 
+  click on the Appointment now  
+  任务，随后你点击了任务，
+
+1594
+01:10:27,613 --> 01:10:29,947
+  you get an appointment view   
+  and it showing the detail of  
+你会获得任务视图，它会显示任务的细节，
+
+1595
+01:10:29,949 --> 01:10:32,182
+     where you're going and     
+  when it is et cetera, okay?  
+  将要去哪，何时动身还有其它一些东西
+
+1596
+01:10:32,184 --> 01:10:36,452
+   Well, each of those views,   
+ year view, month view, the day 
+ 这些view中的每一个，年视图，月视图，日视图，
+
+1597
+01:10:36,454 --> 01:10:40,155
+   view, and the appointment    
+    view are their own MVCs.    
+    任务视图，都有他们自己的MVC。
+
+1598
+01:10:40,157 --> 01:10:41,857
+             Okay?           
+
+1599
+01:10:41,858 --> 01:10:43,558
+      But you can see how       
+     the last three, okay,      
+     但是你可以发现，最后三个view,
+
+1600
+01:10:43,560 --> 01:10:47,628
+   are used as essentially a    
+ minion of the top level view,
+ 都被最顶层的年视图为了展示更多的细节
+
+1601
+01:10:47,630 --> 01:10:51,032
+           year view,           
+   to show more detail, okay?   
+   而被当做仆人使用。
+
+1602
+01:10:51,034 --> 01:10:52,766
+       So the year view,        
+     you click on a month,      
+     所以在年视图里，你点击了一个月份，
+
+1603
+01:10:52,768 --> 01:10:57,404
+  it's going to use the month   
+ view MVC to show more detail.  
+ 它会利用月份视图的MVC来展现更多细节。
+
+1604
+01:10:57,406 --> 01:11:00,406
+   So it's part of its view,    
+             okay?              
+    所以它是它视图的一部分，
+
+1605
+01:11:00,408 --> 01:11:03,476
+     So, you see this also      
+      in iOS with tab bar  
+所以你也在带有便签控制栏的iOS应用
+
+1606
+01:11:03,478 --> 01:11:05,228
+      controllers, right?       
+      中见过这些吧
+
+1607
+01:11:05,229 --> 01:11:06,979
+    You have the tab bar at     
+   the bottom, I have four or   
+   在底部有一个标签栏，有四个或五个
+
+1608
+01:11:06,981 --> 01:11:09,615
+  five things you can choose.  
+  项可以供你选择。 
+
+1609
+01:11:09,616 --> 01:11:12,250
+  Well there's some MVC at the  
+ top whose has four pointers to 
+ 在上面有一个MVC，它指向四个仆人，
+
+1610
+01:11:12,252 --> 01:11:15,120
+  four minions, which are the   
+ four MVCs that are each going  
+也就是将要出现在标签栏中的MVC，
+
+1611
+01:11:15,122 --> 01:11:17,488
+ to appear in a tab bar, okay?  
+
+1612
+01:11:17,490 --> 01:11:18,673
+    We'll be doing that for    
+    我们将会做一个这方面的例子， 
+
+1613
+01:11:18,674 --> 01:11:19,857
+     example, in assignment     
+         number two or     
+      在第二次或第三次作业，我们会        
+
+1614
+01:11:19,859 --> 01:11:21,792
+      three where we'll be      
+      making a tab bar and   
+      制作一个标签栏，   
+
+1615
+01:11:21,794 --> 01:11:25,328
+    you're gonna have to do     
+      multiple MVCs, okay?      
+      你们将会学习如何使用多个MVC
+
+1616
+01:11:25,330 --> 01:11:28,531
+   So, that basically results   
+    in a picture looks kinda    
+  所以使用多个MVC的效果看起来就像
+
+1617
+01:11:28,533 --> 01:11:29,899
+           like this.       
+           这张图片一样。    
+
+1618
+01:11:29,901 --> 01:11:31,434
+           All right?           
+
+1619
+01:11:31,435 --> 01:11:32,968
+  Where you got this MVC, and   
+  在你看到的这个MVC里，
+
+1620
+01:11:32,969 --> 01:11:34,502
+ you see the purple one that's  
+    like underneath the word    
+    找到'together'下面的那个
+
+1621
+01:11:34,505 --> 01:11:37,239
+      together there, and 
+      紫色的，      
+
+1622
+01:11:37,240 --> 01:11:39,974
+ it points to three other MVCs  
+   outside of its view thing.   
+   它从view指向了另外三个MVC，
+
+1623
+01:11:39,977 --> 01:11:40,542
+             Okay?
+
+1624
+01:11:41,478 --> 01:11:42,710
+        That's how we're        
+     going to build it, so      
+     这就是我们创建标签栏控制器的方式，
+
+1625
+01:11:42,712 --> 01:11:43,944
+      that might be a tab       
+        bar control and     
+      这些可能就是它的
+
+1626
+01:11:43,946 --> 01:11:45,812
+ those might be the three tabs. 
+三个标签。
+
+1627
+01:11:45,814 --> 01:11:47,614
+           Okay, and            
+ each one is its own little MVC 
+ 并且它们每一个都是
+
+1628
+01:11:47,616 --> 01:11:50,249
+    completely independent,     
+      operates on its own.      
+      完全独立的，可以独自行动的小MVC。
+
+1629
+01:11:50,251 --> 01:11:52,418
+       Doesn't even know,       
+      这时它就是一个
+
+1630
+01:11:52,419 --> 01:11:54,586
+  it's a generic reusable view  
+   like thing at this point.    
+普通的可重用的view之类的东西，
+
+1631
+01:11:54,589 --> 01:11:56,689
+     Doesn't even know that     
+       it's in a tab bar.  
+       它甚至不知道它在标签栏中。
+
+1632
+01:11:56,691 --> 01:11:58,090
+    Okay, it just knows that    
+      it's supposed to do   
+      它只知道它应该做
+
+1633
+01:11:58,092 --> 01:11:59,591
+       whatever it does.        
+       这些事情。
+
+1634
+01:11:59,593 --> 01:12:01,192
+             And so             
+   it's modular in that way.    
+   所以在这方面，它是模块化的。
+
+1635
+01:12:01,194 --> 01:12:04,328
+ You can also see that there's  
+  no communication between any 
+  可以看到这里不再有其他箭头， 
+
+1636
+01:12:04,330 --> 01:12:06,397
+    other, there's no other     
+       arrows, except for
+       除了一些模型。       
+
+1637
+01:12:06,399 --> 01:12:08,249
+      some of the models.       
+
+1638
+01:12:08,250 --> 01:12:10,100
+ You see some of the models are 
+ communicating with each other. 
+ 某些模型之间在互相通信。
+
+1639
+01:12:10,102 --> 01:12:11,852
+         You know a big         
+         要知道，
+
+1640
+01:12:11,853 --> 01:12:13,603
+     application might have     
+     a single shared model.     
+     一个大型的应用也许会有一个单独的共享模型。
+
+1641
+01:12:13,605 --> 01:12:17,606
+  Or the models might be split  
+ off into pieces to be used by  
+ 或者，模型会被分开来供子MVC使用。
+
+1642
+01:12:18,876 --> 01:12:20,208
+           sub MVCs.            
+
+1643
+01:12:20,210 --> 01:12:21,326
+             Okay?              
+              But          
+              但是，     
+
+1644
+01:12:21,327 --> 01:12:22,443
+    that's the only kind of     
+ communication you have there.  
+ 这里只能使用这种通信方式。
+
+1645
+01:12:22,446 --> 01:12:23,678
+   All other communication is   
+   其它所有的通信
+
+1646
+01:12:23,680 --> 01:12:26,681
+   either the structure view    
+  communication we saw on MVC,  
+  要么是MVC中的结构化通信，
+
+1647
+01:12:26,683 --> 01:12:29,716
+   or it's using MVCs as part   
+  of the view of another MVC.   
+  要么是将MVC用作另一个MVC视图的一部分。
+
+1648
+01:12:31,386 --> 01:12:32,385
+    Any question about that?    
+    有问题吗？
+
+1649
+01:12:33,688 --> 01:12:36,689
+  So we definitely don't want   
+   to be having designs that    
+   所以我们当然不希望设计成这样，
+
+1650
+01:12:36,691 --> 01:12:38,190
+     look like this, okay?  
+
+1651
+01:12:38,192 --> 01:12:39,824
+       Where everybody's        
+     talking to everybody.      
+     所有都在互相通信，
+
+1652
+01:12:39,826 --> 01:12:41,459
+      We can't tell who's       
+        talking to what.        
+        我们不能分清谁在和什么通信。
+
+1653
+01:12:41,461 --> 01:12:43,994
+ It's just impossible to debug  
+    a program like this, and   
+    这会让调试程序变得异常艰难， 
+
+1654
+01:12:43,996 --> 01:12:45,446
+       it doesn't scale.
+       而且它无法规模化。        
+
+1655
+01:12:45,447 --> 01:12:46,897
+     You can't build really     
+     big programs this way.     
+     你不能通过这种方式创建出大程序。
+
+1656
+01:12:46,899 --> 01:12:48,165
+ It just becomes impossible to 
+ 这样的话， 
+
+1657
+01:12:48,167 --> 01:12:51,634
+   know how touching anything   
+ would break everything, right? 
+ 你无法弄清楚，什么地方会引发整个程序的崩溃。
+
+1658
+01:12:51,636 --> 01:12:53,469
+    So we're definitely not     
+    going to be doing that.     
+    所以我们绝对不会这样做的。
+
+1659
+01:12:54,639 --> 01:12:57,573
+  All right so that's MVC and,  
+  所以，这就是MVC，
+
+1660
+01:12:57,575 --> 01:13:00,875
+  like I say, on Monday we'll   
+  apply MVC to our calculator.  
+  我们将会在周一的课里把MVC应用到我们的计算器程序中。
+
+1661
+01:13:01,845 --> 01:13:02,977
+      So what's coming up?      
+      所以，接下来是什么？
+
+1662
+01:13:02,979 --> 01:13:06,146
+     I always try to get to     
+   this slide every lecture.  
+   我每节课都尽量讲到这里，
+
+1663
+01:13:06,148 --> 01:13:09,716
+     Sometimes I forget but     
+   it's posted in the slides.   
+   有时我会忘记，但是它被放到了课件中。
+
+1664
+01:13:09,718 --> 01:13:12,018
+  It says tomorrow is Friday.   
+  周五也就是明天，
+
+1665
+01:13:12,020 --> 01:13:14,320
+         No, day after          
+      tomorrow is Friday.       
+      不对，后天的周五，
+
+1666
+01:13:14,322 --> 01:13:17,256
+         And people who         
+   are watching on iTunes U,    
+   在iTunes U上观看的同学们，
+
+1667
+01:13:17,258 --> 01:13:19,858
+   these Friday sections will   
+     not be on iTunes U so      
+     周五的部分不会被放到iTunes U上，
+
+1668
+01:13:19,860 --> 01:13:22,461
+      don't go looking for      
+  them only the normal Monday,
+  只有周一和周三的课件才会被放上去，  
+
+1669
+01:13:22,463 --> 01:13:24,596
+       Wednesday lectures       
+       went on iTunes U.      
+       所以不要到处找。  
+
+1670
+01:13:25,999 --> 01:13:27,164
+  But, for Stanford students,   
+  但是对于在坐的同学，
+
+1671
+01:13:27,166 --> 01:13:30,300
+  Friday we have this debugger  
+    section we talked about.    
+    周五我们将讨论之前谈到的调试部分。
+
+1672
+01:13:30,302 --> 01:13:32,769
+     And then next Monday,      
+     下周一，你们的阅读作业
+
+1673
+01:13:32,771 --> 01:13:35,638
+    your reading assignment     
+        is gonna be due.        
+        将会截至。
+
+1674
+01:13:35,640 --> 01:13:37,040
+        In other words,         
+  you should be done with that  
+  换句话说，你应当在周一上课之前
+
+1675
+01:13:37,042 --> 01:13:40,176
+   reading assignment before    
+ the start of Monday's lecture. 
+ 完成阅读作业。
+
+1676
+01:13:40,178 --> 01:13:43,045
+    And I'm gonna assign you    
+  another reading assignment.   
+  我会再布置给你们一个阅读作业。
+
+1677
+01:13:43,047 --> 01:13:45,180
+     It might be your only      
+   other reading assignment.    
+   它将会是你们最后一个阅读作业。
+
+1678
+01:13:45,182 --> 01:13:46,815
+      Perhaps there'll be       
+     a reassignment three,  
+    也许以后还会有阅读作业，
+
+1679
+01:13:46,817 --> 01:13:48,383
+      but it won't be any       
+        more than that. 
+        但是不会像那个一样多。        
+
+1680
+01:13:49,318 --> 01:13:50,351
+   And then on Wednesday I'm    
+   下周三，我会深入介绍
+
+1681
+01:13:50,353 --> 01:13:53,420
+     really gonna dive into     
+     swift and foundation.      
+     Swift语言和Foundation框架。
+
+1682
+01:13:53,422 --> 01:13:56,556
+  I'm gonna talk a little bit   
+ about the Objective C legacy,  
+ 我将会介绍一点遗留下来的Objective-C。
+
+1683
+01:13:57,625 --> 01:13:59,425
+    and then your assignment    
+        one is gonna be         
+        你们的作业一将会在
+
+1684
+01:13:59,427 --> 01:14:00,792
+     due a week from today.     
+     一周后截至。
+
+1685
+01:14:00,794 --> 01:14:05,129
+ It's been posted for you, and  
+  your assignment two is gonna  
+  你们已经看到了，作业二将会在
+
+1686
+01:14:05,131 --> 01:14:08,032
+  go out next Wednesday and be  
+ due the Wednesday after that.  
+ 下周三布置下去，下下周三截至。
+
+1687
+01:14:08,034 --> 01:14:09,900
+    Just for a little bit of    
+     advanced planning for      
+     提前为你们所有人
+
+1688
+01:14:09,902 --> 01:14:11,335
+          all of you.  
+          做一些计划。         
+
+1689
+01:14:11,337 --> 01:14:12,235
+             Okay?              
+
+1690
+01:14:12,237 --> 01:14:13,202
+      Any other questions?      
+      还有问题吗？
+
+1691
+01:14:14,439 --> 01:14:15,904
+        Okay, thank you.        
+        好的，谢谢。
+
+1692
+01:14:15,906 --> 01:14:19,808
+   >> For more, please visit    
+      us at stanford.edu.       
+  >> 想了解更多，请登录 stanford.edu

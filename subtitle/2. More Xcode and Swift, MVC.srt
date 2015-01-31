@@ -505,49 +505,43 @@ even though it's not initialized in
 
 103
 00:04:11,215 --> 00:04:14,450
-the very beginning of
-a colossus creation starts out
+the very beginning of a colossus creation starts out
 在庞大得创建方法中
 
 104
 00:04:14,452 --> 00:04:16,451
 as nil not set.
-都没有对其赋nil
+都没有对其赋nil。
 
 105
 00:04:16,453 --> 00:04:21,723
-As soon as as this user
-interface gets loaded up
+As soon as as this user interface gets loaded up
 只要这个接口被加载了
 
 106
 00:04:21,725 --> 00:04:23,891
 by this new controller.
-通过新的控制器
+通过新的控制器。
 
 107
 00:04:23,893 --> 00:04:26,794
-Then this gets wired up,
-alright, so, that gets
+Then this gets wired up, alright, so, that gets
 那么这个将连接起来，好了，那么那里
 
 108
 00:04:26,796 --> 00:04:30,497
-wired up, and this is set, and
-then this it's set forever.
-也将连接起来，只要这里被赋值了，那么所有的这个都被赋值了
+wired up, and this is set, and then this it's set forever.
+也将连接起来，只要这里被赋值了，那么所有的这个都被赋值了。
 
 109
 00:04:30,499 --> 00:04:33,199
-So it's really, kinda would
-be sad if we actually,
-假如这是真的，那么当我们每次在用的时候
+So it's really, kinda would be sad if we actually,
+假如这是真的，那么当我们每次在用的时候，
 
 110
 00:04:33,201 --> 00:04:36,536
-every time we used it had
-to unwrap it all the time.
-我们都将加上感叹号，这真是挺悲伤的
+every time we used it had to unwrap it all the time.
+我们都将加上感叹号，这真是挺悲伤的。
 
 111
 00:04:36,538 --> 00:04:38,437
@@ -556,20 +550,17 @@ So these kind of properties that.
 
 112
 00:04:38,439 --> 00:04:42,674
-Get set very early, maybe
-not right at creation like
+Get set very early, maybe not right at creation like
 很早就被赋值的，不一定像这个一样是正确地创建
 
 113
 00:04:42,676 --> 00:04:44,976
-this one, but very,
-they get set very early, and
+this one, but very, they get set very early, and
 但是，绝大部分还是会在创建的时候就赋值
 
 114
 00:04:44,978 --> 00:04:46,511
-then they stay
-set all the time.
+then they stay set all the time.
 然后之后就一直被赋值
 
 115
@@ -579,20 +570,17 @@ You can, instead of
 
 116
 00:04:49,031 --> 00:04:50,614
-putting a question mark
-in their decoration.
+putting a question mark in their decoration.
 在声明的地方加一个问号来代替
 
 117
 00:04:50,616 --> 00:04:52,683
-We're talking about
-their decoration here.
+We're talking about their decoration here.
 我们将在这里谈论他们的声明
 
 118
 00:04:52,685 --> 00:04:54,317
-You can put
-an exclamation point.
+You can put an exclamation point.
 你们可以在这里加一个感叹号
 
 119
@@ -607,32 +595,27 @@ This is just an optional, but
 
 121
 00:04:58,523 --> 00:05:03,625
-always automatically unwrap
-it so that you don't have to
+always automatically unwrap it so that you don't have to
 它会自动解开为了让你不用
 
 122
 00:05:03,627 --> 00:05:06,261
-put this exclamation
-point in here.
+put this exclamation point in here.
 在这里加感叹号
 
 123
 00:05:06,263 --> 00:05:07,695
-So I take this
-exclamation point out.
+So I take this exclamation point out.
 所以，我把这里的感叹号删掉了
 
 124
 00:05:07,697 --> 00:05:09,764
-You can see, it's not
-generating any errors.
+You can see, it's not generating any errors.
 你们可以看到，它将不再报错
 
 125
 00:05:10,933 --> 00:05:15,735
-And it's still going to
-unwrap this display and
+And it's still going to unwrap this display and
 它将把display转化成
 
 126
@@ -647,32 +630,27 @@ And.
 
 128
 00:05:18,840 --> 00:05:21,006
-It's still gonna crash
-your program if for
+It's still gonna crash your program if for
 它还是会崩溃由于
 
 129
 00:05:21,008 --> 00:05:22,307
-some reason
-the display were nil.
+some reason the display were nil.
 某些原因比如display是nil
 
 130
 00:05:22,309 --> 00:05:25,110
-If you tried to execute
-this code, that may
+If you tried to execute this code, that may
 如果你执意要执行这段代码，那是
 
 131
 00:05:25,112 --> 00:05:28,146
-be impossible because this
-is the button sending those.
+be impossible because this is the button sending those.
 不可能的，因为这里是由按钮来发送这些的
 
 132
 00:05:28,148 --> 00:05:31,716
-So the button wouldn't be here
-if this hadn't gotten already
+So the button wouldn't be here if this hadn't gotten already
 这个按钮不会在这里除非它加载的时候
 
 133
@@ -682,56 +660,47 @@ loaded up in the set.
 
 134
 00:05:33,819 --> 00:05:35,919
-But if somehow you had some
-place in your controller or
+But if somehow you had some place in your controller or
 但是如果在某种情况下你必须
 
 135
 00:05:35,921 --> 00:05:39,589
-you were accessing display
-before this UI got loaded.
+you were accessing display before this UI got loaded.
 在UI加载之前你要获取display
 
 136
 00:05:39,591 --> 00:05:42,158
-It would crash,
-because it is unwrapping this,
+It would crash, because it is unwrapping this,
 它将崩溃，因为它还没有解开联系
 
 137
 00:05:42,160 --> 00:05:44,327
-it's just that you don't have
-to put the explanation point,
+it's just that you don't have to put the explanation point,
 你不需要在这里写感叹号
 
 138
 00:05:44,329 --> 00:05:46,629
-it's kinda like auto
-explanation point.
+it's kinda like auto explanation point.
 它会自动解析
 
 139
 00:05:46,631 --> 00:05:51,066
-And, this is called a
-implicitly unwrapped optional.
+And, this is called a implicitly unwrapped optional.
 这个就叫做unwrapped optional
 
 140
 00:05:51,068 --> 00:05:53,968
-Okay?
-Implicitly unwrapped optional.
+Okay? Implicitly unwrapped optional.
 有问题嘛？隐式unwrapped optional
 
 141
 00:05:53,970 --> 00:05:56,704
-And it's really only useful
-for this kind, of property,
+And it's really only useful for this kind, of property,
 在这种情况下它真的很有用对于属性来说
 
 142
 00:05:56,706 --> 00:06:00,274
-that's, set very early, and
-then stay set, forever.
+that's, set very early, and then stay set, forever.
 在创建的时候就赋值，那么将一直被赋值
 
 143
@@ -746,32 +715,27 @@ Okay, so let's move on
 
 145
 00:06:07,248 --> 00:06:11,117
-to the next button in
-our [INAUDIBLE] here.
+to the next button in our [INAUDIBLE] here.
 接着下一个按钮
 
 146
 00:06:11,119 --> 00:06:13,285
-Which is going to
-be an enter button.
+Which is going to be an enter button.
 它就是Enter键
 
 147
 00:06:13,287 --> 00:06:16,655
-Now our calculator does
-not have an equals sign.
+Now our calculator does not have an equals sign.
 现在我们的计算器还没有等号
 
 148
 00:06:16,657 --> 00:06:18,223
-So you're probably used
-to calculators where you
+So you're probably used to calculators where you
 你们也许通常会这样使用计算器
 
 149
 00:06:18,225 --> 00:06:21,726
-say six plus three then when
-you hit equals it shows you
+say six plus three then when you hit equals it shows you
 6乘以3，然后你们按等号计算器展示
 
 150
@@ -786,8 +750,7 @@ This calculator is
 
 152
 00:06:24,913 --> 00:06:26,796
-a little more like
-a scientific calculator.
+a little more like a scientific calculator.
 更像科学计算器
 
 153
@@ -797,38 +760,32 @@ Has an enter key.
 
 154
 00:06:27,566 --> 00:06:31,668
-And so, instead you put
-the numbers you want to add or
+And so, instead you put the numbers you want to add or
 那么，你们按你们想相加的数字按钮或者
 
 155
 00:06:31,670 --> 00:06:35,671
-divide or multiply or whatever
-onto a stack and then when you
+divide or multiply or whatever onto a stack and then when you
 除以或者乘以无论什么都将会入栈，然后当你
 
 156
 00:06:35,673 --> 00:06:38,440
-press the operation keys it
-pulls them off the stack.
+press the operation keys it pulls them off the stack.
 按下操作按钮的时候，数字将会出栈
 
 157
 00:06:38,442 --> 00:06:43,011
-So that looks like this,
-6 enter 3 times.
+So that looks like this, 6 enter 3 times.
 比如这样 6 乘以 3
 
 158
 00:06:43,013 --> 00:06:45,279
-Four, six, enter,
-three, enter, times.
+Four, six, enter, three, enter, times.
 4 6 乘以 3
 
 159
 00:06:45,281 --> 00:06:48,449
-So the times is going
-to pull the six and
+So the times is going to pull the six and
 这个乘法操作符将会把6 和 
 
 160
@@ -838,9 +795,8 @@ the three off the stack.
 
 161
 00:06:50,736 --> 00:06:53,020
-You could even go six, enter,
-five, enter, four, enter, and
-你也可以按6，？，5， ？4？然后
+You could even go six, enter, five, enter, four, enter, and
+你也可以按6，回车，5，回车，4， 回车，然后
 
 162
 00:06:53,022 --> 00:06:54,521
@@ -849,8 +805,7 @@ then go times plus.
 
 163
 00:06:55,590 --> 00:06:58,624
-That would multiply the top
-two on the stack and
+That would multiply the top two on the stack and
 它将会把栈顶的两个元素出栈
 
 164
@@ -860,32 +815,27 @@ then add the last one on.
 
 165
 00:07:01,829 --> 00:07:04,629
-So we need an enter key
-here for our calculator.
+So we need an enter key here for our calculator.
 所以我们的计算器还是需要一个Enter键
 
 166
 00:07:04,631 --> 00:07:06,798
-Now, I'm gonna create that
-enter key in a way that's 
+Now, I'm gonna create that enter key in a way that's 
 现在，我将要通过这种方式创建一个enter键
 
 167
 00:07:06,800 --> 00:07:09,367
-actually gonna cause a problem
-for me in a moment, but
+actually gonna cause a problem for me in a moment, but
 它虽然会引起一些问题，但是
 
 168
 00:07:09,369 --> 00:07:12,370
-I wanna show you how to
-resolve that very problem.
+I wanna show you how to resolve that very problem.
 我将会展示给你们看如何解决这些问题
 
 169
 00:07:12,372 --> 00:07:16,039
-So I'm gonna create this enter
-key by copying and pasting.
+So I'm gonna create this enter key by copying and pasting.
 那么，我将通过复制粘贴
 
 170
@@ -895,8 +845,7 @@ This digit key right here.
 
 171
 00:07:18,610 --> 00:07:19,475
-And I'm just gonna
-put it in here.
+And I'm just gonna put it in here.
 那么我将会把这段代码放在这里
 
 172
@@ -906,74 +855,62 @@ Notice that I'm lining these,
 
 173
 00:07:22,113 --> 00:07:23,745
-blue lines up
-absolutely perfectly.
+blue lines up absolutely perfectly.
 蓝色的辅助线出现最好
 
 174
 00:07:23,747 --> 00:07:27,315
-I don't want them to be, like
-it's lined up with that one,
+I don't want them to be, like it's lined up with that one,
 我不想这些按钮像这个一样
 
 175
 00:07:27,317 --> 00:07:28,750
-but not that one or
-vice versa.
+but not that one or vice versa.
 或者那个一样
 
 176
 00:07:28,752 --> 00:07:30,685
-I want them
-perfectly lined up.
+I want them perfectly lined up.
 我希望它完全对齐
 
 177
 00:07:30,687 --> 00:07:33,520
-Cuz later I'm gonna spread
-these out over the whole UI
-因为我待会要在整个UI中放大这些按钮
+Cuz later I'm gonna spread these out over the whole UI
+因为我待会要在整个 UI 中放大这些按钮
 
 178
 00:07:33,522 --> 00:07:37,057
-and if I haven't lined these
-up just absolutely perfectly
+and if I haven't lined these up just absolutely perfectly
 如果我没有将这些按钮对齐的话
 
 179
 00:07:37,059 --> 00:07:39,693
-then Expo's not gonna quite
-know what I want here in Xcode
+then Expo's not gonna quite know what I want here in Xcode
 将不会知道我想把它放在这里
 
 180
 00:07:39,695 --> 00:07:41,828
-terms of the relationship
-between these.
+terms of the relationship between these.
 在这个和这个之间
 
 181
 00:07:43,264 --> 00:07:46,999
-All right so we don't want a
-three on here, we want to have
+All right so we don't want a three on here, we want to have
 好了，我们不希望这个按钮上还是3，所以我们需要修改一下
 
 182
 00:07:47,001 --> 00:07:52,237
-a,enter symbol so I'm gonna go
-up here to special characters.
+a,enter symbol so I'm gonna go up here to special characters.
 一个enter的符号，我将输入一个特殊的符号
 
 183
 00:07:52,239 --> 00:07:54,505
-This is on in most
-Mac applications.
-这个符号在很多的Mac应用中都有
+This is on in most Mac applications.
+这个符号在很多的 Mac 应用中都有
 
 184
 00:07:54,507 --> 00:07:57,174
-You can go to the edit menu
-to get special characters.
+You can go to the edit menu to get special characters.
 你们可以从编辑菜单中获取这些特殊符号
 
 185
@@ -983,8 +920,7 @@ And I'm going to search for
 
 186
 00:07:58,344 --> 00:08:00,510
-this one actually, I think
-that's called a return.
+this one actually, I think that's called a return.
 这个特殊符号，我觉得它应该叫返回
 
 187
@@ -999,14 +935,12 @@ Unicode字符
 
 189
 00:08:04,616 --> 00:08:06,615
-And so
-I want this one that looks,
+And so I want this one that looks,
 我想要这个
 
 190
 00:08:06,617 --> 00:08:09,551
-kind of like a return or
-enter key.
+kind of like a return or enter key.
 看起来像返回或者enter按钮的
 
 191
@@ -1016,20 +950,18 @@ So I have this.
 
 192
 00:08:11,688 --> 00:08:13,721
-And I'm gonna use the same
-mechanism we used before,
+And I'm gonna use the same mechanism we used before,
 我将使用之前使用过的机制
 
 193
 00:08:13,723 --> 00:08:14,822
 which is CTRL+drag.
-那就是CTRL+drag
+那就是 CTRL+drag
 
 194
 00:08:14,824 --> 00:08:18,958
-So I'm just gonna
-CTRL+drag out here.
-那么我想CTRL+drag拖到这里
+So I'm just gonna CTRL+drag out here.
+那么我想 CTRL+drag 拖到这里
 
 195
 00:08:18,960 --> 00:08:21,027
@@ -1038,37 +970,32 @@ And, we're creating an action,
 
 196
 00:08:21,029 --> 00:08:24,196
-of course, cuz we want this
-button to send us a message.
+of course, cuz we want this button to send us a message.
 当然，我们希望这个按钮传递给我们一个信息
 
 197
 00:08:24,198 --> 00:08:25,431
-I'm gonna call it Enter.
-我讲叫它Enter
+I'm gonna call it "enter".
+我讲叫它 “enter”
 
 198
 00:08:26,700 --> 00:08:28,333
-That's what it is
-the answer key
+That's what it is the answer key
 那就是我们的返回键.
 
 199
 00:08:28,335 --> 00:08:30,134
-Now one thing is
-different about this one,
+Now one thing is different about this one,
 现在有一件事会有一点不同
 
 200
 00:08:30,136 --> 00:08:32,470
-if you'll remember when
-we wired this action up,
-如果你记得当我们连接这个action的时候
+if you'll remember when we wired this action up,
+如果你记得当我们连接这个 action 的时候
 
 201
 00:08:32,472 --> 00:08:35,906
-we had the button that was
-sending it as an argument and
+we had the button that was sending it as an argument and
 我们让这个按钮传递给我们一个参数
 
 202

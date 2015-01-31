@@ -3808,222 +3808,162 @@ property, right here in our controller.
 
 801
 00:40:47,204 --> 00:40:51,339
- So this is a great opportunity 
-           to look at           
-    the syntax in Swift for     
+So this is a great opportunity to look at the syntax in Swift for     
 在Swift中这个语法就是
 
 802
 00:40:51,341 --> 00:40:54,109
-      creating a property.      
+creating a property.      
 创建一个属性 
 
 803
 00:40:54,110 --> 00:40:56,878
- And there's a couple of things 
-            on here             
- that are not normally part of  
-              it.               
+And there's a couple of things on here that are not normally part of it.               
 这里有几件事情通常都不是它的一部分 
 
 804
 00:40:56,880 --> 00:41:02,516
-This is you, the main syntax for
-            creating            
-          a property.           
+This is you, the main syntax for creating a property.           
 这是你的主要语法创建一个属性 
 
 805
 00:41:02,518 --> 00:41:04,418
-Let's quickly look at this thing
-           to get it            
-        out of the way.         
+Let's quickly look at this thing to get it out of the way.         
 我们快速的了解下这个get方法 
 
 806
 00:41:04,420 --> 00:41:07,454
- This is not really part of the 
-             Swift              
-        language proper.        
+This is not really part of the Swift language proper.        
 这不是Swift真正语言的一部分 
 
 807
 00:41:07,456 --> 00:41:09,555
-This is something Xcode puts in 
-            here so     
+This is something Xcode puts in here so     
 这是Xcode将在这里
 
 808
 00:41:09,557 --> 00:41:14,526
-that this little circle, do you 
-            see the             
- little circle in this gutter,  
-            appears?     
+that this little circle, do you see the little circle in this gutter, appears?     
 这个小圆圈，你可以看到这个小圆圈出现在这里 
 
 809
 00:41:14,528 --> 00:41:18,463
-This little circle when I mouse 
-            over it,            
-     look what Xcode does.      
+This little circle when I mouse over it, look what Xcode does.      
 当我把鼠标移动到上面时候，看看Xcode的变化 
 
 810
 00:41:18,465 --> 00:41:21,933
- It shows me what this line of  
-            code is             
-         connected to.          
+It shows me what this line of code is connected to.          
 它展示了我选中的代码所连接的UI 
 
 811
 00:41:21,935 --> 00:41:23,852
-             'Kay?              
-   So that's really cool, and   
+'Kay? So that's really cool, and   
 这看起来非常酷，
 
 812
 00:41:23,853 --> 00:41:25,770
- you're gonna see that's really 
-            valuable            
-      later in this demo,   
+you're gonna see that's really valuable later in this demo,   
 在这个demo中这是非常有用的，
 
 813
 00:41:25,772 --> 00:41:27,838
- is being able to find out what 
-           things are           
-         connected to.         
+is being able to find out what things are connected to.         
 它能找到我们连接的是什么控件 
 
 814
 00:41:27,840 --> 00:41:29,773
- So that's all this thing means 
-             here.              
+So that's all this thing means here.              
 这个就是它所展示的意义 
 
 815
 00:41:29,775 --> 00:41:33,777
-You, you, you don't type this in
-           yourself,            
-that when you Ctrl+drag, it puts
-           it there.            
+You, you, you don't type this in yourself, that when you Ctrl+drag, it puts it there.            
 当你Ctrl+点击拖动时候你不清楚是什么类型，它所说的 
 
 816
 00:41:33,779 --> 00:41:38,748
-This weak, all you, you, if you 
-           come from            
-        other languages,   
+This weak, all you, you, if you come from other languages,   
 这个weak，如果你从其他语言过来到      
 
 817
 00:41:38,750 --> 00:41:44,653
-   you're used to things like   
-            garbage             
-collection to clean up the heap.
+you're used to things like garbage collection to clean up the heap.
 你会使用过类似的垃圾回收机制 
 
 818
 00:41:44,655 --> 00:41:46,288
-Or maybe you even have to alloc 
-              and               
+Or maybe you even have to alloc and               
 或者你也许习惯自己分配和
 
 819
 00:41:46,290 --> 00:41:50,258
-free things yourself manually in
-              some              
-           languages.           
+free things yourself manually in some languages.           
 释放管理在一些语言中 
 
 820
 00:41:50,260 --> 00:41:51,792
-     None of that in Swift.     
+None of that in Swift.     
 在Swift中是没有的 
 
 821
 00:41:51,794 --> 00:41:54,828
-In Swift, the, all objects live 
-             in the             
-          heap, 'kay.   
+In Swift, the, all objects live in the heap, 'kay.   
 在Swift中，所有的对象都在堆中         
 
 822
 00:41:54,830 --> 00:41:58,398
-  All class, the instances of   
-          classes live          
-          in the heap.   
+All class, the instances of classes live in the heap.   
 所有类，类的实例都存在类的堆中 
 
 823
 00:41:58,400 --> 00:42:02,335
-   And the memory for them is   
-          managed for           
-           you, 'kay?           
+And the memory for them is managed for you, 'kay?           
 替你进行了内存管理 
 
 824
 00:42:02,337 --> 00:42:05,371
-You allocate them as much as you
-            want, as            
- soon as there's no pointers to 
-             them,       
+You allocate them as much as you want, as soon as there's no pointers to them,       
 你分配他们尽可能多的你想要的，只要没有了指针指向它们，
 
 825
 00:42:05,373 --> 00:42:08,274
- they get cleaned up, and it's  
-          not garbage           
-       collection, 'kay?
+they get cleaned up, and it's not garbage collection, 'kay?
 它们会自动清理，不需要垃圾回收    
 
 826
 00:42:08,276 --> 00:42:10,493
-    It's reference counting.    
+It's reference counting.    
 这就是引用计数 
 
 827
 00:42:10,494 --> 00:42:12,711
-     It's actually counting     
-       references to them       
-    but it's all automatic.     
+It's actually counting references to them but it's all automatic.     
 它实际上是计算引用他们的次数，但这都是自动的 
 
 828
 00:42:12,713 --> 00:42:16,548
-The only thing you ever have to 
-            be maybe            
-   interested in is this weak   
-         business which         
+The only thing you ever have to be maybe interested in is this weak business which         
 你曾经也许唯一感兴趣的是这个weak的功能，
 
 829
 00:42:16,550 --> 00:42:19,851
- is less than a hundredth of a  
-           percent of           
-           the time.            
+is less than a hundredth of a percent of the time.            
 在小于百分之一的时间 
 
 830
 00:42:19,853 --> 00:42:23,788
-And for the first four weeks of 
-              this              
-   class, forget about weak.   
+And for the first four weeks of this class, forget about weak.   
 前四周的课程中，忘掉有关weak的吧  
 
 831
 00:42:23,790 --> 00:42:27,591
-It'll automatically happen when 
-             you do             
-this Ctrl+drag, but just ignore 
-              it.               
+It'll automatically happen when you do this Ctrl+drag, but just ignore it.               
 当你使用Ctrl+点击拖动时候，它会自动完成，所以先忽略这个吧 
 
 832
 00:42:27,593 --> 00:42:29,560
- But the main thing to know is  
-            that all            
-          that memory           
+But the main thing to know is that all that memory           
 但是最主要的事情是知道有关内存管理
 
 833
@@ -4033,487 +3973,379 @@ management is happening for you.
 
 834
 00:42:31,130 --> 00:42:34,330
-  Also this, instance variable  
-          right here,           
+Also this, instance variable right here,           
 同时，实例变量在这里，
 
 835
 00:42:34,332 --> 00:42:38,267
-   which is a pointer to this   
-         object, notice         
-    there's no ampersands or   
+which is a pointer to this object, notice there's no ampersands or   
 通过一个指针指向对象，注意到没有与符号或
 
 836
 00:42:38,269 --> 00:42:42,271
-   stars or any other kind of   
-          syntax that           
-    says this is a pointer.     
+stars or any other kind of syntax that says this is a pointer.     
 星或者其他任何语法说这是一个指针 
 
 837
 00:42:42,273 --> 00:42:44,406
-             'Kay?              
+'Kay?              
 
 838
 00:42:44,407 --> 00:42:46,540
-If you have a instance, variable
-               or               
-          property or  
+If you have a instance, variable or property or  
 如果你有一个实例变量或属性或         
 
 839
 00:42:46,543 --> 00:42:48,910
-   local variable that is an    
-         object, okay,    
+local variable that is an object, okay,    
 局部变量都是一个对象 
 
 840
 00:42:48,912 --> 00:42:52,980
-it's always a pointer to it cuz 
-            objects             
-  only live in the heap, 'kay?  
+it's always a pointer to it cuz objects only live in the heap, 'kay?  
 它总是一个指针，因为对象只在堆中存在着 
 
 841
 00:42:52,982 --> 00:42:54,648
-So you don't need all that extra
-           stars and            
+So you don't need all that extra stars and            
 所以不需要多余的*和&，
 
 842
 00:42:54,650 --> 00:42:57,184
-ampersand, any of that business 
-           from other           
-        languages, okay?        
+ampersand, any of that business from other languages, okay?        
 不要从其他语言中借鉴 
 
 843
 00:42:58,286 --> 00:43:01,587
- This exclamation point, by the 
-            way, I'm            
-   gonna talk about in a few    
-            minutes,            
+This exclamation point, by the way, I'm gonna talk about in a few minutes,            
 这个感叹号，顺便说一下，我要谈几分钟
 
 844
 00:43:01,589 --> 00:43:04,023
-  has nothing to do with this   
-            being an            
-         object, okay?          
+has nothing to do with this being an object, okay?          
 这是和对象不相关的 
 
 845
 00:43:04,025 --> 00:43:05,858
- This is, this totally separate 
-             thing.             
+This is, this totally separate thing.             
 这完全不相干的事情 
 
 846
 00:43:05,860 --> 00:43:07,092
-        We'll get to it.        
+We'll get to it.        
 我们会得到它 
 
 847
 00:43:07,094 --> 00:43:08,043
-           All right.           
+All right.           
 
 848
 00:43:08,044 --> 00:43:08,993
-     So let's look at this.     
+So let's look at this.     
 让我们看看这个 
 
 849
 00:43:08,995 --> 00:43:15,166
-This is the syntax for defining 
-               a                
-        property, 'kay?         
+This is the syntax for defining a property, 'kay?         
 这个语法是定义了一个属性，对吗？
 
 850
 00:43:15,168 --> 00:43:16,066
-     An instance variable.      
+An instance variable.      
 一个实例变量 
 
 851
 00:43:16,068 --> 00:43:18,519
-     And it's very simple.   
+And it's very simple.   
 并且它是如此的简单 
 
 852
 00:43:18,520 --> 00:43:20,971
-You got var, short for variable 
-           cuz that's           
-   what this is, a variable.    
+You got var, short for variable cuz that's what this is, a variable.    
 你看到var，它是变量的缩写 
 
 853
 00:43:20,973 --> 00:43:23,473
- The name, this is the name of  
-          it, display.          
+The name, this is the name of it, display.          
 这是变量的名称，display
 
 854
 00:43:23,475 --> 00:43:25,475
-             Okay?              
-  That's just the name of this  
-           property.    
+Okay? That's just the name of this property.    
 这个属性的名字是这个         
 
 855
 00:43:25,477 --> 00:43:26,909
-       And then :UILabel!       
+And then :UILabel!       
 紧接着就是UILabel 
 
 856
 00:43:26,911 --> 00:43:28,510
-       Is the type, 'kay?       
+Is the type, 'kay?       
 这个是它的类型 
 
 857
 00:43:28,512 --> 00:43:33,815
-That's the type of this instance
-           variable.            
+That's the type of this instance variable.            
 这个类似是这个实例变量的 
 
 858
 00:43:33,817 --> 00:43:38,452
- So again, I'll talk about the  
-          exclamation           
-        point later, but        
+So again, I'll talk about the exclamation point later, but        
 我稍后会讲到那个感叹号，但
 
 859
 00:43:38,454 --> 00:43:42,389
-obviously this thing is pointing
-            to this             
-label so that we can talk to it.
+obviously this thing is pointing to this label so that we can talk to it.
 很明显，这是指向label的，我们能这样说 
 
 860
 00:43:42,391 --> 00:43:43,590
-  And we'll be doing that in a  
-            moment.             
+And we'll be doing that in a moment.             
 我们能够这样去做 
 
 861
 00:43:43,592 --> 00:43:44,424
-             'Kay?              
+'Kay?              
 
 862
 00:43:44,426 --> 00:43:46,325
-           Questions?           
+Questions?           
 有什么疑问吗？
 
 863
 00:43:46,327 --> 00:43:49,962
-  All right, let's talk about   
-          another kind          
-     of connection we may,      
+All right, let's talk about another kind of connection we may,      
 好的，让我们来谈谈另一种连接，
 
 864
 00:43:49,964 --> 00:43:52,364
-we can make, let's start putting
-              some              
-   buttons in our calculator.
+we can make, let's start putting some buttons in our calculator.
 我们可以，让我们开始放一些计算器的按钮吧 
 
 865
 00:43:52,366 --> 00:43:55,100
-  So I'm gonna go back to the   
-           Utilities            
-         window, 'kay?          
+So I'm gonna go back to the Utilities window, 'kay?          
 我将要打开这个工具窗口 
 
 866
 00:43:55,102 --> 00:43:56,734
-  By pressing this button over  
-             here,              
+By pressing this button over here,              
 按下这个按钮，
 
 867
 00:43:56,736 --> 00:44:00,705
-go down to the bottom, go to the
-           third tab            
- over here, the object library. 
+go down to the bottom, go to the third tab over here, the object library. 
 找到下方的第三个选项的对象目录 
 
 868
 00:44:00,707 --> 00:44:04,775
-  And instead of a label, this  
-            time I'm            
-    gonna drag out a button.  
+And instead of a label, this time I'm gonna drag out a button.  
 这次拖的不是label，我将要拖动出来一个按钮 
 
 869
 00:44:04,777 --> 00:44:07,143
-             Okay?              
- I'm gonna put this button here 
-              now.       
+Okay? I'm gonna put this button here now.       
 现在我要把这个按钮放到这里        
 
 870
 00:44:07,145 --> 00:44:11,414
- Just to be different, I'm not  
-             gonna              
-initially line it up with a blue
-             line.              
+Just to be different, I'm not gonna initially line it up with a blue line.              
 有些不同，我没有初始化蓝色的线 
 
 871
 00:44:11,416 --> 00:44:14,283
- I'm just gonna put it kinda in 
-           space out            
-            here and   
+I'm just gonna put it kinda in space out here and   
 我只是想把它放在这个空间中，
 
 872
 00:44:14,285 --> 00:44:17,119
- I'll line it up with the blue  
-          line later,           
-             'kay?              
+I'll line it up with the blue line later, 'kay?              
 将它放在蓝线的下面 
 
 873
 00:44:17,121 --> 00:44:19,487
- But I don't wanna forget to do 
-              that              
-though, I always wanna do that. 
+But I don't wanna forget to do that though, I always wanna do that. 
 但我不会忘记做，我总是期望这样 
 
 874
 00:44:19,489 --> 00:44:22,724
- What I'm gonna do later is to  
-          show you it           
-          can be done.          
+What I'm gonna do later is to show you it can be done.          
 以后我要做的就是告诉你这是可以做到的 
 
 875
 00:44:22,726 --> 00:44:26,127
-So, this is gonna be, let's say 
-            this is             
-   gonna be one of our number   
-            buttons.           
+So, this is gonna be, let's say this is gonna be one of our number buttons.           
 接着，我们可以说这就是一个数字按钮 
 
 876
 00:44:26,129 --> 00:44:30,197
- Like the upper left corner of  
-           our keypad           
-            is a 7.             
+Like the upper left corner of our keypad is a 7.             
 就像键盘左上角的数字7 
 
 877
 00:44:30,199 --> 00:44:31,598
-             Okay?              
+Okay?              
 
 878
 00:44:31,599 --> 00:44:32,998
-  Again, I have the same thing  
-           over here.      
+Again, I have the same thing over here.      
 我还需要其他的一些      
 
 879
 00:44:33,001 --> 00:44:35,368
-             Okay?              
-With the attributes inspector I 
-              can               
+Okay? With the attributes inspector I can               
 通过属性设置，我能够
 
 880
 00:44:35,370 --> 00:44:37,203
-  change things like the font.  
+change things like the font.  
 修改一些字体大小什么的 
 
 881
 00:44:37,205 --> 00:44:40,872
-  Let's make this be 24 point,  
-           let's say.     
+Let's make this be 24 point, let's say.     
 让我们尝试下尺寸为24的 
 
 882
 00:44:40,874 --> 00:44:42,791
-         I can resize.          
+I can resize.          
 我能够修改尺寸 
 
 883
 00:44:42,792 --> 00:44:44,709
-  Notice that when I resize it  
-         will actually          
-       tell me the size,        
+Notice that when I resize it will actually tell me the size,        
 注意，当我调整它时候，会显示尺寸 
 
 884
 00:44:44,711 --> 00:44:46,978
-see it saying there what size it
-              is?               
+see it saying there what size it is?               
 看到它说这是多大的尺寸
 
 885
 00:44:46,980 --> 00:44:50,381
- I can also set the size maybe  
-           with this            
-   size inspector right here,   
+I can also set the size maybe with this size inspector right here,   
 我还可以在设置尺寸这里修改，
 
 886
 00:44:50,383 --> 00:44:51,348
-      type it in exactly.       
+type it in exactly.       
 类型的准备 
 
 887
 00:44:51,350 --> 00:44:53,517
- Maybe 64 by 64, something like 
-             that.              
+Maybe 64 by 64, something like that.              
 也许64 x 64 看起来更合适 
 
 888
 00:44:53,519 --> 00:44:54,918
-   We don't usually do that.  
+We don't usually do that.  
 我们通常不这样做 
 
 889
 00:44:54,920 --> 00:44:57,587
-We want things to be kinda their
-            natural             
-           sizes but            
+We want things to be kinda their natural sizes but            
 我们希望它能够是原始的大小，但
 
 890
 00:44:57,589 --> 00:45:01,156
-just want to show you that there
-           are other            
-     inspectors over here.      
+just want to show you that there are other inspectors over here.      
 这里只想向你展示有其他的方法 
 
 891
 00:45:01,158 --> 00:45:02,491
-       So we have this 7.       
+So we have this 7.       
 所以我们有这个7 
 
 892
 00:45:02,493 --> 00:45:05,460
-Now when this 7 is pressed, what
-             do we              
-        want to happen?         
+Now when this 7 is pressed, what do we want to happen?         
 当7被按下的时候，会发生什么呢？
 
 893
 00:45:05,462 --> 00:45:07,963
-         What we want.          
+What we want.          
 我们想要的 
 
 894
 00:45:07,964 --> 00:45:10,465
-Numbers just start appearing up 
-            here in             
-      the display, right?    
+Numbers just start appearing up here in the display, right?    
 数字出现在需要展示的地方    
 
 895
 00:45:10,467 --> 00:45:13,000
-    So that's something our     
-         controller is          
-      going to have to do. 
+So that's something our controller is going to have to do. 
 这就是我们的控制器不得不做的事 
 
 896
 00:45:13,002 --> 00:45:17,071
- So, when we touch this button, 
-            we kinda            
-   want this button to send a   
-           message to  
+So, when we touch this button, we kinda want this button to send a message to  
 当我们点击这个按钮，我们想让这个按钮发送信息到      
 
 897
 00:45:17,073 --> 00:45:21,307
- our controller, and we do that 
-           the exact            
-  same way as we did this one,  
+our controller, and we do that the exact same way as we did this one,  
 我们的控制器，跟之前的方式一样，
 
 898
 00:45:21,309 --> 00:45:25,911
-we hold down control, drag into 
-           our code.    
+we hold down control, drag into our code.    
 我们按住Ctrl，点击，拖动到代码中         
 
 899
 00:45:25,913 --> 00:45:29,248
-When we let go though, we're not
-            going to            
-an outlet connection this time, 
+When we let go though, we're not going to an outlet connection this time, 
 当我们松开时候，我们不想要outlet这个，
 
 900
 00:45:29,250 --> 00:45:34,085
-because I dont want an instance
-variable
-here, what i want is a method,
-right?
+because I dont want an instance variable here, what i want is a method, right?
 因为我不想要个实例变量，我要的是一个方法对吧？
 
 901
 00:45:34,087 --> 00:45:39,790
-A function on my class, a
-method, everyone
-understand the word method I
-hope,
+A function on my class, a method, everyone understand the word method I hope,
 我类里的一个函数，方法，我想大家都知道这个词的含义，
 
 902
 00:45:39,792 --> 00:45:44,161
-okay, so we want it to send an
-[INAUDIBLE]
-message to our control board, so
+okay, so we want it to send an [INAUDIBLE] message to our control board, so
 我们想让它发送一个消息给控制板
 
 
 903
 00:45:44,163 --> 00:45:48,831
-I'm going to pick" action",
-[COUGH] losing
-my voice here.
+I'm going to pick" action", [COUGH] losing my voice here.
 所以我选"action",[咳嗽] 有点失声 
 
 904
 00:45:48,833 --> 00:45:50,433
-Bad time to have a little cold,
-but. 
+Bad time to have a little cold, but. 
 关键时刻有点感冒...不过还好 
 
 905
 00:45:50,435 --> 00:45:52,968
-[SOUND] So I'm doing an action
-so
+[SOUND] So I'm doing an action so
 所以在这里我选了 action
 
 906
 00:45:52,970 --> 00:45:56,838
-an action is a little different
-than a
-outlet, okay?
+an action is a little different than a outlet, okay?
  action 跟outlet 略有不同  
 
 907
 00:45:56,840 --> 00:45:58,973
-An outlet means an instance
-variable or
+An outlet means an instance variable or
 outlet 代表一个实例变量
 
 908
 00:45:58,975 --> 00:46:01,909
-property, action means create a
-method for
-me.
+property, action means create a method for me.
 或者是一个属性，action 则是为我创建了一个方法 
 
 909
 00:46:01,911 --> 00:46:03,944
-So again it wants to know the
-name of the
-method.
+So again it wants to know the name of the method.
 所以紧接着它要我输入方法的名字 
 
 910
@@ -4523,31 +4355,22 @@ So what does this thing do?
 
 911
 00:46:05,514 --> 00:46:08,815
-Well when I press seven, it
-appends a
-digit onto the end of
+Well when I press seven, it appends a digit onto the end of
 当我按7 的时候，
 
 912
 00:46:08,817 --> 00:46:12,852
-whatever's already in the
-display, so I'm
-going to call it append,
+whatever's already in the display, so I'm going to call it append,
 不管原先显示着什么，都在后面加个7，所以我应该叫它 append...
 
 913
 00:46:12,854 --> 00:46:17,390
-I could call it append seven,
-but I'm
-actually going to call it append
-digit,
+I could call it append seven, but I'm actually going to call it append digit,
 本来应该叫做 append7，但我还是选择appendDigit，
 
 914
 00:46:17,392 --> 00:46:20,859
-because I want to have one
-method that all
-of my buttons use.
+because I want to have one method that all of my buttons use.
 因为我想所有的按钮都使用这个方法 
 
 915
@@ -4557,107 +4380,77 @@ All right?
 
 916
 00:46:23,329 --> 00:46:25,796
-I don't want to, copy and
-pasting a bunch
-of methods, that would be really
-bad code.
+I don't want to, copy and pasting a bunch of methods, that would be really bad code.
 我不想复制粘贴一堆雷同的方法，那样只会把代码变得一团糟 
 
 917
 00:46:27,400 --> 00:46:29,566
-But if I'm gonna have one
-method,
+But if I'm gonna have one method,
 相反我仅仅使用一个方法，
 
 918
 00:46:29,568 --> 00:46:33,437
-then I need to know which button
-is
-sending me this message, okay?
+then I need to know which button is sending me this message, okay?
 所以我就需要知道是哪个按钮发送的这个消息，对吧？
 
 919
 00:46:33,439 --> 00:46:37,073
-Luckily, when you haven't
-actioned a
-message being sent here,
+Luckily, when you haven't actioned a message being sent here,
 在这，这个弹出框里，
 
 920
 00:46:37,075 --> 00:46:40,977
-you can specify that it has
-arguments, you
-see right here where it says
-arguments?
+you can specify that it has arguments, you see right here where it says arguments?
 你可以规定它有没有参数，你看这里它写着arguments了么？
 
 921
 00:46:40,979 --> 00:46:45,414
-And it can have no arguments or
-it can
-have the sender.
+And it can have no arguments or it can have the sender.
 你可以选择没有参数，或者是 sender 
 
 922
 00:46:45,416 --> 00:46:48,483
-Which is the button here as the
-argument.
+Which is the button here as the argument.
 sender 的意思就是把这个按钮当作参数 
 
 923
 00:46:48,485 --> 00:46:52,787
-The only tricky thing here is,
-and I'm not
-sure why they did this in Xcode.
+The only tricky thing here is, and I'm not sure why they did this in Xcode.
 这里有点诡异，我不懂Xcode 为什么要这样 
 
 924
 00:46:52,789 --> 00:46:54,455
-Hopefully, they'll change it in
-the
-future.
+Hopefully, they'll change it in the future.
 希望他们以后能改进下 
 
 925
 00:46:54,457 --> 00:46:59,092
-By default, the type of that
-argument,
-which is right here, is any
-object.
+By default, the type of that argument, which is right here, is any object.
 就是参数的默认类型是 anyobject 
 
 926
 00:46:59,094 --> 00:47:01,961
-Now, we're gonna talk about any
-object
-next week.
+Now, we're gonna talk about any object next week.
 下周我们会讲什么是anyobject 
 
 927
 00:47:01,963 --> 00:47:04,330
-But, we don't want any object
-here.
+But, we don't want any object here.
 不过在这里我们肯定不要anyobject 
 
 928
 00:47:04,332 --> 00:47:06,599
-We know that the sender is a UI
-button, so
+We know that the sender is a UI button, so
 我们知道sender 其实是UIButton，
 
 929
 00:47:06,601 --> 00:47:09,935
-I picked, click this little blue
-thing and
-switch this to UI button.
+I picked, click this little blue thing and switch this to UI button.
 点这里选择UIButton 
 
 930
 00:47:09,937 --> 00:47:13,672
-When you're doing your homework,
-if you
-forget to switch that to UI
-button,
+When you're doing your homework, if you forget to switch that to UI button,
 如果你做作业的时候，忘了选成UIButton，
 
 931
@@ -4672,43 +4465,32 @@ So don't forget.
 
 933
 00:47:17,543 --> 00:47:21,978
-And obviously the event that the
-message
-is gonna be sent on, touch up
-inside,
+And obviously the event that the message is gonna be sent on, touch up inside,
 然后很明显，触发事件应该选为 touch up inside，
 
 934
 00:47:21,980 --> 00:47:25,448
-just means the user touched on
-this button
-and the touch went up.
+just means the user touched on this button and the touch went up.
 意思是你手落在按钮的范围内，手起也在按钮的范围内 
 
 935
 00:47:25,450 --> 00:47:27,116
-While it was still inside the
-button.
+While it was still inside the button.
 意思是你手落在按钮的范围内，手起也在按钮的范围内 
 
 936
 00:47:27,118 --> 00:47:29,952
-That's all a touch up inside
-means there.
+That's all a touch up inside means there.
 这就是touch up inside 的意思 
 
 937
 00:47:29,954 --> 00:47:32,021
-All right so when I connect
-this,
+All right so when I connect this,
 当我点了connect 以后， 
 
 938
 00:47:32,023 --> 00:47:35,824
-I'm gonna get a method with one
-argument
-which is a sender which is a UI
-button.
+I'm gonna get a method with one argument which is a sender which is a UI button.
 我就得到了一个方法，有一个参数，类型是UIButton 
 
 939
@@ -4718,54 +4500,42 @@ So let's take a look.
 
 940
 00:47:38,761 --> 00:47:41,695
-So here's your first method
-declaration in
-SWIFT, okay?
+So here's your first method declaration in SWIFT, okay?
 它就是你的第一个SWIFT函数 
 
 941
 00:47:41,698 --> 00:47:46,133
-Again it's got this little IB
-action thing
-which is kinda like IB outlet.
+Again it's got this little IB action thing which is kinda like IB outlet.
 同样这里有一个叫IBAction的东西，跟IBOutlet 类似 
 
 942
 00:47:46,135 --> 00:47:47,967
-It puts a little dot in the
-gutter.
+It puts a little dot in the gutter.
 左边有一个小圆点 
 
 943
 00:47:49,104 --> 00:47:50,436
-Okay?
-So that you can
+Okay? So that you can
 这样你就可以看见它连的是哪里 
 
 944
 00:47:50,438 --> 00:47:52,938
-see what this thing is connected
-to.
+see what this thing is connected to.
 这样你就可以看见它连的是哪里 
 
 945
 00:47:52,940 --> 00:47:59,010
-So this is the normal, Swift
-method
-syntax.
+So this is the normal, Swift method syntax.
 这个就是Swift 定义方法的标准语法 
 
 946
 00:47:59,012 --> 00:48:02,213
-Starts with func because
-function,
+Starts with func because function,
 以func 开头，取了function的缩写 
 
 947
 00:48:02,215 --> 00:48:04,215
-basically that method is a
-function in
-class.
+basically that method is a function in class.
 它就是我们类里的一个函数了 
 
 948
@@ -4780,29 +4550,22 @@ Append digit.
 
 950
 00:48:07,920 --> 00:48:10,987
-And then in parentheses, all the
-arguments
-separated by commas.
+And then in parentheses, all the arguments separated by commas.
 在括号里，所有参数都用逗号分隔 
 
 951
 00:48:10,989 --> 00:48:12,989
-We only have one argument,
-though.
+We only have one argument, though.
 我们这只有一个参数 
 
 952
 00:48:12,991 --> 00:48:15,057
-Here's the name of the first
-argument.
+Here's the name of the first argument.
 这个是第一个参数的名字 
 
 953
 00:48:15,059 --> 00:48:18,860
-That's the name we're going to
-use to
-access it inside of our method,
-and
+That's the name we're going to use to access it inside of our method, and
 我们在函数体里就要用到这个名字，
 
 954
@@ -4812,53 +4575,39 @@ here is the type.
 
 955
 00:48:21,264 --> 00:48:22,496
-Okay?
-It's a UI button.
+Okay? It's a UI button.
 懂了么？类型是UIButton 
 
 956
 00:48:22,498 --> 00:48:24,598
-I, notice no exclamation point
-there, by
-the way.
+I, notice no exclamation point there, by the way.
 顺便提下，要注意到这里是没有叹号的 
 
 957
 00:48:26,535 --> 00:48:31,237
-Okay if this had a return value,
-if this
-method returned something this
-one doesn't
+Okay if this had a return value, if this method returned something this one doesn't
 如果这个函数有返回值，虽然这里没有 
 
 958
 00:48:31,239 --> 00:48:36,208
-[COUGH] but if it returned
-something, it
+[COUGH] but if it returned something, it
 would look like this arrow the
 return type
 我说的是如果它有的话，这里就写这样的箭头 
 
 959
 00:48:37,745 --> 00:48:40,311
-okay so that's how you specify a
-return
-type.
+okay so that's how you specify a return type.
 这样就定义了它的返回类型 
 
 960
 00:48:42,215 --> 00:48:48,185
-Okay, pretty simple the syntax
-and then
-inside here we just type,
+Okay, pretty simple the syntax and then inside here we just type,
 看见了么？非常简单的语法 
 
 961
 00:48:48,187 --> 00:48:51,822
-well whatever we want this thing
-to do
-when one of these buttons is
-touched.
+well whatever we want this thing to do when one of these buttons is touched.
 继续看我们的函数，当点击了其中一个按钮，
 
 962
@@ -4868,24 +4617,18 @@ So what do we want it to do?
 
 963
 00:48:53,775 --> 00:48:55,725
-Well, okay, first of all before
-we do
-that, let's go ahead and make
-more of
+Well, okay, first of all before we do that, let's go ahead and make more of
 在此之前，我们先多弄几个按钮 
 
 964
 00:48:55,727 --> 00:48:58,928
-these buttons because I need
-seven, eight,
-nine, four, five, six, all this.
- 我们还需要其他的按钮，4,5,6,7 这些 
+these buttons because I need seven, eight, nine, four, five, six, all this.
+我们还需要其他的按钮，4,5,6,7 这些 
 
 965
 00:48:58,930 --> 00:49:01,664
-So let's copy and paste the
-button.
- 可以复制粘贴 
+So let's copy and paste the button.
+可以复制粘贴 
 
 966
 00:49:01,666 --> 00:49:04,400
@@ -4894,51 +4637,37 @@ When I copy and
 
 967
 00:49:04,401 --> 00:49:07,135
-paste the button, notice I'm
-using the
-blue lines to put it perfectly
-lined up.
+paste the button, notice I'm using the blue lines to put it perfectly lined up.
 注意我用这些蓝线来对齐 
 
 968
 00:49:07,138 --> 00:49:11,373
-Okay, also notice that it there
-also
-sending this message.
+Okay, also notice that it there also sending this message.
 注意，他们都发送同一个消息，触发同一个函数 
 
 969
 00:49:11,375 --> 00:49:14,776
-All right, see how their both
-sending the
-message, because when I copy and
+All right, see how their both sending the message, because when I copy and
 因为拷贝按钮的时候连同这些信息也一起拷贝了 
 
 970
 00:49:14,778 --> 00:49:18,012
-paste, it copied that aspect of
-it as
-well.
+paste, it copied that aspect of it as well.
 因为拷贝按钮的时候连同这些信息也一起拷贝了 
 
 971
 00:49:18,014 --> 00:49:21,182
-So there's another one, I could
-select all
-three of these and
+So there's another one, I could select all three of these and
 可以一次选三个，一起拷贝 
 
 972
 00:49:21,184 --> 00:49:27,154
-copy and paste, okay, I could
-select all
-six of these and copy and paste.
+copy and paste, okay, I could select all six of these and copy and paste.
 6个一起选
 
 973
 00:49:27,156 --> 00:49:30,990
-So I can quickly make, my entire
-keypad.
+So I can quickly make, my entire keypad.
 这样快速得把键盘造出来了 
 
 974
@@ -4948,26 +4677,18 @@ Just need to edit the title.
 
 975
 00:49:33,344 --> 00:49:35,695
-Now, if while I'm editing these
-titles,
-sometimes you're clicking around
-in
+Now, if while I'm editing these titles, sometimes you're clicking around in
 如果你像现在这样，做些改动，点来点去 
 
 976
 00:49:35,697 --> 00:49:39,431
-here and, you know, you're not a
-very
-accurate clicker.
- 不小心没点准 
+here and, you know, you're not a very accurate clicker.
+不小心没点准 
 
 977
 00:49:39,433 --> 00:49:43,368
-[LAUGH] Or, you know, you just
-get out,
-out of control clicking here,
-and oh,
- 手一滑把控件拖飞了 
+[LAUGH] Or, you know, you just get out, out of control clicking here, and oh,
+手一滑把控件拖飞了 
 
 978
 00:49:43,370 --> 00:49:45,236
@@ -4981,139 +4702,102 @@ Okay?
 
 980
 00:49:46,822 --> 00:49:48,405
-No problem, you can just put it
-right back
-in.
+No problem, you can just put it right back in.
 没关系，只要把它再拖回原地 
 
 981
 00:49:48,408 --> 00:49:51,675
-Okay, use the blue lines to your
-advantage.
- 那些蓝色的辅助线会帮你个大忙 
+Okay, use the blue lines to your advantage.
+那些蓝色的辅助线会帮你个大忙 
 
 982
 00:49:52,844 --> 00:49:55,278
-And we'll put our zero down
-here.
- 把0 放在这 
+And we'll put our zero down here.
+把0放在这 
 
 983
 00:49:55,279 --> 00:49:57,713
-And I don't need these buttons
-so I'm just
-hit, selecting it, hitting
-delete.
- 选中，多余的按钮，点 Delete 
+And I don't need these buttons so I'm just hit, selecting it, hitting delete.
+选中，多余的按钮，点 Delete 
 
 984
 00:49:57,716 --> 00:49:59,715
-That's how you can get rid of
-something.
+That's how you can get rid of something.
 就这么删东西 
 
 985
 00:49:59,717 --> 00:50:02,985
-And I promised I was gonna put
-these all
-on blue lines, so I'm gonna do
-that.
+And I promised I was gonna put these all on blue lines, so I'm gonna do that.
 我说过要把他们对齐蓝线 
 
 986
 00:50:02,987 --> 00:50:05,921
-I'm gonna put it right
-underneath the
-zero.
- 把他们放在0 标签控件的底下 
+I'm gonna put it right underneath the zero.
+把他们放在0 标签控件的底下 
 
 987
 00:50:05,923 --> 00:50:08,890
-So here's a blue line that means
-underneath the zero, and
+So here's a blue line that means underneath the zero, and
 这条蓝线就表明我可以放在标签底下 
 
 988
 00:50:08,892 --> 00:50:10,692
-then I'm going to put at this
-edge.
- 让它对起左边这条蓝线 
+then I'm going to put at this edge.
+让它对起左边这条蓝线 
 
 989
 00:50:10,694 --> 00:50:14,962
-So now you can see that the blue
-lines are
-not just the edges, but
- 你可以发现，这些蓝线不仅在调整边缘的时候出现 
+So now you can see that the blue lines are not just the edges, but
+你可以发现，这些蓝线不仅在调整边缘的时候出现 
 
 990
 00:50:14,964 --> 00:50:17,965
-they are other objects, like the
-other
-objects in the keypad and
+they are other objects, like the other objects in the keypad and
 在调整其他对象，比如这些按钮的时候，他们也会出现 
 
 991
 00:50:17,967 --> 00:50:20,667
-also now the title, the display
-rather at
-the top.
+also now the title, the display rather at the top.
 同样，标题，标签这些也同样受用 
 
 992
 00:50:21,870 --> 00:50:26,205
-So I've got all these buttons,
-they're all
-sending this message append
-digit.
- 现在按钮齐了，他们都发送 appendDigit 这个消息 
+So I've got all these buttons, they're all sending this message append digit.
+现在按钮齐了，他们都发送 appendDigit 这个消息 
 
 993
 00:50:26,207 --> 00:50:28,874
-So I need to figure out which
-one is
-sending it,
+So I need to figure out which one is sending it,
 所以我就需要分辨出是哪个按钮发送的消息 
 
 994
 00:50:28,876 --> 00:50:30,942
-so that I can do the right
-thing.
- 然后针对性的做相应的功能 
+so that I can do the right thing.
+然后针对性的做相应的功能 
 
 995
 00:50:30,944 --> 00:50:33,611
-So let's start writing some code
-inside
-the method.
+So let's start writing some code inside the method.
 现在让我们来往这个方法里添加代码 
 
 996
 00:50:33,613 --> 00:50:37,281
-So the first thing I'm going to
-do is
-declare a local variable,
+So the first thing I'm going to do is declare a local variable,
 首先，我要申明一个本地变量 
 
 997
 00:50:37,283 --> 00:50:39,917
-it's just a local variable
-inside this
-method.
+it's just a local variable inside this method.
  就是方法内部的本地变量 
 
 998
 00:50:39,919 --> 00:50:43,520
-I'm going to do that by saying
-let digit
-equal.
- let digit = 
+I'm going to do that by saying let digit equal.
+输入let digit = 
 
 999
 00:50:43,522 --> 00:50:47,824
-So I want this local variable to
-be the
-digit that was pressed.
+So I want this local variable to be the digit that was pressed.
  我想让这个变量表示我们输入的数字 
 
 1000
@@ -5123,10 +4807,8 @@ Okay.
 
 1001
 00:50:50,744 --> 00:50:53,661
-So, first thing that's quite
-different
-here is, what's let?
- 这里值得注意的是，这个let 是什么？
+So, first thing that's quite different here is, what's let?
+这里值得注意的是，这个let 是什么？
 
 1002
 00:50:53,664 --> 00:50:54,363
@@ -5140,56 +4822,43 @@ Why isn't this var, right?
 
 1004
 00:50:57,001 --> 00:51:00,735
-Cuz var means variable, what the
-heck does
-let mean?
+Cuz var means variable, what the heck does let mean?
 因为var 是变量的意思，那let 是什么鬼？
 
 1005
 00:51:00,737 --> 00:51:05,973
-Well let is exactly the same as
-var except
-it's a constant.
- 其实 let 跟 var 差不多，只不过 let 代表常量 
+Well let is exactly the same as var except it's a constant.
+其实 let 跟 var 差不多，只不过 let 代表常量 
 
 1006
 00:51:07,143 --> 00:51:10,744
-Which means you're going to sign
-this
-right off the bat, and
- 意味着一旦你为它设置了初值 
+Which means you're going to sign this right off the bat, and
+意味着一旦你为它设置了初值 
 
 1007
 00:51:10,746 --> 00:51:13,046
-it's never going to change in
-this method.
- 它在这个方法内就再也不能被改变了 
+it's never going to change in this method.
+它在这个方法内就再也不能被改变了 
 
 1008
 00:51:13,048 --> 00:51:15,415
-Now Swift makes a big deal about
-this, and
- 这在SWFT里很重要 
+Now Swift makes a big deal about this, and
+这在 Swift 里很重要 
 
 1009
 00:51:15,417 --> 00:51:19,552
-I love this feature, because if
-I'm
-reading this code,
- 我大爱这个特性，
+I love this feature, because if I'm reading this code,
+我大爱这个特性，
 
 1010
 00:51:19,554 --> 00:51:23,355
-I know the digit is never going
-to change
-all, this might be, you know.
+I know the digit is never going to change all, this might be, you know.
 因为当我读代码的时候，我知道它不会变，而上面那个（var）会变 
 
 1011
 00:51:23,357 --> 00:51:24,856
-It might have a dozen lines of
-code.
- 假设你的方法里有几十行代码，
+It might have a dozen lines of code.
+假设你的方法里有几十行代码，
 
 1012
 00:51:24,858 --> 00:51:26,792
@@ -5198,22 +4867,18 @@ Which by the way,
 
 1013
 00:51:26,793 --> 00:51:28,727
-you shouldn't have very many
-methods, with
-many more lines of code then
-that.
+you shouldn't have very many methods, with many more lines of code then that.
 你最好别在一个方法里面塞太多的代码，
 
 1014
 00:51:28,729 --> 00:51:30,294
-Okay?
-You want people to be able to
+Okay? You want people to be able to
 你应该让人清楚明了的知道你这个方法要做的是什么事情 
 
 1015
 00:51:30,296 --> 00:51:31,796
-kind of see what a method's
-doing.你应该让人清楚明了的知道你这个方法要做的是什么事情 
+kind of see what a method's doing.
+你应该让人清楚明了的知道你这个方法要做的是什么事情 
 
 1016
 00:51:33,232 --> 00:51:34,765
@@ -5222,9 +4887,7 @@ You can use other methods,
 
 1017
 00:51:34,767 --> 00:51:37,801
-call other methods if you need
-to get more
-code in there.
+call other methods if you need to get more code in there.
 然后通过调用那些方法来实现更多的逻辑 
 
 1018
@@ -5249,34 +4912,27 @@ That's big for readability.
 
 1022
 00:51:44,407 --> 00:51:47,541
-You'll be surprised how much
-more readable
-it makes the code, to know that
-this is a,
+You'll be surprised how much more readable it makes the code, to know that this is a,
 你会惊叹仅仅知道哪些是变量，哪些是常量，就会对代码的可阅读性带来这么大的提升 
 
 1023
 00:51:47,544 --> 00:51:49,177
-local variable, but it's
-constant.
+local variable, but it's constant.
 你会惊叹仅仅知道哪些是变量，哪些是常量，就会对代码的可阅读性带来这么大的提升 
 
 1024
 00:51:49,179 --> 00:51:50,111
 Only set at the beginning.
- 只需要申明的时候加个关键字就行 
+只需要申明的时候加个关键字就行 
 
 1025
 00:51:50,113 --> 00:51:52,913
-Yeah.
-Is there a reason, constants and
+Yeah. Is there a reason, constants and
 [学生提问] 对于像变量、常量这些东西，这里为什么都用相同的命名规范？
 
 1026
 00:51:52,915 --> 00:51:54,715
-like, variables have the same
-naming
-convention.
+like, variables have the same naming convention.
 [学生] 对于像变量、常量这些东西，这里为什么都使用相同的命名规范？
 
 1027
@@ -5286,80 +4942,62 @@ Since [UNKNOWN] like Java there.
 
 1028
 00:51:56,451 --> 00:51:58,184
-Like the naming conventions like
-all caps
-or lowercase.
+Like the naming conventions like all caps or lowercase.
 因为比如说Java 会用“全部大写”或者“全部小写”来区别这些概念 
 
 1029
 00:51:58,186 --> 00:52:00,770
-Yeah.
-So, yeah.
- [提问完毕]
+Yeah. So, yeah.
+[提问完毕]
 
 1030
 00:52:00,771 --> 00:52:03,355
-The question is, why don't I
-call digit
-like all caps digit, or
+The question is, why don't I call digit like all caps digit, or
 这位同学的问题是，为什么不把 digit 写成 DIGIT，
 
 1031
 00:52:03,358 --> 00:52:05,424
-something like that, so I know
-it's a
-constant.
+something like that, so I know it's a constant.
 以此来区分他是不是常量 
 
 1032
 00:52:05,426 --> 00:52:07,626
-That would be a programming
-style thing.
+That would be a programming style thing.
 这算是编程风格的问题，
 
 1033
 00:52:07,628 --> 00:52:10,929
-Generally in Swift they don't do
-that.
-但在SWIFT 里，我们通常不这样做 
+Generally in Swift they don't do that.
+但在 Swift 里，我们通常不这样做 
 
 1034
 00:52:10,931 --> 00:52:13,765
-And, I'll show you why that is
-in a
-moment.
+And, I'll show you why that is in a moment.
 我之后会给你们演示，
 
 1035
 00:52:13,767 --> 00:52:15,233
-Why you don't really need to do
-that.
+Why you don't really need to do that.
 为什么我们不需要通过玩弄命名规范来区别这些概念，
 
 1036
 00:52:15,235 --> 00:52:18,069
-Because you can very quickly
-find out the
-declaration of
+Because you can very quickly find out the declaration of
 因为你可以非常快速的找到每个变量的定义，
 
 1037
 00:52:18,071 --> 00:52:22,406
-any symbol anywhere with one
-click, and
-you'll see that.
+any symbol anywhere with one click, and you'll see that.
 只需要点一下鼠标就一目了然 
 
 1038
 00:52:22,408 --> 00:52:25,209
 Good question though.
- 问得不错！
+问得不错！
 
 1039
 00:52:25,210 --> 00:52:28,011
-All right, so I wanna let the
-digit, equal
-the number that's on the,
+All right, so I wanna let the digit, equal the number that's on the,
 所以，接下来我要 let digit = 被触发的按钮上的那个数字
 
 1040
@@ -5369,23 +5007,18 @@ the sending button.
 
 1041
 00:52:30,197 --> 00:52:32,380
-So I'm gonna have to send a
-message to
-this button.
+So I'm gonna have to send a message to this button.
 所以我要向那个按钮发送一个消息 
 
 1042
 00:52:32,383 --> 00:52:34,316
-Okay?
-Gonna have to somehow access
-this button.
+Okay? Gonna have to somehow access this button.
 对吧？我们得访问这个按钮对象 
 
 1043
 00:52:34,318 --> 00:52:37,886
-So I'm gonna have to do sender,
-something.
- 我就打 sender 然后..
+So I'm gonna have to do sender, something.
+我就打 sender 然后..
 
 1044
 00:52:37,888 --> 00:52:40,655
@@ -5395,10 +5028,8 @@ okay?
 
 1045
 00:52:40,657 --> 00:52:44,091
-So this is a good time to talk
-about the
-documentation.
- 现在就是讲讲文档的好时机了
+So this is a good time to talk about the documentation.
+现在就是讲讲文档的好时机了
 
 1046
 00:52:44,093 --> 00:52:45,543
@@ -5407,15 +5038,12 @@ documentation.
 
 1047
 00:52:45,544 --> 00:52:46,994
-Because being a good iOS
-developer,
+Because being a good iOS developer,
 想要成为一名好的iOS开发者，
 
 1048
 00:52:46,996 --> 00:52:50,397
-really demands that you are good
-at
-navigating the documentation.
+really demands that you are good at navigating the documentation.
 熟练地使用文档是必须的 
 
 1049
@@ -5427,16 +5055,12 @@ plugged in to Xcode.
 
 1050
 00:52:54,336 --> 00:52:57,036
-For example, if I wanna find out
-about
-button,
+For example, if I wanna find out about button,
 比如，我想看看按钮的文档 
 
 1051
 00:52:57,038 --> 00:53:00,339
-all I need to do is hold down
-the option
-key.
+all I need to do is hold down the option key.
 我只要按住option 
 
 1052
@@ -5456,9 +5080,7 @@ As I mouse over things,
 
 1055
 00:53:04,544 --> 00:53:09,680
-everything, it turns blue with a
-dashed
-blue line under it, okay?
+everything, it turns blue with a dashed blue line under it, okay?
 当我的鼠标移动到文本上方时，他们底下就会出现一条蓝色的虚线 
 
 1056
@@ -5468,16 +5090,12 @@ If I click on it,
 
 1057
 00:53:12,117 --> 00:53:14,884
-it gives me a little blurb from
-the
-documentation about this thing.
+it gives me a little blurb from the documentation about this thing.
 他就弹出一个文档的摘要 
 
 1058
 00:53:14,886 --> 00:53:17,954
-So it's saying, you know,
-here's, button
-is a class.
+So it's saying, you know, here's, button is a class.
 他说这是button， 这是一个类，
 
 1059
@@ -5487,64 +5105,48 @@ Here's its inheritance.
 
 1060
 00:53:19,290 --> 00:53:20,689
-Here's a little bit of what it
-does.
+Here's a little bit of what it does.
 这里是关于他的功能 
 
 1061
 00:53:20,691 --> 00:53:22,691
-And really awesome at the bottom
-here,
+And really awesome at the bottom here,
 最棒的是在最后这里，
 
 1062
 00:53:22,693 --> 00:53:25,427
-here's a link that takes you to
-the
-detailed documentation.
+here's a link that takes you to the detailed documentation.
 这是一个指向详细文档的链接 
 
 1063
 00:53:25,429 --> 00:53:27,962
-So I'm gonna click this little
-link right
-here.
+So I'm gonna click this little link right here.
 我点击他 
 
 1064
 00:53:27,964 --> 00:53:34,501
-It's going to be up a
-documentation
-window, with UI button in it,
-hello?
+It's going to be up a documentation window, with UI button in it, hello?
 他就打开了UIButton的文档窗口...咦？
 
 1065
 00:53:34,503 --> 00:53:38,038
-Did I not click that right thing
-here,
+Did I not click that right thing here,
 我没点错吧？
 
 1066
 00:53:38,040 --> 00:53:43,076
-oh I hope I don't have a network
-issue
-here.
+oh I hope I don't have a network issue here.
 不会是网络出问题了吧..
 
 1067
 00:53:43,078 --> 00:53:47,046
-hm, okay well, I guess I'm not
-connected
-to the network,
+hm, okay well, I guess I'm not connected to the network,
 好吧..我猜我的网络出问题了..
 
 1068
 00:53:47,048 --> 00:53:50,149
-that's the problem, so it's
-getting this
-off the network.
- 果然，没有联上网..
+that's the problem, so it's getting this off the network.
+果然，没有联上网..
 
 1069
 00:53:50,151 --> 00:53:53,819
@@ -5553,44 +5155,32 @@ Okay so.
 
 1070
 00:53:53,820 --> 00:53:57,488
-Imagine that there were
-documentation here
-and, it would have along this
-side here
+Imagine that there were documentation here and, it would have along this side here
 那就想象一下..文档出现在了这里 
 
 1071
 00:53:57,491 --> 00:54:03,294
-on the left all the instance
-variables or
-properties and methods of u i
-button.
+on the left all the instance variables or properties and methods of u i button.
 在窗口的左边，就会出现很长的一列关于UIButton的属性，变量，方法什么的 
 
 1072
 00:54:03,296 --> 00:54:05,929
-And you could click on any one,
-and
+And you could click on any one, and
 你可以点击他们，然后就可以看见完整的描述 
 
 1073
 00:54:05,931 --> 00:54:08,165
-in there we'd have a full
-description of
-it here.
+in there we'd have a full description of it here.
 你可以点他们，然后就可以看见完整的描述 
 
 1074
 00:54:08,167 --> 00:54:11,735
-And all the types that it
-referenced you
-could click on it here, and
+And all the types that it referenced you could click on it here, and
 所有文档间的引用你都可以点击，
 
 1075
 00:54:11,737 --> 00:54:14,504
-basically it's a hyper linked
-documentation [UNKNOWN].
+basically it's a hyper linked documentation [UNKNOWN].
 它本质上就是一些文档间的超链接，
 
 1076
@@ -5600,10 +5190,7 @@ As you can imagine.
 
 1077
 00:54:16,774 --> 00:54:19,041
-I'll try to get the networking
-working on
-Wednesday and we'll take a look
-at this.
+I'll try to get the networking working on Wednesday and we'll take a look at this.
 我争取在下周三把网络问题搞定，到时候我们就能一睹芳容了 
 
 1078
@@ -5613,25 +5200,17 @@ But if I was looking in here,
 
 1079
 00:54:21,495 --> 00:54:23,946
-I'd look down in the section
-that says
-getting the button's current
-state, and
+I'd look down in the section that says getting the button's current state, and
 我会在这里找到一些如何获取UIButton状态的信息 
 
 1080
 00:54:23,948 --> 00:54:30,185
-I'd find that there is an
-instance
-property there called current
-title.
+I'd find that there is an instance property there called current title.
 我会找到一个叫做currentTitle 的属性 
 
 1081
 00:54:30,187 --> 00:54:31,552
-Okay?
-It's unfortunate I'm not going
-to
+Okay? It's unfortunate I'm not going to
 很遗憾没能能演示这个流程
 
 1082
@@ -5646,50 +5225,37 @@ But.
 
 1084
 00:54:33,689 --> 00:54:39,993
-So how do we access, property or
-call a
-method in another object,
+So how do we access, property or call a method in another object,
 那么怎么访问到一个对象的属性、方法呢？
 
 1085
 00:54:39,995 --> 00:54:43,429
-will look exactly the same
-whether you
-call it a method or
+will look exactly the same whether you call it a method or
 答案是，访问属性和调用函数的方式是一模一样的 
 
 1086
 00:54:43,431 --> 00:54:46,332
-accessing a property, which is
-you use
-dot.
+accessing a property, which is you use dot.
 访问属性，你用点(.)
 
 1087
 00:54:46,334 --> 00:54:49,435
-Okay.
-It's the same syntax that's used
-in
+Okay. It's the same syntax that's used in
 这跟大多数语言是一样的，都用点号来访问成员 
 
 1088
 00:54:49,437 --> 00:54:52,771
-a lot of languages is to, to do
-dot.
+a lot of languages is to, to do dot.
 这跟大多数语言是一样的，都用点号来访问成员 
 
 1089
 00:54:52,773 --> 00:54:55,173
-And so when you do that, Xcode
-is going to
-say, oh,
+And so when you do that, Xcode is going to say, oh,
 当你在Xcode里打一个点的时候，他就说，呐，
 
 1090
 00:54:55,175 --> 00:54:58,209
-well, here's all the things
-button knows
-how to do.
+well, here's all the things button knows how to do.
 这里是所有UIButton可访问的成员 
 
 1091
@@ -5699,59 +5265,42 @@ Okay?
 
 1092
 00:54:59,895 --> 00:55:01,578
-And as you can see, button knows
-how to do
-a lot of things.
+And as you can see, button knows how to do a lot of things.
 你可以发现，UIButton 能做很多事情，
 
 1093
 00:55:01,581 --> 00:55:03,747
-Because it inherits from a
-class, it
-inherits from a class,
+Because it inherits from a class, it inherits from a class,
 这是因为它继承于一个类，它的父类又继承于另一个类，不停继承 
 
 1094
 00:55:03,749 --> 00:55:07,451
-it inherits from a class, that
-all have
-lots of methods in them.
+it inherits from a class, that all have lots of methods in them.
 所以累计起来就有很多方法可供调用 
 
 1095
 00:55:07,453 --> 00:55:10,320
-So when I looked at that
-documentation.
+So when I looked at that documentation.
 所以当我查看了文档以后，
 
 1096
 00:55:10,322 --> 00:55:13,823
-I've found that current title
-was the
-thing I wanted.
+I've found that current title was the thing I wanted.
 我知道currentTitle 这个属性正是我想要的 
 
 1097
 00:55:13,825 --> 00:55:18,194
-Now notice as I start to type a
-c, it's
-already cutting down
+Now notice as I start to type a c, it's already cutting down
 注意这里我打个字母c，它会帮我过滤出那些开头是c 的选择 
 
 1098
 00:55:18,196 --> 00:55:23,331
-the things that could be
-starting with a
-c, and then c u, they cut down
-even more.
+the things that could be starting with a c, and then c u, they cut down even more.
 然后接着打 cu，它有棒我过滤掉了一些 
 
 1099
 00:55:23,333 --> 00:55:28,770
-I can type tab, to get to the
-first
-ambiguity point, then I can type
-t.
+I can type tab, to get to the first ambiguity point, then I can type t.
 我可以点Tab 键，前进到第一个歧义点，然后接着打 t 
 
 1100

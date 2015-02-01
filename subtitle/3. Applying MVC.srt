@@ -5901,466 +5901,566 @@ like ends or straightened
 00:45:27,159 --> 00:45:30,693
  Inside here, operand is gonna
   have the associated value of
+  在这里面，operand就会获得操作数
 
 1102
 00:45:30,695 --> 00:45:31,427
           the operand.
+          的关联变量
 
 1103
 00:45:32,430 --> 00:45:34,196
+             'Kay?
              'Kay?
 
 1104
 00:45:34,198 --> 00:45:35,897
    Oh, that's exactly what I
              want.
+             这就是我想要的
 
 1105
 00:45:35,899 --> 00:45:38,599
   I'm just gonna return right
    now I have to return this
+   我现在就要返回一个值
 
 1106
 00:45:38,601 --> 00:45:40,301
        tuple right here.
+       我要返回这里的一个元组
 
 1107
 00:45:40,303 --> 00:45:42,569
    So I'm gonna returned the
             operand.
+            所以我要返回operand
 
 1108
 00:45:42,571 --> 00:45:45,005
     That's the result, 'kay.
+    这就是结果
 
 1109
 00:45:45,007 --> 00:45:47,191
        When I go here and
+       当我到这
 
 1110
 00:45:47,192 --> 00:45:49,376
  I encounter that next one down
  which was a four, I got a four
+ 我碰到下一个是4，我得到一个4
 
 1111
 00:45:49,378 --> 00:45:52,845
  I can just return that result
      to evaluate this one.
+     我可以直接返回这个结果来evaluate他
 
 1112
 00:45:52,847 --> 00:45:55,881
    And I also though have to
     return the remainingOps.
+    当然我也需要返回remainingOps
 
 1113
 00:45:57,018 --> 00:46:00,085
   'Kay, so I'm just returning
  the two values of this tuple,
+ 所以我返回了元组里的两个值
 
 1114
 00:46:00,087 --> 00:46:02,754
    notice I don't have to put
         result colon and
+        注意我没有在这放结果冒号
 
 1115
 00:46:02,756 --> 00:46:06,390
  remaining opt colon in here it
    knows that those match and
+   remaining opt冒号，因为这里知道这些是对应的
 
 1116
 00:46:06,392 --> 00:46:07,224
     so it's still doing it.
+    所以这还是会正常执行
 
 1117
 00:46:07,226 --> 00:46:09,159
     All right, makes sense.
+    好的，懂了吧
 
 1118
 00:46:09,161 --> 00:46:13,763
   That's it for operand that's
        all I have to do.
+       这就是我对operand做的一切
 
 1119
 00:46:13,765 --> 00:46:15,064
      It's kind of a, in the
            recursion,
+           这在递归中
 
 1120
 00:46:15,066 --> 00:46:20,102
    it's kind of an end case.
+   是一种结束的情况
 
 1121
 00:46:20,104 --> 00:46:21,069
              Yeah?
    >> Is remainingOps part of
+   －（学生提问）
 
 1122
 00:46:21,071 --> 00:46:22,520
        the stack or heap?
+       －（学生提问）
 
 1123
 00:46:22,521 --> 00:46:23,970
  >> This one here, or this one
              here?
+             －（学生提问）
 
 1124
 00:46:23,973 --> 00:46:24,989
        >> What in general
           [INAUDIBLE].
+          －（学生提问）
 
 1125
 00:46:24,990 --> 00:46:26,006
   >> Okay so, so the question
               is,
+              问题是：
 
 1126
 00:46:26,009 --> 00:46:29,276
  when I do something like this,
      where is remainingOps?
+     当我像这样做的时候，remainingOps在哪？
 
 1127
 00:46:29,278 --> 00:46:30,377
        Is it in the heap?
+       在堆中吗？
 
 1128
 00:46:30,379 --> 00:46:31,812
       Is it on the stack?
+      还是在栈中？
 
 1129
 00:46:31,813 --> 00:46:33,246
     And the thing is, that's
      implementation detail.
+     事实上这些是实现时的细节
 
 1130
 00:46:34,282 --> 00:46:36,148
   So, you, you don't know, but
         you don't care.
+        所以你不知道，也不用关心
 
 1131
 00:46:38,018 --> 00:46:40,185
  All right, so that's operand.
+ 这就是operand
 
 1132
 00:46:40,187 --> 00:46:42,020
    Operand was really, really
              easy.
+             operand真的非常非常简单
 
 1133
 00:46:42,022 --> 00:46:44,321
     How about our operation,
         that's you, you,
+        那么关于这里UnaryOperation
 
 1134
 00:46:44,323 --> 00:46:46,090
    UnaryOperation right here.
+   的操作是怎么样的呢
 
 1135
 00:46:46,092 --> 00:46:49,659
  Now when we handle the case of
       the unary operation,
+      当我们要给UnaryOperation添加操作时
 
 1136
 00:46:49,661 --> 00:46:52,195
     we don't need that first
        associated value,
+       我们不需要第一个关联变量
 
 1137
 00:46:52,197 --> 00:46:54,330
  that's the symbol, like plus.
+ 这是符号，像是加号
 
 1138
 00:46:54,332 --> 00:46:56,332
  Okay well I'm evaluating here
      I don't care what this
+     当我在这操作的时候我不在乎他是什么
 
 1139
 00:46:56,334 --> 00:46:58,500
   symbol is, I only care what
    the function is cause I'm
+   我只在乎那个函数是什么
 
 1140
 00:46:58,502 --> 00:47:00,002
   gonna evaluate the function.
+  因为我要去计算那个函数
 
 1141
 00:47:00,004 --> 00:47:05,807
  So we can actually ignore this
  by putting in underbar, 'kay?
+ 所以我真的可以在这放一个下划线来忽略它
 
 1142
 00:47:05,809 --> 00:47:08,642
   Underbar in swift is kind of
+  下划线在Swift里
 
 1143
 00:47:08,644 --> 00:47:12,212
    the universal I don't care
        about this thing.
+       就是一种无关紧要的东西的通用表达
 
 1144
 00:47:12,214 --> 00:47:14,681
   Okay and we're gonna see it
      other places we use it
+     我们还会在别的无关紧要
 
 1145
 00:47:14,683 --> 00:47:16,549
  where it's kinda like, I don't
     really care about that.
+    的地方看到它
 
 1146
 00:47:16,551 --> 00:47:18,251
   So you just put an underbar
              there.
+             所以你只需要放一个下划线在这
 
 1147
 00:47:18,253 --> 00:47:19,819
    That way you don't have to
     declare a variable with
+    这样你就不需要申明一个奇怪的变量
 
 1148
 00:47:19,821 --> 00:47:22,221
   some dumb name or something
            like that.
+           或者跟他相似的东西
 
 1149
 00:47:22,223 --> 00:47:24,389
     Just put an underbar it
           ignores it.
+          只是放一个下划线在这
 
 1150
 00:47:24,391 --> 00:47:25,323
+             'Kay?
              'Kay?
 
 1151
 00:47:25,324 --> 00:47:26,256
    But I do care about this.
+   但我真的很在乎这个
 
 1152
 00:47:26,259 --> 00:47:29,794
   I'm gonna let that equal the
    operation that I'm doing.
+   我会放let operand在这
 
 1153
 00:47:29,796 --> 00:47:30,361
+             'Kay?
              'Kay?
 
 1154
 00:47:31,397 --> 00:47:32,929
   Everyone, make sense there?
+  所有人都懂了吗？
 
 1155
 00:47:32,931 --> 00:47:34,897
   So I'm ignoring the string,
               but
+              所以我忽略了字符
 
 1156
 00:47:34,899 --> 00:47:36,699
   I'm grabbing the operation.
+  我抓去了操作
 
 1157
 00:47:36,701 --> 00:47:40,402
   So here, what I wanna do is
  return and I'll try to do it,
+ 所以这里我试着返回
 
 1158
 00:47:40,404 --> 00:47:41,370
  but I'm not gonna be able to.
+ 我还没法做
 
 1159
 00:47:41,372 --> 00:47:45,540
    I'm gonna say, return this
          operation with
+         我会返回我还没有的operation
 
 1160
 00:47:45,542 --> 00:47:48,342
    its operand which I don't
              have.
+             还有operand
 
 1161
 00:47:48,344 --> 00:47:51,512
  And there's some remaining ops
    that are leftover after I
+   还有一些我获取operand后
 
 1162
 00:47:51,514 --> 00:47:52,579
         get the operand.
+        剩下的ops
 
 1163
 00:47:52,581 --> 00:47:55,515
    So I'm kinda, I need to do
        some stuff here to
+       所以我要在这做一些
 
 1164
 00:47:55,517 --> 00:47:58,251
  be able to return what I want.
+ 能让我返回我想要的东西的操作
 
 1165
 00:47:58,253 --> 00:48:01,053
   The first thing I need to do
       is get the operand.
+      第一件事就是获取operand
 
 1166
 00:48:01,055 --> 00:48:03,689
+             'Kay?
              'Kay?
 
 1167
 00:48:03,690 --> 00:48:06,324
   So, I did a unary operation
  let's say it was square root.
+ 所以我做了个一元操作说明这是一个平方根
 
 1168
 00:48:06,326 --> 00:48:07,625
  I need to go back to the staff
               and
+              我需要返回到那个地方
 
 1169
 00:48:07,627 --> 00:48:10,862
  pick off the next thing but I
            can't just
+           来获得下一个东西，但我不能
 
 1170
 00:48:10,864 --> 00:48:13,931
   assume that it's a number it
   might be more operations so
+  假定这是一个数字，这会导致更多的步骤
 
 1171
 00:48:13,933 --> 00:48:17,001
   I have to recurse, so here's
  where the recursion comes in.
+ 我需要递归，这里就是用到递归的地方
 
 1172
 00:48:17,003 --> 00:48:20,103
  And I'm gonna show you how to
       call a function that
+      我会展示如何调用一个函数
 
 1173
 00:48:20,105 --> 00:48:22,172
         returns a tuple.
+        来返回一个元组
 
 1174
 00:48:22,174 --> 00:48:25,274
  And get it's value up so this
   is important little example
+  获得这个值，所以这是这里一个重要的例子
 
 1175
 00:48:25,276 --> 00:48:27,677
   here, so there's two ways to
              do it.
+             所以有两种方法去做
 
 1176
 00:48:27,679 --> 00:48:30,279
  I'm gonna do it one way here,
            which is,
+           我会在这里做其中一种
 
 1177
 00:48:30,281 --> 00:48:32,881
          I'm gonna let
        operandEvaluation,
+       let operandEvaluation
 
 1178
 00:48:32,883 --> 00:48:37,919
  which is just a local variable
  that I'm inventing, equal call
+ 一个我申明的本地变量
 
 1179
 00:48:37,921 --> 00:48:43,057
  evaluate with the remainingOps
           that I have.
+          等于evaluate(remainingOps)
 
 1180
 00:48:43,059 --> 00:48:45,025
   'Kay, so here I've recursed.
+  这样我就有了一个递归
 
 1181
 00:48:45,027 --> 00:48:46,459
       Okay, I'm recursing.
+      我正在做一个递归
 
 1182
 00:48:46,461 --> 00:48:48,661
       And I just set it to
        operandEvaluation.
+       我把他赋给operandEvaluation
 
 1183
 00:48:48,663 --> 00:48:51,564
  Now, let's look at the type of
           this thing.
+          来看看它的类型
 
 1184
 00:48:51,566 --> 00:48:55,300
  If I look at its type, you can
      see that it's a tuple.
+     如果你看它的类型，就会发现它是一个元组
 
 1185
 00:48:55,302 --> 00:48:56,468
         That's its type.
+        这就是他的类型
 
 1186
 00:48:56,470 --> 00:48:58,770
       It's a tuple result
          remainingOps.
+         这是一个元祖型的remainingOps
 
 1187
 00:48:58,772 --> 00:49:00,671
   It's this tuple right here.
+  就是这边的这个元组
 
 1188
 00:49:00,673 --> 00:49:03,140
     That is the type of this
        operandEvaluation.
+       就是这个operandEvaluation的类型
 
 1189
 00:49:04,309 --> 00:49:06,242
  So now that I have that tuple,
+ 所以现在我有了这个元组
 
 1190
 00:49:06,244 --> 00:49:09,245
  it's the result of evaluation
   how do I get the result and
+  这就是evaluation的结果，那我是怎么获得这个结果
 
 1191
 00:49:09,247 --> 00:49:13,716
    the remaining op out of it
  well I can get the operand by
+ 获得这些剩下的op
 
 1192
 00:49:13,718 --> 00:49:19,621
  saying operand eval, [UNKNOWN]
    operandEvaluation.result.
+   只要let operand = operandEvaluation.result
 
 1193
 00:49:19,623 --> 00:49:21,423
+             'Kay?
              'Kay?
 
 1194
 00:49:21,424 --> 00:49:23,224
  So that just pull this is the
          tuple here I'm
+         所以只是把元组放这
 
 1195
 00:49:23,226 --> 00:49:26,227
    getting this value of the
       tuple out of there.
+      就获得了这里元组的值
 
 1196
 00:49:26,229 --> 00:49:27,461
      Now what type is this?
+     现在这个的类型是什么
 
 1197
 00:49:29,298 --> 00:49:29,863
             Anybody?
+            有人知道吗
 
 1198
 00:49:30,865 --> 00:49:31,931
        It's an optional.
+       这是个optional
 
 1199
 00:49:31,932 --> 00:49:32,998
    You're pretty safe saying
         optional when I
+        你说optional是非常圆滑的
 
 1200
 00:49:33,001 --> 00:49:34,099
   ask what type it is, aren't
               you?
+              当我问你这是什么类型时
 
 1201
 00:49:34,101 --> 00:49:35,801

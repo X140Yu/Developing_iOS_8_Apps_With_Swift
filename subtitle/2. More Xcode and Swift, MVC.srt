@@ -1,46 +1,46 @@
 1
 00:00:00,001 --> 00:00:04,636
-[MUSIC]
+欢迎收看斯坦福大学公开课
 
 2
 00:00:04,638 --> 00:00:08,373
 Stanford University.
-斯坦福大学
+本字幕由志愿者义务贡献
 
 3
 00:00:08,375 --> 00:00:11,942
 >> All right, well,welcome to Stanford CS193P,
-好 欢迎来到斯坦福CS193P
+欢迎参加斯坦福大学2015年 
 
 4
 00:00:11,944 --> 00:00:13,377
 winter of 2015.
-2015冬季课程。
+冬季学期的 CS193P 课程
 
 5
 00:00:13,379 --> 00:00:14,744
 This is lecture number two.
-这是我们的第二讲。
+这是我们的第二讲 
 
 6
 00:00:14,746 --> 00:00:18,581
 I apologize upfront for my terrible voice, we are going
-由于我糟糕的嗓音，预先向大家致歉。今天我们将要
+由于我糟糕的嗓音，预先向大家致歉 
 
 7
 00:00:18,583 --> 00:00:20,549
 to try to get through this as best we can today.
-尽可能去克服这个困难。
+我们要尽可能去克服这个困难 
 
 8
 00:00:22,153 --> 00:00:23,819
 Our topics are two fold.
-我们的话题有两个方面。
+我们的话题有两个方面 
 
 9
 00:00:23,821 --> 00:00:25,854
-[COUGH] We're going to continue the calculator 
-我们将继续在上一讲中已经开始的计算器Demo，
+We're going to continue the calculator 
+我们将继续在上一讲中已经开始的计算器 Demo，
 
 10
 00:00:25,856 --> 00:00:29,924
@@ -50,17 +50,17 @@ demo that we started, in last lecture and then we're gonna
 11
 00:00:29,926 --> 00:00:32,526
 have some slides about this model view controller,
-一些关于模型视图控制器，
+一些关于 model view controller，
 
 12
 00:00:32,528 --> 00:00:35,462
 object-oriented design pattern that we're gonna use in
-和面向对象设计模式的幻灯片
+和面向对象设计模式的 slides
 
 13
 00:00:35,464 --> 00:00:36,797
 everything we do.
-这种设计模式我们已经广泛的使用。
+这些设计模式我们将要广泛的使用
 
 14
 00:00:36,799 --> 00:00:40,066
@@ -75,7 +75,7 @@ All right?
 16
 00:00:41,152 --> 00:00:42,235
 So let's get started with that demo.
-没问题就让我开始演示Demo
+没问题就让我开始演示 Demo
 
 17
 00:00:42,237 --> 00:00:44,136
@@ -85,7 +85,7 @@ Again, here's a slide with the summary of kind of
 18
 00:00:44,138 --> 00:00:46,538
 the important things we're gonna talk about.
-接下去我们即将要讲的重点的幻灯片
+接下去我们即将要讲的重点的 slide
 
 19
 00:00:46,540 --> 00:00:48,540
@@ -95,12 +95,12 @@ You don't need to read those in advance here,
 20
 00:00:48,542 --> 00:00:49,708
 it's more for reference.
-它便于提供参考。
+它更多地是为了提供参考 的
 
 21
 00:00:49,710 --> 00:00:52,410
 My slides in general, I post them,
-我做的幻灯片一般来讲，
+我做的 slides 一般来讲，
 
 22
 00:00:52,412 --> 00:00:55,246
@@ -115,7 +115,7 @@ To be able go back and try and
 24
 00:00:56,582 --> 00:00:58,515
 figure out, whoa, when did he talked about that day?
-回忆出，哇哦，他什么时候讲过这些？
+回忆出，我什么时候讲过这些？
 
 25
 00:00:58,517 --> 00:00:59,382
@@ -124,22 +124,22 @@ Oh yeah.
 26
 00:00:59,384 --> 00:01:00,983
 What's important, et cetera.
-什么是重要的，等等。
+什么是重要的，等等 
 
 27
 00:01:00,985 --> 00:01:03,419
 So my slides do tend to be a little bit dense.
-所以，我的幻灯片也往往是有点多。
+所以，我的 slides 也往往是有点多 
 
 28
 00:01:03,421 --> 00:01:05,187
 I tend to put a little more on them, than,
-我更倾向于多放一些关于这个的内容，
+我更倾向于在上面多放一些内容，
 
 29
 00:01:05,189 --> 00:01:06,989
 than just bullet items.
-与项目相比
+而不是一项一项往上列
 
 30
 00:01:06,990 --> 00:01:08,790
@@ -154,7 +154,7 @@ kind of get just a little bit more depth to
 32
 00:01:11,728 --> 00:01:14,162
 remind yourself what I talked about.
-你们更深入的理解
+你们会有更深入的理解
 
 33
 00:01:14,164 --> 00:01:15,363
@@ -168,7 +168,7 @@ All right, so
 35
 00:01:17,883 --> 00:01:20,400
 this demo, if you'll remember last time, where we left off,
-关于这个Demo，如果你们还记得上次我们快结束时，
+关于这个 Demo，如果你们还记得上次我们快结束时，
 
 36
 00:01:20,403 --> 00:01:23,603
@@ -178,7 +178,7 @@ we had gotten the keypad fully working.
 37
 00:01:23,605 --> 00:01:26,606
 All right, and we were talking a little bit about properties
-我们将要讲一些关于属性和
+我们将要讲一些关于 properties 和
 
 38
 00:01:26,608 --> 00:01:28,808
@@ -188,12 +188,12 @@ and instant variables and how we had to initialize them.
 39
 00:01:28,810 --> 00:01:30,710
 And so I'm gonna ask a question right at
-我将会在这讲结束的时候问一个问题
+我将要回答上次课快要结束时
 
 40
 00:01:30,712 --> 00:01:33,012
 the end of lecture, perfect timing.
-多完美的时机
+提出的那个问题
 
 41
 00:01:33,014 --> 00:01:37,248
@@ -203,17 +203,17 @@ What about the little outlet that we dragged out
 42
 00:01:37,250 --> 00:01:40,284
 that display UI label exclamation point, how come we
-显示UI Lable的outlet后面有个感叹号
+显示 UI Lable的 outlet 后面有个感叹号
 
 43
 00:01:40,286 --> 00:01:43,888
 didn't have to make that equal to something, to start.
-以及为什么我们从一开始不需要将它赋值。
+以及为什么我们从一开始不需要将它赋值 
 
 44
 00:01:43,890 --> 00:01:46,123
 And that's where this demo is gonna pick up.
-我们将从这个地方继续上次的Demo。
+我们将从这个地方继续上次的 Demo 
 
 45
 00:01:46,125 --> 00:01:46,890
@@ -221,22 +221,22 @@ Okay?
 
 46
 00:01:46,892 --> 00:01:49,759
->> Okay.
+Okay.
 
 47
 00:01:49,760 --> 00:01:52,627
-[COUGH] Well, let's dive back into this demonstration,
+Well, let's dive back into this demonstration,
 好吧，让我们深入到演示中来，
 
 48
 00:01:52,630 --> 00:01:54,647
 where we left off.
-接着我们上次讲的地方。
+接着我们上次讲的地方 
 
 49
 00:01:54,648 --> 00:01:56,665
 Which it was this line of code, here.
-上次我们在这行代码结束的。
+上次我们在这行代码结束的 
 
 50
 00:01:56,668 --> 00:01:59,868
@@ -245,18 +245,18 @@ And, we had just talked about the fact that we have to
 
 51
 00:01:59,870 --> 00:02:04,572
-initialize all of our variables [COUGH] in a class,
+initialize all of our variables in a class,
 在类中初始化我们的变量
 
 52
 00:02:04,574 --> 00:02:05,807
 in any class.
-在任何类中都必须这样做。
+在任何类中都必须这样做 
 
 53
 00:02:05,809 --> 00:02:09,510
 And, so that's why we need this equals falls here.
-所以我们需要在这个加个等号
+所以我们需要在这加个等号
 
 54
 00:02:09,512 --> 00:02:13,747
@@ -266,7 +266,7 @@ They wanted the equal falls too but we needed it and yet
 55
 00:02:13,749 --> 00:02:15,482
 it didn't seem like we needed one here.
-这里看起来并不需要等号赋值。
+这里看起来并不需要等号赋值 
 
 56
 00:02:15,484 --> 00:02:17,050
@@ -281,17 +281,17 @@ Well, it turns out that this right here,
 58
 00:02:19,087 --> 00:02:22,254
 even though it doesn't quite look like one, is an optional.
-即使它看起来不完全像之前那个，这是一个optional
+即使它看起来不完全像之前那个，这是一个 optional
 
 59
 00:02:23,490 --> 00:02:28,559
 And, optionals automatically get equaled nil, given to you.
-而且optionals在你使用之前就赋了nil
+而且 optional 在你使用之前就赋了 nil
 
 60
 00:02:29,595 --> 00:02:31,862
 So, you don't actually have to put the equals nil here.
-所以，其实你们并不需要在这里给它赋nil
+所以，其实你们并不需要在这里给它赋 nil
 
 61
 00:02:31,864 --> 00:02:35,365
@@ -306,17 +306,17 @@ It's just being done automatically for you.
 63
 00:02:37,602 --> 00:02:39,635
 But, let's talk about the look of this thing.
-但是，我们来谈论一下这个东西的样子。
+但是，我们来谈论一下这个东西的语法
 
 64
 00:02:40,905 --> 00:02:43,772
 It's got this exclamation point here.
-在这里有个感叹号。
+在这里有个感叹号 
 
 65
 00:02:43,774 --> 00:02:45,040
 And, if it were an optional,
-如果它是一个optional
+如果它是一个 optional
 
 66
 00:02:45,042 --> 00:02:47,208
@@ -326,7 +326,7 @@ you'd be used to it having a question mark.
 67
 00:02:47,210 --> 00:02:49,310
 For example, we look at this optional right here,
-例如，我们来看这里这个optional，
+例如，我们来看这里这个 optional，
 
 68
 00:02:49,312 --> 00:02:51,028
@@ -335,13 +335,13 @@ current title,
 
 69
 00:02:51,029 --> 00:02:52,745
-you see it's string question mark not exclamation point,
-你们将会看到这里string是问号而不是感叹号，
+you see it's String question mark not exclamation point,
+你们将会看到这里 String 是问号而不是感叹号，
 
 70
 00:02:52,748 --> 00:02:54,665
 question mark.
-这里是问号。
+这里是问号 
 
 71
 00:02:54,666 --> 00:02:56,583
@@ -366,7 +366,7 @@ it makes no difference to the actual type, it's still
 75
 00:03:02,590 --> 00:03:05,958
 an optional whose value here could be a UI label.
-它仍然是一个optional，其值在这里可能是一个UI label类型。
+它仍然是一个 optional，其值在这里可能是一个 UI label 类型 
 
 76
 00:03:07,161 --> 00:03:09,761
@@ -375,13 +375,13 @@ But it matters on the usage of it.
 
 77
 00:03:09,763 --> 00:03:12,597
-[COUGH] And this is purely just kind of
+And this is purely just kind of
 这完全是编译器
 
 78
 00:03:12,599 --> 00:03:15,466
 a compiler helping you out thing, here.
-帮你把这事做掉了
+帮你把这事做好了
 
 79
 00:03:16,502 --> 00:03:18,602
@@ -391,7 +391,7 @@ But if we look at when I change this to
 80
 00:03:18,604 --> 00:03:21,538
 a question mark you see that some errors appear down here.
-改成问号。Xcode将会在这里报出一些错误提示
+改成问号 Xcode 将会在这里报出一些错误提示
 
 81
 00:03:21,540 --> 00:03:23,940
@@ -401,42 +401,42 @@ So then let's click on one of these errors, like this one,
 82
 00:03:23,942 --> 00:03:26,208
 and you can see the errors that UI label,
-你们将会看到UI label控件
+你们将会看到 UI label 控件
 
 83
 00:03:26,210 --> 00:03:29,244
 question mark does not have a member named text.
-问号没有叫text的成员变量
+问号没有叫 text 的成员变量
 
 84
 00:03:29,246 --> 00:03:31,279
 In other words you can't send text.
-换句话说，你不能将text赋给。
+换句话说，你不能给 UI label 问号
 
 85
 00:03:31,281 --> 00:03:32,580
 UI label question mark,
-UI label问号，
+发送 text 消息
 
 86
 00:03:32,582 --> 00:03:35,350
 which is what this is and that makes sense because UI label
-因为UI label后面这个问号
+因为 UI label 后面这个问号
 
 87
 00:03:35,352 --> 00:03:36,784
 question mark is an optional and
-是一个optional，而且
+是一个 optional，而且
 
 88
 00:03:36,786 --> 00:03:39,453
 obviously an optional doesn't respond to text.
-很显然这个optional不是回应text的
+很显然这个 optional 不是回应 text 的
 
 89
 00:03:39,455 --> 00:03:42,889
 UI labels do, but optionals don't.
-UI label是这样的，但optional不一定这样。
+UI label 是这样的，但 optional 不一定这样 
 
 90
 00:03:42,891 --> 00:03:44,858
@@ -446,7 +446,7 @@ So, why are we getting this error now when we
 91
 00:03:44,860 --> 00:03:46,726
 weren't getting it before.
-在这之前却没有。
+在这之前却没有 
 
 92
 00:03:46,728 --> 00:03:47,993
@@ -466,17 +466,17 @@ this error by just putting an exclamation point here,
 95
 00:03:51,632 --> 00:03:54,399
 that would unwrap this optional.
-它将会去除这个optional。
+它将会去除这个 optional 
 
 96
 00:03:54,401 --> 00:03:56,734
 And now this would be an UI label right here and
-那么现在这里会变成UI label，而且
+那么现在这里会变成 UI label，而且
 
 97
 00:03:56,736 --> 00:03:57,819
 we can send a text.
-我们可以将text赋值给它
+我们可以给它发送 text 消息
 
 98
 00:03:57,820 --> 00:03:58,903
@@ -491,12 +491,12 @@ We can unwrap it there and we can unwrap it there.
 100
 00:04:03,075 --> 00:04:05,742
 And that gets rid of all of our errors.
-这样一来避免了所有同样的错误。
+这样一来避免了所有同样的错误 
 
 101
 00:04:05,744 --> 00:04:09,012
-But [COUGH] this kind of an interesting property in that
-但是这里有个很有意思的属性
+But this kind of an interesting property in that
+但是这里有个很有意思的 property
 
 102
 00:04:09,014 --> 00:04:11,213
@@ -506,22 +506,22 @@ even though it's not initialized in
 103
 00:04:11,215 --> 00:04:14,450
 the very beginning of a colossus creation starts out
-在庞大得创建方法中
+在庞大的创建方法中
 
 104
 00:04:14,452 --> 00:04:16,451
 as nil not set.
-都没有对其赋nil。
+都没有对其赋 nil 
 
 105
 00:04:16,453 --> 00:04:21,723
 As soon as as this user interface gets loaded up
-只要这个接口被加载了
+只要这个 UI 被加载了
 
 106
 00:04:21,725 --> 00:04:23,891
 by this new controller.
-通过新的控制器。
+通过新的 controller
 
 107
 00:04:23,893 --> 00:04:26,794
@@ -531,7 +531,7 @@ Then this gets wired up, alright, so, that gets
 108
 00:04:26,796 --> 00:04:30,497
 wired up, and this is set, and then this it's set forever.
-也将连接起来，只要这里被赋值了，那么所有的这个都被赋值了。
+也将连接起来，只要这里被赋值了，那么所有的这个都被赋值了 
 
 109
 00:04:30,499 --> 00:04:33,199
@@ -541,7 +541,7 @@ So it's really, kinda would be sad if we actually,
 110
 00:04:33,201 --> 00:04:36,536
 every time we used it had to unwrap it all the time.
-我们都将加上感叹号，这真是挺悲伤的。
+我们都将加上感叹号，这真是挺麻烦的 
 
 111
 00:04:36,538 --> 00:04:38,437
@@ -591,12 +591,12 @@ And what that says is.
 120
 00:04:56,588 --> 00:04:58,521
 This is just an optional, but
-这只是一个optional，但是
+这只是一个 optional，但是
 
 121
 00:04:58,523 --> 00:05:03,625
 always automatically unwrap it so that you don't have to
-它会自动解开为了让你不用
+它会自动解开，为了让你不用
 
 122
 00:05:03,627 --> 00:05:06,261
@@ -616,7 +616,7 @@ You can see, it's not generating any errors.
 125
 00:05:10,933 --> 00:05:15,735
 And it's still going to unwrap this display and
-它将把display转化成
+它将把 display 转化成
 
 126
 00:05:15,737 --> 00:05:17,670
@@ -631,12 +631,12 @@ And.
 128
 00:05:18,840 --> 00:05:21,006
 It's still gonna crash your program if for
-它还是会崩溃由于
+它还是会由于
 
 129
 00:05:21,008 --> 00:05:22,307
 some reason the display were nil.
-某些原因比如display是nil
+某些原因比如 display 是 nil 崩溃
 
 130
 00:05:22,309 --> 00:05:25,110
@@ -651,12 +651,12 @@ be impossible because this is the button sending those.
 132
 00:05:28,148 --> 00:05:31,716
 So the button wouldn't be here if this hadn't gotten already
-这个按钮不会在这里除非它加载的时候
+这个按钮不会在这里除非它被加载
 
 133
 00:05:31,718 --> 00:05:33,818
 loaded up in the set.
-被赋值
+被赋值的时候
 
 134
 00:05:33,819 --> 00:05:35,919
@@ -666,12 +666,12 @@ But if somehow you had some place in your controller or
 135
 00:05:35,921 --> 00:05:39,589
 you were accessing display before this UI got loaded.
-在UI加载之前你要获取display
+在 UI 加载之前你要获取 display
 
 136
 00:05:39,591 --> 00:05:42,158
 It would crash, because it is unwrapping this,
-它将崩溃，因为它还没有解开联系
+它将崩溃，因为它还没有 unwrap
 
 137
 00:05:42,160 --> 00:05:44,327
@@ -686,17 +686,17 @@ it's kinda like auto explanation point.
 139
 00:05:46,631 --> 00:05:51,066
 And, this is called a implicitly unwrapped optional.
-这个就叫做unwrapped optional
+这个就叫做 unwrapped optional
 
 140
 00:05:51,068 --> 00:05:53,968
 Okay? Implicitly unwrapped optional.
-有问题嘛？隐式unwrapped optional
+有问题嘛？隐式 unwrapped optional
 
 141
 00:05:53,970 --> 00:05:56,704
 And it's really only useful for this kind, of property,
-在这种情况下它真的很有用对于属性来说
+在这种情况下它对这类 property 来说有用
 
 142
 00:05:56,706 --> 00:06:00,274
@@ -706,7 +706,7 @@ that's, set very early, and then stay set, forever.
 143
 00:06:00,276 --> 00:06:02,642
 It's kind of sugar, really.
-这真是一个好的语法糖
+这是一点语法的甜头
 
 144
 00:06:04,379 --> 00:06:07,246
@@ -715,13 +715,13 @@ Okay, so let's move on
 
 145
 00:06:07,248 --> 00:06:11,117
-to the next button in our [INAUDIBLE] here.
+to the next button in our here.
 接着下一个按钮
 
 146
 00:06:11,119 --> 00:06:13,285
 Which is going to be an enter button.
-它就是Enter键
+它就是 Enter 键
 
 147
 00:06:13,287 --> 00:06:16,655
@@ -776,17 +776,17 @@ press the operation keys it pulls them off the stack.
 157
 00:06:38,442 --> 00:06:43,011
 So that looks like this, 6 enter 3 times.
-比如这样 6 乘以 3
+比如这样 6  3 乘
 
 158
 00:06:43,013 --> 00:06:45,279
 Four, six, enter, three, enter, times.
-4 6 乘以 3
+4 6 enter 3 enter 乘
 
 159
 00:06:45,281 --> 00:06:48,449
 So the times is going to pull the six and
-这个乘法操作符将会把6 和 
+这个乘法操作符将会把 6 和 
 
 160
 00:06:48,451 --> 00:06:50,735
@@ -796,12 +796,12 @@ the three off the stack.
 161
 00:06:50,736 --> 00:06:53,020
 You could even go six, enter, five, enter, four, enter, and
-你也可以按6，回车，5，回车，4， 回车，然后
+你也可以按6，enter，5，enter，4， enter，然后
 
 162
 00:06:53,022 --> 00:06:54,521
 then go times plus.
-按乘以
+按乘以 加
 
 163
 00:06:55,590 --> 00:06:58,624
@@ -816,12 +816,12 @@ then add the last one on.
 165
 00:07:01,829 --> 00:07:04,629
 So we need an enter key here for our calculator.
-所以我们的计算器还是需要一个Enter键
+所以我们的计算器还是需要一个 Enter 键
 
 166
 00:07:04,631 --> 00:07:06,798
 Now, I'm gonna create that enter key in a way that's 
-现在，我将要通过这种方式创建一个enter键
+现在，我将要通过这种方式创建一个 enter 键
 
 167
 00:07:06,800 --> 00:07:09,367
@@ -841,32 +841,32 @@ So I'm gonna create this enter key by copying and pasting.
 170
 00:07:16,041 --> 00:07:18,608
 This digit key right here.
-这里的数字键来创建Enter键
+这里的数字键来创建 Enter 键
 
 171
 00:07:18,610 --> 00:07:19,475
 And I'm just gonna put it in here.
-那么我将会把这段代码放在这里
+那么我将会把这放在这里
 
 172
 00:07:19,477 --> 00:07:20,743
 Notice that I'm lining these,
-注意我要粘贴在这里
+我通过这些蓝色辅助线
 
 173
 00:07:22,113 --> 00:07:23,745
 blue lines up absolutely perfectly.
-蓝色的辅助线出现最好
+把这些连接起来
 
 174
 00:07:23,747 --> 00:07:27,315
 I don't want them to be, like it's lined up with that one,
-我不想这些按钮像这个一样
+我不想这按钮放这
 
 175
 00:07:27,317 --> 00:07:28,750
 but not that one or vice versa.
-或者那个一样
+或者放这里
 
 176
 00:07:28,752 --> 00:07:30,685
@@ -886,12 +886,12 @@ and if I haven't lined these up just absolutely perfectly
 179
 00:07:37,059 --> 00:07:39,693
 then Expo's not gonna quite know what I want here in Xcode
-将不会知道我想把它放在这里
+我将不会知道它们会被
 
 180
 00:07:39,695 --> 00:07:41,828
 terms of the relationship between these.
-在这个和这个之间
+Xcode 安排到哪里
 
 181
 00:07:43,264 --> 00:07:46,999
@@ -901,7 +901,7 @@ All right so we don't want a three on here, we want to have
 182
 00:07:47,001 --> 00:07:52,237
 a,enter symbol so I'm gonna go up here to special characters.
-一个enter的符号，我将输入一个特殊的符号
+一个 enter 的符号，我将输入一个特殊的符号
 
 183
 00:07:52,239 --> 00:07:54,505
@@ -921,7 +921,7 @@ And I'm going to search for
 186
 00:07:58,344 --> 00:08:00,510
 this one actually, I think that's called a return.
-这个特殊符号，我觉得它应该叫返回
+这个特殊符号，我觉得它应该叫 return
 
 187
 00:08:00,512 --> 00:08:01,945
@@ -931,7 +931,7 @@ Yeah. And these are just
 188
 00:08:01,947 --> 00:08:04,614
 Unicode characters right here.
-Unicode字符
+Unicode 字符
 
 189
 00:08:04,616 --> 00:08:06,615
@@ -941,7 +941,7 @@ And so I want this one that looks,
 190
 00:08:06,617 --> 00:08:09,551
 kind of like a return or enter key.
-看起来像返回或者enter按钮的
+看起来像返回或者 enter 按钮的
 
 191
 00:08:10,487 --> 00:08:11,686
@@ -966,21 +966,21 @@ So I'm just gonna CTRL+drag out here.
 195
 00:08:18,960 --> 00:08:21,027
 And, we're creating an action,
-然后，我们创建一个action
+然后，我们创建一个 action
 
 196
 00:08:21,029 --> 00:08:24,196
 of course, cuz we want this button to send us a message.
-当然，我们希望这个按钮传递给我们一个信息
+当然，我们希望这个按钮给我们发个消息
 
 197
 00:08:24,198 --> 00:08:25,431
 I'm gonna call it "enter".
-我讲叫它 “enter”
+我将叫它 “enter”
 
 198
 00:08:26,700 --> 00:08:28,333
-That's what it is the answer key
+That's what it is the enter key
 那就是我们的返回键.
 
 199
@@ -1031,12 +1031,12 @@ not going to have an argument so
 208
 00:08:46,950 --> 00:08:48,750
 it doesn't matter what this type is.
-不用管它这里是什么类型。
+不用管它这里是什么类型 
 
 209
 00:08:48,752 --> 00:08:49,717
-So disconnect that.
-那么先断开他们的连接
+So connect that.
+所以把它们连接
 
 210
 00:08:49,719 --> 00:08:51,686
@@ -1046,7 +1046,7 @@ As you can see right here.
 211
 00:08:51,688 --> 00:08:54,154
 We have enter, and it has no arguments.
-我们已经有一个enter键，没有参数的
+我们已经有一个 enter 键，没有参数的
 
 212
 00:08:55,691 --> 00:08:57,690
@@ -1061,12 +1061,12 @@ Well, the main thing we need to do is,
 214
 00:08:59,560 --> 00:09:03,228
 put whatever number is in this display up here,
-把所有的数字在这里加起来
+把 display 显示的数字
 
 215
 00:09:03,230 --> 00:09:05,697
 okay, onto our internal stack.
-在我们的栈中
+放入我们的栈中
 
 216
 00:09:05,699 --> 00:09:06,931
@@ -1076,7 +1076,7 @@ So, we're gonna need
 217
 00:09:06,933 --> 00:09:09,367
 an internal stack, in a moment, here.
-一个暂时的栈
+一个栈
 
 218
 00:09:09,369 --> 00:09:10,868
@@ -1085,13 +1085,13 @@ Another thing we might wanna do, is.
 
 219
 00:09:11,904 --> 00:09:14,604
-Set users in the middle of typing the number to false.
-设置用户中间操作数字这个参数为 false
+Set usersInTheMiddleOfTypeingANumber to false.
+设置 usersInTheMiddleOfTypeingANumber 为 false
 
 220
 00:09:14,606 --> 00:09:17,507
 Because we might have been typing a number, but
-因为我们可能已近输入了一个数字
+因为我们可能已经输入了一个数字
 
 221
 00:09:17,509 --> 00:09:20,343
@@ -1110,13 +1110,13 @@ we're going to be starting a new number.
 
 224
 00:09:23,848 --> 00:09:27,182
-[COUGH] All right, so we'll call that user [NOISE] in
-好了，那么我们就叫它 输入好了
+All right, so we'll call that user in
+好了，那么我们
 
 225
 00:09:27,184 --> 00:09:29,451
 the middle of typing falls there.
-中间输入那里
+把它设置为 false 就好了
 
 226
 00:09:29,453 --> 00:09:32,387
@@ -1150,7 +1150,7 @@ Oh.Oh
 232
 00:09:48,369 --> 00:09:50,001
 What's that? Oh, my god.
-那是什么？上帝啊
+那是什么？
 
 233
 00:09:50,003 --> 00:09:52,337
@@ -1165,7 +1165,7 @@ Well it's, it's kind of working because after we
 235
 00:09:54,674 --> 00:09:57,241
 press enter the user is in the middle of typing numbers.
-所按的回车也一起出现在数字里面了。
+所按的回车也一起出现在数字里面了 
 
 236
 00:09:57,243 --> 00:09:59,160
@@ -1190,7 +1190,7 @@ This little enter.
 240
 00:10:05,117 --> 00:10:06,749
 What the heck is that doing on there?
-这个heck是做什么的？
+到底发生了什么？
 
 241
 00:10:06,751 --> 00:10:07,783
@@ -1205,23 +1205,23 @@ Let's take a look here.
 243
 00:10:11,988 --> 00:10:15,023
 The problem here, has to do with the messages being sent.
-问题出在这里，在信息传递之前
+问题出在这里，在发消息之前
 
 244
 00:10:15,025 --> 00:10:17,358
 So, when we wire this up, that's good.
-那么，当我们连接好了，它就好了
+那么，当我们连接好了
 
 245
 00:10:17,360 --> 00:10:20,161
 We got enter.
-我们已经有enter键了
+我们已经有 enter 键了
 
 246
 00:10:20,162 --> 00:10:22,963
-The problem is that button also sends a pen digit.
-问题是那个按钮还传递数字
-
+The problem is that button also sends a appendDigit.
+问题是那个按钮还传递 appendDigit 消息
+ 
 247
 00:10:22,965 --> 00:10:25,598
 That's because we copied and pasted this three, remember?
@@ -1229,8 +1229,8 @@ That's because we copied and pasted this three, remember?
 
 248
 00:10:25,600 --> 00:10:28,735
-And the three sends a pen digit, until we copy and
-而3按钮还传递了一个数字，直到我们复制
+And the three sends appendDigit, until we copy and
+而3按钮还传递了 appendDigit，直到我们复制
 
 249
 00:10:28,737 --> 00:10:29,903
@@ -1239,8 +1239,8 @@ paste it.
 
 250
 00:10:29,904 --> 00:10:31,070
-Now, this one sends, sends a pen digit.
-现在 ，这个按钮传递了一个数字
+Now, this one sends, sends appendDigit.
+现在 ，这个按钮发送了 appendDigit
 
 251
 00:10:31,072 --> 00:10:32,805
@@ -1250,12 +1250,12 @@ So this is both.
 252
 00:10:32,807 --> 00:10:34,874
 Okay, sending two.
-ok，传递了两次
+传递了两次
 
 253
 00:10:34,875 --> 00:10:36,942
 Now, that's a common mistake to make.
-现在，这是一个很常见的错误
+这是一个很常见的错误
 
 254
 00:10:36,944 --> 00:10:39,744
@@ -1320,7 +1320,7 @@ and it'll take this connection away.
 266
 00:11:04,666 --> 00:11:06,232
 So now I only have enter.
-那么，现在我们只有enter键的连接了
+那么，现在我们只有 enter 键的连接了
 
 267
 00:11:06,234 --> 00:11:08,101
@@ -1334,8 +1334,8 @@ See it's,
 
 269
 00:11:09,854 --> 00:11:11,604
-it's not sending appendage, it is sending enter.
-它将不再传递附加物，它只传递 enter
+it's not sending appendDigit, it is sending enter.
+它将不再发送 appendDigit，它只发送 enter
 
 270
 00:11:11,606 --> 00:11:14,440
@@ -1345,7 +1345,7 @@ And you can do this right clicking for anything.
 271
 00:11:14,442 --> 00:11:16,608
 Like we need to do it for our label up here.
-就像我们必须连接 label 一样
+就像我们连接 label 一样
 
 272
 00:11:16,610 --> 00:11:21,112
@@ -1375,7 +1375,7 @@ For example, if we have accidentally put an argument
 277
 00:11:35,393 --> 00:11:40,062
 here to enter, if we had made it do descending button trick,
-对于enter键来说，如果我们已经做过了
+对于 enter 键来说，如果我们已经做过了
 
 278
 00:11:40,064 --> 00:11:42,064
@@ -1390,12 +1390,12 @@ You can't just say, oh okay.
 280
 00:11:44,434 --> 00:11:45,066
 I'll fix that.
-我将会修复它的
+我将会修复它
 
 281
 00:11:45,068 --> 00:11:46,667
 I'll just delete that
-我将会删除它的.
+我将会删除它的
 
 282
 00:11:46,669 --> 00:11:49,136
@@ -1405,12 +1405,12 @@ Because that would not work because,
 283
 00:11:49,138 --> 00:11:52,072
 enter with an argument is actually a different
-因为带有参数的enter键它是不同的
+因为带有参数的 enter 键
 
 284
 00:11:52,074 --> 00:11:54,774
 message than enter with no argument.
-对于没参数的enter键来说
+对于没参数的 enter 键来说发送的是不同的消息
 
 285
 00:11:54,776 --> 00:11:57,510
@@ -1425,7 +1425,7 @@ your program it would crash and
 287
 00:11:58,980 --> 00:12:02,581
 it would say, couldn't send message enter colon.
-它会说，enter 不能传递参数
+它会说，不能发送消息 enter:
 
 288
 00:12:02,583 --> 00:12:05,150
@@ -1435,21 +1435,22 @@ When you touch this button cause enter colon means enter
 289
 00:12:05,152 --> 00:12:08,853
 with an argument, only for the purpose of this tour It doe-,
+enter: 代表有参数，但是代码中看不到
 
 290
 00:12:08,855 --> 00:12:10,655
 we don't see enter colon in our code.
-我们看不到enter的代码
+enter: 参数
 
 291
 00:12:10,657 --> 00:12:12,656
 That's just something that's, this story board here.
-还好这里有story board
+这就是 Story board 中发生的一些事
 
 292
 00:12:13,793 --> 00:12:17,661
 So if that happens, you need to right click on here and
-那么如果这个发生了，你必须点击这里
+那么如果这个发生了，你需要点击这里
 
 293
 00:12:17,663 --> 00:12:21,431
@@ -1459,7 +1460,7 @@ disconnect the enter colon, that happened in there and
 294
 00:12:21,433 --> 00:12:23,566
 then you just recontrol drag.
-拖拉连接
+拖拽连接
 
 295
 00:12:23,568 --> 00:12:25,834
@@ -1469,16 +1470,16 @@ When you recontrol drag it's nice it will.
 296
 00:12:25,836 --> 00:12:28,103
 Kind of let you try to grab onto something, so
-让你们尝试一下
+这里好像让你抓住什么东西一样
 
 297
 00:12:28,105 --> 00:12:32,373
 its easy to reconnect.
-它很容易重新连接。
+它很容易重新连接 
 
 298
 00:12:32,375 --> 00:12:35,293
-Kay?OK？
+OKay
 
 299
 00:12:35,294 --> 00:12:38,212
@@ -1488,7 +1489,7 @@ All right, so now we want to actually implement enter here.
 300
 00:12:38,214 --> 00:12:41,248
 We want to enter the guts of it.
-我们开始着手实现它的内部。
+我们开始着手实现它的内部 
 
 301
 00:12:41,250 --> 00:12:44,150
@@ -1503,7 +1504,7 @@ going to be that
 303
 00:12:45,703 --> 00:12:47,253
 internal stack that these numbers are going to go on.
-这些数字的内部栈。
+这些数字的内部栈 
 
 
 304
@@ -1514,12 +1515,12 @@ And so that's gonna be a var just like
 305
 00:12:52,059 --> 00:12:54,393
 this var up here that we've created and
-我们刚创建的这个变量。
+我们刚创建的这个变量 
 
 306
 00:12:54,395 --> 00:12:57,562
 I'm call it operand stack that's a good name for it.
-我叫它操作符栈，不错的名字。
+我叫它操作符栈，不错的名字 
 
 
 307
@@ -1546,7 +1547,7 @@ when you create an array type you have to specify.
 311
 00:13:08,807 --> 00:13:10,840
 What kind of thing is in the array.
-表明数组里面存储的是什么。
+表明数组里面存储的是什么 
 
 312
 00:13:10,842 --> 00:13:15,211
@@ -1556,12 +1557,12 @@ And so, I'm gonna put doubles in my array.
 313
 00:13:17,214 --> 00:13:20,782
 And that's, even though you might say, well we can't
-嗯。也许你会说，好吧我们并不能
+嗯 也许你会说，好吧我们并不能
 
 314
 00:13:20,784 --> 00:13:25,286
 enter doubles, because these are all integers, basically.
-输入double，因为这里大都是些integer。
+输入double，因为这里大都是些integer 
 
 315
 00:13:25,288 --> 00:13:29,723
@@ -1571,12 +1572,12 @@ But if I were to say, 3 enter 6 divide, I get .5.
 316
 00:13:29,725 --> 00:13:31,925
 So than a double would appear.
-这样就出现了一个double。
+这样就出现了一个double 
 
 317
 00:13:31,927 --> 00:13:34,661
 So that's why I'm going to use double.
-这就是我为什么要使用 double。
+这就是我为什么要使用 double 
 
 318
 00:13:34,663 --> 00:13:38,964
@@ -1591,12 +1592,12 @@ It says stored property operandStack does not
 320
 00:13:41,135 --> 00:13:43,368
 have initial value.
-初始值。
+初始值 
 
 321
 00:13:43,370 --> 00:13:45,036
 So we have to give this an initial value.
-所以我们得赋给它初始值。
+所以我们得赋给它初始值 
 
 322
 00:13:45,038 --> 00:13:47,071
@@ -1606,7 +1607,7 @@ So I'm going to give this an initial value of
 323
 00:13:47,073 --> 00:13:48,472
 an empty array.
-一个空的数组。
+一个空的数组 
 
 324
 00:13:48,474 --> 00:13:51,608
@@ -1616,7 +1617,7 @@ So now you're seeing for the first time how you actually.
 325
 00:13:51,610 --> 00:13:57,480
 Create an instance of a class or of a data type.
-创建一个类或者数据类型的实例。
+创建一个类或者数据类型的实例 
 
 326
 00:13:57,482 --> 00:14:00,249
@@ -1626,7 +1627,7 @@ And you do that just by specifying the type and
 327
 00:14:00,251 --> 00:14:01,984
 then use parenthesis.
-然后写上分号。
+然后写上分号 
 
 328
 00:14:01,986 --> 00:14:03,752
@@ -1636,7 +1637,7 @@ Now, we're not,
 329
 00:14:03,754 --> 00:14:05,554
 again we haven't talked about initializers.
-我们还没有讨论过构造器。
+我们还没有讨论过构造器 
 
 330
 00:14:05,556 --> 00:14:06,888
@@ -1646,12 +1647,12 @@ A class or
 331
 00:14:06,890 --> 00:14:09,390
 a data structure can have multiple initializers.
-一种数据类型可以有许多构造器。
+一种数据类型可以有许多构造器 
 
 332
 00:14:09,392 --> 00:14:11,158
 Some of them might have arguments in here.
-其中的一些可能会在这里有参数。
+其中的一些可能会在这里有参数 
 
 333
 00:14:12,128 --> 00:14:16,863
@@ -1666,7 +1667,7 @@ create them with no arguments and in a case on
 335
 00:14:21,135 --> 00:14:22,835
 array，it's very obvious what to do.
-数组，该做什么一目了然。
+数组，该做什么一目了然 
 
 336
 00:14:22,837 --> 00:14:25,103
@@ -1676,7 +1677,7 @@ No arguments just creates an empty array right,
 337
 00:14:25,105 --> 00:14:27,739
 with no elements in it.
-这里不需要任何参数。
+这里不需要任何参数 
 
 338
 00:14:27,741 --> 00:14:31,142
@@ -1696,7 +1697,7 @@ It's kind of annoying that we have to type this and
 341
 00:14:34,080 --> 00:14:36,147
 then we have to type it right again.
-然后在这又得定义一遍。
+然后在这又得定义一遍 
 
 342
 00:14:36,148 --> 00:14:38,215
@@ -1707,7 +1708,7 @@ And the answer is, we don't have to do that,
 343
 00:14:38,217 --> 00:14:41,051
 because in swift, swift is very strongly typed.
-因为swift是严格强类型的。
+因为swift是严格强类型的 
 
 344
 00:14:41,053 --> 00:14:43,252
@@ -1717,12 +1718,12 @@ You know there's all the variables, but
 345
 00:14:43,254 --> 00:14:45,221
 the properties are strongly typed.
-属性都是强类型的。
+属性都是强类型的 
 
 346
 00:14:45,223 --> 00:14:48,724
 But they, there's also a lot of type inference.
-而且它们都有许多类型推断。
+而且它们都有许多类型推断 
 
 347
 00:14:48,726 --> 00:14:50,625
@@ -1737,7 +1738,7 @@ This type in the exact same way that digit had no type and
 349
 00:14:53,997 --> 00:14:55,596
 it inferred it from here.
-但它可以从这里推断出来。
+但它可以从这里推断出来 
 
 350
 00:14:55,598 --> 00:14:58,366
@@ -1747,7 +1748,7 @@ OperandStack，我们并不需要指明它的类型，因为
 351
 00:14:58,368 --> 00:14:59,633
 it can infer it from here.
-可以从这里推断出来。
+可以从这里推断出来 
 
 352
 00:14:59,635 --> 00:15:02,302
@@ -1757,7 +1758,7 @@ And if we option click on operandStack you'll see that
 353
 00:15:02,304 --> 00:15:05,271
 indeed, it's figured out that that's an array of double.
-它确实可以辨识出这是一个double类型的数组。
+它确实可以辨识出这是一个double类型的数组 
 
 354
 00:15:05,273 --> 00:15:07,824
@@ -1767,7 +1768,7 @@ And in fact,
 355
 00:15:07,825 --> 00:15:10,376
 putting the type in here is considered bad form.
-在这里指明类型被认为是不好的书写形式。
+在这里指明类型被认为是不好的书写形式 
 
 356
 00:15:10,378 --> 00:15:14,080
@@ -1777,17 +1778,17 @@ If it can be inferred, you should let it infer, so,
 357
 00:15:14,082 --> 00:15:16,915
 if we didn't have this blue（for example，而且明明是bool！英文是机器录入的么） up here we shouldn't that either,
-拿这里的Bool来说，我们其实也需要声明类型。
+拿这里的Bool来说，我们其实也需要声明类型 
 
 358
 00:15:16,917 --> 00:15:21,419
 because, false, and true are, can only be blue values so,（bool！！！）
-因为false和true只可能是 Bool 的值。
+因为false和true只可能是 Bool 的值 
 
 359
 00:15:21,421 --> 00:15:22,887
 we're gonna take that off as well.
-所以我们也可以把它去掉。
+所以我们也可以把它去掉 
 
 360
 00:15:22,889 --> 00:15:28,025
@@ -1807,7 +1808,7 @@ Well, when we press enter, we just want to append.
 363
 00:15:34,599 --> 00:15:35,798
 So, append.
-所以，append。
+所以，append 
 
 364
 00:15:35,800 --> 00:15:39,034
@@ -1817,17 +1818,17 @@ This is actually the first time we're sending an actual
 365
 00:15:39,036 --> 00:15:41,703
 message to an object looks just like when we
-消息给一个对象。就像去
+消息给一个对象 就像去
 
 366
 00:15:41,705 --> 00:15:43,738
 accessed a property.
-获取了一个属性一样。
+获取了一个属性一样 
 
 367
 00:15:43,740 --> 00:15:47,375
 The dot and it's just the name of the method that we're
-输入点号，然后就出现了我们想要在数组上调用的方法名字。
+输入点号，然后就出现了我们想要在数组上调用的方法名字 
 
 368
 00:15:47,377 --> 00:15:49,110
@@ -1836,7 +1837,7 @@ trying to invoke in our arrays.
 369
 00:15:49,112 --> 00:15:51,478
 Just an array, an array method right here called a pen（append！！）.
-这是一个数组；这是一个叫做append的数组方法。
+这是一个数组；这是一个叫做append的数组方法 
 
 370
 00:15:51,480 --> 00:15:54,414
@@ -1846,12 +1847,12 @@ I think you see the arguments as newElement: T.
 371
 00:15:54,416 --> 00:15:57,517
 This : T means it has to be of this type.
-这个 : T 意味着它必须是这个类型。
+这个 : T 意味着它必须是这个类型 
 
 372
 00:15:57,519 --> 00:16:00,853
 Type of things in the array so this has to be a double.
-这个数组里面东西的类型，所以它必须是一个double。
+这个数组里面东西的类型，所以它必须是一个double 
 
 373
 00:16:00,855 --> 00:16:04,223
@@ -1861,7 +1862,7 @@ So that's kind of a problem, cuz really what I want to
 374
 00:16:04,225 --> 00:16:08,060
 append onto my stack is what's up here in this display text.
-我的栈上附加的是，这里display text的内容。
+我的栈上附加的是，这里display text的内容 
 
 375
 00:16:08,062 --> 00:16:11,830
@@ -1880,17 +1881,17 @@ Okay? But what type is this?
 378
 00:16:15,101 --> 00:16:16,767
 I can type display.text.（type of display.text？？）
-display.text 的类型。
+display.text 的类型 
 
 379
 00:16:18,437 --> 00:16:19,936
-Now that's not string.
-它不是 string。
+Now that's not String.
+它不是 String 
 
 380
 00:16:19,938 --> 00:16:22,205
 That is an optional.
-它是一个optional。
+它是一个optional 
 
 381
 00:16:22,207 --> 00:16:24,874
@@ -1905,22 +1906,22 @@ So we can unwrap it even though
 383
 00:16:28,045 --> 00:16:29,911
 that's not gonna solve the problem.
-这并不能解决问题。
+这并不能解决问题 
 
 384
 00:16:29,913 --> 00:16:31,212
-This is still a string and
-这仍是一个string，
+This is still a String and
+这仍是一个String，
 
 385
 00:16:31,214 --> 00:16:33,381
 you're still seeing an error here.
-你们还是可以看到这里有一个错误。
+你们还是可以看到这里有一个错误 
 
 386
 00:16:33,383 --> 00:16:36,217
-The same string is not convertible to double [COUGH].
-这个string不可以转化为double。
+The same String is not convertible to double [COUGH].
+这个String不可以转化为double 
 
 387
 00:16:36,219 --> 00:16:37,651
@@ -1929,23 +1930,23 @@ Because we're supposed to be putting doubles in
 
 388
 00:16:37,653 --> 00:16:39,086
-this array putting strings.
-这个数组而不是string。
+this array putting Strings.
+这个数组而不是String 
 
 389
 00:16:39,088 --> 00:16:40,987
 So, we have a problem here.
-所以，我们在这有个问题。
+所以，我们在这有个问题 
 
 390
 00:16:40,989 --> 00:16:44,323
-We have somehow to convert this string into a double so
-我们得用某种方式把string转化成double以便
+We have somehow to convert this String into a double so
+我们得用某种方式把String转化成double以便
 
 391
 00:16:44,325 --> 00:16:45,358
 we can put it on this stack.
-我们把它放入栈中。
+我们把它放入栈中 
 
 392
 00:16:46,394 --> 00:16:48,994
@@ -1960,7 +1961,7 @@ Just show you another feature which we
 394
 00:16:51,131 --> 00:16:52,930
 call Computed Properties.
-称之为计算型属性。
+称之为计算型属性 
 
 
 395
@@ -1971,7 +1972,7 @@ So I'm gonna create another property display value and
 396
 00:16:56,002 --> 00:16:57,401
 it's gonna be a Double.
-它是一个Double。
+它是一个Double 
 
 397
 00:16:57,403 --> 00:17:00,671
@@ -1981,7 +1982,7 @@ And what I want this to be equal to is, I always want it
 398
 00:17:00,673 --> 00:17:03,773
 to be whatever's in this display converted to a double.
-等于这里的显示转化成double的值。
+等于这里的显示转化成double的值 
 
 399
 00:17:04,742 --> 00:17:05,786
@@ -1997,7 +1998,7 @@ be able to set it or get it so
 00:17:06,832 --> 00:17:07,876
     I'm gonna be able to get
    the value of this double.
-   我能够取到这个double的值。
+   我能够取到这个double的值 
 
 402
 00:17:07,878 --> 00:17:10,112
@@ -2008,7 +2009,7 @@ be able to set it or get it so
 403
 00:17:10,114 --> 00:17:11,413
     have it turn into text.
-    把它转化成文本。
+    把它转化成文本 
 
 404
 00:17:13,016 --> 00:17:15,616
@@ -2019,7 +2020,7 @@ be able to set it or get it so
 00:17:15,618 --> 00:17:19,886
    property really is tied to
    some data somewhere else.
-   属性实际上是与其他地方的某些数据绑定的。
+   属性实际上是与其他地方的某些数据绑定的 
 
 406
 00:17:19,888 --> 00:17:22,756
@@ -2030,13 +2031,13 @@ be able to set it or get it so
 407
 00:17:22,758 --> 00:17:25,125
          or something.
-         还是什么。
+         还是什么 
 
 408
 00:17:25,126 --> 00:17:27,493
  Really, I want it to always be
  calculated and we can do that.
- 实际上，我想让它总是可计算的，而我们可以做到。
+ 实际上，我想让它总是可计算的，而我们可以做到 
 
 409
 00:17:27,495 --> 00:17:29,295
@@ -2048,24 +2049,24 @@ be able to set it or get it so
 00:17:29,297 --> 00:17:32,364
        you just put curly
          braces after.
-         你只需要在后面写上大括号。
+         你只需要在后面写上大括号 
 
 411
 00:17:32,366 --> 00:17:37,168
        And you say, get,
         and we say, set.
-        然后写下get，再写set。
+        然后写下get，再写set 
 
 412
 00:17:37,170 --> 00:17:39,871
              Okay?
-             好了。
+             好了 
 
 413
 00:17:39,872 --> 00:17:42,573
   And inside here we are gonna
    compute the value of this.
-   然后在这里面，我们要对它的值进行计算了。
+   然后在这里面，我们要对它的值进行计算了 
 
 414
 00:17:42,575 --> 00:17:46,010
@@ -2101,19 +2102,19 @@ be able to set it or get it so
 00:17:58,856 --> 00:18:02,024
  number that they tried to set
  the display value to in here.
- 那个显示值在这里设值。
+ 那个显示值在这里设值 
 
 420
 00:18:03,126 --> 00:18:05,393
             'Kay, so
   let's do the set side first.
-  好吧，那么让我们先来写set方法。
+  好吧，那么让我们先来写set方法 
 
 421
 00:18:05,395 --> 00:18:07,695
          It's actually
        a little simpler.
-       这其实会简单一些。
+       这其实会简单一些 
 
 422
 00:18:07,697 --> 00:18:08,929
@@ -2136,7 +2137,7 @@ be able to set it or get it so
 00:18:14,903 --> 00:18:16,235
        New value in this,
      this is the new value.
-     这里的newValue。
+     这里的newValue 
 
 426
 00:18:16,237 --> 00:18:17,903
@@ -2153,24 +2154,24 @@ be able to set it or get it so
 00:18:19,340 --> 00:18:21,306
       this new value will
          have the five.
-         那这个newValue就会是5。
+         那这个newValue就会是5 
 
 429
 00:18:22,442 --> 00:18:23,541
-  And so all I really wanna do。
+  And so all I really wanna do 
   我所想做的
 
 430
 00:18:23,543 --> 00:18:26,276
     here is say display text
      equals the new value.
-     就是在这让display.text等于newValue。
+     就是在这让display.text等于newValue 
 
 431
 00:18:26,278 --> 00:18:30,480
    But again, of course this
-     is an optional string.
-     但同样的问题，这是个optional string，
+     is an optional String.
+     但同样的问题，这是个optional String，
 
 432
 00:18:30,482 --> 00:18:33,216
@@ -2182,18 +2183,18 @@ be able to set it or get it so
 00:18:33,218 --> 00:18:36,419
      five, this new values
      going to be a double.
-     5，这个newValue将会是一个double。
+     5，这个newValue将会是一个double 
 
 434
 00:18:36,421 --> 00:18:41,557
    But we know how to convert
-    something to a string by
-    但是我们知道如何把它转化成string，只需要写上
+    something to a String by
+    但是我们知道如何把它转化成String，只需要写上
 
 435
 00:18:41,559 --> 00:18:45,260
   using backlash parenthesis.
-  反斜线，圆括号。
+  反斜线，圆括号 
 
 436
 00:18:45,262 --> 00:18:48,129
@@ -2205,13 +2206,13 @@ be able to set it or get it so
 00:18:48,131 --> 00:18:51,399
       printed out [COUGH]
        our digit up here.
-       输出[咳]这里digit是一样的。
+       输出[咳]这里digit是一样的 
 
 438
 00:18:51,401 --> 00:18:53,501
       We just use the back
        slash parenthesis.
-       我们只需要写上反斜线和圆括号。
+       我们只需要写上反斜线和圆括号 
 
 439
 00:18:53,503 --> 00:18:55,336
@@ -2222,25 +2223,25 @@ be able to set it or get it so
 440
 00:18:55,338 --> 00:18:57,938
      which is a double into
-      a string of doubles.
-      把一个double转化成string。
+      a String of doubles.
+      把一个double转化成String 
 
 441
 00:18:57,940 --> 00:19:00,540
        You know how to do
         that themselves.
-        你知道该怎么做了。
+        你知道该怎么做了 
 
 442
 00:19:00,542 --> 00:19:02,575
          And so bingo,
  we've got our display text and
- 没错。我们得到了display.text，
+ 没错 我们得到了display.text，
 
 443
 00:19:02,577 --> 00:19:04,477
    that's all that necessary.
-   这就够了。
+   这就够了 
 
 444
 00:19:04,479 --> 00:19:07,479
@@ -2252,12 +2253,12 @@ be able to set it or get it so
 00:19:07,481 --> 00:19:10,282
    clearly not in the middle
   of typing a number anymore.
-  不再是在输入一个数字了。
+  不再是在输入一个数字了 
 
 446
 00:19:10,284 --> 00:19:14,085
      [INAUDIBLE] Say that.
-     说。
+     说 
 
 447
 00:19:14,087 --> 00:19:17,221
@@ -2274,7 +2275,7 @@ be able to set it or get it so
 449
 00:19:19,292 --> 00:19:21,258
    return this display value.
-   返回displayValue。
+   返回displayValue 
 
 450
 00:19:21,260 --> 00:19:24,161
@@ -2285,12 +2286,12 @@ be able to set it or get it so
 451
 00:19:24,163 --> 00:19:26,363
      display value is here.
-     这里的displayValue。
+     这里的displayValue 
 
 452
 00:19:27,399 --> 00:19:29,215
       And then return it.
-      然后返回它。
+      然后返回它 
 
 453
 00:19:29,216 --> 00:19:31,032
@@ -2301,7 +2302,7 @@ be able to set it or get it so
 454
 00:19:31,035 --> 00:19:32,801
    through the details here.
-   详细说明细节。
+   详细说明细节 
 
 455
 00:19:32,803 --> 00:19:37,205
@@ -2325,7 +2326,7 @@ be able to set it or get it so
 00:19:44,347 --> 00:19:45,879
        But I'm not going
       to explain it here.
-      而我不会在这解释它。
+      而我不会在这解释它 
 
 459
 00:19:45,881 --> 00:19:49,382
@@ -2342,34 +2343,34 @@ be able to set it or get it so
 461
 00:19:52,053 --> 00:19:56,822
   I'm gonna use a method on it
-   called number from string.
-   我要使用它的一个方法叫numberFromString。
+   called number from String.
+   我要使用它的一个方法叫numberFromString 
 
 462
 00:19:57,858 --> 00:19:59,624
      And I'm gonna give it
-      this string which is
-      然后我会把这个string传给他，
+      this String which is
+      然后我会把这个String传给他，
 
 
 463
 00:19:59,626 --> 00:20:02,593
     the display values text,
       unwrapped of course.
-      display.text,当然得拆包。
+      display.text,当然得拆包 
 
 
 464
 00:20:03,596 --> 00:20:06,497
  The result is acting optional
    so I'm gonna unwrap that.
-   结果是一个optional，所以我要把它拆包。
+   结果是一个optional，所以我要把它拆包 
 
 465
 00:20:06,499 --> 00:20:09,499
    And then I'm gonna get the
   double value of the thing I
-  然后我要得到它返回的的double值。
+  然后我要得到它返回的的double值 
 
 
 466
@@ -2387,12 +2388,12 @@ be able to set it or get it so
 00:20:12,637 --> 00:20:14,637
      I am gonna take it and
      turn it into a double.
-     我把它转化成一个double。
+     我把它转化成一个double 
 
 469
 00:20:14,639 --> 00:20:15,738
         So there we go.
-        好了。
+        好了 
 
 470
 00:20:15,739 --> 00:20:16,838
@@ -2404,7 +2405,7 @@ be able to set it or get it so
 00:20:16,841 --> 00:20:18,374
        look at that later
           if you want.
-          以后再考虑它，如果你想的话。
+          以后再考虑它，如果你想的话 
 
 472
 00:20:19,410 --> 00:20:20,959
@@ -2422,13 +2423,13 @@ be able to set it or get it so
 00:20:22,512 --> 00:20:24,579
      get it, it's gonna be
       setting and getting.
-      get方法来设值和取值。
+      get方法来设值和取值 
 
 475
 00:20:24,581 --> 00:20:27,415
-    It has a string here, so
+    It has a String here, so
    that is really convenient.
-   这里有一个string，所以它也挺方便的。
+   这里有一个String，所以它也挺方便的 
 
 476
 00:20:27,417 --> 00:20:29,400
@@ -2444,7 +2445,7 @@ be able to set it or get it so
 478
 00:20:31,387 --> 00:20:32,285
              'Kay?
-             好。
+             好 
 
 479
 00:20:32,287 --> 00:20:33,953
@@ -2454,25 +2455,25 @@ be able to set it or get it so
 480
 00:20:33,955 --> 00:20:34,987
           No problem.
-          没错。
+          没错 
 
 481
 00:20:34,989 --> 00:20:37,256
        We're pinning that
        onto operandStack.
-       我们把它附到operandStack上了。
+       我们把它附到operandStack上了 
 
 482
 00:20:37,258 --> 00:20:40,058
      So let's print in our
        operandStack here.
-       所以让我们把operandStack在这打印出来。
+       所以让我们把operandStack在这打印出来 
 
 483
 00:20:42,362 --> 00:20:45,162
  Just so, I mean we can do the
  same thing here, operandStack.
- 就像这样，一样的方式，operandStack。
+ 就像这样，一样的方式，operandStack 
 
 484
 00:20:46,632 --> 00:20:48,649
@@ -2488,14 +2489,14 @@ be able to set it or get it so
 486
 00:20:50,669 --> 00:20:53,636
     arrays know how to turn
-    themselves into strings.
-    数组是知道如何把他们自身转化成string的。
+    themselves into Strings.
+    数组是知道如何把他们自身转化成String的 
 
 487
 00:20:53,638 --> 00:20:55,938
  You'll see how they do that in
  the console in a moment here.
- 你一会儿就会在console里看到它们是怎么做到的了。
+ 你一会儿就会在console里看到它们是怎么做到的了 
 
 488
 00:20:56,874 --> 00:20:58,040
@@ -2511,13 +2512,13 @@ be able to set it or get it so
 490
 00:21:00,844 --> 00:21:02,343
     our stack properly here.
-    我们的栈里。
+    我们的栈里 
 
 491
 00:21:04,547 --> 00:21:14,054
             [NOISE]
            All right.
-           好的。
+           好的 
 
 492
 00:21:14,056 --> 00:21:14,854
@@ -2533,7 +2534,7 @@ be able to set it or get it so
 00:21:18,593 --> 00:21:21,761
      And look, operandStack
      equals 56 doing good.
-     看，operandStack是等于56，运行正常。
+     看，operandStack是等于56，运行正常 
 
 495
 00:21:21,763 --> 00:21:23,128
@@ -2543,13 +2544,13 @@ be able to set it or get it so
 496
 00:21:23,130 --> 00:21:24,429
     All right, 56.0 and 7.0.
-    好的，56.0和7.0。
+    好的，56.0和7.0 
 
 497
 00:21:24,431 --> 00:21:27,699
   So, you can see that arrays
-  turn themselves into strings
-  所以你们看到了数组是如何把自身转化成string的，
+  turn themselves into Strings
+  所以你们看到了数组是如何把自身转化成String的，
 
 498
 00:21:27,701 --> 00:21:30,735
@@ -2559,20 +2560,20 @@ be able to set it or get it so
 
 499
 00:21:30,737 --> 00:21:33,937
-  their elements into strings
+  their elements into Strings
     and separated by commas.
-    元素转化成string并以逗号分隔。
+    元素转化成String并以逗号分隔 
 
 500
 00:21:35,507 --> 00:21:37,207
        Now this is good.
-       这个就搞定了。
+       这个就搞定了 
 
 501
 00:21:37,209 --> 00:21:39,642
      So we got our operand,
   operandStack building here.
-  我们这的operandStack就创建好了。
+  我们这的operandStack就创建好了 
 
 
 502
@@ -2584,18 +2585,18 @@ be able to set it or get it so
 503
 00:21:44,715 --> 00:21:45,947
    minus buttons, et cetera.
-   减法之类的按钮。
+   减法之类的按钮 
 
 504
 00:21:45,949 --> 00:21:47,549
  I'm gonna put them right here.
- 我要把他们放在这里。
+ 我要把他们放在这里 
 
 505
 00:21:47,551 --> 00:21:50,385
    That will operate on these
      items uh,on the stack.
-     它在在这些项上进行运算，在栈上。
+     它在在这些项上进行运算，在栈上 
 
 506
 00:21:50,387 --> 00:21:52,119
@@ -2613,7 +2614,7 @@ be able to set it or get it so
 00:21:55,124 --> 00:21:57,057
        Add them together,
         it would be 15.
-        把他们相加，得到15。
+        把他们相加，得到15 
 
 509
 00:21:57,059 --> 00:21:58,758
@@ -2624,13 +2625,13 @@ be able to set it or get it so
 00:21:58,760 --> 00:22:00,560
       it actually will put
    the 15 back on the stack.
-   实际上15会被放回到栈里。
+   实际上15会被放回到栈里 
 
 511
 00:22:00,562 --> 00:22:03,696
    So then, we'd have 56 and
         15 on our stack.
-        然后，我们的栈里就有了56和15。
+        然后，我们的栈里就有了56和15 
 
 512
 00:22:03,698 --> 00:22:04,863
@@ -2641,7 +2642,7 @@ be able to set it or get it so
 00:22:04,865 --> 00:22:08,400
     Plus those together and
   we wanted by it plus again.
-  把它们加到一起，再运行一次加法。
+  把它们加到一起，再运行一次加法 
 
 514
 00:22:08,402 --> 00:22:08,933
@@ -2651,7 +2652,7 @@ be able to set it or get it so
 515
 00:22:08,935 --> 00:22:12,036
          [COUGH] Okay.
-         好的。
+         好的 
 
 516
 00:22:12,038 --> 00:22:15,539
@@ -2662,13 +2663,13 @@ be able to set it or get it so
 00:22:15,541 --> 00:22:17,040
       Well, we would make
        our buttons here.
-       嗯，我们把按钮放到这。
+       嗯，我们把按钮放到这 
 
 518
 00:22:17,042 --> 00:22:22,245
  And I'm gonna make the buttons
       again by copying and
-      我通过复制粘贴数字按钮来创建这些按钮。
+      我通过复制粘贴数字按钮来创建这些按钮 
 
 519
 00:22:22,247 --> 00:22:24,580
@@ -2684,12 +2685,12 @@ be able to set it or get it so
 00:22:26,650 --> 00:22:29,584
     so right off the bat I'm
     gonna right click on it.
-    所以马上就点击它。
+    所以马上就点击它 
 
 522
 00:22:29,586 --> 00:22:31,353
-  And disconnect appendage it.（appendDigit。。。）
-  然后取消和appendDigit的关联。
+  And disconnect appendage it.（appendDigit   ）
+  然后取消和appendDigit的关联 
 
 523
 00:22:31,355 --> 00:22:34,472
@@ -2701,13 +2702,13 @@ be able to set it or get it so
 00:22:34,473 --> 00:22:37,590
     now this button sends no
      messages, yet anyway.
-     这个按钮现在就不会发送任何消息了。
+     这个按钮现在就不会发送任何消息了 
 
 525
 00:22:37,593 --> 00:22:40,461
        And then we could
       put a type on here.
-      然后我们要在这上面设置一个符号。
+      然后我们要在这上面设置一个符号 
 
 526
 00:22:40,463 --> 00:22:44,331
@@ -2719,30 +2720,30 @@ be able to set it or get it so
 00:22:44,333 --> 00:22:47,000
  mathematical symbols so if we
  go down here to math symbols.
- 数学符号，所以我们看这里的math symbols。
+ 数学符号，所以我们看这里的math symbols 
 
 528
 00:22:47,002 --> 00:22:49,936
       See there's a bunch
      of math symbols here.
-     看这里有好多数学符号。
+     看这里有好多数学符号 
 
 529
 00:22:49,938 --> 00:22:51,737
  So let's do times, right here,
- 我们来给乘法设置符号，就在这里。
+ 我们来给乘法设置符号，就在这里 
 
 530
 00:22:51,739 --> 00:22:56,775
   first, we'll put times right
  there, and we can wire it up.
- 首先，把乘法放到这，然后我们可以把他嵌入代码。
+ 首先，把乘法放到这，然后我们可以把他嵌入代码 
 
 531
 00:22:56,777 --> 00:22:59,511
     I'm just gonna hold that
     Ctrl and drag out here.
-    按住Ctrl然后拉到这里来。
+    按住Ctrl然后拉到这里来 
 
 532
 00:23:00,580 --> 00:23:03,881
@@ -2753,7 +2754,7 @@ be able to set it or get it so
 533
 00:23:03,883 --> 00:23:05,549
             Operate.
-            operate。
+            operate 
 
 534
 00:23:05,551 --> 00:23:09,052
@@ -2765,7 +2766,7 @@ be able to set it or get it so
 00:23:09,054 --> 00:23:11,588
        they're all going
         to send operate.
-        他们都会发送operate。
+        他们都会发送operate 
 
 536
 00:23:11,590 --> 00:23:13,289
@@ -2787,44 +2788,44 @@ be able to set it or get it so
 539
 00:23:18,195 --> 00:23:19,661
       object to be button.
-      把这个按钮上的anyObject改称UIButton。
+      把这个按钮上的anyObject改称UIButton 
 
 540
 00:23:20,697 --> 00:23:22,129
       Do not forget that.
-      不要忘记这点。
+      不要忘记这点 
 
 541
 00:23:22,131 --> 00:23:24,965
         'Kay, so action,
  we are gonna have it centered.(set sender!!)
- 好了，action，设置好的sender。
+ 好了，action，设置好的sender 
 
 542
 00:23:24,967 --> 00:23:25,932
            UIButton.
-           UIButton。
+           UIButton 
 
 543
 00:23:25,934 --> 00:23:26,666
         Call it operate.
-        operate。
+        operate 
 
 544
 00:23:27,669 --> 00:23:28,868
           There it is.
-          就是这样。
+          就是这样 
 
 545
 00:23:28,870 --> 00:23:30,269
   That's method doing operate.
-  这就是operate方法。
+  这就是operate方法 
 
 546
 00:23:31,338 --> 00:23:33,438
         We can copy and
  paste this button now, right?
- 我们现在可以复制粘贴按钮了。
+ 我们现在可以复制粘贴按钮了 
 
 547
 00:23:33,440 --> 00:23:34,639
@@ -2835,51 +2836,51 @@ be able to set it or get it so
 00:23:34,641 --> 00:23:37,775
     let's copy and paste and
     make some more of these.
-    让我们复制粘贴然后重复。
+    让我们复制粘贴然后重复 
 
 549
 00:23:37,777 --> 00:23:41,778
       We'll start out with
     four of them, let's say.
-    我们先搞出4个。
+    我们先搞出4个 
 
 550
 00:23:41,780 --> 00:23:43,680
              'Kay?
-             好。
+             好 
 
 551
 00:23:43,681 --> 00:23:45,581
        Let's get back our
     special characters here.
-    我们回到特殊符号这里。
+    我们回到特殊符号这里 
 
 552
 00:23:45,584 --> 00:23:51,087
      [COUGH] All right, so
  let's make this one be divide.
- [咳]好的，我们来把它做成除法。
+ [咳]好的，我们来把它做成除法 
 
 553
 00:23:51,089 --> 00:23:53,522
    Let's make this one plus.
-   我们把这个做成加法。
+   我们把这个做成加法 
 
 554
 00:23:53,524 --> 00:23:55,924
      And this one be minus.
-     这个是减法。
+     这个是减法 
 
 555
 00:23:55,926 --> 00:23:58,660
            All right.
-           好了。
+           好了 
 
 556
 00:23:58,662 --> 00:24:00,461
        So we've got these
         buttons [COUGH].
-        按钮就完成了。
+        按钮就完成了 
 
 557
 00:24:00,463 --> 00:24:02,930
@@ -2890,7 +2891,7 @@ be able to set it or get it so
 558
 00:24:02,932 --> 00:24:04,598
   they're all sending operate.
-  它们都会发送operate。
+  它们都会发送operate 
 
 559
 00:24:05,701 --> 00:24:08,535
@@ -2901,7 +2902,7 @@ be able to set it or get it so
 560
 00:24:08,537 --> 00:24:09,869
           that's good.
-          这样刚好。
+          这样刚好 
 
 561
 00:24:09,871 --> 00:24:12,905
@@ -2913,7 +2914,7 @@ be able to set it or get it so
 00:24:12,907 --> 00:24:15,808
  which one is sending it by the
   same exact way we did above.
-  哪个是按照我们之前的方式去发送的。
+  哪个是按照我们之前的方式去发送的 
 
 563
 00:24:15,810 --> 00:24:18,543
@@ -2924,13 +2925,13 @@ be able to set it or get it so
 564
 00:24:18,545 --> 00:24:20,111
      We're gonna unwrap it.
-     我们要把它拆包。
+     我们要把它拆包 
 
 565
 00:24:20,113 --> 00:24:24,582
       So operation here is
-       gonna be a string.
-       这里的operation是一个string。
+       gonna be a String.
+       这里的operation是一个String 
 
 566
 00:24:24,584 --> 00:24:28,418
@@ -2942,7 +2943,7 @@ be able to set it or get it so
 00:24:28,420 --> 00:24:31,721
        we know which one
          to use there.
-         我们就知道了该用哪个。
+         我们就知道了该用哪个 
 
 568
 00:24:31,723 --> 00:24:35,758
@@ -2954,7 +2955,7 @@ be able to set it or get it so
 00:24:35,760 --> 00:24:39,128
   Swift that's very powerful,
     much more powerful than
-    它非常强大，比其他语言中的强大多了。
+    它非常强大，比其他语言中的强大多了 
 
 570
 00:24:39,130 --> 00:24:41,463
@@ -2966,7 +2967,7 @@ be able to set it or get it so
 00:24:41,465 --> 00:24:43,432
          And also very,
    very important to switch.（swift）
-   而且对Swfit来说很重要。
+   而且对Swfit来说很重要 
 
 572
 00:24:43,434 --> 00:24:46,401
@@ -2984,7 +2985,7 @@ be able to set it or get it so
 00:24:49,172 --> 00:24:51,906
     later in the quarter how
   important this operator is.
-  接下来的一个季度感受到它的强大。
+  接下来的一个季度感受到它的强大 
 
 575
 00:24:51,908 --> 00:24:54,541
@@ -2995,29 +2996,29 @@ be able to set it or get it so
 00:24:54,543 --> 00:24:59,846
     switch looks like switch
   in other languages, like C.
-  它和其他语言中的switch看起来很像，比如C。
+  它和其他语言中的switch看起来很像，比如C 
 
 577
 00:24:59,848 --> 00:25:01,080
     You switch on something.
-    你在某种东西上switch。
+    你在某种东西上switch 
 
 578
 00:25:01,082 --> 00:25:03,015
      In this case I'm gonna
-     switch on this string.
-     这里我会在string上switch。
+     switch on this String.
+     这里我会在String上switch 
 
 579
 00:25:03,017 --> 00:25:04,483
-      This is the string.
-      这就是那个string，
+      This is the String.
+      这就是那个String，
 
 580
 00:25:04,485 --> 00:25:06,852
      Then you just specify
     the case of each thing.
-    然后你要指明所有case。
+    然后你要指明所有case 
 
 581
 00:25:06,854 --> 00:25:10,822
@@ -3045,18 +3046,18 @@ be able to set it or get it so
 585
 00:25:24,236 --> 00:25:26,203
          for multiply.
-         做乘法。
+         做乘法 
 
 586
 00:25:26,204 --> 00:25:28,171
       And we'd do that for
    all the other cases here.
-   接着对其他的case也这么做。
+   接着对其他的case也这么做 
 
 587
 00:25:28,173 --> 00:25:30,439
     So let's copy and paste.
-    复制然后粘贴。
+    复制然后粘贴 
 
 588
 00:25:30,441 --> 00:25:36,478
@@ -3102,7 +3103,7 @@ be able to set it or get it so
 595
 00:25:54,595 --> 00:25:55,828
   you type with the keyboard.
-  你们键盘上输入的减法符号是有一些不同的。
+  你们键盘上输入的减法符号是有一些不同的 
 
 596
 00:25:55,830 --> 00:25:59,164
@@ -3114,7 +3115,7 @@ be able to set it or get it so
 00:25:59,166 --> 00:26:03,434
  you wanna use exactly the same
    symbols here in your case.
-   你们要确定使用的是同一个符号。
+   你们要确定使用的是同一个符号 
 
 598
 00:26:03,436 --> 00:26:06,871
@@ -3126,17 +3127,17 @@ be able to set it or get it so
 00:26:06,873 --> 00:26:11,274
   absolutely requires that you
     have every case covered.
-    你必须确保覆盖所有情况。
+    你必须确保覆盖所有情况 
 
 600
 00:26:11,276 --> 00:26:13,877
-  Now since this is a string,
+  Now since this is a String,
   obviously can't have case of
     由于这是一个字符串,显然不可能
 
 601
 00:26:13,879 --> 00:26:15,345
-      every single string
+      every single String
         in the universe.
     穷举每一种情况
 
@@ -5908,13 +5909,13 @@ then it's not gonna add this rule.
 1101
 00:49:24,965 --> 00:49:26,998
  So we wanted to add this rule.·
-    我们想要添加这些规则。
+    我们想要添加这些规则 
 
 1102
 00:49:27,000 --> 00:49:30,101
        So this adds up to
       87 different rules.
-    所以总共有 87 个不同的规则。
+    所以总共有 87 个不同的规则 
 
 1103
 00:49:30,103 --> 00:49:32,554
@@ -5943,7 +5944,7 @@ then it's not gonna add this rule.
 00:49:39,211 --> 00:49:43,279
   It only takes 87 constraints
   to express all these rules.
-    只需要87个限制就可以表示这些排列规则。
+    只需要87个限制就可以表示这些排列规则 
 
 1108
 00:49:44,482 --> 00:49:45,547
@@ -5965,7 +5966,7 @@ then it's not gonna add this rule.
 1111
 00:49:51,888 --> 00:49:52,787
       watch what happens.
-看看会发生什么。
+看看会发生什么 
 
 1112
 00:49:54,790 --> 00:49:56,723
@@ -5976,7 +5977,7 @@ then it's not gonna add this rule.
 00:49:56,725 --> 00:49:59,392
      first these blue lines
    are showing me the rules.
-    首先这些蓝色的线表示规则。
+    首先这些蓝色的线表示规则 
 
 1114
 00:49:59,394 --> 00:50:01,094
@@ -5994,13 +5995,13 @@ then it's not gonna add this rule.
 00:50:03,064 --> 00:50:05,531
        So these are what
       equals rules means.
-    这就是 equals 规则的要求。
+    这就是 equals 规则的要求 
 
 1117
 00:50:05,533 --> 00:50:08,700
   But there's also tiny little
      I beams right up here.
-  这里还有一些小的 I 形状的线。
+  这里还有一些小的 I 形状的线 
 
 
 1118
@@ -6032,7 +6033,7 @@ then it's not gonna add this rule.
 00:50:21,046 --> 00:50:23,113
      they're supposed to be
      based on those rules.
-	是基于这些规则的。
+	是基于这些规则的 
 
 1123
 00:50:24,049 --> 00:50:27,016
@@ -6050,7 +6051,7 @@ then it's not gonna add this rule.
 00:50:29,854 --> 00:50:31,753
     That's what these dashed
        yellow lines mean.
-	这就是这些黄色的线的意思。
+	这就是这些黄色的线的意思 
 
 1126
 00:50:31,755 --> 00:50:33,221
@@ -6085,13 +6086,13 @@ then it's not gonna add this rule.
 00:50:42,931 --> 00:50:45,331
         it only had this
       one label in there.
-	只有这一个 label 文档。
+	只有这一个 label 文档 
 
 1132
 00:50:46,401 --> 00:50:47,700
       Now we got all these
          buttons added.
-	现在所有的 button 都添加上来了。
+	现在所有的 button 都添加上来了 
 
 1133
 00:50:47,702 --> 00:50:50,002
@@ -6102,7 +6103,7 @@ then it's not gonna add this rule.
 1134
 00:50:50,004 --> 00:50:52,304
    All selected here as well.
-	在这里也处于全部选中的状态。
+	在这里也处于全部选中的状态 
 
 1135
 00:50:52,306 --> 00:50:54,673
@@ -6144,13 +6145,13 @@ then it's not gonna add this rule.
 00:51:11,723 --> 00:51:13,890
      enforce two rules that
    conflict with each other.
-	实施两种相互冲突的规则时。
+	实施两种相互冲突的规则时 
 
 1142
 00:51:13,892 --> 00:51:17,626
    So if you get to that red,
    this is not going to work.
- 所以如果箭头是红色，这些约束就不会正常工作。
+ 所以如果箭头是红色，这些约束就不会正常工作 
 
 1143
 00:51:17,628 --> 00:51:20,295
@@ -6174,7 +6175,7 @@ then it's not gonna add this rule.
 00:51:26,236 --> 00:51:27,201
          things were in
         the wrong place.
-	仅代表有些东西在错误的位置。
+	仅代表有些东西在错误的位置 
 
 1147
 00:51:27,203 --> 00:51:29,136
@@ -6186,7 +6187,7 @@ then it's not gonna add this rule.
 00:51:29,138 --> 00:51:30,637
    Here's all the things that
     were in the wrong place.
- 这里是在错误位置的东西。
+ 这里是在错误位置的东西 
 
 1149
 00:51:30,639 --> 00:51:31,972
@@ -6226,7 +6227,7 @@ then it's not gonna add this rule.
 00:51:44,118 --> 00:51:46,985
     have it to frame update
       to the proper thing.
- 使它的 frame 更新到合适的大小。
+ 使它的 frame 更新到合适的大小 
 
 1156
 00:51:46,987 --> 00:51:50,588
@@ -6249,7 +6250,7 @@ then it's not gonna add this rule.
 1159
 00:51:57,496 --> 00:51:59,096
        So let's try that.
-	让我们试试看。
+	让我们试试看 
 
 1160
 00:51:59,097 --> 00:52:00,697
@@ -6270,25 +6271,25 @@ then it's not gonna add this rule.
 1163
 00:52:03,968 --> 00:52:06,101
  There's no auto layout issues.
- 也没有 auto layout 的问题。
+ 也没有 auto layout 的问题 
 
 1164
 00:52:06,103 --> 00:52:07,435
              Okay.
       All looks good here.
- 看起来不错。
+ 看起来不错 
 
 1165
 00:52:07,437 --> 00:52:09,070
         We can close our
        document outline.
-   可以关闭 document outline 视图了。
+   可以关闭 document outline 视图了 
 
 1166
 00:52:10,306 --> 00:52:13,440
     We zoom out, we can see,
   wow, it spread them all out.
- 将视图缩小，可以看到按钮充满了整个视图。
+ 将视图缩小，可以看到按钮充满了整个视图 
 
 1167
 00:52:13,442 --> 00:52:14,675
@@ -6299,7 +6300,7 @@ then it's not gonna add this rule.
 00:52:14,677 --> 00:52:18,444
        maybe it's obeying
      those rules I gave it.
- 因为他们都遵守我定下的规则。
+ 因为他们都遵守我定下的规则 
 
 1169
 00:52:18,446 --> 00:52:20,079
@@ -6326,13 +6327,13 @@ then it's not gonna add this rule.
 00:52:30,223 --> 00:52:32,790
       It's made, you know,
      kind of tall and thin.
-   iPhone 6 做的既长又窄。
+   iPhone 6 做的既长又窄 
 
 1174
 00:52:32,792 --> 00:52:35,459
         So if this still
        works fine enter. 
-	一切正常。
+	一切正常 
 
 1175
 00:52:35,461 --> 00:52:39,763
@@ -6344,7 +6345,7 @@ then it's not gonna add this rule.
 00:52:39,765 --> 00:52:44,266
        that, it all seems
          to be working.
-    看起来运行正常。
+    看起来运行正常 
 
 1177
 00:52:44,268 --> 00:52:48,804
@@ -6361,7 +6362,7 @@ then it's not gonna add this rule.
 00:52:51,024 --> 00:52:53,241
  But if we go over here to this
    we can rotate the device.
-  如果我们从这里旋转设备。
+  如果我们从这里旋转设备 
 
 1180
 00:52:54,277 --> 00:52:55,843
@@ -6391,13 +6392,13 @@ then it's not gonna add this rule.
 00:53:09,190 --> 00:53:13,491
     we can rotate back using
      the command keys here.
-    可以用 command 键将设备转回来。
+    可以用 command 键将设备转回来 
 
 1185
 00:53:14,627 --> 00:53:17,461
       And it looks good in
       either orientation.
-   可以看到，在两个方向上看起来都不错。
+   可以看到，在两个方向上看起来都不错 
 
 1186
 00:53:17,463 --> 00:53:21,465
@@ -6435,7 +6436,7 @@ then it's not gonna add this rule.
 1192
 00:53:37,347 --> 00:53:39,280
     it's not quite as tall.
-  并没有那么长。
+  并没有那么长 
    
 1193
 00:53:39,282 --> 00:53:42,416
@@ -6447,13 +6448,13 @@ then it's not gonna add this rule.
 00:53:42,418 --> 00:53:46,986
  But it relayed out the buttons
  to look good in that case too.
-  但是在这种情况下也将 buttons 摆放的很棒。
+  但是在这种情况下也将 buttons 摆放的很棒 
 
 1195
 00:53:46,988 --> 00:53:52,558
     9 times 9, divided by 8,
     square root, et cetera.
-    9 × 9， 除以 8 ，开方，等等。
+    9 × 9， 除以 8 ，开方，等等 
 
 1196
 00:53:52,560 --> 00:53:56,995
@@ -6464,7 +6465,7 @@ then it's not gonna add this rule.
 1197
 00:53:56,997 --> 00:54:00,131
    look at this one as well.
-   这样看起来也不错。
+   这样看起来也不错 
 
 1198
 00:54:00,133 --> 00:54:03,067
@@ -6473,7 +6474,7 @@ then it's not gonna add this rule.
 1199
 00:54:03,069 --> 00:54:05,019
           All righty.
-        好啦。
+        好啦 
 
 1200
 00:54:05,020 --> 00:54:06,970
@@ -6485,7 +6486,7 @@ then it's not gonna add this rule.
 00:54:06,973 --> 00:54:10,207
  you try this extra credit and
     it doesn't work for you.
-你尝试得到额外加分，这是行不通的。
+你尝试得到额外加分，这是行不通的 
 
 1202
 00:54:10,209 --> 00:54:16,413
@@ -6497,7 +6498,7 @@ then it's not gonna add this rule.
 00:54:16,415 --> 00:54:21,450
   on this and using the third
  button over here on the right.
-	这个位置并使用右边第三个按钮重新开始。
+	这个位置并使用右边第三个按钮重新开始 
 
 1204
 00:54:21,452 --> 00:54:23,852
@@ -6509,7 +6510,7 @@ then it's not gonna add this rule.
 00:54:23,854 --> 00:54:26,688
   you can see the top section
   here is the selected views.
-你能看到上面的部分是被选中的视图。
+你能看到上面的部分是被选中的视图 
 
 1206
 00:54:26,690 --> 00:54:27,922
@@ -6521,7 +6522,7 @@ then it's not gonna add this rule.
 00:54:27,924 --> 00:54:29,257
         this wouldn't do
       anything right now.
-现在这里不能做任何操作。
+现在这里不能做任何操作 
 
 1208
 00:54:29,259 --> 00:54:31,659
@@ -6539,7 +6540,7 @@ then it's not gonna add this rule.
 00:54:34,163 --> 00:54:37,164
      container and clearing
    the constraints entirely.
-容器内并清除所有约束。
+容器内并清除所有约束 
 
 1211
 00:54:37,166 --> 00:54:40,000
@@ -6568,7 +6569,7 @@ then it's not gonna add this rule.
 00:54:49,877 --> 00:54:51,343
        Clear Constraints,
     that'll clear them all.
-清除所有约束条件，这将清除所有限制。
+清除所有约束条件，这将清除所有限制 
 
 1216
 00:54:51,345 --> 00:54:53,211
@@ -6580,7 +6581,7 @@ then it's not gonna add this rule.
 00:54:53,213 --> 00:54:55,880
         also it's gonna
        clear your labels.
-需要清除你的标签。
+需要清除你的标签 
 
 1218
 00:54:55,882 --> 00:54:59,450
@@ -6615,7 +6616,7 @@ then it's not gonna add this rule.
 00:55:10,728 --> 00:55:13,595
   the size of all your buttons
     in the utilities window.
-你的按钮的大小。
+你的按钮的大小 
 
 1224
 00:55:14,565 --> 00:55:16,164
@@ -6650,7 +6651,7 @@ then it's not gonna add this rule.
 1229
 00:55:29,378 --> 00:55:31,210
   the blue lines are working.
-蓝色线条正常工作。
+蓝色线条正常工作 
 
 1230
 00:55:32,313 --> 00:55:36,015
@@ -6668,7 +6669,7 @@ then it's not gonna add this rule.
 00:55:38,285 --> 00:55:40,285
       so that it's sitting
      underneath your label.
-以至于它在你标签下方。
+以至于它在你标签下方 
 
 1233
 00:55:41,654 --> 00:55:44,021
@@ -6680,7 +6681,7 @@ then it's not gonna add this rule.
 00:55:44,023 --> 00:55:46,490
      label, sometimes it's
      a good idea, clear all
-通常清除所有约束限制是个好的做法。
+通常清除所有约束限制是个好的做法 
 
 1235
 00:55:46,492 --> 00:55:48,892
@@ -6698,7 +6699,7 @@ then it's not gonna add this rule.
 00:55:51,763 --> 00:55:56,132
  just for your label, do reset
   to suggest your constraint.
-对你的标签，做重置到建议的约束条件。
+对你的标签，做重置到建议的约束条件 
 
 1238
 00:55:56,134 --> 00:55:57,499
@@ -6721,7 +6722,7 @@ then it's not gonna add this rule.
 00:56:03,206 --> 00:56:06,407
   the buttons aren't too close
  and it thinks that, you know.
-按钮们不要靠的太近。
+按钮们不要靠的太近 
 
 1242
 00:56:06,409 --> 00:56:08,042
@@ -6746,7 +6747,7 @@ then it's not gonna add this rule.
 00:56:17,485 --> 00:56:21,253
   be attainable when you drag
   your buttons into position.
-可以达到的，当你拖拽一个按钮到一个位置。
+可以达到的，当你拖拽一个按钮到一个位置 
 
 
 1246
@@ -6758,7 +6759,7 @@ then it's not gonna add this rule.
 00:56:23,539 --> 00:56:24,788
       worry too much about
     this auto layout stuff.
-太担心界面自动布局的内容。
+太担心界面自动布局的内容 
 
 1248
 00:56:25,825 --> 00:56:27,158
@@ -6774,7 +6775,7 @@ then it's not gonna add this rule.
 00:56:29,495 --> 00:56:31,728
       so you're eventually
     going to have to do it.
-最终你讲会来处理它。
+最终你讲会来处理它 
 
 
 1251
@@ -6787,13 +6788,13 @@ then it's not gonna add this rule.
 1252
 00:56:34,199 --> 00:56:35,465
      weeks, on auto layout.
-自动布局。
+自动布局 
 
 1253
 00:56:35,467 --> 00:56:38,968
    I've really just shown you
   just kind of what it can do,
-我仅仅向你们展示了它的小小一角。
+我仅仅向你们展示了它的小小一角 
 
 1254
 00:56:38,970 --> 00:56:41,770
@@ -6804,7 +6805,7 @@ then it's not gonna add this rule.
 1255
 00:56:41,772 --> 00:56:43,338
    auto layout in particular.
-自动布局。
+自动布局 
 
 1256
 00:56:44,374 --> 00:56:48,409
@@ -6816,13 +6817,13 @@ then it's not gonna add this rule.
 1257
 00:56:48,411 --> 00:56:50,745
         square area and
-在这个方框被做工作。
+在这个方框被做工作 
 
 1258
 00:56:50,746 --> 00:56:53,080
  we want our UIs to work on all
   kinds of different devices.
-我想要我们的界面能再各种不同设备上正常工作。
+我想要我们的界面能再各种不同设备上正常工作 
 
 1259
 00:56:53,082 --> 00:56:54,614
@@ -6834,7 +6835,7 @@ then it's not gonna add this rule.
 00:56:55,584 --> 00:56:57,717
         start with some
       experience with it.
-作为入门的原因。
+作为入门的原因 
 
 1261
 00:56:59,820 --> 00:57:00,686
@@ -6844,7 +6845,7 @@ then it's not gonna add this rule.
 1262
 00:57:00,688 --> 00:57:02,520
          So that is it.
-就这样。
+就这样 
 
 1263
 00:57:02,522 --> 00:57:06,190
@@ -6881,7 +6882,7 @@ then it's not gonna add this rule.
 00:57:20,438 --> 00:57:26,141
  This is all calculator brain,
     calculator engine code.
-这是所有计算器的核心，计算器的引擎代码。
+这是所有计算器的核心，计算器的引擎代码 
 
 1269
 00:57:26,143 --> 00:57:28,143
@@ -6898,7 +6899,7 @@ then it's not gonna add this rule.
 00:57:30,213 --> 00:57:33,648
    And so I'll give a little
   talk about NBC later today.
-今天稍后我将讲关于NBC的内容。
+今天稍后我将讲关于NBC的内容 
 
 1272
 00:57:33,650 --> 00:57:36,650
@@ -6916,7 +6917,7 @@ then it's not gonna add this rule.
 00:57:41,857 --> 00:57:45,258
   where all apps need to obey
   model V controller paradigm.
-在这里所有的程序都需要遵循MVC模式。
+在这里所有的程序都需要遵循MVC模式 
 
 1275
 00:57:46,294 --> 00:57:49,261
@@ -6934,7 +6935,7 @@ then it's not gonna add this rule.
 00:57:52,766 --> 00:57:54,499
    somewhere else so, this is
    going to be mostly review.
-地方听过它，因此这里将是复习。
+地方听过它，因此这里将是复习 
 
 1278
 00:57:54,501 --> 00:57:57,769
@@ -6946,7 +6947,7 @@ then it's not gonna add this rule.
 00:57:57,771 --> 00:58:00,705
         an idea of what
        MVC is all about.
-一个MVC相关的概念。
+一个MVC相关的概念 
 
 1280
 00:58:00,707 --> 00:58:04,975
@@ -7004,7 +7005,7 @@ then it's not gonna add this rule.
 1289
 00:58:24,860 --> 00:58:26,794
    Okay, that's what it does.
-那是计算器要做的。
+那是计算器要做的 
 
 
 1290
@@ -7017,7 +7018,7 @@ then it's not gonna add this rule.
 00:58:28,731 --> 00:58:32,098
    all that stuff, that's all
    kind of calculator stuff.
-相关材料，也就是计算器相关的内容。
+相关材料，也就是计算器相关的内容 
 
 1292
 00:58:32,100 --> 00:58:35,935
@@ -7029,7 +7030,7 @@ then it's not gonna add this rule.
 00:58:35,937 --> 00:58:37,569
        it shouldn't be in
         our controller.
-不应该在我们的控制器中。
+不应该在我们的控制器中 
 
 1294
 00:58:38,639 --> 00:58:43,841
@@ -7041,7 +7042,7 @@ then it's not gonna add this rule.
 00:58:43,843 --> 00:58:48,178
      controls how the model
     is presented on screen.
-控制模型是如何显示在屏幕上。
+控制模型是如何显示在屏幕上 
 
 1296
 00:58:48,180 --> 00:58:51,348
@@ -7076,7 +7077,7 @@ then it's not gonna add this rule.
 00:59:00,291 --> 00:59:02,524
        UI, we're going to
         use in the view.
-要做的事，我们在视图中要用到它。
+要做的事，我们在视图中要用到它 
 
 1302
 00:59:02,526 --> 00:59:06,127
@@ -7100,7 +7101,7 @@ then it's not gonna add this rule.
 1305
 00:59:10,032 --> 00:59:11,498
        how your UI works.
-	你的界面元素是如何工作的。
+	你的界面元素是如何工作的 
 
 1306
 00:59:11,500 --> 00:59:13,600
@@ -7111,7 +7112,7 @@ then it's not gonna add this rule.
 1307
 00:59:13,602 --> 00:59:15,234
        how your UI works.
-界面如何工作的。
+界面如何工作的 
 
 1308
 00:59:15,236 --> 00:59:15,801
@@ -7128,7 +7129,7 @@ then it's not gonna add this rule.
 00:59:22,009 --> 00:59:25,543
  also about how to communicate
    between these three camps.
-知道三层（camps）是如何通讯的。
+知道三层（camps）是如何通讯的 
 
 1311
 00:59:25,545 --> 00:59:27,412
@@ -7151,25 +7152,25 @@ then it's not gonna add this rule.
 1314
 00:59:32,184 --> 00:59:33,350
   then the dashed white line.
-白色虚线。
+白色虚线 
 
 1315
 00:59:33,352 --> 00:59:34,884
      So that's like you're
       driving in your car.
-就像你驾驶你的汽车。
+就像你驾驶你的汽车 
 
 1316
 00:59:35,887 --> 00:59:40,356
   Try to use them as an image
    for how this communication
-尝试用做以道路标线想象是如何通信的。
+尝试用做以道路标线想象是如何通信的 
 
 1317
 00:59:40,358 --> 00:59:42,090
   happens, where it's allowed,
     where it's not allowed.
-哪里是允许通信的，哪里是不被允许的。
+哪里是允许通信的，哪里是不被允许的 
 
 1318
 00:59:43,093 --> 00:59:45,693
@@ -7199,7 +7200,7 @@ then it's not gonna add this rule.
 00:59:51,567 --> 00:59:52,799
        you can head right
          across there.
-你可以轧过虚线到另一侧。
+你可以轧过虚线到另一侧 
 
 1323
 00:59:52,801 --> 00:59:54,267
@@ -7245,7 +7246,7 @@ then it's not gonna add this rule.
 1330
 01:00:10,850 --> 01:00:12,650
  So it has to have this access.
-因此你必须有该权限。
+因此你必须有该权限 
 
 1331
 01:00:12,652 --> 01:00:16,319
@@ -7257,12 +7258,12 @@ then it's not gonna add this rule.
 1332
 01:00:16,321 --> 01:00:17,320
            the model.
-模型通信。
+模型通信 
 
 1333
 01:00:17,322 --> 01:00:18,354
     This is a one way arrow.
-这是个单向箭头。
+这是个单向箭头 
 
 1334
 01:00:18,356 --> 01:00:20,289
@@ -7273,7 +7274,7 @@ then it's not gonna add this rule.
 01:00:20,290 --> 01:00:22,223
       one way arrow, from
   the controller to the model.
-对模型的控制也是单向的。
+对模型的控制也是单向的 
 
 1336
 01:00:22,226 --> 01:00:25,160
@@ -7286,7 +7287,7 @@ then it's not gonna add this rule.
 01:00:25,162 --> 01:00:27,095
        is also unlimited
          communication,
-也是允许通信的。
+也是允许通信的 
 
 
 1338
@@ -7299,7 +7300,7 @@ then it's not gonna add this rule.
 01:00:28,832 --> 01:00:30,798
          talking using
        it's own minions.
-向视图发送指令。
+向视图发送指令 
 
 1340
 01:00:30,800 --> 01:00:32,667
@@ -7317,7 +7318,7 @@ then it's not gonna add this rule.
 01:00:35,571 --> 01:00:37,671
      So, the controller can
      do anything it wants.
-因此，控制器可以做任何它想做的事。
+因此，控制器可以做任何它想做的事 
 
 
 1343
@@ -7342,7 +7343,7 @@ then it's not gonna add this rule.
 01:00:46,280 --> 01:00:48,213
    And you're gonna see that
    in the demo on Wednesday.
-我们周三的演示中将要看到它。
+我们周三的演示中将要看到它 
 
 1347
 01:00:48,215 --> 01:00:51,249
@@ -7360,7 +7361,7 @@ then it's not gonna add this rule.
 01:00:52,635 --> 01:00:54,018
     our controller can talk
     to it's view, all right?
-这样，我们控制器可以发送指令到对应视图。对吧？
+这样，我们控制器可以发送指令到对应视图 对吧？
 
 1350
 01:00:55,055 --> 01:00:56,354
@@ -7386,7 +7387,7 @@ then it's not gonna add this rule.
 01:00:59,991 --> 01:01:03,292
    100% obvious, the model is
    completely UI independent.
-很明显，Model 是完全独立于UI的。
+很明显，Model 是完全独立于UI的 
 
 1355
 01:01:03,294 --> 01:01:05,494
@@ -7398,13 +7399,13 @@ then it's not gonna add this rule.
 01:01:05,496 --> 01:01:07,863
        a viewer object or
       anyone in that camp.
-视图对象发送指令，也不能和视图层的任何对象通讯。
+视图对象发送指令，也不能和视图层的任何对象通讯 
 
 1357
 01:01:07,865 --> 01:01:10,399
     Because the view objects
  are fundamentally UI objects.
-因为视图对象是基本的UI对象。
+因为视图对象是基本的UI对象 
 
 1358
 01:01:10,401 --> 01:01:11,466
@@ -7415,7 +7416,7 @@ then it's not gonna add this rule.
 01:01:11,468 --> 01:01:13,401
          they're still
    fundamentally UI objects.
-他们也是基本的UI 对象。
+他们也是基本的UI 对象 
 
 1360
 01:01:13,403 --> 01:01:16,237
@@ -7427,7 +7428,7 @@ then it's not gonna add this rule.
 01:01:16,239 --> 01:01:18,272
      they can't be talking
      to any specific model.
-他们就不能和任何特定的Model 对象通讯。
+他们就不能和任何特定的Model 对象通讯 
 
 1362
 01:01:18,274 --> 01:01:20,674
@@ -7444,32 +7445,32 @@ then it's not gonna add this rule.
 01:01:22,377 --> 01:01:24,377
       So there's never any
     communication this way.
-因此这里没有任何通信。
+因此这里没有任何通信 
 
 
 1365
 01:01:24,379 --> 01:01:25,911
         That's why it's
      a double yellow line.
-这也是这里使用黄色双线的原因。
+这也是这里使用黄色双线的原因 
 
 1366
 01:01:25,913 --> 01:01:27,780
         That's why these
          lines are red.
-这是这些线是红色的原因。
+这是这些线是红色的原因 
 
 
 1367
 01:01:27,782 --> 01:01:29,748
  That's why there's fire, okay?
-这也是这里用火标注的原因。明白？
+这也是这里用火标注的原因 明白？
 
 1368
 01:01:29,750 --> 01:01:31,783
    Never go across that line,
              Never.
-永远不要跨越这条线。绝不！
+永远不要跨越这条线 绝不！
 
 1369
 01:01:34,120 --> 01:01:36,520
@@ -7481,7 +7482,7 @@ then it's not gonna add this rule.
 01:01:36,522 --> 01:01:38,588
    You got these generic view
      objects, like buttons.
-你得到这些通用的视图对象，例如按钮。
+你得到这些通用的视图对象，例如按钮 
 
 1371
 01:01:38,590 --> 01:01:40,724
@@ -7492,7 +7493,7 @@ then it's not gonna add this rule.
 1372
 01:01:40,726 --> 01:01:43,593
       Well, yes, they can.
-对，当然可以。
+对，当然可以 
 
 1373
 01:01:43,595 --> 01:01:46,495
@@ -7503,14 +7504,14 @@ then it's not gonna add this rule.
 1374
 01:01:46,497 --> 01:01:48,397
           are generic.
- 是通用的。
+ 是通用的 
 
 
 1375
 01:01:48,398 --> 01:01:50,298
    So they can't really know
    much about the controller.
-这样，他们不能真正的了解控制器。
+这样，他们不能真正的了解控制器 
 
 1376
 01:01:50,301 --> 01:01:53,201
@@ -7528,7 +7529,7 @@ then it's not gonna add this rule.
 01:01:55,439 --> 01:01:58,673
  the thing they're talking to,
     and in a structured way.
-在什么位置，并用一种结构化的方式和控制器通信。
+在什么位置，并用一种结构化的方式和控制器通信 
 
 1379
 01:01:58,675 --> 01:02:02,776
@@ -7552,7 +7553,7 @@ then it's not gonna add this rule.
 01:02:05,514 --> 01:02:07,480
        Well one is called
          target action.
-其中一个方式叫做Target 操作。
+其中一个方式叫做Target 操作 
 
 1383
 01:02:07,482 --> 01:02:10,816
@@ -7570,7 +7571,7 @@ then it's not gonna add this rule.
 01:02:15,089 --> 01:02:17,389
         to the view and
        says to the view,
-指向视图，并和视图通信。
+指向视图，并和视图通信 
 
 1386
 01:02:17,391 --> 01:02:20,058
@@ -7588,7 +7589,7 @@ then it's not gonna add this rule.
 01:02:21,661 --> 01:02:24,828
        someone moves you,
       send me that action.
-别人移动了你，给向我发送那个操作。
+别人移动了你，给向我发送那个操作 
 
 
 1389
@@ -7606,7 +7607,7 @@ then it's not gonna add this rule.
 01:02:28,033 --> 01:02:30,600
     slider is communicating
     back to the controller.
-拖动条就可以反过来和控制器通信。
+拖动条就可以反过来和控制器通信 
 
 1392
 01:02:30,602 --> 01:02:32,835
@@ -7617,7 +7618,7 @@ then it's not gonna add this rule.
 1393
 01:02:32,837 --> 01:02:34,103
     a space game controller.
-一个空间游戏控制器。
+一个空间游戏控制器 
 
 1394
 01:02:34,105 --> 01:02:36,071
@@ -7629,7 +7630,7 @@ then it's not gonna add this rule.
 01:02:36,073 --> 01:02:38,607
    All it knows is that when
   something happens in itself,
-它所知道的只是某一个事件何时在它身上发生。
+它所知道的只是某一个事件何时在它身上发生 
 
 
 1396
@@ -7648,7 +7649,7 @@ then it's not gonna add this rule.
 01:02:43,680 --> 01:02:45,780
     the view to communicate
       with the controller.
-到视图和控制器之间的通信。
+到视图和控制器之间的通信 
 
 
 1399
@@ -7686,7 +7687,7 @@ then it's not gonna add this rule.
 01:02:56,458 --> 01:02:58,791
       synchronizing what's
            happening.
-同步正在发生的事件。
+同步正在发生的事件 
 
 1405
 01:02:58,793 --> 01:03:01,694
@@ -7722,7 +7723,7 @@ then it's not gonna add this rule.
 01:03:11,671 --> 01:03:15,806
        somebody know that
    the user just did scroll.
-知道用户刚刚做了滚动操作。
+知道用户刚刚做了滚动操作 
 
 1411
 01:03:15,808 --> 01:03:17,691
@@ -7742,7 +7743,7 @@ then it's not gonna add this rule.
 01:03:19,578 --> 01:03:23,413
  to let the controller know the
  user will be scrolling, okay?
-控制器知道用户将要执行滑动操作。 懂吗？
+控制器知道用户将要执行滑动操作  懂吗？
 
 
 1414
@@ -7775,7 +7776,7 @@ scroll viewer需要知道
 01:03:33,223 --> 01:03:36,190
    have enough logic to know
  the answer to those questions.
-足够的逻辑知道那些问题的答案。
+足够的逻辑知道那些问题的答案 
 
 1419
 01:03:36,192 --> 01:03:39,727
@@ -7787,7 +7788,7 @@ scroll viewer需要知道
 01:03:39,729 --> 01:03:42,730
      answer those questions
      to some other object.
-其他对象来回答那些问题。
+其他对象来回答那些问题 
 
 1421
 01:03:42,732 --> 01:03:44,664
@@ -7812,7 +7813,7 @@ scroll viewer需要知道
 01:03:49,137 --> 01:03:51,570
      the other thing like,
     should allow scrolling.
-其他事情，像是否允许滑动。
+其他事情，像是否允许滑动 
 
 1425
 01:03:51,572 --> 01:03:53,939
@@ -7822,7 +7823,7 @@ scroll viewer需要知道
 1426
 01:03:53,941 --> 01:03:54,539
        Things like that.
-就像那样。
+就像那样 
 
 1427
 01:03:54,541 --> 01:03:56,591
@@ -7834,7 +7835,7 @@ scroll viewer需要知道
 01:03:56,592 --> 01:03:58,642
   methods you are going to see
   in these delicate protocols.
-方法，你将要在那些代理协议中看到他们。
+方法，你将要在那些代理协议中看到他们 
 
 1429
 01:03:58,645 --> 01:04:00,878
@@ -7862,18 +7863,18 @@ scroll viewer需要知道
 1433
 01:04:06,318 --> 01:04:07,117
    I can see very few of you.
-很少能做到。
+很少能做到 
 
 1434
 01:04:07,119 --> 01:04:08,818
   So, I will be teaching that.
-这里我将要讲它。
+这里我将要讲它 
 
 1435
 01:04:08,820 --> 01:04:12,421
  A protocol is just a blind way
    to talk to another object.
-协议仅仅是blind和其他对象通信的方式。
+协议仅仅是blind和其他对象通信的方式 
 
 1436
 01:04:12,423 --> 01:04:13,556
@@ -7884,7 +7885,7 @@ scroll viewer需要知道
 01:04:13,557 --> 01:04:14,690
     you're gonna be like oh,
    yeah, I know what that is.
-你将会明白，这知道这就是它。
+你将会明白，这知道这就是它 
 
 1438
 01:04:14,692 --> 01:04:16,958
@@ -7901,7 +7902,7 @@ scroll viewer需要知道
 1440
 01:04:19,162 --> 01:04:20,862
    this blind communication.
-盲目通信。
+盲目通信 
 
 1441
 01:04:21,931 --> 01:04:24,932
@@ -7914,12 +7915,12 @@ scroll viewer需要知道
 01:04:24,934 --> 01:04:28,502
  that views should not own the
  data that they're displaying.
-视图不应该持有他们展示的数据。
+视图不应该持有他们展示的数据 
 
 1443
 01:04:28,504 --> 01:04:30,170
     They should not own it.
-他们不应该持有数据。
+他们不应该持有数据 
 
 
 1444
@@ -7943,13 +7944,13 @@ scroll viewer需要知道
 01:04:37,812 --> 01:04:40,679
   your iPod, on your iPhone or
        your iPad, right?
-你iPod,iPhone 或者iPad 中的所有歌曲。 对吗？
+你iPod,iPhone 或者iPad 中的所有歌曲  对吗？
 
 1448
 01:04:40,681 --> 01:04:43,281
      You might have 10,000
         songs in there.
-你可能有10000首歌曲。
+你可能有10000首歌曲 
 
 
 1449
@@ -7973,7 +7974,7 @@ scroll viewer需要知道
 01:04:52,774 --> 01:04:55,191
  expect it to hold 10,000 songs
    so it can list through it.
-期望它来持有10000首歌，这样你才能浏览他们。
+期望它来持有10000首歌，这样你才能浏览他们 
 
 1453
 01:04:55,194 --> 01:04:56,860
@@ -8027,7 +8028,7 @@ OKay，因为你的音乐数据库是一个Model
 01:05:12,075 --> 01:05:16,243
        tell a view how to
     display all those songs.
-告诉一个视图如何展示这些歌曲。
+告诉一个视图如何展示这些歌曲 
 
 1462
 01:05:16,245 --> 01:05:18,429
@@ -8074,7 +8075,7 @@ OKay，因为你的音乐数据库是一个Model
 01:05:33,994 --> 01:05:36,928
   Now the data source doesn't
     do the will did should.
- 数据源并不做will, did, should 的事。
+ 数据源并不做will, did, should 的事 
 
 1470
 01:05:36,930 --> 01:05:39,230
@@ -8110,12 +8111,12 @@ OKay，因为你的音乐数据库是一个Model
 01:05:47,021 --> 01:05:48,604
    makes space internally for
          10,000 things.
-为10000歌开辟内部空间。
+为10000歌开辟内部空间 
 
 1476
 01:05:48,607 --> 01:05:50,340
  It doesn't know what they are.
-视图并不知道这些歌曲是什么。
+视图并不知道这些歌曲是什么 
 
 
 1477
@@ -8127,7 +8128,7 @@ OKay，因为你的音乐数据库是一个Model
 1478
 01:05:53,011 --> 01:05:54,276
    that you know where it is.
-你便能知道它在哪里。
+你便能知道它在哪里 
 
 1479
 01:05:54,278 --> 01:05:57,779
@@ -8139,13 +8140,13 @@ OKay，因为你的音乐数据库是一个Model
 01:05:57,781 --> 01:06:00,849
  it starts sending the message
        to the controller,
-它开始发送消息给控制器。
+它开始发送消息给控制器 
 
 1481
 01:06:00,851 --> 01:06:03,785
       give me the data at
     line 150 next 10 items.
-返回150 行后面的10条数据。
+返回150 行后面的10条数据 
 
 1482
 01:06:03,787 --> 01:06:04,975
@@ -8156,13 +8157,13 @@ OKay，因为你的音乐数据库是一个Model
 01:06:04,976 --> 01:06:06,164
        And then you flick
         down some more.
-然后你再往下轻轻滑动。
+然后你再往下轻轻滑动 
 
 1484
 01:06:06,165 --> 01:06:07,353
       Now it's saying 250,
          10 more items.
-现在显示250， 另外10条数据。
+现在显示250， 另外10条数据 
 
 
 1485
@@ -8175,13 +8176,13 @@ OKay，因为你的音乐数据库是一个Model
 01:06:10,259 --> 01:06:11,725
       saying give me more,
        give me more data.
-要求得到更多的数据。
+要求得到更多的数据 
 
 1487
 01:06:11,727 --> 01:06:14,361
     And it's providing it to
   the view in this blind way.
-控制器用这种blind 方式提供数据给视图。
+控制器用这种blind 方式提供数据给视图 
 
 1488
 01:06:14,363 --> 01:06:17,230
@@ -8194,7 +8195,7 @@ OKay，因为你的音乐数据库是一个Model
 01:06:17,232 --> 01:06:20,232
  through the controller in this
  kind of blind structured way.
-是通过控制器用这种blind structured方式。
+是通过控制器用这种blind structured方式 
 
 1490
 01:06:20,234 --> 01:06:21,767
@@ -8216,7 +8217,7 @@ OKay，因为你的音乐数据库是一个Model
 01:06:24,972 --> 01:06:27,105
     it's a specific kind of
    delegate for getting data.
-它是一种特殊类型的用于获取数据的代理。
+它是一种特殊类型的用于获取数据的代理 
 
 1494
 01:06:27,107 --> 01:06:30,408
@@ -8228,7 +8229,7 @@ OKay，因为你的音乐数据库是一个Model
 01:06:30,410 --> 01:06:33,477
     a data source, and they
  usually also have a delegate.
-他们有一个数据源，并且通常有一个代理。
+他们有一个数据源，并且通常有一个代理 
 
 
 1496
@@ -8240,7 +8241,7 @@ OKay，因为你的音乐数据库是一个Model
 1497
 01:06:36,549 --> 01:06:38,415
   did, should, kind of things.
-did, should, 等要做的事。
+did, should, 等要做的事 
 
 1498
 01:06:38,417 --> 01:06:40,316
@@ -8253,7 +8254,7 @@ did, should, 等要做的事。
 01:06:40,318 --> 01:06:43,219
  it depends on whether they are
  showing a lot of data or not.
-这取决于他们是否要显示大量数据。
+这取决于他们是否要显示大量数据 
 
 
 1500
@@ -8271,7 +8272,7 @@ did, should, 等要做的事。
 1502
 01:06:49,226 --> 01:06:51,109
  it just has a suit and a rank. 
- 它仅有花色和点数两点属性。
+ 它仅有花色和点数两点属性 
 
 1503
 01:06:51,110 --> 01:06:52,993
@@ -8282,13 +8283,13 @@ did, should, 等要做的事。
 1504
 01:06:52,996 --> 01:06:54,262
       just suit and rank.     
-进行计算。
+进行计算 
 
 1505
 01:06:54,264 --> 01:06:56,030
       We are going to set       
        those properties. 
-       我们会把它们设置成属性。
+       我们会把它们设置成属性 
 
 1506
 01:06:56,032 --> 01:06:58,766
@@ -8299,7 +8300,7 @@ did, should, 等要做的事。
 1507
 01:06:58,768 --> 01:07:00,267
    it wouldn't be owning it. 
-   它不会拥有这些数据。   
+   它不会拥有这些数据    
 
 1508
 01:07:00,269 --> 01:07:02,536
@@ -8316,7 +8317,7 @@ did, should, 等要做的事。
 01:07:04,572 --> 01:07:06,605
  rank, the view is just getting 
     that data to present it.    
-    view仅仅是为了显示而获取那些数据。
+    view仅仅是为了显示而获取那些数据 
 
 1511
 01:07:06,608 --> 01:07:07,840
@@ -8333,7 +8334,7 @@ did, should, 等要做的事。
 1513
 01:07:10,745 --> 01:07:12,878
        it to display it.     
-       只是给view来显示。   
+       只是给view来显示    
 
 1514
 01:07:12,880 --> 01:07:14,312
@@ -8349,12 +8350,12 @@ did, should, 等要做的事。
 01:07:17,617 --> 01:07:22,520
       interpret and format      
  the model's data for the view. 
- 给view解释并格式化这些model提供的数据。
+ 给view解释并格式化这些model提供的数据 
 
 1517
 01:07:22,522 --> 01:07:23,654
   That's the controller's job.  
-  这就是controller的工作。
+  这就是controller的工作 
 
 1518
 01:07:23,656 --> 01:07:25,188
@@ -8383,7 +8384,7 @@ did, should, 等要做的事。
 01:07:34,432 --> 01:07:36,265
      using its view minion      
       to put it on screen. 
-      运用到view中去，然后显示到屏幕上。
+      运用到view中去，然后显示到屏幕上 
 
 1523
 01:07:36,267 --> 01:07:37,132
@@ -8394,7 +8395,7 @@ did, should, 等要做的事。
 1524
 01:07:37,134 --> 01:07:38,667
       the controller does.      
-      controller做的事情。
+      controller做的事情 
 
 1525
 01:07:38,669 --> 01:07:40,468
@@ -8411,7 +8412,7 @@ did, should, 等要做的事。
 01:07:42,972 --> 01:07:46,040
     Again, obviously that's     
   verboten because model knows  
-同样的，显然是不可以。因为model对于UI
+同样的，显然是不可以 因为model对于UI
 
 1528
 01:07:46,042 --> 01:07:47,708
@@ -8422,7 +8423,7 @@ did, should, 等要做的事。
 01:07:47,710 --> 01:07:50,710
  it couldn't possibly talk to a 
  UI object like the controller. 
- 它不可能同像controller一样的UI对象进行通信。
+ 它不可能同像controller一样的UI对象进行通信 
 
 1530
 01:07:50,712 --> 01:07:53,046
@@ -8452,13 +8453,13 @@ did, should, 等要做的事。
 01:07:59,019 --> 01:08:01,186
  somebody changes something on  
   the network and it changes.   
-  某人在网络上修改了数据，数据改变了。
+  某人在网络上修改了数据，数据改变了 
 
 1535
 01:08:01,188 --> 01:08:02,587
        And the controller       
        needs to find out.       
-       controller需要了解这些。
+       controller需要了解这些 
 
 1536
 01:08:02,589 --> 01:08:04,555
@@ -8491,7 +8492,7 @@ did, should, 等要做的事。
 1541
 01:08:17,868 --> 01:08:19,768
     anyone who's interested.    
-    感兴趣的任何人。
+    感兴趣的任何人 
 
 1542
 01:08:19,770 --> 01:08:21,937
@@ -8507,7 +8508,7 @@ did, should, 等要做的事。
 01:08:24,107 --> 01:08:28,476
    Notification and Key Value   
    Observing, KVO we call it.   
-   Notification和KVO。
+   Notification和KVO 
 
 1545
 01:08:28,478 --> 01:08:31,211
@@ -8549,7 +8550,7 @@ did, should, 等要做的事。
 01:08:46,060 --> 01:08:47,659
        say, okay, give me       
     that data that changed.     
-    给我那个改变过的数据。
+    给我那个改变过的数据 
 
 1552
 01:08:48,962 --> 01:08:49,560
@@ -8576,7 +8577,7 @@ did, should, 等要做的事。
 01:08:54,533 --> 01:08:57,334
       example, if the data      
      in a database changes.     
-     数据库中的数据发生了改变。
+     数据库中的数据发生了改变 
 
 1557
 01:08:57,336 --> 01:09:00,070
@@ -8588,7 +8589,7 @@ did, should, 等要做的事。
 01:09:00,072 --> 01:09:03,272
   controller can then go talk   
  to the model to get the info.  
- 随后可以同model通信来获取信息。
+ 随后可以同model通信来获取信息 
 
 1559
 01:09:05,309 --> 01:09:06,286
@@ -8614,18 +8615,18 @@ did, should, 等要做的事。
 01:09:09,880 --> 01:09:11,179
      you probably wouldn't      
         want to do that.        
-        你最好不要这样做。
+        你最好不要这样做 
 
 1564
 01:09:11,181 --> 01:09:12,980
      That would probably be     
       a violation of MVC.       
-      这可能违背了MVC的原则。
+      这可能违背了MVC的原则 
 
 1565
 01:09:12,982 --> 01:09:14,749
            All right.     
-           好的。      
+           好的       
 
 1566
 01:09:14,751 --> 01:09:16,750
@@ -8641,13 +8642,13 @@ did, should, 等要做的事。
 1568
 01:09:18,787 --> 01:09:21,288
         all these rules,        
-        所有的这些规则。
+        所有的这些规则 
 
 1569
 01:09:21,289 --> 01:09:23,790
   and we can imagine building   
   something simple using this.  
-  我们可以利用这些来制作一些小的应用。
+  我们可以利用这些来制作一些小的应用 
 
 1570
 01:09:23,792 --> 01:09:26,259
@@ -8670,7 +8671,7 @@ did, should, 等要做的事。
 01:09:30,865 --> 01:09:34,166
  four different areas on screen 
   where things are happening. 
-    都发生着事情。
+    都发生着事情 
 
 1574
 01:09:34,168 --> 01:09:35,433
@@ -8692,7 +8693,7 @@ did, should, 等要做的事。
 01:09:40,073 --> 01:09:47,244
  Because an MVC can use as part 
    of its view, another MVC.    
-因为一个MVC可以将另一个MVC当做视图的一部分。
+因为一个MVC可以将另一个MVC当做视图的一部分 
 
 1578
 01:09:47,246 --> 01:09:48,311
@@ -8708,7 +8709,7 @@ did, should, 等要做的事。
 01:09:52,116 --> 01:09:56,051
          the minions of         
         some bigger MVC.       
-        MVC当做仆人使用。 
+        MVC当做仆人使用  
 
 1581
 01:09:56,053 --> 01:09:57,803
@@ -8724,7 +8725,7 @@ did, should, 等要做的事。
 01:09:59,556 --> 01:10:01,756
      we can build more and      
  more complicated applications. 
- 就可以制作出越来越复杂的应用。
+ 就可以制作出越来越复杂的应用 
 
 1584
 01:10:01,758 --> 01:10:07,561
@@ -8736,19 +8737,19 @@ did, should, 等要做的事。
 01:10:07,563 --> 01:10:09,930
       and it's showing you      
         the entire year.        
-        它展示给你一整年的信息。
+        它展示给你一整年的信息 
 
 1586
 01:10:09,932 --> 01:10:12,599
  And you click on a month, and  
  now it shows you a month view. 
- 随后你点击了一个月份，于是它展示给你月视图。
+ 随后你点击了一个月份，于是它展示给你月视图 
 
 1587
 01:10:12,601 --> 01:10:14,567
  Well, a month view looks a lot 
   different than a year view.   
-  月视图看起来和年视图就不太一样了。
+  月视图看起来和年视图就不太一样了 
 
 1588
 01:10:14,569 --> 01:10:17,503
@@ -8760,7 +8761,7 @@ did, should, 等要做的事。
 01:10:17,505 --> 01:10:19,204
  that tells you where you have  
     an appointment on a day.    
-    会有一些通知你在某天会有任务的圈圈。
+    会有一些通知你在某天会有任务的圈圈 
 
 1590
 01:10:19,206 --> 01:10:20,939
@@ -8807,7 +8808,7 @@ did, should, 等要做的事。
 01:10:36,454 --> 01:10:40,155
    view, and the appointment    
     view are their own MVCs.    
-    任务视图，都有他们自己的MVC。
+    任务视图，都有他们自己的MVC 
 
 1598
 01:10:40,157 --> 01:10:41,857
@@ -8829,7 +8830,7 @@ did, should, 等要做的事。
 01:10:47,630 --> 01:10:51,032
            year view,           
    to show more detail, okay?   
-   而被当做仆人使用。
+   而被当做仆人使用 
 
 1602
 01:10:51,034 --> 01:10:52,766
@@ -8841,7 +8842,7 @@ did, should, 等要做的事。
 01:10:52,768 --> 01:10:57,404
   it's going to use the month   
  view MVC to show more detail.  
- 它会利用月份视图的MVC来展现更多细节。
+ 它会利用月份视图的MVC来展现更多细节 
 
 1604
 01:10:57,406 --> 01:11:00,406
@@ -8869,7 +8870,7 @@ did, should, 等要做的事。
 1608
 01:11:06,981 --> 01:11:09,615
   five things you can choose.  
-  项可以供你选择。 
+  项可以供你选择  
 
 1609
 01:11:09,616 --> 01:11:12,250
@@ -8919,7 +8920,7 @@ did, should, 等要做的事。
 1617
 01:11:28,533 --> 01:11:29,899
            like this.       
-           这张图片一样。    
+           这张图片一样     
 
 1618
 01:11:29,901 --> 01:11:31,434
@@ -8966,7 +8967,7 @@ did, should, 等要做的事。
 1626
 01:11:43,946 --> 01:11:45,812
  those might be the three tabs. 
-三个标签。
+三个标签 
 
 1627
 01:11:45,814 --> 01:11:47,614
@@ -8978,7 +8979,7 @@ did, should, 等要做的事。
 01:11:47,616 --> 01:11:50,249
     completely independent,     
       operates on its own.      
-      完全独立的，可以独自行动的小MVC。
+      完全独立的，可以独自行动的小MVC 
 
 1629
 01:11:50,251 --> 01:11:52,418
@@ -8995,7 +8996,7 @@ did, should, 等要做的事。
 01:11:54,589 --> 01:11:56,689
      Doesn't even know that     
        it's in a tab bar.  
-       它甚至不知道它在标签栏中。
+       它甚至不知道它在标签栏中 
 
 1632
 01:11:56,691 --> 01:11:58,090
@@ -9006,13 +9007,13 @@ did, should, 等要做的事。
 1633
 01:11:58,092 --> 01:11:59,591
        whatever it does.        
-       这些事情。
+       这些事情 
 
 1634
 01:11:59,593 --> 01:12:01,192
              And so             
    it's modular in that way.    
-   所以在这方面，它是模块化的。
+   所以在这方面，它是模块化的 
 
 1635
 01:12:01,194 --> 01:12:04,328
@@ -9024,7 +9025,7 @@ did, should, 等要做的事。
 01:12:04,330 --> 01:12:06,397
     other, there's no other     
        arrows, except for
-       除了一些模型。       
+       除了一些模型        
 
 1637
 01:12:06,399 --> 01:12:08,249
@@ -9034,7 +9035,7 @@ did, should, 等要做的事。
 01:12:08,250 --> 01:12:10,100
  You see some of the models are 
  communicating with each other. 
- 某些模型之间在互相通信。
+ 某些模型之间在互相通信 
 
 1639
 01:12:10,102 --> 01:12:11,852
@@ -9045,13 +9046,13 @@ did, should, 等要做的事。
 01:12:11,853 --> 01:12:13,603
      application might have     
      a single shared model.     
-     一个大型的应用也许会有一个单独的共享模型。
+     一个大型的应用也许会有一个单独的共享模型 
 
 1641
 01:12:13,605 --> 01:12:17,606
   Or the models might be split  
  off into pieces to be used by  
- 或者，模型会被分开来供子MVC使用。
+ 或者，模型会被分开来供子MVC使用 
 
 1642
 01:12:18,876 --> 01:12:20,208
@@ -9067,7 +9068,7 @@ did, should, 等要做的事。
 01:12:21,327 --> 01:12:22,443
     that's the only kind of     
  communication you have there.  
- 这里只能使用这种通信方式。
+ 这里只能使用这种通信方式 
 
 1645
 01:12:22,446 --> 01:12:23,678
@@ -9084,7 +9085,7 @@ did, should, 等要做的事。
 01:12:26,683 --> 01:12:29,716
    or it's using MVCs as part   
   of the view of another MVC.   
-  要么是将MVC用作另一个MVC视图的一部分。
+  要么是将MVC用作另一个MVC视图的一部分 
 
 1648
 01:12:31,386 --> 01:12:32,385
@@ -9111,7 +9112,7 @@ did, should, 等要做的事。
 01:12:39,826 --> 01:12:41,459
       We can't tell who's       
         talking to what.        
-        我们不能分清谁在和什么通信。
+        我们不能分清谁在和什么通信 
 
 1653
 01:12:41,461 --> 01:12:43,994
@@ -9122,13 +9123,13 @@ did, should, 等要做的事。
 1654
 01:12:43,996 --> 01:12:45,446
        it doesn't scale.
-       而且它无法规模化。        
+       而且它无法规模化         
 
 1655
 01:12:45,447 --> 01:12:46,897
      You can't build really     
      big programs this way.     
-     你不能通过这种方式创建出大程序。
+     你不能通过这种方式创建出大程序 
 
 1656
 01:12:46,899 --> 01:12:48,165
@@ -9139,13 +9140,13 @@ did, should, 等要做的事。
 01:12:48,167 --> 01:12:51,634
    know how touching anything   
  would break everything, right? 
- 你无法弄清楚，什么地方会引发整个程序的崩溃。
+ 你无法弄清楚，什么地方会引发整个程序的崩溃 
 
 1658
 01:12:51,636 --> 01:12:53,469
     So we're definitely not     
     going to be doing that.     
-    所以我们绝对不会这样做的。
+    所以我们绝对不会这样做的 
 
 1659
 01:12:54,639 --> 01:12:57,573
@@ -9156,7 +9157,7 @@ did, should, 等要做的事。
 01:12:57,575 --> 01:13:00,875
   like I say, on Monday we'll   
   apply MVC to our calculator.  
-  我们将会在周一的课里把MVC应用到我们的计算器程序中。
+  我们将会在周一的课里把MVC应用到我们的计算器程序中 
 
 1661
 01:13:01,845 --> 01:13:02,977
@@ -9173,7 +9174,7 @@ did, should, 等要做的事。
 01:13:06,148 --> 01:13:09,716
      Sometimes I forget but     
    it's posted in the slides.   
-   有时我会忘记，但是它被放到了课件中。
+   有时我会忘记，但是它被放到了课件中 
 
 1664
 01:13:09,718 --> 01:13:12,018
@@ -9208,7 +9209,7 @@ did, should, 等要做的事。
 01:13:22,463 --> 01:13:24,596
        Wednesday lectures       
        went on iTunes U.      
-       所以不要到处找。  
+       所以不要到处找   
 
 1670
 01:13:25,999 --> 01:13:27,164
@@ -9219,7 +9220,7 @@ did, should, 等要做的事。
 01:13:27,166 --> 01:13:30,300
   Friday we have this debugger  
     section we talked about.    
-    周五我们将讨论之前谈到的调试部分。
+    周五我们将讨论之前谈到的调试部分 
 
 1672
 01:13:30,302 --> 01:13:32,769
@@ -9230,7 +9231,7 @@ did, should, 等要做的事。
 01:13:32,771 --> 01:13:35,638
     your reading assignment     
         is gonna be due.        
-        将会截至。
+        将会截至 
 
 1674
 01:13:35,640 --> 01:13:37,040
@@ -9242,19 +9243,19 @@ did, should, 等要做的事。
 01:13:37,042 --> 01:13:40,176
    reading assignment before    
  the start of Monday's lecture. 
- 完成阅读作业。
+ 完成阅读作业 
 
 1676
 01:13:40,178 --> 01:13:43,045
     And I'm gonna assign you    
   another reading assignment.   
-  我会再布置给你们一个阅读作业。
+  我会再布置给你们一个阅读作业 
 
 1677
 01:13:43,047 --> 01:13:45,180
      It might be your only      
    other reading assignment.    
-   它将会是你们最后一个阅读作业。
+   它将会是你们最后一个阅读作业 
 
 1678
 01:13:45,182 --> 01:13:46,815
@@ -9266,7 +9267,7 @@ did, should, 等要做的事。
 01:13:46,817 --> 01:13:48,383
       but it won't be any       
         more than that. 
-        但是不会像那个一样多。        
+        但是不会像那个一样多         
 
 1680
 01:13:49,318 --> 01:13:50,351
@@ -9277,13 +9278,13 @@ did, should, 等要做的事。
 01:13:50,353 --> 01:13:53,420
      really gonna dive into     
      swift and foundation.      
-     Swift语言和Foundation框架。
+     Swift语言和Foundation框架 
 
 1682
 01:13:53,422 --> 01:13:56,556
   I'm gonna talk a little bit   
  about the Objective C legacy,  
- 我将会介绍一点遗留下来的Objective-C。
+ 我将会介绍一点遗留下来的Objective-C 
 
 1683
 01:13:57,625 --> 01:13:59,425
@@ -9294,7 +9295,7 @@ did, should, 等要做的事。
 1684
 01:13:59,427 --> 01:14:00,792
      due a week from today.     
-     一周后截至。
+     一周后截至 
 
 1685
 01:14:00,794 --> 01:14:05,129
@@ -9306,7 +9307,7 @@ did, should, 等要做的事。
 01:14:05,131 --> 01:14:08,032
   go out next Wednesday and be  
  due the Wednesday after that.  
- 下周三布置下去，下下周三截至。
+ 下周三布置下去，下下周三截至 
 
 1687
 01:14:08,034 --> 01:14:09,900
@@ -9317,7 +9318,7 @@ did, should, 等要做的事。
 1688
 01:14:09,902 --> 01:14:11,335
           all of you.  
-          做一些计划。         
+          做一些计划          
 
 1689
 01:14:11,337 --> 01:14:12,235
@@ -9331,7 +9332,7 @@ did, should, 等要做的事。
 1691
 01:14:14,439 --> 01:14:15,904
         Okay, thank you.        
-        好的，谢谢。
+        好的，谢谢 
 
 1692
 01:14:15,906 --> 01:14:19,808

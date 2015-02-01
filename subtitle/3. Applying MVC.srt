@@ -2672,478 +2672,557 @@ we're just passing a function
 
 501
 00:21:45,517 --> 00:21:47,450
-     And it can be a named
-          function, or
+     And it can be a named      
+          function, or  
+它可以是一个被命名的函数        
 
 502
 00:21:47,452 --> 00:21:49,518
-    we could use these curly
-            braces.
+    we could use these curly    
+            braces. 
+或者可以用花括号            
 
 503
 00:21:49,520 --> 00:21:52,754
-   Now, this is really gonna
- freak you out, cuz watch this.
+   Now, this is really gonna    
+ freak you out, cuz watch this. 
+现在，让你惊讶的事来了，看好了
 
 504
 00:21:52,756 --> 00:21:57,091
- For times, there's a function
- that does times called times.
-
+ For times, there's a function  
+ that does times called times.  
+对于乘法，有一个做乘法运算的函数就叫做“*”
 505
 00:21:58,728 --> 00:22:00,728
-             Okay.
+             Okay.              
 
 506
 00:22:00,729 --> 00:22:02,729
-     So in Swift, all these
-      operators, times and
-
+     So in Swift, all these     
+      operators, times and      
+在Swift里，所有的运算符，乘号等等
 507
 00:22:02,732 --> 00:22:04,664
-   all these things, are just
-           functions.
+   all these things, are just   
+           functions.   
+        都是函数
 
 508
 00:22:04,666 --> 00:22:06,966
-     They just happen to be
+     They just happen to be     
   specified in a way that says
-
+  
 509
 00:22:06,968 --> 00:22:09,068
- that they can be infix, right,
-        between the two
+ that they can be infix, right, 
+        between the two         
 
 510
 00:22:09,070 --> 00:22:11,370
-  arguments instead of taking
- the arguments in parentheses.
+  arguments instead of taking   
+ the arguments in parentheses.  
 
 511
 00:22:11,372 --> 00:22:13,138
- And we do the same thing here
-           with plus.
+ And we do the same thing here  
+           with plus.  
+然后我们对加法做同样的事         
 
 512
 00:22:14,641 --> 00:22:16,074
-        All right, plus.
+        All right, plus.        
+好的，加号
 
 513
 00:22:16,076 --> 00:22:17,508
-    Now, we can't do it with
-           divide and
+    Now, we can't do it with    
+           divide and  
+现在要注意，这种方法不适用于除法和减法         
 
 514
 00:22:17,510 --> 00:22:20,378
-   minus because the order is
-           backwards.
+   minus because the order is   
+           backwards.   
+因为运算方向是反的        
 
 515
 00:22:20,380 --> 00:22:22,146
-  Right, we put the things on
-           the stack,
+  Right, we put the things on   
+           the stack,   
+好，我们把这些东西放到栈上
 
 516
 00:22:22,148 --> 00:22:23,513
- we pull them out backwards, so
+ we pull them out backwards, so 
 
 517
 00:22:23,515 --> 00:22:25,081
-   we can't do it with those,
-              but.
+   we can't do it with those,   
+              but.              
 
 518
 00:22:27,919 --> 00:22:31,086
- I just wanna emphasize, that's
-     what's going on there.
+ I just wanna emphasize, that's 
+     what's going on there.     
 
 519
 00:22:31,088 --> 00:22:33,455
- Okay, so now we have this nice
-           knownOps.
+ Okay, so now we have this nice 
+           knownOps.     
+好，现在我们做好了这些KnwonOps       
 
 520
 00:22:33,457 --> 00:22:34,222
-     So we have this thing.
+     So we have this thing.     
 
 521
 00:22:34,224 --> 00:22:36,724
-        It's loaded up.
+        It's loaded up.         
+它已经装载好了
 
 522
 00:22:36,725 --> 00:22:39,225
- It gets loaded up whenever the
- CalculatorBrain gets created.
+ It gets loaded up whenever the 
+ CalculatorBrain gets created.  
+每当CalculatorBrain被创建它就会被装载
 
 523
 00:22:39,228 --> 00:22:41,612
-      So that's all good.
+      So that's all good.  
+万事俱备     
 
 524
 00:22:41,613 --> 00:22:43,997
- Now we can use that down here
-      in performOperation.
+ Now we can use that down here  
+      in performOperation.  
+现在我们可以将它用在performOperation上    
 
 525
 00:22:43,999 --> 00:22:47,134
- All right, so how are we gonna
- use this in performOperation?
+ All right, so how are we gonna 
+ use this in performOperation?  
+好，那我们要怎么使用呢
 
 526
 00:22:47,136 --> 00:22:50,870
-  Well, we basically wanna let
-      the operation equal
+  Well, we basically wanna let  
+      the operation equal    
+我们让operation等于   
 
 527
 00:22:50,872 --> 00:22:53,172
-      knownOps sub symbol.
+      knownOps sub symbol.  
+knownOps参数symbol    
 
 528
 00:22:53,174 --> 00:22:55,240
-             Okay?
-  Someone passed us a symbol.
+             Okay?              
+  Someone passed us a symbol.   
+明白了吗？使用者传递给我们一个参数symbol
 
 529
 00:22:55,242 --> 00:22:56,641
- They're trying to perform this
-           operation.
+ They're trying to perform this 
+           operation.    
+当他们想用这个方法的时候       
 
 530
 00:22:56,643 --> 00:22:58,810
- So this is either a plus or a
-             times.
+ So this is either a plus or a  
+             times.             
+参数可以是加法或者乘法
 
 531
 00:22:58,812 --> 00:23:00,111
-   Hopefully an operation we
-             know.
+   Hopefully an operation we    
+             know.   
+   是我们已知的运算符      
 
 532
 00:23:00,113 --> 00:23:02,747
- And we're gonna look it up in
-           knownOps.
+ And we're gonna look it up in  
+           knownOps.   
+然后我们会来到KnownOps         
 
 533
 00:23:02,749 --> 00:23:05,683
- And the way we do that is with
-  the subscript notation with
+ And the way we do that is with 
+  the subscript notation with   
+然后要做的就是在
 
 534
 00:23:05,685 --> 00:23:06,650
-      the square brackets.
+      the square brackets.      
 
 535
 00:23:06,652 --> 00:23:07,951
-             Okay?
-         That's how you
+             Okay?              
+         That's how you         
 
 536
 00:23:07,952 --> 00:23:09,251
-     look something up in a
-          dictionary.
+     look something up in a     
+          dictionary.           
 
 537
 00:23:09,254 --> 00:23:11,454
-   But what might be kind of
-       surprising to you,
+   But what might be kind of    
+       surprising to you,  
+不过有一点可能会让你惊讶   
 
 538
 00:23:11,456 --> 00:23:13,622
-  what type do you think this
+  what type do you think this   
       would be, operation?
+得到的operation，你觉得是什么类型的呢？   
 
 539
 00:23:15,292 --> 00:23:17,959
- Any guesses, yeah, some people
-  are saying the right thing.
+ Any guesses, yeah, some people 
+  are saying the right thing. 
+猜猜？哈，有人说出了正确答案  
 
 540
 00:23:17,961 --> 00:23:20,128
-  You'd think this might be an
-              Op,
+  You'd think this might be an  
+              Op,    
+你可能会觉得这个是一个Op           
 
 541
 00:23:20,130 --> 00:23:24,498
-   because I'm looking up in
+   because I'm looking up in    
  knownOps right here, a string.
+因为我在KnownOps这里看，String：Op
 
 542
 00:23:24,500 --> 00:23:27,134
-  And so hopefully I'm getting
+  And so hopefully I'm getting  
  an Op, but this is not an Op,
+因此可以预见得到的会是一个Op，事实上它并不是Op
 
 543
 00:23:27,136 --> 00:23:30,971
-  this actually is an Optional
-              Op.
+  this actually is an Optional  
+              Op.  
+实际上它是一个Optional Op             
 
 544
 00:23:30,973 --> 00:23:33,173
-    Okay, now why is that an
+    Okay, now why is that an    
     Optional Op, because you
+好了，为什么它会是一个Optional Op，因为    
 
 545
 00:23:33,175 --> 00:23:35,541
- might be looking up something
-      that's not in there.
+ might be looking up something  
+      that's not in there.      
+因为它可能不存在于此
 
 546
 00:23:35,543 --> 00:23:38,344
- And it has to return, oh, nil,
-    sorry, couldn't find it,
+ And it has to return, oh, nil, 
+    sorry, couldn't find it, 
+而且它没有返回值。“噢，nil，不好意思找不到该值” 
 
 547
 00:23:38,346 --> 00:23:41,413
- so that's why it has to be an
-     optional, is returned.
+ so that's why it has to be an  
+     optional, is returned. 
+所以这就是为什么它必须是optional    
 
 548
 00:23:41,415 --> 00:23:43,015
-        So a dictionary,
+        So a dictionary, 
+比方说字典       
 
 549
 00:23:43,016 --> 00:23:44,616
- whenever you look up something
-        in a dictionary,
+ whenever you look up something 
+        in a dictionary,    
+每当你要在字典里面寻找东西的时候    
 
 550
 00:23:44,618 --> 00:23:47,118
- it always returns an Optional,
-      okay, either nil or
+ it always returns an Optional, 
+      okay, either nil or  
+它总是会返回一个Optional类型。nil或者是     
 
 551
 00:23:47,120 --> 00:23:50,655
- the type of thing you said was
-    supposed to be in there.
+ the type of thing you said was 
+    supposed to be in there.   
+其他它原本的类型 
 
 552
 00:23:50,657 --> 00:23:53,457
- So I'm gonna if let here, I'm
-           gonna say,
+ So I'm gonna if let here, I'm  
+           gonna say, 
+所以我在这里加上if          
 
 553
 00:23:53,459 --> 00:23:56,827
-   if I'm able to look up my
-   operation in my knownOps,
+   if I'm able to look up my    
+   operation in my knownOps, 
+如果 我能在knownOps里取得我的operation   
 
 554
 00:23:56,829 --> 00:23:59,696
-  then I'm going to push it on
-        to my op stack.
+  then I'm going to push it on  
+        to my op stack. 
+那我就将它放进我的op stack.        
 
 555
 00:24:02,534 --> 00:24:03,232
-             Okay.
+             Okay.              
 
 556
 00:24:03,234 --> 00:24:06,068
-    Are you cool with that?
+    Are you cool with that? 
+明白了吗？    
 
 557
 00:24:06,070 --> 00:24:08,303
-          Make sense?
+          Make sense?           
 
 558
 00:24:08,305 --> 00:24:10,171
-             Okay.
+             Okay.              
 
 559
 00:24:10,173 --> 00:24:12,407
-       Now, what's next?
+       Now, what's next?  
+好，下一步是什么呢      
 
 560
 00:24:12,409 --> 00:24:13,908
-             Well.
+             Well.              
 
 561
 00:24:13,910 --> 00:24:14,541
-          Now we have.
+          Now we have.          
+现在我们有…
 
 562
 00:24:14,543 --> 00:24:15,509
-           Oh, well.
+           Oh, well.            
+噢，等等
 
 563
 00:24:15,510 --> 00:24:16,476
- I'm gonna take a pause here to
+ I'm gonna take a pause here to 
+在这我先暂停一下
 
 564
 00:24:16,478 --> 00:24:18,845
- talk a little bit about access
-            control.
+ talk a little bit about access 
+            control.   
+谈一下access control（接口控制）         
 
 565
 00:24:18,847 --> 00:24:20,697
-             Okay?
+             Okay?              
 
 566
 00:24:20,698 --> 00:24:22,548
- Access control is about public
-          and private.
+ Access control is about public 
+          and private.          
+access control是关于公有和私有
 
 567
 00:24:22,550 --> 00:24:25,017
-             Okay?
+             Okay?              
    What methods in this class
+在这个类里面什么方法是共有的   
 
 568
 00:24:25,019 --> 00:24:27,353
-  are public, in other words,
-   other people can use them,
+  are public, in other words,   
+   other people can use them,   
+换言之，其他人能够使用它
 
 569
 00:24:27,355 --> 00:24:30,022
-    other classes in my code
-     allowed to call them?
+    other classes in my code    
+     allowed to call them?      
+其他类能调用它
 
 570
 00:24:30,024 --> 00:24:31,189
   And what things are private?
+而什么方法是私有的呢  
 
 571
 00:24:31,191 --> 00:24:32,757
-  My internal data structures
-             that I
+  My internal data structures   
+             that I 
+里面的一些内部数据            
 
 572
 00:24:32,759 --> 00:24:34,458
-   don't want people messing
-             with?
+   don't want people messing    
+             with?  
+并不想给别人乱搞            
 
 573
 00:24:34,460 --> 00:24:38,428
-    Okay, so the way public
-        private works in
+    Okay, so the way public     
+        private works in   
+swift处理公有和私有的方法很有趣     
 
 574
 00:24:38,430 --> 00:24:41,064
- Swift is kind of interesting.
+ Swift is kind of interesting.  
 
 575
 00:24:41,066 --> 00:24:42,999
-   You basically specify the
-       things you want to
+   You basically specify the    
+       things you want to  
+你只需要在你想要私有化的东西前     
 
 576
 00:24:43,001 --> 00:24:45,935
- be private by putting the word
-        private on them.
+ be private by putting the word 
+        private on them. 
+加上private       
 
 577
 00:24:45,937 --> 00:24:47,569
-  If you don't put any word on
-             them,
+  If you don't put any word on  
+             them,  
+如果你什么都不加            
 
 578
 00:24:47,571 --> 00:24:50,639
-   then they're public inside
-         your program.
+   then they're public inside   
+         your program.   
+那他们就是在你的程序里公有的       
 
 579
 00:24:50,641 --> 00:24:52,040
-             'Kay?
+             'Kay?              
 
 580
 00:24:52,042 --> 00:24:55,109
-   And you only use the word
- public if you're shipping out,
+   And you only use the word    
+ public if you're shipping out, 
+当你想要打包
 
 581
 00:24:55,111 --> 00:24:58,979
-  like, a framework of objects
+  like, a framework of objects  
       to other people, and
+比如说一些框架或者对象给别人      
 
 582
 00:24:58,981 --> 00:25:02,215
- you want stuff in there to be
- public outside the framework.
+ you want stuff in there to be  
+ public outside the framework. 
+你希望里面框架里的东西是对外公开的 你才会使用public 
 
 583
 00:25:03,251 --> 00:25:04,684
- So I'm making some framework,
+ So I'm making some framework,  
+我做一些框架
 
 584
 00:25:04,686 --> 00:25:07,153
-  a bunch of objects that I'm
-  trying to sell to people or
+  a bunch of objects that I'm   
+  trying to sell to people or 
+一些对象想要卖给别人用  
 
 585
 00:25:07,155 --> 00:25:09,555
-   I get people to use to do
-         something, and
+   I get people to use to do    
+         something, and         
+别人可以用这些东西做点什么
 
 586
 00:25:09,557 --> 00:25:12,624
-    of course I'm gonna have
- things where my objects inside
+    of course I'm gonna have    
+ things where my objects inside 
+当然我也希望在框架内部的一些类
 
 587
 00:25:12,626 --> 00:25:14,192
- my framework can talk to each
-             other.
+ my framework can talk to each  
+             other.             
+可以互相交流
 
 588
 00:25:14,194 --> 00:25:16,361
- There's no keyword needed for
-             that.
+ There's no keyword needed for  
+             that.  
+不需要什么密码 
 
 589
 00:25:16,363 --> 00:25:18,229
-  Then I'll have things inside
-        certain objects
+  Then I'll have things inside  
+        certain objects  
+那我可以对这些特定的类加上private       
 
 590
 00:25:18,231 --> 00:25:20,464
- that are private only to that
+ that are private only to that  
    object, I'll say private.
+让它们私有化    
 
 591
 00:25:20,466 --> 00:25:24,267
- And them some of them might be
- public that the customer who's
+ And them some of them might be 
+ public that the customer who's 
+这样的话顾客就可以用我们框架里面
 
 592
 00:25:24,269 --> 00:25:27,404
-     buying my objects, my
-      framework, can use.
+     buying my objects, my      
+      framework, can use. 
+那些公有的对象      
 
 593
 00:25:27,406 --> 00:25:29,238
-  Now, in this class we're not
-   gonna be doing frameworks,
+  Now, in this class we're not  
+   gonna be doing frameworks,   
+在这节课我们不会做框架
 
 594
 00:25:29,240 --> 00:25:30,840
-  we don't really have time to
-        get to that, so
+  we don't really have time to  
+        get to that, so      
+我们没有那个时间   
 
 595
 00:25:30,842 --> 00:25:32,508
-  we're not gonna be using the
-        keyword public,
+  we're not gonna be using the  
+        keyword public,         
+所以我们不需要用public来修饰对象
 
 596
 00:25:32,510 --> 00:25:34,076
-    we won't ever use that,
+    we won't ever use that,    
+我们之后都不会用它 
 
 597
 00:25:34,078 --> 00:25:35,510
-   because we don't have any
-          frameworks.
+   because we don't have any    
+          frameworks.      
+因为我们没有什么框架     
 
 598
 00:25:35,512 --> 00:25:37,578
- But we are gonna use private.
+ But we are gonna use private.  
+但我们会用private
 
 599
 00:25:37,580 --> 00:25:39,180
- And, starting with assignment
-              two,
+ And, starting with assignment  
+              two,       
+然后，从第二次作业开始       
 
 600
 00:25:40,216 --> 00:25:42,516
-  it's one of your evaluation
-     criteria is gonna be,
+  it's one of your evaluation   
+     criteria is gonna be,  
 
 601
 00:25:42,518 --> 00:25:45,985
@@ -5822,466 +5901,566 @@ like ends or straightened
 00:45:27,159 --> 00:45:30,693
  Inside here, operand is gonna
   have the associated value of
+  在这里面，operand就会获得操作数
 
 1102
 00:45:30,695 --> 00:45:31,427
           the operand.
+          的关联变量
 
 1103
 00:45:32,430 --> 00:45:34,196
+             'Kay?
              'Kay?
 
 1104
 00:45:34,198 --> 00:45:35,897
    Oh, that's exactly what I
              want.
+             这就是我想要的
 
 1105
 00:45:35,899 --> 00:45:38,599
   I'm just gonna return right
    now I have to return this
+   我现在就要返回一个值
 
 1106
 00:45:38,601 --> 00:45:40,301
        tuple right here.
+       我要返回这里的一个元组
 
 1107
 00:45:40,303 --> 00:45:42,569
    So I'm gonna returned the
             operand.
+            所以我要返回operand
 
 1108
 00:45:42,571 --> 00:45:45,005
     That's the result, 'kay.
+    这就是结果
 
 1109
 00:45:45,007 --> 00:45:47,191
        When I go here and
+       当我到这
 
 1110
 00:45:47,192 --> 00:45:49,376
  I encounter that next one down
  which was a four, I got a four
+ 我碰到下一个是4，我得到一个4
 
 1111
 00:45:49,378 --> 00:45:52,845
  I can just return that result
      to evaluate this one.
+     我可以直接返回这个结果来evaluate他
 
 1112
 00:45:52,847 --> 00:45:55,881
    And I also though have to
     return the remainingOps.
+    当然我也需要返回remainingOps
 
 1113
 00:45:57,018 --> 00:46:00,085
   'Kay, so I'm just returning
  the two values of this tuple,
+ 所以我返回了元组里的两个值
 
 1114
 00:46:00,087 --> 00:46:02,754
    notice I don't have to put
         result colon and
+        注意我没有在这放结果冒号
 
 1115
 00:46:02,756 --> 00:46:06,390
  remaining opt colon in here it
    knows that those match and
+   remaining opt冒号，因为这里知道这些是对应的
 
 1116
 00:46:06,392 --> 00:46:07,224
     so it's still doing it.
+    所以这还是会正常执行
 
 1117
 00:46:07,226 --> 00:46:09,159
     All right, makes sense.
+    好的，懂了吧
 
 1118
 00:46:09,161 --> 00:46:13,763
   That's it for operand that's
        all I have to do.
+       这就是我对operand做的一切
 
 1119
 00:46:13,765 --> 00:46:15,064
      It's kind of a, in the
            recursion,
+           这在递归中
 
 1120
 00:46:15,066 --> 00:46:20,102
    it's kind of an end case.
+   是一种结束的情况
 
 1121
 00:46:20,104 --> 00:46:21,069
              Yeah?
    >> Is remainingOps part of
+   －（学生提问）
 
 1122
 00:46:21,071 --> 00:46:22,520
        the stack or heap?
+       －（学生提问）
 
 1123
 00:46:22,521 --> 00:46:23,970
  >> This one here, or this one
              here?
+             －（学生提问）
 
 1124
 00:46:23,973 --> 00:46:24,989
        >> What in general
           [INAUDIBLE].
+          －（学生提问）
 
 1125
 00:46:24,990 --> 00:46:26,006
   >> Okay so, so the question
               is,
+              问题是：
 
 1126
 00:46:26,009 --> 00:46:29,276
  when I do something like this,
      where is remainingOps?
+     当我像这样做的时候，remainingOps在哪？
 
 1127
 00:46:29,278 --> 00:46:30,377
        Is it in the heap?
+       在堆中吗？
 
 1128
 00:46:30,379 --> 00:46:31,812
       Is it on the stack?
+      还是在栈中？
 
 1129
 00:46:31,813 --> 00:46:33,246
     And the thing is, that's
      implementation detail.
+     事实上这些是实现时的细节
 
 1130
 00:46:34,282 --> 00:46:36,148
   So, you, you don't know, but
         you don't care.
+        所以你不知道，也不用关心
 
 1131
 00:46:38,018 --> 00:46:40,185
  All right, so that's operand.
+ 这就是operand
 
 1132
 00:46:40,187 --> 00:46:42,020
    Operand was really, really
              easy.
+             operand真的非常非常简单
 
 1133
 00:46:42,022 --> 00:46:44,321
     How about our operation,
         that's you, you,
+        那么关于这里UnaryOperation
 
 1134
 00:46:44,323 --> 00:46:46,090
    UnaryOperation right here.
+   的操作是怎么样的呢
 
 1135
 00:46:46,092 --> 00:46:49,659
  Now when we handle the case of
       the unary operation,
+      当我们要给UnaryOperation添加操作时
 
 1136
 00:46:49,661 --> 00:46:52,195
     we don't need that first
        associated value,
+       我们不需要第一个关联变量
 
 1137
 00:46:52,197 --> 00:46:54,330
  that's the symbol, like plus.
+ 这是符号，像是加号
 
 1138
 00:46:54,332 --> 00:46:56,332
  Okay well I'm evaluating here
      I don't care what this
+     当我在这操作的时候我不在乎他是什么
 
 1139
 00:46:56,334 --> 00:46:58,500
   symbol is, I only care what
    the function is cause I'm
+   我只在乎那个函数是什么
 
 1140
 00:46:58,502 --> 00:47:00,002
   gonna evaluate the function.
+  因为我要去计算那个函数
 
 1141
 00:47:00,004 --> 00:47:05,807
  So we can actually ignore this
  by putting in underbar, 'kay?
+ 所以我真的可以在这放一个下划线来忽略它
 
 1142
 00:47:05,809 --> 00:47:08,642
   Underbar in swift is kind of
+  下划线在Swift里
 
 1143
 00:47:08,644 --> 00:47:12,212
    the universal I don't care
        about this thing.
+       就是一种无关紧要的东西的通用表达
 
 1144
 00:47:12,214 --> 00:47:14,681
   Okay and we're gonna see it
      other places we use it
+     我们还会在别的无关紧要
 
 1145
 00:47:14,683 --> 00:47:16,549
  where it's kinda like, I don't
     really care about that.
+    的地方看到它
 
 1146
 00:47:16,551 --> 00:47:18,251
   So you just put an underbar
              there.
+             所以你只需要放一个下划线在这
 
 1147
 00:47:18,253 --> 00:47:19,819
    That way you don't have to
     declare a variable with
+    这样你就不需要申明一个奇怪的变量
 
 1148
 00:47:19,821 --> 00:47:22,221
   some dumb name or something
            like that.
+           或者跟他相似的东西
 
 1149
 00:47:22,223 --> 00:47:24,389
     Just put an underbar it
           ignores it.
+          只是放一个下划线在这
 
 1150
 00:47:24,391 --> 00:47:25,323
+             'Kay?
              'Kay?
 
 1151
 00:47:25,324 --> 00:47:26,256
    But I do care about this.
+   但我真的很在乎这个
 
 1152
 00:47:26,259 --> 00:47:29,794
   I'm gonna let that equal the
    operation that I'm doing.
+   我会放let operand在这
 
 1153
 00:47:29,796 --> 00:47:30,361
+             'Kay?
              'Kay?
 
 1154
 00:47:31,397 --> 00:47:32,929
   Everyone, make sense there?
+  所有人都懂了吗？
 
 1155
 00:47:32,931 --> 00:47:34,897
   So I'm ignoring the string,
               but
+              所以我忽略了字符
 
 1156
 00:47:34,899 --> 00:47:36,699
   I'm grabbing the operation.
+  我抓去了操作
 
 1157
 00:47:36,701 --> 00:47:40,402
   So here, what I wanna do is
  return and I'll try to do it,
+ 所以这里我试着返回
 
 1158
 00:47:40,404 --> 00:47:41,370
  but I'm not gonna be able to.
+ 我还没法做
 
 1159
 00:47:41,372 --> 00:47:45,540
    I'm gonna say, return this
          operation with
+         我会返回我还没有的operation
 
 1160
 00:47:45,542 --> 00:47:48,342
    its operand which I don't
              have.
+             还有operand
 
 1161
 00:47:48,344 --> 00:47:51,512
  And there's some remaining ops
    that are leftover after I
+   还有一些我获取operand后
 
 1162
 00:47:51,514 --> 00:47:52,579
         get the operand.
+        剩下的ops
 
 1163
 00:47:52,581 --> 00:47:55,515
    So I'm kinda, I need to do
        some stuff here to
+       所以我要在这做一些
 
 1164
 00:47:55,517 --> 00:47:58,251
  be able to return what I want.
+ 能让我返回我想要的东西的操作
 
 1165
 00:47:58,253 --> 00:48:01,053
   The first thing I need to do
       is get the operand.
+      第一件事就是获取operand
 
 1166
 00:48:01,055 --> 00:48:03,689
+             'Kay?
              'Kay?
 
 1167
 00:48:03,690 --> 00:48:06,324
   So, I did a unary operation
  let's say it was square root.
+ 所以我做了个一元操作说明这是一个平方根
 
 1168
 00:48:06,326 --> 00:48:07,625
  I need to go back to the staff
               and
+              我需要返回到那个地方
 
 1169
 00:48:07,627 --> 00:48:10,862
  pick off the next thing but I
            can't just
+           来获得下一个东西，但我不能
 
 1170
 00:48:10,864 --> 00:48:13,931
   assume that it's a number it
   might be more operations so
+  假定这是一个数字，这会导致更多的步骤
 
 1171
 00:48:13,933 --> 00:48:17,001
   I have to recurse, so here's
  where the recursion comes in.
+ 我需要递归，这里就是用到递归的地方
 
 1172
 00:48:17,003 --> 00:48:20,103
  And I'm gonna show you how to
       call a function that
+      我会展示如何调用一个函数
 
 1173
 00:48:20,105 --> 00:48:22,172
         returns a tuple.
+        来返回一个元组
 
 1174
 00:48:22,174 --> 00:48:25,274
  And get it's value up so this
   is important little example
+  获得这个值，所以这是这里一个重要的例子
 
 1175
 00:48:25,276 --> 00:48:27,677
   here, so there's two ways to
              do it.
+             所以有两种方法去做
 
 1176
 00:48:27,679 --> 00:48:30,279
  I'm gonna do it one way here,
            which is,
+           我会在这里做其中一种
 
 1177
 00:48:30,281 --> 00:48:32,881
          I'm gonna let
        operandEvaluation,
+       let operandEvaluation
 
 1178
 00:48:32,883 --> 00:48:37,919
  which is just a local variable
  that I'm inventing, equal call
+ 一个我申明的本地变量
 
 1179
 00:48:37,921 --> 00:48:43,057
  evaluate with the remainingOps
           that I have.
+          等于evaluate(remainingOps)
 
 1180
 00:48:43,059 --> 00:48:45,025
   'Kay, so here I've recursed.
+  这样我就有了一个递归
 
 1181
 00:48:45,027 --> 00:48:46,459
       Okay, I'm recursing.
+      我正在做一个递归
 
 1182
 00:48:46,461 --> 00:48:48,661
       And I just set it to
        operandEvaluation.
+       我把他赋给operandEvaluation
 
 1183
 00:48:48,663 --> 00:48:51,564
  Now, let's look at the type of
           this thing.
+          来看看它的类型
 
 1184
 00:48:51,566 --> 00:48:55,300
  If I look at its type, you can
      see that it's a tuple.
+     如果你看它的类型，就会发现它是一个元组
 
 1185
 00:48:55,302 --> 00:48:56,468
         That's its type.
+        这就是他的类型
 
 1186
 00:48:56,470 --> 00:48:58,770
       It's a tuple result
          remainingOps.
+         这是一个元祖型的remainingOps
 
 1187
 00:48:58,772 --> 00:49:00,671
   It's this tuple right here.
+  就是这边的这个元组
 
 1188
 00:49:00,673 --> 00:49:03,140
     That is the type of this
        operandEvaluation.
+       就是这个operandEvaluation的类型
 
 1189
 00:49:04,309 --> 00:49:06,242
  So now that I have that tuple,
+ 所以现在我有了这个元组
 
 1190
 00:49:06,244 --> 00:49:09,245
  it's the result of evaluation
   how do I get the result and
+  这就是evaluation的结果，那我是怎么获得这个结果
 
 1191
 00:49:09,247 --> 00:49:13,716
    the remaining op out of it
  well I can get the operand by
+ 获得这些剩下的op
 
 1192
 00:49:13,718 --> 00:49:19,621
  saying operand eval, [UNKNOWN]
    operandEvaluation.result.
+   只要let operand = operandEvaluation.result
 
 1193
 00:49:19,623 --> 00:49:21,423
+             'Kay?
              'Kay?
 
 1194
 00:49:21,424 --> 00:49:23,224
  So that just pull this is the
          tuple here I'm
+         所以只是把元组放这
 
 1195
 00:49:23,226 --> 00:49:26,227
    getting this value of the
       tuple out of there.
+      就获得了这里元组的值
 
 1196
 00:49:26,229 --> 00:49:27,461
      Now what type is this?
+     现在这个的类型是什么
 
 1197
 00:49:29,298 --> 00:49:29,863
             Anybody?
+            有人知道吗
 
 1198
 00:49:30,865 --> 00:49:31,931
        It's an optional.
+       这是个optional
 
 1199
 00:49:31,932 --> 00:49:32,998
    You're pretty safe saying
         optional when I
+        你说optional是非常圆滑的
 
 1200
 00:49:33,001 --> 00:49:34,099
   ask what type it is, aren't
               you?
+              当我问你这是什么类型时
 
 1201
 00:49:34,101 --> 00:49:35,801
@@ -9024,79 +9203,95 @@ opStack 等于
 01:10:42,918 --> 01:10:44,784
      this computer property
            read-only.
+这个 property 是只读的           
 
 1702
 01:10:44,786 --> 01:10:46,652
  But if you do one other thing,
+但如果我们在这里 
 
 1703
 01:10:46,654 --> 01:10:50,456
  which is up here, you have to
      put, colon printable.
+放一个 : printable     
 
 1704
 01:10:51,859 --> 01:10:56,961
    Now, I told you enums and
   structs have no inheritance.
+enum 和 struct 没有继承  
 
 1705
 01:10:56,963 --> 01:10:58,696
   So you're like what, wait a
          second, there.
+等一下，看这里         
 
 1706
 01:10:58,698 --> 01:11:01,098
  You're telling me op inherits
         from printable?
+你竟然告诉我让 op 继承于 printable?        
 
 1707
 01:11:01,100 --> 01:11:04,234
  And the answer is no, does not
   inherit, okay, it's an enum.
+不是这样的，这里不是继承  
 
 1708
 01:11:04,236 --> 01:11:07,070
       Enums don't have any
  inheritance, only classes do.
+enum 没有继承关系，只有 class 有 
 
 1709
 01:11:07,072 --> 01:11:10,540
    What this colon printable
          means is, and
+这个 : printable 代表         
 
 1710
 01:11:10,542 --> 01:11:12,842
   this can be true for classes
     or structs or whatever.
+这个也可以对 class 或者 struct 有效    
 
 1711
 01:11:12,844 --> 01:11:14,643
   You can put after the colon
              here.
+在这里写一个 :             
 
 1712
 01:11:15,713 --> 01:11:17,979
    This is called a protocol.
+这个叫做 protocol   
 
 1713
 01:11:17,981 --> 01:11:21,215
   And all this means is you're
     telling Swift that this
+这就代表，你告诉 Swift，    
 
 1714
 01:11:21,217 --> 01:11:24,852
  enum implements whatever is in
          this protocol.
+这个 enum 需要自己实现这个 protocol 的内容         
 
 1715
 01:11:24,854 --> 01:11:28,389
   And this protocol happens to
       just be one computer
+这个 protocol 恰好是 叫做 description 的 property 
 
 1716
 01:11:28,391 --> 01:11:30,590
   property called Description
-    that returns the string.
+    that returns the string.    
+可以返回一个 string    
 
 1717
 01:11:31,826 --> 01:11:33,326
@@ -9106,207 +9301,249 @@ opStack 等于
 01:11:33,327 --> 01:11:34,827
  Now we're going to talk about
       protocols in depth.
+我们来深入了解一下 protocol
 
 1719
 01:11:34,829 --> 01:11:37,062
    Because protocols are very
          important for
+因为 protocol 能够帮助我们了解，         
 
 1720
 01:11:37,064 --> 01:11:40,065
    explaining how things work
              'kay?
+这到底是怎么一回事儿             
 
 1721
 01:11:40,067 --> 01:11:43,501
   But we're not gonna cover it
          today, though.
+但是我们今天不会讲         
 
 1722
 01:11:43,503 --> 01:11:46,204
   Okay, so if you do those two
    things, put description in
+如果我这么做，加上 printable
 
 1723
 01:11:46,206 --> 01:11:52,209
   printable, now when we run,
   you'll see, I'll go 5 enter.
+再运行程序，5 enter，6,
 
 1724
 01:11:52,211 --> 01:11:54,511
   Six, and you see it's put a
          five in there.
+你就会看到这里有个5         
 
 1725
 01:11:54,513 --> 01:11:55,512
           There's a 6.
+这是6          
 
 1726
 01:11:55,514 --> 01:11:57,447
   Times, it's even putting the
              times.
+times，它竟然把 times 也放进去了             
 
 1727
 01:11:57,449 --> 01:11:59,915
   If I hit times again, now I
           get nil and
+如果我再点击 times，这里得到了 Nil      
 
 1728
 01:11:59,917 --> 01:12:03,652
  i tshows me the whole thing is
         leftover, okay.
+所有的东西都余下了        
 
 1729
 01:12:03,654 --> 01:12:06,454
   Let's go another thing here,
+再来一个测试
 
 1730
 01:12:06,456 --> 01:12:10,358
  what if I go 6 Enter 5 Enter 4
              Enter.
+输入 6 enter 5 enter 4 enter
 
 1731
 01:12:10,360 --> 01:12:13,661
    Now if I do times it says
          times of 4 and
+再做一次 times，它出现 4 * 5 = 20
 
 1732
 01:12:13,663 --> 01:12:18,098
  5 is 20 with the 6 left over,
          exactly right.
+6 被剩下了，这都是正确的         
 
 1733
 01:12:19,134 --> 01:12:22,368
  Kay now notice I had to rerun
        there to do that,
+为了这么做我得重新运行一次，       
 
 1734
 01:12:22,370 --> 01:12:24,303
    you're gonna have a clear
          button right,
+你得在这里放置一个 clear button         
 
 1735
 01:12:24,305 --> 01:12:25,571
  that you do in assignment one,
       you're gonna have to
+在作业一里的完成，      
 
 1736
 01:12:25,573 --> 01:12:27,239
   make that work in assignment
           two as well.
+作业二里也得让它起作用          
 
 1737
 01:12:28,308 --> 01:12:31,309
  Okay the last thing really out
  of time but I'm gonna show you
+最后一件事，尽管快没时间了 
 
 1738
 01:12:31,311 --> 01:12:34,311
  the last thing really quickly
    that I was gonna do is use
+我快速给你们展示一下   
 
 1739
 01:12:34,313 --> 01:12:38,182
   this description to fix this
    problem I said right here.
+利用 description 来回答我留在这里的问题   
 
 1740
 01:12:38,184 --> 01:12:41,385
     Which is what if I had a
      function called learn
+定义一个叫 learn 的函数
 
 1741
 01:12:41,387 --> 01:12:45,388
   op 'kay and it took an op as
        an argument here.
+它把 op 作为参数       
 
 1742
 01:12:45,390 --> 01:12:53,029
  And it just said known ops ops
   description equals that op.
+knownOps[op.description] = op  
 
 1743
 01:12:53,031 --> 01:12:59,368
   You see, now these could all
      just be learn op this.
+这些都可以变成 learnOp()     
 
 1744
 01:13:00,404 --> 01:13:03,438
   Okay which is a lot nicer, I
   only have to type this thing
+这看起来就好多了，我只需要把它敲一次  
 
 1745
 01:13:03,440 --> 01:13:05,306
     once, and I just use the
        description here.
+我在这里用到了 description       
 
 1746
 01:13:05,308 --> 01:13:08,875
   The other thing about this,
  notice where this function is.
+ 另一点，注意这个函数的位置 
 
 1747
 01:13:08,877 --> 01:13:10,143
         Inside the init.
+它在 init 内部        
 
 1748
 01:13:11,246 --> 01:13:12,545
     Okay you are allowed to
+你可以在    
 
 1749
 01:13:12,547 --> 01:13:14,513
    put functions inside other
            functions.
+一个函数的内部放另一个函数           
 
 1750
 01:13:14,515 --> 01:13:17,549
  If this is only called inside
  here, you can put it in here.
+如果只在内部被调用，你可以这么做 
 
 1751
 01:13:17,551 --> 01:13:20,518
  If if I put it outside in fact
   I'd have a little a problem,
+如果我把它放到外部，就会有点小问题  
 
 1752
 01:13:20,520 --> 01:13:22,387
   because it would have to be
             private.
+它得是 private 的            
 
 1753
 01:13:22,389 --> 01:13:26,390
  Because it uses op, and that's
  what this error right here is.
+因为它用到了 op，这就是 error 的提示 
 
 1754
 01:13:26,392 --> 01:13:29,460
  All right I'd have say private
   func, but I don't want to do
+我得把它变成 private 的，但是我不想这么做  
 
 1755
 01:13:29,462 --> 01:13:32,462
  private func, instead I'm just
    gonna put this right down
+所以我把它放到这里   
 
 1756
 01:13:32,464 --> 01:13:35,131
    here, okay and obviously I
     would do that one last.
+显然，我得再做一遍
 
 1757
 01:13:35,133 --> 01:13:37,333
     Okay that's it, hope you
        learned a lot and
+完成了，希望你们能学到很多知识
 
 1758
 01:13:37,335 --> 01:13:40,236
  stuff elsewhere for that and I
    will see you on Wednesday,
+周三再见
 
 1759
 01:13:40,238 --> 01:13:42,037
       I'm here if you have
            questions.
+如果有问题来这问我           
 
 1760
 01:13:44,074 --> 01:13:47,976

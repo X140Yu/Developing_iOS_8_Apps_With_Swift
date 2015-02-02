@@ -7583,477 +7583,567 @@ gonna do that.
 
 1401
 00:58:00,767 --> 00:58:03,101
-   However, we do need a new
-     instance variable here
+   However, we do need a new    
+     instance variable here 
+然而我们确实在这里需要一个新的实例变量     
 
 1402
 00:58:03,103 --> 00:58:04,903
- which is the calculator brain.
+ which is the calculator brain. 
+就是这个计算器 brain
 
 1403
 00:58:05,905 --> 00:58:07,838
- Okay I'm just gonna create one
-           like that,
+ Okay I'm just gonna create one 
+           like that,           
+Okay 我将会定义一个像那样的实例变量
 
 1404
 00:58:07,840 --> 00:58:12,676
- this is extremely common okay
-            this is
+ this is extremely common okay  
+            this is             
+这是特别常见 okay 这是
 
 1405
 00:58:12,678 --> 00:58:16,680
- the green arrow that goes from
-  the controller to the model.
+ the green arrow that goes from 
+  the controller to the model.  
+这个绿色的箭头从 controller 指向 model
 
 1406
 00:58:16,682 --> 00:58:18,948
- Remember that in our MVC talk
-     that I did last time I
+ Remember that in our MVC talk  
+     that I did last time I     
+还记住上次我在我们 MVC 课中所作的
 
 1407
 00:58:18,950 --> 00:58:21,584
- said that the controller has a
-   green arrow to the model,
+ said that the controller has a 
+   green arrow to the model,    
+我说这个 controller 有个绿色的箭头指向 这个model
 
 1408
 00:58:21,586 --> 00:58:24,386
- it can talk to it all at once,
-     say anything it wants.
+ it can talk to it all at once, 
+     say anything it wants.     
+它能够一次性跟所有对话，说它任何它想说的
 
 1409
 00:58:24,388 --> 00:58:26,922
- This is essentially that green
-             arrow.
+ This is essentially that green 
+             arrow.      
+ 这个绿色箭头至关重要  
 
 1410
 00:58:26,924 --> 00:58:29,591
- This is our model right here.
+ This is our model right here.  
+这就是我们的 model
 
 1411
 00:58:29,593 --> 00:58:31,592
-   And this is the controller
-   this is how the controller
+   And this is the controller   
+   this is how the controller   
+这是 controller。这就是 controller 怎么
 
 1412
 00:58:31,594 --> 00:58:33,661
- talks to it through this thing
-       we call the brain.
+ talks to it through this thing 
+       we call the brain.       
+通过我们称之为 brain 的与之对话
 
 1413
 00:58:33,663 --> 00:58:35,562
- Thing you can call it anything
-          you want and
+ Thing you can call it anything 
+          you want and          
+你可以命名任何你想要的
 
 1414
 00:58:35,564 --> 00:58:38,298
-  of course this might be much
- more complicated green arrow,
+  of course this might be much  
+ more complicated green arrow,  
+当然这可以是更为复杂的绿色箭头
 
 1415
 00:58:38,300 --> 00:58:40,767
- it might be a network database
-  that is connecting to you to
+ it might be a network database 
+  that is connecting to you to  
+它可能是一个连结让你得到数据的网络数据库
 
 1416
 00:58:40,769 --> 00:58:41,934
-         get the data.
+         get the data.          
 
 1417
 00:58:41,936 --> 00:58:43,102
-             Okay?
+             Okay?              
 
 1418
 00:58:43,104 --> 00:58:45,671
- But in our case it's this very
-      simple little brain.
+ But in our case it's this very 
+      simple little brain.  
+但是在我们的情况中这是一个十分简单的小 brain
 
 1419
 00:58:45,673 --> 00:58:47,206
-             Okay.
+             Okay.              
 
 1420
 00:58:47,207 --> 00:58:48,740
-   So now we don't need this
-       either down here.
+   So now we don't need this    
+       either down here.        
+所以我们也不需要下面这些
 
 1421
 00:58:48,742 --> 00:58:51,343
- This is where we're appending
-     onto the op stack and
+ This is where we're appending  
+     onto the op stack and      
+这是我们添加 operandStack
 
 1422
 00:58:51,345 --> 00:58:52,044
-        printing it out.
+        printing it out.        
+把它打印出来
 
 1423
 00:58:52,045 --> 00:58:52,744
-     So we don't need that.
+     So we don't need that.     
+因此我们不需要它
 
 1424
 00:58:52,746 --> 00:58:57,548
-   But we do need an enter to
-     push the operand onto
+   But we do need an enter to   
+     push the operand onto      
+但是我们确实需一个 enter 把 operand 推送给
 
 1425
 00:58:57,550 --> 00:58:58,615
-           the stack.
+           the stack.           
 
 1426
 00:58:59,718 --> 00:59:00,516
-             Okay.
+             Okay.              
 
 1427
 00:59:00,518 --> 00:59:03,519
-  So here I'm just gonna say,
+  So here I'm just gonna say,   
+所以在这里我将会说
 
 1428
 00:59:03,521 --> 00:59:08,657
-  that I'm gonna say I'm just
-             gonna
+  that I'm gonna say I'm just   
+             gonna              
+我将会说，我将会
 
 1429
 00:59:08,659 --> 00:59:13,561
- say brain.pushOperand(display)
-             value.
+ say brain.pushOperand(display) 
+             value.             
+说 brain.pushOperand(display)
 
 1430
 00:59:13,563 --> 00:59:15,413
-             'Kay?
+             'Kay?              
 
 1431
 00:59:15,414 --> 00:59:17,264
-  That's the main thing I need
-    to do, is just do that.
+  That's the main thing I need  
+    to do, is just do that.     
+这是我主要需要做的事，刚刚做好
 
 1432
 00:59:17,266 --> 00:59:21,902
-  One thing though is, I also
-   need to update my display.
+  One thing though is, I also   
+   need to update my display.   
+但是另一件事我也需要更新我的现实
 
 1433
 00:59:21,904 --> 00:59:23,870
-    Because when I push this
-            operand,
+    Because when I push this    
+            operand,            
+因为当我推送这个 operand 时
 
 1434
 00:59:23,872 --> 00:59:25,672
- that's gonna change the brain.
+ that's gonna change the brain. 
+它会改变这个 brain
 
 1435
 00:59:25,674 --> 00:59:28,341
- I need to call that evaluate,
-             right?
+ I need to call that evaluate,  
+             right?             
+我需要调用那个 evaluate ，对吧？
 
 1436
 00:59:28,343 --> 00:59:29,442
-       And get the value.
+       And get the value.       
+得到那个值
 
 1437
 00:59:29,443 --> 00:59:30,542
- So I could call evaluate here,
-              but
+ So I could call evaluate here, 
+              but               
+所以我需要在这里调用 evaluate 但是
+
 
 1438
 00:59:30,544 --> 00:59:34,613
- actually, I'm gonna go back to
- my brain, and I'm gonna change
+ actually, I'm gonna go back to 
+ my brain, and I'm gonna change 
+实际上我将会回到我的 brain 中，我将会改变
 
 1439
 00:59:34,615 --> 00:59:39,484
- pushOperand to return the va,
-   the result of evaluating.
+ pushOperand to return the va,  
+   the result of evaluating.    
+pushOperand 让它返回 evaluating 的结果
 
 1440
 00:59:39,486 --> 00:59:42,486
-         Typing today.
+         Typing today.          
+我今天这打印（估计感冒还没恢复）
 
 1441
 00:59:43,789 --> 00:59:46,623
-    From it, from its, from
-         internally, so
+    From it, from its, from     
+         internally, so         
+从它，从它的，从间隔的
 
 1442
 00:59:46,625 --> 00:59:48,991
-   I'm gonna return evaluate
-             here.
+   I'm gonna return evaluate    
+             here.              
+我将会在这里返回 evaluate
 
 1443
 00:59:48,993 --> 00:59:50,593
- So that every time you push an
-            operand,
+ So that every time you push an 
+            operand,            
+所以每次你推送一个 operand
 
 1444
 00:59:50,595 --> 00:59:52,127
-     it'll just return the
-          evaluation.
+     it'll just return the      
+          evaluation.           
+它只会返回一个 evaluation
 
 1445
 00:59:52,129 --> 00:59:55,163
-  Now one could argue whether
- this is the best thing to do.
+  Now one could argue whether   
+ this is the best thing to do.  
+现在有人或许会质疑这是否是最好的方式去处理
 
 1446
 00:59:55,165 --> 00:59:57,932
-  Because, you know, you might
-      not be interested in
+  Because, you know, you might  
+      not be interested in      
+因为，你知道，你现在可能不会对
 
 1447
 00:59:57,934 --> 01:00:00,568
- the result of evaluating that
-           right now.
+ the result of evaluating that  
+           right now.           
+evaluation 的结果感兴趣
 
 1448
 01:00:00,570 --> 01:00:03,671
-   But it kind of feels to me
-         kind of good.
+   But it kind of feels to me   
+         kind of good.          
+但是这种感觉对我来说蛮好的
 
 1449
 01:00:03,673 --> 01:00:05,339
-     And it's not gonna be,
+     And it's not gonna be,     
+而且这不会
 
 1450
 01:00:05,341 --> 01:00:07,341
- there's not gonna be that many
-      things on the stack.
+ there's not gonna be that many 
+      things on the stack.      
+将不会有很多东西在 stack 上
 
 1451
 01:00:07,343 --> 01:00:10,143
- You're not gonna usually have
-        calculator brain
+ You're not gonna usually have  
+        calculator brain        
+通常你的计算器 brain 不会有
 
 1452
 01:00:10,145 --> 01:00:12,712
-   have 1,000 operations and
- operands, although you could.
+   have 1,000 operations and    
+ operands, although you could.  
+1000个操作和操作符，尽管你可以那样
 
 1453
 01:00:12,714 --> 01:00:14,013
-  But you're not usually going
-             to so
+  But you're not usually going  
+             to so              
+但是你通常不会那样做
 
 1454
 01:00:14,015 --> 01:00:16,548
-      it's probably not a
-       performance issue.
+      it's probably not a       
+       performance issue.       
+这可能不是一个执行的问题
 
 1455
 01:00:16,550 --> 01:00:19,751
-  To have it just return this
- and it'll make caller's code,
+  To have it just return this   
+ and it'll make caller's code,  
+有它返回这个，会使 caller 的代码
 
 1456
 01:00:19,753 --> 01:00:22,320
-    you know, look a little
-            simpler.
+    you know, look a little     
+            simpler.            
+你懂的，看起来简单些
 
 1457
 01:00:22,322 --> 01:00:24,522
-  And if they don't want this
-         return value,
+  And if they don't want this   
+         return value,          
+如果它们不想要这个返回值
 
 1458
 01:00:25,858 --> 01:00:27,808
- then they can just ignore it.
+ then they can just ignore it.  
+它们可以就忽略它
 
 1459
 01:00:27,809 --> 01:00:29,759
- They don't have to use it but
-       I am gonna use it.
+ They don't have to use it but  
+       I am gonna use it.       
+它们没有必要用它但是我将会用它
 
 1460
 01:00:29,762 --> 01:00:31,495
-  So, when I push this operand
-          right here,
+  So, when I push this operand  
+          right here,           
+所以当我在这里推送这个 operand
 
 1461
 01:00:31,497 --> 01:00:35,798
-  I'm gonna say, I'm gonna if
-  let the results equal that.
+  I'm gonna say, I'm gonna if   
+  let the results equal that.   
+我将会说，我将会 if let ＝
 
 1462
 01:00:36,734 --> 01:00:38,000
-     Okay, because it's an
-           optional.
+     Okay, because it's an      
+           optional.            
+Okay，因为它是optional
 
 1463
 01:00:39,036 --> 01:00:41,836
-  And if it's not nil then I'm
-             gonna
+  And if it's not nil then I'm  
+             gonna              
+如果它不是nil，我将会
 
 1464
 01:00:41,838 --> 01:00:43,671
-  set the display value to the
-            result.
+  set the display value to the  
+            result.             
+把 result 的值赋给 display
 
 1465
 01:00:43,673 --> 01:00:46,140
- So in other words, every time
-       I push an operand,
+ So in other words, every time  
+       I push an operand,       
+因此换句话说每次我推送一个 operand
 
 1466
 01:00:46,142 --> 01:00:49,343
- I'm gonna up my display value
-      with the evaluation.
+ I'm gonna up my display value  
+      with the evaluation.      
+我将会把 evaluation 的值赋给我的 display
 
 1467
 01:00:49,345 --> 01:00:50,811
-          Make sense?
+          Make sense?           
+有道理吗？
 
 1468
 01:00:50,813 --> 01:00:53,446
- Okay, what if this comes back
-              nil?
+ Okay, what if this comes back  
+              nil?              
+Okay， 如果它是 nil 的话该怎么办？
 
 1469
 01:00:54,982 --> 01:00:56,615
-    So, I push something on,
+    So, I push something on,  
+因此我会推送一些东西上去
 
 1470
 01:00:56,617 --> 01:00:59,151
-    this is not gonna happen
-  probably with Push Operand,
+    this is not gonna happen    
+  probably with Push Operand,   
+这可能不会因为加操作符儿发生
 
 1471
 01:00:59,153 --> 01:01:02,587
-  but it might, and after your
-       homework it might.
+  but it might, and after your  
+       homework it might.       
+但是它可能是 nil 的，在你们的作业之后可能会这样
 
 1472
 01:01:02,589 --> 01:01:04,022
-   So, what if I push and it
-        comes back nil?
+   So, what if I push and it    
+        comes back nil?         
+所以，当我推送返回是 nil 的时候怎么办？
 
 1473
 01:01:04,024 --> 01:01:07,258
-   Well, now I'm kinda stuck,
-             okay?
+   Well, now I'm kinda stuck,   
+             okay?              
+呵呵，现在我被难倒了，Okay？
 
 1474
 01:01:07,260 --> 01:01:10,728
- This is why, in your homework
-  assignment, I suggested, wow
+ This is why, in your homework  
+  assignment, I suggested, wow  
+所以在你们的家庭作业中，我建议， w
 
 1475
 01:01:10,730 --> 01:01:13,730
- wouldn't it be cool if display
-    value took an optional.
+ wouldn't it be cool if display 
+    value took an optional.     
+如果你的 display 值取得是 optional 不是很酷吗？
 
 1476
 01:01:15,100 --> 01:01:17,600
-  Right, if display value took
-   and returned an optional.
+  Right, if display value took  
+   and returned an optional.    
+对吧，如果 display 值取和返回一个 optional
 
 1477
 01:01:17,602 --> 01:01:20,769
-    You could put something
-  sensible in the display when
+    You could put something     
+  sensible in the display when  
+你可以放一些敏感的东西在你的 dispaly中当
 
 1478
 01:01:20,771 --> 01:01:23,605
-     you had something that
-     couldn't be evaluated.
+     you had something that     
+     couldn't be evaluated.     
+你有一些你无法 evaluated 的东西
 
 1479
 01:01:23,607 --> 01:01:25,874
-  So in assignment two making
-       display value into
+  So in assignment two making   
+       display value into       
+所以在家庭作业2中使 dispaly 的值是
 
 1480
 01:01:25,876 --> 01:01:27,809
-    an optional is gonna be
-         required task.
+    an optional is gonna be     
+         required task.         
+一个 optional 是一个必须的任务
 
 1481
 01:01:27,811 --> 01:01:29,977
- So you might as well do it for
-         homework one,
+ So you might as well do it for 
+         homework one,          
+当然你也可以在家庭作业一中那样做
 
 1482
 01:01:29,979 --> 01:01:33,447
- cuz you're gonna have to do it
-    for homework two anyway.
+ cuz you're gonna have to do it 
+    for homework two anyway.    
+因为你不管怎么样都不得不做家庭作业2
 
 1483
 01:01:33,449 --> 01:01:35,182
-             Okay.
+             Okay.              
 
 1484
 01:01:35,183 --> 01:01:36,916
-  Just wanted to give you more
-     time because I didn't
+  Just wanted to give you more  
+     time because I didn't      
+只是想给你们更多的时间因为我没有
 
 1485
 01:01:36,917 --> 01:01:38,650
-  really teach you the things
-   about NumberFormatter and
+  really teach you the things   
+   about NumberFormatter and    
+及时真正教你们关于有关数字格式的东西
 
 1486
 01:01:38,653 --> 01:01:41,320
-  stuff in time for assignment
-              one.
+  stuff in time for assignment  
+              one.              
+在布置家庭作业1的时候
 
 1487
 01:01:41,322 --> 01:01:44,623
- But it's going to be required
- and that's because the best I
+ But it's going to be required  
+ and that's because the best I  
+但是这将会是硬性要求因为我能够在这做的最好的
 
 1488
 01:01:44,625 --> 01:01:48,093
-    can do here is maybe say
-   display value equals zero.
+    can do here is maybe say    
+   display value equals zero.   
+或许是说 display 的值为 0
 
 1489
 01:01:48,095 --> 01:01:50,962
- That's really lame but that's
-       the best I can do.
+ That's really lame but that's  
+       the best I can do.       
+那真正的站不住脚但是那是我能够做的最好的
 
 1490
 01:01:50,964 --> 01:01:54,432
-  I really wanna say, display
-      value was nil, okay.
+  I really wanna say, display   
+      value was nil, okay.      
+我真的想说的是 display 的值是 nil ，okay
 
 1491
 01:01:54,434 --> 01:01:56,634
-    I really just wanna set
-     display value equal to
+    I really just wanna set     
+     display value equal to     
+我真的只想把 display 的值设定为
 
 1492
 01:01:56,636 --> 01:01:58,953
-      the result of this.
+      the result of this.       
+这个的结果
 
 1493
 01:01:58,954 --> 01:02:01,271
-   And I wanna have nil, you
- know, clear out my display or
+   And I wanna have nil, you    
+ know, clear out my display or  
+我想有 nil ，你懂的，清除我的 display 或者
 
 1494
 01:02:01,274 --> 01:02:02,606
-       in assignment two,
+       in assignment two,       
+在家庭作业2中
 
 1495
 01:02:02,608 --> 01:02:06,743
- extra credit, maybe it puts an
-  error message in my display.
+ extra credit, maybe it puts an 
+  error message in my display.  
+加分项，可能加一个错误的信息在我的 display 上
 
 1496
 01:02:07,912 --> 01:02:09,545
-  Now that's extra credit, but
+  Now that's extra credit, but  
+现在那是加分项，但是
 
 1497
 01:02:09,547 --> 01:02:11,246
-  that would be an even better
-      thing to put there.
+  that would be an even better  
+      thing to put there.       
+那将会更加的好放在那里
 
 1498
 01:02:12,216 --> 01:02:14,216
-             Okay?
+             Okay?              
 
 1499
 01:02:14,217 --> 01:02:16,217
-    But same thing for, for
-     forming the operation.
-
-
+    But same thing for, for     
+     forming the operation.     
+但是形成运算也是一样的
 
 1500
 01:02:16,219 --> 01:02:17,652

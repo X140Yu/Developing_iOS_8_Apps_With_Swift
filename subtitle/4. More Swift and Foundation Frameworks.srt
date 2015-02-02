@@ -3304,66 +3304,82 @@ Okay?
 802
 00:33:53,880 --> 00:33:56,280
 Understand that rule number one?
+理解第一条规则了吗？
 
 803
 00:33:56,282 --> 00:33:57,314
 That's your designated initial.
+这就是你们的预设初始化（designated initial）。
 
 804
 00:33:57,316 --> 00:33:59,183
 This is all, by
+这就是全部了。
 
 805
 00:33:59,184 --> 00:34:01,051
 the way in the documentation It's very elaborately.
+顺便说一下，在文档中有详细的描述。
 
 806
 00:34:01,053 --> 00:34:02,485
 Drawn out with pictures and all that.
+有图表之类的说明。
 
 807
 00:34:02,487 --> 00:34:04,020
 I'm just trying to summarize it here.
+我这里只是大概提一下。
 
 808
 00:34:04,022 --> 00:34:05,488
 Okay. Hopefully,
+希望，
 
 809
 00:34:05,489 --> 00:34:06,955
 you've read that already and this is review.
+你们已经读了文档，这是复习。
 
 810
 00:34:06,958 --> 00:34:09,458
 But if not, hopefully you're understanding a little bit of
+如果没有，希望你们能理解一点
 
 811
 00:34:09,460 --> 00:34:11,093
 what I'm saying.
+我所说的。
 
 812
 00:34:11,094 --> 00:34:12,727
 Tonight when you read it, you'll be, oh yeah, I get it.
+今晚，当你们阅读文档时，就会明白了。
 
 813
 00:34:12,730 --> 00:34:14,262
 Okay. So that's the rule for
+这就是
 
 814
 00:34:14,264 --> 00:34:15,897
 designating initializer.
+designating initializer 的规则。
 
 815
 00:34:15,899 --> 00:34:19,233
 You have to initialize all of your own
+你必须在调用父类的初始化函数前
 
 816
 00:34:19,235 --> 00:34:24,838
-properties before you all your superclass's initializer.
+properties before you call your superclass's initializer.
+先初始化你自己的所有属性。
 
 817
 00:34:24,840 --> 00:34:25,572
 Okay? This is for
+只有 designated initializers 需要这样。
 
 818
 00:34:25,574 --> 00:34:26,939
@@ -3372,46 +3388,57 @@ designated initializers only,
 819
 00:34:26,941 --> 00:34:29,342
 cuz they are the ones who call supervisors initializers.
+因为他们调用 supervisors initializers.
 
 820
 00:34:29,344 --> 00:34:32,478
 So you have to be done with your own properties before you
+所以你必须在调用父类的属性前
 
 821
 00:34:32,480 --> 00:34:34,046
 call your superclass's.
+先处理你自己（类）的属性。
 
 822
 00:34:34,048 --> 00:34:36,348
 This one will trip you up, often.
+这经常让你有麻烦。
 
 823
 00:34:36,350 --> 00:34:39,350
 Okay? You also have to call your
+Okay？ 你要先调用
 
 824
 00:34:39,352 --> 00:34:43,420
 superclass's init before you assign a value to
+父类的初始化函数，然后才能给继承自父类的
 
 825
 00:34:43,422 --> 00:34:47,557
 any property you inherit from your superclass.
+属性赋值。
 
 826
 00:34:47,559 --> 00:34:49,125
 In other words,
+也就是说，
 
 827
 00:34:49,126 --> 00:34:50,692
 you have to let your superclass's initialize,
+你必须先让你的父类初始化它的属性，
 
 828
 00:34:50,695 --> 00:34:53,262
 it's properties before you can start setting them.
+然后你才能给它们赋值。
 
 829
 00:34:53,264 --> 00:34:54,963
 So you get those three rules?
+你们现在明白这三条规则了吗？
 
 830
 00:34:54,965 --> 00:34:56,832
@@ -3420,10 +3447,12 @@ Okay.
 831
 00:34:56,833 --> 00:34:58,700
 That has to do with, so you're superclass, cuz it has to do
+这和你们的父类有关，因为它必须处理
 
 832
 00:34:58,702 --> 00:35:01,302
 with designated intitializers and calling super.
+designated intitializers 并调用它的父类（的初始化函数）。
 
 833
 00:35:01,304 --> 00:35:02,921
@@ -3432,42 +3461,52 @@ All right. Now
 834
 00:35:02,922 --> 00:35:04,539
 a convenience initializer has different rules.
+convenience initializer 有不同的规则。
 
 835
 00:35:04,541 --> 00:35:06,073
 Okay? First of all,
+首先，
 
 836
 00:35:06,075 --> 00:35:09,243
 a convenience initializer must and
+convenience initializer 必须
 
 837
 00:35:09,245 --> 00:35:14,581
 can only call a designated initializer in it's own class.
+而且只能调用本类的 designated initializer。
 
 838
 00:35:14,583 --> 00:35:16,249
 Convenience initializer,
+Convenience initializer，
 
 839
 00:35:16,251 --> 00:35:19,118
 initializer cannot call super init of any kind.
+这类初始化函数不能调用任何父类的初始化函数。
 
 840
 00:35:19,120 --> 00:35:21,653
 And it can't call and it must call a,
+它必须调用
 
 841
 00:35:21,655 --> 00:35:23,388
 a designated initializer.
+designated initializer。
 
 842
 00:35:23,390 --> 00:35:26,358
 Now it can call that designated initializer
+它能通过调用其他的 convenience initializer
 
 843
 00:35:26,360 --> 00:35:29,860
 indirectly through another convenience initializer.
+间接调用 designated initializer。
 
 844
 00:35:29,862 --> 00:35:31,312
@@ -3476,14 +3515,17 @@ Okay.
 845
 00:35:31,313 --> 00:35:32,763
 So one convenience initializer can call self another
+因此 convenience initializer 能调用本类其他
 
 846
 00:35:32,765 --> 00:35:35,866
 convenience initializer, which called designated initializer.
+调用designated initializer 的 convenience initializer。
 
 847
 00:35:35,868 --> 00:35:39,268
 But eventually, a designated initializer must be called.
+但最后，有个 designated initializer 必须被调用。
 
 848
 00:35:39,270 --> 00:35:40,870
@@ -3492,14 +3534,17 @@ Okay?
 849
 00:35:40,872 --> 00:35:43,906
 A convenience initializer must call that
+一个 convenience initializer 必须先直接或
 
 850
 00:35:43,908 --> 00:35:46,775
 designated initializer, directly or
+间接调用designated initializer，
 
 851
 00:35:46,777 --> 00:35:50,945
 indirectly before it can touch any values, obviously.
+然后才能访问其他的值。
 
 852
 00:35:50,947 --> 00:35:52,263
@@ -3508,38 +3553,47 @@ Okay?
 853
 00:35:52,264 --> 00:35:53,580
 You have to kinda get the main, your
+你必须让主要的，
 
 854
 00:35:53,583 --> 00:35:56,483
 object primarily initialized before you can have
+你的对象首先被初始化，然后你才能
 
 855
 00:35:56,485 --> 00:36:00,253
 the convenience initializer start hacking at properties.
+让 convenience initializer 开始访问属性。
 
 856
 00:36:00,255 --> 00:36:03,356
 The calling of other inits, whether your a convenience guy
+其他初始化函数的调用，不管是你的 convenience 初始化函数
 
 857
 00:36:03,358 --> 00:36:06,125
 calling your designator or whether your a designator
+调用你的 designator ，还是你的 designator
 
 858
 00:36:06,127 --> 00:36:08,961
 calling up to your supers designator has to be complete
+调用你父类的 designator，
 
 859
 00:36:08,963 --> 00:36:12,197
 before you can start accessing your properties and methods.
+所有这些都必须在你开始访问属性和方法之前完成。
 
 860
 00:36:12,199 --> 00:36:15,400
 In other words, the class has to be initialized before you
+也就是说，这个类必须被初始化，然后
 
 861
 00:36:15,402 --> 00:36:17,869
 can start calling methods and properties.
+你才能开始调用方法和属性。
 
 862
 00:36:17,871 --> 00:36:19,838
@@ -3548,62 +3602,77 @@ Okay?
 863
 00:36:19,839 --> 00:36:21,806
 That's why we have to use lazy if we want a property to
+这就是为什么我们必须使用懒惰的方式，
 
 864
 00:36:21,808 --> 00:36:24,275
 set its value to be calling a method.
+如果我们要设置一个属性的值则调用方法。
 
 865
 00:36:24,277 --> 00:36:25,943
 Because we can't do it non-lazily,
+因为我们不能使用非懒惰方式。
 
 866
 00:36:25,945 --> 00:36:28,245
 because we wouldn't be initialized at that time.
+因为那时我们还没被初始化。
 
 867
 00:36:28,247 --> 00:36:30,113
 We'd still be in the process of initializing.
+我们还在初始化过程中。
 
 868
 00:36:30,115 --> 00:36:31,981
 It's kind of a two phase initialization.
+这如同初始化的两个阶段。
 
 869
 00:36:31,983 --> 00:36:36,652
 You get fully initialized, now you can go do that.
+完全初始化之后，你就能那样做了。
 
 870
 00:36:36,654 --> 00:36:38,120
 Okay? So these are the rules.
+这就是（初始化的）规则了。
 
 871
 00:36:38,122 --> 00:36:40,139
 Question?
+有问题吗？
 
 872
 00:36:40,140 --> 00:36:42,157
 Is there a way to set the constant then by
+有没有这样一种方式，通过调用
 
 873
 00:36:42,159 --> 00:36:43,691
 by calling a method?
+方法给常量赋值？
 
 874
 00:36:43,693 --> 00:36:44,942
 So the question is,
+问题是，
 
 875
 00:36:44,943 --> 00:36:46,192
 is there a way to set constant by calling a method or
+有没有一种方式，可以调用方法或者类似的途径
 
 876
 00:36:46,195 --> 00:36:47,027
 something like that?
+给常量赋值。
 
 877
 00:36:47,029 --> 00:36:47,828
 And the answer is no.
+答案是不能。
 
 878
 00:36:47,830 --> 00:36:49,029
@@ -3612,14 +3681,17 @@ Okay.
 879
 00:36:49,031 --> 00:36:52,098
 You can only set constants either setting them equals
+你只能给常量赋予等于的某个值，
 
 880
 00:36:52,100 --> 00:36:54,033
 something or in your initializers.
+或者在你的初始化函数中。
 
 881
 00:36:54,035 --> 00:36:57,969
 Unfortunately, later we can't do it.
+不幸的是，之后我们不能做这些了。
 
 882
 00:36:57,971 --> 00:36:59,104
@@ -3628,6 +3700,7 @@ Okay.
 883
 00:36:59,106 --> 00:37:01,239
 Let's talk about inheriting init.
+让我们聊聊继承式初始化。
 
 884
 00:37:01,241 --> 00:37:02,507
@@ -3636,30 +3709,37 @@ Okay?
 885
 00:37:02,508 --> 00:37:03,774
 Cuz this is complicated, as well.
+这也很复杂。
 
 886
 00:37:03,776 --> 00:37:05,876
 So here are the rules for inheriting init.
+这就是继承式初始化的规则了。
 
 887
 00:37:05,878 --> 00:37:10,413
 If you do not implement any designated initializers in
+如果你没有在你的类中实现任何 designated initializers ，
 
 888
 00:37:10,415 --> 00:37:14,250
 your class, any, then you'll inherit all of
+那么，你将继承你父类中的
 
 889
 00:37:14,252 --> 00:37:18,320
 your superclass's designated initializers.
+所有 designated initializers。
 
 890
 00:37:18,322 --> 00:37:20,889
 Otherwise, you'll inherit none of your de,
+否则，你将不继承任何你的父类中的
 
 891
 00:37:20,891 --> 00:37:23,358
 superclass's designated initializers.
+designated initializers。
 
 892
 00:37:23,360 --> 00:37:25,059
@@ -3668,10 +3748,12 @@ Okay?
 893
 00:37:25,061 --> 00:37:28,396
 It's all of nothing on designated initializers.
+如果你覆盖了你父类中的所有 designated initializers，
 
 894
 00:37:28,398 --> 00:37:33,934
 If you override all of your superclass's designated inits.
+则 designated initializers 中就什么都没有。
 
 895
 00:37:33,936 --> 00:37:34,668
@@ -3680,22 +3762,27 @@ Okay?
 896
 00:37:34,670 --> 00:37:36,536
 All, so your superclass has
+你的父类中有
 
 897
 00:37:36,537 --> 00:37:38,403
 three designated initializers with different arguments.
+三种不同参数的 designated initializers，
 
 898
 00:37:38,406 --> 00:37:41,607
 If you override all of them, then you'll inherit all of
+如果你覆盖了所有这些方法，那么你就继承了父类中所有的
 
 899
 00:37:41,609 --> 00:37:44,443
 your superclass's convenient initializers.
+convenient initializers。
 
 900
 00:37:44,445 --> 00:37:46,778
 Also, if you implement none of them.
+同样，如果你没有实现它们中的任一个方法，
 
 901
 00:37:46,780 --> 00:37:48,947

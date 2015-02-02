@@ -5,13 +5,13 @@ iTunes U 课程地址：[iTunes](https://itunes.apple.com/us/course/developing-i
 
 CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanford.edu/class/cs193p/cgi-bin/drupal/)
 
+CS193P 字幕组 QQ 群：277542197 
+
 ### 视频及课件下载地址
 
-[1. Logistics, iOS 8 Overview](http://pan.baidu.com/s/1kTIaP4V)
+[Developing iOS 8 Apps with Swift - 百度网盘](http://pan.baidu.com/s/1i3glp2l)
 
-[2. More Xcode and Swift, MVC](http://pan.baidu.com/s/1gdkYYDd)
-
-### 校对的规则
+### 校对规则
 
 请参见项目内文档：[校对规则](./proofread-rules.md)
 

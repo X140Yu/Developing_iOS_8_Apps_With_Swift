@@ -4500,402 +4500,502 @@ cuz whatever's causing the segue to happen in a user
 1101
 00:45:23,705 --> 00:45:27,006
 interface, could be AnyObject, so it makes some sense.
+可以是AnyObject，这是一样对
 
 1102
 00:45:27,008 --> 00:45:30,276
 But there's addConstraints, kay?
+但这里是addConstraints，Okay？
 
 1103
 00:45:30,278 --> 00:45:32,311
 Which is another UIViewController thing.
+也是一种UIViewController
 
 1104
 00:45:32,313 --> 00:45:34,746
 And you add the constraints, you think that would be
+并且你加了限制，你认为
 
 1105
 00:45:34,748 --> 00:45:36,715
 array of whatever class constraints are,
+这是一个无关类型限制的数组
 
 1106
 00:45:36,717 --> 00:45:38,483
 I haven't taught you about this, but
+还没有教你们这些
 
 1107
 00:45:38,485 --> 00:45:41,285
 these are the constraints that do all our UI shifting.
+这些限制都是我们UI的移动
 
 1108
 00:45:41,287 --> 00:45:44,455
 But again, for historical reasons, it's an array of
+但是，由于历史遗留问题
 
 1109
 00:45:44,457 --> 00:45:47,290
-any object and even in a pen digit in calculator.
+any object and even in a appendDigit in calculator.
+这是一个任意对象的数组，甚至是计算器里的appendDigit
 
 1110
 00:45:47,292 --> 00:45:51,294
 Okay, remember, when we drag, control, dragged the button to
+记住，当我按住control拖动时
 
 1111
 00:45:51,296 --> 00:45:54,430
-make a pan digit, and I made a big deal of of saying,
+make a appendDigit, and I made a big deal of of saying,
+拖动按钮去生成一个appendDigit的，我们也会同时作出一个巨大的改变
 
 1112
 00:45:54,432 --> 00:45:57,433
 change that from any object to UI button, okay?
+把那个任意对象变成一个UI Button
 
 1113
 00:45:57,435 --> 00:46:01,070
 Well, if you hadn't changed it, then you could've ended up
+如果你还没改变这个，你就不会在结尾
 
 1114
 00:46:01,072 --> 00:46:03,305
-with a pen digit, sender any object.
+with a appendDigit, sender any object.
+用appendDigit传递任何对象
 
 1115
 00:46:03,307 --> 00:46:03,872
+Kay?
 Kay?
 
 1116
 00:46:05,442 --> 00:46:08,142
 It also can even be the return type for fun, for functions,
+这甚至也可以给函数返回对象
 
 1117
 00:46:08,144 --> 00:46:10,577
 like that button with type I talked about a few slides ago?
+就像是前几张幻灯片中我说过的那个类型
 
 1118
 00:46:10,579 --> 00:46:12,112
 It actually returns any object,
+这真的会返回任意类型
 
 1119
 00:46:12,114 --> 00:46:14,948
 it doesn't return a UI button, you would think it would, but
+这不会返回一个UI Button，你可能想这会返回这样一个类型
 
 1120
 00:46:14,950 --> 00:46:16,916
 it doesn't, it returns any object.
+但是不会，他会返回任意对象
 
 1121
 00:46:16,918 --> 00:46:18,684
 Okay, so, this,
+就是这样
 
 1122
 00:46:18,686 --> 00:46:20,519
 you're probably like what the heck is going on.
+你可能会想这是怎么了
 
 1123
 00:46:20,521 --> 00:46:22,688
 Why would you be passing around these pointers if
+为什么你要传递这些
 
 1124
 00:46:22,690 --> 00:46:24,989
 you don't even know what these things are, okay?
+甚至你不知道这些是什么的指针呢？
 
 1125
 00:46:24,991 --> 00:46:28,426
 Well we'll talk a little bit why we do it but
+我们稍微讨论了一下为什么做这个
 
 1126
 00:46:28,428 --> 00:46:32,163
 let's talk first about how we use it, because it's this
+来说说我们怎么用这个，因为这是一个指向未知对象的指针
 
 1127
 00:46:32,165 --> 00:46:35,766
 pointer to unknown object, so I can't really send any
+所有我不能真的发送任何信息
 
 1128
 00:46:35,768 --> 00:46:40,136
 messages to it because I don't even know what it is, okay?
+因为我甚至不知道这是什么
 
 1129
 00:46:40,138 --> 00:46:45,474
 And so to use it, we convert it to a type we do know, kay?
+和怎么去用，我们把他转换成一种我们知道的类型
 
 1130
 00:46:45,476 --> 00:46:49,044
 That's the only way we're really gonna use any object,
+我们唯一的用任何对象的方式
 
 1131
 00:46:49,046 --> 00:46:52,547
 is to invert it to some class that we do know, all right?
+就是把他转换成我们知道的类
 
 1132
 00:46:52,549 --> 00:46:55,283
 And we do that with.
+我们通过
 
 1133
 00:46:56,319 --> 00:46:59,787
 By creating a new variable, so we, we've got some AnyObject,
+建立一个新的变量AnyObject来实现它
 
 1134
 00:46:59,789 --> 00:47:01,989
 it's a, it was an argument to a method, or
+这是一个方法的参数
 
 1135
 00:47:01,991 --> 00:47:03,557
 it's a local variable or
+或者是一个本地变量
 
 1136
 00:47:03,559 --> 00:47:05,959
 something like that, and we wanna convert it.
+或者我们想要转型的类似它的东西
 
 1137
 00:47:05,961 --> 00:47:08,661
 So, we're gonna create a new variable of the,
+所以我们要建立一个新
 
 1138
 00:47:08,663 --> 00:47:11,163
 of the type we wanna convert it to, okay?
+我们想要转换的变量
 
 1139
 00:47:11,165 --> 00:47:13,832
 And we're gonna assign this new variable to be
+然后我们要把这个变量申明成
 
 1140
 00:47:13,834 --> 00:47:17,269
 equal to that anyobject thing converted.
+我们需要转换成的那种
 
 1141
 00:47:17,271 --> 00:47:18,704
 Now, of course,
+现在，当然
 
 1142
 00:47:18,705 --> 00:47:20,138
 we have to convert it to a compatible type.
+我们需要转换成一个合适的类型
 
 1143
 00:47:20,140 --> 00:47:21,539
 It actually has,
+它真的有的那种
 
 1144
 00:47:21,540 --> 00:47:22,939
 has to actually be one of those things.
+必须要转换成其中一种
 
 1145
 00:47:22,942 --> 00:47:26,344
 So, if we got a UI button back from buttons type and
+所以如果我需要从按钮的类型中取回UI Button这种
 
 1146
 00:47:26,346 --> 00:47:27,711
 it comes back as any object,
+这就会返回成任意类型
 
 1147
 00:47:27,713 --> 00:47:30,881
 we can convert it to UI button, cuz it is a UI button.
+你可以把他转换成UI Button，因为他真的是个UI Button
 
 1148
 00:47:30,883 --> 00:47:32,666
 Kay? But
+但是
 
 1149
 00:47:32,667 --> 00:47:34,450
 we can't convert it to a UI label, it's not a UI label, so
+但是不能转换成UI label，因为他不是个UI label
 
 1150
 00:47:34,453 --> 00:47:36,953
 that would crash our program actually.
+这会让你的程序崩溃
 
 1151
 00:47:36,955 --> 00:47:39,055
 So, how do we do that conversion?
+那我们怎么去做这个转换呢？
 
 1152
 00:47:40,524 --> 00:47:42,758
 yeah, see, it will crash our program if we do that.
+看到没，这会让我们的程序崩溃
 
 1153
 00:47:42,760 --> 00:47:44,392
 How do we do that conversion safely so
+如何安全的去做这个转型
 
 1154
 00:47:44,394 --> 00:47:46,394
 we're not crashing our program all the time?
+这样我们就一直不会让程序崩溃呢？
 
 1155
 00:47:46,396 --> 00:47:50,531
 So, there's two ways, and we call this casting, kay?
+这里有两种方式我们叫它转换
 
 1156
 00:47:50,533 --> 00:47:53,067
 You know what typecasting is, we're essentially casting
+你知道类型转换是什么，我们
 
 1157
 00:47:53,069 --> 00:47:55,068
 the type from any object to something else.
+本质上是把一个类型从任意类型转换成其他的
 
 1158
 00:47:56,004 --> 00:48:00,439
 And we can typecast forcibly using the as keyword.
+我们还可以用as 关键词强行转换
 
 1159
 00:48:00,441 --> 00:48:01,840
 A S, as.
+用as
 
 1160
 00:48:01,842 --> 00:48:04,343
 Okay swift as usual, very succinct.
+通常Swift是非常简洁的
 
 1161
 00:48:04,345 --> 00:48:06,811
 And so I'm gonna use that destination view
+下面我要用destinationViewController
 
 1162
 00:48:06,813 --> 00:48:08,813
 controller thing as an example so
+来做个例子
 
 1163
 00:48:08,815 --> 00:48:12,283
 I've got this property destinationViewController.
+我得到了这个destinationViewController作为属性
 
 1164
 00:48:12,285 --> 00:48:14,051
 It's in any object.
+这是个对象
 
 1165
 00:48:14,053 --> 00:48:16,620
 And, I know it's a ViewController.
+我知道这是个ViewController
 
 1166
 00:48:16,622 --> 00:48:20,223
 And I think it should be a calculator ViewController.
+我想这应该是个计算器ViewController
 
 1167
 00:48:20,225 --> 00:48:21,491
 So, I'm gonna be using in my
+我要在我的
 
 1168
 00:48:21,493 --> 00:48:23,559
 examples CalculatorViewController.
+CalculatorViewController里面用
 
 1169
 00:48:23,561 --> 00:48:25,761
 Imagine we had called our CalculatorViewController,
+想象一下我们调用CalculatorViewController
 
 1170
 00:48:25,763 --> 00:48:28,864
 CalculatorViewController instead of ViewController.
+是CalculatorViewController而不是ViewController
 
 1171
 00:48:28,866 --> 00:48:30,432
 I'm doing that in examples because it,
+我因为这个才用在我的例子里
 
 1172
 00:48:30,434 --> 00:48:32,000
 it's just going to make more sense, okay?
+这样能让你们更好理解
 
 1173
 00:48:32,002 --> 00:48:35,269
 So, I want to talk to this destinationViewController,
+所以我想说说这个destinationViewController
 
 1174
 00:48:35,271 --> 00:48:37,037
 which is any object.
+这个对象
 
 1175
 00:48:37,039 --> 00:48:39,473
 And I know that it's a CalculatorViewController.
+我知道这是个CalculatorViewController
 
 1176
 00:48:39,475 --> 00:48:41,474
 And if it's not a CalculatorViewController,
+如果这个不是个CalculatorViewController
 
 1177
 00:48:41,476 --> 00:48:43,209
 my program should probably crash.
+这个程序就应该会崩溃
 
 1178
 00:48:43,211 --> 00:48:45,177
 Because, in the context I'm using it,
+因为在用这个的环境下
 
 1179
 00:48:45,179 --> 00:48:46,679
 I want it to be that.
+我需要他是CalculatorViewController
 
 1180
 00:48:46,681 --> 00:48:48,397
+Okay?
 Okay?
 
 1181
 00:48:48,398 --> 00:48:50,114
 So, I can just say, let calcVC equals
+所以可以let calcVC ＝ 
 
 1182
 00:48:50,117 --> 00:48:52,484
 CalculatorViewController as CalculatorViewController.
+destinationViewController as CalculatorViewController
 
 1183
 00:48:52,486 --> 00:48:56,821
 And now, calcVC, this new constant, its type is
+现在，擦了擦VC这个常量的类型
 
 1184
 00:48:56,823 --> 00:48:59,990
 not any object, its type is CalculatorViewController.
+不是其他任何类型，而是CalculatorViewController
 
 1185
 00:48:59,992 --> 00:49:02,159
 And so now, I've gotten hold of that AnyObject in
+所以现在我可以这种方法获得任意对象
 
 1186
 00:49:02,161 --> 00:49:03,626
 a way that I can actually do things with it,
+然后用这个来处理
 
 1187
 00:49:03,628 --> 00:49:04,761
 and I can send messages,
+也可以发送消息
 
 1188
 00:49:04,763 --> 00:49:07,696
 CalculatorViewControl messages, to calcVC.
+CalculatorViewControl 消息给calcVC.
 
 1189
 00:49:08,999 --> 00:49:10,899
 Now, you can protect against crashing if
+现在你就可以防止崩溃了
 
 1190
 00:49:10,901 --> 00:49:13,801
 you're not sure whether that destinationViewController is
+你不确定destinationViewController是不是
 
 1191
 00:49:13,803 --> 00:49:16,771
 a CalculatorViewController, but you're hoping it is.
+一个CalculatorViewController，但你希望是
 
 1192
 00:49:16,773 --> 00:49:18,272
+Okay?
 Okay?
 
 1193
 00:49:18,273 --> 00:49:19,772
 You can use as question mark.
+你可以用一个问号
 
 1194
 00:49:19,775 --> 00:49:22,909
 And as question mark returns an optional.
+as？会返回一个可选的
 
 1195
 00:49:22,911 --> 00:49:26,879
 Same as as, right, as returns that any object thing cast to
+跟as一样返回任意类型
 
 1196
 00:49:26,881 --> 00:49:28,414
 be a different class.
+转换到其他类型
 
 1197
 00:49:28,416 --> 00:49:30,983
 As question mark does the same thing, but it's optional
+问号做了同样的事，但是可选版本的
 
 1198
 00:49:30,985 --> 00:49:33,585
 version of that, so we can return nil if that any object,
+如果destinationViewController
 
 1199
 00:49:33,587 --> 00:49:35,387
 destinationViewController cannot be
+不能转换成CalculatorViewController
 
 1200
 00:49:35,389 --> 00:49:37,388
 turned into a CalculatorViewController,
+那就返回nil
 
 1201
 00:49:37,390 --> 00:49:39,757
@@ -5211,7 +5311,7 @@ So, if we hadn't changed, when we control drag to
 
 1279
 00:52:51,056 --> 00:52:54,123
-make a pen digit, what if we had left at any object?
+make a appendDigit, what if we had left at any object?
 
 1280
 00:52:55,259 --> 00:52:56,775
@@ -5219,7 +5319,7 @@ Kay? So we had
 
 1281
 00:52:56,776 --> 00:52:58,292
-a pen digit sender colon any object.
+a appendDigit sender colon any object.
 
 1282
 00:52:58,295 --> 00:52:59,794

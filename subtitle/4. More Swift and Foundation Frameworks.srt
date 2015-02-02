@@ -3787,10 +3787,12 @@ Also, if you implement none of them.
 901
 00:37:46,780 --> 00:37:48,947
 Because you'll essentially inherit all
+在这种情况下，你将继承
 
 902
 00:37:48,949 --> 00:37:51,816
 the designateds and all the convenience in that case.
+所有指定的、方便的类。
 
 903
 00:37:51,818 --> 00:37:53,884
@@ -3799,34 +3801,42 @@ Okay?
 904
 00:37:53,886 --> 00:37:55,419
 So that's the inheritance rule.
+这就是继承的规则。
 
 905
 00:37:55,421 --> 00:37:56,520
 This trips people up, too.
+旅行的人也是这样。
 
 906
 00:37:56,522 --> 00:37:57,587
 They're like, oh yeah,
+他们说，哦耶，
 
 907
 00:37:57,589 --> 00:37:59,255
 I implemented that one initializer, but
+我实现了一个初始化
 
 908
 00:37:59,257 --> 00:38:01,190
 how come the other initializer doesn't work?
+但是其他的初始化为什么没用？
 
 909
 00:38:01,192 --> 00:38:02,624
 Well, because once you initiali,
+好吧，因为一旦你初始化
 
 910
 00:38:02,626 --> 00:38:04,326
 implement one designated initializers,
+执行一个指定的初始化
 
 911
 00:38:04,328 --> 00:38:05,827
 you don't inherit the rest of them.
+你就不必继承其他的
 
 912
 00:38:05,829 --> 00:38:08,129
@@ -3835,38 +3845,47 @@ Okay?
 913
 00:38:08,130 --> 00:38:10,430
 So it's all or nothing on designateds.
+所以指定不是全有就是全无。
 
 914
 00:38:10,433 --> 00:38:13,067
 And on convenience, it's kind of all or nothing too.
+并且便利，同样也是。
 
 915
 00:38:13,069 --> 00:38:15,936
 Cuz you have to implement or not implement all of
+因为为了方便，你要执行或者不执行
 
 916
 00:38:15,938 --> 00:38:18,939
 the designateds to get the conveniences.
+指定操作。
 
 917
 00:38:18,941 --> 00:38:23,876
 Any init that you inherit by these rules that I just said,
+你做任何初始化，继承了我刚才说的规则
 
 918
 00:38:23,878 --> 00:38:27,880
 count for all the rules on the previous slide.
+包括之前幻灯片提到的所有规则。
 
 919
 00:38:27,882 --> 00:38:30,849
 I'm not gonna go back to the previous slide and go through
+在这里，我就回顾之前幻灯片的内容了
 
 920
 00:38:30,851 --> 00:38:33,852
 them all, but you can satisfy a lot of the requirements in
+但是通过之前的幻灯片里讲的的继承初始化
 
 921
 00:38:33,854 --> 00:38:36,988
 the previous slide by just inheriting your initializers.
+可以满足你的很多要求。
 
 922
 00:38:36,990 --> 00:38:38,289
@@ -3875,62 +3894,77 @@ Okay?
 923
 00:38:38,291 --> 00:38:39,757
 But you have,
+但是你
 
 924
 00:38:39,758 --> 00:38:41,224
 you can only inherit them in these kind of restricted ways.
+只能通过这种受限制的方法去继承它们。
 
 925
 00:38:41,227 --> 00:38:42,426
 But once you do,
+只要你这么做了。
 
 926
 00:38:42,428 --> 00:38:46,063
 you can satisfy a lot of those previous rules.
+之前的所有规则你都可以满足了。
 
 927
 00:38:46,065 --> 00:38:48,999
 It is possible to have what's called a required init.
+可能有人问什么是 required 的初始化方法。
 
 928
 00:38:49,001 --> 00:38:51,034
 You just put required on it.
+你只要给它设置 required 。
 
 929
 00:38:51,036 --> 00:38:52,268
 And if you put required,
+如果你设置了 required ，
 
 930
 00:38:52,270 --> 00:38:54,536
 it means that subclasses must implement it.
+那么它的子类就必须实现这个方法。
 
 931
 00:38:54,538 --> 00:38:56,722
 It is required.
+这就是 required 。
 
 932
 00:38:56,723 --> 00:38:58,907
 Now they can inherit it by the rules above.
+现在通过遵守上面的规则，你可以继承它了。
 
 933
 00:38:58,909 --> 00:39:00,241
 In other words, if they don't,
+换句话说，如果没有遵守
 
 934
 00:39:00,243 --> 00:39:02,043
 if any designated negative initializers,
+任何指定的负面的初始化
 
 935
 00:39:02,045 --> 00:39:04,578
 they'll inherit the required initializer, that's good.
+它们将会继承 required 的初始化，这非常棒。
 
 936
 00:39:04,580 --> 00:39:07,948
 But if you implement any of the designated initializers,
+但是如果你想实现其中得某个指定的方法
 
 937
 00:39:07,950 --> 00:39:10,217
 you must implement the required ones.
+你必须实现它对应的 required 。
 
 938
 00:39:10,219 --> 00:39:11,885
@@ -3939,14 +3973,17 @@ Okay?
 939
 00:39:11,887 --> 00:39:15,554
 Finally, there's failable initializers.
+最后，这是失败的初始化。
 
 940
 00:39:15,556 --> 00:39:18,357
 Okay? So
+明白吗？所以
 
 941
 00:39:18,358 --> 00:39:21,159
 some initializers are allowed to fail and return nil.
+有一些初始化允许失败或者返回 nil 。
 
 942
 00:39:21,161 --> 00:39:22,878
@@ -3955,10 +3992,12 @@ Okay?
 943
 00:39:22,879 --> 00:39:24,596
 You, you designate them by putting question mark
+你在初始化完成后，可以加个注释
 
 944
 00:39:24,598 --> 00:39:26,931
 after the init, like this right here.
+就像我这里一样。
 
 945
 00:39:26,933 --> 00:39:28,316
@@ -3967,94 +4006,117 @@ Okay?
 946
 00:39:28,317 --> 00:39:29,700
 Now, this is pretty uncommon.
+现在，这是很少见的。
 
 947
 00:39:29,702 --> 00:39:31,702
 Okay? You don't see
+明白吗？你们不经常见这些。
 
 948
 00:39:31,703 --> 00:39:33,703
 these very often and the documentation last I checked,
+我上次查文档的时候，
 
 949
 00:39:33,706 --> 00:39:35,739
 doesn't really show this very well.
+它也没描述的特别仔细。
 
 950
 00:39:35,741 --> 00:39:37,574
 It doesn't put the question mark in there.
+它没有把注释标在那儿。
 
 951
 00:39:37,576 --> 00:39:38,541
 I think it's just
+我觉得是
 
 952
 00:39:38,543 --> 00:39:41,010
 a documentation generation problem.
+生成文档的时候出现的问题。
 
 953
 00:39:41,012 --> 00:39:43,712
 It will say in, in the comment for
+它会在初始化的时候提示
 
 954
 00:39:43,714 --> 00:39:46,915
 the init, this can return nil, if it fails.
+这个可能会返回 nil ，如果失败的话。
 
 955
 00:39:46,917 --> 00:39:48,083
 But it doesn't put,
+但是它没有放，
 
 956
 00:39:48,084 --> 00:39:49,250
 seem to put the question mark on there.
+貌似把问题标注在那儿了。
 
 957
 00:39:49,252 --> 00:39:51,419
 But that's okay, because when you start using it,
+但是没关系，因为当你用它的时候
 
 958
 00:39:51,421 --> 00:39:53,087
 you're gonna call this initializer.
+你就会调用它。
 
 959
 00:39:53,089 --> 00:39:54,988
 And the thing's gonna come back and you're gonna try and
+回调的时候你会
 
 960
 00:39:54,990 --> 00:39:55,722
 send messages to it.
+给它发送一个消息。
 
 961
 00:39:55,724 --> 00:39:57,524
 And it's gonna say,
+它会提示
 
 962
 00:39:57,525 --> 00:39:59,325
 this isn't optional, does not respond to the method.
+这个方法不是 optional 的，没有对应的方法。
 
 963
 00:39:59,327 --> 00:40:00,159
 And you're like, what?
+你会惊讶，我擦！
 
 964
 00:40:00,161 --> 00:40:01,294
 Isn't optional?
+它不是可选的？
 
 965
 00:40:01,295 --> 00:40:02,428
 And then you're gonna know.
+然后你就会瞬间反应过来
 
 966
 00:40:02,429 --> 00:40:03,562
 Oh, the initializer was failable.
+哦， 初始化失败了。
 
 967
 00:40:03,564 --> 00:40:05,698
 So let's look at an example of this.
+来，我们来看这个例子。
 
 968
 00:40:05,700 --> 00:40:07,065
 So UIImage.
+关于 UIImage
 
 969
 00:40:07,067 --> 00:40:09,751
@@ -4063,130 +4125,162 @@ Okay?
 970
 00:40:09,752 --> 00:40:12,436
 That's a class in UIKit.
+它是 UIKit 中的一个类。
 
 971
 00:40:12,439 --> 00:40:14,772
 And [COUGH] it returns an image.
+然后，它返回一个图片。
 
 972
 00:40:14,774 --> 00:40:17,107
 And you can ask for an image by its name.
+你可以通过它的名称来获取图片
 
 973
 00:40:17,109 --> 00:40:19,976
 But of course, that image named that might not be
+当然，如果你的项目中如果不存在图片的话
 
 974
 00:40:19,978 --> 00:40:23,346
 anywhere in your project, so this thing can return nil.
+它就会返回 nil 。
 
 975
 00:40:23,348 --> 00:40:24,814
 So in this case right here,
+那么在这里，
 
 976
 00:40:24,816 --> 00:40:27,316
 image equals UIImage named: "foo".
+名为 "foo" 的图片赋值给 image
 
 977
 00:40:27,318 --> 00:40:29,284
 Image is an optional UIImage,
+Image 是一个可选的方法。
 
 978
 00:40:29,286 --> 00:40:32,320
 even I'm calling initializer there, right?
+甚至，可以称做 Image 的初始化，对吗？
 
 979
 00:40:32,322 --> 00:40:34,222
 UIImages initializer.
+UIImages 的初始化方法。
 
 980
 00:40:34,224 --> 00:40:35,923
 It could be Usually,
+可能这种叫法比较常见。
 
 981
 00:40:35,925 --> 00:40:38,092
 what we do in this case is we use if let.
+这种情况下我们会用 if let 。
 
 982
 00:40:38,094 --> 00:40:41,061
 If we can let the image equal the image name foo,
+如果 image = UIImage(name: "foo") 成立
 
 983
 00:40:41,063 --> 00:40:42,863
 then we'll do what we want.
+那么我们就处理相关的事件。
 
 984
 00:40:42,865 --> 00:40:44,464
 Otherwise, we couldn't find it.
+不成立，不能创建图片。
 
 985
 00:40:44,466 --> 00:40:46,232
 So, we'll do whatever we do in that case.
+所以，我们可以做任何处理这种情况下。
 
 986
 00:40:46,234 --> 00:40:47,500
 Okay?
+是吗？
 
 987
 00:40:47,502 --> 00:40:48,734
 So watch out for those.
+所以，多注意这些细节。
 
 988
 00:40:48,736 --> 00:40:51,670
 There's a few of them, a few dozen at the most.
+是啊。
 
 989
 00:40:51,672 --> 00:40:52,937
 Yeah.
+是啊。
 
 990
 00:40:52,939 --> 00:40:55,206
 So this is a replace like tricach?
+-所以，这是一个取代，比如 tricach？（学生提问）
 
 991
 00:40:55,208 --> 00:40:58,642
 So the question is does this replace tricatch?
+这是一个取代，比如 tricach？
 
 992
 00:40:58,644 --> 00:41:00,611
 And we're not even going to talk about tricatch in
+我们不打算谈论 tricatch
 
 993
 00:41:00,613 --> 00:41:01,979
 this class.
+在这节课。
 
 994
 00:41:01,980 --> 00:41:03,346
 Okay? That's how rare it is.
+明白？ tricatch 非常少见。
 
 995
 00:41:03,349 --> 00:41:06,816
 You don't even really use tricatch in Swift.
+甚至在 Swift 中也很少用到它。
 
 996
 00:41:06,818 --> 00:41:10,353
 You know, things are optionals make a lot of tricatch stuff
+你知道，很多可选的事情让
 
 997
 00:41:10,355 --> 00:41:11,654
 just not necessary.
+tricatch 变得不是必须得。
 
 998
 00:41:11,656 --> 00:41:13,422
 Tricatch, for
+对于那些不知道什么是 Tricatch 的同学，
 
 999
 00:41:13,423 --> 00:41:15,189
 those of you who don't know is you can raise exceptions in
+可以在你的项目中抛出异常
 
 1000
 00:41:15,192 --> 00:41:17,926
 your program and they can percolate up the callstack and
+它们可以贯穿调用堆栈并且
 
 1001
 00:41:17,928 --> 00:41:20,161
 someone tries to catch them and handle them.
+有些人视图抓住它们，处理它们。
 
 1002
 00:41:20,163 --> 00:41:22,013

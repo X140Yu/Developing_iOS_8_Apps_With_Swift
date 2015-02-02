@@ -3304,66 +3304,82 @@ Okay?
 802
 00:33:53,880 --> 00:33:56,280
 Understand that rule number one?
+理解第一条规则了吗？
 
 803
 00:33:56,282 --> 00:33:57,314
 That's your designated initial.
+这就是你们的预设初始化（designated initial）。
 
 804
 00:33:57,316 --> 00:33:59,183
 This is all, by
+这就是全部了。
 
 805
 00:33:59,184 --> 00:34:01,051
 the way in the documentation It's very elaborately.
+顺便说一下，在文档中有详细的描述。
 
 806
 00:34:01,053 --> 00:34:02,485
 Drawn out with pictures and all that.
+有图表之类的说明。
 
 807
 00:34:02,487 --> 00:34:04,020
 I'm just trying to summarize it here.
+我这里只是大概提一下。
 
 808
 00:34:04,022 --> 00:34:05,488
 Okay. Hopefully,
+希望，
 
 809
 00:34:05,489 --> 00:34:06,955
 you've read that already and this is review.
+你们已经读了文档，这是复习。
 
 810
 00:34:06,958 --> 00:34:09,458
 But if not, hopefully you're understanding a little bit of
+如果没有，希望你们能理解一点
 
 811
 00:34:09,460 --> 00:34:11,093
 what I'm saying.
+我所说的。
 
 812
 00:34:11,094 --> 00:34:12,727
 Tonight when you read it, you'll be, oh yeah, I get it.
+今晚，当你们阅读文档时，就会明白了。
 
 813
 00:34:12,730 --> 00:34:14,262
 Okay. So that's the rule for
+这就是
 
 814
 00:34:14,264 --> 00:34:15,897
 designating initializer.
+designating initializer 的规则。
 
 815
 00:34:15,899 --> 00:34:19,233
 You have to initialize all of your own
+你必须在调用父类的初始化函数前
 
 816
 00:34:19,235 --> 00:34:24,838
-properties before you all your superclass's initializer.
+properties before you call your superclass's initializer.
+先初始化你自己的所有属性。
 
 817
 00:34:24,840 --> 00:34:25,572
 Okay? This is for
+只有 designated initializers 需要这样。
 
 818
 00:34:25,574 --> 00:34:26,939
@@ -3372,46 +3388,57 @@ designated initializers only,
 819
 00:34:26,941 --> 00:34:29,342
 cuz they are the ones who call supervisors initializers.
+因为他们调用 supervisors initializers.
 
 820
 00:34:29,344 --> 00:34:32,478
 So you have to be done with your own properties before you
+所以你必须在调用父类的属性前
 
 821
 00:34:32,480 --> 00:34:34,046
 call your superclass's.
+先处理你自己（类）的属性。
 
 822
 00:34:34,048 --> 00:34:36,348
 This one will trip you up, often.
+这经常让你有麻烦。
 
 823
 00:34:36,350 --> 00:34:39,350
 Okay? You also have to call your
+Okay？ 你要先调用
 
 824
 00:34:39,352 --> 00:34:43,420
 superclass's init before you assign a value to
+父类的初始化函数，然后才能给继承自父类的
 
 825
 00:34:43,422 --> 00:34:47,557
 any property you inherit from your superclass.
+属性赋值。
 
 826
 00:34:47,559 --> 00:34:49,125
 In other words,
+也就是说，
 
 827
 00:34:49,126 --> 00:34:50,692
 you have to let your superclass's initialize,
+你必须先让你的父类初始化它的属性，
 
 828
 00:34:50,695 --> 00:34:53,262
 it's properties before you can start setting them.
+然后你才能给它们赋值。
 
 829
 00:34:53,264 --> 00:34:54,963
 So you get those three rules?
+你们现在明白这三条规则了吗？
 
 830
 00:34:54,965 --> 00:34:56,832
@@ -3420,10 +3447,12 @@ Okay.
 831
 00:34:56,833 --> 00:34:58,700
 That has to do with, so you're superclass, cuz it has to do
+这和你们的父类有关，因为它必须处理
 
 832
 00:34:58,702 --> 00:35:01,302
 with designated intitializers and calling super.
+designated intitializers 并调用它的父类（的初始化函数）。
 
 833
 00:35:01,304 --> 00:35:02,921
@@ -3432,42 +3461,52 @@ All right. Now
 834
 00:35:02,922 --> 00:35:04,539
 a convenience initializer has different rules.
+convenience initializer 有不同的规则。
 
 835
 00:35:04,541 --> 00:35:06,073
 Okay? First of all,
+首先，
 
 836
 00:35:06,075 --> 00:35:09,243
 a convenience initializer must and
+convenience initializer 必须
 
 837
 00:35:09,245 --> 00:35:14,581
 can only call a designated initializer in it's own class.
+而且只能调用本类的 designated initializer。
 
 838
 00:35:14,583 --> 00:35:16,249
 Convenience initializer,
+Convenience initializer，
 
 839
 00:35:16,251 --> 00:35:19,118
 initializer cannot call super init of any kind.
+这类初始化函数不能调用任何父类的初始化函数。
 
 840
 00:35:19,120 --> 00:35:21,653
 And it can't call and it must call a,
+它必须调用
 
 841
 00:35:21,655 --> 00:35:23,388
 a designated initializer.
+designated initializer。
 
 842
 00:35:23,390 --> 00:35:26,358
 Now it can call that designated initializer
+它能通过调用其他的 convenience initializer
 
 843
 00:35:26,360 --> 00:35:29,860
 indirectly through another convenience initializer.
+间接调用 designated initializer。
 
 844
 00:35:29,862 --> 00:35:31,312
@@ -3476,14 +3515,17 @@ Okay.
 845
 00:35:31,313 --> 00:35:32,763
 So one convenience initializer can call self another
+因此 convenience initializer 能调用本类其他
 
 846
 00:35:32,765 --> 00:35:35,866
 convenience initializer, which called designated initializer.
+调用designated initializer 的 convenience initializer。
 
 847
 00:35:35,868 --> 00:35:39,268
 But eventually, a designated initializer must be called.
+但最后，有个 designated initializer 必须被调用。
 
 848
 00:35:39,270 --> 00:35:40,870
@@ -3492,14 +3534,17 @@ Okay?
 849
 00:35:40,872 --> 00:35:43,906
 A convenience initializer must call that
+一个 convenience initializer 必须先直接或
 
 850
 00:35:43,908 --> 00:35:46,775
 designated initializer, directly or
+间接调用designated initializer，
 
 851
 00:35:46,777 --> 00:35:50,945
 indirectly before it can touch any values, obviously.
+然后才能访问其他的值。
 
 852
 00:35:50,947 --> 00:35:52,263
@@ -3508,38 +3553,47 @@ Okay?
 853
 00:35:52,264 --> 00:35:53,580
 You have to kinda get the main, your
+你必须让主要的，
 
 854
 00:35:53,583 --> 00:35:56,483
 object primarily initialized before you can have
+你的对象首先被初始化，然后你才能
 
 855
 00:35:56,485 --> 00:36:00,253
 the convenience initializer start hacking at properties.
+让 convenience initializer 开始访问属性。
 
 856
 00:36:00,255 --> 00:36:03,356
 The calling of other inits, whether your a convenience guy
+其他初始化函数的调用，不管是你的 convenience 初始化函数
 
 857
 00:36:03,358 --> 00:36:06,125
 calling your designator or whether your a designator
+调用你的 designator ，还是你的 designator
 
 858
 00:36:06,127 --> 00:36:08,961
 calling up to your supers designator has to be complete
+调用你父类的 designator，
 
 859
 00:36:08,963 --> 00:36:12,197
 before you can start accessing your properties and methods.
+所有这些都必须在你开始访问属性和方法之前完成。
 
 860
 00:36:12,199 --> 00:36:15,400
 In other words, the class has to be initialized before you
+也就是说，这个类必须被初始化，然后
 
 861
 00:36:15,402 --> 00:36:17,869
 can start calling methods and properties.
+你才能开始调用方法和属性。
 
 862
 00:36:17,871 --> 00:36:19,838
@@ -3548,62 +3602,77 @@ Okay?
 863
 00:36:19,839 --> 00:36:21,806
 That's why we have to use lazy if we want a property to
+这就是为什么我们必须使用懒惰的方式，
 
 864
 00:36:21,808 --> 00:36:24,275
 set its value to be calling a method.
+如果我们要设置一个属性的值则调用方法。
 
 865
 00:36:24,277 --> 00:36:25,943
 Because we can't do it non-lazily,
+因为我们不能使用非懒惰方式。
 
 866
 00:36:25,945 --> 00:36:28,245
 because we wouldn't be initialized at that time.
+因为那时我们还没被初始化。
 
 867
 00:36:28,247 --> 00:36:30,113
 We'd still be in the process of initializing.
+我们还在初始化过程中。
 
 868
 00:36:30,115 --> 00:36:31,981
 It's kind of a two phase initialization.
+这如同初始化的两个阶段。
 
 869
 00:36:31,983 --> 00:36:36,652
 You get fully initialized, now you can go do that.
+完全初始化之后，你就能那样做了。
 
 870
 00:36:36,654 --> 00:36:38,120
 Okay? So these are the rules.
+这就是（初始化的）规则了。
 
 871
 00:36:38,122 --> 00:36:40,139
 Question?
+有问题吗？
 
 872
 00:36:40,140 --> 00:36:42,157
 Is there a way to set the constant then by
+有没有这样一种方式，通过调用
 
 873
 00:36:42,159 --> 00:36:43,691
 by calling a method?
+方法给常量赋值？
 
 874
 00:36:43,693 --> 00:36:44,942
 So the question is,
+问题是，
 
 875
 00:36:44,943 --> 00:36:46,192
 is there a way to set constant by calling a method or
+有没有一种方式，可以调用方法或者类似的途径
 
 876
 00:36:46,195 --> 00:36:47,027
 something like that?
+给常量赋值。
 
 877
 00:36:47,029 --> 00:36:47,828
 And the answer is no.
+答案是不能。
 
 878
 00:36:47,830 --> 00:36:49,029
@@ -3612,14 +3681,17 @@ Okay.
 879
 00:36:49,031 --> 00:36:52,098
 You can only set constants either setting them equals
+你只能给常量赋予等于的某个值，
 
 880
 00:36:52,100 --> 00:36:54,033
 something or in your initializers.
+或者在你的初始化函数中。
 
 881
 00:36:54,035 --> 00:36:57,969
 Unfortunately, later we can't do it.
+不幸的是，之后我们不能做这些了。
 
 882
 00:36:57,971 --> 00:36:59,104
@@ -3628,6 +3700,7 @@ Okay.
 883
 00:36:59,106 --> 00:37:01,239
 Let's talk about inheriting init.
+让我们聊聊继承式初始化。
 
 884
 00:37:01,241 --> 00:37:02,507
@@ -3636,30 +3709,37 @@ Okay?
 885
 00:37:02,508 --> 00:37:03,774
 Cuz this is complicated, as well.
+这也很复杂。
 
 886
 00:37:03,776 --> 00:37:05,876
 So here are the rules for inheriting init.
+这就是继承式初始化的规则了。
 
 887
 00:37:05,878 --> 00:37:10,413
 If you do not implement any designated initializers in
+如果你没有在你的类中实现任何 designated initializers ，
 
 888
 00:37:10,415 --> 00:37:14,250
 your class, any, then you'll inherit all of
+那么，你将继承你父类中的
 
 889
 00:37:14,252 --> 00:37:18,320
 your superclass's designated initializers.
+所有 designated initializers。
 
 890
 00:37:18,322 --> 00:37:20,889
 Otherwise, you'll inherit none of your de,
+否则，你将不继承任何你的父类中的
 
 891
 00:37:20,891 --> 00:37:23,358
 superclass's designated initializers.
+designated initializers。
 
 892
 00:37:23,360 --> 00:37:25,059
@@ -3668,10 +3748,12 @@ Okay?
 893
 00:37:25,061 --> 00:37:28,396
 It's all of nothing on designated initializers.
+如果你覆盖了你父类中的所有 designated initializers，
 
 894
 00:37:28,398 --> 00:37:33,934
 If you override all of your superclass's designated inits.
+则 designated initializers 中就什么都没有。
 
 895
 00:37:33,936 --> 00:37:34,668
@@ -3680,22 +3762,27 @@ Okay?
 896
 00:37:34,670 --> 00:37:36,536
 All, so your superclass has
+你的父类中有
 
 897
 00:37:36,537 --> 00:37:38,403
 three designated initializers with different arguments.
+三种不同参数的 designated initializers，
 
 898
 00:37:38,406 --> 00:37:41,607
 If you override all of them, then you'll inherit all of
+如果你覆盖了所有这些方法，那么你就继承了父类中所有的
 
 899
 00:37:41,609 --> 00:37:44,443
 your superclass's convenient initializers.
+convenient initializers。
 
 900
 00:37:44,445 --> 00:37:46,778
 Also, if you implement none of them.
+同样，如果你没有实现它们中的任一个方法，
 
 901
 00:37:46,780 --> 00:37:48,947
@@ -4500,402 +4587,502 @@ cuz whatever's causing the segue to happen in a user
 1101
 00:45:23,705 --> 00:45:27,006
 interface, could be AnyObject, so it makes some sense.
+可以是AnyObject，这是一样对
 
 1102
 00:45:27,008 --> 00:45:30,276
 But there's addConstraints, kay?
+但这里是addConstraints，Okay？
 
 1103
 00:45:30,278 --> 00:45:32,311
 Which is another UIViewController thing.
+也是一种UIViewController
 
 1104
 00:45:32,313 --> 00:45:34,746
 And you add the constraints, you think that would be
+并且你加了限制，你认为
 
 1105
 00:45:34,748 --> 00:45:36,715
 array of whatever class constraints are,
+这是一个无关类型限制的数组
 
 1106
 00:45:36,717 --> 00:45:38,483
 I haven't taught you about this, but
+还没有教你们这些
 
 1107
 00:45:38,485 --> 00:45:41,285
 these are the constraints that do all our UI shifting.
+这些限制都是我们UI的移动
 
 1108
 00:45:41,287 --> 00:45:44,455
 But again, for historical reasons, it's an array of
+但是，由于历史遗留问题
 
 1109
 00:45:44,457 --> 00:45:47,290
-any object and even in a pen digit in calculator.
+any object and even in a appendDigit in calculator.
+这是一个任意对象的数组，甚至是计算器里的appendDigit
 
 1110
 00:45:47,292 --> 00:45:51,294
 Okay, remember, when we drag, control, dragged the button to
+记住，当我按住control拖动时
 
 1111
 00:45:51,296 --> 00:45:54,430
-make a pan digit, and I made a big deal of of saying,
+make a appendDigit, and I made a big deal of of saying,
+拖动按钮去生成一个appendDigit的，我们也会同时作出一个巨大的改变
 
 1112
 00:45:54,432 --> 00:45:57,433
 change that from any object to UI button, okay?
+把那个任意对象变成一个UI Button
 
 1113
 00:45:57,435 --> 00:46:01,070
 Well, if you hadn't changed it, then you could've ended up
+如果你还没改变这个，你就不会在结尾
 
 1114
 00:46:01,072 --> 00:46:03,305
-with a pen digit, sender any object.
+with a appendDigit, sender any object.
+用appendDigit传递任何对象
 
 1115
 00:46:03,307 --> 00:46:03,872
+Kay?
 Kay?
 
 1116
 00:46:05,442 --> 00:46:08,142
 It also can even be the return type for fun, for functions,
+这甚至也可以给函数返回对象
 
 1117
 00:46:08,144 --> 00:46:10,577
 like that button with type I talked about a few slides ago?
+就像是前几张幻灯片中我说过的那个类型
 
 1118
 00:46:10,579 --> 00:46:12,112
 It actually returns any object,
+这真的会返回任意类型
 
 1119
 00:46:12,114 --> 00:46:14,948
 it doesn't return a UI button, you would think it would, but
+这不会返回一个UI Button，你可能想这会返回这样一个类型
 
 1120
 00:46:14,950 --> 00:46:16,916
 it doesn't, it returns any object.
+但是不会，他会返回任意对象
 
 1121
 00:46:16,918 --> 00:46:18,684
 Okay, so, this,
+就是这样
 
 1122
 00:46:18,686 --> 00:46:20,519
 you're probably like what the heck is going on.
+你可能会想这是怎么了
 
 1123
 00:46:20,521 --> 00:46:22,688
 Why would you be passing around these pointers if
+为什么你要传递这些
 
 1124
 00:46:22,690 --> 00:46:24,989
 you don't even know what these things are, okay?
+甚至你不知道这些是什么的指针呢？
 
 1125
 00:46:24,991 --> 00:46:28,426
 Well we'll talk a little bit why we do it but
+我们稍微讨论了一下为什么做这个
 
 1126
 00:46:28,428 --> 00:46:32,163
 let's talk first about how we use it, because it's this
+来说说我们怎么用这个，因为这是一个指向未知对象的指针
 
 1127
 00:46:32,165 --> 00:46:35,766
 pointer to unknown object, so I can't really send any
+所有我不能真的发送任何信息
 
 1128
 00:46:35,768 --> 00:46:40,136
 messages to it because I don't even know what it is, okay?
+因为我甚至不知道这是什么
 
 1129
 00:46:40,138 --> 00:46:45,474
 And so to use it, we convert it to a type we do know, kay?
+和怎么去用，我们把他转换成一种我们知道的类型
 
 1130
 00:46:45,476 --> 00:46:49,044
 That's the only way we're really gonna use any object,
+我们唯一的用任何对象的方式
 
 1131
 00:46:49,046 --> 00:46:52,547
 is to invert it to some class that we do know, all right?
+就是把他转换成我们知道的类
 
 1132
 00:46:52,549 --> 00:46:55,283
 And we do that with.
+我们通过
 
 1133
 00:46:56,319 --> 00:46:59,787
 By creating a new variable, so we, we've got some AnyObject,
+建立一个新的变量AnyObject来实现它
 
 1134
 00:46:59,789 --> 00:47:01,989
 it's a, it was an argument to a method, or
+这是一个方法的参数
 
 1135
 00:47:01,991 --> 00:47:03,557
 it's a local variable or
+或者是一个本地变量
 
 1136
 00:47:03,559 --> 00:47:05,959
 something like that, and we wanna convert it.
+或者我们想要转型的类似它的东西
 
 1137
 00:47:05,961 --> 00:47:08,661
 So, we're gonna create a new variable of the,
+所以我们要建立一个新
 
 1138
 00:47:08,663 --> 00:47:11,163
 of the type we wanna convert it to, okay?
+我们想要转换的变量
 
 1139
 00:47:11,165 --> 00:47:13,832
 And we're gonna assign this new variable to be
+然后我们要把这个变量申明成
 
 1140
 00:47:13,834 --> 00:47:17,269
 equal to that anyobject thing converted.
+我们需要转换成的那种
 
 1141
 00:47:17,271 --> 00:47:18,704
 Now, of course,
+现在，当然
 
 1142
 00:47:18,705 --> 00:47:20,138
 we have to convert it to a compatible type.
+我们需要转换成一个合适的类型
 
 1143
 00:47:20,140 --> 00:47:21,539
 It actually has,
+它真的有的那种
 
 1144
 00:47:21,540 --> 00:47:22,939
 has to actually be one of those things.
+必须要转换成其中一种
 
 1145
 00:47:22,942 --> 00:47:26,344
 So, if we got a UI button back from buttons type and
+所以如果我需要从按钮的类型中取回UI Button这种
 
 1146
 00:47:26,346 --> 00:47:27,711
 it comes back as any object,
+这就会返回成任意类型
 
 1147
 00:47:27,713 --> 00:47:30,881
 we can convert it to UI button, cuz it is a UI button.
+你可以把他转换成UI Button，因为他真的是个UI Button
 
 1148
 00:47:30,883 --> 00:47:32,666
 Kay? But
+但是
 
 1149
 00:47:32,667 --> 00:47:34,450
 we can't convert it to a UI label, it's not a UI label, so
+但是不能转换成UI label，因为他不是个UI label
 
 1150
 00:47:34,453 --> 00:47:36,953
 that would crash our program actually.
+这会让你的程序崩溃
 
 1151
 00:47:36,955 --> 00:47:39,055
 So, how do we do that conversion?
+那我们怎么去做这个转换呢？
 
 1152
 00:47:40,524 --> 00:47:42,758
 yeah, see, it will crash our program if we do that.
+看到没，这会让我们的程序崩溃
 
 1153
 00:47:42,760 --> 00:47:44,392
 How do we do that conversion safely so
+如何安全的去做这个转型
 
 1154
 00:47:44,394 --> 00:47:46,394
 we're not crashing our program all the time?
+这样我们就一直不会让程序崩溃呢？
 
 1155
 00:47:46,396 --> 00:47:50,531
 So, there's two ways, and we call this casting, kay?
+这里有两种方式我们叫它转换
 
 1156
 00:47:50,533 --> 00:47:53,067
 You know what typecasting is, we're essentially casting
+你知道类型转换是什么，我们
 
 1157
 00:47:53,069 --> 00:47:55,068
 the type from any object to something else.
+本质上是把一个类型从任意类型转换成其他的
 
 1158
 00:47:56,004 --> 00:48:00,439
 And we can typecast forcibly using the as keyword.
+我们还可以用as 关键词强行转换
 
 1159
 00:48:00,441 --> 00:48:01,840
 A S, as.
+用as
 
 1160
 00:48:01,842 --> 00:48:04,343
 Okay swift as usual, very succinct.
+通常Swift是非常简洁的
 
 1161
 00:48:04,345 --> 00:48:06,811
 And so I'm gonna use that destination view
+下面我要用destinationViewController
 
 1162
 00:48:06,813 --> 00:48:08,813
 controller thing as an example so
+来做个例子
 
 1163
 00:48:08,815 --> 00:48:12,283
 I've got this property destinationViewController.
+我得到了这个destinationViewController作为属性
 
 1164
 00:48:12,285 --> 00:48:14,051
 It's in any object.
+这是个对象
 
 1165
 00:48:14,053 --> 00:48:16,620
 And, I know it's a ViewController.
+我知道这是个ViewController
 
 1166
 00:48:16,622 --> 00:48:20,223
 And I think it should be a calculator ViewController.
+我想这应该是个计算器ViewController
 
 1167
 00:48:20,225 --> 00:48:21,491
 So, I'm gonna be using in my
+我要在我的
 
 1168
 00:48:21,493 --> 00:48:23,559
 examples CalculatorViewController.
+CalculatorViewController里面用
 
 1169
 00:48:23,561 --> 00:48:25,761
 Imagine we had called our CalculatorViewController,
+想象一下我们调用CalculatorViewController
 
 1170
 00:48:25,763 --> 00:48:28,864
 CalculatorViewController instead of ViewController.
+是CalculatorViewController而不是ViewController
 
 1171
 00:48:28,866 --> 00:48:30,432
 I'm doing that in examples because it,
+我因为这个才用在我的例子里
 
 1172
 00:48:30,434 --> 00:48:32,000
 it's just going to make more sense, okay?
+这样能让你们更好理解
 
 1173
 00:48:32,002 --> 00:48:35,269
 So, I want to talk to this destinationViewController,
+所以我想说说这个destinationViewController
 
 1174
 00:48:35,271 --> 00:48:37,037
 which is any object.
+这个对象
 
 1175
 00:48:37,039 --> 00:48:39,473
 And I know that it's a CalculatorViewController.
+我知道这是个CalculatorViewController
 
 1176
 00:48:39,475 --> 00:48:41,474
 And if it's not a CalculatorViewController,
+如果这个不是个CalculatorViewController
 
 1177
 00:48:41,476 --> 00:48:43,209
 my program should probably crash.
+这个程序就应该会崩溃
 
 1178
 00:48:43,211 --> 00:48:45,177
 Because, in the context I'm using it,
+因为在用这个的环境下
 
 1179
 00:48:45,179 --> 00:48:46,679
 I want it to be that.
+我需要他是CalculatorViewController
 
 1180
 00:48:46,681 --> 00:48:48,397
+Okay?
 Okay?
 
 1181
 00:48:48,398 --> 00:48:50,114
 So, I can just say, let calcVC equals
+所以可以let calcVC ＝ 
 
 1182
 00:48:50,117 --> 00:48:52,484
 CalculatorViewController as CalculatorViewController.
+destinationViewController as CalculatorViewController
 
 1183
 00:48:52,486 --> 00:48:56,821
 And now, calcVC, this new constant, its type is
+现在，擦了擦VC这个常量的类型
 
 1184
 00:48:56,823 --> 00:48:59,990
 not any object, its type is CalculatorViewController.
+不是其他任何类型，而是CalculatorViewController
 
 1185
 00:48:59,992 --> 00:49:02,159
 And so now, I've gotten hold of that AnyObject in
+所以现在我可以这种方法获得任意对象
 
 1186
 00:49:02,161 --> 00:49:03,626
 a way that I can actually do things with it,
+然后用这个来处理
 
 1187
 00:49:03,628 --> 00:49:04,761
 and I can send messages,
+也可以发送消息
 
 1188
 00:49:04,763 --> 00:49:07,696
 CalculatorViewControl messages, to calcVC.
+CalculatorViewControl 消息给calcVC.
 
 1189
 00:49:08,999 --> 00:49:10,899
 Now, you can protect against crashing if
+现在你就可以防止崩溃了
 
 1190
 00:49:10,901 --> 00:49:13,801
 you're not sure whether that destinationViewController is
+你不确定destinationViewController是不是
 
 1191
 00:49:13,803 --> 00:49:16,771
 a CalculatorViewController, but you're hoping it is.
+一个CalculatorViewController，但你希望是
 
 1192
 00:49:16,773 --> 00:49:18,272
+Okay?
 Okay?
 
 1193
 00:49:18,273 --> 00:49:19,772
 You can use as question mark.
+你可以用一个问号
 
 1194
 00:49:19,775 --> 00:49:22,909
 And as question mark returns an optional.
+as？会返回一个可选的
 
 1195
 00:49:22,911 --> 00:49:26,879
 Same as as, right, as returns that any object thing cast to
+跟as一样返回任意类型
 
 1196
 00:49:26,881 --> 00:49:28,414
 be a different class.
+转换到其他类型
 
 1197
 00:49:28,416 --> 00:49:30,983
 As question mark does the same thing, but it's optional
+问号做了同样的事，但是可选版本的
 
 1198
 00:49:30,985 --> 00:49:33,585
 version of that, so we can return nil if that any object,
+如果destinationViewController
 
 1199
 00:49:33,587 --> 00:49:35,387
 destinationViewController cannot be
+不能转换成CalculatorViewController
 
 1200
 00:49:35,389 --> 00:49:37,388
 turned into a CalculatorViewController,
+那就返回nil
 
 1201
 00:49:37,390 --> 00:49:39,757
@@ -5211,7 +5398,7 @@ So, if we hadn't changed, when we control drag to
 
 1279
 00:52:51,056 --> 00:52:54,123
-make a pen digit, what if we had left at any object?
+make a appendDigit, what if we had left at any object?
 
 1280
 00:52:55,259 --> 00:52:56,775
@@ -5219,7 +5406,7 @@ Kay? So we had
 
 1281
 00:52:56,776 --> 00:52:58,292
-a pen digit sender colon any object.
+a appendDigit sender colon any object.
 
 1282
 00:52:58,295 --> 00:52:59,794

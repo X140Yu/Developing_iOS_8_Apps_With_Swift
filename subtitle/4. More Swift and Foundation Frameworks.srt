@@ -2900,74 +2900,92 @@ of course, we still could have said.
 701
 00:30:00,380 --> 00:30:03,280
 That's because we get a free init in calculator brain,
+这是因为我们有一个默认的init
 
 702
 00:30:03,282 --> 00:30:06,283
 cuz we initialized our default using equals something.
+我们默认使用等于某值初始化
 
 703
 00:30:06,285 --> 00:30:07,467
 Okay. So you,
+所以
 
 704
 00:30:07,468 --> 00:30:08,650
 that's one way to get an init.
+这是一种得到init的方法
 
 705
 00:30:08,653 --> 00:30:11,421
 A struct, not a class, but a struct,
+结构体，不是类，但是结构体
 
 706
 00:30:11,423 --> 00:30:15,324
 it will get a default one that has all the properties as
+它将默认得到一个将所有属性作为参数的初始化方法
 
 707
 00:30:15,326 --> 00:30:18,627
 arguments only if you have no initializers.
+仅当没有initializers时
 
 708
 00:30:18,629 --> 00:30:21,897
 So if you had a struct and you gave it no initializers,
+因此，如果你有一个结构体并且没有initializers
 
 709
 00:30:21,899 --> 00:30:24,899
 you would get one for free, which would be init or
+你会得到一个默认的初始化方法
 
 710
 00:30:24,901 --> 00:30:27,935
 all the arguments match all of the vars you have.
+并且所有的参数和变量匹配，如果有的话
 
 711
 00:30:27,937 --> 00:30:29,970
 All the vars and lets, okay?
+所有的变量和常量，明白吧？
 
 712
 00:30:29,972 --> 00:30:35,108
 So here I got a struct, it has two properties there, x and y.
+这里我有一个结构体，它有两个属性，x和y
 
 713
 00:30:35,110 --> 00:30:38,945
 And you can see that I got this init, x takes an init and
+你可以看到我这里有一个init方法，x是int类型
 
 714
 00:30:38,947 --> 00:30:41,514
 a y string for free, for free.
+y是string类型
 
 715
 00:30:41,516 --> 00:30:44,183
 I didn't have to implement that at all, it just came for
+我没有实现它，仅仅是默认的
 
 716
 00:30:44,185 --> 00:30:45,684
 free and so people can call that.
+都可以调用
 
 717
 00:30:45,686 --> 00:30:48,186
 They can initialize MyStruct, by saying,
+可以初始化MyStruct
 
 718
 00:30:48,188 --> 00:30:51,322
 MyStruct open parentheses and provide the x and the y.
+MyStruct提供x和y两个属性
 
 719
 00:30:51,324 --> 00:30:52,857
@@ -2980,46 +2998,57 @@ All right.
 721
 00:30:54,060 --> 00:30:56,727
 So, what can you do inside of init?
+你可以在init里面做什么？
 
 722
 00:30:56,729 --> 00:30:57,895
 Okay. We saw,
+好，我们看到
 
 723
 00:30:57,896 --> 00:30:59,062
 what we did in calculator brain,
+我们在CalculatorBrain里做了什么
 
 724
 00:30:59,064 --> 00:31:00,763
 we initialized some stuff.
+我们初始化了些
 
 725
 00:31:00,765 --> 00:31:02,498
 But what can you do?
+你可以做什么？
 
 726
 00:31:02,499 --> 00:31:04,232
 Well, you can set any properties value in there.
+你可以在里面设置任何属性值
 
 727
 00:31:04,235 --> 00:31:05,300
 [COUGH] You can even set
+你甚至可以
 
 728
 00:31:05,302 --> 00:31:07,235
 properties that have default values.
+给属性设置默认值
 
 729
 00:31:07,237 --> 00:31:09,771
 So even if you have properties set equals 12.
+即使你把属性设置为等于12
 
 730
 00:31:09,773 --> 00:31:12,540
 In your init, you can reset that thing to something else
+在你的init里，你可以把一些东西重置为别的什么
 
 731
 00:31:12,542 --> 00:31:15,109
 if you wanted to, if you changed your mind in init.
+如果你想的话
 
 732
 00:31:15,111 --> 00:31:16,010
@@ -3028,22 +3057,27 @@ Okay?
 733
 00:31:16,012 --> 00:31:16,910
 You can do that.
+你可以这样做
 
 734
 00:31:16,912 --> 00:31:20,913
 You can also set constant properties.
+你也可以给常量属性赋值
 
 735
 00:31:20,915 --> 00:31:24,817
 So if you have a struct or a class and
+如果你有一个结构体或者类
 
 736
 00:31:24,819 --> 00:31:31,189
 it has letx colon string, you can set that in your init.
+你可以在init里这样设置 let x: String
 
 737
 00:31:31,191 --> 00:31:34,192
 Even though to let, it's gotta get set some time in your init
+你必须得设置一段在你的init里
 
 738
 00:31:34,194 --> 00:31:35,326
@@ -3052,10 +3086,12 @@ is when you can set it.
 739
 00:31:35,328 --> 00:31:37,094
 You can also say, equal something, but
+也可以是等于其他什么
 
 740
 00:31:37,096 --> 00:31:38,495
 you can also set it in your init.
+你可以这样设置，在你的init里
 
 741
 00:31:38,497 --> 00:31:40,230
@@ -3064,26 +3100,32 @@ Okay?
 742
 00:31:40,231 --> 00:31:41,964
 So people sometimes don't understand, realize,
+人们有时不理解
 
 743
 00:31:41,967 --> 00:31:44,567
 they're like, oh, I can have lets in my class?
+他们肯定在想，哦，在我的class里可以有let？
 
 744
 00:31:44,569 --> 00:31:46,602
 Can have like, you know, constants for
+可有一样，你知道的
 
 745
 00:31:46,604 --> 00:31:49,038
 my class that are created at initialization and
+类里的常量在初始化和创建实例
 
 746
 00:31:49,040 --> 00:31:51,306
 stay the same for the lifetime of instance and
+的生命周期里是保持不变的
 
 747
 00:31:51,308 --> 00:31:54,242
 absolutely you can and you initialize them in your init.
+你绝对可以在init里初始化它们
 
 748
 00:31:54,244 --> 00:31:55,443
@@ -3092,18 +3134,22 @@ Okay.
 749
 00:31:55,444 --> 00:31:56,643
 That's actually a good practice if
+这实际上是很好的做法
 
 750
 00:31:56,646 --> 00:32:00,214
 you have something that's, you know, constant like that.
+如果你需要定义属性，你知道的，可以用常量
 
 751
 00:32:00,216 --> 00:32:04,385
 You can call other init methods in your own class or
+在你的类或者结构体里你可以调用其他的init方法
 
 752
 00:32:04,387 --> 00:32:06,687
 struct using self.init.
+使用self.init
 
 753
 00:32:06,689 --> 00:32:08,422
@@ -3112,6 +3158,7 @@ Okay?
 754
 00:32:08,423 --> 00:32:10,156
 Self.init, you can call the other ones with the ones that
+self.init，你可以调用有不同参数的其他init方法
 
 755
 00:32:10,158 --> 00:32:11,524
@@ -3124,18 +3171,22 @@ Okay?
 757
 00:32:13,027 --> 00:32:14,527
 So that sounds good.
+所以听起来很不错
 
 758
 00:32:14,529 --> 00:32:18,297
 And of course in a class, you can call super.init.
+当然，在类里你也可以调用super.init
 
 759
 00:32:18,299 --> 00:32:20,132
 Call your superclass's initializers,
+调用你父类的初始化方法
 
 760
 00:32:20,134 --> 00:32:22,267
 what their arguments whatever, they might be.
+参数无论是什么，如果有的话
 
 761
 00:32:22,269 --> 00:32:26,237
@@ -3144,22 +3195,27 @@ However, big old humongous, however on this one.
 762
 00:32:26,239 --> 00:32:28,205
 There are a lot of rules for
+调用其他的init时有很多规则
 
 763
 00:32:28,207 --> 00:32:31,842
 calling other inits, especially in classes.
+尤其是在类里
 
 764
 00:32:31,844 --> 00:32:34,077
 They instruct, it's not a big deal.
+在结构体里，这并不是一个大问题
 
 765
 00:32:34,078 --> 00:32:36,311
 But in classes, there's a lot of rules and were gonna take
+但在类里，有很多规则，我们将拿两个幻灯片
 
 766
 00:32:36,314 --> 00:32:39,182
 two slides here to go through these rules briefly.
+对这些规则做简单介绍
 
 767
 00:32:39,184 --> 00:32:39,849
@@ -3168,54 +3224,67 @@ All right.
 768
 00:32:39,851 --> 00:32:41,116
 So as part of these rules,
+所以作为这些规则的一部分
 
 769
 00:32:41,118 --> 00:32:43,118
 what do you required to do inside of init?
+你需要在init里做些什么？
 
 770
 00:32:43,120 --> 00:32:45,186
 What is mandatory for you to do?
+什么是你必须要做的？
 
 771
 00:32:45,188 --> 00:32:48,156
 Well, as you know, you have to have initialized all
+好，正如你所知道的，在你的整个类里
 
 772
 00:32:48,158 --> 00:32:50,324
 the properties in your entire class.
+所有的属性都必须初始化
 
 773
 00:32:50,326 --> 00:32:52,659
 You can not start a class off with no value.
+他们都必须有值
 
 774
 00:32:52,661 --> 00:32:56,163
 And remember, optionals, nil is a value for an optional.
+记住，optionals，nil也是一个optional
 
 775
 00:32:56,165 --> 00:32:58,498
 So if an optional is nil, it is set.
+所以，如果你有一个属性的optional是nil，这也算它有值
 
 776
 00:32:58,500 --> 00:32:59,766
 So, everything's fine there.
+一切都好了
 
 777
 00:32:59,768 --> 00:33:03,202
 [COUGH] There are two times, type,
+在类里，Swift提供两种类型
 
 778
 00:33:03,204 --> 00:33:05,504
 types of inits in a class.
+的构造器来初始化
 
 779
 00:33:05,506 --> 00:33:06,805
 Not in a struct, but in a class.
+不是在结构体里，在类里
 
 780
 00:33:06,807 --> 00:33:09,007
 One is called a convenience init and
+一种是convenience init
 
 781
 00:33:09,009 --> 00:33:11,242
@@ -3224,50 +3293,63 @@ then there's all the other kinds.
 782
 00:33:11,244 --> 00:33:13,377
 Those are called designated initializers.
+还有一种叫designated initializers
 
 783
 00:33:13,379 --> 00:33:15,012
 So by default, an initializer is
+默认的initializer
 
 784
 00:33:15,014 --> 00:33:17,647
 called a designated initializer, but there's also
+是designated initializer，但是另外还有些
 
 785
 00:33:17,649 --> 00:33:20,116
 these things called convenience initializers.
+叫convenience initializers
 
 786
 00:33:20,118 --> 00:33:21,384
 And we make this distinction,
+我们得做出区分
 
 787
 00:33:21,386 --> 00:33:23,886
 because there's a little bit different rules about them.
+因为它们的规则有一点点的不同
 
 788
 00:33:23,888 --> 00:33:25,220
 So lets talk about that.
+我们来看看吧
 
 789
 00:33:25,222 --> 00:33:28,056
 A designated initializer, one that doesn't take
+一个designated initializer，不能有
 
 790
 00:33:28,058 --> 00:33:29,858
 convenience in the front of it.
+convenience在它的前面
 
 791
 00:33:29,860 --> 00:33:31,325
 It has to, and
+他只能
 
 792
 00:33:31,327 --> 00:33:37,564
 can only call a designated initializer in its superclass.
+调用其直接父类的designated initializer
+
 
 793
 00:33:37,566 --> 00:33:38,899
 It's a very important rule.
+这是一个非常重要的规则
 
 794
 00:33:38,901 --> 00:33:40,601
@@ -3276,26 +3358,32 @@ Okay. If you
 795
 00:33:40,602 --> 00:33:42,302
 have a designated initializer, initializer doesn't have
+如果你有一个designated initializer，初始化时不能有
 
 796
 00:33:42,304 --> 00:33:43,936
 the word convenience in front of it,
+convenience这个单词在它的前面
 
 797
 00:33:43,938 --> 00:33:45,838
 it can't call another init in your class.
+在你的类里不能调用其他的init方法
 
 798
 00:33:45,840 --> 00:33:47,706
 It has to call a superclass in init and
+在init里有调用父类的init
 
 799
 00:33:47,708 --> 00:33:49,808
 it has to be a designated initializer not
+它必须是一个designated initializer
 
 800
 00:33:49,810 --> 00:33:52,243
 a convenience initializer in the superclass.
+而不是convenience initializer
 
 801
 00:33:52,245 --> 00:33:53,878

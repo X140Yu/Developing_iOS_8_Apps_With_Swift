@@ -1601,402 +1601,502 @@ double, you're sending it to the class, or
 401
 00:17:48,387 --> 00:17:49,952
 the struct in this case, the type.
+在这个例子中的结构体、类型
 
 402
 00:17:49,954 --> 00:17:51,721
 You see what I mean?
+你明白我的意思吗？
 
 403
 00:17:51,723 --> 00:17:54,723
 So, some method you send to instances, particular
+So, 一些你发送到实例中的方法
 
 404
 00:17:54,725 --> 00:17:57,592
 instances of some things you can send to the type.
+特别是实例中的一些东西你可以发送到类型中
 
 405
 00:17:57,594 --> 00:18:00,628
 All right, so two different kinds of, of method but
+All right, 所以两种不一样的方法
 
 406
 00:18:00,630 --> 00:18:02,597
 otherwise, the rules for them are about the same.
+但是，他们的规则是一样的
 
 407
 00:18:02,599 --> 00:18:04,732
 It's just that, who you asked to do the work.
+就是那种,要求你做这份工作的人
 
 408
 00:18:05,668 --> 00:18:08,101
 You declare a type method or
+你声明一个类型方法或者或者一个属性
 
 409
 00:18:08,103 --> 00:18:11,037
 a property by using static in front of it.
+其之前必须使用静态变量
 
 410
 00:18:11,039 --> 00:18:14,474
 So, like abs, there would static func abs,
+So, 就像绝对值，那里存在一个静态的绝对值方法
 
 411
 00:18:14,476 --> 00:18:16,842
 takes a Double returns a double.
+取出一个Double类型数据也要返回一个Double类型数据
 
 412
 00:18:16,844 --> 00:18:19,345
 And that makes it so you send it that to, the Double type
 
+
 413
 00:18:19,347 --> 00:18:21,880
 instead of sending it to a particular double.
 
+
 414
 00:18:21,882 --> 00:18:24,749
 In a class you use the word class not static.
+在一个类中你使用非静态的文字类
 
 415
 00:18:24,751 --> 00:18:26,617
 Okay, cuz it's called a class function.
+Okay, 因为它被叫做一个功能类
 
 416
 00:18:27,787 --> 00:18:28,819
+Okay?
 Okay?
 
 417
 00:18:28,821 --> 00:18:31,055
 So, I just don't want you to be confused,
+So, 我不想使你感到困惑
 
 418
 00:18:31,056 --> 00:18:33,290
 when you start seeing methods like abs that are sent to
+当你开始看见一个类似于abs的方法时
 
 419
 00:18:33,292 --> 00:18:35,108
 the Double type.
+它会发送Double型数据
 
 420
 00:18:35,109 --> 00:18:36,925
 That looks kinda weird but it's perfectly normal.
+那看起来有一点怪异的但是它很正常
 
 421
 00:18:36,928 --> 00:18:38,228
+Okay?
 Okay?
 
 422
 00:18:38,229 --> 00:18:39,529
 And what would you do with a ty, wh, when do
+然后你会用一个 ty,wh 做什么，什么时候用？
 
 423
 00:18:39,531 --> 00:18:42,231
 you have a type function versus an instant function?
+你拥有一个类型函数去和一个实例化的函数进行对抗
 
 424
 00:18:42,233 --> 00:18:44,800
 Well, if you're doing any kind of utility work, right?
+很好，如果你正在从事任何一种实用型的工作，对吗？
 
 425
 00:18:44,802 --> 00:18:46,218
 You're not doing anything in
+你不是针对一种
 
 426
 00:18:46,219 --> 00:18:47,635
 particular to a certain kind of double, but
+特定的Double类型，
 
 427
 00:18:47,638 --> 00:18:50,705
 just in utilities, you would have those in there.
+但是在实用型中，你将会拥有这些
 
 428
 00:18:50,707 --> 00:18:53,908
 Sometimes you would have type methods that create objects of
+有时候你应该拥有类型方法
 
 429
 00:18:53,910 --> 00:18:56,310
 certain kinds and hand them out.
+它可以创造特定类型的方法并且将他们分发出去
 
 430
 00:18:56,312 --> 00:18:59,013
 Maybe a shared object like if you had one,
+也许一个共享型的对象就像是如果你有一个
 
 431
 00:18:59,015 --> 00:19:00,547
 only one instance of an object for
+只有一个对象的实例
 
 432
 00:19:00,549 --> 00:19:03,383
 your entire app of a certain type, maybe you would ask that
+为你的整个App 确定某种类型的，也许你会问那个类型
 
 433
 00:19:03,385 --> 00:19:07,120
 type, give me that shared instance, okay?
+给我那个共享的实例，明白了吗？
 
 434
 00:19:07,122 --> 00:19:08,587
 So it's kinda before utilities and
+所以他是那种在实用型和建立之前
 
 435
 00:19:08,589 --> 00:19:10,889
 creation, that kinda thing.
+是那种类型的东西
 
 436
 00:19:10,891 --> 00:19:12,991
 And they're, now I wouldn't, I don't wanna say, they're rare,
+而且他们，现在我不能也不敢说，他们是特殊的
 
 437
 00:19:12,993 --> 00:19:15,960
 they're not super common, you'll see them in, in iOS and
+他们不是一个超级 common类，你不会看到他们在里面
 
 438
 00:19:15,962 --> 00:19:18,496
 you'll probably use them occasionally.
+在iOS系统中，而且你可能只是偶尔的使用他们
 
 439
 00:19:18,498 --> 00:19:21,565
 you, you would use them really instead of global functions.
+你将会使用他们代替一个全局的函数
 
 440
 00:19:21,567 --> 00:19:23,801
 You can't have global functions.
+你不能拥有一个全局函数
 
 441
 00:19:23,803 --> 00:19:25,936
 In Swift, of course.
+当然，在Swift中
 
 442
 00:19:25,938 --> 00:19:28,271
 But you'd really probably prefer to make it a type
+但是你真的可能喜欢去穿件一个类型方法
 
 443
 00:19:28,273 --> 00:19:31,674
 method so that function is associated with you know,
+以便那个函数关联到你知道的内容
 
 444
 00:19:31,676 --> 00:19:33,542
 the type and kind of, unless it's
+类型和种类，除非它是
 
 445
 00:19:33,544 --> 00:19:35,844
 truly a global function that applies to the world.
+一个真正的全局函数适用于整个工程
 
 446
 00:19:35,846 --> 00:19:39,348
 It doesn't, it's not about a particular class,
+它不是，不是关于一个特殊的类
 
 447
 00:19:39,350 --> 00:19:41,716
 usually you would make them be a type,
+通常情况下你将会把他们当做一个类型使用
 
 448
 00:19:41,718 --> 00:19:44,485
 a type function [SOUND] very well [SOUND].
+一个类型函数是非常好的
 
 449
 00:19:44,487 --> 00:19:46,454
+All right?
 All right?
 
 450
 00:19:46,456 --> 00:19:49,390
 So method, now lets talk about the parameter names
+所以方法，现在让我们来谈谈
 
 451
 00:19:49,392 --> 00:19:50,908
 of methods.
+方法的参数名
 
 452
 00:19:50,909 --> 00:19:52,425
 This is, this is a, this is gonna be the crash course,
+这是一个将要崩溃的课程
 
 453
 00:19:52,428 --> 00:19:54,361
 you read all about this I hope in the documentation.
+你阅读了我希望的在文档中所有关于这些的内容
 
 454
 00:19:54,363 --> 00:19:57,697
 But, all parameters to functions have an internal
+但是，函数中的所有参数都有
 
 455
 00:19:57,699 --> 00:19:58,731
 name and an external name.
+一个内部的名字和一个外部的名字
 
 456
 00:19:58,733 --> 00:20:00,432
 So, we're talking about the parameters.
+所以，让我们来讨论一下这些参数
 
 457
 00:20:00,434 --> 00:20:00,999
 Okay?
+明白了么？
 
 458
 00:20:01,001 --> 00:20:03,068
 So, down there,
+所以，在下面
 
 459
 00:20:03,069 --> 00:20:05,136
 foo, the parameters the parameter to foo there.
+foo, 参数foo在这里
 
 460
 00:20:05,138 --> 00:20:07,071
 'Kay, it has internal name and external name.
+明白了么，它有一个内部命名和一个外部命名
 
 461
 00:20:07,073 --> 00:20:09,874
 So, the internal name, which goes kinda near
+所以，内部的名字，和冒号有一点接近
 
 462
 00:20:09,876 --> 00:20:12,643
 the colon, is the name that that thing is gonna have as
+是在方法中拥有一个本地变量的名字
 
 463
 00:20:12,645 --> 00:20:15,479
 a local variable inside the method, at this internal name.
+在这个内部名称中
 
 464
 00:20:15,481 --> 00:20:18,615
 And then the external name is the name that
+外部命名是一个名字
 
 465
 00:20:18,617 --> 00:20:22,251
 callers are going to use when the, to put before the colon.
+调用者准备使用的，放在冒号之前
 
 466
 00:20:22,253 --> 00:20:23,285
 'Kay?
+明白了么？
 
 467
 00:20:23,286 --> 00:20:24,318
 When they call the thing.
+当他们调用东西的时候
 
 468
 00:20:24,321 --> 00:20:26,822
 So in bar there, I'm calling things, and
+所以在这里，我要调用一个东西
 
 469
 00:20:26,824 --> 00:20:30,008
 in foo I'm defining them.
+在 foo方法中我定义了他们
 
 470
 00:20:30,009 --> 00:20:33,193
 So, you see that here, I call foo with external colon 123.
+所以，在这里你可以看到，我通过外部名称123调用了 foo 方法
 
 471
 00:20:33,196 --> 00:20:37,598
 Even though, internal to foo, that thing is called internal.
+即使，foo的内部，那东西叫做内部
 
 472
 00:20:38,801 --> 00:20:39,933
 'Kay?
+明白了吗？
 
 473
 00:20:39,935 --> 00:20:41,401
 So, you can have both external,
+所以，你可以同事拥有外部的
 
 474
 00:20:41,403 --> 00:20:42,368
 internal names, they can be different.
+以及内部的名字，他们是不同的
 
 475
 00:20:43,604 --> 00:20:45,037
 You can put an under bar,
+你可以添加一个下划线
 
 476
 00:20:45,039 --> 00:20:48,473
 remember under bar is kinda the don't care thing in Swift.
+记住，在Swift中下划线是不会被编译的
 
 477
 00:20:48,475 --> 00:20:50,808
 Even under bar if you don't want callers, so
+如果你不想有调用者
 
 478
 00:20:50,810 --> 00:20:52,009
 use an external name.
+所以使用一个外部命名
 
 479
 00:20:52,011 --> 00:20:53,410
 So now look at bar.
+现在来看这条线
 
 480
 00:20:53,412 --> 00:20:55,345
 It calls foo,
+它调用了 foo方法
 
 481
 00:20:55,346 --> 00:20:57,279
 it doesn't even put internal colon or external colo, colon.
+它甚至没有添加一个内部的冒号或者一个外部的冒号
 
 482
 00:20:57,282 --> 00:20:59,282
 It just puts the argument there.
+它只是把参数留在了那儿
 
 483
 00:20:59,284 --> 00:21:00,550
 'Kay? So, the under bar says,
+Okay？所以，下划线说：
 
 484
 00:21:00,552 --> 00:21:03,285
 I don't wanna have an external name for this.
+“我不想拥有一个外部命名”
 
 485
 00:21:03,287 --> 00:21:07,422
 'Kay, now that is the default for
+Okay，那里只是默认的
 
 486
 00:21:07,424 --> 00:21:09,958
 the first argument to a function.
+将第一个参数传入到函数中
 
 487
 00:21:10,994 --> 00:21:12,393
 So, foo only has one argument, so
+所以，foo方法 只有一个参数
 
 488
 00:21:12,395 --> 00:21:14,695
 it's first argument, it's only argument.
+所以，它是第一个参数也是唯一的一个参数
 
 489
 00:21:14,697 --> 00:21:17,731
 You can see that when you call it from bar,
+你可以看到它当你从bar处调用它
 
 490
 00:21:17,733 --> 00:21:19,332
 you don't say internal colon,
+你没有声明一个内部的冒号
 
 491
 00:21:19,334 --> 00:21:22,435
 as because that under bar thing is the default.
+因为下划线的值是默认的
 
 492
 00:21:23,371 --> 00:21:25,337
 Now, if you don't want that to be the default,
+现在，如果你不想让它为默认的值
 
 493
 00:21:25,339 --> 00:21:28,506
 you can force the first one to be required by
+你可以强制第一个参数是必要的
 
 494
 00:21:28,508 --> 00:21:31,609
 putting a pound sign there, a little hashtag, okay?
+通过添加一个井号标志，一个小的标签，明白？
 
 495
 00:21:31,611 --> 00:21:34,345
 And that makes it so you have to say internal colon-
+这使得你不得不称它为内部冒号
 
 496
 00:21:34,347 --> 00:21:36,814
 >> [COUGH] >> 'Kay?
+Okay？
 
 497
 00:21:37,950 --> 00:21:42,318
 For other parameters, not the first parameter but
+对于另外的参数，不是第一个参数
 
 498
 00:21:42,320 --> 00:21:43,886
 other parameters.
+是其他的参数
 
 499
 00:21:43,888 --> 00:21:46,555
 The name, the internal or external name,
+他们的名称，内部命名或外部命名
 
 500
 00:21:46,557 --> 00:21:49,391
 is mandatory, 'kay?
+是强制性的，明白？
 
 501
 00:21:49,393 --> 00:21:52,460
@@ -2900,74 +3000,92 @@ of course, we still could have said.
 701
 00:30:00,380 --> 00:30:03,280
 That's because we get a free init in calculator brain,
+这是因为我们有一个默认的init
 
 702
 00:30:03,282 --> 00:30:06,283
 cuz we initialized our default using equals something.
+我们默认使用等于某值初始化
 
 703
 00:30:06,285 --> 00:30:07,467
 Okay. So you,
+所以
 
 704
 00:30:07,468 --> 00:30:08,650
 that's one way to get an init.
+这是一种得到init的方法
 
 705
 00:30:08,653 --> 00:30:11,421
 A struct, not a class, but a struct,
+结构体，不是类，但是结构体
 
 706
 00:30:11,423 --> 00:30:15,324
 it will get a default one that has all the properties as
+它将默认得到一个将所有属性作为参数的初始化方法
 
 707
 00:30:15,326 --> 00:30:18,627
 arguments only if you have no initializers.
+仅当没有initializers时
 
 708
 00:30:18,629 --> 00:30:21,897
 So if you had a struct and you gave it no initializers,
+因此，如果你有一个结构体并且没有initializers
 
 709
 00:30:21,899 --> 00:30:24,899
 you would get one for free, which would be init or
+你会得到一个默认的初始化方法
 
 710
 00:30:24,901 --> 00:30:27,935
 all the arguments match all of the vars you have.
+并且所有的参数和变量匹配，如果有的话
 
 711
 00:30:27,937 --> 00:30:29,970
 All the vars and lets, okay?
+所有的变量和常量，明白吧？
 
 712
 00:30:29,972 --> 00:30:35,108
 So here I got a struct, it has two properties there, x and y.
+这里我有一个结构体，它有两个属性，x和y
 
 713
 00:30:35,110 --> 00:30:38,945
 And you can see that I got this init, x takes an init and
+你可以看到我这里有一个init方法，x是int类型
 
 714
 00:30:38,947 --> 00:30:41,514
 a y string for free, for free.
+y是string类型
 
 715
 00:30:41,516 --> 00:30:44,183
 I didn't have to implement that at all, it just came for
+我没有实现它，仅仅是默认的
 
 716
 00:30:44,185 --> 00:30:45,684
 free and so people can call that.
+都可以调用
 
 717
 00:30:45,686 --> 00:30:48,186
 They can initialize MyStruct, by saying,
+可以初始化MyStruct
 
 718
 00:30:48,188 --> 00:30:51,322
 MyStruct open parentheses and provide the x and the y.
+MyStruct提供x和y两个属性
 
 719
 00:30:51,324 --> 00:30:52,857
@@ -2980,46 +3098,57 @@ All right.
 721
 00:30:54,060 --> 00:30:56,727
 So, what can you do inside of init?
+你可以在init里面做什么？
 
 722
 00:30:56,729 --> 00:30:57,895
 Okay. We saw,
+好，我们看到
 
 723
 00:30:57,896 --> 00:30:59,062
 what we did in calculator brain,
+我们在CalculatorBrain里做了什么
 
 724
 00:30:59,064 --> 00:31:00,763
 we initialized some stuff.
+我们初始化了些
 
 725
 00:31:00,765 --> 00:31:02,498
 But what can you do?
+你可以做什么？
 
 726
 00:31:02,499 --> 00:31:04,232
 Well, you can set any properties value in there.
+你可以在里面设置任何属性值
 
 727
 00:31:04,235 --> 00:31:05,300
 [COUGH] You can even set
+你甚至可以
 
 728
 00:31:05,302 --> 00:31:07,235
 properties that have default values.
+给属性设置默认值
 
 729
 00:31:07,237 --> 00:31:09,771
 So even if you have properties set equals 12.
+即使你把属性设置为等于12
 
 730
 00:31:09,773 --> 00:31:12,540
 In your init, you can reset that thing to something else
+在你的init里，你可以把一些东西重置为别的什么
 
 731
 00:31:12,542 --> 00:31:15,109
 if you wanted to, if you changed your mind in init.
+如果你想的话
 
 732
 00:31:15,111 --> 00:31:16,010
@@ -3028,22 +3157,27 @@ Okay?
 733
 00:31:16,012 --> 00:31:16,910
 You can do that.
+你可以这样做
 
 734
 00:31:16,912 --> 00:31:20,913
 You can also set constant properties.
+你也可以给常量属性赋值
 
 735
 00:31:20,915 --> 00:31:24,817
 So if you have a struct or a class and
+如果你有一个结构体或者类
 
 736
 00:31:24,819 --> 00:31:31,189
 it has letx colon string, you can set that in your init.
+你可以在init里这样设置 let x: String
 
 737
 00:31:31,191 --> 00:31:34,192
 Even though to let, it's gotta get set some time in your init
+你必须得设置一段在你的init里
 
 738
 00:31:34,194 --> 00:31:35,326
@@ -3052,10 +3186,12 @@ is when you can set it.
 739
 00:31:35,328 --> 00:31:37,094
 You can also say, equal something, but
+也可以是等于其他什么
 
 740
 00:31:37,096 --> 00:31:38,495
 you can also set it in your init.
+你可以这样设置，在你的init里
 
 741
 00:31:38,497 --> 00:31:40,230
@@ -3064,26 +3200,32 @@ Okay?
 742
 00:31:40,231 --> 00:31:41,964
 So people sometimes don't understand, realize,
+人们有时不理解
 
 743
 00:31:41,967 --> 00:31:44,567
 they're like, oh, I can have lets in my class?
+他们肯定在想，哦，在我的class里可以有let？
 
 744
 00:31:44,569 --> 00:31:46,602
 Can have like, you know, constants for
+可有一样，你知道的
 
 745
 00:31:46,604 --> 00:31:49,038
 my class that are created at initialization and
+类里的常量在初始化和创建实例
 
 746
 00:31:49,040 --> 00:31:51,306
 stay the same for the lifetime of instance and
+的生命周期里是保持不变的
 
 747
 00:31:51,308 --> 00:31:54,242
 absolutely you can and you initialize them in your init.
+你绝对可以在init里初始化它们
 
 748
 00:31:54,244 --> 00:31:55,443
@@ -3092,18 +3234,22 @@ Okay.
 749
 00:31:55,444 --> 00:31:56,643
 That's actually a good practice if
+这实际上是很好的做法
 
 750
 00:31:56,646 --> 00:32:00,214
 you have something that's, you know, constant like that.
+如果你需要定义属性，你知道的，可以用常量
 
 751
 00:32:00,216 --> 00:32:04,385
 You can call other init methods in your own class or
+在你的类或者结构体里你可以调用其他的init方法
 
 752
 00:32:04,387 --> 00:32:06,687
 struct using self.init.
+使用self.init
 
 753
 00:32:06,689 --> 00:32:08,422
@@ -3112,6 +3258,7 @@ Okay?
 754
 00:32:08,423 --> 00:32:10,156
 Self.init, you can call the other ones with the ones that
+self.init，你可以调用有不同参数的其他init方法
 
 755
 00:32:10,158 --> 00:32:11,524
@@ -3124,18 +3271,22 @@ Okay?
 757
 00:32:13,027 --> 00:32:14,527
 So that sounds good.
+所以听起来很不错
 
 758
 00:32:14,529 --> 00:32:18,297
 And of course in a class, you can call super.init.
+当然，在类里你也可以调用super.init
 
 759
 00:32:18,299 --> 00:32:20,132
 Call your superclass's initializers,
+调用你父类的初始化方法
 
 760
 00:32:20,134 --> 00:32:22,267
 what their arguments whatever, they might be.
+参数无论是什么，如果有的话
 
 761
 00:32:22,269 --> 00:32:26,237
@@ -3144,22 +3295,27 @@ However, big old humongous, however on this one.
 762
 00:32:26,239 --> 00:32:28,205
 There are a lot of rules for
+调用其他的init时有很多规则
 
 763
 00:32:28,207 --> 00:32:31,842
 calling other inits, especially in classes.
+尤其是在类里
 
 764
 00:32:31,844 --> 00:32:34,077
 They instruct, it's not a big deal.
+在结构体里，这并不是一个大问题
 
 765
 00:32:34,078 --> 00:32:36,311
 But in classes, there's a lot of rules and were gonna take
+但在类里，有很多规则，我们将拿两个幻灯片
 
 766
 00:32:36,314 --> 00:32:39,182
 two slides here to go through these rules briefly.
+对这些规则做简单介绍
 
 767
 00:32:39,184 --> 00:32:39,849
@@ -3168,54 +3324,67 @@ All right.
 768
 00:32:39,851 --> 00:32:41,116
 So as part of these rules,
+所以作为这些规则的一部分
 
 769
 00:32:41,118 --> 00:32:43,118
 what do you required to do inside of init?
+你需要在init里做些什么？
 
 770
 00:32:43,120 --> 00:32:45,186
 What is mandatory for you to do?
+什么是你必须要做的？
 
 771
 00:32:45,188 --> 00:32:48,156
 Well, as you know, you have to have initialized all
+好，正如你所知道的，在你的整个类里
 
 772
 00:32:48,158 --> 00:32:50,324
 the properties in your entire class.
+所有的属性都必须初始化
 
 773
 00:32:50,326 --> 00:32:52,659
 You can not start a class off with no value.
+他们都必须有值
 
 774
 00:32:52,661 --> 00:32:56,163
 And remember, optionals, nil is a value for an optional.
+记住，optionals，nil也是一个optional
 
 775
 00:32:56,165 --> 00:32:58,498
 So if an optional is nil, it is set.
+所以，如果你有一个属性的optional是nil，这也算它有值
 
 776
 00:32:58,500 --> 00:32:59,766
 So, everything's fine there.
+一切都好了
 
 777
 00:32:59,768 --> 00:33:03,202
 [COUGH] There are two times, type,
+在类里，Swift提供两种类型
 
 778
 00:33:03,204 --> 00:33:05,504
 types of inits in a class.
+的构造器来初始化
 
 779
 00:33:05,506 --> 00:33:06,805
 Not in a struct, but in a class.
+不是在结构体里，在类里
 
 780
 00:33:06,807 --> 00:33:09,007
 One is called a convenience init and
+一种是convenience init
 
 781
 00:33:09,009 --> 00:33:11,242
@@ -3224,50 +3393,63 @@ then there's all the other kinds.
 782
 00:33:11,244 --> 00:33:13,377
 Those are called designated initializers.
+还有一种叫designated initializers
 
 783
 00:33:13,379 --> 00:33:15,012
 So by default, an initializer is
+默认的initializer
 
 784
 00:33:15,014 --> 00:33:17,647
 called a designated initializer, but there's also
+是designated initializer，但是另外还有些
 
 785
 00:33:17,649 --> 00:33:20,116
 these things called convenience initializers.
+叫convenience initializers
 
 786
 00:33:20,118 --> 00:33:21,384
 And we make this distinction,
+我们得做出区分
 
 787
 00:33:21,386 --> 00:33:23,886
 because there's a little bit different rules about them.
+因为它们的规则有一点点的不同
 
 788
 00:33:23,888 --> 00:33:25,220
 So lets talk about that.
+我们来看看吧
 
 789
 00:33:25,222 --> 00:33:28,056
 A designated initializer, one that doesn't take
+一个designated initializer，不能有
 
 790
 00:33:28,058 --> 00:33:29,858
 convenience in the front of it.
+convenience在它的前面
 
 791
 00:33:29,860 --> 00:33:31,325
 It has to, and
+他只能
 
 792
 00:33:31,327 --> 00:33:37,564
 can only call a designated initializer in its superclass.
+调用其直接父类的designated initializer
+
 
 793
 00:33:37,566 --> 00:33:38,899
 It's a very important rule.
+这是一个非常重要的规则
 
 794
 00:33:38,901 --> 00:33:40,601
@@ -3276,26 +3458,32 @@ Okay. If you
 795
 00:33:40,602 --> 00:33:42,302
 have a designated initializer, initializer doesn't have
+如果你有一个designated initializer，初始化时不能有
 
 796
 00:33:42,304 --> 00:33:43,936
 the word convenience in front of it,
+convenience这个单词在它的前面
 
 797
 00:33:43,938 --> 00:33:45,838
 it can't call another init in your class.
+在你的类里不能调用其他的init方法
 
 798
 00:33:45,840 --> 00:33:47,706
 It has to call a superclass in init and
+在init里有调用父类的init
 
 799
 00:33:47,708 --> 00:33:49,808
 it has to be a designated initializer not
+它必须是一个designated initializer
 
 800
 00:33:49,810 --> 00:33:52,243
 a convenience initializer in the superclass.
+而不是convenience initializer
 
 801
 00:33:52,245 --> 00:33:53,878

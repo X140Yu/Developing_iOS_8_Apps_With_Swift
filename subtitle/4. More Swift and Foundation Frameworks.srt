@@ -396,403 +396,403 @@ And inside there, key and value will both be set.
 
 100
 00:04:41,378 --> 00:04:46,947
-Okay, that's really easy way to enumerate dictionaries.
+Okay, that's really easy way to enumerate dictionaries.好了，这是非常简单的枚举字典的方法。
 
 101
 00:04:48,083 --> 00:04:53,686
-Sent all right I'm gonna teaching about new struct that
+Sent all right I'm gonna teaching about new struct that那接下去我将会教一个你们之间没见过的
 
 102
 00:04:53,688 --> 00:04:59,358
-you haven't seen called range a range is just two points.
+you haven't seen called range a range is just two points.新的结构体range，Range 仅有两个
 
 103
 00:04:59,360 --> 00:05:01,893
-Of a sensible type, so a starting point and an ending
+Of a sensible type, so a starting point and an ending明智的类型，一个是起始点，另一个是终点
 
 104
 00:05:01,895 --> 00:05:03,528
-point is exactly what you think a range would be.
+point is exactly what you think a range would be.正如你们所想的rangge那样
 
 105
 00:05:03,530 --> 00:05:07,098
-Now I say a sensible type here because, you know,
+Now I say a sensible type here because, you know,现在我先讲他们其中一个，因为
 
 106
 00:05:07,100 --> 00:05:10,568
-the sensible type depends on what you're talking about for
+the sensible type depends on what you're talking about for这个明智的类型取决于我们怎么用它，对于一个
 
 107
 00:05:10,570 --> 00:05:12,403
-an array, the sensible type is an int,
+an array, the sensible type is an int,数组来说，这个明智的类型就是Int类型
 
 108
 00:05:12,405 --> 00:05:14,805
-but for other things like a string, it's not, and
+but for other things like a string, it's not, and但是对于别的比如 String 来说，它就不是了，而且
 
 109
 00:05:14,807 --> 00:05:16,106
-we're gonna talk about that in a minute.
+we're gonna talk about that in a minute.我们将会在一分钟内讲完这些
 
 110
 00:05:17,409 --> 00:05:21,844
-Range is also a generic, just like array or
+Range is also a generic, just like array or 。Range跟数组或者可选枚举一样
 
 111
 00:05:21,846 --> 00:05:24,413
-like that Optional enom.
+like that Optional enom.是一个类
 
 112
 00:05:24,415 --> 00:05:28,783
-And so it takes the type of thing so the range again that,
+And so it takes the type of thing so the range again that,所以它包含类一个类型
 
 113
 00:05:28,785 --> 00:05:32,520
-to specify a range in an array would be range, angle bracket,
+to specify a range in an array would be range, angle bracket,去辨别一个在数组中的range是一个range，尖括号
 
 114
 00:05:32,522 --> 00:05:35,389
-int because ints are how you index an array.
+int because ints are how you index an array. －int 因为ints是你用来标记数组索引的
 
 115
 00:05:35,391 --> 00:05:36,857
-So, if you were gonna specify a range in
+So, if you were gonna specify a range in所以，如果你要去辨别一个在数组中的range是什么类型
 
 116
 00:05:36,859 --> 00:05:38,758
-an array they would be ints, okay?
+an array they would be ints, okay?它将会是int类型，有问题么？
 
 117
 00:05:38,760 --> 00:05:40,693
-And it's approximately what I put here it's
+And it's approximately what I put here it's而且这就是为什么我把它放在这里的原因
 
 118
 00:05:40,695 --> 00:05:44,663
-not exactly this, but as far as given what, you know,
+not exactly this, but as far as given what, you know,不完全是这个，但是就已经给出的而言，你懂的
 
 119
 00:05:44,665 --> 00:05:47,966
-so far this is the best I can describe it to you.
+so far this is the best I can describe it to you.迄今为止，这是我能想到解释给你们听的最好方式
 
 120
 00:05:47,968 --> 00:05:51,069
-It's just a struck that has a start index and end index and
+It's just a struct that has a start index and end index and它仅仅是一种包含了一个开始的索引和结束的索引的结构体
 
 121
 00:05:51,071 --> 00:05:53,271
-it is a struck you can go and get those values and
+it is a struct you can go and get those values and它也是一种能让你获取和设置
 
 122
 00:05:53,273 --> 00:05:55,940
-set those values out of there so
+set those values out of there so值的结构体
 
 123
 00:05:55,942 --> 00:06:01,145
-array's range would be a range of Int string it's,
+array's range would be a range of Int string it's,所以数组的range是一种包含了int和string的结构体
 
 124
 00:06:01,147 --> 00:06:04,047
-you would think that string would also be.
+you would think that string would also be.你也可以想象成这样
 
 125
 00:06:04,049 --> 00:06:07,017
-You see sub ranges of strings would also be specified by
+You see sub ranges of strings would also be specified by你们将会看到一些range可以通过int去
 
 126
 00:06:07,019 --> 00:06:08,451
-an int, but in not, it not.
+an int, but in not, it not.辨别，但也不一定
 
 127
 00:06:08,453 --> 00:06:11,420
-There's a special type called string.index,
+There's a special type called string.index,这里有一种特殊的类型叫做string index
 
 128
 00:06:11,422 --> 00:06:12,654
-which is an index into a string,
+which is an index into a string,它是一种对string的索引
 
 129
 00:06:12,656 --> 00:06:16,224
-I'm gonna talk all about that in a later slide, okay?
+I'm gonna talk all about that in a later slide, okay?我将会在后面的幻灯片中讲到，行吗？
 
 130
 00:06:16,226 --> 00:06:18,960
-So ranges, just like arrays and
+So ranges, just like arrays and所以range仅仅像数组和
 
 131
 00:06:18,962 --> 00:06:22,530
-dictionaries, we don't usually say range, angle bracket,
+dictionaries, we don't usually say range, angle bracket,字典一样，我们一般不会说range尖括号
 
 132
 00:06:22,532 --> 00:06:26,867
-int equals something we use this special syntax.
+int equals something we use this special syntax.－int 等同于一些东西，但是我们就是这么用这个语法的
 
 133
 00:06:26,869 --> 00:06:29,569
-And the special syntax is this three dots, or
+And the special syntax is this three dots, or这个特殊的语法是三个点，或者
 
 134
 00:06:29,571 --> 00:06:32,739
-two dots and a less than sign.
+two dots and a less than sign.两个点和一个小于号
 
 135
 00:06:32,741 --> 00:06:37,009
-Okay, so the three dots means a range from the first thing,
+Okay, so the three dots means a range from the first thing,好了，那么三个点意味着range从第一个开始
 
 136
 00:06:37,011 --> 00:06:39,778
-oh, no, on the left of the dots, to the other thing on
+oh, no, on the left of the dots, to the other thing on－oh，不是，从最左边的点开始到最右面的点
 
 137
 00:06:39,780 --> 00:06:41,480
-the right of the dots that's the start index and
+the right of the dots that's the start index and在点的右面是开始的索引
 
 138
 00:06:41,482 --> 00:06:44,015
-the end index, and it includes them both.
+the end index, and it includes them both.结束的索引，它都包含这些
 
 139
 00:06:44,017 --> 00:06:47,218
-Includes both the start and end, whereas the other one,
+Includes both the start and end, whereas the other one,包含开始和结束，无论哪个
 
 140
 00:06:47,220 --> 00:06:49,920
-two dot dot less than means it includes the first one, but
+two dot dot less than means it includes the first one, but两个点意味着它只包含了第一个，但是
 
 141
 00:06:49,922 --> 00:06:51,355
-it does not include the second one.
+it does not include the second one.没有包含第二个
 
 142
 00:06:51,357 --> 00:06:54,591
-So it's an open-ended range, okay cuz those,
+So it's an open-ended range, okay cuz those,所以它是一个有开放式结尾的range，好了，因为这些
 
 143
 00:06:54,593 --> 00:06:56,092
-both of those kind of ranges are common.
+both of those kind of ranges are common.都是常用的range类型
 
 144
 00:06:57,028 --> 00:07:00,463
-So that's how we specify a range 99% of the time,
+So that's how we specify a range 99% of the time,所以，我们可以百分之99去辨别range
 
 145
 00:07:00,465 --> 00:07:03,298
-we don't use the range struct to do it
+we don't use the range struct to do it我们不使用range的结构
 
 146
 00:07:03,300 --> 00:07:05,834
-although you can you could create a range struct.
+although you can you could create a range struct.尽管你们可以创建一个range的结构体
 
 147
 00:07:05,836 --> 00:07:08,903
-And you could pass it as an argument to anything that
+And you could pass it as an argument to anything that而且你们可以将它作为一个参数传递给任何对象
 
 148
 00:07:08,905 --> 00:07:12,040
-takes these dot, dot, dots you could put an actual range in
+takes these dot, dot, dots you could put an actual range in它包含了点，点，点，你们可以将真正的range放进去
 
 149
 00:07:12,042 --> 00:07:13,941
-there as well, okay they're the same thing.
+there as well, okay they're the same thing.好了，他们是同样的
 
 150
 00:07:13,943 --> 00:07:16,127
-It's just the dot, dot,
+It's just the dot, dot,点点点对你们而言只是一种
 
 151
 00:07:16,128 --> 00:07:18,312
-dots are syntaxed to create that range for you, okay and
+dots are syntaxed to create that range for you, okay and创建range的语法
 
 152
 00:07:18,314 --> 00:07:20,781
-the things on either side of the dot, dot, dot.
+the things on either side of the dot, dot, dot.在点点点另一边的
 
 153
 00:07:20,783 --> 00:07:21,799
-You know, it depends on
+You know, it depends on你们懂的，它取决于
 
 154
 00:07:21,800 --> 00:07:22,816
-what kind of range you're trying to create.
+what kind of range you're trying to create.你要创建哪种类型的range
 
 155
 00:07:22,818 --> 00:07:24,150
-If you're creating an Int range.
+If you're creating an Int range.如果你要创建一个int类型的range
 
 156
 00:07:24,152 --> 00:07:27,486
-A range of angle bracket int, then they'd be ints, okay?
+A range of angle bracket int, then they'd be ints, okay?那么range<int>，然后range就是int了
 
 157
 00:07:27,488 --> 00:07:28,854
-But if you're doing a string,
+But if you're doing a string,但是如果你们正在处理string
 
 158
 00:07:28,856 --> 00:07:30,188
-they have to be string.indexes.
+they have to be string.indexes.他们它就是string index类型了
 
 159
 00:07:30,190 --> 00:07:33,591
-And that's a little harder to create, because a string.index
+And that's a little harder to create, because a string.index而且创建这种类型的range有一点点难度，因为string index类型
 
 160
 00:07:33,593 --> 00:07:36,294
-can't be created from a numeric literal.
+can't be created from a numeric literal.不能通过数字遍历去创建
 
 161
 00:07:36,296 --> 00:07:38,362
-You have to create it programmatically, so
+You have to create it programmatically, so你不得不通过编程去创建，所以
 
 162
 00:07:38,364 --> 00:07:39,963
-we'll talk about that.
+we'll talk about that.我们将会通过十张幻灯片
 
 163
 00:07:39,965 --> 00:07:45,602
-In about ten slides or so okay and
+In about ten slides or so okay and来讨论这个
 
 164
 00:07:45,604 --> 00:07:48,438
-you can enumerate a range using four end just like we
+you can enumerate a range using four end just like we你们可以列举一个range的用法，就像我们
 
 165
 00:07:48,440 --> 00:07:50,906
-can with our raising dictionaries there okay?
+can with our raising dictionaries there okay?使用字典一样
 
 166
 00:07:50,908 --> 00:07:54,610
-All right,
+All right,好了
 
 167
 00:07:54,611 --> 00:07:58,313
-other classes, besides araised dictionaries range NSObject.
+other classes, besides araised dictionaries range NSObject.其他的类，除了字典，range，NSObject
 
 168
 00:07:58,315 --> 00:08:00,982
-So NSObject was the the base class for
+So NSObject was the the base class for因为NSObject在Objective C的所有类中是
 
 169
 00:08:00,984 --> 00:08:02,817
-all of Objective C classes.
+all of Objective C classes.基类
 
 170
 00:08:02,819 --> 00:08:05,119
-In Swift we don't really have a base class for
+In Swift we don't really have a base class for在Swift中，我们并没有一个基类
 
 171
 00:08:05,121 --> 00:08:07,154
-all Swift classes.
+all Swift classes.对于Swift所有的类而言
 
 172
 00:08:07,156 --> 00:08:10,757
-however, there are some kind of advanced features in
+however, there are some kind of advanced features in然而，它有一些高级的特性
 
 173
 00:08:10,759 --> 00:08:13,726
-iOS that require,
+iOS that require,在iOS中它需要
 
 174
 00:08:13,728 --> 00:08:18,163
-even your Swift class to inherit from NSObject.
+even your Swift class to inherit from NSObject.即使你在Swift中所有类也必须继承于NSObject
 
 175
 00:08:18,165 --> 00:08:19,598
-I can't really talk about them,
+I can't really talk about them,我现在不能跟你们讨论这些
 
 176
 00:08:19,599 --> 00:08:21,032
-because there's other things you need to know for
+because there's other things you need to know for因为还有些别的你们必须得知道的东西
 
 177
 00:08:21,035 --> 00:08:23,401
-me to even explain them to you but
+me to even explain them to you but我得去解释
 
 178
 00:08:23,403 --> 00:08:25,536
-down the road that will happen.
+down the road that will happen.学下去你们就知道类
 
 179
 00:08:25,538 --> 00:08:27,805
-It really doesn't hurt to make your swift class be
+It really doesn't hurt to make your swift class be继承于NSObject并不会对你们的swift类
 
 180
 00:08:27,807 --> 00:08:29,406
-a subclass of NSObject, so we could have
+a subclass of NSObject, so we could have造成伤害，所以我们
 
 181
 00:08:29,408 --> 00:08:31,808
-made calculator brain be a subclass of NSObject.
+made calculator brain be a subclass of NSObject.要将 calculator brain类继承于NSObject
 
 182
 00:08:31,810 --> 00:08:33,109
-Wouldn't hurt, and
+Wouldn't hurt, and没有任何影响，而且
 
 183
 00:08:33,111 --> 00:08:35,845
-in the future, once we learn these advance things,
+in the future, once we learn these advance things,在将来，一旦我们学到一个进阶的东西
 
 184
 00:08:35,847 --> 00:08:38,948
-it'd be nice to be able to do those advanced features with
+it'd be nice to be able to do those advanced features with我们将可以使用一些高级的特性来编写
 
 185
 00:08:38,950 --> 00:08:41,617
-calculator brain so it's kinda one.
+calculator brain so it's kinda one.－calculator brain 类，那么
 
 186
 00:08:41,619 --> 00:08:42,851
-Can feel free I'm not sure what to
+Can feel free I'm not sure what to这将是一种习惯，我也不好说，
 
 187
 00:08:42,853 --> 00:08:45,220
-say the best practice here is to always have your Swift
+say the best practice here is to always have your Swift最好你们所有的Swift类
 
 188
 00:08:45,222 --> 00:08:49,090
-classes inherit from NSObject all the classes in iOS,
+classes inherit from NSObject all the classes in iOS,都继承于NSObject在所有iOS类中
 
 189
 00:08:49,092 --> 00:08:50,975
-like UIViewController, and
+like UIViewController, and就像UIViewController，还有
 
 190
 00:08:50,976 --> 00:08:52,859
-all those, they all inherit from NSObject eventually.
+all those, they all inherit from NSObject eventually.别的所有一样，它们都是完全继承于NSObject的
 
 191
 00:08:52,862 --> 00:08:55,462
-It's the super class of all of them [COUGH] there's not
+It's the super class of all of them [COUGH] there's not它是所哟类的基类
 
 192
 00:08:55,464 --> 00:08:59,599
-really much in NSObject anymore that matters.
+really much in NSObject anymore that matters.没有太多的问题关于NSObject
 
 193
 00:08:59,601 --> 00:09:03,002
-But like I say, there's these advanced features but
+But like I say, there's these advanced features but但是，就像我说的，有一些高级特性比如
 
 194
 00:09:03,004 --> 00:09:04,637
-then there's NSNumber,
+then there's NSNumber,有一个NSNumber
 
 195
 00:09:04,638 --> 00:09:06,271
-you've actually briefly seen NSNumber NSNumber is
+you've actually briefly seen NSNumber NSNumber is你们可以看到NSNumber就是一个简单的NSNumber
 
 196
 00:09:06,273 --> 00:09:09,908
-just a generic number holding class, it just holds a number.
+just a generic number holding class, it just holds a number.它只是包装了一个数字，作为一个包装类
 
 197
 00:09:09,910 --> 00:09:12,677
-That's all it does on it has a ton of methods on and I'm not
+That's all it does on it has a ton of methods on and I'm not它里面有很多方法，但是
 
 198
 00:09:12,679 --> 00:09:15,013
-gonna go through and here you can look in the documentation.
+gonna go through and here you can look in the documentation.我不打算去讲，你们可以自己去看文档
 
 199
 00:09:15,015 --> 00:09:17,114
-But, the methods are things like Double value.
+But, the methods are things like Double value .但是，方法中有叫Double value的
 
 200
 00:09:17,116 --> 00:09:20,317
@@ -2036,7 +2036,7 @@ To have a function like this that takes two arguments, and
 508
 00:22:10,612 --> 00:22:13,946
 the second one doesn't really have, a name.
-不需要 name 
+不需要 name
 
 509
 00:22:13,948 --> 00:22:16,382
@@ -2076,7 +2076,7 @@ That should be the first argument.
 516
 00:22:29,310 --> 00:22:31,193
 That's why it usually doesn't need a first parameter name.
-所以为什么我们不需要第一个参数的 name 
+所以为什么我们不需要第一个参数的 name
 
 517
 00:22:31,196 --> 00:22:32,462
@@ -2171,12 +2171,12 @@ I generally don't recommend that.
 535
 00:23:09,862 --> 00:23:10,994
 All right properties,
-接来下是 properties 
+接来下是 properties
 
 536
 00:23:10,996 --> 00:23:13,062
 let's talk a little bit about properties.
-让我们一起来看看什么是 properties 
+让我们一起来看看什么是 properties
 
 537
 00:23:13,064 --> 00:23:15,331
@@ -2196,7 +2196,7 @@ They are very simple,
 540
 00:23:19,453 --> 00:23:21,570
 you have a property like here I have some stored property.
-在这里你有一个 someStoredProperty 
+在这里你有一个 someStoredProperty
 
 541
 00:23:21,572 --> 00:23:23,238
@@ -2261,7 +2261,7 @@ Okay?
 553
 00:23:47,310 --> 00:23:48,860
 So, here I have some stored property.
-回到我们之前讲的，这里我拥有一个 someStoredProperty 
+回到我们之前讲的，这里我拥有一个 someStoredProperty
 
 554
 00:23:48,862 --> 00:23:51,195
@@ -2276,7 +2276,7 @@ And notice though, even though it's a stores property,
 556
 00:23:54,400 --> 00:23:56,100
 not computed, it's stored.
-直接存储、不需要计算过程的 property 
+直接存储、不需要计算过程的 property
 
 557
 00:23:56,102 --> 00:23:58,435
@@ -2381,7 +2381,7 @@ stored property
 577
 00:24:46,661 --> 00:24:48,711
 And whenever someone sets it, you want to kinda notice and
-当其他方法的设置它的值时，你想要获得一个 notice 
+当其他方法的设置它的值时，你想要获得一个 notice
 
 578
 00:24:48,714 --> 00:24:50,013
@@ -2422,7 +2422,6 @@ didSet on properties you inherit from somebody,
 00:25:04,728 --> 00:25:05,526
 from your super class.
 
-
 586
 00:25:06,529 --> 00:25:07,861
 Okay?
@@ -2451,7 +2450,7 @@ So, you have some view controller let's say, or
 591
 00:25:18,406 --> 00:25:21,440
 you have a view, and you change some property in it and
-或者你有一个 view ，你可以改变其中的某些 property 
+或者你有一个 view ，你可以改变其中的某些 property
 
 592
 00:25:21,442 --> 00:25:25,043
@@ -2490,7 +2489,7 @@ keep things in sync.
 599
 00:25:38,323 --> 00:25:42,624
 All right, lazy initialization so a lazy property,
-接下来，我们谈谈 lazy initialization 
+接下来，我们谈谈 lazy initialization
 
 600
 00:25:42,626 --> 00:25:45,494

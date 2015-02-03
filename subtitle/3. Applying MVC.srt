@@ -3227,12 +3227,12 @@ swift处理公有和私有的方法很有趣
 601
 00:25:42,518 --> 00:25:45,985
 make private things private. OK?
-让 private 的东西 private。
+让应该是 private（私有化） 的东西 private。
 
 603
 00:25:45,987 --> 00:25:47,453
 So that is important to do.
-所以这个很重要。
+所以这点很重要。
 
 604
 00:25:47,455 --> 00:25:48,354
@@ -3242,47 +3242,47 @@ And you could just say,
 605
 00:25:48,356 --> 00:25:49,988
 well, I like everything to be public.
-呃，我喜欢所有东西都是 public 的。
+呃，我喜欢让所有对象和方法都是 public 的。
 
 606
 00:25:49,990 --> 00:25:51,156
 Well, that's bad.
-这样很糟糕。
+可惜，这样做会很糟糕。
 
 607
 00:25:51,158 --> 00:25:53,391
 Okay? If you make your internal structure public,
-好吧？如果你让内部的 structure（结构体）public，
+假如你让内部的 structure（结构体）public 化，
 
 608
 00:25:53,392 --> 00:25:55,625
 and some other object in your program
-然后它会和其他在你程序中的对象
+然后其他在你程序中的对象可能会修改它的内容，
 
 609
 00:25:55,628 --> 00:25:58,796
 starts muck in with it and breaks your object, and
-开始乱搞在一起，然后你的对象崩了，
+这将会导致你的对象错乱，
 
 610
 00:25:58,798 --> 00:26:00,931
 then you come to a new version of your program, and
-然后你程序版本号就+1了，
+随后，你又可能新建了一个程序版本号，
 
 611
 00:26:00,933 --> 00:26:03,467
 you change something, and now everybody's breaking.
-然后你改变了一些东西，导致所有人都崩了。
+改变了一些代码，好了，所有对象都错乱了。
 
 612
 00:26:03,469 --> 00:26:05,335
 That's bad, okay, that's chaos.
-然后就没有然后了。
+所以这么做是不好的，这会导致混乱。明白了吗？
 
 613
 00:26:05,337 --> 00:26:08,671
 So the only things that want to be not private are things
-所以只有当你想用来给别的类或对象提供支持的时候，
+只有当你想用来给别的类或对象提供支持的时候，
 
 614
 00:26:08,673 --> 00:26:11,507
@@ -3297,12 +3297,12 @@ So in this class, the only public things so
 616
 00:26:14,679 --> 00:26:17,279
 far are the initializer.
-的只有 initializer。
+的，只有 initializer。
 
 617
 00:26:17,281 --> 00:26:18,513
 Obviously, we want to allow people to
-很显然，我们希望允许别人
+很显然，我们希望让别人
 
 618
 00:26:18,515 --> 00:26:19,847
@@ -3312,52 +3312,52 @@ create a CalculatorBrain.
 619
 00:26:19,849 --> 00:26:21,349
 That's clearly public.
-这很明显是 public 的。
+很明显，这应当是 public 的。
 
 620
 00:26:21,351 --> 00:26:25,385
 Also pushing and performing operands and operations.
-同样的，将运算符和数字压栈然后计算的这些操作。
+同样的，将运算符和数字压栈然后计算的这些操作
 
 621
 00:26:25,387 --> 00:26:28,238
 That's public. Okay?
-这些都该是 public 的。
+也都应当是 public 的。
 
 623
 00:26:28,239 --> 00:26:29,889
 Everything else, for now, I'm gonna make private.
-其他的东西，目前为止，我都会让它们是 private 的。
+而目前为止我们不需要对外提供的东西，我们都让它们成为 private 的。
 
 624
 00:26:29,891 --> 00:26:31,657
 So I'm gonna make this private.
-所以我将让这个 private 。
+现在，我将让 Op 变成 private 的。
 
 625
 00:26:31,659 --> 00:26:33,592
 Notice that if I make this private,
-注意到当我把这个变成 private了以后，
+注意，当我把这个变成了 private 以后，
 
 626
 00:26:33,594 --> 00:26:35,427
 it's gonna start saying, whoa,
-这边将会提示，喂，
+这边将提示，
 
 627
 00:26:35,429 --> 00:26:38,730
 wait a second, this can't be public, you know, it can't be
-等等，这不能是 public 的，你懂的，这不能是
+这（opStack）不能是 public 的，不能。
 
 628
 00:26:38,732 --> 00:26:42,100
 non-private because this is private and it uses it.
-非 private 的，因为这个是 private 的，然后这个用了它。
+因为 Op 是 private 的，然后 opStack 使用了 Op，所以 opStack 也只能是 private 的。
 
 629
 00:26:42,102 --> 00:26:44,368
 That's what this warning's gonna say right here, see.
-这个位置将会出现一个警告，你们看。
+如果不这么做，这个位置将会出现一个警告，看
 
 630
 00:26:44,370 --> 00:26:45,720
@@ -3378,62 +3378,62 @@ Okay, that's the type of this.
 633
 00:26:48,207 --> 00:26:49,906
 But I want this to be private anyway,
-但是我无论如何都希望它是 private 的，
+在这个情况下，我都希望它是 private 的，
 
 634
 00:26:49,908 --> 00:26:52,742
 this is my internal data structure, opStack.
-这是我的内部数据结构，opStack。
+opStack 就是我程序内部的数据结构了。
 
 635
 00:26:52,744 --> 00:26:56,278
 Now, knownOps is kind of an interesting one.
-现在，knownOps 是个有趣的东西。
+现在我们来看看 knownOps，它是个很有意思的对象。
 
 636
 00:26:56,280 --> 00:26:58,614
 Maybe I would want that to be public one day,
-也许我某天心血来潮会想让它变成 public 的，
+也许我在某种情况下想让它变成 public ，
 
 637
 00:26:58,616 --> 00:27:01,650
 because maybe I want people to use my CalculatorBrain and
-因为也许我希望人们用我的 CalculatorBrain 然后
+比如我希望人们使用我的 CalculatorBrain 的同时
 
 638
 00:27:01,652 --> 00:27:03,685
 teach it new ops.
-教会它新的运算。
+并为它增加新的运算功能。
 
 639
 00:27:03,687 --> 00:27:05,386
 That wouldn't be that unreasonable.
-这并不是那么过分的要求。
+这种情况是真实存在的。
 
 640
 00:27:05,388 --> 00:27:08,356
 However, I'm not ready to support that functionality in
-但是呢，我现在还没准备好让我的 CalculatorBrain
+但是呢，我现在还没准备好让我的 CalculatorBrain 来
 
 641
 00:27:08,358 --> 00:27:09,456
 my CalculatorBrain.
-支持这个功能。
+支持这些功能。
 
 642
 00:27:09,458 --> 00:27:12,059
 I'm just not sure I wanna do it this way.
-我只是还没确定我想这么做。
+或许我只是还不确定我想这么做。
 
 643
 00:27:12,061 --> 00:27:13,827
 Maybe I don't want this property to be public,
-也许我不想让这个 property 变成 public 的，
+所以在某种情况下，我可能又不想让这个 property 变成 public 的，
 
 644
 00:27:13,829 --> 00:27:17,263
 I might want to just have some functions to learn an op or
-我也许希望只是有些函数去学习一个运算操作或者
+我希望只是有些函数去增加一个运算操作或者
 
 645
 00:27:17,265 --> 00:27:18,982
@@ -3443,12 +3443,12 @@ something like that, so
 646
 00:27:18,983 --> 00:27:20,700
 I'm just not sure, so I'm gonna start out private.
-我只是不确定，所以我一开始就设为 private 的。
+我不确定我会怎么做，所以我默认设置它为 private 的。
 
 647
 00:27:20,702 --> 00:27:23,268
 And that's really, when you're designing APIs,
-所以事实就是，当你在设计 APIs 的时候，
+上面这些这就是当你在设计 APIs 的时候需要考虑的问题，
 
 648
 00:27:23,270 --> 00:27:24,536
@@ -3458,7 +3458,7 @@ you wanna kinda start out,
 649
 00:27:24,538 --> 00:27:27,405
 make it private first, and then open it up as you're
-先让它是 private 的，然后等到你想要支持一些功能
+所以比较好的做法是，先让它是 private 的，然后等到你想要支持一些功能
 
 650
 00:27:27,407 --> 00:27:30,308
@@ -3468,7 +3468,7 @@ willing to support that functionality.
 651
 00:27:30,310 --> 00:27:31,709
 -Question? -Is the common view in
--问题？- [学生提问]
+- 有什么问题吗？- [学生提问]
 
 
 652
@@ -3494,32 +3494,32 @@ make them public and then let the?
 656
 00:27:40,685 --> 00:27:43,052
 All right. So the question is, is it,
-好的。那么问题就是，
+好的。那么这个学生的问题是，
 
 657
 00:27:43,054 --> 00:27:45,854
 is it kind of part of the Swift way to make
-是不是有比较 Swift 的方式去让
+“是不是有 Swift 的标准做法让
 
 658
 00:27:45,856 --> 00:27:47,889
 most instant variables private and
-实例变量是 private 的，然后
+一个 private 的实例变量可以
 
 659
 00:27:47,891 --> 00:27:50,75
 then have getters and setters that are public to get them.
-用 public 的 getters 和 setters 去获取他们。
+用 public 的 getters 和 setters 方法去访问它们。”
 
 660
 00:27:50,761 --> 00:27:52,226
 That doesn't really even make sense in Swift.
-这在 Swift 中甚至没有意义。
+这在 Swift 中根本没有意义。
 
 661
 00:27:52,228 --> 00:27:53,961
 That's more of an Objective-C thing.
-这更像是 Objective-C 的方式。
+这更像是 Objective-C 的做法。
 
 662
 00:27:53,963 --> 00:27:56,263
@@ -3529,22 +3529,22 @@ In Objective-C, you had instance variables, and
 663
 00:27:56,265 --> 00:27:59,032
 then you had properties that would get and set them.
-你有 properties ，会用getter 和 setter 去获得和设定它们。
+你有 properties ，会用 getter 和 setter 方法去获取和设置它们。
 
 664
 00:27:59,034 --> 00:28:00,967
 And Swift has kind of merged those a little bit
-然后 Swift 会把这些东西融合得
+Swift 把这些东西进一步
 
 665
 00:28:00,969 --> 00:28:05,638
 closer together so that properties are really kind of
-更紧凑些，所以 properties 事实上是一种
+融合在一起了，所以 properties 事实上是一种
 
 666
 00:28:05,640 --> 00:28:08,907
 the public or private getters and setters.
-public 或者 private 的 getters 和 setters。
+public 或者 private 的 getters 和 setters 方法。
 
 667
 00:28:08,909 --> 00:28:11,043
@@ -3558,22 +3558,22 @@ decide whether you want people to access it or
 
 00:28:13,180 --> 00:28:15,246
 not, and if not, make it private.
-如果不是，将它变成 private。
+如果不是，将它变成 private 的。
 
 670
 00:28:15,248 --> 00:28:16,681
 And if so, make it public.
-如果是，将它变成 public。
+如果是，将它变成 public 的。
 
 671
 00:28:16,683 --> 00:28:19,350
 And that, you know, don't make it non-private, basically.
-然后，你知道，一般来说不要让它是非 private 的。
+一般来说不要让它是 public 的。
 
 672
 00:28:19,352 --> 00:28:21,685
 And that's, just that's all you need to think about.
-再然后呢，这将都是你所需要考虑的。
+所以，你需要考虑的是这些。
 
 673
 00:28:21,687 --> 00:28:24,854
@@ -3588,102 +3588,102 @@ versus the property.
 675
 00:28:26,291 --> 00:28:28,557
 Now, it is still possible in Swift to do that,
-现在，用 Swift 还是有可能做到的，
+但是目前，用 Swift 还是有可能做到的你说的这些的，
 
 676
 00:28:28,559 --> 00:28:30,526
 because you have computed properties.
-因为你有 computed properties（计算属性）。
+因为有 computed properties（计算属性）。
 
 677
 00:28:30,528 --> 00:28:32,328
 And those could be setters and
-然后这些都可以成为设置 private properties
+这些都可以成为设置 private properties
 
 678
 00:28:32,329 --> 00:28:34,129
 getters that are setting private properties.
-的 setters 和 getters。
+的 setters 和 getters 方法。
 
 679
 00:28:34,131 --> 00:28:36,464
 But we're gonna see on Wednesday, even,
-但是我们将会在周三看到，甚至
+我们将会在周三的课程中了解到更多相关的东西，
 
 680
 00:28:36,466 --> 00:28:39,634
 I'm gonna talk to you a little bit about a way that when your
-我将会和你们说一点点关于
+我甚至会和你们讨论一点点关于
 
 681
 00:28:39,636 --> 00:28:41,902
 properties get set, you can intervene,
-properties 的 get 和 set，你可以介入，
+properties 的 get 和 set 方面的东西，你可以 intervene 到它们其中，
 
 682
 00:28:41,904 --> 00:28:44,571
 you can check them to make sure the value is okay.
-你可以检查它们，保证它们的值是正常的。
+检查一下，来保证它们的值是正确的。
 
 683
 00:28:44,573 --> 00:28:46,373
 So if you have a public property,
-所以如果你有一个 public 的 property，
+所以说，如果你有一个 public 的 property，
 
 684
 00:28:46,375 --> 00:28:49,142
 you can still protect it by intervening a little bit
-当人们设了它的值或者尝试获取它的值，
+当人们尝试获取或者设置它的值的时候，
 
 685
 00:28:49,144 --> 00:28:51,110
 when people set it or try and get it.
-你仍然可以介入一点点来保护它。
+你仍然可以 intervene 这个 property 来保护它。
 
 686
 00:28:51,112 --> 00:28:52,912
 So it is possible to still have some protection there,
-所以有可能会有些保护机制在那里，
+这里面仍可以设置一些保护机制，
 
 687
 00:28:52,914 --> 00:28:53,545
 we'll see that.
-我们都会看到的。
+在周三的课程中，我们都会有所了解。
 
 688
 00:28:56,016 --> 00:28:57,749
 All right, so these are our only public things.
-好啦，所以这些就是我们仅有的 public 的东西。
+好，回到主题，这些就是我们仅有的 public 的东西。
 
 689
 00:28:57,751 --> 00:29:00,651
 Now, there's only one other public thing we need to do in
-那么现在，这里还剩一个 public 的东西要
+那么现在，在我们的 CalculatorBrain 里，
 
 690
 00:29:00,653 --> 00:29:02,420
 our CalculatorBrain, which is,
-在我们的 CalculatorBrain 里做的一些事情，这就是，
+还剩一个 public 的东西要做的是，
 
 691
 00:29:02,422 --> 00:29:04,688
 we need to let people evaluate this stack.
-我们需要求这个 stack 的值。
+我们需要允许用户对这个 stack 求值。
 
 692
 00:29:06,058 --> 00:29:09,492
 So people are pushing operands and performing operations,
-所以我们把操作符压栈然后进行运行，
+用户把操作符压栈然后进行计算，
 
 693
 00:29:09,494 --> 00:29:11,828
 now they wanna know what's the result.
-现在我们想知道结果是什么。
+随后，他们想知道结果是什么。
 
 694
 00:29:11,830 --> 00:29:14,129
 Okay? They pushed an operand of a five.
-好吧？我们往栈里压了一个数字5。
+举例，我们往栈里压了一个数字5。
 
 696
 00:29:14,132 --> 00:29:15,898
@@ -3693,7 +3693,7 @@ They pushed an operand of a four.
 697
 00:29:15,900 --> 00:29:18,166
 They performed operation plus,
-我们做加法操作，
+做加法操作，
 
 698
 00:29:18,168 --> 00:29:19,668
@@ -3703,1121 +3703,1000 @@ they want to see four plus five.
 699
 00:29:19,670 --> 00:29:21,202
 Where's that nine, okay?
-得到的答案应该是9，好吧？
+得到的答案应该是9，对吧？
 
 700
 00:29:21,204 --> 00:29:22,403
 They need the result.
-我们想要的是结果。
+他们需要看到结果。
 
 701
 00:29:22,405 --> 00:29:25,606
-   So we need another public
-          method here,
-   这里我们还需要一个公共方法，
+So we need another public method here,
+所以，这里我们还需要一个公共方法，
 
 702
 00:29:25,608 --> 00:29:29,876
- which I'm gonna call evaluate.
- 将其命名为 "evaluate"
+which I'm gonna call evaluate.
+将其命名为 evaluate
 
 703
 00:29:29,878 --> 00:29:31,344
-             'Kay?
-         And evaluate,
+'Kay? And evaluate,
 
 704
 00:29:31,346 --> 00:29:34,880
-   we could have it return a
-      double, for example.
-像这样，我们可以设置其返回类型为 double
+we could have it return a Double, for example.
+像这样，我们可以设置其返回类型为 Double
 
 705
 00:29:34,882 --> 00:29:38,917
-   And it would just evaluate
-        this opStack and
-   这个方法会对 opStack 估值然后
+And it would just evaluate this opStack and
+这个方法会对 opStack 求值并
 
 706
 00:29:38,919 --> 00:29:40,535
-       return the value.
-       返回结果
+return the value.
+返回结果
 
 707
 00:29:40,536 --> 00:29:42,152
- But I really can't make this a
-            double.
-但我不能设置这个 double
+But I really can't make this a Double.
+但现在我并不能设置这个返回类型为 Double
 
 708
 00:29:43,390 --> 00:29:46,524
-   Really, this has to be an
-           optional.
-   事实上，它必须为 optional
+Really, this has to be an optional.
+事实上，它必须为 optional (Double?)
 
 709
 00:29:46,526 --> 00:29:48,892
- 'Kay, why does this have to be
-          an optional?
+'Kay, why does this have to be an optional?
 为什么它必须为 optional ？
 
 710
 00:29:48,894 --> 00:29:52,295
-  Well, that's because someone
- might get my CalculatorBrain,
-这是由于，当某人拿到我的 "CalculatorBrain" 时，
+Well, that's because someone might get my CalculatorBrain,
+这是由于，当某人使用 CalculatorBrain 时，
 
 711
 00:29:52,297 --> 00:29:53,963
-  and the first thing they do
-              is,
-他们如果第一时间
+and the first thing they do is,
+他们做的第一件事
 
 712
 00:29:53,965 --> 00:29:55,932
-  they say, perform operation
-             plus.
-说"执行加法"
+they say, perform operation plus.
+是——执行加法
 
 713
 00:29:55,934 --> 00:29:57,600
- Okay, well I have no operands.
-但我们并没有可以被加的数
+Okay, well I have no operands.
+但我们此时并没有可以被加的数
 
 714
 00:29:57,602 --> 00:29:59,051
-             Okay?
-              And
+Okay? And
 
 715
 00:29:59,052 --> 00:30:00,501
-   you're asking to evaluate
-             plus.
-可这个时候又被要求计算加法
+you're asking to evaluate plus.
+可这个时候又被要求执行加法计算
 
 716
 00:30:00,504 --> 00:30:02,287
-        I can't do that.
-我不能执行这个操作
+I can't do that.
+这个操作是无法完成的
 
 717
 00:30:02,288 --> 00:30:04,071
- So, I have to return something
-  to you, that lets you know,
-所以我必须返回一些东西，让你知道，
+So, I have to return something to you, that lets you know,
+所以我必须返回一些东西，让用户知道
 
 718
 00:30:04,074 --> 00:30:07,776
- I could not evaluate what you
-      ask me to evaluate.
-我无法计算你所需要我计算的东西。
+I could not evaluate what you ask me to evaluate.
+我无法计算你让我计算的东西。
 
 719
 00:30:07,778 --> 00:30:09,477
-  So, I'm gonna return nil in
-           that case,
-在这种情况下，我就会返回 nil，
+So, I'm gonna return nil in that case,
+这种情况下，我就会返回 nil，
 
 720
 00:30:09,479 --> 00:30:12,213
-  so valuate here really needs
-       to be an optional.
-这里确实需要返回一个 optional。
+so valuate here really needs to be an optional.
+所以这里需要返回一个 optional。
 
 721
 00:30:13,249 --> 00:30:14,848
-  'Kay, so you can see some of
-         the thinking,
+'Kay, so you can see some of the thinking,
 你可以看到我们对于什么时候
 
 722
 00:30:14,850 --> 00:30:17,283
- when do you make something an
-       optional when not.
+when do you make something an optional when not.
 应该使用 optional 的思考。
 
 723
 00:30:17,285 --> 00:30:19,285
-   'Kay, so this is a classic
-         case of that,
-这里就是一个典型的使用场景，
+'Kay, so this is a classic case of that,
+这里就是 optional 一个典型的使用场景，
 
 724
 00:30:19,287 --> 00:30:21,787
-  where you got sometimes you
-      wanna return it and
+where you got sometimes you wanna return it and
 有时你想要返回一些东西，
 
 725
 00:30:21,789 --> 00:30:23,889
-  you can't do it, so you have
-         to return nil.
+you can't do it, so you have to return nil.
 但又无法返回的时候，那么就返回 nil.
 
 726
 00:30:23,891 --> 00:30:28,793
- All right, so how we going to
-      implement evaluate?
-那么，接下来我们应该怎么实现 "evaluate" 呢？
+All right, so how we going to implement evaluate?
+那么，接下来我们应该怎么实现 evaluate 呢？
 
 727
 00:30:28,795 --> 00:30:30,595
-  Okay, how many people in the
-             class,
+Okay, how many people in the class,
 对了，在这个班上有多少人
 
 728
 00:30:30,597 --> 00:30:34,365
- raise your hands don't be shy,
-    are you comfortable with
+raise your hands don't be shy, are you comfortable with
 不要害羞，举起你们的手，
 
 729
 00:30:34,367 --> 00:30:37,067
-  the computer science concept
-         of recursion?
+the computer science concept of recursion?
 有多少人熟悉计算机科学中递归的概念？
 
 730
 00:30:39,271 --> 00:30:40,903
-             Okay.
- Excellent, that's about 80 or
+Okay. Excellent, that's about 80 or
 很好，大概有80~90%，
 
 731
 00:30:40,905 --> 00:30:43,939
- 90%, so I'm gonna explain this
-       really fast then.
+90%, so I'm gonna explain this really fast then.
 那么我将只是快速地解释一下
 
 732
 00:30:43,941 --> 00:30:45,974
-  And if you don't understand
-           recursion,
+And if you don't understand recursion,
 如果你不明白递归
 
 733
 00:30:45,976 --> 00:30:47,309
- if you didn't raise your hand,
+if you didn't raise your hand,
 如果你刚才没有举手的话
 
 734
 00:30:47,311 --> 00:30:48,843
- that's something you should go
-            review.
+that's something you should go review.
 那就意味着你需要回去复习
 
 735
 00:30:48,845 --> 00:30:50,378
-             Okay?
-      [LAUGH] Recursion is
+Okay? [LAUGH] Recursion is
 递归是
 
 736
 00:30:50,379 --> 00:30:51,912
- something, you should know by
- the time you take this class,
-当你在这个班级的时候，应该知道的东西。
+something, you should know by the time you take this class,
+当你在学习这门课程的时候，应该了解的东西。
 
 737
 00:30:51,915 --> 00:30:53,714
-    so that's something you
-     definitely wanna know.
-这是你必须知道的。
+so that's something you definitely wanna know.
+而且是必须了解的东西。
 
 738
 00:30:53,716 --> 00:30:57,317
-  So, how are we going to use
-          recursion to
+So, how are we going to use recursion to
 那么在这种情况下，
 
 739
 00:30:57,319 --> 00:30:59,252
-      evaluate this stack?
-我们应该怎样在 "evaluate" 中使用递归？
+evaluate this stack?
+我们应该怎样在 evaluate 中使用递归？
 
 740
 00:30:59,254 --> 00:31:00,653
-  All right, looks like this.
-好，看这里
+All right, looks like this.
+看这里
 
 741
 00:31:00,655 --> 00:31:02,988
-  I'm gonna do a sample stack,
-          right here.
+I'm gonna do a sample stack, right here.
 我将会在这里写一个栈
 
 742
 00:31:02,990 --> 00:31:08,393
- So, let's say I put a 6 on the
- stack, and then I put a 5, and
-这样说吧，我放了一个6在这个栈上，然后我放了一个5，
+So, let's say I put a 6 on the stack, and then I put a 5, and
+这样说吧，我放了一个6在这个栈上，然后我再放了一个5，
 
 743
 00:31:08,395 --> 00:31:14,065
- then I put a plus, and then I
- put a 4, and then I put times.
-然后我放了加号，然后我放了4，最后加上次数
+then I put a plus, and then I put a 4, and then I put times.
+随后我再放了加号，再放4，最后放上乘号
 
 744
 00:31:14,067 --> 00:31:15,166
-             Okay?
+Okay?
 
 745
 00:31:15,168 --> 00:31:17,968
-  So here's our stack, and I'm
-      gonna evaluate this,
-这就是我们的栈，我将要计算这个
+So here's our stack, and I'm gonna evaluate this,
+这就是我们的栈，我将要使用递归
 
 746
 00:31:17,970 --> 00:31:18,702
-      I'm gonna recursion.
-      我将要使用递归
+I'm gonna recursion.
+计算这个栈
 
 747
 00:31:18,704 --> 00:31:19,769
-    How am I gonna do that?
-    我要怎么做？
+How am I gonna do that?
+我要怎么做？
 
 748
 00:31:19,771 --> 00:31:21,437
-  Well, really, what I'm gonna
-        do is I'm gonna
-	  我要这样
+Well, really, what I'm gonna do is I'm gonna
+我要这样
 
 749
 00:31:21,439 --> 00:31:24,740
-  have a helper method here, a
-    recursive helper method.
-在这里我需要一个帮助方法，一个帮助实现递归的方法。
+have a helper method here, a recursive helper method.
+在这里我需要一个 helper 方法，一个帮助实现递归的方法。
 
 750
 00:31:24,742 --> 00:31:27,543
-   I'm gonna call it evaluate
-        also, actually.
-事实上这个方法也叫 "evaluate"
+I'm gonna call it evaluate also, actually.
+事实上这个方法我也叫 evaluate
 
 751
 00:31:27,545 --> 00:31:29,644
-  And it's gonna take a stack,
-        as an argument,
+And it's gonna take a stack, as an argument,
 它会将我们的栈当做一个参数，
 
 752
 00:31:29,646 --> 00:31:31,012
- a stack of things to evaluate.
+a stack of things to evaluate.
 一堆用来计算的东西
 
 753
 00:31:31,014 --> 00:31:34,449
-  And it's only gonna evaluate
-  the top thing on the stack.
-并且它只会计算处于这个栈顶部的元素
+And it's only gonna evaluate the top thing on the stack.
+它计算处于这个栈顶的元素
 
 754
 00:31:34,451 --> 00:31:36,717
- That's it just gonna value the
-      top of the stack and
-它只是计算处于栈中最上面的元素，并且返回，
+That's it just gonna value the top of the stack and
+而且它只计算处于栈顶的元素，并且返回，
 
 755
 00:31:36,719 --> 00:31:38,819
-  return it, but the top thing
-       of the stack might
-但是计算栈最上的这个元素时，
+return it, but the top thing of the stack might
+但是计算栈顶的这个元素时，
 
 756
 00:31:38,821 --> 00:31:41,421
-    involve looking at every
- single of one of these, right?
+involve looking at every single of one of these, right?
 可能也会涉及到栈中的每一个元素
 
 757
 00:31:41,423 --> 00:31:44,157
- Cuz, this times needed to two
-          operations.
-因为，次数需要两个数才能进行。
+Cuz, this times needed to two operations.
+因为，乘法需要两个数才能进行。
 
 758
 00:31:44,159 --> 00:31:47,026
-  So, lets look at this, this
- recursive evaluates gonna come
-让我们再来看看，这个递归计算将要到这里来
+So, lets look at this, this recursive evaluates gonna come
+所以，这个递归计算将
 
 759
 00:31:47,028 --> 00:31:48,961
-  in here, it's gonna try and
-  将尝试着计算处于最顶部的元素
+in here, it's gonna try and
+将尝试着计算处于栈顶的元素
 
 760
 00:31:48,962 --> 00:31:50,895
- evaluate the top of the stack,
-       which is a times.
-       次数
+evaluate the top of the stack, which is a times.
+也就是乘法
 
 761
 00:31:50,898 --> 00:31:51,597
-             Okay?
-         So it's like,
-将会像这样
+Okay? So it's like,
+这将是
 
 762
 00:31:51,599 --> 00:31:53,265
-     okay, I'm doing times.
-我在算次数
+okay, I'm doing times.
+我在算乘法
 
 763
 00:31:53,267 --> 00:31:56,101
-   Now for times it needs two
-            operate,
-现在需要要找到两个数，
+Now for times it needs two operate,
+我需要要找到乘数和被乘数
 
 764
 00:31:56,103 --> 00:31:58,302
-  two operands here for times.
-两个数用于计算次数。
+two operands here for times.
+来做乘法，
 
 765
 00:31:58,304 --> 00:31:59,737
-   So, it recursively calls,
-它开始递归
+So, it recursively calls,
+evaluate 开始递归
 
 766
 00:31:59,739 --> 00:32:03,807
- itself to say give me to first
-       operand for time.
-它说给我第一个数作为次数。
+itself to say give me to first operand for time.
+它说，给我第一个操作数来做乘法。
 
 767
 00:32:03,809 --> 00:32:07,010
-  And so recursively, comes in
-     here, it finds a 4 on
-然后就开始递归，在最顶端它找到了一个4，
+And so recursively, comes in here, it finds a 4 on
+然后从这里递归地，在子栈的栈顶找到了一个4，
 
 768
 00:32:07,012 --> 00:32:10,913
- the top it's like, I know how
-     to evaluate 4, it's 4.
-像这样，我当然知道怎样计算4，4次
+the top it's like, I know how to evaluate 4, it's 4.
+它找到了一个操作数
 
 769
 00:32:10,915 --> 00:32:12,148
-      So, it just returns.
+So, it just returns.
 所以直接返回
 
 770
 00:32:12,150 --> 00:32:15,751
-  Okay, so now I have my first
-           operands.
+Okay, so now I have my first operands.
 好，现在我就有了第一个操作数
 
 771
 00:32:15,753 --> 00:32:16,618
-             'Kay?
-              Now,
+'Kay? Now,
 现在
 
 772
 00:32:16,620 --> 00:32:18,386
-  I take the rest of the stack
-              and
-我把栈中剩下的数进行计算，
+I take the rest of the stack and
+我在剩下的栈上进行递归，
 
 773
 00:32:18,388 --> 00:32:21,255
- evaluate it, to get the second
-              one.
-用于得到第二个数。
+evaluate it, to get the second one.
+以得到第二个操作数。
 
 774
 00:32:21,257 --> 00:32:24,291
-   And when I do that, I get
-          plus, 'kay?
-当我这样做时，我得到一个加号
+And when I do that, I get plus, 'kay?
+当在剩下的栈上递归时，我得到一个加号
 
 775
 00:32:24,293 --> 00:32:26,393
-  So, plus says, oh, I have to
-         evaluate plus.
+So, plus says, oh, I have to evaluate plus.
 然后加号说："噢，我要计算加法。"
 
 776
 00:32:26,395 --> 00:32:27,727
-       It needs operands.
-"那需要计算数才行"
+It needs operands.
+"那需要操作数才行"
 
 777
 00:32:27,729 --> 00:32:30,763
-   So, I come over here, I'm
-        getting a plus.
-然后我就到这里来，我有了一个加号。
+So, I come over here, I'm getting a plus.
+然后我在这里写上，我有了一个加号。
 
 778
 00:32:30,765 --> 00:32:34,700
-    And I gotta go recursive
- again, to go get its operands.
-我将再次递归，用于获取操作数。
+And I gotta go recursive again, to go get its operands.
+我要再次递归，用于获取做加法的操作数。
 
 779
 00:32:34,702 --> 00:32:36,401
-   I get the 5, that's good.
-我得到5，很好。
+I get the 5, that's good.
+我得到5，不错。
 
 780
 00:32:36,403 --> 00:32:41,072
- I'm gonna go recursive again,
-     get the 6, over here.
-我还要再次递归，得到一个6，到这里来。
+I'm gonna go recursive again, get the 6, over here.
+我还要再次递归，得到一个6，填写到这里。
 
 781
 00:32:41,074 --> 00:32:42,907
-  And I've evaluated the whole
-             stack.
-最后我将计算整个栈。
+And I've evaluated the whole stack.
+这样，我计算完整个栈。
 
 782
 00:32:42,909 --> 00:32:45,876
- So, you see how I have to keep
- going backward recursively to
+So, you see how I have to keep going backward recursively to
 就这样，你看到我这样通过来回
 
 783
 00:32:45,878 --> 00:32:46,576
-          my evaluate-
+my evaluate
 递归
 
 784
 00:32:46,578 --> 00:32:47,911
-           >> [COUGH]
+[COUGH]
 
 785
 00:32:47,912 --> 00:32:49,245
- >> To get the operands for my
-          operations.
-获取计算所需要的操作数。
+To get the operands for my operations.
+获取操作符所需要的操作数。
 
 786
 00:32:49,247 --> 00:32:51,848
-  Once, I get to an operand I
-           can stop,
-一旦我取得了操作数，我就停下来，
+Once, I get to an operand I can stop,
+一旦我取得的是操作数，本次递归就可以停止，
 
 787
 00:32:51,850 --> 00:32:54,483
- okay number, I got it and I'm
-        out of of there.
-好的，数字，我得到了然后我要离开这里
+okay number, I got it and I'm out of of there.
+因为我得到我需要的数字，我可以停止递归
 
 788
 00:32:54,485 --> 00:32:56,418
-   But every time I encounter
-       another operation,
+But every time I encounter another operation,
 但每一次我遇到另一个操作符时，
 
 789
 00:32:56,420 --> 00:32:58,153
-      I have to keep going
-         recursively to
+I have to keep going recursively to
 我就必须继续递归来
 
 790
 00:32:58,155 --> 00:33:00,822
-   get all my arguments, any
-     questions about that?
-获取所需要的参数，有人有疑问吗？
+get all my arguments, any questions about that?
+获取所需要的操作数，有人对这个过程有疑问吗？
 
 791
 00:33:00,824 --> 00:33:06,327
-  'Kay, so it's actually gonna
-  be pretty simple recursion.
-这就是一个非常简单的递归算法。
+'Kay, so it's actually gonna be pretty simple recursion.
+这是一个非常简单的递归算法。
 
 792
 00:33:06,329 --> 00:33:08,862
- When you see the code, you're
-  gonna be, that makes sense.
+When you see the code, you're gonna be, that makes sense.
 但你看到了代码，你就会觉得："哦，还真是这样"。
 
 793
 00:33:08,864 --> 00:33:12,832
-    So, I'm gonna have this
- separate I'm gonna put this up
-所以我将把这个放在最上面
+So, I'm gonna have this separate I'm gonna put this up
+我将把这个分开，放在最上面
 
 794
 00:33:12,834 --> 00:33:15,201
- on top for scrolling reasons.
+on top for scrolling reasons.
 为了更好地滚动。
 
 795
 00:33:15,203 --> 00:33:18,237
-             Oops.
-       Didn't mean that.
-Opps，我不是故意地。
+Oops. Didn't mean that.
+Opps，我不是故意的。
 
 796
 00:33:18,239 --> 00:33:19,672
-     The separate evaluate.
-这是分离的另一个 "evaluate"。
+The separate evaluate.
+这是分离的另一个 evaluate。
 
 797
 00:33:20,808 --> 00:33:25,677
- And this evaluate is going to
-      take a stack of ops,
-这个 "evaluate" 将会取得栈上的操作数，
+And this evaluate is going to take a stack of ops,
+这个 evaluate 将会取得栈上的操作数，
 
 798
 00:33:25,679 --> 00:33:27,078
-        as its argument.
+as its argument.
 作为参数。
 
 799
 00:33:27,080 --> 00:33:28,645
-  And why does it take a stack
-            of ops?
+And why does it take a stack of ops?
 为什么他会获取栈上的操作数呢？
 
 800
 00:33:28,647 --> 00:33:31,048
-   Because as it's recursing,
+Because as it's recursing,
 因为当他递归时，
 
 801
 00:33:31,050 --> 00:33:32,882
-   it's using the rest of the
-              ops.
-   它使用剩下的op。
+it's using the rest of the
+ops.
+它使用剩下的操作数。
 
 802
 00:33:32,884 --> 00:33:34,050
-    So, you see what I mean?
-    所以，你们明白我的意思了吗？
+So, you see what I mean?
+所以，你们明白我的意思了吗？
 
 803
 00:33:34,052 --> 00:33:35,618
-           It's not,
-           它不是，
+It's not,
+它不能
 
 804
 00:33:35,619 --> 00:33:37,185
- it can't be looking at the big
-     opStack in our brain.
-  也不可能在我们的大脑里面查看巨大的opStack。
+it can't be looking at the big opStack in our brain.
+访问我们的程序里巨大的 opStack。
 
 805
 00:33:37,188 --> 00:33:38,320
-     It can't look at this.
-     它不能这么查看。
+It can't look at this.
+它无法这么做。
 
 806
 00:33:38,322 --> 00:33:40,756
-     'Kay, cuz it's kind of
-         consuming it.
-      因为这有点太消耗了。
+'Kay, cuz it's kind of consuming it.
+因为这有点太消耗时间了。
 
 807
 00:33:40,758 --> 00:33:42,991
-             Right?
-    And every time I call it
-    我每次递归调用
+Right? And every time I call it
+我每次递归调用
 
 808
 00:33:42,992 --> 00:33:45,225
-   recursively, I'm gonna get
-  fewer operands to work with.
-  都只需要处理更少的操作数。
+recursively, I'm gonna get fewer operands to work with.
+都只需要处理很少的操作数。
 
 809
 00:33:45,228 --> 00:33:46,194
-   So this is what I'm doing.
-   所以这就是我做的事情。
+So this is what I'm doing.
+所以这就是我做的事情。
 
 810
 00:33:46,196 --> 00:33:47,962
- Now, the first time I call it,
- 现在，我第一次调用，
+Now, the first time I call it,
+在这里，我第一次调用，
 
 811
 00:33:47,964 --> 00:33:50,864
- right here, I'm gonna give it
-       the full opStack.
- 需要给出完整的opStack。
+right here, I'm gonna give it the full opStack.
+这时需要给出完整的opStack。
 
 812
 00:33:50,866 --> 00:33:53,767
- So, I'll call my recursive one
-           from here.
- 我从这里开始调用递归函数。
+So, I'll call my recursive one from here.
+我从这里开始调用递归函数。
+
 813
 00:33:53,769 --> 00:33:56,036
-  Now, what's this thing gonna
-            return?
-  那么，这里将要返回什么？
+Now, what's this thing gonna return?
+那么，这里将要返回什么？
 
 814
 00:33:56,038 --> 00:33:56,836
-             'Kay.
+'Kay.
 
 815
 00:33:56,838 --> 00:33:57,770
-     That's interesting and
-     很有意思
+That's interesting and
+这将会很有趣
 
 816
 00:33:57,772 --> 00:34:00,873
- here's a big new thing for you
-            to see.
- 而且这里有个很大很新的东西等待你们发现
+here's a big new thing for you to see.
+而且这里有其他的新鲜东西等待你们发现
 
 
 817
 00:34:00,875 --> 00:34:03,709
-   You've read about it I, I
-        can't remember I
-   你们看过了吧，我不记得
+You've read about it I, I can't remember I
+你们看过了吧，我不记得
 
 818
 00:34:03,711 --> 00:34:05,910
-  even asked you to read about
-      this but I think I.
-  有没有教你们去看相关内容不过我。。我
+even asked you to read about this but I think I.
+有没有叫你们去看相关内容，不过
 
 819
 00:34:05,912 --> 00:34:06,811
-     No, I guess I didn't.
-     不，我猜我没有。
+No, I guess I didn't.
+我猜我没有。
 
 820
 00:34:06,813 --> 00:34:08,846
-     Which is tuples, 'kay?
-     什么是tuple（元组）？
+Which is tuples, 'kay?
+什么是 tuple（元组）？
 
 821
 00:34:08,848 --> 00:34:14,484
-  So in Swift, you can combine
-    multiple things together
-    在Swift里，你可以把多个东西组合起来
+So in Swift, you can combine multiple things together
+在 Swift 里，你可以把多个东西组合起来
 
 822
 00:34:14,486 --> 00:34:16,853
-  into one kind of really te,
-  成为一个相当。。
+into one kind of really te,
+成为一个相当
+
 823
 00:34:16,855 --> 00:34:19,922
-  mini data structure called a
-          tuple, 'kay?
-  迷你的数据结构叫做tuple。
+mini data structure called a tuple, 'kay?
+迷你的数据结构叫做 tuple 。
 
 824
 00:34:19,924 --> 00:34:22,124
- Don't let the tu [LAUGH] sound
-       in there fool you.
- 不要被tu的发音愚弄了。
+Don't let the tu [LAUGH] sound in there fool you.
+不要被 tu 的发音愚弄了。
 
 825
 00:34:22,126 --> 00:34:24,560
-  It's not just two, it's any
-         number, okay?
-  这不是two，它可以是任意数目。
+It's not just two, it's any number, okay?
+这不代表 two，它可以是任意数目。
+
 826
 00:34:24,562 --> 00:34:26,762
-   And you just put them in a
-       parentheses, okay?
-   你只需要把它们放进一对圆括号里。
+And you just put them in a parentheses, okay?
+你只需要把它们放进一对圆括号里。
+
 827
 00:34:26,764 --> 00:34:28,664
-      And, and that's it.
-      这就好了。
+And, and that's it.
+这就好了。
 
 828
 00:34:28,665 --> 00:34:30,565
- So you can use this for return
-            values.
- 你可以用它来做返回值。
+So you can use this for return values.
+你可以用它来做返回值。
+
 829
 00:34:30,567 --> 00:34:32,033
-  So I've gotta function right
-             here,
-  我在这里使用了这一功能，
+So I've gotta function right here,
+我在这里使用了这一功能，
+
 830
 00:34:32,035 --> 00:34:34,735
- and I actually need to return
- two things from this evaluate.
- 实际上我需要在求值后返回两个东西。
+and I actually need to return two things from this evaluate.
+实际上我需要在求值后返回两个东西。
+
 831
 00:34:35,771 --> 00:34:37,754
-             'Kay?
-          One thing I
-          一个是
+'Kay? One thing I
+一个是
+
 832
 00:34:37,755 --> 00:34:39,738
-  need to return is the result
-      of a evaluating it.
-      求值运算的结果。
+need to return is the result of a evaluating it.
+求值运算的结果。
 
 833
 00:34:40,975 --> 00:34:43,042
-     But the other thing I
-     另一个
+But the other thing I
+另一个是
 
 834
 00:34:43,043 --> 00:34:45,110
- need to return is the rest of
-  the stack that I didn't use.
-  需要返回的是剩余未使用的栈。
+need to return is the rest of the stack that I didn't use.
+剩余的未使用的栈。
 
 835
 00:34:45,112 --> 00:34:48,647
- Cuz as I'm working my way down
-    here and I take off that
-    因此就像我在这里演示的，
+Cuz as I'm working my way down here and I take off that
+因此就像我在这里演示的，
 
 836
 00:34:48,649 --> 00:34:52,884
-  times, and the 4 and the 5,
- okay, I'm consuming things but
- 我取走了乘号，然后是4跟5。我消费了东西，
+times, and the 4 and the 5, okay, I'm consuming things but
+我取走了乘号，然后是4跟5。我拿走了栈里的一些东西，
 
 837
 00:34:52,886 --> 00:34:54,652
-  then I'm leaving the rest of
-         the stacks, so
-  同时栈有剩余部分，
+then I'm leaving the rest of the stacks, so
+同时栈有剩余部分，
 
 838
 00:34:54,654 --> 00:34:56,920
-    I have to keep returning
-   what's left of the stacks,
-   所以我需要在求值过程中
+I have to keep returning what's left of the stacks,
+所以我需要在求值过程中
 
 839
 00:34:56,922 --> 00:34:58,722
-  while we keep consuming it.
-  返回栈的剩余部分。
+while we keep consuming it.
+返回栈的剩余部分。
 
 840
 00:34:58,724 --> 00:34:59,689
-             Okay?
+Okay?
 
 841
 00:34:59,691 --> 00:35:01,958
- So, I'm gonna return this in a
-             tuple.
- 所以，我要在tuple里返回这个。
+So, I'm gonna return this in a tuple.
+所以，我要在 tuple 里返回这个。
 
 842
 00:35:01,960 --> 00:35:04,126
-  Tuples could not be simpler
-            syntax,
-  Tuple的语法不能再简单了，
+Tuples could not be simpler syntax,
+Tuple 的语法不能再简单了，
+
 843
 00:35:04,128 --> 00:35:08,097
-   just open parentheses, not
-    nine, open parentheses.
-   只要左括号，不是9，左括号
+just open parentheses, not nine, open parentheses.
+只要左括号，不是9，左括号
 
 844
 00:35:08,099 --> 00:35:11,066
- Open parentheses, and just all
-      the types that you,
- 然后是所有你要的类型数据
+Open parentheses, and just all the types that you,
+然后是所有你要的类型数据
+
 845
 00:35:11,068 --> 00:35:12,634
-   of things that you want in
-             here.
-   统统放在这里。
+of things that you want in here.
+统统放在这里。
 
 846
 00:35:12,636 --> 00:35:14,569
- So, I'm gonna return a double
-         question mark,
- 所以我要在这里返回 double？
+So, I'm gonna return a double question mark,
+所以我要在这里返回 double? 
 
 847
 00:35:14,571 --> 00:35:16,070
-       that's my results.
-       这是我的结果。
+that's my results.
+这是我的结果。
+
 848
 00:35:16,072 --> 00:35:17,683
-             'Kay?
+'Kay?
 
 849
 00:35:17,684 --> 00:35:19,295
-   That's what's eventually,
-            gonna be
-   这是最终
+That's what's eventually, gonna be
+这是最终
 
 850
 00:35:19,296 --> 00:35:20,907
-  returned out here after all
-     the recursion unwinds.
-  所有递归都被展开后返回的结果。
+returned out here after all the recursion unwinds.
+所有递归都被展开后返回的结果。
 
 851
 00:35:20,910 --> 00:35:23,643
-   And then also I'm going to
-   同时我也需要
+And then also I'm going to
+同时我也需要
 
 852
 00:35:23,645 --> 00:35:28,348
-   have the ops that are left
-             over.
-   剩下的op。
+have the ops that are left over.
+剩下的 op。
 
 853
 00:35:28,350 --> 00:35:32,851
-  Now, a tuple could look just
-      like this, unnamed.
-  现在，一个tuple看上去像这样，未命名的。
+Now, a tuple could look just like this, unnamed.
+现在，一个未命名的 tuple 看上去像这样。
 
 854
 00:35:32,853 --> 00:35:34,519
-  Did you see how these things
-         are not named,
-  你们看到这些未命名的格式，
+Did you see how these things are not named,
+你们看到这些未命名的格式，
 
 855
 00:35:34,521 --> 00:35:35,920
- each of these things in here.
- 里面每一个东西。
+each of these things in here.
+里面每一个东西。
 
 856
 00:35:35,922 --> 00:35:38,956
- But you can also put names in
- here as, if you want, as well.
- 如果你想要，也可以把名称放在这里。
+But you can also put names in here as, if you want, as well.
+如果你想要，你也可以把名称放在这里。
 
 857
 00:35:38,958 --> 00:35:41,092
- So maybe I would call this one
-          the result.
- 所以大概我会把这个命名为result
+So maybe I would call this one the result.
+我会把这个（tuple 的第一项）命名为 result
+
 858
 00:35:42,061 --> 00:35:44,728
-             Okay?
-              And
+Okay? And
 
 859
 00:35:44,729 --> 00:35:47,396
-     I would call this one
-      remainingOps, 'kay?
-      把这个命名为remainingOps
+I would call this one remainingOps, 'kay?
+把这个（tuple 的第二项）命名为 remainingOps
 
 860
 00:35:47,399 --> 00:35:49,666
- And I kinda recommend putting
-      those in there, and
- 我推荐这么做，
+And I kinda recommend putting those in there, and
+我推荐给 tuple 中的对象命名，
+
 861
 00:35:49,668 --> 00:35:52,601
-   you'll see why in a second
-  because there's two ways to
-  马上你门就会知道为什么 因为有两种方法
+you'll see why in a second because there's two ways to
+马上你们就会知道为什么。因为有两种方法
 
 862
 00:35:52,603 --> 00:35:56,138
- call a function that returns a
-   tuple and get the results.
-  来调用返回tuple的函数，拿到返回值。
+call a function that returns a tuple and get the results.
+的返回值是 tuple。
 
 863
 00:35:56,140 --> 00:36:00,208
-  And one of the ways requires
-   that you name these, 'kay?
-   其中一种强制要求命名。
+And one of the ways requires that you name these, 'kay?
+其中一种强制要求命名。
 
 864
 00:36:00,210 --> 00:36:01,843
-  So, it doesn't hurt to name
-    the, you might, as well.
-  所以，加上名字没什么妨害的。
+So, it doesn't hurt to name the, you might, as well.
+所以，加上名字没什么要紧的。
 
 865
 00:36:01,845 --> 00:36:03,111
-    It's good documentation.
-    这是很好的文档。
+It's good documentation.
+这是很好的代码习惯。
 
 866
 00:36:03,113 --> 00:36:05,379
-  Someone looking at this now
-        knows, oh, yeah,
-  有些人看到这里就会明白，对的，
+Someone looking at this now knows, oh, yeah,
+有些人看到这个方法就会明白。
 
 867
 00:36:05,381 --> 00:36:07,147
-   this is the result of the
-        evaluation, and
-    这个是求值的结果，
+this is the result of the evaluation, and
+这个（tuple 的第一项）是求值的结果，
 
 868
 00:36:07,149 --> 00:36:09,783
-  these the ops that were left
-             over.
-  这个是剩下的op。
+these the ops that were left over.
+这个（tuple 的第二项）是剩下的栈。
 
 869
 00:36:09,785 --> 00:36:10,784
-             'Kay?
+'Kay?
 
 870
 00:36:10,786 --> 00:36:13,419
-           All right.
+All right.
 
 871
 00:36:13,421 --> 00:36:15,121
-     So let's dive in here.
-     我们从这里开始。
+So let's dive in here.
+好，我们从这里开始。
 
 872
 00:36:15,123 --> 00:36:16,956
-        The first thing,
-        第一件事，
+The first thing,
+第一件事，
 
 873
 00:36:16,957 --> 00:36:18,790
- line of code I'm gonna put in
-    this recursive function
- 放在这个递归函数的代码，
+line of code I'm gonna put in this recursive function
+编写这个递归函数
+
 874
 00:36:18,793 --> 00:36:21,193
-  is the failure line of code,
-  处理失败的情况，
+is the failure line of code,
+处理失败的情况的代码，
 
 875
 00:36:21,195 --> 00:36:25,930
-   which is return nil, ops,
-             okay?
-   简单返回 （nil， ops）
+which is return nil, ops, okay?
+这里，我们直接返回 （nil, ops）
 
 876
 00:36:25,932 --> 00:36:28,566
- So if I fail, okay, I'm gonna
-            try and
-  所以如果失败了，我会努力。。
+So if I fail, okay, I'm gonna try and
+如果失败了，我会尝试
 
 877
 00:36:28,568 --> 00:36:33,303
- do my best in here to evaluate
-  these ops you passed me, but
-  尽力在这里用传入的ops求值，
+do my best in here to evaluate these ops you passed me, but
+用这里传入的 ops 求值，
 
 878
 00:36:33,305 --> 00:36:36,272
-    if I fail I'm just gonna
-    return my result of nil.
-    如果失败了，就以nil为结果返回。
+if I fail I'm just gonna return my result of nil.
+如果失败了，就以 nil 为结果返回。
 
 879
 00:36:36,274 --> 00:36:37,974
-             'Kay?
+'Kay?
 
 880
 00:36:37,975 --> 00:36:39,675
- And that's gonna be my default
-      is to return nil so
- 返回nil将是默认行为，
+And that's gonna be my default is to return nil so
+返回 nil 将是默认行为，
+
 881
 00:36:39,678 --> 00:36:40,643
-        I know I failed.
-        然后我就知道我失败了。
+I know I failed.
+如果返回 nil，我就知道我失败了。
+
 882
 00:36:40,645 --> 00:36:42,344
-  So, if I run out of operands
-               or
-  比如，我处理完毕所有的操作数，
+So, if I run out of operands or
+再者，比如当我处理完毕所有的操作数，
+
 883
 00:36:42,346 --> 00:36:44,613
- I run out of stack can't find
-             it for
- 或者处理完毕整个stack，
+I run out of stack can't find it for
+或者处理完毕整个栈时，
+
 884
 00:36:44,615 --> 00:36:47,915
- example, it's just gonna fall
-    out here and return nil.
- 那么就会跳转这里返回nil。
+example, it's just gonna fall out here and return nil.
+那么也会跳转到这里，返回 nil。
 
 885
 00:36:49,152 --> 00:36:49,683
-             Okay?
+Okay?
 
 886
 00:36:49,685 --> 00:36:50,784
-        So that's good.
-        这样挺不错的。
+So that's good.
+这样挺不错的。
 
 887
 00:36:50,786 --> 00:36:52,619
- So, what do I need to do here?
- 这里需要我做什么呢？
+So, what do I need to do here?
+在这里需要我做什么呢？
 
 888
 00:36:52,621 --> 00:36:56,089
- Well, first thing is I need to
-   make sure I have some ops.
-   首先我要确定这里有op。
+Well, first thing is I need to make sure I have some ops.
+首先我要确定栈中有元素。
 
 889
 00:36:56,091 --> 00:36:59,859
-  So I'm gonna check to see if
-     the ops is not empty.
-  我要检查ops是不是空的。
+So I'm gonna check to see if the ops is not empty.
+我要检查栈是不是空的。
+
 890
 00:36:59,861 --> 00:37:04,529
-  Okay, if you've handed me a
- stack of no ops to evaluates,
-  如果传入一个没有op的栈
+Okay, if you've handed me a stack of no ops to evaluates,
+如果传入一个没有元素的栈
 
 891
 00:37:04,531 --> 00:37:05,463
-        I can't do that.
-        我将无法求值。
+I can't do that.
+我将无法求值。
 
 892
 00:37:05,465 --> 00:37:06,698
- So I'm just gonna return nil.
- 我简单地返回nil。
+So I'm just gonna return nil.
+我简单地返回 nil 即可。
 
 893
 00:37:06,700 --> 00:37:07,615
-             'Kay?
-               So
+'Kay? So
 
 894
 00:37:07,616 --> 00:37:08,531
-  that's the very first thing,
-  这是最开始要做的事，
+that's the very first thing,
+这是最开始要做的事，
 
 895
 00:37:08,534 --> 00:37:11,035
- I gotta make sure I have some
-       ops to work with.
- 我要确定我有待处理的op
+I gotta make sure I have some ops to work with.
+我要确定我有待处理的栈元素
 
 896
 00:37:11,037 --> 00:37:14,237
- Now, I'm gonna grab the first
-      op of the stack, so
- 现在，我要获取栈里的第一个op，
+Now, I'm gonna grab the first op of the stack, so
+现在，我要获取栈里的第一个操作符或者操作数，
+
 897
 00:37:14,239 --> 00:37:16,639
-   in this example, I'm gonna
-    grab that x off of here.
-    在这个例子里，我要在这里获取x。
+in this example, I'm gonna grab that x off of here.
+在这个例子里，我要在这里获取 x。
 
 898
 00:37:16,641 --> 00:37:17,206
-             'Kay?
+'Kay?
 
 899
 00:37:17,208 --> 00:37:18,574
-       I'm gonna do that,
-       我这么做，
+I'm gonna do that,
+想要这么做，
 
 900
 00:37:18,576 --> 00:37:24,012
-  I'm gonna try to do that by
-   saying, let op equal ops.
-   这么实现： let op ＝ ops.
+I'm gonna try to do that by saying, let op equal ops.
+这么实现： let op ＝ ops.
 
 901
 00:37:38,994 --> 00:37:40,594

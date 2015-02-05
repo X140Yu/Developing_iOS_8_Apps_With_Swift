@@ -1201,274 +1201,342 @@ stored in variables copied, okay?
 301
 00:13:32,501 --> 00:13:34,117
 Right?
+好的。
 
 302
 00:13:34,118 --> 00:13:35,734
 And referenced and classes are reference types.
+类属于引用类型。
 
 303
 00:13:35,737 --> 00:13:37,637
 In other words, we pass round pointers to them,
+换句话说，我们传递的是这些对象的指针，
 
 304
 00:13:37,639 --> 00:13:39,171
 they live in the heap.
+而这些对象本身存储在堆内存中。
 
 305
 00:13:39,173 --> 00:13:41,407
 And remember that class is their memory and
+需要记住的是，堆内存中的对象
 
 306
 00:13:41,409 --> 00:13:43,809
 the heap is managed for us.
+系统会自动为我们管理（ARC）。
 
 307
 00:13:43,811 --> 00:13:45,444
 Okay, so there's nothing,
+是的，这样一来，
 
 308
 00:13:45,445 --> 00:13:47,078
-we don't have to do anything [INAUDIBLE] can free them.
+we don't have to do anything alloc and free them.
+我们就没有必要手动去开辟和释放内存了。
 
 309
 00:13:47,080 --> 00:13:48,212
 We create them when we want, and
+我们创建这些对象后，
 
 310
 00:13:48,214 --> 00:13:49,714
 when nobody else, no one's using it,
+当没有其他指针指向这些对象的时候，
 
 311
 00:13:49,716 --> 00:13:52,316
 it gets cleaned up and it's not garbage collection, okay?
+这些对象就会被马上清理掉，注意，这不是垃圾回收机制，明白吗？
 
 312
 00:13:52,318 --> 00:13:53,850
 Reference counting, automatic reference counting.
+这是引用计数，自动引用计数。
 
 313
 00:13:53,852 --> 00:13:56,252
 But, I wanna just have a slide on this
+我还希望多讲一下关于
 
 314
 00:13:56,254 --> 00:13:58,221
 value type versus reference type again, because it's
+值类型和引用类型的区别，因为明白这个
 
 315
 00:13:58,223 --> 00:13:59,789
 a really important thing to understand it.
+真的很重要。
 
 316
 00:13:59,791 --> 00:14:01,890
 Cuz people get confused writing the code and
+因为人们在写代码的时候并不是很清楚
 
 317
 00:14:01,892 --> 00:14:04,726
 they don't understand what's going on,
+他们背后的区别和原理，
 
 318
 00:14:04,728 --> 00:14:08,329
 but a value type struct means, you know, it's
+对于值类型，比如结构体，它表示
 
 319
 00:14:08,331 --> 00:14:11,599
 mean that it's copied when you pass it into a function.
+当你将它传递给函数的时候，函数使用的是它的拷贝。
 
 320
 00:14:11,601 --> 00:14:14,235
 It's copied when you assign it to a different variable,
+当你将它赋值给另外一个变量的时候也是如此，
 
 321
 00:14:14,237 --> 00:14:15,436
 this one especially gets people.
+理解这个是很重要的。
 
 322
 00:14:15,438 --> 00:14:16,636
 I don't understand as I have,
+比如，
 
 323
 00:14:16,638 --> 00:14:20,540
 you know let x equals array, and I say let y equal x.
+将一个数组赋值给一个常量x，然后将x赋值给常量y。
 
 324
 00:14:20,542 --> 00:14:22,508
 That makes, essentially a copy of x,
+这实际上是将x的值拷贝一份给了y，
 
 325
 00:14:22,510 --> 00:14:25,611
 now that copy might be lazy behind the scenes, but
+或许这背后是以惰性的方式拷贝的，但是
 
 326
 00:14:25,613 --> 00:14:28,279
 as far as you're concerned it's a copy, okay?
+你只需要知道x的值是拷贝给y的就可以了，明白吗？
 
 327
 00:14:29,449 --> 00:14:31,015
 And if you wanna to be mutable,
+如果你想赋值后可以修改它，
 
 328
 00:14:31,017 --> 00:14:33,183
 you could copy it into a VAR instead of a LET,
+你只需要将这个常量赋值给一个变量（var y = x）之后，
 
 329
 00:14:33,185 --> 00:14:34,718
 and now you could mutate it.
+你就可以修改它了。
 
 330
 00:14:34,720 --> 00:14:36,486
 And if you mutate it you get,
+而且这个时候你修改y的时候，
 
 331
 00:14:36,488 --> 00:14:38,988
 you're mutating your own copy, you're not mutating.
+你修改的是你拷贝来的值，而不是修改
 
 332
 00:14:38,990 --> 00:14:42,491
 What the other one pointed to, okay?
+之前被拷贝的那个值（修改y不会影响x），明白吗？
 
 333
 00:14:42,493 --> 00:14:47,729
 you, because of this, when you make a struct or an enum,
+正是因为这个原理，当你定义一个枚举或结构体，
 
 334
 00:14:47,731 --> 00:14:51,866
 and you add a function to it that modifies it,
+并且给它添加一个方法来修改它的状态的时候，
 
 335
 00:14:51,868 --> 00:14:56,236
 you have to mark it with this keyword mutating.
+你必须在方法前面加上mutating关键字。
 
 336
 00:14:56,238 --> 00:14:59,306
 And that's so that Swift knows when someone else.
+这样当其他人，
 
 337
 00:14:59,308 --> 00:15:02,042
 Gets you know, tries to use your enum or struct, if
+需要使用你的这个枚举或结构体的时候，
 
 338
 00:15:02,044 --> 00:15:05,178
 they use one of these mutating functions it obviously has to
+他们必须在一个变量上来调用这些mutating函数，
 
 339
 00:15:05,180 --> 00:15:07,613
 be in a var but not in a let type variable.
+而不是在一个常量上。
 
 340
 00:15:07,615 --> 00:15:13,552
 [NOISE] Okay so reference stored in the heap, reference
+好的，引用类型存储在堆中，
 
 341
 00:15:13,554 --> 00:15:19,524
 counted even if you have a constant pointer to a class.
+即使这是一个常量指针，也会导致引用计数增加。
 
 342
 00:15:19,526 --> 00:15:21,525
 Let something equals the class.
+对于指向一个对象的常量指针，
 
 343
 00:15:21,527 --> 00:15:24,261
 You can still send messages to that thing that can mutate it,
+你同样可以向这个常量指针发送消息，来修改所指对象里面的属性，
 
 344
 00:15:24,263 --> 00:15:26,196
 because it didn't the heap.
+因为这个对象存储在堆里面，
 
 345
 00:15:26,197 --> 00:15:28,130
 All right, so it being, you have a pointer to it.
+而你可以用一个指针来引用它。
 
 346
 00:15:28,133 --> 00:15:29,933
 So, and when you pass it to a function,
+当你把这个这个对象传递个一个函数的时候，
 
 347
 00:15:29,935 --> 00:15:31,267
 you're passing a pointer to that thing, so
+你传递的是指向这个对象的指针，所以，
 
 348
 00:15:31,269 --> 00:15:32,968
 if the function modifies it,
+如果这个函数修改了这个对象，
 
 349
 00:15:32,970 --> 00:15:35,571
 it's modifying the thing back where it was called.
+那它修改的就是存储在堆内存中的那个对象了。
 
 350
 00:15:35,573 --> 00:15:37,406
 Okay?
+明白吗？
 
 351
 00:15:37,408 --> 00:15:41,809
 So which do you use between these two?
+那么如何正确选择这两种数据类型呢？
 
 352
 00:15:41,811 --> 00:15:42,894
 Well you know,
+事实上，
 
 353
 00:15:42,895 --> 00:15:43,978
 90% of the time, you're gonna use a class.
+百分之九十的情况下我们都会使用类。
 
 354
 00:15:43,980 --> 00:15:45,746
 This is object-oriented programming language.
+因为这是面向对象的编程语言。
 
 355
 00:15:45,748 --> 00:15:48,348
 You're gonna wanna have the ability to do inheritance, and
+当你使用类，你就可以使用诸如继承，
 
 356
 00:15:48,350 --> 00:15:49,916
 overriding, and things like that.
+重写之类的特性了。
 
 357
 00:15:49,918 --> 00:15:53,786
 Structs are really more for the basic fundamental types,
+而结构体更适合基础数据类型，
 
 358
 00:15:53,788 --> 00:15:57,456
 like double, int, array, dictionaries, string.
+比如小数，整数，数组，字典和字符串。
 
 359
 00:15:57,458 --> 00:16:00,826
 These are all you know, really fundamental things and
+你知道，这些东西都非常基础，而且
 
 360
 00:16:00,828 --> 00:16:03,128
 when we get into the graphics, you're gonna see the points,
+当我们涉及到绘图的时候，我们会更多地使用points，
 
 361
 00:16:03,130 --> 00:16:07,131
 sizes, rectangles, those are structs, okay?
+sizes，rectangles，这些都是结构体。
 
 362
 00:16:07,133 --> 00:16:09,166
 But, most of everything else we build,
+但是，我们大多数操作都是
 
 363
 00:16:09,168 --> 00:16:12,036
 we build the classes, okay.
+与类打交道。
 
 364
 00:16:12,038 --> 00:16:13,804
 And since it manages all the memory for you and
+而且，加上系统会为你管理内存，
 
 365
 00:16:13,806 --> 00:16:18,775
 all that, it's really no big pain to do, to use classes.
+所以现在使用类是一件非常轻松的事情了。
 
 366
 00:16:19,944 --> 00:16:22,228
 All right, so methods.
+好的，接下来，
 
 367
 00:16:22,229 --> 00:16:24,513
 So, I wanna talk a little bit about methods, all right.
+我想讨论一下 方法。
 
 368
 00:16:24,515 --> 00:16:26,181
 You obviously-
+很明显，
 
 369
 00:16:26,183 --> 00:16:27,449
@@ -1477,126 +1545,158 @@ You obviously-
 370
 00:16:27,451 --> 00:16:29,417
 >> If you override a method in a class,
+当你重写父类的方法的时候，
 
 371
 00:16:29,419 --> 00:16:33,287
 you have to put the keyword, override in front of it, 'kay?
+你必须在该方法前面加上override关键字，记住了吗？
 
 372
 00:16:34,490 --> 00:16:37,057
 You can also mark a method final,
+你也可以把一个方法标记为final，
 
 373
 00:16:37,059 --> 00:16:39,559
 that means no one can override it.
+这表示这个方法不能被重写。
 
 374
 00:16:39,561 --> 00:16:41,694
 So, if someone subclasses a class you wrote,
+这样一来，如果有人继承了你的类，
 
 375
 00:16:41,696 --> 00:16:43,328
 they can't override you if you marked it final.
+他们就不能重写那些被标记为final的方法了。
 
 376
 00:16:43,330 --> 00:16:46,131
 You can also mark an entire class final, which means hm,
+你还可以把整个类都标记为final，这表示，
 
 377
 00:16:46,133 --> 00:16:47,565
 it's a, you know, this is the end of the line.
+谁都不能更改这个类了。
 
 378
 00:16:47,567 --> 00:16:49,634
 You can't do any subclasses of it basically.
+甚至不能继承这个类。
 
 379
 00:16:49,636 --> 00:16:51,402
 Okay?
+明白了吗？
+
 
 380
 00:16:51,404 --> 00:16:58,508
 Both types and instances have methods and properties.
+类型和实例都有自己的方法和属性。
 
 381
 00:16:58,510 --> 00:17:00,577
 So, types, a type is like array,
+比如，数组就是一个类型（相当于Class），
 
 382
 00:17:00,579 --> 00:17:04,047
 that's the type and instance of an array is an actual array
+而具体的一个数组就是一个实例（相当于具体对象），
 
 383
 00:17:04,049 --> 00:17:04,947
 with things in it.
+实例封装有自己数据。
 
 384
 00:17:04,949 --> 00:17:07,249
 Okay?
+明白吗？
 
 385
 00:17:07,250 --> 00:17:09,550
 So let's look at this pili, piece of code, right here.
+我们来看看下面这段代码。
 
 386
 00:17:09,553 --> 00:17:11,620
 I've defined a double, 'kay?
+我定义里一个Double类型的变量d，
 
 387
 00:17:11,622 --> 00:17:13,922
 This var which is a double, and I say,
+这个是一个double变量，
 
 388
 00:17:13,924 --> 00:17:17,625
 if the Double isSignMinus, that means if it's minus sign,
+然后向d发送isSignMinus消息，来判断它
 
 389
 00:17:17,627 --> 00:17:19,727
 has, it's negative.
+是否是一个负数，
 
 390
 00:17:19,729 --> 00:17:21,962
 Then I'm going to set the Double to be it,
+然后我把d设置为，
 
 391
 00:17:21,964 --> 00:17:23,863
 the absolute value of the double.
+它的绝对值。
 
 392
 00:17:23,865 --> 00:17:28,501
 So, isSignMinus is an instance variable,
+所以，isSignMius是实例d的变量，
 
 393
 00:17:28,503 --> 00:17:30,035
 an instance property.
+或者说是实例d的一个属性。
 
 394
 00:17:30,037 --> 00:17:32,804
 You send it to a particular Double to ask it,
+你通过对一个具体的Double类型的实例d发送isSignMius消息，
 
 395
 00:17:32,806 --> 00:17:34,673
 is your SignMinus?
+来判实例d是否是负数。
 
 396
 00:17:34,675 --> 00:17:39,210
 Whereas Double.abs is a type function on double.
+然而，abs是Double这个类型的方法（类似于class的类方法，所有对象共享）。
 
 397
 00:17:39,212 --> 00:17:42,379
 You pass the Double you wanna operate on to it, and
+你向这个方法中传入你需要操作的Double类型的实例，
 
 398
 00:17:42,381 --> 00:17:44,381
 it works on it.
+它返回你想要的结果。
 
 399
 00:17:44,382 --> 00:17:46,382
 But your, and you're not sending abs to a particular
+这里，你并没有向一个特定的Double类型的实例发送消息，
 
 400
 00:17:46,385 --> 00:17:48,385
 double, you're sending it to the class, or
+而是向Double这个类型在发送消息，
 
 401
 00:17:48,387 --> 00:17:49,952
@@ -2903,7 +3003,7 @@ you can set them later like the outlets in a storyboard.
 672
 00:28:46,117 --> 00:28:50,752
 Or you can actually initialize by using a closure.
-���又或者可以用闭包来初始化属性。
+???又或者可以用闭包来初始化属性。
 
 673
 00:28:50,754 --> 00:28:52,287

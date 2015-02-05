@@ -16,36 +16,16 @@
     - 原文中例如 [COUGH] 等类似的部分不需要翻译。
 - 其它：
     - 学生提问的部分，听不清楚，字幕也不全，但是老师回答的时候会把问题复述一遍，
-      所以字幕只需要'[学生提问]'就好。
+      所以字幕只需要'（学生提问）'就好。
 
 - 不需要翻译的词汇
     - Xcode 中的词语，例如：Story board。
     - model, view, controller, view controller 等。
     - true, false 等 Swift 中的关键字。
+    - UI, Auto Layout 
 
 ### 格式要求
 - 把一条字幕中的多行合并成一行。
-- 所以请根据情况，把多条字幕合并成一条：
-    - 单条只带有类似 'OK' 的语气词，合并到上一条。
-    - 一个完整的句子被分成多条，但是合并后，屏幕能装得下合并后的一条。  
-      例如（注意时间轴的调整）：  
-
-            1616
-            01:11:25,330 --> 01:11:28,531
-            So, that basically results   
-            in a picture looks kinda    
-
-            1617
-            01:11:28,533 --> 01:11:29,899
-                       
-
-            1618
-            01:11:29,901 --> 01:11:31,434
-            All right?   
-      可以修改成：
-
-            1616
-            01:11:25,330 --> 01:11:31,434
-            So, that basically results in a picture looks kinda like this. All right? 
+- 不要合并多条字幕！
 
 

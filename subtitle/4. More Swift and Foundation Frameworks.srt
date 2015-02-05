@@ -1,154 +1,191 @@
-﻿1
+1
 00:00:00,001 --> 00:00:04,836
 [MUSIC]
 
 2
 00:00:04,838 --> 00:00:07,405
 Stanford University.
+斯坦福大学。
 
 3
 00:00:11,277 --> 00:00:15,946
 >> Okay, well, welcome to lecture four of CS193P,
+欢迎来到 CS193P，
 
 4
 00:00:15,948 --> 00:00:18,748
 Stanford Winter of 2015.
+斯坦福 2015 冬季课程。
 
 5
 00:00:18,750 --> 00:00:21,284
 So, I've been doing all demo up until now,
+在今天以前，我们一直都在写 demo， 
 
 6
 00:00:21,286 --> 00:00:24,553
 and now we're going to be doing all slides today.
+而今天，我们将会全部通过幻灯片学习。
 
 7
 00:00:24,555 --> 00:00:28,724
 So, I have a lot of stuff to talk about most of this,
+我将会讲到很多东西，大部分，
 
 8
 00:00:28,726 --> 00:00:31,143
 although not all of it,
+但不是全部，
 
 9
 00:00:31,144 --> 00:00:33,561
 is covered in your reading assignments, mh okay?
+都在你的阅读任务中，好吗？
 
 10
 00:00:33,563 --> 00:00:35,496
 But here I'm going to
+在这里我会尝试着把
 
 11
 00:00:35,497 --> 00:00:37,430
 try to highlight the things that are pretty important, and
+最重要的部分高亮出来，
 
 12
 00:00:37,433 --> 00:00:39,066
 also just show you some stuff that are not in
+并且也会给你看一些
 
 13
 00:00:39,068 --> 00:00:41,802
 that reading assignment that you kinda need to know.
+并不包含在阅读任务中，但你仍然需要知道的东西。
 
 14
 00:00:41,804 --> 00:00:43,336
 So this is definitely not a substitute for
+所以这绝对不能代替阅读
 
 15
 00:00:43,338 --> 00:00:46,472
 the reading you'll still need to do the reading in order to
+你仍然需要通过阅读
 
 16
 00:00:46,474 --> 00:00:49,875
 kinda get the, the details of a lot of this stuff.
+来掌握一些细节部分。
 
 17
 00:00:49,877 --> 00:00:54,613
 So but this hopefully will kinda get you focused in on,
+但希望这节课可以让你注意在，
 
 18
 00:00:54,615 --> 00:00:58,066
 on the key stuff.
+关键的东西上。
 
 19
 00:00:58,067 --> 00:01:01,518
 All right, [COUGH] so first, I wanna talk about
+好的，那么我将讲讲
 
 20
 00:01:01,521 --> 00:01:05,589
 optionals and enums, so now that you know what an enum is.
+optionals 和 enums，现在你已经知道 enum 是什么了。 
 
 21
 00:01:05,591 --> 00:01:08,425
 I can tell you what an Optional really is okay?
+那么我可以告诉你 optional 到底是什么了 
 
 22
 00:01:08,427 --> 00:01:10,994
 An Optional is just an enum, okay?
+一个 optional 就是一个 enum，
 
 23
 00:01:10,996 --> 00:01:15,098
 It's a very simple enum it's a generic kind of like array.
+这就是一个非常简单的 enum，就像数组的泛型。
 
 24
 00:01:15,100 --> 00:01:15,998
 You know, have an array,
+你知道，一个数组，
 
 25
 00:01:16,000 --> 00:01:17,666
 you specify the type of thing in it,
+你指定了其类型，
 
 26
 00:01:17,668 --> 00:01:19,301
-Optional's exactly the same, okay?
+Optionals exactly the same, okay?
+Optionals 完全就是这样，
 
 27
 00:01:19,303 --> 00:01:20,335
 It's a generic.
+就是泛型。
 
 28
 00:01:20,337 --> 00:01:22,637
 You specify the type of Optional it is.
+你指定了 optional 的类型是什么。
 
 29
 00:01:22,639 --> 00:01:26,173
 And that type, which is T here in this little enum,
+而此类型，在这个小 enum 中的 T
 
 30
 00:01:26,175 --> 00:01:29,376
 is just the type of the associated value, you know,
+就是一种关联值类型，
 
 31
 00:01:29,378 --> 00:01:31,578
 that enums can have associated values.
+enums 可以关联各种值。
 
 32
 00:01:31,580 --> 00:01:35,882
 So that's just the type that, if the optional is not nil.
+所以这就只是其类型，如果 optional 不是 nil。
 
 33
 00:01:35,884 --> 00:01:38,751
 That's what you get so that's all an enum is and
+这就是你会取到的。这就是 enum 的全部了。
 
 34
 00:01:38,753 --> 00:01:42,054
 so for example, this is what it would look like if we
+举个例子，这里就是你会看到的
 
 35
 00:01:42,056 --> 00:01:45,724
 used the enum notation to do an optional.
+如果我们使用一个 enum 实现一个 optional。
 
 36
 00:01:45,726 --> 00:01:49,561
 Saying you know, x which is an enum or is an optional string,
+你可以看到，x 可以是一个 enum 或者是一个 optional string，
 
 37
 00:01:49,563 --> 00:01:52,130
-which nil would just be saying x equals optional,
+which nil would just be saying x equals optional
+x nil 与 optional
 
 38
 00:01:52,132 --> 00:01:53,497
 angle bracket string dot none.
+等于尖括号 string 点 none 相等。
 
 39
 00:01:54,800 --> 00:01:56,200
@@ -157,58 +194,72 @@ Okay?
 40
 00:01:56,201 --> 00:01:57,601
 Or, if you're sending it to not be know you
+或者你可以将其隐藏，
 
 41
 00:01:57,603 --> 00:02:00,403
-would say optional angle bracket string dot some,
+would say optional angle bracket string dot Some，
+你可以说 optional 尖括号 string 点 Some，
 
 42
 00:02:00,405 --> 00:02:02,705
 parentheses, the associated value, which would be hello.
+圆括号，关联值，也就是 "Hello".
 
 43
 00:02:04,408 --> 00:02:05,607
 That make sense?
+很合理对吧？
 
 44
 00:02:05,609 --> 00:02:07,709
 So Optional really actually super simple.
+Optional 其实就是这么简单。
 
 45
 00:02:07,711 --> 00:02:10,478
 With a question mark and exclamation point,
+由问好及感叹号组成，
 
 46
 00:02:10,480 --> 00:02:13,180
 I know that makes it seem like, it's just so
+我知道这看起来
 
 47
 00:02:13,182 --> 00:02:17,451
 really complicated, but it's pretty simple really it's just
+非常复杂，但实际上非常简单
 
 48
 00:02:17,453 --> 00:02:20,787
 syntax sugar, syntactic sugar to do this Optional.
+这只是语法糖而已，语法糖实现了 optional。
 
 49
 00:02:20,789 --> 00:02:25,124
 Now the unwrapping, really just looks like this It's just
+现在到解包，真的这看起来
 
 50
 00:02:25,126 --> 00:02:28,894
-a switch and the case of sum, you give the value back.
+a switch and the case of some, you give the value back.
+就只是 switch 与 case，在 "Some" 的情况下你可以得到其值。
 
 51
 00:02:28,896 --> 00:02:32,230
 In the case of none, you raise an exception, okay?
+在 "None" 的情况下，你抛出了一个异常。
 
 52
 00:02:32,232 --> 00:02:36,034
 And simple as that.
+就这么简单。
 
 53
 00:02:36,036 --> 00:02:38,836
 That's why it crashes when you unwrap something that's
+这也是为什么当你解包一个 nil 的时候会崩溃
 
 54
 00:02:38,838 --> 00:02:41,405
@@ -217,186 +268,232 @@ nil, okay?
 55
 00:02:41,407 --> 00:02:45,242
 So that's optional all right, so array, I just wanna.
+这就是一个 optional 对吧，一个数组，我只是想要。
 
 56
 00:02:45,244 --> 00:02:47,744
 We covered this so I'm gonna really fast through this but
+我们已经概括了一次，所以我将很快地进行下一部分。
 
 57
 00:02:47,746 --> 00:02:50,480
 arrays, the syntax there is the same, right?
+数组，这里的语法是相同的，对吧？
 
 58
 00:02:50,482 --> 00:02:51,781
 That square bracket thing,
+这个尖括号东西，
 
 59
 00:02:51,783 --> 00:02:54,050
 that means exactly the same thing.
+这就意味着他们是相同的。
 
 60
 00:02:54,052 --> 00:02:59,054
 Also you can't append or modify in any way
+并且你不能通过任何方式增加或修改
 
 61
 00:02:59,056 --> 00:03:02,257
 an array that is a let, right, that's a constant array.
+一个声明为 let 的数组，因为这是常量数组。
 
 62
 00:03:02,259 --> 00:03:04,992
 I just wanna make it clear that defining an array to
+我在这里重申一下，通过 let 将一个
 
 63
 00:03:04,994 --> 00:03:07,328
 be a constant by saying let something equal
+数组声明为常量
 
 64
 00:03:07,330 --> 00:03:09,229
 an array versus var something equal an array,
+与声明一个 array 为 var 是相反的，
 
 65
 00:03:09,231 --> 00:03:12,833
 means that it's immutable, so you can't do append or insert,
+这意味着它是不可变的，所以你不能增加或插入，
 
 66
 00:03:12,835 --> 00:03:15,468
 or anything else that you could do on a mutable array.
+或任何你想要改变这个数组的操作。
 
 67
 00:03:15,470 --> 00:03:17,337
 Also, of course,
+当然，
 
 68
 00:03:17,338 --> 00:03:19,205
 if you access an array with the square brackets and
+如果你通过方括号访问一个数组
 
 69
 00:03:19,207 --> 00:03:21,540
 try to pull out something that's outside the bounds of
+然后尝试着获取一个超出了数组范围东西
 
 70
 00:03:21,542 --> 00:03:23,809
 the array, this array only has four animals in it and
+这个数组，这个数组只有四种动物在里面，
 
 71
 00:03:23,811 --> 00:03:27,145
 I'm trying to get animal five that's gonna crash.
+我想要获取第五种，那么就会崩溃。
 
 72
 00:03:27,147 --> 00:03:28,279
 Array index out of bounds,
+数组越界，
 
 73
 00:03:28,281 --> 00:03:30,981
 just like pretty much any language you've used.
+就好像你曾经用过的任何一种语言。
 
 74
 00:03:32,551 --> 00:03:33,850
 How to enumerate an array.
+如何枚举一个数组呢。
 
 75
 00:03:33,852 --> 00:03:35,885
 If you wanted to go through every single item
+如果你想要获取在数组中的每一件事物
 
 76
 00:03:35,887 --> 00:03:39,655
-in an array and look at it, you can use four in, okay?
+in an array and look at it, you can use for in, okay?
+你可以使用 for in， 
 
 77
 00:03:39,657 --> 00:03:43,526
-So you just say four, some variable you want,
+So you just say for, some variable you want,
+需要使用 for，一个你需要的变量，
 
 78
 00:03:43,528 --> 00:03:46,061
 in your array, and then inside there,
+in 你的数组，然后在里面，
 
 79
 00:03:46,063 --> 00:03:49,131
 that'll be your value, okay pretty obvious.
+那就是你要的参数，非常明显。
 
 80
 00:03:49,133 --> 00:03:51,433
 I put this here mostly to compare it to the next slide,
+我放在这里主要是为了与接下来字典的幻灯片进行对比，
 
 81
 00:03:51,435 --> 00:03:54,902
 which is dictionary so dictionary again,
+又是字典，
 
 82
 00:03:54,904 --> 00:03:56,470
 that's where a bracket thing is an alternate for
+这里的括号也是起着同样的作用
 
 83
 00:03:56,472 --> 00:03:59,406
 the exact same thing so if I had a nice
+如果我有一个非常好的
 
 84
 00:03:59,408 --> 00:04:02,576
 dictionary here I can create a dictionary.
+字典，我可以创造一个字典。
 
 85
 00:04:02,578 --> 00:04:04,177
 Using this square bracket notation,
+使用方括号标记。
 
 86
 00:04:04,179 --> 00:04:07,146
 which is just square bracket, key colon value, comma
+方括号，键 冒号 值，逗号 
 
 87
 00:04:07,148 --> 00:04:08,914
 key colon value okay, you know that.
-
+键 冒号 值，好了你懂的。
+ 
 88
 00:04:08,916 --> 00:04:12,084
 And you also know that if I access a dictionary with
+并且你也知道，如果我通过方括号访问一个字典，
 
 89
 00:04:12,086 --> 00:04:14,519
 the square bracket, it returns an optional and
+他会返回一个 optional 对象，
 
 90
 00:04:14,521 --> 00:04:17,722
 that's because, for example here, I'm looking up PAC ten
+这是由于，举个例子，我要在 "pac10team" 中寻找俄亥俄州， 
 
 91
 00:04:17,724 --> 00:04:21,192
 team Ohio State obviously that is not.
+明显就没有。
 
 92
 00:04:21,194 --> 00:04:23,961
 It packed ten team so it's not in the dictionary.
+这里只包含了十个队伍，所以就不在这个字典里。
 
 93
 00:04:23,963 --> 00:04:25,929
 So it's going to return nil, okay?
+那么就应该返回 nil 对吧？
 
 94
 00:04:25,931 --> 00:04:27,931
 So, that's why when you access a dictionary,
+这就是为什么你访问一个字典，
 
 95
 00:04:27,933 --> 00:04:29,299
 it comes back it's an Optional.
+它会返回一个 Optional 对象。
 
 96
 00:04:30,769 --> 00:04:32,868
 To enumerate dictionary you use a tuple.
+枚举字典你需要使用 tuple。
 
 97
 00:04:33,871 --> 00:04:36,171
-Okay, so you say four, the tuple,
+Okay, so you say for, the tuple,
+你输入 for，tuple
 
 98
 00:04:36,173 --> 00:04:39,207
 key com of value in the dictionary.
+键值对 in 字典。
 
 99
 00:04:39,209 --> 00:04:41,376
 And inside there, key and value will both be set.
+然后在里面，键与值都会设置好。
 
 100
 00:04:41,378 --> 00:04:46,947
-Okay, that's really easy way to enumerate dictionaries.好了，这是非常简单的枚举字典的方法。
+Okay, that's really easy way to enumerate dictionaries.
+好了，这是非常简单的枚举字典的方法。
 
 101
 00:04:48,083 --> 00:04:53,686

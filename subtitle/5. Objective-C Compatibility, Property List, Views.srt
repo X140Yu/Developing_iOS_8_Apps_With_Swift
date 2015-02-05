@@ -1,0 +1,7412 @@
+﻿1
+00:00:00,001 --> 00:00:04,636
+[MUSIC]
+
+2
+00:00:04,638 --> 00:00:07,672
+Stanford University.
+
+3
+00:00:13,579 --> 00:00:18,248
+Okay, well welcome to Stanford CS193p, Winter of 2015.
+
+4
+00:00:18,250 --> 00:00:20,983
+This is lecture number five.
+
+5
+00:00:20,985 --> 00:00:22,318
+And, today we're gonna finish up
+
+6
+00:00:22,320 --> 00:00:24,486
+what were talking about last time.
+
+7
+00:00:24,488 --> 00:00:27,289
+And talk a little bit about Objective-C compatibility,
+
+8
+00:00:27,291 --> 00:00:29,991
+because, of course iOS was originally written in
+
+9
+00:00:29,993 --> 00:00:31,426
+an entirely different language.
+
+10
+00:00:31,428 --> 00:00:33,078
+And so there's a little bit of
+
+11
+00:00:33,079 --> 00:00:34,729
+bridging between the Swift world and the old world.
+
+12
+00:00:34,731 --> 00:00:37,931
+And we're gonna talk about an example of
+
+13
+00:00:37,933 --> 00:00:41,168
+using any object which is property lists.
+
+14
+00:00:41,170 --> 00:00:43,703
+And I'm gonna do a kind of a brief demo even,
+
+15
+00:00:43,705 --> 00:00:45,104
+showing you that.
+
+16
+00:00:45,106 --> 00:00:47,940
+Then we're gonna move onto a completely new topic,
+
+17
+00:00:47,942 --> 00:00:50,793
+which is views.
+
+18
+00:00:50,794 --> 00:00:53,645
+So, views on how we draw, and how we handle touch input.
+
+19
+00:00:53,647 --> 00:00:56,381
+In our UI and so we're gonna go over that, and
+
+20
+00:00:56,383 --> 00:00:58,116
+I'll be having a demo for that as well.
+
+21
+00:00:58,118 --> 00:01:00,818
+So, I'm gonna blast through these slides pretty quick.
+
+22
+00:01:00,820 --> 00:01:04,188
+As usual, the demonstration is probably
+
+23
+00:01:04,190 --> 00:01:06,823
+a little more elucidating then some of the slides, cuz when
+
+24
+00:01:06,825 --> 00:01:08,925
+you see it in action, it's a lot easier to understand.
+
+25
+00:01:08,927 --> 00:01:11,995
+Okay.
+
+26
+00:01:11,996 --> 00:01:15,064
+So, Objective-C compatibility, so, virtually all the iOS API,
+
+27
+00:01:15,066 --> 00:01:20,002
+this API that was written over the last, however many years,
+
+28
+00:01:20,004 --> 00:01:23,905
+in Objective-C, is available from Swift.
+
+29
+00:01:23,907 --> 00:01:25,773
+And you can't even tell the difference, okay?
+
+30
+00:01:25,775 --> 00:01:29,176
+It's just kind of, automatically made available.
+
+31
+00:01:29,178 --> 00:01:30,711
+And, when they designed Swift,
+
+32
+00:01:30,713 --> 00:01:33,513
+they went to a lot of trouble to make sure that it would,
+
+33
+00:01:33,515 --> 00:01:35,515
+could be done in a very compatible way.
+
+34
+00:01:35,517 --> 00:01:38,785
+So, that all of the iOS API, would work,
+
+35
+00:01:38,787 --> 00:01:40,553
+just fine in Swift.
+
+36
+00:01:40,555 --> 00:01:44,523
+There's few special data types though, that they've gone
+
+37
+00:01:44,525 --> 00:01:49,294
+to special care to bridge between the two languages,
+
+38
+00:01:49,296 --> 00:01:54,532
+and this makes using iOS API from Objective-C, much easier
+
+39
+00:01:54,534 --> 00:01:58,235
+in Swift, and so, I'm gonna talk briefly about those.
+
+40
+00:01:58,237 --> 00:02:00,203
+One is NSString.
+
+41
+00:02:00,205 --> 00:02:02,939
+That is the old way that string were represented,
+
+42
+00:02:02,941 --> 00:02:06,775
+in iOS, and that is bridged interchangeably to
+
+43
+00:02:06,777 --> 00:02:07,909
+Swift's string.
+
+44
+00:02:07,911 --> 00:02:09,310
+You can't really even tell the difference.
+
+45
+00:02:09,312 --> 00:02:11,546
+If you have a method that takes an NSString,
+
+46
+00:02:11,548 --> 00:02:14,415
+you can pass a Swift string in there, and vice-versa.
+
+47
+00:02:14,417 --> 00:02:16,283
+Okay, they're just automatically treated if
+
+48
+00:02:16,285 --> 00:02:17,317
+they were the same thing,
+
+49
+00:02:17,319 --> 00:02:19,119
+even though they are quite different things.
+
+50
+00:02:19,121 --> 00:02:22,088
+String in Swift is not even a class.
+
+51
+00:02:22,090 --> 00:02:23,189
+Okay, its just a struct.
+
+52
+00:02:23,191 --> 00:02:26,258
+So, they've done some miraculous work to
+
+53
+00:02:26,260 --> 00:02:27,592
+bridge these things.
+
+54
+00:02:27,594 --> 00:02:30,528
+NSArray, which is the old array,
+
+55
+00:02:30,530 --> 00:02:33,865
+is bridged to array of any object.
+
+56
+00:02:33,867 --> 00:02:37,468
+Okay, so any time you see, an array of any object in
+
+57
+00:02:37,470 --> 00:02:42,439
+an iOS API, it's because it was an NSArray before, okay?
+
+58
+00:02:42,441 --> 00:02:44,374
+Then NSDictionary is an interesting one,
+
+59
+00:02:44,376 --> 00:02:47,343
+it's bridged to dictionary where the keys have to be
+
+60
+00:02:47,345 --> 00:02:49,378
+subclasses of NSObject, and
+
+61
+00:02:49,380 --> 00:02:52,848
+the values are any object, okay?
+
+62
+00:02:52,850 --> 00:02:55,350
+Now, you might think, that's gonna be a problem, and
+
+63
+00:02:55,352 --> 00:02:58,153
+I'll explain why that's not in a moment.
+
+64
+00:02:58,155 --> 00:02:59,554
+And then of course, Int and
+
+65
+00:02:59,556 --> 00:03:03,357
+Float, Double, Bool, they are all bridged to NSNumber.
+
+66
+00:03:03,359 --> 00:03:04,858
+We talked briefly about NSNumber,
+
+67
+00:03:04,860 --> 00:03:06,960
+we talked about the NSNumber format and all that.
+
+68
+00:03:06,962 --> 00:03:10,430
+So, NSNumber was the old Objective-C object that
+
+69
+00:03:10,432 --> 00:03:12,965
+just meant, any kind of numeric value.
+
+70
+00:03:12,967 --> 00:03:15,801
+And, so anything that used to take an NSNumber, you can
+
+71
+00:03:15,803 --> 00:03:19,204
+pass a double, or float or int in there, and it'll just work.
+
+72
+00:03:19,206 --> 00:03:21,573
+Of course, coming back the other way isn't automatic,
+
+73
+00:03:21,575 --> 00:03:23,775
+because it doesn't really know necessarily what you want.
+
+74
+00:03:24,811 --> 00:03:27,278
+But you can use the methods like double value or
+
+75
+00:03:27,280 --> 00:03:31,382
+int value, like we use double value, in the calculator.
+
+76
+00:03:31,384 --> 00:03:34,484
+And of course, int and float and double are also bridged to
+
+77
+00:03:34,486 --> 00:03:37,287
+the C types int, float, and double.
+
+78
+00:03:37,289 --> 00:03:41,390
+So, you have an API that takes an int, and hold a C int.
+
+79
+00:03:41,392 --> 00:03:45,194
+It'll be bridged to take capital I Swift Int.
+
+80
+00:03:45,196 --> 00:03:48,296
+So, this stuff, all just works completely automatically.
+
+81
+00:03:48,298 --> 00:03:50,398
+And you don't ever have to do anything.
+
+82
+00:03:50,400 --> 00:03:51,232
+And it just works.
+
+83
+00:03:51,234 --> 00:03:55,803
+However, if you wanna be explicit, about the type,
+
+84
+00:03:55,805 --> 00:03:57,270
+you can cast, okay?
+
+85
+00:03:57,272 --> 00:04:01,240
+So, it is perfectly legal to cast a Swift string to
+
+86
+00:04:01,242 --> 00:04:04,543
+an NSString, and it will always work, so
+
+87
+00:04:04,545 --> 00:04:06,145
+you don't need as?
+
+88
+00:04:06,147 --> 00:04:09,114
+Okay, it's all a hundred percent guaranteed cast.
+
+89
+00:04:09,116 --> 00:04:10,916
+And then once you do that,
+
+90
+00:04:10,917 --> 00:04:12,717
+you have an NSString instead of a string, and so
+
+91
+00:04:12,719 --> 00:04:15,620
+you can send it messages that are in NSString.
+
+92
+00:04:15,622 --> 00:04:17,421
+Although you wanna be careful with some of them,
+
+93
+00:04:17,423 --> 00:04:19,990
+like length, is an NSString method,
+
+94
+00:04:19,992 --> 00:04:22,325
+that doesn't exist on string.
+
+95
+00:04:22,327 --> 00:04:24,661
+It doesn't exist on String for a reason.
+
+96
+00:04:24,663 --> 00:04:27,830
+Because, we talked about this before, you know,
+
+97
+00:04:27,832 --> 00:04:31,066
+the length of a Unicode string, can vary,
+
+98
+00:04:32,269 --> 00:04:35,403
+compared to the number of glifs you'll see on screen,
+
+99
+00:04:35,405 --> 00:04:37,739
+and the new Swift string deals with that, and the old
+
+100
+00:04:37,741 --> 00:04:40,307
+NSString doesn't really deal with that properly.
+
+101
+00:04:40,309 --> 00:04:43,577
+So, you gotta be careful, when you start calling NSString
+
+102
+00:04:43,579 --> 00:04:45,012
+methods that, you know,
+
+103
+00:04:45,014 --> 00:04:47,614
+there's not, you wanna look for a string equivalent, and
+
+104
+00:04:47,616 --> 00:04:49,349
+use that if you can, because it's newer, and
+
+105
+00:04:49,351 --> 00:04:52,284
+it does thinks a little more accurately.
+
+106
+00:04:52,286 --> 00:04:57,189
+But NSArray is the same thing, you can cast from an array,
+
+107
+00:04:57,191 --> 00:04:59,457
+that you have in Swift, to an NSArray, and
+
+108
+00:04:59,459 --> 00:05:01,025
+then you can call them methods in NSArray.
+
+109
+00:05:01,027 --> 00:05:03,594
+Like components joined by string, which is kinda cool,
+
+110
+00:05:03,596 --> 00:05:05,429
+it takes all the components in the array,
+
+111
+00:05:05,431 --> 00:05:07,964
+sends them description, takes those descriptions and
+
+112
+00:05:07,966 --> 00:05:10,400
+joins them by the string you pass as an argument.
+
+113
+00:05:10,402 --> 00:05:14,704
+This is the same as the join method in Swift's string.
+
+114
+00:05:14,706 --> 00:05:17,172
+Okay, so, you can look at the documentation for
+
+115
+00:05:17,174 --> 00:05:18,907
+string and, NSString and NSArray, but
+
+116
+00:05:18,909 --> 00:05:21,710
+pretty much all the things you can do there, or most
+
+117
+00:05:21,712 --> 00:05:25,846
+of them anyway, are available in the Swift versions.
+
+118
+00:05:25,848 --> 00:05:27,281
+But again, if you're passing them back and
+
+119
+00:05:27,283 --> 00:05:30,951
+forth, it's all automagic, so you'd say.
+
+120
+00:05:30,953 --> 00:05:33,753
+Now, you might get a little concerned about dictionary,
+
+121
+00:05:34,989 --> 00:05:40,225
+because dictionary, the key has to be an NSObject.
+
+122
+00:05:40,227 --> 00:05:42,594
+And of course, we know that string, and array, and
+
+123
+00:05:42,596 --> 00:05:45,663
+dictionary in Swift, are not even objects, okay?
+
+124
+00:05:45,665 --> 00:05:47,198
+They're not any object, or
+
+125
+00:05:47,200 --> 00:05:50,401
+they're, and they're not an NSObject for sure.
+
+126
+00:05:50,403 --> 00:05:53,570
+But you can still pass them anywhere you wanna pass in
+
+127
+00:05:53,572 --> 00:05:56,907
+any object, or a subclass of NSObject, because they
+
+128
+00:05:56,909 --> 00:06:00,343
+are bridged to classes that inherit from NSObject,
+
+129
+00:06:00,345 --> 00:06:01,744
+because NSString, NSArray, and
+
+130
+00:06:01,746 --> 00:06:03,412
+NSDictionary all inherit from NSObject.
+
+131
+00:06:03,414 --> 00:06:05,814
+So, that means strings, Swift strings,
+
+132
+00:06:05,816 --> 00:06:09,718
+can be the keys in a dictionary, an NSDictionary,
+
+133
+00:06:09,720 --> 00:06:11,919
+even though it requires NSObject, okay?
+
+134
+00:06:11,921 --> 00:06:14,889
+And of course, all three of them can be values,
+
+135
+00:06:14,891 --> 00:06:17,324
+because, even though they're not really objects,
+
+136
+00:06:17,326 --> 00:06:20,894
+they are structs, they are bridged to things that can be.
+
+137
+00:06:20,896 --> 00:06:21,994
+Okay?
+
+138
+00:06:21,996 --> 00:06:23,529
+So, it is okay to pass a string or
+
+139
+00:06:23,531 --> 00:06:24,530
+an array to any object.
+
+140
+00:06:27,034 --> 00:06:29,134
+You won't even notice this bridge isn't bridging 99% of
+
+141
+00:06:29,136 --> 00:06:30,285
+the time.
+
+142
+00:06:30,286 --> 00:06:31,435
+It just happens automatically.
+
+143
+00:06:31,438 --> 00:06:33,637
+But I just wanted you to know that's going on, so
+
+144
+00:06:33,639 --> 00:06:34,938
+you don't get kinda confused when you start
+
+145
+00:06:34,940 --> 00:06:37,874
+seeing NSString, NSArray, what's going on, okay?
+
+146
+00:06:37,876 --> 00:06:40,109
+They're just being automatically bridged for you.
+
+147
+00:06:41,579 --> 00:06:43,396
+All right.
+
+148
+00:06:43,397 --> 00:06:45,214
+So, we talked about any object last time,
+
+149
+00:06:45,216 --> 00:06:47,182
+and now I'm gonna talk about a use of any object,
+
+150
+00:06:47,184 --> 00:06:48,783
+which is called property list.
+
+151
+00:06:48,785 --> 00:06:51,052
+So, property list is not a type or
+
+152
+00:06:51,054 --> 00:06:54,689
+anything like that, it's just a term that we use.
+
+153
+00:06:54,691 --> 00:06:58,792
+And the definition of that term is, it's in any object,
+
+154
+00:06:58,794 --> 00:07:03,129
+a property list is any object, that is known to be,
+
+155
+00:07:03,131 --> 00:07:05,865
+behind the scenes, one of those six classes.
+
+156
+00:07:05,867 --> 00:07:07,650
+NSString, an array,
+
+157
+00:07:07,651 --> 00:07:09,434
+dictionary, number, data and date.
+
+158
+00:07:09,437 --> 00:07:12,404
+Or bridged too with Swift, okay?
+
+159
+00:07:12,406 --> 00:07:17,609
+So, why do we define this property list thing?
+
+160
+00:07:17,611 --> 00:07:19,544
+Its in any object.
+
+161
+00:07:19,545 --> 00:07:21,478
+Its kind of unwieldy, because you have to do a lot,
+
+162
+00:07:21,481 --> 00:07:24,115
+a fair amount of casting, ising and asing, cuz
+
+163
+00:07:24,117 --> 00:07:27,284
+any object, of course, to use it, we have to kinda cast it.
+
+164
+00:07:27,286 --> 00:07:30,053
+And so, why do we have this thing?
+
+165
+00:07:30,055 --> 00:07:32,722
+Two reasons really.
+
+166
+00:07:32,723 --> 00:07:35,390
+One, property list is used to pass data around blind.
+
+167
+00:07:35,393 --> 00:07:36,926
+It's like a cookie, right?
+
+168
+00:07:36,928 --> 00:07:37,993
+In a browser.
+
+169
+00:07:37,995 --> 00:07:40,295
+It's kind of this just bundle of data,
+
+170
+00:07:40,297 --> 00:07:43,098
+that only the creator of it knows how to interpret it,
+
+171
+00:07:43,100 --> 00:07:45,166
+because only they know what strings, arrays,
+
+172
+00:07:45,168 --> 00:07:46,734
+dictionaries, and stuff are in there.
+
+173
+00:07:46,736 --> 00:07:48,252
+But to everyone else it,
+
+174
+00:07:48,253 --> 00:07:49,769
+just looks like any object, so they don't know what it is.
+
+175
+00:07:49,772 --> 00:07:53,273
+So, all they can do, is pass it around to other things.
+
+176
+00:07:53,275 --> 00:07:57,010
+So, it's good for blind data passing, the other thing is,
+
+177
+00:07:57,012 --> 00:08:00,580
+a property list can be used as generic data structures, okay?
+
+178
+00:08:00,582 --> 00:08:02,014
+Since it's got arrays, and
+
+179
+00:08:02,016 --> 00:08:05,584
+dictionaries, and numbers, and dates, and all that in there.
+
+180
+00:08:05,586 --> 00:08:10,021
+You can turn a data structure, like your r-ops stack,
+
+181
+00:08:10,023 --> 00:08:12,523
+in the calculator brain, it has op enums in there,
+
+182
+00:08:12,525 --> 00:08:14,392
+that's not a generic data structure, but
+
+183
+00:08:14,394 --> 00:08:17,461
+we can turn it into a generic data structure, for example,
+
+184
+00:08:17,463 --> 00:08:20,831
+and then do things with it like write it out to disk, or
+
+185
+00:08:20,833 --> 00:08:23,700
+send it over the network, or things like that.
+
+186
+00:08:23,702 --> 00:08:26,569
+So, those are the two main reasons we use property list.
+
+187
+00:08:26,571 --> 00:08:31,073
+And, a really good use of property list in
+
+188
+00:08:31,075 --> 00:08:33,575
+iOS is NSUserDefaults.
+
+189
+00:08:33,577 --> 00:08:37,012
+So, NSUserDefaults is like a really tiny little database,
+
+190
+00:08:37,014 --> 00:08:39,347
+and it only knows how to store property lists.
+
+191
+00:08:39,349 --> 00:08:40,999
+Okay?
+
+192
+00:08:41,000 --> 00:08:42,650
+And it's really for things like settings, and
+
+193
+00:08:42,652 --> 00:08:44,051
+preferences, stuff like that.
+
+194
+00:08:44,053 --> 00:08:45,852
+You would never, it's not high performance,
+
+195
+00:08:45,854 --> 00:08:48,054
+you would never use it for big things like images or
+
+196
+00:08:48,056 --> 00:08:50,089
+anything like that, just property lists, you know,
+
+197
+00:08:50,091 --> 00:08:54,060
+dates and strings and doubles, and things like that.
+
+198
+00:08:54,062 --> 00:08:57,796
+It can store and retrieve any property list, and
+
+199
+00:08:57,798 --> 00:08:59,831
+it just stores it like a dictionary,
+
+200
+00:08:59,833 --> 00:09:03,034
+as if the NSUserDefaults thing itself is a dictionary.
+
+201
+00:09:03,036 --> 00:09:05,103
+And, it can store the whole property list,
+
+202
+00:09:05,105 --> 00:09:08,005
+like set object for key, that first method you see there.
+
+203
+00:09:08,007 --> 00:09:10,007
+And, repeat, retrieve all property list,
+
+204
+00:09:10,009 --> 00:09:12,642
+or, it can just do little tiny pieces of property list,
+
+205
+00:09:12,644 --> 00:09:14,377
+like it has a method set double,
+
+206
+00:09:14,379 --> 00:09:16,813
+that will just set a double for a certain key.
+
+207
+00:09:16,815 --> 00:09:18,348
+Okay? So,
+
+208
+00:09:18,349 --> 00:09:19,882
+it's like a dictionary in it's key value, but
+
+209
+00:09:19,884 --> 00:09:21,350
+it only stores property list.
+
+210
+00:09:21,352 --> 00:09:23,919
+And, the big thing about the way it stores them,
+
+211
+00:09:23,921 --> 00:09:28,056
+is that it persists when your app is gone, okay?
+
+212
+00:09:28,058 --> 00:09:29,390
+So, you know,
+
+213
+00:09:29,392 --> 00:09:30,958
+normally, a dictionary is stored in the heap.
+
+214
+00:09:30,960 --> 00:09:32,759
+As soon as your app quits, it's gone.
+
+215
+00:09:32,761 --> 00:09:34,327
+But this, stays around, so
+
+216
+00:09:34,329 --> 00:09:35,995
+that when your app launches the next time,
+
+217
+00:09:35,997 --> 00:09:37,697
+all the data's still there.
+
+218
+00:09:37,699 --> 00:09:39,465
+So, that's why it's kind of like a database, but
+
+219
+00:09:39,467 --> 00:09:40,932
+it's very small, okay?
+
+220
+00:09:40,934 --> 00:09:43,034
+For preference and settings.
+
+221
+00:09:43,036 --> 00:09:45,503
+Here's how you use NSUserDefaults.
+
+222
+00:09:45,505 --> 00:09:49,006
+You use this type method in NSUserDefaults called
+
+223
+00:09:49,008 --> 00:09:50,974
+standardUserDefaults.
+
+224
+00:09:50,976 --> 00:09:53,243
+This gives you an instance of an NSUserDefaults.
+
+225
+00:09:53,245 --> 00:09:54,310
+You're always gonna use
+
+226
+00:09:54,312 --> 00:09:56,579
+the same instances like a shared instance.
+
+227
+00:09:56,581 --> 00:09:58,114
+You'll always to use the same one.
+
+228
+00:09:58,116 --> 00:10:02,117
+And then you just send it messages like, you know,
+
+229
+00:10:02,119 --> 00:10:05,587
+set object for keys, store this property list, and
+
+230
+00:10:05,589 --> 00:10:07,989
+get object for key to get it back.
+
+231
+00:10:07,991 --> 00:10:09,257
+Now, the changes you make in there,
+
+232
+00:10:09,259 --> 00:10:12,193
+are automatically saved, but, there is a method called
+
+233
+00:10:12,195 --> 00:10:15,929
+synchronized, which is kinda like save, which can force it,
+
+234
+00:10:15,931 --> 00:10:17,931
+to save out to disc.
+
+235
+00:10:17,933 --> 00:10:19,666
+Why do you ever need synchronized when it
+
+236
+00:10:19,668 --> 00:10:21,868
+auto saves?
+
+237
+00:10:21,869 --> 00:10:24,069
+Well, in auto save, when things happen like you app
+
+238
+00:10:24,072 --> 00:10:28,073
+stops being the front most app,
+
+239
+00:10:28,075 --> 00:10:29,708
+the user switched to another app.
+
+240
+00:10:29,710 --> 00:10:31,709
+So, your app is still there, but
+
+241
+00:10:31,711 --> 00:10:33,077
+it switched to the background.
+
+242
+00:10:33,079 --> 00:10:35,145
+It'll save then.
+
+243
+00:10:35,147 --> 00:10:36,580
+So, it won't always save when you want, and
+
+244
+00:10:36,582 --> 00:10:39,315
+especially when you're debugging, okay?
+
+245
+00:10:39,317 --> 00:10:42,118
+When you hit stop in the debugger,
+
+246
+00:10:42,120 --> 00:10:43,986
+it doesn't save, okay?
+
+247
+00:10:43,988 --> 00:10:47,289
+And so, you probably wanna throw some synchronizes in
+
+248
+00:10:47,291 --> 00:10:49,157
+there, to save this thing out,
+
+249
+00:10:49,159 --> 00:10:50,792
+especially when you're debugging.
+
+250
+00:10:50,794 --> 00:10:52,960
+It's not really that expensive to synchronize,
+
+251
+00:10:52,962 --> 00:10:54,562
+especially if there's not much data in there,
+
+252
+00:10:54,564 --> 00:10:56,697
+which there shouldn't be, because it's small.
+
+253
+00:10:56,699 --> 00:10:59,266
+So, it can't hurt too much to throw them in there.
+
+254
+00:10:59,268 --> 00:11:01,334
+Okay?
+
+255
+00:11:01,336 --> 00:11:03,403
+And yeah, synchronize return to bool,
+
+256
+00:11:03,405 --> 00:11:05,021
+whether it failed or not.
+
+257
+00:11:05,022 --> 00:11:06,638
+But if it failed, there's really not much you can do.
+
+258
+00:11:07,775 --> 00:11:10,075
+So, a lot of times people don't even look at the return
+
+259
+00:11:10,077 --> 00:11:13,044
+values synchronize, they just synchronize, and they pray.
+
+260
+00:11:13,046 --> 00:11:16,014
+But, it's only not gonna save if like the disk is full or
+
+261
+00:11:16,016 --> 00:11:17,715
+something, that virtually never happens.
+
+262
+00:11:19,285 --> 00:11:20,851
+All right, so, I'm gonna do a little demo here.
+
+263
+00:11:20,853 --> 00:11:23,086
+And show you a little more about property list.
+
+264
+00:11:23,088 --> 00:11:24,821
+And also any object,
+
+265
+00:11:24,822 --> 00:11:26,555
+cuz you've never seen any object in action.
+
+266
+00:11:26,558 --> 00:11:31,260
+And what we're gonna do, is add a property to our
+
+267
+00:11:31,262 --> 00:11:34,796
+calculator brain, which gets its program.
+
+268
+00:11:35,732 --> 00:11:37,448
+Okay?
+
+269
+00:11:37,449 --> 00:11:39,165
+So, our calculator brain has a program, especially your
+
+270
+00:11:39,168 --> 00:11:41,468
+versions, where you added variables to it.
+
+271
+00:11:41,470 --> 00:11:42,936
+It's got this kind of program,
+
+272
+00:11:42,938 --> 00:11:44,337
+it's almost like a little computer program.
+
+273
+00:11:44,339 --> 00:11:48,007
+You can execute that program, set its variables, it's great.
+
+274
+00:11:48,009 --> 00:11:49,709
+So, it would be nice if we could get that program.
+
+275
+00:11:49,711 --> 00:11:52,678
+But we don't wanna reveal our internal data structure, and
+
+276
+00:11:52,680 --> 00:11:55,113
+there's nothing anyone can do with that program.
+
+277
+00:11:55,115 --> 00:11:56,848
+So, we're really just getting it as a cookie.
+
+278
+00:11:56,850 --> 00:11:59,717
+And the only thing you can do with it, is give it back
+
+279
+00:11:59,719 --> 00:12:02,520
+to the calculator brain, or another calculator brain in
+
+280
+00:12:02,522 --> 00:12:05,389
+the future, and then say, evaluate.
+
+281
+00:12:05,391 --> 00:12:07,724
+Okay, so you see the value of having this?
+
+282
+00:12:07,726 --> 00:12:09,359
+So, basically getting the program out of
+
+283
+00:12:09,361 --> 00:12:10,793
+the calculator brain and send it back.
+
+284
+00:12:10,795 --> 00:12:13,162
+But we're gonna return it as a property list.
+
+285
+00:12:13,164 --> 00:12:14,196
+It's gonna be any object.
+
+286
+00:12:14,198 --> 00:12:16,031
+People are gonna look at this var, and
+
+287
+00:12:16,033 --> 00:12:17,632
+it's gonna be of type any object, and
+
+288
+00:12:17,634 --> 00:12:20,068
+all they can do is get it, and then set it back.
+
+289
+00:12:20,070 --> 00:12:21,503
+Okay?
+
+290
+00:12:21,504 --> 00:12:22,937
+So, what would that look like?
+
+291
+00:12:22,939 --> 00:12:24,538
+Let's go over here to our calculator.
+
+292
+00:12:24,540 --> 00:12:26,840
+So, I've gone much bigger font here.
+
+293
+00:12:26,842 --> 00:12:28,308
+Hopefully everybody, is this big enough?
+
+294
+00:12:28,310 --> 00:12:30,143
+Yeah?
+
+295
+00:12:30,145 --> 00:12:31,510
+Okay.
+
+296
+00:12:31,512 --> 00:12:32,745
+All right.
+
+297
+00:12:32,747 --> 00:12:35,514
+So, this is calculator as I last left it.
+
+298
+00:12:35,516 --> 00:12:37,716
+It doesn't have your enhancements to it for
+
+299
+00:12:37,718 --> 00:12:39,951
+the variables.
+
+300
+00:12:39,953 --> 00:12:42,319
+And I'm just gonna add a var here.
+
+301
+00:12:42,321 --> 00:12:43,887
+A public var.
+
+302
+00:12:43,889 --> 00:12:44,554
+Okay?
+
+303
+00:12:44,556 --> 00:12:45,922
+Called program, and
+
+304
+00:12:45,924 --> 00:12:49,225
+it's gonna be type any object, but I'm gonna put comment here
+
+305
+00:12:49,227 --> 00:12:53,595
+that says guaranteed to be a property list.
+
+306
+00:12:53,597 --> 00:12:56,965
+So, the callers know that this is a property list.
+
+307
+00:12:56,967 --> 00:13:01,002
+So, for example, they could put it into NSUserDefaults.
+
+308
+00:13:01,004 --> 00:13:02,737
+Or they could write it out to disc.
+
+309
+00:13:02,739 --> 00:13:04,571
+I haven't taught you how to write it out to disc, but
+
+310
+00:13:04,573 --> 00:13:05,706
+you can do it.
+
+311
+00:13:05,708 --> 00:13:06,673
+So, they could do that with it,
+
+312
+00:13:06,675 --> 00:13:09,375
+cuz they know it's a property list, okay?
+
+313
+00:13:09,377 --> 00:13:13,346
+So, this is going to be a computed property.
+
+314
+00:13:13,348 --> 00:13:15,948
+Okay, so we're gonna have a get in the set.
+
+315
+00:13:15,950 --> 00:13:17,183
+And when the get,
+
+316
+00:13:17,184 --> 00:13:18,417
+we're just gonna get some sort of property
+
+317
+00:13:18,419 --> 00:13:21,186
+list representation of our internal data structure.
+
+318
+00:13:21,188 --> 00:13:23,521
+And when you set, we're gonna take that property list and
+
+319
+00:13:23,523 --> 00:13:27,057
+turn it back into our private representation.
+
+320
+00:13:28,060 --> 00:13:29,259
+So, the get,
+
+321
+00:13:30,362 --> 00:13:34,063
+how are we gonna represent ourselves as a property list
+
+322
+00:13:34,065 --> 00:13:36,732
+because this is really our internal data structure here,
+
+323
+00:13:36,734 --> 00:13:39,801
+it's array of op, op is an enum,
+
+324
+00:13:39,803 --> 00:13:43,871
+clearly enums are not NSDates, or NSStrings, or NSArrays.
+
+325
+00:13:43,873 --> 00:13:46,407
+So, we can't just return this thing, okay?
+
+326
+00:13:46,409 --> 00:13:48,208
+Cuz that's not a property list.
+
+327
+00:13:48,210 --> 00:13:51,244
+So, we need to return some sort of property list.
+
+328
+00:13:51,246 --> 00:13:53,980
+And I'm gonna return an array of strings.
+
+329
+00:13:53,982 --> 00:13:58,084
+And the string is either gonna be the symbol of an op,
+
+330
+00:13:58,086 --> 00:14:01,587
+in which case I will look it up in known ops, or
+
+331
+00:14:01,589 --> 00:14:04,956
+the string will be an numeric representation of
+
+332
+00:14:04,958 --> 00:14:06,958
+the string of the operand rather.
+
+333
+00:14:06,960 --> 00:14:08,026
+Right? The dub will
+
+334
+00:14:08,028 --> 00:14:09,326
+turn into a string.
+
+335
+00:14:09,328 --> 00:14:13,163
+Which I happened to have a var that does exactly that.
+
+336
+00:14:13,165 --> 00:14:15,565
+Okay? This turns an enum op,
+
+337
+00:14:15,567 --> 00:14:17,800
+into a string.
+
+338
+00:14:17,802 --> 00:14:19,635
+And I know how to turn it back.
+
+339
+00:14:19,637 --> 00:14:22,771
+Because I know how to use a number formatter to turn
+
+340
+00:14:22,773 --> 00:14:25,273
+the string of a operand back into a double and
+
+341
+00:14:25,275 --> 00:14:27,709
+obviously I know how to look up binary and
+
+342
+00:14:27,711 --> 00:14:30,645
+uniary operations in our known ops.
+
+343
+00:14:30,647 --> 00:14:32,764
+Okay?
+
+344
+00:14:32,765 --> 00:14:34,882
+So, we could say something along these lines.
+
+345
+00:14:34,884 --> 00:14:39,586
+Our get, I'm gonna show you a much better get in a second,
+
+346
+00:14:39,588 --> 00:14:43,590
+but one way we could do our get is we could just say,
+
+347
+00:14:43,592 --> 00:14:47,226
+we could make a return value that is going to be
+
+348
+00:14:47,228 --> 00:14:48,861
+an array of string.
+
+349
+00:14:48,863 --> 00:14:52,764
+Okay, in fact let's just create an empty array of
+
+350
+00:14:52,766 --> 00:14:56,768
+string here, and then we can just through our ops,
+
+351
+00:14:56,770 --> 00:14:59,737
+in our opStack here, and for each op,
+
+352
+00:14:59,739 --> 00:15:04,307
+we can just say return value append, an ops description.
+
+353
+00:15:04,309 --> 00:15:07,877
+On to the end of it, and then we could return, return value.
+
+354
+00:15:10,748 --> 00:15:13,882
+Right, makes sense, I just my internal data structure into
+
+355
+00:15:13,884 --> 00:15:16,918
+a property list, because this is a property list.
+
+356
+00:15:16,920 --> 00:15:20,588
+Notice I can return, this through any object,
+
+357
+00:15:20,590 --> 00:15:22,557
+because arrays are bridged, and
+
+358
+00:15:22,559 --> 00:15:24,392
+as array which happens to be an object.
+
+359
+00:15:24,394 --> 00:15:25,392
+Okay.
+
+360
+00:15:25,394 --> 00:15:27,961
+But this is an awful lot of code for this.
+
+361
+00:15:27,963 --> 00:15:31,731
+We can actually do this in one line of code, okay?
+
+362
+00:15:31,733 --> 00:15:34,834
+So if you paid attention in my last lecture, you'll remember
+
+363
+00:15:34,836 --> 00:15:36,969
+that I told you about this function called MAP.
+
+364
+00:15:36,971 --> 00:15:43,041
+[COUGH] And I can actually just return my opstack mapped,
+
+365
+00:15:43,043 --> 00:15:49,047
+so that each element description is returned.
+
+366
+00:15:49,049 --> 00:15:51,349
+So I don't need any of this, okay?
+
+367
+00:15:52,485 --> 00:15:54,785
+So everyone understand this line of code right here?
+
+368
+00:15:54,787 --> 00:15:57,921
+This is just a little closure that gets the opportunity to
+
+369
+00:15:57,923 --> 00:16:00,723
+convert every single thing inside op stack,
+
+370
+00:16:00,725 --> 00:16:03,893
+which is an op, these are ops, into a string and it takes
+
+371
+00:16:03,895 --> 00:16:07,396
+this string and maps them all and returns a new array.
+
+372
+00:16:09,132 --> 00:16:09,697
+Okay?
+
+373
+00:16:10,733 --> 00:16:13,434
+So when you start getting familiar with Swift and
+
+374
+00:16:13,436 --> 00:16:14,785
+what it can do,
+
+375
+00:16:14,786 --> 00:16:16,135
+you'll start realizing a lot of things that take five or
+
+376
+00:16:16,138 --> 00:16:17,570
+six line of code, you can just do them in one.
+
+377
+00:16:18,640 --> 00:16:20,873
+Okay, but it does take some experience.
+
+378
+00:16:20,875 --> 00:16:22,775
+So now let's talk about going the other way.
+
+379
+00:16:22,777 --> 00:16:25,177
+So now we have, someone gives us back our program.
+
+380
+00:16:25,179 --> 00:16:27,245
+We wanna load our Ops dec back up.
+
+381
+00:16:27,247 --> 00:16:33,117
+Well the first thing we wanna make sure is that the thing
+
+382
+00:16:33,119 --> 00:16:37,387
+they're giving us back is an array of these symbols.
+
+383
+00:16:37,389 --> 00:16:38,988
+Because they could just give me junk,
+
+384
+00:16:38,990 --> 00:16:40,923
+because it's any object they could set it to anything.
+
+385
+00:16:40,925 --> 00:16:42,291
+So, I, I want to make sure that's what it is.
+
+386
+00:16:42,293 --> 00:16:43,826
+So what I'm going to do,
+
+387
+00:16:43,828 --> 00:16:47,529
+I'm going to let op symbols equal new value, right?
+
+388
+00:16:47,531 --> 00:16:49,731
+New value remember we are in the setter here.
+
+389
+00:16:49,733 --> 00:16:52,633
+So, new value is the new value which is in any object.
+
+390
+00:16:54,070 --> 00:16:57,571
+As an array of string, because that's what it has to be.
+
+391
+00:16:57,573 --> 00:17:00,573
+If this thing that they passed in is not an array of string,
+
+392
+00:17:00,575 --> 00:17:02,308
+I don't know what to do with it.
+
+393
+00:17:02,310 --> 00:17:07,479
+So really here what I wanna do is, if let as question mark,
+
+394
+00:17:07,481 --> 00:17:09,981
+because they could pass me anything.
+
+395
+00:17:09,983 --> 00:17:13,485
+And so, here I'm using the as to make sure this any object
+
+396
+00:17:13,487 --> 00:17:17,488
+they pass me is actually and array of strings, okay?
+
+397
+00:17:17,490 --> 00:17:19,390
+If it is, now I can convert back, so
+
+398
+00:17:19,392 --> 00:17:22,893
+I'm gonna create something called my new op stack which
+
+399
+00:17:22,895 --> 00:17:27,497
+is just gonna be an array of ops and I'm just gonna go for
+
+400
+00:17:27,499 --> 00:17:31,834
+each op symbol 1n this op symbols.
+
+401
+00:17:32,836 --> 00:17:35,603
+Op symbols is this thing right here, that's the array,
+
+402
+00:17:35,605 --> 00:17:38,373
+that's the new value, the any object converted.
+
+403
+00:17:38,375 --> 00:17:42,776
+Into an array of strings, okay?
+
+404
+00:17:42,778 --> 00:17:48,448
+So for each one if I can find a known op,
+
+405
+00:17:48,450 --> 00:17:53,586
+that matches that symbol then this must be an op,
+
+406
+00:17:53,588 --> 00:17:56,255
+and so I will just add that op
+
+407
+00:17:56,257 --> 00:18:01,326
+to, to my stack, otherwise I'm gonna see
+
+408
+00:18:01,328 --> 00:18:04,162
+if I could turn that string into an operand, and I'm gonna
+
+409
+00:18:04,164 --> 00:18:09,166
+do that with if let operand equal NS number formatter.
+
+410
+00:18:09,168 --> 00:18:12,736
+Okay, number from string, I'm gonna pass it
+
+411
+00:18:12,738 --> 00:18:16,773
+this op symbol that I got out of that array it gave me.
+
+412
+00:18:16,775 --> 00:18:20,042
+I'm going to use optional chaining here and
+
+413
+00:18:20,044 --> 00:18:24,113
+put a question mark, then double value, okay.
+
+414
+00:18:24,115 --> 00:18:27,616
+Remember optional chaining, if you have an expression like
+
+415
+00:18:27,618 --> 00:18:31,653
+this, this whole expression, and if anything along the way
+
+416
+00:18:31,655 --> 00:18:36,157
+returns nil then this whole expression will return nil.
+
+417
+00:18:36,159 --> 00:18:38,659
+If you put a question mark after that term.
+
+418
+00:18:38,661 --> 00:18:40,927
+So, number from string can return nil if this is
+
+419
+00:18:40,929 --> 00:18:44,364
+not a string, that can be interpreted as a number.
+
+420
+00:18:44,366 --> 00:18:47,000
+So by putting a question mark here it says, okay?
+
+421
+00:18:47,002 --> 00:18:50,169
+If that's nil than just return nil back to here.
+
+422
+00:18:50,171 --> 00:18:52,604
+Otherwise keep going and send it double value.
+
+423
+00:18:53,574 --> 00:18:57,709
+So this operand is either going to not get set,
+
+424
+00:18:57,711 --> 00:19:01,879
+because of the if let, or it's going to be a double,
+
+425
+00:19:01,881 --> 00:19:03,580
+which is what this double value comes out of here.
+
+426
+00:19:04,883 --> 00:19:07,384
+Okay, so that's kind of explaining from last week how
+
+427
+00:19:07,386 --> 00:19:09,252
+we did this NumberFormatter thing.
+
+428
+00:19:09,254 --> 00:19:12,005
+So in this case,
+
+429
+00:19:12,006 --> 00:19:14,757
+I can just append onto the end of it that a new op.
+
+430
+00:19:14,759 --> 00:19:19,361
+So, we'll say dot operand with that operand.
+
+431
+00:19:19,363 --> 00:19:20,795
+So we're just putting a new op on there.
+
+432
+00:19:20,797 --> 00:19:24,565
+So now I've built a new op stack using all those strings,
+
+433
+00:19:24,567 --> 00:19:27,901
+and I can just return that new op stack.
+
+434
+00:19:27,903 --> 00:19:30,170
+Not return it, sorry.
+
+435
+00:19:30,171 --> 00:19:32,438
+I'm gonna set my op stack equal to that new op
+
+436
+00:19:32,441 --> 00:19:33,740
+stack, okay?
+
+437
+00:19:33,742 --> 00:19:35,174
+That's it.
+
+438
+00:19:37,111 --> 00:19:38,276
+Any questions about that?
+
+439
+00:19:38,278 --> 00:19:41,513
+>> [INAUDIBLE] Property List?
+
+440
+00:19:41,515 --> 00:19:42,780
+Like that's just because.
+
+441
+00:19:42,782 --> 00:19:44,932
+>> This is documentation,
+
+442
+00:19:44,933 --> 00:19:47,083
+this is a public thing, it's not private, and I'm just
+
+443
+00:19:47,086 --> 00:19:49,520
+documenting to anyone who's using it that this is true.
+
+444
+00:19:49,522 --> 00:19:52,389
+I can document this even better using a typealias.
+
+445
+00:19:52,391 --> 00:19:54,290
+So you can basically have a typealias,
+
+446
+00:19:54,292 --> 00:19:55,892
+which is an alias for a type.
+
+447
+00:19:55,894 --> 00:19:58,094
+It's just a way of another type, and
+
+448
+00:19:58,096 --> 00:20:00,429
+I could have a typealias called PropertyList,
+
+449
+00:20:00,431 --> 00:20:02,831
+which is equals AnyObject.
+
+450
+00:20:03,934 --> 00:20:08,302
+Then I could have this type be PropertyList, okay?
+
+451
+00:20:08,304 --> 00:20:11,772
+So I just created PropertyList as an alias for AnyObject, so
+
+452
+00:20:11,774 --> 00:20:13,106
+someone looking at this is gonna go,
+
+453
+00:20:13,108 --> 00:20:14,974
+whoa, what the heck is PropertyList?
+
+454
+00:20:14,976 --> 00:20:16,309
+Now they're going to look at this typealias, and
+
+455
+00:20:16,311 --> 00:20:18,844
+say, oh, that's any object, but they're really going to
+
+456
+00:20:18,846 --> 00:20:21,480
+understand that I'm returning the property list to them, and
+
+457
+00:20:21,482 --> 00:20:22,848
+the reason it's property list, again, so
+
+458
+00:20:22,850 --> 00:20:26,584
+I can throw it again as user defaults or whatever, okay?
+
+459
+00:20:28,354 --> 00:20:30,621
+But otherwise, it's only good, the only thing it's good for
+
+460
+00:20:30,623 --> 00:20:33,056
+is giving it back to me to reset my program in
+
+461
+00:20:33,058 --> 00:20:34,724
+the future; that's all this thing is good for.
+
+462
+00:20:36,394 --> 00:20:39,762
+Now, you're gonna wanna add this to your assignment for
+
+463
+00:20:39,764 --> 00:20:41,497
+assignment three, okay?
+
+464
+00:20:44,802 --> 00:20:47,502
+So, all right, back to slides.
+
+465
+00:20:48,571 --> 00:20:50,871
+I'm not gonna, I don't have time to really run this
+
+466
+00:20:50,873 --> 00:20:53,940
+unfortunately due to in test code because we are.
+
+467
+00:20:56,178 --> 00:20:57,577
+Schedule constraint here.
+
+468
+00:20:57,579 --> 00:20:59,979
+So let's go back to here, continue.
+
+469
+00:21:01,182 --> 00:21:03,415
+All right, so now let's talk about, new thing here,
+
+470
+00:21:03,417 --> 00:21:06,584
+which is Views, okay, totally new topic.
+
+471
+00:21:06,586 --> 00:21:09,087
+A view, that is to say,
+
+472
+00:21:09,089 --> 00:21:12,156
+a subclass of the class UIView in iOS
+
+473
+00:21:12,158 --> 00:21:15,259
+represents a rectangular area on the screen.
+
+474
+00:21:15,261 --> 00:21:17,861
+That defines a coordinate space to draw in, and
+
+475
+00:21:17,863 --> 00:21:20,463
+also to handle touch events, okay?
+
+476
+00:21:20,465 --> 00:21:24,100
+That's what a view is, and you are going to learn today,
+
+477
+00:21:24,102 --> 00:21:25,301
+how to make your own views.
+
+478
+00:21:26,771 --> 00:21:29,638
+The views are hierarchical, so,
+
+479
+00:21:29,640 --> 00:21:32,407
+views are within views are within views.
+
+480
+00:21:32,409 --> 00:21:34,742
+Any view only has one superview.
+
+481
+00:21:34,744 --> 00:21:37,478
+Right, it's only contained directly in one view.
+
+482
+00:21:37,480 --> 00:21:39,480
+But, it can have any number of subviews.
+
+483
+00:21:39,482 --> 00:21:41,948
+So in our calculator, we had a top level view,
+
+484
+00:21:41,950 --> 00:21:43,316
+which I'm gonna talk about in a moment,
+
+485
+00:21:43,318 --> 00:21:45,752
+and then we had a lot of subviews, all the buttons,
+
+486
+00:21:45,754 --> 00:21:49,221
+the labels, those are all UIView subclasses.
+
+487
+00:21:49,223 --> 00:21:50,989
+Okay, so we made a whole bunch.
+
+488
+00:21:50,991 --> 00:21:53,091
+A bunch of subviews in that view.
+
+489
+00:21:53,093 --> 00:21:54,225
+But you can go even deeper.
+
+490
+00:21:54,227 --> 00:21:55,593
+It's hierarchical multi-layer.
+
+491
+00:21:55,595 --> 00:21:58,295
+We can go as deep as we want.
+
+492
+00:21:58,297 --> 00:22:01,231
+The two, you can see the two properties there for
+
+493
+00:22:01,233 --> 00:22:03,317
+getting your super view.
+
+494
+00:22:03,318 --> 00:22:05,402
+Notice it returns a optional, because you
+
+495
+00:22:05,404 --> 00:22:07,804
+can have a view that's not currently on screen.
+
+496
+00:22:07,806 --> 00:22:10,406
+It's not currently in the view hierarchy so that can be nil.
+
+497
+00:22:11,509 --> 00:22:15,577
+Your subviews, I show a ray of UIView there.
+
+498
+00:22:15,579 --> 00:22:18,847
+Actually the subviews property is an array of any object,
+
+499
+00:22:18,849 --> 00:22:20,482
+again for historical reasons, but
+
+500
+00:22:20,484 --> 00:22:21,849
+there will always be UIViews in there.
+
+501
+00:22:21,851 --> 00:22:26,086
+So don't even worry about that, okay?
+
+502
+00:22:26,088 --> 00:22:28,588
+And usually in this class on the the slides.
+
+503
+00:22:28,590 --> 00:22:30,290
+If something's an array of AnyObject,
+
+504
+00:22:30,292 --> 00:22:32,258
+if there's gonna be a certain kind of thing in there,
+
+505
+00:22:32,260 --> 00:22:34,460
+I'll say, array of the certain kind of thing.
+
+506
+00:22:34,462 --> 00:22:36,628
+But when you write your code, then,
+
+507
+00:22:36,630 --> 00:22:40,565
+obviously, you might see, oh, that's array of AnyObject, and
+
+508
+00:22:40,567 --> 00:22:43,301
+that's again, the bridging will work here,
+
+509
+00:22:43,303 --> 00:22:46,404
+automatically, so, no worries there UIWindow.
+
+510
+00:22:46,406 --> 00:22:48,372
+There is a certain thing called a UIWindow.
+
+511
+00:22:48,374 --> 00:22:51,809
+It's a subclass UIView but it has no meaning in iOS.
+
+512
+00:22:51,811 --> 00:22:53,510
+There is a UIWindow it's at the very,
+
+513
+00:22:53,512 --> 00:22:56,913
+very, very top of each device screen but
+
+514
+00:22:56,915 --> 00:22:59,515
+you never send it any messages really.
+
+515
+00:22:59,517 --> 00:23:00,583
+You don't interact with it.
+
+516
+00:23:00,585 --> 00:23:02,151
+It's all about views.
+
+517
+00:23:02,153 --> 00:23:04,152
+On a desktop windows matter.
+
+518
+00:23:04,154 --> 00:23:07,589
+But on iOS, it's all about views, okay?
+
+519
+00:23:07,591 --> 00:23:08,690
+So don't worry about UIwindow.
+
+520
+00:23:10,927 --> 00:23:13,127
+This hierarchy of views, subviews and
+
+521
+00:23:13,129 --> 00:23:15,629
+superviews, is created usually, graphically.
+
+522
+00:23:15,631 --> 00:23:17,664
+You can drag things out in the storyboard.
+
+523
+00:23:17,666 --> 00:23:20,800
+You can drag views inside other views to
+
+524
+00:23:20,802 --> 00:23:23,102
+create your hierarchy.
+
+525
+00:23:23,104 --> 00:23:25,104
+But you can do it in code as well.
+
+526
+00:23:25,106 --> 00:23:28,674
+It's pretty rare to do it in code, but you can.
+
+527
+00:23:28,676 --> 00:23:30,809
+There's two methods here addSubview and
+
+528
+00:23:30,811 --> 00:23:33,611
+removeFromSuperview, addSubview is sent to
+
+529
+00:23:33,613 --> 00:23:35,446
+the prospective superview.
+
+530
+00:23:35,448 --> 00:23:37,314
+In other words to the place you wanna add your,
+
+531
+00:23:37,316 --> 00:23:38,749
+this view into.
+
+532
+00:23:38,751 --> 00:23:40,984
+And removeFromSuperview is sent to the view that you
+
+533
+00:23:40,986 --> 00:23:42,285
+want to remove.
+
+534
+00:23:42,287 --> 00:23:44,571
+So these are sent to different,
+
+535
+00:23:44,572 --> 00:23:46,856
+okay, removeFromSuperview means remove yourself from
+
+536
+00:23:46,858 --> 00:23:47,556
+your superview.
+
+537
+00:23:49,493 --> 00:23:51,593
+So, where does the view hierarchy start?
+
+538
+00:23:51,595 --> 00:23:52,927
+Where is the kind of the root,
+
+539
+00:23:52,929 --> 00:23:55,596
+the top level of this hierarchy, and
+
+540
+00:23:55,598 --> 00:23:58,132
+the answer is very simple, but, for some reason,
+
+541
+00:23:58,134 --> 00:24:00,667
+students have a very difficult time understanding this one.
+
+542
+00:24:00,669 --> 00:24:04,737
+There is a property in your UIView Controller
+
+543
+00:24:04,739 --> 00:24:06,505
+called view, and
+
+544
+00:24:06,507 --> 00:24:11,209
+it is the top level view in the scene in the storyboard.
+
+545
+00:24:11,211 --> 00:24:12,544
+All right. So you have this story board.
+
+546
+00:24:12,546 --> 00:24:15,346
+You've got your scene that we've seen like your
+
+547
+00:24:15,348 --> 00:24:17,331
+calculator one.
+
+548
+00:24:17,332 --> 00:24:19,315
+The top level one the place where you're going to add
+
+549
+00:24:19,318 --> 00:24:22,720
+your top level views is called view in your view controller.
+
+550
+00:24:22,722 --> 00:24:24,688
+It's just a property in UIView Controller.
+
+551
+00:24:24,690 --> 00:24:27,390
+So it really couldn't be simpler, okay?
+
+552
+00:24:27,392 --> 00:24:29,859
+Sometimes students they just forget that's there and there
+
+553
+00:24:29,861 --> 00:24:32,495
+like all right how do I add something to my story board?
+
+554
+00:24:32,497 --> 00:24:34,229
+You know in code or something like that.
+
+555
+00:24:34,231 --> 00:24:37,065
+Well you just you add it to the view of
+
+556
+00:24:37,067 --> 00:24:40,502
+your UIView Controller, okay?
+
+557
+00:24:40,504 --> 00:24:46,741
+So, let's talk about initializing a view.
+
+558
+00:24:46,743 --> 00:24:50,444
+As usual, as I've kind of recommended, you probably want
+
+559
+00:24:50,446 --> 00:24:52,946
+to avoid doing an initializer, if you can.
+
+560
+00:24:52,948 --> 00:24:55,782
+So, to initialize any properties in
+
+561
+00:24:55,784 --> 00:24:58,584
+your view hopefully using equals or
+
+562
+00:24:58,586 --> 00:25:00,953
+some of the other ways we've talked about doing it.
+
+563
+00:25:00,955 --> 00:25:03,856
+But, in UIView it's slightly more likely that you
+
+564
+00:25:03,858 --> 00:25:05,724
+might want to have an initializer.
+
+565
+00:25:05,726 --> 00:25:07,826
+So it's a slightly complicated thing.
+
+566
+00:25:07,828 --> 00:25:08,926
+Only slightly.
+
+567
+00:25:08,928 --> 00:25:11,262
+In that UIView has two initializers you
+
+568
+00:25:11,264 --> 00:25:12,730
+have to deal with.
+
+569
+00:25:12,731 --> 00:25:14,197
+And that's because UIViews can be created in
+
+570
+00:25:14,200 --> 00:25:15,499
+two different ways.
+
+571
+00:25:15,501 --> 00:25:18,468
+In code by just saying UIView and
+
+572
+00:25:18,470 --> 00:25:22,438
+this frame initializer, which is just the frame in the super
+
+573
+00:25:22,440 --> 00:25:26,042
+view coordinate system where this view is gonna live.
+
+574
+00:25:26,044 --> 00:25:27,643
+But then there's also this init with coder.
+
+575
+00:25:27,645 --> 00:25:29,311
+And I'm not gonna talk about coders and
+
+576
+00:25:29,313 --> 00:25:30,679
+archiving and all that.
+
+577
+00:25:30,681 --> 00:25:33,614
+But that is the initializer that is called when the view
+
+578
+00:25:33,616 --> 00:25:35,649
+comes out of a storyboard.
+
+579
+00:25:35,651 --> 00:25:38,318
+So, if you create a view by dragging on a storyboard,
+
+580
+00:25:38,320 --> 00:25:41,455
+its initializer is this coder thing, okay?
+
+581
+00:25:41,457 --> 00:25:44,858
+So, if you want, if you absolutely have to use
+
+582
+00:25:44,860 --> 00:25:47,694
+an initializer to initialize something in your UIView,
+
+583
+00:25:47,696 --> 00:25:50,329
+you're gonna want to implement both of these things.
+
+584
+00:25:50,331 --> 00:25:53,432
+And I recommend this kind of format here.
+
+585
+00:25:53,434 --> 00:25:57,669
+Where you override init with frame there.
+
+586
+00:25:57,671 --> 00:26:00,271
+That is a designated initializer in UIView.
+
+587
+00:26:00,273 --> 00:26:03,641
+And then, there's actually a required initializer,
+
+588
+00:26:03,643 --> 00:26:05,042
+which is the decoder one.
+
+589
+00:26:05,044 --> 00:26:08,245
+So if you implement the init with frame you have to
+
+590
+00:26:08,247 --> 00:26:09,746
+implement the coder one, it's required,
+
+591
+00:26:09,748 --> 00:26:11,848
+cuz as soon as you implement the init with frame,
+
+592
+00:26:11,850 --> 00:26:14,216
+you'll no longer inherit all of your designated
+
+593
+00:26:14,218 --> 00:26:17,052
+initializers you won't inherit the init with the coder.
+
+594
+00:26:17,054 --> 00:26:18,787
+So, basically implement them both, and
+
+595
+00:26:18,789 --> 00:26:21,189
+then just factor your initialization code into some
+
+596
+00:26:21,191 --> 00:26:24,659
+setup method or something, and call that, okay?
+
+597
+00:26:24,661 --> 00:26:26,827
+So, that's only if you absolutely have to
+
+598
+00:26:28,064 --> 00:26:28,895
+have an initializer.
+
+599
+00:26:30,365 --> 00:26:33,566
+All right, there's another alternative to initializing.
+
+600
+00:26:33,568 --> 00:26:37,336
+Which is if you can wait until the initialization is finished
+
+601
+00:26:37,338 --> 00:26:40,005
+but you want something really early in the view's life,
+
+602
+00:26:40,007 --> 00:26:42,007
+you can implement this method awakeFromNib.
+
+603
+00:26:42,009 --> 00:26:43,508
+But that only works for
+
+604
+00:26:43,510 --> 00:26:46,411
+views that come out of a storyboard, okay?
+
+605
+00:26:46,413 --> 00:26:49,347
+awakeFromNib means I just awoke from coming out of
+
+606
+00:26:49,349 --> 00:26:50,848
+a snory, a storyboard.
+
+607
+00:26:50,850 --> 00:26:53,617
+So now you can initialize me.
+
+608
+00:26:53,619 --> 00:26:56,019
+So it's a little bit limited, because it only is good for
+
+609
+00:26:56,021 --> 00:26:57,353
+views that come out of a story board.
+
+610
+00:26:58,322 --> 00:26:59,488
+But it is an alternative.
+
+611
+00:27:00,557 --> 00:27:02,157
+Now okay, so
+
+612
+00:27:02,159 --> 00:27:04,726
+that's all I'm going to say about that actually.
+
+613
+00:27:04,728 --> 00:27:06,827
+Now let's go on to how do we.
+
+614
+00:27:06,829 --> 00:27:09,663
+Draw and handle events in this rectangular area.
+
+615
+00:27:09,665 --> 00:27:11,765
+Well we need a coordinate system to work in.
+
+616
+00:27:11,767 --> 00:27:13,233
+So there's some data structures I'm going to
+
+617
+00:27:13,235 --> 00:27:16,736
+show you real quick to get us started here, that we're
+
+618
+00:27:16,738 --> 00:27:19,939
+gonna use when we're drawing and handling events.
+
+619
+00:27:19,941 --> 00:27:24,843
+First of all, all coordinates are gonna be CGFloats.
+
+620
+00:27:24,845 --> 00:27:27,879
+Okay, CGFloats is a type in Swift struct.
+
+621
+00:27:27,881 --> 00:27:31,315
+And always use CGFloat when you're drawing or
+
+622
+00:27:31,317 --> 00:27:32,416
+handling events in a view.
+
+623
+00:27:32,418 --> 00:27:33,684
+Do not use double.
+
+624
+00:27:33,686 --> 00:27:34,951
+Do not use float.
+
+625
+00:27:34,953 --> 00:27:35,952
+If you use those in your homework,
+
+626
+00:27:35,954 --> 00:27:37,186
+you're gonna get dinged, okay?
+
+627
+00:27:37,188 --> 00:27:38,020
+CGFloat.
+
+628
+00:27:39,056 --> 00:27:40,322
+Now doubles and
+
+629
+00:27:40,324 --> 00:27:44,059
+floats can be converted to a CGFloat using the initialized.
+
+630
+00:27:44,061 --> 00:27:47,462
+CGFloat has initializer for floats and doubles.
+
+631
+00:27:47,464 --> 00:27:48,929
+that you can pass and turn into a float.
+
+632
+00:27:48,931 --> 00:27:52,966
+But, you always want things to be into CGFloat when you're
+
+633
+00:27:52,968 --> 00:27:55,568
+working in the coordinate system, okay?
+
+634
+00:27:56,671 --> 00:27:58,571
+Now, there's a couple other structures that
+
+635
+00:27:58,573 --> 00:27:59,538
+are important here.
+
+636
+00:27:59,540 --> 00:28:00,472
+One is CG Point.
+
+637
+00:28:00,474 --> 00:28:03,274
+It's just two floats, X and Y.
+
+638
+00:28:03,276 --> 00:28:05,209
+Just defines a point in the coordinate system.
+
+639
+00:28:05,211 --> 00:28:06,210
+Couldn't be simpler.
+
+640
+00:28:06,212 --> 00:28:08,712
+Okay? And there's also CGsize,
+
+641
+00:28:08,714 --> 00:28:09,846
+just defines a width and
+
+642
+00:28:09,848 --> 00:28:11,815
+a height in the coordinate system.
+
+643
+00:28:11,817 --> 00:28:13,483
+Okay, so these are just simple structs.
+
+644
+00:28:13,485 --> 00:28:14,517
+That's all they are, structs.
+
+645
+00:28:14,519 --> 00:28:16,785
+I don't know, certainly Point,
+
+646
+00:28:16,787 --> 00:28:19,221
+I don't think has any other methods on it or anything.
+
+647
+00:28:19,223 --> 00:28:22,223
+Size, maybe, I don't think so, though.
+
+648
+00:28:22,225 --> 00:28:24,726
+But these two are combined, the points and
+
+649
+00:28:24,728 --> 00:28:27,928
+the size, to CGRect.
+
+650
+00:28:27,930 --> 00:28:31,031
+So CGRect is struct that has a point and a size.
+
+651
+00:28:31,033 --> 00:28:33,100
+The point is the origin of the rect.
+
+652
+00:28:33,102 --> 00:28:34,734
+Upper left, which I'm going to talk about in a second.
+
+653
+00:28:34,736 --> 00:28:37,270
+And then the size is the width and height.
+
+654
+00:28:37,272 --> 00:28:40,740
+Now rect has a lot of methods on it, okay?
+
+655
+00:28:40,742 --> 00:28:42,708
+Rect has things like minX,
+
+656
+00:28:42,710 --> 00:28:44,242
+which is the left edge of the rect.
+
+657
+00:28:44,244 --> 00:28:48,112
+Or midY, which is the midpoint of the rectangle vertically.
+
+658
+00:28:48,114 --> 00:28:49,880
+Or intersects.
+
+659
+00:28:49,882 --> 00:28:51,382
+And you pass another Rect, and it'll tell you,
+
+660
+00:28:51,384 --> 00:28:53,650
+boolean, whether it intersects that Rect, right?
+
+661
+00:28:53,652 --> 00:28:55,251
+The two Rects overlap.
+
+662
+00:28:55,253 --> 00:28:57,887
+Or, intercept, which says, take this other Rect and
+
+663
+00:28:57,889 --> 00:28:59,321
+create a smaller rectangle,
+
+664
+00:28:59,323 --> 00:29:01,457
+which is the intersection of those two Rects.
+
+665
+00:29:02,459 --> 00:29:04,159
+Or contains point.
+
+666
+00:29:04,161 --> 00:29:05,560
+Okay, we passed a point and
+
+667
+00:29:05,562 --> 00:29:07,461
+it'll tell you whether it contains that point.
+
+668
+00:29:07,463 --> 00:29:09,563
+So rect is this struct, but
+
+669
+00:29:09,565 --> 00:29:11,264
+it has a lot of cool methods in there.
+
+670
+00:29:11,266 --> 00:29:12,732
+A whole bunch more.
+
+671
+00:29:12,734 --> 00:29:16,035
+You can just type a rect, type and
+
+672
+00:29:16,037 --> 00:29:21,006
+then a dot Xcode show you all the cool methods it has, okay?
+
+673
+00:29:21,008 --> 00:29:23,875
+All right, so those are the types of data types we're
+
+674
+00:29:23,877 --> 00:29:26,044
+gonna use to talk about our coordinate system and
+
+675
+00:29:26,046 --> 00:29:27,979
+to write our code in coordinate system.
+
+676
+00:29:27,981 --> 00:29:30,915
+So let's talk about the Views coordinate system itself.
+
+677
+00:29:30,917 --> 00:29:33,283
+First of all, origin upper left.
+
+678
+00:29:33,285 --> 00:29:35,652
+Some of you might be used to origin lower left,
+
+679
+00:29:35,654 --> 00:29:36,786
+like Cartesian coordinates,
+
+680
+00:29:36,788 --> 00:29:38,621
+the origin is in the lower left.
+
+681
+00:29:38,623 --> 00:29:42,491
+But all this origin that you're using a view is in
+
+682
+00:29:42,493 --> 00:29:44,543
+the upper left.
+
+683
+00:29:44,544 --> 00:29:46,594
+So, that means increasing Y is down the screen,
+
+684
+00:29:46,597 --> 00:29:48,714
+increasing X is across.
+
+685
+00:29:48,715 --> 00:29:50,832
+So, I put an example, 500 dot 35, 500 comma 35, over there.
+
+686
+00:29:50,834 --> 00:29:53,801
+It's 500 across, and only 35 down, okay?
+
+687
+00:29:53,803 --> 00:29:58,238
+From the upper left.
+
+688
+00:29:58,240 --> 00:30:01,508
+The units that we're talking about here are points
+
+689
+00:30:01,510 --> 00:30:02,342
+not pixels.
+
+690
+00:30:02,344 --> 00:30:03,476
+Okay.
+
+691
+00:30:03,478 --> 00:30:07,980
+Pick high, very high resolution displays have more
+
+692
+00:30:07,982 --> 00:30:10,282
+than one pixel per point.
+
+693
+00:30:10,284 --> 00:30:13,551
+Okay, 'cuz they are able to draw very find curves,
+
+694
+00:30:13,553 --> 00:30:16,154
+very fine text, et cetera.
+
+695
+00:30:16,156 --> 00:30:17,956
+You don't usually care
+
+696
+00:30:17,957 --> 00:30:19,757
+about the difference between points and pixels.
+
+697
+00:30:19,759 --> 00:30:20,991
+It's automatically handled for
+
+698
+00:30:20,993 --> 00:30:23,126
+you because you're doing things like drawing text or
+
+699
+00:30:23,128 --> 00:30:26,162
+drawing an arc and the system automatically uses as much
+
+700
+00:30:26,164 --> 00:30:28,464
+pixels as it can to make things nice.
+
+701
+00:30:28,466 --> 00:30:30,132
+But occasionally you do care,
+
+702
+00:30:30,134 --> 00:30:33,836
+because maybe you're drawing something very finely detailed
+
+703
+00:30:33,838 --> 00:30:37,372
+and you want to control pixel boundaries.
+
+704
+00:30:37,374 --> 00:30:39,708
+And if you want to do that you can call this,
+
+705
+00:30:39,710 --> 00:30:42,610
+get this property in view called content scale
+
+706
+00:30:42,612 --> 00:30:46,180
+factor and it will return the number of pixels per point.
+
+707
+00:30:46,182 --> 00:30:48,182
+So on a retina display, that's gonna be 2.
+
+708
+00:30:48,184 --> 00:30:51,184
+On a non-retina display, that will be 1.
+
+709
+00:30:51,186 --> 00:30:52,986
+It could be anything, though.
+
+710
+00:30:52,988 --> 00:30:54,471
+Okay?
+
+711
+00:30:54,472 --> 00:30:55,955
+So you shouldn't write your code assuming it's 2 or 1.
+
+712
+00:30:55,957 --> 00:30:58,758
+You should just write your code, get the content scale
+
+713
+00:30:58,760 --> 00:31:00,993
+factor, and you'll know how many pixels per point.
+
+714
+00:31:00,995 --> 00:31:02,528
+Okay?
+
+715
+00:31:02,529 --> 00:31:04,062
+99% of the time, you don't have to worry about this, but
+
+716
+00:31:04,064 --> 00:31:07,065
+in your assignment three, hint, hint, you might have to.
+
+717
+00:31:07,067 --> 00:31:07,632
+Okay.
+
+718
+00:31:09,502 --> 00:31:12,469
+So what about the boundaries of where drawing happens.
+
+719
+00:31:12,471 --> 00:31:13,870
+You've got this rectangular area.
+
+720
+00:31:13,872 --> 00:31:17,107
+Well, there's a very important property called bounds,
+
+721
+00:31:17,109 --> 00:31:20,910
+which is a CGRect, which describes the area you're
+
+722
+00:31:20,912 --> 00:31:25,047
+drawing in in your own coordinate system.
+
+723
+00:31:25,049 --> 00:31:26,081
+Okay? It's important that it's in
+
+724
+00:31:26,083 --> 00:31:28,149
+your own coordinate system.
+
+725
+00:31:28,151 --> 00:31:32,553
+Because these views can be scaled and even rotated and
+
+726
+00:31:32,555 --> 00:31:35,556
+translated to other you know, coordinates systems.
+
+727
+00:31:35,558 --> 00:31:37,257
+But when you're using the bounds and
+
+728
+00:31:37,259 --> 00:31:39,926
+you're drawing it yourself, you have this rectangle and
+
+729
+00:31:39,928 --> 00:31:42,495
+you know where it is.
+
+730
+00:31:42,496 --> 00:31:45,063
+Now the origin of your bounds usually is 0,0.
+
+731
+00:31:45,066 --> 00:31:46,865
+But you could define it to mean something else, for
+
+732
+00:31:46,867 --> 00:31:49,935
+example, scroll views they define their origin to
+
+733
+00:31:49,937 --> 00:31:53,338
+be where they are in the thing they're scrolling,
+
+734
+00:31:53,340 --> 00:31:55,707
+that's just what they define origin to be, but
+
+735
+00:31:55,709 --> 00:31:58,442
+90% of the time, your origin is just going to be 0,0.
+
+736
+00:31:58,444 --> 00:31:59,410
+So, the width and
+
+737
+00:31:59,411 --> 00:32:00,377
+height is what you're going to care about,
+
+738
+00:32:00,379 --> 00:32:02,212
+how big a space am I drawing into.
+
+739
+00:32:03,215 --> 00:32:06,082
+There are two other properties that often get confused with
+
+740
+00:32:06,084 --> 00:32:08,551
+bounds, but don't let this happen to you.
+
+741
+00:32:08,553 --> 00:32:10,252
+One is center.
+
+742
+00:32:10,254 --> 00:32:14,589
+Center is the center of your view rectangle in your
+
+743
+00:32:14,591 --> 00:32:17,158
+superview's coordinate system, not in yours.
+
+744
+00:32:18,127 --> 00:32:20,194
+So if you write code that say, oh, I'm gonna start to
+
+745
+00:32:20,196 --> 00:32:23,063
+draw something in middle of my rectangle.
+
+746
+00:32:23,065 --> 00:32:24,297
+I'll get center.
+
+747
+00:32:24,299 --> 00:32:25,098
+Aah!
+
+748
+00:32:25,100 --> 00:32:26,516
+That's wrong.
+
+749
+00:32:26,517 --> 00:32:27,933
+Okay? Center is in your super view.
+
+750
+00:32:27,935 --> 00:32:29,368
+Center positions you.
+
+751
+00:32:29,370 --> 00:32:31,470
+It has nothing to do with how you draw.
+
+752
+00:32:31,472 --> 00:32:33,805
+It just says where you are in your super view.
+
+753
+00:32:33,807 --> 00:32:36,674
+Same thing, frame, frame is a rectangle in your
+
+754
+00:32:36,676 --> 00:32:40,277
+super view's coordinate system that contains you.
+
+755
+00:32:40,279 --> 00:32:43,847
+Okay, it contains all of you, of your drawing.
+
+756
+00:32:43,849 --> 00:32:45,615
+But it's in your super user coordinates systems so
+
+757
+00:32:45,617 --> 00:32:48,385
+it's only good to position you, not for drawing.
+
+758
+00:32:48,387 --> 00:32:50,186
+When you're drawing, you use bounds.
+
+759
+00:32:50,188 --> 00:32:52,421
+To kind of give you a picture of this,
+
+760
+00:32:52,423 --> 00:32:55,057
+as better like you might think that
+
+761
+00:32:55,059 --> 00:32:59,361
+the frame size is exactly the same as the bound size.
+
+762
+00:32:59,363 --> 00:33:02,563
+Right, if it's a rectangle that contains my rectangle,
+
+763
+00:33:02,565 --> 00:33:04,932
+it must be exactly the same size.
+
+764
+00:33:04,934 --> 00:33:07,734
+But no, because view can be rotated.
+
+765
+00:33:08,704 --> 00:33:10,487
+Okay? And
+
+766
+00:33:10,488 --> 00:33:12,271
+if you rotate your view like this green view,
+
+767
+00:33:12,273 --> 00:33:14,707
+look how much bigger the frame is.
+
+768
+00:33:14,709 --> 00:33:18,410
+The rectangle that contains you is much bigger than you.
+
+769
+00:33:18,412 --> 00:33:19,878
+Because you're tilted.
+
+770
+00:33:19,880 --> 00:33:20,578
+All right?
+
+771
+00:33:21,814 --> 00:33:24,014
+Make sense?
+
+772
+00:33:24,015 --> 00:33:26,215
+So don't confuse frame and center, which are about
+
+773
+00:33:26,218 --> 00:33:30,420
+positioning, with bounce which is your size and
+
+774
+00:33:30,422 --> 00:33:33,623
+area that you're drawing into in your own coordinate system.
+
+775
+00:33:36,127 --> 00:33:37,059
+Okay?
+
+776
+00:33:37,060 --> 00:33:37,992
+Okay, so creating views.
+
+777
+00:33:37,995 --> 00:33:38,527
+How do we create views?
+
+778
+00:33:42,533 --> 00:33:45,333
+Most often views are created by dragging them out to
+
+779
+00:33:45,335 --> 00:33:46,801
+the storyboard.
+
+780
+00:33:46,803 --> 00:33:50,104
+That's 95% of the time.
+
+781
+00:33:50,106 --> 00:33:52,123
+And af, but
+
+782
+00:33:52,124 --> 00:33:54,141
+of course, your views aren't sitting in the object pallet,
+
+783
+00:33:54,143 --> 00:33:57,577
+there's buttons and sliders, but there's no your view.
+
+784
+00:33:57,579 --> 00:34:00,113
+So you have to drag it out of generic view.
+
+785
+00:34:00,115 --> 00:34:01,681
+It's kind of at the bottom of the pallet and
+
+786
+00:34:01,683 --> 00:34:02,782
+you just drag it out.
+
+787
+00:34:02,784 --> 00:34:05,051
+Once you drag it out though,
+
+788
+00:34:05,052 --> 00:34:07,319
+you have to go to the identity inspector and change the class
+
+789
+00:34:07,321 --> 00:34:10,989
+of that view that you dragged out, so that it's your class.
+
+790
+00:34:10,991 --> 00:34:12,457
+Okay? So it's a two step process.
+
+791
+00:34:12,459 --> 00:34:15,093
+You drag a view, your custom view out and then you change
+
+792
+00:34:15,095 --> 00:34:19,930
+this class to view whatever your custom class is on rare
+
+793
+00:34:19,932 --> 00:34:24,034
+occasion, you might create an instance of your view in code.
+
+794
+00:34:25,036 --> 00:34:26,569
+Probably never in this class,
+
+795
+00:34:26,571 --> 00:34:29,938
+maybe in your final project, although I doubt it.
+
+796
+00:34:29,940 --> 00:34:34,442
+You just do that using UIView's frame initializer.
+
+797
+00:34:34,444 --> 00:34:35,376
+Right? So you just say
+
+798
+00:34:35,378 --> 00:34:36,644
+view equals UIView frame.
+
+799
+00:34:38,214 --> 00:34:40,414
+You can even do UIView with no arguments and
+
+800
+00:34:40,416 --> 00:34:43,283
+it'll give you a CGRect to zero which is a frame zero
+
+801
+00:34:43,285 --> 00:34:45,485
+size and width and
+
+802
+00:34:45,486 --> 00:34:47,686
+then you could later set its frame to position the view.
+
+803
+00:34:47,689 --> 00:34:50,189
+So here's an example of creating a view in code.
+
+804
+00:34:50,191 --> 00:34:51,590
+I'm going to use UILabel.
+
+805
+00:34:51,592 --> 00:34:55,093
+UILabel is a subclass of UIView so I can send it.
+
+806
+00:34:55,095 --> 00:34:57,495
+UI labels parentheses frame.
+
+807
+00:34:57,497 --> 00:34:59,263
+So I just give it this frame which is kind of in
+
+808
+00:34:59,265 --> 00:35:00,698
+the upper left.
+
+809
+00:35:00,700 --> 00:35:04,334
+Notice I've created this view but it's not on screen yet.
+
+810
+00:35:04,336 --> 00:35:06,003
+Okay.
+
+811
+00:35:06,004 --> 00:35:07,671
+Assuming this code here is in a view controller,
+
+812
+00:35:07,673 --> 00:35:10,640
+I could then say view.addSubview.
+
+813
+00:35:10,642 --> 00:35:12,475
+Cuz remember view is a property in
+
+814
+00:35:12,477 --> 00:35:15,144
+my view controller which is that top level view.
+
+815
+00:35:15,146 --> 00:35:17,279
+And I could say add subview of the label and
+
+816
+00:35:17,281 --> 00:35:18,613
+boom, it'll appear on screen.
+
+817
+00:35:19,616 --> 00:35:20,514
+Okay? At 20,
+
+818
+00:35:20,516 --> 00:35:22,716
+20, width 100, height 50.
+
+819
+00:35:22,718 --> 00:35:23,283
+Okay?
+
+820
+00:35:25,120 --> 00:35:26,619
+So it is possible to create views in code.
+
+821
+00:35:26,621 --> 00:35:28,821
+We almost never do that in iOS.
+
+822
+00:35:28,823 --> 00:35:29,855
+We use storyboards.
+
+823
+00:35:31,458 --> 00:35:35,727
+Okay, so when do I wanna create my own UIView?
+
+824
+00:35:35,729 --> 00:35:36,660
+Right?
+
+825
+00:35:36,662 --> 00:35:38,162
+Well, when don't you want to?
+
+826
+00:35:38,164 --> 00:35:40,597
+Well you don't want to if you want a button or a slider or
+
+827
+00:35:40,599 --> 00:35:43,099
+anything where there's already an iOS view.
+
+828
+00:35:43,101 --> 00:35:44,400
+But if you want to do something that
+
+829
+00:35:44,402 --> 00:35:47,303
+those things can't do, draw something special or
+
+830
+00:35:47,305 --> 00:35:49,538
+handle touch events like swipes and
+
+831
+00:35:49,540 --> 00:35:54,509
+taps and pinches, differently or for a different purpose.
+
+832
+00:35:54,511 --> 00:35:58,212
+Then those things then you create your own custom view.
+
+833
+00:35:58,214 --> 00:36:00,581
+So, we're going to focus on drawing today, and
+
+834
+00:36:00,583 --> 00:36:03,984
+I'll do gestures in the next lec, in the next lecture.
+
+835
+00:36:03,986 --> 00:36:05,585
+To draw in your UIView,
+
+836
+00:36:05,587 --> 00:36:09,155
+all you need to do is override this method drawRect.
+
+837
+00:36:10,591 --> 00:36:13,425
+Okay, very simple method only takes one argument.
+
+838
+00:36:13,427 --> 00:36:15,594
+In the code, it's actually called Rect, but
+
+839
+00:36:15,596 --> 00:36:18,697
+I've renamed it to be regionThatNeedsToBeDrawn, so
+
+840
+00:36:18,699 --> 00:36:20,798
+that people understand what that argument is.
+
+841
+00:36:20,800 --> 00:36:23,734
+That argument is purely an optimization.
+
+842
+00:36:23,736 --> 00:36:27,338
+It's just the system saying, hey, draw yourself and really,
+
+843
+00:36:27,340 --> 00:36:29,339
+I only care about this rectangle of you.
+
+844
+00:36:29,341 --> 00:36:31,641
+But you can draw your, the whole self if you want.
+
+845
+00:36:31,643 --> 00:36:33,609
+But this is the only rectangle I really care about.
+
+846
+00:36:33,611 --> 00:36:37,279
+So if you had a View that knew how to draw parts of itself,
+
+847
+00:36:37,281 --> 00:36:40,182
+okay, then it could only draw the part that's in
+
+848
+00:36:40,184 --> 00:36:41,650
+this rectangle, but
+
+849
+00:36:41,651 --> 00:36:43,117
+you can completely ignore this rectangle if you want.
+
+850
+00:36:43,120 --> 00:36:45,387
+It's purely an optimization.
+
+851
+00:36:45,389 --> 00:36:45,953
+Okay?
+
+852
+00:36:48,124 --> 00:36:49,990
+This is very important to understand,
+
+853
+00:36:49,992 --> 00:36:53,260
+you never call drawRect, ever, never.
+
+854
+00:36:53,262 --> 00:36:54,160
+Never.
+
+855
+00:36:54,162 --> 00:36:55,345
+Okay?
+
+856
+00:36:55,346 --> 00:36:56,529
+If you call drawRect in your homework,
+
+857
+00:36:56,531 --> 00:36:58,330
+you're going to be a major ding.
+
+858
+00:36:58,332 --> 00:36:59,999
+Because I'm standing here in front of
+
+859
+00:37:00,001 --> 00:37:01,600
+you with red text on my slide.
+
+860
+00:37:01,602 --> 00:37:03,034
+Saying, never.
+
+861
+00:37:03,036 --> 00:37:05,153
+Okay.
+
+862
+00:37:05,154 --> 00:37:07,271
+Do not call drawRect, drawRect is called by the system.
+
+863
+00:37:07,273 --> 00:37:09,190
+Okay?
+
+864
+00:37:09,191 --> 00:37:11,108
+It's called by the system when your view needs to be redrawn.
+
+865
+00:37:11,110 --> 00:37:13,010
+How does the system know your needs,
+
+866
+00:37:13,012 --> 00:37:14,578
+view needs to be redrawn?
+
+867
+00:37:14,580 --> 00:37:18,314
+Because somebody called setNeedsDisplay on your view.
+
+868
+00:37:18,316 --> 00:37:19,982
+And you can call it on yourself if you want.
+
+869
+00:37:19,984 --> 00:37:22,985
+If something has changed about your view, some property or
+
+870
+00:37:22,987 --> 00:37:24,887
+something that would change the way it's drawn,
+
+871
+00:37:24,889 --> 00:37:26,888
+you call set needs display on yourself,
+
+872
+00:37:26,890 --> 00:37:29,691
+eventually the system will call your drawRect.
+
+873
+00:37:29,693 --> 00:37:31,993
+But it's got to set some things up first, okay.
+
+874
+00:37:31,995 --> 00:37:33,928
+There's other views around you.
+
+875
+00:37:33,930 --> 00:37:36,330
+That it has to get organized.
+
+876
+00:37:36,332 --> 00:37:38,965
+Okay, so never call drawRect, drawRect it's called for you.
+
+877
+00:37:38,967 --> 00:37:42,002
+When you call set in use display, you can specify I
+
+878
+00:37:42,004 --> 00:37:44,303
+really only need this rectangle redisplayed and
+
+879
+00:37:44,305 --> 00:37:45,905
+then obviously,
+
+880
+00:37:45,906 --> 00:37:47,506
+that rectangle's gonna show up in the argument to drawRect.
+
+881
+00:37:48,609 --> 00:37:51,143
+Okay, but if multiple people call set in use display with
+
+882
+00:37:51,145 --> 00:37:53,345
+different rectangles, probably the union of those
+
+883
+00:37:53,347 --> 00:37:56,280
+rectangles might get called here one time for drawRect.
+
+884
+00:37:56,282 --> 00:37:57,581
+Okay?
+
+885
+00:37:57,583 --> 00:38:00,517
+Make sense?
+
+886
+00:38:00,519 --> 00:38:01,418
+All right.
+
+887
+00:38:01,420 --> 00:38:03,186
+So, how do you implement this, pow,
+
+888
+00:38:03,188 --> 00:38:05,922
+all-powerful drawRect method?
+
+889
+00:38:05,924 --> 00:38:09,625
+You can use, kind of a C-like, function-based API,
+
+890
+00:38:09,627 --> 00:38:11,259
+called Core Graphics.
+
+891
+00:38:11,261 --> 00:38:13,094
+That's what it's all based on.
+
+892
+00:38:13,096 --> 00:38:15,596
+Or you can use a nice object-oriented, thing,
+
+893
+00:38:15,598 --> 00:38:18,432
+called UIBezierPath, which is what we're gonna use,
+
+894
+00:38:18,434 --> 00:38:20,367
+because we like object-oriented.
+
+895
+00:38:20,369 --> 00:38:23,603
+But since the underlying stuff core graphics is what
+
+896
+00:38:23,605 --> 00:38:26,973
+UIBezierPath is built on, I'm gonna kinda explain a little
+
+897
+00:38:26,975 --> 00:38:29,442
+bit about the concepts of Core Graphics.
+
+898
+00:38:29,444 --> 00:38:31,944
+How one draws in Core Graphics.
+
+899
+00:38:31,946 --> 00:38:34,380
+The first thing in Core Graphics that's important is,
+
+900
+00:38:34,382 --> 00:38:37,416
+you have to get a context to draw in.
+
+901
+00:38:37,418 --> 00:38:38,700
+Okay? So
+
+902
+00:38:38,701 --> 00:38:39,983
+if you're printing you'll have a printing context.
+
+903
+00:38:39,986 --> 00:38:41,519
+If you're drawing on screen you'll have a draw on
+
+904
+00:38:41,521 --> 00:38:44,305
+screen context, et cetera.
+
+905
+00:38:44,306 --> 00:38:47,090
+And inside drawRect, when you're drawRect is called by
+
+906
+00:38:47,093 --> 00:38:50,227
+the system it sets up the drawing context for you.
+
+907
+00:38:50,229 --> 00:38:51,895
+So it's automatically set up,
+
+908
+00:38:51,897 --> 00:38:54,097
+and it's called the current context.
+
+909
+00:38:54,099 --> 00:38:55,431
+The current drawing context.
+
+910
+00:38:55,433 --> 00:38:58,233
+And you can get it if you were using the CAPI.
+
+911
+00:38:58,235 --> 00:39:01,837
+Or C-like APIs it's still swift but it's functional.
+
+912
+00:39:01,839 --> 00:39:03,405
+Function API, you can get it
+
+913
+00:39:03,407 --> 00:39:06,207
+with this function UIGraphicsGetCurrentContext.
+
+914
+00:39:06,209 --> 00:39:07,541
+And it will return this cookie,
+
+915
+00:39:07,543 --> 00:39:08,876
+it's just this magic cookie.
+
+916
+00:39:08,878 --> 00:39:11,411
+You don't know what it is, but it is the context of drawing.
+
+917
+00:39:11,413 --> 00:39:15,615
+Because all of the C-like functional API take
+
+918
+00:39:15,617 --> 00:39:17,483
+a context as an argument.
+
+919
+00:39:17,485 --> 00:39:20,786
+Okay, BezierPath doesn't do that no worries,
+
+920
+00:39:20,788 --> 00:39:22,521
+but that one does.
+
+921
+00:39:22,522 --> 00:39:24,255
+So the first thing you need is a context automatically set up
+
+922
+00:39:24,258 --> 00:39:25,824
+for your when drawRect is called.
+
+923
+00:39:25,826 --> 00:39:29,927
+Then you create paths, you create paths with lines and
+
+924
+00:39:29,929 --> 00:39:31,395
+arcs and things like that.
+
+925
+00:39:32,297 --> 00:39:33,930
+Then you set the drawing attributes,
+
+926
+00:39:33,932 --> 00:39:36,499
+like the colors you want to draw in, the line widths, and
+
+927
+00:39:36,501 --> 00:39:37,800
+things like that, and
+
+928
+00:39:37,802 --> 00:39:41,370
+finally, you stroke and fill those paths.
+
+929
+00:39:42,305 --> 00:39:44,122
+Okay?
+
+930
+00:39:44,123 --> 00:39:45,940
+And you can do either, or, or both stroking and filling.
+
+931
+00:39:45,942 --> 00:39:48,509
+So that is how, that is fundamentally how you draw.
+
+932
+00:39:48,511 --> 00:39:52,979
+Things like drawing text is just the fonts know how to
+
+933
+00:39:52,981 --> 00:39:56,049
+have the perfect path to draw beautiful letters.
+
+934
+00:39:56,051 --> 00:39:58,918
+And so, your stroking would outline the letters, and
+
+935
+00:39:58,920 --> 00:40:01,620
+filling fills in the letters, okay?
+
+936
+00:40:01,622 --> 00:40:05,023
+So even drawing text, is just stroking and filling paths.
+
+937
+00:40:06,093 --> 00:40:10,061
+Okay? Now, UIBzierPath, this object
+
+938
+00:40:10,063 --> 00:40:12,830
+only thing on top, it always draws in the current context,
+
+939
+00:40:12,832 --> 00:40:14,431
+you don't have to worry about context.
+
+940
+00:40:14,433 --> 00:40:17,934
+It has methods, to do things like line two, arch two,
+
+941
+00:40:17,936 --> 00:40:19,069
+to build the path.
+
+942
+00:40:19,071 --> 00:40:20,821
+It also has methods for
+
+943
+00:40:20,822 --> 00:40:22,572
+setting a lot of these attributes like line width and
+
+944
+00:40:22,574 --> 00:40:25,174
+things like that and it has methods to stroke and fill.
+
+945
+00:40:25,176 --> 00:40:28,243
+So all those core graphics are put into one class.
+
+946
+00:40:28,245 --> 00:40:30,012
+Let's look at UIBezierPath, and
+
+947
+00:40:30,014 --> 00:40:32,747
+how we would use it to draw a triangle, let's say.
+
+948
+00:40:34,183 --> 00:40:37,418
+First we create a path, so we just say, UIBezierPath.
+
+949
+00:40:37,420 --> 00:40:40,320
+There are other initializers for UIBezierPath but
+
+950
+00:40:40,322 --> 00:40:42,889
+you could also just create an empty path, and
+
+951
+00:40:42,891 --> 00:40:45,625
+then you can start moving around.
+
+952
+00:40:45,627 --> 00:40:50,195
+So, here I'm going to assume this screen is 160 points wide
+
+953
+00:40:50,197 --> 00:40:53,965
+by 250 wide, and I'm gonna draw, this triangle here.
+
+954
+00:40:53,967 --> 00:40:57,102
+So I'm gonna move to 80 which is halfway across and
+
+955
+00:40:57,104 --> 00:40:58,369
+50 which is a little bit down,
+
+956
+00:40:58,371 --> 00:41:03,607
+and then I'm going to add a line down to 140, 150.
+
+957
+00:41:03,609 --> 00:41:06,743
+Then I wanna another line over to 10, 150.
+
+958
+00:41:06,745 --> 00:41:10,446
+Then I'm going to close this path.
+
+959
+00:41:10,448 --> 00:41:11,681
+Okay?
+
+960
+00:41:11,682 --> 00:41:12,915
+So that's it, that's how you can make a triangle.
+
+961
+00:41:12,917 --> 00:41:16,285
+Now, I'm kind of lying to you a little bit, because as you
+
+962
+00:41:16,287 --> 00:41:18,687
+execute these, nothing is appearing on screen.
+
+963
+00:41:18,689 --> 00:41:21,389
+The screen will be blank.
+
+964
+00:41:21,391 --> 00:41:23,891
+Okay, I was only showing them so you could understand what I
+
+965
+00:41:23,893 --> 00:41:25,726
+was doing there with the lines.
+
+966
+00:41:25,728 --> 00:41:27,278
+So it'd be blank.
+
+967
+00:41:27,279 --> 00:41:28,829
+To make it appear, you have to stroke or fill.
+
+968
+00:41:28,831 --> 00:41:31,331
+So, let's set the attributes we want.
+
+969
+00:41:31,333 --> 00:41:34,300
+So, I'm gonna set the color for filling to be green, and
+
+970
+00:41:34,302 --> 00:41:37,403
+the color for stroking to be red.
+
+971
+00:41:37,405 --> 00:41:41,007
+Okay, now notice that I set those with methods on UIColor,
+
+972
+00:41:41,009 --> 00:41:43,409
+not with methods on the BézierPath.
+
+973
+00:41:43,411 --> 00:41:46,144
+Okay, that's a little interesting but
+
+974
+00:41:46,146 --> 00:41:47,679
+that's the way that works.
+
+975
+00:41:47,681 --> 00:41:51,015
+But line width, I do step by talking to the paths, so
+
+976
+00:41:51,017 --> 00:41:52,316
+I sent a message to the BezierPath,
+
+977
+00:41:52,318 --> 00:41:53,650
+set line with the three.
+
+978
+00:41:53,652 --> 00:41:57,254
+So once I set up all my attributes, now I can fill,
+
+979
+00:41:57,256 --> 00:41:58,988
+for example by saying, path fill and
+
+980
+00:41:58,990 --> 00:42:01,791
+see, I get the rectangle filled in green.
+
+981
+00:42:01,793 --> 00:42:05,127
+Or, I can say stroke and it'll stroke the red line.
+
+982
+00:42:05,129 --> 00:42:07,696
+Okay?
+
+983
+00:42:07,698 --> 00:42:10,098
+Pretty straightforward?
+
+984
+00:42:10,100 --> 00:42:12,100
+Most of learning to draw is all about
+
+985
+00:42:12,102 --> 00:42:14,568
+understanding UIBezierPath and all the methods on it.
+
+986
+00:42:14,570 --> 00:42:15,269
+Question back there?
+
+987
+00:42:16,438 --> 00:42:18,038
+>> if I have two shapes onscreen,
+
+988
+00:42:18,040 --> 00:42:20,707
+how would I set the colors be different for each one?
+
+989
+00:42:20,709 --> 00:42:21,875
+>> If you have two what?
+
+990
+00:42:21,876 --> 00:42:23,042
+>> If you have two different shapes onscreen?
+
+991
+00:42:23,044 --> 00:42:23,976
+>> Oh, yes. So, the question,
+
+992
+00:42:23,978 --> 00:42:25,210
+if I have two shapes onscreen,
+
+993
+00:42:25,212 --> 00:42:27,912
+how would I set the colors be different for each one?
+
+994
+00:42:27,914 --> 00:42:30,748
+I would set the colors, stroke or fill one.
+
+995
+00:42:30,750 --> 00:42:32,149
+Set the colors on something else, stroke or
+
+996
+00:42:32,151 --> 00:42:32,783
+fill the other.
+
+997
+00:42:33,719 --> 00:42:34,918
+Okay?
+
+998
+00:42:34,920 --> 00:42:36,503
+Question.
+
+999
+00:42:36,504 --> 00:42:38,087
+>> If the path isn't closed, what does fill do?
+
+1000
+00:42:38,089 --> 00:42:39,605
+>> So the question is,
+
+1001
+00:42:39,606 --> 00:42:41,122
+if the path is not closed, what does fill do?
+
+1002
+00:42:41,125 --> 00:42:43,926
+Well, it depends on, I think the winding rule, and,
+
+1003
+00:42:43,928 --> 00:42:45,694
+other things about how it draws.
+
+1004
+00:42:45,696 --> 00:42:48,196
+But, it will try to fill it in.
+
+1005
+00:42:48,198 --> 00:42:49,097
+Okay. I mean a path could
+
+1006
+00:42:49,099 --> 00:42:50,931
+cross back over itself.
+
+1007
+00:42:50,933 --> 00:42:52,132
+Right? And so filling it
+
+1008
+00:42:52,134 --> 00:42:54,234
+might be hard to understand.
+
+1009
+00:42:54,236 --> 00:42:55,502
+And so there are rules for that.
+
+1010
+00:42:56,604 --> 00:42:58,637
+I'll talk about that just briefly in just a second, but
+
+1011
+00:42:58,639 --> 00:43:00,139
+it will fill.
+
+1012
+00:43:00,140 --> 00:43:01,640
+But there are other things, if you don't close a path then
+
+1013
+00:43:01,642 --> 00:43:04,042
+you can't do things like hit detection, right?
+
+1014
+00:43:04,044 --> 00:43:05,410
+Detecting whether a point is inside it
+
+1015
+00:43:05,412 --> 00:43:07,345
+because it's not closed, so there's no inside.
+
+1016
+00:43:10,049 --> 00:43:13,083
+So you can, UIBezierPath also has kind of
+
+1017
+00:43:13,085 --> 00:43:17,653
+pre-canned cool shapes like roundedRect, okay,
+
+1018
+00:43:17,655 --> 00:43:20,489
+which is a rectangle that the corners are rounded off of, or
+
+1019
+00:43:20,491 --> 00:43:24,960
+obviously ovals and circles, it has ways of doing that.
+
+1020
+00:43:24,962 --> 00:43:28,830
+You can also clip to any arbitrary path.
+
+1021
+00:43:28,832 --> 00:43:30,543
+So clipping,
+
+1022
+00:43:30,544 --> 00:43:32,255
+hopefully everyone knows what that means.
+
+1023
+00:43:32,256 --> 00:43:33,967
+That means, if I set it up, if I have a path, and I say clip.
+
+1024
+00:43:33,970 --> 00:43:37,404
+If I say, Add Clip, then all drawing I do after that
+
+1025
+00:43:37,406 --> 00:43:41,941
+will only show up if it's inside that path, okay?
+
+1026
+00:43:43,178 --> 00:43:44,677
+So, for example,
+
+1027
+00:43:44,678 --> 00:43:46,177
+if you were drawing playing card on screen,
+
+1028
+00:43:46,180 --> 00:43:49,114
+playing cards have little rounded rects, so you might
+
+1029
+00:43:49,116 --> 00:43:52,484
+draw your playing card in a big rectangle, and then clip
+
+1030
+00:43:52,486 --> 00:43:56,988
+to a rounded rect, so that the corners get [INAUDIBLE], okay.
+
+1031
+00:43:56,990 --> 00:43:59,990
+That's a simple to get a rounded rect playing card.
+
+1032
+00:44:01,260 --> 00:44:04,127
+You can also do hit detection as I mentioned, the hit
+
+1033
+00:44:04,129 --> 00:44:07,430
+detection and the filling depends on the winding rules,
+
+1034
+00:44:07,432 --> 00:44:10,866
+and there's this usesEvenOddFillRule, property,
+
+1035
+00:44:10,868 --> 00:44:14,837
+which is only yes or no to say which winding rule it uses.
+
+1036
+00:44:14,839 --> 00:44:16,605
+And so people who don't know what that means,
+
+1037
+00:44:16,607 --> 00:44:17,605
+don't worry about it.
+
+1038
+00:44:17,607 --> 00:44:19,207
+In fact, don't worry about hit detection or
+
+1039
+00:44:19,209 --> 00:44:20,764
+any of this stuff,
+
+1040
+00:44:20,765 --> 00:44:22,320
+cuz you're not going to have to do this for your homework.
+
+1041
+00:44:22,321 --> 00:44:23,876
+But I just want you to know that BezierPath has a lot of
+
+1042
+00:44:23,880 --> 00:44:25,946
+other stuff besides just linetwo, linetwo,
+
+1043
+00:44:25,948 --> 00:44:26,680
+fill and stroke.
+
+1044
+00:44:26,682 --> 00:44:28,615
+Okay, it has other stuff.
+
+1045
+00:44:28,616 --> 00:44:30,549
+And when you want to look at UIBezierPath,
+
+1046
+00:44:30,552 --> 00:44:32,618
+check out its documentation and
+
+1047
+00:44:32,620 --> 00:44:34,553
+kind of experience it in its full glory.
+
+1048
+00:44:36,057 --> 00:44:39,491
+Okay, let's talk a little bit more about colors because I
+
+1049
+00:44:39,493 --> 00:44:41,626
+used a color there, that green color.
+
+1050
+00:44:41,628 --> 00:44:43,227
+UIColor is just an object.
+
+1051
+00:44:43,229 --> 00:44:45,262
+It's really powerful.
+
+1052
+00:44:45,264 --> 00:44:46,497
+Colors not only can be
+
+1053
+00:44:46,499 --> 00:44:49,433
+standard colors like UIColor.greenColor, but
+
+1054
+00:44:49,435 --> 00:44:52,736
+you can create a color from RGB, red, green, blue, or
+
+1055
+00:44:52,738 --> 00:44:55,838
+HSB, that's hue, saturation, and brightness.
+
+1056
+00:44:55,840 --> 00:44:59,208
+You can even set your color to be a pattern, so that when you
+
+1057
+00:44:59,210 --> 00:45:02,311
+draw with that color, it actually draws some image.
+
+1058
+00:45:02,313 --> 00:45:02,911
+Okay?
+
+1059
+00:45:02,913 --> 00:45:05,347
+So that's kinda cool.
+
+1060
+00:45:05,349 --> 00:45:10,017
+Views have a background color, which you can set on them.
+
+1061
+00:45:10,019 --> 00:45:13,353
+Also colors can be transparent.
+
+1062
+00:45:13,355 --> 00:45:14,988
+Okay?
+
+1063
+00:45:14,989 --> 00:45:16,622
+They can be see-through, partially see-through.
+
+1064
+00:45:16,625 --> 00:45:18,191
+This is called alpha.
+
+1065
+00:45:18,193 --> 00:45:21,027
+So alpha is a value between zero and one.
+
+1066
+00:45:21,029 --> 00:45:22,461
+Zero means fully transparent, so
+
+1067
+00:45:22,463 --> 00:45:24,096
+you can see completely through it, and
+
+1068
+00:45:24,098 --> 00:45:25,663
+it won't even show up on the screen.
+
+1069
+00:45:25,665 --> 00:45:27,598
+To one, which is fully opaque.
+
+1070
+00:45:27,600 --> 00:45:29,400
+It obscures anything behind it.
+
+1071
+00:45:29,402 --> 00:45:30,868
+Anything drawn with this color.
+
+1072
+00:45:30,870 --> 00:45:32,903
+And you can create a transparent color from
+
+1073
+00:45:32,905 --> 00:45:35,472
+another color with this color with alpha component.
+
+1074
+00:45:35,474 --> 00:45:37,840
+This would create kind of half transparent yellow.
+
+1075
+00:45:37,842 --> 00:45:40,943
+Color to draw with, and you can draw in your view with
+
+1076
+00:45:40,945 --> 00:45:43,045
+these transparent colors, okay?
+
+1077
+00:45:43,047 --> 00:45:45,247
+Using these BazierPaths.
+
+1078
+00:45:45,249 --> 00:45:48,750
+However, if you draw in your view with transparency,
+
+1079
+00:45:48,752 --> 00:45:51,519
+you must tell the system that you are going to do that.
+
+1080
+00:45:51,521 --> 00:45:54,221
+And you do that by setting this property on
+
+1081
+00:45:54,223 --> 00:45:56,623
+your UIView called opaque to false.
+
+1082
+00:45:56,625 --> 00:45:58,091
+And why is this required?
+
+1083
+00:45:58,093 --> 00:46:00,727
+Well, because drawing with transparency is expensive.
+
+1084
+00:46:00,729 --> 00:46:01,961
+Because the views behind you
+
+1085
+00:46:01,963 --> 00:46:03,829
+are gonna start showing through.
+
+1086
+00:46:03,831 --> 00:46:05,197
+Okay? So the system has to
+
+1087
+00:46:05,199 --> 00:46:08,734
+blend basically the different views that are overlapping.
+
+1088
+00:46:08,736 --> 00:46:12,237
+That's expensive in terms of graphics power.
+
+1089
+00:46:12,239 --> 00:46:14,772
+And so it doesn't wanna do that if it doesn't have to.
+
+1090
+00:46:14,774 --> 00:46:16,374
+If it can just draw the bit.
+
+1091
+00:46:16,376 --> 00:46:17,875
+If you don't set this to false and
+
+1092
+00:46:17,877 --> 00:46:20,410
+you try drawing transparently, it's not gonna work.
+
+1093
+00:46:20,412 --> 00:46:22,479
+Okay?
+
+1094
+00:46:22,480 --> 00:46:24,547
+Cuz it's not gonna blend with the things behind.
+
+1095
+00:46:24,549 --> 00:46:28,918
+You can make your entire view transparent.
+
+1096
+00:46:28,920 --> 00:46:29,985
+Okay?
+
+1097
+00:46:29,987 --> 00:46:31,386
+It has its own property alpha,
+
+1098
+00:46:31,388 --> 00:46:33,722
+which you can set to anywhere between zero and one.
+
+1099
+00:46:33,724 --> 00:46:34,906
+It'll make your view,
+
+1100
+00:46:34,907 --> 00:46:36,089
+everything you draw in the view will be
+
+1101
+00:46:37,193 --> 00:46:39,460
+however much transparent you want it to be.
+
+1102
+00:46:39,462 --> 00:46:41,194
+Okay?
+
+1103
+00:46:41,196 --> 00:46:45,331
+What happens when views overlap and have transparency?
+
+1104
+00:46:45,333 --> 00:46:46,832
+They're blended as I said,
+
+1105
+00:46:46,834 --> 00:46:49,268
+remember that the subview's order matters.
+
+1106
+00:46:49,270 --> 00:46:51,636
+Okay? The thing that is first in
+
+1107
+00:46:51,638 --> 00:46:54,439
+the subviews array is in the back.
+
+1108
+00:46:54,441 --> 00:46:56,808
+And everything down the rye is in front.
+
+1109
+00:46:56,810 --> 00:46:59,276
+So, when the transparency happens,
+
+1110
+00:46:59,278 --> 00:47:01,979
+that's the order it's gonna happen in.
+
+1111
+00:47:01,981 --> 00:47:05,315
+You can completely hide a view by sending it hidden equal to
+
+1112
+00:47:05,317 --> 00:47:08,718
+true, and this is surprisingly common to just hide a view,
+
+1113
+00:47:08,720 --> 00:47:11,854
+and maybe it appears when a certain condition is true on
+
+1114
+00:47:11,856 --> 00:47:14,490
+screen, or whatever you can set up this view in
+
+1115
+00:47:14,492 --> 00:47:17,526
+your storyboard and then set it to hidden, to true.
+
+1116
+00:47:17,528 --> 00:47:19,161
+And so it comes up, it's not there.
+
+1117
+00:47:19,163 --> 00:47:22,230
+And then in code you say hidden equals false, boom,
+
+1118
+00:47:22,232 --> 00:47:23,431
+it appears, okay?
+
+1119
+00:47:23,433 --> 00:47:25,466
+So that's a way to, completely hide the view.
+
+1120
+00:47:25,468 --> 00:47:26,900
+A hidden view not only doesn't draw,
+
+1121
+00:47:26,902 --> 00:47:28,635
+it doesn't receive any touch events either.
+
+1122
+00:47:28,637 --> 00:47:30,103
+But it's still in the view hierarchy.
+
+1123
+00:47:30,105 --> 00:47:31,304
+It's kinda there waiting.
+
+1124
+00:47:31,306 --> 00:47:33,139
+Okay?
+
+1125
+00:47:33,141 --> 00:47:34,807
+All right, drawing text.
+
+1126
+00:47:34,809 --> 00:47:37,476
+So, usually you draw text on screen with a UILabel.
+
+1127
+00:47:37,478 --> 00:47:40,211
+That's what you did with your display, et cetera.
+
+1128
+00:47:40,213 --> 00:47:43,548
+But you might wanna draw in your drawRect and
+
+1129
+00:47:43,550 --> 00:47:45,916
+you do that with this class called NSAttributedString,
+
+1130
+00:47:45,918 --> 00:47:47,685
+which I'm really not gonna cover.
+
+1131
+00:47:47,687 --> 00:47:49,503
+You wanna look at
+
+1132
+00:47:49,504 --> 00:47:51,320
+its documentation if you wanna draw a text.
+
+1133
+00:47:51,323 --> 00:47:53,890
+I'm not gonna do a demo of NSAttributedString, but
+
+1134
+00:47:53,892 --> 00:47:55,058
+I'm gonna give you some code for
+
+1135
+00:47:55,060 --> 00:47:56,325
+your assignment next week, and I'm
+
+1136
+00:47:56,327 --> 00:47:59,361
+gonna use NSAttributedString in the code I'm giving you, so
+
+1137
+00:47:59,363 --> 00:48:01,630
+you'll be able to see an example of how it's used.
+
+1138
+00:48:01,632 --> 00:48:03,865
+But basically NSAttributedString is
+
+1139
+00:48:03,867 --> 00:48:05,333
+a bunch of characters and
+
+1140
+00:48:05,335 --> 00:48:07,668
+some attributes on those characters.
+
+1141
+00:48:07,670 --> 00:48:11,805
+Now attributed string has a couple of interesting things
+
+1142
+00:48:11,807 --> 00:48:12,572
+about it.
+
+1143
+00:48:12,574 --> 00:48:13,740
+It's easy to use.
+
+1144
+00:48:13,742 --> 00:48:16,075
+You can just create it, pass it a string, and
+
+1145
+00:48:16,077 --> 00:48:19,044
+then say draw at point, and that will draw the string with
+
+1146
+00:48:19,046 --> 00:48:21,580
+its point, its upper left corner at that point.
+
+1147
+00:48:21,582 --> 00:48:24,215
+And you can even find out how big it's gonna be by asking it
+
+1148
+00:48:24,217 --> 00:48:25,850
+the size of this attribute string.
+
+1149
+00:48:25,852 --> 00:48:28,285
+So it's pretty easy to use in that way.
+
+1150
+00:48:28,287 --> 00:48:30,688
+Mutability is not done with var and
+
+1151
+00:48:30,690 --> 00:48:32,756
+let for NSAttributedString.
+
+1152
+00:48:32,758 --> 00:48:33,656
+There's a different class
+
+1153
+00:48:33,658 --> 00:48:36,325
+called NSMutableAttributedString.
+
+1154
+00:48:36,327 --> 00:48:37,827
+Okay? And why would you
+
+1155
+00:48:37,829 --> 00:48:40,262
+want a mutable string attributed string?
+
+1156
+00:48:40,264 --> 00:48:41,830
+Well because these strings,
+
+1157
+00:48:41,832 --> 00:48:44,265
+what makes an attributed string attributed,
+
+1158
+00:48:44,267 --> 00:48:47,502
+is you can put attributes on the characters in this string.
+
+1159
+00:48:47,504 --> 00:48:49,770
+And so a mutable attributed string,
+
+1160
+00:48:49,772 --> 00:48:51,538
+you can set the attributes.
+
+1161
+00:48:51,540 --> 00:48:54,007
+You can get the string out as an NSString,
+
+1162
+00:48:54,009 --> 00:48:57,210
+using the String property on NSAttributedString but
+
+1163
+00:48:57,212 --> 00:48:59,946
+NSAttributedString itself is not a string.
+
+1164
+00:48:59,948 --> 00:49:02,048
+It's not like a subclass of NSString or anything.
+
+1165
+00:49:02,050 --> 00:49:03,349
+It's its own thing.
+
+1166
+00:49:03,351 --> 00:49:05,434
+So you set
+
+1167
+00:49:05,435 --> 00:49:07,518
+these attributes with functions like setAttributes.
+
+1168
+00:49:07,521 --> 00:49:09,387
+It takes a dictionary of attributes.
+
+1169
+00:49:09,389 --> 00:49:11,189
+I'll talk to you about what the keys and
+
+1170
+00:49:11,191 --> 00:49:12,590
+values are in a second.
+
+1171
+00:49:12,592 --> 00:49:15,143
+And then arrange.
+
+1172
+00:49:15,144 --> 00:49:17,695
+That's an NSRange right there by the way, not a Swift Range.
+
+1173
+00:49:17,697 --> 00:49:20,497
+And the indexing into these strings is
+
+1174
+00:49:20,499 --> 00:49:22,966
+the old style NSString version.
+
+1175
+00:49:22,968 --> 00:49:24,967
+It's not the string.index stuff we
+
+1176
+00:49:24,969 --> 00:49:26,335
+talked about last time.
+
+1177
+00:49:26,337 --> 00:49:29,471
+It's literally which Unicode character are you
+
+1178
+00:49:29,473 --> 00:49:32,107
+talking about setting an attribute at?
+
+1179
+00:49:32,109 --> 00:49:33,792
+Okay?
+
+1180
+00:49:33,793 --> 00:49:35,476
+So, this dictionary has a bunch of attributes.
+
+1181
+00:49:35,479 --> 00:49:37,178
+The attributes can be things like,
+
+1182
+00:49:37,180 --> 00:49:39,280
+set the foreground color of this text.
+
+1183
+00:49:39,282 --> 00:49:39,947
+Okay?
+
+1184
+00:49:39,949 --> 00:49:41,648
+Set the stroke width.
+
+1185
+00:49:41,650 --> 00:49:43,283
+Okay? Because remember,
+
+1186
+00:49:43,285 --> 00:49:44,484
+text is just paths.
+
+1187
+00:49:44,486 --> 00:49:47,153
+You can stroke them and to set the width or the font,
+
+1188
+00:49:47,155 --> 00:49:49,421
+is a really important one to be able to say.
+
+1189
+00:49:49,423 --> 00:49:52,991
+Set this text to have this particular font, okay?
+
+1190
+00:49:52,993 --> 00:49:55,827
+And so you just set a dictionary that has
+
+1191
+00:49:55,829 --> 00:49:59,964
+the key NSFontAttribute and the value would be a UIFont.
+
+1192
+00:49:59,966 --> 00:50:01,799
+Okay?
+
+1193
+00:50:01,800 --> 00:50:03,633
+Now let's talk about UI fonts, briefly.
+
+1194
+00:50:03,636 --> 00:50:07,270
+Fonts in iOS 7 and later, including iOS 8,
+
+1195
+00:50:07,272 --> 00:50:09,439
+are very important to get right, okay?
+
+1196
+00:50:09,441 --> 00:50:10,640
+Look at these screenshots.
+
+1197
+00:50:10,642 --> 00:50:12,908
+Look how important the fonts are.
+
+1198
+00:50:12,910 --> 00:50:14,743
+Okay? They're critical,
+
+1199
+00:50:14,745 --> 00:50:16,745
+to making the UI look good.
+
+1200
+00:50:16,747 --> 00:50:18,497
+Okay?
+
+1201
+00:50:18,498 --> 00:50:20,248
+So, you've got to get the right fonts in your app.
+
+1202
+00:50:20,250 --> 00:50:22,350
+And where do you get the right fonts?
+
+1203
+00:50:22,352 --> 00:50:24,752
+Well, the number one place to get a font,
+
+1204
+00:50:24,754 --> 00:50:28,489
+the right place 99% of the time, is this class function
+
+1205
+00:50:28,491 --> 00:50:32,826
+in UI font called preferred font for textile, okay?
+
+1206
+00:50:32,828 --> 00:50:36,696
+The text style is something like headline, or
+
+1207
+00:50:36,698 --> 00:50:38,548
+a body, okay?
+
+1208
+00:50:38,549 --> 00:50:40,399
+The body would be like the main content that your user is
+
+1209
+00:50:40,401 --> 00:50:42,051
+looking at.
+
+1210
+00:50:42,052 --> 00:50:43,702
+Headline might be like a title at the top.
+
+1211
+00:50:43,704 --> 00:50:46,171
+Footnote might be a small little thing mentioned at
+
+1212
+00:50:46,173 --> 00:50:47,923
+the bottom, okay?
+
+1213
+00:50:47,924 --> 00:50:49,674
+And there's a whole bunch more of these textiles.
+
+1214
+00:50:49,676 --> 00:50:51,559
+And so, you're gonna ask
+
+1215
+00:50:51,560 --> 00:50:53,443
+the assistant give me the preferred font for that style.
+
+1216
+00:50:53,446 --> 00:50:55,512
+The font includes a size.
+
+1217
+00:50:55,514 --> 00:50:57,664
+Okay?
+
+1218
+00:50:57,665 --> 00:50:59,815
+You want font to include the size, as well as the face.
+
+1219
+00:50:59,818 --> 00:51:02,852
+And users can go into their settings on their phone and
+
+1220
+00:51:02,854 --> 00:51:05,321
+change and say I can't see it anymore.
+
+1221
+00:51:05,323 --> 00:51:06,706
+Kinda like me.
+
+1222
+00:51:06,707 --> 00:51:08,090
+And they make their fonts bigger.
+
+1223
+00:51:08,092 --> 00:51:08,657
+Okay?
+
+1224
+00:51:08,659 --> 00:51:09,491
+And so this would
+
+1225
+00:51:09,493 --> 00:51:12,027
+automatically get that new size.
+
+1226
+00:51:12,029 --> 00:51:13,261
+Okay? So that's why you
+
+1227
+00:51:13,263 --> 00:51:15,162
+always wanna use preferred font any
+
+1228
+00:51:15,164 --> 00:51:17,931
+time you're displaying any user content, okay?
+
+1229
+00:51:17,933 --> 00:51:20,767
+Now, it is possible to create fonts where you say,
+
+1230
+00:51:20,769 --> 00:51:22,702
+give me arial 15 narrow or what.
+
+1231
+00:51:22,704 --> 00:51:25,071
+It is possible, but you really shouldn't be doing that.
+
+1232
+00:51:25,073 --> 00:51:27,006
+You should be using this preferred font for style.
+
+1233
+00:51:27,008 --> 00:51:28,941
+There's also a system font.
+
+1234
+00:51:28,943 --> 00:51:31,376
+This is something that appears on buttons and
+
+1235
+00:51:31,378 --> 00:51:35,113
+in things like segmented controls, things like that.
+
+1236
+00:51:35,115 --> 00:51:39,316
+You never wanna use only the system fonts for user content.
+
+1237
+00:51:39,318 --> 00:51:41,118
+User content you wanna use the preferred fonts.
+
+1238
+00:51:42,154 --> 00:51:42,719
+Okay?
+
+1239
+00:51:44,155 --> 00:51:45,821
+So yeah, other ways to get fonts, ignore them.
+
+1240
+00:51:45,823 --> 00:51:48,090
+I'm not gonna talk about it, okay?
+
+1241
+00:51:48,092 --> 00:51:50,425
+All right, how about drawing images?
+
+1242
+00:51:50,427 --> 00:51:52,227
+How do you do that?
+
+1243
+00:51:52,228 --> 00:51:54,028
+Well there is a UI label for
+
+1244
+00:51:54,031 --> 00:51:56,264
+images, it's called UI Image View.
+
+1245
+00:51:56,266 --> 00:51:58,065
+And you can use that to put an image on screen, but
+
+1246
+00:51:58,067 --> 00:52:01,368
+you might wanna draw an image, in your drawrect as well.
+
+1247
+00:52:01,370 --> 00:52:04,338
+And usually you create an image by name, from that
+
+1248
+00:52:04,340 --> 00:52:07,674
+Images.xcassets thing that we moved out of the way real
+
+1249
+00:52:07,676 --> 00:52:10,076
+quick right at the beginning of our very first demo.
+
+1250
+00:52:10,078 --> 00:52:12,345
+And if you click on that, it's pretty self-explanatory.
+
+1251
+00:52:12,347 --> 00:52:13,679
+You can drag images.
+
+1252
+00:52:13,681 --> 00:52:16,081
+You can have different images of different resolutions for
+
+1253
+00:52:16,083 --> 00:52:17,149
+different devices.
+
+1254
+00:52:17,150 --> 00:52:18,216
+It's really pretty powerful.
+
+1255
+00:52:18,218 --> 00:52:19,917
+That's usually create an image.
+
+1256
+00:52:19,919 --> 00:52:23,120
+By name and dragging into the images.xcassets.
+
+1257
+00:52:23,122 --> 00:52:25,389
+You can create it in other ways from the file system,
+
+1258
+00:52:25,391 --> 00:52:27,991
+which we haven't talked about, or even with drawing, but
+
+1259
+00:52:27,993 --> 00:52:29,826
+we're not gonna talk about that either.
+
+1260
+00:52:29,828 --> 00:52:33,429
+Once you have the UIImage, you can draw it by just sending it
+
+1261
+00:52:33,431 --> 00:52:35,231
+the message, draw at point.
+
+1262
+00:52:35,233 --> 00:52:38,133
+And it will draw in its normal size with that point as
+
+1263
+00:52:38,135 --> 00:52:39,634
+it's upper left.
+
+1264
+00:52:39,636 --> 00:52:41,403
+You can also say drawInRect, and
+
+1265
+00:52:41,405 --> 00:52:44,605
+it'll scale to fit that rect, either bigger or smaller, or
+
+1266
+00:52:44,607 --> 00:52:47,608
+you can draw a pattern in rect it'll tile it repeatedly to
+
+1267
+00:52:47,610 --> 00:52:48,442
+fill the rect.
+
+1268
+00:52:48,444 --> 00:52:50,044
+Okay?
+
+1269
+00:52:50,045 --> 00:52:51,645
+So really easy to draw images inside your draw rect.
+
+1270
+00:52:51,647 --> 00:52:54,547
+And the last thing I wanna talk about is,
+
+1271
+00:52:54,549 --> 00:52:58,484
+what happens when your bounds changes in your UI view?
+
+1272
+00:52:58,486 --> 00:53:00,719
+Like the, the user rotates the phone.
+
+1273
+00:53:00,721 --> 00:53:02,721
+Now your bounds are wide and
+
+1274
+00:53:02,723 --> 00:53:06,257
+not very tall, instead of tall and not so wide.
+
+1275
+00:53:07,427 --> 00:53:09,210
+You might think,
+
+1276
+00:53:09,211 --> 00:53:10,994
+oh my drawRect's gonna get called, and I'm gonna redraw.
+
+1277
+00:53:10,996 --> 00:53:12,529
+But no, that does not happen.
+
+1278
+00:53:12,531 --> 00:53:16,666
+Instead, the bits that were on screen get stretched.
+
+1279
+00:53:16,668 --> 00:53:18,351
+Okay?
+
+1280
+00:53:18,352 --> 00:53:20,035
+So, usually that's not what you want.
+
+1281
+00:53:20,038 --> 00:53:22,772
+You can and
+
+1282
+00:53:22,773 --> 00:53:25,507
+result in a very grainy, kind of bit stretching of your UI.
+
+1283
+00:53:25,509 --> 00:53:27,426
+But that is the default,
+
+1284
+00:53:27,427 --> 00:53:29,344
+is the bit stretching because it's higher performance.
+
+1285
+00:53:29,346 --> 00:53:32,914
+Now, you control though, you can control what happens to
+
+1286
+00:53:32,916 --> 00:53:35,049
+your view when the bounds change,
+
+1287
+00:53:35,051 --> 00:53:38,052
+with this property in view called content mode.
+
+1288
+00:53:38,054 --> 00:53:40,821
+And here are some of the content modes you can set.
+
+1289
+00:53:40,823 --> 00:53:43,323
+There's left, right, top, bottom, et cetera.
+
+1290
+00:53:43,325 --> 00:53:46,592
+All these ones basically don't change the bits.
+
+1291
+00:53:46,594 --> 00:53:48,461
+They don't re-draw, but
+
+1292
+00:53:48,462 --> 00:53:50,329
+they just move your entire view to the left edge,
+
+1293
+00:53:50,331 --> 00:53:53,432
+right edge, top, or bottom of the new bounds.
+
+1294
+00:53:53,434 --> 00:53:54,933
+These are kinda strange ones.
+
+1295
+00:53:54,935 --> 00:53:56,801
+You probably don't need that very often.
+
+1296
+00:53:56,803 --> 00:53:58,169
+Then there's the scaling of the bits.
+
+1297
+00:53:58,171 --> 00:54:00,604
+So here's the default, ScaleToFill.
+
+1298
+00:54:00,606 --> 00:54:02,840
+'Kay, we'll scale the bits to fill the new bounds, but
+
+1299
+00:54:02,842 --> 00:54:05,842
+you can also fill or fit the bounds and
+
+1300
+00:54:05,844 --> 00:54:07,210
+keep it aspect ratio.
+
+1301
+00:54:07,212 --> 00:54:09,012
+So that won't stretch your bits.
+
+1302
+00:54:09,014 --> 00:54:10,413
+It'll still scale them, but
+
+1303
+00:54:10,415 --> 00:54:13,582
+it'll scale them with your aspect ratio maintained, or
+
+1304
+00:54:13,584 --> 00:54:17,219
+you can have the wonderous redraw, 'kay?
+
+1305
+00:54:17,221 --> 00:54:19,421
+This is the one you wanna set that says,
+
+1306
+00:54:19,423 --> 00:54:22,690
+when my bounds change, call my drawRect again.
+
+1307
+00:54:22,692 --> 00:54:23,524
+Okay?
+
+1308
+00:54:23,526 --> 00:54:25,392
+With the new bounds.
+
+1309
+00:54:25,394 --> 00:54:26,793
+So you're gonna want that quite often.
+
+1310
+00:54:26,795 --> 00:54:29,129
+I'll show you that in the demo today.
+
+1311
+00:54:29,131 --> 00:54:30,630
+All right, so let's get right to this demo.
+
+1312
+00:54:31,699 --> 00:54:34,767
+Today, it's gonna be a little tight to do this in 20 minutes
+
+1313
+00:54:34,769 --> 00:54:37,002
+but, cuz we're gonna cover a lot of stuff but
+
+1314
+00:54:37,004 --> 00:54:38,036
+I think we can do it.
+
+1315
+00:54:38,038 --> 00:54:42,273
+We're going to start by creating a new project.
+
+1316
+00:54:42,275 --> 00:54:43,841
+So I'm just going to file a new project,
+
+1317
+00:54:43,843 --> 00:54:44,775
+this is brand new.
+
+1318
+00:54:44,776 --> 00:54:45,708
+Okay? We're going away from
+
+1319
+00:54:45,711 --> 00:54:46,676
+the calculator here.
+
+1320
+00:54:46,678 --> 00:54:47,944
+And as always we're gonna be
+
+1321
+00:54:47,946 --> 00:54:50,346
+using the single view application thing right here.
+
+1322
+00:54:50,348 --> 00:54:52,781
+I'm gonna call this project Happiness,
+
+1323
+00:54:52,783 --> 00:54:55,684
+because we're gonna draw a face, a smiley face.
+
+1324
+00:54:55,686 --> 00:54:56,851
+Okay? And it's gonna be
+
+1325
+00:54:56,853 --> 00:54:59,654
+able to smile or frown, depending on how happy it is.
+
+1326
+00:54:59,656 --> 00:55:01,072
+Okay?
+
+1327
+00:55:01,073 --> 00:55:02,489
+So that's why we're gonna call this Happiness.
+
+1328
+00:55:02,492 --> 00:55:04,992
+I'm gonna put it in the same place I put my calculator,
+
+1329
+00:55:04,994 --> 00:55:07,094
+which is my home directory developer there.
+
+1330
+00:55:07,096 --> 00:55:08,428
+Here it is.
+
+1331
+00:55:08,430 --> 00:55:12,031
+As before I'm gonna move this AppDelegate out of the way.
+
+1332
+00:55:12,033 --> 00:55:14,433
+I'm gonna move, actually let's take a look at image.assets.
+
+1333
+00:55:14,435 --> 00:55:16,669
+So here's the appicon slots.
+
+1334
+00:55:16,671 --> 00:55:18,403
+You can see that for any given image,
+
+1335
+00:55:18,405 --> 00:55:21,306
+like the appicon, there's lots of different resolutions,
+
+1336
+00:55:21,308 --> 00:55:23,541
+depending on the devices that you can provide.
+
+1337
+00:55:23,543 --> 00:55:24,876
+Okay?
+
+1338
+00:55:24,877 --> 00:55:26,210
+You don't have to provide all the different resolutions,
+
+1339
+00:55:26,212 --> 00:55:27,945
+it will interpolate but you can do it.
+
+1340
+00:55:27,947 --> 00:55:31,848
+So you just drag an image into here, and now you can get it
+
+1341
+00:55:31,850 --> 00:55:34,951
+by name with that UIImage named function.
+
+1342
+00:55:34,953 --> 00:55:36,169
+So we'll get that out of there.
+
+1343
+00:55:36,170 --> 00:55:37,386
+We don't want the launch screen either.
+
+1344
+00:55:37,389 --> 00:55:38,955
+So here we are.
+
+1345
+00:55:38,956 --> 00:55:40,522
+I'm gonna show you something fun here too.
+
+1346
+00:55:40,525 --> 00:55:43,158
+Here is my storyboard.
+
+1347
+00:55:43,160 --> 00:55:46,028
+I'm gonna show you how to add a new view controller to
+
+1348
+00:55:46,030 --> 00:55:47,062
+your storyboard.
+
+1349
+00:55:47,064 --> 00:55:48,696
+And in fact, I'm gonna delete this one.
+
+1350
+00:55:48,698 --> 00:55:50,064
+So, you see this one right here I've selected?
+
+1351
+00:55:50,066 --> 00:55:50,964
+I'm just deleting it.
+
+1352
+00:55:50,966 --> 00:55:52,866
+It's gone. I'm gonna delete its
+
+1353
+00:55:52,868 --> 00:55:54,735
+code as well.
+
+1354
+00:55:54,736 --> 00:55:56,603
+I'm gonna go here, and just delete, move it to the trash.
+
+1355
+00:55:56,605 --> 00:55:59,339
+Now I have a storyboard with nothing in it, and
+
+1356
+00:55:59,341 --> 00:56:01,040
+I've no view controllers.
+
+1357
+00:56:01,042 --> 00:56:02,542
+Okay?
+
+1358
+00:56:02,543 --> 00:56:04,043
+So, how do I add a view controller?
+
+1359
+00:56:04,045 --> 00:56:06,144
+You go over here to your object pallet.
+
+1360
+00:56:06,146 --> 00:56:08,313
+The very first thing is a view controller.
+
+1361
+00:56:08,315 --> 00:56:09,981
+And you just drag it out, and boom.
+
+1362
+00:56:09,983 --> 00:56:10,781
+You've got one.
+
+1363
+00:56:11,917 --> 00:56:13,550
+Now, the class.
+
+1364
+00:56:13,552 --> 00:56:15,318
+What class is this going to be though?
+
+1365
+00:56:15,320 --> 00:56:17,720
+This is gonna be Generic UIView controller, so
+
+1366
+00:56:17,722 --> 00:56:19,121
+it's pretty useless.
+
+1367
+00:56:19,123 --> 00:56:20,823
+Okay? You can't add any outlets, or
+
+1368
+00:56:20,825 --> 00:56:23,525
+have any actions because it's not a subclass of UIView
+
+1369
+00:56:23,527 --> 00:56:26,628
+controller, so you can't put any of that implementation in.
+
+1370
+00:56:26,630 --> 00:56:30,564
+So, we're gonna create a new subclass of UIView controller.
+
+1371
+00:56:30,566 --> 00:56:31,665
+So let me show you how to do that.
+
+1372
+00:56:31,667 --> 00:56:33,834
+You say New > File.
+
+1373
+00:56:33,836 --> 00:56:35,869
+And last time we went to New > File,
+
+1374
+00:56:35,871 --> 00:56:38,671
+we said Swift file to make the calculator brain.
+
+1375
+00:56:38,673 --> 00:56:41,574
+But now we're gonna go over here to Cocoa Touch Class,
+
+1376
+00:56:41,576 --> 00:56:44,109
+which we do anytime we wanna create a subclass of
+
+1377
+00:56:44,111 --> 00:56:45,661
+an iOS class.
+
+1378
+00:56:45,662 --> 00:56:47,212
+And here I'm creating a subclass of UIView controller.
+
+1379
+00:56:47,214 --> 00:56:48,346
+I need this.
+
+1380
+00:56:48,348 --> 00:56:50,381
+So I'm gonna click on that.
+
+1381
+00:56:50,383 --> 00:56:52,583
+Here's where I pick what I want it to be a subclass of.
+
+1382
+00:56:52,585 --> 00:56:53,884
+You can see there's a lot of things in here.
+
+1383
+00:56:53,886 --> 00:56:56,119
+I'm gonna say I want a view controller.
+
+1384
+00:56:56,121 --> 00:56:58,021
+It wants to call it view controller by default.
+
+1385
+00:56:58,023 --> 00:56:59,889
+We don't even like that for
+
+1386
+00:56:59,891 --> 00:57:02,291
+the calculator, let alone this.
+
+1387
+00:57:02,293 --> 00:57:06,128
+So I'm gonna call this my happiness view controller.
+
+1388
+00:57:06,130 --> 00:57:07,563
+Okay?
+
+1389
+00:57:07,564 --> 00:57:08,997
+So it creates that.
+
+1390
+00:57:08,999 --> 00:57:11,599
+Put it in the same place all my other Swift files are.
+
+1391
+00:57:11,601 --> 00:57:12,800
+Here it is.
+
+1392
+00:57:12,802 --> 00:57:14,118
+Happiness view controller.
+
+1393
+00:57:14,119 --> 00:57:15,435
+Again, I'm gonna get rid of this code.
+
+1394
+00:57:15,438 --> 00:57:16,470
+Okay?
+
+1395
+00:57:16,472 --> 00:57:18,972
+Just to make things a little clearer.
+
+1396
+00:57:18,974 --> 00:57:20,039
+So here's my happiness view controller.
+
+1397
+00:57:20,041 --> 00:57:22,675
+It's just like the view controller you had,
+
+1398
+00:57:22,677 --> 00:57:26,278
+that was called view controller in your calculator.
+
+1399
+00:57:26,280 --> 00:57:28,013
+It was called Happiness view controller.
+
+1400
+00:57:28,015 --> 00:57:29,481
+But this guy right here,
+
+1401
+00:57:29,483 --> 00:57:31,783
+is still playing old view controller.
+
+1402
+00:57:31,785 --> 00:57:32,917
+How do I know that?
+
+1403
+00:57:32,919 --> 00:57:34,752
+Well, it's this magic right here.
+
+1404
+00:57:34,754 --> 00:57:36,787
+You see this identity inspector?
+
+1405
+00:57:36,789 --> 00:57:38,521
+Okay. You can see the class of
+
+1406
+00:57:38,523 --> 00:57:41,791
+this selected thing here, in this UIView controller.
+
+1407
+00:57:41,793 --> 00:57:43,793
+And I don't want it to be UIView controller.
+
+1408
+00:57:43,795 --> 00:57:46,462
+I want it to be HappinessView controller.
+
+1409
+00:57:46,464 --> 00:57:49,264
+So, very important to understand that in
+
+1410
+00:57:49,266 --> 00:57:52,033
+storyboards, everything is linked up to
+
+1411
+00:57:52,035 --> 00:57:53,334
+your code by name.
+
+1412
+00:57:53,336 --> 00:57:54,902
+Only by the name.
+
+1413
+00:57:54,904 --> 00:57:56,603
+That is the only thing that links what's in
+
+1414
+00:57:56,605 --> 00:57:57,971
+your storyboard with your code.
+
+1415
+00:57:57,973 --> 00:58:00,674
+The names of outlets, the names of methods,
+
+1416
+00:58:00,676 --> 00:58:01,974
+the action methods.
+
+1417
+00:58:01,976 --> 00:58:04,610
+The name of your UIView controllers.
+
+1418
+00:58:04,612 --> 00:58:06,412
+The name of your UIViews.
+
+1419
+00:58:06,414 --> 00:58:07,612
+Okay? It's all by name.
+
+1420
+00:58:07,614 --> 00:58:09,881
+So you have to go to the identity inspector here and
+
+1421
+00:58:09,883 --> 00:58:12,050
+make sure that name matches up.
+
+1422
+00:58:12,052 --> 00:58:13,835
+So now, you can see
+
+1423
+00:58:13,836 --> 00:58:15,619
+this says that it's a HappinessView controller.
+
+1424
+00:58:15,621 --> 00:58:17,721
+So that's making me happy.
+
+1425
+00:58:17,723 --> 00:58:20,240
+Okay.
+
+1426
+00:58:20,241 --> 00:58:22,758
+Now, we want to put our custom view in here, okay?
+
+1427
+00:58:22,761 --> 00:58:26,329
+So how do I add a custom view to my UI?
+
+1428
+00:58:26,331 --> 00:58:29,231
+And the answer is, I go into the object pallet.
+
+1429
+00:58:29,233 --> 00:58:30,766
+It's all the way at the bottom,
+
+1430
+00:58:30,768 --> 00:58:32,134
+near the bottom somewhere.
+
+1431
+00:58:32,136 --> 00:58:32,901
+Where is that thing?
+
+1432
+00:58:32,903 --> 00:58:33,801
+There it is.
+
+1433
+00:58:33,803 --> 00:58:35,870
+You can drag out a generic view.
+
+1434
+00:58:35,872 --> 00:58:37,705
+So this is just a UI view.
+
+1435
+00:58:37,707 --> 00:58:39,339
+Now when I drag it out,
+
+1436
+00:58:39,341 --> 00:58:43,343
+I'm gonna put it right here with the dashed blue lines.
+
+1437
+00:58:43,345 --> 00:58:46,279
+'Kay, because we know that that's a good thing to do.
+
+1438
+00:58:46,281 --> 00:58:50,416
+And I want to set up the auto layout so
+
+1439
+00:58:50,418 --> 00:58:56,054
+that this view always fully fills my scene here.
+
+1440
+00:58:56,056 --> 00:58:58,489
+Okay? Now I could control drag to
+
+1441
+00:58:58,491 --> 00:59:02,560
+the edges like I did before, but since this is already
+
+1442
+00:59:02,562 --> 00:59:06,630
+perfectly where I want it, and I use the blue lines, I
+
+1443
+00:59:06,632 --> 00:59:11,001
+can go down here and use Reset to Suggested Constraints.
+
+1444
+00:59:11,003 --> 00:59:12,302
+'Kay?
+
+1445
+00:59:12,303 --> 00:59:13,602
+Now, I'm only showing you dribs and drabs of autolayout.
+
+1446
+00:59:13,605 --> 00:59:16,105
+I was gonna talk all about autolayout today, but
+
+1447
+00:59:16,107 --> 00:59:17,439
+we need to move on to this.
+
+1448
+00:59:17,441 --> 00:59:19,941
+But I will be having the lecture on auto layout,
+
+1449
+00:59:19,943 --> 00:59:21,409
+probably week after next.
+
+1450
+00:59:21,411 --> 00:59:23,745
+In the meantime I'm just gonna show you little bits of it and
+
+1451
+00:59:23,747 --> 00:59:25,730
+you can explore.
+
+1452
+00:59:25,731 --> 00:59:27,714
+I'm never gonna ask you to do a ton of it in your homework.
+
+1453
+00:59:27,717 --> 00:59:30,084
+So this one I'm gonna reset to suggested constraints, and
+
+1454
+00:59:30,086 --> 00:59:31,284
+it added those constraints.
+
+1455
+00:59:31,286 --> 00:59:32,585
+And I could go over here.
+
+1456
+00:59:32,587 --> 00:59:34,187
+Let me make some more space here.
+
+1457
+00:59:34,189 --> 00:59:35,654
+I could go look at them over here.
+
+1458
+00:59:35,656 --> 00:59:37,523
+You've all determined that.
+
+1459
+00:59:37,525 --> 00:59:40,559
+Another place you can see the constraints of a view is
+
+1460
+00:59:40,561 --> 00:59:42,193
+here in the size inspector.
+
+1461
+00:59:42,195 --> 00:59:44,662
+If you look towards the bottom of the size inspector-
+
+1462
+00:59:44,664 --> 00:59:46,163
+Look, here's all the constraints, see?
+
+1463
+00:59:46,165 --> 00:59:48,165
+Trailing, leading, top, bottom.
+
+1464
+00:59:48,167 --> 00:59:50,634
+It added all these because these are the suggested
+
+1465
+00:59:50,636 --> 00:59:53,970
+constraints based on the dash blue lines that I used.
+
+1466
+00:59:53,972 --> 00:59:55,822
+Okay?
+
+1467
+00:59:55,823 --> 00:59:57,673
+So, oftentimes if you put something in place perfectly
+
+1468
+00:59:57,675 --> 00:59:58,874
+with the blue lines,
+
+1469
+00:59:58,876 --> 01:00:01,443
+you can use recess-suggested constraints.
+
+1470
+01:00:01,445 --> 01:00:04,979
+We coulda done that with our display in our calculator.
+
+1471
+01:00:04,981 --> 01:00:06,748
+We couldn't do it with the buttons.
+
+1472
+01:00:06,750 --> 01:00:09,116
+Cuz it just wasn't lined up enough with other things, but
+
+1473
+01:00:09,118 --> 01:00:11,618
+we could have done it with the display.
+
+1474
+01:00:11,620 --> 01:00:12,853
+All right? So now we have this.
+
+1475
+01:00:12,855 --> 01:00:17,623
+Now, this UIView, let's look at its identity in Spector.
+
+1476
+01:00:17,625 --> 01:00:19,258
+It's just a generic UIView.
+
+1477
+01:00:19,260 --> 01:00:20,726
+That's no good.
+
+1478
+01:00:20,727 --> 01:00:22,193
+We need a custom UIView sub-class.
+
+1479
+01:00:22,196 --> 01:00:23,161
+So let's go do that.
+
+1480
+01:00:23,163 --> 01:00:24,996
+File > New File.
+
+1481
+01:00:24,998 --> 01:00:26,665
+Same thing,
+
+1482
+01:00:26,666 --> 01:00:28,333
+I'm gonna create a subclass of a coco touch class.
+
+1483
+01:00:28,335 --> 01:00:30,801
+This one's not gonna be a view controller,
+
+1484
+01:00:30,803 --> 01:00:32,202
+it's gonna be a UIView.
+
+1485
+01:00:32,204 --> 01:00:33,837
+Okay? I'm gonna call it face view,
+
+1486
+01:00:33,839 --> 01:00:35,238
+cuz that's what it's gonna do.
+
+1487
+01:00:35,240 --> 01:00:38,041
+It's gonna draw a face, okay?
+
+1488
+01:00:38,043 --> 01:00:40,776
+Put it in the same place, put everything.
+
+1489
+01:00:40,778 --> 01:00:42,845
+Here's our, my face view right here.
+
+1490
+01:00:42,847 --> 01:00:44,413
+We'll get back to that in a second.
+
+1491
+01:00:44,415 --> 01:00:45,780
+In our storyboard,
+
+1492
+01:00:45,782 --> 01:00:49,517
+we wanna make sure that we inspect our Face View.
+
+1493
+01:00:49,519 --> 01:00:50,618
+Okay?
+
+1494
+01:00:50,619 --> 01:00:51,718
+And change its class to Face View.
+
+1495
+01:00:51,721 --> 01:00:54,087
+By the way, it can kinda get tricky sometimes,
+
+1496
+01:00:54,089 --> 01:00:55,655
+picking the right thing.
+
+1497
+01:00:55,657 --> 01:00:57,490
+Like, sometimes you're picking the UIView controller,
+
+1498
+01:00:57,492 --> 01:00:58,691
+sometimes you're picking the view.
+
+1499
+01:00:58,693 --> 01:01:02,628
+One kinda cool trick, CTRL+ Shift.
+
+1500
+01:01:02,630 --> 01:01:05,397
+If you hold CTRL+Shift and click, then it
+
+1501
+01:01:05,399 --> 01:01:09,367
+lets you pick which thing you want, that's under the mouse.
+
+1502
+01:01:09,369 --> 01:01:11,636
+A very important little trick, CTRL+Shift.
+
+1503
+01:01:11,638 --> 01:01:13,804
+So here I could pick the view controller.
+
+1504
+01:01:13,806 --> 01:01:15,539
+Now I'm seeing the identity inspector of
+
+1505
+01:01:15,541 --> 01:01:16,473
+the view controller.
+
+1506
+01:01:16,475 --> 01:01:18,041
+Or I could go here and pick,
+
+1507
+01:01:18,043 --> 01:01:20,843
+this is the view property in my view controller.
+
+1508
+01:01:20,845 --> 01:01:21,977
+The top level view.
+
+1509
+01:01:21,979 --> 01:01:24,380
+This is my FaceView that I'm trying to create.
+
+1510
+01:01:24,382 --> 01:01:26,615
+So I select this here, then I'm gonna go to
+
+1511
+01:01:26,617 --> 01:01:28,750
+the Identity Inspector again, up here.
+
+1512
+01:01:28,752 --> 01:01:31,652
+I'm gonna change this to be a FaceView.
+
+1513
+01:01:31,654 --> 01:01:32,887
+Okay?
+
+1514
+01:01:32,889 --> 01:01:35,189
+So now this thing is a FaceView, and so
+
+1515
+01:01:35,191 --> 01:01:37,524
+when it's time for this thing to draw,
+
+1516
+01:01:37,526 --> 01:01:40,727
+it's gonna call the Draw Rect of the FaceView class.
+
+1517
+01:01:40,729 --> 01:01:43,096
+So let's go take a look at the FaceView class.
+
+1518
+01:01:43,098 --> 01:01:44,630
+Here it is.
+
+1519
+01:01:44,632 --> 01:01:48,100
+And here is drawRect.
+
+1520
+01:01:48,102 --> 01:01:50,602
+Now, it's commented out by default.
+
+1521
+01:01:50,604 --> 01:01:52,303
+Why is it commented out by default?
+
+1522
+01:01:52,305 --> 01:01:57,308
+Well because having a drawRect costs system resources.
+
+1523
+01:01:57,310 --> 01:01:59,677
+It thinks it has to draw this thing.
+
+1524
+01:01:59,678 --> 01:02:02,045
+So you only wanna have a drawRect if you actually draw,
+
+1525
+01:02:02,047 --> 01:02:03,279
+in your drawRect.
+
+1526
+01:02:03,281 --> 01:02:06,149
+Don't have it just sitting there uncommented out,
+
+1527
+01:02:06,151 --> 01:02:08,050
+if you're not actually using it.
+
+1528
+01:02:08,052 --> 01:02:10,386
+All right, so, how am I gonna draw this face?
+
+1529
+01:02:10,388 --> 01:02:13,622
+Let's start by drawing the outline of the head.
+
+1530
+01:02:13,624 --> 01:02:14,989
+Just a round circle.
+
+1531
+01:02:14,991 --> 01:02:16,074
+Okay?
+
+1532
+01:02:16,075 --> 01:02:17,158
+Cuz that's pretty simple to draw.
+
+1533
+01:02:17,160 --> 01:02:20,695
+And how am I gonna do that?
+
+1534
+01:02:20,697 --> 01:02:24,164
+Let's start by creating a BezierPath.
+
+1535
+01:02:24,166 --> 01:02:29,636
+I'll call it facePath which is, BezierPath.
+
+1536
+01:02:29,638 --> 01:02:31,188
+And let's look at
+
+1537
+01:02:31,189 --> 01:02:32,739
+all the different kinds of BezierPaths we can make.
+
+1538
+01:02:32,741 --> 01:02:34,257
+Ovals.
+
+1539
+01:02:34,258 --> 01:02:35,774
+We could use this one, ovalInRect, okay?
+
+1540
+01:02:35,777 --> 01:02:36,809
+That's a pretty good one.
+
+1541
+01:02:36,811 --> 01:02:38,977
+I'm actually gonna use this one,
+
+1542
+01:02:38,979 --> 01:02:42,447
+arcCenter cuz I wanna show you a really bad error message
+
+1543
+01:02:42,449 --> 01:02:45,650
+you're gonna get in swift that I want you to avoid.
+
+1544
+01:02:45,652 --> 01:02:48,019
+So I'm gonna use this one which lets you create an arc,
+
+1545
+01:02:48,021 --> 01:02:50,254
+and I'm just gonna have my arc go all the way around.
+
+1546
+01:02:50,256 --> 01:02:52,089
+Okay? From zero all the way around.
+
+1547
+01:02:52,091 --> 01:02:54,190
+So, it wants to know the center.
+
+1548
+01:02:54,192 --> 01:02:56,626
+So I'm gonna have to have my faces center somehow.
+
+1549
+01:02:56,628 --> 01:02:58,094
+We'll define that in a second.
+
+1550
+01:02:58,096 --> 01:03:00,229
+It also wants to know the radius, so
+
+1551
+01:03:00,231 --> 01:03:02,731
+I have to have my faces radius in a second.
+
+1552
+01:03:02,733 --> 01:03:04,332
+We'll do that.
+
+1553
+01:03:04,334 --> 01:03:07,602
+It wants to know the start angle, to draw this arc.
+
+1554
+01:03:07,604 --> 01:03:09,003
+Okay? So
+
+1555
+01:03:09,004 --> 01:03:10,403
+I'm gonna start at angle zero.
+
+1556
+01:03:10,406 --> 01:03:12,339
+The angle's in radians.
+
+1557
+01:03:12,341 --> 01:03:15,542
+So I wanna go around to 2pi.
+
+1558
+01:03:15,544 --> 01:03:17,444
+Going, I'm gonna draw an arc from zero,
+
+1559
+01:03:17,446 --> 01:03:19,045
+all the way around to 2pi radians.
+
+1560
+01:03:19,047 --> 01:03:21,447
+Hopefully everyone knows what radians are.
+
+1561
+01:03:21,449 --> 01:03:22,965
+Okay?
+
+1562
+01:03:22,966 --> 01:03:24,482
+So zero to two pi that's good, and then clockwise or
+
+1563
+01:03:24,485 --> 01:03:25,935
+counter clockwise,
+
+1564
+01:03:25,936 --> 01:03:27,386
+I don't care cuz I'm going all the way around.
+
+1565
+01:03:27,388 --> 01:03:28,953
+So I'll just say clockwise true.
+
+1566
+01:03:28,955 --> 01:03:31,823
+Now, when I do this, well first let's do
+
+1567
+01:03:31,825 --> 01:03:34,458
+our faceCenter and faceRadius here.
+
+1568
+01:03:34,460 --> 01:03:40,630
+So I'm gonna make actually computed properties for those.
+
+1569
+01:03:40,632 --> 01:03:43,600
+So the face center is a CG point.
+
+1570
+01:03:43,602 --> 01:03:47,970
+And really, it would be cool, yeah, I could do get and set.
+
+1571
+01:03:47,972 --> 01:03:49,905
+It's gonna be Get Only.
+
+1572
+01:03:49,907 --> 01:03:51,240
+Okay?
+
+1573
+01:03:51,241 --> 01:03:52,574
+I'm not gonna allow me to set my face center,
+
+1574
+01:03:52,576 --> 01:03:54,209
+I'm almost going to calculate it.
+
+1575
+01:03:54,211 --> 01:03:56,644
+I could make it settable, actually too, but
+
+1576
+01:03:56,646 --> 01:03:59,080
+I'm gonna make it so it's calculated only.
+
+1577
+01:03:59,082 --> 01:04:00,681
+When you do calculated only,
+
+1578
+01:04:00,683 --> 01:04:03,050
+you actually don't need this part.
+
+1579
+01:04:03,052 --> 01:04:03,683
+This get.
+
+1580
+01:04:03,685 --> 01:04:04,851
+You can take that out.
+
+1581
+01:04:04,853 --> 01:04:06,352
+And if it's Return Only.
+
+1582
+01:04:06,354 --> 01:04:08,253
+So I'll say return.
+
+1583
+01:04:08,255 --> 01:04:11,023
+Now I, you might be saying oh I'm gonna return center,
+
+1584
+01:04:11,025 --> 01:04:12,257
+let's put the face in the center.
+
+1585
+01:04:12,259 --> 01:04:15,660
+Did everyone understand why this is very bad?
+
+1586
+01:04:15,662 --> 01:04:17,528
+All right, cuz center is not in my coordinate system.
+
+1587
+01:04:17,530 --> 01:04:19,029
+It's in my super views coordinate system.
+
+1588
+01:04:19,031 --> 01:04:23,967
+Luckily, I can convert a point from my super views coordinate
+
+1589
+01:04:23,969 --> 01:04:29,138
+system using this nice method, convertPoint from view.
+
+1590
+01:04:29,140 --> 01:04:32,407
+So I'm gonna convert center from my superview.
+
+1591
+01:04:33,377 --> 01:04:34,876
+Okay?
+
+1592
+01:04:34,877 --> 01:04:36,376
+That's gonna put my face right in the center,
+
+1593
+01:04:36,379 --> 01:04:39,680
+cuz I've converted that center from my superview's coordinate
+
+1594
+01:04:39,682 --> 01:04:40,514
+system to mine.
+
+1595
+01:04:40,516 --> 01:04:41,381
+Okay?
+
+1596
+01:04:41,383 --> 01:04:43,083
+So that's faceCenter.
+
+1597
+01:04:43,085 --> 01:04:45,151
+Let's also do faceRadius.
+
+1598
+01:04:45,153 --> 01:04:46,786
+So for the faceRadius,
+
+1599
+01:04:46,788 --> 01:04:49,488
+I'm gonna have it be as big as it can be.
+
+1600
+01:04:49,490 --> 01:04:50,990
+Okay?
+
+1601
+01:04:50,991 --> 01:04:52,491
+So faceRadius is gonna be a CG flow to all of
+
+1602
+01:04:52,493 --> 01:04:55,493
+our drawing stuff is flowed, and I'm gonna return as big as
+
+1603
+01:04:55,495 --> 01:04:57,261
+it can be without getting cut off.
+
+1604
+01:04:57,263 --> 01:04:59,563
+So it's gonna be the minimum of my width or height.
+
+1605
+01:04:59,565 --> 01:05:03,934
+So I'm gonna say, min of my bounds.
+
+1606
+01:05:03,936 --> 01:05:06,203
+Sorry.
+
+1607
+01:05:06,204 --> 01:05:08,471
+Bounds.size.width, or my bounds.size.height.
+
+1608
+01:05:08,473 --> 01:05:10,306
+Whichever is less than that.
+
+1609
+01:05:10,307 --> 01:05:12,140
+Min is just a nice little function in Swift.
+
+1610
+01:05:12,143 --> 01:05:15,077
+And I'm gonna divide by two because this is a radius,
+
+1611
+01:05:15,079 --> 01:05:16,612
+not diameter of my face.
+
+1612
+01:05:16,614 --> 01:05:17,946
+This is the radius.
+
+1613
+01:05:17,948 --> 01:05:20,982
+So now I have my center facing radius, but
+
+1614
+01:05:20,984 --> 01:05:22,984
+I still have an error here.
+
+1615
+01:05:22,986 --> 01:05:24,669
+Look at this error.
+
+1616
+01:05:24,670 --> 01:05:26,353
+Even though I did my center, I did my radius.
+
+1617
+01:05:26,356 --> 01:05:27,554
+I still have an error.
+
+1618
+01:05:27,556 --> 01:05:28,955
+What is the problem?
+
+1619
+01:05:28,957 --> 01:05:31,891
+Oh, extra argument radius in call.
+
+1620
+01:05:31,893 --> 01:05:33,760
+Huh.
+
+1621
+01:05:33,762 --> 01:05:34,944
+That's weird.
+
+1622
+01:05:34,945 --> 01:05:36,127
+I didn't see any extra argument.
+
+1623
+01:05:36,130 --> 01:05:37,329
+What the heck is that about?
+
+1624
+01:05:37,331 --> 01:05:39,131
+Okay.
+
+1625
+01:05:39,132 --> 01:05:40,932
+You could waste a half an hour looking for this, okay?
+
+1626
+01:05:40,934 --> 01:05:42,250
+I was thinking, oh,
+
+1627
+01:05:42,251 --> 01:05:43,567
+radius, there's nothing wrong with the radius.
+
+1628
+01:05:43,570 --> 01:05:45,687
+It's right.
+
+1629
+01:05:45,688 --> 01:05:47,805
+The problem for this has nothing to do with the radius.
+
+1630
+01:05:47,807 --> 01:05:50,708
+The problem is this.
+
+1631
+01:05:50,710 --> 01:05:52,410
+Okay?
+
+1632
+01:05:52,411 --> 01:05:54,111
+So this is an error you get from switching occasionally,
+
+1633
+01:05:54,113 --> 01:05:56,813
+I'm sure they'll fix all these errors, but occasionally,
+
+1634
+01:05:56,815 --> 01:05:59,416
+you get this very misleading error, and this is one.
+
+1635
+01:05:59,418 --> 01:06:00,817
+The problem is that this-
+
+1636
+01:06:00,819 --> 01:06:01,784
+What type is this?
+
+1637
+01:06:05,022 --> 01:06:06,021
+It's a double.
+
+1638
+01:06:06,023 --> 01:06:07,489
+Yeah.
+
+1639
+01:06:07,490 --> 01:06:08,956
+And what type do we draw with?
+
+1640
+01:06:08,959 --> 01:06:10,224
+CGFloat.
+
+1641
+01:06:10,226 --> 01:06:14,194
+So this problem is just that I need to cast this to
+
+1642
+01:06:14,196 --> 01:06:15,195
+a CGFloat.
+
+1643
+01:06:15,197 --> 01:06:16,908
+Okay?
+
+1644
+01:06:16,909 --> 01:06:18,620
+That's gonna make this error go away.
+
+1645
+01:06:18,621 --> 01:06:20,332
+It had nothing to do with radius whatsoever there.
+
+1646
+01:06:20,335 --> 01:06:22,168
+Okay?
+
+1647
+01:06:22,169 --> 01:06:24,002
+So, best warning, watch out for that.
+
+1648
+01:06:24,005 --> 01:06:26,605
+All right, so I have my nice facePath here.
+
+1649
+01:06:26,607 --> 01:06:30,476
+Maybe I wanna set my facePath's linewidth.
+
+1650
+01:06:30,478 --> 01:06:34,246
+Something like three, something like that.
+
+1651
+01:06:34,248 --> 01:06:36,181
+In fact, maybe I even want linewidth to
+
+1652
+01:06:36,183 --> 01:06:42,019
+be something that's configurable in my FaceView.
+
+1653
+01:06:42,021 --> 01:06:43,253
+So it's a CG float.
+
+1654
+01:06:43,255 --> 01:06:45,222
+And we'll set it to default of three.
+
+1655
+01:06:45,224 --> 01:06:46,790
+One thing that's interesting and
+
+1656
+01:06:46,792 --> 01:06:48,891
+then we'll set this down here to line width.
+
+1657
+01:06:48,893 --> 01:06:51,794
+One thing that's interesting about this is any time
+
+1658
+01:06:51,796 --> 01:06:54,997
+someone changes my line width, I need to redraw myself.
+
+1659
+01:06:54,999 --> 01:06:56,565
+All right?
+
+1660
+01:06:56,567 --> 01:06:58,133
+So how can I make that happen?
+
+1661
+01:06:58,135 --> 01:07:01,502
+Well, I can use Property Observer.
+
+1662
+01:07:01,504 --> 01:07:02,937
+Okay?
+
+1663
+01:07:02,938 --> 01:07:04,371
+Anytime someone sets this,
+
+1664
+01:07:04,373 --> 01:07:08,108
+I'm gonna call setNeedsDisplay on myself.
+
+1665
+01:07:08,110 --> 01:07:09,709
+Okay?
+
+1666
+01:07:09,711 --> 01:07:11,127
+Bam.
+
+1667
+01:07:11,128 --> 01:07:12,544
+I'm in it redrawn by the system.
+
+1668
+01:07:12,547 --> 01:07:13,879
+Okay? So anytime you have
+
+1669
+01:07:13,881 --> 01:07:16,815
+a property in your, in a view that changes how you would be
+
+1670
+01:07:16,817 --> 01:07:19,284
+drawn, just put a little property observer into
+
+1671
+01:07:19,286 --> 01:07:20,952
+the setNeedsDisplay after it.
+
+1672
+01:07:20,954 --> 01:07:23,354
+And it'll get you automatically redrawn.
+
+1673
+01:07:23,356 --> 01:07:25,189
+Maybe I'll have another property here,
+
+1674
+01:07:25,191 --> 01:07:26,490
+which is the color I wanna be.
+
+1675
+01:07:26,492 --> 01:07:29,626
+UIColor, we'll set the default here to be
+
+1676
+01:07:29,628 --> 01:07:31,461
+blueColor for example.
+
+1677
+01:07:31,463 --> 01:07:33,329
+But I want the exact same thing here.
+
+1678
+01:07:33,331 --> 01:07:34,029
+Okay?
+
+1679
+01:07:34,031 --> 01:07:35,330
+Someone sets it.
+
+1680
+01:07:35,332 --> 01:07:36,631
+I want it redrawn.
+
+1681
+01:07:36,633 --> 01:07:39,167
+And so let's go ahead and set our color.
+
+1682
+01:07:39,169 --> 01:07:42,003
+Now I'm gonna do both my set, I could do set fill and
+
+1683
+01:07:42,005 --> 01:07:44,638
+set stroke colors, but I'm just gonna do set,
+
+1684
+01:07:44,640 --> 01:07:46,773
+which sets both my fill and my stroke.
+
+1685
+01:07:46,775 --> 01:07:49,976
+I'm not gonna be filling so it doesn't matter, but set to
+
+1686
+01:07:49,978 --> 01:07:53,146
+both, and then how do I draw this BezierPath right here?
+
+1687
+01:07:53,148 --> 01:07:56,716
+I just say, facepath.stroke.
+
+1688
+01:07:56,718 --> 01:08:01,319
+And that's gonna draw, okay?
+
+1689
+01:08:01,321 --> 01:08:04,456
+So let's go take a look at this.
+
+1690
+01:08:04,458 --> 01:08:11,395
+[INAUDIBLE] Okay.
+
+1691
+01:08:11,397 --> 01:08:13,397
+So, it comes up, it's blank.
+
+1692
+01:08:13,399 --> 01:08:15,866
+And not only is it blank, it's got some error down here.
+
+1693
+01:08:15,868 --> 01:08:17,918
+What does it say? It says,
+
+1694
+01:08:17,919 --> 01:08:19,969
+failed to instantiate the default view controller.
+
+1695
+01:08:19,971 --> 01:08:21,738
+Okay? Well that means that in my
+
+1696
+01:08:21,740 --> 01:08:27,009
+storyboard, there is no scene that's specified,
+
+1697
+01:08:27,011 --> 01:08:29,444
+as the scene to start in.
+
+1698
+01:08:29,446 --> 01:08:31,079
+Okay? It has no starting scene.
+
+1699
+01:08:31,081 --> 01:08:33,848
+The starting scene always has a little arrow pointing to it.
+
+1700
+01:08:33,850 --> 01:08:34,983
+Right here,
+
+1701
+01:08:34,984 --> 01:08:36,117
+you've probably seen in in your calculator right?
+
+1702
+01:08:36,119 --> 01:08:38,419
+A little arrow that says this is the place to come in
+
+1703
+01:08:38,421 --> 01:08:39,720
+when you start this app.
+
+1704
+01:08:39,722 --> 01:08:42,322
+You can set that arrow with the inspector the regular
+
+1705
+01:08:42,324 --> 01:08:44,524
+attributes inspector by selecting your
+
+1706
+01:08:44,526 --> 01:08:47,693
+view controller that you wanna be the one that comes in.
+
+1707
+01:08:47,695 --> 01:08:48,894
+And click. This little button here is
+
+1708
+01:08:48,896 --> 01:08:49,828
+initial view controller.
+
+1709
+01:08:49,830 --> 01:08:51,129
+You see that arrow appear?
+
+1710
+01:08:51,131 --> 01:08:52,997
+You can also pick this arrow up and
+
+1711
+01:08:52,999 --> 01:08:55,032
+move it to another view controller.
+
+1712
+01:08:55,034 --> 01:08:56,767
+Okay?
+
+1713
+01:08:56,769 --> 01:08:59,269
+So now we have a thing, oh all right.
+
+1714
+01:08:59,271 --> 01:09:01,154
+So we've got our face.
+
+1715
+01:09:01,155 --> 01:09:03,038
+Now, one thing I don't like about this face is it goes all
+
+1716
+01:09:03,041 --> 01:09:04,407
+the way to the edges.
+
+1717
+01:09:04,409 --> 01:09:06,675
+I want it to actually be 90% of the edges.
+
+1718
+01:09:08,178 --> 01:09:09,544
+Okay? Another thing I
+
+1719
+01:09:09,546 --> 01:09:10,712
+don't like is this.
+
+1720
+01:09:10,714 --> 01:09:12,113
+Ugh, okay?
+
+1721
+01:09:12,115 --> 01:09:15,982
+So my face is gonna be distorted every time I rotate.
+
+1722
+01:09:15,984 --> 01:09:17,601
+Why is that?
+
+1723
+01:09:17,602 --> 01:09:19,219
+That's this stretching thing I was telling you about.
+
+1724
+01:09:19,221 --> 01:09:22,155
+We want our draw rect to be called again when we
+
+1725
+01:09:22,157 --> 01:09:24,523
+have a new bounds like that.
+
+1726
+01:09:24,525 --> 01:09:26,492
+So let's fix both of those things.
+
+1727
+01:09:26,494 --> 01:09:29,795
+We can fix that content mode redraw by selecting our view,
+
+1728
+01:09:29,797 --> 01:09:31,596
+going to the inspector up here,
+
+1729
+01:09:31,598 --> 01:09:33,431
+the attributes inspector, and
+
+1730
+01:09:33,433 --> 01:09:35,199
+the very first one is the mode.
+
+1731
+01:09:35,201 --> 01:09:37,835
+And you can see the default was scale to fill.
+
+1732
+01:09:37,837 --> 01:09:38,835
+We want redraw.
+
+1733
+01:09:39,905 --> 01:09:41,170
+Okay? So I'm gonna pick redraw.
+
+1734
+01:09:41,172 --> 01:09:42,738
+So that'll fix that.
+
+1735
+01:09:42,740 --> 01:09:49,711
+And as far as the 90%, I'm going to fix that in here,
+
+1736
+01:09:49,713 --> 01:09:55,683
+by having the, my face radius be times 90%.
+
+1737
+01:09:55,685 --> 01:09:58,319
+But really, I'd like this to be settable too.
+
+1738
+01:09:58,321 --> 01:10:02,456
+So I'm gonna have var scale, CGFloat.
+
+1739
+01:10:03,425 --> 01:10:05,358
+Okay. And we'll start this out at
+
+1740
+01:10:05,360 --> 01:10:05,958
+90%.
+
+1741
+01:10:05,960 --> 01:10:07,393
+So I want that, and
+
+1742
+01:10:07,395 --> 01:10:11,963
+this one also, if I change, I want it to change.
+
+1743
+01:10:11,965 --> 01:10:13,231
+Okay?
+
+1744
+01:10:13,232 --> 01:10:14,498
+So now let's go try that.
+
+1745
+01:10:14,501 --> 01:10:15,132
+See what happens.
+
+1746
+01:10:15,134 --> 01:10:16,567
+Okay? We got our 90%.
+
+1747
+01:10:16,569 --> 01:10:18,135
+That's good.
+
+1748
+01:10:18,136 --> 01:10:19,702
+And when I rotate, it doesn't stretch it.
+
+1749
+01:10:20,672 --> 01:10:22,138
+Okay? And it's using the minimum of
+
+1750
+01:10:22,140 --> 01:10:23,072
+the width or height.
+
+1751
+01:10:23,074 --> 01:10:24,006
+Okay?
+
+1752
+01:10:24,008 --> 01:10:24,906
+So that's good.
+
+1753
+01:10:24,908 --> 01:10:26,074
+That's going good.
+
+1754
+01:10:26,076 --> 01:10:29,444
+Now we wanna draw the eyes and the mouth, and
+
+1755
+01:10:29,446 --> 01:10:31,712
+cuz time is running out here,
+
+1756
+01:10:31,714 --> 01:10:35,249
+I'm actually gonna type those in super fast.
+
+1757
+01:10:35,251 --> 01:10:38,752
+I posted for those of you who are trying to keep along here,
+
+1758
+01:10:38,754 --> 01:10:40,687
+which is probably impossible.
+
+1759
+01:10:40,689 --> 01:10:44,390
+To do that though, I need some constants.
+
+1760
+01:10:44,392 --> 01:10:47,560
+And this how we do constants in Swift.
+
+1761
+01:10:47,562 --> 01:10:49,461
+We create structs.
+
+1762
+01:10:49,463 --> 01:10:52,330
+Okay? And then use class, or
+
+1763
+01:10:52,332 --> 01:10:55,500
+in this case, static lets.
+
+1764
+01:10:55,502 --> 01:10:56,868
+Okay? So this is gonna be
+
+1765
+01:10:56,870 --> 01:11:00,071
+a constant called Scaling.FaceRadiustoEyeRadius.
+
+1766
+01:11:00,073 --> 01:11:01,956
+Okay. And
+
+1767
+01:11:01,957 --> 01:11:03,840
+then I'm going to have a function here, that I'm
+
+1768
+01:11:03,843 --> 01:11:07,911
+gonna type in really, really fast, called bezierPathForEye.
+
+1769
+01:11:07,913 --> 01:11:11,548
+And it's just gonna return a BezierPath that draws an eye.
+
+1770
+01:11:11,550 --> 01:11:13,149
+Either the left eye or the right eye.
+
+1771
+01:11:13,151 --> 01:11:14,283
+This says which one.
+
+1772
+01:11:14,285 --> 01:11:16,051
+Okay? So it returns a BezierPath.
+
+1773
+01:11:16,053 --> 01:11:18,804
+Okay?
+
+1774
+01:11:18,805 --> 01:11:21,556
+Then I'm gonna have another one, which is BezierSmile.
+
+1775
+01:11:21,558 --> 01:11:23,124
+We're gonna type that in real fast.
+
+1776
+01:11:23,126 --> 01:11:24,158
+Okay?
+
+1777
+01:11:24,160 --> 01:11:26,060
+So here is BeizerPath for smile.
+
+1778
+01:11:26,062 --> 01:11:27,794
+And what this is gonna do,
+
+1779
+01:11:27,796 --> 01:11:31,331
+it's gonna take a fraction of the maximum smile.
+
+1780
+01:11:31,333 --> 01:11:33,800
+So one is full smile.
+
+1781
+01:11:33,802 --> 01:11:35,835
+Minus one is full frown.
+
+1782
+01:11:35,837 --> 01:11:37,069
+And everywhere in between.
+
+1783
+01:11:37,071 --> 01:11:38,570
+'Kay? So that's what this does.
+
+1784
+01:11:38,572 --> 01:11:39,738
+And it returns a BeizerPath.
+
+1785
+01:11:39,740 --> 01:11:42,440
+So now here in my drawRect,
+
+1786
+01:11:42,442 --> 01:11:46,477
+I can say bezierPathForEye, left eye.
+
+1787
+01:11:46,479 --> 01:11:47,611
+I got the BezierPath.
+
+1788
+01:11:47,613 --> 01:11:51,047
+I'm just gonna immediately send it stroke.
+
+1789
+01:11:51,049 --> 01:11:52,949
+Okay?
+
+1790
+01:11:52,950 --> 01:11:54,850
+And then BezierPath for the right eye.
+
+1791
+01:11:54,852 --> 01:11:56,985
+I'm gonna send it stroke.
+
+1792
+01:11:56,987 --> 01:11:59,087
+So I'm just gonna stroke the left eye and the right eye.
+
+1793
+01:11:59,089 --> 01:12:00,338
+Okay?
+
+1794
+01:12:00,339 --> 01:12:01,588
+Then I'm gonna do the smiliness.
+
+1795
+01:12:01,591 --> 01:12:06,127
+So, I'm going to let smiliness equal some value.
+
+1796
+01:12:06,129 --> 01:12:08,429
+Let's start it at 0.75.
+
+1797
+01:12:08,431 --> 01:12:11,064
+We're pretty, pretty happy to start.
+
+1798
+01:12:11,066 --> 01:12:13,767
+And then I'm going to create a bez,
+
+1799
+01:12:13,769 --> 01:12:16,269
+this BezierPath using this thing up here for
+
+1800
+01:12:16,271 --> 01:12:19,005
+a smile, which is bezierPathForSmile.
+
+1801
+01:12:19,007 --> 01:12:22,775
+And we're gonna pass it the smiliness.
+
+1802
+01:12:22,777 --> 01:12:25,810
+And then I'm just going to stroke this smile path.
+
+1803
+01:12:27,881 --> 01:12:29,147
+Okay?
+
+1804
+01:12:29,148 --> 01:12:30,414
+And I hoped to have a little more time so
+
+1805
+01:12:30,416 --> 01:12:32,449
+I could have gone through this code, but
+
+1806
+01:12:32,451 --> 01:12:34,985
+it's a pretty straightforward code, really.
+
+1807
+01:12:34,987 --> 01:12:37,654
+Here we're just using add curve to point in
+
+1808
+01:12:37,656 --> 01:12:38,788
+our BezierPath.
+
+1809
+01:12:38,790 --> 01:12:41,724
+To draw a curve, which is the curve of the mouth.
+
+1810
+01:12:41,726 --> 01:12:43,793
+And then here,
+
+1811
+01:12:43,794 --> 01:12:45,861
+we're just using BezierPath arc center again.
+
+1812
+01:12:45,863 --> 01:12:46,495
+Okay?
+
+1813
+01:12:46,497 --> 01:12:48,063
+To create the circle.
+
+1814
+01:12:48,064 --> 01:12:49,630
+The eyes are just circles, okay?
+
+1815
+01:12:49,633 --> 01:12:50,965
+That's really all those two methods do.
+
+1816
+01:12:50,967 --> 01:12:53,100
+There's nothing really special about them.
+
+1817
+01:12:53,102 --> 01:12:57,004
+And what do I have error here, which is, oops.
+
+1818
+01:12:57,006 --> 01:12:58,971
+Dot.
+
+1819
+01:12:58,973 --> 01:13:00,172
+Okay?
+
+1820
+01:13:00,174 --> 01:13:01,607
+That's not it either.
+
+1821
+01:13:01,609 --> 01:13:04,176
+SmilePath oh, equals, not that.
+
+1822
+01:13:04,178 --> 01:13:05,143
+Equals.
+
+1823
+01:13:05,145 --> 01:13:06,044
+There we go.
+
+1824
+01:13:06,046 --> 01:13:06,744
+Okay?
+
+1825
+01:13:06,746 --> 01:13:08,078
+Yes?
+
+1826
+01:13:08,080 --> 01:13:09,479
+So let's run this.
+
+1827
+01:13:09,481 --> 01:13:11,414
+Hopefully, we'll have a smiley face.
+
+1828
+01:13:13,284 --> 01:13:14,049
+There it is.
+
+1829
+01:13:14,051 --> 01:13:15,017
+He looks pretty happy.
+
+1830
+01:13:15,019 --> 01:13:16,051
+We can rotate him.
+
+1831
+01:13:16,053 --> 01:13:17,335
+He's very happy.
+
+1832
+01:13:17,336 --> 01:13:18,618
+Okay, let's make him a little sad.
+
+1833
+01:13:18,621 --> 01:13:21,422
+How about minus 0.5?
+
+1834
+01:13:21,424 --> 01:13:22,389
+Minus 0.5.
+
+1835
+01:13:22,391 --> 01:13:24,424
+Pretty, pretty sad.
+
+1836
+01:13:27,929 --> 01:13:29,495
+Aw.
+
+1837
+01:13:29,497 --> 01:13:31,764
+Okay?
+
+1838
+01:13:31,766 --> 01:13:33,466
+Okay.
+
+1839
+01:13:33,467 --> 01:13:35,167
+So now we have this nice FaceView.
+
+1840
+01:13:35,169 --> 01:13:38,603
+What we're gonna do in our next lecture, is we're going
+
+1841
+01:13:38,605 --> 01:13:41,439
+to add a gesture so we can make him happy or sad.
+
+1842
+01:13:41,441 --> 01:13:42,306
+Happy or sad.
+
+1843
+01:13:42,308 --> 01:13:43,908
+Okay?
+
+1844
+01:13:43,909 --> 01:13:45,509
+We're also gonna put a gesture in there, a pinch gesture so
+
+1845
+01:13:45,511 --> 01:13:46,977
+we can make them bigger or smaller.
+
+1846
+01:13:46,979 --> 01:13:49,396
+Okay?
+
+1847
+01:13:49,397 --> 01:13:51,814
+Then we're going to actually add a whole other MVC and
+
+1848
+01:13:51,817 --> 01:13:55,718
+make a much more powerful application that just uses
+
+1849
+01:13:55,720 --> 01:13:58,421
+the FaceView.
+
+1850
+01:13:58,422 --> 01:14:01,123
+The happiness view controller as a view in another MVC.
+
+1851
+01:14:01,125 --> 01:14:02,413
+Okay?
+
+1852
+01:14:02,414 --> 01:14:03,702
+So now we're going to do multiple NBCs.
+
+1853
+01:14:03,703 --> 01:14:04,991
+So that's what we're gonna be doing on Monday.
+

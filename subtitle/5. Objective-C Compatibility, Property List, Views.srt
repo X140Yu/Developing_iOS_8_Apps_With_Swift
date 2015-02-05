@@ -292,11 +292,11 @@ because it doesn't really know necessarily what you want.
 
 74
 00:03:24,811 --> 00:03:27,278
-But you can use the methods like Double value or
+But you can use the methods like doubleValue or
 
 75
 00:03:27,280 --> 00:03:31,382
-Int value, like we use Double value, in the Calculator.
+Int value, like we use doubleValue, in the Calculator.
 
 76
 00:03:31,384 --> 00:03:34,484
@@ -1252,7 +1252,7 @@ So, this is going to be a computed property.
 
 314
 00:13:13,348 --> 00:13:15,948
-Okay, so we're gonna have a get in the set.
+Okay, so we're gonna have a get and a set.
 
 315
 00:13:15,950 --> 00:13:17,183
@@ -1260,11 +1260,11 @@ And when the get,
 
 316
 00:13:17,184 --> 00:13:18,417
-we're just gonna get some sort of property
+we're just gonna get some sort of Property
 
 317
 00:13:18,419 --> 00:13:21,186
-list representation of our internal data structure.
+List representation of our internal data structure.
 
 318
 00:13:21,188 --> 00:13:23,521
@@ -1328,7 +1328,7 @@ the String of the operand rather.
 
 333
 00:14:06,960 --> 00:14:08,026
-Right? The dub will
+Right? The Double will
 
 334
 00:14:08,028 --> 00:14:09,326
@@ -1384,7 +1384,7 @@ but one way we could do our get is we could just say,
 
 347
 00:14:43,592 --> 00:14:47,226
-we could make a return value that is going to be
+we could make a returnValue that is going to be
 
 348
 00:14:47,228 --> 00:14:48,861
@@ -1396,7 +1396,7 @@ Okay, in fact let's just create an empty Array of
 
 350
 00:14:52,766 --> 00:14:56,768
-String here, and then we can just through our ops,
+String here, and then we can just go through our ops,
 
 351
 00:14:56,770 --> 00:14:59,737
@@ -1404,11 +1404,11 @@ in our opStack here, and for each op,
 
 352
 00:14:59,739 --> 00:15:04,307
-we can just say return value append, an ops description.
+we can just say returnValue.append, an op's description.
 
 353
 00:15:04,309 --> 00:15:07,877
-On to the end of it, and then we could return, return value.
+On to the end of it, and then we could return, returnValue.
 
 354
 00:15:10,748 --> 00:15:13,882
@@ -1428,7 +1428,7 @@ because Arrays are bridged, and
 
 358
 00:15:22,559 --> 00:15:24,392
-as Array which happens to be an object.
+NSArray which happens to be an object.
 
 359
 00:15:24,394 --> 00:15:25,392
@@ -1448,11 +1448,11 @@ So if you paid attention in my last lecture, you'll remember
 
 363
 00:15:34,836 --> 00:15:36,969
-that I told you about this function called MAP.
+that I told you about this function called map.
 
 364
 00:15:36,971 --> 00:15:43,041
-[COUGH] And I can actually just return my opstack mapped,
+And I can actually just return my opStack mapped,
 
 365
 00:15:43,043 --> 00:15:49,047
@@ -1472,7 +1472,7 @@ This is just a little closure that gets the opportunity to
 
 369
 00:15:57,923 --> 00:16:00,723
-convert every single thing inside op stack,
+convert every single thing inside opStack,
 
 370
 00:16:00,725 --> 00:16:03,893
@@ -1516,7 +1516,7 @@ So now we have, someone gives us back our program.
 
 380
 00:16:25,179 --> 00:16:27,245
-We wanna load our Ops dec back up.
+We wanna load our opStack back up.
 
 381
 00:16:27,247 --> 00:16:33,117
@@ -1544,15 +1544,15 @@ So what I'm going to do,
 
 387
 00:16:43,828 --> 00:16:47,529
-I'm going to let op symbols equal new value, right?
+I'm going to let opSymbols equal newValue, right?
 
 388
 00:16:47,531 --> 00:16:49,731
-New value remember we are in the setter here.
+newValue remember we are in the setter here.
 
 389
 00:16:49,733 --> 00:16:52,633
-So, new value is the new value which is in AnyObject.
+So, newValue is the newValue which is in AnyObject.
 
 390
 00:16:54,070 --> 00:16:57,571
@@ -1588,7 +1588,7 @@ If it is, now I can convert back, so
 
 398
 00:17:19,392 --> 00:17:22,893
-I'm gonna create something called my new op stack which
+I'm gonna create something called my new opStack which
 
 399
 00:17:22,895 --> 00:17:27,497
@@ -1596,15 +1596,15 @@ is just gonna be an Array of ops and I'm just gonna go for
 
 400
 00:17:27,499 --> 00:17:31,834
-each op symbol 1n this op symbols.
+each opSymbol in this opSymbols.
 
 401
 00:17:32,836 --> 00:17:35,603
-Op symbols is this thing right here, that's the Array,
+opSymbols is this thing right here, that's the Array,
 
 402
 00:17:35,605 --> 00:17:38,373
-that's the new value, the AnyObject converted.
+that's the newValue, the AnyObject converted.
 
 403
 00:17:38,375 --> 00:17:42,776
@@ -1632,15 +1632,15 @@ if I could turn that String into an operand, and I'm gonna
 
 409
 00:18:04,164 --> 00:18:09,166
-do that with if let operand equal NS number formatter.
+do that with if let operand equal NSNumberFormatter.
 
 410
 00:18:09,168 --> 00:18:12,736
-Okay, number from String, I'm gonna pass it
+Okay, numberFromString, I'm gonna pass it
 
 411
 00:18:12,738 --> 00:18:16,773
-this op symbol that I got out of that Array it gave me.
+this opSymbol that I got out of that Array it gave me.
 
 412
 00:18:16,775 --> 00:18:20,042
@@ -1648,7 +1648,7 @@ I'm going to use optional chaining here and
 
 413
 00:18:20,044 --> 00:18:24,113
-put a question mark, then Double value, okay.
+put a question mark, then doubleValue, okay.
 
 414
 00:18:24,115 --> 00:18:27,616
@@ -1668,7 +1668,7 @@ If you put a question mark after that term.
 
 418
 00:18:38,661 --> 00:18:40,927
-So, number from String can return nil if this is
+So, numberFromString can return nil if this is
 
 419
 00:18:40,929 --> 00:18:44,364
@@ -1684,7 +1684,7 @@ If that's nil than just return nil back to here.
 
 422
 00:18:50,171 --> 00:18:52,604
-Otherwise keep going and send it Double value.
+Otherwise keep going and send it doubleValue.
 
 423
 00:18:53,574 --> 00:18:57,709
@@ -1696,7 +1696,7 @@ because of the if let, or it's going to be a Double,
 
 425
 00:19:01,881 --> 00:19:03,580
-which is what this Double value comes out of here.
+which is what this doubleValue comes out of here.
 
 426
 00:19:04,883 --> 00:19:07,384
@@ -1704,7 +1704,7 @@ Okay, so that's kind of explaining from last week how
 
 427
 00:19:07,386 --> 00:19:09,252
-we did this NumberFormatter thing.
+we did this number formatter thing.
 
 428
 00:19:09,254 --> 00:19:12,005
@@ -1724,11 +1724,11 @@ So we're just putting a new op on there.
 
 432
 00:19:20,797 --> 00:19:24,565
-So now I've built a new op stack using all those Strings,
+So now I've built a new opStack using all those Strings,
 
 433
 00:19:24,567 --> 00:19:27,901
-and I can just return that new op stack.
+and I can just return that new opStack.
 
 434
 00:19:27,903 --> 00:19:30,170
@@ -1736,11 +1736,11 @@ Not return it, sorry.
 
 435
 00:19:30,171 --> 00:19:32,438
-I'm gonna set my op stack equal to that new op
+I'm gonna set my opStack equal to that new op
 
 436
 00:19:32,441 --> 00:19:33,740
-stack, okay?
+Stack, okay?
 
 437
 00:19:33,742 --> 00:19:35,174
@@ -1752,7 +1752,7 @@ Any questions about that?
 
 439
 00:19:38,278 --> 00:19:41,513
->> [INAUDIBLE] Property List?
+>>Property List?
 
 440
 00:19:41,515 --> 00:19:42,780
@@ -1860,11 +1860,11 @@ I'm not gonna, I don't have time to really run this
 
 466
 00:20:50,873 --> 00:20:53,940
-unfortunately due to in test code because we are.
+unfortunately due to in test code because we are
 
 467
 00:20:56,178 --> 00:20:57,577
-Schedule constraint here.
+schedule constraint here.
 
 468
 00:20:57,579 --> 00:20:59,979
@@ -1876,7 +1876,7 @@ All right, so now let's talk about, new thing here,
 
 470
 00:21:03,417 --> 00:21:06,584
-which is Views, okay, totally new topic.
+which is views, okay, totally new topic.
 
 471
 00:21:06,586 --> 00:21:09,087
@@ -1984,11 +1984,11 @@ It's not currently in the view hierarchy so that can be nil.
 
 497
 00:22:11,509 --> 00:22:15,577
-Your subviews, I show a ray of UIView there.
+Your subviews, I show Array of UIView there.
 
 498
 00:22:15,579 --> 00:22:18,847
-Actually the subviews property is an Array of AnyObject,
+Actually the subview's property is an Array of AnyObject,
 
 499
 00:22:18,849 --> 00:22:20,482
@@ -2032,7 +2032,7 @@ that's again, the bridging will work here,
 
 509
 00:22:43,303 --> 00:22:46,404
-automatically, so, no worries there UIWindow.
+automatically, so, no worries there. UIWindow.
 
 510
 00:22:46,406 --> 00:22:48,372
@@ -2084,7 +2084,7 @@ superviews, is created usually, graphically.
 
 522
 00:23:15,631 --> 00:23:17,664
-You can drag things out in the storyboard.
+You can drag things out in the StoryBoard.
 
 523
 00:23:17,666 --> 00:23:20,800
@@ -2132,7 +2132,7 @@ want to remove.
 
 534
 00:23:42,287 --> 00:23:44,571
-So these are sent to different,
+So these are sent to different people,
 
 535
 00:23:44,572 --> 00:23:46,856
@@ -2172,11 +2172,11 @@ called view, and
 
 544
 00:24:06,507 --> 00:24:11,209
-it is the top level view in the scene in the storyboard.
+it is the top level view in the scene in the StoryBoard.
 
 545
 00:24:11,211 --> 00:24:12,544
-All right. So you have this story board.
+All right. So you have this StoryBoard.
 
 546
 00:24:12,546 --> 00:24:15,346
@@ -2208,7 +2208,7 @@ Sometimes students they just forget that's there and there
 
 553
 00:24:29,861 --> 00:24:32,495
-like all right how do I add something to my story board?
+like all right how do I add something to my StoryBoard?
 
 554
 00:24:32,497 --> 00:24:34,229
@@ -2308,11 +2308,11 @@ But that is the initializer that is called when the view
 
 578
 00:25:33,616 --> 00:25:35,649
-comes out of a storyboard.
+comes out of a StoryBoard.
 
 579
 00:25:35,651 --> 00:25:38,318
-So, if you create a view by dragging on a storyboard,
+So, if you create a view by dragging on a StoryBoard,
 
 580
 00:25:38,320 --> 00:25:41,455
@@ -2412,7 +2412,7 @@ But that only works for
 
 604
 00:26:43,510 --> 00:26:46,411
-views that come out of a storyboard, okay?
+views that come out of a StoryBoard, okay?
 
 605
 00:26:46,413 --> 00:26:49,347
@@ -2420,7 +2420,7 @@ awakeFromNib means I just awoke from coming out of
 
 606
 00:26:49,349 --> 00:26:50,848
-a snory, a storyboard.
+a snory, a StoryBoard.
 
 607
 00:26:50,850 --> 00:26:53,617
@@ -2432,7 +2432,7 @@ So it's a little bit limited, because it only is good for
 
 609
 00:26:56,021 --> 00:26:57,353
-views that come out of a story board.
+views that come out of a StoryBoard.
 
 610
 00:26:58,322 --> 00:26:59,488
@@ -3112,7 +3112,7 @@ Most often views are created by dragging them out to
 
 779
 00:33:45,335 --> 00:33:46,801
-the storyboard.
+the StoryBoard.
 
 780
 00:33:46,803 --> 00:33:50,104
@@ -3284,7 +3284,7 @@ We almost never do that in iOS.
 
 822
 00:35:28,823 --> 00:35:29,855
-We use storyboards.
+We use StoryBoards.
 
 823
 00:35:31,458 --> 00:35:35,727
@@ -4456,7 +4456,7 @@ screen, or whatever you can set up this view in
 
 1115
 00:47:14,492 --> 00:47:17,526
-your storyboard and then set it to hidden, to true.
+your StoryBoard and then set it to hidden, to true.
 
 1116
 00:47:17,528 --> 00:47:19,161
@@ -5380,7 +5380,7 @@ I'm gonna show you something fun here too.
 
 1346
 00:55:40,525 --> 00:55:43,158
-Here is my storyboard.
+Here is my StoryBoard.
 
 1347
 00:55:43,160 --> 00:55:46,028
@@ -5388,7 +5388,7 @@ I'm gonna show you how to add a new view controller to
 
 1348
 00:55:46,030 --> 00:55:47,062
-your storyboard.
+your StoryBoard.
 
 1349
 00:55:47,064 --> 00:55:48,696
@@ -5416,7 +5416,7 @@ I'm gonna go here, and just delete, move it to the trash.
 
 1355
 00:55:56,605 --> 00:55:59,339
-Now I have a storyboard with nothing in it, and
+Now I have a StoryBoard with nothing in it, and
 
 1356
 00:55:59,341 --> 00:56:01,040
@@ -5636,7 +5636,7 @@ So, very important to understand that in
 
 1410
 00:57:49,266 --> 00:57:52,033
-storyboards, everything is linked up to
+StoryBoards, everything is linked up to
 
 1411
 00:57:52,035 --> 00:57:53,334
@@ -5652,7 +5652,7 @@ That is the only thing that links what's in
 
 1414
 00:57:56,605 --> 00:57:57,971
-your storyboard with your code.
+your StoryBoard with your code.
 
 1415
 00:57:57,973 --> 00:58:00,674
@@ -5960,7 +5960,7 @@ We'll get back to that in a second.
 
 1491
 01:00:44,415 --> 01:00:45,780
-In our storyboard,
+In our StoryBoard,
 
 1492
 01:00:45,782 --> 01:00:49,517
@@ -6780,7 +6780,7 @@ Okay? Well that means that in my
 
 1696
 01:08:21,740 --> 01:08:27,009
-storyboard, there is no scene that's specified,
+StoryBoard, there is no scene that's specified,
 
 1697
 01:08:27,011 --> 01:08:29,444

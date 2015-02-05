@@ -1622,504 +1622,431 @@ Double 和它关联
 
 301
 00:12:57,868 --> 00:13:00,768
- I'm gonna have a string which
-    is gonna be the symbol,
+I'm gonna have a string which is gonna be the symbol,
 首先我需要用一个字符串来表示符号，
 
 302
 00:13:00,770 --> 00:13:01,936
-  the mathematical symbol for
+the mathematical symbol for
 数学运算符
 303
 00:13:01,938 --> 00:13:04,238
-   it and of course I'm gonna
-        have a function.
+it and of course I'm gonna have a function.
 我当然还需要一个函数来做这个运算
 
 304
 00:13:05,341 --> 00:13:08,408
- Okay again functions are just
-        types in swift,
+Okay again functions are just types in swift,
 再重提一遍，函数在swift里也是一种类型，
 
 305
 00:13:08,410 --> 00:13:11,344
- it's no different than string
- 'kay we're just saying this is
+it's no different than string 'kay we're just saying this is
 与字符串相比并没有任何的不同，我们只需要知道
 
 306
 00:13:11,346 --> 00:13:13,612
- a function, put a function in
-             there.
+a function, put a function in there.
 这是个函数，放在这就好了
 307
 00:13:13,614 --> 00:13:15,147
-  A lot of times we'll do the
-        curly braces and
+A lot of times we'll do the curly braces and
 很多时候在这里我们会通过用花括号
 
 308
 00:13:15,149 --> 00:13:17,883
- put a closure use closures to
-    create our function but
+put a closure use closures to create our function but
 写一个闭包来实现这个函数，
 309
 00:13:17,885 --> 00:13:19,584
-     we could create actual
-         functions and
+we could create actual functions and
 但是我们也可以通过在其他地方写一个真正的函数
 
 310
 00:13:19,586 --> 00:13:21,185
-   pass them in there, that's
-             fine.
+pass them in there, that's fine.
 然后传递进来，也是没有问题的
 
 311
 00:13:21,187 --> 00:13:25,289
-    So, and we'd also want a
-   binary function here that takes two arguments.
+So, and we'd also want a binary function here that takes two arguments.
 继续，我们还需要一个有2个参数的二元运算函数，
 
 
 
 313
 00:13:26,959 --> 00:13:28,625
-      Binary operation and
+Binary operation and
 二元运算，然后
 
 314
 00:13:28,627 --> 00:13:34,296
- just those two arguments here
-       in it's function. Okay?
+just those two arguments here in it's function. Okay?
 在里面加一个带2个参数的函数
 
 
 316
 00:13:34,297 --> 00:13:37,499
-   So now we have the stack. Okay. Which is an array of Ops.
+So now we have the stack. Okay. Which is an array of Ops.
 我们这里还有一个栈，是由Op组成的数组
 
 318
 00:13:37,501 --> 00:13:41,369
- And these ops are either each
- op in this, is array is either
+And these ops are either each op in this, is array is either
 这个数组的元素要么是一个操作数，
 
 319
 00:13:41,371 --> 00:13:44,638
-   an operand or it's one of
- these two kinds of operations.
+an operand or it's one of these two kinds of operations.
 要么是刚才这个枚举里两种运算中的一种
 
 320
 00:13:46,308 --> 00:13:49,142
-   Okay so so this is great.
+Okay so so this is great.
 很好
 
 321
 00:13:49,144 --> 00:13:53,979
- We got this op it's either an
-    operation or an operand.
+We got this op it's either an operation or an operand.
 我们现在有了Op，它是操作数或者是运算
 
 322
 00:13:53,981 --> 00:13:59,251
- How are we going to, you know,
-        put things into this op stack for example and something like that.
+How are we going to, you know, put things into this op stack for example and something like that.
 下边我们要做的是往opStack这个数组里放东西
 
 
 324
 00:13:59,253 --> 00:14:01,653
-  So let, let's go talk about,
-            the API.
+So let, let's go talk about, the API.
 这里简单说一下API
 
 325
 00:14:01,655 --> 00:14:05,356
- A, API stands for application
-     programing interface.
+A, API stands for application programing interface.
 API指的是应用程序接口
 
 326
 00:14:05,358 --> 00:14:09,060
-  API is kind of the methods, all
-   the methods and properties
+API is kind of the methods, all the methods and properties
 API就是组成你的类里边所有属性
 
 
 327
 00:14:09,062 --> 00:14:13,230
-  that make up your class, the
-      description of them.
+that make up your class, the description of them.
 和方法的描述
 
 328
 00:14:13,232 --> 00:14:16,066
-  So I'll use that word a lot,
-              API.
+So I'll use that word a lot, API.
 我之后会经常提到这个词
 
 329
 00:14:16,068 --> 00:14:18,835
- And we really need to be able
- to put an operand on there and
+And we really need to be able to put an operand on there and
 现在我们需要想办法往opStack这个栈里压入
 
 330
 00:14:18,837 --> 00:14:20,736
- stack, and we need to be able
-    to put an operation on.
+stack, and we need to be able to put an operation on.
 操作符和运算
 
 331
 00:14:20,738 --> 00:14:24,573
-  So I'm gonna have a function
-    called pushOperand, and
+So I'm gonna have a function called pushOperand, and
 所以我写一个叫pushOperand的函数，
 
 332
 00:14:24,575 --> 00:14:27,809
-  it's gonna take an operand,
-       which is a Double.
+it's gonna take an operand, which is a Double.
 需要传入一个Double类型的参数作为操作数
 
 333
 00:14:27,811 --> 00:14:30,578
-   Okay it's not gonna return
-      anything yet anyway.
+Okay it's not gonna return anything yet anyway.
 不需要返回值
 
 334
 00:14:30,580 --> 00:14:33,715
-  And to push an operand on my
-  stack, could not be easier,
+And to push an operand on my stack, could not be easier,
 要把一个操作数压进栈非常简单，
 
 335
 00:14:33,717 --> 00:14:36,217
-       I'm just gonna say
-        opStack.append,
+I'm just gonna say opStack.append,
  我只需要写opStack.append,
 
 336
 00:14:36,219 --> 00:14:42,355
- you'll remember that append is
-    a function in array and the thing that you put on,
+you'll remember that append is a function in array and the thing that you put on,
 要记住append是数组从尾部添加元素的函数，
 
 
 338
 00:14:42,357 --> 00:14:45,858
-    obviously has to be this
-         little type T.
+obviously has to be this little type T.
 这有一个类型T，
 
 339
 00:14:45,860 --> 00:14:48,627
- T is whatever you put in here,
-      so op in this case.
+T is whatever you put in here, so op in this case.
 T代表你添加到数组里的类型，在这里是Op
 
 340
 00:14:48,629 --> 00:14:50,729
- So we have to have an op here.
+So we have to have an op here.
 我们要加一个Op进去
 
 341
 00:14:50,731 --> 00:14:52,964
-   How do you create an enum
-             item?
+How do you create an enum item?
 我们怎么新建一个枚举项呢？
 
 342
 00:14:52,966 --> 00:15:01,539
-  You just Op.Operand and you
- give it the associated value. Okay？
+You just Op.Operand and you give it the associated value. Okay？
 只需要写Op.Operand然后给它一个相关值
 
 344
 00:15:01,541 --> 00:15:10,013
- So, very simple kind of way to
-     create these enums and associate the value with them.
+So, very simple kind of way to create these enums and associate the value with them.
 看，新建枚举项以及他们的相关值非常简单
 
 
 346
 00:15:10,015 --> 00:15:11,114
-   Any questions about that?
+Any questions about that?
 这里有问题吗？
 
 347
 00:15:12,450 --> 00:15:13,749
-    Okay, and then how about
-          operations?
-���好，那运算呢？
+Okay, and then how about operations?
+好，那运算呢？
 
 348
 00:15:13,751 --> 00:15:15,384
-  We'll have instead of push,
+We'll have instead of push,
 我们这次不写push，
 
 349
 00:15:15,386 --> 00:15:18,720
-     we're gonna call this
-       performOperation.
+we're gonna call this performOperation.
 而是写一个叫performOperation （执行运算）的函数
 
 350
 00:15:18,722 --> 00:15:20,922
-     And I think when I do
-   performOperation, what I'm
+And I think when I do performOperation, what I'm
 并且我希望当我执行performOperation的时候，
 
 351
 00:15:20,924 --> 00:15:23,024
-  gonna have is, my CalculatorBrain is going to have
+gonna have is, my CalculatorBrain is going to have
 我的CalculatorBrain类已经有一些
 
 352
 00:15:23,026 --> 00:15:26,493
-  a bunch of known operations,
-   things it knows how to do.
+a bunch of known operations, things it knows how to do.
 已知的运算以及他们具体的运算方法
 
 353
 00:15:26,495 --> 00:15:27,861
-    And when you perform an
-           operation,
+And when you perform an operation,
 然后当你执行一个运算的时候，
 
 354
 00:15:27,863 --> 00:15:30,697
-      you just specify the
-   mathematical symbol of it.
+you just specify the mathematical symbol of it.
 你只需要写出它的数学符号就可以了
 
 355
 00:15:30,699 --> 00:15:36,301
- So the argument here is going
-         to be symbol, which is a string.Okay?
+So the argument here is going to be symbol, which is a string.Okay?
 所以这个函数的参数是一个数学符号，也就是字符串
 
 358
 00:15:36,303 --> 00:15:41,306
-  So, to append an op on here
-     that is, an operation,
+So, to append an op on here that is, an operation,
 我们要把运算，也就是一个Op压进栈，
 
 359
 00:15:41,308 --> 00:15:43,274
-  I'm gonna need to have these
-       known operations.
+I'm gonna need to have these known operations.
 我需要用到已知的运算
 
 360
 00:15:43,276 --> 00:15:44,775
-  So, how am I gonna do that?
+So, how am I gonna do that?
 要怎么做呢？
 
 361
 00:15:44,777 --> 00:15:47,878
-      Well, to have known
-  operations, I'm gonna create
+Well, to have known operations, I'm gonna create
 我们要新建另外一个实例变量knownOps作为
 
 362
 00:15:47,880 --> 00:15:51,048
- another instance variable here
-      called knownOps, so
+another instance variable here called knownOps, so
  存储已知运算的地方
 
 363
 00:15:51,050 --> 00:15:55,251
-      my known operations. And it's gonna be a
-          dictionary.
+my known operations. And it's gonna be a dictionary.
 这些已知的运算，是一个字典类型
 
 365
 00:15:55,253 --> 00:15:58,987
-   Okay, now, you read about
-        dictionaries in  last week's reading assignment.
+Okay, now, you read about dictionaries in  last week's reading assignment.
 上周的阅读材料里你们应该已经读到过字典类型了
 
 
 
 367
 00:15:58,989 --> 00:16:00,489
- That's why I have the reading
-     assignment due today.
+That's why I have the reading assignment due today.
  这就是为什么今天是阅读材料的截止日期，
 
 368
 00:16:00,491 --> 00:16:02,257
-   Cuz then I can know you've
-        read about them.
+Cuz then I can know you've read about them.
 这样我就能知道你们已经读过了
 
 369
 00:16:02,259 --> 00:16:02,824
-        I hope you have.
+I hope you have.
 希望你们确实读了
 
 370
 00:16:05,495 --> 00:16:07,428
-   And so, how do I create a
-          dictionary?
+And so, how do I create a dictionary?
 我们如何新建一个字典？
 
 371
 00:16:07,430 --> 00:16:08,995
-      It looks like this,
-          Dictionary.
+It looks like this,  Dictionary.
 像这样
 
 372
 00:16:08,997 --> 00:16:11,531
-   And it's the same kind of
-    thing with these angled
+And it's the same kind of thing with these angled
 同样是使用尖括号，
 
 373
 00:16:11,533 --> 00:16:14,434
- brackets, because you have to
-    say for the dictionary,
+brackets, because you have to say for the dictionary,
 你必须为字典
 
 374
 00:16:14,436 --> 00:16:17,036
-  what type are the keys, what
-      type are the values.
+what type are the keys, what type are the values.
 建立相对应的键值关系
 
 375
 00:16:17,038 --> 00:16:20,506
-  And our dictionary is gonna
- have keys that are strings and
+And our dictionary is gonna have keys that are strings and
 在这里，键是字符串
 
 376
 00:16:20,508 --> 00:16:22,874
-  it's gonna have values that
-            are ops.
+it's gonna have values that are ops.
 值的类型是Op
 
 377
 00:16:22,876 --> 00:16:26,478
-       Oops, sorry, ops.
+Oops, sorry, ops.
 哦，对不起，Op
 
 378
 00:16:26,480 --> 00:16:29,947
-   Okay, and I'm gonna create
-              one. Okay?
+Okay, and I'm gonna create one. Okay?
 好，新建了一个字典
 
 380
 00:16:29,949 --> 00:16:32,316
-   Everyone understand this?
+Everyone understand this?
 大家都明白这个了吗？
 
 381
 00:16:32,317 --> 00:16:34,684
-  Now, this knownOps, I'm just
- gonna put all of the ops that
+Now, this knownOps, I'm just gonna put all of the ops that
 现在在这个knownOps变量里，我要把所有
 
 382
 00:16:34,687 --> 00:16:38,955
- I know in there, where the key
- is the symbol and the value is
+I know in there, where the key is the symbol and the value is
 我知道的运算放进去，键是运算符号
 
 383
 00:16:38,957 --> 00:16:42,392
-  the actual op, and then when
- someone says performOperation,
+the actual op, and then when someone says performOperation,
 值是实际的Op也就是运算方法，每次我要执行performOperation时，
 
 384
 00:16:42,394 --> 00:16:44,527
-  I'm gonna look it up in the
-           knownOps.
+I'm gonna look it up in the knownOps.
 我会去knownOps里去找那些已知的运算
 
 385
 00:16:44,529 --> 00:16:47,329
-    And when I find it, then
-    that's the operation I'm
+And when I find it, then that's the operation I'm
 当我找到的时候，我就要把这个
 
 386
 00:16:47,331 --> 00:16:49,531
- gonna push onto the stack, all
-             right?
+gonna push onto the stack, all right?
 运算压到opStack这个栈里
 
 387
 00:16:49,533 --> 00:16:51,183
-          Make sense?
+Make sense?
 能明白吗？
 388
 00:16:51,184 --> 00:16:52,834
-    But I have to load this
-          knownOps up.
+But I have to load this knownOps up.
 但是我需要预先载入knownOps
 389
 00:16:52,836 --> 00:16:55,903
-  Oh, but first of all, so let
-   me talk about this syntax.
+Oh, but first of all, so let me talk about this syntax.
 哦，首先，我要说一下这个语法
 
 390
 00:16:55,905 --> 00:17:00,941
- Just like array has a special
-     syntax with the square brackets, so does dictionary.
+Just like array has a special syntax with the square brackets, so does dictionary.
 跟前边数组使用方括号的特殊语法一样，字典也可以这么写
 
 392
 00:17:00,943 --> 00:17:03,510
-  So to have a dictionary like
-     this with this kind of
+So to have a dictionary like this with this kind of
 如果字典用这种写法，
 
 393
 00:17:03,512 --> 00:17:07,080
- special syntax, we're gonna do
-      open square bracket.
+special syntax, we're gonna do open square bracket.
 我们需要用方括号，
 
 394
 00:17:07,082 --> 00:17:12,752
-  And then a colon in between
-          the key and
+And then a colon in between the key and
 然后中间用冒号隔开键和值，
 
 395
 00:17:12,754 --> 00:17:15,254
-  the value type, so it looks
-           like that.
+the value type, so it looks like that.
 就像这样
 
 396
 00:17:15,256 --> 00:17:17,789
-  So it looks very similar to
-           array, but
+So it looks very similar to array, but
 跟数组很像，但是
 
 397
 00:17:17,791 --> 00:17:22,660
-  you've got this thing where
-     you've got the key and the value separated by a
-     colon. Okay？
+you've got this thing where you've got the key and the value separated by a colon. Okay？
 你需要用冒号把键和值分隔开
 
 400
 00:17:23,796 --> 00:17:25,429
- Same thing, though, exact same
-             thing.
+Same thing, though, exact same thing.
 其实是完全一样的
 
 401
@@ -2129,95 +2056,87 @@ Just a dictionary, strings,
 
 402
 00:17:27,432 --> 00:17:28,698
-looking up in strings to find
-              ops.
+looking up in strings to find ops.
 用字符串找 op
 
 403
 00:17:28,700 --> 00:17:32,701
-All right, so how am I gonna
-   initialize this knownOps?
+All right, so how am I gonna initialize this knownOps?
 好，那我们怎么初始化这个已知的 op
 
 404
 00:17:32,703 --> 00:17:33,869
- Well, this is a great time for
+Well, this is a great time for
 这是我们
 
 405
 00:17:33,871 --> 00:17:37,906
-the first time for you see an
-       initializer, okay?
+the first time for you see an initializer, okay?
 第一次提到 initializer
 
 406
 00:17:37,908 --> 00:17:41,876
-So far we've been creating
- classes like right here, okay,
-到此，我们已经通过加括号创建了一个像这样类
+So far we've been creating classes like right here, okay,
+到此，我们已经通过加括号
 
 407
 00:17:41,878 --> 00:17:44,311
-just by putting these
-          parentheses.
+just by putting these parentheses.
+创建了一个像这样类。
 
 408
 00:17:44,313 --> 00:17:46,680
-And I told you that was
-   calling an initializer in
-这就是在调用字典的 initializer
+And I told you that was calling an initializer in
+这就是在调用字典的 initializer ，
 
 409
 00:17:46,682 --> 00:17:47,947
 Dictionary, okay, and
+好的，
 
 410
 00:17:47,949 --> 00:17:50,817
-this one was calling an
-     initializer in Array.
+this one was calling an initializer in Array.
 这是在调用数组的 initializer
 
 411
 00:17:50,819 --> 00:17:52,585
-And so we're gonna have our
-       own initializer in
+And so we're gonna have our own initializer in
 然而，我们会为 CalculatorBrain 设置自己的 initializer
 
 412
 00:17:52,587 --> 00:17:55,421
 CalculatorBrain, and
+并且
 
 413
 00:17:55,422 --> 00:17:58,256
-we just do that by saying
-     init, like this, okay.
+we just do that by saying init, like this, okay.
 通过像 init 这样的形式
 
 414
 00:17:58,258 --> 00:18:01,726
-Now any time someone says
- something like let brain equal
+Now any time someone says something like let brain equal
 现在不论何时 使用 let brain = CalculatorBrain()
 
 415
 00:18:01,728 --> 00:18:05,296
-CalculatorBrain, with the
-parentheses, okay?
+CalculatorBrain, with the parentheses, okay?
+得加上括号。
 
 416
 00:18:05,298 --> 00:18:07,531
-It's going to call an init
-              that
-就会调用匹配对应参数的 init 方法
+It's going to call an init that
+就会调用匹配对应
 
 417
 00:18:07,533 --> 00:18:09,667
 matches the same arguments.
+参数的 init 方法
 
 418
 00:18:09,669 --> 00:18:11,668
-In this case, no arguments, so
-   it's gonna call this init.
+In this case, no arguments, so it's gonna call this init.
 在这里，没有参数，所以将会调用这个 init 方法
 
 419
@@ -2231,30 +2150,27 @@ Couldn't be simpler there.
 
 421
 00:18:16,840 --> 00:18:18,173
-So what are we gonna do in
-           this init?
+So what are we gonna do in this init?
 那我们要在这个初始化方法里做什么呢？
 
 422
 00:18:18,175 --> 00:18:20,375
-We're just gonna initialize
-       this known op, so
+We're just gonna initialize this known op, so
 我们将要初始化 op
 
 423
 00:18:20,377 --> 00:18:24,545
-I'm just gonna start putting
-    some known ops into this
-于是，加入一些已知的 op 到 op 的字典里
+I'm just gonna start putting some known ops into this
+于是，加入一些已知的 op 
 
 424
 00:18:24,547 --> 00:18:26,780
 knownOps dictionary.
+到 op 的字典里
 
 425
 00:18:26,782 --> 00:18:31,617
-We need our friend special
-   characters here for that.
+We need our friend special characters here for that.
 我们需要刚才用过的特殊字符
 
 426
@@ -2264,14 +2180,12 @@ So let's go ahead and
 
 427
 00:18:34,254 --> 00:18:36,888
-put, well, let's put times
-      here first, I guess.
+put, well, let's put times here first, I guess.
 先加入乘法
 
 428
 00:18:36,891 --> 00:18:39,257
-Okay, and we need to create an
-           operation.
+Okay, and we need to create an operation.
 再创建一个操作
 
 429
@@ -2281,86 +2195,73 @@ How do we create an operation?
 
 430
 00:18:40,394 --> 00:18:43,461
-Very similar to how we created
-           this enum.
+Very similar to how we created this enum.
 跟我们创建这个枚举很像
 
 431
 00:18:43,463 --> 00:18:47,431
-Op, dot, and times is a binary
-           operation.
+Op, dot, and times is a binary operation.
 op， 点，乘法时一个二元运算符
 
 432
 00:18:47,433 --> 00:18:49,566
-And you can see that it's
-      typing this for me.
+And you can see that it's typing this for me.
 自动为我补全了
 
 433
 00:18:49,568 --> 00:18:51,735
-I'm just pressing Tab to get
-             along.
+I'm just pressing Tab to get along.
 按 Tab 继续
 
 434
 00:18:51,737 --> 00:18:56,105
-This is the symbol, which is
-        this thing here.
+This is the symbol, which is this thing here.
 这是这里的符号
 
 435
 00:18:56,107 --> 00:18:58,908
-Now, this is kinda bad code
-        that I ended up
+Now, this is kinda bad code that I ended up
 现在，我完成一个糟糕的代码
 
 436
 00:18:58,910 --> 00:19:00,809
-typing this twice in the same
-             line.
+typing this twice in the same line.
 同一行输入了这段两次
 
 437
 00:19:00,811 --> 00:19:03,378
-If I accidentally use the
-            wrong x,
+If I accidentally use the wrong x,
 假如不小心输错 x
 
 438
 00:19:03,380 --> 00:19:06,881
-like some x from somewhere
-   else or the x just from my
+like some x from somewhere else or the x just from my
 比如 x 来自别的地方或者
 
 439
 00:19:06,883 --> 00:19:10,451
-keyboard might be different
-from this x, than this x, ugh,
+keyboard might be different from this x, than this x, ugh,
 我键盘的 x 不同于这个 x
 
 440
 00:19:10,453 --> 00:19:12,920
-we could get in trouble where
-  these things don't match up.
+we could get in trouble where these things don't match up.
 万一它们不匹配，我们就会遇到问题
 
 441
 00:19:12,922 --> 00:19:15,489
-So later, in the, right at the
-     very end of the demo,
+So later, in the, right at the very end of the demo,
 晚点在演示快结束的时候，
 
 442
 00:19:15,491 --> 00:19:16,857
-I'm gonna show you how we
-        could do this in
-我会向你展示不需要像这样输入两次 x 的方法
+I'm gonna show you how we could do this in
+我会向你展示
 
 443
 00:19:16,859 --> 00:19:20,960
-a way where we don't have to
-  type this x twice like that.
+a way where we don't have to type this x twice like that.
+不需要像这样输入两次 x 的方法
 
 444
 00:19:20,962 --> 00:19:22,161
@@ -2368,14 +2269,12 @@ Okay.
 
 445
 00:19:22,162 --> 00:19:23,361
-But now we just need the
-           function.
+But now we just need the function.
 但是现在我们只需要这个方法
 
 446
 00:19:23,364 --> 00:19:25,230
-We know how to do that with
-           closures.
+We know how to do that with closures.
 我们知道如何用闭包实现
 
 447
@@ -2390,25 +2289,23 @@ End the closure.
 
 449
 00:19:29,002 --> 00:19:31,736
-And yes, I could put this
-        closure outside,
+And yes, I could put this closure outside,
 当然，这是最后，于是我也可以把闭包放到外面
 
 450
 00:19:31,738 --> 00:19:33,838
-since it's the last thing
-             here.
+since it's the last thing here.
 因为这个闭包在代码结尾处
 
 451
 00:19:33,840 --> 00:19:37,107
-That is also legal to do when
-        you're creating
-当你创建这样的操作时，也是合法的
+That is also legal to do when you're creating
+当你创建这样的操作时，
 
 452
 00:19:37,109 --> 00:19:39,109
 the operations like this.
+也是合法的。
 
 453
 00:19:39,111 --> 00:19:40,310
@@ -2417,12 +2314,11 @@ the operations like this.
 454
 00:19:40,312 --> 00:19:41,377
 So that's kinda nice.
-这看上去很棒吧
+这看上去很棒吧。
 
 455
 00:19:41,379 --> 00:19:44,880
-Let's do our other three
-    binary operations here.
+Let's do our other three binary operations here.
 让我们来加入另外三种二元操作
 
 456
@@ -2432,23 +2328,23 @@ We'll go divide.
 
 457
 00:19:46,984 --> 00:19:49,784
-And this is where it really
-    gets annoying to have to
-这就是非得输入两遍的烦人的地方
+And this is where it really gets annoying to have to
+这就是非得输入两遍
 
 458
 00:19:49,786 --> 00:19:51,736
 type it twice.
+的烦人的地方
 
 459
 00:19:51,737 --> 00:19:53,687
-But I have to show you
-  something else before I can
-但我要在演示如何做之前给你看点其它东西
+But I have to show you something else before I can
+但是在这之前，
 
 460
 00:19:53,690 --> 00:19:56,357
 show you how to do that right.
+我得给你们演示一下别的。
 
 461
 00:19:57,726 --> 00:19:58,591
@@ -2462,26 +2358,22 @@ And there we have minus.
 
 463
 00:20:02,364 --> 00:20:04,997
-You can see there's two
-  different minuses there, so
+You can see there's two different minuses there, so
 你可以看到有两种减法
 
 464
 00:20:04,999 --> 00:20:07,866
-hopefully I clicked the same
-   minus in both those spots.
+hopefully I clicked the same minus in both those spots.
 我在这两处都点了同一个减法符号
 
 465
 00:20:07,868 --> 00:20:09,434
-And then we change these
-            things.
+And then we change these things.
 改一下这里
 
 466
 00:20:09,436 --> 00:20:13,671
-We know that divide is 1
-       divided by $0, and
+We know that divide is 1 divided by $0, and
 除法是用 $1 除以 $0
 
 467
@@ -2491,8 +2383,7 @@ this is plus.
 
 468
 00:20:16,742 --> 00:20:21,678
-And this is 1 minus 0, $1
-       minus $0, okay, so
+And this is 1 minus 0, $1 minus $0, okay, so
 减法 $1 - $0
 
 469
@@ -2502,32 +2393,27 @@ everyone cool here?
 
 470
 00:20:25,350 --> 00:20:27,483
-These enums are really easy to
-            create.
+These enums are really easy to create.
 枚举简单地就能创建
 
 471
 00:20:27,485 --> 00:20:31,920
-The API of them is really,
-      really nice, simple.
+The API of them is really, really nice, simple.
 它们的接口非常简单、漂亮
 
 472
 00:20:31,922 --> 00:20:34,055
-And then we have our other
-           operation,
+And then we have our other operation,
 接下来我们来看看其它操作
 
 473
 00:20:34,057 --> 00:20:37,058
-which is our unary operation,
-     which is square root.
+which is our unary operation, which is square root.
 一个一元操作——开方
 
 474
 00:20:37,060 --> 00:20:40,861
-So let's put that in here,
-   square root is right here.
+So let's put that in here, square root is right here.
 那那个放这， 开方放这
 
 475
@@ -2537,13 +2423,13 @@ And we'll put it right here.
 
 476
 00:20:45,266 --> 00:20:48,267
-And square root is not a
-     binary operation it's
-开方不是一个二元操作，而是一元操作
+And square root is not a binary operation it's
+开方不是一个二元操作，
 
 477
 00:20:48,269 --> 00:20:49,601
 a unary operation.
+而是一元操作
 
 478
 00:20:49,603 --> 00:20:53,738
@@ -2556,14 +2442,12 @@ Oops, look at all this.
 
 480
 00:20:56,592 --> 00:20:59,443
-And of course, inside here,
-    it's square root of $0.
+And of course, inside here, it's square root of $0.
 当然，这里，它是 $0 的平方根
 
 481
 00:20:59,445 --> 00:21:01,745
-Okay, you remember that from
-           last time.
+Okay, you remember that from last time.
 跟z之前zh说的一样
 
 482
@@ -2578,8 +2462,7 @@ Now, while I'm here,
 
 484
 00:21:04,865 --> 00:21:06,848
-I wanna show you a couple
-  things more about closures.
+I wanna show you a couple things more about closures.
 我再给大家介绍一些闭包相关的东西
 
 485
@@ -2588,19 +2471,18 @@ Okay.
 
 486
 00:21:07,952 --> 00:21:10,052
-This, what is this curly
-             brace?
+This, what is this curly brace?
 看这里，这个大括号是什么？
 
 487
 00:21:10,054 --> 00:21:12,721
- It's a function that takes one
-          argument and
-这是一个接受一个参数，返回一个参数的函数
+It's a function that takes one argument and
+这是一个接受一个参数，
 
 488
 00:21:12,723 --> 00:21:14,356
 returns one argument.
+返回一个参数的函数
 
 489
 00:21:14,358 --> 00:21:16,308
@@ -2609,14 +2491,12 @@ And we know that
 
 490
 00:21:16,309 --> 00:21:18,259
-it's Doubles because we're
-  creating a unary operation.
+it's Doubles because we're creating a unary operation.
 我们创建一元操作，所以是 Double
 
 491
 00:21:18,261 --> 00:21:21,962
-And so, it's inferring the
-       type here, right?
+And so, it's inferring the type here, right?
 于是，它推出这里的类型，对吧？
 
 492
@@ -2626,20 +2506,17 @@ Everyone understand that?
 
 493
 00:21:23,532 --> 00:21:27,133
-Well, there's another function
-  that returns a function, or
+Well, there's another function that returns a function, or
 这里有另外一个函数返回一个函数，或者
 
 494
 00:21:27,135 --> 00:21:28,901
- there's another function that
-       takes a Double and
+there's another function that takes a Double and
 一个函数接受一个 Double
 
 495
 00:21:28,903 --> 00:21:31,570
-returns a Double, that does
-          square root,
+returns a Double, that does square root,
 返回一个开方后的 Double
 
 496
@@ -2649,14 +2526,12 @@ it's called square root.
 
 497
 00:21:33,774 --> 00:21:36,941
-So inside here, we could just
-        say square root.
+So inside here, we could just say square root.
 所以这里，我们可以就说 sqrt
 
 498
 00:21:38,178 --> 00:21:40,811
-Okay, we don't even need this
-           business.
+Okay, we don't even need this business.
 甚至不需要这个
 
 499
@@ -2666,563 +2541,492 @@ Just wanna emphasize that
 
 500
 00:21:44,082 --> 00:21:45,515
-we're just passing a function
-             here.
+we're just passing a function here.
 我们在这里传入了一个函数
 
 501
 00:21:45,517 --> 00:21:47,450
-     And it can be a named      
-          function, or  
+And it can be a named function, or  
 它可以是一个被命名的函数        
 
 502
 00:21:47,452 --> 00:21:49,518
-    we could use these curly    
-            braces. 
+we could use these curly braces. 
 或者可以用花括号            
 
 503
 00:21:49,520 --> 00:21:52,754
-   Now, this is really gonna    
- freak you out, cuz watch this. 
+Now, this is really gonna freak you out, cuz watch this. 
 现在，让你惊讶的事来了，看好了
 
 504
 00:21:52,756 --> 00:21:57,091
- For times, there's a function  
- that does times called times.  
+For times, there's a function that does times called times.  
 对于乘法，有一个做乘法运算的函数就叫做“*”
+
 505
 00:21:58,728 --> 00:22:00,728
-             Okay.              
+Okay.              
 
 506
 00:22:00,729 --> 00:22:02,729
-     So in Swift, all these     
-      operators, times and      
+So in Swift, all these operators, times and      
 在Swift里，所有的运算符，乘号等等
 507
 00:22:02,732 --> 00:22:04,664
-   all these things, are just   
-           functions.   
-        都是函数
+all these things, are just functions.   
+都是函数
 
 508
 00:22:04,666 --> 00:22:06,966
-     They just happen to be     
-  specified in a way that says
-  
+They just happen to be specified in a way that says
+ 
 509
 00:22:06,968 --> 00:22:09,068
- that they can be infix, right, 
-        between the two         
+that they can be infix, right, between the two         
 
 510
 00:22:09,070 --> 00:22:11,370
-  arguments instead of taking   
- the arguments in parentheses.  
+arguments instead of taking the arguments in parentheses.  
 
 511
 00:22:11,372 --> 00:22:13,138
- And we do the same thing here  
-           with plus.  
+And we do the same thing here with plus.  
 然后我们对加法做同样的事         
 
 512
 00:22:14,641 --> 00:22:16,074
-        All right, plus.        
+All right, plus.        
 好的，加号
 
 513
 00:22:16,076 --> 00:22:17,508
-    Now, we can't do it with    
-           divide and  
+Now, we can't do it with divide and  
 现在要注意，这种方法不适用于除法和减法         
 
 514
 00:22:17,510 --> 00:22:20,378
-   minus because the order is   
-           backwards.   
+minus because the order is backwards.   
 因为运算方向是反的        
 
 515
 00:22:20,380 --> 00:22:22,146
-  Right, we put the things on   
-           the stack,   
+Right, we put the things on the stack,   
 好，我们把这些东西放到栈上
 
 516
 00:22:22,148 --> 00:22:23,513
- we pull them out backwards, so 
+we pull them out backwards, so 
 
 517
 00:22:23,515 --> 00:22:25,081
-   we can't do it with those,   
-              but.              
+we can't do it with those, but.              
 
 518
 00:22:27,919 --> 00:22:31,086
- I just wanna emphasize, that's 
-     what's going on there.     
+I just wanna emphasize, that's what's going on there.     
 
 519
 00:22:31,088 --> 00:22:33,455
- Okay, so now we have this nice 
-           knownOps.     
+Okay, so now we have this nice knownOps.     
 好，现在我们做好了这些KnwonOps       
 
 520
 00:22:33,457 --> 00:22:34,222
-     So we have this thing.     
+So we have this thing.     
+做好了 
 
 521
 00:22:34,224 --> 00:22:36,724
-        It's loaded up.         
+It's loaded up.         
 它已经装载好了
 
 522
 00:22:36,725 --> 00:22:39,225
- It gets loaded up whenever the 
- CalculatorBrain gets created.  
+It gets loaded up whenever the CalculatorBrain gets created.  
 每当CalculatorBrain被创建它就会被装载
 
 523
 00:22:39,228 --> 00:22:41,612
-      So that's all good.  
+So that's all good.  
 万事俱备     
 
 524
 00:22:41,613 --> 00:22:43,997
- Now we can use that down here  
-      in performOperation.  
+Now we can use that down here in performOperation.  
 现在我们可以将它用在performOperation上    
 
 525
 00:22:43,999 --> 00:22:47,134
- All right, so how are we gonna 
- use this in performOperation?  
+All right, so how are we gonna use this in performOperation?  
 好，那我们要怎么使用呢
 
 526
 00:22:47,136 --> 00:22:50,870
-  Well, we basically wanna let  
-      the operation equal    
+Well, we basically wanna let the operation equal    
 我们让operation等于   
 
 527
 00:22:50,872 --> 00:22:53,172
-      knownOps sub symbol.  
+knownOps sub symbol.  
 knownOps参数symbol    
 
 528
 00:22:53,174 --> 00:22:55,240
-             Okay?              
-  Someone passed us a symbol.   
+Okay? Someone passed us a symbol.   
 明白了吗？使用者传递给我们一个参数symbol
 
 529
 00:22:55,242 --> 00:22:56,641
- They're trying to perform this 
-           operation.    
+They're trying to perform this operation.    
 当他们想用这个方法的时候       
 
 530
 00:22:56,643 --> 00:22:58,810
- So this is either a plus or a  
-             times.             
+So this is either a plus or a times.             
 参数可以是加法或者乘法
 
 531
 00:22:58,812 --> 00:23:00,111
-   Hopefully an operation we    
-             know.   
-   是我们已知的运算符      
+Hopefully an operation we know.   
+是我们已知的运算符      
 
 532
 00:23:00,113 --> 00:23:02,747
- And we're gonna look it up in  
-           knownOps.   
+And we're gonna look it up in knownOps.   
 然后我们会来到KnownOps         
 
 533
 00:23:02,749 --> 00:23:05,683
- And the way we do that is with 
-  the subscript notation with   
+And the way we do that is with the subscript notation with   
 然后要做的就是在
 
 534
 00:23:05,685 --> 00:23:06,650
-      the square brackets.      
+the square brackets.      
 
 535
 00:23:06,652 --> 00:23:07,951
-             Okay?              
-         That's how you         
+Okay? That's how you         
 
 536
 00:23:07,952 --> 00:23:09,251
-     look something up in a     
-          dictionary.           
+look something up in a dictionary.           
 
 537
 00:23:09,254 --> 00:23:11,454
-   But what might be kind of    
-       surprising to you,  
+But what might be kind of surprising to you,  
 不过有一点可能会让你惊讶   
 
 538
 00:23:11,456 --> 00:23:13,622
-  what type do you think this   
-      would be, operation?
+what type do you think this would be, operation?
 得到的operation，你觉得是什么类型的呢？   
 
 539
 00:23:15,292 --> 00:23:17,959
- Any guesses, yeah, some people 
-  are saying the right thing. 
+Any guesses, yeah, some people are saying the right thing. 
 猜猜？哈，有人说出了正确答案  
 
 540
 00:23:17,961 --> 00:23:20,128
-  You'd think this might be an  
-              Op,    
+You'd think this might be an Op,    
 你可能会觉得这个是一个Op           
 
 541
 00:23:20,130 --> 00:23:24,498
-   because I'm looking up in    
- knownOps right here, a string.
+because I'm looking up in knownOps right here, a string.
 因为我在KnownOps这里看，String：Op
 
 542
 00:23:24,500 --> 00:23:27,134
-  And so hopefully I'm getting  
- an Op, but this is not an Op,
+And so hopefully I'm getting an Op, but this is not an Op,
 因此可以预见得到的会是一个Op，事实上它并不是Op
 
 543
 00:23:27,136 --> 00:23:30,971
-  this actually is an Optional  
-              Op.  
+this actually is an Optional Op.  
 实际上它是一个Optional Op             
 
 544
 00:23:30,973 --> 00:23:33,173
-    Okay, now why is that an    
-    Optional Op, because you
+Okay, now why is that an Optional Op, because you
 好了，为什么它会是一个Optional Op，因为    
 
 545
 00:23:33,175 --> 00:23:35,541
- might be looking up something  
-      that's not in there.      
+might be looking up something that's not in there.      
 因为它可能不存在于此
 
 546
 00:23:35,543 --> 00:23:38,344
- And it has to return, oh, nil, 
-    sorry, couldn't find it, 
+And it has to return, oh, nil, sorry, couldn't find it, 
 而且它没有返回值“噢，nil，不好意思找不到该值” 
 
 547
 00:23:38,346 --> 00:23:41,413
- so that's why it has to be an  
-     optional, is returned. 
+so that's why it has to be an optional, is returned. 
 所以这就是为什么它必须是optional    
 
 548
 00:23:41,415 --> 00:23:43,015
-        So a dictionary, 
+So a dictionary, 
 比方说字典       
 
 549
 00:23:43,016 --> 00:23:44,616
- whenever you look up something 
-        in a dictionary,    
+whenever you look up something in a dictionary,    
 每当你要在字典里面寻找东西的时候    
 
 550
 00:23:44,618 --> 00:23:47,118
- it always returns an Optional, 
-      okay, either nil or  
+it always returns an Optional, okay, either nil or  
 它总是会返回一个Optional类型nil或者是     
 
 551
 00:23:47,120 --> 00:23:50,655
- the type of thing you said was 
-    supposed to be in there.   
+the type of thing you said was supposed to be in there.   
 其他它原本的类型 
 
 552
 00:23:50,657 --> 00:23:53,457
- So I'm gonna if let here, I'm  
-           gonna say, 
+So I'm gonna if let here, I'm gonna say, 
 所以我在这里加上if          
 
 553
 00:23:53,459 --> 00:23:56,827
-   if I'm able to look up my    
-   operation in my knownOps, 
+if I'm able to look up my operation in my knownOps, 
 如果 我能在knownOps里取得我的operation   
 
 554
 00:23:56,829 --> 00:23:59,696
-  then I'm going to push it on  
-        to my op stack. 
+then I'm going to push it on to my op stack. 
 那我就将它放进我的op stack.        
 
 555
 00:24:02,534 --> 00:24:03,232
-             Okay.              
+Okay.              
 
 556
 00:24:03,234 --> 00:24:06,068
-    Are you cool with that? 
+Are you cool with that? 
 明白了吗？    
 
 557
 00:24:06,070 --> 00:24:08,303
-          Make sense?           
+Make sense?
+理解？
+
 
 558
 00:24:08,305 --> 00:24:10,171
-             Okay.              
+Okay.              
 
 559
 00:24:10,173 --> 00:24:12,407
-       Now, what's next?  
+Now, what's next?  
 好，下一步是什么呢      
 
 560
 00:24:12,409 --> 00:24:13,908
-             Well.              
+Well.              
 
 561
 00:24:13,910 --> 00:24:14,541
-          Now we have.          
+Now we have.          
 现在我们有…
 
 562
 00:24:14,543 --> 00:24:15,509
-           Oh, well.            
+Oh, well.            
 噢，等等
 
 563
 00:24:15,510 --> 00:24:16,476
- I'm gonna take a pause here to 
+I'm gonna take a pause here to 
 在这我先暂停一下
 
 564
 00:24:16,478 --> 00:24:18,845
- talk a little bit about access 
-            control.   
+talk a little bit about access control.   
 谈一下access control（接口控制）         
 
 565
 00:24:18,847 --> 00:24:20,697
-             Okay?              
+Okay?              
 
 566
 00:24:20,698 --> 00:24:22,548
- Access control is about public 
-          and private.          
+Access control is about public and private.          
 access control是关于公有和私有
 
 567
 00:24:22,550 --> 00:24:25,017
-             Okay?              
-   What methods in this class
+Okay? What methods in this class
 在这个类里面什么方法是共有的   
 
 568
 00:24:25,019 --> 00:24:27,353
-  are public, in other words,   
-   other people can use them,   
+are public, in other words, other people can use them,   
 换言之，其他人能够使用它
 
 569
 00:24:27,355 --> 00:24:30,022
-    other classes in my code    
-     allowed to call them?      
+other classes in my code allowed to call them?      
 其他类能调用它
 
 570
 00:24:30,024 --> 00:24:31,189
-  And what things are private?
+And what things are private?
 而什么方法是私有的呢  
 
 571
 00:24:31,191 --> 00:24:32,757
-  My internal data structures   
-             that I 
+My internal data structures that I 
 里面的一些内部数据            
 
 572
 00:24:32,759 --> 00:24:34,458
-   don't want people messing    
-             with?  
+don't want people messing with?  
 并不想给别人乱搞            
 
 573
 00:24:34,460 --> 00:24:38,428
-    Okay, so the way public     
-        private works in   
-swift处理公有和私有的方法很有趣     
+Okay, so the way public private works in   
+swift处理公有和私有的方法   
 
 574
 00:24:38,430 --> 00:24:41,064
- Swift is kind of interesting.  
+Swift is kind of interesting.  
+很有趣  
 
 575
 00:24:41,066 --> 00:24:42,999
-   You basically specify the    
-       things you want to  
+You basically specify the things you want to  
 你只需要在你想要私有化的东西前     
 
 576
 00:24:43,001 --> 00:24:45,935
- be private by putting the word 
-        private on them. 
+be private by putting the word private on them. 
 加上private       
 
 577
 00:24:45,937 --> 00:24:47,569
-  If you don't put any word on  
-             them,  
+If you don't put any word on them,  
 如果你什么都不加            
 
 578
 00:24:47,571 --> 00:24:50,639
-   then they're public inside   
-         your program.   
+then they're public inside your program.   
 那他们就是在你的程序里公有的       
 
 579
 00:24:50,641 --> 00:24:52,040
-             'Kay?              
+'Kay?              
 
 580
 00:24:52,042 --> 00:24:55,109
-   And you only use the word    
- public if you're shipping out, 
+And you only use the word public if you're shipping out, 
 当你想要打包
 
 581
 00:24:55,111 --> 00:24:58,979
-  like, a framework of objects  
-      to other people, and
+like, a framework of objects to other people, and
 比如说一些框架或者对象给别人      
 
 582
 00:24:58,981 --> 00:25:02,215
- you want stuff in there to be  
- public outside the framework. 
+you want stuff in there to be public outside the framework. 
 你希望里面框架里的东西是对外公开的 你才会使用public 
 
 583
 00:25:03,251 --> 00:25:04,684
- So I'm making some framework,  
+So I'm making some framework,  
 我做一些框架
 
 584
 00:25:04,686 --> 00:25:07,153
-  a bunch of objects that I'm   
-  trying to sell to people or 
+a bunch of objects that I'm trying to sell to people or 
 一些对象想要卖给别人用  
 
 585
 00:25:07,155 --> 00:25:09,555
-   I get people to use to do    
-         something, and         
+I get people to use to do something, and         
 别人可以用这些东西做点什么
 
 586
 00:25:09,557 --> 00:25:12,624
-    of course I'm gonna have    
- things where my objects inside 
+of course I'm gonna have things where my objects inside 
 当然我也希望在框架内部的一些类
 
 587
 00:25:12,626 --> 00:25:14,192
- my framework can talk to each  
-             other.             
+my framework can talk to each other.             
 可以互相交流
 
 588
 00:25:14,194 --> 00:25:16,361
- There's no keyword needed for  
-             that.  
+There's no keyword needed for that.  
 不需要什么密码 
 
 589
 00:25:16,363 --> 00:25:18,229
-  Then I'll have things inside  
-        certain objects  
+Then I'll have things inside certain objects  
 那我可以对这些特定的类加上private       
 
 590
 00:25:18,231 --> 00:25:20,464
- that are private only to that  
-   object, I'll say private.
+that are private only to that object, I'll say private.
 让它们私有化    
 
 591
 00:25:20,466 --> 00:25:24,267
- And them some of them might be 
- public that the customer who's 
+And them some of them might be public that the customer who's 
 这样的话顾客就可以用我们框架里面
 
 592
 00:25:24,269 --> 00:25:27,404
-     buying my objects, my      
-      framework, can use. 
+buying my objects, my framework, can use. 
 那些公有的对象      
 
 593
 00:25:27,406 --> 00:25:29,238
-  Now, in this class we're not  
-   gonna be doing frameworks,   
+Now, in this class we're not gonna be doing frameworks,   
 在这节课我们不会做框架
 
 594
 00:25:29,240 --> 00:25:30,840
-  we don't really have time to  
-        get to that, so      
+we don't really have time to get to that, so      
 我们没有那个时间   
 
 595
 00:25:30,842 --> 00:25:32,508
-  we're not gonna be using the  
-        keyword public,         
+we're not gonna be using the keyword public,         
 所以我们不需要用public来修饰对象
 
 596
 00:25:32,510 --> 00:25:34,076
-    we won't ever use that,    
+we won't ever use that,    
 我们之后都不会用它 
 
 597
 00:25:34,078 --> 00:25:35,510
-   because we don't have any    
-          frameworks.      
+because we don't have any frameworks.      
 因为我们没有什么框架     
 
 598
 00:25:35,512 --> 00:25:37,578
- But we are gonna use private.  
+But we are gonna use private.  
 但我们会用private
 
 599
 00:25:37,580 --> 00:25:39,180
- And, starting with assignment  
-              two,       
+And, starting with assignment two,       
 然后，从第二次作业开始       
 
 600
 00:25:40,216 --> 00:25:42,516
-  it's one of your evaluation   
-     criteria is gonna be,  
+it's one of your evaluation criteria is gonna be,  
 
 601
 00:25:42,518 --> 00:25:45,985

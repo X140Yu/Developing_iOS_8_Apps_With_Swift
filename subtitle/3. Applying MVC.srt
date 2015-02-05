@@ -10,331 +10,287 @@ Stanford University.
 
 3
 00:00:09,809 --> 00:00:13,343
-Okay, well welcome to
-CS193p, Winter 2015.
-好的,热烈欢迎来到CS193p 2015 冬季课程
+Okay, well welcome to CS193p, Winter 2015.
+好的，热烈欢迎来到 CS193p 2015 冬季课程。
 
 4
 00:00:13,345 --> 00:00:15,445
 This is Lecture NO.3.
-这是第三堂课.
+这是第三堂课。
 
 5
 00:00:15,447 --> 00:00:17,714
 This is gonna be all demo.
-这节课将全部是演示.
+这节课将全部是演示。
 
 6
 00:00:17,716 --> 00:00:21,283
-today, my voice is mostly
-recovered from last week,
-跟上周比我今天的声音基本上恢复了,
+today, my voice is mostly recovered from last week,
+跟上周比我今天的声音基本上恢复了，
 
 7
 00:00:21,285 --> 00:00:22,918
 not 100% as you can tell.
-但如你们听到的, 我并没有完全恢复.
+但如你们听到的，我并没有完全恢复。
 
 8
 00:00:22,920 --> 00:00:23,985
 But it's getting there.
-但是差不多了.
+但是差不多了。
 
 9
 00:00:25,455 --> 00:00:29,924
-So what we're gonna be doing
-today is a demo.
-好的, 我们今天将要进行一个演示.
+So what we're gonna be doing today is a demo.
+好的，我们今天将要进行一个演示。
 
 10
 00:00:29,926 --> 00:00:31,825
-We're gonna extend our
-calculator a little bit,
-我们会给计算器加点东西
+We're gonna extend our calculator a little bit,
+我们会给计算器加点东西，
 
 11
 00:00:31,827 --> 00:00:33,460
-we're gonna make it more
-powerful.
-让它功能更强大.
+we're gonna make it more powerful.
+让它功能更强大。
 
 12
 00:00:33,462 --> 00:00:36,629
-But more importantly, we're
-gonna have it obey this MVC
-更重要的是, 我们将会让它遵从MVC
+But more importantly, we're gonna have it obey this MVC
+更重要的是，我们将会让它遵从 MVC
 
 13
 00:00:36,631 --> 00:00:37,930
 design paradigm.
-设计范例.
+设计范例。
 
 14
 00:00:37,932 --> 00:00:39,682
 'Kay?
-好么?
+好么？
 
 15
 00:00:39,683 --> 00:00:41,433
-So it's good, a pretty good
-example of showing how
-因此, 这是一个演示如何把(计算器里的)内容
+So it's good, a pretty good example of showing how
+因此，这是一个演示如何把（计算器里的）内容
 
 16
 00:00:41,436 --> 00:00:44,670
-we're gonna separate the stuff
-into the camps here.
-分配到这里列出的区块的好例子.
+we're gonna separate the stuff into the camps here.
+分成不同的部分（把 model 从 view 中独立出来）的好例子。
 
 17
 00:00:44,672 --> 00:00:46,138
-Now, we're gonna cover a bunch
-of other things,
-现在我们要讲讲其他的, 比如
+Now, we're gonna cover a bunch of other things,
+现在我们要讲讲其他的，比如
 
 18
 00:00:46,140 --> 00:00:48,473
-language features and stuff as
-I always do.
-语言特性和用法这些惯例内容.
+language features and stuff as I always do.
+语言特性和用法这些惯例内容。
 
 19
 00:00:48,475 --> 00:00:52,143
-That's really the primary goal
-of these first three lectures
-这是前三节有演示的课的最主要目标.
+That's really the primary goal of these first three lectures
+这是前三节有演示的课的
 
 20
 00:00:52,145 --> 00:00:54,078
 with the demo.
-我之所以向你们实时演示
+最主要的目标。
 
 21
 00:00:54,079 --> 00:00:56,012
-So I just mean for you to see
-it in action because you can
+So I just mean for you to see it in action because you can
 我之所以将要向你们实时演示
 
 22
 00:00:56,015 --> 00:00:59,750
-read all you want about swift
-or, about iOS, but until you
+read all you want about swift or, about iOS, but until you
 是因为虽然你们能读到所有你们想读的关于swift或者iOS的内容
 
 23
 00:00:59,752 --> 00:01:02,619
-actually see it act, turning
-into an app, it's not real.
-但直到你看到代码如何成为应用，才融会贯通.
+actually see it act, turning into an app, it's not real.
+但直到你看到代码如何成为应用，才融会贯通。
 
 24
 00:01:02,621 --> 00:01:04,420
-So I'm just trying to make it
-real for you.
-因此我会试着将应用的编写的过程展示给你们.
+So I'm just trying to make it real for you.
+因此我会试着将应用的编写的过程展示给你们。
 
 25
 00:01:06,057 --> 00:01:08,590
-I'm going to go to my last
-slide, because,
+I'm going to go to my last slide, because,
 我会讲完最后一张幻灯片, 因为,
 
 26
 00:01:08,592 --> 00:01:11,093
-once I go to the demo, I'll
-forget to come back.
-我一旦开始做演示就停不下来了.
+once I go to the demo, I'll forget to come back.
+我一旦开始做演示就停不下来了。
 
 27
 00:01:11,095 --> 00:01:13,895
-Which is just the what's
-coming up in this class.
-这张幻灯片仅仅是说明接下来这门课要讲什么.
+Which is just the what's coming up in this class.
+这张幻灯片仅仅是说明接下来这门课要讲什么。
 
 28
 00:01:13,897 --> 00:01:17,031
-On Wednesday, it's gonna be no
-demo, it's gonna be all
-本周三没有课上演示,全是幻灯片.
+On Wednesday, it's gonna be no demo, it's gonna be all
+本周三没有课上演示，全是幻灯片，
 
 29
 00:01:17,033 --> 00:01:19,967
-slides, it's going to be one
-of the few lectures where it's all slides
-这种课不会多，但这节是其中之一.
+slides, it's going to be one of the few lectures where it's all slides
+这种课不会多，但这节是其中之一。
 
 30
 00:01:21,186 --> 00:01:22,402
 But what I'm gonna try to do,
-我会在周三的课上尝试划出
+我会尝试
 
 31
 00:01:22,405 --> 00:01:25,205
-on Wednesday, is give you the
-highlights of this all
-划出你们
+on Wednesday, is give you the highlights of this all
+在周三的课上划出你们现阶段
 
 32
 00:01:25,207 --> 00:01:27,307
 this reading that you're doing.
-现阶段所学重点.
+所学重点。
 
 33
 00:01:27,309 --> 00:01:28,658
-Okay?
-Because you're
+Okay? Because you're
 可以么？因为
 
 34
 00:01:28,659 --> 00:01:30,008
-reading a lot of stuff and
-it's sometimes hard to
-你们要读很多的东西,有时候区分
+reading a lot of stuff and it's sometimes hard to
+你们要读很多的东西，有时候区分
 
 35
 00:01:30,011 --> 00:01:32,611
-tell what's really important
-in there and what's not.
-哪些是重点哪些不是会比较困难.
+tell what's really important in there and what's not.
+哪些是重点哪些不是重点会比较困难。
 
 36
 00:01:32,613 --> 00:01:34,279
-So I'm gonna kinda give you
-the highlights so
-因此我会给你们划重点.
+So I'm gonna kinda give you the highlights so
+因此我会给你们划重点，
 
 37
 00:01:34,281 --> 00:01:36,448
-you can get an idea of what's
-important.
-这样你们会对重点内容有些概念.
+you can get an idea of what's important.
+这样你们会对重点内容有些概念。
 
 38
 00:01:36,450 --> 00:01:40,618
-And then I'm also gonna start
-talking about some of
+And then I'm also gonna start talking about some of
 接着我会开始讲一些
 
 39
 00:01:40,620 --> 00:01:45,255
-the foundation layer API in
-IOS that's the non,
-iOS中基础层的非
+the foundation layer API in IOS that's the non,
+iOS 中基础层的
 
 40
 00:01:45,257 --> 00:01:47,891
 user interface layer basically and
-用户界面 API, 大体上讲.
+非用户界面 API，大体上讲，
 
 41
 00:01:47,893 --> 00:01:51,227
-kinda what some of the classes
-are in there.
-和其中包含的一些类.
+kinda what some of the classes are in there.
+和其中包含的一些类。
 
 42
 00:01:51,229 --> 00:01:54,130
-And then also just a little
-bit of how we use the language
-接着是一点点关于如何使用iOS中Swift
+And then also just a little bit of how we use the language
+接着是一点点关于如何使用 iOS 中 Swift 语言特性
 
 43
 00:01:54,132 --> 00:01:57,099
-features of swift, and
-foundation, in iOS so
- 和Foundation 框架的语言特性.
+features of swift, and Foundation, in iOS so
+和一些关于 Foundation 框架的东西。
 
 44
 00:01:57,101 --> 00:02:00,169
-that you can kinda get this
-kind of your
-这样在一定程度上
+that you can kinda get this kind of your
+这样在一定程度上，
 
 45
 00:02:00,171 --> 00:02:01,870
-next Wednesday's lecture ,
-本周三的课
+next Wednesday's lecture,
+本周三的课，
 
 46
 00:02:01,872 --> 00:02:03,772
 is gonna be your baseline lecture,
-会成为你的当做奠基课程.
+会成为你当做奠基的课程。
 
 47
 00:02:03,774 --> 00:02:07,241
-can kinda get you grounded in
-how to do all this stuff.
-你在一定程度会获得如何做这些东西的根基.
+can kinda get you grounded in how to do all this stuff.
+你在一定程度会获得如何做这些东西的根基。
 
 48
 00:02:07,243 --> 00:02:10,044
-And then next week we'll start
-diving in,
-然后接下来一周我们开始深入,
+And then next week we'll start diving in,
+然后接下来一周我们开始深入，
 
 49
 00:02:10,046 --> 00:02:13,814
-to build a more sophisticated
-iOS application.
-写一个更成熟高端的iOS应用.
+to build a more sophisticated iOS application.
+写一个更成熟高端的iOS应用。
 
 50
 00:02:13,816 --> 00:02:15,682
-Okay, I know this is kind of a
-whirlwind in first two
-好的, 我知道头两周会有些吃力,
+Okay, I know this is kind of a whirlwind in first two
+好的，我知道头两周会有些吃力，
 
 51
 00:02:15,684 --> 00:02:18,752
-weeks, you're learning a new
-language, all new system.
-你们将在其间学一门新的编程语言, 一个全新的体系.
+weeks, you're learning a new language, all new system.
+你们将在其间学一门新的编程语言，一个全新的体系。
 
 52
 00:02:18,754 --> 00:02:20,920
-But hopefully by the end of
-this week and the end of your
+But hopefully by the end of this week and the end of your
 但是希望在这周以及
 
 53
 00:02:20,922 --> 00:02:24,757
-second assignment which will
-go out on Wednesday you'll be
-将在周三布置的第二个作业结束之后,
+second assignment which will go out on Wednesday you'll be
+将在周三布置的第二个作业结束之后，
 
 54
 00:02:24,759 --> 00:02:26,225
-pretty confident that you'll
-at least,
-你能够比较确信,至少自己,
+pretty confident that you'll at least,
+你能够比较确信，至少自己，
 
 55
 00:02:26,227 --> 00:02:30,595
-you know, have a, solid ground
-foundation to build from,
-额...有一个的坚实的基础.
+you know, have a, solid ground foundation to build from,
+额...有一个的坚实的基础。
 
 56
 00:02:30,597 --> 00:02:31,662
 no pun intended there.
-我不是在说笑.
+我不是在说笑。
 
 57
 00:02:33,032 --> 00:02:36,767
-There's a holiday weekend this
-weekend no Friday section and
-这周末有公众假期, 所以这周五没课,
+There's a holiday weekend this weekend no Friday section and
+这周末有公众假期，所以这周五没课，
 
 58
 00:02:36,769 --> 00:02:39,603
-no class on Monday until we
-resume next Wednesday, and
-下周一也没课,直到下周三重新开始上课,
+no class on Monday until we resume next Wednesday, and
+下周一也没课，直到下周三重新开始上课，
 
 59
 00:02:39,605 --> 00:02:42,305
-the primary thing I'm gonna do
-next Wednesday,
+the primary thing I'm gonna do next Wednesday,
 下周三我的首要任务是
 
 60
@@ -344,242 +300,208 @@ not day after tomorrow but
 
 61
 00:02:44,342 --> 00:02:46,376
-the next Wednesday, is talk a
-little more about auto layout.
-是下周周三, 是讲一些关于auto layout的内容.
+the next Wednesday, is talk a little more about AutoLayout.
+是下周周三，是讲一些关于 AutoLayout 的内容。
 
 62
 00:02:46,378 --> 00:02:49,445
-Cause you've only just seen
-kind of a glimpse of auto
+Cause you've only just seen kind of a glimpse of 
 因为到目前为止你们只是瞥见了一点关于
 
 63
 00:02:49,447 --> 00:02:51,013
-layouts so far and
-auto layout的内容.
+AutoLayouts so far and
+AutoLayout 的内容。
 
 64
 00:02:51,015 --> 00:02:53,849
-I haven't even really told you
-how to do auto layout and so
-我实际上并没有告诉你们如何做auto layout
+I haven't even really told you how to do AutoLayout and so
+我实际上并没有告诉你们如何做 AutoLayout
 
 65
 00:02:53,851 --> 00:02:55,383
-you're kinda just fumbling
-around and trying,
+you're kinda just fumbling around and trying,
 你们差不多只是在摸索和尝试
 
 66
 00:02:55,385 --> 00:02:58,619
-trying to reproduce what I do
-so next Wednesday we'll
-重现我做过的内容. 所以下周三
+trying to reproduce what I do so next Wednesday we'll
+重现我做过的内容，所以下周三
 
 67
 00:02:58,621 --> 00:03:01,588
-talk about how to really do
-auto layout hm, and all that.
-我们会讲如何做真正的auto layout和相关内容.
+talk about how to really do AutoLayout hm, and all that.
+我们会讲如何做真正的 AutoLayout 和相关内容。
 
 68
 00:03:02,825 --> 00:03:05,225
-'Kay, any questions before I
-dive into this demo?
-好的,在我开始演示之前还有没有问题?
+'Kay, any questions before I dive into this demo?
+好的，在我开始演示之前还有没有问题？
 
 69
 00:03:06,194 --> 00:03:10,396
-Hopefully my voice will hold
-out I can already hear it
-希望我的声音能坚持住, 我已经感觉到
+Hopefully my voice will hold out I can already hear it
+希望我的声音能坚持住，我已经感觉到
 
 70
 00:03:10,398 --> 00:03:14,065
-starting to not hold out but
-we will see.
-嗓子有些挺不住了, 但是...看吧.
+starting to not hold out but we will see.
+嗓子有些挺不住了，但是...看看吧。
 
 71
 00:03:14,067 --> 00:03:15,266
 All right.
-好的.
+好的。
 
 72
 00:03:15,268 --> 00:03:21,839
-So, I'm going to just go to
-Xcode here, launch Xcode.
-嗯,我现在点这里的Xcode, 运行Xcode.
+So, I'm going to just go to Xcode here, launch Xcode.
+嗯，我现在点这里的 Xcode，运行 Xcode。
 
 73
 00:03:22,941 --> 00:03:25,942
-And we're gonna leave off
-right where we, were,
-我们将继续上次课程
+And we're gonna leave off right where we, were,
+我们将继续上次课程，
 
 74
 00:03:25,944 --> 00:03:27,410
 last time, in the calculator.
-计算器程序的编写.
+计算器程序的编写。
 
 75
 00:03:28,846 --> 00:03:32,681
-There it is right here, and so
-these are UI.
-都在这里了, 这是UI.
+There it is right here, and so these are UI.
+都在这里了，这是 UI。
 
 76
 00:03:32,683 --> 00:03:34,783
-Hopefully you recognize that
-and you did,
+Hopefully you recognize that and you did,
 希望你们都认出来了并且
 
 77
 00:03:34,785 --> 00:03:36,051
 did your homework.
-做了作业.
+做了作业。
 
 78
 00:03:36,053 --> 00:03:38,070
 I hope.
-我希望.
+我希望。
 
 79
 00:03:38,071 --> 00:03:40,088
-And here is this area that I
-selected at the end,
-这是我在代码尾部选中的区域,
+And here is this area that I selected at the end,
+这是我在代码尾部选中的区域，
 
 80
 00:03:40,090 --> 00:03:43,290
-which is this area that's
-really has not,
-这块区域并不是,
+which is this area that's really has not,
+这块区域并不是，
 
 81
 00:03:43,292 --> 00:03:47,928
-this is not about how, how the
-calculator gets presented on
-并不是负责计算器如何在屏幕上呈现的.
+this is not about how, how the calculator gets presented on
+并不是负责计算器如何在屏幕上呈现的（并不是 controller 的工作），
 
 82
 00:03:47,930 --> 00:03:51,064
-screen, this blue area is
-about how the calculator is
-这块蓝色的区域是关于这个计算器
+screen, this blue area is about how the calculator is
+这块蓝色的区域是关于这个计算器，
 
 83
 00:03:51,066 --> 00:03:52,165
 a calculator, okay?
-为什么是个计算器, 可以么?
+为什么是个计算器（应该是 model 的工作），可以么？
 
 84
 00:03:52,167 --> 00:03:54,367
-This is where all our
-calculations are and
-这里是存放运算的地方
+This is where all our calculations are and
+这里是存放运算的地方，
 
 85
 00:03:54,369 --> 00:03:57,302
-this blue area really
-shouldn't be in this class,
+this blue area really shouldn't be in this class,
 这个蓝色区域不应该出现在这个类里,
 
 86
 00:03:57,304 --> 00:04:00,839
-this view controller class
-because this is the C
-这个视图控制器类. 因为这是我们MVC模型的
+this view controller class because this is the C
+这个视图控制器类，因为这是我们 MVC 模型的中的C
 
 87
 00:04:00,841 --> 00:04:01,973
 of our MVC, okay.
-控制器(Controller), 好么?
+控制器（Controller），好么？
 
 88
 00:04:01,975 --> 00:04:06,910
-And our MVC, this is the C,
-this is the V, the view,
-我们的MVC模型, 这是控制器(Controller), 这是视图(View),
+And our MVC, this is the C, this is the V, the view,
+我们的 MVC 模型，这是控制器（Controller），这是视图（View），
 
 89
 00:04:06,912 --> 00:04:09,546
-these are the minions that
-this controller's using.
-它们是控制器使用的小兵们.
+these are the minions that this controller's using.
+它们是控制器使用的小兵们。
 
 90
 00:04:09,548 --> 00:04:11,948
-And today we're gonna create
-the M.
-今天我们将构建计算器的模型(Model).
+And today we're gonna create the M.
+今天我们将构建计算器的模型（Model）。
 
 91
 00:04:11,950 --> 00:04:13,349
-Okay?
-The model.
-好么?模型.
+Okay? The model.
+好么？模型。
 
 92
 00:04:13,351 --> 00:04:15,351
 The model is gonna be what our calcu,
-这个模型将会决定我们的计,
+这个模型将会决定我们的计（口误），
 
 93
 00:04:15,353 --> 00:04:18,854
-what our application is, which
-is, it's a calculator.
-我们的应用是什么, 也就是一个计算器.
+what our application is, which is, it's a calculator.
+我们的应用是什么，也就是一个计算器。
 
 94
 00:04:18,856 --> 00:04:20,155
 'Kay?
-好么?
+好么？
 
 95
 00:04:20,157 --> 00:04:23,758
-We're also going to enhance
-our calculator the primary new
+We're also going to enhance our calculator the primary new
 我们将会加强这个计算器, 我们将赋予
 
 96
 00:04:23,760 --> 00:04:26,360
-feature we're gonna give our
-calculator is that
+feature we're gonna give our calculator is that
 它的首要新特性是
 
 97
 00:04:26,362 --> 00:04:30,030
-our calculators model is gonna
-remember every operand and
+our calculators model is gonna remember every operand and
 我们的计算器模型将会记住所有我们要求的
 
 98
 00:04:30,032 --> 00:04:32,833
 operation you ever asked it to do.
-运算对象和运算.
+运算对象和运算符。
 
 99
 00:04:32,835 --> 00:04:38,271
-Okay, so right now as we do
-operations we consume all
-好的, 现在当我们做运算的是时候我们假设所有
+Okay, so right now as we do operations we consume all
+好的，现在当我们做运算的是时候我们假设我们用完了所有
 
 100
 00:04:38,273 --> 00:04:39,505
 the operands.
-运算对象.
-
-101
-00:04:32,835 --> 00:04:39,505
-Okay, so right now as we do operations we consume all the operands.
-好，现在我们注释掉我们刚才的操作
+运算对象。
 
 103
 00:04:39,507 --> 00:04:41,040
 'Kay, they consume, kinda, they're gone.
-他们没有了
+他们都用完了，没有了。
 
 104
 00:04:42,276 --> 00:04:43,792
@@ -589,22 +511,22 @@ So in this case,
 105
 00:04:43,793 --> 00:04:45,309
 we're going to actually collect all the operations and
-我们要收集所有在堆栈中的操作和
+我们要收集所有在堆栈中的运算数和
 
 106
 00:04:45,312 --> 00:04:48,346
 operands in our, in a stack and then we can
-运算，然后我们可以
+运算符，然后我们可以
 
 107
 00:04:48,348 --> 00:04:53,350
 ask the model to, evaluate that stack of operations and
-要求我们模型，求出我们所有操作运算的值，
+要求我们模型，在任何时候求出我们
 
 108
 00:04:53,352 --> 00:04:55,385
- operands at any time we want.
- 在任何时候
+operands at any time we want.
+所有操作运算的值。
 
 109
 00:04:55,387 --> 00:04:57,654
@@ -614,55 +536,52 @@ And the reason we're adding that ability is because your homework,
 110
 00:04:57,656 --> 00:05:00,256
 assignment number two, you're gonna add two
-任务二，你需要添加两个
+第二份作业，你需要添加两个
 
 111
 00:05:00,258 --> 00:05:03,726
 major features where having all the operands and the
-  主要功能，它包括所有的操作和运算
+主要功能，它包括所有的运算数和运算符，
 
 112
 00:05:03,728 --> 00:05:06,628
 operations in a stack is gonna be really valuable to you.
-这将会对你很有用
+这将会对你很有用的。
 
 113
 00:05:06,630 --> 00:05:09,264
 So you'll be starting your second homework with what I
-所以你要开始做第二份作业
+所以你要开始做第二份作业，
 
 114
 00:05:09,266 --> 00:05:12,334
 do today cause you'll need this capability to do what I
-用我今天讲的东西，因为在里面你将会用到这些知识
+用我今天讲的东西，因为在里面你将会用到
 
 115
 00:05:12,336 --> 00:05:13,735
-         ask you there.
+ask you there.
+这些知识。
 
 116
 00:05:13,737 --> 00:05:14,902
 Okay, and I'll talk about that at the end.
-我会在结束的时候说一下这个问题
+我会在结束的时候说一下这个问题。
 
 117
 00:05:14,904 --> 00:05:17,237
 If I forget to talk about that, remind me.
-如果我忘记说的话，提醒我一下
+如果我忘记说的话，提醒我一下。
 
 118
-00:05:17,239 --> 00:05:18,805
- Say, tell us about assignment two.
- 就说和我们说一下那两个作业
-
-119
-00:05:20,175 --> 00:05:21,240
-Okay.
+00:05:17,239 --> 00:05:21,240
+Say, tell us about assignment two. Okay.
+就说和我们说一下第二份作业。
 
 120
 00:05:21,242 --> 00:05:22,908
 So, how do we create a new class.
-我们怎么去创建一个新的类
+那么，我们怎么去创建一个新的类呢？
 
 121
 00:05:22,910 --> 00:05:25,911
@@ -672,32 +591,32 @@ Because we're gonna put our model, 'kay, the calculator,
 122
 00:05:25,913 --> 00:05:28,680
 kind of, it, it's the guts, in a different class.
-它是一个内脏（一部分），放在不同的类里
+它的内脏，放在另一个类里面（不放在 controller 里面）。
 
 123
 00:05:28,682 --> 00:05:31,983
 So how do we create a new class, in Xcode.
-所以，我们应该怎么用Xcode创建一个新的类
+那么，我们应该怎么用 Xcode 创建一个新的类？
 
 124
 00:05:31,985 --> 00:05:33,651
 We do that up here from the File menu.
-我们从这里找到文件菜单
+我们从这上面找到文件菜单。
 
 125
 00:05:33,653 --> 00:05:35,619
 We go, New > File.
-然后选择 新建 -> 文件
+然后选择，New -> File。
 
 126
 00:05:35,621 --> 00:05:38,489
 So, you're gonna do File menu > New > File for a lot of
-所以你要使用 文件菜单 -> 新建 -> 文件
+所以你要使用 File -> New -> File
 
 127
 00:05:38,491 --> 00:05:41,291
 different things you're gonna add to your project.
-来为你的项目来添加各种不同的东西
+来为你的项目来添加很多各种不同的东西。
 
 128
 00:05:41,293 --> 00:05:43,693
@@ -707,12 +626,12 @@ Not even just, new classes or
 129
 00:05:43,695 --> 00:05:46,863
 whatever, but, when you click that you're gonna see
-或者随便什么，当你点击那里的时候你会看到
+或者随便什么，当你点击那里的时候你将会看到，
 
 130
 00:05:46,865 --> 00:05:48,497
 there's a lot of different things you could add.
-你可以添加很多不一样的东西
+你可以添加很多不一样的东西。
 
 131
 00:05:48,499 --> 00:05:49,865
@@ -727,42 +646,42 @@ you're gonna click on this iOS thing at the top.
 133
 00:05:52,269 --> 00:05:53,635
 And we wanna add a source file.
-我们要添加一个资源文件
+我们想要添加一个资源文件。
 
 134
 00:05:53,637 --> 00:05:56,671
 And over here we're gonna be doing this later in the quarter,
-一会我们会在这里添加文件，
+在之后的学习中，我们将会添加这种文件，
 
 135
 00:05:56,673 --> 00:06:04,378
 this is how we basically add subclasses of iOS classes, Co, Cocoa Touch classes.
-我们主要用这种方式来添加 iOS 的类和Cocoa Touch的类
+我们主要用这种方式来添加 iOS 的类和 Cocoa Touch 的类的子类。
 
 137
 00:06:04,380 --> 00:06:06,446
 But we're gonna do today this one Swift File,
-但是今天我们这样来添加一个 Swift 的文件，
+但是今天我们添加一个 Swift 的文件，
 
 138
 00:06:06,448 --> 00:06:08,948
 you can see it's an empty Swift File.
-你可以看到这是一个空的 Swift 文件
+你可以看到这是一个空的 Swift 文件。
 
 139
 00:06:08,950 --> 00:06:11,517
 And since our model is completely UI independent it doesn't inherit,
-因为我们的模型是一个独立的UI，它不需要继承，
+因为我们的模型是一个完全和 UI 独立的类，它不需要继承，
 
 140
 00:06:11,519 --> 00:06:15,287
 it doesn't subclass any IOS class or anything,
- 它不是iOS或者其他的类的子类，
+它不是 iOS 或者其他的类的子类，
 
 141
 00:06:15,289 --> 00:06:17,923
 it's just a basic, Swift File.
-它只是一个基本的 Swift 文件
+它只是一个基本的 Swift 文件。
 
 142
 00:06:17,925 --> 00:06:19,824

@@ -5795,564 +5795,497 @@ ask what type it is, aren't you?
 
 1201
 00:49:34,101 --> 00:49:35,801
-     It's almost always an
-           Optional.
-它总会是 Optional           
+It's almost always an Optional.
+答案总可以是 Optional
 
 1202
 00:49:35,803 --> 00:49:37,168
-   Cuz I usually don't ask if
-           it's not.
-因为如果它不是，我就不会问了
+Cuz I usually don't ask if it's not.
+如果它不是我才不会问呢
 
 1203
 00:49:37,170 --> 00:49:40,672
- But it is indeed an Optional,
-      an Optional Double.
-它确实是个 Optional，一个 Optional Double 类型的      
+But it is indeed an Optional, an Optional Double.
+但是在这它确实是个 Optional，一个 Optional Double 型
 
 1204
 00:49:40,674 --> 00:49:42,707
-   It's this type right here,
-             Okay?
+It's this type right here, Okay?
 这就是它的类型             
 
 1205
 00:49:42,709 --> 00:49:46,043
-  So we need to turn it into a
- Double if we're gonna pass it
+So we need to turn it into a Double if we're gonna pass it
 如果我们想把它传入这里， 
 
 1206
 00:49:46,045 --> 00:49:48,078
- to this operation right here.
+to this operation right here.
 就得把它变成一个 Double 类型的
 
 1207
 00:49:48,080 --> 00:49:52,648
-   So I'm gonna use if let to
-    turn that into a Double.
+So I'm gonna use if let to turn that into a Double.
 所以在这里我是用 if let 来把它变成 Double    
 
 1208
 00:49:52,650 --> 00:49:55,084
-             'Kay?
+'Kay?
 
 1209
 00:49:55,085 --> 00:49:57,519
-  Now, I can actually do this
-  because I have the operand.
+Now, I can actually do this because I have the operand.
 我确实可以这么做，因为我已经有了操作数  
 
 1210
 00:49:57,521 --> 00:49:58,587
-    Just got it right here.
+Just got it right here.
 从这里获取到的    
 
 1211
 00:49:58,589 --> 00:50:00,755
-             'Kay?
-   This is now a Double, see?
+'Kay? This is now a Double, see?
 它现在变成 Double 了   
 
 1212
 00:50:00,757 --> 00:50:04,125
- And I can call this operation
-          right here.
+And I can call this operation right here.
 我可以在这里调用这个运算          
 
 1213
 00:50:04,127 --> 00:50:06,327
- And this is the remaining ops,
-      but this has got to
-这里是余下的 ops，但这里得放递归之后
+And this is the remaining ops, but this has got to
+这里是余下的 ops，
 
 1214
 00:50:06,329 --> 00:50:09,229
- be the remaining ops after we
-           recursed.
-余下的 ops           
+be the remaining ops after we recursed.
+但这里得放递归之后余下的 ops
 
 1215
 00:50:09,231 --> 00:50:13,233
- So it's gotta be the remaining
- ops in this operandEvaluation.
-所以它得是这个 operandEvalution 余下的 ops 
+So it's gotta be the remaining ops in this operandEvaluation.
+它得是这个 operandEvalution 余下的 ops
 
 1216
 00:50:13,235 --> 00:50:15,368
-            So that
-  operandEvaluation.remaining-
+So that operandEvaluation.remainingOps.
 所以这里放 operandEvaluation.remainingOps  
 
 1217
 00:50:15,370 --> 00:50:19,471
-              Ops.
-   Everybody cool with that?
+Everybody cool with that?
 都懂了吗？   
 
 1218
 00:50:19,473 --> 00:50:21,206
-         So that's it.
-就是这样         
+So that's it.
+就这么简单
 
 1219
 00:50:21,208 --> 00:50:25,343
-   It's just recurse, we just
-   recursed to evaluate that.
+It's just recurse, we just recursed to evaluate that.
 我们为了计算而进行递归   
 
 1220
 00:50:25,345 --> 00:50:29,180
-   If this fails if, if this
-    recursion returned nil,
+If this fails if, if this recursion returned nil,
 如果这步失败了，这次递归返回 nil    
 
 1221
 00:50:29,182 --> 00:50:31,849
-  then this is, this, if let's
-     not gonna happen this
+then this is, this, if let's not gonna happen this
 这里都不会进行     
 
 1222
 00:50:31,851 --> 00:50:34,584
-   return's not gonna happen,
- gonna fall all the way out and
+return's not gonna happen, gonna fall all the way out and
 不会 return，然后一路向下运行， 
 
 1223
 00:50:34,586 --> 00:50:37,454
-  return nill which is what we
-          want, 'kay.
-最后返回我们期待的 nil          
+return nill which is what we want, 'kay.
+最后返回我们需要的 nil
 
 1224
 00:50:37,456 --> 00:50:39,522
-    We failed in any of our
-     recursive attempts to
+We failed in any of our recursive attempts to
 如果为了得到操作数
 
 1225
 00:50:39,524 --> 00:50:40,756
-   get the operands we need,
+get the operands we need,
 递归失败了   
 
 1226
 00:50:40,758 --> 00:50:42,825
-  we gotta fail all the way up
-       to the top level.
+we gotta fail all the way up to the top level.
 就是一路失败到最顶层的递归       
 
 1227
 00:50:42,827 --> 00:50:46,028
-         [BLANK_AUDIO]
+
 
 1228
 00:50:46,030 --> 00:50:48,063
-   Okay now binary operation.
-双目操作符   
+Okay now binary operation.
+现在谈谈双目操作符
 
 1229
 00:50:49,299 --> 00:50:52,466
-   Also Okay, let's do yeah,
-       binary here case.
-在这个 case 处理双目操作符       
+Also Okay, let's do yeah, binary here case.
+在这个 case 里处理双目操作符
 
 1230
 00:50:53,535 --> 00:50:54,267
-            Binary.
+Binary.
+输入Binary
 
 1231
 00:50:55,470 --> 00:50:57,570
-   Obviously same exact thing
-             here.
+Obviously same exact thing here.
 显然，跟上面一样             
 
 1232
 00:50:57,572 --> 00:50:59,438
-   We don't care about that.
+We don't care about that.
 我们不需要关心这个   
 
 1233
 00:50:59,440 --> 00:51:00,906
-    And here we're gonna let
-           operation.
+And here we're gonna let operation.
 在这里，let operation           
 
 1234
 00:51:00,908 --> 00:51:03,708
- And we're gonna do the exactly
-     the same thing we did
+And we're gonna do the exactly the same thing we did
 跟之前做相同的事情
 
 1235
 00:51:03,710 --> 00:51:06,577
- here but we just have to do it
-   twice because we have two
+here but we just have to do it twice because we have two
 但在这里得做两次
 
 1236
 00:51:06,579 --> 00:51:08,646
-  operands to do here, through
-             here.
+operands to do here, through here.
 因为我们得获取到两个操作数             
 
 1237
 00:51:08,648 --> 00:51:15,052
- So let's let opp1Evaluation =
-    evaluate(remainingOps).
+So let's let opp1Evaluation = evaluate(remainingOps).
 所以，let opp1Evaluation = evaluate(remainingOps)
 
 1238
 00:51:16,088 --> 00:51:17,487
-             'Kay.
+'Kay.
 
 1239
 00:51:17,488 --> 00:51:18,887
-     And then if we can let
-           operand1 =
-如果进行 let operand1 = op1Evaluation.result
+And then if we can let operand1 =
+如果我们 let operand1 =
 
 1240
 00:51:18,890 --> 00:51:20,756
-     op1Evaluation.result.
-
+op1Evaluation.result.
+op1Evaluation.result
 
 1241
 00:51:20,758 --> 00:51:23,625
- 'Kay, then we got op1, that's
-             good.
-我们就获得了 op1             
+'Kay, then we got op1, that's good.
+我们就得到了 op1，还不错
 
 1242
 00:51:23,627 --> 00:51:27,262
- So now let's let op2Evaluation
-               =
-在这里 let op2Evaluation = evaluation(op1Evaluation.remainingOps)               
+So now let's let op2Evaluation =
+现在我们再 let op2Evaluation =
 
 1243
 00:51:27,264 --> 00:51:32,600
- evaluation(op1Evaluation.rema-
-           iningOps).
+evaluation(op1Evaluation.remainingOps).
+evaluation(op1Evaluation.remainingOps)
 
 1244
 00:51:32,602 --> 00:51:36,370
-             'Kay?
+'Kay?
 
 1245
 00:51:36,371 --> 00:51:40,139
-   And if we can let operand,
-  oops, if we can let operand2
-如果在这里 let operand2 = op2Evaluation.result  
+And if we can let operand, oops, if we can let operand2
+如果在这里 let operand2
 
 1246
 00:51:40,142 --> 00:51:44,844
-  = op2Evaluation.result, then
-             we can
-我们就             
+= op2Evaluation.result,
+= op2Evaluation.result，
 
 1247
 00:51:44,846 --> 00:51:50,716
-  return (operation(operand1,
-           operand2).
-return (operation(operand1, operand2))           
+then we can return (operation(operand1, operand2).
+然后 return (operation(operand1, operand2)
 
 1248
 00:51:50,718 --> 00:51:53,185
-             'Kay?
-              And
+'Kay?
+
 
 1249
 00:51:53,186 --> 00:51:55,653
-           we'll have
- op2Evaluation.remainingOps as
-我们把 op2Evaluation.remainingOps 
+And we'll have op2Evaluation.remainingOps
+接着把 op2Evaluation.remainingOps
 
 1250
 00:51:55,656 --> 00:51:57,355
-       our remaining ops.
-作为我们余下的 ops       
+as our remaining ops.
+作为余下的 ops
 
 1251
 00:51:57,357 --> 00:52:00,825
-             Okay?
-         [BLANK_AUDIO]
+Okay?
+
 
 1252
 00:52:00,827 --> 00:52:01,692
-          Make sense?
-我讲明白了吗？          
+Make sense?
+明白了吗
 
 1253
 00:52:01,694 --> 00:52:02,426
-           All right.
-          What's our.
+All right.
+好的
 
 1254
 00:52:02,428 --> 00:52:03,159
-     We have an error here.
-在这里有个 error
+We have an error here.
+哦，出现了个 error
 
 1255
 00:52:03,161 --> 00:52:04,560
-          What is it?
+What is it?
+看看它错哪了
 
 1256
 00:52:04,562 --> 00:52:05,695
-             Okay.
-             Yeah,
+Okay.
+我明白了
 
 1257
 00:52:05,696 --> 00:52:06,829
- this is a good error to cover
-             here.
+Yeah, this is a good error to cover here.
 这个 error 值得一讲        
 
 1258
 00:52:06,831 --> 00:52:09,665
-  See this it says method must
-  be declared private because
-它提到，这个方法必须声明为 private   
+See this it says method must be declared private
+看这，它说函数必须被声明为 private
 
 1259
 00:52:09,667 --> 00:52:12,501
- this parameter uses a private
-             value.
-因为参数使用了 private 的值             
+because this parameter uses a private type.
+因为它的参数使用了 private 类型
 
 1260
 00:52:12,503 --> 00:52:16,137
- And sure enough op is private
-   so this has to be private.
-op 是 private 的，所以这个方法得是 private 的   
+And sure enough op is private so this has to be private.
+显然由于 op 是 private 的，这个函数也得是 private 的
 
 1261
 00:52:17,740 --> 00:52:19,273
-             'Kay?
+'Kay?
 
 1262
 00:52:20,476 --> 00:52:21,875
-     Now notice by the way,
-同时注意这里     
+Now notice by the way,
+注意
 
 1263
 00:52:21,877 --> 00:52:28,080
-  I don't have default: break
-      here in this switch.
+I don't have default: break here in this switch.
 这个 switch 我没有写 default: break      
 
 1264
 00:52:28,082 --> 00:52:30,215
-  And why do I not have that?
-我为什么没写？  
+And why do I not have that?
+我之所以没写
 
 1265
 00:52:30,217 --> 00:52:33,418
-   Because I've handled every
-     possible value of op.
-因为我已经处理了 op 的每一个可能情形     
+Because I've handled every possible value of op.
+是因为我已经处理了 op 的每一个可能的情形
 
 1266
 00:52:35,088 --> 00:52:35,986
-             'Kay?
-         There are only
-这里只有
+'Kay?
+
 
 1267
 00:52:35,988 --> 00:52:37,254
-       three kinds of op.
-三种 op       
+There are only three kinds of op.
+这里只有三种 op
 
 1268
 00:52:37,256 --> 00:52:38,522
-     I've handled them all.
-我每一种都处理了     
+I've handled them all.
+每一种我都处理过了
 
 1269
 00:52:38,524 --> 00:52:40,374
-  So I don't need any default.
-所以我不需要 default  
+So I don't need any default.
+所以就不需要 default 了
 
 1270
 00:52:40,375 --> 00:52:42,225
-  It wasn't like in the other
- one where we had a String and
+It wasn't like in the other one where we had a String and
 这不像上一个处理 String 的 switch 
 
 1271
 00:52:42,227 --> 00:52:44,761
- we only handle a few Strings,
-    we had a default break.
-我们只处理了几个 String，所以有 default: break    
+we only handle a few Strings, we had a default break.
+我们只处理了几个 String，所以需要写 default: break
 
 1272
 00:52:44,763 --> 00:52:47,863
- You don't put default break in
-  when you handle every thing.
-当你处理完所有情况，就不需要 default: break 了  
+You don't put default break in when you handle every thing.
+如果能处理完所有情况，就不需要 default: break 了
 
 1273
 00:52:47,865 --> 00:52:49,598
- And it's really bad programing
-            style to
-在每一个单独的 switch 语句
+And it's really bad programing style to
+而且在每一个 switch 后面都放一个 default: break
 
 1274
 00:52:49,600 --> 00:52:51,633
-  put a default break in every
-         single switch.
-放一个 default: break 也是一种不好的编程风格         
+put a default break in every single switch.
+是一种很不好的编程风格
 
 1275
 00:52:51,635 --> 00:52:54,903
- 'Kay, you should only put them
-    in on the ones where you
-你只应该把它们放在你真想 break 的地方    
+'Kay, you should only put them in the ones where you
+除非你真的没法处理所有的情况
 
 1276
 00:52:54,905 --> 00:52:58,373
- truly are breaking because you
-    can't handle every case.
-因为你不能处理每一种情况    
+truly are breaking because you can't handle every case.
+必须得要一个 break 才行
 
 1277
 00:52:58,375 --> 00:53:00,574
-             'Kay?
-           All right.
+'Kay? All right.
+好的我们继续。
 
 1278
 00:53:00,576 --> 00:53:03,844
- Now, the last thing we have to
- do is just call this recursive
-现在要做的最后一件事就是 
+Now, the last thing we have to do is just call this recursive
+那么最后要做的
 
 1279
 00:53:03,846 --> 00:53:06,113
-       version from here.
-调用这个递归       
+version from here.
+就是调用这个递归
 
 1280
 00:53:06,115 --> 00:53:08,782
-  And I'm gonna call this one
-              and
-我要用不一样的方式调用它，              
+And I'm gonna call this one and
+这次调用它来获取 Tuple 值的方式
 
 1281
 00:53:08,784 --> 00:53:11,117
-    get these Tuple values a
-      little differently.
-来获取这些 Tuple 的值
+get these Tuple values a little differently.
+略有不同
 
 1282
 00:53:11,119 --> 00:53:12,718
-  I'm not gonna call it in the
-         same way here.
-我不会跟上次一样那么调用         
+I'm not gonna call it in the same way here.
+我不会像上次那么调用
 
 1283
 00:53:12,720 --> 00:53:14,920
-     I'm not gonna say, let
-        something equal.
-我不会 let XX = 这样        
+I'm not gonna say, let something equal.
+我不会写 let XX = XX 这种
 
 1284
 00:53:14,922 --> 00:53:20,091
-  Instead I'm gonna say let a
- Tuple which has let's call it
+Instead I'm gonna say let a Tuple which has let's call it
 我会 let 一个 Tuple ， 
 
 1285
 00:53:20,093 --> 00:53:24,062
-   say (result, remainder) =
-          evaluate and
-像这样 (result, remainder) = evaluate          
+say (result, remainder) = evaluate
+比如 (result, remainder) = evaluate
 
 1286
 00:53:24,064 --> 00:53:28,666
-    I'm gonna pass my whole
-     (opStack) here, Okay.
+and I'm gonna pass my whole (opStack) here, Okay.
 我要把整个 opStack 传进去     
 
 1287
 00:53:28,668 --> 00:53:31,668
- So this is a different way to
-  call a function that returns
-这里就是调用返回 Tuple 的函数的不同方法  
+So this is a different way to call a function that returns
+这里就是调用能返回 Tuple 的函数的不同方法
 
 1288
 00:53:31,670 --> 00:53:35,305
- a Tuple here you actually let
-   a Tuple equal the result.
-其实是 let 一个 Tuple 等于函数的返回值   
+a Tuple here you actually let a Tuple equal the result.
+其实是令一个 Tuple 等于函数的返回值
 
 1289
 00:53:35,307 --> 00:53:37,974
-  Instead of letting a single
-     thing equal result and
-而不是让一个单独的东西等于返回值     
+Instead of letting a single thing equal result and
+而不是让一个单独的东西等于返回值再
 
 1290
 00:53:37,976 --> 00:53:42,111
- then using the dots to get it,
- you let the Tuple equal it and
-然后使用 . 来获取元素， 你 let Tuple = 
+then using the dots to get it, you let the Tuple equal it and
+使用 . 来获取元素，你是令 Tuple 等于后面这些
 
 1291
 00:53:42,113 --> 00:53:45,547
- notice that these names don't
-  have to be the same as these
-注意，这些命名不需要是一样的
+notice that these names don't have to be the same as these
+顺便注意这些名字并不必须和上面这些相同
 
 1292
 00:53:45,549 --> 00:53:48,283
-  names so result is the same,
-           but here I
-result 是一样的，但是这里           
+names so result is the same, but here I
+两个 result 是一样的，但是这里
 
 1293
 00:53:48,285 --> 00:53:52,286
- use the word remainder instead
-   of the word remainingOps.
-我用 remainder 来取代 remainingOps   
+use the word remainder instead of the word remainingOps.
+我用了 remainder 而没有用 remainingOps
 
 1294
 00:53:52,288 --> 00:53:53,754
-  Okay they do not have to be
-           the same.
-它们没必要是一样的           
+Okay they do not have to be the same.
+它们不必相同
 
 1295
 00:53:55,024 --> 00:54:00,694
-  And then here we just return
-          our result.
+And then here we just return our result.
 在这里，返回我们的结果          
 
 1296
 00:54:00,696 --> 00:54:02,261
-             Okay?
+Okay?
 
 1297
 00:54:02,263 --> 00:54:04,163
-   So we learned a lot right
-          there, Okay.
-在这里我们学到了很多          
+So we learned a lot right there, Okay.
+在这我们讲了很多
 
 1298
 00:54:04,165 --> 00:54:05,297
-    We learned about Tuple,
-我们学到了 Tuple     
+We learned about Tuple,
+我们讲了 Tuple
 
 1299
 00:54:05,299 --> 00:54:08,033
-  passing, you know, things back
-           Tuples in
-通过不同的方式获取 Tuple            
+passing, you know, things back Tuples in
+讲了通过不同的方法获取 Tuple
 
 1300
 00:54:08,035 --> 00:54:13,237
- different ways, you know, how to
-   ignore things in enums, and,
-当我们在得到相关的值的时候   
+different ways, you know, how to ignore things in enums, and,
+以及要得到所需的值或者其他的东西的时候
 
 1301
 00:54:13,239 --> 00:54:15,106
@@ -6362,7 +6295,7 @@ when we're getting associate values, all that stuff.
 1302
 00:54:15,108 --> 00:54:16,974
 So hopefully, you got all that.
-所以希望你们都掌握了
+希望你们都掌握了
 
 1303
 00:54:16,976 --> 00:54:19,676
@@ -6372,16 +6305,16 @@ I see a few people still kinda catching up on their typing.
 1304
 00:54:19,678 --> 00:54:21,444
 So I'll break for second here.
-所以我会在这里等你们一下
+那我就暂时等你们一下
 
 1305
 00:54:21,446 --> 00:54:24,480
-[BLANK_AUDIO]
+
 
 1306
 00:54:24,482 --> 00:54:27,283
-[SOUND] So that's it that's the entire implementation of
-这就是计算器
+So that's it that's the entire implementation of
+这就是我们计算器的 calculator brain
 
 1307
 00:54:27,285 --> 00:54:28,384
@@ -6401,41 +6334,37 @@ Pretty simple little data structure here.
 1310
 00:54:33,724 --> 00:54:36,858
 Just have to say what our known ops are.
-只需要明确我们已知的 ops
+只需要说清我们要用哪些 ops
 
 1311
 00:54:36,860 --> 00:54:38,726
-And have this recursion which
-you know,
-这种递归
+And have this recursion which you know,
+再加上这个递归
 
 1312
 00:54:38,728 --> 00:54:42,196
-actually is quite simple,
-powerful code.
-它其实就是一段很简单的功能很强大的代码
+actually is quite simple, powerful code.
+这其实就是一段简单而功能强大的代码
 
 1313
 00:54:42,198 --> 00:54:44,031
-If you're not comfortable with
-your recursion I
-如果你不满意你的递归
+If you're not comfortable with your recursion
+如果你不明白这个递归
 
 1314
 00:54:44,033 --> 00:54:46,533
-can see how it might be a little bit disturbing.
-我可以帮你看下它哪里不合理
+I can see how it might be a little bit disturbing.
+我也知道它确实有些地方有点烦人
 
 1315
 00:54:46,535 --> 00:54:48,301
-But go stare at it for
-如果你多看看你的代码，
+But go stare at it for a while
+但如果你多看看这段代码
 
 1316
 00:54:48,302 --> 00:54:50,068
-awhile and you'll, you'll get
-it, how it works.
-你就会明白它是怎么实现的
+and you'll, you'll get it, how it works.
+你就会明白它的原理了
 
 1317
 00:54:50,071 --> 00:54:51,921
@@ -6443,9 +6372,8 @@ Okay.
 
 1318
 00:54:51,922 --> 00:54:53,772
-So, now that we've got this
-new calculator brain,
-现在我们完成了一个新的计算机
+So, now that we've got this new calculator brain,
+既然我们已经有了这个新的 calculator brain
 
 1319
 00:54:53,775 --> 00:54:57,509
@@ -6455,71 +6383,66 @@ we have to use it in our old Controller.
 1320
 00:54:57,511 --> 00:54:59,678
 Okay, yeah question?
-Okay，有什么问题？
+说你的问题
 
 1321
 00:54:59,679 --> 00:55:01,846
->> Do we have to let like the opStack equal the remainder?
-我们必须得让 opStack 等于 remainder 吗？
+- Do we have to let the opStack equal the remainder?
+- 我们必须得让 opStack 等于 remainder 吗？
 
 1322
 00:55:01,848 --> 00:55:04,549
->> Do we have to let the opStack equal the remainder?
-我们必须得让 opStack 等于 remainder 吗？
+Do we have to let the opStack equal the remainder?
+我们是不是得让 opStack 等于 remainder
 
 1323
 00:55:04,551 --> 00:55:05,349
 Here, you mean?
-是个意思吗？
+你是说这段代码吗？
 
 1324
 00:55:05,351 --> 00:55:05,916
->> Yeah.
-对！
+- Yeah.
+- 是的！
 
 1325
 00:55:07,119 --> 00:55:08,418
->> well, we're not gonna use remainder, so
-呃，我们不会使用 remainder
+well, we're not gonna use remainder, so
+嗯，我们不必让它等于 remainder
 
 1326
 00:55:08,420 --> 00:55:10,620
-actually, even I could put I
-don't care here.
-实际上，即使我可以用我也不用关心这里
+actually, even I could put I don't care here.
+实际上，这个 remainder 甚至可以写成 ‘I don't care’
 
 1327
 00:55:10,622 --> 00:55:13,255
-I only put that remainder
-there to show you could have
-我把 remainder 放在这里是让你们知道
+I only put that remainder there to show you could have
+我在这用 remainder 只是想让你们知道
 
 1328
 00:55:13,257 --> 00:55:15,257
-a different name, but I'm not
-using the remainder.
-你们可以起一个不同的名称，但我并没有使用它
+a different name, but I'm not using the remainder.
+你可以起一个不同的名称，我实际没有使用 remainder 这个变量
 
 1329
 00:55:15,259 --> 00:55:16,892
-I only want the result.
-我只需要 result 就好了
+I only want the result. You see.
+我只需要一个结果。你看这（被学生打断）
 
 1330
 00:55:16,894 --> 00:55:19,861
-You see.
->> Won't the opStack contain
-明白了吗？
--在你计算它之前，
+- Won't the opStack contain
+- 在你计算 opStack 之前，
 
 1331
 00:55:19,862 --> 00:55:22,829
-what was previously in it before you evaluate it?
-opStack 不是包含了原先在它里面的东西吗？
+- what was previously in it before you evaluate it?
+- 它不包含原先在它里面的东西吗？
 
 1332
 00:55:22,832 --> 00:55:25,016
->> Yes, the opStack will be
+Yes, the opStack will be
 是的，但是这不会影响到 opStack
 
 1333
@@ -6535,24 +6458,21 @@ Arrays are passed by value so
 1335
 00:55:28,704 --> 00:55:30,837
 a copy of it gets passed into here.
-它的一个副本被传递到这里
+它的一个 copy 被传递到这里
 
 1336
 00:55:30,839 --> 00:55:33,506
-So this would be untouched and
-which is what I want.
+So this would be untouched and which is what I want.
 所以它不会改变，这正是我想要的
 
 1337
 00:55:33,508 --> 00:55:36,242
-I don't want evaluate to
-consume my opStack.
+I don't want evaluate to consume my opStack.
 我不想 evaluate 方法耗尽我的运算栈
 
 1338
 00:55:36,244 --> 00:55:38,010
-I wanna be able to call
-evaluate over and
+I wanna be able to call evaluate over and
 我希望它一遍又一遍的
 
 1339
@@ -6562,26 +6482,22 @@ over and over.
 
 1340
 00:55:38,746 --> 00:55:39,945
-'Kay?
-Especially if,
-明白了吗？特别地，
+'Kay? Especially if,
+明白了吗？尤其是假如
 
 1341
 00:55:39,947 --> 00:55:43,581
-I, let's say, introduced
-variable operands and,
-假设我引入变量操作数，
+I, let's say, introduced variable operands and,
+我引入变量操作数，
 
 1342
 00:55:43,583 --> 00:55:45,550
-that's what you're homeworks
-gonna be, then I wouldn't
-这留给你们当作业，
+hint that's what you're homeworks gonna be, then I wouldn't
+提示你们下这个会留给你们当作业，
 
 1343
 00:55:45,552 --> 00:55:47,685
-want to change the variables
-to different things and
+want to change the variables to different things and
 而且我不想改变这些变量
 
 1344
@@ -6591,21 +6507,18 @@ be calling it over and
 
 1345
 00:55:49,521 --> 00:55:51,354
-over with different values for
-the variable for example and
+over with different values for the variable for example and
 一直调用它
 
 1346
 00:55:51,357 --> 00:55:53,690
-then maybe next week I can
-have an assignment where I'm
-也许下周我可以有一项任务，
+then maybe next week I can have an assignment where I'm
+也许下周我会布置这么一个任务，
 
 1347
 00:55:53,692 --> 00:55:57,894
-gonna make you graph such a
-thing, which I'm going to do.
-我要让你们画这么一个东西
+gonna make you graph such a thing, which I'm going to do.
+让你们就画这样的东西，我会布置给你们的
 
 1348
 00:55:57,896 --> 00:55:59,012
@@ -6614,254 +6527,216 @@ Okay?
 1349
 00:55:59,013 --> 00:56:00,129
 So that's why I wanna do that.
-所以，那是为什么我这么做
+这就是我为什么想这么做
 
 1350
 00:56:00,131 --> 00:56:02,131
-So anyway, yeah, remainder
-here can just be anything.
-所以，这里的 remainder 可以是任何值
+So anyway, yeah, remainder here can just be anything.
+总而言之，这个 remainder 你想怎么写都行
 
 1351
 00:56:02,133 --> 00:56:03,532
-I'm actually gonna put this
-here because we're
-实际上，我把它放在这里，是因为
+I'm actually gonna put this here because we're
+实际上，我这么写
 
 1352
 00:56:03,534 --> 00:56:05,300
-gonna print one this in a
-second just so
-我想打印它
+gonna println this in a second just so
+是想一会 println 它
 
 1353
 00:56:05,302 --> 00:56:06,567
-we can get a better look at
-what's going on.
-这样我们就可以明白它内部如何运行的
+we can get a better look at what's going on.
+这样我们就可以明白它内部是如何运行的
 
 1354
 00:56:06,569 --> 00:56:10,904
-But first, let's go back to
-our Controller and use this
-我们接着回到我们的 Controller
+But first, let's go back to our Controller and use this
+接着，回到我们的 Controller
 
 1355
 00:56:10,906 --> 00:56:14,007
-CalculatorBrain, this nice
-Model we just invented.
-使用 CalculatorBrain，这个我们刚刚建立的很好的 Model
+CalculatorBrain, this nice Model we just invented.
+用 CalculatorBrain 这个刚刚建立的不错的 Model
 
 1356
 00:56:14,009 --> 00:56:15,842
-Let's use it.
-Now,
-我们开始使用它，现在
+Let's use it. Now,
+我们现在就把它用上
 
 1357
 00:56:15,843 --> 00:56:17,676
-I'm gonna show you how to get
-two things on screen at
-我来教你们怎样让这两个页面同时
+I'm gonna show you how to get two things on screen at
+我先教你们怎样让这两个页面同时
 
 1358
 00:56:17,679 --> 00:56:18,644
 the same time.
-显示在你的界面上
+显示在你的屏幕上
 
 1359
 00:56:18,646 --> 00:56:20,880
-That aren't necessarily
-directly related.
+That aren't necessarily directly related.
 它们之间不一定要直接相关
 
 1360
 00:56:20,882 --> 00:56:23,549
-Before we have the Storyboard
-and then I went up and
+Before we have the Storyboard and then I went up and
 之前我们用 Storyboard 的时候，移动鼠标
 
 1361
 00:56:23,551 --> 00:56:25,784
-clicked this Assistant Editor
-right here and
-点击右上角的 Assistant Editor 按钮之后
+clicked this Assistant Editor right here and
+点击右上角的 Assistant Editor 按钮
 
 1362
 00:56:25,786 --> 00:56:27,319
 it showed me the Controller.
-它显示一个相关联的控制器
+它显示的是一个对应的 Controller
 
 1363
 00:56:27,320 --> 00:56:28,853
-Because the Assistant Editor
-figured out that, oh,
-那是因为 Assistant Editor 自动识别出
+Because the Assistant Editor figured out that, oh,
+那是因为 Assistant Editor 这个编辑模块认为
 
 1364
 00:56:28,855 --> 00:56:30,388
-if you have the Storyboard up
-you probably want
+if you have the Storyboard up you probably want
 如果打开了 Storyboard，那么你可能想要打开
 
 1365
 00:56:30,390 --> 00:56:33,257
-the Controller for the scene
-you have selected.
-你选择的那个 Scene 的 Controller
+the Controller for the scene you have selected.
+你选择的那个事件的 Controller
 
 1366
 00:56:33,259 --> 00:56:34,992
-But here it's like, I don't
-know what to show you.
-但是现在，这里啥也不显示
+But here it's like, I don't know what to show you.
+但是现在，这里没啥能显示的
 
 1367
 00:56:34,994 --> 00:56:36,827
-So I'm gonna show you a
-different way to
-所以我教你们另外一种方法
+So I'm gonna show you a different way to
+现在我教教你们别的方法
 
 1368
 00:56:36,829 --> 00:56:39,229
-get something in here, two
-ways actually.
+get something in here, two ways actually.
 来显示控制器界面，实际上是两种方法
 
 1369
 00:56:39,231 --> 00:56:41,931
-One is if you go to this top
-bar where
+One is if you go to this top bar where
 看没看见 top bar 上
 
 1370
 00:56:41,933 --> 00:56:44,667
-it says counterparts, you can
-mouse down and
+it says counterparts, you can mouse down and
 counterparts 这个选项，
 
 1371
 00:56:44,669 --> 00:56:47,603
-you can find all kinds of
-things about this
+you can find all kinds of things about this
 点击它你会发现更多选项
 
 1372
 00:56:47,605 --> 00:56:50,272
-like subclasses of this class
-on the left.
-比如左边类的子类
+like subclasses of this class on the left.
+比如左边代码这个类的子类
 
 1373
 00:56:51,341 --> 00:56:54,642
-Superclasses of this [UNKNOWN]
-class on the left.
-它的父类
+Superclasses of this class on the left.
+这个类的父类
 
 1374
 00:56:54,644 --> 00:56:57,111
-Of course it has no
-superclasses or subclasses.
+Of course it has no superclasses or subclasses.
 当然了，它没有任何子类或者父类
 
 1375
 00:56:57,113 --> 00:57:00,547
-But other things, things it
-includes are included by it.
-此外，还有被它包含或者包含它的一些文件
+But other things, things it includes are included by it.
+还有其他的选项，比如它包含或包含它的一些文件
 
 1376
 00:57:00,549 --> 00:57:02,115
-You can also just manually go
-in.
+You can also just manually go in.
 你也可以手动去找
 
 1377
 00:57:02,117 --> 00:57:03,283
-We can go over here for
-example and
+We can go over here for example and
 比如我们可以在里面浏览
 
 1378
 00:57:03,285 --> 00:57:06,152
-find our ViewController and
-load it up that way, but
+find our ViewController and load it up that way, but
 找到我们想要的 ViewController，并且打开它
 
 1379
 00:57:06,154 --> 00:57:09,088
-I'm gonna show you a different
-way than doing that
-但是我还有另外一种方法
+I'm gonna show you a different way than doing that
+先不要点，我给你们展示下第二种方法
 
 1380
 00:57:09,090 --> 00:57:11,423
-which is to go over here to
-your navigator.
-打开左侧的导航条，
+which is to go over here to your navigator.
+首先打开左侧的导航条，
 
 1381
 00:57:11,425 --> 00:57:14,893
-If you hold down Option and
-press on
+If you hold down Option and press on
 按住 Option 键，同时点击
 
 1382
 00:57:14,895 --> 00:57:18,663
-a file like ViewController it
-will appear on the right.
+a file like ViewController it will appear on the right.
 一个文件，比如这个 ViewController，它就会显示在右边
 
 1383
 00:57:18,665 --> 00:57:20,464
 'Kay?
-看见没？
+
 
 1384
 00:57:20,466 --> 00:57:22,866
-So Option clicking in here is
-another good way to
-所以，按住 Option 键
+So Option clicking in here is another good way to
+按Option + 左键也能非常方便地把
 
 1385
 00:57:22,868 --> 00:57:23,767
 put things on the right.
-再点击这里是个非常方便的方法
+东西在右边打开
 
 1386
 00:57:25,437 --> 00:57:27,320
 Okay?
-对吧？
 
 1387
 00:57:27,321 --> 00:57:29,204
-So now here we have our
-CalculatorBrain on the left
+So now here we have our CalculatorBrain on the left
 现在 CalculatorBrain 显示在左边，
 
 1388
 00:57:29,207 --> 00:57:31,040
-and we have our Controller on
-the right,
+and we have our Controller on the right,
 同时 Controller 显示在我们的右边
 
 1389
 00:57:31,042 --> 00:57:34,943
-we are going to rip out all of
-the stuff in our
-我们将删掉 Controller 里的
+we are going to rip out all of the stuff in our
+我们将删掉 Controller 里
 
 1390
 00:57:34,945 --> 00:57:39,180
-Controller that had to do with
-being calculator.
-那些过去充当计算器的东西
+Controller that had to do with being calculator.
+那些以前写的计算用的代码
 
 1391
 00:57:39,182 --> 00:57:41,716
-Okay, so that's all this stuff
-right in here.
-Okay，所以这东西就在这里
+Okay, so that's all this stuff right in here.
+那么要删的就是这些
 
 1392
 00:57:41,718 --> 00:57:43,484
@@ -6869,32 +6744,28 @@ Okay，所以这东西就在这里
 
 1393
 00:57:43,485 --> 00:57:45,251
-All this calculating stuff, we
-don't need any of this
-这些计算的代码我们再也不需要了，
+All this calculating stuff, we don't need any of this
+这些计算用的代码我们再也不需要了，
 
 1394
 00:57:45,254 --> 00:57:47,254
 because those were only called from there.
-因为那些代码只在那边调用
+因为那些代码只在刚删掉那调用
 
 1395
 00:57:47,256 --> 00:57:49,022
-'Kay, so our Controller's
-getting quite simple,
-Okey，我们的 Controller 变得更轻量级了，
+'Kay, so our Controller's getting quite simple,
+我们的 Controller 变得更简洁了，
 
 1396
 00:57:49,024 --> 00:57:50,757
-our Controller hardly has
-anything left in it.
-我们的 Controller 几乎没有留下任何东西
+our Controller hardly has anything left in it.
+几乎没剩下什么了
 
 1397
 00:57:50,759 --> 00:57:54,727
-And that's because the UI only
-needs this to be controlled.
-这是因为只需要这些就可以控制 UI
+And that's because the UI only needs this to be controlled.
+因为要想控制 UI 有这些就够了
 
 1398
 00:57:54,729 --> 00:57:56,579
@@ -6902,9 +6773,8 @@ needs this to be controlled.
 
 1399
 00:57:56,580 --> 00:57:58,430
-We also don't need our operand
-stack because the brain is
-我们也不需要我们的操作数栈，因为 brain
+We also don't need our operandStack because the brain is
+我们也不需要我们 operandStack，因为 brain
 
 1400
 00:57:58,432 --> 00:58:00,766
@@ -6913,570 +6783,498 @@ gonna do that.
 
 1401
 00:58:00,767 --> 00:58:03,101
-   However, we do need a new    
-     instance variable here 
-然而我们确实在这里需要一个新的实例变量     
+However, we do need a new instance variable here
+但是这里得有一个新的实例变量
 
 1402
 00:58:03,103 --> 00:58:04,903
- which is the CalculatorBrain. 
-就是这个 CalculatorBrain
+which is the CalculatorBrain.
+就是 CalculatorBrain
 
 1403
 00:58:05,905 --> 00:58:07,838
- Okay I'm just gonna create one 
-           like that,           
-Okay 我将会定义一个像那样的实例变量
+Okay I'm just gonna create one like that,
+我将会定义一个像那样的实例变量
 
 1404
 00:58:07,840 --> 00:58:12,676
- this is extremely common, Okay?  
-            this is             
-这是非常常见的。这是
+this is extremely common, Okay? this is
+这是非常常见的，
 
 1405
 00:58:12,678 --> 00:58:16,680
- the green arrow that goes from 
-  the Controller to the Model.  
-从 Controller 指向 Model 的绿色的箭头
+the green arrow that goes from the Controller to the Model.
+这是之前讲 MVC 时候说到的从 Controller
 
 1406
 00:58:16,682 --> 00:58:18,948
- Remember that in our MVC talk  
-     that I did last time I     
-还记住上次我在我们 MVC 课中所说的
+Remember that in our MVC talk that I did last time I
+指向 Model 那个绿色箭头
 
 1407
 00:58:18,950 --> 00:58:21,584
- said that the Controller has a 
-   green arrow to the Model,    
-Controller 有个绿色的箭头指向 Model
+said that the Controller has a green arrow to the Model,
+还记得 Controller 有个绿色的箭头指向 Model 吗
 
 1408
 00:58:21,586 --> 00:58:24,386
- it can talk to it all it wants, 
-     say anything it wants.     
-它能跟 Model 说任何它想说的
+it can talk to it all it wants, say anything it wants.
+Controller 可以给 Model 传递任何它想传递的信息
 
 1409
 00:58:24,388 --> 00:58:26,922
- This is essentially that green 
-             arrow.      
- 这本质上来说就是那个绿色箭头 
+This is essentially that green arrow.
+这段代码本质上来说就是那个绿色箭头
 
 1410
 00:58:26,924 --> 00:58:29,591
- This is our Model right here.  
-这就是我们的 Model
+This is our Model right here.
+这是我们的 Model
 
 1411
 00:58:29,593 --> 00:58:31,592
-   And this is the Controller   
-   this is how the Controller   
+And this is the Controller this is how the Controller
 这是 Controller，这就是 Controller 怎样
 
 1412
 00:58:31,594 --> 00:58:33,661
- talks to it, through this thing 
-       we call the brain.       
+talks to it, through this thing we call the brain.
 跟 Model 对话，通过我们称之为 brain 的这个东西
 
 1413
 00:58:33,663 --> 00:58:35,562
- Thing you can call it anything 
-          you want and          
-你可以命名任何你想要的
+Thing you can call it anything you want and
+这个 brain 你想怎么给他命名都行
 
 1414
 00:58:35,564 --> 00:58:38,298
-  of course this might be much  
- more complicated green arrow,  
-当然这可以是更为复杂的绿色箭头
+of course this might be much more complicated green arrow,
+当然了，这个绿色箭头可以表示相当复杂的东西
 
 1415
 00:58:38,300 --> 00:58:40,767
- it might be a network database 
-  that is connecting to you to  
-它可能是一个跟你连接的让你得到数据的网络数据库
+it might be a network database that is connecting to you to
+它可能代表一个网络数据库，
 
 1416
 00:58:40,769 --> 00:58:41,934
-         get the data.          
+get the data.
+你可以和它进行链接并获取数据
 
 1417
 00:58:41,936 --> 00:58:43,102
-             Okay?              
+Okay?
 
 1418
 00:58:43,104 --> 00:58:45,671
- But in our case it's this very 
-      simple little brain.  
-但是在我们的情况中这是一个十分简单的小 brain
+But in our case it's this very simple little brain.
+但是在我们的例子中这是一个十分简单的小 brain
 
 1419
 00:58:45,673 --> 00:58:47,206
-             Okay.              
+Okay.
 
 1420
 00:58:47,207 --> 00:58:48,740
-   So now we don't need this    
-       either down here.        
-所以我们也不需要下面这些
+So now we don't need this either down here.
+我们也不需要下面这些代码了
 
 1421
 00:58:48,742 --> 00:58:51,343
- This is where we're appending  
-     onto the opStack and      
+This is where we're appending onto the opStack and
 这是我们往 opStack 添加东西以及
 
 1422
 00:58:51,345 --> 00:58:52,044
-        printing it out.        
+printing it out.
 把 opStack 打印出来的地方
 
 1423
 00:58:52,045 --> 00:58:52,744
-     So we don't need that.     
-因此我们不需要这些
+So we don't need that.
+我们也不需要这些
 
 1424
 00:58:52,746 --> 00:58:57,548
-   But we do need an enter() to   
-     push the operand onto      
-但是我们确实需一个 enter() 把 operand 压到栈里
+But we do need an enter() to push the operand onto
+但是我们确实需一个 enter()
 
 1425
 00:58:57,550 --> 00:58:58,615
-           the stack.           
+the stack.
+来把 operand 压到栈里
 
 1426
 00:58:59,718 --> 00:59:00,516
-             Okay.              
+Okay.
 
 1427
 00:59:00,518 --> 00:59:03,519
-  So here I'm just gonna say,   
-所以在这里我将会说
+So here I'm just gonna say,
+在这
 
 1428
 00:59:03,521 --> 00:59:08,657
-  that I'm gonna say I'm just   
-             gonna              
-我将会说，我将会
+that I'm gonna say I'm just gonna
+我准备写
 
 1429
 00:59:08,659 --> 00:59:13,561
- say brain.pushOperand(displayValue).             
-说 brain.pushOperand(displayValue)
+say brain.pushOperand(displayValue).
+brain.pushOperand(displayValue)
 
 1430
 00:59:13,563 --> 00:59:15,413
-             'Kay?              
+'Kay?
 
 1431
 00:59:15,414 --> 00:59:17,264
-  That's the main thing I need  
-    to do, is just do that.     
-这是我主要需要做的事，刚刚做好
+That's the main thing I need to do, it's just do that.
+这是我主要要做的，就这么做就好
 
 1432
 00:59:17,266 --> 00:59:21,902
-  One thing though is, I also   
-   need to update my display.   
-但是另一件事我也需要更新我的 display
+One thing though is, I also need to update my display.
+接下来我就需要更新 display 了
 
 1433
 00:59:21,904 --> 00:59:23,870
-    Because when I push this    
-            operand,            
+Because when I push this operand,
 因为当我往栈里压这个 operand 时
 
 1434
 00:59:23,872 --> 00:59:25,672
- that's gonna change the brain. 
-它会改变这个 brain
+that's gonna change the brain.
+它会改变 brain
 
 1435
 00:59:25,674 --> 00:59:28,341
- I need to call that evaluate,  
-             right?             
+I need to call that evaluate, right?
 我需要调用那个 evaluate ，对吧？
 
 1436
 00:59:28,343 --> 00:59:29,442
-       And get the value.       
-得到那个值
+And get the value.
+再得到它的值
 
 1437
 00:59:29,443 --> 00:59:30,542
- So I could call evaluate here, 
-              but               
-所以我需要在这里调用 evaluate 但是
+So I could call evaluate here, but
+我确实可以在这里调用 evaluate 但是
 
 
 1438
 00:59:30,544 --> 00:59:34,613
- actually, I'm gonna go back to 
- my brain, and I'm gonna change 
-实际上我将会回到我的 brain 中，我将会改变
+actually, I'm gonna go back to my brain, and I'm gonna change
+实际上我们再看下 brain ，我将会改变
 
 1439
 00:59:34,615 --> 00:59:39,484
- pushOperand to return the va,  
-   the result of evaluating.    
+pushOperand to return the result of evaluating.
 pushOperand 让它返回 evaluating 的结果
 
 1440
 00:59:39,486 --> 00:59:42,486
-         Typing today.          
-我今天这打字（估计感冒还没恢复）
+Typing today.
+今天这字打的
 
 1441
 00:59:43,789 --> 00:59:46,623
-    From it, from its, from     
-         internally, so         
-从它，从它的，从间隔的
+From it, from its, from internally, so
+从它的内部
 
 1442
 00:59:46,625 --> 00:59:48,991
-   I'm gonna return evaluate    
-             here.              
-我将会在这里返回 evaluate
+I'm gonna return evaluate here.
+evaluate 在这里返回
 
 1443
 00:59:48,993 --> 00:59:50,593
- So that every time you push an 
-            operand,            
+So that every time you push an operand,
 所以每次你往栈里压一个 operand
 
 1444
 00:59:50,595 --> 00:59:52,127
-     it'll just return the      
-          evaluation.           
+it'll just return the evaluation.
 它就会返回一个计算结果
 
 1445
 00:59:52,129 --> 00:59:55,163
-  Now one could argue whether   
- this is the best thing to do.  
-现在有人或许会质疑这是否最好的方式
+Now one could argue whether this is the best thing to do.
+现在有人或许会质疑这种方法是不是最好的
 
 1446
 00:59:55,165 --> 00:59:57,932
-  Because, you know, you might  
-      not be interested in      
-因为，你知道，你现在可能不会对
+Because, you know, you might not be interested in
+因为，你现在可能不会对
 
 1447
 00:59:57,934 --> 01:00:00,568
- the result of evaluating that  
-           right now.           
+the result of evaluating that right now.
 计算的结果感兴趣
 
 1448
 01:00:00,570 --> 01:00:03,671
-   But it kind of feels to me   
-         kind of good.          
-但我我感觉蛮好的
+But it kind of feels to me kind of good.
+但我感觉蛮好的
 
 1449
 01:00:03,673 --> 01:00:05,339
-     And it's not gonna be,     
-而且这不会
+And it's not gonna be,
+而且
 
 1450
 01:00:05,341 --> 01:00:07,341
- there's not gonna be that many 
-      things on the stack.      
-将不会有很多东西在栈上
+there's not gonna be that many things on the stack.
+也不会有很多东西在栈上
 
 1451
 01:00:07,343 --> 01:00:10,143
- You're not gonna usually have  
-        calculator brain        
-通常你的计算器 brain 不会有
+You're not gonna usually have calculator brain
+因为通常你的 calculator brain 不会有
 
 1452
 01:00:10,145 --> 01:00:12,712
-   have 1,000 operations and    
- operands, although you could.  
-1000 个操作符和操作数，尽管你可以那样
+have 1,000 operations and operands, although you could.
+上千个操作符和操作数，虽然理论上可以这样
 
 1453
 01:00:12,714 --> 01:00:14,013
-  But you're not usually going  
-             to, so              
+But you're not usually going to, so
 但是你通常不会那样做
 
 1454
 01:00:14,015 --> 01:00:16,548
-      it's probably not a       
-       performance issue.       
-这可能不是一个性能问题
+it's probably not a performance issue.
+所以只返回这个应该不会是一个性能问题
 
 1455
 01:00:16,550 --> 01:00:19,751
-  To have it just return this   
- and it'll make caller's code,  
-有它返回这个，会使调用者的代码
+To have it just return this and it'll make caller's code,
+而且可以使调用部分的代码
 
 1456
 01:00:19,753 --> 01:00:22,320
-    you know, look a little     
-            simpler.            
-你懂的，看起来简单些
+you know, look a little simpler.
+看起来简单些
 
 1457
 01:00:22,322 --> 01:00:24,522
-  And if they don't want this   
-         return value,          
+And if they don't want this return value,
 如果它们不想要这个返回值
 
 1458
 01:00:25,858 --> 01:00:27,808
- then they can just ignore it.  
-它们可以就忽略它
+then they can just ignore it.
+它们可以直接忽略它
 
 1459
 01:00:27,809 --> 01:00:29,759
- They don't have to use it but  
-       I am gonna use it.       
-它们没有必要用它但是我将会用它
+They don't have to use it but I am gonna use it.
+它们没有必要用它，但我要用到
 
 1460
 01:00:29,762 --> 01:00:31,495
-  So, when I push this operand  
-          right here,           
-所以当我在这里将 operand 压栈
+So, when I push this operand right here,
+那么当我在这里将 operand 压栈
 
 1461
 01:00:31,497 --> 01:00:35,798
-  I'm gonna say, I'm gonna if   
-  let the results equal that.   
-我将会说，我将会 if let ＝
+I'm gonna say, I'm gonna if let the results equal that.
+我打算这样写 if let result ＝ 后面这些代码
 
 1462
 01:00:36,734 --> 01:00:38,000
-     Okay, because it's an      
-           Optional.            
-Okay，因为它是 Optional
+Okay, because it's an Optional.
+它是 Optional 的
 
 1463
 01:00:39,036 --> 01:00:41,836
-  And if it's not nil then I'm  
-             gonna              
-如果它不是 nil，我将会
+And if it's not nil then I'm gonna
+如果它不是 nil，我就可以
 
 1464
 01:00:41,838 --> 01:00:43,671
-  set the displayValue to the  
-            result.             
+set the displayValue to the result.
 把 result 的值赋给 displayValue
 
 1465
 01:00:43,673 --> 01:00:46,140
- So in other words, every time  
-       I push an operand,       
+So in other words, every time I push an operand,
 因此换句话说每次我往栈里压一个 operand
 
 1466
 01:00:46,142 --> 01:00:49,343
- I'm gonna up my displayValue  
-      with the evaluation.      
+I'm gonna up my displayValue with the evaluation.
 我将会把计算结果赋给我的 displayValue
 
 1467
 01:00:49,345 --> 01:00:50,811
-          Make sense?           
+Make sense?
 能理解吗？
 
 1468
 01:00:50,813 --> 01:00:53,446
- Okay, what if this comes back  
-              nil?              
-Okay， 如果它是 nil 的话该怎么办？
+Okay, what if this comes back nil?
+如果它是 nil 的话该怎么办？
 
 1469
 01:00:54,982 --> 01:00:56,615
-    So, I push something on,  
+So, I push something on,
 我会往栈里压一些东西
 
 1470
 01:00:56,617 --> 01:00:59,151
-    this is not gonna happen    
-  probably with pushOperand(),   
+this is not gonna happen probably with pushOperand(),
 但这里应该不是调用 pushOperand()
 
 1471
 01:00:59,153 --> 01:01:02,587
-  but it might, and after your  
-       homework it might.       
-但是可能会用到，在你们坐过作业之后，可能会用到
+but it might, and after your homework it might.
+但也有可能是 nil， 在你们做过作业之后，可能会是
 
 1472
 01:01:02,589 --> 01:01:04,022
-   So, what if I push and it    
-        comes back nil?         
+So, what if I push and it comes back nil?
 所以，当我往栈里压并且返回是 nil 的时候怎么办？
 
 1473
 01:01:04,024 --> 01:01:07,258
-   Well, now I'm kinda stuck,   
-             Okay?              
-呵呵，现在我被难倒了，Okay？
+Well, now I'm kinda stuck, Okay?
+呵呵，现在我被难倒了
 
 1474
 01:01:07,260 --> 01:01:10,728
- This is why, in your homework  
-  assignment, I suggested, wow  
+This is why, in your homework assignment, I suggested, wow
 所以在你们的家庭作业中，我建议，
 
 1475
 01:01:10,730 --> 01:01:13,730
- wouldn't it be cool if displayValue took an Optional.     
-哇，如果 displayValue 是 Optional 就好了
+wouldn't it be cool if displayValue took an Optional.
+如果 displayValue 是 Optional 该多好
 
 1476
 01:01:15,100 --> 01:01:17,600
-  Right, if displayValue took  
-   and returned an Optional.    
+Right, if displayValue took and returned an Optional.
 对吧，如果 displayValue 是 Optional 并返回一个 Optional
 
 1477
 01:01:17,602 --> 01:01:20,769
-    You could put something     
-  sensible in the display when  
+You could put something sensible in the display when
 当你有一些你无法计算的东西，
 
 1478
 01:01:20,771 --> 01:01:23,605
-     you had something that     
-     couldn't be evaluated.     
+you had something that couldn't be evaluated.
 你可以放一些合理的东西在你的 display 中
 
 1479
 01:01:23,607 --> 01:01:25,874
-  So in assignment two making   
-       displayValue into       
-所以在作业二中你们必须使 displayValue 是
+So in assignment two making displayValue into
+所以在作业二中让 displayValue 是 Optional
 
 1480
 01:01:25,876 --> 01:01:27,809
-    an Optional is gonna be     
-         required task.         
-一个 Optional
+an Optional is gonna be required task.
+将会是要求之一
 
 1481
 01:01:27,811 --> 01:01:29,977
- So you might as well do it for 
-         homework one,          
+So you might as well do it for homework one,
 你也可以在作业一中这样做
 
 1482
 01:01:29,979 --> 01:01:33,447
- cuz you're gonna have to do it 
-    for homework two anyway.    
-因为你反正都要做作业二
+cuz you're gonna have to do it for homework two anyway.
+因为你反正都要在作业二中这么做
 
 1483
 01:01:33,449 --> 01:01:35,182
-             Okay.              
+Okay.
 
 1484
 01:01:35,183 --> 01:01:36,916
-  Just wanted to give you more  
-     time because I didn't      
-只是想给你们更多的时间因为我没有
+Just wanted to give you more time because I didn't
+我只是想多给你们点时间
 
 1485
 01:01:36,917 --> 01:01:38,650
-  really teach you the things   
-   about NumberFormatter and    
-在布置作业一之前
+really teach you the things about NumberFormatter and
+因为我没有在布置作业一之前
 
 1486
 01:01:38,653 --> 01:01:41,320
-  stuff in time for assignment  
-              one.              
-真正地教你们关于有关 NumberFormatter 的知识
+stuff in time for assignment one.
+完整地教你们关于有关 NumberFormatter 的知识
 
 1487
 01:01:41,322 --> 01:01:44,623
- But it's going to be required  
- and that's because the best I  
+But it's going to be required and that's because the best I
 但是这将会是硬性要求，因为我最多只能告诉你们
 
 1488
 01:01:44,625 --> 01:01:48,093
-    can do here is maybe say    
-   displayValue equals zero.   
-displayValue 为 0
+can do here is maybe say displayValue equals zero.
+令 displayValue 的值为 0
 
 1489
 01:01:48,095 --> 01:01:50,962
- That's really lame but that's  
-       the best I can do.       
+That's really lame but that's the best I can do.
 那真的没什么道理，但是那是我也只能这样了
 
 1490
 01:01:50,964 --> 01:01:54,432
-  I really wanna say, displayValue was nil, Okay.      
-我真的想说的是 displayValue 是 nil，Okay
+I really wanna say, displayValue was nil, Okay.
+我也蛮想令 displayValue 为 nil 的
 
 1491
 01:01:54,434 --> 01:01:56,634
-    I really just wanna set     
-     displayValue equal to     
+I really just wanna set displayValue equal to
 我真的只想把 displayValue 等于
 
 1492
 01:01:56,636 --> 01:01:58,953
-      the result of this.       
-这个的结果
+the result of this.
+这段代码的结果
 
 1493
 01:01:58,954 --> 01:02:01,271
-   And I wanna have nil, you    
- know, clear out my display or  
-我想有 nil ，你懂的，清除我的 display 或者
+And I wanna have nil, you know, clear out my display or
+我想设为 nil， 清除我的 display 或者
 
 1494
 01:02:01,274 --> 01:02:02,606
-       in assignment two,       
-在作业二中
+in assignment two,
+在作业二中作为一个加分项
 
 1495
 01:02:02,608 --> 01:02:06,743
- extra credit, maybe it puts an 
-  error message in my display.  
-加分项，可能它在我的 display 上显示一段错误信息
+extra credit, maybe it puts an error message in my display.
+让它在我的 display 上显示一段错误提示信息也好
 
 1496
 01:02:07,912 --> 01:02:09,545
-  Now that's extra credit, but  
+Now that's extra credit, but
 现在那是加分项，但是
 
 1497
 01:02:09,547 --> 01:02:11,246
-  that would be an even better  
-      thing to put there.       
-显示这么一段错误信息应该会更好
+that would be an even better thing to put there.
+显示这么一段错误提示信息应该会更好
 
 1498
 01:02:12,216 --> 01:02:14,216
-             Okay?              
+Okay?
 
 1499
 01:02:14,217 --> 01:02:16,217
-    But same thing for, for     
-     forming the operation.     
+But same thing for, for forming the operation.
 但是形成运算也是一样的
 
 1500
 01:02:16,219 --> 01:02:17,652
-   Here's our operation right
-             here.
-   这就是我们所做的操作
+Here's our operation right here.
+这就是我们所做的操作
 
 1501
 01:02:17,654 --> 01:02:21,005

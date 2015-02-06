@@ -7449,418 +7449,522 @@ I told you it returned nil if it couldn't find it?
 1601
 01:06:04,367 --> 01:06:06,834
 Well, what does it return if it could find it?
+那么如果它能找到它的话，它会返回什么？
 
 1602
 01:06:06,836 --> 01:06:09,536
 Well, it returns a Range of String.Index.
+它会返回 Range<String.Index> 
 
 1603
 01:06:09,538 --> 01:06:11,388
 Actually, it
+实际上
 
 1604
 01:06:11,389 --> 01:06:13,239
 returns an Optional Range of String.Index.
+它会返回一个 optional 的 Range<String.Index> 
 
 1605
 01:06:13,242 --> 01:06:14,607
 Okay? That's how, if you used it for
+明白了吗？这就是如何使用这个方法
 
 1606
 01:06:14,609 --> 01:06:15,908
 your assignment, that's how you used it.
+你们的作业中可能会用到它
 
 1607
 01:06:15,910 --> 01:06:17,543
 You used the Optional nature of it,
+你可以用到它 Optional 的性质
 
 1608
 01:06:17,545 --> 01:06:20,212
 but now you can even use the Range nature of it.
+你更可以用到它 Range 的性质
 
 1609
 01:06:20,214 --> 01:06:22,498
 So for example, if we wanted to
+比如我们想要在一个含有数字的字符串中
 
 1610
 01:06:22,499 --> 01:06:24,783
 get the whole number portion of a string that had a number.
+获取其中的数字部分
 
 1611
 01:06:24,785 --> 01:06:27,252
 So I have, let's say, 56.25 as a string,
+这里我有一个“56.25”的字符串
 
 1612
 01:06:27,254 --> 01:06:29,020
 I wanna get the whole number part.
+我想要获取整个数字部分
 
 1613
 01:06:29,022 --> 01:06:33,457
 I could just say find me that decimal point.
+我可以这么做——首先找到小数点
 
 1614
 01:06:33,459 --> 01:06:34,942
 Kay? And that's gonna
+然后
 
 1615
 01:06:34,943 --> 01:06:36,426
 return a range if, if it can find it.
+它会返回一个范围，如果它能够找到小数点
 
 1616
 01:06:36,428 --> 01:06:37,844
 If there's a decimal point in
+如果在我刚才的字符串中有小数点的话
 
 1617
 01:06:37,845 --> 01:06:39,261
 there it's gonna return that range.
+这个方法会返回那个范围
 
 1618
 01:06:39,264 --> 01:06:43,232
 And I'm gonna grab the part from the num.startIndex,
+接着我就可以用 num.startIndex 来获取那部分了
 
 1619
 01:06:43,234 --> 01:06:46,102
 you see the num is the number, it's startIndex all the way
+这里你可以看到 num 是一个数字，他的 startIndex 是
 
 1620
 01:06:46,104 --> 01:06:49,805
 to where the decimal is, not including the decimal, okay?
+小数点之后的那个位置，而不是小数点，明白了吗？
 
 1621
 01:06:49,807 --> 01:06:51,406
 Now I've got sub string which is the whole part.
+现在我已经从字符串中提取了我想要的那部分
 
 1622
 01:06:53,476 --> 01:06:54,108
 Are we cool with that?
+理解了吗？
 
 1623
 01:06:55,544 --> 01:06:57,644
 So sub stringing and strings actually,
+所以，字符串和子字符串
 
 1624
 01:06:57,646 --> 01:07:01,247
 once you understand this whole index thing pretty powerful.
+一旦你了解了这些方法，
 
 1625
 01:07:01,249 --> 01:07:03,416
 We could even remove the whole number part.
+我们就可以利用它们在字符串中移除整个数字部分
 
 1626
 01:07:03,418 --> 01:07:06,185
 'Kay, just by using removeRange of that same
+只需要对相同的范围使用 removeRange
 
 1627
 01:07:06,187 --> 01:07:09,421
 range, num.startIndex, the decimal range.
+num.startIndex，数字的返回
 
 1628
 01:07:09,423 --> 01:07:12,357
 Or we can replace the range with other things, etc.
+或者我们可以将这个范围替换成其他的东西，等等
 
 1629
 01:07:12,359 --> 01:07:15,060
 Okay, so there's a lot of string methods there for
+好的，对字符串进行修改的方法大多数
 
 1630
 01:07:15,062 --> 01:07:17,895
 doing that and they're all based on that string index.
+都基于字符串的 index
 
 1631
 01:07:17,897 --> 01:07:19,363
 Okay, other string methods,
+另外一些字符串的方法
 
 1632
 01:07:19,365 --> 01:07:21,265
 I'm gonna start blasting through a lot of this.
+我会快速讲解一些
 
 1633
 01:07:21,267 --> 01:07:22,933
 You could look these all up in the documentation.
+你可以在文档里找到所有的这些方法
 
 1634
 01:07:22,935 --> 01:07:24,567
 Some of these it actually gets from NSString,
+其中一些实际上从 NSString 中来的
 
 1635
 01:07:24,569 --> 01:07:26,402
 which I'm gonna talk about in a moment.
+稍后我会讲一下 NSString
 
 1636
 01:07:26,404 --> 01:07:28,771
 You can see that you can find the endIndex,
+你看你可以找到 endIndex
 
 1637
 01:07:28,773 --> 01:07:31,740
 there is the join takura talked about before
+还有我们之前讨论过的 join 方法
 
 1638
 01:07:31,742 --> 01:07:36,544
 notice that there's toInt but not toDouble.
+注意，还有一个方法是 toInt 而不是 toDouble
 
 1639
 01:07:36,546 --> 01:07:38,880
 Why is there toInt in string and not toDouble?
+为什么在字符串操作中只有 toInt 而没有 toDouble？
 
 1640
 01:07:38,882 --> 01:07:40,614
 Anybody having any idea why it is?
+有人知道原因吗？
 
 1641
 01:07:43,118 --> 01:07:45,485
 It's because when you convert to a double,
+这是因为如果你转换到一个 double 时
 
 1642
 01:07:45,487 --> 01:07:46,986
 you have to specify things.
+你需要指定一些东西
 
 1643
 01:07:46,988 --> 01:07:48,721
 How many significant digits do you want?
+你需要多少的有效位数？
 
 1644
 01:07:48,723 --> 01:07:50,723
 How many digits after the fraction do you want,
+你需要小数点后几位？
 
 1645
 01:07:50,725 --> 01:07:52,258
 things like that?
+如此之类的问题
 
 1646
 01:07:52,259 --> 01:07:53,792
 And so there's really nowhere to specify that.
+事实上没有地方去指定这些东西
 
 1647
 01:07:53,794 --> 01:07:55,560
 It would have to be toDouble with a whole bunch of
+如果有一个 toDouble 方法，那么会有一大堆的
 
 1648
 01:07:55,562 --> 01:07:57,795
 arguments to specify how you wanna do that conversion.
+参数来指定转换中的一些细节
 
 1649
 01:07:57,797 --> 01:08:00,498
 When you convert to an int, there's nothing inside,
+但当你将字符串转换为 Int 时，这些细节都不存在了
 
 1650
 01:08:00,500 --> 01:08:01,899
 you just convert it to the int, right?
+你仅仅需要将它转换为 Int，对吗？
 
 1651
 01:08:01,901 --> 01:08:05,602
 So the whole number so but notice that toInt does return
+注意，toInt 方法返回的是一个 Optional Int，
 
 1652
 01:08:05,604 --> 01:08:08,672
 an optional int, that's because if you say toInt,
+那是因为，当你调用 toInt 方法时
 
 1653
 01:08:08,674 --> 01:08:13,509
 if you send out to hello, it's going to be nil, okay?
+但是你的字符串是”hello“，此时会返回 nil，明白了吗？
 
 1654
 01:08:13,511 --> 01:08:15,844
 So, string methods, all right?
+String 方法，没问题了吧？
 
 1655
 01:08:16,880 --> 01:08:20,248
 Okay, there's kind of a hidden bunch of methods which you
+好的，其实有一些隐藏的方法
 
 1656
 01:08:20,250 --> 01:08:24,018
 don't even know about, which is conversions using init.
+这些方法你根本不知道，这些方法是在 init 中实现了转换
 
 1657
 01:08:24,020 --> 01:08:26,220
 So for example, if I had a Double and
+比如，我有一个 Double 型的值
 
 1658
 01:08:26,222 --> 01:08:31,224
 a float, I could say, let x equal Int of that double, and
+浮点数，我可以利用 let x = Int(d)，
 
 1659
 01:08:31,226 --> 01:08:35,461
 I just basically create a floor and turned it to an int.
+我就可以对这个值取下整并将它转化为一个 Int
 
 1660
 01:08:35,463 --> 01:08:37,029
 So I converted it.
+这就是我如何转换的
 
 1661
 01:08:37,030 --> 01:08:38,596
 So I know you convert things and
+我知道你们把这个对象转换成那个对象
 
 1662
 01:08:38,599 --> 01:08:39,865
 convert them from one thing to another.
+或者从那个对象转换成这个对象
 
 1663
 01:08:39,867 --> 01:08:42,834
 It makes total sense with the number values like ints and
+像整数和浮点数或者类似的
 
 1664
 01:08:42,836 --> 01:08:44,152
 floats and things like that.
+都可以这么做
 
 1665
 01:08:44,153 --> 01:08:45,469
 And you're gonna see CGFloat next week.
+下周你们会使用到 CGFloat
 
 1666
 01:08:45,472 --> 01:08:47,905
 That's another kind of floating point number.
+这是另外一种浮点数
 
 1667
 01:08:47,907 --> 01:08:49,340
 And you can convert using.
+同样你可以通过转换使用它
 
 1668
 01:08:49,342 --> 01:08:50,741
 There's no toInt or anything.
+但是 CGFloat 没有 toInt 或者其他的方法
 
 1669
 01:08:50,743 --> 01:08:53,410
 You just create a new one with the initializer.
+你只能通过 initializer 创建一个 CGFloat 对象
 
 1670
 01:08:53,412 --> 01:08:54,411
 'Kay, so the numbers.
+接下来，Numbers（数字）
 
 1671
 01:08:54,413 --> 01:08:56,212
 But you almost might be surprised.
+你会感到惊讶的是
 
 1672
 01:08:56,214 --> 01:08:57,747
 Actually, if you read the homework carefully or
+如果你之前认真地读过了课后作业的要求
 
 1673
 01:08:57,749 --> 01:08:59,715
 the reading assignment, you saw this.
+你会看到
 
 1674
 01:08:59,717 --> 01:09:02,217
 Is that you can convert arrays and
+你可以在数组和字符串之间 
 
 1675
 01:09:02,219 --> 01:09:06,521
 strings using these intitializers.
+通过 intitializer 相互转化
 
 1676
 01:09:06,523 --> 01:09:11,158
 For example, you can say array of a string, so create a new
+举例，你通过调用 Array("abc") 来
 
 1677
 01:09:11,160 --> 01:09:13,927
 array and the initializers argument is a string.
+创建一个数组
 
 1678
 01:09:13,929 --> 01:09:15,095
 And it will return you an array of
+这个方法会返回一个数组
 
 1679
 01:09:15,097 --> 01:09:18,231
 all the characters in that string, right?
+而数组中的元素是字符串中的字符
 
 1680
 01:09:18,233 --> 01:09:20,800
 Unicode characters.
+Unicode 字符
 
 1681
 01:09:20,801 --> 01:09:23,368
 Or vice versa, you can have an array of unicode characters.
+相反的，你有一个包含一对 Unicode 字符的数组
 
 1682
 01:09:23,371 --> 01:09:25,404
 Right?
+对吧？
 
 1683
 01:09:25,405 --> 01:09:27,438
 And it will, and you pass that to strings constructor and
+你可以使用 String 的 constrctor 来创建一个字符串
 
 1684
 01:09:27,441 --> 01:09:29,974
 it will return the string with those things zipped up.
+字符串中元素由数组中字符拼接而成
 
 1685
 01:09:31,377 --> 01:09:32,660
 Okay?
+明白了吗？
 
 1686
 01:09:32,661 --> 01:09:33,944
 So there's kind of a hidden thing there.
+所以还有一些隐藏的方法
 
 1687
 01:09:35,647 --> 01:09:38,214
 Notice that you can't do string of 52.5,
+但是，注意你不能调用 let s = Stirng(52.5)
 
 1688
 01:09:38,216 --> 01:09:40,950
 but that's okay because you have that back slash,
+但是你可以通过 let s = "\(37.5)" 来实现
 
 1689
 01:09:40,952 --> 01:09:43,319
 open-parenthesis thing to convert.
+浮点数到字符串之间的
 
 1690
 01:09:43,321 --> 01:09:45,087
 Of floats to strings.
+转换
 
 1691
 01:09:46,857 --> 01:09:47,722
 Okay? You can do
+明白了吗？你可以
 
 1692
 01:09:47,724 --> 01:09:49,190
 string of 52 though.
+let s = String(52) 这么做
 
 1693
 01:09:49,192 --> 01:09:51,359
 Cuz it has toInt, it kinda knows how to do that.
+因为 String 有 toInt 这个方法，它知道如何将整数转换成字符串
 
 1694
 01:09:52,728 --> 01:09:54,294
 All right, assertions.
+接下来，Assertions
 
 1695
 01:09:54,296 --> 01:09:57,364
 So assertions, really valuable debugging aid.
+Assertions 是一个很有用的 debug 方法
 
 1696
 01:09:57,366 --> 01:10:01,200
 They basically take a closure as the first argument.
+它们接受一个闭包作为其第一个参数
 
 1697
 01:10:01,202 --> 01:10:02,434
 It's an auto closure,
+闭包是 autoclosure 的
 
 1698
 01:10:02,436 --> 01:10:03,635
 which means you don't need the curly braces.
+这意味着你不需要花括号
 
 1699
 01:10:03,637 --> 01:10:05,937
 Is this just kind of funky think, okay.
+这是一个很有意思的事情
 
 1700
 01:10:06,940 --> 01:10:10,041
 So the first argument is what would be inside the,
+总而言之，第一个参数应该是
 
 1701
 01:10:10,043 --> 01:10:11,275
 the curly braces of a closure.
+在闭包括号内的那些东西
 
 1702
 01:10:11,277 --> 01:10:14,244
 And the second argument is some string that's gonna be
+assert() 的第二个参数是一个字符串
 
 1703
 01:10:14,246 --> 01:10:18,181
 printed out on your console because assert, if whatever
+假如 assert 方法的第一个参数返回的是 false
 
 1704
 01:10:18,183 --> 01:10:21,184
 that thing that was in the auto-closure evaluates to,
+这个字符串将会在你的控制台中输出
 
 1705
 01:10:21,186 --> 01:10:22,818
@@ -7869,66 +7973,82 @@ if that's not true.
 1706
 01:10:22,820 --> 01:10:24,720
 'Kay, cuz you're asserting that that's true,
+这是因为你 assert 的条件应该是成立的
 
 1707
 01:10:24,722 --> 01:10:26,154
 then it's gonna crash your program.
+如果不成立，那么它会导致你的程序崩溃
 
 1708
 01:10:27,257 --> 01:10:28,356
 Okay, and print that message out.
+这时在控制台中输出一个信息
 
 1709
 01:10:28,358 --> 01:10:30,241
 So it's a great way to make
+对程序的 debug 是很有帮助的
 
 1710
 01:10:30,242 --> 01:10:32,125
 your program crash when things that should be true aren't.
+因为你的程序因为某些条件的不满足而导致崩溃
 
 1711
 01:10:32,128 --> 01:10:35,796
 Now, asserts don't work when you build your program for
+assert 方法会在你生成程序的 Release 版本的时候
 
 1712
 01:10:35,798 --> 01:10:37,497
 release, like to the App Store.
+失效，也就是提交到 App Store 的版本
 
 1713
 01:10:37,499 --> 01:10:40,600
 When you're shipping to the App Store, asserts don't work.
+当你在把程序提交到 App Store 的时候，assert 不会工作
 
 1714
 01:10:40,602 --> 01:10:42,635
 It doesn't even evaluate the closure, okay,
+这时，它甚至不会对闭包求值
 
 1715
 01:10:42,637 --> 01:10:43,302
 they're just ignored.
+它们被忽略了
 
 1716
 01:10:44,405 --> 01:10:46,138
 But for debugging, it's pretty good.
+这个在 debug 中很有用
 
 1717
 01:10:46,140 --> 01:10:50,108
 So I might have a function called validation that should,
+我可能会有一个叫 validation 的函数
 
 1718
 01:10:50,110 --> 01:10:52,944
 at this point that I'm executing this assert
+当我在执行 assert 的时候
 
 1719
 01:10:52,946 --> 01:10:54,945
 not be returning nil.
+不应该返回 nil
 
 1720
 01:10:54,947 --> 01:10:59,249
 And if it does return nil then I'm going to crash here.
+而且，它如果返回 nil 了，这会把程序搞崩溃
 
 1721
 01:10:59,251 --> 01:11:01,685
 So I say the assertion is that validation should not be
+这里我写 assert(validation() != nil, "the validation fucniton return nil")
 
 1722
 01:11:01,687 --> 01:11:04,087
@@ -7941,148 +8061,185 @@ nil right now.
 1724
 01:11:05,890 --> 01:11:10,291
 So a lot of languages have assert so swift does too.
+assert 在很多语言中都有实现，Swift 也有一样
 
 1725
 01:11:10,293 --> 01:11:12,827
 okay, other function, so there's a lot of function and
+好的，还有一些其他的函数
 
 1726
 01:11:12,829 --> 01:11:15,830
 these do not appear to be documented anywhere yet.
+这些函数并没有出现在文档中
 
 1727
 01:11:15,832 --> 01:11:18,332
 So the slide might be your only documentation.
+所以我的 Slide 可能是唯一你们可以参考的文档
 
 1728
 01:11:18,334 --> 01:11:20,033
 I'm sure you can find about them on the internet instead
+我相信你们在网上也可以找到这些
 
 1729
 01:11:20,035 --> 01:11:22,002
 of too but there's a lot of functions.
+可能网上的资料还要更详细一点
 
 1730
 01:11:22,004 --> 01:11:24,303
 These are global functions, not methods.
+这些是全局函数，并不是某个 Class 的方法
 
 1731
 01:11:24,305 --> 01:11:26,872
 They take arguments which are hard for
+它们接受一些参数，这些参数
 
 1732
 01:11:26,874 --> 01:11:28,907
 me to explain to you right now.
+目前我很难跟你们解释
 
 1733
 01:11:28,909 --> 01:11:32,044
 But basically they take arrays and strings, and dictionaries,
+但是你们只需要知道这些函数可以接受 Array, Dictionary, String 型的参数
 
 1734
 01:11:32,046 --> 01:11:34,245
 because they take other things that arrays and
+因为它们还接受 Array, Dictionary, String 型的参数
 
 1735
 01:11:34,247 --> 01:11:37,448
 strings, and dictionaries are, those things.
+和其他的一些东西
 
 1736
 01:11:37,450 --> 01:11:40,985
 But you can look through this list kinda interesting things.
+你可以看一遍这个列表
 
 1737
 01:11:40,987 --> 01:11:42,853
 I can combine it with the thing I
+我会讲它和 String 中的方法
 
 1738
 01:11:42,855 --> 01:11:45,956
 was talking about at the end there with the string.
+混合在一起
 
 1739
 01:11:45,958 --> 01:11:47,624
 Passing in an array of characters.
+传入一个由字符组成的数组
 
 1740
 01:11:47,626 --> 01:11:51,694
 I can actually take a string, call a reverse, which returns
+我可以拿一个字符串，在它之上调用 reverse 方法
 
 1741
 01:11:51,696 --> 01:11:55,731
 an array of the characters reversed and then call string
+返回这些字符的反转，然后再调用
 
 1742
 01:11:55,733 --> 01:11:59,201
 to push it back and call it, create a string again.
+String 的方法创建一个新的字符串
 
 1743
 01:11:59,203 --> 01:12:00,502
 All right?
+明白了吗？
 
 1744
 01:12:00,504 --> 01:12:02,070
 Objective-C Compatibility.
+Objective-C 兼容性
 
 1745
 01:12:02,072 --> 01:12:04,322
 You know what?
+这个话题
 
 1746
 01:12:04,323 --> 01:12:06,573
 We are going to wait and talk about this next time.
+我们下一次再讲
 
 1747
 01:12:06,576 --> 01:12:08,009
 Very important topic.
+这是一个很重要的话题
 
 1748
 01:12:08,010 --> 01:12:09,443
 But I don't want to give it short shrift.
+我想好好探讨一下
 
 1749
 01:12:09,445 --> 01:12:11,178
 So, that is it for today.
+这就是今天课程的所有内容
 
 1750
 01:12:11,180 --> 01:12:15,882
 Let me, quickly, show you, this slide.
+最后让我快速给你们过一遍这个 Slide
 
 1751
 01:12:17,719 --> 01:12:20,052
 Okay coming up, no Friday section this week.
+这周五没有课程
 
 1752
 01:12:20,054 --> 01:12:21,820
 Next Monday is holiday, no lecture.
+下周一是节假日，也没有课程
 
 1753
 01:12:21,822 --> 01:12:23,138
 Next Wednesday,
+下周三
 
 1754
 01:12:23,139 --> 01:12:24,455
 I might not be talking about auto layout next week,
+我可能会讲一些 Auto Layout 的话题
 
 1755
 01:12:24,458 --> 01:12:26,425
 I'm not sure.
+但不一定
 
 1756
 01:12:26,426 --> 01:12:28,393
 Your homework one was due today, your homework two was
+课后作业一今天截止，课后作业二
 
 1757
 01:12:28,395 --> 01:12:31,529
 already posted, your reading assignment two was posted on
+我也贴出来了，你们的阅读作业二会在
 
 1758
 01:12:31,531 --> 01:12:35,165
 Monday, all that stuff is due next Wednesday.
+（下）周一贴上来，然后所有的东西下周三截止
 
 1759
 01:12:35,167 --> 01:12:36,933
 If you have any questions, I'm here.
+如果你们有其他的疑问，欢迎来询问
 
 1760
 01:12:36,935 --> 01:12:42,405
 [SOUND] For more, please visit us at stanford.edu.
+更多课程，请访问 stanford.edu
 

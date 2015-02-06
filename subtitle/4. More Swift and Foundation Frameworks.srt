@@ -5505,10 +5505,12 @@ turned into a CalculatorViewController,
 1201
 00:49:37,390 --> 00:49:39,757
 because it's not a CalculatorViewController some
+因为它不是 CalculatorViewController，而是其他的
 
 1202
 00:49:39,759 --> 00:49:41,992
 other kinda ViewController or something else.
+ViewController 或者其他的（类）。
 
 1203
 00:49:41,994 --> 00:49:42,726
@@ -5517,62 +5519,77 @@ All right?
 1204
 00:49:42,728 --> 00:49:44,745
 And so you can say,
+所以，你可以说，
 
 1205
 00:49:44,746 --> 00:49:46,763
+if let calcVC equals destinationViewController as
 if let calcVC equals destinationViewController as
 
 1206
 00:49:46,765 --> 00:49:48,131
 CalculatorViewController, and
+CalculatorViewController， 然后
 
 1207
 00:49:48,133 --> 00:49:51,067
 then inside there, you've got calcVC set.
+在那里面，你就给 calcVc 赋值了。
 
 1208
 00:49:51,069 --> 00:49:53,502
 And it's, you know that it's a CalculatorViewController.
+也就是，你知道它是一个 CalculatorViewController。
 
 1209
 00:49:53,504 --> 00:49:57,205
 And any object is now in your past, okay?
+any object也就成了过去式了。
 
 1210
 00:49:58,975 --> 00:50:00,174
 Make sense? So, we have as and
+有道理吧。因此，我们使用 as 和
 
 1211
 00:50:00,176 --> 00:50:01,675
 as question mark.
+as? 。
 
 1212
 00:50:01,677 --> 00:50:05,512
 You can also check beforehand if you just wanna see, is this
+如果你愿意，你也可以事先检查下，这是不是一个
 
 1213
 00:50:05,514 --> 00:50:08,748
 a CalculatorViewController, you can say is.
+CalculatorViewController，你可以说是。
 
 1214
 00:50:08,750 --> 00:50:10,750
 So, you can say if destinationViewController is
+你可以说如果 destinationViewController 是一个
 
 1215
 00:50:10,752 --> 00:50:13,252
 a calculation view CalculatorViewController,
+CalculatorViewController，
 
 1216
 00:50:13,254 --> 00:50:16,422
 then I'll go ahead and, then I can do the as, for example.
+那么我就继续，然后我就可以做 as（转化）。
 
 1217
 00:50:16,424 --> 00:50:20,358
 But usually we use the as question mark, you know,
+但通常地，我们使用 as? 
 
 1218
 00:50:20,360 --> 00:50:23,194
 check it and convert it all in one go.
+做检查并且转换，一次搞定。
 
 1219
 00:50:23,196 --> 00:50:25,013
@@ -5581,10 +5598,12 @@ Okay?
 1220
 00:50:25,014 --> 00:50:26,831
 So that's how we're gonna use an AnyObject.
+这就是我们怎么使用 AnyObject。
 
 1221
 00:50:26,833 --> 00:50:30,434
 We're gonna have to cast it with as into something else.
+我们必须将它转化成其他东西。
 
 1222
 00:50:30,436 --> 00:50:32,936
@@ -5601,42 +5620,52 @@ doesn't [INAUDIBLE]?
 1225
 00:50:37,475 --> 00:50:39,041
 Yeah. So the question is,
+所以，问题是，
 
 1226
 00:50:39,043 --> 00:50:41,977
 is there a way to kind of ask it what the type is and
+有没有这样一种方式，可以先询问这个类是什么类型，
 
 1227
 00:50:41,979 --> 00:50:44,079
 get the answer back in some way?
+然后得到结果。
 
 1228
 00:50:44,081 --> 00:50:47,448
 And, the answer is, for the purposes of where you are, no.
+答案是，由于你所处的位置，不能。
 
 1229
 00:50:47,450 --> 00:50:48,883
 Okay? You don't do that.
+你不能那样做。
 
 1230
 00:50:48,885 --> 00:50:50,317
 You, you, you ask it for
+你要询问一个确定的，
 
 1231
 00:50:50,319 --> 00:50:52,919
 certain, whether it can be a certain thing.
+它是否是一个确定的东西。
 
 1232
 00:50:52,921 --> 00:50:54,587
 You don't ask it, what are you?
+你不能问，你是什么？
 
 1233
 00:50:54,589 --> 00:50:55,988
 And then try and figure it out from there.
+然后试图从那里算出它。
 
 1234
 00:50:55,990 --> 00:50:57,589
 Just, that's, we're not gonna use that paradigm.
+因此，我们不能使用那样的范例。
 
 1235
 00:50:59,827 --> 00:51:00,792
@@ -5645,226 +5674,282 @@ Okay?
 1236
 00:51:00,794 --> 00:51:03,728
 Let's talk about arrays of any object.
+让我们说说包含 any object 的数组。
 
 1237
 00:51:03,730 --> 00:51:05,996
 Cuz sometimes you're gonna get an array of any object back,
+有时你会得到一个 any object 的数组。
 
 1238
 00:51:05,998 --> 00:51:08,766
 like that constraints one I was talking about.
+就像我刚刚提到的 constraints。
 
 1239
 00:51:08,768 --> 00:51:10,967
 Where it's going to be an array of constraints that
+它是一个 constraints 的数组，有可能是
 
 1240
 00:51:10,969 --> 00:51:13,536
 are going to be AnyObject, but I know they're going to be in
+AnyObject（数组）。但我知道它们是这个 
 
 1241
 00:51:13,538 --> 00:51:16,539
 this layout constraint, but they're going to be an array.
+layout constraint，但它们是一个数组。
 
 1242
 00:51:16,541 --> 00:51:18,491
 So, you can do
+所以，你可以在转化它们
 
 1243
 00:51:18,492 --> 00:51:20,442
 some interesting things with casting there.
+时做些有趣的事情。
 
 1244
 00:51:20,445 --> 00:51:23,045
 So, let's use the toolbar items one,
+让我们举这个 toolbar items 为例，
 
 1245
 00:51:23,047 --> 00:51:26,048
 so that toolbar items it's a, that's a property on
+toolbar items 是 UIViewController 的
 
 1246
 00:51:26,050 --> 00:51:29,184
 UIViewController and it returns an array that's gonna
+一个属性，它返回一个 UI bar button items 的
 
 1247
 00:51:29,186 --> 00:51:31,519
 have UI bar button items in it.
+数组。
 
 1248
 00:51:31,521 --> 00:51:35,122
 But, for historical reasons it returns the square bracket
+但，由于历史原因，它返回
 
 1249
 00:51:35,124 --> 00:51:36,556
 of AnyObject.
+[AnyObject]。
 
 1250
 00:51:36,558 --> 00:51:37,957
 So, I can say for
+所以，我可以说，
 
 1251
 00:51:37,959 --> 00:51:41,994
 item in toolbar items, then item is gonna be in AnyObject.
+在 toolbar items 中，item 会是 AnyObject。
 
 1252
 00:51:41,996 --> 00:51:44,697
 So, I'm enumerating those AnyObject.
+所以，我遍历这些AnyObject。
 
 1253
 00:51:44,699 --> 00:51:47,499
 And I'm actually having my variable item be AnyObject,
+我确实让我的变量为AnyObject，
 
 1254
 00:51:47,501 --> 00:51:48,967
 but then inside I'm saying,
+但在里面，我判断，
 
 1255
 00:51:48,969 --> 00:51:51,736
 if I can let the toolbar item equal, you know,
+如果我能让 toolbar item 等于，你们知道的，
 
 1256
 00:51:51,738 --> 00:51:55,172
 be a UI bar button item, then I'm good to go.
+一个 UI bar button item，让我就可以继续了。
 
 1257
 00:51:55,174 --> 00:51:57,908
 So, you see how I'm enumerating this array of
+你们看我是如何遍历这个 any object
 
 1258
 00:51:57,910 --> 00:51:58,842
 any object.
+的数组。
 
 1259
 00:51:58,844 --> 00:52:00,611
 Then the objects, and
+然后这些 objects，
 
 1260
 00:52:00,612 --> 00:52:02,379
 then inside I'm doing the as question mark.
+在里面我使用 as?
 
 1261
 00:52:02,381 --> 00:52:04,113
 But I can do it another way to.
+但我也可以使用其他方式，
 
 1262
 00:52:04,115 --> 00:52:05,815
 Kay? Which is I can say, for
+也就是，我可以使用 for
 
 1263
 00:52:05,817 --> 00:52:09,885
 toolbarItem in toolbarItems as an array of UIBarButtonItem.
+toolbarItem in toolbarItems as [UIBarButtonItem]
 
 1264
 00:52:09,887 --> 00:52:12,454
 Another words, I can cast the entire array.
+换句话说，我可以转换整个数组，
 
 1265
 00:52:12,456 --> 00:52:14,288
 If I know that that array of many objects is
+如果我确认这个有很多 objects 的数组是个
 
 1266
 00:52:14,290 --> 00:52:17,825
 really an array of UIBarButton item, I can just cast it.
+UIBarButton item 数组。我就能转化它。
 
 1267
 00:52:17,827 --> 00:52:20,561
 Now this one, you can't do question mark, because it
+现在这个，你不能使用问号，因为
 
 1268
 00:52:20,563 --> 00:52:24,197
 wouldn't make sense to say for toolbarItem in nil, okay?
+toolbarItem 为 nil 是没有意义的。
 
 1269
 00:52:24,199 --> 00:52:25,732
 So, that makes no sense.
+没有意义。
 
 1270
 00:52:25,734 --> 00:52:28,017
 So, you can't here,
+你不能在这里，
 
 1271
 00:52:28,018 --> 00:52:30,301
 you better be darn sure that that array has what you want.
+你最好确认那个数组是你想要的。
 
 1272
 00:52:30,304 --> 00:52:32,838
 But then inside, now toolbarItem is a tool,
+但这里面，toolbarItem 是一个 tool，
 
 1273
 00:52:32,840 --> 00:52:36,008
 UIBarButtonItem, cuz I've casted the whole array from
+UIBarButtonItem，因为我已经转换了整个数组，从 any object 
 
 1274
 00:52:36,010 --> 00:52:38,810
 array of any object to array of UIBarButtonItem.
+数组转换到 UIBarButtonItem 数组。
 
 1275
 00:52:38,812 --> 00:52:42,380
 You understand the difference there between those two?
+你们明白这两个的不同吗？
 
 1276
 00:52:42,382 --> 00:52:46,350
 Okay another example of AnyObject and
+另一个 AnyObject的例子，
 
 1277
 00:52:46,352 --> 00:52:48,085
 where it appears.
+它在哪里出现呢，
 
 1278
 00:52:48,087 --> 00:52:51,054
 So, if we hadn't changed, when we control drag to
+如果我们并没有改变， 当我们 control 拖建一个
 
 1279
 00:52:51,056 --> 00:52:54,123
 make a appendDigit, what if we had left at any object?
+appendDigit，如果我们保留 any object 会怎样？
 
 1280
 00:52:55,259 --> 00:52:56,775
 Kay? So we had
+所以我们有一个
 
 1281
 00:52:56,776 --> 00:52:58,292
 a appendDigit sender colon any object.
+appendDigit(sender : AnyObject)。
 
 1282
 00:52:58,295 --> 00:52:59,794
 How could we have dealt with that?
+我们怎么处理这个呢？
 
 1283
 00:52:59,796 --> 00:53:01,996
 Well, we just would've said,
+好吧，我们刚才说的，
 
 1284
 00:53:01,998 --> 00:53:05,166
 if we can let the sendingButton equal sender as
+如果我们能够 let sendingButton = sender as UIButton
 
 1285
 00:53:05,168 --> 00:53:08,502
 a UIButton, then do what we do, let digit equals
+那么，做我们该做的，let digit ＝ 
 
 1286
 00:53:08,504 --> 00:53:12,072
 sendingButton.currenTitle exclamation point,
+sendingButton.currenTitle!。
 
 1287
 00:53:12,074 --> 00:53:14,507
 et cetera, et cetera, et cetera.
+等等。
 
 1288
 00:53:14,509 --> 00:53:15,775
 Make sense?
+有道理吧？
 
 1289
 00:53:15,776 --> 00:53:17,042
 But we didn't want to put that extra if let and
+如果我们不想使用这个额外的 if let，
 
 1290
 00:53:17,045 --> 00:53:18,844
 I hadn't talked to you about as, so
+我还没有跟你们讲 as，
 
 1291
 00:53:18,846 --> 00:53:22,014
 that's why I said be sure to put that thing UIButton.
+这是为什么我说要确保这个是 UIButton。
 
 1292
 00:53:22,016 --> 00:53:22,581
@@ -5873,34 +5958,42 @@ All right?
 1293
 00:53:24,451 --> 00:53:27,485
 Now you might ask, why is that even in AnyObject?
+现在你们可能会问，为什么这个甚至是 AnyObject？
 
 1294
 00:53:27,487 --> 00:53:30,454
 When I control dragged, why did he just put UIButton?
+当我们 control 拖拽时， 为什么它就填了 UIButton？
 
 1295
 00:53:30,456 --> 00:53:32,456
 Why did it even offer any object?
+为什么它甚至提供了 any object？
 
 1296
 00:53:32,458 --> 00:53:35,525
 Well, because you could have an action that is sent
+因为你们可能有一个 action，这个action 是
 
 1297
 00:53:35,527 --> 00:53:38,695
 by two different kinds of UI elements.
+两个不同的 UI 元素发起的。
 
 1298
 00:53:38,697 --> 00:53:41,464
 Maybe it's set by a button and also by a slider.
+它可能是由 button，也可能是 slider 发起的。
 
 1299
 00:53:41,466 --> 00:53:43,099
 I don't know what that would be,
+我不知道它会是什么。
 
 1300
 00:53:43,101 --> 00:53:44,900
 I couldn't even think of an example of that.
+我甚至不能就此举个例子。
 
 1301
 00:53:44,902 --> 00:53:47,803

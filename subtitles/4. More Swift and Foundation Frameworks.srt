@@ -6552,134 +6552,167 @@ You can assume for
 1401
 00:57:50,745 --> 00:57:52,878
 the purposes of this, they're of type T.
+它们都是 T 类型
 
 1402
 00:57:52,880 --> 00:57:56,248
 Whatever the T is that I created the array with, right?
+无论 T 是什么类型，我创建了一个 T 类型的数组
 
 1403
 00:57:56,250 --> 00:57:58,617
 So, let's talk about, you know about append.
+让我们继续，你应该知道 append（追加，即在数组的末尾增加元素）方法
 
 1404
 00:57:58,619 --> 00:57:59,984
 That's how you add something to array,
+这就是我们在计算器的 App 中
 
 1405
 00:57:59,986 --> 00:58:02,020
 we did that in the calculator all the time.
+对数组操作一直在使用的方法
 
 1406
 00:58:02,022 --> 00:58:03,521
 There's also insert, so
+当然，数组也有 insert（插入）操作
 
 1407
 00:58:03,522 --> 00:58:05,021
 you can inset something in the middle of your array.
+你可以在数组中间的某个位置插入元素
 
 1408
 00:58:05,024 --> 00:58:06,924
 You just specify what index.
+通过指定一个 index（位置）
 
 1409
 00:58:06,926 --> 00:58:09,159
 There is also splice.
+同样也有 splice 操作
 
 1410
 00:58:09,161 --> 00:58:10,593
 Kay? Splice will take
+Splice 操作会
 
 1411
 00:58:10,595 --> 00:58:15,064
 another array and splice it into the middle of your array.
+将另外的一个数组加入到你的数组的中间位置
 
 1412
 00:58:15,066 --> 00:58:15,964
 Kay? So that can
+明白了吗？有时候
 
 1413
 00:58:15,966 --> 00:58:17,699
 sometimes be invaluable.
+这个操作是十分重要的
 
 1414
 00:58:17,701 --> 00:58:19,467
 It's otherwise just like insert, it's just like
+它不像 insert 操作插入一个元素，它是
 
 1415
 00:58:19,469 --> 00:58:22,270
 inserting another array inside the array.
+在数组中插入数组而不是元素的一种方法
 
 1416
 00:58:22,272 --> 00:58:25,673
 Okay there's also removeAtIndex of course of
+当然还有 removeAtIndex 这样一个方法
 
 1417
 00:58:25,675 --> 00:58:29,243
 course its a var, if you've got you're array in
+顾名思义，你可以利用这个方法来
 
 1418
 00:58:29,245 --> 00:58:31,445
 a var you can do removeAtIndex and
+从一个数组中移除一个元素
 
 1419
 00:58:31,447 --> 00:58:33,913
 there's also removeRange, okay?
+有了这个方法，也有 removeRange 方法
 
 1420
 00:58:33,915 --> 00:58:36,683
 So you can specify a range with the dot dot dot thing or
+removeRange 的方法接受一个范围，并移除这个范围内的所有元素
 
 1421
 00:58:36,685 --> 00:58:38,451
 the dot dot dot less than thing and
+你可以通过 ... 来创建一个范围
 
 1422
 00:58:38,453 --> 00:58:41,253
 remove a range of your array elements.
+并在 removeRange 方法中使用这个范围
 
 1423
 00:58:41,255 --> 00:58:43,522
 And there's also replaceRange, and
+另外，还有 replaceRange 这样的方法
 
 1424
 00:58:43,524 --> 00:58:46,191
 when you replace a range, the thing you replace it with
+当你替换一个范围内的元素时，替换的元素个数
 
 1425
 00:58:46,193 --> 00:58:47,425
 doesn't have to be the same length.
+不需要等于被替换的元素个数
 
 1426
 00:58:48,428 --> 00:58:51,228
 So, I can have an array and replace a range that
+假如我有一个包含3个元素的数组，我将这个数组的全范围
 
 1427
 00:58:51,230 --> 00:58:55,132
 spans three things with something that is six long,
+替换成包含6个元素的数组
 
 1428
 00:58:55,134 --> 00:58:56,700
 and make my array it'll make my array longer, okay?
+这样就可以使原数组变长了
 
 1429
 00:58:56,702 --> 00:58:59,102
 So you can replace range.
+当然你也可以指定一个范围
 
 1430
 00:58:59,104 --> 00:59:01,370
 There's also sorting.
+同样，Array 范型提供排序方法
 
 1431
 00:59:02,306 --> 00:59:04,006
 You can sort an array.
+你可以对一个数组进行排序
 
 1432
 00:59:04,008 --> 00:59:08,676
 The sorting method in array takes one argument and
+排序方法接受一个参数和
 
 1433
 00:59:08,678 --> 00:59:13,313
 that's just a function to determine whether two
+一个决定两个元素相互之间排序结果的函数
 
 1434
 00:59:13,315 --> 00:59:16,516
@@ -6688,70 +6721,87 @@ things are ordered before each other or not.
 1435
 00:59:16,518 --> 00:59:17,868
 Kay? So, it's
+明白了吗？这个函数
 
 1436
 00:59:17,869 --> 00:59:19,219
 going through the array and putting everything in order.
+将遍历整个数组并排序整个数组
 
 1437
 00:59:19,221 --> 00:59:20,987
 It needs to know, it pick, picks out,
+排序方法，只需要知道它接受一个数组，并传出一个数组
 
 1438
 00:59:20,989 --> 00:59:23,055
 however whatever sort, if it's Quicksort or
+无论是怎么样的排序方法，例如快排
 
 1439
 00:59:23,057 --> 00:59:25,691
 I don't know what sort it's using in there.
+或者是任何我不知名的方法
 
 1440
 00:59:25,693 --> 00:59:27,092
 But it needs to be able to compare things so
+它只需要能够比较两个元素即可
 
 1441
 00:59:27,094 --> 00:59:30,795
 you just provide a function desk comparison and
+你只需要提供一个比较函数
 
 1442
 00:59:30,797 --> 00:59:32,997
 usually you're going to do it with a closure just like this.
+通常一般会把比较函数写成一个闭包
 
 1443
 00:59:32,999 --> 00:59:36,133
 You can see this is kind of the default sorting assuming
+这里你可以看到这样的排序函数默认
 
 1444
 00:59:36,135 --> 00:59:39,336
 that this type can just be compared with less than.
+两者这间通过小于来比较
 
 1445
 00:59:39,338 --> 00:59:44,174
 I would just say a dot sort, closure, $0 > $1.
+例如：a.sort { $0 < $1 }
 
 1446
 00:59:44,176 --> 00:59:45,992
 Make sense?
+明白了吗
 
 1447
 00:59:45,993 --> 00:59:47,809
 And that's gonna return yes, if $0 < $1, and
+如果 $0 < $1 的话，这个函数会返回 yes
 
 1448
 00:59:47,812 --> 00:59:49,745
 that's what sort wants to know and
+这个返回结果是我们想了解的
 
 1449
 00:59:49,747 --> 00:59:52,548
 it's gonna call that closure repeatedly okay?
+sort 方法会不断的调用这个闭包
 
 1450
 00:59:52,550 --> 00:59:55,684
 As it's going through doing it's quick sort or whatever.
+当它采用的是快速排序或者其他任何的排序函数
 
 1451
 00:59:55,686 --> 00:59:58,286
 There's also another one call sorted.
+这里还有另外一个方法叫 sorted
 
 1452
 00:59:58,288 --> 01:00:00,555
@@ -6760,118 +6810,147 @@ So we're ta, this is an in place sort.
 1453
 01:00:00,557 --> 01:00:01,889
 Right? Sorts the array in place.
+将整个数组进行排序
 
 1454
 01:00:01,891 --> 01:00:05,959
 They're sorted, will return a new array that is sorted.
+如果一个数组是已排序，它将会返回一个已排序的新数组
 
 1455
 01:00:05,961 --> 01:00:07,593
 Okay? A copy of your array sorted.
+这个意思是，一个已排序的数组的复制
 
 1456
 01:00:10,298 --> 01:00:11,497
 More array methods.
+接下来让我们看看更多的 Array 方法
 
 1457
 01:00:11,499 --> 01:00:14,466
 Okay, so these three are pretty cool.
+这里有3个非常酷的方法
 
 1458
 01:00:14,468 --> 01:00:16,034
 This one's called filter.
+这一个叫 filter
 
 1459
 01:00:16,036 --> 01:00:19,103
 So filter will give you a new array with all
+filter 方法将你所有不想要的元素
 
 1460
 01:00:19,105 --> 01:00:22,807
 the undesirable elements filtered out of there.
+过滤掉然后返回给你那个过滤后的数组
 
 1461
 01:00:22,809 --> 01:00:25,576
 And the way you specify which ones are all undesirable is
+你指定元素是不是你想要的方式，就是提供一个
 
 1462
 01:00:25,578 --> 01:00:27,511
 with the argument which is a function,
+函数作为参数
 
 1463
 01:00:27,513 --> 01:00:28,812
 that just returns a Bool,
+函数返回一个 Bool 型的结果
 
 1464
 01:00:28,814 --> 01:00:31,080
 whether something's undesirable or not.
+来表明这个元素是不是想要的
 
 1465
 01:00:32,283 --> 01:00:32,848
 Make sense?
+明白了吗？
 
 1466
 01:00:33,850 --> 01:00:36,351
 And there's another one you can do by mapping.
+另外一个很酷的方法就是 mapping（映射）
 
 1467
 01:00:36,353 --> 01:00:39,387
 So this will give you a new array where every single
+这将会将你原来的数组中每一个元素
 
 1468
 01:00:39,389 --> 01:00:43,023
 element in your array is mapped to something else.
+映射到一个新的数组
 
 1469
 01:00:43,025 --> 01:00:44,458
 And the thing you map it to doesn't even have to
+原来的元素通过映射后的类型甚至都
 
 1470
 01:00:44,460 --> 01:00:46,693
 be the same type, so I can have an array of ints, and
+不需要与原来的一样，好比我有一个 Int 型的数组
 
 1471
 01:00:46,695 --> 01:00:49,095
 I could map it to an array of strings.
+我可以将这些元素映射为字符串
 
 1472
 01:00:49,097 --> 01:00:50,763
 And that's what I've done here.
+这就是我在这里所做的
 
 1473
 01:00:50,765 --> 01:00:52,231
 So I have this array of ints, 1, 2, 3, and
+这里，我有一个包含1，2，3的 Int 型数组
 
 1474
 01:00:52,233 --> 01:00:54,399
 I've mapped it using a closure that
+我利用一个闭包将它们映射
 
 1475
 01:00:54,401 --> 01:00:59,804
 returns the stringification of it to an arrayed strings.
+到它们的字符串形式
 
 1476
 01:00:59,806 --> 01:01:02,940
 Now, you can see, incredibly concise language swift.
+从这些方法中你可以看到，Swift 语言是多么简洁
 
 1477
 01:01:02,942 --> 01:01:05,976
 I mean, to take an array of ints and turn it into an array
+我的意思是，拿来一个 Int 型的数组，将
 
 1478
 01:01:05,978 --> 01:01:08,578
 of strings, no for loops, no nothing.
+它转变成一个 String 型的数组，不需要循环
 
 1479
 01:01:08,580 --> 01:01:11,147
 Just, you know, running a dozen characters here.
+你只需要知道的是，你可以充分享受
 
 1480
 01:01:11,149 --> 01:01:13,116
 So you really want to take advantage of some of
+Swift 语言带给你的闭包特性
 
 1481
 01:01:13,118 --> 01:01:15,918
 the things swift can do with closures, syntax and
+而不需要撰写一大堆的代码
 
 1482
 01:01:15,920 --> 01:01:16,485
@@ -6880,74 +6959,92 @@ things like that.
 1483
 01:01:16,487 --> 01:01:20,856
 You can also reduce an entire array to, to a single value.
+还有，你可以将整个数组 reduce（减少）为一个值
 
 1484
 01:01:20,858 --> 01:01:23,925
 So this one takes an argument which is the initial value you
+这个方法接受一个参数
 
 1485
 01:01:23,927 --> 01:01:25,059
 want to start with.
+这个参数是你自定的初始值
 
 1486
 01:01:25,061 --> 01:01:26,794
 And then it just takes a function that
+还有一个函数作为参数
 
 1487
 01:01:26,796 --> 01:01:30,364
 takes the value so far and the next element in the array and
+这个函数传入当前的值和下一个数组中的元素
 
 1488
 01:01:30,366 --> 01:01:31,832
 you return what the combination is.
+你只需要返回他们两者的组合是什么
 
 1489
 01:01:31,834 --> 01:01:33,533
 So you're just combining, combining, combining.
+就这样你一直组合、组合、组合，直到得到最终的结果
 
 1490
 01:01:33,535 --> 01:01:36,069
 So for example if you wanted to add up an array,
+举例来说，你想要累加整个数组中的值
 
 1491
 01:01:36,071 --> 01:01:38,571
 you could say [1, 2, 3.]reduce.
+你只需要输入 [1, 2, 3].reduce
 
 1492
 01:01:38,573 --> 01:01:41,473
 Start with a 0, and then my closure just gonna add
+然后我们以0为初始值，即第一个参数，我的闭包作为第二个参数
 
 1493
 01:01:41,475 --> 01:01:48,113
 the next element, which is the $1 to, so far which is $0.
+将下一个元素（$1）累加起来
 
 1494
 01:01:48,115 --> 01:01:52,516
 Okay all right, string.
+以上就是所有 Array 中的方法，String
 
 1495
 01:01:52,518 --> 01:01:54,618
 So string is a little bit complicated.
+String 有一点点复杂
 
 1496
 01:01:57,690 --> 01:01:59,055
 I can tell all the, by the way,
+今天的课程我无法将所有 String 的内容讲完
 
 1497
 01:01:59,057 --> 01:02:00,790
 already I'm not gonna get to the end of this so
+String 的内容可能一直要持续到
 
 1498
 01:02:00,792 --> 01:02:02,658
 we'll finish this next Wednesday.
+下周三的课程
 
 1499
 01:02:02,660 --> 01:02:05,327
 This whole slide package here but.
+这个 Slide 包在这里
 
 1500
 01:02:05,329 --> 01:02:06,945
 So string.
+String
 
 1501
 01:02:06,946 --> 01:02:08,562

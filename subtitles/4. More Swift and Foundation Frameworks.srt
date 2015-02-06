@@ -1,154 +1,191 @@
-﻿1
+1
 00:00:00,001 --> 00:00:04,836
 [MUSIC]
 
 2
 00:00:04,838 --> 00:00:07,405
 Stanford University.
+斯坦福大学。
 
 3
 00:00:11,277 --> 00:00:15,946
 >> Okay, well, welcome to lecture four of CS193P,
+欢迎来到 CS193P，
 
 4
 00:00:15,948 --> 00:00:18,748
 Stanford Winter of 2015.
+斯坦福 2015 冬季课程。
 
 5
 00:00:18,750 --> 00:00:21,284
 So, I've been doing all demo up until now,
+在今天以前，我们一直都在写 demo， 
 
 6
 00:00:21,286 --> 00:00:24,553
 and now we're going to be doing all slides today.
+而今天，我们将会全部通过幻灯片学习。
 
 7
 00:00:24,555 --> 00:00:28,724
 So, I have a lot of stuff to talk about most of this,
+我将会讲到很多东西，大部分，
 
 8
 00:00:28,726 --> 00:00:31,143
 although not all of it,
+但不是全部，
 
 9
 00:00:31,144 --> 00:00:33,561
 is covered in your reading assignments, mh okay?
+都在你的阅读任务中，好吗？
 
 10
 00:00:33,563 --> 00:00:35,496
 But here I'm going to
+在这里我会尝试着把
 
 11
 00:00:35,497 --> 00:00:37,430
 try to highlight the things that are pretty important, and
+最重要的部分高亮出来，
 
 12
 00:00:37,433 --> 00:00:39,066
 also just show you some stuff that are not in
+并且也会给你看一些
 
 13
 00:00:39,068 --> 00:00:41,802
 that reading assignment that you kinda need to know.
+并不包含在阅读任务中，但你仍然需要知道的东西。
 
 14
 00:00:41,804 --> 00:00:43,336
 So this is definitely not a substitute for
+所以这绝对不能代替阅读
 
 15
 00:00:43,338 --> 00:00:46,472
 the reading you'll still need to do the reading in order to
+你仍然需要通过阅读
 
 16
 00:00:46,474 --> 00:00:49,875
 kinda get the, the details of a lot of this stuff.
+来掌握一些细节部分。
 
 17
 00:00:49,877 --> 00:00:54,613
 So but this hopefully will kinda get you focused in on,
+但希望这节课可以让你注意在，
 
 18
 00:00:54,615 --> 00:00:58,066
 on the key stuff.
+关键的东西上。
 
 19
 00:00:58,067 --> 00:01:01,518
 All right, [COUGH] so first, I wanna talk about
+好的，那么我将讲讲
 
 20
 00:01:01,521 --> 00:01:05,589
 optionals and enums, so now that you know what an enum is.
+optionals 和 enums，现在你已经知道 enum 是什么了。 
 
 21
 00:01:05,591 --> 00:01:08,425
 I can tell you what an Optional really is okay?
+那么我可以告诉你 optional 到底是什么了 
 
 22
 00:01:08,427 --> 00:01:10,994
 An Optional is just an enum, okay?
+一个 optional 就是一个 enum，
 
 23
 00:01:10,996 --> 00:01:15,098
 It's a very simple enum it's a generic kind of like array.
+这就是一个非常简单的 enum，就像数组的泛型。
 
 24
 00:01:15,100 --> 00:01:15,998
 You know, have an array,
+你知道，一个数组，
 
 25
 00:01:16,000 --> 00:01:17,666
 you specify the type of thing in it,
+你指定了其类型，
 
 26
 00:01:17,668 --> 00:01:19,301
-Optional's exactly the same, okay?
+Optionals exactly the same, okay?
+Optionals 完全就是这样，
 
 27
 00:01:19,303 --> 00:01:20,335
 It's a generic.
+就是泛型。
 
 28
 00:01:20,337 --> 00:01:22,637
 You specify the type of Optional it is.
+你指定了 optional 的类型是什么。
 
 29
 00:01:22,639 --> 00:01:26,173
 And that type, which is T here in this little enum,
+而此类型，在这个小 enum 中的 T
 
 30
 00:01:26,175 --> 00:01:29,376
 is just the type of the associated value, you know,
+就是一种关联值类型，
 
 31
 00:01:29,378 --> 00:01:31,578
 that enums can have associated values.
+enums 可以关联各种值。
 
 32
 00:01:31,580 --> 00:01:35,882
 So that's just the type that, if the optional is not nil.
+所以这就只是其类型，如果 optional 不是 nil。
 
 33
 00:01:35,884 --> 00:01:38,751
 That's what you get so that's all an enum is and
+这就是你会取到的。这就是 enum 的全部了。
 
 34
 00:01:38,753 --> 00:01:42,054
 so for example, this is what it would look like if we
+举个例子，这里就是你会看到的
 
 35
 00:01:42,056 --> 00:01:45,724
 used the enum notation to do an optional.
+如果我们使用一个 enum 实现一个 optional。
 
 36
 00:01:45,726 --> 00:01:49,561
 Saying you know, x which is an enum or is an optional string,
+你可以看到，x 可以是一个 enum 或者是一个 optional string，
 
 37
 00:01:49,563 --> 00:01:52,130
-which nil would just be saying x equals optional,
+which nil would just be saying x equals optional
+x nil 与 optional
 
 38
 00:01:52,132 --> 00:01:53,497
 angle bracket string dot none.
+等于尖括号 string 点 none 相等。
 
 39
 00:01:54,800 --> 00:01:56,200
@@ -157,58 +194,72 @@ Okay?
 40
 00:01:56,201 --> 00:01:57,601
 Or, if you're sending it to not be know you
+或者你可以将其隐藏，
 
 41
 00:01:57,603 --> 00:02:00,403
-would say optional angle bracket string dot some,
+would say optional angle bracket string dot Some，
+你可以说 optional 尖括号 string 点 Some，
 
 42
 00:02:00,405 --> 00:02:02,705
 parentheses, the associated value, which would be hello.
+圆括号，关联值，也就是 "Hello".
 
 43
 00:02:04,408 --> 00:02:05,607
 That make sense?
+很合理对吧？
 
 44
 00:02:05,609 --> 00:02:07,709
 So Optional really actually super simple.
+Optional 其实就是这么简单。
 
 45
 00:02:07,711 --> 00:02:10,478
 With a question mark and exclamation point,
+由问好及感叹号组成，
 
 46
 00:02:10,480 --> 00:02:13,180
 I know that makes it seem like, it's just so
+我知道这看起来
 
 47
 00:02:13,182 --> 00:02:17,451
 really complicated, but it's pretty simple really it's just
+非常复杂，但实际上非常简单
 
 48
 00:02:17,453 --> 00:02:20,787
 syntax sugar, syntactic sugar to do this Optional.
+这只是语法糖而已，语法糖实现了 optional。
 
 49
 00:02:20,789 --> 00:02:25,124
 Now the unwrapping, really just looks like this It's just
+现在到解包，真的这看起来
 
 50
 00:02:25,126 --> 00:02:28,894
-a switch and the case of sum, you give the value back.
+a switch and the case of some, you give the value back.
+就只是 switch 与 case，在 "Some" 的情况下你可以得到其值。
 
 51
 00:02:28,896 --> 00:02:32,230
 In the case of none, you raise an exception, okay?
+在 "None" 的情况下，你抛出了一个异常。
 
 52
 00:02:32,232 --> 00:02:36,034
 And simple as that.
+就这么简单。
 
 53
 00:02:36,036 --> 00:02:38,836
 That's why it crashes when you unwrap something that's
+这也是为什么当你解包一个 nil 的时候会崩溃
 
 54
 00:02:38,838 --> 00:02:41,405
@@ -217,186 +268,232 @@ nil, okay?
 55
 00:02:41,407 --> 00:02:45,242
 So that's optional all right, so array, I just wanna.
+这就是一个 optional 对吧，一个数组，我只是想要。
 
 56
 00:02:45,244 --> 00:02:47,744
 We covered this so I'm gonna really fast through this but
+我们已经概括了一次，所以我将很快地进行下一部分。
 
 57
 00:02:47,746 --> 00:02:50,480
 arrays, the syntax there is the same, right?
+数组，这里的语法是相同的，对吧？
 
 58
 00:02:50,482 --> 00:02:51,781
 That square bracket thing,
+这个尖括号东西，
 
 59
 00:02:51,783 --> 00:02:54,050
 that means exactly the same thing.
+这就意味着他们是相同的。
 
 60
 00:02:54,052 --> 00:02:59,054
 Also you can't append or modify in any way
+并且你不能通过任何方式增加或修改
 
 61
 00:02:59,056 --> 00:03:02,257
 an array that is a let, right, that's a constant array.
+一个声明为 let 的数组，因为这是常量数组。
 
 62
 00:03:02,259 --> 00:03:04,992
 I just wanna make it clear that defining an array to
+我在这里重申一下，通过 let 将一个
 
 63
 00:03:04,994 --> 00:03:07,328
 be a constant by saying let something equal
+数组声明为常量
 
 64
 00:03:07,330 --> 00:03:09,229
 an array versus var something equal an array,
+与声明一个 array 为 var 是相反的，
 
 65
 00:03:09,231 --> 00:03:12,833
 means that it's immutable, so you can't do append or insert,
+这意味着它是不可变的，所以你不能增加或插入，
 
 66
 00:03:12,835 --> 00:03:15,468
 or anything else that you could do on a mutable array.
+或任何你想要改变这个数组的操作。
 
 67
 00:03:15,470 --> 00:03:17,337
 Also, of course,
+当然，
 
 68
 00:03:17,338 --> 00:03:19,205
 if you access an array with the square brackets and
+如果你通过方括号访问一个数组
 
 69
 00:03:19,207 --> 00:03:21,540
 try to pull out something that's outside the bounds of
+然后尝试着获取一个超出了数组范围东西
 
 70
 00:03:21,542 --> 00:03:23,809
 the array, this array only has four animals in it and
+这个数组，这个数组只有四种动物在里面，
 
 71
 00:03:23,811 --> 00:03:27,145
 I'm trying to get animal five that's gonna crash.
+我想要获取第五种，那么就会崩溃。
 
 72
 00:03:27,147 --> 00:03:28,279
 Array index out of bounds,
+数组越界，
 
 73
 00:03:28,281 --> 00:03:30,981
 just like pretty much any language you've used.
+就好像你曾经用过的任何一种语言。
 
 74
 00:03:32,551 --> 00:03:33,850
 How to enumerate an array.
+如何枚举一个数组呢。
 
 75
 00:03:33,852 --> 00:03:35,885
 If you wanted to go through every single item
+如果你想要获取在数组中的每一件事物
 
 76
 00:03:35,887 --> 00:03:39,655
-in an array and look at it, you can use four in, okay?
+in an array and look at it, you can use for in, okay?
+你可以使用 for in， 
 
 77
 00:03:39,657 --> 00:03:43,526
-So you just say four, some variable you want,
+So you just say for, some variable you want,
+需要使用 for，一个你需要的变量，
 
 78
 00:03:43,528 --> 00:03:46,061
 in your array, and then inside there,
+in 你的数组，然后在里面，
 
 79
 00:03:46,063 --> 00:03:49,131
 that'll be your value, okay pretty obvious.
+那就是你要的参数，非常明显。
 
 80
 00:03:49,133 --> 00:03:51,433
 I put this here mostly to compare it to the next slide,
+我放在这里主要是为了与接下来字典的幻灯片进行对比，
 
 81
 00:03:51,435 --> 00:03:54,902
 which is dictionary so dictionary again,
+又是字典，
 
 82
 00:03:54,904 --> 00:03:56,470
 that's where a bracket thing is an alternate for
+这里的括号也是起着同样的作用
 
 83
 00:03:56,472 --> 00:03:59,406
 the exact same thing so if I had a nice
+如果我有一个非常好的
 
 84
 00:03:59,408 --> 00:04:02,576
 dictionary here I can create a dictionary.
+字典，我可以创造一个字典。
 
 85
 00:04:02,578 --> 00:04:04,177
 Using this square bracket notation,
+使用方括号标记。
 
 86
 00:04:04,179 --> 00:04:07,146
 which is just square bracket, key colon value, comma
+方括号，键 冒号 值，逗号 
 
 87
 00:04:07,148 --> 00:04:08,914
 key colon value okay, you know that.
-
+键 冒号 值，好了你懂的。
+ 
 88
 00:04:08,916 --> 00:04:12,084
 And you also know that if I access a dictionary with
+并且你也知道，如果我通过方括号访问一个字典，
 
 89
 00:04:12,086 --> 00:04:14,519
 the square bracket, it returns an optional and
+他会返回一个 optional 对象，
 
 90
 00:04:14,521 --> 00:04:17,722
 that's because, for example here, I'm looking up PAC ten
+这是由于，举个例子，我要在 "pac10team" 中寻找俄亥俄州， 
 
 91
 00:04:17,724 --> 00:04:21,192
 team Ohio State obviously that is not.
+明显就没有。
 
 92
 00:04:21,194 --> 00:04:23,961
 It packed ten team so it's not in the dictionary.
+这里只包含了十个队伍，所以就不在这个字典里。
 
 93
 00:04:23,963 --> 00:04:25,929
 So it's going to return nil, okay?
+那么就应该返回 nil 对吧？
 
 94
 00:04:25,931 --> 00:04:27,931
 So, that's why when you access a dictionary,
+这就是为什么你访问一个字典，
 
 95
 00:04:27,933 --> 00:04:29,299
 it comes back it's an Optional.
+它会返回一个 Optional 对象。
 
 96
 00:04:30,769 --> 00:04:32,868
 To enumerate dictionary you use a tuple.
+枚举字典你需要使用 tuple。
 
 97
 00:04:33,871 --> 00:04:36,171
-Okay, so you say four, the tuple,
+Okay, so you say for, the tuple,
+你输入 for，tuple
 
 98
 00:04:36,173 --> 00:04:39,207
 key com of value in the dictionary.
+键值对 in 字典。
 
 99
 00:04:39,209 --> 00:04:41,376
 And inside there, key and value will both be set.
+然后在里面，键与值都会设置好。
 
 100
 00:04:41,378 --> 00:04:46,947
-Okay, that's really easy way to enumerate dictionaries.好了，这是非常简单的枚举字典的方法。
+Okay, that's really easy way to enumerate dictionaries.
+好了，这是非常简单的枚举字典的方法。
 
 101
 00:04:48,083 --> 00:04:53,686
@@ -5505,10 +5602,12 @@ turned into a CalculatorViewController,
 1201
 00:49:37,390 --> 00:49:39,757
 because it's not a CalculatorViewController some
+因为它不是 CalculatorViewController，而是其他的
 
 1202
 00:49:39,759 --> 00:49:41,992
 other kinda ViewController or something else.
+ViewController 或者其他的（类）。
 
 1203
 00:49:41,994 --> 00:49:42,726
@@ -5517,62 +5616,77 @@ All right?
 1204
 00:49:42,728 --> 00:49:44,745
 And so you can say,
+所以，你可以说，
 
 1205
 00:49:44,746 --> 00:49:46,763
+if let calcVC equals destinationViewController as
 if let calcVC equals destinationViewController as
 
 1206
 00:49:46,765 --> 00:49:48,131
 CalculatorViewController, and
+CalculatorViewController， 然后
 
 1207
 00:49:48,133 --> 00:49:51,067
 then inside there, you've got calcVC set.
+在那里面，你就给 calcVc 赋值了。
 
 1208
 00:49:51,069 --> 00:49:53,502
 And it's, you know that it's a CalculatorViewController.
+也就是，你知道它是一个 CalculatorViewController。
 
 1209
 00:49:53,504 --> 00:49:57,205
 And any object is now in your past, okay?
+any object也就成了过去式了。
 
 1210
 00:49:58,975 --> 00:50:00,174
 Make sense? So, we have as and
+有道理吧。因此，我们使用 as 和
 
 1211
 00:50:00,176 --> 00:50:01,675
 as question mark.
+as? 。
 
 1212
 00:50:01,677 --> 00:50:05,512
 You can also check beforehand if you just wanna see, is this
+如果你愿意，你也可以事先检查下，这是不是一个
 
 1213
 00:50:05,514 --> 00:50:08,748
 a CalculatorViewController, you can say is.
+CalculatorViewController，你可以说是。
 
 1214
 00:50:08,750 --> 00:50:10,750
 So, you can say if destinationViewController is
+你可以说如果 destinationViewController 是一个
 
 1215
 00:50:10,752 --> 00:50:13,252
 a calculation view CalculatorViewController,
+CalculatorViewController，
 
 1216
 00:50:13,254 --> 00:50:16,422
 then I'll go ahead and, then I can do the as, for example.
+那么我就继续，然后我就可以做 as（转化）。
 
 1217
 00:50:16,424 --> 00:50:20,358
 But usually we use the as question mark, you know,
+但通常地，我们使用 as? 
 
 1218
 00:50:20,360 --> 00:50:23,194
 check it and convert it all in one go.
+做检查并且转换，一次搞定。
 
 1219
 00:50:23,196 --> 00:50:25,013
@@ -5581,10 +5695,12 @@ Okay?
 1220
 00:50:25,014 --> 00:50:26,831
 So that's how we're gonna use an AnyObject.
+这就是我们怎么使用 AnyObject。
 
 1221
 00:50:26,833 --> 00:50:30,434
 We're gonna have to cast it with as into something else.
+我们必须将它转化成其他东西。
 
 1222
 00:50:30,436 --> 00:50:32,936
@@ -5601,42 +5717,52 @@ doesn't [INAUDIBLE]?
 1225
 00:50:37,475 --> 00:50:39,041
 Yeah. So the question is,
+所以，问题是，
 
 1226
 00:50:39,043 --> 00:50:41,977
 is there a way to kind of ask it what the type is and
+有没有这样一种方式，可以先询问这个类是什么类型，
 
 1227
 00:50:41,979 --> 00:50:44,079
 get the answer back in some way?
+然后得到结果。
 
 1228
 00:50:44,081 --> 00:50:47,448
 And, the answer is, for the purposes of where you are, no.
+答案是，由于你所处的位置，不能。
 
 1229
 00:50:47,450 --> 00:50:48,883
 Okay? You don't do that.
+你不能那样做。
 
 1230
 00:50:48,885 --> 00:50:50,317
 You, you, you ask it for
+你要询问一个确定的，
 
 1231
 00:50:50,319 --> 00:50:52,919
 certain, whether it can be a certain thing.
+它是否是一个确定的东西。
 
 1232
 00:50:52,921 --> 00:50:54,587
 You don't ask it, what are you?
+你不能问，你是什么？
 
 1233
 00:50:54,589 --> 00:50:55,988
 And then try and figure it out from there.
+然后试图从那里算出它。
 
 1234
 00:50:55,990 --> 00:50:57,589
 Just, that's, we're not gonna use that paradigm.
+因此，我们不能使用那样的范例。
 
 1235
 00:50:59,827 --> 00:51:00,792
@@ -5645,226 +5771,282 @@ Okay?
 1236
 00:51:00,794 --> 00:51:03,728
 Let's talk about arrays of any object.
+让我们说说包含 any object 的数组。
 
 1237
 00:51:03,730 --> 00:51:05,996
 Cuz sometimes you're gonna get an array of any object back,
+有时你会得到一个 any object 的数组。
 
 1238
 00:51:05,998 --> 00:51:08,766
 like that constraints one I was talking about.
+就像我刚刚提到的 constraints。
 
 1239
 00:51:08,768 --> 00:51:10,967
 Where it's going to be an array of constraints that
+它是一个 constraints 的数组，有可能是
 
 1240
 00:51:10,969 --> 00:51:13,536
 are going to be AnyObject, but I know they're going to be in
+AnyObject（数组）。但我知道它们是这个 
 
 1241
 00:51:13,538 --> 00:51:16,539
 this layout constraint, but they're going to be an array.
+layout constraint，但它们是一个数组。
 
 1242
 00:51:16,541 --> 00:51:18,491
 So, you can do
+所以，你可以在转化它们
 
 1243
 00:51:18,492 --> 00:51:20,442
 some interesting things with casting there.
+时做些有趣的事情。
 
 1244
 00:51:20,445 --> 00:51:23,045
 So, let's use the toolbar items one,
+让我们举这个 toolbar items 为例，
 
 1245
 00:51:23,047 --> 00:51:26,048
 so that toolbar items it's a, that's a property on
+toolbar items 是 UIViewController 的
 
 1246
 00:51:26,050 --> 00:51:29,184
 UIViewController and it returns an array that's gonna
+一个属性，它返回一个 UI bar button items 的
 
 1247
 00:51:29,186 --> 00:51:31,519
 have UI bar button items in it.
+数组。
 
 1248
 00:51:31,521 --> 00:51:35,122
 But, for historical reasons it returns the square bracket
+但，由于历史原因，它返回
 
 1249
 00:51:35,124 --> 00:51:36,556
 of AnyObject.
+[AnyObject]。
 
 1250
 00:51:36,558 --> 00:51:37,957
 So, I can say for
+所以，我可以说，
 
 1251
 00:51:37,959 --> 00:51:41,994
 item in toolbar items, then item is gonna be in AnyObject.
+在 toolbar items 中，item 会是 AnyObject。
 
 1252
 00:51:41,996 --> 00:51:44,697
 So, I'm enumerating those AnyObject.
+所以，我遍历这些AnyObject。
 
 1253
 00:51:44,699 --> 00:51:47,499
 And I'm actually having my variable item be AnyObject,
+我确实让我的变量为AnyObject，
 
 1254
 00:51:47,501 --> 00:51:48,967
 but then inside I'm saying,
+但在里面，我判断，
 
 1255
 00:51:48,969 --> 00:51:51,736
 if I can let the toolbar item equal, you know,
+如果我能让 toolbar item 等于，你们知道的，
 
 1256
 00:51:51,738 --> 00:51:55,172
 be a UI bar button item, then I'm good to go.
+一个 UI bar button item，让我就可以继续了。
 
 1257
 00:51:55,174 --> 00:51:57,908
 So, you see how I'm enumerating this array of
+你们看我是如何遍历这个 any object
 
 1258
 00:51:57,910 --> 00:51:58,842
 any object.
+的数组。
 
 1259
 00:51:58,844 --> 00:52:00,611
 Then the objects, and
+然后这些 objects，
 
 1260
 00:52:00,612 --> 00:52:02,379
 then inside I'm doing the as question mark.
+在里面我使用 as?
 
 1261
 00:52:02,381 --> 00:52:04,113
 But I can do it another way to.
+但我也可以使用其他方式，
 
 1262
 00:52:04,115 --> 00:52:05,815
 Kay? Which is I can say, for
+也就是，我可以使用 for
 
 1263
 00:52:05,817 --> 00:52:09,885
 toolbarItem in toolbarItems as an array of UIBarButtonItem.
+toolbarItem in toolbarItems as [UIBarButtonItem]
 
 1264
 00:52:09,887 --> 00:52:12,454
 Another words, I can cast the entire array.
+换句话说，我可以转换整个数组，
 
 1265
 00:52:12,456 --> 00:52:14,288
 If I know that that array of many objects is
+如果我确认这个有很多 objects 的数组是个
 
 1266
 00:52:14,290 --> 00:52:17,825
 really an array of UIBarButton item, I can just cast it.
+UIBarButton item 数组。我就能转化它。
 
 1267
 00:52:17,827 --> 00:52:20,561
 Now this one, you can't do question mark, because it
+现在这个，你不能使用问号，因为
 
 1268
 00:52:20,563 --> 00:52:24,197
 wouldn't make sense to say for toolbarItem in nil, okay?
+toolbarItem 为 nil 是没有意义的。
 
 1269
 00:52:24,199 --> 00:52:25,732
 So, that makes no sense.
+没有意义。
 
 1270
 00:52:25,734 --> 00:52:28,017
 So, you can't here,
+你不能在这里，
 
 1271
 00:52:28,018 --> 00:52:30,301
 you better be darn sure that that array has what you want.
+你最好确认那个数组是你想要的。
 
 1272
 00:52:30,304 --> 00:52:32,838
 But then inside, now toolbarItem is a tool,
+但这里面，toolbarItem 是一个 tool，
 
 1273
 00:52:32,840 --> 00:52:36,008
 UIBarButtonItem, cuz I've casted the whole array from
+UIBarButtonItem，因为我已经转换了整个数组，从 any object 
 
 1274
 00:52:36,010 --> 00:52:38,810
 array of any object to array of UIBarButtonItem.
+数组转换到 UIBarButtonItem 数组。
 
 1275
 00:52:38,812 --> 00:52:42,380
 You understand the difference there between those two?
+你们明白这两个的不同吗？
 
 1276
 00:52:42,382 --> 00:52:46,350
 Okay another example of AnyObject and
+另一个 AnyObject的例子，
 
 1277
 00:52:46,352 --> 00:52:48,085
 where it appears.
+它在哪里出现呢，
 
 1278
 00:52:48,087 --> 00:52:51,054
 So, if we hadn't changed, when we control drag to
+如果我们并没有改变， 当我们 control 拖建一个
 
 1279
 00:52:51,056 --> 00:52:54,123
 make a appendDigit, what if we had left at any object?
+appendDigit，如果我们保留 any object 会怎样？
 
 1280
 00:52:55,259 --> 00:52:56,775
 Kay? So we had
+所以我们有一个
 
 1281
 00:52:56,776 --> 00:52:58,292
 a appendDigit sender colon any object.
+appendDigit(sender : AnyObject)。
 
 1282
 00:52:58,295 --> 00:52:59,794
 How could we have dealt with that?
+我们怎么处理这个呢？
 
 1283
 00:52:59,796 --> 00:53:01,996
 Well, we just would've said,
+好吧，我们刚才说的，
 
 1284
 00:53:01,998 --> 00:53:05,166
 if we can let the sendingButton equal sender as
+如果我们能够 let sendingButton = sender as UIButton
 
 1285
 00:53:05,168 --> 00:53:08,502
 a UIButton, then do what we do, let digit equals
+那么，做我们该做的，let digit ＝ 
 
 1286
 00:53:08,504 --> 00:53:12,072
 sendingButton.currenTitle exclamation point,
+sendingButton.currenTitle!。
 
 1287
 00:53:12,074 --> 00:53:14,507
 et cetera, et cetera, et cetera.
+等等。
 
 1288
 00:53:14,509 --> 00:53:15,775
 Make sense?
+有道理吧？
 
 1289
 00:53:15,776 --> 00:53:17,042
 But we didn't want to put that extra if let and
+如果我们不想使用这个额外的 if let，
 
 1290
 00:53:17,045 --> 00:53:18,844
 I hadn't talked to you about as, so
+我还没有跟你们讲 as，
 
 1291
 00:53:18,846 --> 00:53:22,014
 that's why I said be sure to put that thing UIButton.
+这是为什么我说要确保这个是 UIButton。
 
 1292
 00:53:22,016 --> 00:53:22,581
@@ -5873,34 +6055,42 @@ All right?
 1293
 00:53:24,451 --> 00:53:27,485
 Now you might ask, why is that even in AnyObject?
+现在你们可能会问，为什么这个甚至是 AnyObject？
 
 1294
 00:53:27,487 --> 00:53:30,454
 When I control dragged, why did he just put UIButton?
+当我们 control 拖拽时， 为什么它就填了 UIButton？
 
 1295
 00:53:30,456 --> 00:53:32,456
 Why did it even offer any object?
+为什么它甚至提供了 any object？
 
 1296
 00:53:32,458 --> 00:53:35,525
 Well, because you could have an action that is sent
+因为你们可能有一个 action，这个action 是
 
 1297
 00:53:35,527 --> 00:53:38,695
 by two different kinds of UI elements.
+两个不同的 UI 元素发起的。
 
 1298
 00:53:38,697 --> 00:53:41,464
 Maybe it's set by a button and also by a slider.
+它可能是由 button，也可能是 slider 发起的。
 
 1299
 00:53:41,466 --> 00:53:43,099
 I don't know what that would be,
+我不知道它会是什么。
 
 1300
 00:53:43,101 --> 00:53:44,900
 I couldn't even think of an example of that.
+我甚至不能就此举个例子。
 
 1301
 00:53:44,902 --> 00:53:47,803
@@ -6362,134 +6552,167 @@ You can assume for
 1401
 00:57:50,745 --> 00:57:52,878
 the purposes of this, they're of type T.
+它们都是 T 类型
 
 1402
 00:57:52,880 --> 00:57:56,248
 Whatever the T is that I created the array with, right?
+无论 T 是什么类型，我创建了一个 T 类型的数组
 
 1403
 00:57:56,250 --> 00:57:58,617
 So, let's talk about, you know about append.
+让我们继续，你应该知道 append（追加，即在数组的末尾增加元素）方法
 
 1404
 00:57:58,619 --> 00:57:59,984
 That's how you add something to array,
+这就是我们在计算器的 App 中
 
 1405
 00:57:59,986 --> 00:58:02,020
 we did that in the calculator all the time.
+对数组操作一直在使用的方法
 
 1406
 00:58:02,022 --> 00:58:03,521
 There's also insert, so
+当然，数组也有 insert（插入）操作
 
 1407
 00:58:03,522 --> 00:58:05,021
 you can inset something in the middle of your array.
+你可以在数组中间的某个位置插入元素
 
 1408
 00:58:05,024 --> 00:58:06,924
 You just specify what index.
+通过指定一个 index（位置）
 
 1409
 00:58:06,926 --> 00:58:09,159
 There is also splice.
+同样也有 splice 操作
 
 1410
 00:58:09,161 --> 00:58:10,593
 Kay? Splice will take
+Splice 操作会
 
 1411
 00:58:10,595 --> 00:58:15,064
 another array and splice it into the middle of your array.
+将另外的一个数组加入到你的数组的中间位置
 
 1412
 00:58:15,066 --> 00:58:15,964
 Kay? So that can
+明白了吗？有时候
 
 1413
 00:58:15,966 --> 00:58:17,699
 sometimes be invaluable.
+这个操作是十分重要的
 
 1414
 00:58:17,701 --> 00:58:19,467
 It's otherwise just like insert, it's just like
+它不像 insert 操作插入一个元素，它是
 
 1415
 00:58:19,469 --> 00:58:22,270
 inserting another array inside the array.
+在数组中插入数组而不是元素的一种方法
 
 1416
 00:58:22,272 --> 00:58:25,673
 Okay there's also removeAtIndex of course of
+当然还有 removeAtIndex 这样一个方法
 
 1417
 00:58:25,675 --> 00:58:29,243
 course its a var, if you've got you're array in
+顾名思义，你可以利用这个方法来
 
 1418
 00:58:29,245 --> 00:58:31,445
 a var you can do removeAtIndex and
+从一个数组中移除一个元素
 
 1419
 00:58:31,447 --> 00:58:33,913
 there's also removeRange, okay?
+有了这个方法，也有 removeRange 方法
 
 1420
 00:58:33,915 --> 00:58:36,683
 So you can specify a range with the dot dot dot thing or
+removeRange 的方法接受一个范围，并移除这个范围内的所有元素
 
 1421
 00:58:36,685 --> 00:58:38,451
 the dot dot dot less than thing and
+你可以通过 ... 来创建一个范围
 
 1422
 00:58:38,453 --> 00:58:41,253
 remove a range of your array elements.
+并在 removeRange 方法中使用这个范围
 
 1423
 00:58:41,255 --> 00:58:43,522
 And there's also replaceRange, and
+另外，还有 replaceRange 这样的方法
 
 1424
 00:58:43,524 --> 00:58:46,191
 when you replace a range, the thing you replace it with
+当你替换一个范围内的元素时，替换的元素个数
 
 1425
 00:58:46,193 --> 00:58:47,425
 doesn't have to be the same length.
+不需要等于被替换的元素个数
 
 1426
 00:58:48,428 --> 00:58:51,228
 So, I can have an array and replace a range that
+假如我有一个包含3个元素的数组，我将这个数组的全范围
 
 1427
 00:58:51,230 --> 00:58:55,132
 spans three things with something that is six long,
+替换成包含6个元素的数组
 
 1428
 00:58:55,134 --> 00:58:56,700
 and make my array it'll make my array longer, okay?
+这样就可以使原数组变长了
 
 1429
 00:58:56,702 --> 00:58:59,102
 So you can replace range.
+当然你也可以指定一个范围
 
 1430
 00:58:59,104 --> 00:59:01,370
 There's also sorting.
+同样，Array 范型提供排序方法
 
 1431
 00:59:02,306 --> 00:59:04,006
 You can sort an array.
+你可以对一个数组进行排序
 
 1432
 00:59:04,008 --> 00:59:08,676
 The sorting method in array takes one argument and
+排序方法接受一个参数和
 
 1433
 00:59:08,678 --> 00:59:13,313
 that's just a function to determine whether two
+一个决定两个元素相互之间排序结果的函数
 
 1434
 00:59:13,315 --> 00:59:16,516
@@ -6498,70 +6721,87 @@ things are ordered before each other or not.
 1435
 00:59:16,518 --> 00:59:17,868
 Kay? So, it's
+明白了吗？这个函数
 
 1436
 00:59:17,869 --> 00:59:19,219
 going through the array and putting everything in order.
+将遍历整个数组并排序整个数组
 
 1437
 00:59:19,221 --> 00:59:20,987
 It needs to know, it pick, picks out,
+排序方法，只需要知道它接受一个数组，并传出一个数组
 
 1438
 00:59:20,989 --> 00:59:23,055
 however whatever sort, if it's Quicksort or
+无论是怎么样的排序方法，例如快排
 
 1439
 00:59:23,057 --> 00:59:25,691
 I don't know what sort it's using in there.
+或者是任何我不知名的方法
 
 1440
 00:59:25,693 --> 00:59:27,092
 But it needs to be able to compare things so
+它只需要能够比较两个元素即可
 
 1441
 00:59:27,094 --> 00:59:30,795
 you just provide a function desk comparison and
+你只需要提供一个比较函数
 
 1442
 00:59:30,797 --> 00:59:32,997
 usually you're going to do it with a closure just like this.
+通常一般会把比较函数写成一个闭包
 
 1443
 00:59:32,999 --> 00:59:36,133
 You can see this is kind of the default sorting assuming
+这里你可以看到这样的排序函数默认
 
 1444
 00:59:36,135 --> 00:59:39,336
 that this type can just be compared with less than.
+两者这间通过小于来比较
 
 1445
 00:59:39,338 --> 00:59:44,174
 I would just say a dot sort, closure, $0 > $1.
+例如：a.sort { $0 < $1 }
 
 1446
 00:59:44,176 --> 00:59:45,992
 Make sense?
+明白了吗
 
 1447
 00:59:45,993 --> 00:59:47,809
 And that's gonna return yes, if $0 < $1, and
+如果 $0 < $1 的话，这个函数会返回 yes
 
 1448
 00:59:47,812 --> 00:59:49,745
 that's what sort wants to know and
+这个返回结果是我们想了解的
 
 1449
 00:59:49,747 --> 00:59:52,548
 it's gonna call that closure repeatedly okay?
+sort 方法会不断的调用这个闭包
 
 1450
 00:59:52,550 --> 00:59:55,684
 As it's going through doing it's quick sort or whatever.
+当它采用的是快速排序或者其他任何的排序函数
 
 1451
 00:59:55,686 --> 00:59:58,286
 There's also another one call sorted.
+这里还有另外一个方法叫 sorted
 
 1452
 00:59:58,288 --> 01:00:00,555
@@ -6570,118 +6810,147 @@ So we're ta, this is an in place sort.
 1453
 01:00:00,557 --> 01:00:01,889
 Right? Sorts the array in place.
+将整个数组进行排序
 
 1454
 01:00:01,891 --> 01:00:05,959
 They're sorted, will return a new array that is sorted.
+如果一个数组是已排序，它将会返回一个已排序的新数组
 
 1455
 01:00:05,961 --> 01:00:07,593
 Okay? A copy of your array sorted.
+这个意思是，一个已排序的数组的复制
 
 1456
 01:00:10,298 --> 01:00:11,497
 More array methods.
+接下来让我们看看更多的 Array 方法
 
 1457
 01:00:11,499 --> 01:00:14,466
 Okay, so these three are pretty cool.
+这里有3个非常酷的方法
 
 1458
 01:00:14,468 --> 01:00:16,034
 This one's called filter.
+这一个叫 filter
 
 1459
 01:00:16,036 --> 01:00:19,103
 So filter will give you a new array with all
+filter 方法将你所有不想要的元素
 
 1460
 01:00:19,105 --> 01:00:22,807
 the undesirable elements filtered out of there.
+过滤掉然后返回给你那个过滤后的数组
 
 1461
 01:00:22,809 --> 01:00:25,576
 And the way you specify which ones are all undesirable is
+你指定元素是不是你想要的方式，就是提供一个
 
 1462
 01:00:25,578 --> 01:00:27,511
 with the argument which is a function,
+函数作为参数
 
 1463
 01:00:27,513 --> 01:00:28,812
 that just returns a Bool,
+函数返回一个 Bool 型的结果
 
 1464
 01:00:28,814 --> 01:00:31,080
 whether something's undesirable or not.
+来表明这个元素是不是想要的
 
 1465
 01:00:32,283 --> 01:00:32,848
 Make sense?
+明白了吗？
 
 1466
 01:00:33,850 --> 01:00:36,351
 And there's another one you can do by mapping.
+另外一个很酷的方法就是 mapping（映射）
 
 1467
 01:00:36,353 --> 01:00:39,387
 So this will give you a new array where every single
+这将会将你原来的数组中每一个元素
 
 1468
 01:00:39,389 --> 01:00:43,023
 element in your array is mapped to something else.
+映射到一个新的数组
 
 1469
 01:00:43,025 --> 01:00:44,458
 And the thing you map it to doesn't even have to
+原来的元素通过映射后的类型甚至都
 
 1470
 01:00:44,460 --> 01:00:46,693
 be the same type, so I can have an array of ints, and
+不需要与原来的一样，好比我有一个 Int 型的数组
 
 1471
 01:00:46,695 --> 01:00:49,095
 I could map it to an array of strings.
+我可以将这些元素映射为字符串
 
 1472
 01:00:49,097 --> 01:00:50,763
 And that's what I've done here.
+这就是我在这里所做的
 
 1473
 01:00:50,765 --> 01:00:52,231
 So I have this array of ints, 1, 2, 3, and
+这里，我有一个包含1，2，3的 Int 型数组
 
 1474
 01:00:52,233 --> 01:00:54,399
 I've mapped it using a closure that
+我利用一个闭包将它们映射
 
 1475
 01:00:54,401 --> 01:00:59,804
 returns the stringification of it to an arrayed strings.
+到它们的字符串形式
 
 1476
 01:00:59,806 --> 01:01:02,940
 Now, you can see, incredibly concise language swift.
+从这些方法中你可以看到，Swift 语言是多么简洁
 
 1477
 01:01:02,942 --> 01:01:05,976
 I mean, to take an array of ints and turn it into an array
+我的意思是，拿来一个 Int 型的数组，将
 
 1478
 01:01:05,978 --> 01:01:08,578
 of strings, no for loops, no nothing.
+它转变成一个 String 型的数组，不需要循环
 
 1479
 01:01:08,580 --> 01:01:11,147
 Just, you know, running a dozen characters here.
+你只需要知道的是，你可以充分享受
 
 1480
 01:01:11,149 --> 01:01:13,116
 So you really want to take advantage of some of
+Swift 语言带给你的闭包特性
 
 1481
 01:01:13,118 --> 01:01:15,918
 the things swift can do with closures, syntax and
+而不需要撰写一大堆的代码
 
 1482
 01:01:15,920 --> 01:01:16,485
@@ -6690,74 +6959,92 @@ things like that.
 1483
 01:01:16,487 --> 01:01:20,856
 You can also reduce an entire array to, to a single value.
+还有，你可以将整个数组 reduce（减少）为一个值
 
 1484
 01:01:20,858 --> 01:01:23,925
 So this one takes an argument which is the initial value you
+这个方法接受一个参数
 
 1485
 01:01:23,927 --> 01:01:25,059
 want to start with.
+这个参数是你自定的初始值
 
 1486
 01:01:25,061 --> 01:01:26,794
 And then it just takes a function that
+还有一个函数作为参数
 
 1487
 01:01:26,796 --> 01:01:30,364
 takes the value so far and the next element in the array and
+这个函数传入当前的值和下一个数组中的元素
 
 1488
 01:01:30,366 --> 01:01:31,832
 you return what the combination is.
+你只需要返回他们两者的组合是什么
 
 1489
 01:01:31,834 --> 01:01:33,533
 So you're just combining, combining, combining.
+就这样你一直组合、组合、组合，直到得到最终的结果
 
 1490
 01:01:33,535 --> 01:01:36,069
 So for example if you wanted to add up an array,
+举例来说，你想要累加整个数组中的值
 
 1491
 01:01:36,071 --> 01:01:38,571
 you could say [1, 2, 3.]reduce.
+你只需要输入 [1, 2, 3].reduce
 
 1492
 01:01:38,573 --> 01:01:41,473
 Start with a 0, and then my closure just gonna add
+然后我们以0为初始值，即第一个参数，我的闭包作为第二个参数
 
 1493
 01:01:41,475 --> 01:01:48,113
 the next element, which is the $1 to, so far which is $0.
+将下一个元素（$1）累加起来
 
 1494
 01:01:48,115 --> 01:01:52,516
 Okay all right, string.
+以上就是所有 Array 中的方法，String
 
 1495
 01:01:52,518 --> 01:01:54,618
 So string is a little bit complicated.
+String 有一点点复杂
 
 1496
 01:01:57,690 --> 01:01:59,055
 I can tell all the, by the way,
+今天的课程我无法将所有 String 的内容讲完
 
 1497
 01:01:59,057 --> 01:02:00,790
 already I'm not gonna get to the end of this so
+String 的内容可能一直要持续到
 
 1498
 01:02:00,792 --> 01:02:02,658
 we'll finish this next Wednesday.
+下周三的课程
 
 1499
 01:02:02,660 --> 01:02:05,327
 This whole slide package here but.
+这个 Slide 包在这里
 
 1500
 01:02:05,329 --> 01:02:06,945
 So string.
+String
 
 1501
 01:02:06,946 --> 01:02:08,562
@@ -7162,418 +7449,522 @@ I told you it returned nil if it couldn't find it?
 1601
 01:06:04,367 --> 01:06:06,834
 Well, what does it return if it could find it?
+那么如果它能找到它的话，它会返回什么？
 
 1602
 01:06:06,836 --> 01:06:09,536
 Well, it returns a Range of String.Index.
+它会返回 Range<String.Index> 
 
 1603
 01:06:09,538 --> 01:06:11,388
 Actually, it
+实际上
 
 1604
 01:06:11,389 --> 01:06:13,239
 returns an Optional Range of String.Index.
+它会返回一个 optional 的 Range<String.Index> 
 
 1605
 01:06:13,242 --> 01:06:14,607
 Okay? That's how, if you used it for
+明白了吗？这就是如何使用这个方法
 
 1606
 01:06:14,609 --> 01:06:15,908
 your assignment, that's how you used it.
+你们的作业中可能会用到它
 
 1607
 01:06:15,910 --> 01:06:17,543
 You used the Optional nature of it,
+你可以用到它 Optional 的性质
 
 1608
 01:06:17,545 --> 01:06:20,212
 but now you can even use the Range nature of it.
+你更可以用到它 Range 的性质
 
 1609
 01:06:20,214 --> 01:06:22,498
 So for example, if we wanted to
+比如我们想要在一个含有数字的字符串中
 
 1610
 01:06:22,499 --> 01:06:24,783
 get the whole number portion of a string that had a number.
+获取其中的数字部分
 
 1611
 01:06:24,785 --> 01:06:27,252
 So I have, let's say, 56.25 as a string,
+这里我有一个“56.25”的字符串
 
 1612
 01:06:27,254 --> 01:06:29,020
 I wanna get the whole number part.
+我想要获取整个数字部分
 
 1613
 01:06:29,022 --> 01:06:33,457
 I could just say find me that decimal point.
+我可以这么做——首先找到小数点
 
 1614
 01:06:33,459 --> 01:06:34,942
 Kay? And that's gonna
+然后
 
 1615
 01:06:34,943 --> 01:06:36,426
 return a range if, if it can find it.
+它会返回一个范围，如果它能够找到小数点
 
 1616
 01:06:36,428 --> 01:06:37,844
 If there's a decimal point in
+如果在我刚才的字符串中有小数点的话
 
 1617
 01:06:37,845 --> 01:06:39,261
 there it's gonna return that range.
+这个方法会返回那个范围
 
 1618
 01:06:39,264 --> 01:06:43,232
 And I'm gonna grab the part from the num.startIndex,
+接着我就可以用 num.startIndex 来获取那部分了
 
 1619
 01:06:43,234 --> 01:06:46,102
 you see the num is the number, it's startIndex all the way
+这里你可以看到 num 是一个数字，他的 startIndex 是
 
 1620
 01:06:46,104 --> 01:06:49,805
 to where the decimal is, not including the decimal, okay?
+小数点之后的那个位置，而不是小数点，明白了吗？
 
 1621
 01:06:49,807 --> 01:06:51,406
 Now I've got sub string which is the whole part.
+现在我已经从字符串中提取了我想要的那部分
 
 1622
 01:06:53,476 --> 01:06:54,108
 Are we cool with that?
+理解了吗？
 
 1623
 01:06:55,544 --> 01:06:57,644
 So sub stringing and strings actually,
+所以，字符串和子字符串
 
 1624
 01:06:57,646 --> 01:07:01,247
 once you understand this whole index thing pretty powerful.
+一旦你了解了这些方法，
 
 1625
 01:07:01,249 --> 01:07:03,416
 We could even remove the whole number part.
+我们就可以利用它们在字符串中移除整个数字部分
 
 1626
 01:07:03,418 --> 01:07:06,185
 'Kay, just by using removeRange of that same
+只需要对相同的范围使用 removeRange
 
 1627
 01:07:06,187 --> 01:07:09,421
 range, num.startIndex, the decimal range.
+num.startIndex，数字的返回
 
 1628
 01:07:09,423 --> 01:07:12,357
 Or we can replace the range with other things, etc.
+或者我们可以将这个范围替换成其他的东西，等等
 
 1629
 01:07:12,359 --> 01:07:15,060
 Okay, so there's a lot of string methods there for
+好的，对字符串进行修改的方法大多数
 
 1630
 01:07:15,062 --> 01:07:17,895
 doing that and they're all based on that string index.
+都基于字符串的 index
 
 1631
 01:07:17,897 --> 01:07:19,363
 Okay, other string methods,
+另外一些字符串的方法
 
 1632
 01:07:19,365 --> 01:07:21,265
 I'm gonna start blasting through a lot of this.
+我会快速讲解一些
 
 1633
 01:07:21,267 --> 01:07:22,933
 You could look these all up in the documentation.
+你可以在文档里找到所有的这些方法
 
 1634
 01:07:22,935 --> 01:07:24,567
 Some of these it actually gets from NSString,
+其中一些实际上从 NSString 中来的
 
 1635
 01:07:24,569 --> 01:07:26,402
 which I'm gonna talk about in a moment.
+稍后我会讲一下 NSString
 
 1636
 01:07:26,404 --> 01:07:28,771
 You can see that you can find the endIndex,
+你看你可以找到 endIndex
 
 1637
 01:07:28,773 --> 01:07:31,740
 there is the join takura talked about before
+还有我们之前讨论过的 join 方法
 
 1638
 01:07:31,742 --> 01:07:36,544
 notice that there's toInt but not toDouble.
+注意，还有一个方法是 toInt 而不是 toDouble
 
 1639
 01:07:36,546 --> 01:07:38,880
 Why is there toInt in string and not toDouble?
+为什么在字符串操作中只有 toInt 而没有 toDouble？
 
 1640
 01:07:38,882 --> 01:07:40,614
 Anybody having any idea why it is?
+有人知道原因吗？
 
 1641
 01:07:43,118 --> 01:07:45,485
 It's because when you convert to a double,
+这是因为如果你转换到一个 double 时
 
 1642
 01:07:45,487 --> 01:07:46,986
 you have to specify things.
+你需要指定一些东西
 
 1643
 01:07:46,988 --> 01:07:48,721
 How many significant digits do you want?
+你需要多少的有效位数？
 
 1644
 01:07:48,723 --> 01:07:50,723
 How many digits after the fraction do you want,
+你需要小数点后几位？
 
 1645
 01:07:50,725 --> 01:07:52,258
 things like that?
+如此之类的问题
 
 1646
 01:07:52,259 --> 01:07:53,792
 And so there's really nowhere to specify that.
+事实上没有地方去指定这些东西
 
 1647
 01:07:53,794 --> 01:07:55,560
 It would have to be toDouble with a whole bunch of
+如果有一个 toDouble 方法，那么会有一大堆的
 
 1648
 01:07:55,562 --> 01:07:57,795
 arguments to specify how you wanna do that conversion.
+参数来指定转换中的一些细节
 
 1649
 01:07:57,797 --> 01:08:00,498
 When you convert to an int, there's nothing inside,
+但当你将字符串转换为 Int 时，这些细节都不存在了
 
 1650
 01:08:00,500 --> 01:08:01,899
 you just convert it to the int, right?
+你仅仅需要将它转换为 Int，对吗？
 
 1651
 01:08:01,901 --> 01:08:05,602
 So the whole number so but notice that toInt does return
+注意，toInt 方法返回的是一个 Optional Int，
 
 1652
 01:08:05,604 --> 01:08:08,672
 an optional int, that's because if you say toInt,
+那是因为，当你调用 toInt 方法时
 
 1653
 01:08:08,674 --> 01:08:13,509
 if you send out to hello, it's going to be nil, okay?
+但是你的字符串是”hello“，此时会返回 nil，明白了吗？
 
 1654
 01:08:13,511 --> 01:08:15,844
 So, string methods, all right?
+String 方法，没问题了吧？
 
 1655
 01:08:16,880 --> 01:08:20,248
 Okay, there's kind of a hidden bunch of methods which you
+好的，其实有一些隐藏的方法
 
 1656
 01:08:20,250 --> 01:08:24,018
 don't even know about, which is conversions using init.
+这些方法你根本不知道，这些方法是在 init 中实现了转换
 
 1657
 01:08:24,020 --> 01:08:26,220
 So for example, if I had a Double and
+比如，我有一个 Double 型的值
 
 1658
 01:08:26,222 --> 01:08:31,224
 a float, I could say, let x equal Int of that double, and
+浮点数，我可以利用 let x = Int(d)，
 
 1659
 01:08:31,226 --> 01:08:35,461
 I just basically create a floor and turned it to an int.
+我就可以对这个值取下整并将它转化为一个 Int
 
 1660
 01:08:35,463 --> 01:08:37,029
 So I converted it.
+这就是我如何转换的
 
 1661
 01:08:37,030 --> 01:08:38,596
 So I know you convert things and
+我知道你们把这个对象转换成那个对象
 
 1662
 01:08:38,599 --> 01:08:39,865
 convert them from one thing to another.
+或者从那个对象转换成这个对象
 
 1663
 01:08:39,867 --> 01:08:42,834
 It makes total sense with the number values like ints and
+像整数和浮点数或者类似的
 
 1664
 01:08:42,836 --> 01:08:44,152
 floats and things like that.
+都可以这么做
 
 1665
 01:08:44,153 --> 01:08:45,469
 And you're gonna see CGFloat next week.
+下周你们会使用到 CGFloat
 
 1666
 01:08:45,472 --> 01:08:47,905
 That's another kind of floating point number.
+这是另外一种浮点数
 
 1667
 01:08:47,907 --> 01:08:49,340
 And you can convert using.
+同样你可以通过转换使用它
 
 1668
 01:08:49,342 --> 01:08:50,741
 There's no toInt or anything.
+但是 CGFloat 没有 toInt 或者其他的方法
 
 1669
 01:08:50,743 --> 01:08:53,410
 You just create a new one with the initializer.
+你只能通过 initializer 创建一个 CGFloat 对象
 
 1670
 01:08:53,412 --> 01:08:54,411
 'Kay, so the numbers.
+接下来，Numbers（数字）
 
 1671
 01:08:54,413 --> 01:08:56,212
 But you almost might be surprised.
+你会感到惊讶的是
 
 1672
 01:08:56,214 --> 01:08:57,747
 Actually, if you read the homework carefully or
+如果你之前认真地读过了课后作业的要求
 
 1673
 01:08:57,749 --> 01:08:59,715
 the reading assignment, you saw this.
+你会看到
 
 1674
 01:08:59,717 --> 01:09:02,217
 Is that you can convert arrays and
+你可以在数组和字符串之间 
 
 1675
 01:09:02,219 --> 01:09:06,521
 strings using these intitializers.
+通过 intitializer 相互转化
 
 1676
 01:09:06,523 --> 01:09:11,158
 For example, you can say array of a string, so create a new
+举例，你通过调用 Array("abc") 来
 
 1677
 01:09:11,160 --> 01:09:13,927
 array and the initializers argument is a string.
+创建一个数组
 
 1678
 01:09:13,929 --> 01:09:15,095
 And it will return you an array of
+这个方法会返回一个数组
 
 1679
 01:09:15,097 --> 01:09:18,231
 all the characters in that string, right?
+而数组中的元素是字符串中的字符
 
 1680
 01:09:18,233 --> 01:09:20,800
 Unicode characters.
+Unicode 字符
 
 1681
 01:09:20,801 --> 01:09:23,368
 Or vice versa, you can have an array of unicode characters.
+相反的，你有一个包含一对 Unicode 字符的数组
 
 1682
 01:09:23,371 --> 01:09:25,404
 Right?
+对吧？
 
 1683
 01:09:25,405 --> 01:09:27,438
 And it will, and you pass that to strings constructor and
+你可以使用 String 的 constrctor 来创建一个字符串
 
 1684
 01:09:27,441 --> 01:09:29,974
 it will return the string with those things zipped up.
+字符串中元素由数组中字符拼接而成
 
 1685
 01:09:31,377 --> 01:09:32,660
 Okay?
+明白了吗？
 
 1686
 01:09:32,661 --> 01:09:33,944
 So there's kind of a hidden thing there.
+所以还有一些隐藏的方法
 
 1687
 01:09:35,647 --> 01:09:38,214
 Notice that you can't do string of 52.5,
+但是，注意你不能调用 let s = Stirng(52.5)
 
 1688
 01:09:38,216 --> 01:09:40,950
 but that's okay because you have that back slash,
+但是你可以通过 let s = "\(37.5)" 来实现
 
 1689
 01:09:40,952 --> 01:09:43,319
 open-parenthesis thing to convert.
+浮点数到字符串之间的
 
 1690
 01:09:43,321 --> 01:09:45,087
 Of floats to strings.
+转换
 
 1691
 01:09:46,857 --> 01:09:47,722
 Okay? You can do
+明白了吗？你可以
 
 1692
 01:09:47,724 --> 01:09:49,190
 string of 52 though.
+let s = String(52) 这么做
 
 1693
 01:09:49,192 --> 01:09:51,359
 Cuz it has toInt, it kinda knows how to do that.
+因为 String 有 toInt 这个方法，它知道如何将整数转换成字符串
 
 1694
 01:09:52,728 --> 01:09:54,294
 All right, assertions.
+接下来，Assertions
 
 1695
 01:09:54,296 --> 01:09:57,364
 So assertions, really valuable debugging aid.
+Assertions 是一个很有用的 debug 方法
 
 1696
 01:09:57,366 --> 01:10:01,200
 They basically take a closure as the first argument.
+它们接受一个闭包作为其第一个参数
 
 1697
 01:10:01,202 --> 01:10:02,434
 It's an auto closure,
+闭包是 autoclosure 的
 
 1698
 01:10:02,436 --> 01:10:03,635
 which means you don't need the curly braces.
+这意味着你不需要花括号
 
 1699
 01:10:03,637 --> 01:10:05,937
 Is this just kind of funky think, okay.
+这是一个很有意思的事情
 
 1700
 01:10:06,940 --> 01:10:10,041
 So the first argument is what would be inside the,
+总而言之，第一个参数应该是
 
 1701
 01:10:10,043 --> 01:10:11,275
 the curly braces of a closure.
+在闭包括号内的那些东西
 
 1702
 01:10:11,277 --> 01:10:14,244
 And the second argument is some string that's gonna be
+assert() 的第二个参数是一个字符串
 
 1703
 01:10:14,246 --> 01:10:18,181
 printed out on your console because assert, if whatever
+假如 assert 方法的第一个参数返回的是 false
 
 1704
 01:10:18,183 --> 01:10:21,184
 that thing that was in the auto-closure evaluates to,
+这个字符串将会在你的控制台中输出
 
 1705
 01:10:21,186 --> 01:10:22,818
@@ -7582,66 +7973,82 @@ if that's not true.
 1706
 01:10:22,820 --> 01:10:24,720
 'Kay, cuz you're asserting that that's true,
+这是因为你 assert 的条件应该是成立的
 
 1707
 01:10:24,722 --> 01:10:26,154
 then it's gonna crash your program.
+如果不成立，那么它会导致你的程序崩溃
 
 1708
 01:10:27,257 --> 01:10:28,356
 Okay, and print that message out.
+这时在控制台中输出一个信息
 
 1709
 01:10:28,358 --> 01:10:30,241
 So it's a great way to make
+对程序的 debug 是很有帮助的
 
 1710
 01:10:30,242 --> 01:10:32,125
 your program crash when things that should be true aren't.
+因为你的程序因为某些条件的不满足而导致崩溃
 
 1711
 01:10:32,128 --> 01:10:35,796
 Now, asserts don't work when you build your program for
+assert 方法会在你生成程序的 Release 版本的时候
 
 1712
 01:10:35,798 --> 01:10:37,497
 release, like to the App Store.
+失效，也就是提交到 App Store 的版本
 
 1713
 01:10:37,499 --> 01:10:40,600
 When you're shipping to the App Store, asserts don't work.
+当你在把程序提交到 App Store 的时候，assert 不会工作
 
 1714
 01:10:40,602 --> 01:10:42,635
 It doesn't even evaluate the closure, okay,
+这时，它甚至不会对闭包求值
 
 1715
 01:10:42,637 --> 01:10:43,302
 they're just ignored.
+它们被忽略了
 
 1716
 01:10:44,405 --> 01:10:46,138
 But for debugging, it's pretty good.
+这个在 debug 中很有用
 
 1717
 01:10:46,140 --> 01:10:50,108
 So I might have a function called validation that should,
+我可能会有一个叫 validation 的函数
 
 1718
 01:10:50,110 --> 01:10:52,944
 at this point that I'm executing this assert
+当我在执行 assert 的时候
 
 1719
 01:10:52,946 --> 01:10:54,945
 not be returning nil.
+不应该返回 nil
 
 1720
 01:10:54,947 --> 01:10:59,249
 And if it does return nil then I'm going to crash here.
+而且，它如果返回 nil 了，这会把程序搞崩溃
 
 1721
 01:10:59,251 --> 01:11:01,685
 So I say the assertion is that validation should not be
+这里我写 assert(validation() != nil, "the validation fucniton return nil")
 
 1722
 01:11:01,687 --> 01:11:04,087
@@ -7654,148 +8061,185 @@ nil right now.
 1724
 01:11:05,890 --> 01:11:10,291
 So a lot of languages have assert so swift does too.
+assert 在很多语言中都有实现，Swift 也有一样
 
 1725
 01:11:10,293 --> 01:11:12,827
 okay, other function, so there's a lot of function and
+好的，还有一些其他的函数
 
 1726
 01:11:12,829 --> 01:11:15,830
 these do not appear to be documented anywhere yet.
+这些函数并没有出现在文档中
 
 1727
 01:11:15,832 --> 01:11:18,332
 So the slide might be your only documentation.
+所以我的 Slide 可能是唯一你们可以参考的文档
 
 1728
 01:11:18,334 --> 01:11:20,033
 I'm sure you can find about them on the internet instead
+我相信你们在网上也可以找到这些
 
 1729
 01:11:20,035 --> 01:11:22,002
 of too but there's a lot of functions.
+可能网上的资料还要更详细一点
 
 1730
 01:11:22,004 --> 01:11:24,303
 These are global functions, not methods.
+这些是全局函数，并不是某个 Class 的方法
 
 1731
 01:11:24,305 --> 01:11:26,872
 They take arguments which are hard for
+它们接受一些参数，这些参数
 
 1732
 01:11:26,874 --> 01:11:28,907
 me to explain to you right now.
+目前我很难跟你们解释
 
 1733
 01:11:28,909 --> 01:11:32,044
 But basically they take arrays and strings, and dictionaries,
+但是你们只需要知道这些函数可以接受 Array, Dictionary, String 型的参数
 
 1734
 01:11:32,046 --> 01:11:34,245
 because they take other things that arrays and
+因为它们还接受 Array, Dictionary, String 型的参数
 
 1735
 01:11:34,247 --> 01:11:37,448
 strings, and dictionaries are, those things.
+和其他的一些东西
 
 1736
 01:11:37,450 --> 01:11:40,985
 But you can look through this list kinda interesting things.
+你可以看一遍这个列表
 
 1737
 01:11:40,987 --> 01:11:42,853
 I can combine it with the thing I
+我会讲它和 String 中的方法
 
 1738
 01:11:42,855 --> 01:11:45,956
 was talking about at the end there with the string.
+混合在一起
 
 1739
 01:11:45,958 --> 01:11:47,624
 Passing in an array of characters.
+传入一个由字符组成的数组
 
 1740
 01:11:47,626 --> 01:11:51,694
 I can actually take a string, call a reverse, which returns
+我可以拿一个字符串，在它之上调用 reverse 方法
 
 1741
 01:11:51,696 --> 01:11:55,731
 an array of the characters reversed and then call string
+返回这些字符的反转，然后再调用
 
 1742
 01:11:55,733 --> 01:11:59,201
 to push it back and call it, create a string again.
+String 的方法创建一个新的字符串
 
 1743
 01:11:59,203 --> 01:12:00,502
 All right?
+明白了吗？
 
 1744
 01:12:00,504 --> 01:12:02,070
 Objective-C Compatibility.
+Objective-C 兼容性
 
 1745
 01:12:02,072 --> 01:12:04,322
 You know what?
+这个话题
 
 1746
 01:12:04,323 --> 01:12:06,573
 We are going to wait and talk about this next time.
+我们下一次再讲
 
 1747
 01:12:06,576 --> 01:12:08,009
 Very important topic.
+这是一个很重要的话题
 
 1748
 01:12:08,010 --> 01:12:09,443
 But I don't want to give it short shrift.
+我想好好探讨一下
 
 1749
 01:12:09,445 --> 01:12:11,178
 So, that is it for today.
+这就是今天课程的所有内容
 
 1750
 01:12:11,180 --> 01:12:15,882
 Let me, quickly, show you, this slide.
+最后让我快速给你们过一遍这个 Slide
 
 1751
 01:12:17,719 --> 01:12:20,052
 Okay coming up, no Friday section this week.
+这周五没有课程
 
 1752
 01:12:20,054 --> 01:12:21,820
 Next Monday is holiday, no lecture.
+下周一是节假日，也没有课程
 
 1753
 01:12:21,822 --> 01:12:23,138
 Next Wednesday,
+下周三
 
 1754
 01:12:23,139 --> 01:12:24,455
 I might not be talking about auto layout next week,
+我可能会讲一些 Auto Layout 的话题
 
 1755
 01:12:24,458 --> 01:12:26,425
 I'm not sure.
+但不一定
 
 1756
 01:12:26,426 --> 01:12:28,393
 Your homework one was due today, your homework two was
+课后作业一今天截止，课后作业二
 
 1757
 01:12:28,395 --> 01:12:31,529
 already posted, your reading assignment two was posted on
+我也贴出来了，你们的阅读作业二会在
 
 1758
 01:12:31,531 --> 01:12:35,165
 Monday, all that stuff is due next Wednesday.
+（下）周一贴上来，然后所有的东西下周三截止
 
 1759
 01:12:35,167 --> 01:12:36,933
 If you have any questions, I'm here.
+如果你们有其他的疑问，欢迎来询问
 
 1760
 01:12:36,935 --> 01:12:42,405
 [SOUND] For more, please visit us at stanford.edu.
+更多课程，请访问 stanford.edu
 

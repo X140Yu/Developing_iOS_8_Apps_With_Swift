@@ -6401,78 +6401,97 @@ Okay?
 1601
 01:04:50,991 --> 01:04:52,491
 So faceRadius is gonna be a CGFloat to all of
+faceRadius 会是 CGFloat 类型的，
 
 1602
 01:04:52,493 --> 01:04:55,493
-our drawing stuff is float, and I'm gonna return as big as
+our drawing stuff is Float, and I'm gonna return as big as
+所有的绘画元素都是 Float 类型的，在它不会被截断的情况下，
 
 1603
 01:04:55,495 --> 01:04:57,261
 it can be without getting cut off.
+我会让它尽可能大
 
 1604
 01:04:57,263 --> 01:04:59,563
 So it's gonna be the minimum of my width or height.
+所以让它成为宽和高中较小的那一个
 
 1605
 01:04:59,565 --> 01:05:03,934
 So I'm gonna say, min of my bounds.
+所以这里
 
 1606
 01:05:03,936 --> 01:05:06,203
 Sorry.
+抱歉
 
 1607
 01:05:06,204 --> 01:05:08,471
-Bounds.size.width, or my bounds.size.height.
+bounds.size.width, or my bounds.size.height.
+bounds.size.width 或者 bounds.size.height
 
 1608
 01:05:08,473 --> 01:05:10,306
 Whichever is less than that.
+哪个短用哪个
 
 1609
 01:05:10,307 --> 01:05:12,140
 Min is just a nice little function in Swift.
+Swift 中的 min 是一个不错的小函数
 
 1610
 01:05:12,143 --> 01:05:15,077
 And I'm gonna divide by two because this is a radius,
+这里把它除以2，因为这是半径
 
 1611
 01:05:15,079 --> 01:05:16,612
 not diameter of my face.
+而不是脸的直径
 
 1612
 01:05:16,614 --> 01:05:17,946
 This is the radius.
+是半径
 
 1613
 01:05:17,948 --> 01:05:20,982
 So now I have my center facing radius, but
+现在我有了脸的半径
 
 1614
 01:05:20,984 --> 01:05:22,984
 I still have an error here.
+但是这里还是有个错误
 
 1615
 01:05:22,986 --> 01:05:24,669
 Look at this error.
+来看看这个错误
 
 1616
 01:05:24,670 --> 01:05:26,353
 Even though I did my center, I did my radius.
+即使我算好了中间位置，算好了半径
 
 1617
 01:05:26,356 --> 01:05:27,554
 I still have an error.
+这里还是有错误
 
 1618
 01:05:27,556 --> 01:05:28,955
 What is the problem?
+到底是什么问题？
 
 1619
 01:05:28,957 --> 01:05:31,891
 Oh, extra argument radius in call.
+extra argument radius in call
 
 1620
 01:05:31,893 --> 01:05:33,760
@@ -6481,14 +6500,17 @@ Huh.
 1621
 01:05:33,762 --> 01:05:34,944
 That's weird.
+这很奇怪
 
 1622
 01:05:34,945 --> 01:05:36,127
 I didn't see any extra argument.
+我没看到额外的参数
 
 1623
 01:05:36,130 --> 01:05:37,329
 What the heck is that about?
+到底出什么错了？
 
 1624
 01:05:37,331 --> 01:05:39,131
@@ -6497,26 +6519,32 @@ Okay.
 1625
 01:05:39,132 --> 01:05:40,932
 You could waste a half an hour looking for this, okay?
+你可能会花半个小时找错误
 
 1626
 01:05:40,934 --> 01:05:42,250
 I was thinking, oh,
+你可能会想
 
 1627
 01:05:42,251 --> 01:05:43,567
 radius, there's nothing wrong with the radius.
+radius，radius 这里也没什么问题啊
 
 1628
 01:05:43,570 --> 01:05:45,687
 It's right.
+是的
 
 1629
 01:05:45,688 --> 01:05:47,805
 The problem for this has nothing to do with the radius.
+radius 跟这个问题一点关系都没有
 
 1630
 01:05:47,807 --> 01:05:50,708
 The problem is this.
+问题在这
 
 1631
 01:05:50,710 --> 01:05:52,410
@@ -6525,46 +6553,57 @@ Okay?
 1632
 01:05:52,411 --> 01:05:54,111
 So this is an error you get from switching occasionally,
+这个错误你们可能会偶尔遇到
 
 1633
 01:05:54,113 --> 01:05:56,813
 I'm sure they'll fix all these errors, but occasionally,
+我确定他们会修复好这些错误
 
 1634
 01:05:56,815 --> 01:05:59,416
 you get this very misleading error, and this is one.
+但是偶尔还是会获得这些误导你的错误，这就是一个
 
 1635
 01:05:59,418 --> 01:06:00,817
 The problem is that this-
+问题在于
 
 1636
 01:06:00,819 --> 01:06:01,784
 What type is this?
+它的类型是什么？
 
 1637
 01:06:05,022 --> 01:06:06,021
 It's a Double.
+它是一个 Double
 
 1638
 01:06:06,023 --> 01:06:07,489
 Yeah.
+是的
 
 1639
 01:06:07,490 --> 01:06:08,956
 And what type do we draw with?
+但是我们绘画用什么类型的？
 
 1640
 01:06:08,959 --> 01:06:10,224
 CGFloat.
+CGFloat
 
 1641
 01:06:10,226 --> 01:06:14,194
 So this problem is just that I need to cast this to
+所以把它转型成 CGfloat 这个问题就可以
 
 1642
 01:06:14,196 --> 01:06:15,195
 a CGFloat.
+解决了
 
 1643
 01:06:15,197 --> 01:06:16,908
@@ -6573,10 +6612,12 @@ Okay?
 1644
 01:06:16,909 --> 01:06:18,620
 That's gonna make this error go away.
+这个错误就会消失了
 
 1645
 01:06:18,621 --> 01:06:20,332
 It had nothing to do with radius whatsoever there.
+跟 radius 一点关系都没有
 
 1646
 01:06:20,335 --> 01:06:22,168
@@ -6585,50 +6626,62 @@ Okay?
 1647
 01:06:22,169 --> 01:06:24,002
 So, best warning, watch out for that.
+这就是我给你们的提醒，以后要注意点
 
 1648
 01:06:24,005 --> 01:06:26,605
 All right, so I have my nice facePath here.
+我已经得到了 facePath
 
 1649
 01:06:26,607 --> 01:06:30,476
-Maybe I wanna set my facePath's linewidth.
+Maybe I wanna set my facePath's lineWidth.
+在这里设置一下 facePath 的 lineWidth（线宽）
 
 1650
 01:06:30,478 --> 01:06:34,246
 Something like three, something like that.
+设置成3吧
 
 1651
 01:06:34,248 --> 01:06:36,181
 In fact, maybe I even want lineWidth to
+我想把 lineWidth 变成 FaceView 中
 
 1652
 01:06:36,183 --> 01:06:42,019
 be something that's configurable in my FaceView.
+可以设置的一个属性
 
 1653
 01:06:42,021 --> 01:06:43,253
 So it's a CGFloat.
+类型是 CGFloat
 
 1654
 01:06:43,255 --> 01:06:45,222
 And we'll set it to default of three.
+我们把它的默认设置为3
 
 1655
 01:06:45,224 --> 01:06:46,790
 One thing that's interesting and
+一个很有趣的事是
 
 1656
 01:06:46,792 --> 01:06:48,891
-then we'll set this down here to linewidth.
+then we'll set this down here to lineWidth.
+我先把这里设置成 lineWidth
 
 1657
 01:06:48,893 --> 01:06:51,794
 One thing that's interesting about this is any time
+一个有趣的事情是，无论何时 lineWidth 被改变了，
 
 1658
 01:06:51,796 --> 01:06:54,997
 someone changes my lineWidth, I need to redraw myself.
+我都需要把 FaceView 重新绘制一遍
 
 1659
 01:06:54,999 --> 01:06:56,565
@@ -6637,10 +6690,12 @@ All right?
 1660
 01:06:56,567 --> 01:06:58,133
 So how can I make that happen?
+我怎么做才能实现呢？
 
 1661
 01:06:58,135 --> 01:07:01,502
 Well, I can use Property Observer.
+我可以使用 Property Observer
 
 1662
 01:07:01,504 --> 01:07:02,937
@@ -6649,10 +6704,12 @@ Okay?
 1663
 01:07:02,938 --> 01:07:04,371
 Anytime someone sets this,
+无论什么时候，有人改变了它
 
 1664
 01:07:04,373 --> 01:07:08,108
 I'm gonna call setNeedsDisplay on myself.
+我就会在自己身上调用 setNeedsDisplay
 
 1665
 01:07:08,110 --> 01:07:09,709
@@ -6665,46 +6722,57 @@ Bam.
 1667
 01:07:11,128 --> 01:07:12,544
 I'm in it redrawn by the system.
+系统就会帮你重新绘制视图
 
 1668
 01:07:12,547 --> 01:07:13,879
 Okay? So anytime you have
+如果在你的 view 中有一个
 
 1669
 01:07:13,881 --> 01:07:16,815
 a property in your, in a view that changes how you would be
+property 在改变的时候需要被重新绘制
 
 1670
 01:07:16,817 --> 01:07:19,284
-drawn, just put a little property observer into
+drawn, just put a little Property Observer into
+只要在 Property Observer 里调用
 
 1671
 01:07:19,286 --> 01:07:20,952
 the setNeedsDisplay after it.
+setNeedsDisplay 就可以了
 
 1672
 01:07:20,954 --> 01:07:23,354
 And it'll get you automatically redrawn.
+它就会帮你重新绘制
 
 1673
 01:07:23,356 --> 01:07:25,189
 Maybe I'll have another property here,
+在这里我还想添加一个
 
 1674
 01:07:25,191 --> 01:07:26,490
 which is the color I wanna be.
+颜色的 property
 
 1675
 01:07:26,492 --> 01:07:29,626
 UIColor, we'll set the default here to be
+类型是 UIColor，默认设置成
 
 1676
 01:07:29,628 --> 01:07:31,461
 blueColor for example.
+蓝色
 
 1677
 01:07:31,463 --> 01:07:33,329
 But I want the exact same thing here.
+但我也想像这里一样
 
 1678
 01:07:33,331 --> 01:07:34,029
@@ -6713,46 +6781,57 @@ Okay?
 1679
 01:07:34,031 --> 01:07:35,330
 Someone sets it.
+有人改变了它
 
 1680
 01:07:35,332 --> 01:07:36,631
 I want it redrawn.
+视图就会被重新绘制
 
 1681
 01:07:36,633 --> 01:07:39,167
 And so let's go ahead and set our color.
+现在设置一下颜色
 
 1682
 01:07:39,169 --> 01:07:42,003
 Now I'm gonna do both my set, I could do setFill and
+我既想 setFill 又想 setStroke
 
 1683
 01:07:42,005 --> 01:07:44,638
 setStroke colors, but I'm just gonna do set,
+我两者都想做，只要 set 就可以了
 
 1684
 01:07:44,640 --> 01:07:46,773
 which sets both my fill and my stroke.
+这样填充和笔画都会被设置
 
 1685
 01:07:46,775 --> 01:07:49,976
 I'm not gonna be filling so it doesn't matter, but set to
+这里不会被填充，所以调用 set 也没问题
 
 1686
 01:07:49,978 --> 01:07:53,146
 both, and then how do I draw this BezierPath right here?
+然后呢？我怎么绘制 BezierPath？
 
 1687
 01:07:53,148 --> 01:07:56,716
 I just say, facePath.stroke.
+facePath.stroke 就可以了
 
 1688
 01:07:56,718 --> 01:08:01,319
 And that's gonna draw, okay?
+这样就可以绘制了
 
 1689
 01:08:01,321 --> 01:08:04,456
 So let's go take a look at this.
+我们运行一下程序
 
 1690
 01:08:04,458 --> 01:08:11,395
@@ -6761,86 +6840,107 @@ Okay.
 1691
 01:08:11,397 --> 01:08:13,397
 So, it comes up, it's blank.
+运行起来了，它是空的
 
 1692
 01:08:13,399 --> 01:08:15,866
 And not only is it blank, it's got some error down here.
+不仅仅是空白的，这里还有一些错误信息
 
 1693
 01:08:15,868 --> 01:08:17,918
 What does it say? It says,
+它说
 
 1694
 01:08:17,919 --> 01:08:19,969
 failed to instantiate the default view controller.
+failed to instantiate the default view controller（初始化默认 view controller 失败）
 
 1695
 01:08:19,971 --> 01:08:21,738
 Okay? Well that means that in my
+这表明
 
 1696
 01:08:21,740 --> 01:08:27,009
 StoryBoard, there is no scene that's specified,
+在 StoryBoard 中，没有指定
 
 1697
 01:08:27,011 --> 01:08:29,444
 as the scene to start in.
+开始的场景
 
 1698
 01:08:29,446 --> 01:08:31,079
 Okay? It has no starting scene.
+没有开始的场景
 
 1699
 01:08:31,081 --> 01:08:33,848
 The starting scene always has a little arrow pointing to it.
+开始的场景总是有一个指向它的小箭头
 
 1700
 01:08:33,850 --> 01:08:34,983
 Right here,
+在这里
 
 1701
 01:08:34,984 --> 01:08:36,117
 you've probably seen in in your Calculator right?
+你们可能在 Calculator 中已经见过了
 
 1702
 01:08:36,119 --> 01:08:38,419
 A little arrow that says this is the place to come in
+当你运行程序时
 
 1703
 01:08:38,421 --> 01:08:39,720
 when you start this app.
+一个代表程序入口点的小箭头
 
 1704
 01:08:39,722 --> 01:08:42,322
 You can set that arrow with the Inspector the regular
+你可以在选中的 view controller 的
 
 1705
 01:08:42,324 --> 01:08:44,524
-attributes inspector by selecting your
+Attributes Inspector by selecting your
+Attributes Inspector 里
 
 1706
 01:08:44,526 --> 01:08:47,693
 view controller that you wanna be the one that comes in.
+设置它为入口场景
 
 1707
 01:08:47,695 --> 01:08:48,894
 And click. This little button here is
+点击这里的小按钮
 
 1708
 01:08:48,896 --> 01:08:49,828
 Initial View Controller.
+Is Initial View Controller
 
 1709
 01:08:49,830 --> 01:08:51,129
 You see that arrow appear?
+看到剪头出现了吗？
 
 1710
 01:08:51,131 --> 01:08:52,997
 You can also pick this arrow up and
+你也可以把这个剪头选中
 
 1711
 01:08:52,999 --> 01:08:55,032
 move it to another view controller.
+把它移动到另一个 view controller 里
 
 1712
 01:08:55,034 --> 01:08:56,767
@@ -6849,110 +6949,137 @@ Okay?
 1713
 01:08:56,769 --> 01:08:59,269
 So now we have a thing, oh all right.
+好了
 
 1714
 01:08:59,271 --> 01:09:01,154
 So we've got our face.
+脸已经出现了
 
 1715
 01:09:01,155 --> 01:09:03,038
 Now, one thing I don't like about this face is it goes all
+现在我对这个脸不满意的地方就是
 
 1716
 01:09:03,041 --> 01:09:04,407
 the way to the edges.
+它太靠近边缘了
 
 1717
 01:09:04,409 --> 01:09:06,675
 I want it to actually be 90% of the edges.
+我想让它占据整个长度的 90%
 
 1718
 01:09:08,178 --> 01:09:09,544
 Okay? Another thing I
+另一件
 
 1719
 01:09:09,546 --> 01:09:10,712
 don't like is this.
+我不满意的事情是
 
 1720
 01:09:10,714 --> 01:09:12,113
 Ugh, okay?
+额
 
 1721
 01:09:12,115 --> 01:09:15,982
 So my face is gonna be distorted every time I rotate.
+每一次我旋转屏幕，脸都会被破坏
 
 1722
 01:09:15,984 --> 01:09:17,601
 Why is that?
+这是怎么回事儿？
 
 1723
 01:09:17,602 --> 01:09:19,219
 That's this stretching thing I was telling you about.
+这就是我之前告诉你们的拉伸的情况
 
 1724
 01:09:19,221 --> 01:09:22,155
 We want our drawRect to be called again when we
+我们希望每一个获得新的边界时（就像旋转屏幕）
 
 1725
 01:09:22,157 --> 01:09:24,523
 have a new bounds like that.
+drawRect 都会被再一次调用
 
 1726
 01:09:24,525 --> 01:09:26,492
 So let's fix both of those things.
+现在我们一起把它们处理好
 
 1727
 01:09:26,494 --> 01:09:29,795
 We can fix that content mode redraw by selecting our view,
+修改 Mode （重绘模式）的方法是：选中 view
 
 1728
 01:09:29,797 --> 01:09:31,596
 going to the inspector up here,
+去到 Inspector
 
 1729
 01:09:31,598 --> 01:09:33,431
 the Attributes Inspector, and
+Attributes Inspector
 
 1730
 01:09:33,433 --> 01:09:35,199
 the very first one is the mode.
+第一个就是 Mode
 
 1731
 01:09:35,201 --> 01:09:37,835
 And you can see the default was scale to fill.
+默认的是 Scale To Fill (拉伸以填充)
 
 1732
 01:09:37,837 --> 01:09:38,835
 We want Redraw.
+我们想要 Redraw (重绘)
 
 1733
 01:09:39,905 --> 01:09:41,170
 Okay? So I'm gonna pick Redraw.
+所以我选择 Redraw
 
 1734
 01:09:41,172 --> 01:09:42,738
 So that'll fix that.
+这样就修改好了
 
 1735
 01:09:42,740 --> 01:09:49,711
 And as far as the 90%, I'm going to fix that in here,
+至于 90%，我在这里修改
 
 1736
 01:09:49,713 --> 01:09:55,683
 by having the, my face radius be times 90%.
+把 face radius 乘以 90%
 
 1737
 01:09:55,685 --> 01:09:58,319
 But really, I'd like this to be settable too.
+但是我也想让它成为一个可以被设置的
 
 1738
 01:09:58,321 --> 01:10:02,456
 So I'm gonna have var scale, CGFloat.
+添加一个变量，类型是 CGFloat
 
 1739
 01:10:03,425 --> 01:10:05,358
 Okay. And we'll start this out at
+默认设置为
 
 1740
 01:10:05,360 --> 01:10:05,958
@@ -6961,10 +7088,12 @@ Okay. And we'll start this out at
 1741
 01:10:05,960 --> 01:10:07,393
 So I want that, and
+我想让它
 
 1742
 01:10:07,395 --> 01:10:11,963
 this one also, if I change, I want it to change.
+在更改以后也重绘视图
 
 1743
 01:10:11,965 --> 01:10:13,231
@@ -6973,30 +7102,37 @@ Okay?
 1744
 01:10:13,232 --> 01:10:14,498
 So now let's go try that.
+运行一下程序
 
 1745
 01:10:14,501 --> 01:10:15,132
 See what happens.
+看看发生了什么
 
 1746
 01:10:15,134 --> 01:10:16,567
 Okay? We got our 90%.
+90% 已经实现了
 
 1747
 01:10:16,569 --> 01:10:18,135
 That's good.
+还不错
 
 1748
 01:10:18,136 --> 01:10:19,702
 And when I rotate, it doesn't stretch it.
+当我旋转屏幕时，也没有拉伸
 
 1749
 01:10:20,672 --> 01:10:22,138
 Okay? And it's using the minimum of
+它使用了宽度和高度中
 
 1750
 01:10:22,140 --> 01:10:23,072
 the width or height.
+较小的那个
 
 1751
 01:10:23,074 --> 01:10:24,006
@@ -7005,58 +7141,72 @@ Okay?
 1752
 01:10:24,008 --> 01:10:24,906
 So that's good.
+还不错
 
 1753
 01:10:24,908 --> 01:10:26,074
 That's going good.
+越来越好了哈
 
 1754
 01:10:26,076 --> 01:10:29,444
 Now we wanna draw the eyes and the mouth, and
+现在开始绘制眼睛个嘴
 
 1755
 01:10:29,446 --> 01:10:31,712
 cuz time is running out here,
+时间已经不多了
 
 1756
 01:10:31,714 --> 01:10:35,249
 I'm actually gonna type those in super fast.
+我将会用超快的速度输入
 
 1757
 01:10:35,251 --> 01:10:38,752
 I posted for those of you who are trying to keep along here,
+那些一路跟着我敲键盘的同学
 
 1758
 01:10:38,754 --> 01:10:40,687
 which is probably impossible.
+是不可能跟上的
 
 1759
 01:10:40,689 --> 01:10:44,390
 To do that though, I need some constants.
+为了实现这些，我需要一些常量
 
 1760
 01:10:44,392 --> 01:10:47,560
 And this how we do constants in Swift.
+在 Swift 中我们这样定义常量
 
 1761
 01:10:47,562 --> 01:10:49,461
 We create structs.
+创建 struct
 
 1762
 01:10:49,463 --> 01:10:52,330
 Okay? And then use class, or
+使用 class 或者
 
 1763
 01:10:52,332 --> 01:10:55,500
 in this case, static lets.
+在这里使用 static let 修饰
 
 1764
 01:10:55,502 --> 01:10:56,868
 Okay? So this is gonna be
+所以这个常量就是
 
 1765
 01:10:56,870 --> 01:11:00,071
 a constant called Scaling.FaceRadiustoEyeRadius.
+Scaling.FaceRadiustoEyeRadius
 
 1766
 01:11:00,073 --> 01:11:01,956
@@ -7065,26 +7215,32 @@ Okay. And
 1767
 01:11:01,957 --> 01:11:03,840
 then I'm going to have a function here, that I'm
+这里有个函数叫做 bezierPathForEye
 
 1768
 01:11:03,843 --> 01:11:07,911
 gonna type in really, really fast, called bezierPathForEye.
+我也会飞快地输入
 
 1769
 01:11:07,913 --> 01:11:11,548
 And it's just gonna return a BezierPath that draws an eye.
+它会返回一个绘制一只眼睛的 BezierPath
 
 1770
 01:11:11,550 --> 01:11:13,149
 Either the left eye or the right eye.
+左眼或者右眼
 
 1771
 01:11:13,151 --> 01:11:14,283
 This says which one.
+参数用来确定是哪一只眼睛
 
 1772
 01:11:14,285 --> 01:11:16,051
 Okay? So it returns a BezierPath.
+它返回了一个 BezierPath
 
 1773
 01:11:16,053 --> 01:11:18,804
@@ -7093,10 +7249,12 @@ Okay?
 1774
 01:11:18,805 --> 01:11:21,556
 Then I'm gonna have another one, which is BezierSmile.
+这里还会有一个函数，BezierSmile
 
 1775
 01:11:21,558 --> 01:11:23,124
 We're gonna type that in real fast.
+我们会飞快地输入...
 
 1776
 01:11:23,126 --> 01:11:24,158
@@ -7105,50 +7263,62 @@ Okay?
 1777
 01:11:24,160 --> 01:11:26,060
 So here is BeizerPath for smile.
+这就是笑容的 BeizerPath
 
 1778
 01:11:26,062 --> 01:11:27,794
 And what this is gonna do,
+这个函数会
 
 1779
 01:11:27,796 --> 01:11:31,331
-it's gonna take a fraction of the maximum smile.
+it's gonna take a fractionOfMaximumSmile.
+把 fractionOfMaximumSmile 作为参数
 
 1780
 01:11:31,333 --> 01:11:33,800
 So one is full smile.
+1 是最开心的笑容
 
 1781
 01:11:33,802 --> 01:11:35,835
 Minus one is full frown.
+-1 是最难过的
 
 1782
 01:11:35,837 --> 01:11:37,069
 And everywhere in between.
+其余的都在 1 和 -1 之间
 
 1783
 01:11:37,071 --> 01:11:38,570
 'Kay? So that's what this does.
+这就是它做的事情
 
 1784
 01:11:38,572 --> 01:11:39,738
 And it returns a BeizerPath.
+返回一个 BeizerPath
 
 1785
 01:11:39,740 --> 01:11:42,440
 So now here in my drawRect,
+在 drawRect 函数中
 
 1786
 01:11:42,442 --> 01:11:46,477
 I can say bezierPathForEye, left eye.
+调用 bezierPathForEye，left 作为参数
 
 1787
 01:11:46,479 --> 01:11:47,611
 I got the BezierPath.
+我获得了 BezierPath
 
 1788
 01:11:47,613 --> 01:11:51,047
 I'm just gonna immediately send it stroke.
+我立即用它调用 stroke
 
 1789
 01:11:51,049 --> 01:11:52,949
@@ -7157,14 +7327,17 @@ Okay?
 1790
 01:11:52,950 --> 01:11:54,850
 And then BezierPath for the right eye.
+接着是右眼的 BezierPath
 
 1791
 01:11:54,852 --> 01:11:56,985
 I'm gonna send it stroke.
+给它发送 stroke 消息
 
 1792
 01:11:56,987 --> 01:11:59,087
 So I'm just gonna stroke the left eye and the right eye.
+现在绘制了左眼和右眼
 
 1793
 01:11:59,089 --> 01:12:00,338
@@ -7173,38 +7346,47 @@ Okay?
 1794
 01:12:00,339 --> 01:12:01,588
 Then I'm gonna do the smiliness.
+接着处理笑容
 
 1795
 01:12:01,591 --> 01:12:06,127
 So, I'm going to let smiliness equal some value.
+先把笑容设置为一个值
 
 1796
 01:12:06,129 --> 01:12:08,429
 Let's start it at 0.75.
+从 0.75 开始吧
 
 1797
 01:12:08,431 --> 01:12:11,064
 We're pretty, pretty happy to start.
+这是一个很开心很开心的数值了
 
 1798
 01:12:11,066 --> 01:12:13,767
 And then I'm going to create a bez,
+接着，我用上面的这些给笑容
 
 1799
 01:12:13,769 --> 01:12:16,269
 this BezierPath using this thing up here for
+创建一个 BezierPath
 
 1800
 01:12:16,271 --> 01:12:19,005
 a smile, which is bezierPathForSmile.
+用这个函数 bezierPathForSmile 
 
 1801
 01:12:19,007 --> 01:12:22,775
 And we're gonna pass it the smiliness.
+把 smiliness 传进去
 
 1802
 01:12:22,777 --> 01:12:25,810
 And then I'm just going to stroke this smile path.
+然后绘制这个笑容的线条
 
 1803
 01:12:27,881 --> 01:12:29,147
@@ -7213,34 +7395,42 @@ Okay?
 1804
 01:12:29,148 --> 01:12:30,414
 And I hoped to have a little more time so
+我很希望能有时间
 
 1805
 01:12:30,416 --> 01:12:32,449
 I could have gone through this code, but
+跟大家一起看看代码
 
 1806
 01:12:32,451 --> 01:12:34,985
 it's a pretty straightforward code, really.
+但是这些代码都很易懂
 
 1807
 01:12:34,987 --> 01:12:37,654
 Here we're just using addCurveToPoint in
+这里我们调用 addCurveToPoint
 
 1808
 01:12:37,656 --> 01:12:38,788
 our BezierPath.
+在 BezierPath 里
 
 1809
 01:12:38,790 --> 01:12:41,724
 To draw a curve, which is the curve of the mouth.
+为了绘制嘴部的曲线
 
 1810
 01:12:41,726 --> 01:12:43,793
 And then here,
+接着，这儿
 
 1811
 01:12:43,794 --> 01:12:45,861
-we're just using BezierPath arc center again.
+we're just using BezierPath arcCenter again.
+我们又调用了一次 BezierPath arcCenter
 
 1812
 01:12:45,863 --> 01:12:46,495
@@ -7249,26 +7439,32 @@ Okay?
 1813
 01:12:46,497 --> 01:12:48,063
 To create the circle.
+为了绘制圆
 
 1814
 01:12:48,064 --> 01:12:49,630
 The eyes are just circles, okay?
+眼睛都是圆的
 
 1815
 01:12:49,633 --> 01:12:50,965
 That's really all those two methods do.
+这就是这两个方法做的事情
 
 1816
 01:12:50,967 --> 01:12:53,100
 There's nothing really special about them.
+没什么特别的
 
 1817
 01:12:53,102 --> 01:12:57,004
 And what do I have error here, which is, oops.
+这里有个错误
 
 1818
 01:12:57,006 --> 01:12:58,971
 Dot.
+点
 
 1819
 01:12:58,973 --> 01:13:00,172
@@ -7277,18 +7473,22 @@ Okay?
 1820
 01:13:00,174 --> 01:13:01,607
 That's not it either.
+不是点
 
 1821
 01:13:01,609 --> 01:13:04,176
 SmilePath oh, equals, not that.
+SmilePath 等于，
 
 1822
 01:13:04,178 --> 01:13:05,143
 Equals.
+等号
 
 1823
 01:13:05,145 --> 01:13:06,044
 There we go.
+这就对了
 
 1824
 01:13:06,046 --> 01:13:06,744
@@ -7297,50 +7497,62 @@ Okay?
 1825
 01:13:06,746 --> 01:13:08,078
 Yes?
+有问题吗？
 
 1826
 01:13:08,080 --> 01:13:09,479
 So let's run this.
+运行一下程序
 
 1827
 01:13:09,481 --> 01:13:11,414
 Hopefully, we'll have a smiley face.
+希望我们能有一张笑脸
 
 1828
 01:13:13,284 --> 01:13:14,049
 There it is.
+来了
 
 1829
 01:13:14,051 --> 01:13:15,017
 He looks pretty happy.
+他看起来很快乐
 
 1830
 01:13:15,019 --> 01:13:16,051
 We can rotate him.
+我们可以旋转屏幕
 
 1831
 01:13:16,053 --> 01:13:17,335
 He's very happy.
+他真的很快乐
 
 1832
 01:13:17,336 --> 01:13:18,618
 Okay, let's make him a little sad.
+来，我们让他难过一点
 
 1833
 01:13:18,621 --> 01:13:21,422
 How about minus 0.5?
+-0.5 怎么样？
 
 1834
 01:13:21,424 --> 01:13:22,389
 Minus 0.5.
+-0.5
 
 1835
 01:13:22,391 --> 01:13:24,424
 Pretty, pretty sad.
+非诚非常难过
 
 1836
 01:13:27,929 --> 01:13:29,495
 Aw.
+呜呜
 
 1837
 01:13:29,497 --> 01:13:31,764
@@ -7353,18 +7565,22 @@ Okay.
 1839
 01:13:33,467 --> 01:13:35,167
 So now we have this nice FaceView.
+FaceView 已经完成了
 
 1840
 01:13:35,169 --> 01:13:38,603
 What we're gonna do in our next lecture, is we're going
+下一次课要讲的是
 
 1841
 01:13:38,605 --> 01:13:41,439
 to add a gesture so we can make him happy or sad.
+给这个程序添加手势，我们就可以让他一会儿开心一会儿难过
 
 1842
 01:13:41,441 --> 01:13:42,306
 Happy or sad.
+开心或者难过
 
 1843
 01:13:42,308 --> 01:13:43,908
@@ -7373,10 +7589,12 @@ Okay?
 1844
 01:13:43,909 --> 01:13:45,509
 We're also gonna put a gesture in there, a pinch gesture so
+我们也会加入 pinch gesture (缩放手势)
 
 1845
 01:13:45,511 --> 01:13:46,977
 we can make them bigger or smaller.
+我们就能把他变大或者变小
 
 1846
 01:13:46,979 --> 01:13:49,396
@@ -7385,18 +7603,22 @@ Okay?
 1847
 01:13:49,397 --> 01:13:51,814
 Then we're going to actually add a whole another MVC and
+接着我们会添加另一个完整的 MVC
 
 1848
 01:13:51,817 --> 01:13:55,718
 make a much more powerful application that just uses
+使用 FaceView 制作一个
 
 1849
 01:13:55,720 --> 01:13:58,421
 the FaceView.
+更强大的应用
 
 1850
 01:13:58,422 --> 01:14:01,123
 The HappinessViewController as a view in another MVC.
+把 HappinessViewController 用作另一个 MVC 的 view
 
 1851
 01:14:01,125 --> 01:14:02,413
@@ -7405,8 +7627,10 @@ Okay?
 1852
 01:14:02,414 --> 01:14:03,702
 So now we're going to do multiple MVCs.
+我们接下来就会处理多个 MVC 了
 
 1853
 01:14:03,703 --> 01:14:04,991
 So that's what we're gonna be doing on Monday.
+这就是下周一要完成的事情了
 

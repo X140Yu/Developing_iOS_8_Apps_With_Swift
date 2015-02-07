@@ -2401,802 +2401,1003 @@ Which is if you can wait until the initialization is finished
 601
 00:26:37,338 --> 00:26:40,005
 but you want something really early in the view's life,
+如果你需要在视图加载完成后立即执行一些操作，
 
 602
 00:26:40,007 --> 00:26:42,007
 you can implement this method awakeFromNib.
+你可以实现awakeFromNib方法。
 
 603
 00:26:42,009 --> 00:26:43,508
 But that only works for
+但是只有storyboard中的视图
 
 604
 00:26:43,510 --> 00:26:46,411
 views that come out of a StoryBoard, okay?
+才会调用这个方法，记住了吗？
 
 605
 00:26:46,413 --> 00:26:49,347
 awakeFromNib means I just awoke from coming out of
+awakeFromNib表示我已经从storyboard中
 
 606
 00:26:49,349 --> 00:26:50,848
 a StoryBoard.
+加载出来了。
 
 607
 00:26:50,850 --> 00:26:53,617
 So now you can initialize me.
+你可以对我做一些初始化操作。
 
 608
 00:26:53,619 --> 00:26:56,019
 So it's a little bit limited, because it only is good for
+不过这个方法使用很有局限性，
 
 609
 00:26:56,021 --> 00:26:57,353
 views that come out of a StoryBoard.
+因为只是针对storyboard中的视图。
 
 610
 00:26:58,322 --> 00:26:59,488
 But it is an alternative.
+但是这的确是另外一种方法。
 
 611
 00:27:00,557 --> 00:27:02,157
 Now okay, so
+好的，
 
 612
 00:27:02,159 --> 00:27:04,726
 that's all I'm going to say about that actually.
+以上是关于视图初始化方面的内容。
 
 613
 00:27:04,728 --> 00:27:06,827
 Now let's go on to how do we.
+现在我们来看看怎样在视图中
 
 614
 00:27:06,829 --> 00:27:09,663
 Draw and handle events in this rectangular area.
+绘制和处理事件（触摸事件）。
 
 615
 00:27:09,665 --> 00:27:11,765
 Well we need a coordinate system to work in.
+我们需要一个坐标系来完成这些操作。
 
 616
 00:27:11,767 --> 00:27:13,233
 So there's some data structures I'm going to
+所以我会大致介绍一些
 
 617
 00:27:13,235 --> 00:27:16,736
 show you real quick to get us started here, that we're
+我们在绘制和处理触摸事件中，
 
 618
 00:27:16,738 --> 00:27:19,939
 gonna use when we're drawing and handling events.
+需要用到的数据结构。
 
 619
 00:27:19,941 --> 00:27:24,843
 First of all, all coordinates are gonna be CGFloats.
+首先，所有的坐标系的单位都是CGFloats。
 
 620
 00:27:24,845 --> 00:27:27,879
 Okay, CGFloats is a type in Swift struct.
+是的，CGFloats在swift中是结构体。
 
 621
 00:27:27,881 --> 00:27:31,315
 And always use CGFloat when you're drawing or
+记住，在绘制和处理触摸事件的时候，
 
 622
 00:27:31,317 --> 00:27:32,416
 handling events in a view.
+我们都用CGFloat类型。
 
 623
 00:27:32,418 --> 00:27:33,684
 Do not use Double.
+不要用double类型。
 
 624
 00:27:33,686 --> 00:27:34,951
 Do not use Float.
+也不要用Float类型。
 
 625
 00:27:34,953 --> 00:27:35,952
 If you use those in your homework,
+如果你在课后作业中使用这些类型，
 
 626
 00:27:35,954 --> 00:27:37,186
 you're gonna get dinged, okay?
+你就会死翘翘了，明白吗？
+
 
 627
 00:27:37,188 --> 00:27:38,020
 CGFloat.
+只能用CGFloat。
 
 628
 00:27:39,056 --> 00:27:40,322
 Now Doubles and
+你可以通过初始化方法，
 
 629
 00:27:40,324 --> 00:27:44,059
 Floats can be converted to a CGFloat using the initializer.
+将Double和Float类型转换成CGFloat类型。
 
 630
 00:27:44,061 --> 00:27:47,462
 CGFloat has initializer for Floats and Doubles.
+你也可以通过CGFloat的初始化方法
 
 631
 00:27:47,464 --> 00:27:48,929
 that you can pass and turn into a Float.
+把CGFloat类型转换为double或float类型。
 
 632
 00:27:48,931 --> 00:27:52,966
 But, you always want things to be into CGFloat when you're
+但是你在坐标系中，
 
 633
 00:27:52,968 --> 00:27:55,568
 working in the coordinate system, okay?
+只会使用CGFloat类型。记住了吗？
 
 634
 00:27:56,671 --> 00:27:58,571
 Now, there's a couple other structures that
+这还有一些比较重要的
 
 635
 00:27:58,573 --> 00:27:59,538
 are important here.
+结构体。
 
 636
 00:27:59,540 --> 00:28:00,472
 One is CGPoint.
+一个是CGPoint。
 
 637
 00:28:00,474 --> 00:28:03,274
 It's just two Floats, X and Y.
+它由x和y两个Float类型组成。
 
 638
 00:28:03,276 --> 00:28:05,209
 Just defines a point in the coordinate system.
+它用来定义坐标系中的一个点。
 
 639
 00:28:05,211 --> 00:28:06,210
 Couldn't be simpler.
+很容易理解。
 
 640
 00:28:06,212 --> 00:28:08,712
 Okay? And there's also CGSize,
+然后，另外一个是CGSize，
 
 641
 00:28:08,714 --> 00:28:09,846
 just defines a width and
+它在坐标系中定义
 
 642
 00:28:09,848 --> 00:28:11,815
 a height in the coordinate system.
+长和宽。
 
 643
 00:28:11,817 --> 00:28:13,483
 Okay, so these are just simple structs.
+是的，就是一些简单的结构体而已。
 
 644
 00:28:13,485 --> 00:28:14,517
 That's all they are, structs.
+他们都是结构体。
 
 645
 00:28:14,519 --> 00:28:16,785
 I don't know, certainly Point,
+我不太确定，貌似
 
 646
 00:28:16,787 --> 00:28:19,221
 I don't think has any other methods on it or anything.
+Point并没有其他的方法。
 
 647
 00:28:19,223 --> 00:28:22,223
 Size, maybe, I don't think so, though.
+Size可能有，不过也不一定。
 
 648
 00:28:22,225 --> 00:28:24,726
 But these two are combined, the points and
+Size和point组合在一起，
 
 649
 00:28:24,728 --> 00:28:27,928
 the size, to CGRect.
+就是CGRect。
 
 650
 00:28:27,930 --> 00:28:31,031
 So CGRect is struct that has a point and a size.
+所以CGRect是由point和size组成的结构体。
 
 651
 00:28:31,033 --> 00:28:33,100
 The point is the origin of the rect.
+point是这个矩形的原点。
 
 652
 00:28:33,102 --> 00:28:34,734
 Upper left, which I'm going to talk about in a second.
+它在左上角，我马上会详细解释。
 
 653
 00:28:34,736 --> 00:28:37,270
 And then the size is the width and height.
+然后是size，它表示矩形的宽和高。
 
 654
 00:28:37,272 --> 00:28:40,740
 Now rect has a lot of methods on it, okay?
+矩形结构体有很多方法，知道吗？
 
 655
 00:28:40,742 --> 00:28:42,708
 Rect has things like minX,
+比如minX,
 
 656
 00:28:42,710 --> 00:28:44,242
 which is the left edge of the rect.
+它表示矩形的左边界。
 
 657
 00:28:44,244 --> 00:28:48,112
 Or midY, which is the midpoint of the rectangle vertically.
+又比如midY,表示矩形垂直方向上的中点。
 
 658
 00:28:48,114 --> 00:28:49,880
 Or intersects.
+还有intersects方法。
 
 659
 00:28:49,882 --> 00:28:51,382
 And you pass another Rect, and it'll tell you,
+你传递另外一个矩形进去，它会返回一个布尔值，
 
 660
 00:28:51,384 --> 00:28:53,650
 Boolean, whether it intersects that Rect, right?
+来判断这两个矩形是否相交，明白？
 
 661
 00:28:53,652 --> 00:28:55,251
 The two Rects overlap.
+或者说他们是否重叠。
 
 662
 00:28:55,253 --> 00:28:57,887
 Or, intercept, which says, take this other Rect and
+intercept方法可以创建一个，
 
 663
 00:28:57,889 --> 00:28:59,321
 create a smaller rectangle,
+更小的矩形，
 
 664
 00:28:59,323 --> 00:29:01,457
 which is the intersection of those two Rects.
+通过两个矩形交叉的部分。
 
 665
 00:29:02,459 --> 00:29:04,159
 Or contains point.
+contains方法。
 
 666
 00:29:04,161 --> 00:29:05,560
 Okay, we passed a point and
+我们传递一个point进去，
 
 667
 00:29:05,562 --> 00:29:07,461
 it'll tell you whether it contains that point.
+它告诉你这个点是否在矩形中。
 
 668
 00:29:07,463 --> 00:29:09,563
 So rect is this struct, but
+所以，rect这个结构体，
 
 669
 00:29:09,565 --> 00:29:11,264
 it has a lot of cool methods in there.
+有很多很酷的方法。
 
 670
 00:29:11,266 --> 00:29:12,732
 A whole bunch more.
+一大堆。
 
 671
 00:29:12,734 --> 00:29:16,035
 You can just type a rect, type and
+你只需要键入rect，
 
 672
 00:29:16,037 --> 00:29:21,006
 then a dot Xcode show you all the cool methods it has, okay?
+然后打一个点，Xcode会提示出所有这些方法。
 
 673
 00:29:21,008 --> 00:29:23,875
 All right, so those are the types of data types we're
+好的，以上所有这些结构体，
 
 674
 00:29:23,877 --> 00:29:26,044
 gonna use to talk about our coordinate system and
+都是关于坐标系和在坐标系中操作
 
 675
 00:29:26,046 --> 00:29:27,979
 to write our code in coordinate system.
+时所需要用的数据结构。
 
 676
 00:29:27,981 --> 00:29:30,915
 So let's talk about the Views coordinate system itself.
+接下来我们看看视图的坐标系统。
 
 677
 00:29:30,917 --> 00:29:33,283
 First of all, origin upper left.
+首先，原点在左上角。
 
 678
 00:29:33,285 --> 00:29:35,652
 Some of you might be used to origin lower left,
+你或许遇到过原点在左下角的坐标系，
 
 679
 00:29:35,654 --> 00:29:36,786
 like Cartesian coordinates,
+比如Cartesian坐标系，
 
 680
 00:29:36,788 --> 00:29:38,621
 the origin is in the lower left.
+原点就在左下角。
 
 681
 00:29:38,623 --> 00:29:42,491
 But all this origin that you're using a view is in
+但是view的坐标原点
 
 682
 00:29:42,493 --> 00:29:44,543
 the upper left.
+都在左上角。
 
 683
 00:29:44,544 --> 00:29:46,594
 So, that means increasing Y is down the screen,
+也就是说，Y轴向下延伸，
 
 684
 00:29:46,597 --> 00:29:48,714
 increasing X is across.
+X轴向右延伸。
 
 685
 00:29:48,715 --> 00:29:50,832
 So, I put an example, 500 dot 35, 500 comma 35, over there.
+比如这里有一个点（500，35）。
 
 686
 00:29:50,834 --> 00:29:53,801
 It's 500 across, and only 35 down, okay?
+它相对于左上角
 
 687
 00:29:53,803 --> 00:29:58,238
 From the upper left.
+向右500单位距离，向下35单位距离，明白吗？
 
 688
 00:29:58,240 --> 00:30:01,508
 The units that we're talking about here are points
+在这里我们用的单位是点，
 
 689
 00:30:01,510 --> 00:30:02,342
 not pixels.
+不是像素。
 
 690
 00:30:02,344 --> 00:30:03,476
 Okay.
+是的。
 
 691
 00:30:03,478 --> 00:30:07,980
 Pick high, very high resolution displays have more
+高分屏中，每一个点可能表示
 
 692
 00:30:07,982 --> 00:30:10,282
 than one pixel per point.
+多个像素。
 
 693
 00:30:10,284 --> 00:30:13,551
 Okay, 'cuz they are able to draw very find curves,
+这样就可以绘制非常平滑的曲线，
 
 694
 00:30:13,553 --> 00:30:16,154
 very fine text, et cetera.
+文本等。
 
 695
 00:30:16,156 --> 00:30:17,956
 You don't usually care
+你通常不需要在乎
 
 696
 00:30:17,957 --> 00:30:19,757
 about the difference between points and pixels.
+点和像素直接的区别。
 
 697
 00:30:19,759 --> 00:30:20,991
 It's automatically handled for
+因为在你绘制文本或者曲线的时候，
 
 698
 00:30:20,993 --> 00:30:23,126
 you because you're doing things like drawing text or
+系统会自动帮你配置
 
 699
 00:30:23,128 --> 00:30:26,162
 drawing an arc and the system automatically uses as much
+一个点到底应该占多少个像素
 
 700
 00:30:26,164 --> 00:30:28,464
 pixels as it can to make things nice.
+才能使绘制更完美。
 
 701
 00:30:28,466 --> 00:30:30,132
 But occasionally you do care,
+但有些时候你需要在意这些，
 
 702
 00:30:30,134 --> 00:30:33,836
 because maybe you're drawing something very finely detailed
+特别是你需要处理和控制
 
 703
 00:30:33,838 --> 00:30:37,372
 and you want to control pixel boundaries.
+非常精细的细节和像素边境的是时候。
 
 704
 00:30:37,374 --> 00:30:39,708
 And if you want to do that you can call this,
+你可以访问这个属性
 
 705
 00:30:39,710 --> 00:30:42,610
 get this property in view called contentScaleFactor
+contentScaleFactor
 
 706
 00:30:42,612 --> 00:30:46,180
 and it will return the number of pixels per point.
+它会告诉你一个点占多少个像素。
 
 707
 00:30:46,182 --> 00:30:48,182
 So on a retina display, that's gonna be 2.
+在retina屏中，一点表示2个像素。
 
 708
 00:30:48,184 --> 00:30:51,184
 On a non-retina display, that will be 1.
+非retina屏中表示一个像素。
 
 709
 00:30:51,186 --> 00:30:52,986
 It could be anything, though.
+当然在其他屏幕中或许是任意个像素。
 
 710
 00:30:52,988 --> 00:30:54,471
 Okay?
+明白吗？
 
 711
 00:30:54,472 --> 00:30:55,955
 So you shouldn't write your code assuming it's 2 or 1.
+所以你不能直接用2或1把代码写死。
 
 712
 00:30:55,957 --> 00:30:58,758
 You should just write your code, get the contentScaleFactor
+你在写代码的时候，
 
 713
 00:30:58,760 --> 00:31:00,993
 and you'll know how many pixels per point.
+应该用contentScaleFactor来获取这个值。
 
 714
 00:31:00,995 --> 00:31:02,528
 Okay?
+记住了吗？
 
 715
 00:31:02,529 --> 00:31:04,062
 99% of the time, you don't have to worry about this, but
+百分之九十九的情况下，你不需要担心这个问题，但是
 
 716
 00:31:04,064 --> 00:31:07,065
 in your assignment three, hint, hint, you might have to.
+在课后作业3中，你可能需要处理这个问题。
 
 717
 00:31:07,067 --> 00:31:07,632
 Okay.
+好的。
 
 718
 00:31:09,502 --> 00:31:12,469
 So what about the boundaries of where drawing happens.
+那么，我们绘制区域的边界在哪里？
 
 719
 00:31:12,471 --> 00:31:13,870
 You've got this rectangular area.
+你已经有一个矩形区域。
 
 720
 00:31:13,872 --> 00:31:17,107
 Well, there's a very important property called bounds,
+另外，有一个非常重要的属性，叫做bounds，
 
 721
 00:31:17,109 --> 00:31:20,910
 which is a CGRect, which describes the area you're
+他是CGRect类型，它定义了坐标系中
 
 722
 00:31:20,912 --> 00:31:25,047
 drawing in in your own coordinate system.
+的绘制区域。
 
 723
 00:31:25,049 --> 00:31:26,081
 Okay? It's important that it's in
+明白吗？需要特别注意的是，
 
 724
 00:31:26,083 --> 00:31:28,149
 your own coordinate system.
+绘制是相对于自身的坐标系。
 
 725
 00:31:28,151 --> 00:31:32,553
 Because these views can be scaled and even rotated and
+因为视图可以被拉伸，旋转
 
 726
 00:31:32,555 --> 00:31:35,556
 translated to other you know, coordinates systems.
+或者变换等（父视图坐标系中）。
 
 727
 00:31:35,558 --> 00:31:37,257
 But when you're using the bounds and
+但是你用bounds属性的时候，
 
 728
 00:31:37,259 --> 00:31:39,926
 you're drawing it yourself, you have this rectangle and
+你是在自身坐标系绘制，你知道这个矩形
 
 729
 00:31:39,928 --> 00:31:42,495
 you know where it is.
+的确切位置。
 
 730
 00:31:42,496 --> 00:31:45,063
 Now the origin of your bounds usually is 0,0.
+bounds的原点通常是（0，0）。
 
 731
 00:31:45,066 --> 00:31:46,865
 But you could define it to mean something else, for
+但是你可以更改它，
 
 732
 00:31:46,867 --> 00:31:49,935
 example, scroll views they define their origin to
+比如，scroll view在scroll的时候会
 
 733
 00:31:49,937 --> 00:31:53,338
 be where they are in the thing they're scrolling,
+更改它的原点至scroll的位置，
 
 734
 00:31:53,340 --> 00:31:55,707
 that's just what they define origin to be, but
+这是scroll view定义bounds原点的方式，
 
 735
 00:31:55,709 --> 00:31:58,442
 90% of the time, your origin is just going to be 0,0.
+但是百分之九十的情况下，bounds的原点是（0，0）。
 
 736
 00:31:58,444 --> 00:31:59,410
 So, the width and
+宽和高
 
 737
 00:31:59,411 --> 00:32:00,377
 height is what you're going to care about,
+才是你需要关心的，
 
 738
 00:32:00,379 --> 00:32:02,212
 how big a space am I drawing into.
+我可以在多大的区域绘制？
 
 739
 00:32:03,215 --> 00:32:06,082
 There are two other properties that often get confused with
+还有两个属性，容易和bounds混淆
 
 740
 00:32:06,084 --> 00:32:08,551
 bounds, but don't let this happen to you.
+我希望你不会这样。
 
 741
 00:32:08,553 --> 00:32:10,252
 One is center.
+一个是center。
 
 742
 00:32:10,254 --> 00:32:14,589
 Center is the center of your view rectangle in your
+center是你自身视图矩形的中点，
 
 743
 00:32:14,591 --> 00:32:17,158
 superview's coordinate system, not in yours.
+不过它是相对于父视图的坐标系，而不是自身的。
 
 744
 00:32:18,127 --> 00:32:20,194
 So if you write code that say, oh, I'm gonna start to
+如果你这样写代码，我将在矩形中心
 
 745
 00:32:20,196 --> 00:32:23,063
 draw something in middle of my rectangle.
+绘制一些东西。
 
 746
 00:32:23,065 --> 00:32:24,297
 I'll get center.
+我会得到中心点。
 
 747
 00:32:24,299 --> 00:32:25,098
 Aah!
+啊哈！
 
 748
 00:32:25,100 --> 00:32:26,516
 That's wrong.
+这样会出问题。
 
 749
 00:32:26,517 --> 00:32:27,933
 Okay? Center is in your super view.
+明白吗？center是相对于父视图的坐标系。
 
 750
 00:32:27,935 --> 00:32:29,368
 Center positions you.
+center定义你在父视图的位置。
 
 751
 00:32:29,370 --> 00:32:31,470
 It has nothing to do with how you draw.
+它和绘制操作没有关系。
 
 752
 00:32:31,472 --> 00:32:33,805
 It just says where you are in your super view.
+它仅仅用来在你父视图中定位。
 
 753
 00:32:33,807 --> 00:32:36,674
 Same thing, frame, frame is a rectangle in your
+同样，frame是父视图坐标系中
 
 754
 00:32:36,676 --> 00:32:40,277
 super view's coordinate system that contains you.
+用来包含子视图的。
 
 755
 00:32:40,279 --> 00:32:43,847
 Okay, it contains all of you, of your drawing.
+是的，它包含子视图的所有区域，包括绘制部分。
 
 756
 00:32:43,849 --> 00:32:45,615
 But it's in your super user coordinates systems so
+但是它是相对于父视图的坐标系，
 
 757
 00:32:45,617 --> 00:32:48,385
 it's only good to position you, not for drawing.
+所以它只是用来定位子视图，与绘制无关。
 
 758
 00:32:48,387 --> 00:32:50,186
 When you're drawing, you use bounds.
+绘制的时候，你使用bounds。
 
 759
 00:32:50,188 --> 00:32:52,421
 To kind of give you a picture of this,
+为了更形象地说明这个，
 
 760
 00:32:52,423 --> 00:32:55,057
 as better like you might think that
+你可以这样认为
 
 761
 00:32:55,059 --> 00:32:59,361
 the frame size is exactly the same as the bound size.
+frame的size和bounds的size总是相同的。
 
 762
 00:32:59,363 --> 00:33:02,563
 Right, if it's a rectangle that contains my rectangle,
+不是吗？如果一个矩形要完全包含我，
 
 763
 00:33:02,565 --> 00:33:04,932
 it must be exactly the same size.
+它必须和我的尺寸一样大。
 
 764
 00:33:04,934 --> 00:33:07,734
 But no, because view can be rotated.
+但也有例外，因为视图可以旋转。
 
 765
 00:33:08,704 --> 00:33:10,487
 Okay? And
+明白吗？
 
 766
 00:33:10,488 --> 00:33:12,271
 if you rotate your view like this green view,
+如果你像这个绿色视图这样，旋转你的视图，
 
 767
 00:33:12,273 --> 00:33:14,707
 look how much bigger the frame is.
+你可以看到，frame要大的多。
 
 768
 00:33:14,709 --> 00:33:18,410
 The rectangle that contains you is much bigger than you.
+包含你的矩形，要你你自己大得多。
 
 769
 00:33:18,412 --> 00:33:19,878
 Because you're tilted.
+因为你是倾斜的。
 
 770
 00:33:19,880 --> 00:33:20,578
 All right?
+对吗？
 
 771
 00:33:21,814 --> 00:33:24,014
 Make sense?
+明白吗？
 
 772
 00:33:24,015 --> 00:33:26,215
 So don't confuse frame and center, which are about
+所以不要混淆了，frame和center是用来定位的，
 
 773
 00:33:26,218 --> 00:33:30,420
 positioning, with bounce which is your size and
+而bounds，是为绘制操作定义的
 
 774
 00:33:30,422 --> 00:33:33,623
 area that you're drawing into in your own coordinate system.
+自身坐标系。
 
 775
 00:33:36,127 --> 00:33:37,059
 Okay?
+明白吗？
 
 776
 00:33:37,060 --> 00:33:37,992
 Okay, so creating views.
+接下来，视图的创建。
 
 777
 00:33:37,995 --> 00:33:38,527
 How do we create views?
+我们怎样创建一个视图？
 
 778
 00:33:42,533 --> 00:33:45,333
 Most often views are created by dragging them out to
+大部分的视图是直接
 
 779
 00:33:45,335 --> 00:33:46,801
 the StoryBoard.
+从storyboard中拖出来，而生成的。
 
 780
 00:33:46,803 --> 00:33:50,104
 That's 95% of the time.
+百分之九十五都是这样。
 
 781
 00:33:50,106 --> 00:33:52,123
 And af, but
+但是，
 
 782
 00:33:52,124 --> 00:33:54,141
 of course, your views aren't sitting in the Object Pallet,
+官方视图可能不能满足你的需要，
 
 783
 00:33:54,143 --> 00:33:57,577
 there's buttons and sliders, but there's no your view.
+这里有按钮，滑条等，但是可能没有你需要的视图。
 
 784
 00:33:57,579 --> 00:34:00,113
 So you have to drag it out of generic view.
+这时候，你就需要先拖一个原始视图（UIView）。
 
 785
 00:34:00,115 --> 00:34:01,681
 It's kind of at the bottom of the pallet and
+就在控件区的底部，
 
 786
 00:34:01,683 --> 00:34:02,782
 you just drag it out.
+拖出来就可以了。
 
 787
 00:34:02,784 --> 00:34:05,051
 Once you drag it out though,
+一旦你拖出来这个视图后，
 
 788
 00:34:05,052 --> 00:34:07,319
 you have to go to the Identity Inspector and change the class
+你需要在它的Identity Inspector去
 
 789
 00:34:07,321 --> 00:34:10,989
 of that view that you dragged out, so that it's your class.
+把对应的类修改你自己的实现类。
 
 790
 00:34:10,991 --> 00:34:12,457
 Okay? So it's a two step process.
+明白吗？需要两步来完成这个操作。
 
 791
 00:34:12,459 --> 00:34:15,093
 You drag a view, your custom view out and then you change
+先拖一个视图出来，
 
 792
 00:34:15,095 --> 00:34:19,930
 this class to view whatever your custom class is on rare
+然后把对应的类改为你自己的类，
 
 793
 00:34:19,932 --> 00:34:24,034
 occasion, you might create an instance of your view in code.
+只有在很少情况下，你才需要用纯代码创建视图。
 
 794
 00:34:25,036 --> 00:34:26,569
 Probably never in this class,
+至少本课程上永远不会，
 
 795
 00:34:26,571 --> 00:34:29,938
 maybe in your final project, although I doubt it.
+期末项目上可能会，但我还是怀疑。
 
 796
 00:34:29,940 --> 00:34:34,442
 You just do that using UIView's frame initializer.
+你可以为构造器提供一个
 
 797
 00:34:34,444 --> 00:34:35,376
 Right? So you just say
+frame值来
 
 798
 00:34:35,378 --> 00:34:36,644
 view equals UIView frame.
+创建视图。
 
 799
 00:34:38,214 --> 00:34:40,414
 You can even do UIView with no arguments and
+你也可以不传参数，
 
 800
 00:34:40,416 --> 00:34:43,283
 it'll give you a CGRect to zero which is a frame zero
+这样视图的frame值就默认为
 
 801
 00:34:43,285 --> 00:34:45,485

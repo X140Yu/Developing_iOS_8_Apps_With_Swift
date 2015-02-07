@@ -801,214 +801,267 @@ as if the NSUserDefaults thing itself is a Dictionary.
 201
 00:09:03,036 --> 00:09:05,103
 And, it can store the whole Property List,
+它可以存储所有的属性列表。
 
 202
 00:09:05,105 --> 00:09:08,005
 like setObject forkey: , that first method you see there.
+比如 setObject forkey:， 就是你们在那看到的第一个方法。
 
 203
 00:09:08,007 --> 00:09:10,007
 And, repeat, retrieve all Property List,
+然后，重复，取回所有的属性列表。
 
 204
 00:09:10,009 --> 00:09:12,642
 or, it can just do little tiny pieces of Property List,
+或者，它可以只处理属性列表中的一小部分。
 
 205
 00:09:12,644 --> 00:09:14,377
 like it has a method set Double,
+比如，它有个方法 set Double，
 
 206
 00:09:14,379 --> 00:09:16,813
 that will just set a Double for a certain key.
+这将为某一 key 设置一个 Double 值。
 
 207
 00:09:16,815 --> 00:09:18,348
 Okay? So,
+所以，
 
 208
 00:09:18,349 --> 00:09:19,882
 it's like a Dictionary in it's key value, but
+它像一个有 key value 的字典，但
 
 209
 00:09:19,884 --> 00:09:21,350
 it only stores Property List.
+它只存储属性列表。
 
 210
 00:09:21,352 --> 00:09:23,919
 And, the big thing about the way it stores them,
+最大的不同是，它存储这些属性，
 
 211
 00:09:23,921 --> 00:09:28,056
 is that it persists when your app is gone, okay?
+当你的app关闭时，它永久保存这些数据。
 
 212
 00:09:28,058 --> 00:09:29,390
 So, you know,
+你们知道的，
 
 213
 00:09:29,392 --> 00:09:30,958
 normally, a Dictionary is stored in the heap.
+一般的，一个字典存储在堆中。
 
 214
 00:09:30,960 --> 00:09:32,759
 As soon as your app quits, it's gone.
+只要你的 app 退出了，它就没了。
 
 215
 00:09:32,761 --> 00:09:34,327
 But this, stays around, so
+但这个，保留着，所以
 
 216
 00:09:34,329 --> 00:09:35,995
 that when your app launches the next time,
+当你的 app 在下次启动时，
 
 217
 00:09:35,997 --> 00:09:37,697
 all the data's still there.
+所有的数据都在。
 
 218
 00:09:37,699 --> 00:09:39,465
 So, that's why it's kind of like a database, but
+因此，这就是为什么它像个数据库，但
 
 219
 00:09:39,467 --> 00:09:40,932
 it's very small, okay?
+它非常小。
 
 220
 00:09:40,934 --> 00:09:43,034
 For preference and settings.
+为了性能和设置，
 
 221
 00:09:43,036 --> 00:09:45,503
 Here's how you use NSUserDefaults.
+这是你要怎么使用 NSUserDefaults。
 
 222
 00:09:45,505 --> 00:09:49,006
 You use this type method in NSUserDefaults called
+你在 NSUserDefaults 中使用这类方法 
 
 223
 00:09:49,008 --> 00:09:50,974
 standardUserDefaults.
+standardUserDefaults。
 
 224
 00:09:50,976 --> 00:09:53,243
 This gives you an instance of an NSUserDefaults.
+这给你一个 NSUserDefaults 的实例。
 
 225
 00:09:53,245 --> 00:09:54,310
 You're always gonna use
+你总是使用同一个实例，
 
 226
 00:09:54,312 --> 00:09:56,579
 the same instances like a shared instance.
+类似于一个共享实例。
 
 227
 00:09:56,581 --> 00:09:58,114
 You'll always to use the same one.
+你总是使用同一个（实例）。
 
 228
 00:09:58,116 --> 00:10:02,117
 And then you just send it messages like, you know,
+然后，你就发消息给它，比如，正如你知道的，
 
 229
 00:10:02,119 --> 00:10:05,587
 setObject forkey:, store this Property List, and
+setObject forkey:，保存这个属性列表。
 
 230
 00:10:05,589 --> 00:10:07,989
 getObject forkey: to get it back.
+然后使用 getObject forkey，获取它。
 
 231
 00:10:07,991 --> 00:10:09,257
 Now, the changes you make in there,
+现在，你在那里做的改变，
 
 232
 00:10:09,259 --> 00:10:12,193
 are automatically saved, but, there is a method called
+会自动保存。有一个方法叫
 
 233
 00:10:12,195 --> 00:10:15,929
 synchronized, which is kinda like save, which can force it,
+synchronized，类似于 save，这个方法可以强制
 
 234
 00:10:15,931 --> 00:10:17,931
 to save out to disc.
+保存数据到磁盘。
 
 235
 00:10:17,933 --> 00:10:19,666
 Why do you ever need synchronized when it
+既然有自动保存，为什么你还需要
 
 236
 00:10:19,668 --> 00:10:21,868
 auto saves?
+synchronized？
 
 237
 00:10:21,869 --> 00:10:24,069
 Well, in auto save, when things happen like you app
+好吧，在自动保存中，当有些事情发生时，比如你的 app
 
 238
 00:10:24,072 --> 00:10:28,073
 stops being the front most app,
+停止做为最前端的 app，
 
 239
 00:10:28,075 --> 00:10:29,708
 the user switched to another app.
+用户转向使用其他 app。
 
 240
 00:10:29,710 --> 00:10:31,709
 So, your app is still there, but
+因此，你的 app 还在那里运行，但是
 
 241
 00:10:31,711 --> 00:10:33,077
 it switched to the background.
+变成后台运行了。
 
 242
 00:10:33,079 --> 00:10:35,145
 It'll save then.
+那时它将保存数据。
 
 243
 00:10:35,147 --> 00:10:36,580
 So, it won't always save when you want, and
+因此，它不会总是在你需要的时候保存数据，
 
 244
 00:10:36,582 --> 00:10:39,315
 especially when you're debugging, okay?
+特别是当你调试的时候。
 
 245
 00:10:39,317 --> 00:10:42,118
 When you hit stop in the debugger,
+当你在调试器中停止时，
 
 246
 00:10:42,120 --> 00:10:43,986
 it doesn't save, okay?
+它并不保存数据。
 
 247
 00:10:43,988 --> 00:10:47,289
 And so, you probably wanna throw some synchronizes in
+因此，你可能要放一些 synchronizes，
 
 248
 00:10:47,291 --> 00:10:49,157
 there, to save this thing out,
+以便把数据保存下来。
 
 249
 00:10:49,159 --> 00:10:50,792
 especially when you're debugging.
+特别是当你调试的时候。
 
 250
 00:10:50,794 --> 00:10:52,960
 It's not really that expensive to synchronize,
+synchronize 操作，代价并不高，
 
 251
 00:10:52,962 --> 00:10:54,562
 especially if there's not much data in there,
+特别是它没有很多数据的时候。
 
 252
 00:10:54,564 --> 00:10:56,697
 which there shouldn't be, because it's small.
+它也不应该有很多数据，因为它很小。
 
 253
 00:10:56,699 --> 00:10:59,266
 So, it can't hurt too much to throw them in there.
+因此，使用 synchronize 方法并没有太大伤害。
 
 254
 00:10:59,268 --> 00:11:01,334
@@ -1017,54 +1070,67 @@ Okay?
 255
 00:11:01,336 --> 00:11:03,403
 And yeah, synchronize return to Bool,
+当然， synchronize 返回 Bool 值，
 
 256
 00:11:03,405 --> 00:11:05,021
 whether it failed or not.
+表示它失败与否。
 
 257
 00:11:05,022 --> 00:11:06,638
 But if it failed, there's really not much you can do.
+但如果它失败了，你也不能做太多事情，
 
 258
 00:11:07,775 --> 00:11:10,075
 So, a lot of times people don't even look at the return
+因此，大多数时候人们甚至不检查 synchronize 的
 
 259
 00:11:10,077 --> 00:11:13,044
 values synchronize, they just synchronize, and they pray.
+返回值，他们只是使用 synchronize，然后他们祈祷。
 
 260
 00:11:13,046 --> 00:11:16,014
 But, it's only not gonna save if like the disk is full or
+但是，它只是在磁盘满了或者其他时候无法保存数据，
 
 261
 00:11:16,016 --> 00:11:17,715
 something, that virtually never happens.
+但这些情况很少发生。
 
 262
 00:11:19,285 --> 00:11:20,851
 All right, so, I'm gonna do a little demo here.
+我要做些 demo。
 
 263
 00:11:20,853 --> 00:11:23,086
 And show you a little more about Property List.
+给你展示更多的属性列表。
 
 264
 00:11:23,088 --> 00:11:24,821
 And also AnyObject,
+还有 AnyObject。
 
 265
 00:11:24,822 --> 00:11:26,555
 cuz you've never seen AnyObject in action.
+你永远不会在 action 中看到 AnyObject。
 
 266
 00:11:26,558 --> 00:11:31,260
 And what we're gonna do, is add a property to our
+我们将做的，是在我们的 CalculatorBrain
 
 267
 00:11:31,262 --> 00:11:34,796
 CalculatorBrain, which gets its program.
+添加一个属性，这个属性获取它的 program。
 
 268
 00:11:35,732 --> 00:11:37,448
@@ -1073,82 +1139,102 @@ Okay?
 269
 00:11:37,449 --> 00:11:39,165
 So, our CalculatorBrain has a program, especially your
+所以我们的 CalculatorBrain 有一个 program，特别是你们的
 
 270
 00:11:39,168 --> 00:11:41,468
 versions, where you added variables to it.
+版本，当你们在其中添加变量。
 
 271
 00:11:41,470 --> 00:11:42,936
 It's got this kind of program,
+它会有这样的 program，
 
 272
 00:11:42,938 --> 00:11:44,337
 it's almost like a little computer program.
+它几乎像一个小的计算机程序。
 
 273
 00:11:44,339 --> 00:11:48,007
 You can execute that program, set its variables, it's great.
+你可以执行这个程序，设置变量，这很好。
 
 274
 00:11:48,009 --> 00:11:49,709
 So, it would be nice if we could get that program.
+如果我们能得到这个 program 会很棒。
 
 275
 00:11:49,711 --> 00:11:52,678
 But we don't wanna reveal our internal data structure, and
+但我们并不想暴露我们内部的数据结构，
 
 276
 00:11:52,680 --> 00:11:55,113
 there's nothing anyone can do with that program.
+这样任何人就不能在这个程序上做任何事。
 
 277
 00:11:55,115 --> 00:11:56,848
 So, we're really just getting it as a cookie.
+实际上我们的做法是像一个 cookie 一样来获取它。
 
 278
 00:11:56,850 --> 00:11:59,717
 And the only thing you can do with it, is give it back
+你能做的唯一事情，把它返回给
 
 279
 00:11:59,719 --> 00:12:02,520
 to the CalculatorBrain, or another CalculatorBrain in
+CalculatorBrain，或者将来的其他 CalculatorBrain，
 
 280
 00:12:02,522 --> 00:12:05,389
 the future, and then say, evaluate.
+然后，评估。
 
 281
 00:12:05,391 --> 00:12:07,724
 Okay, so you see the value of having this?
+你看到有这个的值？
 
 282
 00:12:07,726 --> 00:12:09,359
 So, basically getting the program out of
+基本上，从 CalculatorBrain 中获取 program，
 
 283
 00:12:09,361 --> 00:12:10,793
 the CalculatorBrain and send it back.
+然后在返还它。
 
 284
 00:12:10,795 --> 00:12:13,162
 But we're gonna return it as a Property List.
+但我们将以属性列表返回。
 
 285
 00:12:13,164 --> 00:12:14,196
 It's gonna be AnyObject.
+它会是 AnyObject。
 
 286
 00:12:14,198 --> 00:12:16,031
 People are gonna look at this var, and
+人们将查看这个变量，
 
 287
 00:12:16,033 --> 00:12:17,632
 it's gonna be of type AnyObject, and
+它会是 AnyObject 类型，
 
 288
 00:12:17,634 --> 00:12:20,068
 all they can do is get it, and then set it back.
+他们能做的是获取它，然后赋值返回。
 
 289
 00:12:20,070 --> 00:12:21,503
@@ -1157,18 +1243,22 @@ Okay?
 290
 00:12:21,504 --> 00:12:22,937
 So, what would that look like?
+这会是什么样的？
 
 291
 00:12:22,939 --> 00:12:24,538
 Let's go over here to our Calculator.
+让我们到我们的 Calculator 里来。
 
 292
 00:12:24,540 --> 00:12:26,840
 So, I've gone much bigger font here.
+我已经在这里调了更大的字体。
 
 293
 00:12:26,842 --> 00:12:28,308
 Hopefully everybody, is this big enough?
+希望每个人（能看到），这个够大吗？
 
 294
 00:12:28,310 --> 00:12:30,143
@@ -1185,10 +1275,12 @@ All right.
 297
 00:12:32,747 --> 00:12:35,514
 So, this is Calculator as I last left it.
+这个是我上次留下的 Calculator。
 
 298
 00:12:35,516 --> 00:12:37,716
 It doesn't have your enhancements to it for
+它没有你们为变量的改进。
 
 299
 00:12:37,718 --> 00:12:39,951
@@ -1197,10 +1289,12 @@ the variables.
 300
 00:12:39,953 --> 00:12:42,319
 And I'm just gonna add a var here.
+我就要再这里加一个 var。
 
 301
 00:12:42,321 --> 00:12:43,887
 A public var.
+一个共有的 var。
 
 302
 00:12:43,889 --> 00:12:44,554
@@ -1209,162 +1303,202 @@ Okay?
 303
 00:12:44,556 --> 00:12:45,922
 Called program, and
+叫做 program，
 
 304
 00:12:45,924 --> 00:12:49,225
 it's gonna be type AnyObject, but I'm gonna put comment here
+这个会是 AnyObject 类型，但我要在这注释下，
 
 305
 00:12:49,227 --> 00:12:53,595
 that says guaranteed to be a Property List.
+要保证是个属性列表。
 
 306
 00:12:53,597 --> 00:12:56,965
 So, the callers know that this is a Property List.
+这样调用者知道这是个属性列表。
 
 307
 00:12:56,967 --> 00:13:01,002
 So, for example, they could put it into NSUserDefaults.
+例如，他们可以把它放入 NSUserDefaults。
 
 308
 00:13:01,004 --> 00:13:02,737
 Or they could write it out to disc.
+或者他们可以将这个写入磁盘。
 
 309
 00:13:02,739 --> 00:13:04,571
 I haven't taught you how to write it out to disc, but
+我还没教你们怎么把这个写入磁盘。
 
 310
 00:13:04,573 --> 00:13:05,706
 you can do it.
+你们能够做的。
 
 311
 00:13:05,708 --> 00:13:06,673
 So, they could do that with it,
+他们可以那样做。
 
 312
 00:13:06,675 --> 00:13:09,375
 cuz they know it's a Property List, okay?
+他们知道它是个属性列表。
 
 313
 00:13:09,377 --> 00:13:13,346
 So, this is going to be a computed property.
+会有一个被计算的属性。
 
 314
 00:13:13,348 --> 00:13:15,948
 Okay, so we're gonna have a get and a set.
+我们将有一个 get 和一个 set。
 
 315
 00:13:15,950 --> 00:13:17,183
 And when the get,
+当 get 时，
 
 316
 00:13:17,184 --> 00:13:18,417
 we're just gonna get some sort of Property
+我们将获取代表我们内部数据结构的某个
 
 317
 00:13:18,419 --> 00:13:21,186
 List representation of our internal data structure.
+属性列表。
 
 318
 00:13:21,188 --> 00:13:23,521
 And when you set, we're gonna take that Property List and
+当你 set 时，我们将得到属性列表并且
 
 319
 00:13:23,523 --> 00:13:27,057
 turn it back into our private representation.
+把它放回我们的私有代表。
 
 320
 00:13:28,060 --> 00:13:29,259
 So, the get,
+这个 get，
 
 321
 00:13:30,362 --> 00:13:34,063
 how are we gonna represent ourselves as a Property List
+这是我们怎么将我们自己表现为一个属性列表，
 
 322
 00:13:34,065 --> 00:13:36,732
 because this is really our internal data structure here,
+因为这实际上是我们内部数据结构，
 
 323
 00:13:36,734 --> 00:13:39,801
 it's Array of op, op is an enum,
+是个 op 数据，op 是枚举类型，
 
 324
 00:13:39,803 --> 00:13:43,871
 clearly enums are not NSDates, or NSStrings, or NSArrays.
+显然，enums 不是 NSDates，也不是 NSStrings 或 NSArrays。
 
 325
 00:13:43,873 --> 00:13:46,407
 So, we can't just return this thing, okay?
+我们不能只是返回这个东西，
 
 326
 00:13:46,409 --> 00:13:48,208
 Cuz that's not a Property List.
+因为它不是一个属性列表。
 
 327
 00:13:48,210 --> 00:13:51,244
 So, we need to return some sort of Property List.
+我们必须返回某种属性列表。
 
 328
 00:13:51,246 --> 00:13:53,980
 And I'm gonna return an Array of Strings.
+我将返回一个 Strings 数据。
 
 329
 00:13:53,982 --> 00:13:58,084
 And the String is either gonna be the symbol of an op,
+这个 String 是个运算符，
 
 330
 00:13:58,086 --> 00:14:01,587
 in which case I will look it up in known ops, or
+这个运算符我可以在已知的运算符中找到的，或者
 
 331
 00:14:01,589 --> 00:14:04,956
 the String will be an numeric representation of
+这个 String 会是个代表数字类型的
 
 332
 00:14:04,958 --> 00:14:06,958
 the String of the operand rather.
+操作数。
 
 333
 00:14:06,960 --> 00:14:08,026
 Right? The Double will
+对吧，Double 将转换成
 
 334
 00:14:08,028 --> 00:14:09,326
 turn into a String.
+一个 String。
 
 335
 00:14:09,328 --> 00:14:13,163
 Which I happened to have a var that does exactly that.
+刚好我有一个变量正好可以处理这个。
 
 336
 00:14:13,165 --> 00:14:15,565
 Okay? This turns an enum op,
+这将一个 op 枚举变成
 
 337
 00:14:15,567 --> 00:14:17,800
 into a String.
+一个 String。
 
 338
 00:14:17,802 --> 00:14:19,635
 And I know how to turn it back.
+我知道怎么把它变回来。
 
 339
 00:14:19,637 --> 00:14:22,771
 Because I know how to use a number formatter to turn
+我知道怎么使用一个 number formatter 来把一个
 
 340
 00:14:22,773 --> 00:14:25,273
 the String of a operand back into a Double and
+操作数字符串变成一个 Double。
 
 341
 00:14:25,275 --> 00:14:27,709
 obviously I know how to look up binary and
+显然我也知道怎么在我们的操作符中
 
 342
 00:14:27,711 --> 00:14:30,645
 uniary operations in our known ops.
+查找二元和一元操作符。
 
 343
 00:14:30,647 --> 00:14:32,764
@@ -1373,62 +1507,77 @@ Okay?
 344
 00:14:32,765 --> 00:14:34,882
 So, we could say something along these lines.
+沿着这几行，我们可以说些东西。
 
 345
 00:14:34,884 --> 00:14:39,586
 Our get, I'm gonna show you a much better get in a second,
+我们的 get，我马上给你演示一个更好的 get，
 
 346
 00:14:39,588 --> 00:14:43,590
 but one way we could do our get is we could just say,
+但有一种方式，我们可以让我们的get，
 
 347
 00:14:43,592 --> 00:14:47,226
 we could make a returnValue that is going to be
+我们可以将字符串数组作为
 
 348
 00:14:47,228 --> 00:14:48,861
 an Array of String.
+返回值。
 
 349
 00:14:48,863 --> 00:14:52,764
 Okay, in fact let's just create an empty Array of
+实际上，我们只是创建一个空的字符串数组，
 
 350
 00:14:52,766 --> 00:14:56,768
 String here, and then we can just go through our ops,
+然后我们可以在我们的 opStack 中查找我们的操作符，
 
 351
 00:14:56,770 --> 00:14:59,737
 in our opStack here, and for each op,
+对于每一个操作符，
 
 352
 00:14:59,739 --> 00:15:04,307
 we can just say returnValue.append, an op's description.
+我们可以紧紧使用 returnValue.append，将一个操作符的描述
 
 353
 00:15:04,309 --> 00:15:07,877
 On to the end of it, and then we could return, returnValue.
+附加在它的后面，然后我们可以返回值。
 
 354
 00:15:10,748 --> 00:15:13,882
 Right, makes sense, I just my internal data structure into
+有道理，我刚刚把我的内部数据结构转变成一个
 
 355
 00:15:13,884 --> 00:15:16,918
 a Property List, because this is a Property List.
+属性列表，因为这是一个属性列表。
 
 356
 00:15:16,920 --> 00:15:20,588
 Notice I can return, this through AnyObject,
+注意我可以通过 AnyObject 返回。
 
 357
 00:15:20,590 --> 00:15:22,557
 because Arrays are bridged, and
+因为 Arrays 是关联的，
 
 358
 00:15:22,559 --> 00:15:24,392
 NSArray which happens to be an object.
+NSArray 恰好是一个 object，
 
 359
 00:15:24,394 --> 00:15:25,392
@@ -1437,50 +1586,62 @@ Okay.
 360
 00:15:25,394 --> 00:15:27,961
 But this is an awful lot of code for this.
+但这是可怕的多行代码。
 
 361
 00:15:27,963 --> 00:15:31,731
 We can actually do this in one line of code, okay?
+实际上，我们可以仅使用一行代码，
 
 362
 00:15:31,733 --> 00:15:34,834
 So if you paid attention in my last lecture, you'll remember
+如果你们注意我上次讲的课，你们就会
 
 363
 00:15:34,836 --> 00:15:36,969
 that I told you about this function called map.
+记得我跟你们说过，这个函数叫做 map。
 
 364
 00:15:36,971 --> 00:15:43,041
 And I can actually just return my opStack mapped,
+实际上我可以仅返回我的 opStack mapped。
 
 365
 00:15:43,043 --> 00:15:49,047
 so that each element description is returned.
+这样每个元素的描述都返回了。
 
 366
 00:15:49,049 --> 00:15:51,349
 So I don't need any of this, okay?
+因此我不需要这里的任何一行代码。
 
 367
 00:15:52,485 --> 00:15:54,785
 So everyone understand this line of code right here?
+每个人都理解了这行代码了吧。
 
 368
 00:15:54,787 --> 00:15:57,921
 This is just a little closure that gets the opportunity to
+这仅仅是一个闭包，它转化 opStack 内的
 
 369
 00:15:57,923 --> 00:16:00,723
 convert every single thing inside opStack,
+每个单一的东西，
 
 370
 00:16:00,725 --> 00:16:03,893
 which is an op, these are ops, into a String and it takes
+也就是将操作符，这些是操作符，转换成字符串，
 
 371
 00:16:03,895 --> 00:16:07,396
 this String and maps them all and returns a new Array.
+然后得到这个字符串，然后将它们所有都映射，最后返回一个新的数组。
 
 372
 00:16:09,132 --> 00:16:09,697
@@ -1489,114 +1650,142 @@ Okay?
 373
 00:16:10,733 --> 00:16:13,434
 So when you start getting familiar with Swift and
+当你们开始熟悉 Swift，
 
 374
 00:16:13,436 --> 00:16:14,785
 what it can do,
+和 Swift 能做的。
 
 375
 00:16:14,786 --> 00:16:16,135
 you'll start realizing a lot of things that take five or
+你就开始意识到很多需要五六行代码处理的东西，
 
 376
 00:16:16,138 --> 00:16:17,570
 six line of code, you can just do them in one.
+现在你只需要一行。
 
 377
 00:16:18,640 --> 00:16:20,873
 Okay, but it does take some experience.
+但这需要一定的经验。
 
 378
 00:16:20,875 --> 00:16:22,775
 So now let's talk about going the other way.
+现在让我们谈谈其他方式，
 
 379
 00:16:22,777 --> 00:16:25,177
 So now we have, someone gives us back our program.
+现在有人返回给我们 program，
 
 380
 00:16:25,179 --> 00:16:27,245
 We wanna load our opStack back up.
+我们想加载上我们的 opStack，
 
 381
 00:16:27,247 --> 00:16:33,117
 Well the first thing we wanna make sure is that the thing
+第一件我们需要确认的事情是
 
 382
 00:16:33,119 --> 00:16:37,387
 they're giving us back is an Array of these symbols.
+他们给我们的是这些符号的数组。
 
 383
 00:16:37,389 --> 00:16:38,988
 Because they could just give me junk,
+因为他们可能给我们没用的东西。
 
 384
 00:16:38,990 --> 00:16:40,923
 because it's AnyObject they could set it to anything.
+这是个 AnyObject，他们可以给它设置任何值。
 
 385
 00:16:40,925 --> 00:16:42,291
 So, I, I want to make sure that's what it is.
+我需要确认这是什么。
 
 386
 00:16:42,293 --> 00:16:43,826
 So what I'm going to do,
+我将要做的是，
 
 387
 00:16:43,828 --> 00:16:47,529
 I'm going to let opSymbols equal newValue, right?
+我们将让这个 opSymobls 等于 newValue，
 
 388
 00:16:47,531 --> 00:16:49,731
 newValue remember we are in the setter here.
+newValue 记得我们在 setter 里。
 
 389
 00:16:49,733 --> 00:16:52,633
 So, newValue is the newValue which is in AnyObject.
+这个 newValue 是 AnyObject 的 newValue。
 
 390
 00:16:54,070 --> 00:16:57,571
 As an Array of String, because that's what it has to be.
+转化为一个字符串数组，它必须是这样的。
 
 391
 00:16:57,573 --> 00:17:00,573
 If this thing that they passed in is not an Array of String,
+如果他们传递的不是字符串数组，
 
 392
 00:17:00,575 --> 00:17:02,308
 I don't know what to do with it.
+我就不知道怎么处理。
 
 393
 00:17:02,310 --> 00:17:07,479
 So really here what I wanna do is, if let as question mark,
+所以这里我想做的是， if let as?
 
 394
 00:17:07,481 --> 00:17:09,981
 because they could pass me anything.
+因为他们可能传给我任何东西，
 
 395
 00:17:09,983 --> 00:17:13,485
 And so, here I'm using the as to make sure this AnyObject
+所以这里我使用 as 以确保他们传递过来的 AnyObject
 
 396
 00:17:13,487 --> 00:17:17,488
 they pass me is actually and Array of Strings, okay?
+确实是个字符串数组。
 
 397
 00:17:17,490 --> 00:17:19,390
 If it is, now I can convert back, so
+如果是，我就可以转化回来，
 
 398
 00:17:19,392 --> 00:17:22,893
 I'm gonna create something called my new opStack which
+我将创建一个 newOpStack，
 
 399
 00:17:22,895 --> 00:17:27,497
 is just gonna be an Array of ops and I'm just gonna go for
+它是一个操作符数组。我将遍历这个
 
 400
 00:17:27,499 --> 00:17:31,834
 each opSymbol in this opSymbols.
+opSymbols 里的每个 opSymbol。
 
 401
 00:17:32,836 --> 00:17:35,603

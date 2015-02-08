@@ -1790,194 +1790,242 @@ opSymbols 里的每个 opSymbol。
 401
 00:17:32,836 --> 00:17:35,603
 opSymbols is this thing right here, that's the Array,
+opSymbols 是这个东西，它是 Array 泛型的
 
 402
 00:17:35,605 --> 00:17:38,373
 that's the newValue, the AnyObject converted.
+这是从 AnyObject 转换来的 newValue
 
 403
 00:17:38,375 --> 00:17:42,776
 Into an Array of Strings, okay?
+转换成 Array<String> 类型的，明白了吗？
 
 404
 00:17:42,778 --> 00:17:48,448
 So for each one if I can find a known op,
+所以对于每一个 opSymbol
 
 405
 00:17:48,450 --> 00:17:53,586
 that matches that symbol then this must be an op,
+在 knownOps 中找到对应的 op
 
 406
 00:17:53,588 --> 00:17:56,255
 and so I will just add that op
+那么我就可以将
 
 407
 00:17:56,257 --> 00:18:01,326
 to, to my stack, otherwise I'm gonna see
+那个 op 加至我的 newOpStack 中，否则
 
 408
 00:18:01,328 --> 00:18:04,162
 if I could turn that String into an operand, and I'm gonna
+我将尝试把字符串转换成一个操作数
 
 409
 00:18:04,164 --> 00:18:09,166
 do that with if let operand equal NSNumberFormatter.
+这里我可以输入 if let operand = NSNumberFormatter()
 
 410
 00:18:09,168 --> 00:18:12,736
 Okay, numberFromString, I'm gonna pass it
+NSNumberFormatter().numberFromString(...)
 
 411
 00:18:12,738 --> 00:18:16,773
 this opSymbol that I got out of that Array it gave me.
+括号里的参数我将把 opSymbol 传进去
 
 412
 00:18:16,775 --> 00:18:20,042
 I'm going to use optional chaining here and
+这里我将使用 optional chaining 并且
 
 413
 00:18:20,044 --> 00:18:24,113
 put a question mark, then doubleValue, okay.
+放一个问号在这里，然后 .doubleValue
 
 414
 00:18:24,115 --> 00:18:27,616
 Remember optional chaining, if you have an expression like
+记住，optional chaining，如果你有一个像这样的表达式
 
 415
 00:18:27,618 --> 00:18:31,653
 this, this whole expression, and if anything along the way
+那么整个表达式中任意一个
 
 416
 00:18:31,655 --> 00:18:36,157
 returns nil then this whole expression will return nil.
+返回了 nil 的话，那么整个表达式将返回 nil
 
 417
 00:18:36,159 --> 00:18:38,659
 If you put a question mark after that term.
+我在这里放置了一个问号
 
 418
 00:18:38,661 --> 00:18:40,927
 So, numberFromString can return nil if this is
+那么 numberFromString 如果接受一个不是 String 型的参数
 
 419
 00:18:40,929 --> 00:18:44,364
 not a String, that can be interpreted as a number.
+那么它就会返回 nil，即使这个字符串可以被解释成一个数字
 
 420
 00:18:44,366 --> 00:18:47,000
 So by putting a question mark here it says, okay?
+所以这里我放置一个问号的意思是
 
 421
 00:18:47,002 --> 00:18:50,169
 If that's nil than just return nil back to here.
+如果这个表达式返回 nil，则 operand 也将是 nil
 
 422
 00:18:50,171 --> 00:18:52,604
 Otherwise keep going and send it doubleValue.
+如果不返回 nil，那么 operand 设置成表达式返回值的 doubleValue
 
 423
 00:18:53,574 --> 00:18:57,709
 So this operand is either going to not get set,
+这个 operand 要么设值要么不被设值
 
 424
 00:18:57,711 --> 00:19:01,879
 because of the if let, or it's going to be a Double,
+因为 if let，它将成为一个 Double 型的
 
 425
 00:19:01,881 --> 00:19:03,580
 which is what this doubleValue comes out of here.
+也就是为什么这里出现 doubleValue 的原因
 
 426
 00:19:04,883 --> 00:19:07,384
 Okay, so that's kind of explaining from last week how
+好的，这就是上周我们做 number formatter 
 
 427
 00:19:07,386 --> 00:19:09,252
 we did this number formatter thing.
+的实现的一种解释
 
 428
 00:19:09,254 --> 00:19:12,005
 So in this case,
+在这里
 
 429
 00:19:12,006 --> 00:19:14,757
 I can just append onto the end of it that a new op.
+我只需要追加一个新的 op
 
 430
 00:19:14,759 --> 00:19:19,361
 So, we'll say dot operand with that operand.
+我们输入 .Operand(operand)
 
 431
 00:19:19,363 --> 00:19:20,795
 So we're just putting a new op on there.
+这样我们就追加了一个新的 op
 
 432
 00:19:20,797 --> 00:19:24,565
 So now I've built a new opStack using all those Strings,
+现在我使用了所有的那些字符串创建了一个 newOpStack
 
 433
 00:19:24,567 --> 00:19:27,901
 and I can just return that new opStack.
+这里我将返回这个 newOpStack
 
 434
 00:19:27,903 --> 00:19:30,170
 Not return it, sorry.
+喔，这里不是返回
 
 435
 00:19:30,171 --> 00:19:32,438
 I'm gonna set my opStack equal to that new op
+而是将 opStack = newOpStack
 
 436
 00:19:32,441 --> 00:19:33,740
 Stack, okay?
+明白了吗？
 
 437
 00:19:33,742 --> 00:19:35,174
 That's it.
+就这些
 
 438
 00:19:37,111 --> 00:19:38,276
 Any questions about that?
+对此有什么疑问吗？
 
 439
 00:19:38,278 --> 00:19:41,513
 >>Property List?
+- [学生提问]
 
 440
 00:19:41,515 --> 00:19:42,780
 Like that's just because.
+- [学生提问]
 
 441
 00:19:42,782 --> 00:19:44,932
 >> This is documentation,
+这是文档
 
 442
 00:19:44,933 --> 00:19:47,083
 this is a public thing, it's not private, and I'm just
+这是一个 public 的东西，不是 private 的
 
 443
 00:19:47,086 --> 00:19:49,520
 documenting to anyone who's using it that this is true.
+这是提供给任何使用我代码的人的文档
 
 444
 00:19:49,522 --> 00:19:52,389
 I can document this even better using a typealias.
+我能够用 typealias 更好地整理我的代码文档
 
 445
 00:19:52,391 --> 00:19:54,290
 So you can basically have a typealias,
+你仅仅需要输入 typealias
 
 446
 00:19:54,292 --> 00:19:55,892
 which is an alias for a type.
+typealias 是一个类型的替身
 
 447
 00:19:55,894 --> 00:19:58,094
 It's just a way of another type, and
+是一种其他类型
 
 448
 00:19:58,096 --> 00:20:00,429
 I could have a typealias called PropertyList,
+输入 typealias PropertyList = AnyObject
 
 449
 00:20:00,431 --> 00:20:02,831
@@ -1986,70 +2034,87 @@ which is equals AnyObject.
 450
 00:20:03,934 --> 00:20:08,302
 Then I could have this type be PropertyList, okay?
+接下来我就可以让 program: AnyObject 中的 AnyObject 成为 PropertyList 类型，明白了吗？
 
 451
 00:20:08,304 --> 00:20:11,772
 So I just created PropertyList as an alias for AnyObject, so
+这里我创建了 PropertyList 类型，它是 AnyObject 的一个替身
 
 452
 00:20:11,774 --> 00:20:13,106
 someone looking at this is gonna go,
+当别人看到这里的时候
 
 453
 00:20:13,108 --> 00:20:14,974
 whoa, what the heck is PropertyList?
+他会有一个疑问，究竟什么是 PropertyList
 
 454
 00:20:14,976 --> 00:20:16,309
 Now they're going to look at this typealias, and
+然后他们会回头看到这个 typealias
 
 455
 00:20:16,311 --> 00:20:18,844
 say, oh, that's AnyObject, but they're really going to
+然后知道，那是 AnyObject，他们会知道
 
 456
 00:20:18,846 --> 00:20:21,480
 understand that I'm returning the Property List to them, and
+我将返回一个 PropertyList 给他们
 
 457
 00:20:21,482 --> 00:20:22,848
 the reason it's Property List, again, so
+这就是为什么是 PropertyList 的原因
 
 458
 00:20:22,850 --> 00:20:26,584
 I can throw it again as user defaults or whatever, okay?
+我可以不是使用 PropertyList 或者使用默认设置，甚至其他的值，明白了吗？
 
 459
 00:20:28,354 --> 00:20:30,621
 But otherwise, it's only good, the only thing it's good for
+但是唯一的好处是
 
 460
 00:20:30,623 --> 00:20:33,056
 is giving it back to me to reset my program in
+当将来它返回给我，重置我的 program 的时候
 
 461
 00:20:33,058 --> 00:20:34,724
 the future; that's all this thing is good for.
+这就是它有利的地方
 
 462
 00:20:36,394 --> 00:20:39,762
 Now, you're gonna wanna add this to your assignment for
+现在，你们大概希望把这个加到你们的
 
 463
 00:20:39,764 --> 00:20:41,497
 assignment three, okay?
+课后作业三中
 
 464
 00:20:44,802 --> 00:20:47,502
 So, all right, back to slides.
+好的，回到我们的 Slides
 
 465
 00:20:48,571 --> 00:20:50,871
 I'm not gonna, I don't have time to really run this
+我并没有足够的课堂时间运行这个
 
 466
 00:20:50,873 --> 00:20:53,940
 unfortunately due to in test code because we are
+因为这个需要预先限制的测试代码
 
 467
 00:20:56,178 --> 00:20:57,577
@@ -2058,254 +2123,317 @@ schedule constraint here.
 468
 00:20:57,579 --> 00:20:59,979
 So let's go back to here, continue.
+让我们继续
 
 469
 00:21:01,182 --> 00:21:03,415
 All right, so now let's talk about, new thing here,
+继续讨论一些新东西
 
 470
 00:21:03,417 --> 00:21:06,584
 which is views, okay, totally new topic.
+Views，全新的话题
 
 471
 00:21:06,586 --> 00:21:09,087
 A view, that is to say,
+一个 view
 
 472
 00:21:09,089 --> 00:21:12,156
 a subclass of the class UIView in iOS
+iOS 中 UIView 类的一个子类
 
 473
 00:21:12,158 --> 00:21:15,259
 represents a rectangular area on the screen.
+表示了屏幕上的一个长方形的区域
 
 474
 00:21:15,261 --> 00:21:17,861
 That defines a coordinate space to draw in, and
+定义了一个坐标系空间来绘图
 
 475
 00:21:17,863 --> 00:21:20,463
 also to handle touch events, okay?
+和处理触摸的操作，明白了吗？
 
 476
 00:21:20,465 --> 00:21:24,100
 That's what a view is, and you are going to learn today,
+这就是 view，你们今天要学的
 
 477
 00:21:24,102 --> 00:21:25,301
 how to make your own views.
+如何制作你们自己的 views
 
 478
 00:21:26,771 --> 00:21:29,638
 The views are hierarchical, so,
+views 是有层次的
 
 479
 00:21:29,640 --> 00:21:32,407
 views are within views are within views.
+这就意味着 views 可以在 views 中
 
 480
 00:21:32,409 --> 00:21:34,742
 Any view only has one superview.
+但是任意的 view 只能有一个 superview
 
 481
 00:21:34,744 --> 00:21:37,478
 Right, it's only contained directly in one view.
+这也就意味，一个 view 是直接包含在另一个 view 中的
 
 482
 00:21:37,480 --> 00:21:39,480
 But, it can have any number of subviews.
+但是一个 view 可以有多个 subview
 
 483
 00:21:39,482 --> 00:21:41,948
 So in our Calculator, we had a top level view,
+在我们的计算器程序中，我们有一个最高层的 view
 
 484
 00:21:41,950 --> 00:21:43,316
 which I'm gonna talk about in a moment,
+最高层的 view 一会儿我即将谈到
 
 485
 00:21:43,318 --> 00:21:45,752
 and then we had a lot of subviews, all the buttons,
+接下来我们有一大堆的 subviews，都是按钮
 
 486
 00:21:45,754 --> 00:21:49,221
 the labels, those are all UIView subclasses.
+和标签，它们是 UIView 的子类
 
 487
 00:21:49,223 --> 00:21:50,989
 Okay, so we made a whole bunch.
+所以我们将会用到一大堆
 
 488
 00:21:50,991 --> 00:21:53,091
 A bunch of subviews in that view.
+一大堆的 subviews，在最高层的 view 中
 
 489
 00:21:53,093 --> 00:21:54,225
 But you can go even deeper.
+但是你可以研究更深入
 
 490
 00:21:54,227 --> 00:21:55,593
 It's hierarchical multi-layer.
+有层次的 multi-layer
 
 491
 00:21:55,595 --> 00:21:58,295
 We can go as deep as we want.
+我们想研究多深入都可以
 
 492
 00:21:58,297 --> 00:22:01,231
 The two, you can see the two properties there for
+在这里，你看到这两个 properties 
 
 493
 00:22:01,233 --> 00:22:03,317
 getting your super view.
+这两个 properties 是用来获取你的 superview
 
 494
 00:22:03,318 --> 00:22:05,402
 Notice it returns a optional, because you
+注意它返回一个可选的类型，这是因为
 
 495
 00:22:05,404 --> 00:22:07,804
 can have a view that's not currently on screen.
+你可以拥有一个当前不在屏幕中的 view
 
 496
 00:22:07,806 --> 00:22:10,406
 It's not currently in the view hierarchy so that can be nil.
+不在当前 view 层次结构中的 view 都会是 nil
 
 497
 00:22:11,509 --> 00:22:15,577
 Your subviews, I show Array of UIView there.
+还有一个属性是 subviews，这里我写的是由 UIView 对象组成的一个数组
 
 498
 00:22:15,579 --> 00:22:18,847
 Actually the subview's property is an Array of AnyObject,
+实际上这个 subview property 是由 AnyObject 组成的一个数组
 
 499
 00:22:18,849 --> 00:22:20,482
 again for historical reasons, but
+因为一些历史性的原因，不过
 
 500
 00:22:20,484 --> 00:22:21,849
 there will always be UIViews in there.
+元素始终都是 UIView 的对象
 
 501
 00:22:21,851 --> 00:22:26,086
 So don't even worry about that, okay?
+这里不需要关心，没有问题
 
 502
 00:22:26,088 --> 00:22:28,588
 And usually in this class on the the slides.
+在 Slides 中你经常看到这个类
 
 503
 00:22:28,590 --> 00:22:30,290
 If something's an Array of AnyObject,
+如果什么东西是由 AnyObject 组成的一个数组
 
 504
 00:22:30,292 --> 00:22:32,258
 if there's gonna be a certain kind of thing in there,
+那就是里面肯定有某种特定的东西
 
 505
 00:22:32,260 --> 00:22:34,460
 I'll say, Array of the certain kind of thing.
+换言之，由某种特定的对象组成的数组
 
 506
 00:22:34,462 --> 00:22:36,628
 But when you write your code, then,
+但是当你编写自己的代码时
 
 507
 00:22:36,630 --> 00:22:40,565
 obviously, you might see, oh, that's Array of AnyObject, and
+你明显知道这是由 AnyObject 组成的一个数组
 
 508
 00:22:40,567 --> 00:22:43,301
 that's again, the bridging will work here,
+再一次，bridging 起作用了
 
 509
 00:22:43,303 --> 00:22:46,404
 automatically, so, no worries there. UIWindow.
+这一切都是自动完成的，不需要你操心。UIWindow
 
 510
 00:22:46,406 --> 00:22:48,372
 There is a certain thing called a UIWindow.
+有这么一个东西叫 UIWindow
 
 511
 00:22:48,374 --> 00:22:51,809
 It's a subclass UIView but it has no meaning in iOS.
+它是 UIView 的子类，但是在 iOS 开发中你不需要关心
 
 512
 00:22:51,811 --> 00:22:53,510
 There is a UIWindow it's at the very,
+在每一个设备屏幕上都会有一个 UIWindow
 
 513
 00:22:53,512 --> 00:22:56,913
 very, very top of each device screen but
+iOS 上只有一个
 
 514
 00:22:56,915 --> 00:22:59,515
 you never send it any messages really.
+但是你不会向它发送任何消息
 
 515
 00:22:59,517 --> 00:23:00,583
 You don't interact with it.
+你不跟它交互
 
 516
 00:23:00,585 --> 00:23:02,151
 It's all about views.
+在 iOS 中你只要关心 views
 
 517
 00:23:02,153 --> 00:23:04,152
 On a desktop windows matter.
+但是在桌面环境中，UIWindow 就很关键
 
 518
 00:23:04,154 --> 00:23:07,589
 But on iOS, it's all about views, okay?
+再次强调，在 iOS 中你只要关心 views，明白了吗？
 
 519
 00:23:07,591 --> 00:23:08,690
-So don't worry about UIwindow.
+So don't worry about UIWindow.
+不要操心 UIWindow
 
 520
 00:23:10,927 --> 00:23:13,127
 This hierarchy of views, subviews and
+views 的层次结构，subviews 和
 
 521
 00:23:13,129 --> 00:23:15,629
 superviews, is created usually, graphically.
+superviews 通常不需要通过代码来创建
 
 522
 00:23:15,631 --> 00:23:17,664
 You can drag things out in the StoryBoard.
+你可以直接从 StoryBoard 中拖出来这些组件
 
 523
 00:23:17,666 --> 00:23:20,800
 You can drag views inside other views to
+你可以在其他 views 中拖入 views 
 
 524
 00:23:20,802 --> 00:23:23,102
 create your hierarchy.
+来创建你自己的层次结构
 
 525
 00:23:23,104 --> 00:23:25,104
 But you can do it in code as well.
+但是这并不是说不能用代码来创建这些东西
 
 526
 00:23:25,106 --> 00:23:28,674
 It's pretty rare to do it in code, but you can.
+确实可以用代码创建图形部分，但是很少人这么做
 
 527
 00:23:28,676 --> 00:23:30,809
 There's two methods here addSubview and
+这里有两个方法：addSubview 和
 
 528
 00:23:30,811 --> 00:23:33,611
 removeFromSuperview, addSubview is sent to
+removeFromSuperview，addSubview 是
 
 529
 00:23:33,613 --> 00:23:35,446
 the prospective superview.
+向预期的 superview 发送的消息
 
 530
 00:23:35,448 --> 00:23:37,314
 In other words to the place you wanna add your,
+换言之，superview 是你想添加你的 view 的地方
 
 531
 00:23:37,316 --> 00:23:38,749
@@ -2314,62 +2442,77 @@ this view into.
 532
 00:23:38,751 --> 00:23:40,984
 And removeFromSuperview is sent to the view that you
+同样的，removeFromSuperview 是
 
 533
 00:23:40,986 --> 00:23:42,285
 want to remove.
+想你想要移除的 view 发送的消息
 
 534
 00:23:42,287 --> 00:23:44,571
 So these are sent to different people,
+这两个消息发送给不同的对象
 
 535
 00:23:44,572 --> 00:23:46,856
 okay, removeFromSuperview means remove yourself from
+removeFromSuperview 意味着把“你”自己从 superview 中
 
 536
 00:23:46,858 --> 00:23:47,556
 your superview.
+移除
 
 537
 00:23:49,493 --> 00:23:51,593
 So, where does the view hierarchy start?
+那么 view 的层次结构从那里开始呢？
 
 538
 00:23:51,595 --> 00:23:52,927
 Where is the kind of the root,
+它肯定有一个根节点
 
 539
 00:23:52,929 --> 00:23:55,596
 the top level of this hierarchy, and
+在层次结构的最顶上
 
 540
 00:23:55,598 --> 00:23:58,132
 the answer is very simple, but, for some reason,
+答案很简单，但是因为某些原因
 
 541
 00:23:58,134 --> 00:24:00,667
 students have a very difficult time understanding this one.
+学生们会很难理解这个概念
 
 542
 00:24:00,669 --> 00:24:04,737
 There is a property in your UIView Controller
+在你们的 UIView Controller 中有一个 property
 
 543
 00:24:04,739 --> 00:24:06,505
 called view, and
+名字叫 view
 
 544
 00:24:06,507 --> 00:24:11,209
 it is the top level view in the scene in the StoryBoard.
+这就是你们在 StoryBoard 场景中的最高层次的 view
 
 545
 00:24:11,211 --> 00:24:12,544
 All right. So you have this StoryBoard.
+这里你有这个 StoryBoard
 
 546
 00:24:12,546 --> 00:24:15,346
 You've got your scene that we've seen like your
+你有一个场景跟 Calculator one 差不多的场景
 
 547
 00:24:15,348 --> 00:24:17,331
@@ -2378,202 +2521,252 @@ Calculator one.
 548
 00:24:17,332 --> 00:24:19,315
 The top level one the place where you're going to add
+在视图层次中最高层（你将要添加
 
 549
 00:24:19,318 --> 00:24:22,720
 your top level views is called view in your view controller.
+你顶层 views）的地方叫 view controller 中 view
 
 550
 00:24:22,722 --> 00:24:24,688
 It's just a property in UIView Controller.
+一个在 UIViewController 的 property
 
 551
 00:24:24,690 --> 00:24:27,390
 So it really couldn't be simpler, okay?
+不能够更简单了吧
 
 552
 00:24:27,392 --> 00:24:29,859
 Sometimes students they just forget that's there and there
+有时学生们忘记了UIViewController中还有这么一个 view
 
 553
 00:24:29,861 --> 00:24:32,495
 like all right how do I add something to my StoryBoard?
+那在我 StordBoard 中添加一些东西
 
 554
 00:24:32,497 --> 00:24:34,229
 You know in code or something like that.
+你想要从代码中实现
 
 555
 00:24:34,231 --> 00:24:37,065
 Well you just you add it to the view of
+那么你就把它加入你 UIView Controller
 
 556
 00:24:37,067 --> 00:24:40,502
 your UIView Controller, okay?
+的 view property 中，明白了吗？
 
 557
 00:24:40,504 --> 00:24:46,741
 So, let's talk about initializing a view.
+接下来让我们讨论一下初始化一个 view
 
 558
 00:24:46,743 --> 00:24:50,444
 As usual, as I've kind of recommended, you probably want
+通常我建议，不要做初始化
 
 559
 00:24:50,446 --> 00:24:52,946
 to avoid doing an initializer, if you can.
+尽可能不要
 
 560
 00:24:52,948 --> 00:24:55,782
 So, to initialize any properties in
+这里，在你的 view 中初始化
 
 561
 00:24:55,784 --> 00:24:58,584
 your view hopefully using equals or
+一些 properties 可以使用 = 
 
 562
 00:24:58,586 --> 00:25:00,953
 some of the other ways we've talked about doing it.
+或者我们说过的其他方法实现
 
 563
 00:25:00,955 --> 00:25:03,856
 But, in UIView it's slightly more likely that you
+但是，在 UIView 中有一点点相似的地方是
 
 564
 00:25:03,858 --> 00:25:05,724
 might want to have an initializer.
+你可能需要一个 initializer
 
 565
 00:25:05,726 --> 00:25:07,826
 So it's a slightly complicated thing.
+通常这个有一点点复杂
 
 566
 00:25:07,828 --> 00:25:08,926
 Only slightly.
+不过只有一点点
 
 567
 00:25:08,928 --> 00:25:11,262
 In that UIView has two initializers you
+UIView 中有两个 initializers
 
 568
 00:25:11,264 --> 00:25:12,730
 have to deal with.
+你需要处理的
 
 569
 00:25:12,731 --> 00:25:14,197
 And that's because UIViews can be created in
+那是因为 UIView 可以由两种不同的方法
 
 570
 00:25:14,200 --> 00:25:15,499
 two different ways.
+来创建
 
 571
 00:25:15,501 --> 00:25:18,468
 In code by just saying UIView and
+在代码中你会写 UIView
 
 572
 00:25:18,470 --> 00:25:22,438
 this frame initializer, which is just the frame in the super
+frame initializer，也就是你在 superview 的
 
 573
 00:25:22,440 --> 00:25:26,042
 view coordinate system where this view is gonna live.
+坐标系系统下存在的位置
 
 574
 00:25:26,044 --> 00:25:27,643
 But then there's also this init with coder.
+还有一个是 init(coder: NSCoder)
 
 575
 00:25:27,645 --> 00:25:29,311
 And I'm not gonna talk about coders and
+这里不打算讲 coders
 
 576
 00:25:29,313 --> 00:25:30,679
 archiving and all that.
+和归档的那些东西
 
 577
 00:25:30,681 --> 00:25:33,614
 But that is the initializer that is called when the view
+但是在 Storyboard 中初始化的时候会
 
 578
 00:25:33,616 --> 00:25:35,649
 comes out of a StoryBoard.
+调用 init(coder: NSCoder) 方法
 
 579
 00:25:35,651 --> 00:25:38,318
 So, if you create a view by dragging on a StoryBoard,
+所以，你在 StoryBoard 中拖入一个 view
 
 580
 00:25:38,320 --> 00:25:41,455
 its initializer is this coder thing, okay?
+它的 initializer 方法是 init(coder: NSCoder)，明白了吗？
 
 581
 00:25:41,457 --> 00:25:44,858
 So, if you want, if you absolutely have to use
+如果你想的话，你绝对需要
 
 582
 00:25:44,860 --> 00:25:47,694
 an initializer to initialize something in your UIView,
+在你的 UIView 中使用一个 initializer
 
 583
 00:25:47,696 --> 00:25:50,329
 you're gonna want to implement both of these things.
+你将要实现这两个方法
 
 584
 00:25:50,331 --> 00:25:53,432
 And I recommend this kind of format here.
+这里我推荐的格式是
 
 585
 00:25:53,434 --> 00:25:57,669
 Where you override init with frame there.
+当你在这里 override init(frame: CGRect)
 
 586
 00:25:57,671 --> 00:26:00,271
 That is a designated initializer in UIView.
+这是一个UIView 的 designated initializer 
 
 587
 00:26:00,273 --> 00:26:03,641
 And then, there's actually a required initializer,
+接下黎，还有一个 requried 的 initializer
 
 588
 00:26:03,643 --> 00:26:05,042
 which is the decoder one.
+也就是 decoder 方法
 
 589
 00:26:05,044 --> 00:26:08,245
 So if you implement the init with frame you have to
+如果你实现了 init(frame: CGRect) 方法
 
 590
 00:26:08,247 --> 00:26:09,746
 implement the coder one, it's required,
+你必须同时实现 init(coder: NSCoder)，
 
 591
 00:26:09,748 --> 00:26:11,848
 cuz as soon as you implement the init with frame,
+因为只要是你实现了 init(frame: CGRect)
 
 592
 00:26:11,850 --> 00:26:14,216
 you'll no longer inherit all of your designated
+你就不再继承所有的 designated initializers
 
 593
 00:26:14,218 --> 00:26:17,052
 initializers you won't inherit the init with the coder.
+同样你不再继承 init(coder: NSCoder)
 
 594
 00:26:17,054 --> 00:26:18,787
 So, basically implement them both, and
+所以，实现这两者
 
 595
 00:26:18,789 --> 00:26:21,189
 then just factor your initialization code into some
+然后重构你的代码，讲这两个 initializer 放进
 
 596
 00:26:21,191 --> 00:26:24,659
 setup method or something, and call that, okay?
+setup 方法中或者其他的方法中，然后调用重构后的方法，明白了吗？
 
 597
 00:26:24,661 --> 00:26:26,827
 So, that's only if you absolutely have to
+这就是你唯一要有的 initializer
 
 598
 00:26:28,064 --> 00:26:28,895
@@ -2582,10 +2775,12 @@ have an initializer.
 599
 00:26:30,365 --> 00:26:33,566
 All right, there's another alternative to initializing.
+好的，还有另外关于初始化的一些东西
 
 600
 00:26:33,568 --> 00:26:37,336
 Which is if you can wait until the initialization is finished
+也就是你等到初始化完成之后想做的
 
 601
 00:26:37,338 --> 00:26:40,005

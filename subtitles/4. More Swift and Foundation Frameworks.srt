@@ -1396,7 +1396,7 @@ stored in variables copied, okay?
 301
 00:13:32,501 --> 00:13:34,117
 Right?
-好的 
+对吗？ 
 
 302
 00:13:34,118 --> 00:13:35,734
@@ -1426,22 +1426,22 @@ the heap is managed for us.
 307
 00:13:43,811 --> 00:13:45,444
 Okay, so there's nothing,
-是的，这样一来，
+这样一来，
 
 308
 00:13:45,445 --> 00:13:47,078
 we don't have to do anything alloc and free them.
-我们就没有必要手动去开辟和释放内存了 
+我们就没有必要去开辟和释放内存了 
 
 309
 00:13:47,080 --> 00:13:48,212
 We create them when we want, and
-我们创建这些对象后，
+我们创建想要的对象后，
 
 310
 00:13:48,214 --> 00:13:49,714
 when nobody else, no one's using it,
-当没有其他指针指向这些对象的时候，
+一旦没有任何指针指向这些对象，
 
 311
 00:13:49,716 --> 00:13:52,316
@@ -1451,17 +1451,17 @@ it gets cleaned up and it's not garbage collection, okay?
 312
 00:13:52,318 --> 00:13:53,850
 Reference counting, automatic reference counting.
-这是引用计数，自动引用计数 
+这是引用计数，自动引用计数 （ARC）
 
 313
 00:13:53,852 --> 00:13:56,252
 But, I wanna just have a slide on this
-我还希望多讲一下关于
+我还想多讲一下
 
 314
 00:13:56,254 --> 00:13:58,221
 value type versus reference type again, because it's
-值类型和引用类型的区别，因为明白这个
+值类型和引用类型的区别，因为分清它们
 
 315
 00:13:58,223 --> 00:13:59,789
@@ -1486,7 +1486,7 @@ but a value type struct means, you know, it's
 319
 00:14:08,331 --> 00:14:11,599
 mean that it's copied when you pass it into a function.
-当你将它传递给函数的时候，函数使用的是它的拷贝 
+当你将它传递给方法的时候，方法使用的是它的拷贝 
 
 320
 00:14:11,601 --> 00:14:14,235
@@ -1511,37 +1511,37 @@ let x = Array<>，然后 let y = x
 324
 00:14:20,542 --> 00:14:22,508
 That makes, essentially a copy of x,
-这实际上是将x的值拷贝一份给了y，
+这实际上是将 x 的值拷贝一份给了 y ，
 
 325
 00:14:22,510 --> 00:14:25,611
 now that copy might be lazy behind the scenes, but
-或许这背后是以惰性的方式拷贝的，但是
+或许这背后是以惰性的方式拷贝的，总之
 
 326
 00:14:25,613 --> 00:14:28,279
 as far as you're concerned it's a copy, okay?
-你只需要知道x的值是拷贝给y的就可以了，明白吗？
+你只需要知道这是一份拷贝，明白吗？
 
 327
 00:14:29,449 --> 00:14:31,015
 And if you wanna to be mutable,
-如果你想赋值后可以修改它，
+如果你希望赋值后可以修改它，
 
 328
 00:14:31,017 --> 00:14:33,183
 you could copy it into a VAR instead of a LET,
-你只需要将这个常量赋值给一个变量（var y = x）之后，
+你只需要将这个常量赋值给一个变量（var y = x），
 
 329
 00:14:33,185 --> 00:14:34,718
 and now you could mutate it.
-你就可以修改它了 
+之后，你就可以修改它了 
 
 330
 00:14:34,720 --> 00:14:36,486
 And if you mutate it you get,
-而且这个时候你修改y的时候，
+当你修改你得到的值的时候，
 
 331
 00:14:36,488 --> 00:14:38,988
@@ -1551,37 +1551,37 @@ you're mutating your own copy, you're not mutating.
 332
 00:14:38,990 --> 00:14:42,491
 What the other one pointed to, okay?
-之前被拷贝的那个值（修改y不会影响x），明白吗？
+之前被拷贝的那个值（修改 y 不会影响 x ），明白吗？
 
 333
 00:14:42,493 --> 00:14:47,729
 you, because of this, when you make a struct or an enum,
-正是因为这个原理，当你定义一个枚举或结构体，
+因为上诉原理，当你定义一个 struct 或者一个 enum，
 
 334
 00:14:47,731 --> 00:14:51,866
 and you add a function to it that modifies it,
-并且给它添加一个方法来修改它的状态的时候，
+并且为它添加方法来修改它的状态时，
 
 335
 00:14:51,868 --> 00:14:56,236
 you have to mark it with this keyword mutating.
-你必须在方法前面加上mutating关键字 
+你必须在方法前面加上 mutating 关键字。 
 
 336
 00:14:56,238 --> 00:14:59,306
 And that's so that Swift knows when someone else.
-这样当其他人，
+这样当其他人
 
 337
 00:14:59,308 --> 00:15:02,042
 Gets you know, tries to use your enum or struct, if
-需要使用你的这个枚举或结构体的时候，
+需要使用你的 enum 或 struct 的时候，
 
 338
 00:15:02,044 --> 00:15:05,178
 they use one of these mutating functions it obviously has to
-他们必须在一个变量上来调用这些mutating函数，
+他们就必须在一个变量上来调用这些 mutating 函数，
 
 339
 00:15:05,180 --> 00:15:07,613
@@ -1591,12 +1591,12 @@ be in a var but not in a let type variable.
 340
 00:15:07,615 --> 00:15:13,552
 [NOISE] Okay so reference stored in the heap, reference
-好的，引用类型存储在堆中，
+引用类型存储在堆中，
 
 341
 00:15:13,554 --> 00:15:19,524
 counted even if you have a constant pointer to a class.
-即使这是一个常量指针，也会导致引用计数增加 
+即使是一个常量指针，也会导致引用计数增加 
 
 342
 00:15:19,526 --> 00:15:21,525
@@ -1621,17 +1621,17 @@ All right, so it being, you have a pointer to it.
 346
 00:15:28,133 --> 00:15:29,933
 So, and when you pass it to a function,
-当你把这个这个对象传递个一个函数的时候，
+当你把这个这个对象传递个一个方法的时候，
 
 347
 00:15:29,935 --> 00:15:31,267
 you're passing a pointer to that thing, so
-你传递的是指向这个对象的指针，所以，
+你传递的是指向这个对象的指针，所以
 
 348
 00:15:31,269 --> 00:15:32,968
 if the function modifies it,
-如果这个函数修改了这个对象，
+如果这个方法修改了这个对象，
 
 349
 00:15:32,970 --> 00:15:35,571
@@ -1666,7 +1666,7 @@ This is object-oriented programming language.
 355
 00:15:45,748 --> 00:15:48,348
 You're gonna wanna have the ability to do inheritance, and
-当你使用类，你就可以使用诸如继承，
+当你使用类时，你就可以使用诸如继承，
 
 356
 00:15:48,350 --> 00:15:49,916
@@ -1681,7 +1681,7 @@ Structs are really more for the basic fundamental types,
 358
 00:15:53,788 --> 00:15:57,456
 like Double, Int, Array, Dictionaries, String.
-比如浮点数， Int ， Array ，字典和字符串 
+比如 Double, Int, Array, Dictionaries, String。
 
 359
 00:15:57,458 --> 00:16:00,826
@@ -1691,17 +1691,17 @@ These are all you know, really fundamental things and
 360
 00:16:00,828 --> 00:16:03,128
 when we get into the graphics, you're gonna see the points,
-当我们涉及到绘图的时候，我们会更多地使用points，
+当我们涉及到绘图的时候，我们会更多地使用 points ，
 
 361
 00:16:03,130 --> 00:16:07,131
 sizes, rectangles, those are structs, okay?
-sizes，rectangles，这些都是结构体 
+sizes，rectangles，它们都是都是结构体 
 
 362
 00:16:07,133 --> 00:16:09,166
 But, most of everything else we build,
-但是，我们大多数操作都是
+但是，我们的大多数操作都是
 
 363
 00:16:09,168 --> 00:16:12,036
@@ -1711,7 +1711,7 @@ we build the classes, okay.
 364
 00:16:12,038 --> 00:16:13,804
 And since it manages all the memory for you and
-而且，加上系统会为你管理内存，
+而且系统会为你管理内存，
 
 365
 00:16:13,806 --> 00:16:18,775
@@ -1726,7 +1726,7 @@ All right, so methods.
 367
 00:16:22,229 --> 00:16:24,513
 So, I wanna talk a little bit about methods, all right.
-我想讨论一下 方法 
+我想讨论一下方法 
 
 368
 00:16:24,515 --> 00:16:26,181
@@ -1745,42 +1745,42 @@ You obviously-
 371
 00:16:29,419 --> 00:16:33,287
 you have to put the keyword, override in front of it, 'kay?
-你必须在该方法前面加上override关键字，记住了吗？
+你必须在该方法前面加上 override 关键字，记住了吗？
 
 372
 00:16:34,490 --> 00:16:37,057
 You can also mark a method final,
-你也可以把一个方法标记为final，
+你也可以把一个方法标记为 final ，
 
 373
 00:16:37,059 --> 00:16:39,559
 that means no one can override it.
-这表示这个方法不能被重写 
+final 表示这个方法不能被重写 
 
 374
 00:16:39,561 --> 00:16:41,694
 So, if someone subclasses a class you wrote,
-这样一来，如果有人继承了你的类，
+如果有人继承了你的类，
 
 375
 00:16:41,696 --> 00:16:43,328
 they can't override you if you marked it final.
-他们就不能重写那些被标记为final的方法了 
+他们不能重写那些被标记为 final 的方法
 
 376
 00:16:43,330 --> 00:16:46,131
 You can also mark an entire class final, which means hm,
-你还可以把整个类都标记为final，这表示，
+你还可以把整个类都标记为 final ，这表示，
 
 377
 00:16:46,133 --> 00:16:47,565
 it's a, you know, this is the end of the line.
-谁都不能更改这个类了 
+谁都不能更改这个类，
 
 378
 00:16:47,567 --> 00:16:49,634
 You can't do any subclasses of it basically.
-甚至不能继承这个类 
+甚至不能继承这个类。
 
 379
 00:16:49,636 --> 00:16:51,402
@@ -1791,17 +1791,17 @@ Okay?
 380
 00:16:51,404 --> 00:16:58,508
 Both types and instances have methods and properties.
-类型和实例都有自己的方法和属性 
+类和实例都有自己的方法和属性 
 
 381
 00:16:58,510 --> 00:17:00,577
 So, types, a type is like Array,
-比如， Array 就是一个类型（相当于Class），
+比如， Array 就是一个类，
 
 382
 00:17:00,579 --> 00:17:04,047
 that's the type and instance of an Array is an actual Array
-而具体的一个 Array 就是一个实例（相当于具体对象），
+而具体的一个 Array 就是一个实例，
 
 383
 00:17:04,049 --> 00:17:04,947
@@ -1821,62 +1821,62 @@ So let's look at this pili, piece of code, right here.
 386
 00:17:09,553 --> 00:17:11,620
 I've defined a Double, 'kay?
-我定义里一个Double类型的变量d，
+我定义里一个 Double 类型的变量 d ，
 
 387
 00:17:11,622 --> 00:17:13,922
 This var which is a Double, and I say,
-这个是一个Double变量，
+这个是一个 Double 变量，
 
 388
 00:17:13,924 --> 00:17:17,625
 if the Double isSignMinus, that means if it's minus sign,
-然后向d发送isSignMinus消息，来判断它
+然后向 d 发送 isSignMinus 消息，来判断它
 
 389
 00:17:17,627 --> 00:17:19,727
 has, it's negative.
-是否是一个负数，
+是否是负数，
 
 390
 00:17:19,729 --> 00:17:21,962
 Then I'm going to set the Double to be it,
-然后我把d设置为，
+然后我把 d 设置为，
 
 391
 00:17:21,964 --> 00:17:23,863
 the absolute value of the Double.
-它的绝对值 
+它自己的绝对值 
 
 392
 00:17:23,865 --> 00:17:28,501
 So, isSignMinus is an instance variable,
-所以，isSignMius是实例d的变量，
+所以， isSignMius 是实例 d 的变量，
 
 393
 00:17:28,503 --> 00:17:30,035
 an instance property.
-或者说是实例d的一个属性 
+或者说是实例 d 的一个属性 
 
 394
 00:17:30,037 --> 00:17:32,804
 You send it to a particular Double to ask it,
-你通过对一个具体的Double类型的实例d发送isSignMius消息，
+你通过对一个具体的 Double 类型的实例 d 发送 isSignMius 消息，
 
 395
 00:17:32,806 --> 00:17:34,673
 is your SignMinus?
-来判实例d是否是负数 
+来判实例 d 是否是负数 
 
 396
 00:17:34,675 --> 00:17:39,210
 Whereas Double.abs is a type function on Double.
-然而，abs是Double这个类型的方法（类似于class的类方法，所有对象共享） 
+然而， abs 是 Double 这个类的方法（所有对象共享） 
 
 397
 00:17:39,212 --> 00:17:42,379
 You pass the Double you wanna operate on to it, and
-你向这个方法中传入你需要操作的Double类型的实例，
+你向这个方法中传入你需要操作的 Double 类型的实例，
 
 398
 00:17:42,381 --> 00:17:44,381
@@ -1886,12 +1886,12 @@ it works on it.
 399
 00:17:44,382 --> 00:17:46,382
 But your, and you're not sending abs to a particular
-这里，你并没有向一个特定的Double类型的实例发送消息，
+这里，你并没有向一个特定的 Double 实例发送消息，
 
 400
 00:17:46,385 --> 00:17:48,385
 Double, you're sending it to the class, or
-而是向Double这个类型在发送消息，
+而是向 Double 这个类在发送消息，
 
 401
 00:17:48,387 --> 00:17:49,952
@@ -1901,27 +1901,27 @@ the struct in this case, the type.
 402
 00:17:49,954 --> 00:17:51,721
 You see what I mean?
-你明白我的意思吗？
+明白我的意思吗？
 
 403
 00:17:51,723 --> 00:17:54,723
 So, some method you send to instances, particular
-So, 有些方法调用发送到实例
+你把一些方法发送给实例
 
 404
 00:17:54,725 --> 00:17:57,592
 instances of some things, something you can send to the type.
-有些发送到类型
+一些特殊的方法，你可以发送给类型
 
 405
 00:17:57,594 --> 00:18:00,628
 All right, so two different kinds of, of method but
-All right, 所以两种不一样的方法
+所以是两种不一样的方法
 
 406
 00:18:00,630 --> 00:18:02,597
 otherwise, the rules for them are about the same.
-但是，他们的规则是一样的
+但他们的规则是一样的
 
 407
 00:18:02,599 --> 00:18:04,732
@@ -1931,17 +1931,17 @@ It's just that, who you asked to do the work.
 408
 00:18:05,668 --> 00:18:08,101
 You declare a type method or
-你声明一个类型方法或者或者一个属性
+你声明一个类方法或者或者一个 property
 
 409
 00:18:08,103 --> 00:18:11,037
 a property by using static in front of it.
-其之前必须使用静态变量
+之前必须使用静态变量
 
 410
 00:18:11,039 --> 00:18:14,474
 So, like abs, there would static func abs,
-So, 就像绝对值，就是 static func abs(d: Double) -> Double
+就像绝对值，就是
 
 411
 00:18:14,476 --> 00:18:16,842
@@ -1951,7 +1951,7 @@ static func abs(d: Double) -> Double
 412
 00:18:16,844 --> 00:18:19,345
 And that makes it so you send it that to, the Double type
-这就规定了你要向 Double 类型发消息
+这就规定了你要向 Double 类发消息
 
 413
 00:18:19,347 --> 00:18:21,880
@@ -1966,52 +1966,52 @@ In a class you use the word class not static.
 415
 00:18:24,751 --> 00:18:26,617
 Okay, cuz it's called a class function.
-Okay, 因为它被叫做一个类方法
+因为它被称为类方法
 
 416
 00:18:27,787 --> 00:18:28,819
 Okay?
-Okay?
+明白吗？
 
 417
 00:18:28,821 --> 00:18:31,055
 So, I just don't want you to be confused,
-So, 我不想使你感到困惑
+我不想让你们感到困惑
 
 418
 00:18:31,056 --> 00:18:33,290
 when you start seeing methods like abs that are sent to
-当你开始看见一个类似于abs的方法
+当你看见一个类似于abs的方法
 
 419
 00:18:33,292 --> 00:18:35,108
 the Double type.
-发送给 Double 类型时
+被发送给 Double 类时
 
 420
 00:18:35,109 --> 00:18:36,925
 That looks kinda weird but it's perfectly normal.
-那看起来有一点怪异的但是它很正常
+那看起来有一点奇怪，但是很正常
 
 421
 00:18:36,928 --> 00:18:38,228
 Okay?
-Okay?
+明白吗？
 
 422
 00:18:38,229 --> 00:18:39,529
 And what would you do with a ty, wh, when do
-那么你会用类函……
+那么……
 
 423
 00:18:39,531 --> 00:18:42,231
 you have a type function versus an instant function?
-类型函数和实例函数该如何选择呢？
+类方法和实例方法该如何选择呢？
 
 424
 00:18:42,233 --> 00:18:44,800
 Well, if you're doing any kind of utility work, right?
-呃，如果你正在进行通用性工作
+如果你正在进行通用性工作
 
 425
 00:18:44,802 --> 00:18:46,218
@@ -2026,12 +2026,12 @@ particular to a certain kind of Double, but
 427
 00:18:47,638 --> 00:18:50,705
 just in utilities, you would have those in there.
-只是通用的一些步骤，那么类型函数和实例函数都会出现
+只是通用的一些步骤，那么你可以使用两种方式
 
 428
 00:18:50,707 --> 00:18:53,908
 Sometimes you would have type methods that create objects of
-有时候你会用类型方法
+有时候你会用类方法
 
 429
 00:18:53,910 --> 00:18:56,310
@@ -2041,12 +2041,12 @@ certain kinds and hand them out.
 430
 00:18:56,312 --> 00:18:59,013
 Maybe a shared object like if you had one,
-比如共享对象，如果你的 App 只有一个
+比如共享对象，如果你有一个
 
 431
 00:18:59,015 --> 00:19:00,547
 only one instance of an object for
-某种特定类型的对象实例
+只有一个实例的对象
 
 432
 00:19:00,549 --> 00:19:03,383
@@ -2071,52 +2071,52 @@ creation, that kinda thing.
 436
 00:19:10,891 --> 00:19:12,991
 And they're, now I wouldn't, I don't wanna say, they're rare,
-而且这些东西，我不敢说很少见
+类方法，我不想说很少见
 
 437
 00:19:12,993 --> 00:19:15,960
 they're not super common, you'll see them in, in iOS and
-这些东西不是非常常见，你们在 iOS 里面会看到
+类方法并不是非常常见，你们在 iOS 里面会看到
 
 438
 00:19:15,962 --> 00:19:18,496
 you'll probably use them occasionally.
-偶尔还是使用到
+偶尔还会使用
 
 439
 00:19:18,498 --> 00:19:21,565
 you, you would use them really instead of global functions.
-你可能会把它们当做全局的函数来使用
+你可能会使用类方法而非全局方法
 
 440
 00:19:21,567 --> 00:19:23,801
 You can't have global functions.
-你不能拥有一个全局函数
+你可以没有全局方法
 
 441
 00:19:23,803 --> 00:19:25,936
 In Swift, of course.
-当然，在Swift中
+当然是在 Swift 中
 
 442
 00:19:25,938 --> 00:19:28,271
 But you'd really probably prefer to make it a type
-但是你真的可能喜欢去创建一个类型方法
+但是你可能真的喜欢创建类方法
 
 443
 00:19:28,273 --> 00:19:31,674
 method so that function is associated with you know,
-以便那个函数关联到
+以便那个方法关联到
 
 444
 00:19:31,676 --> 00:19:33,542
 the type and kind of, unless it's
-类型和其他东西 除非它真的是
+类型和其他东西，除非它真的是
 
 445
 00:19:33,544 --> 00:19:35,844
 truly a global function that applies to the world.
-一个世界通用的全局函数
+一个世界通用的全局方法
 
 446
 00:19:35,846 --> 00:19:39,348
@@ -2126,22 +2126,22 @@ It doesn't, it's not about a particular class,
 447
 00:19:39,350 --> 00:19:41,716
 usually you would make them be a type,
-通常情况下你将会把他们当做一个类型使用
+通常情况下你将会把它们当做一个类使用
 
 448
 00:19:41,718 --> 00:19:44,485
 a type function [SOUND] very well [SOUND].
-好吧
+一个类方法
 
 449
 00:19:44,487 --> 00:19:46,454
 All right?
-All right?
+对吧？
 
 450
 00:19:46,456 --> 00:19:49,390
 So method, now lets talk about the parameter names
-所以方法，现在让我们来谈谈
+现在让我们来谈谈
 
 451
 00:19:49,392 --> 00:19:50,908
@@ -2151,17 +2151,17 @@ of methods.
 452
 00:19:50,909 --> 00:19:52,425
 This is, this is a, this is gonna be the crash course,
-这是一个将要崩溃的课程
+这会是速成课，
 
 453
 00:19:52,428 --> 00:19:54,361
 you read all about this I hope in the documentation.
-你阅读了我希望的在文档中所有关于这些的内容
+你们已经阅读了我希望你们知道的，在文档中所有的相关内容
 
 454
 00:19:54,363 --> 00:19:57,697
 But, all parameters to functions have an internal
-但是，函数中的所有参数都有
+但是，方法中的所有参数都有
 
 455
 00:19:57,699 --> 00:19:58,731
@@ -2186,7 +2186,7 @@ So, down there,
 459
 00:20:03,069 --> 00:20:05,136
 foo, the parameters the parameter to foo there.
-foo, 参数foo在这里
+foo , 参数 foo 在这里
 
 460
 00:20:05,138 --> 00:20:07,071
@@ -2236,7 +2236,7 @@ So in bar there, I'm calling things, and
 469
 00:20:26,824 --> 00:20:30,008
 in foo I'm defining them.
-在 foo方法中我定义了他们
+在 foo 方法中我定义了他们
 
 470
 00:20:30,009 --> 00:20:33,193
@@ -2246,7 +2246,7 @@ So, you see that here, I call foo with external colon 123.
 471
 00:20:33,196 --> 00:20:37,598
 Even though, internal to foo, that thing is called internal.
-即使，foo的内部，那东西叫做内部
+尽管，foo 的内部，那东西叫做内部
 
 472
 00:20:38,801 --> 00:20:39,933
@@ -2256,7 +2256,7 @@ Even though, internal to foo, that thing is called internal.
 473
 00:20:39,935 --> 00:20:41,401
 So, you can have both external,
-所以，你可以同事拥有外部的
+所以，你可以同时拥有外部的
 
 474
 00:20:41,403 --> 00:20:42,368
@@ -2281,7 +2281,7 @@ Even under bar if you don't want callers, so
 478
 00:20:50,810 --> 00:20:52,009
 use an external name.
-所以使用一个外部命名
+使用一个外部命名
 
 479
 00:20:52,011 --> 00:20:53,410
@@ -2291,7 +2291,7 @@ So now look at bar.
 480
 00:20:53,412 --> 00:20:55,345
 It calls foo,
-它调用了 foo方法
+它调用了 foo 方法
 
 481
 00:20:55,346 --> 00:20:57,279
@@ -2306,7 +2306,7 @@ It just puts the argument there.
 483
 00:20:59,284 --> 00:21:00,550
 'Kay? So, the under bar says,
-Okay？所以，下划线说：
+所以，下划线说：
 
 484
 00:21:00,552 --> 00:21:03,285
@@ -2316,17 +2316,17 @@ I don't wanna have an external name for this.
 485
 00:21:03,287 --> 00:21:07,422
 'Kay, now that is the default for
-Okay，那里只是默认的
+好，那里只是默认的
 
 486
 00:21:07,424 --> 00:21:09,958
 the first argument to a function.
-将第一个参数传入到函数中
+将第一个参数传入到方法中
 
 487
 00:21:10,994 --> 00:21:12,393
 So, foo only has one argument, so
-所以，foo方法 只有一个参数
+所以，foo 方法只有一个参数
 
 488
 00:21:12,395 --> 00:21:14,695
@@ -2336,7 +2336,7 @@ it's first argument, it's only argument.
 489
 00:21:14,697 --> 00:21:17,731
 You can see that when you call it from bar,
-你可以看到它当你从bar处调用它
+你可以看到它当你从 bar 处调用它
 
 490
 00:21:17,733 --> 00:21:19,332
@@ -2351,7 +2351,7 @@ as because that under bar thing is the default.
 492
 00:21:23,371 --> 00:21:25,337
 Now, if you don't want that to be the default,
-现在，如果你不想让它为默认的值
+现在，如果你不想让它作为默认的值
 
 493
 00:21:25,339 --> 00:21:28,506
@@ -2361,7 +2361,7 @@ you can force the first one to be required by
 494
 00:21:28,508 --> 00:21:31,609
 putting a pound sign there, a little hashtag, okay?
-通过添加一个井号标志，一个小的标签，明白？
+通过添加一个井号标志，一个小标签，明白？
 
 495
 00:21:31,611 --> 00:21:34,345
@@ -2371,7 +2371,7 @@ And that makes it so you have to say internal colon-
 496
 00:21:34,347 --> 00:21:36,814
 >> [COUGH] >> 'Kay?
-Okay？
+明白吗？
 
 497
 00:21:37,950 --> 00:21:42,318
@@ -2396,12 +2396,12 @@ is mandatory, 'kay?
 501
 00:21:49,393 --> 00:21:52,460
 Unless, you put the and you can change the name,
-除非，你设置或者改变了它的 name
+除非，你设置或者改变了它的名称
 
 502
 00:21:52,462 --> 00:21:55,430
 you can be you can, you can have the external name be
-这个因人而异，你可以将 external name 区别于其他的参数
+这个因人而异，你可以将外部命名区别于其他的参数
 
 503
 00:21:55,432 --> 00:21:58,165
@@ -2416,7 +2416,7 @@ And you can put the under bar in there and make it so
 505
 00:22:01,003 --> 00:22:03,070
 even the second one has no parameter name.
-来让第二个变量没有 parameter name
+来让第二个变量没有参数名
 
 506
 00:22:03,072 --> 00:22:06,940
@@ -2431,7 +2431,7 @@ To have a function like this that takes two arguments, and
 508
 00:22:10,612 --> 00:22:13,946
 the second one doesn't really have, a name.
-不需要 name
+不需要名称
 
 509
 00:22:13,948 --> 00:22:16,382
@@ -2471,7 +2471,7 @@ That should be the first argument.
 516
 00:22:29,310 --> 00:22:31,193
 That's why it usually doesn't need a first parameter name.
-所以为什么我们不需要第一个参数的 name
+这就是我们不需要第一个参数名的原因
 
 517
 00:22:31,196 --> 00:22:32,462
@@ -2531,7 +2531,7 @@ distributed out amongst it's arguments.
 528
 00:22:53,582 --> 00:22:55,014
 So, it's really a lot easier to read and
-所以他比较方便去阅读
+比较方便去阅读
 
 529
 00:22:55,016 --> 00:22:57,516
@@ -2581,7 +2581,7 @@ So, property observers are very important and
 538
 00:23:15,333 --> 00:23:17,333
 we're gonna use them a lot.
-而且我们会大量地使用它
+而且我们会大量使用它
 
 539
 00:23:17,335 --> 00:23:19,452
@@ -2596,7 +2596,7 @@ you have a property like here I have some stored property.
 541
 00:23:21,572 --> 00:23:23,238
 It's an Int equals 42, and
-它是一个 Int 类型的，并且它的值为 42
+它是 Int 类型的，值为42
 
 542
 00:23:23,240 --> 00:23:26,941
@@ -2636,7 +2636,7 @@ the thing I'm talking about, right now.
 549
 00:23:42,223 --> 00:23:43,422
 This is the thing to pay attention to.
-它是你们需要关心的地方
+这是你们需要关心的部分
 
 550
 00:23:43,424 --> 00:23:44,590
@@ -2651,7 +2651,7 @@ almost think of yellow, as like highlighted.
 552
 00:23:45,759 --> 00:23:47,309
 Okay?
-明白了吗
+明白了吗？
 
 553
 00:23:47,310 --> 00:23:48,860
@@ -2661,7 +2661,7 @@ So, here I have some stored property.
 554
 00:23:48,862 --> 00:23:51,195
 It stores in Int 42.
-它存储了 Int 类型的 42
+它存储了 Int 类型的42
 
 555
 00:23:51,197 --> 00:23:54,398
@@ -2681,12 +2681,12 @@ I still put a curly brace after it.
 558
 00:23:58,437 --> 00:24:00,103
 But in that curly brace instead of
-花括号的意思并不是
+花括号的意思并不是说，
 
 559
 00:24:00,105 --> 00:24:02,472
 saying get instead like a computer property.
-说，这个 property 是通过计算得到的
+这个 property 是通过计算得到的
 
 560
 00:24:02,474 --> 00:24:05,675
@@ -2726,7 +2726,7 @@ willSet 这个方法会在设置 property 值之前被调用
 567
 00:24:21,991 --> 00:24:25,592
 the properties value gets set, and the didSet, right after.
-同样道理，didSet 这个方法会在设置 property 值之后被调用
+同理，didSet 这个方法会在设置 property 值之后被调用
 
 568
 00:24:25,594 --> 00:24:27,244
@@ -2741,7 +2741,7 @@ you've got this special variable called new value,
 570
 00:24:28,897 --> 00:24:31,230
 which is gonna be the new value that's going to be set.
-这就是 property 将要被设置的新的值
+这是 property 将要被设置的新的值
 
 571
 00:24:31,232 --> 00:24:34,233
@@ -2751,7 +2751,7 @@ And then inside didSet, you've got this special thing
 572
 00:24:34,235 --> 00:24:36,535
 called old value, which is the old value.
-这就是 property 要被设置之前值
+这是 property 要被设置之前值
 
 573
 00:24:36,537 --> 00:24:39,371
@@ -2796,7 +2796,7 @@ don't necessarily do anything with that property directly.
 581
 00:24:57,321 --> 00:24:59,722
 But you wanna know, when that gets changed by anybody.
-但是你想知道它们被其他方法改变了
+但它们被其他方法改变是你想知道
 
 582
 00:24:59,724 --> 00:25:00,756
@@ -2806,16 +2806,17 @@ But you wanna know, when that gets changed by anybody.
 583
 00:25:00,758 --> 00:25:01,956
 So, you can even do willSet and
-所以，你可以在某些继承的类之上
+所以，你可以在某些
 
 584
 00:25:01,958 --> 00:25:04,726
 didSet on properties you inherit from somebody,
-编写 willSet 和 didSet
+继承的类之上
 
 585
 00:25:04,728 --> 00:25:05,526
 from your super class.
+重写继承自父类的 willSet 和 didSet
 
 586
 00:25:06,529 --> 00:25:07,861
@@ -2825,17 +2826,17 @@ Okay?
 587
 00:25:07,863 --> 00:25:10,697
 Now, what kinda things would we do in here?
-在这里，我们能够做些什么
+在这里，我们能够做些什么？
 
 588
 00:25:10,699 --> 00:25:13,533
 Well, one extremely common thing to do in iOS is to
-一个在 iOS 开发中非常常见的做法是
+在 iOS 开发中非常常见的做法是
 
 589
 00:25:15,636 --> 00:25:17,019
 update the user-interface.
-更新用户界面
+更新用户界面（UI）
 
 590
 00:25:17,020 --> 00:25:18,403
@@ -2865,7 +2866,7 @@ That make sense?
 595
 00:25:30,283 --> 00:25:32,083
 'Kay.
-好的
+好
 
 596
 00:25:32,084 --> 00:25:33,884
@@ -2875,16 +2876,17 @@ So, the observers are really cool, they're a really good
 597
 00:25:33,886 --> 00:25:35,852
 way to kinda keep track of what's going on and
-同时也是追踪哪些 property 被设置或获取的一种好方法
+同时也是追踪哪些 property 被设置或获取的
 
 598
 00:25:35,854 --> 00:25:36,853
 keep things in sync.
+一种好方法
 
 599
 00:25:38,323 --> 00:25:42,624
 All right, lazy initialization so a lazy property,
-接下来，我们谈谈 lazy initialization
+接下来，我们谈谈惰性实例化
 
 600
 00:25:42,626 --> 00:25:45,494

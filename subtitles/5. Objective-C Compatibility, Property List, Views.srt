@@ -4499,7 +4499,7 @@ So even drawing text, is just stroking and filling paths.
 
 937
 00:40:06,093 --> 00:40:10,061
-Okay? Now, UIBzierPath, this object-oriented
+Okay? Now, UIBezierPath, this object-oriented
 
 938
 00:40:10,063 --> 00:40:12,830
@@ -4511,7 +4511,7 @@ you don't have to worry about context.
 
 940
 00:40:14,433 --> 00:40:17,934
-It has methods, to do things like line two, arch two,
+It has methods, to do things like lineto, archto,
 
 941
 00:40:17,936 --> 00:40:19,069
@@ -4756,230 +4756,288 @@ Question.
 1001
 00:42:39,606 --> 00:42:41,122
 if the path is not closed, what does fill do?
+如果path不是闭合的，填充的结果是什么？
+
 
 1002
 00:42:41,125 --> 00:42:43,926
 Well, it depends on, I think the winding rule, and,
+我想它依赖于绕圈规则，以及
 
 1003
 00:42:43,928 --> 00:42:45,694
 other things about how it draws.
+其他的如何绘图的一些东西。
 
 1004
 00:42:45,696 --> 00:42:48,196
 But, it will try to fill it in.
+但是，它会努力去填充。
 
 1005
 00:42:48,198 --> 00:42:49,097
 Okay. I mean a path could
+我的意思是path可以
 
 1006
 00:42:49,099 --> 00:42:50,931
 cross back over itself.
+回头和自己相交。
 
 1007
 00:42:50,933 --> 00:42:52,132
 Right? And so filling it
+对吗？对这种情况进行填充
 
 1008
 00:42:52,134 --> 00:42:54,234
 might be hard to understand.
+可能很难理解。
 
 1009
 00:42:54,236 --> 00:42:55,502
 And so there are rules for that.
+所以有相应的一些规则去处理。
 
 1010
 00:42:56,604 --> 00:42:58,637
 I'll talk about that just briefly in just a second, but
+我简要地介绍一下，
 
 1011
 00:42:58,639 --> 00:43:00,139
 it will fill.
+它会去填充的。
 
 1012
 00:43:00,140 --> 00:43:01,640
 But there are other things, if you don't close a path then
+但是对于别的操作，如果你没有闭合path，
 
 1013
 00:43:01,642 --> 00:43:04,042
 you can't do things like hit detection, right?
+那么你没法做类似碰撞检测等操作，对吗？
 
 1014
 00:43:04,044 --> 00:43:05,410
 Detecting whether a point is inside it
+检测一个点是不是在它里面
 
 1015
 00:43:05,412 --> 00:43:07,345
 because it's not closed, so there's no inside.
+因为没有闭合，所以它没有内部。
 
 1016
 00:43:10,049 --> 00:43:13,083
 So you can, UIBezierPath also has kind of
+所以你能，UIBezierPath有各种
 
 1017
 00:43:13,085 --> 00:43:17,653
 pre-canned cool shapes like roundedRect, okay,
+预制的漂亮形状，比如roundedRect。
 
 1018
 00:43:17,655 --> 00:43:20,489
 which is a rectangle that the corners are rounded off of, or
+它是四个角被磨圆了的矩形，
 
 1019
 00:43:20,491 --> 00:43:24,960
 obviously ovals and circles, it has ways of doing that.
+或者干脆是椭圆跟圆形，它有处理这些的方法。
 
 1020
 00:43:24,962 --> 00:43:28,830
 You can also clip to any arbitrary path.
+你也可以剪切任意path
 
 1021
 00:43:28,832 --> 00:43:30,543
 So clipping,
+所以对于剪切，
 
 1022
 00:43:30,544 --> 00:43:32,255
 hopefully everyone knows what that means.
+希望每个人都明白它的意义。
 
 1023
 00:43:32,256 --> 00:43:33,967
 That means, if I set it up, if I have a path, and I say clip.
+它意味着如果我设置好了，我有一个path，我要剪切。
 
 1024
 00:43:33,970 --> 00:43:37,404
 If I say, addClip, then all drawing I do after that
+如果我说，addClip，那么在这之后所有的绘图操作
 
 1025
 00:43:37,406 --> 00:43:41,941
 will only show up if it's inside that path, okay?
+只会影响到path里面的部分，okay？
 
 1026
 00:43:43,178 --> 00:43:44,677
 So, for example,
+举个例子，
 
 1027
 00:43:44,678 --> 00:43:46,177
 if you were drawing playing card on screen,
+如果你正在屏幕上绘制纸牌，
 
 1028
 00:43:46,180 --> 00:43:49,114
 playing cards have little rounded rects, so you might
+纸牌有小小的圆角效果，所以你可以
 
 1029
 00:43:49,116 --> 00:43:52,484
 draw your playing card in a big rectangle, and then clip
+把纸牌画在一个大的矩形里面，然后剪切到
 
 1030
 00:43:52,486 --> 00:43:56,988
 to a rounded rect, so that the corners get cut off, okay.
+一个圆角矩阵里，这样四角就修圆了。
 
 1031
 00:43:56,990 --> 00:43:59,990
 That's a simple to get a rounded rect playing card.
+这是一个获得圆角纸牌的简单方法。
 
 1032
 00:44:01,260 --> 00:44:04,127
 You can also do hit detection as I mentioned, the hit
+你也可以做我提到的碰撞检测，碰撞检测
 
 1033
 00:44:04,129 --> 00:44:07,430
 detection and the filling depends on the winding rules,
+和填充依赖绕圈规则，
 
 1034
 00:44:07,432 --> 00:44:10,866
 and there's this usesEvenOddFillRule, property,
+这里有usesEvenOddFillRule属性，
 
 1035
 00:44:10,868 --> 00:44:14,837
 which is only yes or no to say which winding rule it uses.
+bool类型，指定了它使用的绕圈规则。
 
 1036
 00:44:14,839 --> 00:44:16,605
 And so people who don't know what that means,
+所以不了解它的含义的同学，
 
 1037
 00:44:16,607 --> 00:44:17,605
 don't worry about it.
+不用担心。
 
 1038
 00:44:17,607 --> 00:44:19,207
 In fact, don't worry about hit detection or
+实际上，不用担心碰撞检测
 
 1039
 00:44:19,209 --> 00:44:20,764
 any of this stuff,
+或者类似的API，
 
 1040
 00:44:20,765 --> 00:44:22,320
 cuz you're not going to have to do this for your homework.
+因为你们的课外作业里不用做这些。
 
 1041
 00:44:22,321 --> 00:44:23,876
 But I just want you to know that BezierPath has a lot of
+不过我希望你们能了解BezierPath拥有许多
 
 1042
 00:44:23,880 --> 00:44:25,946
-other stuff besides just linetwo, linetwo,
+other stuff besides just lineto, lineto,
+其他API，不仅仅是lineto, lineto,
 
 1043
 00:44:25,948 --> 00:44:26,680
 fill and stroke.
+fill和stroke。
 
 1044
 00:44:26,682 --> 00:44:28,615
 Okay, it has other stuff.
+Okay，它有别的API。
 
 1045
 00:44:28,616 --> 00:44:30,549
 And when you want to look at UIBezierPath,
+当你想要查看UIBezierPath，
 
 1046
 00:44:30,552 --> 00:44:32,618
 check out its documentation and
+可以打开相关文档
 
 1047
 00:44:32,620 --> 00:44:34,553
 kind of experience it in its full glory.
+经历它的各种荣耀。
 
 1048
 00:44:36,057 --> 00:44:39,491
 Okay, let's talk a little bit more about colors because I
+Okay，我们再聊一聊颜色
 
 1049
 00:44:39,493 --> 00:44:41,626
 used a color there, that green color.
+因为我在那里用了一种绿色。
 
 1050
 00:44:41,628 --> 00:44:43,227
 UIColor is just an object.
+UIColor是一个对象。
 
 1051
 00:44:43,229 --> 00:44:45,262
 It's really powerful.
+它非常强大。
 
 1052
 00:44:45,264 --> 00:44:46,497
 Colors not only can be
+它不仅仅是
 
 1053
 00:44:46,499 --> 00:44:49,433
 standard colors like UIColor.greenColor, but
+类似UIColor.greenColor的标准颜色，
 
 1054
 00:44:49,435 --> 00:44:52,736
 you can create a color from RGB, red, green, blue, or
+你也可以用RGB，红绿蓝，或者
 
 1055
 00:44:52,738 --> 00:44:55,838
 HSB, that's hue, saturation, and brightness.
+HSB，色调，饱和度，亮度来创建颜色。
 
 1056
 00:44:55,840 --> 00:44:59,208
 You can even set your color to be a pattern, so that when you
+你甚至可以把颜色设置为一个模式，这样当你
 
 1057
 00:44:59,210 --> 00:45:02,311
 draw with that color, it actually draws some image.
+用那种颜色绘制时，它实际上画出的是图片。
 
 1058
 00:45:02,313 --> 00:45:02,911
@@ -4988,14 +5046,17 @@ Okay?
 1059
 00:45:02,913 --> 00:45:05,347
 So that's kinda cool.
+这个相当酷。
 
 1060
 00:45:05,349 --> 00:45:10,017
 Views have a background color, which you can set on them.
+View有个可以设置的backgroundColor属性。
 
 1061
 00:45:10,019 --> 00:45:13,353
 Also colors can be transparent.
+UIColor也可以是透明的。
 
 1062
 00:45:13,355 --> 00:45:14,988
@@ -5004,122 +5065,152 @@ Okay?
 1063
 00:45:14,989 --> 00:45:16,622
 They can be see-through, partially see-through.
+他们可以是透明的，半透明的。
 
 1064
 00:45:16,625 --> 00:45:18,191
 This is called alpha.
+这叫做alpha。
 
 1065
 00:45:18,193 --> 00:45:21,027
 So alpha is a value between zero and one.
+alpha是一个介于0和1之间的值。
 
 1066
 00:45:21,029 --> 00:45:22,461
 Zero means fully transparent, so
+0代表完全透明，
 
 1067
 00:45:22,463 --> 00:45:24,096
 you can see completely through it, and
+你的视线可以完全穿过去，
 
 1068
 00:45:24,098 --> 00:45:25,663
 it won't even show up on the screen.
+它不会出现在屏幕上。
 
 1069
 00:45:25,665 --> 00:45:27,598
 To one, which is fully opaque.
+1表示完全不透明。
 
 1070
 00:45:27,600 --> 00:45:29,400
 It obscures anything behind it.
+它遮挡了背后的所有东西。
 
 1071
 00:45:29,402 --> 00:45:30,868
 Anything drawn with this color.
+用这种颜色绘制的任何东西。
 
 1072
 00:45:30,870 --> 00:45:32,903
 And you can create a transparent color from
+你可以用另一种颜色
 
 1073
 00:45:32,905 --> 00:45:35,472
 another color with this color with alpha component.
+和alpha值合成半透明颜色。
 
 1074
 00:45:35,474 --> 00:45:37,840
 This would create kind of half transparent yellow.
+这里创建了一种半透明的黄色。
 
 1075
 00:45:37,842 --> 00:45:40,943
 Color to draw with, and you can draw in your view with
+用于绘制的颜色，你可以用这些透明颜色
 
 1076
 00:45:40,945 --> 00:45:43,045
 these transparent colors, okay?
+来绘制你的view，okay？
 
 1077
 00:45:43,047 --> 00:45:45,247
-Using these BazierPaths.
+Using these BezierPaths.
+使用BezierPaths。
 
 1078
 00:45:45,249 --> 00:45:48,750
 However, if you draw in your view with transparency,
+然而，如果你要用透明度来绘制，
 
 1079
 00:45:48,752 --> 00:45:51,519
 you must tell the system that you are going to do that.
+你必须告诉先系统你要这么做。
 
 1080
 00:45:51,521 --> 00:45:54,221
 And you do that by setting this property on
+实现这个，你需要设置
 
 1081
 00:45:54,223 --> 00:45:56,623
 your UIView called opaque to false.
+UIView的opaque属性为false。
 
 1082
 00:45:56,625 --> 00:45:58,091
 And why is this required?
+为什么需要这么做？
 
 1083
 00:45:58,093 --> 00:46:00,727
 Well, because drawing with transparency is expensive.
+因为带透明度的绘制是非常昂贵的。
 
 1084
 00:46:00,729 --> 00:46:01,961
 Because the views behind you
+因为你后面的view
 
 1085
 00:46:01,963 --> 00:46:03,829
 are gonna start showing through.
+会被展示出来。
 
 1086
 00:46:03,831 --> 00:46:05,197
 Okay? So the system has to
+Okay？所以系统必须
 
 1087
 00:46:05,199 --> 00:46:08,734
 blend basically the different views that are overlapping.
+把重叠的view混合起来绘制。
 
 1088
 00:46:08,736 --> 00:46:12,237
 That's expensive in terms of graphics power.
+这在图像处理上非常昂贵。
 
 1089
 00:46:12,239 --> 00:46:14,772
 And so it doesn't wanna do that if it doesn't have to.
+所以如无必要别这么干。
 
 1090
 00:46:14,774 --> 00:46:16,374
 If it can just draw the bit.
+假设它在绘制某个点。
 
 1091
 00:46:16,376 --> 00:46:17,875
 If you don't set this to false and
+如果你没有把这个设置为false
 
 1092
 00:46:17,877 --> 00:46:20,410
 you try drawing transparently, it's not gonna work.
+并且你还要画成透明的，那不会成功的。
 
 1093
 00:46:20,412 --> 00:46:22,479
@@ -5128,10 +5219,12 @@ Okay?
 1094
 00:46:22,480 --> 00:46:24,547
 Cuz it's not gonna blend with the things behind.
+因为它不会把后面的东西混合进来。
 
 1095
 00:46:24,549 --> 00:46:28,918
 You can make your entire view transparent.
+你可以把整个view设置成透明的。
 
 1096
 00:46:28,920 --> 00:46:29,985
@@ -5140,22 +5233,27 @@ Okay?
 1097
 00:46:29,987 --> 00:46:31,386
 It has its own property alpha,
+它有自己的alpha属性，
 
 1098
 00:46:31,388 --> 00:46:33,722
 which you can set to anywhere between zero and one.
+你可以设置0到1之间的任意值。
 
 1099
 00:46:33,724 --> 00:46:34,906
 It'll make your view,
+它会使你的view，
 
 1100
 00:46:34,907 --> 00:46:36,089
 everything you draw in the view will be
+你在view上绘制的所有东西
 
 1101
 00:46:37,193 --> 00:46:39,460
 however much transparent you want it to be.
+带上你想要的任意透明度。
 
 1102
 00:46:39,462 --> 00:46:41,194
@@ -5164,86 +5262,107 @@ Okay?
 1103
 00:46:41,196 --> 00:46:45,331
 What happens when views overlap and have transparency?
+当带有透明度的view互相遮挡，会发生什么？
 
 1104
 00:46:45,333 --> 00:46:46,832
 They're blended as I said,
+他们会像我说的那样混合，
 
 1105
 00:46:46,834 --> 00:46:49,268
 remember that the subview's order matters.
+记住subview的顺序有影响。
 
 1106
 00:46:49,270 --> 00:46:51,636
 Okay? The thing that is first in
+Okay？subview array里的第一个，
 
 1107
 00:46:51,638 --> 00:46:54,439
-the subviews Array is in the back.
+the subviews array is in the back.
+出现在最后面。
 
 1108
 00:46:54,441 --> 00:46:56,808
 And everything down the rye is in front.
+array里剩下的view按照顺序出现在前面。
 
 1109
 00:46:56,810 --> 00:46:59,276
 So, when the transparency happens,
+所以，当透明度产生时，
 
 1110
 00:46:59,278 --> 00:47:01,979
 that's the order it's gonna happen in.
+这就是将要发生的顺序。
 
 1111
 00:47:01,981 --> 00:47:05,315
 You can completely hide a view by sending it hidden equal to
+你可以完全隐藏一个view，只要把hidden设置为
 
 1112
 00:47:05,317 --> 00:47:08,718
 true, and this is surprisingly common to just hide a view,
+true，这种隐藏一个view的做法非常普遍，
 
 1113
 00:47:08,720 --> 00:47:11,854
 and maybe it appears when a certain condition is true on
+它可以因为某个条件成立而出现在屏幕上，
 
 1114
 00:47:11,856 --> 00:47:14,490
 screen, or whatever you can set up this view in
+或者在你的storyboard里创建这个view，
 
 1115
 00:47:14,492 --> 00:47:17,526
 your StoryBoard and then set it to hidden, to true.
+然后把hidden设置为true。
 
 1116
 00:47:17,528 --> 00:47:19,161
 And so it comes up, it's not there.
+所以它出来的时候，你看不到。
 
 1117
 00:47:19,163 --> 00:47:22,230
 And then in code you say hidden equals false, boom,
+然后你在代码中设置hidden为false，轰隆，
 
 1118
 00:47:22,232 --> 00:47:23,431
 it appears, okay?
+出现了，okay？
 
 1119
 00:47:23,433 --> 00:47:25,466
 So that's a way to, completely hide the view.
+所以这是彻底隐藏view的一个方法。
 
 1120
 00:47:25,468 --> 00:47:26,900
 A hidden view not only doesn't draw,
+隐藏的view不仅不会被绘制，
 
 1121
 00:47:26,902 --> 00:47:28,635
 it doesn't receive any touch events either.
+也不会接受任何touch event。
 
 1122
 00:47:28,637 --> 00:47:30,103
 But it's still in the view hierarchy.
+不过它还存在于view的层级关系中。
 
 1123
 00:47:30,105 --> 00:47:31,304
 It's kinda there waiting.
+有点像在那等待。
 
 1124
 00:47:31,306 --> 00:47:33,139
@@ -5252,218 +5371,272 @@ Okay?
 1125
 00:47:33,141 --> 00:47:34,807
 All right, drawing text.
+好的，绘制文本。
 
 1126
 00:47:34,809 --> 00:47:37,476
 So, usually you draw text on screen with a UILabel.
+通常你们用UILabel在屏幕上绘制文本。
 
 1127
 00:47:37,478 --> 00:47:40,211
 That's what you did with your display, et cetera.
+这就是你用你的显示做的事，等等。
 
 1128
 00:47:40,213 --> 00:47:43,548
 But you might wanna draw in your drawRect and
+不过你可能想要在drawRect做绘制
 
 1129
 00:47:43,550 --> 00:47:45,916
 you do that with this class called NSAttributedString,
+你用NSAttributedString来干这个，
 
 1130
 00:47:45,918 --> 00:47:47,685
 which I'm really not gonna cover.
+这部分我不准备讲解。
 
 1131
 00:47:47,687 --> 00:47:49,503
 You wanna look at
+你可以查看
 
 1132
 00:47:49,504 --> 00:47:51,320
 its documentation if you wanna draw a text.
+它的文档，如果你想要绘制文本。
 
 1133
 00:47:51,323 --> 00:47:53,890
 I'm not gonna do a demo of NSAttributedString, but
+我不会给出NSAttributedString的demo，不过
 
 1134
 00:47:53,892 --> 00:47:55,058
 I'm gonna give you some code for
+我会给你们一些代码作为
 
 1135
 00:47:55,060 --> 00:47:56,325
 your assignment next week, and I'm
+下周的作业，
 
 1136
 00:47:56,327 --> 00:47:59,361
-gonna use NSAttributedString in the code I'm giving you, so
+gonna use NSAttributedString in the code I'm giving you,
+我会在给你们的代码里使用NSAttributedString，
 
 1137
 00:47:59,363 --> 00:48:01,630
-you'll be able to see an example of how it's used.
+so you'll be able to see an example of how it's used.
+所以你们能看到它如何使用的例子。
 
 1138
 00:48:01,632 --> 00:48:03,865
 But basically NSAttributedString is
+但是基本上NSAttributedString
 
 1139
 00:48:03,867 --> 00:48:05,333
 a bunch of characters and
+就是一串字符和
 
 1140
 00:48:05,335 --> 00:48:07,668
 some attributes on those characters.
+设置在字符上的一些attributes。
 
 1141
 00:48:07,670 --> 00:48:11,805
 Now attributed String has a couple of interesting things
+现在NSAttributedString有许多有趣的
 
 1142
 00:48:11,807 --> 00:48:12,572
 about it.
+特点。
 
 1143
 00:48:12,574 --> 00:48:13,740
 It's easy to use.
+它易于使用。
 
 1144
 00:48:13,742 --> 00:48:16,075
 You can just create it, pass it a String, and
+你可以创建它，传入一个String，
 
 1145
 00:48:16,077 --> 00:48:19,044
-then say draw at point, and that will draw the String with
+then say drawAtPoint, and that will draw the String with
+然后调用drawAtPoint，然后String就画出来了，
 
 1146
 00:48:19,046 --> 00:48:21,580
 its point, its upper left corner at that point.
+参数指定了它的左上角位置。
 
 1147
 00:48:21,582 --> 00:48:24,215
 And you can even find out how big it's gonna be by asking it
+你可以查看它将要占用的大小，
 
 1148
 00:48:24,217 --> 00:48:25,850
 the size of this attribute String.
+调用size就行。
 
 1149
 00:48:25,852 --> 00:48:28,285
 So it's pretty easy to use in that way.
+这么做非常容易。
 
 1150
 00:48:28,287 --> 00:48:30,688
 Mutability is not done with var and
+var跟let无法为NSAttributedString
 
 1151
 00:48:30,690 --> 00:48:32,756
 let for NSAttributedString.
+带来可变性。
 
 1152
 00:48:32,758 --> 00:48:33,656
 There's a different class
+有另一种class
 
 1153
 00:48:33,658 --> 00:48:36,325
 called NSMutableAttributedString.
+叫做NSMutableAttributedString。
 
 1154
 00:48:36,327 --> 00:48:37,827
 Okay? And why would you
+Okay？为什么你们
 
 1155
 00:48:37,829 --> 00:48:40,262
 want a MutableAttributedString?
+想要一个NSMutableAttributedString呢？
 
 1156
 00:48:40,264 --> 00:48:41,830
 Well because these Strings,
+因为这些String，
 
 1157
 00:48:41,832 --> 00:48:44,265
 what makes an AttributedString attributed,
+AttributedString之所以是AttributedString，
 
 1158
 00:48:44,267 --> 00:48:47,502
 is you can put attributes on the characters in this String.
+是你可以在String的字符上面设置attributes。
 
 1159
 00:48:47,504 --> 00:48:49,770
 And so a MutableAttributedString,
+所以对于MutableAttributedString，
 
 1160
 00:48:49,772 --> 00:48:51,538
 you can set the attributes.
+你可以设置attributes。
 
 1161
 00:48:51,540 --> 00:48:54,007
 You can get the String out as an NSString,
+你可以把里面的文本导出为NSString，
 
 1162
 00:48:54,009 --> 00:48:57,210
-using the String property on NSAttributedString but
+using the string property on NSAttributedString but
+用NSAttributedString的string属性
 
 1163
 00:48:57,212 --> 00:48:59,946
 NSAttributedString itself is not a String.
+但是NSAttributedString本身不是String。
 
 1164
 00:48:59,948 --> 00:49:02,048
 It's not like a subclass of NSString or anything.
+它不是NSString的子类或者别的。
 
 1165
 00:49:02,050 --> 00:49:03,349
 It's its own thing.
+它属于它自己。
 
 1166
 00:49:03,351 --> 00:49:05,434
 So you set
+所以你们
 
 1167
 00:49:05,435 --> 00:49:07,518
 these attributes with functions like setAttributes.
+用setAttributes等函数设置attributes。
 
 1168
 00:49:07,521 --> 00:49:09,387
 It takes a Dictionary of attributes.
+它使用一个Dictionary类型的attributes。
 
 1169
 00:49:09,389 --> 00:49:11,189
 I'll talk to you about what the keys and
+我稍后介绍它的各种keys
 
 1170
 00:49:11,191 --> 00:49:12,590
 values are in a second.
+跟values。
 
 1171
 00:49:12,592 --> 00:49:15,143
 And then a range.
+还有范围。
 
 1172
 00:49:15,144 --> 00:49:17,695
 That's an NSRange right there by the way, not a Swift Range.
+注意是NSRange， 不是Swift Range。
 
 1173
 00:49:17,697 --> 00:49:20,497
 And the indexing into these Strings is
+这些Strings的索引
 
 1174
 00:49:20,499 --> 00:49:22,966
 the old style NSString version.
+是NSString版的古老风格。
 
 1175
 00:49:22,968 --> 00:49:24,967
-It's not the String.index stuff we
+It's not the string.index stuff we
+它不是string.index这样
 
 1176
 00:49:24,969 --> 00:49:26,335
 talked about last time.
+上次我们讲过了。
 
 1177
 00:49:26,337 --> 00:49:29,471
 It's literally which Unicode character are you
+字面上的意思是在那些你关注的
 
 1178
 00:49:29,473 --> 00:49:32,107
 talking about setting an attribute at?
+的Unicode文字上面设置一个attribute。
 
 1179
 00:49:32,109 --> 00:49:33,792
@@ -5472,14 +5645,17 @@ Okay?
 1180
 00:49:33,793 --> 00:49:35,476
 So, this Dictionary has a bunch of attributes.
+所以这个Dictionary有一串attributes
 
 1181
 00:49:35,479 --> 00:49:37,178
 The attributes can be things like,
+attributes可以是类似，
 
 1182
 00:49:37,180 --> 00:49:39,280
 set the foreground color of this text.
+设置文本的前景色。
 
 1183
 00:49:39,282 --> 00:49:39,947
@@ -5488,34 +5664,42 @@ Okay?
 1184
 00:49:39,949 --> 00:49:41,648
 Set the stroke width.
+可以是设置描边的宽度。
 
 1185
 00:49:41,650 --> 00:49:43,283
 Okay? Because remember,
+Okay？记住，
 
 1186
 00:49:43,285 --> 00:49:44,484
 text is just paths.
+文本就是一些paths。
 
 1187
 00:49:44,486 --> 00:49:47,153
 You can stroke them and to set the width or the font,
+你可以对它们描边，而且可以指定宽度或者字体，
 
 1188
 00:49:47,155 --> 00:49:49,421
 is a really important one to be able to say.
+这是值得一提的重要能力。
 
 1189
 00:49:49,423 --> 00:49:52,991
 Set this text to have this particular font, okay?
+（attributes可以是）对文本使用特定字体，okay？
 
 1190
 00:49:52,993 --> 00:49:55,827
 And so you just set a Dictionary that has
+这样你只要设置一个
 
 1191
 00:49:55,829 --> 00:49:59,964
 the key NSFontAttribute and the value would be a UIFont.
+key为NSFontAttribute，value为UIFont的一个Dictionary。
 
 1192
 00:49:59,966 --> 00:50:01,799
@@ -5523,31 +5707,38 @@ Okay?
 
 1193
 00:50:01,800 --> 00:50:03,633
-Now let's talk about UI fonts, briefly.
+Now let's talk about UIFonts, briefly.
+现在我们简要讨论一下UIFonts
 
 1194
 00:50:03,636 --> 00:50:07,270
 Fonts in iOS 7 and later, including iOS 8,
+Fonts从iOS 7开始，包括iOS 8，
 
 1195
 00:50:07,272 --> 00:50:09,439
 are very important to get right, okay?
+正确使用非常重要，okay？
 
 1196
 00:50:09,441 --> 00:50:10,640
 Look at these screenshots.
+请看这些截图。
 
 1197
 00:50:10,642 --> 00:50:12,908
 Look how important the fonts are.
+看下这些字体有多么重要。
 
 1198
 00:50:12,910 --> 00:50:14,743
 Okay? They're critical,
+Okay？它们是
 
 1199
 00:50:14,745 --> 00:50:16,745
 to making the UI look good.
+创建漂亮UI的关键。
 
 1200
 00:50:16,747 --> 00:50:18,497

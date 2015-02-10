@@ -7157,17 +7157,17 @@ String
 1501
 01:02:06,946 --> 01:02:08,562
 String is complicated when it comes to indexing.
-当遇到索引字符串时，你会遇到很复杂的问题
+字符串处理的一个难点是处理索引
 
 1502
 01:02:08,565 --> 01:02:10,765
 You know, creating sub Strings and stuff like that.
-类似与创建字符串等等的问题
+和创建字符串等其他的问题
 
 1503
 01:02:10,767 --> 01:02:13,368
 A lot of people are like, oh, I can't even figure out how to
-一堆人会说，“我根本不知道怎么
+一堆人会说：“我根本弄不明白怎么
 
 1504
 01:02:13,370 --> 01:02:16,103
@@ -7182,87 +7182,88 @@ It's so complicated.
 1506
 01:02:18,156 --> 01:02:20,206
 But once you understand that Strings are made of unicode
-但是一旦你弄明白了字符串只不过是由 Unicode 组成
+但是一旦你了解到字符串只不过是由一堆 Unicode 字符组成
 
 1507
 01:02:20,209 --> 01:02:23,844
 characters and when you get a subString, you actually don't
-的一堆字符时，你就不会想要
+的时候，你就不会希望你处理的子串的是
 
 1508
 01:02:23,846 --> 01:02:26,179
 want a subString of unicode characters.
-一堆由 Unicode 字符组成的子串了
+一堆由 Unicode 字符组成的了
 
 1509
 01:02:26,181 --> 01:02:27,213
 You want a subString of
-你想要的是
+你想要处理的是
 
 1510
 01:02:27,215 --> 01:02:29,615
 unicode characters that are on glyph boundaries.
-有边界的 Unicode 字符
+单个的 Unicode 字素
+[字素概念引用自：https://msdn.microsoft.com/zh-cn/library/vstudio/7h9tk6x8(v=vs.100).aspx]
 
 1511
 01:02:29,617 --> 01:02:33,752
 A glyph is something you perceive to be a character.
-文字是你把一个字符察觉出来的东西
+字素是显示为单字符的文本单元
 
 1512
 01:02:33,754 --> 01:02:34,986
 But in unicode, it could be
-但是在 Unicode 编码中
+在 Unicode 编码中
 
 1513
 01:02:34,988 --> 01:02:36,821
 multiple characters making up one glyph.
-一个文字有可能由多个字符组成
+一个字素有可能由多个字符组成
 
 1514
 01:02:36,823 --> 01:02:38,522
 For example, an accent.
-假设说，一个重音符号
+举例说，一个重音符号
 
 1515
 01:02:38,524 --> 01:02:41,291
 So you know, a lot of European languages, there's accents,
-你知道，在一些欧洲语系中有重音符号
+在一些欧洲语系中有重音符号
 
 1516
 01:02:41,293 --> 01:02:44,561
 okay, maybe you know, in French, you have accent aigu,
-你们中有些人知道，在法语中有 aigu 重音符号
+你们中有些人应该知道，在法语中有 ´ 重音符号 
 
 1517
 01:02:44,563 --> 01:02:46,396
 right, which is the forward going top slash.
-对，就是那个斜向上的横线
+对，就是这个斜向上的横线
 
 1518
 01:02:46,398 --> 01:02:48,464
 Well, that could be two unicode characters, E and
-这就有可能是两个 Unicode 字符，E 和
+带有这个重音符号的 é 就是由两个 Unicode 字符组成，e 和
 
 1519
 01:02:48,466 --> 01:02:50,433
 the accent character.
-重音符号
+重音符号 ´
 
 1520
 01:02:50,435 --> 01:02:53,302
 So two characters makes what you perceive to be one glyph.
-两个字符组成一个文字
+两个 Unicode 字符组成一个字素
 
 1521
 01:02:53,304 --> 01:02:57,172
 So you can't index into this String which is
-所以你不能在一个字符串中索引
+所以你不能在一个字符串像数组一样
 
 1522
 01:02:57,174 --> 01:02:58,206
 an Array of characters.
-因为字符串有一系列的字符组成
+使用索引
 
 1523
 01:02:58,208 --> 01:02:59,674
@@ -7272,12 +7273,12 @@ That's what a String is,
 1524
 01:02:59,675 --> 01:03:01,141
 a String is Array of in essentially,
-简单的说，是
+简单的说，内部是
 
 1525
 01:03:01,144 --> 01:03:03,010
 internally a collection or
-内部由一系列 Unicode 字符
+由一系列 Unicode 字符
 
 1526
 01:03:03,012 --> 01:03:04,778
@@ -7287,32 +7288,32 @@ collection of unicode characters.
 1527
 01:03:04,780 --> 01:03:06,312
 You can't really index by Int or
-不能用整数来索引
+你不能用整数来索引
 
 1528
 01:03:06,314 --> 01:03:08,981
 you might be halfway through the e accent aigu, and
-因为你有可能真巧遇到重音符号
+因为你有可能碰巧遇到类似的重音符号
 
 1529
 01:03:08,983 --> 01:03:12,284
 you're getting you know, either the ac, accent aigu or
-继续这么做会把重音符号和
+像数组一样用整数索引做有可能会把重音符号和
 
 1530
 01:03:12,286 --> 01:03:14,319
 the e but not the character.
-e 分开，而无法取得整个字符
+e 分开，而无法取得整个字符 é
 
 1531
 01:03:14,321 --> 01:03:17,055
 So instead Strings are indexed by this other type called
-所以字符串是由另外的类型来索引的
+所以字符串是由另外的一个类型来索引的
 
 1532
 01:03:17,057 --> 01:03:18,890
 String.index.
-是 String.index
+这种类型叫 String.Index
 
 1533
 01:03:18,892 --> 01:03:20,024
@@ -7322,49 +7323,52 @@ Okay? Now how do
 1534
 01:03:20,026 --> 01:03:22,193
 you get a String.index?
-得到一个 String.index 呢？
+获得一个 String.Index 呢？
 
 1535
 01:03:22,195 --> 01:03:22,826
 Okay, well, yes.
+好
 
 1536
 01:03:22,828 --> 01:03:23,660
 It's saying here.
+用 Slide 上这里说的函数
 
 1537
 01:03:23,662 --> 01:03:25,862
 Okay?
+明白了吗？
 
 1538
 01:03:25,863 --> 01:03:28,063
 So you get a sting.index by getting the startIndex of
-你可以通过 startIndex 来这个字符串的开始位置
+你可以通过 startIndex 来获取这个字符串的开始位置
 
 1539
 01:03:28,066 --> 01:03:29,299
 the String.
-来得到 String.Index
+来得到一个 String.Index 类型的变量
 
 1540
 01:03:29,300 --> 01:03:30,533
 That gives you String.index that point to
-它会返回给你一个指向字符串开头的
+刚才的那个方法，它会返回给你一个指向字符串开头的
 
 1541
 01:03:30,535 --> 01:03:31,967
 the first character of the String.
-String.Index
+String.Index 的变量
 
 1542
 01:03:31,969 --> 01:03:34,903
 And then you advance it forward,
-然后你再向后移动
+然后你可以讲这个索引向后推进
 
 1543
 01:03:34,905 --> 01:03:36,505
 however many times you wanna go.
-随便你想移动多少次
+随便你想推进多少次都行
 
 1544
 01:03:36,507 --> 01:03:38,306
@@ -7374,22 +7378,22 @@ So in other words, you have to look through the characters so
 1545
 01:03:38,308 --> 01:03:40,141
 that it will jump over e accent aigu,
-这个方法它会跳过重音符号
+这种方法它会跳过整个 é 而不是只跳过一个 e 而停在重音符号上
 
 1546
 01:03:40,143 --> 01:03:42,443
 both characters to the next one, you see?
-然后指向下一个字符
+明白了吗？
 
 1547
 01:03:43,646 --> 01:03:45,278
 So you do that with this function,
-你使用这个函数来推进你的 String.Index
+而你可以你使用下面的这个函数来推进你的 String.Index
 
 1548
 01:03:45,280 --> 01:03:47,914
 it's not a method in String, it's actually just a function,
-这不是 String 中的一个方法，这只是一个函数
+这不是 String 类中的一个方法，这只是一个函数
 
 1549
 01:03:47,916 --> 01:03:50,183
@@ -7399,22 +7403,22 @@ a global function called advance.
 1550
 01:03:50,185 --> 01:03:52,618
 And you give it the index, okay, and
-然后你传入索引
+你传入索引
 
 1551
 01:03:52,620 --> 01:03:55,187
 you tell it how many times you want it to move forward.
-你告诉这个函数你想向后推进多少个字符
+同时，你告诉这个函数你想向后推进多少次
 
 1552
 01:03:55,189 --> 01:03:58,123
 And it will give you back a new index.
-它会返回给你一个新的索引位置
+然后它就会返回给你一个新的索引位置
 
 1553
 01:03:58,125 --> 01:03:59,491
 So here's an example.
-这里有一个例子
+这里举一个例子
 
 1554
 01:03:59,493 --> 01:04:01,859
@@ -7434,7 +7438,7 @@ Okay? So I say,
 1557
 01:04:06,598 --> 01:04:08,765
 let the index equal advance,
-let index = advance
+let index = advance ...
 
 1558
 01:04:08,767 --> 01:04:11,767
@@ -7459,42 +7463,42 @@ It went forward one to the e, now forward one to the l.
 1562
 01:04:17,207 --> 01:04:18,806
 And again, if that, it was e accent aigu,
-这里我再重申，加入这是一个 e 重音符号
+这里我再重申，假如这里不是 e 而是一个 é
 
 1563
 01:04:18,808 --> 01:04:21,642
 it would have gone forward four Unicode characters, but
-他会向前推进4个 Unicode 字符
+刚才的操作他会向前推进4个 Unicode 字符
 
 1564
 01:04:21,644 --> 01:04:25,446
 only three to the third glyph, as you perceive it, okay?
-只有第3个是文字
+但只有第3个字符是 e
 
 1565
 01:04:25,448 --> 01:04:28,715
 So now that I have a pointer to that L, I could use, for
-既然我已经有一个指向 l 的指针
+接下来，既然我已经有一个指向 l 的指针
 
 1566
 01:04:28,717 --> 01:04:31,484
 example, a nice String function called splice.
-我就可以用一个 String 的方法，叫 splice
+我就可以用一个 String 类中的方法，叫 splice
 
 1567
 01:04:31,486 --> 01:04:33,953
 So splice is just like the splice in Array.
-字符串中的 splice 和数组中的 splice很像
+字符串中的 splice 和数组中的 splice 方法很像
 
 1568
 01:04:33,955 --> 01:04:38,157
 It will splice a String into the middle of another String.
-它会将一个字符串 splice 到另外的一个字符串之中
+它会将一个字符串拼合到另外的一个字符串之中
 
 1569
 01:04:38,159 --> 01:04:40,459
 Okay? And I'm gonna have a splice at
-明白吗？如果我在这个位置使用了 splice
+明白吗？如果我在这个位置使用了 splice 方法
 
 1570
 01:04:40,461 --> 01:04:44,229
@@ -7519,7 +7523,7 @@ So, this startIndex is the magic behind making that work.
 1574
 01:04:53,305 --> 01:04:56,840
 Also if I said, if I got two local variables star deck,
-另外假如我说，我又两个局部变量 startIndex
+另外假如我说，我有两个局部变量 startIndex
 
 1575
 01:04:56,842 --> 01:05:00,477
@@ -7529,72 +7533,72 @@ Index, and endIndex, which I made by taking advance of
 1576
 01:05:00,479 --> 01:05:02,478
 the startIndex by one and six.
-startIndex 是由原来的 startIndex 向后推进1个字符，endIndex 是向后推进6个
+startIndex 是由最初的 startIndex 向后推进1个字符得到的，endIndex 是向后推进6个得到的
 
 1577
 01:05:02,480 --> 01:05:05,448
 So this is going to be, I want it to be from index one to
-这也就意味着，我想这两个变量指向第一个字符
+这也就意味着，我想这两个变量一个指向索引1的位置
 
 1578
 01:05:05,450 --> 01:05:08,150
 index six, then I could get a subString and
-和第六个字符，然后我可以创建一个子串
+另一个指向索引6的位置，然后我可以在这两个范围内创建一个子串
 
 1579
 01:05:08,152 --> 01:05:11,253
 I get a subString and in the String exactly the same like
-另外，我就可以像数组一样得到一个串的子串
+就像数组创建子数组一样
 
 1580
 01:05:11,255 --> 01:05:13,221
 an Array, square brackets.
-使用方括号
+使用方括号得到一个字符串的子串
 
 1581
 01:05:13,223 --> 01:05:14,689
 String, square brackets.
-字符串也可以使用方括号来创建子串
+也就是说，字符串也可以使用方括号来创建子串
 
 1582
 01:05:14,691 --> 01:05:17,792
 But inside that square brackets goes arrange.
-但是与数组不同的地方是，方括号里面是一个范围
+方括号里面是一个范围
 
 1583
 01:05:17,794 --> 01:05:19,326
 And the range, the dot, dot,
-范围中由两个 . 组成的
+范围由两个 String.Index 类型的
 
 1584
 01:05:19,328 --> 01:05:22,529
 dot thing has to have a String.index on the left and
-这里我有左侧是有一个 String.Index
+变量组成，一个在左侧
 
 1585
 01:05:22,531 --> 01:05:26,265
 a String.index on the right, not Ints.
-右侧有 String.Index，不是整数
+一个在右侧，中间是 ..
 
 1586
 01:05:26,267 --> 01:05:27,633
 Okay?
-明白了吗？
+String.Index 类型而不是 Int 型，明白了吗？
 
 1587
 01:05:27,634 --> 01:05:29,000
 So here I got String.index.
-这里我有 String.Index
+这里我
 
 1588
 01:05:29,003 --> 01:05:31,937
 By doing this advance for the left and a String.Index on
-通过向前推进左侧的位置和右侧的位置
+通过向前推进左侧的位置和右侧的位置，得到
 
 1589
 01:05:31,939 --> 01:05:34,673
 the right, until the subString will be eabcl.
-知道截断的子串时 eabcl
+截断的子串为 eabcl 的两个 String.Index 类型的变量
 
 1590
 01:05:34,675 --> 01:05:36,574
@@ -7604,7 +7608,7 @@ Cuz I went from index one,
 1591
 01:05:36,576 --> 01:05:41,112
 which is the second character, index zero is the first, or,
-也就是第二个字符，索引0是第一个
+也就是是第二个字符，索引0是第一个字符，这跟数组索引情况相似
 
 1592
 01:05:41,114 --> 01:05:44,581
@@ -7619,27 +7623,26 @@ Everyone understand String.Index now?
 1594
 01:05:46,051 --> 01:05:49,552
 It's all about advance, 'kay?
-这些是关于 advance
+以上这些是关于 advance 函数的
 
 1595
 01:05:49,554 --> 01:05:52,588
 The advance function is the key to understanding how to
-advance 函数是理解如何创建子串的
+advance 函数是理解如何创建子串的关键
 
 1596
 01:05:52,590 --> 01:05:54,957
 subString Strings.
-关键
 
 1597
 01:05:54,959 --> 01:05:57,126
 And, there's lots of other, once you understand this,
-还有其他的东西，一旦你弄懂了
+还有其他的东西，一旦你弄懂了这个
 
 1598
 01:05:57,128 --> 01:05:58,527
 there's things like range of String.
-类似 rangeOfString 这样的东西
+类似 rangeOfString 这样的东西你也会明白了
 
 1599
 01:05:58,529 --> 01:06:01,629
@@ -7649,12 +7652,12 @@ Remember we used range of String in calculator, and it,
 1600
 01:06:01,631 --> 01:06:04,365
 I told you it returned nil if it couldn't find it?
-我告诉过你们，如果它不能找到它的话，会返回 nil
+我告诉过你们，如果 rangeOfString 不能找到的想要的范围的话，会返回 nil
 
 1601
 01:06:04,367 --> 01:06:06,834
 Well, what does it return if it could find it?
-那么如果它能找到它的话，它会返回什么？
+那么如果 rangeOfString 能找到范围的话，它会返回什么？
 
 1602
 01:06:06,836 --> 01:06:09,536
@@ -7799,17 +7802,17 @@ Okay, so there's a lot of String methods there for
 1630
 01:07:15,062 --> 01:07:17,895
 doing that and they're all based on that String index.
-都基于字符串的 index
+都基于字符串的索引
 
 1631
 01:07:17,897 --> 01:07:19,363
 Okay, other String methods,
-另外一些字符串的方法
+还有另外一些字符串的方法
 
 1632
 01:07:19,365 --> 01:07:21,265
 I'm gonna start blasting through a lot of this.
-我会快速讲解一些
+我会快速讲解其中的一些
 
 1633
 01:07:21,267 --> 01:07:22,933
@@ -7829,7 +7832,7 @@ which I'm gonna talk about in a moment.
 1636
 01:07:26,404 --> 01:07:28,771
 You can see that you can find the endIndex,
-你看你可以找到 endIndex
+你看你从 Slide 上可以找到 endIndex
 
 1637
 01:07:28,773 --> 01:07:31,740
@@ -7919,7 +7922,7 @@ if you send out to hello, it's going to be nil, okay?
 1654
 01:08:13,511 --> 01:08:15,844
 So, String methods, all right?
-String 方法，没问题了吧？
+String 中的方法，没问题了吧？
 
 1655
 01:08:16,880 --> 01:08:20,248
@@ -7929,12 +7932,12 @@ Okay, there's kind of a hidden bunch of methods which you
 1656
 01:08:20,250 --> 01:08:24,018
 don't even know about, which is conversions using init.
-这些方法你根本不知道，这些方法是在 init 中实现了转换
+这些方法你根本不知道，这些方法是在初始化时实现了转换
 
 1657
 01:08:24,020 --> 01:08:26,220
 So for example, if I had a Double and
-比如，我有一个 Double 型的值
+比如，我有一个 Double 的值
 
 1658
 01:08:26,222 --> 01:08:31,224
@@ -7964,12 +7967,12 @@ convert them from one thing to another.
 1663
 01:08:39,867 --> 01:08:42,834
 It makes total sense with the number values like Ints and
-像 Int 和浮点数或者类似的
+像 Int 和 Float 或者类似的
 
 1664
 01:08:42,836 --> 01:08:44,152
 Floats and things like that.
-都可以这么做
+都可以这么做来相互转换
 
 1665
 01:08:44,153 --> 01:08:45,469
@@ -7994,12 +7997,12 @@ There's no toInt or anything.
 1669
 01:08:50,743 --> 01:08:53,410
 You just create a new one with the initializer.
-你只能通过 initializer 创建一个 CGFloat 对象
+你只能通过初始化方法（initializer）创建一个 CGFloat 对象
 
 1670
 01:08:53,412 --> 01:08:54,411
 'Kay, so the numbers.
-接下来，Numbers（数字）
+接下来，Numbers
 
 1671
 01:08:54,413 --> 01:08:56,212
@@ -8023,8 +8026,8 @@ Is that you can convert Arrays and
 
 1675
 01:09:02,219 --> 01:09:06,521
-Strings using these intitializers.
-通过 intitializer 相互转化
+Strings using these initializer.
+通过初始化方法完成相互转化
 
 1676
 01:09:06,523 --> 01:09:11,158
@@ -8034,17 +8037,17 @@ For example, you can say Array of a String, so create a new
 1677
 01:09:11,160 --> 01:09:13,927
 Array and the initializers argument is a String.
-创建一个 Array 
+创建一个数组 
 
 1678
 01:09:13,929 --> 01:09:15,095
 And it will return you an Array of
-这个方法会返回一个 Array 
+这个方法会返回一个数组 
 
 1679
 01:09:15,097 --> 01:09:18,231
 all the characters in that String, right?
-而 Array 中的元素是字符串中的字符
+而数组中的元素是字符串中的字符
 
 1680
 01:09:18,233 --> 01:09:20,800
@@ -8054,22 +8057,22 @@ Unicode 字符
 1681
 01:09:20,801 --> 01:09:23,368
 Or vice versa, you can have an Array of unicode characters.
-相反的，你有一个包含一对 Unicode 字符的 Array 
+相反的，你有一个包含一堆 Unicode 字符的数组 
 
 1682
 01:09:23,371 --> 01:09:25,404
 Right?
-对吧？
+是吧？
 
 1683
 01:09:25,405 --> 01:09:27,438
 And it will, and you pass that to Strings constructor and
-你可以使用 String 的 constrctor 来创建一个字符串
+你可以使用 String 的构建器（constructor）来创建一个字符串
 
 1684
 01:09:27,441 --> 01:09:29,974
 it will return the String with those things zipped up.
-字符串中元素由 Array 中字符拼接而成
+字符串中字符由数组中元素拼接而成
 
 1685
 01:09:31,377 --> 01:09:32,660
@@ -8296,7 +8299,7 @@ of too but there's a lot of functions.
 1730
 01:11:22,004 --> 01:11:24,303
 These are global functions, not methods.
-这些是全局函数，并不是某个 Class 的方法
+这些是全局函数，并不是 String, Array 或者其他的 struct 的方法
 
 1731
 01:11:24,305 --> 01:11:26,872
@@ -8311,12 +8314,12 @@ me to explain to you right now.
 1733
 01:11:28,909 --> 01:11:32,044
 But basically they take Arrays and Strings, and Dictionaries,
-但是你们只需要知道这些函数可以接受 Array, Dictionary, String 型的参数
+但是你们只需要知道这些函数可以接受 Array, Dictionary, String 的参数
 
 1734
 01:11:32,046 --> 01:11:34,245
 because they take other things that Arrays and
-因为它们还接受 Array, Dictionary, String 型的参数
+因为它们还接受 Array, Dictionary, String 的参数
 
 1735
 01:11:34,247 --> 01:11:37,448
@@ -8341,7 +8344,7 @@ was talking about at the end there with the String.
 1739
 01:11:45,958 --> 01:11:47,624
 Passing in an Array of characters.
-传入一个由字符组成的 Array 
+传入一个由字符组成的数组 
 
 1740
 01:11:47,626 --> 01:11:51,694
@@ -8396,12 +8399,12 @@ So, that is it for today.
 1750
 01:12:11,180 --> 01:12:15,882
 Let me, quickly, show you, this slide.
-最后让我快速给你们过一遍这个 Slide
+最后让我快速给你们看一下这页 Slide
 
 1751
 01:12:17,719 --> 01:12:20,052
 Okay coming up, no Friday section this week.
-这周五没有课程
+周五没有课程
 
 1752
 01:12:20,054 --> 01:12:21,820

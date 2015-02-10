@@ -31,75 +31,87 @@ what were talking about last time.
 7
 00:00:24,488 --> 00:00:27,289
 And talk a little bit about Objective-C compatibility,
-然后再说一点关于
+然后再说一点关于Objective-C兼容性的问题。
 
 8
 00:00:27,291 --> 00:00:29,991
 because, of course iOS was originally written in
+因为iOS起初是用Objective-C 这种
 
 9
 00:00:29,993 --> 00:00:31,426
 an entirely different language.
+完全不同于Swift的语言写的。
 
 10
 00:00:31,428 --> 00:00:33,078
 And so there's a little bit of
+所以在旧世界和Swift的世界中间
 
 11
 00:00:33,079 --> 00:00:34,729
 bridging between the Swift world and the old world.
+需要有一个桥接。
 
 12
 00:00:34,731 --> 00:00:37,931
 And we're gonna talk about an example of
+然后我们会讲 Property list，这是适用
 
 13
 00:00:37,933 --> 00:00:41,168
 using AnyObject which is Property Lists.
+AnyObject的又一个例子。
 
 14
 00:00:41,170 --> 00:00:43,703
 And I'm gonna do a kind of a brief demo even,
+这里我会用一个简单的
 
 15
 00:00:43,705 --> 00:00:45,104
 showing you that.
+demo来演示这个。
 
 16
-00:00:45,106 --> 00:00:47,940
-Then we're gonna move onto a completely new topic,
-
-17
-00:00:47,942 --> 00:00:50,793
-which is views.
+00:00:45,106 --> 00:00:50,793
+Then we're gonna move onto a completely new topic, which is views.
+然后我们就要开始一个全新的课题，view
 
 18
 00:00:50,794 --> 00:00:53,645
 So, views on how we draw, and how we handle touch input.
+是关于在我们的UI里，如何绘制view，
 
 19
 00:00:53,647 --> 00:00:56,381
 In our UI and so we're gonna go over that, and
+如何响应触屏事件，先讲一些内容，然后
 
 20
 00:00:56,383 --> 00:00:58,116
 I'll be having a demo for that as well.
+依然会有一个demo。
 
 21
 00:00:58,118 --> 00:01:00,818
 So, I'm gonna blast through these slides pretty quick.
+幻灯片我可能会讲的比较快。
 
 22
 00:01:00,820 --> 00:01:04,188
 As usual, the demonstration is probably
+总体来说，示例会比幻灯片更
 
 23
 00:01:04,190 --> 00:01:06,823
 a little more elucidating then some of the slides, cuz when
+容易让你们理解，因为当你们真正看见如何做的
 
 24
 00:01:06,825 --> 00:01:08,925
 you see it in action, it's a lot easier to understand.
+时候，知识会容易理解的多。
 
 25
 00:01:08,927 --> 00:01:11,995
@@ -108,306 +120,374 @@ Okay.
 26
 00:01:11,996 --> 00:01:15,064
 So, Objective-C compatibility, so, virtually all the iOS API,
+下面开始讲 Objective-C 兼容的问题， 基本上iOS全部的API都是
 
 27
 00:01:15,066 --> 00:01:20,002
 this API that was written over the last, however many years,
+在之前许多年内用 Objective-C 写的。
 
 28
 00:01:20,004 --> 00:01:23,905
 in Objective-C, is available from Swift.
+现在在Swift里也可以用。
 
 29
 00:01:23,907 --> 00:01:25,773
 And you can't even tell the difference, okay?
+甚至你都看不出区别来。
 
 30
 00:01:25,775 --> 00:01:29,176
 It's just kind of, automatically made available.
+就好像非常自然的就可以用一样。
 
 31
 00:01:29,178 --> 00:01:30,711
 And, when they designed Swift,
+但是当他们设计Swift的时候，
 
 32
 00:01:30,713 --> 00:01:33,513
 they went to a lot of trouble to make sure that it would,
+为了达到非常好的兼容性，他们遇到了
 
 33
 00:01:33,515 --> 00:01:35,515
 could be done in a very compatible way.
+很多麻烦。
 
 34
 00:01:35,517 --> 00:01:38,785
 So, that all of the iOS API, would work,
+所以现在的这些 API，在Swift里
 
 35
 00:01:38,787 --> 00:01:40,553
 just fine in Swift.
+还算能用。
 
 36
 00:01:40,555 --> 00:01:44,523
 There's few special data types though, that they've gone
+但是有一些特殊的数据类型，在交接两种语言的
 
 37
 00:01:44,525 --> 00:01:49,294
 to special care to bridge between the two languages,
+时候需要特殊的注意。
 
 38
 00:01:49,296 --> 00:01:54,532
 and this makes using iOS API from Objective-C, much easier
+这使得使用 Objective-C 调用 iOS API的时候，会比Swift
 
 39
 00:01:54,534 --> 00:01:58,235
 in Swift, and so, I'm gonna talk briefly about those.
+容易很多，我下边会简要的说一下这个问题。
 
 40
 00:01:58,237 --> 00:02:00,203
 One is NSString.
+其中一个就是 NSString 。
+
 
 41
 00:02:00,205 --> 00:02:02,939
 That is the old way that String were represented,
+这是String以前的形式，
 
 42
 00:02:02,941 --> 00:02:06,775
 in iOS, and that is bridged interchangeably to
+在iOS里， 它与Swift的String
 
 43
 00:02:06,777 --> 00:02:07,909
 Swift's String.
+是可以互换使用的。
 
 44
 00:02:07,911 --> 00:02:09,310
 You can't really even tell the difference.
+甚至可以当它们没有区别。
 
 45
 00:02:09,312 --> 00:02:11,546
 If you have a method that takes an NSString,
+如果有一个方法接受 NSString 的参数，
 
 46
 00:02:11,548 --> 00:02:14,415
 you can pass a Swift String in there, and vice-versa.
+你可以传一个Swift的String进去，反之亦然。
 
 47
 00:02:14,417 --> 00:02:16,283
 Okay, they're just automatically treated if
+尽管他们两个是非常不同的东西，
 
 48
 00:02:16,285 --> 00:02:17,317
 they were the same thing,
+它们还是被当成
 
 49
 00:02:17,319 --> 00:02:19,119
 even though they are quite different things.
+完全一样的。
 
 50
 00:02:19,121 --> 00:02:22,088
 String in Swift is not even a class.
+Swift里的String甚至都不是一个类，
 
 51
 00:02:22,090 --> 00:02:23,189
 Okay, its just a struct.
+而仅仅是一个 struct 。
 
 52
 00:02:23,191 --> 00:02:26,258
 So, they've done some miraculous work to
+苹果的人做了非常神奇的工作把
 
 53
 00:02:26,260 --> 00:02:27,592
 bridge these things.
+它们桥接了起来。
 
 54
 00:02:27,594 --> 00:02:30,528
 NSArray, which is the old Array,
+数组的老版本， NSArray，
 
 55
 00:02:30,530 --> 00:02:33,865
 is bridged to Array of AnyObject.
+桥接到Swift 里就是 AnyObject 元素组成的数组。
 
 56
 00:02:33,867 --> 00:02:37,468
 Okay, so any time you see, an Array of AnyObject in
+所以以后只要你们在iOS的API里看到
 
 57
 00:02:37,470 --> 00:02:42,439
 an iOS API, it's because it was an NSArray before, okay?
+AnyObject 的数组，说明他们以前都是 NSArray 。
 
 58
 00:02:42,441 --> 00:02:44,374
 Then NSDictionary is an interesting one,
+NSDictionary 是比较有趣的一个，
 
 59
 00:02:44,376 --> 00:02:47,343
 it's bridged to Dictionary where the keys have to be
+在Swift里，它被桥接成键是 NSObject 的子类对象
 
 60
-00:02:47,345 --> 00:02:49,378
-subclasses of NSObject, and
-
-61
-00:02:49,380 --> 00:02:52,848
-the values are AnyObject, okay?
+00:02:47,345 --> 00:02:52,848
+subclasses of NSObject, and the values are AnyObject, okay?
+而值是 AnyObject
 
 62
 00:02:52,850 --> 00:02:55,350
 Now, you might think, that's gonna be a problem, and
+你们可能觉得这样会有问题，
 
 63
 00:02:55,352 --> 00:02:58,153
 I'll explain why that's not in a moment.
+我一会儿会解释为什么目前这样做没问题。
 
 64
 00:02:58,155 --> 00:02:59,554
 And then of course, Int and
+然后，Int， Float
 
 65
 00:02:59,556 --> 00:03:03,357
 Float, Double, Bool, they are all bridged to NSNumber.
+Double， Bool，他们都是从 NSNumber 桥接过来的。
 
 66
 00:03:03,359 --> 00:03:04,858
 We talked briefly about NSNumber,
+我们之前简单的讲过 NSNumber ，
 
 67
 00:03:04,860 --> 00:03:06,960
 we talked about the NSNumber format and all that.
+我们讲了 NSNumber 的模版 。
 
 68
 00:03:06,962 --> 00:03:10,430
 So, NSNumber was the old Objective-C object that
+所以， NSNumber 是 Objective-C 里所有关于
 
 69
 00:03:10,432 --> 00:03:12,965
 just meant, any kind of numeric value.
+数值的对象。
 
 70
 00:03:12,967 --> 00:03:15,801
 And, so anything that used to take an NSNumber, you can
+所以在所有用到 NSNumber的地方，你传入一个
 
 71
 00:03:15,803 --> 00:03:19,204
 pass a Double, or Float or Int in there, and it'll just work.
+Double，Float 或者 Int 都是没问题的。
 
 72
 00:03:19,206 --> 00:03:21,573
 Of course, coming back the other way isn't automatic,
+当然反过来是不行的，
 
 73
 00:03:21,575 --> 00:03:23,775
 because it doesn't really know necessarily what you want.
+因为那样系统就不知道你到底需要那种数字类型了。
 
 74
 00:03:24,811 --> 00:03:27,278
 But you can use the methods like doubleValue or
+当然你可以用类似 doubleValue 或者
 
 75
 00:03:27,280 --> 00:03:31,382
-Int value, like we use doubleValue, in the Calculator.
+IntValue, like we use doubleValue, in the Calculator.
+IntValue 的这样的方法， 比如我们在计算器里就用了 doubleValue。
 
 76
 00:03:31,384 --> 00:03:34,484
 And of course, Int and Float and Double are also bridged to
+当然 Int Float 和 Double 都是和 C 语言
 
 77
 00:03:34,486 --> 00:03:37,287
 the C types int, float, and double.
+里的int，float 和 double 桥接好的。
 
 78
 00:03:37,289 --> 00:03:41,390
 So, you have an API that takes an int, and hold a C int.
+所以如果一个API里结构一个C语言的int参数，
 
 79
 00:03:41,392 --> 00:03:45,194
 It'll be bridged to take capital I Swift Int.
+它也可以接受一个 Swift 里的 Int （I是大写的）。
 
 80
 00:03:45,196 --> 00:03:48,296
 So, this stuff, all just works completely automatically.
+这个特性是完全自动生效的，
 
 81
-00:03:48,298 --> 00:03:50,398
-And you don't ever have to do anything.
+00:03:48,298 --> 00:03:51,232
+And you don't ever have to do anything.And it just works.
+我们什么都不需要做。
 
-82
-00:03:50,400 --> 00:03:51,232
-And it just works.
 
 83
 00:03:51,234 --> 00:03:55,803
 However, if you wanna be explicit, about the type,
+然后，如果你需要非常明确的类型，
 
 84
 00:03:55,805 --> 00:03:57,270
 you can cast, okay?
+你可以做类型转换。
 
 85
 00:03:57,272 --> 00:04:01,240
 So, it is perfectly legal to cast a Swift String to
+把 Swift 的String转换成 NSString 是完全合法的，
 
 86
 00:04:01,242 --> 00:04:04,543
 an NSString, and it will always work, so
+不会有任何问题，
 
 87
 00:04:04,545 --> 00:04:06,145
 you don't need as?
+并且不需要 as？。
 
 88
 00:04:06,147 --> 00:04:09,114
 Okay, it's all a hundred percent guaranteed cast.
+这是完全安全的转换。
 
 89
 00:04:09,116 --> 00:04:10,916
 And then once you do that,
+如果你这么做，
 
 90
 00:04:10,917 --> 00:04:12,717
 you have an NSString instead of a String, and so
+你就把之前的String转换成了 NSString ，
 
 91
 00:04:12,719 --> 00:04:15,620
 you can send it messages that are in NSString.
+你就可以给它发送 NSString 的消息了。
 
 92
 00:04:15,622 --> 00:04:17,421
 Although you wanna be careful with some of them,
+你们也需要注意一些问题，
 
 93
 00:04:17,423 --> 00:04:19,990
 like length, is an NSString method,
+比如length 是一个 NSString，
 
 94
 00:04:19,992 --> 00:04:22,325
 that doesn't exist on String.
+在 String 里并不存在。
 
 95
 00:04:22,327 --> 00:04:24,661
 It doesn't exist on String for a reason.
+它在 String 里不存在是有原因的，
 
 96
 00:04:24,663 --> 00:04:27,830
 Because, we talked about this before, you know,
+我们曾经讲过，
 
 97
 00:04:27,832 --> 00:04:31,066
 the length of a Unicode String, can vary,
+Unicode 字符串的长度是可变的，
 
 98
 00:04:32,269 --> 00:04:35,403
-compared to the number of glifs you'll see on screen,
+compared to the number of glyphs you'll see on screen,
+根据你在屏幕上看到符号的不同而不同，
 
 99
 00:04:35,405 --> 00:04:37,739
 and the new Swift String deals with that, and the old
+新的 Swift 的 String 会处理此类字符串，但是 NSString 确实
 
 100
 00:04:37,741 --> 00:04:40,307
 NSString doesn't really deal with that properly.
+没有很好的处理。
 
 101
 00:04:40,309 --> 00:04:43,577
 So, you gotta be careful, when you start calling NSString
+所以当你要调用 NSString 方法的时候要特别小心，
 
 102
 00:04:43,579 --> 00:04:45,012
@@ -416,178 +496,214 @@ methods that, you know,
 103
 00:04:45,014 --> 00:04:47,614
 there's not, you wanna look for a String equivalent, and
+尽量用 String 代替，因为
 
 104
 00:04:47,616 --> 00:04:49,349
 use that if you can, because it's newer, and
+String 是最新的，
 
 105
 00:04:49,351 --> 00:04:52,284
 it does thinks a little more accurately.
+而且可以更精确。
 
 106
 00:04:52,286 --> 00:04:57,189
 But NSArray is the same thing, you can cast from an Array,
+NSArray 也是一样的， 你可以从 Swift 的 Array 
 
 107
 00:04:57,191 --> 00:04:59,457
 that you have in Swift, to an NSArray, and
+转换到它，
 
 108
 00:04:59,459 --> 00:05:01,025
 then you can call them methods in NSArray.
+然后你就可以调用 NSArray 的方法了。
 
 109
 00:05:01,027 --> 00:05:03,594
-Like components joined by String, which is kinda cool,
+Like componentsJoinedByString, which is kinda cool,
+比如 componentsJoinedByString 就是一个很酷的方法，
 
 110
 00:05:03,596 --> 00:05:05,429
 it takes all the components in the Array,
+它收集数组中的所有元素，
 
 111
 00:05:05,431 --> 00:05:07,964
 sends them description, takes those descriptions and
+给它们一个描述，然后用传进来的字符串把
 
 112
 00:05:07,966 --> 00:05:10,400
 joins them by the String you pass as an argument.
+它们连接起来。
 
 113
 00:05:10,402 --> 00:05:14,704
 This is the same as the join method in Swift's String.
+这个跟Swift里String的join方法是一样的。
 
 114
 00:05:14,706 --> 00:05:17,172
 Okay, so, you can look at the documentation for
+你们可以去查阅 String，NSString 和 NSArray
 
 115
 00:05:17,174 --> 00:05:18,907
 String and, NSString and NSArray, but
+的官方文档，
 
 116
 00:05:18,909 --> 00:05:21,710
 pretty much all the things you can do there, or most
+基本上所有的东西，或者说大多数的东西，
 
 117
 00:05:21,712 --> 00:05:25,846
 of them anyway, are available in the Swift versions.
+都可以在Swift里用。
 
 118
 00:05:25,848 --> 00:05:27,281
 But again, if you're passing them back and
+如果你在两个版本里转换，
 
 119
 00:05:27,283 --> 00:05:30,951
-forth, it's all automagic, so you'd say.
+forth, it's all automatic, so you'd say.
+可以说都是自动的过程。
 
 120
 00:05:30,953 --> 00:05:33,753
 Now, you might get a little concerned about Dictionary,
+好的，你们对 Dictionary 可能还有点疑问，
 
 121
 00:05:34,989 --> 00:05:40,225
 because Dictionary, the key has to be an NSObject.
+因为字典的键必须是 NSObject。
 
 122
 00:05:40,227 --> 00:05:42,594
 And of course, we know that String, and Array, and
+当然我们知道，String，Array 和 Dictionary 在 Swift 
 
 123
 00:05:42,596 --> 00:05:45,663
 Dictionary in Swift, are not even objects, okay?
+里都不是对象。
 
 124
 00:05:45,665 --> 00:05:47,198
 They're not AnyObject, or
+它们既不是 AnyObject ，
 
 125
 00:05:47,200 --> 00:05:50,401
 they're, and they're not an NSObject for sure.
+当然更不是 NSObject 。
 
 126
 00:05:50,403 --> 00:05:53,570
 But you can still pass them anywhere you wanna pass in
+但是我们依然可以在需要传 AnyObject 类型 或者 NSObject 的子类
 
 127
 00:05:53,572 --> 00:05:56,907
 AnyObject, or a subclass of NSObject, because they
+的参数里传入它们， 因为他们
 
 128
 00:05:56,909 --> 00:06:00,343
 are bridged to classes that inherit from NSObject,
+都被桥接到了 NSObject的子类里。
 
 129
 00:06:00,345 --> 00:06:01,744
 because NSString, NSArray, and
+因为 NSString ，NSArray 和 
 
 130
 00:06:01,746 --> 00:06:03,412
 NSDictionary all inherit from NSObject.
+NSDictionary 全都继承自 NSObject 。
 
 131
 00:06:03,414 --> 00:06:05,814
 So, that means Strings, Swift Strings,
+所以 String， 也就是Swift的字符串，
 
 132
 00:06:05,816 --> 00:06:09,718
 can be the keys in a Dictionary, an NSDictionary,
+可以作为 NSDictionary 的键，
 
 133
 00:06:09,720 --> 00:06:11,919
 even though it requires NSObject, okay?
+尽管要求键是 NSObject 类型的。
 
 134
 00:06:11,921 --> 00:06:14,889
-And of course, all three of them can be values,
+And of course, all three of them can be values, 
+当然，它们3个也可以作为字典的值，
 
 135
 00:06:14,891 --> 00:06:17,324
 because, even though they're not really objects,
+因为，尽管他们不是对象，是 struct ， 但是他们桥接
 
 136
-00:06:17,326 --> 00:06:20,894
-they are structs, they are bridged to things that can be.
+00:06:17,326 --> 00:06:21,994
+they are structs, they are bridged to things that can be. Okay?
+到 Objective-C 的东西可以作为值。
 
-137
-00:06:20,896 --> 00:06:21,994
-Okay?
 
 138
 00:06:21,996 --> 00:06:23,529
 So, it is okay to pass a String or
+所以，在需要传入 AnyObject 传入
 
 139
 00:06:23,531 --> 00:06:24,530
 an Array to AnyObject.
+String 或者 Array 都没问题。
 
 140
-00:06:27,034 --> 00:06:29,134
-You won't even notice this bridge isn't bridging 99% of
+00:06:27,034 --> 00:06:30,285
+You won't even notice this bridge isn't bridging 99% of the time.
+你在99%的时候都见不到这种桥接，
 
-141
-00:06:29,136 --> 00:06:30,285
-the time.
 
 142
 00:06:30,286 --> 00:06:31,435
 It just happens automatically.
+它们都是自动的。
 
 143
 00:06:31,438 --> 00:06:33,637
 But I just wanted you to know that's going on, so
+我只是想让你们知道背后发生了什么，
 
 144
 00:06:33,639 --> 00:06:34,938
 you don't get kinda confused when you start
+这样在你们见到 NSString 或者 NSArray 的时候就
 
 145
 00:06:34,940 --> 00:06:37,874
 seeing NSString, NSArray, what's going on, okay?
+不会感到疑惑了。
 
 146
 00:06:37,876 --> 00:06:40,109
 They're just being automatically bridged for you.
+它们都是自动桥接过来的。 
 
 147
 00:06:41,579 --> 00:06:43,396
@@ -596,174 +712,212 @@ All right.
 148
 00:06:43,397 --> 00:06:45,214
 So, we talked about AnyObject last time,
+上次我们讲过了AnyObject。
 
 149
 00:06:45,216 --> 00:06:47,182
 and now I'm gonna talk about a use of AnyObject,
+现在我们要讲 AnyObject 的一个用处。 
 
 150
 00:06:47,184 --> 00:06:48,783
 which is called Property List.
+这就是 Property List 。
 
 151
 00:06:48,785 --> 00:06:51,052
 So, Property List is not a type or
+Property List 并不是任何一种类型，
 
 152
 00:06:51,054 --> 00:06:54,689
 anything like that, it's just a term that we use.
+它属于一种工具类的东西。
 
 153
 00:06:54,691 --> 00:06:58,792
 And the definition of that term is, it's in AnyObject,
+它的定义是，
 
 154
 00:06:58,794 --> 00:07:03,129
 a Property List is AnyObject, that is known to be,
+Property List 表面上是 AnyObject ， 但是在
 
 155
 00:07:03,131 --> 00:07:05,865
 behind the scenes, one of those six classes.
+后台，它是 NSString
 
 156
 00:07:05,867 --> 00:07:07,650
-NSString, an Array,
+NSString, NSArray,
+NSArray，
 
 157
 00:07:07,651 --> 00:07:09,434
-Dictionary, Number, Data and Date.
+NSDictionary, NSNumber, NSData and NSDate.
+NSDictionary, NSNumber, NSData and NSDate.
 
 158
 00:07:09,437 --> 00:07:12,404
-Or bridged too with Swift, okay?
+Or bridged to with Swift, okay?
+这六种类型中的一种，或者是它们桥接到Swift里的版本。
 
 159
 00:07:12,406 --> 00:07:17,609
 So, why do we define this Property List thing?
+我们为什么要用 Property List 呢？
 
 160
 00:07:17,611 --> 00:07:19,544
 It's in AnyObject.
+它属于 AnyObject
 
 161
 00:07:19,545 --> 00:07:21,478
 It's kind of unwieldy, because you have to do a lot,
+它看起来非常笨重，因为我们需要用 ising 或者 asing 做
 
 162
 00:07:21,481 --> 00:07:24,115
 a fair amount of casting, ising and asing, cuz
+大量的类型转换，因为要使用 AnyObject，
 
 163
 00:07:24,117 --> 00:07:27,284
 AnyObject, of course, to use it, we have to kinda cast it.
+我们就要进行类型转换。
 
 164
 00:07:27,286 --> 00:07:30,053
 And so, why do we have this thing?
+所以说，我们为什么要用它？
 
 165
 00:07:30,055 --> 00:07:32,722
 Two reasons really.
+实际上有两个原因。
 
 166
 00:07:32,723 --> 00:07:35,390
 One, Property List is used to pass data around blind.
+第一， Property List 要用来隐式的传递数据。
 
 167
-00:07:35,393 --> 00:07:36,926
-It's like a cookie, right?
-
-168
-00:07:36,928 --> 00:07:37,993
-In a browser.
+00:07:35,393 --> 00:07:37,993
+It's like a cookie, right? In a browser.
+就好像浏览器里的cookie一样。
 
 169
 00:07:37,995 --> 00:07:40,295
 It's kind of this just bundle of data,
+它们是只有创建者才知道如何
 
 170
 00:07:40,297 --> 00:07:43,098
 that only the creator of it knows how to interpret it,
+解释它们的一组数据。
 
 171
 00:07:43,100 --> 00:07:45,166
 because only they know what Strings, Arrays,
+因为只有创建人才知道里边到底是 String， Array
 
 172
 00:07:45,168 --> 00:07:46,734
 Dictionaries, and stuff are in there.
+Dictionarie 还是别的什么。
 
 173
 00:07:46,736 --> 00:07:48,252
 But to everyone else it,
+但是对于其他人来说
 
 174
 00:07:48,253 --> 00:07:49,769
 just looks like AnyObject, so they don't know what it is.
+它们就是 AnyObject ，但不知道具体是什么。
 
 175
 00:07:49,772 --> 00:07:53,273
 So, all they can do, is pass it around to other things.
+所以他们能做的就是把它传给其他人。
 
 176
 00:07:53,275 --> 00:07:57,010
 So, it's good for blind data passing, the other thing is,
+这是隐式数据传送的好处。 另一个原因是
 
 177
 00:07:57,012 --> 00:08:00,580
 a Property List can be used as generic data structures, okay?
+Property List 可以用于泛型的数据结构。
 
 178
 00:08:00,582 --> 00:08:02,014
 Since it's got Arrays, and
+因为它可以是Array，
 
 179
 00:08:02,016 --> 00:08:05,584
 Dictionaries, and Numbers, and Dates, and all that in there.
+Dictionarie， Number， Date ，都有可能。
 
 180
 00:08:05,586 --> 00:08:10,021
 You can turn a data structure, like your r-ops stack,
+你可以把一个数据结构变成一个泛型的数据结构，就想你
 
 181
 00:08:10,023 --> 00:08:12,523
 in the CalculatorBrain, it has op enums in there,
+CalculatorBrain类里面的opStack，
 
 182
 00:08:12,525 --> 00:08:14,392
 that's not a generic data structure, but
+它有一个叫做op的枚举，但是它不是泛型的
 
 183
 00:08:14,394 --> 00:08:17,461
 we can turn it into a generic data structure, for example,
+但是它不是泛型的。
 
 184
 00:08:17,463 --> 00:08:20,831
 and then do things with it like write it out to disk, or
+泛型的数据结构可以用来写入磁盘，
 
 185
 00:08:20,833 --> 00:08:23,700
 send it over the network, or things like that.
+或者通过网络传送。
 
 186
 00:08:23,702 --> 00:08:26,569
 So, those are the two main reasons we use Property List.
+以上就是使用Property List的两个主要原因。
 
 187
 00:08:26,571 --> 00:08:31,073
 And, a really good use of Property List in
+Property List 在 iOS里另外一个很好的用处
 
 188
 00:08:31,075 --> 00:08:33,575
 iOS is NSUserDefaults.
+就是 NSUserDefaults。
 
 189
 00:08:33,577 --> 00:08:37,012
 So, NSUserDefaults is like a really tiny little database,
+NSUserDefaults 就像一个微型的数据库。
 
 190
 00:08:37,014 --> 00:08:39,347
 and it only knows how to store Property Lists.
+它只会存储Property List 。
 
 191
 00:08:39,349 --> 00:08:40,999
@@ -772,38 +926,47 @@ Okay?
 192
 00:08:41,000 --> 00:08:42,650
 And it's really for things like settings, and
+存储那些诸如设置，
 
 193
 00:08:42,652 --> 00:08:44,051
 preferences, stuff like that.
+参数等等的东西。
 
 194
 00:08:44,053 --> 00:08:45,852
 You would never, it's not high performance,
+由于它的性能不高，
 
 195
 00:08:45,854 --> 00:08:48,054
 you would never use it for big things like images or
+所以千万不要用它存一些图片什么的比较大的数据，
 
 196
 00:08:48,056 --> 00:08:50,089
 anything like that, just Property Lists, you know,
+只用来存 Property List，你懂的
 
 197
 00:08:50,091 --> 00:08:54,060
 Dates and Strings and Doubles, and things like that.
+日期，字符串，数字什么的。
 
 198
 00:08:54,062 --> 00:08:57,796
 It can store and retrieve any Property List, and
+它可以像字典一样存储和
 
 199
 00:08:57,798 --> 00:08:59,831
 it just stores it like a Dictionary,
+导出Property List ，
 
 200
 00:08:59,833 --> 00:09:03,034
 as if the NSUserDefaults thing itself is a Dictionary.
+NSUserDefaults本身就是一个字典。
 
 201
 00:09:03,036 --> 00:09:05,103
@@ -2887,7 +3050,7 @@ First of all, all coordinates are gonna be CGFloats.
 620
 00:27:24,845 --> 00:27:27,879
 Okay, CGFloats is a type in Swift struct.
-是的，CGFloats在swift中是结构体。
+是的，CGFloats在Swift中是结构体。
 
 621
 00:27:27,881 --> 00:27:31,315

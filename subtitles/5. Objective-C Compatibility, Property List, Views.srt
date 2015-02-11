@@ -321,32 +321,33 @@ We talked briefly about NSNumber,
 67
 00:03:04,860 --> 00:03:06,960
 we talked about the NSNumber format and all that.
-我们讲了 NSNumber 的模版 。
+我们讲过了 NSNumber 格式化 。
+
 
 68
 00:03:06,962 --> 00:03:10,430
 So, NSNumber was the old Objective-C object that
-所以， NSNumber 是 Objective-C 里所有关于
+并且， NSNumber 是 Objective-C 里所有关于
 
 69
 00:03:10,432 --> 00:03:12,965
-just meant, any kind of numeric value.
-数值的对象。
+just meant, any kind of numerical value.
+数值的根对象。
 
 70
 00:03:12,967 --> 00:03:15,801
 And, so anything that used to take an NSNumber, you can
-所以在所有用到 NSNumber的地方，你传入一个
+以至于只要带有 NSNumber 的的地方你就可以 传递 一个
 
 71
 00:03:15,803 --> 00:03:19,204
 pass a Double, or Float or Int in there, and it'll just work.
-Double，Float 或者 Int 都是没问题的。
+Double，Float 或者 Int类型的对象过去都是没问题的。
 
 72
 00:03:19,206 --> 00:03:21,573
 Of course, coming back the other way isn't automatic,
-当然反过来是不行的，
+当然反过来系统就不可以自动检测 ，
 
 73
 00:03:21,575 --> 00:03:23,775
@@ -361,7 +362,7 @@ But you can use the methods like doubleValue or
 75
 00:03:27,280 --> 00:03:31,382
 IntValue, like we use doubleValue, in the Calculator.
-IntValue 的这样的方法， 比如我们在计算器里就用了 doubleValue。
+IntValue 的这样的方法， 比如我们在demo（计算器）里就用了 doubleValue。
 
 76
 00:03:31,384 --> 00:03:34,484
@@ -376,12 +377,12 @@ the C types int, float, and double.
 78
 00:03:37,289 --> 00:03:41,390
 So, you have an API that takes an int, and hold a C int.
-所以如果一个API里结构一个C语言的int参数，
+所以如果有存储一个C语言的int类型参数的API，
 
 79
 00:03:41,392 --> 00:03:45,194
 It'll be bridged to take capital I Swift Int.
-它也可以接受一个 Swift 里的 Int （I是大写的）。
+它可以被一个 Swift 里的带 Int 类型参数I的API桥接（I是大写的）。
 
 80
 00:03:45,196 --> 00:03:48,296
@@ -397,7 +398,7 @@ And you don't ever have to do anything.And it just works.
 83
 00:03:51,234 --> 00:03:55,803
 However, if you wanna be explicit, about the type,
-然后，如果你需要非常明确的类型，
+然而，如果你需要非常明确的类型，
 
 84
 00:03:55,805 --> 00:03:57,270
@@ -417,7 +418,7 @@ an NSString, and it will always work, so
 87
 00:04:04,545 --> 00:04:06,145
 you don't need as?
-并且不需要 as？。
+并且不需要 “as”。
 
 88
 00:04:06,147 --> 00:04:09,114
@@ -427,7 +428,7 @@ Okay, it's all a hundred percent guaranteed cast.
 89
 00:04:09,116 --> 00:04:10,916
 And then once you do that,
-如果你这么做，
+一旦这样操作，
 
 90
 00:04:10,917 --> 00:04:12,717
@@ -447,12 +448,12 @@ Although you wanna be careful with some of them,
 93
 00:04:17,423 --> 00:04:19,990
 like length, is an NSString method,
-比如length 是一个 NSString，
+比如length 是一个 NSString方法，
 
 94
 00:04:19,992 --> 00:04:22,325
 that doesn't exist on String.
-在 String 里并不存在。
+在 String（c语言数据类型） 里并不存在。
 
 95
 00:04:22,327 --> 00:04:24,661

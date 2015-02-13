@@ -987,67 +987,82 @@ gonna go through and here you can look in the documentation.
 199
 00:09:15,015 --> 00:09:17,114
 But, the methods are things like doubleValue.
-但是，方法中有些方法，比如 doubleValue、
+但是，这些方法，比如 doubleValue
 
 200
 00:09:17,116 --> 00:09:20,317
 intValue which is give me your value of yourself as
+intValue ，会将他们自身的值
 
 201
 00:09:20,319 --> 00:09:21,818
 an Int, as a Double etc.
+以 int 、double 等类型返回给我们
 
 202
 00:09:23,121 --> 00:09:26,322
 In Swift, we don't really use this very much,
+在 Swift 中，我们不会用太多这些东西
 
 203
 00:09:26,324 --> 00:09:28,324
 because it's strongly typed and,
+因为 Swift 是强类型
 
 204
 00:09:28,326 --> 00:09:31,527
 so we're using types like Int and Double.
+我们直接用像 Int 、 Double 这样的类型
 
 205
 00:09:31,529 --> 00:09:35,997
 But in Objective-C APIs, there's no NSNumbers lying
+但在 Objective-C 的 API 中，没有遍地的 NSNumbers 类型
 
 206
 00:09:35,999 --> 00:09:39,701
 around and so you kinda need to know about it.
+这一点是你们要了解的
 
 207
 00:09:39,703 --> 00:09:42,069
 I'm gonna talk a little bit later about the fact that
+接下来我会多讲一点强类型的内容
 
 208
 00:09:42,071 --> 00:09:44,772
 all those Swift types are kinda magically bridged
+所有这些 Swift 类型都通过巧妙桥接到 NSNumber 类型
 
 209
 00:09:44,774 --> 00:09:48,075
-to NSNumber, okay those inits and Doubles.
+to NSNumber, okay those ints and Doubles.
+比如 Int Double 等
 
 210
 00:09:48,077 --> 00:09:50,076
 So, you really don't even have to worry about NSNumber.
+所以你甚至不必担心 NSNumber
 
 211
 00:09:50,078 --> 00:09:53,880
 Unless you use NSNumberFormatter that we used in
+除非你要用 NSNumberFormatter 做类型分配
 
 212
 00:09:53,882 --> 00:09:58,117
 the assignment, because that thing returns an NSNumber.
+因为它会返回一个 NSNumber 类型的值
 
 213
 00:09:58,119 --> 00:10:00,652
->> So it there's no like, NSObject parallel in Swift,
+>> So it there's no like NSObject parallel in Swift,
+>> 所以在 Swift 中没有一个和 NSObject 类似的东西
 
 214
 00:10:00,654 --> 00:10:02,721
 is there a way to make like an Array that holds.
+那有办法让
 
 215
 00:10:02,723 --> 00:10:04,773
@@ -1056,282 +1071,352 @@ And kind of [CROSSTALK].
 216
 00:10:04,774 --> 00:10:06,824
 >> Yep, so the question is, if there's no NSObject, well,
+嗯，他的问题是，如果没有 NSObject （那么该怎么处理 NSObject 相关的东西呢）
 
 217
 00:10:06,826 --> 00:10:09,060
 it wouldn't really matter about NSObject.
+其实没有 NSObject 并不是造成困扰的所在
 
 218
 00:10:09,062 --> 00:10:11,062
 But the question is can I
+真正的问题在于没了 NSObject 之后
 
 219
 00:10:11,063 --> 00:10:13,063
 create an Array where there are random Objects in there?
+我能不能创建一个包含任意对象的数组呢
 
 220
 00:10:13,065 --> 00:10:15,932
 And we're gonna talk about that later.
+我们下面会讲这个东西
 
 221
 00:10:15,934 --> 00:10:18,468
 Another class, NSDate, exactly what is sounds like,
+另一个类， NSDate，顾名思义
 
 222
 00:10:18,470 --> 00:10:21,270
 stores a date, let's you get the current date and time too.
+可以存储日期，也可以让你获取当前日期和时间
 
 223
 00:10:22,306 --> 00:10:24,139
-Pretty self explanatory has lots and
+Pretty self-explanatory has lots and
+显然，NSDate 有非常非常多的方法
 
 224
 00:10:24,141 --> 00:10:25,874
 lots of methods in it.
+会涉及到这些东西
 
 225
 00:10:25,876 --> 00:10:28,143
 And it has even more and more methods because there's those
+它还因为下面即将提到的另外三个类
 
 226
 00:10:28,145 --> 00:10:29,577
 three other classes mentioned here,
+还会有更多相关的方法
 
 227
 00:10:29,579 --> 00:10:32,480
 Calendar, DateFormatter, and DateComponents.
+Calendar, DateFormatter, 和 DateComponents.
 
 228
 00:10:32,482 --> 00:10:34,281
 And if you're ever doing a date where you're gonna
+如果你正要做日期相关的事情
 
 229
 00:10:34,283 --> 00:10:37,784
 put a date on screen as part of your application,
+在你的应用的某个地方放置一个日期
 
 230
 00:10:37,786 --> 00:10:39,753
 you really wanna look at all these classes and
+你就需要查看所有
 
 231
 00:10:39,755 --> 00:10:41,954
 read the documentation that talks about dates.
+提到日期的类和文档
 
 232
 00:10:41,956 --> 00:10:43,422
 Because, dates are displayed very
+因为全世界的日期
 
 233
 00:10:43,424 --> 00:10:45,224
 differently around the world.
+显示方式各不相同
 
 234
 00:10:45,226 --> 00:10:48,160
 Different calendars different you know even
+不同的日历，就我们所熟知的差异
 
 235
 00:10:48,162 --> 00:10:50,895
 different languages, the order of the month, day, year even
+在语言方面，年月日的顺序方面都不同
 
 236
 00:10:50,897 --> 00:10:53,031
 if you're using the Gregirian calendar is different.
+甚至你正在用的 Gregirian 类型的标准日历也有不同的地方
 
 237
 00:10:53,033 --> 00:10:56,600
 So, you really, really dates are tricky to get right if
+所以如果你要做在全世界都能准确运行的日历
 
 238
 00:10:56,602 --> 00:10:59,136
 you wanna build an app that can work around the world.
+是非常非常困难的
 
 239
 00:10:59,138 --> 00:11:00,871
 Okay, so I'm just kind of warning you if
+所以我只是提醒你
 
 240
 00:11:00,873 --> 00:11:03,506
 you're gonna build an app like that some day you wonna really
+如果你要做一个应用，有一天你想用它真正的明白日期
 
 241
 00:11:03,508 --> 00:11:06,542
 understand date and all it's friends here.
+和它相关的所有的伙伴
 
 242
 00:11:06,544 --> 00:11:07,977
 There's NSData,
+还有个 NSData
 
 243
 00:11:07,979 --> 00:11:11,280
 super easy class it's just a bag of bits, okay?
+非常简单的类，它就是一个比特包
 
 244
 00:11:11,282 --> 00:11:13,849
 Could be gigantic bag of bits, small bag of bits, whatever.
+可以是巨大的比特包，也可以是一个小小的比特包
 
 245
 00:11:13,851 --> 00:11:18,586
 But it's just untyped data that's just in there it's just
+不管怎样，它里面只是无类型的数据
 
 246
 00:11:18,588 --> 00:11:21,055
 you can think of it almost like a point or two memory and
+你可以把它看成是一个点或者一段内存
 
 247
 00:11:21,057 --> 00:11:22,256
 you just don't know what's in there.
+并且你不知道它那里有什么东西
 
 248
 00:11:23,292 --> 00:11:26,693
-This is how iOS will pass around untyped data,
+This is how iOS will pass around untyped data, raw data.
+这就是 iOS 可以四处传递无类型数据、原始数据的原因
 
 249
 00:11:26,695 --> 00:11:31,263
-raw data it passes are out, it around using this class it'll
+It passes around using this class.
+它就是通过这个类来传递的
 
 250
 00:11:31,265 --> 00:11:33,632
-be obvious when we start using this what it's for.
+It will be obvious when we start using this what it's for.
+所以我们用这个类的目的是显而易见的
 
 251
 00:11:33,634 --> 00:11:36,134
 You're not gonna be using NSData much in this class,
+你不会用太多 NSData 的东西
 
 252
 00:11:36,136 --> 00:11:38,970
 cuz we're not dealing with raw data that much,okay.
+因为我们不会去处理那么多原始数据
 
 253
 00:11:38,972 --> 00:11:41,439
 All right, so, let,
+好的，其实
 
 254
 00:11:41,441 --> 00:11:43,974
 I just wanted to mention some of those classes just so,
+我只是想稍微提一下这其中的一些类
 
 255
 00:11:43,976 --> 00:11:47,144
-you know, they exist you can check out the documentation.
+you know, they exist you can check out the documentation
+它们都在文档中，你可以通过文档
 
 256
 00:11:47,146 --> 00:11:48,945
-On all of them to find out more about it and
+on all of them to find out more about it and
+找到它们并查看更详细的内容
 
 257
 00:11:48,947 --> 00:11:50,914
 I'm gonna revisit a few of them like Array and
+下面我会再稍微提到其中的一些类，比如 Array
 
 258
 00:11:50,916 --> 00:11:54,283
 Dictionary and String because they, they're so important I'm
+Dictionary 还有 String，因为它们实在太重要了
 
 259
 00:11:54,285 --> 00:11:56,552
 actually gonna talk about some of their methods.
+所以我会着重介绍它们的一部分方法
 
 260
 00:11:56,554 --> 00:11:58,554
 But, I wanna talk a little bit about data structures in
+通常，我会先谈谈 Swift 中的一些数据结构
 
 261
 00:11:58,556 --> 00:12:00,589
 Swift in general, okay?
+没问题吧
 
 262
 00:12:01,491 --> 00:12:03,124
 There's really three fundamental building
+在这些数据结构中
 
 263
 00:12:03,126 --> 00:12:04,692
 blocks for your data structure that you
+就三块非常重要的内容
 
 264
 00:12:04,694 --> 00:12:06,927
-might build and you've seen them.
+might build and you've seen them
+而且你之前已经见过了
 
 265
 00:12:06,929 --> 00:12:08,795
-Two of the three of them in detail, but
+two of the three of them in detail, but
+其中的两个的具体内容
 
 266
 00:12:08,797 --> 00:12:10,597
 they are class, struct, and
+它们就是类、结构体
 
 267
 00:12:10,599 --> 00:12:13,333
 enum, okay they're the three basic building blocks.
+和枚举，它们就是那三个基础的块
 
 268
 00:12:14,469 --> 00:12:17,936
 And they look very similar their declaration syntax looks
+它们在声明的语法上看起来很像
 
 269
 00:12:17,938 --> 00:12:19,137
 very, very similar, right?
+非常非常像，对吧
 
 270
 00:12:19,139 --> 00:12:21,106
 Just, the only difference is whether it's class,
+唯一的差别就在声明的关键字是 class
 
 271
 00:12:21,108 --> 00:12:23,341
 struct, or enum, but otherwise looks the same.
+struct 还是 enum，除此之外看起来就是一模一样
 
 272
 00:12:23,343 --> 00:12:25,009
 They're also very similar in that they can all
+它们还有个非常相像的地方，它们都能拥有
 
 273
 00:12:25,011 --> 00:12:27,878
-have properties and functions, okay.
+have properties and functions, okay, all three of them.
+属性和函数
 
 274
 00:12:27,880 --> 00:12:31,448
-All three of them now enums they can't store any values
+Now enums they can't store any values
+现在枚举本身是不能存储任何值
 
 275
 00:12:31,450 --> 00:12:34,050
 you store the values of your enum in that associated
+你可以将值存储在枚举的关联信息中
 
 276
 00:12:34,052 --> 00:12:38,454
 information but they can have computed properties, okay?
+枚举是可以有计算型属性
 
 277
 00:12:38,456 --> 00:12:42,458
 And all three of them can have functions, all right? okay?
+这三种数据结构都可以有函数，明白吗
 
 278
 00:12:42,460 --> 00:12:44,292
 So, that's very important to understand so,
+理解这点非常的重要
 
 279
 00:12:44,294 --> 00:12:45,927
 they are very, very similar in that way.
+它们在那方面看起来非常的相似
 
 280
 00:12:47,197 --> 00:12:49,397
-They're also similar at least strucs, and
+They're also similar at least structs, and
+结构体和类更甚
 
 281
 00:12:49,399 --> 00:12:51,098
 classes in that they can have intializers.
+它们甚至都可以有初始化的构造器
 
 282
 00:12:51,100 --> 00:12:53,800
 And we're gonna talk about initializers in detail in
+我们后面的幻灯片中会详细地
 
 283
 00:12:53,802 --> 00:12:55,468
 a few slides, okay?
+谈到这个构造器
 
 284
 00:12:55,470 --> 00:12:56,703
 So, they're similar in a lot of ways but
+它们在许多方面都非常相似
 
 285
 00:12:56,705 --> 00:12:58,938
 there's a couple ways in which they're very different,
+但仍然有几个不同的地方
 
 286
 00:12:58,940 --> 00:13:00,039
@@ -1340,58 +1425,72 @@ all right?
 287
 00:13:00,040 --> 00:13:01,139
 Classes are the only ones where you
+类是三者中唯一拥有
 
 288
 00:13:01,142 --> 00:13:04,009
 have inheritance, okay?
+继承的性质
 
 289
 00:13:04,011 --> 00:13:05,243
 And it's pretty obvious,
+显而易见
 
 290
 00:13:05,245 --> 00:13:07,478
 that's kind of the main definer of what a class is,
+这是一种确定类是什么东西的主要定义
 
 291
 00:13:07,480 --> 00:13:08,045
 it has inheritance.
+就是它有继承性质
 
 292
 00:13:09,715 --> 00:13:12,082
-And then, introspected, spection and
+And then, introspection and
+并且我也将要讲的
 
 293
 00:13:12,084 --> 00:13:13,750
 casting, which I'm also gonna talk about a little
+内省和转换
 
 294
 00:13:13,752 --> 00:13:16,652
 later those are only for classes, so none of this
+都是属于类的性质
 
 295
 00:13:16,654 --> 00:13:19,555
 casting thing I'm gonna talk about can you do for structs.
+所以我所说所有关于转换的内容，你不能应用到结构体上
 
 296
 00:13:21,158 --> 00:13:23,224
 And the most important difference to understand, and
+而我们要明白的三种结构最重要的区别
 
 297
 00:13:23,226 --> 00:13:24,625
 we really went over this in the demo,
+在我们接下来的 Demo 中会遇见的
 
 298
 00:13:24,627 --> 00:13:27,561
 is this value type versus reference type.
+就是值类型相对于引用类型的区别
 
 299
 00:13:27,563 --> 00:13:29,663
 Structs and enums are passed around and
+结构体和枚举的传递和
 
 300
 00:13:29,665 --> 00:13:32,499
 stored in variables copied, okay?
+存储是通过拷贝值
 
 301
 00:13:32,501 --> 00:13:34,117

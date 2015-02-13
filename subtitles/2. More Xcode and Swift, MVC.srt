@@ -2993,2279 +2993,2170 @@ Now since this is a String, obviously can't have case of
 
 601
 00:26:13,879 --> 00:26:15,345
-      every single String
-        in the universe.
-    穷举每一种情况
+every single String in the universe.
+穷举每一种情况
 
 602
 00:26:15,347 --> 00:26:18,280
-    That is almost infinite,
-       but luckily there,
-    通常是无限多的,但是很幸运的是,
+That is almost infinite, but luckily there,
+通常是无限多的，但是很幸运的是
 
 603
 00:26:18,282 --> 00:26:22,584
-   you can take defaults and
- just break out of the switch.
-    可以再default后,使用break跳出switch
+you can take defaults and just break out of the switch.
+可以在 default 后，使用 break 来跳出 switch
 
 604
 00:26:22,586 --> 00:26:26,187
- That means if it's not one of
-  these cases by default just
-    也就是如果不是上面列举的情况,
+That means if it's not one of these cases by default just
+也就意味着，如果不是 default 之前列举的那些情况
 
 605
 00:26:26,189 --> 00:26:27,088
-    break out of the switch.
-    就会默认跳出switch语句
+break out of the switch.
+就会跳出 switch
 
 606
 00:26:27,090 --> 00:26:28,355
-       You could put code
-         here as well,
-    代码也可以放在这里
+You could put code here as well,
+这不是说代码不能放在 default 中
 
 607
 00:26:28,357 --> 00:26:31,091
-   but breaking out of it is
- what we wanna do in our case.
-    在需要的地方break
+but breaking out of it is what we wanna do in our case.
+只是在这里，我们想要从 switch 中 break 而已
 
 608
 00:26:33,028 --> 00:26:35,861
- now, in here, we're just going
- to put the code for multiply.
-    现在,在这里,放乘法相关的语句
+now, in here, we're just going to put the code for multiply.
+现在，在这里，我们输入与乘法相关的语句
 
 609
 00:26:35,863 --> 00:26:37,896
- So, what do we need to do for
-           multiply?
-    那么,乘法需要做些什么?
+So, what do we need to do for multiply?
+那么，乘法需要做些什么?
 
 610
 00:26:37,898 --> 00:26:40,432
-        For the moment,
-  I'm gonna comment this out.
-    我会暂时将这部分注视掉
+For the moment, I'm gonna comment this out.
+我会暂时将这部分注释掉
 
 611
 00:26:40,434 --> 00:26:42,667
- I'm gonna use command, slash,
-    使用command + / 来注释
+I'm gonna use command, slash,
+使用 ⌘ + / 键来注释
 
 612
 00:26:42,669 --> 00:26:44,502
-       which is a really
-         nice feature.
-    这种注释方法的确称得上是一个很不错的功能.
+which is a really nice feature.
+这个快捷键的确称得上是一个很不错的功能
 
 613
 00:26:44,504 --> 00:26:46,103
-     You do command slash.
-     command + /之后,
+You do command slash.
+按下 ⌘ + / 键之后
 
 614
 00:26:46,105 --> 00:26:48,238
- And then command slash again,
-         to uncomment.
-    再次command + /来取消给代码注释.
+And then command slash again, to uncomment.
+再次按下 ⌘ + / 键来取消给代码注释
 
 615
 00:26:48,240 --> 00:26:55,311
-  [INAUDIBLE] real quick cuz I
-   just wanna focus on times.
-    这样就可以专注于当前的事情上,
+[INAUDIBLE] real quick cuz I just wanna focus on times.
+这里我想专注于乘法操作的代码
 
 616
 00:26:55,313 --> 00:26:58,247
-         Now any time I
-      press any operator,
-    任何时候,点击任何操作符,
+Now any time I press any operator,
+任何时候，点击任何操作符
 
 617
 00:26:58,249 --> 00:27:02,317
-     I probably wanna give
-  the user an automatic enter.
-    可能会给用户自动按下enter键
+I probably wanna give the user an automatic enter.
+我希望自动给用户按下 enter 按钮
 
 618
 00:27:02,319 --> 00:27:05,087
-   That's so that six enter,
-          three enter,
-    也就是6,enter,3,enter
+That's so that six enter, three enter,
+也就是6，enter，3，enter
 
 619
 00:27:05,089 --> 00:27:07,989
-      times is the same as
-     six enter three times.
-    乘,和6乘以3一样
+times is the same as six enter three times.
+乘法，等价于6乘以3
 
 620
 00:27:09,392 --> 00:27:12,393
- Okay, so six enter three times
- is gonna do an automatic enter
-    好了,6 enter 3 乘 会自动来一个enter
+Okay, so six enter three times is gonna do an automatic enter
+这里，6，enter，3，乘法会自动在
 
 621
 00:27:12,395 --> 00:27:13,927
-         on that three.
-		在那个3之上
+on that three.
+在3之后输入一个 enter
 
 622
 00:27:14,996 --> 00:27:16,596
-         Cuz obviously,
-    I intend to have six and
- 显然,在这种情况下,我想让6和
+Cuz obviously, I intend to have six and
+显然在这种情况下，我想让6和
 
 623
 00:27:16,598 --> 00:27:18,998
-      three be multiplied
-         in that case.
-		 3相乘
+three be multiplied in that case.
+3相乘
 
 624
 00:27:19,000 --> 00:27:26,705
-      So for all of these
-  operations, I going to say,
-	对于所有的操作符,我要说的是
+So for all of these operations, I going to say,
+所以，对于所有的操作符的 Action
 
 625
 00:27:26,707 --> 00:27:29,708
-   if the users in the middle
-      of typing a number.
-	 如果用户在中间输入一个数字,
+if the users in the middle of typing a number.
+如果用户正在输入一个数字（userIsInTheMiddleOfTypingANumber 为 true）
 
 626
 00:27:29,710 --> 00:27:32,443
-       Then hit enter for
-        me, right here.
-		然后点击enter键.
+Then hit enter for me, right here.
+那么，我要自动帮用户输入一个 enter，即调用 enter()
 
 627
 00:27:32,445 --> 00:27:36,347
-     Okay, so [COUGH] what
-      do we need to do in	
-		好了,我们需要
+Okay, so [COUGH] what do we need to do in	
+接下来，我们
 
 628
 00:27:36,349 --> 00:27:39,516
-  this specific case of times?
-  在乘这里做什么?
-	
+this specific case of times?
+需要乘法在这里做什么？
+
 629
 00:27:39,518 --> 00:27:42,886
-   Well, really we just want
-   to set our display value.
-	我们需要在这里显示计算的结果.
+Well, really we just want to set our display value.
+我们需要在这里对 displayValue 设值
 
 630
 00:27:42,888 --> 00:27:46,856
-   Remember we have our nice
-    display value down here.
-	记住,我们有自己的显示值的方法.
+Remember we have our nice display value down here.
+还记得吗？我们自定义了 displayValue 的取值和设值方法
 
 631
 00:27:46,858 --> 00:27:49,492
-     And we can do setting
-      as well as getting.
-	我们可以进行赋值,也可以进行取值
+And we can do setting as well as getting.
+取值和设值方法
 
 632
 00:27:49,494 --> 00:27:52,094
-  So I set that display value.
-	因此,在这里赋值.
+So I set that display value.
+因此，我在这里需要做的是
 
 633
 00:27:52,096 --> 00:27:55,264
-            Up here.
-	 这里.
+Up here.
+设值
 
 634
 00:27:55,265 --> 00:27:58,433
-  Equal to multiplying the top
-   two things on this stack.
-	等于将栈顶的两个数相乘
+Equal to multiplying the top two things on this stack.
+displayValue 等于将栈顶的两个数相乘
 
 635
 00:27:58,435 --> 00:28:02,270
-    So I can actually remove
-    something off our stack.
-	因此,我可以从栈里移除一些元素.
+So I can actually remove something off our stack.
+因此，我可以从栈里移除一些元素
 
 636
 00:28:02,272 --> 00:28:04,705
-     We're representing our
-       stack as an array.
-	我们使用一个数组带代表栈结构.
+We're representing our stack as an array.
+我们可以使用一个数组代表栈结构
 
 637
 00:28:05,941 --> 00:28:07,908
-           Of course,
- they are stacked as an array.
-	当然了,确实是使用一个数组来表示的栈.
+Of course, they are stacked as an array.
+而且，这里确实是使用了一个数组来表示栈结构
 
 638
 00:28:07,910 --> 00:28:11,311
-  And so a stack is something
-      you push things on,
-	栈是一个可以压入元素到栈离,
+And so a stack is something you push things on,
+栈是一种数据结构，你可以压入元素到栈里
 
 639
 00:28:11,313 --> 00:28:12,979
-      you pop things off.
-	可以从栈里弹出元素
+you pop things off.
+也可以从栈里弹出元素
 
 640
 00:28:12,981 --> 00:28:15,614
- And with an array, we're just
-  gonna add something there at
-	使用数组的话,只要
+And with an array, we're just gonna add something there at
+用数组实现的话，我们只需要
 
 641
 00:28:15,616 --> 00:28:17,082
- the end to push something on,
-              and
-	在数组的末尾添加一个元素来模拟元素入栈
+the end to push something on, and
+在数组的末尾添加一个元素，来模拟元素的入栈操作
 
 642
 00:28:17,084 --> 00:28:19,317
-    that will just remove it
-  from the end to pop it off.
-	在数组的末尾移除一个元素来模拟元素出栈
+that will just remove it from the end to pop it off.
+在数组的末尾移除一个元素，来模拟元素的出栈操作
 
 643
 00:28:19,319 --> 00:28:21,653
-       So there's a nice.
-	这种模拟看起来很酷吧.
+So there's a nice.
+没问题吧？
 
 644
 00:28:21,655 --> 00:28:23,654
-           All right.
-    This is an array, right?
-	好了,这是一个数组,是么?
+All right. This is an array, right?
+好的，这是一个数组
 
 645
 00:28:23,656 --> 00:28:26,007
-        Operand stacks.
-	操作符栈.
+Operand stacks.
+数组名称是 operandStack
 
 646
 00:28:26,008 --> 00:28:28,359
-     There's a nice method
-      called remove last.
-	有个很好使的方法叫做:移除最后一个元素
+There's a nice method called remove last.
+有个方法叫 removeLast()
 
 647
 00:28:28,361 --> 00:28:30,894
-   And if we option click on
-  remove last, you'll see here
-	如果在removelast方法上按住option键,
+And if we option click on remove last, you'll see here
+如果在 removeLast 方法上按住 option 键并单击
 
 648
 00:28:30,896 --> 00:28:33,430
-   that it removes an element
-   from the end of the array.
-	可以看到说明:从数组的末尾移除一个元素
+that it removes an element from the end of the array.
+可以看到说明：从数组的末尾移除一个元素
 
 649
 00:28:34,666 --> 00:28:37,567
-      Now, it does require
-   a count greater than zero.
-	需要数组的元素个数大于零.
+Now, it does require a count greater than zero.
+这个方法需要数组的元素个数大于零
 
 650
 00:28:37,569 --> 00:28:42,705
-   So if our array were empty
- this would crash our program.
-	如果数组是空的话,移除元素会导致程序崩溃
+So if our array were empty this would crash our program.
+如果数组是空的话，移除元素会导致程序崩溃
 
 651
 00:28:42,707 --> 00:28:44,840
-     So let's put a little
-     protective thing here.
-	所以,在这里做一些保护性的措施.
+So let's put a little protective thing here.
+所以，在这里做一些保护性的措施.
 
 652
 00:28:44,842 --> 00:28:47,742
-     If the operand stacks.
-	如果操作符栈
+If the operand stacks.
+如果 operandStack
 
 653
 00:28:47,744 --> 00:28:50,411
-    There's a nice property
-   here called Count on that.
-	操作符栈变量有一个属性叫做Count
+There's a nice property here called Count on that.
+operandStack 变量有一个属性叫做 count
 
 654	
 00:28:50,413 --> 00:28:52,947
-        It is greater or
-	如果大于或者
+It is greater or
+如果它大于或者
 
 655
 00:28:52,948 --> 00:28:55,482
- equal to two actually because
- multiply takes two operand so
-	等于2,因为乘法需要2个操作数
+equal to two actually because multiply takes two operand so
+等于2，因为乘法需要2个操作数
 
 656
 00:28:55,485 --> 00:28:57,484
-        there better two
-     things on this stack.
-	所以至少需要栈中有2个元素
+there better two things on this stack.
+所以栈中至少需要有2个元素
 
 657
 00:28:58,921 --> 00:29:01,121
-   Then we can do this and so
-	然后,我们可以这样做,
+Then we can do this and so
+那么我们可以把这取出来的栈顶元素
 
 658
 00:29:01,123 --> 00:29:05,324
-   we're gonna multiply that
-  by and remove the next one.
-	相乘,然后移除最后一个元素
+we're gonna multiply that by and remove the next one.
+相乘上第二次调用 removeLast() 所取出来的栈顶元素
 
 659
 00:29:05,326 --> 00:29:06,125
-             Okay?
-	对么?
+Okay?
+明白了吗？
 
 660
 00:29:06,127 --> 00:29:07,259
-        So here we got-
-	这样的话,
+So here we got-
+这样的话
 
 661
 00:29:09,062 --> 00:29:12,463
- We're just taking the last two
-  things off of this stack by
-	我们从栈中移除最后两个元素,
+We're just taking the last two things off of this stack by
+我们从栈中移除最顶上的两个元素
 
 662
 00:29:12,465 --> 00:29:14,832
-       removing them from
-    the end of the array and
-	通过从数组中移除元素
+removing them from the end of the array and
+通过从数组中移除最后的元素（removeLast 方法）
 
 663
 00:29:14,834 --> 00:29:17,334
-       just assigning it
-       to display value.
-	赋值给displayValue变量
+just assigning it to display value.
+将运算结果赋值给 displayValue 变量
 
 664
 00:29:17,336 --> 00:29:19,469
-      And we probably also
-   want to do an enter here,
-	这里可能需要做一个enter,
+And we probably also want to do an enter here,
+接着，我们希望在这里输入一个 enter()
 
 665
 00:29:19,471 --> 00:29:22,539
-    because [COUGH] if I go
-     six enter three times,
-	如果单击6 enter 3 乘,
+because [COUGH] if I go six enter three times,
+如果用户按下了6，enter，3，乘
 
 666
 00:29:22,541 --> 00:29:25,108
-  well then I want to be able
-   to say then nine plus and
-	这样就得到9加
+well then I want to be able to say then nine plus and
+然后接着，用户按下了9，加
 
 667
 00:29:25,110 --> 00:29:28,744
-        have it add onto
-      the six times three.
-	然后加上6乘以3
+have it add onto the six times three.
+这代表着在原来运算的结果上加9
 
 668
 00:29:29,713 --> 00:29:32,213
-    So we want an automatic
-      enter here, as well.
-	这里需要一个自动点击enter,
+So we want an automatic enter here, as well.
+所以，这里需要一个自动点击 enter 的操作
 
 669
 00:29:32,215 --> 00:29:34,149
-             Okay?
-	是么?
+Okay?
+明白了吗？
 
 670
 00:29:34,150 --> 00:29:36,084
-     So, that's pretty much
-    all we need to do here.
-	这大概就是我们需要在这里做的了.
+So, that's pretty much all we need to do here.
+这大概就是我们所有需要在这里做的了
 
 671
 00:29:36,086 --> 00:29:41,021
-  Let's go ahead and run this,
-      see how this works.
-	继续,运行这个程序,看它是怎么工作的,
+Let's go ahead and run this, see how this works.
+让我们运行这个应用，看看它是否正常工作
 
 672
 00:29:43,826 --> 00:29:47,527
-     And so, six enter, or
-    three enter, six enter.
-	6 确认 或者 3 确认 6 确认
+And so, six enter, or three enter, six enter.
+我们尝试输入3，enter，6，enter
 
 673
 00:29:47,529 --> 00:29:49,996
-       Now we've got them
-       both on the stack.
-	可以在栈上看到它们
+Now we've got them both on the stack.
+我们可以从控制台看到它们已经在栈上了
 
 674
 00:29:49,998 --> 00:29:52,898
-     Times and you can see
-      we put our 18 here.
-	相乘,然后可以看到结果是18
+Times and you can see we put our 18 here.
+然后我让它们相乘，可以看到结果是18
 
 675
 00:29:52,900 --> 00:29:55,668
-      It also put it back
-        on the stack and
-	结果也被放入的栈中,
+It also put it back on the stack and
+18这个结果也被放入了栈中
 
 676
 00:29:55,670 --> 00:29:57,536
-     we can say five times.
-	比如,5 乘
+we can say five times.
+我们再输入5，乘
 
 677
 00:29:57,538 --> 00:29:59,237
-        That put a five
-        on the stack and
-	将5放入栈中,
+That put a five on the stack and
+这个操作将5放入栈中,
 
 678
 00:29:59,239 --> 00:30:01,372
-     then multiplied them,
-          took it off.
-	将它们相乘,从栈中移除,
+then multiplied them, took it off.
+将它们两个从栈中移除并相乘，返回结果
 
 679
 00:30:01,374 --> 00:30:03,107
-   So that's working nicely.
-	程序运行的不错啊
+So that's working nicely.
+程序正常运行
 
 680
 00:30:03,109 --> 00:30:05,576
-  [COUGH] Now what about our-
-	现在,
+[COUGH] Now what about our-
+现在
 
 681
 00:30:05,578 --> 00:30:06,743
-      Other buttons, here.
-	这里,我们的其他的按钮,
+Other buttons, here.
+我们的其他的运算符按钮
 
 682
 00:30:06,745 --> 00:30:08,745
-   We gonna make those work.
-	我们要让它们工作.
+We gonna make those work.
+我们想要让它们正常工作
 
 683
 00:30:08,747 --> 00:30:12,548
-         Let's do that.
-	让我们完成这个工作.
+Let's do that.
+让我们继续完成
 
 684
 00:30:12,550 --> 00:30:16,152
-      Now, they do a very
-      similar thing, here.
-	它们需要完成十分相似的事情, 
+Now, they do a very similar thing, here.
+其他的运算符功能和乘法的功能是十分相似的 
 
 685
 00:30:16,154 --> 00:30:20,088
-    So, one temptation would
-     be to just copy here.
-	所以,来复制下这部分,
+So, one temptation would be to just copy here.
+所以，我们复制乘法的这部分代码
 
 686
 00:30:20,090 --> 00:30:22,657
-   Let's uncomment these out.
-	打开这部分的注释,
+Let's uncomment these out.
+先取消这部分的注释
 
 687
 00:30:23,693 --> 00:30:25,459
-    And then just paste it,
-          repeatedly.
-	然后粘贴到这里,重复粘贴,
+And then just paste it, repeatedly.
+然后重复粘贴
 
 688
 00:30:25,461 --> 00:30:26,827
-       So, put it there.
-	放到这里.
+So, put it there.
+放到这些位置
 
 689
 00:30:27,996 --> 00:30:31,831
-   There, there and then just
-     changes times in here.
-	只需要更改这里的乘号.
+There, there and then just changes times in here.
+只需要修改这里的乘号
 
 690
 00:30:31,833 --> 00:30:35,868
-       D note to plus for
-      example on this one.
-	这个换成一个加号,
+D note to plus for example on this one.
+把这个换成个加号
 
 691
 00:30:35,870 --> 00:30:39,038
- But his is pretty messy code,
-        look at all this
-	但是,这样的代码看起来很乱,
+But his is pretty messy code, look at all this
+但是，这样的代码看起来很乱
 
 692
 00:30:39,040 --> 00:30:42,841
-      incredible amount of
-   duplicating code, in here.
-	这里有大量的重复的代码,
+incredible amount of duplicating code, in here.
+这里有大量的重复的代码
 
 693
 00:30:42,843 --> 00:30:47,145
-  We really probably wouldn't
-  to write our code like this.
-	我们确实不希望我们的代码写成这样.
+We really probably wouldn't to write our code like this.
+我们不希望代码写成这样子
 
 694
 00:30:47,147 --> 00:30:49,780
-   People would think we were
-     terrible programmers I
-	别人会认为我们是很糟糕的程序员
+People would think we were terrible programmers I
+如果写成这样，别人会认为我们是很糟糕的程序员
 
 695
 00:30:49,782 --> 00:30:51,482
-     think if we did that.
-	如果我们像这样写代码的话.
+think if we did that.
 
 696
 00:30:51,484 --> 00:30:54,251
-      Really what would be
-    nice is if we had some,
-	什么样的代码看起来会不错呢? 
+Really what would be nice is if we had some,
+什么样的代码看起来会不错呢？ 
 
 697
 00:30:54,253 --> 00:30:56,453
-        could write some
-       kind of function.
-	那就是如果我们可以把这些重复的代码写成函数
+could write some kind of function.
+那就是如果我们可以把这些重复的代码写成函数
 
 698
 00:30:56,455 --> 00:31:00,990
-     Maybe we could call it
-      perform operation or
-	我们可能会给这个函数起名perfomOperation
+Maybe we could call it perform operation or
+然后给函数起名为 perfomOperation
 
 699
 00:31:00,992 --> 00:31:02,458
-      something like that.
-	或者类似意思的名字.
+something like that.
+或者类似意思的名字
 
 700
 00:31:02,460 --> 00:31:05,927
-      And if the argument
-       to that function.
-	至于函数的参数,
+And if the argument to that function.
+至于函数的参数
 
 701
 00:31:05,929 --> 00:31:08,196
-         Remember that
-     arguments have names.
-	注意,函数参数也是又名字的,
+Remember that arguments have names.
+需要注意的是，函数参数也是有名字的
 
 702
 00:31:08,198 --> 00:31:09,163
-        Here's the name.
-	这就是名字. 
+Here's the name.
+这就是参数的名字
 
 703
 00:31:09,165 --> 00:31:10,364
-   And then we have the type.
-	然后是参数类型. 
+And then we have the type.
+然后是参数的类型
 
 704
 00:31:11,434 --> 00:31:16,269
-  The argument were something
-    which basically was this
-	这里的参数就是
+The argument were something which basically was this
+这里的参数是
 
 705
 00:31:16,271 --> 00:31:19,305
-  little operation in here, or
-	这里的操作符,
+little operation in here, or
+这里的运算操作符
 
 706
 00:31:19,307 --> 00:31:21,707
-   some sort of function that
-    would do this operation.
-	这就是完成操作符操作的函数.
+some sort of function that would do this operation.
+或者是能够完成运算操作符操作的函数
 
 707
 00:31:21,709 --> 00:31:24,576
-    So if this could be some
-     sort of function that
- 	如果可以写成函数的话,
+So if this could be some sort of function that
+如果可以把这些重复代码写成函数的话
 
 708
 00:31:24,578 --> 00:31:25,277
-         would be cool.
-	看起来就不错了.
+would be cool.
+看起来就很棒了
 
 709
 00:31:25,279 --> 00:31:27,078
-     Then, maybe we could.
-	然后,我们可能会,
+Then, maybe we could.
+接下来
 
 710
 00:31:27,080 --> 00:31:28,880
- I take this code out of here,
-        put it in here.
-	将这段代码移动到这里,
+I take this code out of here, put it in here.
+将这段代码移动到这个位置
 
 711
 00:31:30,149 --> 00:31:34,384
-   Let's call it perform not
-  pre-form, perform operation.
-	起码为perform,而不是pre-form
+Let's call it perform not pre-form, perform operation.
+并起名为 performOperation
 
 712
 00:31:34,386 --> 00:31:36,353
-   [LAUGH] Put it in here and
-	放在这里.
+[LAUGH] Put it in here and
+放到这里
 
 713
 00:31:36,355 --> 00:31:38,921
-       instead of doing,
-    you know, multiply here.
-	你懂的,这里不是使用乘.
+instead of doing, you know, multiply here.
+这里注意，我们把乘号改掉
 
 714
 00:31:38,923 --> 00:31:41,190
-   Let's go ahead and we can
-  do this operation some how.
-	继续,完成这个操作.
+Let's go ahead and we can do this operation some how.
+用其他的方式来进行运算
 
 715
 00:31:41,192 --> 00:31:42,891
- I guess, well maybe operation,
-	可能是operation函数,
+I guess, well maybe operation,
+可能是某个叫 operation 函数
 
 716
 00:31:42,893 --> 00:31:48,196
-    call it like a function
-    with two arguments here.
-	像一个带两个参数的函数一样调用.
+call it like a function with two arguments here.
+接受两个参数
 
 717
 00:31:51,067 --> 00:31:52,500
-             Okay.
-         That would be
-	好了,看起来很不错了.
+Okay. That would be
+好了，这样看起来很不错了
 
 718
 00:31:52,502 --> 00:31:55,202
- cool because we'd be sharing,
-     you know, this check.
-	因为我们共用了这段代码.
+cool because we'd be sharing, you know, this check.
+因为我们复用了这段代码，复用了这个判读
 
 719
 00:31:55,204 --> 00:31:57,204
-  We'd be sharing this enter.
-	公用了这enter方法
+We'd be sharing this enter.
+复用了这 enter 方法
 
 720
 00:31:57,206 --> 00:31:59,472
-    [COUGH] We'd be sharing
-  the removal of the operator.
-	共用了removal操作方法.
+[COUGH] We'd be sharing the removal of the operator.
+复用了从栈中弹出两个元素的方法
 
 721
 00:31:59,474 --> 00:32:01,441
-        We'd be sharing
-    the same display value.
-	共用了displayValue变量. 
+We'd be sharing the same display value.
+复用了 displayValue 变量
 
 722
 00:32:01,443 --> 00:32:04,209
-    We'd be kind of sharing
-     a lot of code here and
-	这样,公用了大段的代码,
+We'd be kind of sharing a lot of code here and
+通过这样，复用了大段的代码
 
 723
 00:32:05,746 --> 00:32:08,179
-    then up here if we could
-    just do something like,
-	在上面,只需要像这样做,
+then up here if we could just do something like,
+至于在上面的 case 中国年，我们只需要像这样
 
 724
 00:32:08,181 --> 00:32:12,850
-       perform operation,
-     and, somehow, specify,
-	调用函数,
+perform operation, and, somehow, specify,
+调用函数 performOperation，并且
 
 725
 00:32:12,852 --> 00:32:16,186
-   multiply, as the operation
-     we wanted to do here.
-	指定函数参数,
+multiply, as the operation we wanted to do here.
+指定函数参数 multiply
 
 726
 00:32:16,188 --> 00:32:23,593
-   And then we wouldn't need
-  all this stuff here, right?
-	这段代码就不需要了,对么?
+And then we wouldn't need all this stuff here, right?
+原来的那一大段代码就都不需要了，明白了吗？
 
 727
 00:32:23,595 --> 00:32:24,527
-   So this is gonna be cool.
-	看起来很不错吧?
+So this is gonna be cool.
+看起来很不错
 
 728
 00:32:24,529 --> 00:32:25,995
-      Now, can we do this?
-	可以这样做么?
+Now, can we do this?
+有人会质疑，我们可以这样做吗？
 
 729
 00:32:25,997 --> 00:32:28,564
-           Well, yes,
-     the answer is we can.
-	当然了,可以的.
+Well, yes, the answer is we can.
+答案是当然可以
 
 730
 00:32:28,566 --> 00:32:33,134
-   And so, types, functions.
-	参数类型,函数
+And so, types, functions.
+参数类型，函数
 
 731
 00:32:33,136 --> 00:32:37,005
-     Can be types in Swift,
-   just like any other type.
-	在Swift里可以当做类型,就像其他的类型一样
+Can be types in Swift, just like any other type.
+函数在 Swift 里可以被当做一种类型，就像 Swfit 中其他的类型一样
 
 732
 00:32:37,007 --> 00:32:40,040
-     So, you know, we have
-  a double here, oops, double.
-	这里需要一个double,
+So, you know, we have a double here, oops, double.
+你知道，这里需要一个 Double 类型的参数
 
 733
 00:32:41,844 --> 00:32:42,809
-         That's a type.
-	就是这个类型,
+That's a type.
+就是这个类型
 
 734
 00:32:42,811 --> 00:32:43,943
-       You can also have
-        a function type.
-	也可以有一个函数类型.
+You can also have a function type.
+当然也可以有一个函数类型的参数
 
 735
 00:32:43,945 --> 00:32:45,611
-     So how do you specify
-        a function type?
-	那么,怎么指定一个函数类型呢?
+So how do you specify a function type?
+那么，怎么指定一个函数类型呢？
 
 736
 00:32:45,613 --> 00:32:47,846
-       Well multiple I or
-	比如multiple,
+Well multiple I or
+无论是 multiple
 
 737
 00:32:47,848 --> 00:32:49,981
-     whatever function I'm
-     about to perform here.
-	或者是任何其他想要执行的函数,
+whatever function I'm about to perform here.
+或者是任何其他我想要在这里执行的函数
 
 738
 00:32:49,983 --> 00:32:54,686
- This is a function that takes
-   two doubles as arguments.
-	这个函数需要两个double类型的参数
+This is a function that takes two doubles as arguments.
+这样的函数需要两个 Double 类型的参数
 
 739
 00:32:54,688 --> 00:32:56,354
-    And it returns a double.
-	函数的返回值类型也是一个double类型
+And it returns a double.
+并且，它的返回值类型也是一个 Double 类型
 
 740
 00:32:56,356 --> 00:33:00,190
-      So, I can just say,
-     I want operation to be
-	我想要一个函数,
+So, I can just say, I want operation to be
+所以我在这里输入
 
 741
 00:33:00,192 --> 00:33:04,661
-   a function that takes two
- doubles and returns a double.
-	带两个double类型参数,返回double类型
+a function that takes two doubles and returns a double.
+我想要 operation 是一个函数，带两个 Double 类型参数，返回 Double 类型
 
 742
 00:33:04,663 --> 00:33:07,363
- I can express that right here.
-	这就是我要表达的,
+I can express that right here.
+这就是我要表达的
 
 743
 00:33:07,365 --> 00:33:11,300
-        This is a type,
-       the type of this.
-	这就是参数类型,这种类型.
+This is a type, the type of this.
+这就是函数类型的定义
 
 744
 00:33:12,369 --> 00:33:15,870
-  Argument right here that you
-   can click on and say yeah
-	在这里的参数上右键,
+Argument right here that you can click on and say yeah
+在函数的名称上按住 option 单击
 
 745
 00:33:15,872 --> 00:33:18,639
- that type is double takes two
- doubles and returns a double.
-	可以看到信息:2个double类型的参数,一个double类型返回值.
+that type is double takes two doubles and returns a double.
+你可以看到信息：2个 Double 类型的参数，1个 Double 类型的返回值
 
 746
 00:33:20,276 --> 00:33:22,176
-    So, just simple as that.
-	就是这么简单.
+So, just simple as that.
+就是这么简单
 
 747
 00:33:22,177 --> 00:33:24,077
-       So all we need now
-       is a function here
-	我们所知道的,这里是一个函数,
+So all we need now is a function here
+我们目前已知的就是，这里有一个函数
 
 748
 00:33:24,079 --> 00:33:26,379
-      called multiply that
-     takes two doubles and
-	函数名multiply,带2个参数,
+called multiply that takes two doubles and
+这个函数名称为 multiply，带2个 Double 类型的参数
 
 749
 00:33:26,381 --> 00:33:28,514
-      returns a double and
-      does multiplication.
-	返回double类型,完成乘法操作.
+returns a double and does multiplication.
+返回1个 Double 类型的返回值，函数功能是完成乘法操作
 
 750
 00:33:28,516 --> 00:33:33,118
-  So we could go down here and
-     say okay multiply and
-	好了,看下面的乘,
+So we could go down here and say okay multiply and
+接下来我们在下面输入 multiply 的代码
 
 751
 00:33:33,120 --> 00:33:35,587
-     you'll have op1 which
-       is double and op2.
-	有一个参数,double类型,第二个参数, 
+you'll have op1 which
+is double and op2.
+有一个参数,double类型,第二个参数, 
 
 752
 00:33:35,589 --> 00:33:39,157
-      [COUGH] A double and
-    it returned the double.
-	double类型,返回一个double类型.
+[COUGH] A double and
+it returned the double.
+double类型,返回一个double类型.
 
 753
 00:33:39,159 --> 00:33:41,926
-      And it's just return
-       one times out two.
-	这个函数返回参数1乘以参数2
+And it's just return
+one times out two.
+这个函数返回参数1乘以参数2
 
 754
 00:33:42,962 --> 00:33:44,261
-             Okay?
-	对么?
+Okay?
+对么?
 
 755
 00:33:44,263 --> 00:33:45,729
-     And that worked great.
-	看来起不错哟!
+And that worked great.
+看来起不错哟!
 
 756
 00:33:45,731 --> 00:33:51,600
-    Back out again so we can
-  see if this actually works.
-	回到上面,看它是否真的可以正常运行.
+Back out again so we can
+see if this actually works.
+回到上面,看它是否真的可以正常运行.
 
 757
 00:33:51,602 --> 00:33:53,168
-  But there's no arrows here.
-	没有任何错误.
+But there's no arrows here.
+没有任何错误.
 
 758
 00:33:53,170 --> 00:33:55,387
-             Right?
-       It seems to work.
-	对么?看起来可行.
+Right?
+It seems to work.
+对么?看起来可行.
 
 759
 00:33:55,388 --> 00:33:57,605
-      Multiply seems to be
- a function to take the $2 and
+Multiply seems to be
+a function to take the $2 and
 
 760
 00:33:57,608 --> 00:33:59,274
-        turns it double.
+turns it double.
 
 761
 00:33:59,275 --> 00:34:00,941
-      And that's what this
-      argument here is and
-	这里的这个参数,
+And that's what this
+argument here is and
+这里的这个参数,
 
 762
 00:34:00,944 --> 00:34:02,661
-     I'm passing it along.
-	将它传入
+I'm passing it along.
+将它传入
 
 763
 00:34:02,662 --> 00:34:04,379
-     It should all work so
-      let's give it a try.
-	应该是可行的,那么试一下吧.
+It should all work so
+let's give it a try.
+应该是可行的,那么试一下吧.
 
 764
 00:34:08,818 --> 00:34:10,684
-        So here we go as
-        it takes enter.
-	  点下enter
+So here we go as
+it takes enter.
+点下enter
 
 765
 00:34:10,686 --> 00:34:15,188
-          54 times and
-  sure enough it's working it.
-	54乘以,好了,没问题.
+54 times and
+sure enough it's working it.
+54乘以,好了,没问题.
 
 766
 00:34:15,190 --> 00:34:17,757
-        It's doing that
-        multiplication.
-	完成了乘法操作.
+It's doing that
+multiplication.
+完成了乘法操作.
 
 767
 00:34:18,826 --> 00:34:23,428
- Works great and so what about
-  all of our other cases here?
-	做的不错,其他的case语句呢?
+Works great and so what about
+all of our other cases here?
+做的不错,其他的case语句呢?
 
 768
 00:34:23,430 --> 00:34:26,731
-       Well we would just
-    need to take this same.
-	只需要也像这样做.
+Well we would just
+need to take this same.
+只需要也像这样做.
 
 769
 00:34:26,733 --> 00:34:29,400
-  Piece of code right here and
-    put it for all of them.
-	所有的case语句,这里一段代码,
+Piece of code right here and
+put it for all of them.
+所有的case语句,这里一段代码,
 
 770
 00:34:29,402 --> 00:34:32,169
- And of course we need a divide
-     method, so we have to
-	当然了,我们需要除法函数,
+And of course we need a divide
+method, so we have to
+当然了,我们需要除法函数,
 
 771
 00:34:32,171 --> 00:34:35,805
-  come down here, and copy and
-  paste that, and make divide.
-	来到下面,复制,粘贴,起名divide
+come down here, and copy and
+paste that, and make divide.
+来到下面,复制,粘贴,起名divide
 
 772
 00:34:35,807 --> 00:34:37,907
-       Oh wait a second,
-	稍等, 
+Oh wait a second,
+稍等, 
 
 773
 00:34:37,909 --> 00:34:41,210
-  this is starting to be just
-    as bad as I had before.
-	看起来又像之前的一样,很糟糕了.
+this is starting to be just
+as bad as I had before.
+看起来又像之前的一样,很糟糕了.
 
 774
 00:34:41,212 --> 00:34:44,646
-    Having to make all these
- extra functions, multiply and
-	需要这些额外的函数,乘法,
+Having to make all these
+extra functions, multiply and
+需要这些额外的函数,乘法,
 
 775
 00:34:44,648 --> 00:34:46,081
-      divide and all that.
-	触发,等等.
+divide and all that.
+触发,等等.
 
 776
 00:34:46,082 --> 00:34:47,515
-        Well [COUGH] it
-       turns out it's so
-	事情上,
+Well [COUGH] it
+turns out it's so
+事情上,
 
 777
 00:34:47,518 --> 00:34:52,553
-  common to pass functions as
-  arguments in Swift, that it
-	在Swift中,把函数作为参数传递是很常见的.
+common to pass functions as
+arguments in Swift, that it
+在Swift中,把函数作为参数传递是很常见的.
 
 778
 00:34:52,555 --> 00:34:56,390
-  allows you to put a function
-     like multiply right in
-	允许你传递一个,比如multiply,的函数,
+allows you to put a function
+like multiply right in
+允许你传递一个,比如multiply,的函数,
 
 779
 00:34:56,392 --> 00:35:00,327
- here without having to create
- a separate function like this.
-	不需要再创建一个函数
+here without having to create
+a separate function like this.
+不需要再创建一个函数
 
 780
 00:35:00,329 --> 00:35:02,195
-       And all you do is
-      you just pick it up.
-	需要做的是,选中,
+And all you do is
+you just pick it up.
+需要做的是,选中,
 
 781
 00:35:02,197 --> 00:35:05,131
-    So I'm just going to cut
-    that from down here and
-	从这里剪切
+So I'm just going to cut
+that from down here and
+从这里剪切
 
 782
 00:35:05,133 --> 00:35:06,599
-       I'm going to paste
-       it right in here.
-	粘贴到这里来
+I'm going to paste
+it right in here.
+粘贴到这里来
 
 783
 00:35:07,702 --> 00:35:10,168
-   The only thing you have to
- change syntactically when you
-	唯一需要做语法上的改变的是,
+The only thing you have to
+change syntactically when you
+唯一需要做语法上的改变的是,
 
 784
 00:35:10,170 --> 00:35:13,738
-  do that is this curly brace,
-             okay.
-	这里是一个大括号.
+do that is this curly brace,
+okay.
+这里是一个大括号.
 
 785
 00:35:13,740 --> 00:35:16,541
-     Instead of being after
-       the declaration of
-	而不是之前在声明
+Instead of being after
+the declaration of
+而不是之前在声明
 
 786
 00:35:16,543 --> 00:35:21,779
-  the arguments in the return
- value, it needs to be before.
-	函数,返回值之后.
+the arguments in the return
+value, it needs to be before.
+函数,返回值之后.
 
 787
 00:35:21,781 --> 00:35:24,314
-     So, you move the curly
-         brace before.
-	把大括号放到前面.	
+So, you move the curly
+brace before.
+把大括号放到前面.	
 
 788
 00:35:24,316 --> 00:35:25,648
-         And then where
-      the curly brace was,
-	之前这里是小括号.
+And then where
+the curly brace was,
+之前这里是小括号.
 
 789
 00:35:25,650 --> 00:35:27,417
- you gonna put in, the word in.
-	这里添加一个单词in
+you gonna put in, the word in.
+这里添加一个单词in
 
 790
 00:35:28,586 --> 00:35:30,486
- And so that allows us to just.
-	允许我们稍微调整下.
+And so that allows us to just.
+允许我们稍微调整下.
 
 791
 00:35:30,488 --> 00:35:34,723
-   Come and do that again to
- eliminate some of our errors.
-	现在把这些错误解决了,
+Come and do that again to
+eliminate some of our errors.
+现在把这些错误解决了,
 
 792
 00:35:34,725 --> 00:35:37,291
-     And we can get rid of
-  function multiply down here.
-	移除这里的mutiply
+And we can get rid of
+function multiply down here.
+移除这里的mutiply
 
 793
 00:35:39,328 --> 00:35:42,862
- So that allows me to just put
- that multiplier right in here.
-	把乘法放在这里.
+So that allows me to just put
+that multiplier right in here.
+把乘法放在这里.
 
 794
 00:35:42,864 --> 00:35:44,030
-         Right in line.
-	就是这里.
+Right in line.
+就是这里.
 
 795
 00:35:44,032 --> 00:35:46,032
-     Write as the argument
-       to this function.
-	给这个函数写一个参数.
+Write as the argument
+to this function.
+给这个函数写一个参数.
 
 796
 00:35:46,034 --> 00:35:48,167
- And this things kind of wacky.
-	 看起来略古怪.
+And this things kind of wacky.
+看起来略古怪.
 
 797
 00:35:48,169 --> 00:35:49,701
-        For those of you
-       who don't know it,
-	对于一些不了解的人来讲,
+For those of you
+who don't know it,
+对于一些不了解的人来讲,
 
 798
 00:35:49,703 --> 00:35:51,469
-   user programming languages
-      that allow this kind
- 	编程语言中,
+user programming languages
+that allow this kind
+编程语言中,
 
 799
 00:35:51,471 --> 00:35:53,604
-       of thing to happen
-      are called closures.
-	这种情况称之为闭包.
+of thing to happen
+are called closures.
+这种情况称之为闭包.
 
 800
 00:35:54,607 --> 00:35:56,540
- It basically allows you to put
-   a function right in there.
-	允许在这里放一个函数.
+It basically allows you to put
+a function right in there.
+允许在这里放一个函数.
 
 801
 00:35:56,542 --> 00:36:02,812
-   And this, okay here, looks
- okay, I mean we can certainly
-	好了,这看起来还不错.
+And this, okay here, looks
+okay, I mean we can certainly
+好了,这看起来还不错.
 
 802
 00:36:02,814 --> 00:36:05,481
- you know, now we can copy and
-  paste this and put it here.
-	下面又是复制,粘贴,放着
+you know, now we can copy and
+paste this and put it here.
+下面又是复制,粘贴,放着
 
 803
 00:36:05,483 --> 00:36:06,615
-       You know, here and
-	放这里
+You know, here and
+放这里
 
 804
 00:36:06,617 --> 00:36:09,118
-        change this and
-  put it here and change this.
-	改了这个,放在这里,改了这个,	
+change this and
+put it here and change this.
+改了这个,放在这里,改了这个,	
 
 805
 00:36:09,120 --> 00:36:12,287
-       But it can even be
-       better than this.
-	但是,我们可以进一步改进.
+But it can even be
+better than this.
+但是,我们可以进一步改进.
 
 806
 00:36:12,289 --> 00:36:15,223
-     So we know that Swift
-       is really good at
-	我们知道Swift很擅长的
+So we know that Swift
+is really good at
+我们知道Swift很擅长的
 
 807
 00:36:15,225 --> 00:36:17,658
-        something called
-        type inference.
-	一个特性称为类型引用.
+something called
+type inference.
+一个特性称为类型引用.
 
 808
 00:36:17,660 --> 00:36:19,493
-       Where I can kinda
-      figure out the type,
- 	从类型引用可以看出是什么类型,
+Where I can kinda
+figure out the type,
+从类型引用可以看出是什么类型,
 
 809
 00:36:19,495 --> 00:36:22,863
-         of something,
-       from the context.
-	结合上下文来看.
+of something,
+from the context.
+结合上下文来看.
 
 810
 00:36:22,865 --> 00:36:25,165
-         And you can do
-      the same thing here.
-	这里也可以这么做.
+And you can do
+the same thing here.
+这里也可以这么做.
 
 811
 00:36:25,167 --> 00:36:27,267
-      Because its looking
-     at perform operation.
-	看下这里的performOperation
+Because its looking
+at perform operation.
+看下这里的performOperation
 
 812
 00:36:27,269 --> 00:36:29,435
-    It knows you're calling
-       perform operation.
-	它知道你在调用performOperation
+It knows you're calling
+perform operation.
+它知道你在调用performOperation
 
 813
 00:36:29,437 --> 00:36:33,039
-   It knows this argument is
-   a function that takes two
-	它知道这个函数的参数,
+It knows this argument is
+a function that takes two
+它知道这个函数的参数,
 
 814
 00:36:33,041 --> 00:36:34,940
- doubles and returns a double.
-	2个double类型,一个double类型的返回值.
+doubles and returns a double.
+2个double类型,一个double类型的返回值.
 
 815
 00:36:34,942 --> 00:36:38,377
-  So you really don't have to
- specify all the types in here.
-	所以,这里不需要明确的指定类型,
+So you really don't have to
+specify all the types in here.
+所以,这里不需要明确的指定类型,
 
 816
 00:36:38,379 --> 00:36:39,978
-   Cuz it knows all of this.
-	因为它知道这些事情.
+Cuz it knows all of this.
+因为它知道这些事情.
 
 817
 00:36:39,980 --> 00:36:43,381
- So you can actually get rid of
-  all these type decorations,
-	所以,可以删除这些类型声明.
+So you can actually get rid of
+all these type decorations,
+所以,可以删除这些类型声明.
 
 818
 00:36:43,383 --> 00:36:45,416
-  right here, even the return.
-	甚至是返回值类型也可以省去.
+right here, even the return.
+甚至是返回值类型也可以省去.
 
 819
 00:36:45,418 --> 00:36:47,851
-          And, again,
- seeing no warnings, no errors.
-	可以看到,没有任何警告,错误.
+And, again,
+seeing no warnings, no errors.
+可以看到,没有任何警告,错误.
 
 820
 00:36:47,853 --> 00:36:49,553
-     It knows that this has
-      to be a double, and
-	它知道这个参数是double,
+It knows that this has
+to be a double, and
+它知道这个参数是double,
 
 821
 00:36:49,555 --> 00:36:51,454
-    this has to be a double.
-	这个参数也是dobule类型.
+this has to be a double.
+这个参数也是dobule类型.
 
 822
 00:36:51,456 --> 00:36:53,556
-    Because it knows you're
-   calling perform operation.
-	因为它知道你需要调用的函数.
+Because it knows you're
+calling perform operation.
+因为它知道你需要调用的函数.
 
 823
 00:36:53,558 --> 00:36:56,959
-    So it knows the argument
-     to that is like that.
-	就像这样,它知道函数的参数.
+So it knows the argument
+to that is like that.
+就像这样,它知道函数的参数.
 
 824
 00:36:58,529 --> 00:37:00,962
-  Okay, and you can even make
-   this look a little nicer.
-	好了,可以进行进一步的改进.
+Okay, and you can even make
+this look a little nicer.
+好了,可以进行进一步的改进.
 
 825
 00:37:00,964 --> 00:37:03,631
-      We can move this all
-       up onto one line.
-	把这些上移一行.
+We can move this all
+up onto one line.
+把这些上移一行.
 
 826
 00:37:04,800 --> 00:37:08,168
-        Really nice for
-       readability here.
-	看来起更具有可读性.
+Really nice for
+readability here.
+看来起更具有可读性.
 
 827
 00:37:08,170 --> 00:37:11,037
-    But, we can actually do
-     even better than this,
-	事实上,我们可以做的更好. 
+But, we can actually do
+even better than this,
+事实上,我们可以做的更好. 
 
 828
 00:37:11,039 --> 00:37:15,074
-    because Swift knows that
-  perform operations argument
-	因为Swift知道这个函数
+because Swift knows that
+perform operations argument
+因为Swift知道这个函数
 
 829
 00:37:15,076 --> 00:37:18,844
-  returns something, you don't
-  need this return key if your
-	返回一个值,所以你不需要return
+returns something, you don't
+need this return key if your
+返回一个值,所以你不需要return
 
 830
 00:37:18,846 --> 00:37:22,715
-  whole is just an expression
-   like this return key word.
-	如果所有的代码只有一个返回语句.
+whole is just an expression
+like this return key word.
+如果所有的代码只有一个返回语句.
 
 831
 00:37:22,717 --> 00:37:25,717
-  You don;t need that key word
-    because it knows this is
-	不需要return这个关键字了,
+You don;t need that key word
+because it knows this is
+不需要return这个关键字了,
 
 832
 00:37:25,719 --> 00:37:27,485
-  going to return something so
-	因为程序知道你要返回什么.
+going to return something so
+因为程序知道你要返回什么.
 
 833
 00:37:27,487 --> 00:37:32,056
-   this is just an expression
-    it's going to return it.
-	这样只返回一个表达式就可以了.
+this is just an expression
+it's going to return it.
+这样只返回一个表达式就可以了.
 
 834
 00:37:33,325 --> 00:37:37,260
-   But it's even better than
-   that because a swift does
-	更好的做法是,
+But it's even better than
+that because a swift does
+更好的做法是,
 
 835
 00:37:37,262 --> 00:37:40,597
-     not force you to name
-      these two arguments.
-	swift不强制你给这两个参数命名.
+not force you to name
+these two arguments.
+swift不强制你给这两个参数命名.
 836
 00:37:40,599 --> 00:37:44,967
-   If you don;t name them it
-    will use the names Dar0.
-	如果不手动命名的话,程序自动给参数起码$0
+If you don;t name them it
+will use the names Dar0.
+如果不手动命名的话,程序自动给参数起码$0
 
 837
 00:37:44,969 --> 00:37:46,952
-         Dollar 1, and
-	$1,
+Dollar 1, and
+$1,
 
 838
 00:37:46,953 --> 00:37:48,936
-  if you have more arguments,
- dollar 2, dollar 3, dollar 4.
-	如果有更多的参数,会命名为$2,$3,$4.
+if you have more arguments,
+dollar 2, dollar 3, dollar 4.
+如果有更多的参数,会命名为$2,$3,$4.
 
 839
 00:37:48,939 --> 00:37:50,706
-  So you don't even need this.
-	所以,这也不要了.
+So you don't even need this.
+所以,这也不要了.
 
 840
 00:37:52,142 --> 00:37:53,441
-             Okay?
+Okay?
 
 841
 00:37:53,443 --> 00:37:55,710
-     So this is a function
-          right here.
-	这里是一个函数.
+So this is a function
+right here.
+这里是一个函数.
 
 842
 00:37:55,712 --> 00:37:58,112
-     It takes two doubles,
-   dollar 0 and dollar 1, and
-	这个函数有两个double类型参数,$0,$1	
+It takes two doubles,
+dollar 0 and dollar 1, and
+这个函数有两个double类型参数,$0,$1	
 
 843
 00:37:58,114 --> 00:37:59,546
-       returns a double.
-	返回一个double类型的值.
+returns a double.
+返回一个double类型的值.
 
 844
 00:37:59,548 --> 00:38:02,916
-  Now Swift knows that they're
- doubles because it knows that
-	Swift知道它们是double类型.
+Now Swift knows that they're
+doubles because it knows that
+Swift知道它们是double类型.
 
 845
 00:38:02,918 --> 00:38:04,517
-     you're passing them to
-     perform an operation.
-	因为你将它们传递给了这个函数.
+you're passing them to
+perform an operation.
+因为你将它们传递给了这个函数.
 
 846
 00:38:04,519 --> 00:38:07,920
-  If you were passing this to
-  some other, a function that
-	如果把它们传递给其他的函数,
+If you were passing this to
+some other, a function that
+如果把它们传递给其他的函数,
 
 847
 00:38:07,922 --> 00:38:10,789
-     took different kind of
- function as an argument, then,
-	比如有不同类型的参数,
+took different kind of
+function as an argument, then,
+比如有不同类型的参数,
 
 848
 00:38:10,791 --> 00:38:14,126
- you know, these types might be
- different but in this case it
-	这些类型可能和上面不同.
+you know, these types might be
+different but in this case it
+这些类型可能和上面不同.
 
 849
 00:38:14,128 --> 00:38:16,961
-  knows that's what it is and
- it knows that it returns once
-	但是Swift知道该使用什么类型
+knows that's what it is and
+it knows that it returns once
+但是Swift知道该使用什么类型
 
 850
 00:38:16,963 --> 00:38:20,731
- it knows it's going to return
-   what this calculation is.
-	这里就是这样的.
+it knows it's going to return
+what this calculation is.
+这里就是这样的.
 
 851
 00:38:21,801 --> 00:38:22,366
-           All right.
-	好了.
+All right.
+好了.
 
 852
 00:38:23,568 --> 00:38:26,536
-  Now one more cool syntactic
-   thing you can do is if you
-	更酷的事情是,
+Now one more cool syntactic
+thing you can do is if you
+更酷的事情是,
 
 853
 00:38:26,538 --> 00:38:29,305
-      have a function like
-     performOperation, and
-	如果有一个performOperation这样的函数,
+have a function like
+performOperation, and
+如果有一个performOperation这样的函数,
 
 854
 00:38:29,307 --> 00:38:32,741
- it has an argument which is a
- function like operation here,
-	有个像operation这样的参数,
+it has an argument which is a
+function like operation here,
+有个像operation这样的参数,
 
 855
 00:38:32,743 --> 00:38:36,445
-      if this argument is
-  the last argument, okay, so
-	如果是最后一个参数,
+if this argument is
+the last argument, okay, so
+如果是最后一个参数,
 
 856
 00:38:36,447 --> 00:38:38,446
-    if I had other arguments
-         before it, and
-	在之前有别的参数,
+if I had other arguments
+before it, and
+在之前有别的参数,
 
 857
 00:38:38,448 --> 00:38:42,917
-  this was the argument, then
-   you can move the function.
-	这是参数,可以移动这个函数的位置
+this was the argument, then
+you can move the function.
+这是参数,可以移动这个函数的位置
 
 858
 00:38:43,886 --> 00:38:47,888
-    Outside the parentheses,
-      so other arguments,
-	移动到括号外,参数也是.
+Outside the parentheses,
+so other arguments,
+移动到括号外,参数也是.
 
 859
 00:38:47,890 --> 00:38:50,123
- if there were other arguments
- before, they would go in here.
-	如果有其他类型的参数,可以放在这里. 
+if there were other arguments
+before, they would go in here.
+如果有其他类型的参数,可以放在这里. 
 
 860
 00:38:51,726 --> 00:38:54,327
-    But this last argument,
-	但是这个最后的一个参数.
+But this last argument,
+但是这个最后的一个参数.
 
 861
 00:38:54,328 --> 00:38:56,929
- which is this operation, gets
- to go outside the parentheses.
-	这个函数,需要放在括号外.
+which is this operation, gets
+to go outside the parentheses.
+这个函数,需要放在括号外.
 
 862
 00:38:56,931 --> 00:38:59,564
-   And if there are no other
-     arguments, if this is
-	如果没有其他的参数,
+And if there are no other
+arguments, if this is
+如果没有其他的参数,
 
 863
 00:38:59,566 --> 00:39:02,033
-   the only argument, you can
-   actually get rid of that.
-	如果只有一个参数,可以删除它.
+the only argument, you can
+actually get rid of that.
+如果只有一个参数,可以删除它.
 
 864
 00:39:03,870 --> 00:39:05,269
-             Okay.
+Okay.
 
 865
 00:39:05,271 --> 00:39:08,705
-     So, we're cutting down
-     to incredibly concise
-	 因此,我们把程序变得很简洁了	
+So, we're cutting down
+to incredibly concise
+因此,我们把程序变得很简洁了	
 
 866
 00:39:08,707 --> 00:39:13,509
-    language here and we can
-    do this exact same deal,
-	可以再这样做.
+language here and we can
+do this exact same deal,
+可以再这样做.
 
 867
 00:39:13,511 --> 00:39:18,047
-      of course with these
-     other form operations.
-	其他的操作也可以这样做.
+of course with these
+other form operations.
+其他的操作也可以这样做.
 
 868
 00:39:18,049 --> 00:39:19,848
-  We just need to change the.
-	只需要改这里.
+We just need to change the.
+只需要改这里.
 
 869
 00:39:20,817 --> 00:39:21,382
-         Nothing here.
-	这里不需要改.
+Nothing here.
+这里不需要改.
 
 870	
 00:39:22,585 --> 00:39:24,184
-    This one, we be a little
-   careful with the order of
-	这里,需要注意参数的顺序,
+This one, we be a little
+careful with the order of
+这里,需要注意参数的顺序,
 
 871
 00:39:24,186 --> 00:39:27,421
-        operations here,
-  we wanna do this because we
-	我们会这么做,
+operations here,
+we wanna do this because we
+我们会这么做,
 
 872
 00:39:27,423 --> 00:39:30,824
-   click the thing that we're
- dividing by on the stack last.
-	除以栈中的最后一个元素.
+click the thing that we're
+dividing by on the stack last.
+除以栈中的最后一个元素.
 
 873
 00:39:30,826 --> 00:39:34,660
-   And that's the first thing
-   that comes off the stack.
-	栈中最先离开的元素
+And that's the first thing
+that comes off the stack.
+栈中最先离开的元素
 
 874
 00:39:34,662 --> 00:39:35,494
- And same thing here actually,
-	这里也要注意,
+And same thing here actually,
+这里也要注意,
 
 875
 00:39:35,496 --> 00:39:38,163
-        the subtraction
-       minus dollar here.
-	减法,减号,$,	
+the subtraction
+minus dollar here.
+减法,减号,$,	
 
 876
 00:39:38,165 --> 00:39:41,900
-     Okay, so, this is our
-      entire operate, and
-	好了,这就是我们的全部操作.
+Okay, so, this is our
+entire operate, and
+好了,这就是我们的全部操作.
 
 877
 00:39:41,902 --> 00:39:44,469
-     you can see that it's
-      incredibly concise.
-	你可以看到,这相当的简洁.
+you can see that it's
+incredibly concise.
+你可以看到,这相当的简洁.
 
 878
 00:39:44,471 --> 00:39:45,803
-         Very readable.
-	很高的可读性.
+Very readable.
+很高的可读性.
 
 879
 00:39:45,805 --> 00:39:47,504
-        TImes is clearly
-      doing this function.
-	这里改成乘法. 
+TImes is clearly
+doing this function.
+这里改成乘法. 
 
 880
 00:39:47,506 --> 00:39:48,905
-      And very extensible.
-	也有很高的可扩展性
+And very extensible.
+也有很高的可扩展性
 
 881
 00:39:48,907 --> 00:39:50,206
-        If you wanna add
-        more functions,
-	如果需要添加更多的操作,
+If you wanna add
+more functions,
+如果需要添加更多的操作,
 
 882
 00:39:50,208 --> 00:39:51,974
-    we just one liners here,
-	只需要这里添加一行代码.
+we just one liners here,
+只需要这里添加一行代码.
 
 883
 00:39:51,976 --> 00:39:55,745
- but more these [COUGH] binary
-  functions that have two So,
-	这里我们就只有这么多.
+but more these [COUGH] binary
+functions that have two So,
+这里我们就只有这么多.
 
 884
 00:39:55,747 --> 00:39:58,814
-    let's go ahead and make
-  sure these are all working.
-	继续,确保我们程序运行问题.
+let's go ahead and make
+sure these are all working.
+继续,确保我们程序运行问题.
 
 885
 00:40:02,753 --> 00:40:04,686
-           All right.
-	好的.
+All right.
+好的.
 
 886
 00:40:04,687 --> 00:40:06,620
-      So, 6 enter 5 times,
-    that's 30, that's good.
-	6乘以5,结果是30,看起来不错.
+So, 6 enter 5 times,
+that's 30, that's good.
+6乘以5,结果是30,看起来不错.
 
 887
 00:40:06,623 --> 00:40:11,291
-     How about 47 plus 77,
-           excellent.
-	47加上77,不错.
+How about 47 plus 77,
+excellent.
+47加上77,不错.
 
 888
 00:40:11,293 --> 00:40:13,593
-      How about 2 divide.
-	2除以
+How about 2 divide.
+2除以
 
 889
 00:40:13,595 --> 00:40:14,928
-             38.5.
-	     38.5
+38.5.
+38.5
 
 890
 00:40:14,930 --> 00:40:17,397
-   [INAUDIBLE] number there.
-	这个数,三十八点五.
+[INAUDIBLE] number there.
+这个数,三十八点五.
 
 891
 00:40:17,399 --> 00:40:20,299
- Working, you can see the stack
-  doing all the right things.
-	正常,可以看到做的还错.
+Working, you can see the stack
+doing all the right things.
+正常,可以看到做的还错.
 
 892
 00:40:21,368 --> 00:40:24,102
-             Okay?
-          Make sense?
-	对么?正确的吧?
+Okay?
+Make sense?
+对么?正确的吧?
 
 893
 00:40:24,104 --> 00:40:26,771
-      Now, I'm going to do
-     one more thing, here.
-	现在,还需要做一个事情.
+Now, I'm going to do
+one more thing, here.
+现在,还需要做一个事情.
 
 894
 00:40:27,840 --> 00:40:29,473
-        Which is to add
-       another operation,
-	就是添加另外的一个操作符.
+Which is to add
+another operation,
+就是添加另外的一个操作符.
 
 895
 00:40:29,475 --> 00:40:31,174
- this is going to be a slightly
-      different operation.
-	稍有不同的一个操作.
+this is going to be a slightly
+different operation.
+稍有不同的一个操作.
 
 896
 00:40:31,176 --> 00:40:32,375
-   So, I'm going to copy and
-	复制一下,
+So, I'm going to copy and
+复制一下,
 
 897
 00:40:32,377 --> 00:40:35,144
-     paste these operation
-         buttons here.
-	粘贴到操作符按钮这里.
+paste these operation
+buttons here.
+粘贴到操作符按钮这里.
 
 898
 00:40:35,146 --> 00:40:37,880
- Again, I'm going to make sure
-    they are lined up really
-	确保真正的对齐了.
+Again, I'm going to make sure
+they are lined up really
+确保真正的对齐了.
 
 899
 00:40:37,882 --> 00:40:41,350
-   nice with as many of these
-    blue lines as I can get.
-	使用蓝色的线来对齐.	
+nice with as many of these
+blue lines as I can get.
+使用蓝色的线来对齐.	
 
 900
 00:40:42,786 --> 00:40:44,919
-     I'm actually going to
-   leave these buttons here.
-	把按钮放在这.
+I'm actually going to
+leave these buttons here.
+把按钮放在这.
 
 901
 00:40:46,255 --> 00:40:48,389
-  Because you're going to need
-    them for your homework.
-    因为你等下做作业的时候会需要他们
+Because you're going to need
+them for your homework.
+因为你等下做作业的时候会需要他们
 
 902
 00:40:48,391 --> 00:40:50,323
-    But we gonna change this
-  button right down here to be
-  但是我们将会改变这个按钮
+But we gonna change this
+button right down here to be
+但是我们将会改变这个按钮
 
 903
 00:40:50,325 --> 00:40:51,825
-     a different operator.
-     把它成为一个不同的运算符.
+a different operator.
+把它成为一个不同的运算符.
 
 
 904
 00:40:52,894 --> 00:40:54,760
-     Which is going to be,
-          square root.
-          它将会变成一个平方根运算符
+Which is going to be,
+square root.
+它将会变成一个平方根运算符
 
 905
 00:40:54,762 --> 00:40:57,629
-      Which is right here,
-     square root operator.
-     就在这里,一个平方根
+Which is right here,
+square root operator.
+就在这里,一个平方根
 
 906
 00:40:58,732 --> 00:40:59,297
-           All right?
-           好的.
+All right?
+好的.
 
 907
 00:40:59,299 --> 00:41:05,803
- And, so, I'm going to go back
-   her to do square root, and
-   然后我回到这里,去添加一个平方根运算
+And, so, I'm going to go back
+her to do square root, and
+然后我回到这里,去添加一个平方根运算
 
 908
 00:41:05,805 --> 00:41:07,704
- it's just another case, right.
- 只需要再添加一个case就可以搞定了.
+it's just another case, right.
+只需要再添加一个case就可以搞定了.
 
 909
 00:41:07,706 --> 00:41:08,805
-       Case square root.
-       case平方根
+Case square root.
+case平方根
 
 910
 00:41:09,841 --> 00:41:12,808
-    And, maybe I should just
-    be able to use the same
-    也许我应该直接拷贝一样的
+And, maybe I should just
+be able to use the same
+也许我应该直接拷贝一样的
 
 911
 00:41:12,810 --> 00:41:13,709
-       mechanism, right?
-       这句话,对吧.
+mechanism, right?
+这句话,对吧.
 
 912
 00:41:13,711 --> 00:41:14,843
-    Let's see if that works.
-    让我们看看,这样能不能行.
+Let's see if that works.
+让我们看看,这样能不能行.
 
 913
 00:41:15,946 --> 00:41:18,897
-      Place that in there.
-      把它们放在这
+Place that in there.
+把它们放在这
 
 914
 00:41:18,898 --> 00:41:21,849
-  And instead of this bracket
-  here, let's use the built in
-  把大括号里的内容删掉,用一个
+And instead of this bracket
+here, let's use the built in
+把大括号里的内容删掉,用一个
 
 915
 00:41:21,851 --> 00:41:25,285
-    function in Swift to do
-    square root called sqrt.
-    swift里内置的平方根运算函数,叫做sqrt
+function in Swift to do
+square root called sqrt.
+swift里内置的平方根运算函数,叫做sqrt
 
 916
 00:41:25,287 --> 00:41:26,219
-      And a dollar there.
-      还有一个$符号
+And a dollar there.
+还有一个$符号
 
 917
 00:41:26,221 --> 00:41:27,187
-          Looks good.
-          看起来不错
+Looks good.
+看起来不错
 
 918
 00:41:27,189 --> 00:41:29,322
-  And then we're ready to go.
-  好的,我们弄好了.
+And then we're ready to go.
+好的,我们弄好了.
 
 919
 00:41:29,324 --> 00:41:32,591
-   Let's just work, call it,
-     what's going on here.
-     这里好像有什么问题.
+Let's just work, call it,
+what's going on here.
+这里好像有什么问题.
 
 920
 00:41:32,593 --> 00:41:35,794
- They have some sort of error,
-      what's the problem.
-      好像是某种错误,是什么问题呢?
+They have some sort of error,
+what's the problem.
+好像是某种错误,是什么问题呢?
 
 921
 00:41:35,796 --> 00:41:36,995
-      I don't understand.
-      我也不清楚.
+I don't understand.
+我也不清楚.
 
 922
 00:41:36,997 --> 00:41:38,163
-   Let's take a look at this.
-   我们来看一看.
+Let's take a look at this.
+我们来看一看.
 
 923
 00:41:38,165 --> 00:41:42,867
-   Now this error is a little
-     hard to understand but
-     不过这个错误有点难理解不过
+Now this error is a little
+hard to understand but
+不过这个错误有点难理解不过
 
 924
 00:41:42,869 --> 00:41:46,970
-   basically what it's saying
-     is that you're calling
-     大概意思是说你使用的这个
+basically what it's saying
+is that you're calling
+大概意思是说你使用的这个
 
 925
 00:41:46,972 --> 00:41:51,207
- performOperation here with an
- argument which is a function,
- 带一个参数的performOperatin是个函数
+performOperation here with an
+argument which is a function,
+带一个参数的performOperatin是个函数
 
 926
 00:41:51,209 --> 00:41:54,177
-   it only takes on argument.
-   并且他只有一个参数
+it only takes on argument.
+并且他只有一个参数
 
 927
 00:41:54,179 --> 00:41:55,378
-   Goes Swift looks here and
-   我们看看这个函数
+Goes Swift looks here and
+我们看看这个函数
 
 928
 00:41:55,380 --> 00:41:57,579
-    it's used that it's only
-     using a dollar zero so
-     这个函数只是用了一个参数$
+it's used that it's only
+using a dollar zero so
+这个函数只是用了一个参数$
 
 929
 00:41:57,581 --> 00:42:00,849
-     this is a one argument
-      function this whole
-      确实是一个只有一个参数的函数
+this is a one argument
+function this whole
+确实是一个只有一个参数的函数
 
 930
 00:42:00,851 --> 00:42:03,785
-     curly brace thing is a
- function that is one argument.
- 大括号里只有一个参数
+curly brace thing is a
+function that is one argument.
+大括号里只有一个参数
 
 931
 00:42:03,787 --> 00:42:07,121
-      Well four operation
-     takes a function that
-     上面的4各运算法调用的这个函数
+Well four operation
+takes a function that
+上面的4各运算法调用的这个函数
 
 932
 00:42:07,123 --> 00:42:08,189
-       has two arguments.
-       有两个参数
+has two arguments.
+有两个参数
 
 933
 00:42:09,692 --> 00:42:11,591
-      So that's a mismatch
-       that doesn't work.
-       所以参数不匹配,导致了这个错误
+So that's a mismatch
+that doesn't work.
+所以参数不匹配,导致了这个错误
 
 934
 00:42:12,594 --> 00:42:14,694
-    So how can we fix this.
-    那么我们来修复这个错误
+So how can we fix this.
+那么我们来修复这个错误
 
 935
 00:42:14,695 --> 00:42:16,795
-  Well actually believe it or
- not we can just make a copy of
- 我们来直接复制这个函数体
+Well actually believe it or
+not we can just make a copy of
+我们来直接复制这个函数体
 
 936
 00:42:16,798 --> 00:42:19,398
-   form operation of another
-       method, same name.
+form operation of another
+method, same name.
 
 937
 00:42:19,400 --> 00:42:22,067
-     This one we are gonna
-   have different arguments.
-   但是这个函数会有不同的参数个数
+This one we are gonna
+have different arguments.
+但是这个函数会有不同的参数个数
 
 938
 00:42:22,069 --> 00:42:24,736
-       It's gonna have a,
-      an argument which is
-      将只有一个参数
+It's gonna have a,
+an argument which is
+将只有一个参数
 
 939
 00:42:24,738 --> 00:42:27,605
- a function that only takes one
-  double and returns a double.
-  只有一个double参数,返回值是一个double
+a function that only takes one
+double and returns a double.
+只有一个double参数,返回值是一个double
 
 940
 00:42:28,574 --> 00:42:30,224
-     And then inside here,
-     然后在这里
+And then inside here,
+然后在这里
 
 941
 00:42:30,225 --> 00:42:31,875
-   obviously we don't need to
- pull two things off the stack,
- 显然我们不需要推出两个数字出栈
+obviously we don't need to
+pull two things off the stack,
+显然我们不需要推出两个数字出栈
 
 942
 00:42:31,877 --> 00:42:32,609
-           just one.
-           只推出一个就行了
+just one.
+只推出一个就行了
 
 943
 00:42:32,611 --> 00:42:35,645
- And obviously we only need to
- 我们只需要注意
+And obviously we only need to
+我们只需要注意
 
 944
 00:42:35,647 --> 00:42:37,413
-    check to make sure there
-   is one thing on the stack.
-   确保只有一个数字会被推出栈
+check to make sure there
+is one thing on the stack.
+确保只有一个数字会被推出栈
 
 945
 00:42:37,415 --> 00:42:41,950
-           And look,
- all error warnings gone, okay?
- 现在看一看,所有的错误都消失了,对吧.
+And look,
+all error warnings gone, okay?
+现在看一看,所有的错误都消失了,对吧.
 
 946
 00:42:41,952 --> 00:42:44,319
-      So it automatically
-     figured out that this
-     所以,它自动搞清楚了
+So it automatically
+figured out that this
+所以,它自动搞清楚了
 
 947
 00:42:44,321 --> 00:42:46,321
-      performer operation
-       must be this one,
-       他必须匹配的是这个函数
+performer operation
+must be this one,
+他必须匹配的是这个函数
 
 948
 00:42:46,323 --> 00:42:49,857
-   because this is a function
-  that only has one argument.
-  因为这是个只有一个参数的函数
+because this is a function
+that only has one argument.
+因为这是个只有一个参数的函数
 
 949
 00:42:49,859 --> 00:42:52,460
-    And so it matched it up
-    with this version of it.
-    所以它匹配了这个版本的函数
+And so it matched it up
+with this version of it.
+所以它匹配了这个版本的函数
 
 950
 00:42:52,462 --> 00:42:55,996
-   So in Swift, you can have
- functions with the same name.
- 所以在swift中,我们可以拥有相同名字的函数
+So in Swift, you can have
+functions with the same name.
+所以在swift中,我们可以拥有相同名字的函数
 
 951
 00:42:55,998 --> 00:42:58,265
-      As long as they have
-      different arguments.
-      只要他们有不同的参数就可以了.
+As long as they have
+different arguments.
+只要他们有不同的参数就可以了.
 
 952
 00:42:58,267 --> 00:42:59,399
-      And that Swift will
-      swift将会
+And that Swift will
+swift将会
 
 953
 00:42:59,401 --> 00:43:02,168
-       automatically pick
-   the right one, if it can.
-   自动选择正确的一个
+automatically pick
+the right one, if it can.
+自动选择正确的一个
 
 954
 00:43:02,170 --> 00:43:03,936
-      There are sometimes
-      when it's just like,
-      某些时候这就好比
+There are sometimes
+when it's just like,
+某些时候这就好比
 
 955
 00:43:03,938 --> 00:43:05,971
-      I can't really tell
-      which one you mean.
-      你不告诉他你到底想要的是哪个
+I can't really tell
+which one you mean.
+你不告诉他你到底想要的是哪个
 
 956
 00:43:05,973 --> 00:43:08,673
-     And it will certainly
-    complain, in that case.
-    在这种情况下,它当然会发牢骚了.
+And it will certainly
+complain, in that case.
+在这种情况下,它当然会发牢骚了.
 
 957
 00:43:11,378 --> 00:43:14,311
-   But most of the type it's
-  gonna be on [INAUDIBLE] from
-  但是,大部分情况
+But most of the type it's
+gonna be on [INAUDIBLE] from
+但是,大部分情况
 
 958
 00:43:14,313 --> 00:43:16,647
-      the types involved,
-        what's going on.
-        它会通过参数类型判断到底使用哪个函数
+the types involved,
+what's going on.
+它会通过参数类型判断到底使用哪个函数
 
 959
 00:43:16,649 --> 00:43:18,582
-    So, just gonna run this
-     one again real quick.
-     让我们运行一次这个程序
+So, just gonna run this
+one again real quick.
+让我们运行一次这个程序
 
 960
 00:43:18,584 --> 00:43:22,852
-  [INAUDIBLE] 36 square root.
-  36的平方根
+[INAUDIBLE] 36 square root.
+36的平方根
 
 961
 00:43:22,854 --> 00:43:27,423
-    Looks like it's working,
-      9 times square root.
-      看起来答案正确.再乘以9然后开平方
+Looks like it's working,
+9 times square root.
+看起来答案正确.再乘以9然后开平方
 
 962
 00:43:27,425 --> 00:43:27,989
-           Excellent.
-           很好
+Excellent.
+很好
 
 963
 00:43:29,726 --> 00:43:30,291
-             Okay.
+Okay.
 
 964
 00:43:31,627 --> 00:43:33,894
-           All right.
-              So,
-              然后
+All right.
+So,
+然后
 
 965
 00:43:33,895 --> 00:43:36,162
-    the last thing I'm going
-     to do here is work on
-     我们要做的最后一件事
+the last thing I'm going
+to do here is work on
+我们要做的最后一件事
 
 966
 00:43:36,165 --> 00:43:37,431
-  the layout of these buttons.
-  就是设置这些按钮的布局
+the layout of these buttons.
+就是设置这些按钮的布局
 
 967
 00:43:37,433 --> 00:43:38,531
- So that's all I'm gonna do for
-           the code.
-           我用代码写的就是这么多
+So that's all I'm gonna do for
+the code.
+我用代码写的就是这么多
 
 968
 00:43:38,533 --> 00:43:40,333
-      You can see that we
-     really didn't have to
-     你可以看到,我们实际上
+You can see that we
+really didn't have to
+你可以看到,我们实际上
 
 969
 00:43:40,335 --> 00:43:41,367
-     write that much code.
-     并没有写太多代码
+write that much code.
+并没有写太多代码
 
 970
 00:43:42,436 --> 00:43:45,003
-     To make this work and
-     来让这个程序运行起来
+To make this work and
+来让这个程序运行起来
 
 971
 00:43:45,005 --> 00:43:47,939
-     we got to do a lot of
-     stuff in our UI here.
-     而是在UI上做了很多事
+we got to do a lot of
+stuff in our UI here.
+而是在UI上做了很多事
 
 972
 00:43:47,941 --> 00:43:50,708
- So, let's go ahead and make it
-  so these buttons spread out.
-  好的,让我们继续,把这些按钮展开
+So, let's go ahead and make it
+so these buttons spread out.
+好的,让我们继续,把这些按钮展开
 
 973
 00:43:50,710 --> 00:43:54,778
- Cuz right now you see all this
-  space is wasted right here.
-  因为你现在可以看到,我们浪费了很多空间
+Cuz right now you see all this
+space is wasted right here.
+因为你现在可以看到,我们浪费了很多空间
 
 974
 00:43:54,780 --> 00:43:57,481
-        And on an iPhone
-       in portrait mode.
-       如果iPhone在竖屏的时候
+And on an iPhone
+in portrait mode.
+如果iPhone在竖屏的时候
 
 975
 00:43:57,483 --> 00:43:59,549
- Whole bottom space is wasted.
- 我们下面的空间都浪费了
+Whole bottom space is wasted.
+我们下面的空间都浪费了
 
 976
 00:43:59,551 --> 00:44:01,484
-        And an iPhone on
-        landscape mode,
-        如果在横屏状态
+And an iPhone on
+landscape mode,
+如果在横屏状态
 
 977
 00:44:01,486 --> 00:44:02,685
- this whole size can be wasted.
- 这块区域被浪费了
+this whole size can be wasted.
+这块区域被浪费了
 
 978
 00:44:02,687 --> 00:44:04,920
-     So I really want these
-    buttons much bigger, and
-    所以我很想把这些按钮弄得大一些
+So I really want these
+buttons much bigger, and
+所以我很想把这些按钮弄得大一些
 
 979
 00:44:04,922 --> 00:44:05,687
-        stretching out.
-        拉伸开
+stretching out.
+拉伸开
 
 980
 00:44:07,124 --> 00:44:09,791
-   Now, when you do something
-  like that, you have to think
-  现在,如果你想做这件事,你需要认真
+Now, when you do something
+like that, you have to think
+现在,如果你想做这件事,你需要认真
 
 981
 00:44:09,793 --> 00:44:12,226
-  a little bit of kind of what
-   your strategy is gonna be.
-   思考一下到底应该怎么做合适
+a little bit of kind of what
+your strategy is gonna be.
+思考一下到底应该怎么做合适
 
 982
 00:44:12,228 --> 00:44:15,696
-   You can't just kinda root
-     four start, you know,
-     而不是急匆匆就开始随便就开始
+You can't just kinda root
+four start, you know,
+而不是急匆匆就开始随便就开始
 
 983
 00:44:15,698 --> 00:44:17,597
-        control drag it
-        between things.
-        用鼠标随便拖动这些按钮之类的
+control drag it
+between things.
+用鼠标随便拖动这些按钮之类的
 
 984
 00:44:17,599 --> 00:44:20,667
-      And trying to set up
-    the horizontal spacing,
-    或是试着设置水平区间
+And trying to set up
+the horizontal spacing,
+或是试着设置水平区间
 
 985
 00:44:20,669 --> 00:44:24,437
-  and maybe line up the, make
-  the equal width and height.
-  对齐这些线,设置相同的宽度和高度
+and maybe line up the, make
+the equal width and height.
+对齐这些线,设置相同的宽度和高度
 
 986
 00:44:24,439 --> 00:44:27,106
-  Oh my gosh, you'd be control
-     dragging all day long,
-     我的天,要是这么做你肯定得用鼠标拖一整天
+Oh my gosh, you'd be control
+dragging all day long,
+我的天,要是这么做你肯定得用鼠标拖一整天
 
 987
 00:44:27,108 --> 00:44:28,374
-         by doing that.
+by doing that.
 
 988
 00:44:28,376 --> 00:44:30,475
-    So I'm not going to use
-    control drag to do this.
-    所以我不会使用鼠标拖动来做这些事
+So I'm not going to use
+control drag to do this.
+所以我不会使用鼠标拖动来做这些事
 
 989
 00:44:30,477 --> 00:44:33,945
- I'm going to use these buttons
-  down here which will kind of
-  我们将使用下面的这些按钮来布局
+I'm going to use these buttons
+down here which will kind of
+我们将使用下面的这些按钮来布局
 
 990
 00:44:33,947 --> 00:44:36,414
-   bulk out a layout buttons.
+bulk out a layout buttons.
 
 991
 00:44:36,416 --> 00:44:40,451
-       Let's go ahead and
-   use the whole screen here.
-   我们先把这个界面扩大到全屏
+Let's go ahead and
+use the whole screen here.
+我们先把这个界面扩大到全屏
 
 992
 00:44:40,453 --> 00:44:43,620
-       Document outline.
-       把左边栏关掉
+Document outline.
+把左边栏关掉
 
 993
 00:44:43,622 --> 00:44:45,939
-        So what is going
-       to be my strategy?
-       那么,我的策略是什么呢?
+So what is going
+to be my strategy?
+那么,我的策略是什么呢?
 
 994
 00:44:45,940 --> 00:44:48,257
- Well, my strategy is I'm going
-  to make a perfect grid here.
-  我的策略就是在这做一个完美的网格
+Well, my strategy is I'm going
+to make a perfect grid here.
+我的策略就是在这做一个完美的网格
 
 995
 00:44:48,260 --> 00:44:52,195
- So, I almost have one, except
- for there's one missing here.
- 这其实已经是一个差不多得了,不过还缺一个
+So, I almost have one, except
+for there's one missing here.
+这其实已经是一个差不多得了,不过还缺一个
 
 996
 00:44:52,197 --> 00:44:54,897
- So I'm actually going to take
-  a button, copy and paste it.
-  我复制一个按钮,然后粘贴在这里
+So I'm actually going to take
+a button, copy and paste it.
+我复制一个按钮,然后粘贴在这里
 
 997
 00:44:54,899 --> 00:44:59,167
-     Okay, just kind of be
- a dummy button here actually.
- 把这个当做一个占位按钮就行了
+Okay, just kind of be
+a dummy button here actually.
+把这个当做一个占位按钮就行了
 
 998
 00:44:59,169 --> 00:45:00,969
-         With no title.
-         不用添加任何标题
+With no title.
+不用添加任何标题
 
 999
 00:45:00,970 --> 00:45:02,770
- I'm going to right click on it
-  also because I don't want it
-  然后右键单击这个按钮,因为我不想让它
+I'm going to right click on it
+also because I don't want it
+然后右键单击这个按钮,因为我不想让它
 
 1000
 00:45:02,773 --> 00:45:04,939
@@ -5764,579 +5655,579 @@ then it's not gonna add this rule.
 
 1101
 00:49:24,965 --> 00:49:26,998
- So we wanted to add this rule.·
-    我们想要添加这些规则 
+So we wanted to add this rule.·
+我们想要添加这些规则 
 
 1102
 00:49:27,000 --> 00:49:30,101
-       So this adds up to
-      87 different rules.
-    所以总共有 87 个不同的规则 
+So this adds up to
+87 different rules.
+所以总共有 87 个不同的规则 
 
 1103
 00:49:30,103 --> 00:49:32,554
-   All these equal widths and
-    所有相同宽度，相同高度
+All these equal widths and
+所有相同宽度，相同高度
 
 1104
 00:49:32,555 --> 00:49:35,006
-    heights and all these So
- if you don't have 87 in here,
-     以及这些，如果你的规则的数目不是87
+heights and all these So
+if you don't have 87 in here,
+以及这些，如果你的规则的数目不是87
 
 1105
 00:49:35,008 --> 00:49:36,974
-    if it says a hundred and
-           something,
-    假如是100或者其它，
+if it says a hundred and
+something,
+假如是100或者其它，
 
 1106
 00:49:36,976 --> 00:49:39,209
-    probably you don't have
-   everything lined up right.
-    那么很可能你没有将所有东西正确连接起来
+probably you don't have
+everything lined up right.
+那么很可能你没有将所有东西正确连接起来
 
 1107
 00:49:39,211 --> 00:49:43,279
-  It only takes 87 constraints
-  to express all these rules.
-    只需要87个限制就可以表示这些排列规则 
+It only takes 87 constraints
+to express all these rules.
+只需要87个限制就可以表示这些排列规则 
 
 1108
 00:49:44,482 --> 00:49:45,547
-           All right.
-    好
+All right.
+好
 
 1109
 00:49:45,549 --> 00:49:48,316
-     Now, when I click this
-    Add 87 Constraints it's
-    现在，如果我按下“Add 87 Constraints”
+Now, when I click this
+Add 87 Constraints it's
+现在，如果我按下“Add 87 Constraints”
 
 1110
 00:49:48,318 --> 00:49:51,886
-    going to add these rules
-   to all these buttons, and
-    就会在这些按钮上添加这些规则，
+going to add these rules
+to all these buttons, and
+就会在这些按钮上添加这些规则，
 
 1111
 00:49:51,888 --> 00:49:52,787
-      watch what happens.
+watch what happens.
 看看会发生什么 
 
 1112
 00:49:54,790 --> 00:49:56,723
-    So, I get all kinds of,
-    嗯，我得到了很多的（线）
+So, I get all kinds of,
+嗯，我得到了很多的（线）
 
 1113
 00:49:56,725 --> 00:49:59,392
-     first these blue lines
-   are showing me the rules.
-    首先这些蓝色的线表示规则 
+first these blue lines
+are showing me the rules.
+首先这些蓝色的线表示规则 
 
 1114
 00:49:59,394 --> 00:50:01,094
-             'Kay?
-   A lot them are saying here
-    许多蓝色的线代表这里
+'Kay?
+A lot them are saying here
+许多蓝色的线代表这里
 
 1115
 00:50:01,096 --> 00:50:03,062
-     that things are equal
-      widths and heights.
+that things are equal
+widths and heights.
 的按钮都是相同大小的（长，宽）
 
 1116
 00:50:03,064 --> 00:50:05,531
-       So these are what
-      equals rules means.
-    这就是 equals 规则的要求 
+So these are what
+equals rules means.
+这就是 equals 规则的要求 
 
 1117
 00:50:05,533 --> 00:50:08,700
-  But there's also tiny little
-     I beams right up here.
-  这里还有一些小的 I 形状的线 
+But there's also tiny little
+I beams right up here.
+这里还有一些小的 I 形状的线 
 
 
 1118
 00:50:08,702 --> 00:50:13,671
-  That are showing this basing
-    to nearest neighbor, and
-  I 行的线表示以最近的物体为基准
+That are showing this basing
+to nearest neighbor, and
+I 行的线表示以最近的物体为基准
 
 1119
 00:50:13,673 --> 00:50:16,073
-  also like there's a yellow,
-          yellow here.
-  这里还有一些黄色的线
+also like there's a yellow,
+yellow here.
+这里还有一些黄色的线
 
 1120
 00:50:16,075 --> 00:50:18,409
-          This yellow,
-     remember, means yeah,
-	记住，这些黄色的线代表
+This yellow,
+remember, means yeah,
+记住，这些黄色的线代表
 
 1121
 00:50:18,411 --> 00:50:21,044
- there's constraints on these,
- but they're not actually where
-	这里虽然有一些约束，
-	但是这些约束本不应该
+there's constraints on these,
+but they're not actually where
+这里虽然有一些约束，
+但是这些约束本不应该
 
 1122
 00:50:21,046 --> 00:50:23,113
-     they're supposed to be
-     based on those rules.
-	是基于这些规则的 
+they're supposed to be
+based on those rules.
+是基于这些规则的 
 
 1123
 00:50:24,049 --> 00:50:27,016
-   So we really want to move
-    them all to be in their
-	我们很需要将这些按钮，按照这些规则，
+So we really want to move
+them all to be in their
+我们很需要将这些按钮，按照这些规则，
 
 1124
 00:50:27,018 --> 00:50:29,852
-      proper spaces based
-        on these rules.
-	移动到合适的地方
+proper spaces based
+on these rules.
+移动到合适的地方
 
 1125
 00:50:29,854 --> 00:50:31,753
-    That's what these dashed
-       yellow lines mean.
-	这就是这些黄色的线的意思 
+That's what these dashed
+yellow lines mean.
+这就是这些黄色的线的意思 
 
 1126
 00:50:31,755 --> 00:50:33,221
-     So we can do the same
-       thing to do that,
-	我们可以按刚开始
+So we can do the same
+thing to do that,
+我们可以按刚开始
 
 1127
 00:50:33,223 --> 00:50:36,224
-  that we did at the beginning
-   with the label on the top
-	处理顶部的 label 那样
+that we did at the beginning
+with the label on the top
+处理顶部的 label 那样
 
 1128
 00:50:36,226 --> 00:50:38,225
-       which is go to our
-     document outline here,
-	点击左下角的 document outline 菜单
+which is go to our
+document outline here,
+点击左下角的 document outline 菜单
 
 1129
 00:50:38,227 --> 00:50:39,393
-   in the lower left corner.
- 
+in the lower left corner.
+
 
 1130
 00:50:39,395 --> 00:50:42,929
-    Okay these are document
-  outline when we last saw it,
-	这些是 UI 文档的缩略图，上一次我们观看时
+Okay these are document
+outline when we last saw it,
+这些是 UI 文档的缩略图，上一次我们观看时
 
 1131
 00:50:42,931 --> 00:50:45,331
-        it only had this
-      one label in there.
-	只有这一个 label 文档 
+it only had this
+one label in there.
+只有这一个 label 文档 
 
 1132
 00:50:46,401 --> 00:50:47,700
-      Now we got all these
-         buttons added.
-	现在所有的 button 都添加上来了 
+Now we got all these
+buttons added.
+现在所有的 button 都添加上来了 
 
 1133
 00:50:47,702 --> 00:50:50,002
-        And you can see
-     they're all selected.
-	而且所有 button 都处于选中状态
+And you can see
+they're all selected.
+而且所有 button 都处于选中状态
 
 1134
 00:50:50,004 --> 00:50:52,304
-   All selected here as well.
-	在这里也处于全部选中的状态 
+All selected here as well.
+在这里也处于全部选中的状态 
 
 1135
 00:50:52,306 --> 00:50:54,673
-   And, we've got this little
-     yellow thing up here.
-	这上面有一个黄色的小箭头
+And, we've got this little
+yellow thing up here.
+这上面有一个黄色的小箭头
 
 1136
 00:50:54,675 --> 00:50:58,643
-   Now, if this is red, okay,
-     if you do all this and
-	如果这里是红色箭头，如果你做了这些操作
+Now, if this is red, okay,
+if you do all this and
+如果这里是红色箭头，如果你做了这些操作
 
 1137
 00:50:58,645 --> 00:51:02,747
-  this is red, well that means
-    that you've got not just
-	并且是红色箭头，那就意味着你所添加的
+this is red, well that means
+that you've got not just
+并且是红色箭头，那就意味着你所添加的
 
 1138
 00:51:02,749 --> 00:51:05,516
- warnings that your constraints
- aren't in the right place, but
-	constraints（限制）不仅是警告
+warnings that your constraints
+aren't in the right place, but
+constraints（限制）不仅是警告
 
 1139
 00:51:05,518 --> 00:51:08,452
-   you've got errors, usually
-    conflicting constraints,
-	而且有错误，通常由冲突的 constraints 引起
+you've got errors, usually
+conflicting constraints,
+而且有错误，通常由冲突的 constraints 引起
 
 1140
 00:51:08,454 --> 00:51:11,721
-       where you've asked
-         auto layout to
-	当你让 auto layout 强制
+where you've asked
+auto layout to
+当你让 auto layout 强制
 
 1141
 00:51:11,723 --> 00:51:13,890
-     enforce two rules that
-   conflict with each other.
-	实施两种相互冲突的规则时 
+enforce two rules that
+conflict with each other.
+实施两种相互冲突的规则时 
 
 1142
 00:51:13,892 --> 00:51:17,626
-   So if you get to that red,
-   this is not going to work.
- 所以如果箭头是红色，这些约束就不会正常工作 
+So if you get to that red,
+this is not going to work.
+所以如果箭头是红色，这些约束就不会正常工作 
 
 1143
 00:51:17,628 --> 00:51:20,295
- So, you'll want to start over,
-              and
- 那么，你可能想重新再设置一遍，
+So, you'll want to start over,
+and
+那么，你可能想重新再设置一遍，
 
 1144
 00:51:20,297 --> 00:51:23,432
- I'll show you in a minute how
- you can start over if things,
- 我稍后为大家展示怎么在重新开始，
+I'll show you in a minute how
+you can start over if things,
+我稍后为大家展示怎么在重新开始，
 
 1145
 00:51:23,434 --> 00:51:26,234
-   or not going your way, but
- if it's yellow that just means
+or not going your way, but
+if it's yellow that just means
 如果和你想的不同，黄色箭头
 
 1146
 00:51:26,236 --> 00:51:27,201
-         things were in
-        the wrong place.
-	仅代表有些东西在错误的位置 
+things were in
+the wrong place.
+仅代表有些东西在错误的位置 
 
 1147
 00:51:27,203 --> 00:51:29,136
-         So no problem,
-      we click the yellow.
-	很简单，点击黄色箭头
+So no problem,
+we click the yellow.
+很简单，点击黄色箭头
 
 1148
 00:51:29,138 --> 00:51:30,637
-   Here's all the things that
-    were in the wrong place.
- 这里是在错误位置的东西 
+Here's all the things that
+were in the wrong place.
+这里是在错误位置的东西 
 
 1149
 00:51:30,639 --> 00:51:31,972
-    This is all the buttons,
-	这是所有的 button
+This is all the buttons,
+这是所有的 button
 
 1150
 00:51:31,974 --> 00:51:34,274
-   you can see they highlight
-     as I mouse over them.
- 你可以看到当鼠标移到按钮上时，对应的按钮高亮
+you can see they highlight
+as I mouse over them.
+你可以看到当鼠标移到按钮上时，对应的按钮高亮
 
 1151
 00:51:34,276 --> 00:51:38,077
-   And you can really pick on
-  any one of them to fix this
+And you can really pick on
+any one of them to fix this
 你可以任意选一个来修改
 
 1152
 00:51:38,079 --> 00:51:40,880
- because there's a nice little
-  switch here called apply to
+because there's a nice little
+switch here called apply to
 因为这里有一个很方便的 switch 代表
 
 1153
 00:51:40,882 --> 00:51:42,047
-   all views and containers.
- 将修改应用到所有 views（视图）和 containers（容器）
+all views and containers.
+将修改应用到所有 views（视图）和 containers（容器）
 
 1154
 00:51:42,049 --> 00:51:44,116
-       You don't have to
-     click on each one and
- 你就不必每一个都点击
+You don't have to
+click on each one and
+你就不必每一个都点击
 
 1155
 00:51:44,118 --> 00:51:46,985
-    have it to frame update
-      to the proper thing.
- 使它的 frame 更新到合适的大小 
+have it to frame update
+to the proper thing.
+使它的 frame 更新到合适的大小 
 
 1156
 00:51:46,987 --> 00:51:50,588
-    You can just click quite
- obvious in container and it's
- 你可以很容易的选中复选框
+You can just click quite
+obvious in container and it's
+你可以很容易的选中复选框
 
 1157
 00:51:50,590 --> 00:51:55,125
- going to move the frame of all
-  the buttons to fix the fact
+going to move the frame of all
+the buttons to fix the fact
 这样就会移动所有 button 的 frame，修改
 
 1158
 00:51:55,127 --> 00:51:57,494
-   that they're in the wrong
-  place based on their rules.
-  那些处于错误位置的
+that they're in the wrong
+place based on their rules.
+那些处于错误位置的
 
 1159
 00:51:57,496 --> 00:51:59,096
-       So let's try that.
-	让我们试试看 
+So let's try that.
+让我们试试看 
 
 1160
 00:51:59,097 --> 00:52:00,697
-   I'm gonna hit this button
-    here, Fix Misplacement.
- 我要点击这个按钮，Fix Misplacement
+I'm gonna hit this button
+here, Fix Misplacement.
+我要点击这个按钮，Fix Misplacement
 
 1161
 00:52:01,933 --> 00:52:03,032
-     And it moved them all.
- 所有的 button 都移动了
+And it moved them all.
+所有的 button 都移动了
 
 1162
 00:52:03,034 --> 00:52:03,966
-    There's no more yellow.
-  没有黄色的警告了
+There's no more yellow.
+没有黄色的警告了
 
 1163
 00:52:03,968 --> 00:52:06,101
- There's no auto layout issues.
- 也没有 auto layout 的问题 
+There's no auto layout issues.
+也没有 auto layout 的问题 
 
 1164
 00:52:06,103 --> 00:52:07,435
-             Okay.
-      All looks good here.
- 看起来不错 
+Okay.
+All looks good here.
+看起来不错 
 
 1165
 00:52:07,437 --> 00:52:09,070
-        We can close our
-       document outline.
-   可以关闭 document outline 视图了 
+We can close our
+document outline.
+可以关闭 document outline 视图了 
 
 1166
 00:52:10,306 --> 00:52:13,440
-    We zoom out, we can see,
-  wow, it spread them all out.
- 将视图缩小，可以看到按钮充满了整个视图 
+We zoom out, we can see,
+wow, it spread them all out.
+将视图缩小，可以看到按钮充满了整个视图 
 
 1167
 00:52:13,442 --> 00:52:14,675
-             Okay?
-            Because,
+Okay?
+Because,
 
 1168
 00:52:14,677 --> 00:52:18,444
-       maybe it's obeying
-     those rules I gave it.
- 因为他们都遵守我定下的规则 
+maybe it's obeying
+those rules I gave it.
+因为他们都遵守我定下的规则 
 
 1169
 00:52:18,446 --> 00:52:20,079
-             Okay?
+Okay?
 
 1170
 00:52:20,080 --> 00:52:21,713
-    So let's now run this on
-     some devices here and
-  现在，试试在不同的设备上运行
+So let's now run this on
+some devices here and
+现在，试试在不同的设备上运行
 
 1171
 00:52:21,716 --> 00:52:23,182
-   see what this looks like.
-  看看结果会怎样
+see what this looks like.
+看看结果会怎样
 
 1172
 00:52:26,220 --> 00:52:30,221
-  So turn off on an iPhone 6,
- which is a pretty tall device.
-  在 特别长的 iPhone 6 上
+So turn off on an iPhone 6,
+which is a pretty tall device.
+在 特别长的 iPhone 6 上
 
 1173
 00:52:30,223 --> 00:52:32,790
-      It's made, you know,
-     kind of tall and thin.
-   iPhone 6 做的既长又窄 
+It's made, you know,
+kind of tall and thin.
+iPhone 6 做的既长又窄 
 
 1174
 00:52:32,792 --> 00:52:35,459
-        So if this still
-       works fine enter. 
-	一切正常 
+So if this still
+works fine enter. 
+一切正常 
 
 1175
 00:52:35,461 --> 00:52:39,763
-   69874 times 5 divide maybe
-   square root something like
- 输入 69874 乘以 5 除以，或是开方
+69874 times 5 divide maybe
+square root something like
+输入 69874 乘以 5 除以，或是开方
 
 1176
 00:52:39,765 --> 00:52:44,266
-       that, it all seems
-         to be working.
-    看起来运行正常 
+that, it all seems
+to be working.
+看起来运行正常 
 
 1177
 00:52:44,268 --> 00:52:48,804
-  Now, not only is it working
-  here in this portrait mode,
-  不但在设备直立时工作正常
+Now, not only is it working
+here in this portrait mode,
+不但在设备直立时工作正常
 
 1178
 00:52:48,806 --> 00:52:51,023
-         tall and thin.
-   既长又窄
+tall and thin.
+既长又窄
 
 1179
 00:52:51,024 --> 00:52:53,241
- But if we go over here to this
-   we can rotate the device.
-  如果我们从这里旋转设备 
+But if we go over here to this
+we can rotate the device.
+如果我们从这里旋转设备 
 
 1180
 00:52:54,277 --> 00:52:55,843
-            Okay, so
-  I'm going to rotate left and
-   我要通过 command 键来向左，向右
+Okay, so
+I'm going to rotate left and
+我要通过 command 键来向左，向右
 
 1181
 00:52:55,845 --> 00:52:58,979
-   right and use the command
-        keys to do this.
- 移动设备
+right and use the command
+keys to do this.
+移动设备
 
 1182
 00:52:58,981 --> 00:53:02,449
-   And we rotate it right and
-           you see it
-   设备向右转可以看到
+And we rotate it right and
+you see it
+设备向右转可以看到
 
 1183
 00:53:02,451 --> 00:53:08,220
-   may the buttons spread out
-    to this new location and
-   buttons 均匀分布到新的位置
+may the buttons spread out
+to this new location and
+buttons 均匀分布到新的位置
 
 1184
 00:53:09,190 --> 00:53:13,491
-    we can rotate back using
-     the command keys here.
-    可以用 command 键将设备转回来 
+we can rotate back using
+the command keys here.
+可以用 command 键将设备转回来 
 
 1185
 00:53:14,627 --> 00:53:17,461
-      And it looks good in
-      either orientation.
-   可以看到，在两个方向上看起来都不错 
+And it looks good in
+either orientation.
+可以看到，在两个方向上看起来都不错 
 
 1186
 00:53:17,463 --> 00:53:21,465
- And in fact, it can look good
-   on other devices as well.
- 实际上，在其他设备上同样看起来很棒
+And in fact, it can look good
+on other devices as well.
+实际上，在其他设备上同样看起来很棒
 
 1187
 00:53:21,467 --> 00:53:23,066
-   So let's go over here and
-  点击这里
+So let's go over here and
+点击这里
 
 1188
 00:53:23,068 --> 00:53:26,235
-   instead of doing iPhone 6,
- let's try it on an iPhone 4S.
-  这次不用 iPhone 6，试一下 iPhone 4S的效果
+instead of doing iPhone 6,
+let's try it on an iPhone 4S.
+这次不用 iPhone 6，试一下 iPhone 4S的效果
 
 1189
 00:53:26,237 --> 00:53:27,937
-            Okay so,
+Okay so,
 
 1190
 00:53:27,939 --> 00:53:32,407
-  gonna switch the simulation
-     here, let's run that.
-  切换模拟器，运行
+gonna switch the simulation
+here, let's run that.
+切换模拟器，运行
 
 1191
 00:53:34,077 --> 00:53:37,345
-   Now the iPhone 4s, you can
-    see is a little shorter,
-   现在时 iPhone 4s，它看起来短一点
+Now the iPhone 4s, you can
+see is a little shorter,
+现在时 iPhone 4s，它看起来短一点
 
 1192
 00:53:37,347 --> 00:53:39,280
-    it's not quite as tall.
-  并没有那么长 
-   
+it's not quite as tall.
+并没有那么长 
+
 1193
 00:53:39,282 --> 00:53:42,416
-   A little lower resolution,
-           obviously.
-   很明显，分辨率也有些低
+A little lower resolution,
+obviously.
+很明显，分辨率也有些低
 
 1194
 00:53:42,418 --> 00:53:46,986
- But it relayed out the buttons
- to look good in that case too.
-  但是在这种情况下也将 buttons 摆放的很棒 
+But it relayed out the buttons
+to look good in that case too.
+但是在这种情况下也将 buttons 摆放的很棒 
 
 1195
 00:53:46,988 --> 00:53:52,558
-    9 times 9, divided by 8,
-    square root, et cetera.
-    9 × 9， 除以 8 ，开方，等等 
+9 times 9, divided by 8,
+square root, et cetera.
+9 × 9， 除以 8 ，开方，等等 
 
 1196
 00:53:52,560 --> 00:53:56,995
-      And same thing here
-       we can rotate and
-   同样我们可以旋转
+And same thing here
+we can rotate and
+同样我们可以旋转
 
 1197
 00:53:56,997 --> 00:54:00,131
-   look at this one as well.
-   这样看起来也不错 
+look at this one as well.
+这样看起来也不错 
 
 1198
 00:54:00,133 --> 00:54:03,067
-             Okay.
+Okay.
 
 1199
 00:54:03,069 --> 00:54:05,019
-          All righty.
-        好啦 
+All righty.
+好啦 
 
 1200
 00:54:05,020 --> 00:54:06,970
- So the last thing I just want
-  to talk about briefly is if
-  最后我相简单的说下
+So the last thing I just want
+to talk about briefly is if
+最后我相简单的说下
 
 1201
 00:54:06,973 --> 00:54:10,207

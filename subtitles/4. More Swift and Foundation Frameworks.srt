@@ -1,21 +1,20 @@
 1
 00:00:00,001 --> 00:00:04,836
-[MUSIC]
+欢迎收看斯坦福大学公开课
 
 2
 00:00:04,838 --> 00:00:07,405
-Stanford University.
-斯坦福大学 
+本字幕由志愿者义务贡献
 
 3
 00:00:11,277 --> 00:00:15,946
 >> Okay, well, welcome to lecture four of CS193P,
-欢迎来到 CS193P，
+欢迎参加斯坦福大学2015年冬季学期的 CS193P 课程 
 
 4
 00:00:15,948 --> 00:00:18,748
 Stanford Winter of 2015.
-斯坦福 2015 冬季课程 
+CS193P 课程
 
 5
 00:00:18,750 --> 00:00:21,284
@@ -25,32 +24,32 @@ So, I've been doing all demo up until now,
 6
 00:00:21,286 --> 00:00:24,553
 and now we're going to be doing all slides today.
-而今天，我们将会全部通过幻灯片学习 
+而今天，我们将会全部通过幻灯片学习
 
 7
 00:00:24,555 --> 00:00:28,724
-So, I have a lot of stuff to talk about most of this,
-我将会讲到很多东西，大部分，
+So, I have a lot of stuff to talk about 
+我将会讲到很多东西
 
 8
 00:00:28,726 --> 00:00:31,143
-although not all of it,
-但不是全部，
+most of this, although not all of it,
+大部分，但不是全部，
 
 9
 00:00:31,144 --> 00:00:33,561
-is covered in your reading assignments, mh okay?
-都在你的阅读任务中，好吗？
+is covered in your reading assignments, okay?
+都在你的阅读任务中
 
 10
 00:00:33,563 --> 00:00:35,496
 But here I'm going to
-在这里我会尝试着把
+在这里我会尽量把
 
 11
 00:00:35,497 --> 00:00:37,430
 try to highlight the things that are pretty important, and
-最重要的部分高亮出来，
+重点强调一些重要的部分
 
 12
 00:00:37,433 --> 00:00:39,066
@@ -65,7 +64,7 @@ that reading assignment that you kinda need to know.
 14
 00:00:41,804 --> 00:00:43,336
 So this is definitely not a substitute for
-所以这绝对不能代替阅读
+但这绝对不能代替阅读
 
 15
 00:00:43,338 --> 00:00:46,472
@@ -75,27 +74,27 @@ the reading you'll still need to do the reading in order to
 16
 00:00:46,474 --> 00:00:49,875
 kinda get the, the details of a lot of this stuff.
-来掌握一些细节部分 
+来掌握这些的细节部分 
 
 17
 00:00:49,877 --> 00:00:54,613
 So but this hopefully will kinda get you focused in on,
-但希望这节课可以让你注意在，
+希望这节课可以让你注意在
 
 18
 00:00:54,615 --> 00:00:58,066
 on the key stuff.
-关键的东西上 
+关键的东西上
 
 19
 00:00:58,067 --> 00:01:01,518
-All right, [COUGH] so first, I wanna talk about
+All right, so first, I wanna talk about
 好的，那么我将讲讲
 
 20
 00:01:01,521 --> 00:01:05,589
 Optionals and enums, so now that you know what an enum is.
-Optionals 和 enums，现在你已经知道 enum 是什么了  
+Optional 和 enum，你已经知道 enum 是什么了  
 
 21
 00:01:05,591 --> 00:01:08,425
@@ -105,32 +104,32 @@ I can tell you what an Optional really is okay?
 22
 00:01:08,427 --> 00:01:10,994
 An Optional is just an enum, okay?
-一个 Optional 就是一个 enum，
+Optional 就是 enum，
 
 23
 00:01:10,996 --> 00:01:15,098
 It's a very simple enum it's a generic kind of like Array.
-这就是一个非常简单的 enum，就像 Array 的泛型 
+就是一个非常简单的 enum，它是泛型的，类似于 Array
 
 24
 00:01:15,100 --> 00:01:15,998
 You know, have an Array,
-你知道，一个 Array ，
+比如一个 Array ，
 
 25
 00:01:16,000 --> 00:01:17,666
 you specify the type of thing in it,
-你指定了其类型，
+你指定了其中的类型，
 
 26
 00:01:17,668 --> 00:01:19,301
 Optionals exactly the same, okay?
-Optionals 完全就是这样，
+Optional 跟它完全一样
 
 27
 00:01:19,303 --> 00:01:20,335
 It's a generic.
-就是泛型 
+就是泛型
 
 28
 00:01:20,337 --> 00:01:22,637
@@ -140,12 +139,12 @@ You specify the type of Optional it is.
 29
 00:01:22,639 --> 00:01:26,173
 And that type, which is T here in this little enum,
-而此类型，在这个小 enum 中的 T
+而此类型，在这个 enum 中的 T
 
 30
 00:01:26,175 --> 00:01:29,376
 is just the type of the associated value, you know,
-就是一种关联值类型，
+就是关联值的类型
 
 31
 00:01:29,378 --> 00:01:31,578
@@ -155,22 +154,22 @@ enums 可以关联各种值
 32
 00:01:31,580 --> 00:01:35,882
 So that's just the type that, if the Optional is not nil.
-所以这就只是其类型，如果 Optional 不是 nil 
+如果 Optional 不是 nil，这就是它的类型
 
 33
 00:01:35,884 --> 00:01:38,751
 That's what you get so that's all an enum is and
-这就是你会取到的 这就是 enum 的全部了 
+你就可以获取到它。这就是 enum
 
 34
 00:01:38,753 --> 00:01:42,054
 so for example, this is what it would look like if we
-举个例子，这里就是你会看到的
+举个例子
 
 35
 00:01:42,056 --> 00:01:45,724
 used the enum notation to do an Optional.
-如果我们使用一个 enum 实现一个 Optional 
+使用一个 enum 实现一个 Optional 看起来会像是这样
 
 36
 00:01:45,726 --> 00:01:49,561
@@ -180,12 +179,12 @@ Saying you know, x which is an enum or is an Optional String,
 37
 00:01:49,563 --> 00:01:52,130
 which nil would just be saying x equals Optional
-x nil 与 Optional
+如果是 nil 可以这样表示：
 
 38
 00:01:52,132 --> 00:01:53,497
 angle bracket String dot none.
-等于尖括号 String 点 none 相等 
+x = Optional<String>.None
 
 39
 00:01:54,800 --> 00:01:56,200
@@ -194,22 +193,22 @@ Okay?
 40
 00:01:56,201 --> 00:01:57,601
 Or, if you're sending it to not be know you
-或者你可以将其隐藏，
+或者你可以将其赋值
 
 41
 00:01:57,603 --> 00:02:00,403
 would say Optional angle bracket String dot Some，
-你可以说 Optional 尖括号 String 点 Some，
+x = Optional<Sting>.Some()
 
 42
 00:02:00,405 --> 00:02:02,705
 parentheses, the associated value, which would be hello.
-圆括号，关联值，也就是 "Hello".
+关联值，也就是 "Hello".
 
 43
 00:02:04,408 --> 00:02:05,607
 That make sense?
-很合理对吧？
+很合理吧？
 
 44
 00:02:05,609 --> 00:02:07,709
@@ -234,7 +233,7 @@ really complicated, but it's pretty simple really it's just
 48
 00:02:17,453 --> 00:02:20,787
 syntax sugar, syntactic sugar to do this Optional.
-这只是语法糖而已，语法糖实现了 Optional 
+这只是语法上的甜头，为了实现 Optional
 
 49
 00:02:20,789 --> 00:02:25,124
@@ -249,7 +248,7 @@ a switch and the case of some, you give the value back.
 51
 00:02:28,896 --> 00:02:32,230
 In the case of none, you raise an exception, okay?
-在 "None" 的情况下，你抛出了一个异常 
+在 "None" 的情况下，就会抛出异常 
 
 52
 00:02:32,232 --> 00:02:36,034
@@ -268,22 +267,22 @@ nil, okay?
 55
 00:02:41,407 --> 00:02:45,242
 So that's Optional all right, so Array, I just wanna.
-这就是一个 Optional 对吧，一个 Array ，我只是想要 
+这就是一个 Optional 。对于 Array
 
 56
 00:02:45,244 --> 00:02:47,744
 We covered this so I'm gonna really fast through this but
-我们已经概括了一次，所以我将很快地进行下一部分 
+我们已经概括了一次，所以我会快点进行这部分
 
 57
 00:02:47,746 --> 00:02:50,480
 Arrays, the syntax there is the same, right?
- Array ，这里的语法是相同的，对吧？
+Array ，这里的语法是相同的，对吧？
 
 58
 00:02:50,482 --> 00:02:51,781
 That square bracket thing,
-这个尖括号东西，
+这里的方括号
 
 59
 00:02:51,783 --> 00:02:54,050
@@ -308,27 +307,27 @@ I just wanna make it clear that defining an Array to
 63
 00:03:04,994 --> 00:03:07,328
 be a constant by saying let something equal
- Array 声明为常量
+Array 声明为常量
 
 64
 00:03:07,330 --> 00:03:09,229
 an Array versus var something equal an Array,
-与声明一个 Array 为 var 是相反的，
+与声明一个 Array 为 var
 
 65
 00:03:09,231 --> 00:03:12,833
 means that it's immutable, so you can't do append or insert,
-这意味着它是不可变的，所以你不能增加或插入，
+声明为 let 意味着它是不可变的，所以你不能增加或插入，
 
 66
 00:03:12,835 --> 00:03:15,468
 or anything else that you could do on a mutable Array.
-或任何你想要改变这个 Array 的操作 
+或任何你想要改变这个 Array 的操作
 
 67
 00:03:15,470 --> 00:03:17,337
 Also, of course,
-当然，
+当然
 
 68
 00:03:17,338 --> 00:03:19,205
@@ -343,7 +342,7 @@ try to pull out something that's outside the bounds of
 70
 00:03:21,542 --> 00:03:23,809
 the Array, this Array only has four animals in it and
-这个 Array ，这个 Array 只有四种动物在里面，
+一个 Array 只有四种动物在里面，
 
 71
 00:03:23,811 --> 00:03:27,145
@@ -353,22 +352,22 @@ I'm trying to get animal five that's gonna crash.
 72
 00:03:27,147 --> 00:03:28,279
 Array index out of bounds,
- Array 越界，
+Array 访问越界
 
 73
 00:03:28,281 --> 00:03:30,981
 just like pretty much any language you've used.
-就好像你曾经用过的任何一种语言 
+你以前使用过的语言也会是这样
 
 74
 00:03:32,551 --> 00:03:33,850
 How to enumerate an Array.
-如何枚举一个 Array 呢 
+如何枚举一个 Array 呢
 
 75
 00:03:33,852 --> 00:03:35,885
 If you wanted to go through every single item
-如果你想要获取在 Array 中的每一件事物
+如果你想要获取在 Array 中的每一个对象
 
 76
 00:03:35,887 --> 00:03:39,655
@@ -378,27 +377,27 @@ in an Array and look at it, you can use for in, okay?
 77
 00:03:39,657 --> 00:03:43,526
 So you just say for, some variable you want,
-需要使用 for，一个你需要的变量，
+就比如 for，一个你需要的变量，
 
 78
 00:03:43,528 --> 00:03:46,061
 in your Array, and then inside there,
-in 你的 Array ，然后在里面，
+in Array，然后在这里面
 
 79
 00:03:46,063 --> 00:03:49,131
 that'll be your value, okay pretty obvious.
-那就是你要的参数，非常明显 
+就是你想要的值了
 
 80
 00:03:49,133 --> 00:03:51,433
 I put this here mostly to compare it to the next slide,
-我放在这里主要是为了与接下来字典的幻灯片进行对比，
+我放在这里主要是为了与
 
 81
 00:03:51,435 --> 00:03:54,902
 which is Dictionary so Dictionary again,
-又是字典，
+接下来的 Dictionary 进行对比
 
 82
 00:03:54,904 --> 00:03:56,470
@@ -408,42 +407,42 @@ that's where a bracket thing is an alternate for
 83
 00:03:56,472 --> 00:03:59,406
 the exact same thing so if I had a nice
-如果我有一个非常好的
+有一个 Dictionary
 
 84
 00:03:59,408 --> 00:04:02,576
 Dictionary here I can create a Dictionary.
-字典，我可以创造一个字典 
+我创建了一个 Dictionay 
 
 85
 00:04:02,578 --> 00:04:04,177
 Using this square bracket notation,
-使用方括号标记 
+使用了方括号标记
 
 86
 00:04:04,179 --> 00:04:07,146
 which is just square bracket, key colon value, comma
-方括号，键 冒号 值，逗号 
+[key:value], [key:value]
 
 87
 00:04:07,148 --> 00:04:08,914
 key colon value okay, you know that.
-键 冒号 值，好了你懂的 
+你懂的 
  
 88
 00:04:08,916 --> 00:04:12,084
 And you also know that if I access a Dictionary with
-并且你也知道，如果我通过方括号访问一个字典，
+如果我通过方括号访问一个 Dictionay，
 
 89
 00:04:12,086 --> 00:04:14,519
 the square bracket, it returns an Optional and
-他会返回一个 Optional 对象，
+它会返回一个 Optional 
 
 90
 00:04:14,521 --> 00:04:17,722
 that's because, for example here, I'm looking up PAC ten
-这是由于，举个例子，我要在 "pac10team" 中寻找俄亥俄州， 
+举个例子，我要在 pac10teamRankings 中寻找 Ohio State
 
 91
 00:04:17,724 --> 00:04:21,192
@@ -453,7 +452,7 @@ team Ohio State obviously that is not.
 92
 00:04:21,194 --> 00:04:23,961
 It packed ten team so it's not in the Dictionary.
-这里只包含了十个队伍，所以就不在这个字典里 
+这里只包含了十个队伍，而它不在这个 Dictionay 里
 
 93
 00:04:23,963 --> 00:04:25,929
@@ -463,52 +462,52 @@ So it's going to return nil, okay?
 94
 00:04:25,931 --> 00:04:27,931
 So, that's why when you access a Dictionary,
-这就是为什么你访问一个字典，
+这就是为什么你访问一个 Dictionay，
 
 95
 00:04:27,933 --> 00:04:29,299
 it comes back it's an Optional.
-它会返回一个 Optional 对象 
+它会返回一个 Optional
 
 96
 00:04:30,769 --> 00:04:32,868
 To enumerate Dictionary you use a tuple.
-枚举字典你需要使用 tuple 
+枚举 Dictionay 你需要使用 tuple 
 
 97
 00:04:33,871 --> 00:04:36,171
 Okay, so you say for, the tuple,
-你输入 for，tuple
+for tuple
 
 98
 00:04:36,173 --> 00:04:39,207
 key com of value in the Dictionary.
-键值对 in 字典 
+(key, value) in  Dictionay 
 
 99
 00:04:39,209 --> 00:04:41,376
 And inside there, key and value will both be set.
-然后在里面，键与值都会设置好 
+然后在里面，key 与 value 都会被设置好 
 
 100
 00:04:41,378 --> 00:04:46,947
 Okay, that's really easy way to enumerate Dictionaries.
-好了，这是非常简单的枚举字典的方法 
+这是非常简单的枚举 Dictionay 的方法
 
 101
 00:04:48,083 --> 00:04:53,686
-Sent all right I'm gonna teaching about new struct that
-那接下去我将会教一个你们之间没见过的
+Sence? All right I'm gonna teaching about new struct that
+那接下来我会教你们一个之前没见过的
 
 102
 00:04:53,688 --> 00:04:59,358
 you haven't seen called Range. A Range is just two points
-新的结构体Range，Range 是合理的类型的两个点
+新的结构体 Range，Range 是一个包含一种合理类型的两个点
 
 103
 00:04:59,360 --> 00:05:01,893
 of a sensible type, so a starting point and an ending
-一个是起始点，另一个是终点
+一个是起始点，另一个是终止点
 
 104
 00:05:01,895 --> 00:05:03,528
@@ -518,22 +517,22 @@ point is exactly what you think a range would be.
 105
 00:05:03,530 --> 00:05:07,098
 Now I say a sensible type here because, you know,
-现在我先讲他们其中一个，因为
+之所以称为合理类型
 
 106
 00:05:07,100 --> 00:05:10,568
 the sensible type depends on what you're talking about for
-这个合理的类型取决于我们怎么用它，对于一个
+取决于你怎么看
 
 107
 00:05:10,570 --> 00:05:12,403
 an Array, the sensible type is an Int,
- Array 来说，这个合理的类型就是Int类型
+对于 Array 来说，这个合理的类型可以是 Int
 
 108
 00:05:12,405 --> 00:05:14,805
 but for other things like a String, it's not, and
-但是对于别的比如 String 来说，它就不是了，而且
+但是对于别的比如 String 来说，它就不是了
 
 109
 00:05:14,807 --> 00:05:16,106
@@ -543,12 +542,12 @@ we're gonna talk about that in a minute.
 110
 00:05:17,409 --> 00:05:21,844
 Range is also a generic, just like Array or
-Range跟 Array 或者可选枚举一样
+Range 跟 Array 或者 Optional enum 一样
 
 111
 00:05:21,846 --> 00:05:24,413
 like that Optional enum.
-是一个泛型
+是泛型的
 
 112
 00:05:24,415 --> 00:05:28,783
@@ -563,37 +562,37 @@ To specify a range in an Array would be Range, angle bracket,
 114
 00:05:32,522 --> 00:05:35,389
 Int because Ints are how you index an Array.
-因为Ints是你用来标记 Array 索引的
+因为 Array 是通过 Int 索引的
 
 115
 00:05:35,391 --> 00:05:36,857
-So, if you were gonna specify a range in
-所以，如果你要去辨别一个在 Array 中的range是什么类型
+So, if you were gonna specify a Range in
+所以，如果你想要在数组中声明 Range
 
 116
 00:05:36,859 --> 00:05:38,758
 an Array they would be Ints, okay?
-它将会是Int类型，有问题么？
+它就需要是 Int 类型的
 
 117
 00:05:38,760 --> 00:05:40,693
 And it's approximately what I put here it's
-而且这就是为什么我把它放在这里的原因
+我在这里讲的大概差不多了
 
 118
 00:05:40,695 --> 00:05:44,663
 not exactly this, but as far as given what, you know,
-不完全是这个，但是就已经给出的而言，你懂的
+但不完全是，但是就目前你们了解的知识来看
 
 119
 00:05:44,665 --> 00:05:47,966
 so far this is the best I can describe it to you.
-迄今为止，这是我能想到解释给你们听的最好方式
+这是我能想到的最好的描述方式
 
 120
 00:05:47,968 --> 00:05:51,069
 It's just a struct that has a startIndex and endIndex and
-它仅仅是一种包含了一个 startIndex 和 endIndex 的结构体
+它仅仅是一个包含了 startIndex 和 endIndex 的结构体
 
 121
 00:05:51,071 --> 00:05:53,271
@@ -618,7 +617,7 @@ you would think that String would also be.
 125
 00:06:04,049 --> 00:06:07,017
 You see sub ranges of Strings would also be specified by
-你们可以看到 String 的子串可以通过 Int 去指定
+可以看到 String 的子串可以通过 Int 去指定
 
 126
 00:06:07,019 --> 00:06:08,451
@@ -628,52 +627,52 @@ an Int, but in not, it not.
 127
 00:06:08,453 --> 00:06:11,420
 There's a special type called String.index,
-这里有一种特殊的类型叫做String.index
+这里有一种特殊的类型叫做 String.index
 
 128
 00:06:11,422 --> 00:06:12,654
 which is an index into a String,
-它是一种对String的索引
+它是一种对 String 的索引
 
 129
 00:06:12,656 --> 00:06:16,224
 I'm gonna talk all about that in a later slide, okay?
-我将会在后面的幻灯片中讲到，行吗？
+我将会在后面的幻灯片中讲到
 
 130
 00:06:16,226 --> 00:06:18,960
 So Ranges, just like Arrays and
-所以Range就像 Array 和
+所以 Range 就像 Array 和
 
 131
 00:06:18,962 --> 00:06:22,530
 Dictionaries, we don't usually say Range, angle bracket,
-字典一样，我们一般不会用 Range<Int> = XXX，
+Dictionay 一样，但我们一般不会用 Range<Int> = XXX，
 
 132
 00:06:22,532 --> 00:06:26,867
 Int equals something we use this special syntax.
-我们使用一个特殊的语法
+我们使用这种特殊的语法
 
 133
 00:06:26,869 --> 00:06:29,569
 And the special syntax is this three dots, or
-这个特殊的语法是三个点，或者
+这个特殊的语法是 ... ，或者
 
 134
 00:06:29,571 --> 00:06:32,739
 two dots and a less than sign.
-两个点和一个小于号
+..<
 
 135
 00:06:32,741 --> 00:06:37,009
 Okay, so the three dots means a range from the first thing,
-好了，那么三个点意味着从第一个到……
+... 意味着
 
 136
 00:06:37,011 --> 00:06:39,778
 oh, no, on the left of the dots, to the other thing on
-噢不，从点的左边到点的右边
+从点的左边到点的右边
 
 137
 00:06:39,780 --> 00:06:41,480
@@ -693,7 +692,7 @@ Includes both the start and end, whereas the other one,
 140
 00:06:47,220 --> 00:06:49,920
 two dot dot less than means it includes the first one, but
-两个点意味着它只包含了开头，但是
+..< 意味着它只包含了开头，但是
 
 141
 00:06:49,922 --> 00:06:51,355
@@ -703,107 +702,107 @@ it does not include the second one.
 142
 00:06:51,357 --> 00:06:54,591
 So it's an open-ended Range, okay cuz those,
-所以它是一个有（左闭）右开的Range，好了，因为这些
+所以它是一个有左闭右开的区间
 
 143
 00:06:54,593 --> 00:06:56,092
 both of those kind of Ranges are common.
-都是常用的Range类型
+这些都是常用的 Range 的种类
 
 144
 00:06:57,028 --> 00:07:00,463
 So that's how we specify a Range 99% of the time,
-这就是在 99% 的时间里定义一个 Range 的方法
+也是你们在 99% 的时候定义一个 Range 的方法
 
 145
 00:07:00,465 --> 00:07:03,298
 we don't use the Range struct to do it
-我们不使用Range的结构
+我们不使用 Range 的结构来定义
 
 146
 00:07:03,300 --> 00:07:05,834
 although you can you could create a Range struct.
-尽管你们可以创建一个Range的结构体
+尽管可以创建一个 Range 的结构体
 
 147
 00:07:05,836 --> 00:07:08,903
 And you could pass it as an argument to anything that
-而且你们可以将它作为一个参数传递给任何接受这些点点点的东西
+而且你们可以将它作为参数传递给任何接受 Range 的地方
 
 148
 00:07:08,905 --> 00:07:12,040
 takes these dot, dot, dots. You could put an actual Range in
-你们可以将真正的Range放进去
+你们可以使用真正的 Range 结构
 
 149
 00:07:12,042 --> 00:07:13,941
 there as well, okay they're the same thing.
-好了，他们是同样的
+他们是同样的
 
 150
 00:07:13,943 --> 00:07:16,127
 It's just the dot, dot,
-点点点对你们而言只是一种
+... 对你们而言只是一种
 
 151
 00:07:16,128 --> 00:07:18,312
 dots are syntaxed to create that Range for you, okay and
-创建Range的语法
+创建 Range 的语法
 
 152
 00:07:18,314 --> 00:07:20,781
 the things on either side of the dot, dot, dot.
-另一方面，除了点点点
+在 ... 的两侧
 
 153
 00:07:20,783 --> 00:07:21,799
 You know, it depends on
-你们懂的，它取决于
+它取决于
 
 154
 00:07:21,800 --> 00:07:22,816
 what kind of Range you're trying to create.
-你要创建哪种类型的Range
+你要创建哪种类型的 Range
 
 155
 00:07:22,818 --> 00:07:24,150
 If you're creating an Int Range.
-如果你要创建一个Int类型的Range
+如果你要创建一个 Int 类型的 Range
 
 156
 00:07:24,152 --> 00:07:27,486
 A Range of angle bracket Int, then they'd be Ints, okay?
-那么Range<Int>，然后Range就是Int类型的了
+那么 Range<Int>，然后 Range 就是 Int 类型的了
 
 157
 00:07:27,488 --> 00:07:28,854
 But if you're doing a String,
-但是如果你们正在处理String
+但是如果你们正在处理 String
 
 158
 00:07:28,856 --> 00:07:30,188
 they have to be String.indexes.
-那就必须使用String.index类型了
+那就必须使用 String.index 类型了
 
 159
 00:07:30,190 --> 00:07:33,591
 And that's a little harder to create, because a String.index
-而且创建这种类型的Range有一点点难度，因为String.index类型
+而且创建这种类型的 Range 有一点点难度，因为 String.index 类型
 
 160
 00:07:33,593 --> 00:07:36,294
 can't be created from a numeric literal.
-不能通过数字遍历去创建
+不能通过数字去创建
 
 161
 00:07:36,296 --> 00:07:38,362
 You have to create it programmatically, so
-你必须通过编程去创建，所以
+你必须需要一点编程技巧去创建，所以
 
 162
 00:07:38,364 --> 00:07:39,963
 we'll talk about that.
-我们将会通过十张幻灯片
+我们将会在大概十张幻灯片后
 
 163
 00:07:39,965 --> 00:07:45,602
@@ -818,7 +817,7 @@ you can enumerate a Range using for-in just like we
 165
 00:07:48,440 --> 00:07:50,906
 can with our raising Dictionaries there okay?
-使用字典一样
+使用 Dictionay 一样
 
 166
 00:07:50,908 --> 00:07:54,610
@@ -828,26 +827,27 @@ All right,
 167
 00:07:54,611 --> 00:07:58,313
 other classes, besides Arrays, Dictionaries, Range. NSObject.
-除了 Array 、字典、Range，接下来讨论其他的类，比如 NSObject
+除了 Array, Dictionay, Range，接下来讨论其他的类，比如 NSObject
 
 168
 00:07:58,315 --> 00:08:00,982
 So NSObject was the the base class for
-NSObject 在 Objective-C 中所有类的
+NSObject 在 Objective-C 中
 
 169
 00:08:00,984 --> 00:08:02,817
 all of Objective-C classes.
-基类
+是所有类的基类
 
 170
 00:08:02,819 --> 00:08:05,119
 In Swift we don't really have a base class for
-在Swift中，我们并没有这样一个基类
+在 Swift 中，我们并没有
 
 171
 00:08:05,121 --> 00:08:07,154
 all Swift classes.
+这样一个基类
 
 172
 00:08:07,156 --> 00:08:10,757
@@ -862,12 +862,12 @@ iOS that require,
 174
 00:08:13,728 --> 00:08:18,163
 even your Swift class to inherit from NSObject.
-这就要求你的 Swift 类必须继承自 NSObject
+你的 Swift 类也可以继承自 NSObject
 
 175
 00:08:18,165 --> 00:08:19,598
 I can't really talk about them,
-我现在不能跟你们讨论这些
+我现在还不能跟你们讨论这些
 
 176
 00:08:19,599 --> 00:08:21,032
@@ -887,17 +887,17 @@ down the road that will happen.
 179
 00:08:25,538 --> 00:08:27,805
 It really doesn't hurt to make your Swift class be
-让你们的 Swift 类继承自 NSObject 也不是一件痛苦的事
+让你们的 Swift 类继承自 NSObject 没什么麻烦的
 
 180
 00:08:27,807 --> 00:08:29,406
 a subclass of NSObject, so we could have
-所以我们
+所以我们可以让
 
 181
 00:08:29,408 --> 00:08:31,808
 made CalculatorBrain be a subclass of NSObject.
-可以让 CalculatorBrain 类继承自 NSObject
+CalculatorBrain 类继承自 NSObject
 
 182
 00:08:31,810 --> 00:08:33,109
@@ -917,12 +917,12 @@ it'd be nice to be able to do those advanced features with
 185
 00:08:38,950 --> 00:08:41,617
 CalculatorBrain so it's kinda one.
-CalculatorBrain 类，那么
+CalculatorBrain
 
 186
 00:08:41,619 --> 00:08:42,851
 Can feel free I'm not sure what to
-唔，我也不确定，
+唔，我也不知道该怎么说
 
 187
 00:08:42,853 --> 00:08:45,220
@@ -946,7 +946,7 @@ all those, they all inherit from NSObject eventually.
 
 191
 00:08:52,862 --> 00:08:55,462
-It's the super class of all of them [COUGH] there's not
+It's the super class of all of them there's not
 它是所有类的基类
 
 192
@@ -967,22 +967,22 @@ Then there's NSNumber,
 195
 00:09:04,638 --> 00:09:06,271
 you've actually briefly seen NSNumber.
-你们之前其实已经瞥见过 NSNumber
+你们之前其实已经见过 NSNumber
 
 196
 00:09:06,273 --> 00:09:09,908
 NSNumber is just a generic number-holding class, it just holds a number.
-它只是一个常见的数字包装类，包装了一个数字
+它只是一个装数字的类
 
 197
 00:09:09,910 --> 00:09:12,677
 That's all it does on it has a ton of methods on and I'm not
-它里面有很多方法，但是
+它里面有很多方法
 
 198
 00:09:12,679 --> 00:09:15,013
 gonna go through and here you can look in the documentation.
-我不打算去讲，你们可以自己去看文档
+但是我不打算去讲，你们可以自己去看文档
 
 199
 00:09:15,015 --> 00:09:17,114
@@ -997,7 +997,7 @@ intValue ，会将他们自身的值
 201
 00:09:20,319 --> 00:09:21,818
 an Int, as a Double etc.
-以 int 、double 等类型返回给我们
+以 Int, Double 等类型返回给我们
 
 202
 00:09:23,121 --> 00:09:26,322
@@ -1037,7 +1037,7 @@ all those Swift types are kinda magically bridged
 209
 00:09:44,774 --> 00:09:48,075
 to NSNumber, okay those ints and Doubles.
-比如 Int Double 等
+比如 Int, Double 等
 
 210
 00:09:48,077 --> 00:09:50,076
@@ -1047,7 +1047,7 @@ So, you really don't even have to worry about NSNumber.
 211
 00:09:50,078 --> 00:09:53,880
 Unless you use NSNumberFormatter that we used in
-除非你要用 NSNumberFormatter 做类型分配
+除非你要用作业中提到的 NSNumberFormatter 
 
 212
 00:09:53,882 --> 00:09:58,117
@@ -1057,17 +1057,17 @@ the assignment, because that thing returns an NSNumber.
 213
 00:09:58,119 --> 00:10:00,652
 >> So it there's no like NSObject parallel in Swift,
->>（学生）所以在 Swift 中没有一个和 NSObject 类似的东西
+>>（学生提问）
 
 214
 00:10:00,654 --> 00:10:02,721
 is there a way to make like an Array that holds
-那能不能构造一个像数组这样
+（学生提问）
 
 215
 00:10:02,723 --> 00:10:04,773
 any kind of [CROSSTALK] ?
-可以存储各种类型的……[声音干扰]
+（学生提问）
 
 216
 00:10:04,774 --> 00:10:06,824
@@ -1177,12 +1177,12 @@ if you're using the Gregirian calendar is different.
 237
 00:10:53,033 --> 00:10:56,600
 So, you really, really dates are tricky to get right if
-所以如果你要做在全世界都能准确运行的日历
+所以如果你要做在全世界都能正确显示的日历
 
 238
 00:10:56,602 --> 00:10:59,136
 you wanna build an app that can work around the world.
-是非常非常困难的
+是需要一些技巧的
 
 239
 00:10:59,138 --> 00:11:00,871
@@ -1192,17 +1192,17 @@ Okay, so I'm just kind of warning you if
 240
 00:11:00,873 --> 00:11:03,506
 you're gonna build an app like that some day you wonna really
-如果你要做一个应用，有一天你想用它真正的明白日期
+如果你要做一个应用需要用到日期时间
 
 241
 00:11:03,508 --> 00:11:06,542
 understand date and all it's friends here.
-和它相关的所有的伙伴
+你需要理解和 NSData 相关的东西
 
 242
 00:11:06,544 --> 00:11:07,977
 There's NSData,
-还有个 NSData
+还有 NSData
 
 243
 00:11:07,979 --> 00:11:11,280
@@ -1307,7 +1307,7 @@ There's really three fundamental building
 263
 00:12:03,126 --> 00:12:04,692
 blocks for your data structure that you
-就三块非常重要的内容
+有三个基础块
 
 264
 00:12:04,694 --> 00:12:06,927
@@ -1357,12 +1357,12 @@ They're also very similar in that they can all
 273
 00:12:25,011 --> 00:12:27,878
 have properties and functions, okay, all three of them.
-属性和函数
+属性和方法
 
 274
 00:12:27,880 --> 00:12:31,448
 Now enums they can't store any values
-现在枚举本身是不能存储任何值
+Enum 本身是不能存储任何值
 
 275
 00:12:31,450 --> 00:12:34,050
@@ -1451,12 +1451,12 @@ it has inheritance.
 292
 00:13:09,715 --> 00:13:12,082
 And then, introspection and
-并且我也将要讲的
+我也会讲
 
 293
 00:13:12,084 --> 00:13:13,750
 casting, which I'm also gonna talk about a little
-内省和转换
+内省和转型
 
 294
 00:13:13,752 --> 00:13:16,652
@@ -1476,12 +1476,12 @@ And the most important difference to understand, and
 297
 00:13:23,226 --> 00:13:24,625
 we really went over this in the demo,
-在我们接下来的 Demo 中会遇见的
+在我们接下来的 demo 中会遇见的
 
 298
 00:13:24,627 --> 00:13:27,561
 is this value type versus reference type.
-就是值类型相对于引用类型的区别
+就是 value type （值类型）与 reference type （引用类型）
 
 299
 00:13:27,563 --> 00:13:29,663
@@ -1491,7 +1491,7 @@ Structs and enums are passed around and
 300
 00:13:29,665 --> 00:13:32,499
 stored in variables copied, okay?
-存储是通过拷贝值
+存储是通过拷贝过的变量
 
 301
 00:13:32,501 --> 00:13:34,117

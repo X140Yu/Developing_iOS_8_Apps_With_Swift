@@ -26,9 +26,13 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 
 ### 字幕下载
 
-因为，当前字幕正在更新中，建议使用Git保持相关数据更新。
+因为当前字幕正在更新中，建议使用Git保持相关数据更新。
 
-也可以直接点击[项目Zip包](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/archive/master.zip)。
+也可以直接点击[项目Zip包](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/archive/master.zip)进行全部已有字幕的下载（可能包含翻译中和未开始翻译的字幕）。
+
+### 字幕的使用
+
+字幕的格式是.srt，所以您可能需要用带外挂字幕功能的视频播放器才可使用，比如[VLC](http://www.videolan.org/vlc/index.html)，如果字幕有乱码，请点击这里进行报错和寻求解决方案：[中文乱码报错用的issue](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/issues/131)。
 
 ### 视频及课件第三方网盘下载
 

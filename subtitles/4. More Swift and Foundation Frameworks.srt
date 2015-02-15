@@ -2996,32 +2996,32 @@ if you put lazy in front of a property declaration, it means
 601
 00:25:45,496 --> 00:25:49,230
 it does not get initialized until someone accesses it.
-它只会在被用到的时候才会初始化 
+它只会在被用到的时候才会初始化
 
 602
 00:25:50,333 --> 00:25:53,467
 And that's true whether it's initialized with
-比如它在被初始化的时候会被赋值，
+比如它以被赋值的操作执行初始化
 
 603
 00:25:53,469 --> 00:25:55,769
 equal something, so that equal something will not
-那么这个赋值的动作会在这个属性实际被用到的时候
+那么这个赋值的动作会在这个 property 实际被用到的时候
 
 604
 00:25:55,771 --> 00:25:59,305
 happen until someone actually accesses that property.
-才会执行 
+才会执行
 
 605
 00:25:59,307 --> 00:26:03,876
 Or you can actually initialize it by putting a closure there,
-你也可以在属性后边加括号，也就是闭包来初始化它，
+你也可以在初始化的时候在后面放一个圆括号
 
 606
 00:26:03,878 --> 00:26:06,712
 put parenthesis after it, and we'll execute that closure.
-也就是通过执行这个闭包，
+也就是通过执行这个闭包
 
 607
 00:26:06,714 --> 00:26:10,048
@@ -3031,43 +3031,42 @@ And that will initialize the property.
 608
 00:26:10,050 --> 00:26:15,186
 But that closure won't get executed until someone tries to get it, 'kay?
-但是这个闭包只有在属性被用到的时候才会执行，明白了吗？
-
+但是这个闭包只有在 property 被用到的时候才会执行
 
 610
 00:26:15,188 --> 00:26:19,023
 And then you can even in a lazy property, you could call
-你甚至可以调用一个方法来初始化一个lazy属性，
+在 lazy property 中
 
 611
 00:26:19,025 --> 00:26:23,593
 a method to, to initialize it because it, normally you
-一般来说
+你甚至可以调用一个方法来初始化
 
 612
 00:26:23,595 --> 00:26:27,296
 wouldn't be able to do this if you didn't say lazy.
-如果你不把属性标记为lazy，这样做是不允许的 
+如果你不把 property 标记为 lazy，这样做是不允许的 
 
 613
 00:26:27,298 --> 00:26:29,415
 Because you can't call any
-因为在你的属性都正确的初始化以前，
+因为在类初始化之前
 
 614
 00:26:29,416 --> 00:26:31,533
 methods in your class until you're fully initialized, so
-类里的方法都是不可以调用的，
+类里的方法都是不可以调用的
 
 615
 00:26:31,535 --> 00:26:33,535
 there's kinda a catch 22 there.
-这好像是个悖论 
+这好像是个不可以违背的规定
 
 616
 00:26:33,537 --> 00:26:34,736
 But in this case since,
-但是在我们这里，
+但是在这种情况
 
 617
 00:26:34,738 --> 00:26:37,238
@@ -3077,12 +3076,12 @@ you can't call any methods until you're initialized,
 618
 00:26:37,240 --> 00:26:39,974
 by the time somebody tries to get this property,
-但是当lazy属性被用到的时候，
+直到有人试图 get 这个 property
 
 619
 00:26:39,976 --> 00:26:41,408
 you'd be fully initialized.
-属性就被全部初始化了，
+它就会被初始化了
 
 620
 00:26:41,410 --> 00:26:43,343
@@ -3092,7 +3091,7 @@ So, you can call methods.
 621
 00:26:43,345 --> 00:26:45,779
 So, you see the advantage of lazy there?
-到这你能看出用lazy的优势了吗？
+到这你能看出用 lazy 的优势了吗？
 
 622
 00:26:45,781 --> 00:26:47,798
@@ -3101,7 +3100,7 @@ So, you see the advantage of lazy there?
 623
 00:26:47,799 --> 00:26:49,816
 This lazy thing still satisfies the rule that you
-这个lazy特性依然满足“所有属性必须
+这个 lazy 特性依然满足“所有属性必须
 
 624
 00:26:49,818 --> 00:26:53,285
@@ -3116,27 +3115,27 @@ must initialize all of your properties.
 627
 00:26:56,690 --> 00:26:58,490
 It still satisfies that rule.
-它依然遵循这个规则 
+它依然遵循这个规则
 
 628
 00:27:00,293 --> 00:27:04,528
 unfortunately, only vars can be lazily initialized.
-但是，只有var才可以用lazy初始化这个特性 
+但是，只有 var 才可以用 lazy 初始化这个特性 
 
 629
 00:27:04,530 --> 00:27:06,347
 Things that are let,
-因为let
+因为 let，也就是类里的常量
 
 630
 00:27:06,348 --> 00:27:11,134
 if you had constants in your class, those would have to be initializing in your initializer.
-也就是类里的常量，都必须在类的初始化方法里初始化 
+都必须在类的初始化方法里初始化 
 
 632
 00:27:11,135 --> 00:27:14,102
 You can't initialize them lazily, only vars, not lets.
-只有var可以lazy initialization，let不可以 
+只有 var 可以用 lazy，let 不可以 
 
 633
 00:27:14,105 --> 00:27:19,108
@@ -3151,7 +3150,7 @@ Because of that rule that everything has to be
 636
 00:27:20,911 --> 00:27:22,577
 initialized before you can do anything.
-所有的属性都必须被初始化 
+所有的 property 都必须被初始化 
 
 637
 00:27:22,579 --> 00:27:24,479
@@ -3161,53 +3160,53 @@ Sometimes you can get into fights with your
 638
 00:27:24,481 --> 00:27:27,114
 superclass for example, about when something's gonna be
-比如当有些属性被初始化的时候，
+举个例子
 
 639
 00:27:27,116 --> 00:27:29,883
 initialized, and you need your superclass to do something or
-它需要父类去做一些事情，或者它要做什么的时候需要你先做
+当有些 property 将要被初始化时，需要你或者你的父类做一些事情
 
 640
 00:27:29,885 --> 00:27:32,252
 you can do something, but it needs you to do something
-一些别的，
+但是你在做这些事情之前还需要先解决一些事情
 
 641
 00:27:32,254 --> 00:27:35,288
 before they can do something, so you're kinda we're stuck.
-这时候你就会有点卡住 
+这时候你就会有点卡住
 
 642
 00:27:35,290 --> 00:27:37,290
 And what you can do is one of the other of you,
-这时候你就可以让一些东西依赖于
+这时候你就可以让
 
 643
 00:27:37,292 --> 00:27:40,259
 make one of the things that depends on their lazy.
-某些其他属性的lazy initialization来理清这些关系 
+某些 property 依赖于它们的 lazy 初始化
 
 644
 00:27:40,261 --> 00:27:45,196
 Okay. And then, as soon as somebody wants it, it'll get initialized and off we go.
-这样的话，当有东西需要这个属性的时候，这个属性会被初始化 
+这样的话，当有东西需要这个 property 的时候，它才会被初始化 
 
 
 646
 00:27:47,000 --> 00:27:48,599
 Okay? Any questions about Lazy?
-明白了吗？关于lazy大家有问题吗？
+明白了吗？关于 lazy 大家有问题吗？
 
 647
 00:27:48,601 --> 00:27:53,337
-Pretty cool feature.All right?
+Pretty cool feature. All right?
 非常好的特性 
 
 649
 00:27:53,338 --> 00:27:55,338
 And it's exactly, what it sounds like, just lazily waits
-准确的来说，就跟这个特性的名字一样，就是懒懒的等着别人
+准确的来说，就跟这个特性的名字一样，就是懒懒地等着别人
 
 650
 00:27:55,341 --> 00:27:58,342
@@ -3216,7 +3215,7 @@ to initialize until someone wants this property.
 
 651
 00:27:58,344 --> 00:27:59,743
->> [COUGH] >> Okay?
+Okay?
 
 652
 00:27:59,745 --> 00:28:02,545
@@ -3230,8 +3229,9 @@ I need to get, I need a drink before the initialization, cuz it's complicated.
 
 655
 00:28:08,719 --> 00:28:10,652
-Hopefully my, [NOISE] I'm just, I'm not, this is not,
-希望我的，我的   没事 
+Hopefully my, I'm just, I'm not, this is not,
+希望我没事儿
+
 656
 00:28:10,654 --> 00:28:11,819
 just taking care of my voice here.
@@ -3239,13 +3239,13 @@ just taking care of my voice here.
 
 657
 00:28:11,821 --> 00:28:15,689
-Okay, init, [LAUGH] all right.
-好了，init，开始 
+Okay, init, all right.
+好了，init 
 
 658
 00:28:15,691 --> 00:28:18,392
 So, when do you need an init method?
-什么时候需要一个init方法？
+什么时候需要一个 init 方法？
 
 659
 00:28:18,394 --> 00:28:20,344
@@ -3255,22 +3255,22 @@ Well, you know what?
 660
 00:28:20,345 --> 00:28:22,295
 You actually don't need an init method that often.
-大多数时候并不需要init方法 
+大多数时候并不需要 init 方法 
 
 661
 00:28:22,297 --> 00:28:26,332
 'Kay? We showed,had the init method in the CalculatorBrain.
-我们之前演示过CalculatorBrain类的init方法，
+我们之前演示过 CalculatorBrain 类的 init 方法，
 
 663
 00:28:26,334 --> 00:28:27,766
 Made sense there. We needed it there.
-在那init确实是有用而且必要的 
+在那 init 确实是有用而且必要的 
 
 665
 00:28:28,902 --> 00:28:29,868
 But you don't need it that often,
-但是实际上大多数时候不太需要init，
+但是实际上大多数时候不太需要 init，
 
 666
 00:28:29,870 --> 00:28:34,005
@@ -3280,42 +3280,42 @@ because a lot of your variables and constants in your class or
 668
 00:28:34,007 --> 00:28:37,808
 struct are set with equals, so you don't need them.
-通过赋值初始化
+通过赋值被初始化
 
 669
 00:28:37,810 --> 00:28:40,110
 Or maybe the properties are Optionals.
-或者有些属性是Optional的，
+或者有些属性是 Optional 的，
 
 670
 00:28:40,112 --> 00:28:41,511
 And so they can just start out nil and
-这样即使他们是nil也没问题，
+这样即使他们是 nil 也没问题，
 
 671
 00:28:41,513 --> 00:28:46,115
 you can set them later like the outlets in a storyboard.
-也可以在之后在给他们赋值，就想storyboard里的outlet一样 
+也可以在之后在给他们赋值，就像 StoryBoard 里的 outlet 一样 
 
 672
 00:28:46,117 --> 00:28:50,752
 Or you can actually initialize by using a closure.
-???又或者可以用闭包来初始化属性 
+又或者可以用闭包来初始化
 
 673
 00:28:50,754 --> 00:28:52,287
 Okay? As I showed in the previous
-理解这个吗？就想我之前演示的
+理解这个吗？就像我之前演示的
 
 674
 00:28:52,289 --> 00:28:54,756
 thing, that lazy thing, that you, you can do that for
-lazy那个特性一样，你一样可以用闭包来初始化一个
+lazy 那个特性一样，你一样可以用闭包来初始化一个
 
 675
 00:28:54,758 --> 00:28:57,558
 non-lazies, put the closure thing there and execute it.
-非lazy的属性 
+非 lazy 的属性 
 
 676
 00:28:57,560 --> 00:28:59,226
@@ -3345,22 +3345,22 @@ But still, you can calculate some things to assign things
 681
 00:29:09,871 --> 00:29:11,937
 in a closure, by executing a closure.
-来做一些计算和赋值 
+做一些计算来赋值
 
 682
 00:29:13,173 --> 00:29:16,841
 and, or you could use the lazy mechanism and then to avoid needing an init.
-并且，你可以用lazy机制，从而不使用init方法 
+你也可以使用 lazy 机制，从而避免使用 init 方法 
 
 684
 00:29:16,843 --> 00:29:18,776
 So, there's a lot of ways to avoid init.
-所以有很多方法来避免使用init方法，
+所以有很多方法来避免使用 init
 
 685
 00:29:19,979 --> 00:29:24,014
 But if you do need an init then what,
-但如果你确实需要一个init方法的时候，
+但如果你确实需要一个 init 方法的时候，
 
 686
 00:29:24,016 --> 00:29:26,516
@@ -3370,7 +3370,7 @@ what, how do we do init?
 687
 00:29:26,518 --> 00:29:28,384
 Because init has some kind of
-因为init方法会有一些很有趣
+因为 init 方法会有一些很有趣
 
 688
 00:29:28,386 --> 00:29:31,220
@@ -3385,12 +3385,12 @@ it's not as straightforward as you might think.
 690
 00:29:34,958 --> 00:29:37,658
 Now you get some free inits-
-在一些情况下，init方法会自动生成，
+在一些情况下，init 方法会自动生成，
 
 691
 00:29:37,660 --> 00:29:39,593
-[COUGH] 'Kay? Inits that get done for
-也就是说init已经给你准备好了
+'Kay? Inits that get done for
+也就是说 init 已经给你准备好了
 
 692
 00:29:39,595 -->00:29:45,231
@@ -3401,30 +3401,32 @@ you, one is that if all the properties in a class,in a base class.
 00:29:45,233 --> 00:29:47,600
 Not a co, this is something that has no superclass,
 基类就是指没有父类的类，
+
 695
 00:29:47,602 --> 00:29:48,668
 like CalculatorBrain.
-比如CalculatorBrain
+比如 CalculatorBrain
 
 696
 00:29:48,670 --> 00:29:50,469
 If they all have defaults,
-如果它的所有属性都有值，
+如果它的所有的 property 都有默认值
 
 697
 00:29:50,471 --> 00:29:53,939
 then you'll get an inits with no arguments for free.
-那么你就会自动得到一个init方法 
+那么你就会自动得到一个没有参数的 init 方法 
 
 698
 00:29:53,941 --> 00:29:56,508
 So, if we haven't implemented CalculatorBrains, init,
-所以尽管我们没有为CalculatorBrains类写init方法，
+所以尽管我们没有为 CalculatorBrains 类写 init 方法，
 
 699
 00:29:56,510 --> 00:29:58,109
 of course, we still could have said.
 我们依然可以写
+
 700
 00:29:58,111 --> 00:30:00,378
 >> You know, brain = CalculatorBrain().
@@ -3433,7 +3435,7 @@ brain = CalculatorBrain()
 701
 00:30:00,380 --> 00:30:03,280
 That's because we get a free init in calculator brain,
-这是因为我们有一个默认的init
+这是因为我们有一个默认的 init
 
 702
 00:30:03,282 --> 00:30:06,283
@@ -3448,7 +3450,7 @@ Okay. So you,
 704
 00:30:07,468 --> 00:30:08,650
 that's one way to get an init.
-这是一种得到init的方法
+这是一种得到 init 的方法
 
 705
 00:30:08,653 --> 00:30:11,421
@@ -3458,17 +3460,17 @@ A struct, not a class, but a struct,
 706
 00:30:11,423 --> 00:30:15,324
 it will get a default one that has all the properties as
-它将默认得到一个将所有属性作为参数的初始化方法
+它将默认得到一个将所有 property 作为参数的初始化方法
 
 707
 00:30:15,326 --> 00:30:18,627
 arguments only if you have no initializers.
-仅当没有initializers时
+仅当没有初始化函数时
 
 708
 00:30:18,629 --> 00:30:21,897
 So if you had a struct and you gave it no initializers,
-因此，如果你有一个结构体并且没有initializers
+因此，如果你有一个结构体并且没有初始化方法
 
 709
 00:30:21,899 --> 00:30:24,899
@@ -3483,42 +3485,42 @@ all the arguments match all of the vars you have.
 711
 00:30:27,937 --> 00:30:29,970
 All the vars and lets, okay?
-所有的变量和常量，明白吧？
+所有的 var 和 let，明白吧？
 
 712
 00:30:29,972 --> 00:30:35,108
 So here I got a struct, it has two properties there, x and y.
-这里我有一个结构体，它有两个属性，x和y
+一个结构体，它有两个 property ，x 和 y
 
 713
 00:30:35,110 --> 00:30:38,945
 And you can see that I got this init, x takes an Int and
-你可以看到我这里有一个init方法，x是Int类型
+你可以看到我这里有一个 init 方法，x 是 Int类型
 
 714
 00:30:38,947 --> 00:30:41,514
 a y String for free, for free.
-y是String类型
+y 是 String 类型
 
 715
 00:30:41,516 --> 00:30:44,183
 I didn't have to implement that at all, it just came for
-我没有实现它，仅仅是默认的
+我不要实现它
 
 716
 00:30:44,185 --> 00:30:45,684
 free and so people can call that.
-都可以调用
+它就可以被调用
 
 717
 00:30:45,686 --> 00:30:48,186
 They can initialize MyStruct, by saying,
-可以初始化MyStruct
+可以通过圆括号，提供 x 和 y 的值来
 
 718
 00:30:48,188 --> 00:30:51,322
 MyStruct open parentheses and provide the x and the y.
-MyStruct提供x和y两个属性
+初始化 MyStruct
 
 719
 00:30:51,324 --> 00:30:52,857
@@ -3531,7 +3533,7 @@ All right.
 721
 00:30:54,060 --> 00:30:56,727
 So, what can you do inside of init?
-你可以在init里面做什么？
+你可以在 init 里面做什么？
 
 722
 00:30:56,729 --> 00:30:57,895
@@ -3541,12 +3543,12 @@ Okay. We saw,
 723
 00:30:57,896 --> 00:30:59,062
 what we did in calculator brain,
-我们在CalculatorBrain里做了什么
+我们在 CalculatorBrain 里做了什么
 
 724
 00:30:59,064 --> 00:31:00,763
 we initialized some stuff.
-我们初始化了些
+我们初始化了些 property
 
 725
 00:31:00,765 --> 00:31:02,498
@@ -3556,27 +3558,27 @@ But what can you do?
 726
 00:31:02,499 --> 00:31:04,232
 Well, you can set any properties value in there.
-你可以在里面设置任何属性值
+你可以在里面设置任何 property 的值
 
 727
 00:31:04,235 --> 00:31:05,300
-[COUGH] You can even set
+You can even set
 你甚至可以
 
 728
 00:31:05,302 --> 00:31:07,235
 properties that have default values.
-给属性设置默认值
+给 property 设置默认值
 
 729
 00:31:07,237 --> 00:31:09,771
 So even if you have properties set equals 12.
-即使你把属性设置为等于12
+即使你把它设置为等于12
 
 730
 00:31:09,773 --> 00:31:12,540
 In your init, you can reset that thing to something else
-在你的init里，你可以把一些东西重置为别的什么
+在你的 init 里，你可以把一些东西重置为别的什么
 
 731
 00:31:12,542 --> 00:31:15,109
@@ -3595,7 +3597,7 @@ You can do that.
 734
 00:31:16,912 --> 00:31:20,913
 You can also set constant properties.
-你也可以给常量属性赋值
+你也可以给常量 property 赋值
 
 735
 00:31:20,915 --> 00:31:24,817
@@ -3604,17 +3606,18 @@ So if you have a struct or a class and
 
 736
 00:31:24,819 --> 00:31:31,189
-it has letx colon String, you can set that in your init.
-你可以在init里这样设置 let x: String
+it has let x colon String, you can set that in your init.
+它有一个 property: let x: String
 
 737
 00:31:31,191 --> 00:31:34,192
 Even though to let, it's gotta get set some time in your init
-你必须得设置一段在你的init里
+即使是 let，它也可以在 init 里
 
 738
 00:31:34,194 --> 00:31:35,326
 is when you can set it.
+被你赋值
 
 739
 00:31:35,328 --> 00:31:37,094
@@ -3624,7 +3627,7 @@ You can also say, equal something, but
 740
 00:31:37,096 --> 00:31:38,495
 you can also set it in your init.
-你可以这样设置，在你的init里
+你可以在 init 里这么做
 
 741
 00:31:38,497 --> 00:31:40,230
@@ -3638,7 +3641,7 @@ So people sometimes don't understand, realize,
 743
 00:31:41,967 --> 00:31:44,567
 they're like, oh, I can have lets in my class?
-他们肯定在想，哦，在我的class里可以有let？
+他们肯定在想，哦，在我的 class 里可以有 let？
 
 744
 00:31:44,569 --> 00:31:46,602
@@ -3658,7 +3661,7 @@ stay the same for the lifetime of instance and
 747
 00:31:51,308 --> 00:31:54,242
 absolutely you can and you initialize them in your init.
-你绝对可以在init里初始化它们
+你绝对可以在 init 里初始化它们
 
 748
 00:31:54,244 --> 00:31:55,443
@@ -3672,17 +3675,17 @@ That's actually a good practice if
 750
 00:31:56,646 --> 00:32:00,214
 you have something that's, you know, constant like that.
-如果你需要定义属性，你知道的，可以用常量
+如果你需要定义常量属性
 
 751
 00:32:00,216 --> 00:32:04,385
 You can call other init methods in your own class or
-在你的类或者结构体里你可以调用其他的init方法
+在你的类或者结构体里你可以调用其他的 init 方法
 
 752
 00:32:04,387 --> 00:32:06,687
 struct using self.init.
-使用self.init
+使用 self.init
 
 753
 00:32:06,689 --> 00:32:08,422
@@ -3691,11 +3694,12 @@ Okay?
 754
 00:32:08,423 --> 00:32:10,156
 Self.init, you can call the other ones with the ones that
-self.init，你可以调用有不同参数的其他init方法
+self.init，你可以调用有不同参数的
 
 755
 00:32:10,158 --> 00:32:11,524
 have different arguments.
+其他 init 方法
 
 756
 00:32:11,526 --> 00:32:13,026
@@ -3709,7 +3713,7 @@ So that sounds good.
 758
 00:32:14,529 --> 00:32:18,297
 And of course in a class, you can call super.init.
-当然，在类里你也可以调用super.init
+当然，在类里你也可以调用 super.init
 
 759
 00:32:18,299 --> 00:32:20,132
@@ -3724,11 +3728,12 @@ what their arguments whatever, they might be.
 761
 00:32:22,269 --> 00:32:26,237
 However, big old humongous, however on this one.
+然而很重要的是
 
 762
 00:32:26,239 --> 00:32:28,205
 There are a lot of rules for
-调用其他的init时有很多规则
+调用其他的 init 时有很多规则
 
 763
 00:32:28,207 --> 00:32:31,842
@@ -3762,7 +3767,7 @@ So as part of these rules,
 769
 00:32:41,118 --> 00:32:43,118
 what do you required to do inside of init?
-你需要在init里做些什么？
+你需要在 init 里做些什么？
 
 770
 00:32:43,120 --> 00:32:45,186
@@ -3772,12 +3777,12 @@ What is mandatory for you to do?
 771
 00:32:45,188 --> 00:32:48,156
 Well, as you know, you have to have initialized all
-好，正如你所知道的，在你的整个类里
+好，正如你所知道的，在你的类里
 
 772
 00:32:48,158 --> 00:32:50,324
 the properties in your entire class.
-所有的属性都必须初始化
+所有的 property 都必须初始化
 
 773
 00:32:50,326 --> 00:32:52,659
@@ -3787,12 +3792,12 @@ You can not start a class off with no value.
 774
 00:32:52,661 --> 00:32:56,163
 And remember, Optionals, nil is a value for an Optional.
-记住，Optionals，nil也是一个Optional
+记住，对于 Optionals，nil 也是值
 
 775
 00:32:56,165 --> 00:32:58,498
 So if an Optional is nil, it is set.
-所以，如果你有一个属性的Optional是nil，这也算它有值
+所以，如果你有一个 Optional 是 nil，这也算它有值
 
 776
 00:32:58,500 --> 00:32:59,766
@@ -3801,8 +3806,8 @@ So, everything's fine there.
 
 777
 00:32:59,768 --> 00:33:03,202
-[COUGH] There are two times, type,
-在类里，Swift提供两种类型
+There are two times, type,
+在类里，Swift 提供两种类型
 
 778
 00:33:03,204 --> 00:33:05,504
@@ -3817,31 +3822,32 @@ Not in a struct, but in a class.
 780
 00:33:06,807 --> 00:33:09,007
 One is called a convenience init and
-一种是convenience init
+一种是 Convenience Init
 
 781
 00:33:09,009 --> 00:33:11,242
 then there's all the other kinds.
+其它的都是另一种类型
 
 782
 00:33:11,244 --> 00:33:13,377
 Those are called designated initializers.
-还有一种叫designated initializers
+叫 Designated Initializers
 
 783
 00:33:13,379 --> 00:33:15,012
 So by default, an initializer is
-默认的initializer
+默认的 initializer
 
 784
 00:33:15,014 --> 00:33:17,647
 called a designated initializer, but there's also
-是designated initializer，但是另外还有些
+是 designated initializer，但是另外还有些
 
 785
 00:33:17,649 --> 00:33:20,116
 these things called convenience initializers.
-叫convenience initializers
+叫 convenience initializers
 
 786
 00:33:20,118 --> 00:33:21,384
@@ -3861,23 +3867,22 @@ So lets talk about that.
 789
 00:33:25,222 --> 00:33:28,056
 A designated initializer, one that doesn't take
-一个designated initializer，不能有
+Designated initializer，不能有
 
 790
 00:33:28,058 --> 00:33:29,858
 convenience in the front of it.
-convenience在它的前面
+convenience 在它的前面
 
 791
 00:33:29,860 --> 00:33:31,325
 It has to, and
-他只能
+它只能
 
 792
 00:33:31,327 --> 00:33:37,564
 can only call a designated initializer in its superclass.
-调用其直接父类的designated initializer
-
+调用其父类的 designated initializer
 
 793
 00:33:37,566 --> 00:33:38,899
@@ -3891,32 +3896,32 @@ Okay. If you
 795
 00:33:40,602 --> 00:33:42,302
 have a designated initializer, initializer doesn't have
-如果你有一个designated initializer，初始化时不能有
+如果有一个 designated initializer
 
 796
 00:33:42,304 --> 00:33:43,936
 the word convenience in front of it,
-convenience这个单词在它的前面
+它前面没有 convenience 这个单词在
 
 797
 00:33:43,938 --> 00:33:45,838
 it can't call another init in your class.
-在你的类里不能调用其他的init方法
+在你的类里不能调用其他的 init 方法
 
 798
 00:33:45,840 --> 00:33:47,706
 It has to call a superclass in init and
-在init里有调用父类的init
+必须在 init 里调用父类的 init
 
 799
 00:33:47,708 --> 00:33:49,808
 it has to be a designated initializer not
-它必须是一个designated initializer
+而且它必须是一个 designated initializer
 
 800
 00:33:49,810 --> 00:33:52,243
 a convenience initializer in the superclass.
-而不是convenience initializer
+而不是 convenience initializer
 
 801
 00:33:52,245 --> 00:33:53,878
@@ -3955,7 +3960,7 @@ I'm just trying to summarize it here.
 808
 00:34:04,022 --> 00:34:05,488
 Okay. Hopefully,
-希望，
+希望
 
 809
 00:34:05,489 --> 00:34:06,955
@@ -3995,41 +4000,42 @@ You have to initialize all of your own
 816
 00:34:19,235 --> 00:34:24,838
 properties before you call your superclass's initializer.
-先初始化你自己的所有属性 
+先初始化你自己的所有的 property
 
 817
 00:34:24,840 --> 00:34:25,572
 Okay? This is for
-只有 designated initializers 需要这样 
+只有 designated initializers
 
 818
 00:34:25,574 --> 00:34:26,939
 designated initializers only,
+需要这样
 
 819
 00:34:26,941 --> 00:34:29,342
 cuz they are the ones who call supervisors initializers.
-因为他们调用 supervisors initializers.
+因为他们调用 supervisors initializers
 
 820
 00:34:29,344 --> 00:34:32,478
 So you have to be done with your own properties before you
-所以你必须在调用父类的属性前
+所以你必须在调用父类的 property 前
 
 821
 00:34:32,480 --> 00:34:34,046
 call your superclass's.
-先处理你自己（类）的属性 
+先处理你自己（类）的 property 
 
 822
 00:34:34,048 --> 00:34:36,348
 This one will trip you up, often.
-这经常让你有麻烦 
+这经常让你有些麻烦
 
 823
 00:34:36,350 --> 00:34:39,350
 Okay? You also have to call your
-Okay？ 你要先调用
+你要先调用
 
 824
 00:34:39,352 --> 00:34:43,420
@@ -4039,7 +4045,7 @@ superclass's init before you assign a value to
 825
 00:34:43,422 --> 00:34:47,557
 any property you inherit from your superclass.
-属性赋值 
+property 赋值
 
 826
 00:34:47,559 --> 00:34:49,125
@@ -4049,7 +4055,7 @@ In other words,
 827
 00:34:49,126 --> 00:34:50,692
 you have to let your superclass's initialize,
-你必须先让你的父类初始化它的属性，
+你必须先让你的父类初始化它的 property，
 
 828
 00:34:50,695 --> 00:34:53,262
@@ -4141,7 +4147,7 @@ So one convenience initializer can call self another
 846
 00:35:32,765 --> 00:35:35,866
 convenience initializer, which called designated initializer.
-调用designated initializer 的 convenience initializer 
+调用 designated initializer 的 convenience initializer 
 
 847
 00:35:35,868 --> 00:35:39,268
@@ -4160,7 +4166,7 @@ A convenience initializer must call that
 850
 00:35:43,908 --> 00:35:46,775
 designated initializer, directly or
-间接调用designated initializer，
+间接调用 designated initializer，
 
 851
 00:35:46,777 --> 00:35:50,945
@@ -4184,27 +4190,27 @@ object primarily initialized before you can have
 855
 00:35:56,485 --> 00:36:00,253
 the convenience initializer start hacking at properties.
-让 convenience initializer 开始访问属性 
+让 convenience initializer 开始访问 property
 
 856
 00:36:00,255 --> 00:36:03,356
 The calling of other inits, whether your a convenience guy
-其他初始化函数的调用，不管是你的 convenience 初始化函数
+其他初始化函数的调用，不管是你的 convenience initializer
 
 857
 00:36:03,358 --> 00:36:06,125
 calling your designator or whether your a designator
-调用你的 designator ，还是你的 designator
+调用你的 designator initializer，还是你的 designator initializer
 
 858
 00:36:06,127 --> 00:36:08,961
 calling up to your supers designator has to be complete
-调用你父类的 designator，
+调用你父类的 designator initializer，
 
 859
 00:36:08,963 --> 00:36:12,197
 before you can start accessing your properties and methods.
-所有这些都必须在你开始访问属性和方法之前完成 
+所有这些都必须在你开始访问 property 和方法之前完成 
 
 860
 00:36:12,199 --> 00:36:15,400
@@ -4214,7 +4220,7 @@ In other words, the class has to be initialized before you
 861
 00:36:15,402 --> 00:36:17,869
 can start calling methods and properties.
-你才能开始调用方法和属性 
+你才能开始调用方法和 property 
 
 862
 00:36:17,871 --> 00:36:19,838
@@ -4223,32 +4229,32 @@ Okay?
 863
 00:36:19,839 --> 00:36:21,806
 That's why we have to use lazy if we want a property to
-这就是为什么我们必须使用懒惰的方式，
+这就是为什么我们必须使用 lazy 的方式，
 
 864
 00:36:21,808 --> 00:36:24,275
 set its value to be calling a method.
-如果我们要设置一个属性的值则调用方法 
+如果想让 property 在被调用方法的时候被赋值
 
 865
 00:36:24,277 --> 00:36:25,943
 Because we can't do it non-lazily,
-因为我们不能使用非懒惰方式 
+因为我们不能使用 non-lazily 的方式 
 
 866
 00:36:25,945 --> 00:36:28,245
 because we wouldn't be initialized at that time.
-因为那时我们还没被初始化 
+因为那时我们还没被初始化
 
 867
 00:36:28,247 --> 00:36:30,113
 We'd still be in the process of initializing.
-我们还在初始化过程中 
+我们还在初始化过程中
 
 868
 00:36:30,115 --> 00:36:31,981
 It's kind of a two phase initialization.
-这如同初始化的两个阶段 
+这如同初始化的两个阶段
 
 869
 00:36:31,983 --> 00:36:36,652
@@ -4268,12 +4274,12 @@ Question?
 872
 00:36:40,140 --> 00:36:42,157
 Is there a way to set the constant then by
-有没有这样一种方式，通过调用
+（学生提问）
 
 873
 00:36:42,159 --> 00:36:43,691
 by calling a method?
-方法给常量赋值？
+（学生提问）
 
 874
 00:36:43,693 --> 00:36:44,942
@@ -4393,7 +4399,7 @@ three designated initializers with different arguments.
 898
 00:37:38,406 --> 00:37:41,607
 If you override all of them, then you'll inherit all of
-如果你覆盖了所有这些方法，那么你就继承了父类中所有的
+如果你重写了所有这些方法，那么你就继承了父类中所有的
 
 899
 00:37:41,609 --> 00:37:44,443

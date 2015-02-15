@@ -4906,54 +4906,67 @@ someone tries to catch them and handle them.
 1002
 00:41:20,163 --> 00:41:22,013
 Okay?
+明白了吗？
 
 1003
 00:41:22,014 --> 00:41:23,864
 And that programming methodology is not one
+这种编程方法并不是
 
 1004
 00:41:23,867 --> 00:41:27,501
 that's really something that we use much in iOS.
+iOS 开发中常用的一种方法
 
 1005
 00:41:27,503 --> 00:41:28,635
 Okay? In Objective-C,
+明白了吗？在 Objective-C 中
 
 1006
 00:41:28,637 --> 00:41:30,537
 maybe it was used even a little more.
+这种方法可能只会用了一点点
 
 1007
 00:41:30,539 --> 00:41:32,171
 I'm not even sure about that but
+对此我不是很确定但是
 
 1008
 00:41:32,173 --> 00:41:34,674
 certainly in Swift we're not gonna be using that.
+在 Swift 中，我们肯定不会使用它
 
 1009
 00:41:34,676 --> 00:41:36,442
 I'm not, I'm not even gonna show it to your in this class.
+在本课程的范围内，我甚至不会演示给你们怎么使用它
 
 1010
 00:41:36,444 --> 00:41:40,679
 That's how unneed, unnecessary it is to know that.
+不需要了解
 
 1011
 00:41:40,681 --> 00:41:41,979
 Okay.
+好的
 
 1012
 00:41:41,981 --> 00:41:44,782
 So let's talk about creating objects,
+让我们来讲一下如何创建对象
 
 1013
 00:41:44,784 --> 00:41:47,718
 then you know to do it by putting the type and
+创建一个对象的语法是，你在想要创建的类型之后
 
 1014
 00:41:47,720 --> 00:41:52,022
 then parentheses and then the arguments to the initializer.
+加上一对括号，括号内是初始化方法的参数
 
 1015
 00:41:52,024 --> 00:41:53,457
@@ -4962,86 +4975,107 @@ Okay.
 1016
 00:41:53,458 --> 00:41:54,891
 It's completely obvious there.
+这里写的很清楚
 
 1017
 00:41:54,893 --> 00:41:58,561
 You notice you don't always create objects by doing that.
+你可能会发现你并不是一直通过这种方式来创建对象
 
 1018
 00:41:58,563 --> 00:42:01,196
 Sometimes, you will ask a class method or
+有时候你会使用一个类方法或者
 
 1019
 00:42:01,198 --> 00:42:02,931
 a type method to do it.
+类型方法去创建一个对象
 
 1020
 00:42:02,933 --> 00:42:04,632
 So here's one, buttonWithType.
+这里就是一个例子，.buttonWithType
 
 1021
 00:42:04,634 --> 00:42:07,802
 You see that's being sent UIButton, the type.
+你看到这个消息被发送给了 UIButton，一种类型
 
 1022
 00:42:07,804 --> 00:42:09,236
 All right. It's not being sent to
+消息并没有发送给一个
 
 1023
 00:42:09,238 --> 00:42:11,238
 a UIButton, it's being sent to the type,
+UIButton 的对象，它发送给了一个类型
 
 1024
 00:42:11,240 --> 00:42:12,639
 like we talked about before.
+我记得我们之前讲过
 
 1025
 00:42:12,641 --> 00:42:14,040
 And so sometimes,
+还有一种情况
 
 1026
 00:42:14,042 --> 00:42:16,976
 you'll be creating things that way very rarely.
+很少见的情况下，用另外一种方式创建对象
 
 1027
 00:42:16,978 --> 00:42:20,546
 They really, Apple's been moving away from that model
+很少见的情况，以至于 Apple 已经将它们从 Model 中移除
 
 1028
 00:42:20,548 --> 00:42:24,049
 and more towards just using initializers and creating
+而转向于使用初始化方法
 
 1029
 00:42:24,051 --> 00:42:28,219
 things but there, there's some that, that do that.
+但是仍有部分的情况会使用到这种创建对象的方法
 
 1030
 00:42:28,221 --> 00:42:31,322
 Like remember UIImage on the previous page,
+还记得上一页中的 UIImage 吗？
 
 1031
 00:42:31,324 --> 00:42:34,025
 that wasn't UIImage dot image named.
+这不是 UIImage.imageNamed
 
 1032
 00:42:34,027 --> 00:42:37,094
 That's kind of how it used to be in Apple, now it's UIImage
+曾经在 Apple 是被使用的，但是现在
 
 1033
 00:42:37,096 --> 00:42:39,996
 parentheses whatever, called a constructor.
+UIImage().xxx，这个叫做 constructor
 
 1034
 00:42:39,998 --> 00:42:43,733
 Sometimes other objects will obviously create
+有些时候其他对象会为你
 
 1035
 00:42:43,735 --> 00:42:45,034
 objects for you.
+创建一些对象
 
 1036
 00:42:45,036 --> 00:42:49,137
 So like here's a really cool method in String called join.
+例如在 String 中有一个非常酷的方法叫 join
 
 1037
 00:42:49,139 --> 00:42:51,856
@@ -5050,34 +5084,42 @@ Okay?
 1038
 00:42:51,857 --> 00:42:54,574
 Join takes an Array of Strings and it will separate them by
+join 方法接受一个由字符串组成的数组并
 
 1039
 00:42:54,577 --> 00:42:57,545
 whatever String you send join to.
+返回给你一个由 join 方法发送的对象拼接成一个字符串 
 
 1040
 00:42:57,547 --> 00:43:00,447
 So comma.join up in Array will give you a comma
+所以，“,”.join(myArray) 会返回给你一个由逗号
 
 1041
 00:43:00,449 --> 00:43:03,316
 separated String, a String with the things,
+分隔的字符串，而字符串是由
 
 1042
 00:43:03,318 --> 00:43:05,685
 then the Array comes separated.
+传入的数组参数中的元素所组成的
 
 1043
 00:43:05,687 --> 00:43:08,388
-And that's obviously creating a new Array.
+And that's obviously creating a new Array (String).
+这很明显是创建一个新字符串的方法
 
 1044
 00:43:08,390 --> 00:43:10,489
 So this, this is kind of completely obvious.
+所以，这确实很明显
 
 1045
 00:43:10,491 --> 00:43:13,325
 But yes, some methods return objects to you that
+但是，一些方法返回给你一个创建的对象
 
 1046
 00:43:13,327 --> 00:43:14,593
@@ -5086,66 +5128,82 @@ are created.
 1047
 00:43:14,595 --> 00:43:16,478
 okay.
+继续
 
 1048
 00:43:16,479 --> 00:43:18,362
 So let's talk now about AnyObject,
+让我们讲一下 AnyObject
 
 1049
 00:43:18,365 --> 00:43:20,832
 this was brought up earlier.
+这个在之前涉及过
 
 1050
 00:43:20,834 --> 00:43:24,201
 AnyObject is kind of okay.
+AnyObject 是某种
 
 1051
 00:43:24,203 --> 00:43:26,103
 For the purposes of what you know so
+为了方便理解
 
 1052
 00:43:26,105 --> 00:43:28,005
 far, you can think of it as a type.
+你可以认为它是一种类型
 
 1053
 00:43:28,007 --> 00:43:30,273
 Okay? It's not really a type, but
+明白了吗？但是事实上，这并不是一种类型
 
 1054
 00:43:30,275 --> 00:43:33,476
 you can think of it as type, like Double or
+但是你可以认为它是一种类型，就像 Double
 
 1055
 00:43:33,478 --> 00:43:35,277
 Array or whatever.
+或者 Array 等等
 
 1056
 00:43:35,279 --> 00:43:37,079
 And it's used primarily for
+AnyObject 大量在
 
 1057
 00:43:37,081 --> 00:43:40,749
 compatibility with existing Objective-C APIs and iOS.
+兼容现有 Objective-C 和 iOS 代码中被使用到
 
 1058
 00:43:40,751 --> 00:43:42,584
 Okay. You're really not gonna use
+你并不经常会使用到
 
 1059
 00:43:42,586 --> 00:43:45,820
 AnyObject to build your own data structures very much.
+AnyObject 来构建你自己的数据结构
 
 1060
 00:43:45,822 --> 00:43:47,689
 I suppose you could, but
+假设你需要
 
 1061
 00:43:47,690 --> 00:43:49,557
 it'd be kind of, it'd be, again, kind of anti-Swift.
+但是，这有点点，不想 Swift 风格的做法
 
 1062
 00:43:49,559 --> 00:43:54,161
 Swift is very much into strong typing and type inference and
+Swift 是强类型语言，并有类型推断的特性
 
 1063
 00:43:54,163 --> 00:43:55,929
@@ -5154,155 +5212,192 @@ all that.
 1064
 00:43:55,930 --> 00:43:57,696
 So you could, but I'm only gonna talk about it in the
+当然你可以这么做，但是我只会在兼容性的问题上
 
 1065
 00:43:57,699 --> 00:44:00,566
 context here of using it here as this compatibility thing.
+讲到 AnyObject 的问题
 
 1066
 00:44:00,568 --> 00:44:01,167
 All right?
+明白了吗？
 
 1067
 00:44:01,169 --> 00:44:04,837
 So what is AnyObject?
+什么是 AnyObject？
 
 1068
 00:44:04,839 --> 00:44:06,672
 Okay? And where will you see it?
+还有，我们会在哪里用到它？
 
 1069
 00:44:06,674 --> 00:44:10,742
 So AnyObject, means a pointer to an object.
+AnyObject 的意思是，指向一个对象的指针
 
 1070
 00:44:10,744 --> 00:44:12,476
 Meaning, an instance of a class.
+也就是说，一个类的实力
 
 1071
 00:44:12,478 --> 00:44:13,310
 Okay? That you
+明白了吗？
 
 1072
 00:44:13,312 --> 00:44:14,978
 don't know what the class is.
+只是你不知道它的类是什么
 
 1073
 00:44:14,980 --> 00:44:18,848
 So it's just kind of pointer to unknown class.
+所以它是指向一个未知类的指针
 
 1074
 00:44:18,850 --> 00:44:20,016
 Okay? Which it seems kind of
+有问题吗？这可能听上去
 
 1075
 00:44:20,018 --> 00:44:21,617
 weird and it is kind of weird.
+有些奇怪，确实它有些奇怪
 
 1076
 00:44:21,619 --> 00:44:24,786
 And you, so we gonna have to play around to be able to
+你们会考虑，我们到底会在什么情况下使用到它
 
 1077
 00:44:24,788 --> 00:44:26,921
 use it but that's what it is.
+但这里我想告诉你们的是，它是什么
 
 1078
 00:44:26,923 --> 00:44:29,524
 And where will you see this in iOS?
+你们会在 iOS 开发中的哪里看到它呢？
 
 1079
 00:44:29,526 --> 00:44:32,360
 Sometimes, you'll see properties that are in
+有些时候你会看到某些属性的类型是 AnyObject 的
 
 1080
 00:44:32,362 --> 00:44:36,430
 AnyObject, like there's a property on storyboard segues
+例如 Storyboard Segues 的一个属性
 
 1081
 00:44:36,432 --> 00:44:38,932
 which we're gonna talk about next week.
+这个属性我们下周会讲到
 
 1082
 00:44:38,934 --> 00:44:41,401
 Called destinationViewController,
+这个属性叫 destinationViewController
 
 1083
 00:44:41,403 --> 00:44:44,403
 instead of being a UIViewController is a type,
+它不是 UIViewController 作为它的类型
 
 1084
 00:44:44,405 --> 00:44:45,604
 it's AnyObject.
+而是 AnyObject
 
 1085
 00:44:45,606 --> 00:44:47,572
 Okay, for historical reasons really.
+因为某些历史性的原因
 
 1086
 00:44:47,574 --> 00:44:50,842
 And similarly u, in UIViewController,
+类似的，在 UIViewController 中
 
 1087
 00:44:50,844 --> 00:44:53,978
 there is a property called toolbarItems and
+有一个叫 toolbarItems 的属性
 
 1088
 00:44:53,980 --> 00:44:57,148
 it would return to an Array of the AnyObject.
+它会返回一个由 AnyObject 组成的数组
 
 1089
 00:44:57,150 --> 00:44:59,083
 Okay?
+明白了吗？
 
 1090
 00:44:59,084 --> 00:45:01,017
 So basically, these properties are giving you back things you
+基本上，这些属性返回给你一些
 
 1091
 00:45:01,020 --> 00:45:02,552
 don't even know what they are.
+你都不知道是什么类型的东西
 
 1092
 00:45:03,989 --> 00:45:05,421
 Kay?
+明白了吗？
 
 1093
 00:45:05,423 --> 00:45:07,623
 You'll also see them as arguments to functions.
+还有，你会在函数的参数中见到 AnyObject
 
 1094
 00:45:07,625 --> 00:45:09,625
 Like here is
+类似在这里一样
 
 1095
 00:45:09,626 --> 00:45:11,626
 a UIViewController method prepare for segue.
+一个 UIViewController 的方法 prepareForSegue
 
 1096
 00:45:11,629 --> 00:45:13,462
 It takes a normal argument there, segue, but
+它接受一个普通的参数，segue，但是它还接受一个
 
 1097
 00:45:13,464 --> 00:45:16,364
 then it also takes a sender, which can be AnyObject.
+sender 参数，这个参数的类型是 AnyObject 的
 
 1098
 00:45:17,834 --> 00:45:19,366
 Now in that case, it kinda makes sense because it
+在这个情况下，AnyObject 的说法更有说服性
 
 1099
 00:45:19,368 --> 00:45:21,068
 really could be AnyObject in that case,
+因为 Sender 确实可以是任意对象
 
 1100
 00:45:21,070 --> 00:45:23,703
 cuz whatever's causing the segue to happen in a user
+因为无论什么导致 UI 中 Segue 发生的东西
 
 1101
 00:45:23,705 --> 00:45:27,006
 interface, could be AnyObject, so it makes some sense.
-可以是AnyObject，这是一样对
+可以是任意对象，所以这么就说通了
 
 1102
 00:45:27,008 --> 00:45:30,276

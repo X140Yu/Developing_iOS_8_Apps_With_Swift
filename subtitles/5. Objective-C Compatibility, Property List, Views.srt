@@ -3956,802 +3956,1003 @@ it'll give you a CGRect to zero which is a frame zero
 801
 00:34:43,285 --> 00:34:45,485
 size and width and
+默认的尺寸和宽度
 
 802
 00:34:45,486 --> 00:34:47,686
 then you could later set its frame to position the view.
+在接下来你可设置它的frame在视图中的位置
 
 803
 00:34:47,689 --> 00:34:50,189
 So here's an example of creating a view in code.
+所以这里有一个使用代码创建视图的例子
 
 804
 00:34:50,191 --> 00:34:51,590
 I'm going to use UILabel.
+我接下来要使用UILabel控件
 
 805
 00:34:51,592 --> 00:34:55,093
 UILabel is a subclass of UIView so I can send it.
+UILabel 是 UIView的一个子类所以我可以发送过去
 
 806
 00:34:55,095 --> 00:34:57,495
 UILabels parentheses frame.
+UILabels 包括一个 frame
 
 807
 00:34:57,497 --> 00:34:59,263
 So I just give it this frame which is kind of in
+所以我只需要在这个frame中
 
 808
 00:34:59,265 --> 00:35:00,698
 the upper left.
+给它一个左上角
 
 809
 00:35:00,700 --> 00:35:04,334
 Notice I've created this view but it's not on screen yet.
+请注意我已经创建了这个视图但是它并没有显示在屏幕上
 
 810
 00:35:04,336 --> 00:35:06,003
+Okay.
 Okay.
 
 811
 00:35:06,004 --> 00:35:07,671
 Assuming this code here is in a view controller,
+假设这里的代码实在一个view controller里
 
 812
 00:35:07,673 --> 00:35:10,640
 I could then say view.addSubview.
+我接下来可以说 view.addSubview.
 
 813
 00:35:10,642 --> 00:35:12,475
 Cuz remember view is a property in
+因为记住view是一个property
 
 814
 00:35:12,477 --> 00:35:15,144
 my view controller which is that top level view.
+在我的view controller实在view的最顶层
 
 815
 00:35:15,146 --> 00:35:17,279
 And I could say add subview of the label and
+我可以说添加一个lable类型的subview在底部
 
 816
 00:35:17,281 --> 00:35:18,613
 boom, it'll appear on screen.
+它将会出现在屏幕上
 
 817
 00:35:19,616 --> 00:35:20,514
 Okay? At 20,
+明白了么？在20，20
 
 818
 00:35:20,516 --> 00:35:22,716
 20, width 100, height 50.
+宽度是100，高度是50
 
 819
 00:35:22,718 --> 00:35:23,283
 Okay?
+明白了么？
 
 820
 00:35:25,120 --> 00:35:26,619
 So it is possible to create views in code.
+所以在代码中创建view是可行的
 
 821
 00:35:26,621 --> 00:35:28,821
 We almost never do that in iOS.
+我们几乎从来不在iOS中这么做
 
 822
 00:35:28,823 --> 00:35:29,855
 We use StoryBoards.
+我们使用 StoryBoards
 
 823
 00:35:31,458 --> 00:35:35,727
 Okay, so when do I wanna create my own UIView?
+Okay，所以当我们想创建一个我自己的UIView时我会怎么做呢？
 
 824
 00:35:35,729 --> 00:35:36,660
 Right?
+Right？
 
 825
 00:35:36,662 --> 00:35:38,162
 Well, when don't you want to?
+Well，当你不想要？
 
 826
 00:35:38,164 --> 00:35:40,597
 Well you don't want to if you want a button or a slider or
+当你不想要一个按钮或者slider或者任何东西
 
 827
 00:35:40,599 --> 00:35:43,099
 anything where there's already an iOS view.
+已经存在于iOS系统view中
 
 828
 00:35:43,101 --> 00:35:44,400
 But if you want to do something that
+但是如果你想要做一些
 
 829
 00:35:44,402 --> 00:35:47,303
 those things can't do, draw something special or
+iOS系统不能做的，绘制一些特别的或者
 
 830
 00:35:47,305 --> 00:35:49,538
 handle touch events like swipes and
+触摸事件像是swipes和
 
 831
 00:35:49,540 --> 00:35:54,509
 taps and pinches, differently or for a different purpose.
+taps以及pinches，不同的或者为了不同的目的
 
 832
 00:35:54,511 --> 00:35:58,212
 Then those things then you create your own custom view.
+接下来你可以通过这些东西创建你自己定制的view
 
 833
 00:35:58,214 --> 00:36:00,581
 So, we're going to focus on drawing today, and
+所以，我们今天将会专注于绘制
 
 834
 00:36:00,583 --> 00:36:03,984
 I'll do gestures in the next lec, in the next lecture.
+然后在下节课我将会讲一些手势方面的内容
 
 835
 00:36:03,986 --> 00:36:05,585
 To draw in your UIView,
+在你的UIView中绘制
 
 836
 00:36:05,587 --> 00:36:09,155
 all you need to do is override this method drawRect.
+所以你需要做的是重写drawRect方法
 
 837
 00:36:10,591 --> 00:36:13,425
 Okay, very simple method only takes one argument.
+Okay，非常简单的方法仅仅调用一个argument
 
 838
 00:36:13,427 --> 00:36:15,594
 In the code, it's actually called Rect, but
+在代码中，它实际上被叫做Rect
 
 839
 00:36:15,596 --> 00:36:18,697
 I've renamed it to be regionThatNeedsToBeDrawn, so
+但是我已经将它重新命名为 regionThatNeedsToBeDrawn
 
 840
 00:36:18,699 --> 00:36:20,798
 that people understand what that argument is.
+这样人们就可以理解那个argument是什么了
 
 841
 00:36:20,800 --> 00:36:23,734
 That argument is purely an optimization.
+那个 argument 纯粹是一个optimization
 
 842
 00:36:23,736 --> 00:36:27,338
 It's just the system saying, hey, draw yourself and really,
+那只是系统的说法，hey，认真的绘制你自己
 
 843
 00:36:27,340 --> 00:36:29,339
 I only care about this rectangle of you.
+我只是关心你画的的矩形范围
 
 844
 00:36:29,341 --> 00:36:31,641
 But you can draw your, the whole self if you want.
+但是你可以绘制你自己的，整个你想要的
 
 845
 00:36:31,643 --> 00:36:33,609
 But this is the only rectangle I really care about.
+但是只有这个矩形范围是我真正关心的
 
 846
 00:36:33,611 --> 00:36:37,279
 So if you had a View that knew how to draw parts of itself,
+所以如果你有一个view你知道怎么去绘制它的部分区域
 
 847
 00:36:37,281 --> 00:36:40,182
 okay, then it could only draw the part that's in
+Okay，然后它可以只绘制
 
 848
 00:36:40,184 --> 00:36:41,650
 this rectangle, but
+在这个矩形区域内的部分
 
 849
 00:36:41,651 --> 00:36:43,117
 you can completely ignore this rectangle if you want.
+但是你可以完全忽视你想要的这个矩形范围
 
 850
 00:36:43,120 --> 00:36:45,387
 It's purely an optimization.
+它纯粹的是一个 optimization
 
 851
 00:36:45,389 --> 00:36:45,953
 Okay?
+明白？
 
 852
 00:36:48,124 --> 00:36:49,990
 This is very important to understand,
+这对于理解来说非常重要
 
 853
 00:36:49,992 --> 00:36:53,260
 you never call drawRect, ever, never.
+你永远不会调用 drawRect方法
 
 854
 00:36:53,262 --> 00:36:54,160
 Never.
+永远不会
 
 855
 00:36:54,162 --> 00:36:55,345
 Okay?
+明白？
 
 856
 00:36:55,346 --> 00:36:56,529
 If you call drawRect in your homework,
+如果你在你的家庭作业中调用 drawRect方法
 
 857
 00:36:56,531 --> 00:36:58,330
 you're going to be a major ding.
+你会是一个主要的ding
 
 858
 00:36:58,332 --> 00:36:59,999
 Because I'm standing here in front of
+因为我在这里站在你的前面
 
 859
 00:37:00,001 --> 00:37:01,600
 you with red text on my slide.
+和我边上的红色文字一起
 
 860
 00:37:01,602 --> 00:37:03,034
 Saying, never.
+说，永远不要
 
 861
 00:37:03,036 --> 00:37:05,153
+Okay.
 Okay.
 
 862
 00:37:05,154 --> 00:37:07,271
 Do not call drawRect, drawRect is called by the system.
+不要调用 drawRect方法，drawRect方式是被系统调用的
 
 863
 00:37:07,273 --> 00:37:09,190
 Okay?
+明白？
 
 864
 00:37:09,191 --> 00:37:11,108
 It's called by the system when your view needs to be redrawn.
+它会被系统调用当你的view需要重新绘制时
 
 865
 00:37:11,110 --> 00:37:13,010
 How does the system know your needs,
+系统是怎样你知道你需要什么的呢
 
 866
 00:37:13,012 --> 00:37:14,578
 view needs to be redrawn?
+view 需要重新绘制？
 
 867
 00:37:14,580 --> 00:37:18,314
 Because somebody called setNeedsDisplay on your view.
+因为有一个叫做 setNeedDisplay的方法在你的view里
 
 868
 00:37:18,316 --> 00:37:19,982
 And you can call it on yourself if you want.
+然后如果你需要的话你可以调用它
 
 869
 00:37:19,984 --> 00:37:22,985
 If something has changed about your view, some property or
+如果在你的view中一些东西发生变化了时
 
 870
 00:37:22,987 --> 00:37:24,887
 something that would change the way it's drawn,
+一些property或者一些东西可能改变了它的绘制方式
 
 871
 00:37:24,889 --> 00:37:26,888
 you call set needs display on yourself,
+你调用 set needs display通过你自己
 
 872
 00:37:26,890 --> 00:37:29,691
 eventually the system will call your drawRect.
+最终系统会调用你的drawRect方法
 
 873
 00:37:29,693 --> 00:37:31,993
 But it's got to set some things up first, okay.
+但是它将会先创建一些东西
 
 874
 00:37:31,995 --> 00:37:33,928
 There's other views around you.
+在你周围有其他的views
 
 875
 00:37:33,930 --> 00:37:36,330
 That it has to get organized.
+它们必须被组织起来
 
 876
 00:37:36,332 --> 00:37:38,965
 Okay, so never call drawRect, drawRect it's called for you.
+okay，所以永远不要调用 drawRect，drawRect 是用来调用你的
 
 877
 00:37:38,967 --> 00:37:42,002
 When you call set in use display, you can specify I
+当你调用一个正在显示的区域时
 
 878
 00:37:42,004 --> 00:37:44,303
 really only need this rectangle redisplayed and
+你可以指定你只需要这么大的范围用来重新显示
 
 879
 00:37:44,305 --> 00:37:45,905
 then obviously,
+然后接下来明显地
 
 880
 00:37:45,906 --> 00:37:47,506
 that rectangle's gonna show up in the argument to drawRect.
+那块区域将会通过drawRect方法露面
 
 881
 00:37:48,609 --> 00:37:51,143
 Okay, but if multiple people call set in use display with
+Okay，但是如果当很多人通过这种方式调用不同的范围时
 
 882
 00:37:51,145 --> 00:37:53,345
 different rectangles, probably the union of those
+很有可能这些区域
 
 883
 00:37:53,347 --> 00:37:56,280
 rectangles might get called here one time for drawRect.
+会被drawRect方法一次调用完成
 
 884
 00:37:56,282 --> 00:37:57,581
 Okay?
+明白了么？
 
 885
 00:37:57,583 --> 00:38:00,517
 Make sense?
+听懂了么？
 
 886
 00:38:00,519 --> 00:38:01,418
 All right.
+好吧
 
 887
 00:38:01,420 --> 00:38:03,186
 So, how do you implement this, pow,
+所以，你要怎样实现这个
+
 
 888
 00:38:03,188 --> 00:38:05,922
 all-powerful drawRect method?
+无所不能的 drawRect 方法呢？
 
 889
 00:38:05,924 --> 00:38:09,625
 You can use, kind of a C-like, function-based API,
+你可以使用，类似于C语言，基于函数的API
 
 890
 00:38:09,627 --> 00:38:11,259
 called Core Graphics.
+叫做 Core Graphics
 
 891
 00:38:11,261 --> 00:38:13,094
 That's what it's all based on.
+这就是它的所有基础
 
 892
 00:38:13,096 --> 00:38:15,596
 Or you can use a nice object-oriented, thing,
+或者你可使用一个漂亮的面相对象的东西
 
 893
 00:38:15,598 --> 00:38:18,432
 called UIBezierPath, which is what we're gonna use,
+叫做UIBezierPath，使我们接下来要使用的
 
 894
 00:38:18,434 --> 00:38:20,367
 because we like object-oriented.
+因为我们喜欢面向对象的
 
 895
 00:38:20,369 --> 00:38:23,603
 But since the underlying stuff core graphics is what
+但是因为涉及到图形绘制底层的东西
 
 896
 00:38:23,605 --> 00:38:26,973
 UIBezierPath is built on, I'm gonna kinda explain a little
+UIBezierPath所运用用来构建的，我会介绍一些
 
 897
 00:38:26,975 --> 00:38:29,442
 bit about the concepts of Core Graphics.
+关于 Core Graphics的概念
 
 898
 00:38:29,444 --> 00:38:31,944
 How one draws in Core Graphics.
+一个东西是怎么样在Core Graphics绘制的
 
 899
 00:38:31,946 --> 00:38:34,380
 The first thing in Core Graphics that's important is,
+在Core Graphics中第一件很重要的事是
 
 900
 00:38:34,382 --> 00:38:37,416
 you have to get a context to draw in.
+你得拥有一个背景用来绘制
 
 901
 00:38:37,418 --> 00:38:38,700
 Okay? So
+明白？
 
 902
 00:38:38,701 --> 00:38:39,983
 if you're printing you'll have a printing context.
+如果你要printing 那你得有一个printing的背景
 
 903
 00:38:39,986 --> 00:38:41,519
 If you're drawing on screen you'll have a draw on
+如果你要绘制在屏幕上你得有一个
 
 904
 00:38:41,521 --> 00:38:44,305
 screen context, et cetera.
+可以绘制的屏幕背景 等等
 
 905
 00:38:44,306 --> 00:38:47,090
 And inside drawRect, when you're drawRect is called by
+在 drawRect中，当你准备绘制时
 
 906
 00:38:47,093 --> 00:38:50,227
 the system it sets up the drawing context for you.
+系统会调用drawRect方法并且为你建立一个绘制的背景
 
 907
 00:38:50,229 --> 00:38:51,895
 So it's automatically set up,
+所以它是自动建立的
 
 908
 00:38:51,897 --> 00:38:54,097
 and it's called the current context.
+并且他被称为当前的背景
 
 909
 00:38:54,099 --> 00:38:55,431
 The current drawing context.
+当前的绘制背景
 
 910
 00:38:55,433 --> 00:38:58,233
 And you can get it if you were using the C-API.
+同时如果你使用C-API时你也可以得到它
 
 911
 00:38:58,235 --> 00:39:01,837
 Or C-like APIs it's still Swift but it's functional.
+或者C-like APIs它仍然是 Swift但是它是实用的
 
 912
 00:39:01,839 --> 00:39:03,405
 Function API, you can get it
+API函数，你可以得到他们
 
 913
 00:39:03,407 --> 00:39:06,207
 with this function UIGraphicsGetCurrentContext.
+通过 UIGraphicsGetCurrentContext方法
 
 914
 00:39:06,209 --> 00:39:07,541
 And it will return this cookie,
+它将会返回到这个cookie
 
 915
 00:39:07,543 --> 00:39:08,876
 it's just this magic cookie.
+它只是这个令人惊奇的cookie
 
 916
 00:39:08,878 --> 00:39:11,411
 You don't know what it is, but it is the context of drawing.
+你不知道它是什么，但是它是绘制时的背景
 
 917
 00:39:11,413 --> 00:39:15,615
 Because all of the C-like functional API take
+因为所有的类似于C-like 函数的 API
 
 918
 00:39:15,617 --> 00:39:17,483
 a context as an argument.
+使用这一背景
 
 919
 00:39:17,485 --> 00:39:20,786
 Okay, BezierPath doesn't do that no worries,
+Okay，BezierPath 不会这样做，不用担心
 
 920
 00:39:20,788 --> 00:39:22,521
 but that one does.
+但是那个会这么做
 
 921
 00:39:22,522 --> 00:39:24,255
 So the first thing you need is a context automatically set up
+所以你需要做的第一件事是自动创建一个context
 
 922
 00:39:24,258 --> 00:39:25,824
 for your when drawRect is called.
+当你的drawRect被调用时
 
 923
 00:39:25,826 --> 00:39:29,927
 Then you create paths, you create paths with lines and
+然后你创建路径，你通过线条和
 
 924
 00:39:29,929 --> 00:39:31,395
 arcs and things like that.
+弧线或者你喜欢的东西
 
 925
 00:39:32,297 --> 00:39:33,930
 Then you set the drawing attributes,
+然后你设置绘制的属性
 
 926
 00:39:33,932 --> 00:39:36,499
 like the colors you want to draw in, the linewidths, and
+类似于你希望绘制进去的颜色，线条宽度
 
 927
 00:39:36,501 --> 00:39:37,800
 things like that, and
+和类似于这些的东西
 
 928
 00:39:37,802 --> 00:39:41,370
 finally, you stroke and fill those paths.
+最后你生成并且填充这些路径
 
 929
 00:39:42,305 --> 00:39:44,122
 Okay?
+明白了么？
 
 930
 00:39:44,123 --> 00:39:45,940
 And you can do either, or, or both stroking and filling.
+你可以两个中任一一个，或者同时做两个
 
 931
 00:39:45,942 --> 00:39:48,509
 So that is how, that is fundamentally how you draw.
+所以那就是如何，你绘制的根本
 
 932
 00:39:48,511 --> 00:39:52,979
 Things like drawing text is just the fonts know how to
+类似于绘制文字之类的事情只是需要知道字体
 
 933
 00:39:52,981 --> 00:39:56,049
 have the perfect path to draw beautiful letters.
+并且如何去绘制一个完美的路径去绘制漂亮的书信
 
 934
 00:39:56,051 --> 00:39:58,918
 And so, your stroking would outline the letters, and
+所以，你的笔刷将会在文字的轮廓
 
 935
 00:39:58,920 --> 00:40:01,620
 filling fills in the letters, okay?
+然后填充到文字的内部，明白？
 
 936
 00:40:01,622 --> 00:40:05,023
 So even drawing text, is just stroking and filling paths.
+所以即使是绘制一个文字，也是只需要一个笔刷和填充的路径
 
 937
 00:40:06,093 --> 00:40:10,061
-Okay? Now, UIBezierPath, this object-oriented
+Okay? Now, UIBzierPath, this object-oriented
+明白了么？现在，UIBzierPath，这个面相对象的
 
 938
 00:40:10,063 --> 00:40:12,830
 thing on top, it always draws in the current context,
+东西在最上面，它通常在当前的背景上绘制
 
 939
 00:40:12,832 --> 00:40:14,431
 you don't have to worry about context.
+你不用担心这个背景
 
 940
 00:40:14,433 --> 00:40:17,934
-It has methods, to do things like lineto, archto,
+It has methods, to do things like line two, arch two,
+它有很多方法，去做一些类似于两个线条，两个弧线
 
 941
 00:40:17,936 --> 00:40:19,069
 to build the path.
+去建立路径
 
 942
 00:40:19,071 --> 00:40:20,821
 It also has methods for
+它同样拥有很多方法
 
 943
 00:40:20,822 --> 00:40:22,572
 setting a lot of these attributes like linewidth and
+用来设置很多属性类似于线宽
 
 944
 00:40:22,574 --> 00:40:25,174
 things like that and it has methods to stroke and fill.
+和一些类似的属性同时它还有很多方法去绘制和填充
 
 945
 00:40:25,176 --> 00:40:28,243
 So all those Core Graphics are put into one class.
+所以所有的这些Core Graphics 被放到一个类里
 
 946
 00:40:28,245 --> 00:40:30,012
 Let's look at UIBezierPath, and
+让我们来看一下 UIBezierPath
 
 947
 00:40:30,014 --> 00:40:32,747
 how we would use it to draw a triangle, let's say.
+和我们怎样使用它绘制一个三角形，让我们开始吧
 
 948
 00:40:34,183 --> 00:40:37,418
 First we create a path, so we just say, UIBezierPath.
+首先，我们创建一个路径，所以我们只需要说，UIBezierPath
 
 949
 00:40:37,420 --> 00:40:40,320
 There are other initializers for UIBezierPath but
+那儿有其他的 UIBezierPath初始化方法
 
 950
 00:40:40,322 --> 00:40:42,889
 you could also just create an empty path, and
+但是你只需要建立一个空的路径
 
 951
 00:40:42,891 --> 00:40:45,625
 then you can start moving around.
+然后你就可以开始在周围移动了
 
 952
 00:40:45,627 --> 00:40:50,195
 So, here I'm going to assume this screen is 160 points wide
+所以，在这里我们架着这个屏幕是160*250
 
 953
 00:40:50,197 --> 00:40:53,965
 by 250 wide, and I'm gonna draw, this triangle here.
+然后我准备在这里绘制一个三角形
 
 954
 00:40:53,967 --> 00:40:57,102
 So I'm gonna move to 80 which is halfway across and
+所以我准备移动80个点，大概横跨半个屏幕
 
 955
 00:40:57,104 --> 00:40:58,369
 50 which is a little bit down,
+和50个点一点点下降
 
 956
 00:40:58,371 --> 00:41:03,607
 and then I'm going to add a line down to 140, 150.
+然后我将要添加一个线向下到 140,150
 
 957
 00:41:03,609 --> 00:41:06,743
 Then I wanna another line over to 10, 150.
+接下来我想再添加另一条线从 10,150过来
 
 958
 00:41:06,745 --> 00:41:10,446
 Then I'm going to close this path.
+然后我将会关闭这个路径
 
 959
 00:41:10,448 --> 00:41:11,681
 Okay?
+看明白了么？
 
 960
 00:41:11,682 --> 00:41:12,915
 So that's it, that's how you can make a triangle.
+所以，这是这样，这就是你如何绘制一个三角形
 
 961
 00:41:12,917 --> 00:41:16,285
 Now, I'm kind of lying to you a little bit, because as you
+现在，我很友好的欺骗了你们一下，因为当你们
 
 962
 00:41:16,287 --> 00:41:18,687
 execute these, nothing is appearing on screen.
+这么做的时候，屏幕上什么也不会出现
 
 963
 00:41:18,689 --> 00:41:21,389
 The screen will be blank.
+屏幕将会一片空白
 
 964
 00:41:21,391 --> 00:41:23,891
 Okay, I was only showing them so you could understand what I
+Okay，我只是向你们展示他们，这样你就可以理解
 
 965
 00:41:23,893 --> 00:41:25,726
 was doing there with the lines.
+我在这儿通过这些线做了什么
 
 966
 00:41:25,728 --> 00:41:27,278
 So it'd be blank.
+所以它将会一篇空白
 
 967
 00:41:27,279 --> 00:41:28,829
 To make it appear, you have to stroke or fill.
+要让它出现，你必须用笔刷绘制出来或者填充
 
 968
 00:41:28,831 --> 00:41:31,331
 So, let's set the attributes we want.
+所以，让我们设置我们需要的属性
 
 969
 00:41:31,333 --> 00:41:34,300
 So, I'm gonna set the color for filling to be green, and
+所以，我将填充的颜色设置为绿色
 
 970
 00:41:34,302 --> 00:41:37,403
 the color for stroking to be red.
+笔刷的颜色设置为红色
 
 971
 00:41:37,405 --> 00:41:41,007
 Okay, now notice that I set those with methods on UIColor,
+Okay，现在注意我通过UIColor设置的这些方法
 
 972
 00:41:41,009 --> 00:41:43,409
 not with methods on the BézierPath.
+不是通过BézierPath方法
 
 973
 00:41:43,411 --> 00:41:46,144
 Okay, that's a little interesting but
+Okay，那是有一点有趣但是
 
 974
 00:41:46,146 --> 00:41:47,679
 that's the way that works.
+它就是那样工作的
 
 975
 00:41:47,681 --> 00:41:51,015
 But linewidth, I do step by talking to the paths, so
+但是线宽，我通过和路径进行沟通所做的一步
 
 976
 00:41:51,017 --> 00:41:52,316
 I sent a message to the BezierPath,
+所以我发送一个消息到 BezierPath
 
 977
 00:41:52,318 --> 00:41:53,650
 set line with the three.
+设置线条的宽度为3
 
 978
 00:41:53,652 --> 00:41:57,254
 So once I set up all my attributes, now I can fill,
+所以当我设置我所需要的全部属性后，现在我可以填充
 
 979
 00:41:57,256 --> 00:41:58,988
 for example by saying, path fill and
+例如通过说，填充路径然后看一下
 
 980
 00:41:58,990 --> 00:42:01,791
 see, I get the rectangle filled in green.
+我得到了一个填充为绿色的三角形
 
 981
 00:42:01,793 --> 00:42:05,127
 Or, I can say stroke and it'll stroke the red line.
+或者说，我可以说用线条绘制它，它将会会被红色的线条绘制
 
 982
 00:42:05,129 --> 00:42:07,696
 Okay?
+明白了么?
 
 983
 00:42:07,698 --> 00:42:10,098
 Pretty straightforward?
+很简单吧？
 
 984
 00:42:10,100 --> 00:42:12,100
 Most of learning to draw is all about
+大多数的学习绘制全都关于
 
 985
 00:42:12,102 --> 00:42:14,568
 understanding UIBezierPath and all the methods on it.
+理解 UIBezierPath和它全部的方法
 
 986
 00:42:14,570 --> 00:42:15,269
 Question back there?
+这里有什么问题么？
 
 987
 00:42:16,438 --> 00:42:18,038
 >> if I have two shapes onscreen,
+>> 如果我在屏幕上有两个形状
 
 988
 00:42:18,040 --> 00:42:20,707
 how would I set the colors be different for each one?
+我怎么样给每个图形不同的颜色呢？
 
 989
 00:42:20,709 --> 00:42:21,875
 >> If you have two what?
+>> 如果你有两个什么？
 
 990
 00:42:21,876 --> 00:42:23,042
 >> If you have two different shapes onscreen?
+>> 如果你在屏幕上有两个形状？
 
 991
 00:42:23,044 --> 00:42:23,976
 >> Oh, yes. So, the question,
+>> 哦，是的，这就是问题
 
 992
 00:42:23,978 --> 00:42:25,210
 if I have two shapes onscreen,
+如果我在屏幕上有两个形状
 
 993
 00:42:25,212 --> 00:42:27,912
 how would I set the colors be different for each one?
+我怎么样给每个图形不同的颜色呢？
 
 994
 00:42:27,914 --> 00:42:30,748
 I would set the colors, stroke or fill one.
+我可设置颜色、线条或者填充一个
 
 995
 00:42:30,750 --> 00:42:32,149
 Set the colors on something else, stroke or
+设置颜色在其他的地方，现货或者
 
 996
 00:42:32,151 --> 00:42:32,783
 fill the other.
+填充另外一个
 
 997
 00:42:33,719 --> 00:42:34,918
 Okay?
+明白了么？
 
 998
 00:42:34,920 --> 00:42:36,503
 Question.
+问题
 
 999
 00:42:36,504 --> 00:42:38,087
 >> If the path isn't closed, what does fill do?
+>> 如果路径没有关闭，那怎么去填充呢
 
 1000
 00:42:38,089 --> 00:42:39,605
 >> So the question is,
+>> 这就是问题
 
 1001
 00:42:39,606 --> 00:42:41,122

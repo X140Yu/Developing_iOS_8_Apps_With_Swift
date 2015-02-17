@@ -1,21 +1,20 @@
 1
 00:00:00,001 --> 00:00:04,836
-[MUSIC]
+欢迎收看斯坦福大学公开课
 
 2
 00:00:04,838 --> 00:00:07,405
-Stanford University.
-斯坦福大学 
+本字幕由志愿者义务贡献
 
 3
 00:00:11,277 --> 00:00:15,946
 >> Okay, well, welcome to lecture four of CS193P,
-欢迎来到 CS193P，
+欢迎参加斯坦福大学2015年冬季学期的 CS193P 课程 
 
 4
 00:00:15,948 --> 00:00:18,748
 Stanford Winter of 2015.
-斯坦福 2015 冬季课程 
+CS193P 课程
 
 5
 00:00:18,750 --> 00:00:21,284
@@ -25,32 +24,32 @@ So, I've been doing all demo up until now,
 6
 00:00:21,286 --> 00:00:24,553
 and now we're going to be doing all slides today.
-而今天，我们将会全部通过幻灯片学习 
+而今天，我们将会全部通过幻灯片学习
 
 7
 00:00:24,555 --> 00:00:28,724
-So, I have a lot of stuff to talk about most of this,
-我将会讲到很多东西，大部分，
+So, I have a lot of stuff to talk about 
+我将会讲到很多东西
 
 8
 00:00:28,726 --> 00:00:31,143
-although not all of it,
-但不是全部，
+most of this, although not all of it,
+大部分，但不是全部，
 
 9
 00:00:31,144 --> 00:00:33,561
-is covered in your reading assignments, mh okay?
-都在你的阅读任务中，好吗？
+is covered in your reading assignments, okay?
+都在你的阅读任务中
 
 10
 00:00:33,563 --> 00:00:35,496
 But here I'm going to
-在这里我会尝试着把
+在这里我会尽量把
 
 11
 00:00:35,497 --> 00:00:37,430
 try to highlight the things that are pretty important, and
-最重要的部分高亮出来，
+重点强调一些重要的部分
 
 12
 00:00:37,433 --> 00:00:39,066
@@ -65,7 +64,7 @@ that reading assignment that you kinda need to know.
 14
 00:00:41,804 --> 00:00:43,336
 So this is definitely not a substitute for
-所以这绝对不能代替阅读
+但这绝对不能代替阅读
 
 15
 00:00:43,338 --> 00:00:46,472
@@ -75,27 +74,27 @@ the reading you'll still need to do the reading in order to
 16
 00:00:46,474 --> 00:00:49,875
 kinda get the, the details of a lot of this stuff.
-来掌握一些细节部分 
+来掌握这些的细节部分 
 
 17
 00:00:49,877 --> 00:00:54,613
 So but this hopefully will kinda get you focused in on,
-但希望这节课可以让你注意在，
+希望这节课可以让你注意在
 
 18
 00:00:54,615 --> 00:00:58,066
 on the key stuff.
-关键的东西上 
+关键的东西上
 
 19
 00:00:58,067 --> 00:01:01,518
-All right, [COUGH] so first, I wanna talk about
+All right, so first, I wanna talk about
 好的，那么我将讲讲
 
 20
 00:01:01,521 --> 00:01:05,589
 Optionals and enums, so now that you know what an enum is.
-Optionals 和 enums，现在你已经知道 enum 是什么了  
+Optional 和 enum，你已经知道 enum 是什么了  
 
 21
 00:01:05,591 --> 00:01:08,425
@@ -105,32 +104,32 @@ I can tell you what an Optional really is okay?
 22
 00:01:08,427 --> 00:01:10,994
 An Optional is just an enum, okay?
-一个 Optional 就是一个 enum，
+Optional 就是 enum，
 
 23
 00:01:10,996 --> 00:01:15,098
 It's a very simple enum it's a generic kind of like Array.
-这就是一个非常简单的 enum，就像 Array 的泛型 
+就是一个非常简单的 enum，它是泛型的，类似于 Array
 
 24
 00:01:15,100 --> 00:01:15,998
 You know, have an Array,
-你知道，一个 Array ，
+比如一个 Array ，
 
 25
 00:01:16,000 --> 00:01:17,666
 you specify the type of thing in it,
-你指定了其类型，
+你指定了其中的类型，
 
 26
 00:01:17,668 --> 00:01:19,301
 Optionals exactly the same, okay?
-Optionals 完全就是这样，
+Optional 跟它完全一样
 
 27
 00:01:19,303 --> 00:01:20,335
 It's a generic.
-就是泛型 
+就是泛型
 
 28
 00:01:20,337 --> 00:01:22,637
@@ -140,12 +139,12 @@ You specify the type of Optional it is.
 29
 00:01:22,639 --> 00:01:26,173
 And that type, which is T here in this little enum,
-而此类型，在这个小 enum 中的 T
+而此类型，在这个 enum 中的 T
 
 30
 00:01:26,175 --> 00:01:29,376
 is just the type of the associated value, you know,
-就是一种关联值类型，
+就是关联值的类型
 
 31
 00:01:29,378 --> 00:01:31,578
@@ -155,22 +154,22 @@ enums 可以关联各种值
 32
 00:01:31,580 --> 00:01:35,882
 So that's just the type that, if the Optional is not nil.
-所以这就只是其类型，如果 Optional 不是 nil 
+如果 Optional 不是 nil，这就是它的类型
 
 33
 00:01:35,884 --> 00:01:38,751
 That's what you get so that's all an enum is and
-这就是你会取到的 这就是 enum 的全部了 
+你就可以获取到它。这就是 enum
 
 34
 00:01:38,753 --> 00:01:42,054
 so for example, this is what it would look like if we
-举个例子，这里就是你会看到的
+举个例子
 
 35
 00:01:42,056 --> 00:01:45,724
 used the enum notation to do an Optional.
-如果我们使用一个 enum 实现一个 Optional 
+使用一个 enum 实现一个 Optional 看起来会像是这样
 
 36
 00:01:45,726 --> 00:01:49,561
@@ -180,12 +179,12 @@ Saying you know, x which is an enum or is an Optional String,
 37
 00:01:49,563 --> 00:01:52,130
 which nil would just be saying x equals Optional
-x nil 与 Optional
+如果是 nil 可以这样表示：
 
 38
 00:01:52,132 --> 00:01:53,497
 angle bracket String dot none.
-等于尖括号 String 点 none 相等 
+x = Optional<String>.None
 
 39
 00:01:54,800 --> 00:01:56,200
@@ -194,22 +193,22 @@ Okay?
 40
 00:01:56,201 --> 00:01:57,601
 Or, if you're sending it to not be know you
-或者你可以将其隐藏，
+或者你可以将其赋值
 
 41
 00:01:57,603 --> 00:02:00,403
 would say Optional angle bracket String dot Some，
-你可以说 Optional 尖括号 String 点 Some，
+x = Optional<Sting>.Some()
 
 42
 00:02:00,405 --> 00:02:02,705
 parentheses, the associated value, which would be hello.
-圆括号，关联值，也就是 "Hello".
+关联值，也就是 "Hello".
 
 43
 00:02:04,408 --> 00:02:05,607
 That make sense?
-很合理对吧？
+很合理吧？
 
 44
 00:02:05,609 --> 00:02:07,709
@@ -234,7 +233,7 @@ really complicated, but it's pretty simple really it's just
 48
 00:02:17,453 --> 00:02:20,787
 syntax sugar, syntactic sugar to do this Optional.
-这只是语法糖而已，语法糖实现了 Optional 
+这只是语法上的甜头，为了实现 Optional
 
 49
 00:02:20,789 --> 00:02:25,124
@@ -249,7 +248,7 @@ a switch and the case of some, you give the value back.
 51
 00:02:28,896 --> 00:02:32,230
 In the case of none, you raise an exception, okay?
-在 "None" 的情况下，你抛出了一个异常 
+在 "None" 的情况下，就会抛出异常 
 
 52
 00:02:32,232 --> 00:02:36,034
@@ -268,22 +267,22 @@ nil, okay?
 55
 00:02:41,407 --> 00:02:45,242
 So that's Optional all right, so Array, I just wanna.
-这就是一个 Optional 对吧，一个 Array ，我只是想要 
+这就是一个 Optional 。对于 Array
 
 56
 00:02:45,244 --> 00:02:47,744
 We covered this so I'm gonna really fast through this but
-我们已经概括了一次，所以我将很快地进行下一部分 
+我们已经概括了一次，所以我会快点进行这部分
 
 57
 00:02:47,746 --> 00:02:50,480
 Arrays, the syntax there is the same, right?
- Array ，这里的语法是相同的，对吧？
+Array ，这里的语法是相同的，对吧？
 
 58
 00:02:50,482 --> 00:02:51,781
 That square bracket thing,
-这个尖括号东西，
+这里的方括号
 
 59
 00:02:51,783 --> 00:02:54,050
@@ -308,27 +307,27 @@ I just wanna make it clear that defining an Array to
 63
 00:03:04,994 --> 00:03:07,328
 be a constant by saying let something equal
- Array 声明为常量
+Array 声明为常量
 
 64
 00:03:07,330 --> 00:03:09,229
 an Array versus var something equal an Array,
-与声明一个 Array 为 var 是相反的，
+与声明一个 Array 为 var
 
 65
 00:03:09,231 --> 00:03:12,833
 means that it's immutable, so you can't do append or insert,
-这意味着它是不可变的，所以你不能增加或插入，
+声明为 let 意味着它是不可变的，所以你不能增加或插入，
 
 66
 00:03:12,835 --> 00:03:15,468
 or anything else that you could do on a mutable Array.
-或任何你想要改变这个 Array 的操作 
+或任何你想要改变这个 Array 的操作
 
 67
 00:03:15,470 --> 00:03:17,337
 Also, of course,
-当然，
+当然
 
 68
 00:03:17,338 --> 00:03:19,205
@@ -343,7 +342,7 @@ try to pull out something that's outside the bounds of
 70
 00:03:21,542 --> 00:03:23,809
 the Array, this Array only has four animals in it and
-这个 Array ，这个 Array 只有四种动物在里面，
+一个 Array 只有四种动物在里面，
 
 71
 00:03:23,811 --> 00:03:27,145
@@ -353,22 +352,22 @@ I'm trying to get animal five that's gonna crash.
 72
 00:03:27,147 --> 00:03:28,279
 Array index out of bounds,
- Array 越界，
+Array 访问越界
 
 73
 00:03:28,281 --> 00:03:30,981
 just like pretty much any language you've used.
-就好像你曾经用过的任何一种语言 
+你以前使用过的语言也会是这样
 
 74
 00:03:32,551 --> 00:03:33,850
 How to enumerate an Array.
-如何枚举一个 Array 呢 
+如何枚举一个 Array 呢
 
 75
 00:03:33,852 --> 00:03:35,885
 If you wanted to go through every single item
-如果你想要获取在 Array 中的每一件事物
+如果你想要获取在 Array 中的每一个对象
 
 76
 00:03:35,887 --> 00:03:39,655
@@ -378,27 +377,27 @@ in an Array and look at it, you can use for in, okay?
 77
 00:03:39,657 --> 00:03:43,526
 So you just say for, some variable you want,
-需要使用 for，一个你需要的变量，
+就比如 for，一个你需要的变量，
 
 78
 00:03:43,528 --> 00:03:46,061
 in your Array, and then inside there,
-in 你的 Array ，然后在里面，
+in Array，然后在这里面
 
 79
 00:03:46,063 --> 00:03:49,131
 that'll be your value, okay pretty obvious.
-那就是你要的参数，非常明显 
+就是你想要的值了
 
 80
 00:03:49,133 --> 00:03:51,433
 I put this here mostly to compare it to the next slide,
-我放在这里主要是为了与接下来字典的幻灯片进行对比，
+我放在这里主要是为了与
 
 81
 00:03:51,435 --> 00:03:54,902
 which is Dictionary so Dictionary again,
-又是字典，
+接下来的 Dictionary 进行对比
 
 82
 00:03:54,904 --> 00:03:56,470
@@ -408,42 +407,42 @@ that's where a bracket thing is an alternate for
 83
 00:03:56,472 --> 00:03:59,406
 the exact same thing so if I had a nice
-如果我有一个非常好的
+有一个 Dictionary
 
 84
 00:03:59,408 --> 00:04:02,576
 Dictionary here I can create a Dictionary.
-字典，我可以创造一个字典 
+我创建了一个 Dictionay 
 
 85
 00:04:02,578 --> 00:04:04,177
 Using this square bracket notation,
-使用方括号标记 
+使用了方括号标记
 
 86
 00:04:04,179 --> 00:04:07,146
 which is just square bracket, key colon value, comma
-方括号，键 冒号 值，逗号 
+[key:value], [key:value]
 
 87
 00:04:07,148 --> 00:04:08,914
 key colon value okay, you know that.
-键 冒号 值，好了你懂的 
+你懂的 
  
 88
 00:04:08,916 --> 00:04:12,084
 And you also know that if I access a Dictionary with
-并且你也知道，如果我通过方括号访问一个字典，
+如果我通过方括号访问一个 Dictionay，
 
 89
 00:04:12,086 --> 00:04:14,519
 the square bracket, it returns an Optional and
-他会返回一个 Optional 对象，
+它会返回一个 Optional 
 
 90
 00:04:14,521 --> 00:04:17,722
 that's because, for example here, I'm looking up PAC ten
-这是由于，举个例子，我要在 "pac10team" 中寻找俄亥俄州， 
+举个例子，我要在 pac10teamRankings 中寻找 Ohio State
 
 91
 00:04:17,724 --> 00:04:21,192
@@ -453,7 +452,7 @@ team Ohio State obviously that is not.
 92
 00:04:21,194 --> 00:04:23,961
 It packed ten team so it's not in the Dictionary.
-这里只包含了十个队伍，所以就不在这个字典里 
+这里只包含了十个队伍，而它不在这个 Dictionay 里
 
 93
 00:04:23,963 --> 00:04:25,929
@@ -463,52 +462,52 @@ So it's going to return nil, okay?
 94
 00:04:25,931 --> 00:04:27,931
 So, that's why when you access a Dictionary,
-这就是为什么你访问一个字典，
+这就是为什么你访问一个 Dictionay，
 
 95
 00:04:27,933 --> 00:04:29,299
 it comes back it's an Optional.
-它会返回一个 Optional 对象 
+它会返回一个 Optional
 
 96
 00:04:30,769 --> 00:04:32,868
 To enumerate Dictionary you use a tuple.
-枚举字典你需要使用 tuple 
+枚举 Dictionay 你需要使用 tuple 
 
 97
 00:04:33,871 --> 00:04:36,171
 Okay, so you say for, the tuple,
-你输入 for，tuple
+for tuple
 
 98
 00:04:36,173 --> 00:04:39,207
 key com of value in the Dictionary.
-键值对 in 字典 
+(key, value) in  Dictionay 
 
 99
 00:04:39,209 --> 00:04:41,376
 And inside there, key and value will both be set.
-然后在里面，键与值都会设置好 
+然后在里面，key 与 value 都会被设置好 
 
 100
 00:04:41,378 --> 00:04:46,947
 Okay, that's really easy way to enumerate Dictionaries.
-好了，这是非常简单的枚举字典的方法 
+这是非常简单的枚举 Dictionay 的方法
 
 101
 00:04:48,083 --> 00:04:53,686
-Sent all right I'm gonna teaching about new struct that
-那接下去我将会教一个你们之间没见过的
+Sence? All right I'm gonna teaching about new struct that
+那接下来我会教你们一个之前没见过的
 
 102
 00:04:53,688 --> 00:04:59,358
 you haven't seen called Range. A Range is just two points
-新的结构体Range，Range 是合理的类型的两个点
+新的结构体 Range，Range 是一个包含一种合理类型的两个点
 
 103
 00:04:59,360 --> 00:05:01,893
 of a sensible type, so a starting point and an ending
-一个是起始点，另一个是终点
+一个是起始点，另一个是终止点
 
 104
 00:05:01,895 --> 00:05:03,528
@@ -518,22 +517,22 @@ point is exactly what you think a range would be.
 105
 00:05:03,530 --> 00:05:07,098
 Now I say a sensible type here because, you know,
-现在我先讲他们其中一个，因为
+之所以称为合理类型
 
 106
 00:05:07,100 --> 00:05:10,568
 the sensible type depends on what you're talking about for
-这个合理的类型取决于我们怎么用它，对于一个
+取决于你怎么看
 
 107
 00:05:10,570 --> 00:05:12,403
 an Array, the sensible type is an Int,
- Array 来说，这个合理的类型就是Int类型
+对于 Array 来说，这个合理的类型可以是 Int
 
 108
 00:05:12,405 --> 00:05:14,805
 but for other things like a String, it's not, and
-但是对于别的比如 String 来说，它就不是了，而且
+但是对于别的比如 String 来说，它就不是了
 
 109
 00:05:14,807 --> 00:05:16,106
@@ -543,12 +542,12 @@ we're gonna talk about that in a minute.
 110
 00:05:17,409 --> 00:05:21,844
 Range is also a generic, just like Array or
-Range跟 Array 或者可选枚举一样
+Range 跟 Array 或者 Optional enum 一样
 
 111
 00:05:21,846 --> 00:05:24,413
 like that Optional enum.
-是一个泛型
+是泛型的
 
 112
 00:05:24,415 --> 00:05:28,783
@@ -563,37 +562,37 @@ To specify a range in an Array would be Range, angle bracket,
 114
 00:05:32,522 --> 00:05:35,389
 Int because Ints are how you index an Array.
-因为Ints是你用来标记 Array 索引的
+因为 Array 是通过 Int 索引的
 
 115
 00:05:35,391 --> 00:05:36,857
-So, if you were gonna specify a range in
-所以，如果你要去辨别一个在 Array 中的range是什么类型
+So, if you were gonna specify a Range in
+所以，如果你想要在数组中声明 Range
 
 116
 00:05:36,859 --> 00:05:38,758
 an Array they would be Ints, okay?
-它将会是Int类型，有问题么？
+它就需要是 Int 类型的
 
 117
 00:05:38,760 --> 00:05:40,693
 And it's approximately what I put here it's
-而且这就是为什么我把它放在这里的原因
+我在这里讲的大概差不多了
 
 118
 00:05:40,695 --> 00:05:44,663
 not exactly this, but as far as given what, you know,
-不完全是这个，但是就已经给出的而言，你懂的
+但不完全是，但是就目前你们了解的知识来看
 
 119
 00:05:44,665 --> 00:05:47,966
 so far this is the best I can describe it to you.
-迄今为止，这是我能想到解释给你们听的最好方式
+这是我能想到的最好的描述方式
 
 120
 00:05:47,968 --> 00:05:51,069
 It's just a struct that has a startIndex and endIndex and
-它仅仅是一种包含了一个 startIndex 和 endIndex 的结构体
+它仅仅是一个包含了 startIndex 和 endIndex 的结构体
 
 121
 00:05:51,071 --> 00:05:53,271
@@ -618,7 +617,7 @@ you would think that String would also be.
 125
 00:06:04,049 --> 00:06:07,017
 You see sub ranges of Strings would also be specified by
-你们可以看到 String 的子串可以通过 Int 去指定
+可以看到 String 的子串可以通过 Int 去指定
 
 126
 00:06:07,019 --> 00:06:08,451
@@ -628,52 +627,52 @@ an Int, but in not, it not.
 127
 00:06:08,453 --> 00:06:11,420
 There's a special type called String.index,
-这里有一种特殊的类型叫做String.index
+这里有一种特殊的类型叫做 String.index
 
 128
 00:06:11,422 --> 00:06:12,654
 which is an index into a String,
-它是一种对String的索引
+它是一种对 String 的索引
 
 129
 00:06:12,656 --> 00:06:16,224
 I'm gonna talk all about that in a later slide, okay?
-我将会在后面的幻灯片中讲到，行吗？
+我将会在后面的幻灯片中讲到
 
 130
 00:06:16,226 --> 00:06:18,960
 So Ranges, just like Arrays and
-所以Range就像 Array 和
+所以 Range 就像 Array 和
 
 131
 00:06:18,962 --> 00:06:22,530
 Dictionaries, we don't usually say Range, angle bracket,
-字典一样，我们一般不会用 Range<Int> = XXX，
+Dictionay 一样，但我们一般不会用 Range<Int> = XXX，
 
 132
 00:06:22,532 --> 00:06:26,867
 Int equals something we use this special syntax.
-我们使用一个特殊的语法
+我们使用这种特殊的语法
 
 133
 00:06:26,869 --> 00:06:29,569
 And the special syntax is this three dots, or
-这个特殊的语法是三个点，或者
+这个特殊的语法是 ... ，或者
 
 134
 00:06:29,571 --> 00:06:32,739
 two dots and a less than sign.
-两个点和一个小于号
+..<
 
 135
 00:06:32,741 --> 00:06:37,009
 Okay, so the three dots means a range from the first thing,
-好了，那么三个点意味着从第一个到……
+... 意味着
 
 136
 00:06:37,011 --> 00:06:39,778
 oh, no, on the left of the dots, to the other thing on
-噢不，从点的左边到点的右边
+从点的左边到点的右边
 
 137
 00:06:39,780 --> 00:06:41,480
@@ -693,7 +692,7 @@ Includes both the start and end, whereas the other one,
 140
 00:06:47,220 --> 00:06:49,920
 two dot dot less than means it includes the first one, but
-两个点意味着它只包含了开头，但是
+..< 意味着它只包含了开头，但是
 
 141
 00:06:49,922 --> 00:06:51,355
@@ -703,107 +702,107 @@ it does not include the second one.
 142
 00:06:51,357 --> 00:06:54,591
 So it's an open-ended Range, okay cuz those,
-所以它是一个有（左闭）右开的Range，好了，因为这些
+所以它是一个有左闭右开的区间
 
 143
 00:06:54,593 --> 00:06:56,092
 both of those kind of Ranges are common.
-都是常用的Range类型
+这些都是常用的 Range 的种类
 
 144
 00:06:57,028 --> 00:07:00,463
 So that's how we specify a Range 99% of the time,
-这就是在 99% 的时间里定义一个 Range 的方法
+也是你们在 99% 的时候定义一个 Range 的方法
 
 145
 00:07:00,465 --> 00:07:03,298
 we don't use the Range struct to do it
-我们不使用Range的结构
+我们不使用 Range 的结构来定义
 
 146
 00:07:03,300 --> 00:07:05,834
 although you can you could create a Range struct.
-尽管你们可以创建一个Range的结构体
+尽管可以创建一个 Range 的结构体
 
 147
 00:07:05,836 --> 00:07:08,903
 And you could pass it as an argument to anything that
-而且你们可以将它作为一个参数传递给任何接受这些点点点的东西
+而且你们可以将它作为参数传递给任何接受 Range 的地方
 
 148
 00:07:08,905 --> 00:07:12,040
 takes these dot, dot, dots. You could put an actual Range in
-你们可以将真正的Range放进去
+你们可以使用真正的 Range 结构
 
 149
 00:07:12,042 --> 00:07:13,941
 there as well, okay they're the same thing.
-好了，他们是同样的
+他们是同样的
 
 150
 00:07:13,943 --> 00:07:16,127
 It's just the dot, dot,
-点点点对你们而言只是一种
+... 对你们而言只是一种
 
 151
 00:07:16,128 --> 00:07:18,312
 dots are syntaxed to create that Range for you, okay and
-创建Range的语法
+创建 Range 的语法
 
 152
 00:07:18,314 --> 00:07:20,781
 the things on either side of the dot, dot, dot.
-另一方面，除了点点点
+在 ... 的两侧
 
 153
 00:07:20,783 --> 00:07:21,799
 You know, it depends on
-你们懂的，它取决于
+它取决于
 
 154
 00:07:21,800 --> 00:07:22,816
 what kind of Range you're trying to create.
-你要创建哪种类型的Range
+你要创建哪种类型的 Range
 
 155
 00:07:22,818 --> 00:07:24,150
 If you're creating an Int Range.
-如果你要创建一个Int类型的Range
+如果你要创建一个 Int 类型的 Range
 
 156
 00:07:24,152 --> 00:07:27,486
 A Range of angle bracket Int, then they'd be Ints, okay?
-那么Range<Int>，然后Range就是Int类型的了
+那么 Range<Int>，然后 Range 就是 Int 类型的了
 
 157
 00:07:27,488 --> 00:07:28,854
 But if you're doing a String,
-但是如果你们正在处理String
+但是如果你们正在处理 String
 
 158
 00:07:28,856 --> 00:07:30,188
 they have to be String.indexes.
-那就必须使用String.index类型了
+那就必须使用 String.index 类型了
 
 159
 00:07:30,190 --> 00:07:33,591
 And that's a little harder to create, because a String.index
-而且创建这种类型的Range有一点点难度，因为String.index类型
+而且创建这种类型的 Range 有一点点难度，因为 String.index 类型
 
 160
 00:07:33,593 --> 00:07:36,294
 can't be created from a numeric literal.
-不能通过数字遍历去创建
+不能通过数字去创建
 
 161
 00:07:36,296 --> 00:07:38,362
 You have to create it programmatically, so
-你必须通过编程去创建，所以
+你必须需要一点编程技巧去创建，所以
 
 162
 00:07:38,364 --> 00:07:39,963
 we'll talk about that.
-我们将会通过十张幻灯片
+我们将会在大概十张幻灯片后
 
 163
 00:07:39,965 --> 00:07:45,602
@@ -818,7 +817,7 @@ you can enumerate a Range using for-in just like we
 165
 00:07:48,440 --> 00:07:50,906
 can with our raising Dictionaries there okay?
-使用字典一样
+使用 Dictionay 一样
 
 166
 00:07:50,908 --> 00:07:54,610
@@ -828,26 +827,27 @@ All right,
 167
 00:07:54,611 --> 00:07:58,313
 other classes, besides Arrays, Dictionaries, Range. NSObject.
-除了 Array 、字典、Range，接下来讨论其他的类，比如 NSObject
+除了 Array, Dictionay, Range，接下来讨论其他的类，比如 NSObject
 
 168
 00:07:58,315 --> 00:08:00,982
 So NSObject was the the base class for
-NSObject 在 Objective-C 中所有类的
+NSObject 在 Objective-C 中
 
 169
 00:08:00,984 --> 00:08:02,817
 all of Objective-C classes.
-基类
+是所有类的基类
 
 170
 00:08:02,819 --> 00:08:05,119
 In Swift we don't really have a base class for
-在Swift中，我们并没有这样一个基类
+在 Swift 中，我们并没有
 
 171
 00:08:05,121 --> 00:08:07,154
 all Swift classes.
+这样一个基类
 
 172
 00:08:07,156 --> 00:08:10,757
@@ -862,12 +862,12 @@ iOS that require,
 174
 00:08:13,728 --> 00:08:18,163
 even your Swift class to inherit from NSObject.
-这就要求你的 Swift 类必须继承自 NSObject
+你的 Swift 类也可以继承自 NSObject
 
 175
 00:08:18,165 --> 00:08:19,598
 I can't really talk about them,
-我现在不能跟你们讨论这些
+我现在还不能跟你们讨论这些
 
 176
 00:08:19,599 --> 00:08:21,032
@@ -887,17 +887,17 @@ down the road that will happen.
 179
 00:08:25,538 --> 00:08:27,805
 It really doesn't hurt to make your Swift class be
-让你们的 Swift 类继承自 NSObject 也不是一件痛苦的事
+让你们的 Swift 类继承自 NSObject 没什么麻烦的
 
 180
 00:08:27,807 --> 00:08:29,406
 a subclass of NSObject, so we could have
-所以我们
+所以我们可以让
 
 181
 00:08:29,408 --> 00:08:31,808
 made CalculatorBrain be a subclass of NSObject.
-可以让 CalculatorBrain 类继承自 NSObject
+CalculatorBrain 类继承自 NSObject
 
 182
 00:08:31,810 --> 00:08:33,109
@@ -917,12 +917,12 @@ it'd be nice to be able to do those advanced features with
 185
 00:08:38,950 --> 00:08:41,617
 CalculatorBrain so it's kinda one.
-CalculatorBrain 类，那么
+CalculatorBrain
 
 186
 00:08:41,619 --> 00:08:42,851
 Can feel free I'm not sure what to
-唔，我也不确定，
+唔，我也不知道该怎么说
 
 187
 00:08:42,853 --> 00:08:45,220
@@ -946,7 +946,7 @@ all those, they all inherit from NSObject eventually.
 
 191
 00:08:52,862 --> 00:08:55,462
-It's the super class of all of them [COUGH] there's not
+It's the super class of all of them there's not
 它是所有类的基类
 
 192
@@ -967,371 +967,457 @@ Then there's NSNumber,
 195
 00:09:04,638 --> 00:09:06,271
 you've actually briefly seen NSNumber.
-你们之前其实已经瞥见过 NSNumber
+你们之前其实已经见过 NSNumber
 
 196
 00:09:06,273 --> 00:09:09,908
 NSNumber is just a generic number-holding class, it just holds a number.
-它只是一个常见的数字包装类，包装了一个数字
+它只是一个装数字的类
 
 197
 00:09:09,910 --> 00:09:12,677
 That's all it does on it has a ton of methods on and I'm not
-它里面有很多方法，但是
+它里面有很多方法
 
 198
 00:09:12,679 --> 00:09:15,013
 gonna go through and here you can look in the documentation.
-我不打算去讲，你们可以自己去看文档
+但是我不打算去讲，你们可以自己去看文档
 
 199
 00:09:15,015 --> 00:09:17,114
 But, the methods are things like doubleValue.
-但是，方法中有些方法，比如 doubleValue、
+但是，这些方法，比如 doubleValue
 
 200
 00:09:17,116 --> 00:09:20,317
 intValue which is give me your value of yourself as
+intValue ，会将他们自身的值
 
 201
 00:09:20,319 --> 00:09:21,818
 an Int, as a Double etc.
+以 Int, Double 等类型返回给我们
 
 202
 00:09:23,121 --> 00:09:26,322
 In Swift, we don't really use this very much,
+在 Swift 中，我们不会用太多这些东西
 
 203
 00:09:26,324 --> 00:09:28,324
 because it's strongly typed and,
+因为 Swift 是强类型
 
 204
 00:09:28,326 --> 00:09:31,527
 so we're using types like Int and Double.
+我们直接用像 Int 、 Double 这样的类型
 
 205
 00:09:31,529 --> 00:09:35,997
 But in Objective-C APIs, there's no NSNumbers lying
+但在 Objective-C 的 API 中，没有遍地的 NSNumbers 类型
 
 206
 00:09:35,999 --> 00:09:39,701
 around and so you kinda need to know about it.
+这一点是你们要了解的
 
 207
 00:09:39,703 --> 00:09:42,069
 I'm gonna talk a little bit later about the fact that
+接下来我会多讲一点强类型的内容
 
 208
 00:09:42,071 --> 00:09:44,772
 all those Swift types are kinda magically bridged
+所有这些 Swift 类型都通过巧妙桥接到 NSNumber 类型
 
 209
 00:09:44,774 --> 00:09:48,075
-to NSNumber, okay those inits and Doubles.
+to NSNumber, okay those ints and Doubles.
+比如 Int, Double 等
 
 210
 00:09:48,077 --> 00:09:50,076
 So, you really don't even have to worry about NSNumber.
+所以你甚至不必担心 NSNumber
 
 211
 00:09:50,078 --> 00:09:53,880
 Unless you use NSNumberFormatter that we used in
+除非你要用作业中提到的 NSNumberFormatter 
 
 212
 00:09:53,882 --> 00:09:58,117
 the assignment, because that thing returns an NSNumber.
+因为它会返回一个 NSNumber 类型的值
 
 213
 00:09:58,119 --> 00:10:00,652
->> So it there's no like, NSObject parallel in Swift,
+>> So it there's no like NSObject parallel in Swift,
+>>（学生提问）
 
 214
 00:10:00,654 --> 00:10:02,721
-is there a way to make like an Array that holds.
+is there a way to make like an Array that holds
+（学生提问）
 
 215
 00:10:02,723 --> 00:10:04,773
-And kind of [CROSSTALK].
+any kind of [CROSSTALK] ?
+（学生提问）
 
 216
 00:10:04,774 --> 00:10:06,824
 >> Yep, so the question is, if there's no NSObject, well,
+嗯，他的问题是，如果没有 NSObject （那么该怎么处理 NSObject 相关的东西呢）
 
 217
 00:10:06,826 --> 00:10:09,060
 it wouldn't really matter about NSObject.
+其实没有 NSObject 并不是造成困扰的所在
 
 218
 00:10:09,062 --> 00:10:11,062
 But the question is can I
+真正的问题在于没了 NSObject 之后
 
 219
 00:10:11,063 --> 00:10:13,063
 create an Array where there are random Objects in there?
+我能不能创建一个包含任意对象的数组呢
 
 220
 00:10:13,065 --> 00:10:15,932
 And we're gonna talk about that later.
+我们下面会讲这个东西
 
 221
 00:10:15,934 --> 00:10:18,468
 Another class, NSDate, exactly what is sounds like,
+另一个类， NSDate，顾名思义
 
 222
 00:10:18,470 --> 00:10:21,270
 stores a date, let's you get the current date and time too.
+可以存储日期，也可以让你获取当前日期和时间
 
 223
 00:10:22,306 --> 00:10:24,139
-Pretty self explanatory has lots and
+Pretty self-explanatory has lots and
+显然，NSDate 有非常非常多的方法
 
 224
 00:10:24,141 --> 00:10:25,874
 lots of methods in it.
+会涉及到这些东西
 
 225
 00:10:25,876 --> 00:10:28,143
 And it has even more and more methods because there's those
+它还因为下面即将提到的另外三个类
 
 226
 00:10:28,145 --> 00:10:29,577
 three other classes mentioned here,
+还会有更多相关的方法
 
 227
 00:10:29,579 --> 00:10:32,480
 Calendar, DateFormatter, and DateComponents.
+Calendar, DateFormatter, 和 DateComponents.
 
 228
 00:10:32,482 --> 00:10:34,281
 And if you're ever doing a date where you're gonna
+如果你正要做日期相关的事情
 
 229
 00:10:34,283 --> 00:10:37,784
 put a date on screen as part of your application,
+在你的应用的某个地方放置一个日期
 
 230
 00:10:37,786 --> 00:10:39,753
 you really wanna look at all these classes and
+你就需要查看所有
 
 231
 00:10:39,755 --> 00:10:41,954
 read the documentation that talks about dates.
+提到日期的类和文档
 
 232
 00:10:41,956 --> 00:10:43,422
 Because, dates are displayed very
+因为全世界的日期
 
 233
 00:10:43,424 --> 00:10:45,224
 differently around the world.
+显示方式各不相同
 
 234
 00:10:45,226 --> 00:10:48,160
 Different calendars different you know even
+不同的日历，就我们所熟知的差异
 
 235
 00:10:48,162 --> 00:10:50,895
 different languages, the order of the month, day, year even
+在语言方面，年月日的顺序方面都不同
 
 236
 00:10:50,897 --> 00:10:53,031
 if you're using the Gregirian calendar is different.
+甚至你正在用的 Gregirian 类型的标准日历也有不同的地方
 
 237
 00:10:53,033 --> 00:10:56,600
 So, you really, really dates are tricky to get right if
+所以如果你要做在全世界都能正确显示的日历
 
 238
 00:10:56,602 --> 00:10:59,136
 you wanna build an app that can work around the world.
+是需要一些技巧的
 
 239
 00:10:59,138 --> 00:11:00,871
 Okay, so I'm just kind of warning you if
+所以我只是提醒你
 
 240
 00:11:00,873 --> 00:11:03,506
 you're gonna build an app like that some day you wonna really
+如果你要做一个应用需要用到日期时间
 
 241
 00:11:03,508 --> 00:11:06,542
 understand date and all it's friends here.
+你需要理解和 NSData 相关的东西
 
 242
 00:11:06,544 --> 00:11:07,977
 There's NSData,
+还有 NSData
 
 243
 00:11:07,979 --> 00:11:11,280
 super easy class it's just a bag of bits, okay?
+非常简单的类，它就是一个比特包
 
 244
 00:11:11,282 --> 00:11:13,849
 Could be gigantic bag of bits, small bag of bits, whatever.
+可以是巨大的比特包，也可以是一个小小的比特包
 
 245
 00:11:13,851 --> 00:11:18,586
 But it's just untyped data that's just in there it's just
+不管怎样，它里面只是无类型的数据
 
 246
 00:11:18,588 --> 00:11:21,055
 you can think of it almost like a point or two memory and
+你可以把它看成是一个点或者一段内存
 
 247
 00:11:21,057 --> 00:11:22,256
 you just don't know what's in there.
+并且你不知道它那里有什么东西
 
 248
 00:11:23,292 --> 00:11:26,693
-This is how iOS will pass around untyped data,
+This is how iOS will pass around untyped data, raw data.
+这就是 iOS 可以四处传递无类型数据、原始数据的原因
 
 249
 00:11:26,695 --> 00:11:31,263
-raw data it passes are out, it around using this class it'll
+It passes around using this class.
+它就是通过这个类来传递的
 
 250
 00:11:31,265 --> 00:11:33,632
-be obvious when we start using this what it's for.
+It will be obvious when we start using this what it's for.
+所以我们用这个类的目的是显而易见的
 
 251
 00:11:33,634 --> 00:11:36,134
 You're not gonna be using NSData much in this class,
+你不会用太多 NSData 的东西
 
 252
 00:11:36,136 --> 00:11:38,970
 cuz we're not dealing with raw data that much,okay.
+因为我们不会去处理那么多原始数据
 
 253
 00:11:38,972 --> 00:11:41,439
 All right, so, let,
+好的，其实
 
 254
 00:11:41,441 --> 00:11:43,974
 I just wanted to mention some of those classes just so,
+我只是想稍微提一下这其中的一些类
 
 255
 00:11:43,976 --> 00:11:47,144
-you know, they exist you can check out the documentation.
+you know, they exist you can check out the documentation
+它们都在文档中，你可以通过文档
 
 256
 00:11:47,146 --> 00:11:48,945
-On all of them to find out more about it and
+on all of them to find out more about it and
+找到它们并查看更详细的内容
 
 257
 00:11:48,947 --> 00:11:50,914
 I'm gonna revisit a few of them like Array and
+下面我会再稍微提到其中的一些类，比如 Array
 
 258
 00:11:50,916 --> 00:11:54,283
 Dictionary and String because they, they're so important I'm
+Dictionary 还有 String，因为它们实在太重要了
 
 259
 00:11:54,285 --> 00:11:56,552
 actually gonna talk about some of their methods.
+所以我会着重介绍它们的一部分方法
 
 260
 00:11:56,554 --> 00:11:58,554
 But, I wanna talk a little bit about data structures in
+通常，我会先谈谈 Swift 中的一些数据结构
 
 261
 00:11:58,556 --> 00:12:00,589
 Swift in general, okay?
+没问题吧
 
 262
 00:12:01,491 --> 00:12:03,124
 There's really three fundamental building
+在这些数据结构中
 
 263
 00:12:03,126 --> 00:12:04,692
 blocks for your data structure that you
+有三个基础块
 
 264
 00:12:04,694 --> 00:12:06,927
-might build and you've seen them.
+might build and you've seen them
+而且你之前已经见过了
 
 265
 00:12:06,929 --> 00:12:08,795
-Two of the three of them in detail, but
+two of the three of them in detail, but
+其中的两个的具体内容
 
 266
 00:12:08,797 --> 00:12:10,597
 they are class, struct, and
+它们就是类、结构体
 
 267
 00:12:10,599 --> 00:12:13,333
 enum, okay they're the three basic building blocks.
+和枚举，它们就是那三个基础的块
 
 268
 00:12:14,469 --> 00:12:17,936
 And they look very similar their declaration syntax looks
+它们在声明的语法上看起来很像
 
 269
 00:12:17,938 --> 00:12:19,137
 very, very similar, right?
+非常非常像，对吧
 
 270
 00:12:19,139 --> 00:12:21,106
 Just, the only difference is whether it's class,
+唯一的差别就在声明的关键字是 class
 
 271
 00:12:21,108 --> 00:12:23,341
 struct, or enum, but otherwise looks the same.
+struct 还是 enum，除此之外看起来就是一模一样
 
 272
 00:12:23,343 --> 00:12:25,009
 They're also very similar in that they can all
+它们还有个非常相像的地方，它们都能拥有
 
 273
 00:12:25,011 --> 00:12:27,878
-have properties and functions, okay.
+have properties and functions, okay, all three of them.
+属性和方法
 
 274
 00:12:27,880 --> 00:12:31,448
-All three of them now enums they can't store any values
+Now enums they can't store any values
+Enum 本身是不能存储任何值
 
 275
 00:12:31,450 --> 00:12:34,050
 you store the values of your enum in that associated
+你可以将值存储在枚举的关联信息中
 
 276
 00:12:34,052 --> 00:12:38,454
 information but they can have computed properties, okay?
+枚举是可以有计算型属性
 
 277
 00:12:38,456 --> 00:12:42,458
 And all three of them can have functions, all right? okay?
+这三种数据结构都可以有函数，明白吗
 
 278
 00:12:42,460 --> 00:12:44,292
 So, that's very important to understand so,
+理解这点非常的重要
 
 279
 00:12:44,294 --> 00:12:45,927
 they are very, very similar in that way.
+它们在那方面看起来非常的相似
 
 280
 00:12:47,197 --> 00:12:49,397
-They're also similar at least strucs, and
+They're also similar at least structs, and
+结构体和类更甚
 
 281
 00:12:49,399 --> 00:12:51,098
 classes in that they can have intializers.
+它们甚至都可以有初始化的构造器
 
 282
 00:12:51,100 --> 00:12:53,800
 And we're gonna talk about initializers in detail in
+我们后面的幻灯片中会详细地
 
 283
 00:12:53,802 --> 00:12:55,468
 a few slides, okay?
+谈到这个构造器
 
 284
 00:12:55,470 --> 00:12:56,703
 So, they're similar in a lot of ways but
+它们在许多方面都非常相似
 
 285
 00:12:56,705 --> 00:12:58,938
 there's a couple ways in which they're very different,
+但仍然有几个不同的地方
 
 286
 00:12:58,940 --> 00:13:00,039
@@ -1340,58 +1426,72 @@ all right?
 287
 00:13:00,040 --> 00:13:01,139
 Classes are the only ones where you
+类是三者中唯一拥有
 
 288
 00:13:01,142 --> 00:13:04,009
 have inheritance, okay?
+继承的性质
 
 289
 00:13:04,011 --> 00:13:05,243
 And it's pretty obvious,
+显而易见
 
 290
 00:13:05,245 --> 00:13:07,478
 that's kind of the main definer of what a class is,
+这是一种确定类是什么东西的主要定义
 
 291
 00:13:07,480 --> 00:13:08,045
 it has inheritance.
+就是它有继承性质
 
 292
 00:13:09,715 --> 00:13:12,082
-And then, introspected, spection and
+And then, introspection and
+我也会讲
 
 293
 00:13:12,084 --> 00:13:13,750
 casting, which I'm also gonna talk about a little
+内省和转型
 
 294
 00:13:13,752 --> 00:13:16,652
 later those are only for classes, so none of this
+都是属于类的性质
 
 295
 00:13:16,654 --> 00:13:19,555
 casting thing I'm gonna talk about can you do for structs.
+所以我所说所有关于转换的内容，你不能应用到结构体上
 
 296
 00:13:21,158 --> 00:13:23,224
 And the most important difference to understand, and
+而我们要明白的三种结构最重要的区别
 
 297
 00:13:23,226 --> 00:13:24,625
 we really went over this in the demo,
+在我们接下来的 demo 中会遇见的
 
 298
 00:13:24,627 --> 00:13:27,561
 is this value type versus reference type.
+就是 value type （值类型）与 reference type （引用类型）
 
 299
 00:13:27,563 --> 00:13:29,663
 Structs and enums are passed around and
+结构体和枚举的传递和
 
 300
 00:13:29,665 --> 00:13:32,499
 stored in variables copied, okay?
+存储是通过拷贝过的变量
 
 301
 00:13:32,501 --> 00:13:34,117
@@ -2896,32 +2996,32 @@ if you put lazy in front of a property declaration, it means
 601
 00:25:45,496 --> 00:25:49,230
 it does not get initialized until someone accesses it.
-它只会在被用到的时候才会初始化 
+它只会在被用到的时候才会初始化
 
 602
 00:25:50,333 --> 00:25:53,467
 And that's true whether it's initialized with
-比如它在被初始化的时候会被赋值，
+比如它以被赋值的操作执行初始化
 
 603
 00:25:53,469 --> 00:25:55,769
 equal something, so that equal something will not
-那么这个赋值的动作会在这个属性实际被用到的时候
+那么这个赋值的动作会在这个 property 实际被用到的时候
 
 604
 00:25:55,771 --> 00:25:59,305
 happen until someone actually accesses that property.
-才会执行 
+才会执行
 
 605
 00:25:59,307 --> 00:26:03,876
 Or you can actually initialize it by putting a closure there,
-你也可以在属性后边加括号，也就是闭包来初始化它，
+你也可以在初始化的时候在后面放一个圆括号
 
 606
 00:26:03,878 --> 00:26:06,712
 put parenthesis after it, and we'll execute that closure.
-也就是通过执行这个闭包，
+也就是通过执行这个闭包
 
 607
 00:26:06,714 --> 00:26:10,048
@@ -2931,43 +3031,42 @@ And that will initialize the property.
 608
 00:26:10,050 --> 00:26:15,186
 But that closure won't get executed until someone tries to get it, 'kay?
-但是这个闭包只有在属性被用到的时候才会执行，明白了吗？
-
+但是这个闭包只有在 property 被用到的时候才会执行
 
 610
 00:26:15,188 --> 00:26:19,023
 And then you can even in a lazy property, you could call
-你甚至可以调用一个方法来初始化一个lazy属性，
+在 lazy property 中
 
 611
 00:26:19,025 --> 00:26:23,593
 a method to, to initialize it because it, normally you
-一般来说
+你甚至可以调用一个方法来初始化
 
 612
 00:26:23,595 --> 00:26:27,296
 wouldn't be able to do this if you didn't say lazy.
-如果你不把属性标记为lazy，这样做是不允许的 
+如果你不把 property 标记为 lazy，这样做是不允许的 
 
 613
 00:26:27,298 --> 00:26:29,415
 Because you can't call any
-因为在你的属性都正确的初始化以前，
+因为在类初始化之前
 
 614
 00:26:29,416 --> 00:26:31,533
 methods in your class until you're fully initialized, so
-类里的方法都是不可以调用的，
+类里的方法都是不可以调用的
 
 615
 00:26:31,535 --> 00:26:33,535
 there's kinda a catch 22 there.
-这好像是个悖论 
+这好像是个不可以违背的规定
 
 616
 00:26:33,537 --> 00:26:34,736
 But in this case since,
-但是在我们这里，
+但是在这种情况
 
 617
 00:26:34,738 --> 00:26:37,238
@@ -2977,12 +3076,12 @@ you can't call any methods until you're initialized,
 618
 00:26:37,240 --> 00:26:39,974
 by the time somebody tries to get this property,
-但是当lazy属性被用到的时候，
+直到有人试图 get 这个 property
 
 619
 00:26:39,976 --> 00:26:41,408
 you'd be fully initialized.
-属性就被全部初始化了，
+它就会被初始化了
 
 620
 00:26:41,410 --> 00:26:43,343
@@ -2992,7 +3091,7 @@ So, you can call methods.
 621
 00:26:43,345 --> 00:26:45,779
 So, you see the advantage of lazy there?
-到这你能看出用lazy的优势了吗？
+到这你能看出用 lazy 的优势了吗？
 
 622
 00:26:45,781 --> 00:26:47,798
@@ -3001,7 +3100,7 @@ So, you see the advantage of lazy there?
 623
 00:26:47,799 --> 00:26:49,816
 This lazy thing still satisfies the rule that you
-这个lazy特性依然满足“所有属性必须
+这个 lazy 特性依然满足“所有属性必须
 
 624
 00:26:49,818 --> 00:26:53,285
@@ -3016,27 +3115,27 @@ must initialize all of your properties.
 627
 00:26:56,690 --> 00:26:58,490
 It still satisfies that rule.
-它依然遵循这个规则 
+它依然遵循这个规则
 
 628
 00:27:00,293 --> 00:27:04,528
 unfortunately, only vars can be lazily initialized.
-但是，只有var才可以用lazy初始化这个特性 
+但是，只有 var 才可以用 lazy 初始化这个特性 
 
 629
 00:27:04,530 --> 00:27:06,347
 Things that are let,
-因为let
+因为 let，也就是类里的常量
 
 630
 00:27:06,348 --> 00:27:11,134
 if you had constants in your class, those would have to be initializing in your initializer.
-也就是类里的常量，都必须在类的初始化方法里初始化 
+都必须在类的初始化方法里初始化 
 
 632
 00:27:11,135 --> 00:27:14,102
 You can't initialize them lazily, only vars, not lets.
-只有var可以lazy initialization，let不可以 
+只有 var 可以用 lazy，let 不可以 
 
 633
 00:27:14,105 --> 00:27:19,108
@@ -3051,7 +3150,7 @@ Because of that rule that everything has to be
 636
 00:27:20,911 --> 00:27:22,577
 initialized before you can do anything.
-所有的属性都必须被初始化 
+所有的 property 都必须被初始化 
 
 637
 00:27:22,579 --> 00:27:24,479
@@ -3061,53 +3160,53 @@ Sometimes you can get into fights with your
 638
 00:27:24,481 --> 00:27:27,114
 superclass for example, about when something's gonna be
-比如当有些属性被初始化的时候，
+举个例子
 
 639
 00:27:27,116 --> 00:27:29,883
 initialized, and you need your superclass to do something or
-它需要父类去做一些事情，或者它要做什么的时候需要你先做
+当有些 property 将要被初始化时，需要你或者你的父类做一些事情
 
 640
 00:27:29,885 --> 00:27:32,252
 you can do something, but it needs you to do something
-一些别的，
+但是你在做这些事情之前还需要先解决一些事情
 
 641
 00:27:32,254 --> 00:27:35,288
 before they can do something, so you're kinda we're stuck.
-这时候你就会有点卡住 
+这时候你就会有点卡住
 
 642
 00:27:35,290 --> 00:27:37,290
 And what you can do is one of the other of you,
-这时候你就可以让一些东西依赖于
+这时候你就可以让
 
 643
 00:27:37,292 --> 00:27:40,259
 make one of the things that depends on their lazy.
-某些其他属性的lazy initialization来理清这些关系 
+某些 property 依赖于它们的 lazy 初始化
 
 644
 00:27:40,261 --> 00:27:45,196
 Okay. And then, as soon as somebody wants it, it'll get initialized and off we go.
-这样的话，当有东西需要这个属性的时候，这个属性会被初始化 
+这样的话，当有东西需要这个 property 的时候，它才会被初始化 
 
 
 646
 00:27:47,000 --> 00:27:48,599
 Okay? Any questions about Lazy?
-明白了吗？关于lazy大家有问题吗？
+明白了吗？关于 lazy 大家有问题吗？
 
 647
 00:27:48,601 --> 00:27:53,337
-Pretty cool feature.All right?
+Pretty cool feature. All right?
 非常好的特性 
 
 649
 00:27:53,338 --> 00:27:55,338
 And it's exactly, what it sounds like, just lazily waits
-准确的来说，就跟这个特性的名字一样，就是懒懒的等着别人
+准确的来说，就跟这个特性的名字一样，就是懒懒地等着别人
 
 650
 00:27:55,341 --> 00:27:58,342
@@ -3116,7 +3215,7 @@ to initialize until someone wants this property.
 
 651
 00:27:58,344 --> 00:27:59,743
->> [COUGH] >> Okay?
+Okay?
 
 652
 00:27:59,745 --> 00:28:02,545
@@ -3130,8 +3229,9 @@ I need to get, I need a drink before the initialization, cuz it's complicated.
 
 655
 00:28:08,719 --> 00:28:10,652
-Hopefully my, [NOISE] I'm just, I'm not, this is not,
-希望我的，我的   没事 
+Hopefully my, I'm just, I'm not, this is not,
+希望我没事儿
+
 656
 00:28:10,654 --> 00:28:11,819
 just taking care of my voice here.
@@ -3139,13 +3239,13 @@ just taking care of my voice here.
 
 657
 00:28:11,821 --> 00:28:15,689
-Okay, init, [LAUGH] all right.
-好了，init，开始 
+Okay, init, all right.
+好了，init 
 
 658
 00:28:15,691 --> 00:28:18,392
 So, when do you need an init method?
-什么时候需要一个init方法？
+什么时候需要一个 init 方法？
 
 659
 00:28:18,394 --> 00:28:20,344
@@ -3155,22 +3255,22 @@ Well, you know what?
 660
 00:28:20,345 --> 00:28:22,295
 You actually don't need an init method that often.
-大多数时候并不需要init方法 
+大多数时候并不需要 init 方法 
 
 661
 00:28:22,297 --> 00:28:26,332
 'Kay? We showed,had the init method in the CalculatorBrain.
-我们之前演示过CalculatorBrain类的init方法，
+我们之前演示过 CalculatorBrain 类的 init 方法，
 
 663
 00:28:26,334 --> 00:28:27,766
 Made sense there. We needed it there.
-在那init确实是有用而且必要的 
+在那 init 确实是有用而且必要的 
 
 665
 00:28:28,902 --> 00:28:29,868
 But you don't need it that often,
-但是实际上大多数时候不太需要init，
+但是实际上大多数时候不太需要 init，
 
 666
 00:28:29,870 --> 00:28:34,005
@@ -3180,42 +3280,42 @@ because a lot of your variables and constants in your class or
 668
 00:28:34,007 --> 00:28:37,808
 struct are set with equals, so you don't need them.
-通过赋值初始化
+通过赋值被初始化
 
 669
 00:28:37,810 --> 00:28:40,110
 Or maybe the properties are Optionals.
-或者有些属性是Optional的，
+或者有些属性是 Optional 的，
 
 670
 00:28:40,112 --> 00:28:41,511
 And so they can just start out nil and
-这样即使他们是nil也没问题，
+这样即使他们是 nil 也没问题，
 
 671
 00:28:41,513 --> 00:28:46,115
 you can set them later like the outlets in a storyboard.
-也可以在之后在给他们赋值，就想storyboard里的outlet一样 
+也可以在之后在给他们赋值，就像 StoryBoard 里的 outlet 一样 
 
 672
 00:28:46,117 --> 00:28:50,752
 Or you can actually initialize by using a closure.
-???又或者可以用闭包来初始化属性 
+又或者可以用闭包来初始化
 
 673
 00:28:50,754 --> 00:28:52,287
 Okay? As I showed in the previous
-理解这个吗？就想我之前演示的
+理解这个吗？就像我之前演示的
 
 674
 00:28:52,289 --> 00:28:54,756
 thing, that lazy thing, that you, you can do that for
-lazy那个特性一样，你一样可以用闭包来初始化一个
+lazy 那个特性一样，你一样可以用闭包来初始化一个
 
 675
 00:28:54,758 --> 00:28:57,558
 non-lazies, put the closure thing there and execute it.
-非lazy的属性 
+非 lazy 的属性 
 
 676
 00:28:57,560 --> 00:28:59,226
@@ -3245,22 +3345,22 @@ But still, you can calculate some things to assign things
 681
 00:29:09,871 --> 00:29:11,937
 in a closure, by executing a closure.
-来做一些计算和赋值 
+做一些计算来赋值
 
 682
 00:29:13,173 --> 00:29:16,841
 and, or you could use the lazy mechanism and then to avoid needing an init.
-并且，你可以用lazy机制，从而不使用init方法 
+你也可以使用 lazy 机制，从而避免使用 init 方法 
 
 684
 00:29:16,843 --> 00:29:18,776
 So, there's a lot of ways to avoid init.
-所以有很多方法来避免使用init方法，
+所以有很多方法来避免使用 init
 
 685
 00:29:19,979 --> 00:29:24,014
 But if you do need an init then what,
-但如果你确实需要一个init方法的时候，
+但如果你确实需要一个 init 方法的时候，
 
 686
 00:29:24,016 --> 00:29:26,516
@@ -3270,7 +3370,7 @@ what, how do we do init?
 687
 00:29:26,518 --> 00:29:28,384
 Because init has some kind of
-因为init方法会有一些很有趣
+因为 init 方法会有一些很有趣
 
 688
 00:29:28,386 --> 00:29:31,220
@@ -3285,12 +3385,12 @@ it's not as straightforward as you might think.
 690
 00:29:34,958 --> 00:29:37,658
 Now you get some free inits-
-在一些情况下，init方法会自动生成，
+在一些情况下，init 方法会自动生成，
 
 691
 00:29:37,660 --> 00:29:39,593
-[COUGH] 'Kay? Inits that get done for
-也就是说init已经给你准备好了
+'Kay? Inits that get done for
+也就是说 init 已经给你准备好了
 
 692
 00:29:39,595 -->00:29:45,231
@@ -3301,30 +3401,32 @@ you, one is that if all the properties in a class,in a base class.
 00:29:45,233 --> 00:29:47,600
 Not a co, this is something that has no superclass,
 基类就是指没有父类的类，
+
 695
 00:29:47,602 --> 00:29:48,668
 like CalculatorBrain.
-比如CalculatorBrain
+比如 CalculatorBrain
 
 696
 00:29:48,670 --> 00:29:50,469
 If they all have defaults,
-如果它的所有属性都有值，
+如果它的所有的 property 都有默认值
 
 697
 00:29:50,471 --> 00:29:53,939
 then you'll get an inits with no arguments for free.
-那么你就会自动得到一个init方法 
+那么你就会自动得到一个没有参数的 init 方法 
 
 698
 00:29:53,941 --> 00:29:56,508
 So, if we haven't implemented CalculatorBrains, init,
-所以尽管我们没有为CalculatorBrains类写init方法，
+所以尽管我们没有为 CalculatorBrains 类写 init 方法，
 
 699
 00:29:56,510 --> 00:29:58,109
 of course, we still could have said.
 我们依然可以写
+
 700
 00:29:58,111 --> 00:30:00,378
 >> You know, brain = CalculatorBrain().
@@ -3333,7 +3435,7 @@ brain = CalculatorBrain()
 701
 00:30:00,380 --> 00:30:03,280
 That's because we get a free init in calculator brain,
-这是因为我们有一个默认的init
+这是因为我们有一个默认的 init
 
 702
 00:30:03,282 --> 00:30:06,283
@@ -3348,7 +3450,7 @@ Okay. So you,
 704
 00:30:07,468 --> 00:30:08,650
 that's one way to get an init.
-这是一种得到init的方法
+这是一种得到 init 的方法
 
 705
 00:30:08,653 --> 00:30:11,421
@@ -3358,17 +3460,17 @@ A struct, not a class, but a struct,
 706
 00:30:11,423 --> 00:30:15,324
 it will get a default one that has all the properties as
-它将默认得到一个将所有属性作为参数的初始化方法
+它将默认得到一个将所有 property 作为参数的初始化方法
 
 707
 00:30:15,326 --> 00:30:18,627
 arguments only if you have no initializers.
-仅当没有initializers时
+仅当没有初始化函数时
 
 708
 00:30:18,629 --> 00:30:21,897
 So if you had a struct and you gave it no initializers,
-因此，如果你有一个结构体并且没有initializers
+因此，如果你有一个结构体并且没有初始化方法
 
 709
 00:30:21,899 --> 00:30:24,899
@@ -3383,42 +3485,42 @@ all the arguments match all of the vars you have.
 711
 00:30:27,937 --> 00:30:29,970
 All the vars and lets, okay?
-所有的变量和常量，明白吧？
+所有的 var 和 let，明白吧？
 
 712
 00:30:29,972 --> 00:30:35,108
 So here I got a struct, it has two properties there, x and y.
-这里我有一个结构体，它有两个属性，x和y
+一个结构体，它有两个 property ，x 和 y
 
 713
 00:30:35,110 --> 00:30:38,945
 And you can see that I got this init, x takes an Int and
-你可以看到我这里有一个init方法，x是Int类型
+你可以看到我这里有一个 init 方法，x 是 Int类型
 
 714
 00:30:38,947 --> 00:30:41,514
 a y String for free, for free.
-y是String类型
+y 是 String 类型
 
 715
 00:30:41,516 --> 00:30:44,183
 I didn't have to implement that at all, it just came for
-我没有实现它，仅仅是默认的
+我不要实现它
 
 716
 00:30:44,185 --> 00:30:45,684
 free and so people can call that.
-都可以调用
+它就可以被调用
 
 717
 00:30:45,686 --> 00:30:48,186
 They can initialize MyStruct, by saying,
-可以初始化MyStruct
+可以通过圆括号，提供 x 和 y 的值来
 
 718
 00:30:48,188 --> 00:30:51,322
 MyStruct open parentheses and provide the x and the y.
-MyStruct提供x和y两个属性
+初始化 MyStruct
 
 719
 00:30:51,324 --> 00:30:52,857
@@ -3431,7 +3533,7 @@ All right.
 721
 00:30:54,060 --> 00:30:56,727
 So, what can you do inside of init?
-你可以在init里面做什么？
+你可以在 init 里面做什么？
 
 722
 00:30:56,729 --> 00:30:57,895
@@ -3441,12 +3543,12 @@ Okay. We saw,
 723
 00:30:57,896 --> 00:30:59,062
 what we did in calculator brain,
-我们在CalculatorBrain里做了什么
+我们在 CalculatorBrain 里做了什么
 
 724
 00:30:59,064 --> 00:31:00,763
 we initialized some stuff.
-我们初始化了些
+我们初始化了些 property
 
 725
 00:31:00,765 --> 00:31:02,498
@@ -3456,27 +3558,27 @@ But what can you do?
 726
 00:31:02,499 --> 00:31:04,232
 Well, you can set any properties value in there.
-你可以在里面设置任何属性值
+你可以在里面设置任何 property 的值
 
 727
 00:31:04,235 --> 00:31:05,300
-[COUGH] You can even set
+You can even set
 你甚至可以
 
 728
 00:31:05,302 --> 00:31:07,235
 properties that have default values.
-给属性设置默认值
+给 property 设置默认值
 
 729
 00:31:07,237 --> 00:31:09,771
 So even if you have properties set equals 12.
-即使你把属性设置为等于12
+即使你把它设置为等于12
 
 730
 00:31:09,773 --> 00:31:12,540
 In your init, you can reset that thing to something else
-在你的init里，你可以把一些东西重置为别的什么
+在你的 init 里，你可以把一些东西重置为别的什么
 
 731
 00:31:12,542 --> 00:31:15,109
@@ -3495,7 +3597,7 @@ You can do that.
 734
 00:31:16,912 --> 00:31:20,913
 You can also set constant properties.
-你也可以给常量属性赋值
+你也可以给常量 property 赋值
 
 735
 00:31:20,915 --> 00:31:24,817
@@ -3504,17 +3606,18 @@ So if you have a struct or a class and
 
 736
 00:31:24,819 --> 00:31:31,189
-it has letx colon String, you can set that in your init.
-你可以在init里这样设置 let x: String
+it has let x colon String, you can set that in your init.
+它有一个 property: let x: String
 
 737
 00:31:31,191 --> 00:31:34,192
 Even though to let, it's gotta get set some time in your init
-你必须得设置一段在你的init里
+即使是 let，它也可以在 init 里
 
 738
 00:31:34,194 --> 00:31:35,326
 is when you can set it.
+被你赋值
 
 739
 00:31:35,328 --> 00:31:37,094
@@ -3524,7 +3627,7 @@ You can also say, equal something, but
 740
 00:31:37,096 --> 00:31:38,495
 you can also set it in your init.
-你可以这样设置，在你的init里
+你可以在 init 里这么做
 
 741
 00:31:38,497 --> 00:31:40,230
@@ -3538,7 +3641,7 @@ So people sometimes don't understand, realize,
 743
 00:31:41,967 --> 00:31:44,567
 they're like, oh, I can have lets in my class?
-他们肯定在想，哦，在我的class里可以有let？
+他们肯定在想，哦，在我的 class 里可以有 let？
 
 744
 00:31:44,569 --> 00:31:46,602
@@ -3558,7 +3661,7 @@ stay the same for the lifetime of instance and
 747
 00:31:51,308 --> 00:31:54,242
 absolutely you can and you initialize them in your init.
-你绝对可以在init里初始化它们
+你绝对可以在 init 里初始化它们
 
 748
 00:31:54,244 --> 00:31:55,443
@@ -3572,17 +3675,17 @@ That's actually a good practice if
 750
 00:31:56,646 --> 00:32:00,214
 you have something that's, you know, constant like that.
-如果你需要定义属性，你知道的，可以用常量
+如果你需要定义常量属性
 
 751
 00:32:00,216 --> 00:32:04,385
 You can call other init methods in your own class or
-在你的类或者结构体里你可以调用其他的init方法
+在你的类或者结构体里你可以调用其他的 init 方法
 
 752
 00:32:04,387 --> 00:32:06,687
 struct using self.init.
-使用self.init
+使用 self.init
 
 753
 00:32:06,689 --> 00:32:08,422
@@ -3591,11 +3694,12 @@ Okay?
 754
 00:32:08,423 --> 00:32:10,156
 Self.init, you can call the other ones with the ones that
-self.init，你可以调用有不同参数的其他init方法
+self.init，你可以调用有不同参数的
 
 755
 00:32:10,158 --> 00:32:11,524
 have different arguments.
+其他 init 方法
 
 756
 00:32:11,526 --> 00:32:13,026
@@ -3609,7 +3713,7 @@ So that sounds good.
 758
 00:32:14,529 --> 00:32:18,297
 And of course in a class, you can call super.init.
-当然，在类里你也可以调用super.init
+当然，在类里你也可以调用 super.init
 
 759
 00:32:18,299 --> 00:32:20,132
@@ -3624,11 +3728,12 @@ what their arguments whatever, they might be.
 761
 00:32:22,269 --> 00:32:26,237
 However, big old humongous, however on this one.
+然而很重要的是
 
 762
 00:32:26,239 --> 00:32:28,205
 There are a lot of rules for
-调用其他的init时有很多规则
+调用其他的 init 时有很多规则
 
 763
 00:32:28,207 --> 00:32:31,842
@@ -3662,7 +3767,7 @@ So as part of these rules,
 769
 00:32:41,118 --> 00:32:43,118
 what do you required to do inside of init?
-你需要在init里做些什么？
+你需要在 init 里做些什么？
 
 770
 00:32:43,120 --> 00:32:45,186
@@ -3672,12 +3777,12 @@ What is mandatory for you to do?
 771
 00:32:45,188 --> 00:32:48,156
 Well, as you know, you have to have initialized all
-好，正如你所知道的，在你的整个类里
+好，正如你所知道的，在你的类里
 
 772
 00:32:48,158 --> 00:32:50,324
 the properties in your entire class.
-所有的属性都必须初始化
+所有的 property 都必须初始化
 
 773
 00:32:50,326 --> 00:32:52,659
@@ -3687,12 +3792,12 @@ You can not start a class off with no value.
 774
 00:32:52,661 --> 00:32:56,163
 And remember, Optionals, nil is a value for an Optional.
-记住，Optionals，nil也是一个Optional
+记住，对于 Optionals，nil 也是值
 
 775
 00:32:56,165 --> 00:32:58,498
 So if an Optional is nil, it is set.
-所以，如果你有一个属性的Optional是nil，这也算它有值
+所以，如果你有一个 Optional 是 nil，这也算它有值
 
 776
 00:32:58,500 --> 00:32:59,766
@@ -3701,8 +3806,8 @@ So, everything's fine there.
 
 777
 00:32:59,768 --> 00:33:03,202
-[COUGH] There are two times, type,
-在类里，Swift提供两种类型
+There are two times, type,
+在类里，Swift 提供两种类型
 
 778
 00:33:03,204 --> 00:33:05,504
@@ -3717,31 +3822,32 @@ Not in a struct, but in a class.
 780
 00:33:06,807 --> 00:33:09,007
 One is called a convenience init and
-一种是convenience init
+一种是 Convenience Init
 
 781
 00:33:09,009 --> 00:33:11,242
 then there's all the other kinds.
+其它的都是另一种类型
 
 782
 00:33:11,244 --> 00:33:13,377
 Those are called designated initializers.
-还有一种叫designated initializers
+叫 Designated Initializers
 
 783
 00:33:13,379 --> 00:33:15,012
 So by default, an initializer is
-默认的initializer
+默认的 initializer
 
 784
 00:33:15,014 --> 00:33:17,647
 called a designated initializer, but there's also
-是designated initializer，但是另外还有些
+是 designated initializer，但是另外还有些
 
 785
 00:33:17,649 --> 00:33:20,116
 these things called convenience initializers.
-叫convenience initializers
+叫 convenience initializers
 
 786
 00:33:20,118 --> 00:33:21,384
@@ -3761,23 +3867,22 @@ So lets talk about that.
 789
 00:33:25,222 --> 00:33:28,056
 A designated initializer, one that doesn't take
-一个designated initializer，不能有
+Designated initializer，不能有
 
 790
 00:33:28,058 --> 00:33:29,858
 convenience in the front of it.
-convenience在它的前面
+convenience 在它的前面
 
 791
 00:33:29,860 --> 00:33:31,325
 It has to, and
-他只能
+它只能
 
 792
 00:33:31,327 --> 00:33:37,564
 can only call a designated initializer in its superclass.
-调用其直接父类的designated initializer
-
+调用其父类的 designated initializer
 
 793
 00:33:37,566 --> 00:33:38,899
@@ -3791,32 +3896,32 @@ Okay. If you
 795
 00:33:40,602 --> 00:33:42,302
 have a designated initializer, initializer doesn't have
-如果你有一个designated initializer，初始化时不能有
+如果有一个 designated initializer
 
 796
 00:33:42,304 --> 00:33:43,936
 the word convenience in front of it,
-convenience这个单词在它的前面
+它前面没有 convenience 这个单词在
 
 797
 00:33:43,938 --> 00:33:45,838
 it can't call another init in your class.
-在你的类里不能调用其他的init方法
+在你的类里不能调用其他的 init 方法
 
 798
 00:33:45,840 --> 00:33:47,706
 It has to call a superclass in init and
-在init里有调用父类的init
+必须在 init 里调用父类的 init
 
 799
 00:33:47,708 --> 00:33:49,808
 it has to be a designated initializer not
-它必须是一个designated initializer
+而且它必须是一个 designated initializer
 
 800
 00:33:49,810 --> 00:33:52,243
 a convenience initializer in the superclass.
-而不是convenience initializer
+而不是 convenience initializer
 
 801
 00:33:52,245 --> 00:33:53,878
@@ -3855,7 +3960,7 @@ I'm just trying to summarize it here.
 808
 00:34:04,022 --> 00:34:05,488
 Okay. Hopefully,
-希望，
+希望
 
 809
 00:34:05,489 --> 00:34:06,955
@@ -3895,41 +4000,42 @@ You have to initialize all of your own
 816
 00:34:19,235 --> 00:34:24,838
 properties before you call your superclass's initializer.
-先初始化你自己的所有属性 
+先初始化你自己的所有的 property
 
 817
 00:34:24,840 --> 00:34:25,572
 Okay? This is for
-只有 designated initializers 需要这样 
+只有 designated initializers
 
 818
 00:34:25,574 --> 00:34:26,939
 designated initializers only,
+需要这样
 
 819
 00:34:26,941 --> 00:34:29,342
 cuz they are the ones who call supervisors initializers.
-因为他们调用 supervisors initializers.
+因为他们调用 supervisors initializers
 
 820
 00:34:29,344 --> 00:34:32,478
 So you have to be done with your own properties before you
-所以你必须在调用父类的属性前
+所以你必须在调用父类的 property 前
 
 821
 00:34:32,480 --> 00:34:34,046
 call your superclass's.
-先处理你自己（类）的属性 
+先处理你自己（类）的 property 
 
 822
 00:34:34,048 --> 00:34:36,348
 This one will trip you up, often.
-这经常让你有麻烦 
+这经常让你有些麻烦
 
 823
 00:34:36,350 --> 00:34:39,350
 Okay? You also have to call your
-Okay？ 你要先调用
+你要先调用
 
 824
 00:34:39,352 --> 00:34:43,420
@@ -3939,7 +4045,7 @@ superclass's init before you assign a value to
 825
 00:34:43,422 --> 00:34:47,557
 any property you inherit from your superclass.
-属性赋值 
+property 赋值
 
 826
 00:34:47,559 --> 00:34:49,125
@@ -3949,7 +4055,7 @@ In other words,
 827
 00:34:49,126 --> 00:34:50,692
 you have to let your superclass's initialize,
-你必须先让你的父类初始化它的属性，
+你必须先让你的父类初始化它的 property，
 
 828
 00:34:50,695 --> 00:34:53,262
@@ -4041,7 +4147,7 @@ So one convenience initializer can call self another
 846
 00:35:32,765 --> 00:35:35,866
 convenience initializer, which called designated initializer.
-调用designated initializer 的 convenience initializer 
+调用 designated initializer 的 convenience initializer 
 
 847
 00:35:35,868 --> 00:35:39,268
@@ -4060,7 +4166,7 @@ A convenience initializer must call that
 850
 00:35:43,908 --> 00:35:46,775
 designated initializer, directly or
-间接调用designated initializer，
+间接调用 designated initializer，
 
 851
 00:35:46,777 --> 00:35:50,945
@@ -4084,27 +4190,27 @@ object primarily initialized before you can have
 855
 00:35:56,485 --> 00:36:00,253
 the convenience initializer start hacking at properties.
-让 convenience initializer 开始访问属性 
+让 convenience initializer 开始访问 property
 
 856
 00:36:00,255 --> 00:36:03,356
 The calling of other inits, whether your a convenience guy
-其他初始化函数的调用，不管是你的 convenience 初始化函数
+其他初始化函数的调用，不管是你的 convenience initializer
 
 857
 00:36:03,358 --> 00:36:06,125
 calling your designator or whether your a designator
-调用你的 designator ，还是你的 designator
+调用你的 designator initializer，还是你的 designator initializer
 
 858
 00:36:06,127 --> 00:36:08,961
 calling up to your supers designator has to be complete
-调用你父类的 designator，
+调用你父类的 designator initializer，
 
 859
 00:36:08,963 --> 00:36:12,197
 before you can start accessing your properties and methods.
-所有这些都必须在你开始访问属性和方法之前完成 
+所有这些都必须在你开始访问 property 和方法之前完成 
 
 860
 00:36:12,199 --> 00:36:15,400
@@ -4114,7 +4220,7 @@ In other words, the class has to be initialized before you
 861
 00:36:15,402 --> 00:36:17,869
 can start calling methods and properties.
-你才能开始调用方法和属性 
+你才能开始调用方法和 property 
 
 862
 00:36:17,871 --> 00:36:19,838
@@ -4123,32 +4229,32 @@ Okay?
 863
 00:36:19,839 --> 00:36:21,806
 That's why we have to use lazy if we want a property to
-这就是为什么我们必须使用懒惰的方式，
+这就是为什么我们必须使用 lazy 的方式，
 
 864
 00:36:21,808 --> 00:36:24,275
 set its value to be calling a method.
-如果我们要设置一个属性的值则调用方法 
+如果想让 property 在被调用方法的时候被赋值
 
 865
 00:36:24,277 --> 00:36:25,943
 Because we can't do it non-lazily,
-因为我们不能使用非懒惰方式 
+因为我们不能使用 non-lazily 的方式 
 
 866
 00:36:25,945 --> 00:36:28,245
 because we wouldn't be initialized at that time.
-因为那时我们还没被初始化 
+因为那时我们还没被初始化
 
 867
 00:36:28,247 --> 00:36:30,113
 We'd still be in the process of initializing.
-我们还在初始化过程中 
+我们还在初始化过程中
 
 868
 00:36:30,115 --> 00:36:31,981
 It's kind of a two phase initialization.
-这如同初始化的两个阶段 
+这如同初始化的两个阶段
 
 869
 00:36:31,983 --> 00:36:36,652
@@ -4168,12 +4274,12 @@ Question?
 872
 00:36:40,140 --> 00:36:42,157
 Is there a way to set the constant then by
-有没有这样一种方式，通过调用
+（学生提问）
 
 873
 00:36:42,159 --> 00:36:43,691
 by calling a method?
-方法给常量赋值？
+（学生提问）
 
 874
 00:36:43,693 --> 00:36:44,942
@@ -4293,7 +4399,7 @@ three designated initializers with different arguments.
 898
 00:37:38,406 --> 00:37:41,607
 If you override all of them, then you'll inherit all of
-如果你覆盖了所有这些方法，那么你就继承了父类中所有的
+如果你重写了所有这些方法，那么你就继承了父类中所有的
 
 899
 00:37:41,609 --> 00:37:44,443
@@ -4806,54 +4912,67 @@ someone tries to catch them and handle them.
 1002
 00:41:20,163 --> 00:41:22,013
 Okay?
+明白了吗？
 
 1003
 00:41:22,014 --> 00:41:23,864
 And that programming methodology is not one
+这种编程方法并不是
 
 1004
 00:41:23,867 --> 00:41:27,501
 that's really something that we use much in iOS.
+iOS 开发中常用的一种方法
 
 1005
 00:41:27,503 --> 00:41:28,635
 Okay? In Objective-C,
+明白了吗？在 Objective-C 中
 
 1006
 00:41:28,637 --> 00:41:30,537
 maybe it was used even a little more.
+这种方法可能只会用了一点点
 
 1007
 00:41:30,539 --> 00:41:32,171
 I'm not even sure about that but
+对此我不是很确定但是
 
 1008
 00:41:32,173 --> 00:41:34,674
 certainly in Swift we're not gonna be using that.
+在 Swift 中，我们肯定不会使用它
 
 1009
 00:41:34,676 --> 00:41:36,442
 I'm not, I'm not even gonna show it to your in this class.
+在本课程的范围内，我甚至不会演示给你们怎么使用它
 
 1010
 00:41:36,444 --> 00:41:40,679
 That's how unneed, unnecessary it is to know that.
+不需要了解
 
 1011
 00:41:40,681 --> 00:41:41,979
 Okay.
+好的
 
 1012
 00:41:41,981 --> 00:41:44,782
 So let's talk about creating objects,
+让我们来讲一下如何创建对象
 
 1013
 00:41:44,784 --> 00:41:47,718
 then you know to do it by putting the type and
+创建一个对象的语法是，你在想要创建的类型之后
 
 1014
 00:41:47,720 --> 00:41:52,022
 then parentheses and then the arguments to the initializer.
+加上一对括号，括号内是初始化方法的参数
 
 1015
 00:41:52,024 --> 00:41:53,457
@@ -4862,86 +4981,107 @@ Okay.
 1016
 00:41:53,458 --> 00:41:54,891
 It's completely obvious there.
+这里写的很清楚
 
 1017
 00:41:54,893 --> 00:41:58,561
 You notice you don't always create objects by doing that.
+你可能会发现你并不是一直通过这种方式来创建对象
 
 1018
 00:41:58,563 --> 00:42:01,196
 Sometimes, you will ask a class method or
+有时候你会使用一个类方法或者
 
 1019
 00:42:01,198 --> 00:42:02,931
 a type method to do it.
+类型方法去创建一个对象
 
 1020
 00:42:02,933 --> 00:42:04,632
 So here's one, buttonWithType.
+这里就是一个例子，.buttonWithType
 
 1021
 00:42:04,634 --> 00:42:07,802
 You see that's being sent UIButton, the type.
+你看到这个消息被发送给了 UIButton，一种类型
 
 1022
 00:42:07,804 --> 00:42:09,236
 All right. It's not being sent to
+消息并没有发送给一个
 
 1023
 00:42:09,238 --> 00:42:11,238
 a UIButton, it's being sent to the type,
+UIButton 的对象，它发送给了一个类型
 
 1024
 00:42:11,240 --> 00:42:12,639
 like we talked about before.
+我记得我们之前讲过
 
 1025
 00:42:12,641 --> 00:42:14,040
 And so sometimes,
+还有一种情况
 
 1026
 00:42:14,042 --> 00:42:16,976
 you'll be creating things that way very rarely.
+很少见的情况下，用另外一种方式创建对象
 
 1027
 00:42:16,978 --> 00:42:20,546
 They really, Apple's been moving away from that model
+很少见的情况，以至于 Apple 已经将它们从 Model 中移除
 
 1028
 00:42:20,548 --> 00:42:24,049
 and more towards just using initializers and creating
+而转向于使用初始化方法
 
 1029
 00:42:24,051 --> 00:42:28,219
 things but there, there's some that, that do that.
+但是仍有部分的情况会使用到这种创建对象的方法
 
 1030
 00:42:28,221 --> 00:42:31,322
 Like remember UIImage on the previous page,
+还记得上一页中的 UIImage 吗？
 
 1031
 00:42:31,324 --> 00:42:34,025
 that wasn't UIImage dot image named.
+这不是 UIImage.imageNamed
 
 1032
 00:42:34,027 --> 00:42:37,094
 That's kind of how it used to be in Apple, now it's UIImage
+曾经在 Apple 是被使用的，但是现在
 
 1033
 00:42:37,096 --> 00:42:39,996
 parentheses whatever, called a constructor.
+UIImage().xxx，这个叫做 constructor
 
 1034
 00:42:39,998 --> 00:42:43,733
 Sometimes other objects will obviously create
+有些时候其他对象会为你
 
 1035
 00:42:43,735 --> 00:42:45,034
 objects for you.
+创建一些对象
 
 1036
 00:42:45,036 --> 00:42:49,137
 So like here's a really cool method in String called join.
+例如在 String 中有一个非常酷的方法叫 join
 
 1037
 00:42:49,139 --> 00:42:51,856
@@ -4950,34 +5090,42 @@ Okay?
 1038
 00:42:51,857 --> 00:42:54,574
 Join takes an Array of Strings and it will separate them by
+join 方法接受一个由字符串组成的数组并
 
 1039
 00:42:54,577 --> 00:42:57,545
 whatever String you send join to.
+返回给你一个由 join 方法发送的对象拼接成一个字符串 
 
 1040
 00:42:57,547 --> 00:43:00,447
 So comma.join up in Array will give you a comma
+所以，“,”.join(myArray) 会返回给你一个由逗号
 
 1041
 00:43:00,449 --> 00:43:03,316
 separated String, a String with the things,
+分隔的字符串，而字符串是由
 
 1042
 00:43:03,318 --> 00:43:05,685
 then the Array comes separated.
+传入的数组参数中的元素所组成的
 
 1043
 00:43:05,687 --> 00:43:08,388
-And that's obviously creating a new Array.
+And that's obviously creating a new Array (String).
+这很明显是创建一个新字符串的方法
 
 1044
 00:43:08,390 --> 00:43:10,489
 So this, this is kind of completely obvious.
+所以，这确实很明显
 
 1045
 00:43:10,491 --> 00:43:13,325
 But yes, some methods return objects to you that
+但是，一些方法返回给你一个创建的对象
 
 1046
 00:43:13,327 --> 00:43:14,593
@@ -4986,66 +5134,82 @@ are created.
 1047
 00:43:14,595 --> 00:43:16,478
 okay.
+继续
 
 1048
 00:43:16,479 --> 00:43:18,362
 So let's talk now about AnyObject,
+让我们讲一下 AnyObject
 
 1049
 00:43:18,365 --> 00:43:20,832
 this was brought up earlier.
+这个在之前涉及过
 
 1050
 00:43:20,834 --> 00:43:24,201
 AnyObject is kind of okay.
+AnyObject 是某种
 
 1051
 00:43:24,203 --> 00:43:26,103
 For the purposes of what you know so
+为了方便理解
 
 1052
 00:43:26,105 --> 00:43:28,005
 far, you can think of it as a type.
+你可以认为它是一种类型
 
 1053
 00:43:28,007 --> 00:43:30,273
 Okay? It's not really a type, but
+明白了吗？但是事实上，这并不是一种类型
 
 1054
 00:43:30,275 --> 00:43:33,476
 you can think of it as type, like Double or
+但是你可以认为它是一种类型，就像 Double
 
 1055
 00:43:33,478 --> 00:43:35,277
 Array or whatever.
+或者 Array 等等
 
 1056
 00:43:35,279 --> 00:43:37,079
 And it's used primarily for
+AnyObject 大量在
 
 1057
 00:43:37,081 --> 00:43:40,749
 compatibility with existing Objective-C APIs and iOS.
+兼容现有 Objective-C 和 iOS 代码中被使用到
 
 1058
 00:43:40,751 --> 00:43:42,584
 Okay. You're really not gonna use
+你并不经常会使用到
 
 1059
 00:43:42,586 --> 00:43:45,820
 AnyObject to build your own data structures very much.
+AnyObject 来构建你自己的数据结构
 
 1060
 00:43:45,822 --> 00:43:47,689
 I suppose you could, but
+假设你需要
 
 1061
 00:43:47,690 --> 00:43:49,557
 it'd be kind of, it'd be, again, kind of anti-Swift.
+但是，这有点点，不想 Swift 风格的做法
 
 1062
 00:43:49,559 --> 00:43:54,161
 Swift is very much into strong typing and type inference and
+Swift 是强类型语言，并有类型推断的特性
 
 1063
 00:43:54,163 --> 00:43:55,929
@@ -5054,155 +5218,192 @@ all that.
 1064
 00:43:55,930 --> 00:43:57,696
 So you could, but I'm only gonna talk about it in the
+当然你可以这么做，但是我只会在兼容性的问题上
 
 1065
 00:43:57,699 --> 00:44:00,566
 context here of using it here as this compatibility thing.
+讲到 AnyObject 的问题
 
 1066
 00:44:00,568 --> 00:44:01,167
 All right?
+明白了吗？
 
 1067
 00:44:01,169 --> 00:44:04,837
 So what is AnyObject?
+什么是 AnyObject？
 
 1068
 00:44:04,839 --> 00:44:06,672
 Okay? And where will you see it?
+还有，我们会在哪里用到它？
 
 1069
 00:44:06,674 --> 00:44:10,742
 So AnyObject, means a pointer to an object.
+AnyObject 的意思是，指向一个对象的指针
 
 1070
 00:44:10,744 --> 00:44:12,476
 Meaning, an instance of a class.
+也就是说，一个类的实力
 
 1071
 00:44:12,478 --> 00:44:13,310
 Okay? That you
+明白了吗？
 
 1072
 00:44:13,312 --> 00:44:14,978
 don't know what the class is.
+只是你不知道它的类是什么
 
 1073
 00:44:14,980 --> 00:44:18,848
 So it's just kind of pointer to unknown class.
+所以它是指向一个未知类的指针
 
 1074
 00:44:18,850 --> 00:44:20,016
 Okay? Which it seems kind of
+有问题吗？这可能听上去
 
 1075
 00:44:20,018 --> 00:44:21,617
 weird and it is kind of weird.
+有些奇怪，确实它有些奇怪
 
 1076
 00:44:21,619 --> 00:44:24,786
 And you, so we gonna have to play around to be able to
+你们会考虑，我们到底会在什么情况下使用到它
 
 1077
 00:44:24,788 --> 00:44:26,921
 use it but that's what it is.
+但这里我想告诉你们的是，它是什么
 
 1078
 00:44:26,923 --> 00:44:29,524
 And where will you see this in iOS?
+你们会在 iOS 开发中的哪里看到它呢？
 
 1079
 00:44:29,526 --> 00:44:32,360
 Sometimes, you'll see properties that are in
+有些时候你会看到某些属性的类型是 AnyObject 的
 
 1080
 00:44:32,362 --> 00:44:36,430
 AnyObject, like there's a property on storyboard segues
+例如 Storyboard Segues 的一个属性
 
 1081
 00:44:36,432 --> 00:44:38,932
 which we're gonna talk about next week.
+这个属性我们下周会讲到
 
 1082
 00:44:38,934 --> 00:44:41,401
 Called destinationViewController,
+这个属性叫 destinationViewController
 
 1083
 00:44:41,403 --> 00:44:44,403
 instead of being a UIViewController is a type,
+它不是 UIViewController 作为它的类型
 
 1084
 00:44:44,405 --> 00:44:45,604
 it's AnyObject.
+而是 AnyObject
 
 1085
 00:44:45,606 --> 00:44:47,572
 Okay, for historical reasons really.
+因为某些历史性的原因
 
 1086
 00:44:47,574 --> 00:44:50,842
 And similarly u, in UIViewController,
+类似的，在 UIViewController 中
 
 1087
 00:44:50,844 --> 00:44:53,978
 there is a property called toolbarItems and
+有一个叫 toolbarItems 的属性
 
 1088
 00:44:53,980 --> 00:44:57,148
 it would return to an Array of the AnyObject.
+它会返回一个由 AnyObject 组成的数组
 
 1089
 00:44:57,150 --> 00:44:59,083
 Okay?
+明白了吗？
 
 1090
 00:44:59,084 --> 00:45:01,017
 So basically, these properties are giving you back things you
+基本上，这些属性返回给你一些
 
 1091
 00:45:01,020 --> 00:45:02,552
 don't even know what they are.
+你都不知道是什么类型的东西
 
 1092
 00:45:03,989 --> 00:45:05,421
 Kay?
+明白了吗？
 
 1093
 00:45:05,423 --> 00:45:07,623
 You'll also see them as arguments to functions.
+还有，你会在函数的参数中见到 AnyObject
 
 1094
 00:45:07,625 --> 00:45:09,625
 Like here is
+类似在这里一样
 
 1095
 00:45:09,626 --> 00:45:11,626
 a UIViewController method prepare for segue.
+一个 UIViewController 的方法 prepareForSegue
 
 1096
 00:45:11,629 --> 00:45:13,462
 It takes a normal argument there, segue, but
+它接受一个普通的参数，segue，但是它还接受一个
 
 1097
 00:45:13,464 --> 00:45:16,364
 then it also takes a sender, which can be AnyObject.
+sender 参数，这个参数的类型是 AnyObject 的
 
 1098
 00:45:17,834 --> 00:45:19,366
 Now in that case, it kinda makes sense because it
+在这个情况下，AnyObject 的说法更有说服性
 
 1099
 00:45:19,368 --> 00:45:21,068
 really could be AnyObject in that case,
+因为 Sender 确实可以是任意对象
 
 1100
 00:45:21,070 --> 00:45:23,703
 cuz whatever's causing the segue to happen in a user
+因为无论什么导致 UI 中 Segue 发生的东西
 
 1101
 00:45:23,705 --> 00:45:27,006
 interface, could be AnyObject, so it makes some sense.
-可以是AnyObject，这是一样对
+可以是任意对象，所以这么就说通了
 
 1102
 00:45:27,008 --> 00:45:30,276

@@ -4001,802 +4001,1002 @@ Okay?
 1001
 00:44:19,600 --> 00:44:21,884
 You know, pinches and maybe rotations, swipes, taps,
+比如，pinchs，rotations，swipes，taps
 
 1002
 00:44:21,886 --> 00:44:24,170
 things like that.
+等手势。
 
 1003
 00:44:24,171 --> 00:44:26,455
 Now we could get the raw data about every finger that
+我们可以获取到手势按下、
 
 1004
 00:44:26,457 --> 00:44:29,691
 goes down, and where it is, that data is available, but
+移动的原始信息，
 
 1005
 00:44:29,693 --> 00:44:31,325
 we never look at that.
+但是我们很少直接使用这些信息。
 
 1006
 00:44:31,327 --> 00:44:34,061
 First of all it's very difficult to
+因为我们自己通过这些原始信息
 
 1007
 00:44:34,063 --> 00:44:35,562
 look at that raw data, and
+很难判断
 
 1008
 00:44:35,564 --> 00:44:39,199
 see, is this a swipe, or is it just moving over to the right.
+这是一个swipe手势，还是单纯向右滑动。
 
 1009
 00:44:40,168 --> 00:44:41,534
 So iOS does all that for
+不过ios为我们做了底层封装，
 
 1010
 00:44:41,536 --> 00:44:44,203
 you, and that's the only way I'm going to teach you
+而本课上，我只会教你
 
 1011
 00:44:44,205 --> 00:44:48,006
 to react to user touches is via gestures, okay?
+通过手势来处理用户的触摸事件，明白吗？
 
 1012
 00:44:48,008 --> 00:44:49,540
 So how do gestures work?
+那么手势是如何工作的呢？
 
 1013
 00:44:49,542 --> 00:44:52,677
 Gestures are recognized by UI views when
+当手指在视图边界内滑动时，
 
 1014
 00:44:52,679 --> 00:44:56,013
 the gesture happens inside their bounds.
+视图会识别特定的手势。
 
 1015
 00:44:56,015 --> 00:44:58,782
 Okay, I told you the views are rectangular areas where you
+是的，我说过，视图是用来绘制和
 
 1016
 00:44:58,784 --> 00:45:00,450
 draw and you recognize gestures so
+识别手势的矩形区域
 
 1017
 00:45:00,452 --> 00:45:02,085
 this is how it happens.
+手势就是这样被识别的。
 
 1018
 00:45:02,087 --> 00:45:04,620
 There's a class called UIGestureRecognizer.
+有一个叫UIGestureRecognizer的类。
 
 1019
 00:45:04,622 --> 00:45:06,255
 It's an abstract base class.
+它是一个抽象类。
 
 1020
 00:45:06,257 --> 00:45:09,424
 You never actually create a UIGestureRecognizer base
+通常，你不会直接创建UIGestureRecognizer基类，
 
 1021
 00:45:09,426 --> 00:45:13,128
 class, you create a sub class of UIGestureRecognizer.
+而是创建它的子类。
 
 1022
 00:45:13,130 --> 00:45:15,263
 And those subclasses are concrete in
+因为这些具体的子类
 
 1023
 00:45:15,265 --> 00:45:17,932
 that they know about certain gestures, swipes and pans and
+能够识别特定的手势，比如swipes、pans、touch
 
 1024
 00:45:17,934 --> 00:45:19,233
 touches, et cetera.
+等。
 
 1025
 00:45:19,235 --> 00:45:24,137
 So there are two sides to using a gesture recognizer.
+使用手势识别器有两个步骤。
 
 1026
 00:45:24,139 --> 00:45:27,674
 One is you have to add a gesture recognizer to a view.
+首先是为视图添加手势识别器。
 
 1027
 00:45:27,676 --> 00:45:30,643
 That says to the view, start recognizing this gesture.
+这表示，该视图现在能识别手势。
 
 1028
 00:45:30,645 --> 00:45:33,679
 If you recognize this gesture, you let somebody know.
+如果你识别了这个手势，就报告给某个对象。
 
 1029
 00:45:33,681 --> 00:45:34,279
 Okay?
+明白吗？
 
 1030
 00:45:34,281 --> 00:45:35,914
 And you do that with
+完成这个步骤，
 
 1031
 00:45:35,915 --> 00:45:37,548
 a function on UIView called add gesture recognizer.
+你只需要调用视图的addGestureRecognized方法。
 
 1032
 00:45:37,551 --> 00:45:38,950
 Couldn't be simpler.
+非常简单。
 
 1033
 00:45:38,952 --> 00:45:42,687
 Then the second piece, though, is when you create the gesture
+第二步是，当你创建手势识别器的时候，
 
 1034
 00:45:42,689 --> 00:45:46,323
 recognizer, you have to say, if you recognize the gesture,
+你必须指定一个对象，如果视图识别了这个手势
 
 1035
 00:45:46,325 --> 00:45:48,225
 who are you gonna tell about it?
+就报告给这个对象。
 
 1036
 00:45:48,227 --> 00:45:49,893
 Okay, you have to notify somebody and
+是的，你需要让某个对象知道
 
 1037
 00:45:49,895 --> 00:45:51,361
 say oh, I recognize that swipe.
+嘿，这是一个swipe手势。
 
 1038
 00:45:51,363 --> 00:45:51,961
 Okay?
+明白吗？
 
 1039
 00:45:51,963 --> 00:45:53,395
 So there's the handler.
+也就是说，你需要提供一个处理事件的对象。
 
 1040
 00:45:53,397 --> 00:45:56,365
 So you've got the recognizer, that's the view.
+一个是识别手势的对象，就是视图。
 
 1041
 00:45:56,367 --> 00:45:58,800
 Okay, the gesture recognizer in association with the view.
+是的，添加了手势识别器的视图。
 
 1042
 00:45:58,802 --> 00:46:00,935
 And then you've got the handler that's who handles it,
+然后是处理事件的对象，
 
 1043
 00:46:00,937 --> 00:46:02,870
 and those are not always the same person.
+这两个并不一定是同一个对象。
 
 1044
 00:46:02,872 --> 00:46:05,506
 Sometimes they're the same object, sometimes not.
+有些时候是的，有些时候不是。
 
 1045
 00:46:05,508 --> 00:46:08,775
 Usually the first one, adding a gesture recognizer to
+通常，为视图添加识别器
 
 1046
 00:46:08,777 --> 00:46:11,211
 a view is done by a controller.
+是通过控制器来完成的。
 
 1047
 00:46:11,213 --> 00:46:13,646
 Although a view will sometimes add it to itself, for
+不过有些时候，视图自己也可以添加识别器，
 
 1048
 00:46:13,648 --> 00:46:14,914
 example scroll view.
+比如scroll view。
 
 1049
 00:46:14,916 --> 00:46:17,449
 Scroll view doesn't even exist without the pan and
+scroll view 可以自动识别
 
 1050
 00:46:17,451 --> 00:46:19,451
 pinch gestures, that's what it does.
+pan和pinch手势。
 
 1051
 00:46:19,453 --> 00:46:22,020
 So it adds the gesture recognizers to itself.
+它为自身添加了这些识别器。
 
 1052
 00:46:22,022 --> 00:46:25,189
 But a lot of times other times you have a gesture that
+但是大多数时候，
 
 1053
 00:46:25,191 --> 00:46:28,992
 you're going to recognize only if the controller wants you to
+只有在控制器需要视图识别手势的时候，
 
 1054
 00:46:28,994 --> 00:46:31,411
 recognize it, so
+你才添加识别器到视图上，
 
 1055
 00:46:31,412 --> 00:46:33,829
 you make some public handler possibly in your view.
+你可能在视图中 实现公开的事件处理方法。
 
 1056
 00:46:33,832 --> 00:46:37,233
 And then your controller can add this gesture recognizer to
+然后控制器可以添加识别器到
 
 1057
 00:46:37,235 --> 00:46:39,035
 one of its views, one of its minions and say,
+视图，
 
 1058
 00:46:39,037 --> 00:46:41,804
 start recognizing this gesture and you can even handle it
+视图开始识别手势，甚至在手势被识别后
 
 1059
 00:46:41,806 --> 00:46:44,106
 yourself if you want, the controller might say.
+可以自己处理相关事件。
 
 1060
 00:46:44,108 --> 00:46:47,009
 Or the controller might say oh, and I'll handle it.
+又或者由控制器来处理。
 
 1061
 00:46:47,011 --> 00:46:49,778
 So the second thing, the handling is either done by
+所以，第二步中，如果是显示相关的事件
 
 1062
 00:46:49,780 --> 00:46:53,281
 the view if it's a display-oriented handling
+一般由视图自己来处理，
 
 1063
 00:46:53,283 --> 00:46:56,217
 thing, or it's done by the controller if it's handling
+而如果涉及到修改model的时候
 
 1064
 00:46:56,219 --> 00:46:58,719
 something that's going to modify the model.
+事件一般由控制器来处理。
 
 1065
 00:46:58,721 --> 00:47:00,320
 Okay? Or be something that's
+明白吗？ 如果
 
 1066
 00:47:00,322 --> 00:47:03,623
 complicated that's going to cause multiple views to
+涉及很多视图这种复杂情况的时候
 
 1067
 00:47:03,625 --> 00:47:05,525
 be involved and so the controller has to do it.
+就必须由控制器来处理了。
 
 1068
 00:47:05,527 --> 00:47:08,260
 And it's perfectly fine to have either the controller or
+所以，事件的处理通常都是由控制器
 
 1069
 00:47:08,262 --> 00:47:10,295
 the view handle something although you would
+或者视图两个中的一个来完成的，
 
 1070
 00:47:10,297 --> 00:47:13,665
 never have the view handle a gesture that is directly
+你绝不会在视图中直接
 
 1071
 00:47:13,667 --> 00:47:15,633
 modifying the model cuz a view can't see the model.
+修改model，因为model对view是不可见的。
 
 1072
 00:47:15,635 --> 00:47:17,635
 Only a controller can do that.
+只有控制器可以直接和model交互。
 
 1073
 00:47:18,838 --> 00:47:20,871
 Okay?
+明白吗？
 
 1074
 00:47:20,872 --> 00:47:22,905
 So how do you add a gesture recognizer to a UI view?
+那么，怎样为视图添加识别器呢？
 
 1075
 00:47:22,908 --> 00:47:24,274
 It's very simple.
+非常简单。
 
 1076
 00:47:24,276 --> 00:47:27,310
 I'm going to do it in a way that is very common, which is
+我会用一种很通用的方式，
 
 1077
 00:47:27,312 --> 00:47:31,147
 to do it in the property observer of an outlet setter,
+就是在属性监听的set方法中来完成，
 
 1078
 00:47:31,149 --> 00:47:34,784
 just exactly like we did when we set the face views delegate
+就和我们在设置face view代理一样
 
 1079
 00:47:34,786 --> 00:47:38,420
 in the property observer, when the face view got set.
+当face view调用set方法时，我们为它设置代理。
 
 1080
 00:47:38,422 --> 00:47:40,789
 We could do the same thing adding adjuster recognizer.
+我们可以通过同样的方法来添加手势识别器。
 
 1081
 00:47:40,791 --> 00:47:42,924
 In fact, we're going to do that in the demo.
+事实上，我们会在demo中演示这个过程。
 
 1082
 00:47:42,926 --> 00:47:44,926
 So here I have an IV outlet.
+这里我有一个IBOutlet属性。
 
 1083
 00:47:44,928 --> 00:47:47,361
 It's just a UI view.
+就是一个
 
 1084
 00:47:47,363 --> 00:47:49,363
 In my story board.
+storyboard中的视图。
 
 1085
 00:47:49,365 --> 00:47:50,864
 It's called pannableView and
+它叫pannableView
 
 1086
 00:47:50,866 --> 00:47:54,000
 I'm going to make it so it can pan around in there.
+我希望可以拖动这个视图。
 
 1087
 00:47:54,002 --> 00:47:58,170
 All right, and in his property observer there the did stat.
+好的，在这个属性监听器的didSet方法中。
 
 1088
 00:47:59,206 --> 00:48:02,274
 I'm going to add this gesture recognizer.
+我将添加这个识别器。
 
 1089
 00:48:02,276 --> 00:48:04,242
 I'm going to create a pan gesture recognizer and
+我需要创建pan手势识别器，
 
 1090
 00:48:04,244 --> 00:48:05,376
 then add it to the view.
+然后添加到视图中。
 
 1091
 00:48:05,378 --> 00:48:06,577
 So here I'm creating it.
+这里我创建它。
 
 1092
 00:48:06,579 --> 00:48:08,813
 This is just
+我只需要
 
 1093
 00:48:08,814 --> 00:48:11,048
 calling UIPanGestureRecognizer initializer here.
+调用UIPanGestureRecognizer的初始化方法即可。
 
 1094
 00:48:11,050 --> 00:48:13,750
 The arguments to the initializer are who to
+第一个参数表示，当手势被识别的时候，
 
 1095
 00:48:13,752 --> 00:48:18,421
 send a message to when the gesture is recognized.
+向谁发送消息。
 
 1096
 00:48:18,423 --> 00:48:20,122
 When we start seeing a pan.
+当视图识别到pan手势。
 
 1097
 00:48:20,124 --> 00:48:22,224
 And as the pan is happening we're gonna be
+我们会向这个对象
 
 1098
 00:48:22,226 --> 00:48:24,159
 sending a message to this object.
+发送一个消息。
 
 1099
 00:48:24,161 --> 00:48:25,560
 In this case it's self.
+这里，它是self。
 
 1100
 00:48:25,562 --> 00:48:28,496
 So this method would obviously be in a controller, right?
+所以这个方法肯定在一个控制器中，不是吗？
 
 1101
 00:48:28,498 --> 00:48:29,597
 Because controllers are the only
+因为只有
 
 1102
 00:48:29,599 --> 00:48:31,031
 things that have the outlets.
+控制器才会有outlets。
 
 1103
 00:48:31,033 --> 00:48:32,332
 So this thing's going to be
+所以这里
 
 1104
 00:48:32,334 --> 00:48:34,367
 handled by the controller itself.
+会由控制器来处理。
 
 1105
 00:48:34,369 --> 00:48:37,437
 And then action is the name of the method.
+action参数表示事件处理的方法名称。
 
 1106
 00:48:37,439 --> 00:48:38,971
 It's just a string that is the name of
+就是方法名称字符串，
 
 1107
 00:48:38,973 --> 00:48:41,874
 the method that's gonna be
+当手势被识别的时候，
 
 1108
 00:48:41,875 --> 00:48:44,776
 called in the controller when this gesture is recognized.
+会调用控制器中的这个方法。
 
 1109
 00:48:44,778 --> 00:48:47,278
 Now notice there's a little colon on the end there?
+看见后面的冒号了吗？
 
 1110
 00:48:47,280 --> 00:48:50,581
 That means that it's called a, it's gonna
+这表示
 
 1111
 00:48:50,583 --> 00:48:52,683
 call a method called pan that has an argument.
+这个pan方法会有一个参数。
 
 1112
 00:48:52,685 --> 00:48:54,251
 That's what the colon means.
+这就是冒号的意思。
 
 1113
 00:48:54,253 --> 00:48:55,786
 There's an argument there.
+表示方法需要一个参数。
 
 1114
 00:48:55,788 --> 00:48:58,221
 Okay, now you don't have to have the colon there if
+你也可以不添加冒号
 
 1115
 00:48:58,223 --> 00:49:00,690
 you want, but if you don't have it there, then you
+如果没有冒号，那么pan被调用的时候
 
 1116
 00:49:00,692 --> 00:49:02,958
 won't get the argument when pan gets called and
+你就得不到这个参数
 
 1117
 00:49:02,960 --> 00:49:05,327
 the argument you get is the gesture recognizer.
+而这个参数就是GestureRecognizer
 
 1118
 00:49:05,329 --> 00:49:07,829
 And for something like pan where you're gonna try and
+有时候你需要
 
 1119
 00:49:07,831 --> 00:49:09,330
 figure out where the finger is,
+判断手指的点击位置，
 
 1120
 00:49:09,332 --> 00:49:10,965
 you need the gesture recognizer so
+这样你就必须得到这个参数
 
 1121
 00:49:10,967 --> 00:49:13,501
 it can tell you where the finger is basically, okay?
+来判断手指的触点在哪里。
 
 1122
 00:49:13,503 --> 00:49:15,235
 So we almost always have a colon.
+因此，我们通常都有冒号。
 
 1123
 00:49:15,237 --> 00:49:16,837
 The only place you
+只有在
 
 1124
 00:49:16,838 --> 00:49:18,438
 wouldn't have a colon might be like a swipe.
+使用swipe手势的时候你不需要冒号。
 
 1125
 00:49:18,440 --> 00:49:20,507
 Because the swipe just got recognized,
+因为这就是一个swipe手势，
 
 1126
 00:49:20,509 --> 00:49:21,741
 you don't really need any information,
+你不需要额外的信息来判断，
 
 1127
 00:49:21,743 --> 00:49:25,762
 you just need to know what happened.
+你只需要确定这是一个swipe手势。
 
 1128
 00:49:25,763 --> 00:49:29,782
 So you might have action, quote, handle swipe, no colon.
+所以你只需要在双引号中加上方法名称即可，不需要冒号。
 
 1129
 00:49:29,784 --> 00:49:31,016
 Then we just ask the view,
+然后，
 
 1130
 00:49:31,018 --> 00:49:33,785
 this panable view, please recognize this gesture when it
+当一个pan手势发生在视图边界的时候，
 
 1131
 00:49:33,787 --> 00:49:35,286
 happens inside your bounds.
+这个视图就可以识别这个手势了。
 
 1132
 00:49:38,190 --> 00:49:40,257
 Okay that's simple, that's like turning on,
+就是这么简单，就像打开开关，
 
 1133
 00:49:40,259 --> 00:49:41,358
 this is the on switch, for
+比如switch控件，
 
 1134
 00:49:41,360 --> 00:49:43,159
 turning on that pan gesture I recognized,
+可以通过pan手势
 
 1135
 00:49:43,161 --> 00:49:45,161
 by asking some of you to recognize it.
+来切换状态。
 
 1136
 00:49:45,163 --> 00:49:48,864
 So now every time this view recognizes a pan going on
+每次视图在边界内识别了pan手势的时候
 
 1137
 00:49:48,866 --> 00:49:51,933
 inside its bounce it's going to send the message pan
+它就会向控制器发送带一个参数的
 
 1138
 00:49:51,935 --> 00:49:54,268
 with an argument to the controller.
+pan消息。
 
 1139
 00:49:56,105 --> 00:49:56,970
 Everybody okay with this?
+都明白了吗？
 
 1140
 00:49:57,940 --> 00:50:01,141
 This is how you set up a gesture recognizer.
+这是配置手势识别器的方法。
 
 1141
 00:50:01,143 --> 00:50:03,076
 How about the handler?
+那么如何处理事件呢？
 
 1142
 00:50:03,078 --> 00:50:06,379
 So that pan thing with that argument, how do we do that?
+有了这个参数后，我们可以做哪些事情呢？
 
 1143
 00:50:06,381 --> 00:50:09,448
 For us to handle the pan we need information about
+在处理pan手势的时候，我们需要
 
 1144
 00:50:09,450 --> 00:50:11,216
 what's going on in that pan.
+知道它的一些信息。
 
 1145
 00:50:11,218 --> 00:50:12,650
 Where are the fingers moving?
+比如手指移动到哪里了？
 
 1146
 00:50:12,652 --> 00:50:14,118
 We need to know about that.
+我们需要知道这些。
 
 1147
 00:50:14,120 --> 00:50:17,788
 So the concrete subclasses of UI gesture recognizer like UI
+UIGestureRecognizer的子类，比如
 
 1148
 00:50:17,790 --> 00:50:21,258
 pangesture recognizer, they add methods that
+PanGestureRecognizer，他们针对特定的手势
 
 1149
 00:50:21,260 --> 00:50:23,727
 are specific to whatever kind of gesture they are.
+添加了自己特定的方法。
 
 1150
 00:50:23,729 --> 00:50:26,930
 So the panGesture one has a translation in
+比如PanGesture就有translationInView方法，
 
 1151
 00:50:26,932 --> 00:50:30,900
 view which tells you how far the finger has moved since,
+用来告诉你 从手势被识别或重置开始
 
 1152
 00:50:30,902 --> 00:50:34,737
 either since the panGesture was first recognized, or
+手指移动了多远的
 
 1153
 00:50:34,739 --> 00:50:36,705
 since that last got reset.
+距离。
 
 1154
 00:50:38,141 --> 00:50:41,709
 And you can reset with this set translation which will
+你可以通过setTranslation方法
 
 1155
 00:50:41,711 --> 00:50:43,778
 reset this translation to a different spot so
+重置这个起点
 
 1156
 00:50:43,780 --> 00:50:45,813
 that the next time that you get notified,
+这样下一次计算拖动距离的时候
 
 1157
 00:50:45,815 --> 00:50:47,948
 it will be the distance between this.
+会以你重置的起点开始计算。
 
 1158
 00:50:47,950 --> 00:50:50,383
 So that's a good way to get incremental panning instead of
+这是一个得到增加距离的好方法
 
 1159
 00:50:50,385 --> 00:50:52,251
 just the total distance that you've panned.
+而不仅仅是得到总距离。
 
 1160
 00:50:52,253 --> 00:50:54,353
 And then also I can tell you velocity,
+还可以得到velocity（速度）
 
 1161
 00:50:54,355 --> 00:50:56,188
 how fast are you panning around?
+拖动的速度有多快？
 
 1162
 00:50:56,190 --> 00:50:58,123
 Is the person kinda moving real slow, or
+用户可能拖动得很慢，或者是想
 
 1163
 00:50:58,125 --> 00:50:59,457
 trying to put something in a perfect spot,
+拖动到某个特定的点，
 
 1164
 00:50:59,459 --> 00:51:01,559
 or are they kind of zooming it around, okay,
+又或者是在放大缩小等，
 
 1165
 00:51:01,561 --> 00:51:03,327
 you might react differently depending on the velocity.
+你可能对不同的速度做出不同的反应。
 
 1166
 00:51:03,329 --> 00:51:05,963
 So those are the things that are very specific to Pan, so
+这是pan手势的一些特有的东西，也是为什么
 
 1167
 00:51:05,965 --> 00:51:08,598
 that's why these methods are in panGesture Recognizer.
+这些方法属于PanGestureRecognizer。
 
 1168
 00:51:08,600 --> 00:51:11,434
 Now that last one is interesting because of
+最后一个是incremental translation，
 
 1169
 00:51:11,436 --> 00:51:12,669
 this incremental translation.
+这个很有趣。
 
 1170
 00:51:12,671 --> 00:51:15,071
 A lot of people really don't quite understand this.
+因为大多数人不是很理解这个。
 
 1171
 00:51:15,073 --> 00:51:16,538
 But you'll see when we do the demo, we'll
+但是在做demo的时候你会明白的，
 
 1172
 00:51:16,540 --> 00:51:19,341
 do incremental translation with our pinch gesture.
+我们会在pinch手势中演示incremental translation。
 
 1173
 00:51:19,343 --> 00:51:22,711
 And it'll make a little more sense what's going on there.
+那时候你就更容易理解它了。
 
 1174
 00:51:22,713 --> 00:51:24,912
 The abstract superclass UIGestureRecognizer.
+抽象类UIGestureRecognizer
 
 1175
 00:51:24,914 --> 00:51:27,581
 It also has a very important property called State.
+有个很重要的属性 叫state（状态）。
 
 1176
 00:51:27,583 --> 00:51:31,685
 Okay when you have a pan it actually goes through states.
+pan手势会经历许多个状态。
 
 1177
 00:51:31,687 --> 00:51:34,421
 It starts out in the state Possible.
+首先是Possible状态。
 
 1178
 00:51:34,423 --> 00:51:36,656
 It's possible a pan can happen.
+表示它或许是一个pan手势。
 
 1179
 00:51:36,658 --> 00:51:38,290
 Then if it were a swipe or
+然后如果手势是扫动或者
 
 1180
 00:51:38,292 --> 00:51:40,959
 a discrete gesture, you would just get one state.
+非连续类型的，就会变为另一个状态。
 
 1181
 00:51:40,961 --> 00:51:42,160
 Which is I recognize this.
+就是Recognized状态。
 
 1182
 00:51:42,162 --> 00:51:44,629
 So that's Recognized.
+表示手势被识别了。
 
 1183
 00:51:44,631 --> 00:51:45,730
 But if it's pan and
+但是如果是pan手势
 
 1184
 00:51:45,732 --> 00:51:48,599
 continuous, then you're gonna get began.
+即手势连续的，state状态就会变为Began状态。
 
 1185
 00:51:48,601 --> 00:51:50,534
 Okay, recognize that the pan has started.
+明白吗，表示pan手势开始识别了。
 
 1186
 00:51:50,536 --> 00:51:51,602
 You'll get that.
+就是这样。
 
 1187
 00:51:51,603 --> 00:51:52,669
 And then every time the finger moves,
-
+随着手指的移动，
+	
 1188
 00:51:52,671 --> 00:51:55,638
 you're gonna get another call to your handler saying,
+会不断通知事件处理对象
 
 1189
 00:51:55,640 --> 00:51:57,106
 changed, changed, changed.
+状态改变为Changed了。
 
 1190
 00:51:57,108 --> 00:51:58,374
 And then when the finger goes up,
+当手指离开屏幕的时候，
 
 1191
 00:51:58,376 --> 00:52:01,443
 you'll get another one that says the state is now ended.
+状态就变为Ended。
 
 1192
 00:52:01,445 --> 00:52:03,245
 So this is basically a little state machine.
+这就像一个时间机器。
 
 1193
 00:52:03,247 --> 00:52:06,014
 Obviously a pan goes through the state machine of possible,
+pan手势在不同的时刻有不同的状态。
 
 1194
 00:52:06,016 --> 00:52:08,416
 began, changed, ended.
+开始，改变，结束。
 
 1195
 00:52:09,518 --> 00:52:10,951
 All right?
+明白吗？
 
 1196
 00:52:10,953 --> 00:52:12,085
 There's also failed and
+也有Failed和Canceled状态，
 
 1197
 00:52:12,087 --> 00:52:13,720
 canceled, like you're in the middle of a pan and
+比如在pan手势的中途
 
 1198
 00:52:13,722 --> 00:52:15,721
 a phone call comes in, okay?
+一个电话打进来了，明白吗？
 
 1199
 00:52:15,723 --> 00:52:18,390
 That's going to cancel that pan, alright?
+这样这个pan手势就会被取消掉，知道吗？
 
 1200
 00:52:18,392 --> 00:52:20,859
 So sometimes you have to pay attention to cancellation like
+所以有时你需要注意手势的取消状态
 
 1201
 00:52:20,861 --> 00:52:23,395

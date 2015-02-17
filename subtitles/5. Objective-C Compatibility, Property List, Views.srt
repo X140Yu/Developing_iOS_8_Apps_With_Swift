@@ -1,98 +1,117 @@
 ﻿1
 00:00:00,001 --> 00:00:04,636
 [MUSIC]
+［音乐］
 
 2
 00:00:04,638 --> 00:00:07,672
 Stanford University.
+斯坦福大学
 
 3
 00:00:13,579 --> 00:00:18,248
 Okay, well welcome to Stanford CS193p, Winter of 2015.
+欢迎来到2015冬季学期，斯坦福大学CS193P课程。
 
 4
 00:00:18,250 --> 00:00:20,983
 This is lecture number five.
+这次是第五讲。
 
 5
 00:00:20,985 --> 00:00:22,318
 And, today we're gonna finish up
+这次我们要继续上次没讲完
 
 6
 00:00:22,320 --> 00:00:24,486
 what were talking about last time.
+的内容。
 
 7
 00:00:24,488 --> 00:00:27,289
 And talk a little bit about Objective-C compatibility,
+然后再说一点关于Objective-C兼容性的问题。
 
 8
 00:00:27,291 --> 00:00:29,991
 because, of course iOS was originally written in
+因为iOS起初是用Objective-C 这种
 
 9
 00:00:29,993 --> 00:00:31,426
 an entirely different language.
+完全不同于Swift的语言写的。
 
 10
 00:00:31,428 --> 00:00:33,078
 And so there's a little bit of
+所以在旧世界和Swift的世界中间
 
 11
 00:00:33,079 --> 00:00:34,729
 bridging between the Swift world and the old world.
+需要有一个桥接。
 
 12
 00:00:34,731 --> 00:00:37,931
 And we're gonna talk about an example of
+然后我们会讲 Property list，这是适用
 
 13
 00:00:37,933 --> 00:00:41,168
 using AnyObject which is Property Lists.
+AnyObject的又一个例子。
 
 14
 00:00:41,170 --> 00:00:43,703
 And I'm gonna do a kind of a brief demo even,
+这里我会用一个简单的
 
 15
 00:00:43,705 --> 00:00:45,104
 showing you that.
+demo来演示这个。
 
 16
-00:00:45,106 --> 00:00:47,940
-Then we're gonna move onto a completely new topic,
-
-17
-00:00:47,942 --> 00:00:50,793
-which is views.
+00:00:45,106 --> 00:00:50,793
+Then we're gonna move onto a completely new topic, which is views.
+然后我们就要开始一个全新的课题，view
 
 18
 00:00:50,794 --> 00:00:53,645
 So, views on how we draw, and how we handle touch input.
+是关于在我们的UI里，如何绘制view，
 
 19
 00:00:53,647 --> 00:00:56,381
 In our UI and so we're gonna go over that, and
+如何响应触屏事件，先讲一些内容，然后
 
 20
 00:00:56,383 --> 00:00:58,116
 I'll be having a demo for that as well.
+依然会有一个demo。
 
 21
 00:00:58,118 --> 00:01:00,818
 So, I'm gonna blast through these slides pretty quick.
+幻灯片我可能会讲的比较快。
 
 22
 00:01:00,820 --> 00:01:04,188
 As usual, the demonstration is probably
+总体来说，示例会比幻灯片更
 
 23
 00:01:04,190 --> 00:01:06,823
 a little more elucidating then some of the slides, cuz when
+容易让你们理解，因为当你们真正看见如何做的
 
 24
 00:01:06,825 --> 00:01:08,925
 you see it in action, it's a lot easier to understand.
+时候，知识会容易理解的多。
 
 25
 00:01:08,927 --> 00:01:11,995
@@ -101,306 +120,374 @@ Okay.
 26
 00:01:11,996 --> 00:01:15,064
 So, Objective-C compatibility, so, virtually all the iOS API,
+下面开始讲 Objective-C 兼容的问题， 基本上iOS全部的API都是
 
 27
 00:01:15,066 --> 00:01:20,002
 this API that was written over the last, however many years,
+在之前许多年内用 Objective-C 写的。
 
 28
 00:01:20,004 --> 00:01:23,905
 in Objective-C, is available from Swift.
+现在在Swift里也可以用。
 
 29
 00:01:23,907 --> 00:01:25,773
 And you can't even tell the difference, okay?
+甚至你都看不出区别来。
 
 30
 00:01:25,775 --> 00:01:29,176
 It's just kind of, automatically made available.
+就好像非常自然的就可以用一样。
 
 31
 00:01:29,178 --> 00:01:30,711
 And, when they designed Swift,
+但是当他们设计Swift的时候，
 
 32
 00:01:30,713 --> 00:01:33,513
 they went to a lot of trouble to make sure that it would,
+为了达到非常好的兼容性，他们遇到了
 
 33
 00:01:33,515 --> 00:01:35,515
 could be done in a very compatible way.
+很多麻烦。
 
 34
 00:01:35,517 --> 00:01:38,785
 So, that all of the iOS API, would work,
+所以现在的这些 API，在Swift里
 
 35
 00:01:38,787 --> 00:01:40,553
 just fine in Swift.
+还算能用。
 
 36
 00:01:40,555 --> 00:01:44,523
 There's few special data types though, that they've gone
+但是有一些特殊的数据类型，在交接两种语言的
 
 37
 00:01:44,525 --> 00:01:49,294
 to special care to bridge between the two languages,
+时候需要特殊的注意。
 
 38
 00:01:49,296 --> 00:01:54,532
 and this makes using iOS API from Objective-C, much easier
+这使得使用 Objective-C 调用 iOS API的时候，会比Swift
 
 39
 00:01:54,534 --> 00:01:58,235
 in Swift, and so, I'm gonna talk briefly about those.
+容易很多，我下边会简要的说一下这个问题。
 
 40
 00:01:58,237 --> 00:02:00,203
 One is NSString.
+其中一个就是 NSString 。
+
 
 41
 00:02:00,205 --> 00:02:02,939
 That is the old way that String were represented,
+这是String以前的形式，
 
 42
 00:02:02,941 --> 00:02:06,775
 in iOS, and that is bridged interchangeably to
+在iOS里， 它与Swift的String
 
 43
 00:02:06,777 --> 00:02:07,909
 Swift's String.
+是可以互换使用的。
 
 44
 00:02:07,911 --> 00:02:09,310
 You can't really even tell the difference.
+甚至可以当它们没有区别。
 
 45
 00:02:09,312 --> 00:02:11,546
 If you have a method that takes an NSString,
+如果有一个方法接受 NSString 的参数，
 
 46
 00:02:11,548 --> 00:02:14,415
 you can pass a Swift String in there, and vice-versa.
+你可以传一个Swift的String进去，反之亦然。
 
 47
 00:02:14,417 --> 00:02:16,283
 Okay, they're just automatically treated if
+尽管他们两个是非常不同的东西，
 
 48
 00:02:16,285 --> 00:02:17,317
 they were the same thing,
+它们还是被当成
 
 49
 00:02:17,319 --> 00:02:19,119
 even though they are quite different things.
+完全一样的。
 
 50
 00:02:19,121 --> 00:02:22,088
 String in Swift is not even a class.
+Swift里的String甚至都不是一个类，
 
 51
 00:02:22,090 --> 00:02:23,189
 Okay, its just a struct.
+而仅仅是一个 struct 。
 
 52
 00:02:23,191 --> 00:02:26,258
 So, they've done some miraculous work to
+苹果的人做了非常神奇的工作把
 
 53
 00:02:26,260 --> 00:02:27,592
 bridge these things.
+它们桥接了起来。
 
 54
 00:02:27,594 --> 00:02:30,528
 NSArray, which is the old Array,
+数组的老版本， NSArray，
 
 55
 00:02:30,530 --> 00:02:33,865
 is bridged to Array of AnyObject.
+桥接到Swift 里就是 AnyObject 元素组成的数组。
 
 56
 00:02:33,867 --> 00:02:37,468
 Okay, so any time you see, an Array of AnyObject in
+所以以后只要你们在iOS的API里看到
 
 57
 00:02:37,470 --> 00:02:42,439
 an iOS API, it's because it was an NSArray before, okay?
+AnyObject 的数组，说明他们以前都是 NSArray 。
 
 58
 00:02:42,441 --> 00:02:44,374
 Then NSDictionary is an interesting one,
+NSDictionary 是比较有趣的一个，
 
 59
 00:02:44,376 --> 00:02:47,343
 it's bridged to Dictionary where the keys have to be
+在Swift里，它被桥接成键是 NSObject 的子类对象
 
 60
-00:02:47,345 --> 00:02:49,378
-subclasses of NSObject, and
-
-61
-00:02:49,380 --> 00:02:52,848
-the values are AnyObject, okay?
+00:02:47,345 --> 00:02:52,848
+subclasses of NSObject, and the values are AnyObject, okay?
+而值是 AnyObject
 
 62
 00:02:52,850 --> 00:02:55,350
 Now, you might think, that's gonna be a problem, and
+你们可能觉得这样会有问题，
 
 63
 00:02:55,352 --> 00:02:58,153
 I'll explain why that's not in a moment.
+我一会儿会解释为什么目前这样做没问题。
 
 64
 00:02:58,155 --> 00:02:59,554
 And then of course, Int and
+然后，Int， Float
 
 65
 00:02:59,556 --> 00:03:03,357
 Float, Double, Bool, they are all bridged to NSNumber.
+Double， Bool，他们都是从 NSNumber 桥接过来的。
 
 66
 00:03:03,359 --> 00:03:04,858
 We talked briefly about NSNumber,
+我们之前简单的讲过 NSNumber ，
 
 67
 00:03:04,860 --> 00:03:06,960
 we talked about the NSNumber format and all that.
+我们讲了 NSNumber 的模版 。
 
 68
 00:03:06,962 --> 00:03:10,430
 So, NSNumber was the old Objective-C object that
+所以， NSNumber 是 Objective-C 里所有关于
 
 69
 00:03:10,432 --> 00:03:12,965
 just meant, any kind of numeric value.
+数值的对象。
 
 70
 00:03:12,967 --> 00:03:15,801
 And, so anything that used to take an NSNumber, you can
+所以在所有用到 NSNumber的地方，你传入一个
 
 71
 00:03:15,803 --> 00:03:19,204
 pass a Double, or Float or Int in there, and it'll just work.
+Double，Float 或者 Int 都是没问题的。
 
 72
 00:03:19,206 --> 00:03:21,573
 Of course, coming back the other way isn't automatic,
+当然反过来是不行的，
 
 73
 00:03:21,575 --> 00:03:23,775
 because it doesn't really know necessarily what you want.
+因为那样系统就不知道你到底需要那种数字类型了。
 
 74
 00:03:24,811 --> 00:03:27,278
 But you can use the methods like doubleValue or
+当然你可以用类似 doubleValue 或者
 
 75
 00:03:27,280 --> 00:03:31,382
-Int value, like we use doubleValue, in the Calculator.
+IntValue, like we use doubleValue, in the Calculator.
+IntValue 的这样的方法， 比如我们在计算器里就用了 doubleValue。
 
 76
 00:03:31,384 --> 00:03:34,484
 And of course, Int and Float and Double are also bridged to
+当然 Int Float 和 Double 都是和 C 语言
 
 77
 00:03:34,486 --> 00:03:37,287
 the C types int, float, and double.
+里的int，float 和 double 桥接好的。
 
 78
 00:03:37,289 --> 00:03:41,390
 So, you have an API that takes an int, and hold a C int.
+所以如果一个API里结构一个C语言的int参数，
 
 79
 00:03:41,392 --> 00:03:45,194
 It'll be bridged to take capital I Swift Int.
+它也可以接受一个 Swift 里的 Int （I是大写的）。
 
 80
 00:03:45,196 --> 00:03:48,296
 So, this stuff, all just works completely automatically.
+这个特性是完全自动生效的，
 
 81
-00:03:48,298 --> 00:03:50,398
-And you don't ever have to do anything.
+00:03:48,298 --> 00:03:51,232
+And you don't ever have to do anything.And it just works.
+我们什么都不需要做。
 
-82
-00:03:50,400 --> 00:03:51,232
-And it just works.
 
 83
 00:03:51,234 --> 00:03:55,803
 However, if you wanna be explicit, about the type,
+然后，如果你需要非常明确的类型，
 
 84
 00:03:55,805 --> 00:03:57,270
 you can cast, okay?
+你可以做类型转换。
 
 85
 00:03:57,272 --> 00:04:01,240
 So, it is perfectly legal to cast a Swift String to
+把 Swift 的String转换成 NSString 是完全合法的，
 
 86
 00:04:01,242 --> 00:04:04,543
 an NSString, and it will always work, so
+不会有任何问题，
 
 87
 00:04:04,545 --> 00:04:06,145
 you don't need as?
+并且不需要 as？。
 
 88
 00:04:06,147 --> 00:04:09,114
 Okay, it's all a hundred percent guaranteed cast.
+这是完全安全的转换。
 
 89
 00:04:09,116 --> 00:04:10,916
 And then once you do that,
+如果你这么做，
 
 90
 00:04:10,917 --> 00:04:12,717
 you have an NSString instead of a String, and so
+你就把之前的String转换成了 NSString ，
 
 91
 00:04:12,719 --> 00:04:15,620
 you can send it messages that are in NSString.
+你就可以给它发送 NSString 的消息了。
 
 92
 00:04:15,622 --> 00:04:17,421
 Although you wanna be careful with some of them,
+你们也需要注意一些问题，
 
 93
 00:04:17,423 --> 00:04:19,990
 like length, is an NSString method,
+比如length 是一个 NSString，
 
 94
 00:04:19,992 --> 00:04:22,325
 that doesn't exist on String.
+在 String 里并不存在。
 
 95
 00:04:22,327 --> 00:04:24,661
 It doesn't exist on String for a reason.
+它在 String 里不存在是有原因的，
 
 96
 00:04:24,663 --> 00:04:27,830
 Because, we talked about this before, you know,
+我们曾经讲过，
 
 97
 00:04:27,832 --> 00:04:31,066
 the length of a Unicode String, can vary,
+Unicode 字符串的长度是可变的，
 
 98
 00:04:32,269 --> 00:04:35,403
-compared to the number of glifs you'll see on screen,
+compared to the number of glyphs you'll see on screen,
+根据你在屏幕上看到符号的不同而不同，
 
 99
 00:04:35,405 --> 00:04:37,739
 and the new Swift String deals with that, and the old
+新的 Swift 的 String 会处理此类字符串，但是 NSString 确实
 
 100
 00:04:37,741 --> 00:04:40,307
 NSString doesn't really deal with that properly.
+没有很好的处理。
 
 101
 00:04:40,309 --> 00:04:43,577
 So, you gotta be careful, when you start calling NSString
+所以当你要调用 NSString 方法的时候要特别小心，
 
 102
 00:04:43,579 --> 00:04:45,012
@@ -409,178 +496,214 @@ methods that, you know,
 103
 00:04:45,014 --> 00:04:47,614
 there's not, you wanna look for a String equivalent, and
+尽量用 String 代替，因为
 
 104
 00:04:47,616 --> 00:04:49,349
 use that if you can, because it's newer, and
+String 是最新的，
 
 105
 00:04:49,351 --> 00:04:52,284
 it does thinks a little more accurately.
+而且可以更精确。
 
 106
 00:04:52,286 --> 00:04:57,189
 But NSArray is the same thing, you can cast from an Array,
+NSArray 也是一样的， 你可以从 Swift 的 Array 
 
 107
 00:04:57,191 --> 00:04:59,457
 that you have in Swift, to an NSArray, and
+转换到它，
 
 108
 00:04:59,459 --> 00:05:01,025
 then you can call them methods in NSArray.
+然后你就可以调用 NSArray 的方法了。
 
 109
 00:05:01,027 --> 00:05:03,594
-Like components joined by String, which is kinda cool,
+Like componentsJoinedByString, which is kinda cool,
+比如 componentsJoinedByString 就是一个很酷的方法，
 
 110
 00:05:03,596 --> 00:05:05,429
 it takes all the components in the Array,
+它收集数组中的所有元素，
 
 111
 00:05:05,431 --> 00:05:07,964
 sends them description, takes those descriptions and
+给它们一个描述，然后用传进来的字符串把
 
 112
 00:05:07,966 --> 00:05:10,400
 joins them by the String you pass as an argument.
+它们连接起来。
 
 113
 00:05:10,402 --> 00:05:14,704
 This is the same as the join method in Swift's String.
+这个跟Swift里String的join方法是一样的。
 
 114
 00:05:14,706 --> 00:05:17,172
 Okay, so, you can look at the documentation for
+你们可以去查阅 String，NSString 和 NSArray
 
 115
 00:05:17,174 --> 00:05:18,907
 String and, NSString and NSArray, but
+的官方文档，
 
 116
 00:05:18,909 --> 00:05:21,710
 pretty much all the things you can do there, or most
+基本上所有的东西，或者说大多数的东西，
 
 117
 00:05:21,712 --> 00:05:25,846
 of them anyway, are available in the Swift versions.
+都可以在Swift里用。
 
 118
 00:05:25,848 --> 00:05:27,281
 But again, if you're passing them back and
+如果你在两个版本里转换，
 
 119
 00:05:27,283 --> 00:05:30,951
-forth, it's all automagic, so you'd say.
+forth, it's all automatic, so you'd say.
+可以说都是自动的过程。
 
 120
 00:05:30,953 --> 00:05:33,753
 Now, you might get a little concerned about Dictionary,
+好的，你们对 Dictionary 可能还有点疑问，
 
 121
 00:05:34,989 --> 00:05:40,225
 because Dictionary, the key has to be an NSObject.
+因为字典的键必须是 NSObject。
 
 122
 00:05:40,227 --> 00:05:42,594
 And of course, we know that String, and Array, and
+当然我们知道，String，Array 和 Dictionary 在 Swift 
 
 123
 00:05:42,596 --> 00:05:45,663
 Dictionary in Swift, are not even objects, okay?
+里都不是对象。
 
 124
 00:05:45,665 --> 00:05:47,198
 They're not AnyObject, or
+它们既不是 AnyObject ，
 
 125
 00:05:47,200 --> 00:05:50,401
 they're, and they're not an NSObject for sure.
+当然更不是 NSObject 。
 
 126
 00:05:50,403 --> 00:05:53,570
 But you can still pass them anywhere you wanna pass in
+但是我们依然可以在需要传 AnyObject 类型 或者 NSObject 的子类
 
 127
 00:05:53,572 --> 00:05:56,907
 AnyObject, or a subclass of NSObject, because they
+的参数里传入它们， 因为他们
 
 128
 00:05:56,909 --> 00:06:00,343
 are bridged to classes that inherit from NSObject,
+都被桥接到了 NSObject的子类里。
 
 129
 00:06:00,345 --> 00:06:01,744
 because NSString, NSArray, and
+因为 NSString ，NSArray 和 
 
 130
 00:06:01,746 --> 00:06:03,412
 NSDictionary all inherit from NSObject.
+NSDictionary 全都继承自 NSObject 。
 
 131
 00:06:03,414 --> 00:06:05,814
 So, that means Strings, Swift Strings,
+所以 String， 也就是Swift的字符串，
 
 132
 00:06:05,816 --> 00:06:09,718
 can be the keys in a Dictionary, an NSDictionary,
+可以作为 NSDictionary 的键，
 
 133
 00:06:09,720 --> 00:06:11,919
 even though it requires NSObject, okay?
+尽管要求键是 NSObject 类型的。
 
 134
 00:06:11,921 --> 00:06:14,889
-And of course, all three of them can be values,
+And of course, all three of them can be values, 
+当然，它们3个也可以作为字典的值，
 
 135
 00:06:14,891 --> 00:06:17,324
 because, even though they're not really objects,
+因为，尽管他们不是对象，是 struct ， 但是他们桥接
 
 136
-00:06:17,326 --> 00:06:20,894
-they are structs, they are bridged to things that can be.
+00:06:17,326 --> 00:06:21,994
+they are structs, they are bridged to things that can be. Okay?
+到 Objective-C 的东西可以作为值。
 
-137
-00:06:20,896 --> 00:06:21,994
-Okay?
 
 138
 00:06:21,996 --> 00:06:23,529
 So, it is okay to pass a String or
+所以，在需要传入 AnyObject 传入
 
 139
 00:06:23,531 --> 00:06:24,530
 an Array to AnyObject.
+String 或者 Array 都没问题。
 
 140
-00:06:27,034 --> 00:06:29,134
-You won't even notice this bridge isn't bridging 99% of
+00:06:27,034 --> 00:06:30,285
+You won't even notice this bridge isn't bridging 99% of the time.
+你在99%的时候都见不到这种桥接，
 
-141
-00:06:29,136 --> 00:06:30,285
-the time.
 
 142
 00:06:30,286 --> 00:06:31,435
 It just happens automatically.
+它们都是自动的。
 
 143
 00:06:31,438 --> 00:06:33,637
 But I just wanted you to know that's going on, so
+我只是想让你们知道背后发生了什么，
 
 144
 00:06:33,639 --> 00:06:34,938
 you don't get kinda confused when you start
+这样在你们见到 NSString 或者 NSArray 的时候就
 
 145
 00:06:34,940 --> 00:06:37,874
 seeing NSString, NSArray, what's going on, okay?
+不会感到疑惑了。
 
 146
 00:06:37,876 --> 00:06:40,109
 They're just being automatically bridged for you.
+它们都是自动桥接过来的。 
 
 147
 00:06:41,579 --> 00:06:43,396
@@ -589,174 +712,212 @@ All right.
 148
 00:06:43,397 --> 00:06:45,214
 So, we talked about AnyObject last time,
+上次我们讲过了AnyObject。
 
 149
 00:06:45,216 --> 00:06:47,182
 and now I'm gonna talk about a use of AnyObject,
+现在我们要讲 AnyObject 的一个用处。 
 
 150
 00:06:47,184 --> 00:06:48,783
 which is called Property List.
+这就是 Property List 。
 
 151
 00:06:48,785 --> 00:06:51,052
 So, Property List is not a type or
+Property List 并不是任何一种类型，
 
 152
 00:06:51,054 --> 00:06:54,689
 anything like that, it's just a term that we use.
+它属于一种工具类的东西。
 
 153
 00:06:54,691 --> 00:06:58,792
 And the definition of that term is, it's in AnyObject,
+它的定义是，
 
 154
 00:06:58,794 --> 00:07:03,129
 a Property List is AnyObject, that is known to be,
+Property List 表面上是 AnyObject ， 但是在
 
 155
 00:07:03,131 --> 00:07:05,865
 behind the scenes, one of those six classes.
+后台，它是 NSString
 
 156
 00:07:05,867 --> 00:07:07,650
-NSString, an Array,
+NSString, NSArray,
+NSArray，
 
 157
 00:07:07,651 --> 00:07:09,434
-Dictionary, Number, Data and Date.
+NSDictionary, NSNumber, NSData and NSDate.
+NSDictionary, NSNumber, NSData and NSDate.
 
 158
 00:07:09,437 --> 00:07:12,404
-Or bridged too with Swift, okay?
+Or bridged to with Swift, okay?
+这六种类型中的一种，或者是它们桥接到Swift里的版本。
 
 159
 00:07:12,406 --> 00:07:17,609
 So, why do we define this Property List thing?
+我们为什么要用 Property List 呢？
 
 160
 00:07:17,611 --> 00:07:19,544
 It's in AnyObject.
+它属于 AnyObject
 
 161
 00:07:19,545 --> 00:07:21,478
 It's kind of unwieldy, because you have to do a lot,
+它看起来非常笨重，因为我们需要用 ising 或者 asing 做
 
 162
 00:07:21,481 --> 00:07:24,115
 a fair amount of casting, ising and asing, cuz
+大量的类型转换，因为要使用 AnyObject，
 
 163
 00:07:24,117 --> 00:07:27,284
 AnyObject, of course, to use it, we have to kinda cast it.
+我们就要进行类型转换。
 
 164
 00:07:27,286 --> 00:07:30,053
 And so, why do we have this thing?
+所以说，我们为什么要用它？
 
 165
 00:07:30,055 --> 00:07:32,722
 Two reasons really.
+实际上有两个原因。
 
 166
 00:07:32,723 --> 00:07:35,390
 One, Property List is used to pass data around blind.
+第一， Property List 要用来隐式的传递数据。
 
 167
-00:07:35,393 --> 00:07:36,926
-It's like a cookie, right?
-
-168
-00:07:36,928 --> 00:07:37,993
-In a browser.
+00:07:35,393 --> 00:07:37,993
+It's like a cookie, right? In a browser.
+就好像浏览器里的cookie一样。
 
 169
 00:07:37,995 --> 00:07:40,295
 It's kind of this just bundle of data,
+它们是只有创建者才知道如何
 
 170
 00:07:40,297 --> 00:07:43,098
 that only the creator of it knows how to interpret it,
+解释它们的一组数据。
 
 171
 00:07:43,100 --> 00:07:45,166
 because only they know what Strings, Arrays,
+因为只有创建人才知道里边到底是 String， Array
 
 172
 00:07:45,168 --> 00:07:46,734
 Dictionaries, and stuff are in there.
+Dictionarie 还是别的什么。
 
 173
 00:07:46,736 --> 00:07:48,252
 But to everyone else it,
+但是对于其他人来说
 
 174
 00:07:48,253 --> 00:07:49,769
 just looks like AnyObject, so they don't know what it is.
+它们就是 AnyObject ，但不知道具体是什么。
 
 175
 00:07:49,772 --> 00:07:53,273
 So, all they can do, is pass it around to other things.
+所以他们能做的就是把它传给其他人。
 
 176
 00:07:53,275 --> 00:07:57,010
 So, it's good for blind data passing, the other thing is,
+这是隐式数据传送的好处。 另一个原因是
 
 177
 00:07:57,012 --> 00:08:00,580
 a Property List can be used as generic data structures, okay?
+Property List 可以用于泛型的数据结构。
 
 178
 00:08:00,582 --> 00:08:02,014
 Since it's got Arrays, and
+因为它可以是Array，
 
 179
 00:08:02,016 --> 00:08:05,584
 Dictionaries, and Numbers, and Dates, and all that in there.
+Dictionarie， Number， Date ，都有可能。
 
 180
 00:08:05,586 --> 00:08:10,021
 You can turn a data structure, like your r-ops stack,
+你可以把一个数据结构变成一个泛型的数据结构，就想你
 
 181
 00:08:10,023 --> 00:08:12,523
 in the CalculatorBrain, it has op enums in there,
+CalculatorBrain类里面的opStack，
 
 182
 00:08:12,525 --> 00:08:14,392
 that's not a generic data structure, but
+它有一个叫做op的枚举，但是它不是泛型的
 
 183
 00:08:14,394 --> 00:08:17,461
 we can turn it into a generic data structure, for example,
+但是它不是泛型的。
 
 184
 00:08:17,463 --> 00:08:20,831
 and then do things with it like write it out to disk, or
+泛型的数据结构可以用来写入磁盘，
 
 185
 00:08:20,833 --> 00:08:23,700
 send it over the network, or things like that.
+或者通过网络传送。
 
 186
 00:08:23,702 --> 00:08:26,569
 So, those are the two main reasons we use Property List.
+以上就是使用Property List的两个主要原因。
 
 187
 00:08:26,571 --> 00:08:31,073
 And, a really good use of Property List in
+Property List 在 iOS里另外一个很好的用处
 
 188
 00:08:31,075 --> 00:08:33,575
 iOS is NSUserDefaults.
+就是 NSUserDefaults。
 
 189
 00:08:33,577 --> 00:08:37,012
 So, NSUserDefaults is like a really tiny little database,
+NSUserDefaults 就像一个微型的数据库。
 
 190
 00:08:37,014 --> 00:08:39,347
 and it only knows how to store Property Lists.
+它只会存储Property List 。
 
 191
 00:08:39,349 --> 00:08:40,999
@@ -765,38 +926,47 @@ Okay?
 192
 00:08:41,000 --> 00:08:42,650
 And it's really for things like settings, and
+存储那些诸如设置，
 
 193
 00:08:42,652 --> 00:08:44,051
 preferences, stuff like that.
+参数等等的东西。
 
 194
 00:08:44,053 --> 00:08:45,852
 You would never, it's not high performance,
+由于它的性能不高，
 
 195
 00:08:45,854 --> 00:08:48,054
 you would never use it for big things like images or
+所以千万不要用它存一些图片什么的比较大的数据，
 
 196
 00:08:48,056 --> 00:08:50,089
 anything like that, just Property Lists, you know,
+只用来存 Property List，你懂的
 
 197
 00:08:50,091 --> 00:08:54,060
 Dates and Strings and Doubles, and things like that.
+日期，字符串，数字什么的。
 
 198
 00:08:54,062 --> 00:08:57,796
 It can store and retrieve any Property List, and
+它可以像字典一样存储和
 
 199
 00:08:57,798 --> 00:08:59,831
 it just stores it like a Dictionary,
+导出Property List ，
 
 200
 00:08:59,833 --> 00:09:03,034
 as if the NSUserDefaults thing itself is a Dictionary.
+NSUserDefaults本身就是一个字典。
 
 201
 00:09:03,036 --> 00:09:05,103
@@ -1790,194 +1960,242 @@ opSymbols 里的每个 opSymbol。
 401
 00:17:32,836 --> 00:17:35,603
 opSymbols is this thing right here, that's the Array,
+opSymbols 是这个东西，它是 Array 泛型的
 
 402
 00:17:35,605 --> 00:17:38,373
 that's the newValue, the AnyObject converted.
+这是从 AnyObject 转换来的 newValue
 
 403
 00:17:38,375 --> 00:17:42,776
 Into an Array of Strings, okay?
+转换成 Array<String> 类型的，明白了吗？
 
 404
 00:17:42,778 --> 00:17:48,448
 So for each one if I can find a known op,
+所以对于每一个 opSymbol
 
 405
 00:17:48,450 --> 00:17:53,586
 that matches that symbol then this must be an op,
+在 knownOps 中找到对应的 op
 
 406
 00:17:53,588 --> 00:17:56,255
 and so I will just add that op
+那么我就可以将
 
 407
 00:17:56,257 --> 00:18:01,326
 to, to my stack, otherwise I'm gonna see
+那个 op 加至我的 newOpStack 中，否则
 
 408
 00:18:01,328 --> 00:18:04,162
 if I could turn that String into an operand, and I'm gonna
+我将尝试把字符串转换成一个操作数
 
 409
 00:18:04,164 --> 00:18:09,166
 do that with if let operand equal NSNumberFormatter.
+这里我可以输入 if let operand = NSNumberFormatter()
 
 410
 00:18:09,168 --> 00:18:12,736
 Okay, numberFromString, I'm gonna pass it
+NSNumberFormatter().numberFromString(...)
 
 411
 00:18:12,738 --> 00:18:16,773
 this opSymbol that I got out of that Array it gave me.
+括号里的参数我将把 opSymbol 传进去
 
 412
 00:18:16,775 --> 00:18:20,042
 I'm going to use optional chaining here and
+这里我将使用 optional chaining 并且
 
 413
 00:18:20,044 --> 00:18:24,113
 put a question mark, then doubleValue, okay.
+放一个问号在这里，然后 .doubleValue
 
 414
 00:18:24,115 --> 00:18:27,616
 Remember optional chaining, if you have an expression like
+记住，optional chaining，如果你有一个像这样的表达式
 
 415
 00:18:27,618 --> 00:18:31,653
 this, this whole expression, and if anything along the way
+那么整个表达式中任意一个
 
 416
 00:18:31,655 --> 00:18:36,157
 returns nil then this whole expression will return nil.
+返回了 nil 的话，那么整个表达式将返回 nil
 
 417
 00:18:36,159 --> 00:18:38,659
 If you put a question mark after that term.
+我在这里放置了一个问号
 
 418
 00:18:38,661 --> 00:18:40,927
 So, numberFromString can return nil if this is
+那么 numberFromString 如果接受一个不是 String 型的参数
 
 419
 00:18:40,929 --> 00:18:44,364
 not a String, that can be interpreted as a number.
+那么它就会返回 nil，即使这个字符串可以被解释成一个数字
 
 420
 00:18:44,366 --> 00:18:47,000
 So by putting a question mark here it says, okay?
+所以这里我放置一个问号的意思是
 
 421
 00:18:47,002 --> 00:18:50,169
 If that's nil than just return nil back to here.
+如果这个表达式返回 nil，则 operand 也将是 nil
 
 422
 00:18:50,171 --> 00:18:52,604
 Otherwise keep going and send it doubleValue.
+如果不返回 nil，那么 operand 设置成表达式返回值的 doubleValue
 
 423
 00:18:53,574 --> 00:18:57,709
 So this operand is either going to not get set,
+这个 operand 要么设值要么不被设值
 
 424
 00:18:57,711 --> 00:19:01,879
 because of the if let, or it's going to be a Double,
+因为 if let，它将成为一个 Double 型的
 
 425
 00:19:01,881 --> 00:19:03,580
 which is what this doubleValue comes out of here.
+也就是为什么这里出现 doubleValue 的原因
 
 426
 00:19:04,883 --> 00:19:07,384
 Okay, so that's kind of explaining from last week how
+好的，这就是上周我们做 number formatter 
 
 427
 00:19:07,386 --> 00:19:09,252
 we did this number formatter thing.
+的实现的一种解释
 
 428
 00:19:09,254 --> 00:19:12,005
 So in this case,
+在这里
 
 429
 00:19:12,006 --> 00:19:14,757
 I can just append onto the end of it that a new op.
+我只需要追加一个新的 op
 
 430
 00:19:14,759 --> 00:19:19,361
 So, we'll say dot operand with that operand.
+我们输入 .Operand(operand)
 
 431
 00:19:19,363 --> 00:19:20,795
 So we're just putting a new op on there.
+这样我们就追加了一个新的 op
 
 432
 00:19:20,797 --> 00:19:24,565
 So now I've built a new opStack using all those Strings,
+现在我使用了所有的那些字符串创建了一个 newOpStack
 
 433
 00:19:24,567 --> 00:19:27,901
 and I can just return that new opStack.
+这里我将返回这个 newOpStack
 
 434
 00:19:27,903 --> 00:19:30,170
 Not return it, sorry.
+喔，这里不是返回
 
 435
 00:19:30,171 --> 00:19:32,438
 I'm gonna set my opStack equal to that new op
+而是将 opStack = newOpStack
 
 436
 00:19:32,441 --> 00:19:33,740
 Stack, okay?
+明白了吗？
 
 437
 00:19:33,742 --> 00:19:35,174
 That's it.
+就这些
 
 438
 00:19:37,111 --> 00:19:38,276
 Any questions about that?
+对此有什么疑问吗？
 
 439
 00:19:38,278 --> 00:19:41,513
 >>Property List?
+- [学生提问]
 
 440
 00:19:41,515 --> 00:19:42,780
 Like that's just because.
+- [学生提问]
 
 441
 00:19:42,782 --> 00:19:44,932
 >> This is documentation,
+这是文档
 
 442
 00:19:44,933 --> 00:19:47,083
 this is a public thing, it's not private, and I'm just
+这是一个 public 的东西，不是 private 的
 
 443
 00:19:47,086 --> 00:19:49,520
 documenting to anyone who's using it that this is true.
+这是提供给任何使用我代码的人的文档
 
 444
 00:19:49,522 --> 00:19:52,389
 I can document this even better using a typealias.
+我能够用 typealias 更好地整理我的代码文档
 
 445
 00:19:52,391 --> 00:19:54,290
 So you can basically have a typealias,
+你仅仅需要输入 typealias
 
 446
 00:19:54,292 --> 00:19:55,892
 which is an alias for a type.
+typealias 是一个类型的替身
 
 447
 00:19:55,894 --> 00:19:58,094
 It's just a way of another type, and
+是一种其他类型
 
 448
 00:19:58,096 --> 00:20:00,429
 I could have a typealias called PropertyList,
+输入 typealias PropertyList = AnyObject
 
 449
 00:20:00,431 --> 00:20:02,831
@@ -1986,70 +2204,87 @@ which is equals AnyObject.
 450
 00:20:03,934 --> 00:20:08,302
 Then I could have this type be PropertyList, okay?
+接下来我就可以让 program: AnyObject 中的 AnyObject 成为 PropertyList 类型，明白了吗？
 
 451
 00:20:08,304 --> 00:20:11,772
 So I just created PropertyList as an alias for AnyObject, so
+这里我创建了 PropertyList 类型，它是 AnyObject 的一个替身
 
 452
 00:20:11,774 --> 00:20:13,106
 someone looking at this is gonna go,
+当别人看到这里的时候
 
 453
 00:20:13,108 --> 00:20:14,974
 whoa, what the heck is PropertyList?
+他会有一个疑问，究竟什么是 PropertyList
 
 454
 00:20:14,976 --> 00:20:16,309
 Now they're going to look at this typealias, and
+然后他们会回头看到这个 typealias
 
 455
 00:20:16,311 --> 00:20:18,844
 say, oh, that's AnyObject, but they're really going to
+然后知道，那是 AnyObject，他们会知道
 
 456
 00:20:18,846 --> 00:20:21,480
 understand that I'm returning the Property List to them, and
+我将返回一个 PropertyList 给他们
 
 457
 00:20:21,482 --> 00:20:22,848
 the reason it's Property List, again, so
+这就是为什么是 PropertyList 的原因
 
 458
 00:20:22,850 --> 00:20:26,584
 I can throw it again as user defaults or whatever, okay?
+我可以不是使用 PropertyList 或者使用默认设置，甚至其他的值，明白了吗？
 
 459
 00:20:28,354 --> 00:20:30,621
 But otherwise, it's only good, the only thing it's good for
+但是唯一的好处是
 
 460
 00:20:30,623 --> 00:20:33,056
 is giving it back to me to reset my program in
+当将来它返回给我，重置我的 program 的时候
 
 461
 00:20:33,058 --> 00:20:34,724
 the future; that's all this thing is good for.
+这就是它有利的地方
 
 462
 00:20:36,394 --> 00:20:39,762
 Now, you're gonna wanna add this to your assignment for
+现在，你们大概希望把这个加到你们的
 
 463
 00:20:39,764 --> 00:20:41,497
 assignment three, okay?
+课后作业三中
 
 464
 00:20:44,802 --> 00:20:47,502
 So, all right, back to slides.
+好的，回到我们的 Slides
 
 465
 00:20:48,571 --> 00:20:50,871
 I'm not gonna, I don't have time to really run this
+我并没有足够的课堂时间运行这个
 
 466
 00:20:50,873 --> 00:20:53,940
 unfortunately due to in test code because we are
+因为这个需要预先限制的测试代码
 
 467
 00:20:56,178 --> 00:20:57,577
@@ -2058,254 +2293,317 @@ schedule constraint here.
 468
 00:20:57,579 --> 00:20:59,979
 So let's go back to here, continue.
+让我们继续
 
 469
 00:21:01,182 --> 00:21:03,415
 All right, so now let's talk about, new thing here,
+继续讨论一些新东西
 
 470
 00:21:03,417 --> 00:21:06,584
 which is views, okay, totally new topic.
+Views，全新的话题
 
 471
 00:21:06,586 --> 00:21:09,087
 A view, that is to say,
+一个 view
 
 472
 00:21:09,089 --> 00:21:12,156
 a subclass of the class UIView in iOS
+iOS 中 UIView 类的一个子类
 
 473
 00:21:12,158 --> 00:21:15,259
 represents a rectangular area on the screen.
+表示了屏幕上的一个长方形的区域
 
 474
 00:21:15,261 --> 00:21:17,861
 That defines a coordinate space to draw in, and
+定义了一个坐标系空间来绘图
 
 475
 00:21:17,863 --> 00:21:20,463
 also to handle touch events, okay?
+和处理触摸的操作，明白了吗？
 
 476
 00:21:20,465 --> 00:21:24,100
 That's what a view is, and you are going to learn today,
+这就是 view，你们今天要学的
 
 477
 00:21:24,102 --> 00:21:25,301
 how to make your own views.
+如何制作你们自己的 views
 
 478
 00:21:26,771 --> 00:21:29,638
 The views are hierarchical, so,
+views 是有层次的
 
 479
 00:21:29,640 --> 00:21:32,407
 views are within views are within views.
+这就意味着 views 可以在 views 中
 
 480
 00:21:32,409 --> 00:21:34,742
 Any view only has one superview.
+但是任意的 view 只能有一个 superview
 
 481
 00:21:34,744 --> 00:21:37,478
 Right, it's only contained directly in one view.
+这也就意味，一个 view 是直接包含在另一个 view 中的
 
 482
 00:21:37,480 --> 00:21:39,480
 But, it can have any number of subviews.
+但是一个 view 可以有多个 subview
 
 483
 00:21:39,482 --> 00:21:41,948
 So in our Calculator, we had a top level view,
+在我们的计算器程序中，我们有一个最高层的 view
 
 484
 00:21:41,950 --> 00:21:43,316
 which I'm gonna talk about in a moment,
+最高层的 view 一会儿我即将谈到
 
 485
 00:21:43,318 --> 00:21:45,752
 and then we had a lot of subviews, all the buttons,
+接下来我们有一大堆的 subviews，都是按钮
 
 486
 00:21:45,754 --> 00:21:49,221
 the labels, those are all UIView subclasses.
+和标签，它们是 UIView 的子类
 
 487
 00:21:49,223 --> 00:21:50,989
 Okay, so we made a whole bunch.
+所以我们将会用到一大堆
 
 488
 00:21:50,991 --> 00:21:53,091
 A bunch of subviews in that view.
+一大堆的 subviews，在最高层的 view 中
 
 489
 00:21:53,093 --> 00:21:54,225
 But you can go even deeper.
+但是你可以研究更深入
 
 490
 00:21:54,227 --> 00:21:55,593
 It's hierarchical multi-layer.
+有层次的 multi-layer
 
 491
 00:21:55,595 --> 00:21:58,295
 We can go as deep as we want.
+我们想研究多深入都可以
 
 492
 00:21:58,297 --> 00:22:01,231
 The two, you can see the two properties there for
+在这里，你看到这两个 properties 
 
 493
 00:22:01,233 --> 00:22:03,317
 getting your super view.
+这两个 properties 是用来获取你的 superview
 
 494
 00:22:03,318 --> 00:22:05,402
 Notice it returns a optional, because you
+注意它返回一个可选的类型，这是因为
 
 495
 00:22:05,404 --> 00:22:07,804
 can have a view that's not currently on screen.
+你可以拥有一个当前不在屏幕中的 view
 
 496
 00:22:07,806 --> 00:22:10,406
 It's not currently in the view hierarchy so that can be nil.
+不在当前 view 层次结构中的 view 都会是 nil
 
 497
 00:22:11,509 --> 00:22:15,577
 Your subviews, I show Array of UIView there.
+还有一个属性是 subviews，这里我写的是由 UIView 对象组成的一个数组
 
 498
 00:22:15,579 --> 00:22:18,847
 Actually the subview's property is an Array of AnyObject,
+实际上这个 subview property 是由 AnyObject 组成的一个数组
 
 499
 00:22:18,849 --> 00:22:20,482
 again for historical reasons, but
+因为一些历史性的原因，不过
 
 500
 00:22:20,484 --> 00:22:21,849
 there will always be UIViews in there.
+元素始终都是 UIView 的对象
 
 501
 00:22:21,851 --> 00:22:26,086
 So don't even worry about that, okay?
+这里不需要关心，没有问题
 
 502
 00:22:26,088 --> 00:22:28,588
 And usually in this class on the the slides.
+在 Slides 中你经常看到这个类
 
 503
 00:22:28,590 --> 00:22:30,290
 If something's an Array of AnyObject,
+如果什么东西是由 AnyObject 组成的一个数组
 
 504
 00:22:30,292 --> 00:22:32,258
 if there's gonna be a certain kind of thing in there,
+那就是里面肯定有某种特定的东西
 
 505
 00:22:32,260 --> 00:22:34,460
 I'll say, Array of the certain kind of thing.
+换言之，由某种特定的对象组成的数组
 
 506
 00:22:34,462 --> 00:22:36,628
 But when you write your code, then,
+但是当你编写自己的代码时
 
 507
 00:22:36,630 --> 00:22:40,565
 obviously, you might see, oh, that's Array of AnyObject, and
+你明显知道这是由 AnyObject 组成的一个数组
 
 508
 00:22:40,567 --> 00:22:43,301
 that's again, the bridging will work here,
+再一次，bridging 起作用了
 
 509
 00:22:43,303 --> 00:22:46,404
 automatically, so, no worries there. UIWindow.
+这一切都是自动完成的，不需要你操心。UIWindow
 
 510
 00:22:46,406 --> 00:22:48,372
 There is a certain thing called a UIWindow.
+有这么一个东西叫 UIWindow
 
 511
 00:22:48,374 --> 00:22:51,809
 It's a subclass UIView but it has no meaning in iOS.
+它是 UIView 的子类，但是在 iOS 开发中你不需要关心
 
 512
 00:22:51,811 --> 00:22:53,510
 There is a UIWindow it's at the very,
+在每一个设备屏幕上都会有一个 UIWindow
 
 513
 00:22:53,512 --> 00:22:56,913
 very, very top of each device screen but
+iOS 上只有一个
 
 514
 00:22:56,915 --> 00:22:59,515
 you never send it any messages really.
+但是你不会向它发送任何消息
 
 515
 00:22:59,517 --> 00:23:00,583
 You don't interact with it.
+你不跟它交互
 
 516
 00:23:00,585 --> 00:23:02,151
 It's all about views.
+在 iOS 中你只要关心 views
 
 517
 00:23:02,153 --> 00:23:04,152
 On a desktop windows matter.
+但是在桌面环境中，UIWindow 就很关键
 
 518
 00:23:04,154 --> 00:23:07,589
 But on iOS, it's all about views, okay?
+再次强调，在 iOS 中你只要关心 views，明白了吗？
 
 519
 00:23:07,591 --> 00:23:08,690
-So don't worry about UIwindow.
+So don't worry about UIWindow.
+不要操心 UIWindow
 
 520
 00:23:10,927 --> 00:23:13,127
 This hierarchy of views, subviews and
+views 的层次结构，subviews 和
 
 521
 00:23:13,129 --> 00:23:15,629
 superviews, is created usually, graphically.
+superviews 通常不需要通过代码来创建
 
 522
 00:23:15,631 --> 00:23:17,664
 You can drag things out in the StoryBoard.
+你可以直接从 StoryBoard 中拖出来这些组件
 
 523
 00:23:17,666 --> 00:23:20,800
 You can drag views inside other views to
+你可以在其他 views 中拖入 views 
 
 524
 00:23:20,802 --> 00:23:23,102
 create your hierarchy.
+来创建你自己的层次结构
 
 525
 00:23:23,104 --> 00:23:25,104
 But you can do it in code as well.
+但是这并不是说不能用代码来创建这些东西
 
 526
 00:23:25,106 --> 00:23:28,674
 It's pretty rare to do it in code, but you can.
+确实可以用代码创建图形部分，但是很少人这么做
 
 527
 00:23:28,676 --> 00:23:30,809
 There's two methods here addSubview and
+这里有两个方法：addSubview 和
 
 528
 00:23:30,811 --> 00:23:33,611
 removeFromSuperview, addSubview is sent to
+removeFromSuperview，addSubview 是
 
 529
 00:23:33,613 --> 00:23:35,446
 the prospective superview.
+向预期的 superview 发送的消息
 
 530
 00:23:35,448 --> 00:23:37,314
 In other words to the place you wanna add your,
+换言之，superview 是你想添加你的 view 的地方
 
 531
 00:23:37,316 --> 00:23:38,749
@@ -2314,62 +2612,77 @@ this view into.
 532
 00:23:38,751 --> 00:23:40,984
 And removeFromSuperview is sent to the view that you
+同样的，removeFromSuperview 是
 
 533
 00:23:40,986 --> 00:23:42,285
 want to remove.
+想你想要移除的 view 发送的消息
 
 534
 00:23:42,287 --> 00:23:44,571
 So these are sent to different people,
+这两个消息发送给不同的对象
 
 535
 00:23:44,572 --> 00:23:46,856
 okay, removeFromSuperview means remove yourself from
+removeFromSuperview 意味着把“你”自己从 superview 中
 
 536
 00:23:46,858 --> 00:23:47,556
 your superview.
+移除
 
 537
 00:23:49,493 --> 00:23:51,593
 So, where does the view hierarchy start?
+那么 view 的层次结构从那里开始呢？
 
 538
 00:23:51,595 --> 00:23:52,927
 Where is the kind of the root,
+它肯定有一个根节点
 
 539
 00:23:52,929 --> 00:23:55,596
 the top level of this hierarchy, and
+在层次结构的最顶上
 
 540
 00:23:55,598 --> 00:23:58,132
 the answer is very simple, but, for some reason,
+答案很简单，但是因为某些原因
 
 541
 00:23:58,134 --> 00:24:00,667
 students have a very difficult time understanding this one.
+学生们会很难理解这个概念
 
 542
 00:24:00,669 --> 00:24:04,737
 There is a property in your UIView Controller
+在你们的 UIView Controller 中有一个 property
 
 543
 00:24:04,739 --> 00:24:06,505
 called view, and
+名字叫 view
 
 544
 00:24:06,507 --> 00:24:11,209
 it is the top level view in the scene in the StoryBoard.
+这就是你们在 StoryBoard 场景中的最高层次的 view
 
 545
 00:24:11,211 --> 00:24:12,544
 All right. So you have this StoryBoard.
+这里你有这个 StoryBoard
 
 546
 00:24:12,546 --> 00:24:15,346
 You've got your scene that we've seen like your
+你有一个场景跟 Calculator one 差不多的场景
 
 547
 00:24:15,348 --> 00:24:17,331
@@ -2378,202 +2691,252 @@ Calculator one.
 548
 00:24:17,332 --> 00:24:19,315
 The top level one the place where you're going to add
+在视图层次中最高层（你将要添加
 
 549
 00:24:19,318 --> 00:24:22,720
 your top level views is called view in your view controller.
+你顶层 views）的地方叫 view controller 中 view
 
 550
 00:24:22,722 --> 00:24:24,688
 It's just a property in UIView Controller.
+一个在 UIViewController 的 property
 
 551
 00:24:24,690 --> 00:24:27,390
 So it really couldn't be simpler, okay?
+不能够更简单了吧
 
 552
 00:24:27,392 --> 00:24:29,859
 Sometimes students they just forget that's there and there
+有时学生们忘记了UIViewController中还有这么一个 view
 
 553
 00:24:29,861 --> 00:24:32,495
 like all right how do I add something to my StoryBoard?
+那在我 StordBoard 中添加一些东西
 
 554
 00:24:32,497 --> 00:24:34,229
 You know in code or something like that.
+你想要从代码中实现
 
 555
 00:24:34,231 --> 00:24:37,065
 Well you just you add it to the view of
+那么你就把它加入你 UIView Controller
 
 556
 00:24:37,067 --> 00:24:40,502
 your UIView Controller, okay?
+的 view property 中，明白了吗？
 
 557
 00:24:40,504 --> 00:24:46,741
 So, let's talk about initializing a view.
+接下来让我们讨论一下初始化一个 view
 
 558
 00:24:46,743 --> 00:24:50,444
 As usual, as I've kind of recommended, you probably want
+通常我建议，不要做初始化
 
 559
 00:24:50,446 --> 00:24:52,946
 to avoid doing an initializer, if you can.
+尽可能不要
 
 560
 00:24:52,948 --> 00:24:55,782
 So, to initialize any properties in
+这里，在你的 view 中初始化
 
 561
 00:24:55,784 --> 00:24:58,584
 your view hopefully using equals or
+一些 properties 可以使用 = 
 
 562
 00:24:58,586 --> 00:25:00,953
 some of the other ways we've talked about doing it.
+或者我们说过的其他方法实现
 
 563
 00:25:00,955 --> 00:25:03,856
 But, in UIView it's slightly more likely that you
+但是，在 UIView 中有一点点相似的地方是
 
 564
 00:25:03,858 --> 00:25:05,724
 might want to have an initializer.
+你可能需要一个 initializer
 
 565
 00:25:05,726 --> 00:25:07,826
 So it's a slightly complicated thing.
+通常这个有一点点复杂
 
 566
 00:25:07,828 --> 00:25:08,926
 Only slightly.
+不过只有一点点
 
 567
 00:25:08,928 --> 00:25:11,262
 In that UIView has two initializers you
+UIView 中有两个 initializers
 
 568
 00:25:11,264 --> 00:25:12,730
 have to deal with.
+你需要处理的
 
 569
 00:25:12,731 --> 00:25:14,197
 And that's because UIViews can be created in
+那是因为 UIView 可以由两种不同的方法
 
 570
 00:25:14,200 --> 00:25:15,499
 two different ways.
+来创建
 
 571
 00:25:15,501 --> 00:25:18,468
 In code by just saying UIView and
+在代码中你会写 UIView
 
 572
 00:25:18,470 --> 00:25:22,438
 this frame initializer, which is just the frame in the super
+frame initializer，也就是你在 superview 的
 
 573
 00:25:22,440 --> 00:25:26,042
 view coordinate system where this view is gonna live.
+坐标系系统下存在的位置
 
 574
 00:25:26,044 --> 00:25:27,643
 But then there's also this init with coder.
+还有一个是 init(coder: NSCoder)
 
 575
 00:25:27,645 --> 00:25:29,311
 And I'm not gonna talk about coders and
+这里不打算讲 coders
 
 576
 00:25:29,313 --> 00:25:30,679
 archiving and all that.
+和归档的那些东西
 
 577
 00:25:30,681 --> 00:25:33,614
 But that is the initializer that is called when the view
+但是在 Storyboard 中初始化的时候会
 
 578
 00:25:33,616 --> 00:25:35,649
 comes out of a StoryBoard.
+调用 init(coder: NSCoder) 方法
 
 579
 00:25:35,651 --> 00:25:38,318
 So, if you create a view by dragging on a StoryBoard,
+所以，你在 StoryBoard 中拖入一个 view
 
 580
 00:25:38,320 --> 00:25:41,455
 its initializer is this coder thing, okay?
+它的 initializer 方法是 init(coder: NSCoder)，明白了吗？
 
 581
 00:25:41,457 --> 00:25:44,858
 So, if you want, if you absolutely have to use
+如果你想的话，你绝对需要
 
 582
 00:25:44,860 --> 00:25:47,694
 an initializer to initialize something in your UIView,
+在你的 UIView 中使用一个 initializer
 
 583
 00:25:47,696 --> 00:25:50,329
 you're gonna want to implement both of these things.
+你将要实现这两个方法
 
 584
 00:25:50,331 --> 00:25:53,432
 And I recommend this kind of format here.
+这里我推荐的格式是
 
 585
 00:25:53,434 --> 00:25:57,669
 Where you override init with frame there.
+当你在这里 override init(frame: CGRect)
 
 586
 00:25:57,671 --> 00:26:00,271
 That is a designated initializer in UIView.
+这是一个UIView 的 designated initializer 
 
 587
 00:26:00,273 --> 00:26:03,641
 And then, there's actually a required initializer,
+接下黎，还有一个 requried 的 initializer
 
 588
 00:26:03,643 --> 00:26:05,042
 which is the decoder one.
+也就是 decoder 方法
 
 589
 00:26:05,044 --> 00:26:08,245
 So if you implement the init with frame you have to
+如果你实现了 init(frame: CGRect) 方法
 
 590
 00:26:08,247 --> 00:26:09,746
 implement the coder one, it's required,
+你必须同时实现 init(coder: NSCoder)，
 
 591
 00:26:09,748 --> 00:26:11,848
 cuz as soon as you implement the init with frame,
+因为只要是你实现了 init(frame: CGRect)
 
 592
 00:26:11,850 --> 00:26:14,216
 you'll no longer inherit all of your designated
+你就不再继承所有的 designated initializers
 
 593
 00:26:14,218 --> 00:26:17,052
 initializers you won't inherit the init with the coder.
+同样你不再继承 init(coder: NSCoder)
 
 594
 00:26:17,054 --> 00:26:18,787
 So, basically implement them both, and
+所以，实现这两者
 
 595
 00:26:18,789 --> 00:26:21,189
 then just factor your initialization code into some
+然后重构你的代码，讲这两个 initializer 放进
 
 596
 00:26:21,191 --> 00:26:24,659
 setup method or something, and call that, okay?
+setup 方法中或者其他的方法中，然后调用重构后的方法，明白了吗？
 
 597
 00:26:24,661 --> 00:26:26,827
 So, that's only if you absolutely have to
+这就是你唯一要有的 initializer
 
 598
 00:26:28,064 --> 00:26:28,895
@@ -2582,10 +2945,12 @@ have an initializer.
 599
 00:26:30,365 --> 00:26:33,566
 All right, there's another alternative to initializing.
+好的，还有另外关于初始化的一些东西
 
 600
 00:26:33,568 --> 00:26:37,336
 Which is if you can wait until the initialization is finished
+也就是你等到初始化完成之后想做的
 
 601
 00:26:37,338 --> 00:26:40,005
@@ -2685,7 +3050,7 @@ First of all, all coordinates are gonna be CGFloats.
 620
 00:27:24,845 --> 00:27:27,879
 Okay, CGFloats is a type in Swift struct.
-是的，CGFloats在swift中是结构体。
+是的，CGFloats在Swift中是结构体。
 
 621
 00:27:27,881 --> 00:27:31,315
@@ -3591,1030 +3956,1289 @@ it'll give you a CGRect to zero which is a frame zero
 801
 00:34:43,285 --> 00:34:45,485
 size and width and
+默认的尺寸和宽度
 
 802
 00:34:45,486 --> 00:34:47,686
 then you could later set its frame to position the view.
+在接下来你可设置它的frame在视图中的位置
 
 803
 00:34:47,689 --> 00:34:50,189
 So here's an example of creating a view in code.
+所以这里有一个使用代码创建视图的例子
 
 804
 00:34:50,191 --> 00:34:51,590
 I'm going to use UILabel.
+我接下来要使用UILabel控件
 
 805
 00:34:51,592 --> 00:34:55,093
 UILabel is a subclass of UIView so I can send it.
+UILabel 是 UIView的一个子类所以我可以发送过去
 
 806
 00:34:55,095 --> 00:34:57,495
 UILabels parentheses frame.
+UILabels 包括一个 frame
 
 807
 00:34:57,497 --> 00:34:59,263
 So I just give it this frame which is kind of in
+所以我只需要在这个frame中
 
 808
 00:34:59,265 --> 00:35:00,698
 the upper left.
+给它一个左上角
 
 809
 00:35:00,700 --> 00:35:04,334
 Notice I've created this view but it's not on screen yet.
+请注意我已经创建了这个视图但是它并没有显示在屏幕上
 
 810
 00:35:04,336 --> 00:35:06,003
+Okay.
 Okay.
 
 811
 00:35:06,004 --> 00:35:07,671
 Assuming this code here is in a view controller,
+假设这里的代码实在一个view controller里
 
 812
 00:35:07,673 --> 00:35:10,640
 I could then say view.addSubview.
+我接下来可以说 view.addSubview.
 
 813
 00:35:10,642 --> 00:35:12,475
 Cuz remember view is a property in
+因为记住view是一个property
 
 814
 00:35:12,477 --> 00:35:15,144
 my view controller which is that top level view.
+在我的view controller实在view的最顶层
 
 815
 00:35:15,146 --> 00:35:17,279
 And I could say add subview of the label and
+我可以说添加一个lable类型的subview在底部
 
 816
 00:35:17,281 --> 00:35:18,613
 boom, it'll appear on screen.
+它将会出现在屏幕上
 
 817
 00:35:19,616 --> 00:35:20,514
 Okay? At 20,
+明白了么？在20，20
 
 818
 00:35:20,516 --> 00:35:22,716
 20, width 100, height 50.
+宽度是100，高度是50
 
 819
 00:35:22,718 --> 00:35:23,283
 Okay?
+明白了么？
 
 820
 00:35:25,120 --> 00:35:26,619
 So it is possible to create views in code.
+所以在代码中创建view是可行的
 
 821
 00:35:26,621 --> 00:35:28,821
 We almost never do that in iOS.
+我们几乎从来不在iOS中这么做
 
 822
 00:35:28,823 --> 00:35:29,855
 We use StoryBoards.
+我们使用 StoryBoards
 
 823
 00:35:31,458 --> 00:35:35,727
 Okay, so when do I wanna create my own UIView?
+Okay，所以当我们想创建一个我自己的UIView时我会怎么做呢？
 
 824
 00:35:35,729 --> 00:35:36,660
 Right?
+Right？
 
 825
 00:35:36,662 --> 00:35:38,162
 Well, when don't you want to?
+Well，当你不想要？
 
 826
 00:35:38,164 --> 00:35:40,597
 Well you don't want to if you want a button or a slider or
+当你不想要一个按钮或者slider或者任何东西
 
 827
 00:35:40,599 --> 00:35:43,099
 anything where there's already an iOS view.
+已经存在于iOS系统view中
 
 828
 00:35:43,101 --> 00:35:44,400
 But if you want to do something that
+但是如果你想要做一些
 
 829
 00:35:44,402 --> 00:35:47,303
 those things can't do, draw something special or
+iOS系统不能做的，绘制一些特别的或者
 
 830
 00:35:47,305 --> 00:35:49,538
 handle touch events like swipes and
+触摸事件像是swipes和
 
 831
 00:35:49,540 --> 00:35:54,509
 taps and pinches, differently or for a different purpose.
+taps以及pinches，不同的或者为了不同的目的
 
 832
 00:35:54,511 --> 00:35:58,212
 Then those things then you create your own custom view.
+接下来你可以通过这些东西创建你自己定制的view
 
 833
 00:35:58,214 --> 00:36:00,581
 So, we're going to focus on drawing today, and
+所以，我们今天将会专注于绘制
 
 834
 00:36:00,583 --> 00:36:03,984
 I'll do gestures in the next lec, in the next lecture.
+然后在下节课我将会讲一些手势方面的内容
 
 835
 00:36:03,986 --> 00:36:05,585
 To draw in your UIView,
+在你的UIView中绘制
 
 836
 00:36:05,587 --> 00:36:09,155
 all you need to do is override this method drawRect.
+所以你需要做的是重写drawRect方法
 
 837
 00:36:10,591 --> 00:36:13,425
 Okay, very simple method only takes one argument.
+Okay，非常简单的方法仅仅调用一个argument
 
 838
 00:36:13,427 --> 00:36:15,594
 In the code, it's actually called Rect, but
+在代码中，它实际上被叫做Rect
 
 839
 00:36:15,596 --> 00:36:18,697
 I've renamed it to be regionThatNeedsToBeDrawn, so
+但是我已经将它重新命名为 regionThatNeedsToBeDrawn
 
 840
 00:36:18,699 --> 00:36:20,798
 that people understand what that argument is.
+这样人们就可以理解那个argument是什么了
 
 841
 00:36:20,800 --> 00:36:23,734
 That argument is purely an optimization.
+那个 argument 纯粹是一个optimization
 
 842
 00:36:23,736 --> 00:36:27,338
 It's just the system saying, hey, draw yourself and really,
+那只是系统的说法，hey，认真的绘制你自己
 
 843
 00:36:27,340 --> 00:36:29,339
 I only care about this rectangle of you.
+我只是关心你画的的矩形范围
 
 844
 00:36:29,341 --> 00:36:31,641
 But you can draw your, the whole self if you want.
+但是你可以绘制你自己的，整个你想要的
 
 845
 00:36:31,643 --> 00:36:33,609
 But this is the only rectangle I really care about.
+但是只有这个矩形范围是我真正关心的
 
 846
 00:36:33,611 --> 00:36:37,279
 So if you had a View that knew how to draw parts of itself,
+所以如果你有一个view你知道怎么去绘制它的部分区域
 
 847
 00:36:37,281 --> 00:36:40,182
 okay, then it could only draw the part that's in
+Okay，然后它可以只绘制
 
 848
 00:36:40,184 --> 00:36:41,650
 this rectangle, but
+在这个矩形区域内的部分
 
 849
 00:36:41,651 --> 00:36:43,117
 you can completely ignore this rectangle if you want.
+但是你可以完全忽视你想要的这个矩形范围
 
 850
 00:36:43,120 --> 00:36:45,387
 It's purely an optimization.
+它纯粹的是一个 optimization
 
 851
 00:36:45,389 --> 00:36:45,953
 Okay?
+明白？
 
 852
 00:36:48,124 --> 00:36:49,990
 This is very important to understand,
+这对于理解来说非常重要
 
 853
 00:36:49,992 --> 00:36:53,260
 you never call drawRect, ever, never.
+你永远不会调用 drawRect方法
 
 854
 00:36:53,262 --> 00:36:54,160
 Never.
+永远不会
 
 855
 00:36:54,162 --> 00:36:55,345
 Okay?
+明白？
 
 856
 00:36:55,346 --> 00:36:56,529
 If you call drawRect in your homework,
+如果你在你的家庭作业中调用 drawRect方法
 
 857
 00:36:56,531 --> 00:36:58,330
 you're going to be a major ding.
+你会是一个主要的ding
 
 858
 00:36:58,332 --> 00:36:59,999
 Because I'm standing here in front of
+因为我在这里站在你的前面
 
 859
 00:37:00,001 --> 00:37:01,600
 you with red text on my slide.
+和我边上的红色文字一起
 
 860
 00:37:01,602 --> 00:37:03,034
 Saying, never.
+说，永远不要
 
 861
 00:37:03,036 --> 00:37:05,153
+Okay.
 Okay.
 
 862
 00:37:05,154 --> 00:37:07,271
 Do not call drawRect, drawRect is called by the system.
+不要调用 drawRect方法，drawRect方式是被系统调用的
 
 863
 00:37:07,273 --> 00:37:09,190
 Okay?
+明白？
 
 864
 00:37:09,191 --> 00:37:11,108
 It's called by the system when your view needs to be redrawn.
+它会被系统调用当你的view需要重新绘制时
 
 865
 00:37:11,110 --> 00:37:13,010
 How does the system know your needs,
+系统是怎样你知道你需要什么的呢
 
 866
 00:37:13,012 --> 00:37:14,578
 view needs to be redrawn?
+view 需要重新绘制？
 
 867
 00:37:14,580 --> 00:37:18,314
 Because somebody called setNeedsDisplay on your view.
+因为有一个叫做 setNeedDisplay的方法在你的view里
 
 868
 00:37:18,316 --> 00:37:19,982
 And you can call it on yourself if you want.
+然后如果你需要的话你可以调用它
 
 869
 00:37:19,984 --> 00:37:22,985
 If something has changed about your view, some property or
+如果在你的view中一些东西发生变化了时
 
 870
 00:37:22,987 --> 00:37:24,887
 something that would change the way it's drawn,
+一些property或者一些东西可能改变了它的绘制方式
 
 871
 00:37:24,889 --> 00:37:26,888
 you call set needs display on yourself,
+你调用 set needs display通过你自己
 
 872
 00:37:26,890 --> 00:37:29,691
 eventually the system will call your drawRect.
+最终系统会调用你的drawRect方法
 
 873
 00:37:29,693 --> 00:37:31,993
 But it's got to set some things up first, okay.
+但是它将会先创建一些东西
 
 874
 00:37:31,995 --> 00:37:33,928
 There's other views around you.
+在你周围有其他的views
 
 875
 00:37:33,930 --> 00:37:36,330
 That it has to get organized.
+它们必须被组织起来
 
 876
 00:37:36,332 --> 00:37:38,965
 Okay, so never call drawRect, drawRect it's called for you.
+okay，所以永远不要调用 drawRect，drawRect 是用来调用你的
 
 877
 00:37:38,967 --> 00:37:42,002
 When you call set in use display, you can specify I
+当你调用一个正在显示的区域时
 
 878
 00:37:42,004 --> 00:37:44,303
 really only need this rectangle redisplayed and
+你可以指定你只需要这么大的范围用来重新显示
 
 879
 00:37:44,305 --> 00:37:45,905
 then obviously,
+然后接下来明显地
 
 880
 00:37:45,906 --> 00:37:47,506
 that rectangle's gonna show up in the argument to drawRect.
+那块区域将会通过drawRect方法露面
 
 881
 00:37:48,609 --> 00:37:51,143
 Okay, but if multiple people call set in use display with
+Okay，但是如果当很多人通过这种方式调用不同的范围时
 
 882
 00:37:51,145 --> 00:37:53,345
 different rectangles, probably the union of those
+很有可能这些区域
 
 883
 00:37:53,347 --> 00:37:56,280
 rectangles might get called here one time for drawRect.
+会被drawRect方法一次调用完成
 
 884
 00:37:56,282 --> 00:37:57,581
 Okay?
+明白了么？
 
 885
 00:37:57,583 --> 00:38:00,517
 Make sense?
+听懂了么？
 
 886
 00:38:00,519 --> 00:38:01,418
 All right.
+好吧
 
 887
 00:38:01,420 --> 00:38:03,186
 So, how do you implement this, pow,
+所以，你要怎样实现这个
+
 
 888
 00:38:03,188 --> 00:38:05,922
 all-powerful drawRect method?
+无所不能的 drawRect 方法呢？
 
 889
 00:38:05,924 --> 00:38:09,625
 You can use, kind of a C-like, function-based API,
+你可以使用，类似于C语言，基于函数的API
 
 890
 00:38:09,627 --> 00:38:11,259
 called Core Graphics.
+叫做 Core Graphics
 
 891
 00:38:11,261 --> 00:38:13,094
 That's what it's all based on.
+这就是它的所有基础
 
 892
 00:38:13,096 --> 00:38:15,596
 Or you can use a nice object-oriented, thing,
+或者你可使用一个漂亮的面相对象的东西
 
 893
 00:38:15,598 --> 00:38:18,432
 called UIBezierPath, which is what we're gonna use,
+叫做UIBezierPath，使我们接下来要使用的
 
 894
 00:38:18,434 --> 00:38:20,367
 because we like object-oriented.
+因为我们喜欢面向对象的
 
 895
 00:38:20,369 --> 00:38:23,603
 But since the underlying stuff core graphics is what
+但是因为涉及到图形绘制底层的东西
 
 896
 00:38:23,605 --> 00:38:26,973
 UIBezierPath is built on, I'm gonna kinda explain a little
+UIBezierPath所运用用来构建的，我会介绍一些
 
 897
 00:38:26,975 --> 00:38:29,442
 bit about the concepts of Core Graphics.
+关于 Core Graphics的概念
 
 898
 00:38:29,444 --> 00:38:31,944
 How one draws in Core Graphics.
+一个东西是怎么样在Core Graphics绘制的
 
 899
 00:38:31,946 --> 00:38:34,380
 The first thing in Core Graphics that's important is,
+在Core Graphics中第一件很重要的事是
 
 900
 00:38:34,382 --> 00:38:37,416
 you have to get a context to draw in.
+你得拥有一个背景用来绘制
 
 901
 00:38:37,418 --> 00:38:38,700
 Okay? So
+明白？
 
 902
 00:38:38,701 --> 00:38:39,983
 if you're printing you'll have a printing context.
+如果你要printing 那你得有一个printing的背景
 
 903
 00:38:39,986 --> 00:38:41,519
 If you're drawing on screen you'll have a draw on
+如果你要绘制在屏幕上你得有一个
 
 904
 00:38:41,521 --> 00:38:44,305
 screen context, et cetera.
+可以绘制的屏幕背景 等等
 
 905
 00:38:44,306 --> 00:38:47,090
 And inside drawRect, when you're drawRect is called by
+在 drawRect中，当你准备绘制时
 
 906
 00:38:47,093 --> 00:38:50,227
 the system it sets up the drawing context for you.
+系统会调用drawRect方法并且为你建立一个绘制的背景
 
 907
 00:38:50,229 --> 00:38:51,895
 So it's automatically set up,
+所以它是自动建立的
 
 908
 00:38:51,897 --> 00:38:54,097
 and it's called the current context.
+并且他被称为当前的背景
 
 909
 00:38:54,099 --> 00:38:55,431
 The current drawing context.
+当前的绘制背景
 
 910
 00:38:55,433 --> 00:38:58,233
 And you can get it if you were using the C-API.
+同时如果你使用C-API时你也可以得到它
 
 911
 00:38:58,235 --> 00:39:01,837
 Or C-like APIs it's still Swift but it's functional.
+或者C-like APIs它仍然是 Swift但是它是实用的
 
 912
 00:39:01,839 --> 00:39:03,405
 Function API, you can get it
+API函数，你可以得到他们
 
 913
 00:39:03,407 --> 00:39:06,207
 with this function UIGraphicsGetCurrentContext.
+通过 UIGraphicsGetCurrentContext方法
 
 914
 00:39:06,209 --> 00:39:07,541
 And it will return this cookie,
+它将会返回到这个cookie
 
 915
 00:39:07,543 --> 00:39:08,876
 it's just this magic cookie.
+它只是这个令人惊奇的cookie
 
 916
 00:39:08,878 --> 00:39:11,411
 You don't know what it is, but it is the context of drawing.
+你不知道它是什么，但是它是绘制时的背景
 
 917
 00:39:11,413 --> 00:39:15,615
 Because all of the C-like functional API take
+因为所有的类似于C-like 函数的 API
 
 918
 00:39:15,617 --> 00:39:17,483
 a context as an argument.
+使用这一背景
 
 919
 00:39:17,485 --> 00:39:20,786
 Okay, BezierPath doesn't do that no worries,
+Okay，BezierPath 不会这样做，不用担心
 
 920
 00:39:20,788 --> 00:39:22,521
 but that one does.
+但是那个会这么做
 
 921
 00:39:22,522 --> 00:39:24,255
 So the first thing you need is a context automatically set up
+所以你需要做的第一件事是自动创建一个context
 
 922
 00:39:24,258 --> 00:39:25,824
 for your when drawRect is called.
+当你的drawRect被调用时
 
 923
 00:39:25,826 --> 00:39:29,927
 Then you create paths, you create paths with lines and
+然后你创建路径，你通过线条和
 
 924
 00:39:29,929 --> 00:39:31,395
 arcs and things like that.
+弧线或者你喜欢的东西
 
 925
 00:39:32,297 --> 00:39:33,930
 Then you set the drawing attributes,
+然后你设置绘制的属性
 
 926
 00:39:33,932 --> 00:39:36,499
 like the colors you want to draw in, the linewidths, and
+类似于你希望绘制进去的颜色，线条宽度
 
 927
 00:39:36,501 --> 00:39:37,800
 things like that, and
+和类似于这些的东西
 
 928
 00:39:37,802 --> 00:39:41,370
 finally, you stroke and fill those paths.
+最后你生成并且填充这些路径
 
 929
 00:39:42,305 --> 00:39:44,122
 Okay?
+明白了么？
 
 930
 00:39:44,123 --> 00:39:45,940
 And you can do either, or, or both stroking and filling.
+你可以两个中任一一个，或者同时做两个
 
 931
 00:39:45,942 --> 00:39:48,509
 So that is how, that is fundamentally how you draw.
+所以那就是如何，你绘制的根本
 
 932
 00:39:48,511 --> 00:39:52,979
 Things like drawing text is just the fonts know how to
+类似于绘制文字之类的事情只是需要知道字体
 
 933
 00:39:52,981 --> 00:39:56,049
 have the perfect path to draw beautiful letters.
+并且如何去绘制一个完美的路径去绘制漂亮的书信
 
 934
 00:39:56,051 --> 00:39:58,918
 And so, your stroking would outline the letters, and
+所以，你的笔刷将会在文字的轮廓
 
 935
 00:39:58,920 --> 00:40:01,620
 filling fills in the letters, okay?
+然后填充到文字的内部，明白？
 
 936
 00:40:01,622 --> 00:40:05,023
 So even drawing text, is just stroking and filling paths.
+所以即使是绘制一个文字，也是只需要一个笔刷和填充的路径
 
 937
 00:40:06,093 --> 00:40:10,061
 Okay? Now, UIBzierPath, this object-oriented
+明白了么？现在，UIBzierPath，这个面相对象的
 
 938
 00:40:10,063 --> 00:40:12,830
 thing on top, it always draws in the current context,
+东西在最上面，它通常在当前的背景上绘制
 
 939
 00:40:12,832 --> 00:40:14,431
 you don't have to worry about context.
+你不用担心这个背景
 
 940
 00:40:14,433 --> 00:40:17,934
 It has methods, to do things like line two, arch two,
+它有很多方法，去做一些类似于两个线条，两个弧线
 
 941
 00:40:17,936 --> 00:40:19,069
 to build the path.
+去建立路径
 
 942
 00:40:19,071 --> 00:40:20,821
 It also has methods for
+它同样拥有很多方法
 
 943
 00:40:20,822 --> 00:40:22,572
 setting a lot of these attributes like linewidth and
+用来设置很多属性类似于线宽
 
 944
 00:40:22,574 --> 00:40:25,174
 things like that and it has methods to stroke and fill.
+和一些类似的属性同时它还有很多方法去绘制和填充
 
 945
 00:40:25,176 --> 00:40:28,243
 So all those Core Graphics are put into one class.
+所以所有的这些Core Graphics 被放到一个类里
 
 946
 00:40:28,245 --> 00:40:30,012
 Let's look at UIBezierPath, and
+让我们来看一下 UIBezierPath
 
 947
 00:40:30,014 --> 00:40:32,747
 how we would use it to draw a triangle, let's say.
+和我们怎样使用它绘制一个三角形，让我们开始吧
 
 948
 00:40:34,183 --> 00:40:37,418
 First we create a path, so we just say, UIBezierPath.
+首先，我们创建一个路径，所以我们只需要说，UIBezierPath
 
 949
 00:40:37,420 --> 00:40:40,320
 There are other initializers for UIBezierPath but
+那儿有其他的 UIBezierPath初始化方法
 
 950
 00:40:40,322 --> 00:40:42,889
 you could also just create an empty path, and
+但是你只需要建立一个空的路径
 
 951
 00:40:42,891 --> 00:40:45,625
 then you can start moving around.
+然后你就可以开始在周围移动了
 
 952
 00:40:45,627 --> 00:40:50,195
 So, here I'm going to assume this screen is 160 points wide
+所以，在这里我们架着这个屏幕是160*250
 
 953
 00:40:50,197 --> 00:40:53,965
 by 250 wide, and I'm gonna draw, this triangle here.
+然后我准备在这里绘制一个三角形
 
 954
 00:40:53,967 --> 00:40:57,102
 So I'm gonna move to 80 which is halfway across and
+所以我准备移动80个点，大概横跨半个屏幕
 
 955
 00:40:57,104 --> 00:40:58,369
 50 which is a little bit down,
+和50个点一点点下降
 
 956
 00:40:58,371 --> 00:41:03,607
 and then I'm going to add a line down to 140, 150.
+然后我将要添加一个线向下到 140,150
 
 957
 00:41:03,609 --> 00:41:06,743
 Then I wanna another line over to 10, 150.
+接下来我想再添加另一条线从 10,150过来
 
 958
 00:41:06,745 --> 00:41:10,446
 Then I'm going to close this path.
+然后我将会关闭这个路径
 
 959
 00:41:10,448 --> 00:41:11,681
 Okay?
+看明白了么？
 
 960
 00:41:11,682 --> 00:41:12,915
 So that's it, that's how you can make a triangle.
+所以，这是这样，这就是你如何绘制一个三角形
 
 961
 00:41:12,917 --> 00:41:16,285
 Now, I'm kind of lying to you a little bit, because as you
+现在，我很友好的欺骗了你们一下，因为当你们
 
 962
 00:41:16,287 --> 00:41:18,687
 execute these, nothing is appearing on screen.
+这么做的时候，屏幕上什么也不会出现
 
 963
 00:41:18,689 --> 00:41:21,389
 The screen will be blank.
+屏幕将会一片空白
 
 964
 00:41:21,391 --> 00:41:23,891
 Okay, I was only showing them so you could understand what I
+Okay，我只是向你们展示他们，这样你就可以理解
 
 965
 00:41:23,893 --> 00:41:25,726
 was doing there with the lines.
+我在这儿通过这些线做了什么
 
 966
 00:41:25,728 --> 00:41:27,278
 So it'd be blank.
+所以它将会一篇空白
 
 967
 00:41:27,279 --> 00:41:28,829
 To make it appear, you have to stroke or fill.
+要让它出现，你必须用笔刷绘制出来或者填充
 
 968
 00:41:28,831 --> 00:41:31,331
 So, let's set the attributes we want.
+所以，让我们设置我们需要的属性
 
 969
 00:41:31,333 --> 00:41:34,300
 So, I'm gonna set the color for filling to be green, and
+所以，我将填充的颜色设置为绿色
 
 970
 00:41:34,302 --> 00:41:37,403
 the color for stroking to be red.
+笔刷的颜色设置为红色
 
 971
 00:41:37,405 --> 00:41:41,007
 Okay, now notice that I set those with methods on UIColor,
+Okay，现在注意我通过UIColor设置的这些方法
 
 972
 00:41:41,009 --> 00:41:43,409
 not with methods on the BézierPath.
+不是通过BézierPath方法
 
 973
 00:41:43,411 --> 00:41:46,144
 Okay, that's a little interesting but
+Okay，那是有一点有趣但是
 
 974
 00:41:46,146 --> 00:41:47,679
 that's the way that works.
+它就是那样工作的
 
 975
 00:41:47,681 --> 00:41:51,015
 But linewidth, I do step by talking to the paths, so
+但是线宽，我通过和路径进行沟通所做的一步
 
 976
 00:41:51,017 --> 00:41:52,316
 I sent a message to the BezierPath,
+所以我发送一个消息到 BezierPath
 
 977
 00:41:52,318 --> 00:41:53,650
 set line with the three.
+设置线条的宽度为3
 
 978
 00:41:53,652 --> 00:41:57,254
 So once I set up all my attributes, now I can fill,
+所以当我设置我所需要的全部属性后，现在我可以填充
 
 979
 00:41:57,256 --> 00:41:58,988
 for example by saying, path fill and
+例如通过说，填充路径然后看一下
 
 980
 00:41:58,990 --> 00:42:01,791
 see, I get the rectangle filled in green.
+我得到了一个填充为绿色的三角形
 
 981
 00:42:01,793 --> 00:42:05,127
 Or, I can say stroke and it'll stroke the red line.
+或者说，我可以说用线条绘制它，它将会会被红色的线条绘制
 
 982
 00:42:05,129 --> 00:42:07,696
 Okay?
+明白了么?
 
 983
 00:42:07,698 --> 00:42:10,098
 Pretty straightforward?
+很简单吧？
 
 984
 00:42:10,100 --> 00:42:12,100
 Most of learning to draw is all about
+大多数的学习绘制全都关于
 
 985
 00:42:12,102 --> 00:42:14,568
 understanding UIBezierPath and all the methods on it.
+理解 UIBezierPath和它全部的方法
 
 986
 00:42:14,570 --> 00:42:15,269
 Question back there?
+这里有什么问题么？
 
 987
 00:42:16,438 --> 00:42:18,038
 >> if I have two shapes onscreen,
+>> 如果我在屏幕上有两个形状
 
 988
 00:42:18,040 --> 00:42:20,707
 how would I set the colors be different for each one?
+我怎么样给每个图形不同的颜色呢？
 
 989
 00:42:20,709 --> 00:42:21,875
 >> If you have two what?
+>> 如果你有两个什么？
 
 990
 00:42:21,876 --> 00:42:23,042
 >> If you have two different shapes onscreen?
+>> 如果你在屏幕上有两个形状？
 
 991
 00:42:23,044 --> 00:42:23,976
 >> Oh, yes. So, the question,
+>> 哦，是的，这就是问题
 
 992
 00:42:23,978 --> 00:42:25,210
 if I have two shapes onscreen,
+如果我在屏幕上有两个形状
 
 993
 00:42:25,212 --> 00:42:27,912
 how would I set the colors be different for each one?
+我怎么样给每个图形不同的颜色呢？
 
 994
 00:42:27,914 --> 00:42:30,748
 I would set the colors, stroke or fill one.
+我可设置颜色、线条或者填充一个
 
 995
 00:42:30,750 --> 00:42:32,149
 Set the colors on something else, stroke or
+设置颜色在其他的地方，现货或者
 
 996
 00:42:32,151 --> 00:42:32,783
 fill the other.
+填充另外一个
 
 997
 00:42:33,719 --> 00:42:34,918
 Okay?
+明白了么？
 
 998
 00:42:34,920 --> 00:42:36,503
 Question.
+问题
 
 999
 00:42:36,504 --> 00:42:38,087
 >> If the path isn't closed, what does fill do?
+>> 如果路径没有关闭，那怎么去填充呢
 
 1000
 00:42:38,089 --> 00:42:39,605
 >> So the question is,
+>> 这就是问题
 
 1001
 00:42:39,606 --> 00:42:41,122
 if the path is not closed, what does fill do?
+如果path不是闭合的，填充的结果是什么？
+
 
 1002
 00:42:41,125 --> 00:42:43,926
 Well, it depends on, I think the winding rule, and,
+我想它依赖于绕圈规则，以及
 
 1003
 00:42:43,928 --> 00:42:45,694
 other things about how it draws.
+其他的如何绘图的一些东西。
 
 1004
 00:42:45,696 --> 00:42:48,196
 But, it will try to fill it in.
+但是，它会努力去填充。
 
 1005
 00:42:48,198 --> 00:42:49,097
 Okay. I mean a path could
+我的意思是path可以
 
 1006
 00:42:49,099 --> 00:42:50,931
 cross back over itself.
+回头和自己相交。
 
 1007
 00:42:50,933 --> 00:42:52,132
 Right? And so filling it
+对吗？对这种情况进行填充
 
 1008
 00:42:52,134 --> 00:42:54,234
 might be hard to understand.
+可能很难理解。
 
 1009
 00:42:54,236 --> 00:42:55,502
 And so there are rules for that.
+所以有相应的一些规则去处理。
 
 1010
 00:42:56,604 --> 00:42:58,637
 I'll talk about that just briefly in just a second, but
+我简要地介绍一下，
 
 1011
 00:42:58,639 --> 00:43:00,139
 it will fill.
+它会去填充的。
 
 1012
 00:43:00,140 --> 00:43:01,640
 But there are other things, if you don't close a path then
+但是对于别的操作，如果你没有闭合path，
 
 1013
 00:43:01,642 --> 00:43:04,042
 you can't do things like hit detection, right?
+那么你没法做类似碰撞检测等操作，对吗？
 
 1014
 00:43:04,044 --> 00:43:05,410
 Detecting whether a point is inside it
+检测一个点是不是在它里面
 
 1015
 00:43:05,412 --> 00:43:07,345
 because it's not closed, so there's no inside.
+因为没有闭合，所以它没有内部。
 
 1016
 00:43:10,049 --> 00:43:13,083
 So you can, UIBezierPath also has kind of
+所以你能，UIBezierPath有各种
 
 1017
 00:43:13,085 --> 00:43:17,653
 pre-canned cool shapes like roundedRect, okay,
+预制的漂亮形状，比如roundedRect。
 
 1018
 00:43:17,655 --> 00:43:20,489
 which is a rectangle that the corners are rounded off of, or
+它是四个角被磨圆了的矩形，
 
 1019
 00:43:20,491 --> 00:43:24,960
 obviously ovals and circles, it has ways of doing that.
+或者干脆是椭圆跟圆形，它有处理这些的方法。
 
 1020
 00:43:24,962 --> 00:43:28,830
 You can also clip to any arbitrary path.
+你也可以剪切任意path
 
 1021
 00:43:28,832 --> 00:43:30,543
 So clipping,
+所以对于剪切，
 
 1022
 00:43:30,544 --> 00:43:32,255
 hopefully everyone knows what that means.
+希望每个人都明白它的意义。
 
 1023
 00:43:32,256 --> 00:43:33,967
 That means, if I set it up, if I have a path, and I say clip.
+它意味着如果我设置好了，我有一个path，我要剪切。
 
 1024
 00:43:33,970 --> 00:43:37,404
 If I say, addClip, then all drawing I do after that
+如果我说，addClip，那么在这之后所有的绘图操作
 
 1025
 00:43:37,406 --> 00:43:41,941
 will only show up if it's inside that path, okay?
+只会影响到path里面的部分，okay？
 
 1026
 00:43:43,178 --> 00:43:44,677
 So, for example,
+举个例子，
 
 1027
 00:43:44,678 --> 00:43:46,177
 if you were drawing playing card on screen,
+如果你正在屏幕上绘制纸牌，
 
 1028
 00:43:46,180 --> 00:43:49,114
 playing cards have little rounded rects, so you might
+纸牌有小小的圆角效果，所以你可以
 
 1029
 00:43:49,116 --> 00:43:52,484
 draw your playing card in a big rectangle, and then clip
+把纸牌画在一个大的矩形里面，然后剪切到
 
 1030
 00:43:52,486 --> 00:43:56,988
 to a rounded rect, so that the corners get cut off, okay.
+一个圆角矩阵里，这样四角就修圆了。
 
 1031
 00:43:56,990 --> 00:43:59,990
 That's a simple to get a rounded rect playing card.
+这是一个获得圆角纸牌的简单方法。
 
 1032
 00:44:01,260 --> 00:44:04,127
 You can also do hit detection as I mentioned, the hit
+你也可以做我提到的碰撞检测，碰撞检测
 
 1033
 00:44:04,129 --> 00:44:07,430
 detection and the filling depends on the winding rules,
+和填充依赖绕圈规则，
 
 1034
 00:44:07,432 --> 00:44:10,866
 and there's this usesEvenOddFillRule, property,
+这里有usesEvenOddFillRule属性，
 
 1035
 00:44:10,868 --> 00:44:14,837
 which is only yes or no to say which winding rule it uses.
+bool类型，指定了它使用的绕圈规则。
 
 1036
 00:44:14,839 --> 00:44:16,605
 And so people who don't know what that means,
+所以不了解它的含义的同学，
 
 1037
 00:44:16,607 --> 00:44:17,605
 don't worry about it.
+不用担心。
 
 1038
 00:44:17,607 --> 00:44:19,207
 In fact, don't worry about hit detection or
+实际上，不用担心碰撞检测
 
 1039
 00:44:19,209 --> 00:44:20,764
 any of this stuff,
+或者类似的API，
 
 1040
 00:44:20,765 --> 00:44:22,320
 cuz you're not going to have to do this for your homework.
+因为你们的课外作业里不用做这些。
 
 1041
 00:44:22,321 --> 00:44:23,876
 But I just want you to know that BezierPath has a lot of
+不过我希望你们能了解BezierPath拥有许多
 
 1042
 00:44:23,880 --> 00:44:25,946
-other stuff besides just linetwo, linetwo,
+other stuff besides just lineto, lineto,
+其他API，不仅仅是lineto, lineto,
 
 1043
 00:44:25,948 --> 00:44:26,680
 fill and stroke.
+fill和stroke。
 
 1044
 00:44:26,682 --> 00:44:28,615
 Okay, it has other stuff.
+Okay，它有别的API。
 
 1045
 00:44:28,616 --> 00:44:30,549
 And when you want to look at UIBezierPath,
+当你想要查看UIBezierPath，
 
 1046
 00:44:30,552 --> 00:44:32,618
 check out its documentation and
+可以打开相关文档
 
 1047
 00:44:32,620 --> 00:44:34,553
 kind of experience it in its full glory.
+经历它的各种荣耀。
 
 1048
 00:44:36,057 --> 00:44:39,491
 Okay, let's talk a little bit more about colors because I
+Okay，我们再聊一聊颜色
 
 1049
 00:44:39,493 --> 00:44:41,626
 used a color there, that green color.
+因为我在那里用了一种绿色。
 
 1050
 00:44:41,628 --> 00:44:43,227
 UIColor is just an object.
+UIColor是一个对象。
 
 1051
 00:44:43,229 --> 00:44:45,262
 It's really powerful.
+它非常强大。
 
 1052
 00:44:45,264 --> 00:44:46,497
 Colors not only can be
+它不仅仅是
 
 1053
 00:44:46,499 --> 00:44:49,433
 standard colors like UIColor.greenColor, but
+类似UIColor.greenColor的标准颜色，
 
 1054
 00:44:49,435 --> 00:44:52,736
 you can create a color from RGB, red, green, blue, or
+你也可以用RGB，红绿蓝，或者
 
 1055
 00:44:52,738 --> 00:44:55,838
 HSB, that's hue, saturation, and brightness.
+HSB，色调，饱和度，亮度来创建颜色。
 
 1056
 00:44:55,840 --> 00:44:59,208
 You can even set your color to be a pattern, so that when you
+你甚至可以把颜色设置为一个模式，这样当你
 
 1057
 00:44:59,210 --> 00:45:02,311
 draw with that color, it actually draws some image.
+用那种颜色绘制时，它实际上画出的是图片。
 
 1058
 00:45:02,313 --> 00:45:02,911
@@ -4623,14 +5247,17 @@ Okay?
 1059
 00:45:02,913 --> 00:45:05,347
 So that's kinda cool.
+这个相当酷。
 
 1060
 00:45:05,349 --> 00:45:10,017
 Views have a background color, which you can set on them.
+View有个可以设置的backgroundColor属性。
 
 1061
 00:45:10,019 --> 00:45:13,353
 Also colors can be transparent.
+UIColor也可以是透明的。
 
 1062
 00:45:13,355 --> 00:45:14,988
@@ -4639,122 +5266,152 @@ Okay?
 1063
 00:45:14,989 --> 00:45:16,622
 They can be see-through, partially see-through.
+他们可以是透明的，半透明的。
 
 1064
 00:45:16,625 --> 00:45:18,191
 This is called alpha.
+这叫做alpha。
 
 1065
 00:45:18,193 --> 00:45:21,027
 So alpha is a value between zero and one.
+alpha是一个介于0和1之间的值。
 
 1066
 00:45:21,029 --> 00:45:22,461
 Zero means fully transparent, so
+0代表完全透明，
 
 1067
 00:45:22,463 --> 00:45:24,096
 you can see completely through it, and
+你的视线可以完全穿过去，
 
 1068
 00:45:24,098 --> 00:45:25,663
 it won't even show up on the screen.
+它不会出现在屏幕上。
 
 1069
 00:45:25,665 --> 00:45:27,598
 To one, which is fully opaque.
+1表示完全不透明。
 
 1070
 00:45:27,600 --> 00:45:29,400
 It obscures anything behind it.
+它遮挡了背后的所有东西。
 
 1071
 00:45:29,402 --> 00:45:30,868
 Anything drawn with this color.
+用这种颜色绘制的任何东西。
 
 1072
 00:45:30,870 --> 00:45:32,903
 And you can create a transparent color from
+你可以用另一种颜色
 
 1073
 00:45:32,905 --> 00:45:35,472
 another color with this color with alpha component.
+和alpha值合成半透明颜色。
 
 1074
 00:45:35,474 --> 00:45:37,840
 This would create kind of half transparent yellow.
+这里创建了一种半透明的黄色。
 
 1075
 00:45:37,842 --> 00:45:40,943
 Color to draw with, and you can draw in your view with
+用于绘制的颜色，你可以用这些透明颜色
 
 1076
 00:45:40,945 --> 00:45:43,045
 these transparent colors, okay?
+来绘制你的view，okay？
 
 1077
 00:45:43,047 --> 00:45:45,247
-Using these BazierPaths.
+Using these BezierPaths.
+使用BezierPaths。
 
 1078
 00:45:45,249 --> 00:45:48,750
 However, if you draw in your view with transparency,
+然而，如果你要用透明度来绘制，
 
 1079
 00:45:48,752 --> 00:45:51,519
 you must tell the system that you are going to do that.
+你必须告诉先系统你要这么做。
 
 1080
 00:45:51,521 --> 00:45:54,221
 And you do that by setting this property on
+实现这个，你需要设置
 
 1081
 00:45:54,223 --> 00:45:56,623
 your UIView called opaque to false.
+UIView的opaque属性为false。
 
 1082
 00:45:56,625 --> 00:45:58,091
 And why is this required?
+为什么需要这么做？
 
 1083
 00:45:58,093 --> 00:46:00,727
 Well, because drawing with transparency is expensive.
+因为带透明度的绘制是非常昂贵的。
 
 1084
 00:46:00,729 --> 00:46:01,961
 Because the views behind you
+因为你后面的view
 
 1085
 00:46:01,963 --> 00:46:03,829
 are gonna start showing through.
+会被展示出来。
 
 1086
 00:46:03,831 --> 00:46:05,197
 Okay? So the system has to
+Okay？所以系统必须
 
 1087
 00:46:05,199 --> 00:46:08,734
 blend basically the different views that are overlapping.
+把重叠的view混合起来绘制。
 
 1088
 00:46:08,736 --> 00:46:12,237
 That's expensive in terms of graphics power.
+这在图像处理上非常昂贵。
 
 1089
 00:46:12,239 --> 00:46:14,772
 And so it doesn't wanna do that if it doesn't have to.
+所以如无必要别这么干。
 
 1090
 00:46:14,774 --> 00:46:16,374
 If it can just draw the bit.
+假设它在绘制某个点。
 
 1091
 00:46:16,376 --> 00:46:17,875
 If you don't set this to false and
+如果你没有把这个设置为false
 
 1092
 00:46:17,877 --> 00:46:20,410
 you try drawing transparently, it's not gonna work.
+并且你还要画成透明的，那不会成功的。
 
 1093
 00:46:20,412 --> 00:46:22,479
@@ -4763,10 +5420,12 @@ Okay?
 1094
 00:46:22,480 --> 00:46:24,547
 Cuz it's not gonna blend with the things behind.
+因为它不会把后面的东西混合进来。
 
 1095
 00:46:24,549 --> 00:46:28,918
 You can make your entire view transparent.
+你可以把整个view设置成透明的。
 
 1096
 00:46:28,920 --> 00:46:29,985
@@ -4775,22 +5434,27 @@ Okay?
 1097
 00:46:29,987 --> 00:46:31,386
 It has its own property alpha,
+它有自己的alpha属性，
 
 1098
 00:46:31,388 --> 00:46:33,722
 which you can set to anywhere between zero and one.
+你可以设置0到1之间的任意值。
 
 1099
 00:46:33,724 --> 00:46:34,906
 It'll make your view,
+它会使你的view，
 
 1100
 00:46:34,907 --> 00:46:36,089
 everything you draw in the view will be
+你在view上绘制的所有东西
 
 1101
 00:46:37,193 --> 00:46:39,460
 however much transparent you want it to be.
+带上你想要的任意透明度。
 
 1102
 00:46:39,462 --> 00:46:41,194
@@ -4799,86 +5463,107 @@ Okay?
 1103
 00:46:41,196 --> 00:46:45,331
 What happens when views overlap and have transparency?
+当带有透明度的view互相遮挡，会发生什么？
 
 1104
 00:46:45,333 --> 00:46:46,832
 They're blended as I said,
+他们会像我说的那样混合，
 
 1105
 00:46:46,834 --> 00:46:49,268
 remember that the subview's order matters.
+记住subview的顺序有影响。
 
 1106
 00:46:49,270 --> 00:46:51,636
 Okay? The thing that is first in
+Okay？subview array里的第一个，
 
 1107
 00:46:51,638 --> 00:46:54,439
-the subviews Array is in the back.
+the subviews array is in the back.
+出现在最后面。
 
 1108
 00:46:54,441 --> 00:46:56,808
 And everything down the rye is in front.
+array里剩下的view按照顺序出现在前面。
 
 1109
 00:46:56,810 --> 00:46:59,276
 So, when the transparency happens,
+所以，当透明度产生时，
 
 1110
 00:46:59,278 --> 00:47:01,979
 that's the order it's gonna happen in.
+这就是将要发生的顺序。
 
 1111
 00:47:01,981 --> 00:47:05,315
 You can completely hide a view by sending it hidden equal to
+你可以完全隐藏一个view，只要把hidden设置为
 
 1112
 00:47:05,317 --> 00:47:08,718
 true, and this is surprisingly common to just hide a view,
+true，这种隐藏一个view的做法非常普遍，
 
 1113
 00:47:08,720 --> 00:47:11,854
 and maybe it appears when a certain condition is true on
+它可以因为某个条件成立而出现在屏幕上，
 
 1114
 00:47:11,856 --> 00:47:14,490
 screen, or whatever you can set up this view in
+或者在你的storyboard里创建这个view，
 
 1115
 00:47:14,492 --> 00:47:17,526
 your StoryBoard and then set it to hidden, to true.
+然后把hidden设置为true。
 
 1116
 00:47:17,528 --> 00:47:19,161
 And so it comes up, it's not there.
+所以它出来的时候，你看不到。
 
 1117
 00:47:19,163 --> 00:47:22,230
 And then in code you say hidden equals false, boom,
+然后你在代码中设置hidden为false，轰隆，
 
 1118
 00:47:22,232 --> 00:47:23,431
 it appears, okay?
+出现了，okay？
 
 1119
 00:47:23,433 --> 00:47:25,466
 So that's a way to, completely hide the view.
+所以这是彻底隐藏view的一个方法。
 
 1120
 00:47:25,468 --> 00:47:26,900
 A hidden view not only doesn't draw,
+隐藏的view不仅不会被绘制，
 
 1121
 00:47:26,902 --> 00:47:28,635
 it doesn't receive any touch events either.
+也不会接受任何touch event。
 
 1122
 00:47:28,637 --> 00:47:30,103
 But it's still in the view hierarchy.
+不过它还存在于view的层级关系中。
 
 1123
 00:47:30,105 --> 00:47:31,304
 It's kinda there waiting.
+有点像在那等待。
 
 1124
 00:47:31,306 --> 00:47:33,139
@@ -4887,218 +5572,272 @@ Okay?
 1125
 00:47:33,141 --> 00:47:34,807
 All right, drawing text.
+好的，绘制文本。
 
 1126
 00:47:34,809 --> 00:47:37,476
 So, usually you draw text on screen with a UILabel.
+通常你们用UILabel在屏幕上绘制文本。
 
 1127
 00:47:37,478 --> 00:47:40,211
 That's what you did with your display, et cetera.
+这就是你用你的显示做的事，等等。
 
 1128
 00:47:40,213 --> 00:47:43,548
 But you might wanna draw in your drawRect and
+不过你可能想要在drawRect做绘制
 
 1129
 00:47:43,550 --> 00:47:45,916
 you do that with this class called NSAttributedString,
+你用NSAttributedString来干这个，
 
 1130
 00:47:45,918 --> 00:47:47,685
 which I'm really not gonna cover.
+这部分我不准备讲解。
 
 1131
 00:47:47,687 --> 00:47:49,503
 You wanna look at
+你可以查看
 
 1132
 00:47:49,504 --> 00:47:51,320
 its documentation if you wanna draw a text.
+它的文档，如果你想要绘制文本。
 
 1133
 00:47:51,323 --> 00:47:53,890
 I'm not gonna do a demo of NSAttributedString, but
+我不会给出NSAttributedString的demo，不过
 
 1134
 00:47:53,892 --> 00:47:55,058
 I'm gonna give you some code for
+我会给你们一些代码作为
 
 1135
 00:47:55,060 --> 00:47:56,325
 your assignment next week, and I'm
+下周的作业，
 
 1136
 00:47:56,327 --> 00:47:59,361
-gonna use NSAttributedString in the code I'm giving you, so
+gonna use NSAttributedString in the code I'm giving you,
+我会在给你们的代码里使用NSAttributedString，
 
 1137
 00:47:59,363 --> 00:48:01,630
-you'll be able to see an example of how it's used.
+so you'll be able to see an example of how it's used.
+所以你们能看到它如何使用的例子。
 
 1138
 00:48:01,632 --> 00:48:03,865
 But basically NSAttributedString is
+但是基本上NSAttributedString
 
 1139
 00:48:03,867 --> 00:48:05,333
 a bunch of characters and
+就是一串字符和
 
 1140
 00:48:05,335 --> 00:48:07,668
 some attributes on those characters.
+设置在字符上的一些attributes。
 
 1141
 00:48:07,670 --> 00:48:11,805
 Now attributed String has a couple of interesting things
+现在NSAttributedString有许多有趣的
 
 1142
 00:48:11,807 --> 00:48:12,572
 about it.
+特点。
 
 1143
 00:48:12,574 --> 00:48:13,740
 It's easy to use.
+它易于使用。
 
 1144
 00:48:13,742 --> 00:48:16,075
 You can just create it, pass it a String, and
+你可以创建它，传入一个String，
 
 1145
 00:48:16,077 --> 00:48:19,044
-then say draw at point, and that will draw the String with
+then say drawAtPoint, and that will draw the String with
+然后调用drawAtPoint，然后String就画出来了，
 
 1146
 00:48:19,046 --> 00:48:21,580
 its point, its upper left corner at that point.
+参数指定了它的左上角位置。
 
 1147
 00:48:21,582 --> 00:48:24,215
 And you can even find out how big it's gonna be by asking it
+你可以查看它将要占用的大小，
 
 1148
 00:48:24,217 --> 00:48:25,850
 the size of this attribute String.
+调用size就行。
 
 1149
 00:48:25,852 --> 00:48:28,285
 So it's pretty easy to use in that way.
+这么做非常容易。
 
 1150
 00:48:28,287 --> 00:48:30,688
 Mutability is not done with var and
+var跟let无法为NSAttributedString
 
 1151
 00:48:30,690 --> 00:48:32,756
 let for NSAttributedString.
+带来可变性。
 
 1152
 00:48:32,758 --> 00:48:33,656
 There's a different class
+有另一种class
 
 1153
 00:48:33,658 --> 00:48:36,325
 called NSMutableAttributedString.
+叫做NSMutableAttributedString。
 
 1154
 00:48:36,327 --> 00:48:37,827
 Okay? And why would you
+Okay？为什么你们
 
 1155
 00:48:37,829 --> 00:48:40,262
 want a MutableAttributedString?
+想要一个NSMutableAttributedString呢？
 
 1156
 00:48:40,264 --> 00:48:41,830
 Well because these Strings,
+因为这些String，
 
 1157
 00:48:41,832 --> 00:48:44,265
 what makes an AttributedString attributed,
+AttributedString之所以是AttributedString，
 
 1158
 00:48:44,267 --> 00:48:47,502
 is you can put attributes on the characters in this String.
+是你可以在String的字符上面设置attributes。
 
 1159
 00:48:47,504 --> 00:48:49,770
 And so a MutableAttributedString,
+所以对于MutableAttributedString，
 
 1160
 00:48:49,772 --> 00:48:51,538
 you can set the attributes.
+你可以设置attributes。
 
 1161
 00:48:51,540 --> 00:48:54,007
 You can get the String out as an NSString,
+你可以把里面的文本导出为NSString，
 
 1162
 00:48:54,009 --> 00:48:57,210
-using the String property on NSAttributedString but
+using the string property on NSAttributedString but
+用NSAttributedString的string属性
 
 1163
 00:48:57,212 --> 00:48:59,946
 NSAttributedString itself is not a String.
+但是NSAttributedString本身不是String。
 
 1164
 00:48:59,948 --> 00:49:02,048
 It's not like a subclass of NSString or anything.
+它不是NSString的子类或者别的。
 
 1165
 00:49:02,050 --> 00:49:03,349
 It's its own thing.
+它属于它自己。
 
 1166
 00:49:03,351 --> 00:49:05,434
 So you set
+所以你们
 
 1167
 00:49:05,435 --> 00:49:07,518
 these attributes with functions like setAttributes.
+用setAttributes等函数设置attributes。
 
 1168
 00:49:07,521 --> 00:49:09,387
 It takes a Dictionary of attributes.
+它使用一个Dictionary类型的attributes。
 
 1169
 00:49:09,389 --> 00:49:11,189
 I'll talk to you about what the keys and
+我稍后介绍它的各种keys
 
 1170
 00:49:11,191 --> 00:49:12,590
 values are in a second.
+跟values。
 
 1171
 00:49:12,592 --> 00:49:15,143
 And then a range.
+还有范围。
 
 1172
 00:49:15,144 --> 00:49:17,695
 That's an NSRange right there by the way, not a Swift Range.
+注意是NSRange， 不是Swift Range。
 
 1173
 00:49:17,697 --> 00:49:20,497
 And the indexing into these Strings is
+这些Strings的索引
 
 1174
 00:49:20,499 --> 00:49:22,966
 the old style NSString version.
+是NSString版的古老风格。
 
 1175
 00:49:22,968 --> 00:49:24,967
-It's not the String.index stuff we
+It's not the string.index stuff we
+它不是string.index这样
 
 1176
 00:49:24,969 --> 00:49:26,335
 talked about last time.
+上次我们讲过了。
 
 1177
 00:49:26,337 --> 00:49:29,471
 It's literally which Unicode character are you
+字面上的意思是在那些你关注的
 
 1178
 00:49:29,473 --> 00:49:32,107
 talking about setting an attribute at?
+的Unicode文字上面设置一个attribute。
 
 1179
 00:49:32,109 --> 00:49:33,792
@@ -5107,14 +5846,17 @@ Okay?
 1180
 00:49:33,793 --> 00:49:35,476
 So, this Dictionary has a bunch of attributes.
+所以这个Dictionary有一串attributes
 
 1181
 00:49:35,479 --> 00:49:37,178
 The attributes can be things like,
+attributes可以是类似，
 
 1182
 00:49:37,180 --> 00:49:39,280
 set the foreground color of this text.
+设置文本的前景色。
 
 1183
 00:49:39,282 --> 00:49:39,947
@@ -5123,34 +5865,42 @@ Okay?
 1184
 00:49:39,949 --> 00:49:41,648
 Set the stroke width.
+可以是设置描边的宽度。
 
 1185
 00:49:41,650 --> 00:49:43,283
 Okay? Because remember,
+Okay？记住，
 
 1186
 00:49:43,285 --> 00:49:44,484
 text is just paths.
+文本就是一些paths。
 
 1187
 00:49:44,486 --> 00:49:47,153
 You can stroke them and to set the width or the font,
+你可以对它们描边，而且可以指定宽度或者字体，
 
 1188
 00:49:47,155 --> 00:49:49,421
 is a really important one to be able to say.
+这是值得一提的重要能力。
 
 1189
 00:49:49,423 --> 00:49:52,991
 Set this text to have this particular font, okay?
+（attributes可以是）对文本使用特定字体，okay？
 
 1190
 00:49:52,993 --> 00:49:55,827
 And so you just set a Dictionary that has
+这样你只要设置一个
 
 1191
 00:49:55,829 --> 00:49:59,964
 the key NSFontAttribute and the value would be a UIFont.
+key为NSFontAttribute，value为UIFont的一个Dictionary。
 
 1192
 00:49:59,966 --> 00:50:01,799
@@ -5158,31 +5908,38 @@ Okay?
 
 1193
 00:50:01,800 --> 00:50:03,633
-Now let's talk about UI fonts, briefly.
+Now let's talk about UIFonts, briefly.
+现在我们简要讨论一下UIFonts
 
 1194
 00:50:03,636 --> 00:50:07,270
 Fonts in iOS 7 and later, including iOS 8,
+Fonts从iOS 7开始，包括iOS 8，
 
 1195
 00:50:07,272 --> 00:50:09,439
 are very important to get right, okay?
+正确使用非常重要，okay？
 
 1196
 00:50:09,441 --> 00:50:10,640
 Look at these screenshots.
+请看这些截图。
 
 1197
 00:50:10,642 --> 00:50:12,908
 Look how important the fonts are.
+看下这些字体有多么重要。
 
 1198
 00:50:12,910 --> 00:50:14,743
 Okay? They're critical,
+Okay？它们是
 
 1199
 00:50:14,745 --> 00:50:16,745
 to making the UI look good.
+创建漂亮UI的关键。
 
 1200
 00:50:16,747 --> 00:50:18,497
@@ -5191,1050 +5948,1246 @@ Okay?
 1201
 00:50:18,498 --> 00:50:20,248
 So, you've got to get the right fonts in your app.
+所以你需要让你的 app 拥有一个合适的字体。
 
 1202
 00:50:20,250 --> 00:50:22,350
 And where do you get the right fonts?
+那么怎么能够使字体合适呢？
 
 1203
 00:50:22,352 --> 00:50:24,752
 Well, the number one place to get a font,
+使这个字体合适的，
 
 1204
 00:50:24,754 --> 00:50:28,489
 the right place 99% of the time, is this class function
+百分之九十九都能使你的字体好看的，是这个在 UIFont 这个类
 
 1205
 00:50:28,491 --> 00:50:32,826
-in UI font called preferredFontForTextStyle, okay?
+in UIFont called preferredFontForTextStyle, okay?
+里面的一个类函数，叫 preferredFontForTextStyle。
 
 1206
 00:50:32,828 --> 00:50:36,696
 The text style is something like headline, or
+字体样式是类似标题，或者
 
 1207
 00:50:36,698 --> 00:50:38,548
 a body, okay?
+正文这些东西。
 
 1208
 00:50:38,549 --> 00:50:40,399
 The body would be like the main content that your user is
+正文就是你展现给用户看的主要的
 
 1209
 00:50:40,401 --> 00:50:42,051
 looking at.
+内容。
 
 1210
 00:50:42,052 --> 00:50:43,702
 Headline might be like a title at the top.
+标题一般就是顶部的这个标题。
 
 1211
 00:50:43,704 --> 00:50:46,171
 Footnote might be a small little thing mentioned at
+注脚是在底部的一行小小的字，
 
 1212
 00:50:46,173 --> 00:50:47,923
 the bottom, okay?
+好吧？
 
 1213
 00:50:47,924 --> 00:50:49,674
 And there's a whole bunch more of these text styles.
+这里还有很多很多这种字体样式。
 
 1214
 00:50:49,676 --> 00:50:51,559
 And so, you're gonna ask
+那么你可能会问，
 
 1215
 00:50:51,560 --> 00:50:53,443
 the assistant give me the preferred font for that style.
+这个字体助手给我了一个对应这种样式的推荐的字体。
 
 1216
-00:50:53,446 --> 00:50:55,512
-The font includes a size.
-
-1217
-00:50:55,514 --> 00:50:57,664
-Okay?
+00:50:53,446 --> 00:50:57,664
+The font includes a size. Okay?
+这个字体包含了字体大小。
 
 1218
 00:50:57,665 --> 00:50:59,815
 UIFont include the size, as well as the face.
+UIFont 包括了其大小以及它的样子。
 
 1219
 00:50:59,818 --> 00:51:02,852
 And users can go into their settings on their phone and
+用户可能会去设置里面改变了一些字体相关的设置，
 
 1220
 00:51:02,854 --> 00:51:05,321
 change and say I can't see it anymore.
+比如老化了看不清楚那些字。
 
 1221
 00:51:05,323 --> 00:51:06,706
 Kinda like me.
+像我一样。
 
 1222
-00:51:06,707 --> 00:51:08,090
-And they make their fonts bigger.
-
-1223
-00:51:08,092 --> 00:51:08,657
-Okay?
+00:51:06,707 --> 00:51:08,657
+And they make their fonts bigger. Okay?
+那么他们设置大一点的字体。
 
 1224
 00:51:08,659 --> 00:51:09,491
 And so this would
+那这个将会
 
 1225
 00:51:09,493 --> 00:51:12,027
 automatically get that new size.
+自动地获取到新的字体大小。
 
 1226
 00:51:12,029 --> 00:51:13,261
 Okay? So that's why you
+所以你
 
 1227
 00:51:13,263 --> 00:51:15,162
 always wanna use preferred font any
+用这个推荐的字体总是好的，
 
 1228
 00:51:15,164 --> 00:51:17,931
 time you're displaying any user content, okay?
+在任何时候都是，尤其是你要展示给用户看的时候。
 
 1229
 00:51:17,933 --> 00:51:20,767
 Now, it is possible to create fonts where you say,
+你当然可以自己创建一个字体，
 
 1230
 00:51:20,769 --> 00:51:22,702
 give me Arial 15 narrow or what.
+比如说，给我一个 15 号大小的窄体 Arial 字体。
 
 1231
 00:51:22,704 --> 00:51:25,071
 It is possible, but you really shouldn't be doing that.
+你可以这么做，但是你不该这么做。
 
 1232
 00:51:25,073 --> 00:51:27,006
 You should be using this preferred font for style.
+你还是乖乖地用推荐的字体。
 
 1233
 00:51:27,008 --> 00:51:28,941
 There's also a system font.
+这里也有系统默认字体。
 
 1234
 00:51:28,943 --> 00:51:31,376
 This is something that appears on buttons and
+比如出现在按钮上的，或者
 
 1235
 00:51:31,378 --> 00:51:35,113
 in things like segmented controls, things like that.
+出现在 segmented control （UI控件的一种）上的。
 
 1236
 00:51:35,115 --> 00:51:39,316
 You never wanna use only the system fonts for user content.
+你永远不会只想用系统设置的是吧？
 
 1237
-00:51:39,318 --> 00:51:41,118
-User content you wanna use the preferred fonts.
-
-1238
-00:51:42,154 --> 00:51:42,719
-Okay?
+00:51:39,318 --> 00:51:42,719
+User content you wanna use the preferred fonts. Okay?
+你会更希望用推荐的字体来显示你的内容给用户看。
 
 1239
 00:51:44,155 --> 00:51:45,821
 So yeah, other ways to get fonts, ignore them.
+啊这里是些其他获得字体的方法，忽略它们。
 
 1240
 00:51:45,823 --> 00:51:48,090
 I'm not gonna talk about it, okay?
+在这里我不会讲它。
 
 1241
 00:51:48,092 --> 00:51:50,425
 All right, how about drawing images?
+好的，那么怎么显示图像呢？
 
 1242
 00:51:50,427 --> 00:51:52,227
 How do you do that?
+你会怎么做？
 
 1243
 00:51:52,228 --> 00:51:54,028
 Well there is a UILabel for
+我们有个叫做 UILabel 的类，
 
 1244
 00:51:54,031 --> 00:51:56,264
 images, it's called UIImageView.
+专门是搞图像，叫 UIImageView。
 
 1245
 00:51:56,266 --> 00:51:58,065
 And you can use that to put an image on screen, but
+你可以用这个类把图像显示到屏幕上，但是呢，
 
 1246
 00:51:58,067 --> 00:52:01,368
 you might wanna draw an image, in your drawrect as well.
+你会希望把这个图像丢到你的 drawrect 里面。
 
 1247
 00:52:01,370 --> 00:52:04,338
 And usually you create an image by name, from that
+一般来说你会以名字来创建这个图像，
 
 1248
 00:52:04,340 --> 00:52:07,674
 Images.xcassets thing that we moved out of the way real
+从 Images.xcassets 里面拿出来，
 
 1249
 00:52:07,676 --> 00:52:10,076
 quick right at the beginning of our very first demo.
+一会第一个演示一开始就会给大家瞅瞅。
 
 1250
 00:52:10,078 --> 00:52:12,345
 And if you click on that, it's pretty self-explanatory.
+如果你点击它，故名思议。
 
 1251
 00:52:12,347 --> 00:52:13,679
 You can drag images.
+你可以拖动图像。
 
 1252
 00:52:13,681 --> 00:52:16,081
 You can have different images of different resolutions for
+你可以根据不同的分辨率，不同的设备，
 
 1253
 00:52:16,083 --> 00:52:17,149
 different devices.
+有不同尺寸的图像。
 
 1254
 00:52:17,150 --> 00:52:18,216
 It's really pretty powerful.
+总之就是很强大。
 
 1255
-00:52:18,218 --> 00:52:19,917
-That's usually create an image.
+00:52:18,218 --> 00:52:20,200
+That's usually how you create an image.
+这就是你一般创建图像的步骤。
 
 1256
-00:52:19,919 --> 00:52:23,120
+00:52:20,201 --> 00:52:23,120
 By name and dragging into the images.xcassets.
+通过图像的名字，拖进 images.xcassets 里面。
 
 1257
 00:52:23,122 --> 00:52:25,389
 You can create it in other ways from the file system,
+你也可以用其他方法从系统文件中创建出来，
 
 1258
 00:52:25,391 --> 00:52:27,991
 which we haven't talked about, or even with drawing, but
+我们还没讲得这些，包括怎么画图像，
 
 1259
 00:52:27,993 --> 00:52:29,826
 we're not gonna talk about that either.
+我们也不会讲这些。
 
 1260
 00:52:29,828 --> 00:52:33,429
 Once you have the UIImage, you can draw it by just sending it
+当你有了这个 UIImage，你可以发送一个消息去显示它，
 
 1261
 00:52:33,431 --> 00:52:35,231
-the message, draw at point.
+the message, drawAtPoint.
+这个函数是 drawAtPoint。
 
 1262
 00:52:35,233 --> 00:52:38,133
 And it will draw in its normal size with that point as
+然后这个函数就会把正常尺寸的的图像在左上角的那个点上
 
 1263
 00:52:38,135 --> 00:52:39,634
 it's upper left.
+显示出来。
 
 1264
 00:52:39,636 --> 00:52:41,403
 You can also say drawInRect, and
+你也可以用 drawInRect 这个函数，
 
 1265
 00:52:41,405 --> 00:52:44,605
 it'll scale to fit that rect, either bigger or smaller, or
+它会缩放图像让其适应这个长方形区域，可以放大或者缩小，或者
 
 1266
 00:52:44,607 --> 00:52:47,608
 you can draw a pattern in rect it'll tile it repeatedly to
+你可以在这个长方形区域里面画一个图案，它会不断地重复平铺
 
 1267
-00:52:47,610 --> 00:52:48,442
-fill the rect.
-
-1268
-00:52:48,444 --> 00:52:50,044
-Okay?
+00:52:47,610 --> 00:52:50,044
+fill the rect. Okay?
+满整个长方形区域。
 
 1269
 00:52:50,045 --> 00:52:51,645
 So really easy to draw images inside your drawRect.
+在你的 drawRect 里面显示图像真的是很简单。
 
 1270
 00:52:51,647 --> 00:52:54,547
 And the last thing I wanna talk about is,
+那么关于这个我想补充的是，
 
 1271
 00:52:54,549 --> 00:52:58,484
 what happens when your bounds changes in your UIView?
+如果你的 UIView 的边框变了咋办？
 
 1272
 00:52:58,486 --> 00:53:00,719
 Like the, the user rotates the phone.
+比如说用户旋转了他的手机。
 
 1273
 00:53:00,721 --> 00:53:02,721
 Now your bounds are wide and
+现在你的边框变得胖矮胖矮的，
 
 1274
 00:53:02,723 --> 00:53:06,257
 not very tall, instead of tall and not so wide.
+不是以前那样高瘦高瘦的。
 
 1275
 00:53:07,427 --> 00:53:09,210
 You might think,
+你也许会想，
 
 1276
 00:53:09,211 --> 00:53:10,994
 oh my drawRect's gonna get called, and I'm gonna redraw.
+噢我需要再调用一次 drawRect，然后就会重新适应。
 
 1277
 00:53:10,996 --> 00:53:12,529
 But no, that does not happen.
+但是这并不会发生。
 
 1278
 00:53:12,531 --> 00:53:16,666
 Instead, the bits that were on screen get stretched.
-
-1279
-00:53:16,668 --> 00:53:18,351
-Okay?
+在屏幕中的图像会被拉扁。
 
 1280
-00:53:18,352 --> 00:53:20,035
-So, usually that's not what you want.
+00:53:16,668 --> 00:53:20,035
+Okay? So, usually that's not what you want.
+所以这一般来说都不是你想要的效果。
 
 1281
 00:53:20,038 --> 00:53:22,772
 You can and
+你将会
 
 1282
 00:53:22,773 --> 00:53:25,507
 result in a very grainy, kind of bit stretching of your UI.
+使其变成马赛克那样，有点强行拉大了图像。
 
 1283
 00:53:25,509 --> 00:53:27,426
 But that is the default,
+这是默认发生的。
 
 1284
 00:53:27,427 --> 00:53:29,344
 is the bit stretching because it's higher performance.
+默认就会将图像拉伸，因为其有更好的性能。
 
 1285
 00:53:29,346 --> 00:53:32,914
 Now, you control though, you can control what happens to
+其实呢，当边界改变了，你可以控制
 
 1286
 00:53:32,916 --> 00:53:35,049
 your view when the bounds change,
+你的 view 的变化，
 
 1287
 00:53:35,051 --> 00:53:38,052
 with this property in view called contentMode.
+用 view 中正确地属性，叫 contentMode 就能做到。
 
 1288
 00:53:38,054 --> 00:53:40,821
-And here are some of the content modes you can set.
+And here are some of the contentModes you can set.
+这里有些你可以修改的 contentMode，
 
 1289
 00:53:40,823 --> 00:53:43,323
 There's left, right, top, bottom, et cetera.
+这里有上下左右等等。
 
 1290
 00:53:43,325 --> 00:53:46,592
 All these ones basically don't change the bits.
+这里的这些修改基本上不会像刚才那样的改变。
 
 1291
 00:53:46,594 --> 00:53:48,461
 They don't re-draw, but
+它们不会重新显示图片，但是
 
 1292
 00:53:48,462 --> 00:53:50,329
 they just move your entire view to the left edge,
+它们只是让你的 view 整体移动到新的边界的左边，右边，
 
 1293
 00:53:50,331 --> 00:53:53,432
 right edge, top, or bottom of the new bounds.
+上边或者下边。
 
 1294
 00:53:53,434 --> 00:53:54,933
 These are kinda strange ones.
+这里有些奇怪的属性，
 
 1295
 00:53:54,935 --> 00:53:56,801
 You probably don't need that very often.
+一般来说你应该不会用到。
 
 1296
 00:53:56,803 --> 00:53:58,169
 Then there's the scaling of the bits.
+这里是些缩放，
 
 1297
 00:53:58,171 --> 00:54:00,604
 So here's the default, ScaleToFill.
+默认的是 ScaleToFill。
 
 1298
 00:54:00,606 --> 00:54:02,840
 'Kay, we'll scale the bits to fill the new bounds, but
+好的，我们会缩放图像去填满新的边界，但是
 
 1299
 00:54:02,842 --> 00:54:05,842
 you can also fill or fit the bounds and
+你仍可以填满或者适应边界，
 
 1300
 00:54:05,844 --> 00:54:07,210
 keep it aspect ratio.
+保存图像原来的长宽比例。
 
 1301
 00:54:07,212 --> 00:54:09,012
 So that won't stretch your bits.
+这些就不会再拉伸你的图像了。
 
 1302
 00:54:09,014 --> 00:54:10,413
 It'll still scale them, but
+它们可以缩放，但是
 
 1303
 00:54:10,415 --> 00:54:13,582
 it'll scale them with your aspect ratio maintained, or
+是以原来的长宽比例来缩放的，或者
 
 1304
 00:54:13,584 --> 00:54:17,219
-you can have the wonderous Redraw, 'kay?
+you can have the wonderest Redraw, 'kay?
+你也可以用你最想用的 redraw。
 
 1305
 00:54:17,221 --> 00:54:19,421
 This is the one you wanna set that says,
+你想设成这个然后，
 
 1306
 00:54:19,423 --> 00:54:22,690
 when my bounds change, call my drawRect again.
-
-1307
-00:54:22,692 --> 00:54:23,524
-Okay?
+当我的边界发生了变化，再次调用我的 drawRect 函数。
 
 1308
-00:54:23,526 --> 00:54:25,392
-With the new bounds.
+00:54:22,692 --> 00:54:25,392
+Okay? With the new bounds.
+有了新的边界
 
 1309
 00:54:25,394 --> 00:54:26,793
 So you're gonna want that quite often.
+你将会常常需要用到它。
 
 1310
 00:54:26,795 --> 00:54:29,129
 I'll show you that in the demo today.
+我会在今天的展示中做给你们看。
 
 1311
 00:54:29,131 --> 00:54:30,630
 All right, so let's get right to this demo.
+好的，那我们开始展示吧。
 
 1312
 00:54:31,699 --> 00:54:34,767
 Today, it's gonna be a little tight to do this in 20 minutes
+今天这个展示的时间有点紧，因为还剩20分钟了，
 
 1313
 00:54:34,769 --> 00:54:37,002
 but, cuz we're gonna cover a lot of stuff but
+因为我们今天讲了好多东西，但是
 
 1314
 00:54:37,004 --> 00:54:38,036
 I think we can do it.
+我觉得我们应该够时间的。
 
 1315
 00:54:38,038 --> 00:54:42,273
 We're going to start by creating a new project.
+我们开始创建一个新的项目。
 
 1316
 00:54:42,275 --> 00:54:43,841
 So I'm just going to file a new project,
+点击 file->new->project，
 
 1317
 00:54:43,843 --> 00:54:44,775
 this is brand new.
+全新的一个项目。
 
 1318
 00:54:44,776 --> 00:54:45,708
 Okay? We're going away from
+我们将暂时把我们之前的
 
 1319
 00:54:45,711 --> 00:54:46,676
 the Calculator here.
+计算器放一边。
 
 1320
 00:54:46,678 --> 00:54:47,944
 And as always we're gonna be
+就像之前一样我们将
 
 1321
 00:54:47,946 --> 00:54:50,346
 using the single view application thing right here.
+用这里的 Single View Application。
 
 1322
 00:54:50,348 --> 00:54:52,781
 I'm gonna call this project Happiness,
+我将这个项目命名为 Happiness，
 
 1323
 00:54:52,783 --> 00:54:55,684
 because we're gonna draw a face, a smiley face.
+因为我们将会展示一个笑脸，
 
 1324
 00:54:55,686 --> 00:54:56,851
 Okay? And it's gonna be
+它将能够
 
 1325
 00:54:56,853 --> 00:54:59,654
 able to smile or frown, depending on how happy it is.
-
-1326
-00:54:59,656 --> 00:55:01,072
-Okay?
+微笑或者皱眉，这取决于它有多开心。
 
 1327
-00:55:01,073 --> 00:55:02,489
-So that's why we're gonna call this Happiness.
+00:54:59,656 --> 00:55:02,489
+Okay? So that's why we're gonna call this Happiness.
+所以我们命名为 Happiness。
 
 1328
 00:55:02,492 --> 00:55:04,992
 I'm gonna put it in the same place I put my Calculator,
+我把它放在我的 Calculator 项目的位置，
 
 1329
 00:55:04,994 --> 00:55:07,094
 which is my home directory developer there.
+也就是我的 home 目录下的 developer 里面。
 
 1330
 00:55:07,096 --> 00:55:08,428
 Here it is.
+就是这里。
 
 1331
 00:55:08,430 --> 00:55:12,031
 As before I'm gonna move this AppDelegate out of the way.
+像之前一样我将会把这个 AppDelegate 放开一边。
 
 1332
 00:55:12,033 --> 00:55:14,433
 I'm gonna move, actually let's take a look at image.xcassets.
+我将会移...事实上我们先看看这个 image.xcassets。
 
 1333
 00:55:14,435 --> 00:55:16,669
 So here's the appicon slots.
+这里是 Appicon（应用图标）的空槽。
 
 1334
 00:55:16,671 --> 00:55:18,403
 You can see that for any given image,
+你可以看到，对于不同的图像，
 
 1335
 00:55:18,405 --> 00:55:21,306
 like the appicon, there's lots of different resolutions,
+像这个 Appicon，它有很多不同的分辨率。
 
 1336
-00:55:21,308 --> 00:55:23,541
-depending on the devices that you can provide.
-
-1337
-00:55:23,543 --> 00:55:24,876
-Okay?
+00:55:21,308 --> 00:55:24,876
+depending on the devices that you can provide. Okay?
+取决于你提供的设备。
 
 1338
 00:55:24,877 --> 00:55:26,210
 You don't have to provide all the different resolutions,
+你不必提供所有的分辨率，
 
 1339
 00:55:26,212 --> 00:55:27,945
 it will interpolate but you can do it.
+它会自己添加，但你也可以都提供。
 
 1340
 00:55:27,947 --> 00:55:31,848
 So you just drag an image into here, and now you can get it
+那么先把这个图像拖进来，然后你就能通过名字来获取了，
 
 1341
 00:55:31,850 --> 00:55:34,951
 by name with that UIImageNamed function.
+这个函数叫 UIImageNamed。
 
 1342
 00:55:34,953 --> 00:55:36,169
 So we'll get that out of there.
+我们还是先把它放出去。
 
 1343
 00:55:36,170 --> 00:55:37,386
 We don't want the launch screen either.
+我们也不想要登陆页面。
 
 1344
 00:55:37,389 --> 00:55:38,955
 So here we are.
+就先这样
 
 1345
 00:55:38,956 --> 00:55:40,522
 I'm gonna show you something fun here too.
+我将给你们展示一些有趣的东西。
 
 1346
 00:55:40,525 --> 00:55:43,158
 Here is my StoryBoard.
+这是我的 StoryBoard。
 
 1347
 00:55:43,160 --> 00:55:46,028
 I'm gonna show you how to add a new view controller to
+我将给你们展示一下怎么把 viewController 添加到
 
 1348
 00:55:46,030 --> 00:55:47,062
 your StoryBoard.
+你的 StoryBoard中。
 
 1349
 00:55:47,064 --> 00:55:48,696
 And in fact, I'm gonna delete this one.
+事实上我将删除这一个。
 
 1350
 00:55:48,698 --> 00:55:50,064
 So, you see this one right here I've selected?
+看到我选择的这个了吗？
 
 1351
 00:55:50,066 --> 00:55:50,964
 I'm just deleting it.
+然后我删除它。
 
 1352
 00:55:50,966 --> 00:55:52,866
 It's gone. I'm gonna delete its
+它消失了。同时我也将删除它的
 
 1353
 00:55:52,868 --> 00:55:54,735
 code as well.
+代码。
 
 1354
 00:55:54,736 --> 00:55:56,603
 I'm gonna go here, and just delete, move it to the trash.
+我点击这里，然后删除，将其移除到垃圾箱。
 
 1355
 00:55:56,605 --> 00:55:59,339
 Now I have a StoryBoard with nothing in it, and
+现在我有一个啥都没有的空 StoryBoard，
 
 1356
 00:55:59,341 --> 00:56:01,040
 I've no view controllers.
+我也没 有viewController。
 
 1357
 00:56:01,042 --> 00:56:02,542
 Okay?
+咋整？
 
 1358
 00:56:02,543 --> 00:56:04,043
 So, how do I add a view controller?
+我怎么添加一个 viewController？
 
 1359
 00:56:04,045 --> 00:56:06,144
 You go over here to your Object Pallet.
+你来到这个 Object Pallet（Xcode 最右下角）
 
 1360
 00:56:06,146 --> 00:56:08,313
 The very first thing is a view controller.
+这里的第一个就是 viewController。
 
 1361
 00:56:08,315 --> 00:56:09,981
 And you just drag it out, and boom.
+然后你拖出来，哗的一下，
 
 1362
 00:56:09,983 --> 00:56:10,781
 You've got one.
+你有了，一个viewController。
 
 1363
 00:56:11,917 --> 00:56:13,550
 Now, the class.
+现在，它的类，
 
 1364
 00:56:13,552 --> 00:56:15,318
 What class is this going to be though?
+它的类是什么呢？
 
 1365
 00:56:15,320 --> 00:56:17,720
 This is gonna be Generic UIView controller, so
+它是一个普通的的 UIView Controller。
 
 1366
 00:56:17,722 --> 00:56:19,121
 it's pretty useless.
+所以这并没什么用。
 
 1367
 00:56:19,123 --> 00:56:20,823
 Okay? You can't add any outlets, or
+你不能用它来添加 outlet （IBOutlet）
 
 1368
 00:56:20,825 --> 00:56:23,525
 have any actions because it's not a subclass of UIView
+也不能添加任何 action，因为它不是 UIView Controller 的子类，
 
 1369
 00:56:23,527 --> 00:56:26,628
 controller, so you can't put any of that implementation in.
+所以你不能在里面放任何实现功能的代码。
 
 1370
 00:56:26,630 --> 00:56:30,564
 So, we're gonna create a new subclass of UIView controller.
+因此我们需要创建一个 UIView controller 的子类。
 
 1371
 00:56:30,566 --> 00:56:31,665
 So let me show you how to do that.
+让我来给你们展示一下。
 
 1372
 00:56:31,667 --> 00:56:33,834
 You say New > File.
+新建一个文件， New -> File
 
 1373
 00:56:33,836 --> 00:56:35,869
 And last time we went to New > File,
+上回我们这么做，
 
 1374
 00:56:35,871 --> 00:56:38,671
 we said Swift file to make the CalculatorBrain.
+是新建 Swift 文件来创建 CalculatorBrain。
 
 1375
 00:56:38,673 --> 00:56:41,574
 But now we're gonna go over here to Cocoa Touch Class,
+但是现在我们选择这个 Cocoa Touch Class，
 
 1376
-00:56:41,576 --> 00:56:44,109
-which we do anytime we wanna create a subclass of
-
-1377
-00:56:44,111 --> 00:56:45,661
-an iOS class.
+00:56:41,576 --> 00:56:45,661
+which we do anytime we wanna create a subclass of an iOS class.
+每当我们想要新建 iOS 的 子类的时候，我们都会选择它
 
 1378
 00:56:45,662 --> 00:56:47,212
 And here I'm creating a subclass of UIView controller.
+这里我创建一个 UIView controller 的子类。
 
 1379
 00:56:47,214 --> 00:56:48,346
 I need this.
+我需要它。
 
 1380
 00:56:48,348 --> 00:56:50,381
 So I'm gonna click on that.
+所以我点击它。
 
 1381
 00:56:50,383 --> 00:56:52,583
 Here's where I pick what I want it to be a subclass of.
+在这里我选择我想要继承的类。
 
 1382
 00:56:52,585 --> 00:56:53,884
 You can see there's a lot of things in here.
+你可以看到这里有很多东西。
 
 1383
 00:56:53,886 --> 00:56:56,119
 I'm gonna say I want a view controller.
+我想要一个 View Controller。
 
 1384
 00:56:56,121 --> 00:56:58,021
 It wants to call it view controller by default.
+它默认就叫 View Controller。
 
 1385
 00:56:58,023 --> 00:56:59,889
 We don't even like that for
+我们甚至在我们的 Calculator 中
 
 1386
 00:56:59,891 --> 00:57:02,291
 the Calculator, let alone this.
+都不这样叫。
 
 1387
 00:57:02,293 --> 00:57:06,128
 So I'm gonna call this my HappinessViewController.
-
-1388
-00:57:06,130 --> 00:57:07,563
-Okay?
+所以我将叫它 HappinessViewController。
 
 1389
-00:57:07,564 --> 00:57:08,997
-So it creates that.
+00:57:06,130 --> 00:57:08,997
+Okay? So it creates that.
+所以它就被创建了。
 
 1390
 00:57:08,999 --> 00:57:11,599
 Put it in the same place all my other Swift files are.
+把它放在我其他的 Swift 文件那里。
 
 1391
 00:57:11,601 --> 00:57:12,800
 Here it is.
+就是这里。
 
 1392
 00:57:12,802 --> 00:57:14,118
 HappinessViewController.
 
 1393
-00:57:14,119 --> 00:57:15,435
-Again, I'm gonna get rid of this code.
-
-1394
-00:57:15,438 --> 00:57:16,470
-Okay?
+00:57:14,119 --> 00:57:16,470
+Again, I'm gonna get rid of this code.Okay?
+再一次，我将把这些代码删掉。
 
 1395
 00:57:16,472 --> 00:57:18,972
 Just to make things a little clearer.
+让它看起来更简洁。
 
 1396
 00:57:18,974 --> 00:57:20,039
 So here's my HappinessViewController.
+这个就是我的 HappinessViewController。
 
 1397
 00:57:20,041 --> 00:57:22,675
 It's just like the view controller you had,
+就像是之前的 view controller 一样，
 
 1398
 00:57:22,677 --> 00:57:26,278
 that was called viewController in your Calculator.
+我们在 Calculator 叫 viewController。
 
 1399
 00:57:26,280 --> 00:57:28,013
 It was called HappinessViewController.
+这里呢我们叫它 HappinessViewController。
 
 1400
 00:57:28,015 --> 00:57:29,481
 But this guy right here,
+但是这里的这个家伙，
 
 1401
 00:57:29,483 --> 00:57:31,783
 is still playing old view controller.
+还在用着以前的 view controller。
 
 1402
 00:57:31,785 --> 00:57:32,917
 How do I know that?
+我怎么能知道呢？
 
 1403
 00:57:32,919 --> 00:57:34,752
 Well, it's this magic right here.
+神奇的东西在这里，
 
 1404
 00:57:34,754 --> 00:57:36,787
 You see this Identity Inspector?
+你看到这个 Identity Inspector 了吗？
 
 1405
 00:57:36,789 --> 00:57:38,521
 Okay. You can see the class of
+你可以看到被选择的东西的类，
 
 1406
 00:57:38,523 --> 00:57:41,791
 this selected thing here, in this UIView controller.
+在这里是 UIView controller。
 
 1407
 00:57:41,793 --> 00:57:43,793
 And I don't want it to be UIView controller.
+我不想让其是 UIView controller。
 
 1408
 00:57:43,795 --> 00:57:46,462
 I want it to be HappinessViewController.
+我想让它是 HappinessViewController。
 
 1409
 00:57:46,464 --> 00:57:49,264
 So, very important to understand that in
+所以，明白StoryBoards的这里很重要，
 
 1410
 00:57:49,266 --> 00:57:52,033
 StoryBoards, everything is linked up to
+所有东西都用名字和你的代码
 
 1411
 00:57:52,035 --> 00:57:53,334
 your code by name.
+相连接。
 
 1412
 00:57:53,336 --> 00:57:54,902
 Only by the name.
+只用名字。
 
 1413
 00:57:54,904 --> 00:57:56,603
 That is the only thing that links what's in
+这个是唯一的连接
 
 1414
 00:57:56,605 --> 00:57:57,971
 your StoryBoard with your code.
+你代码和 StoryBoard 的东西。
 
 1415
 00:57:57,973 --> 00:58:00,674
 The names of outlets, the names of methods,
+outlet 的名字，method 的名字，
 
 1416
 00:58:00,676 --> 00:58:01,974
 the action methods.
+action 的名字。
 
 1417
 00:58:01,976 --> 00:58:04,610
 The name of your UIViewControllers.
+你的 UIViewControllers 的名字，
 
 1418
 00:58:04,612 --> 00:58:06,412
 The name of your UIViews.
+你的 UIViews 的名字。
 
 1419
 00:58:06,414 --> 00:58:07,612
 Okay? It's all by name.
+好吧？所有的都是和名字有关。
 
 1420
 00:58:07,614 --> 00:58:09,881
 So you have to go to the Identity Inspector here and
+所以你需要到 Identity Inspector 这里，然后
 
 1421
 00:58:09,883 --> 00:58:12,050
 make sure that name matches up.
+保证你的名字对得上号。
 
 1422
 00:58:12,052 --> 00:58:13,835
 So now, you can see
+现在你可以看到，
 
 1423
 00:58:13,836 --> 00:58:15,619
 this says that it's a HappinessViewController.
+这里说它使一个 HappinessViewController。
 
 1424
-00:58:15,621 --> 00:58:17,721
-So that's making me happy.
-
-1425
-00:58:17,723 --> 00:58:20,240
-Okay.
+00:58:15,621 --> 00:58:20,240
+So that's making me happy. Okay.
+这让我很快乐。
 
 1426
 00:58:20,241 --> 00:58:22,758
 Now, we want to put our custom view in here, okay?
+现在我们想把我们自定义的 view 放进去，
 
 1427
 00:58:22,761 --> 00:58:26,329
 So how do I add a custom view to my UI?
+那我怎么把这个自定义的 view 放进去呢？
 
 1428
 00:58:26,331 --> 00:58:29,231
 And the answer is, I go into the Object Pallet.
+答案就是，我又一次选择 Object Pallet。
 
 1429
 00:58:29,233 --> 00:58:30,766
 It's all the way at the bottom,
+一直滚下去，
 
 1430
 00:58:30,768 --> 00:58:32,134
 near the bottom somewhere.
+知道就快到底部的时候。
 
 1431
 00:58:32,136 --> 00:58:32,901
 Where is that thing?
+在哪里呢？
 
 1432
 00:58:32,903 --> 00:58:33,801
 There it is.
+在这里。
 
 1433
 00:58:33,803 --> 00:58:35,870
 You can drag out a generic view.
+你可以拖出一个普通的 view。
 
 1434
 00:58:35,872 --> 00:58:37,705
 So this is just a UIView.
+这个就叫 UIView。
 
 1435
 00:58:37,707 --> 00:58:39,339
 Now when I drag it out,
+现在当我拖出来。
 
 1436
 00:58:39,341 --> 00:58:43,343
 I'm gonna put it right here with the dashed blue lines.
+我将把它放在这些虚蓝线这里。
 
 1437
 00:58:43,345 --> 00:58:46,279
 'Kay, because we know that that's a good thing to do.
+因为我们知道这么做总是好的。
 
 1438
 00:58:46,281 --> 00:58:50,416
-And I want to set up the Auto Layout so
+And I want to set up the AutoLayout so
+我想要设置 AutoLayout，因此
 
 1439
 00:58:50,418 --> 00:58:56,054
 that this view always fully fills my scene here.
+这个 view 将填满我的整个画面。
 
 1440
 00:58:56,056 --> 00:58:58,489
 Okay? Now I could control drag to
+现在，我可以按 control 加拖动到边缘，
 
 1441
 00:58:58,491 --> 00:59:02,560
 the edges like I did before, but since this is already
+就像我之前做的那样，但是现在这已经
 
 1442
 00:59:02,562 --> 00:59:06,630
 perfectly where I want it, and I use the blue lines, I
+很完美了，所以我用这些蓝线。我
 
 1443
-00:59:06,632 --> 00:59:11,001
-can go down here and use Reset to Suggested Constraints.
-
-1444
-00:59:11,003 --> 00:59:12,302
-'Kay?
+00:59:06,632 --> 00:59:12,302
+can go down here and use Reset to Suggested Constraints. 'Kay?
+可以在下面用这个 Reset to Suggested Constraints。
 
 1445
 00:59:12,303 --> 00:59:13,602
-Now, I'm only showing you dribs and drabs of Auto Layout.
+Now, I'm only showing you dribs and drabs of AutoLayout.
+现在我只是一点点地向你们展示 AutoLayout。
 
 1446
 00:59:13,605 --> 00:59:16,105
-I was gonna talk all about Auto Layout today, but
+I wasn't gonna talk all about Auto Layout today, but
+我不会在今天讲 AutoLayout 的，但是
 
 1447
 00:59:16,107 --> 00:59:17,439
 we need to move on to this.
+在这里我们需要这么做。
 
 1448
 00:59:17,441 --> 00:59:19,941
 But I will be having the lecture on Auto Layout,
+我会专门有节课讲 Auto Layout，
 
 1449
 00:59:19,943 --> 00:59:21,409
 probably week after next.
+也许是下下周。
 
 1450
 00:59:21,411 --> 00:59:23,745
 In the meantime I'm just gonna show you little bits of it and
+同时我会展示一点点，
 
 1451
 00:59:23,747 --> 00:59:25,730
 you can explore.
+让你们摸索一下。
 
 1452
 00:59:25,731 --> 00:59:27,714
 I'm never gonna ask you to do a ton of it in your homework.
+我不会让你们在作业中坐很多这个，
 
 1453
 00:59:27,717 --> 00:59:30,084
 So this one I'm gonna Reset to Suggested Constraints, and
+所以对于这个我将选 Reset to Suggested Constraints，
 
 1454
 00:59:30,086 --> 00:59:31,284
 it added those constraints.
+然后它就添加了这些 constraints（约束）。
 
 1455
 00:59:31,286 --> 00:59:32,585
 And I could go over here.
+我可以点击这里。
 
 1456
 00:59:32,587 --> 00:59:34,187
 Let me make some more space here.
+让我在这里腾出多一点空间。
 
 1457
 00:59:34,189 --> 00:59:35,654
 I could go look at them over here.
+我可以在这里浏览到它们。
 
 1458
 00:59:35,656 --> 00:59:37,523
 You've all determined that.
+你已经确定了这些。
 
 1459
 00:59:37,525 --> 00:59:40,559
 Another place you can see the constraints of a view is
+另一个能看到 view 的这些 constraints 的地方是
 
 1460
 00:59:40,561 --> 00:59:42,193
 here in the Size Inspector.
+在这个 Size Inspector 这里。
 
 1461
 00:59:42,195 --> 00:59:44,662
 If you look towards the bottom of the Size Inspector-
+如果你看 Size Inspector 的最底部，
 
 1462
 00:59:44,664 --> 00:59:46,163
 Look, here's all the constraints, see?
+看，这里全部都是 the constraints，看到么。
 
 1463
 00:59:46,165 --> 00:59:48,165
@@ -6243,550 +7196,642 @@ Trailing, leading, top, bottom.
 1464
 00:59:48,167 --> 00:59:50,634
 It added all these because these are the suggested
+这里添加的全部都是刚刚建议添加的
 
 1465
-00:59:50,636 --> 00:59:53,970
-constraints based on the dash blue lines that I used.
-
-1466
-00:59:53,972 --> 00:59:55,822
-Okay?
+00:59:50,636 --> 00:59:55,822
+constraints based on the dash blue lines that I used. Okay?
+constraints，基于刚刚我用的那些蓝色虚线。
 
 1467
 00:59:55,823 --> 00:59:57,673
 So, oftentimes if you put something in place perfectly
+所以，一般来说你把东西都放到刚刚好的位置，
 
 1468
 00:59:57,675 --> 00:59:58,874
 with the blue lines,
+放到有蓝线的位置，
 
 1469
 00:59:58,876 --> 01:00:01,443
 you can use Reset to Suggested Constraints.
+你就可以用 Reset to Suggested Constraints。
 
 1470
 01:00:01,445 --> 01:00:04,979
 We coulda done that with our display in our Calculator.
+我们也可以在在我们的 Calculator 中的显示结果的那个地方使用
 
 1471
 01:00:04,981 --> 01:00:06,748
 We couldn't do it with the buttons.
+但是我们不能用在按钮上。
 
 1472
 01:00:06,750 --> 01:00:09,116
 Cuz it just wasn't lined up enough with other things, but
+因为它并没有和其他的物体排列起来，但是
 
 1473
 01:00:09,118 --> 01:00:11,618
 we could have done it with the display.
+我们可以用于显示结果的 display。
 
 1474
 01:00:11,620 --> 01:00:12,853
 All right? So now we have this.
+好的，现在我们有了这个。
 
 1475
 01:00:12,855 --> 01:00:17,623
 Now, this UIView, let's look at its Identity Inspector.
+现在，这个 UIView，我们看看它的 Identity Inspector。
 
 1476
 01:00:17,625 --> 01:00:19,258
 It's just a generic UIView.
+它使个普通的 UIView。
 
 1477
 01:00:19,260 --> 01:00:20,726
 That's no good.
+这并不好。
 
 1478
 01:00:20,727 --> 01:00:22,193
 We need a custom UIView sub-class.
+我们需要一个自定义的 UIView 的子类。
 
 1479
 01:00:22,196 --> 01:00:23,161
 So let's go do that.
+我们来实现这个。
 
 1480
 01:00:23,163 --> 01:00:24,996
 File > New File.
+选择 File > New File
 
 1481
 01:00:24,998 --> 01:00:26,665
 Same thing,
+一样的，
 
 1482
 01:00:26,666 --> 01:00:28,333
 I'm gonna create a subclass of a Cocoa Touch Class.
+我将创建 Cocoa Touch Class 的子类。
 
 1483
 01:00:28,335 --> 01:00:30,801
 This one's not gonna be a view controller,
+这次不是一个 view controller，
 
 1484
 01:00:30,803 --> 01:00:32,202
 it's gonna be a UIView.
+而是一个 UIView。
 
 1485
 01:00:32,204 --> 01:00:33,837
 Okay? I'm gonna call it FaceView,
+好的，我将叫它 FaceView，
 
 1486
 01:00:33,839 --> 01:00:35,238
 cuz that's what it's gonna do.
+因为它要做的就是，
 
 1487
 01:00:35,240 --> 01:00:38,041
 It's gonna draw a face, okay?
+显示出一张脸。
 
 1488
 01:00:38,043 --> 01:00:40,776
 Put it in the same place, put everything.
+将它放在同一个地方，放所有文件的地方。
 
 1489
 01:00:40,778 --> 01:00:42,845
 Here's our, my FaceView right here.
+这里是我们的 FaceView。
 
 1490
 01:00:42,847 --> 01:00:44,413
 We'll get back to that in a second.
+我们一会再回来这里。
 
 1491
 01:00:44,415 --> 01:00:45,780
 In our StoryBoard,
+在我们的 StoryBoard 中。
 
 1492
 01:00:45,782 --> 01:00:49,517
 we wanna make sure that we inspect our FaceView.
-
-1493
-01:00:49,519 --> 01:00:50,618
-Okay?
+我们希望保证我们能检查我们的 FaceView。
 
 1494
-01:00:50,619 --> 01:00:51,718
-And change its class to FaceView.
+01:00:49,519 --> 01:00:51,718
+Okay? And change its class to FaceView.
+然后把它的类改成 FaceView。
 
 1495
 01:00:51,721 --> 01:00:54,087
 By the way, it can kinda get tricky sometimes,
+顺带说一句，选择到一个你想要的东西，
 
 1496
 01:00:54,089 --> 01:00:55,655
 picking the right thing.
+有时候会比较困难。
 
 1497
 01:00:55,657 --> 01:00:57,490
 Like, sometimes you're picking the UIView controller,
+比如说有时候你想选择 UIView controller，
 
 1498
 01:00:57,492 --> 01:00:58,691
 sometimes you're picking the view.
+但有时你会不小心选到 view。
 
 1499
 01:00:58,693 --> 01:01:02,628
 One kinda cool trick, CTRL+ Shift.
+有个酷炫的小技巧是按 CTRL+ Shift。
 
 1500
 01:01:02,630 --> 01:01:05,397
 If you hold CTRL+Shift and click, then it
+如果你按住 CTRL+ Shift 然后点击，它会
 
 1501
 01:01:05,399 --> 01:01:09,367
 lets you pick which thing you want, that's under the mouse.
+让你选择你想要的东西，在这个鼠标后面。
 
 1502
 01:01:09,369 --> 01:01:11,636
 A very important little trick, CTRL+Shift.
+这个很重要的小技巧，CTRL+ Shift。
 
 1503
 01:01:11,638 --> 01:01:13,804
 So here I could pick the view controller.
+所以我可以选择到 view controller。
 
 1504
 01:01:13,806 --> 01:01:15,539
 Now I'm seeing the Identity Inspector of
+现在我看到 view controller
 
 1505
 01:01:15,541 --> 01:01:16,473
 the view controller.
+的 Identity Inspector
 
 1506
 01:01:16,475 --> 01:01:18,041
 Or I could go here and pick,
+或者我可以在这里选择，
 
 1507
 01:01:18,043 --> 01:01:20,843
 this is the view property in my view controller.
+这是我的 view controller 的 view 属性。
 
 1508
 01:01:20,845 --> 01:01:21,977
 The top level view.
+最顶层的 view。
 
 1509
 01:01:21,979 --> 01:01:24,380
 This is my FaceView that I'm trying to create.
+这是我想要创建的 FaceView。
 
 1510
 01:01:24,382 --> 01:01:26,615
 So I select this here, then I'm gonna go to
+所以我选择这个，然后我去到
 
 1511
 01:01:26,617 --> 01:01:28,750
 the Identity Inspector again, up here.
+上面的 Identity Inspector。
 
 1512
-01:01:28,752 --> 01:01:31,652
-I'm gonna change this to be a FaceView.
-
-1513
-01:01:31,654 --> 01:01:32,887
-Okay?
+01:01:28,752 --> 01:01:32,887
+I'm gonna change this to be a FaceView. Okay?
+我将其改成 FaceView。
 
 1514
 01:01:32,889 --> 01:01:35,189
 So now this thing is a FaceView, and so
+那么现在这个东西就是 FaceView 了，
 
 1515
 01:01:35,191 --> 01:01:37,524
 when it's time for this thing to draw,
+当有东西需要显示的时候，
 
 1516
 01:01:37,526 --> 01:01:40,727
 it's gonna call the drawRect of the FaceView class.
+这将会调用 FaceView 里的 drawRect。
 
 1517
 01:01:40,729 --> 01:01:43,096
 So let's go take a look at the FaceView class.
+所以现在去看看这个 FaceView。
 
 1518
 01:01:43,098 --> 01:01:44,630
 Here it is.
+这里就是了。
 
 1519
 01:01:44,632 --> 01:01:48,100
 And here is drawRect.
+这里是 drawRect。
 
 1520
 01:01:48,102 --> 01:01:50,602
 Now, it's commented out by default.
+现在，它默认是被注释的。
 
 1521
 01:01:50,604 --> 01:01:52,303
 Why is it commented out by default?
+为什么默认被注释掉呢？
 
 1522
 01:01:52,305 --> 01:01:57,308
 Well because having a drawRect costs system resources.
+因为用 drawRect 会消耗系统资源。
 
 1523
 01:01:57,310 --> 01:01:59,677
 It thinks it has to draw this thing.
+系统认为需要画这个东西。 
 
 1524
 01:01:59,678 --> 01:02:02,045
 So you only wanna have a drawRect if you actually draw,
+所以当你需要用到 drawRect 的时候你才会把这些代码
 
 1525
 01:02:02,047 --> 01:02:03,279
 in your drawRect.
+写出来。
 
 1526
 01:02:03,281 --> 01:02:06,149
 Don't have it just sitting there uncommented out,
+当你并没有真正需要用它的时候，
 
 1527
 01:02:06,151 --> 01:02:08,050
 if you're not actually using it.
+别让它只是呆在那里，不注释它。
 
 1528
 01:02:08,052 --> 01:02:10,386
 All right, so, how am I gonna draw this face?
+好的，我怎么画这个脸出来呢？
 
 1529
 01:02:10,388 --> 01:02:13,622
 Let's start by drawing the outline of the head.
+我们从画头的轮廓开始吧。
 
 1530
-01:02:13,624 --> 01:02:14,989
-Just a round circle.
-
-1531
-01:02:14,991 --> 01:02:16,074
-Okay?
+01:02:13,624 --> 01:02:16,074
+Just a round circle. Okay?
+一个圆圈。
 
 1532
 01:02:16,075 --> 01:02:17,158
 Cuz that's pretty simple to draw.
+因为这很简单画。
 
 1533
 01:02:17,160 --> 01:02:20,695
 And how am I gonna do that?
+我该怎么做？
 
 1534
 01:02:20,697 --> 01:02:24,164
 Let's start by creating a BezierPath.
+我们开始创建一个 BezierPath 吧。
 
 1535
 01:02:24,166 --> 01:02:29,636
 I'll call it facePath which is, BezierPath.
+我叫这个为 facePath，是一个 BezierPath。
 
 1536
 01:02:29,638 --> 01:02:31,188
 And let's look at
+让我们看看
 
 1537
 01:02:31,189 --> 01:02:32,739
 all the different kinds of BezierPaths we can make.
+我们能用 BezierPaths 制作的所有东西吧。
 
 1538
 01:02:32,741 --> 01:02:34,257
 Ovals.
+椭圆形
 
 1539
 01:02:34,258 --> 01:02:35,774
 We could use this one, ovalInRect, okay?
+我们可以用这个，ovalInRect。
 
 1540
 01:02:35,777 --> 01:02:36,809
 That's a pretty good one.
+这将会是个不错的选择。
 
 1541
 01:02:36,811 --> 01:02:38,977
 I'm actually gonna use this one,
+事实上我将会用这个
 
 1542
 01:02:38,979 --> 01:02:42,447
 arcCenter cuz I wanna show you a really bad error message
+arcCenter，因为我想向你们展示一些你将会在 Swift 中遇到的，
 
 1543
 01:02:42,449 --> 01:02:45,650
 you're gonna get in Swift that I want you to avoid.
+我希望你们能够避免的一些错的离谱的消息。
 
 1544
 01:02:45,652 --> 01:02:48,019
 So I'm gonna use this one which lets you create an arc,
+所以我需要这个，让你创建一个弧，
 
 1545
 01:02:48,021 --> 01:02:50,254
 and I'm just gonna have my arc go all the way around.
+然后我想让这个弧围绕着整个圆，
 
 1546
 01:02:50,256 --> 01:02:52,089
 Okay? From zero all the way around.
+从0度到整个圆。
 
 1547
 01:02:52,091 --> 01:02:54,190
 So, it wants to know the center.
+它需要知道中心。
 
 1548
 01:02:54,192 --> 01:02:56,626
 So I'm gonna have to have my faces center somehow.
+所以我需要我的脸的中心点。
 
 1549
 01:02:56,628 --> 01:02:58,094
 We'll define that in a second.
+我们稍后会定义它。
 
 1550
 01:02:58,096 --> 01:03:00,229
 It also wants to know the radius, so
+它同样需要知道半径是多少，
 
 1551
 01:03:00,231 --> 01:03:02,731
 I have to have my faces radius in a second.
+所以我稍后也需要我的脸的半径。
 
 1552
 01:03:02,733 --> 01:03:04,332
 We'll do that.
+我们会定义的。
 
 1553
 01:03:04,334 --> 01:03:07,602
 It wants to know the start angle, to draw this arc.
+它想知道开始的角度去画这个弧度。
 
 1554
 01:03:07,604 --> 01:03:09,003
 Okay? So
+所以，
 
 1555
 01:03:09,004 --> 01:03:10,403
 I'm gonna start at angle zero.
+我将从0度开始。
 
 1556
 01:03:10,406 --> 01:03:12,339
 The angle's in radians.
+半径是用弧度来计算的。
 
 1557
 01:03:12,341 --> 01:03:15,542
 So I wanna go around to 2pi.
+所以我希望它能从0度画到2pi。
 
 1558
 01:03:15,544 --> 01:03:17,444
 Going, I'm gonna draw an arc from zero,
+继续，我将从0度开始画这个弧，
 
 1559
 01:03:17,446 --> 01:03:19,045
 all the way around to 2pi radians.
+绕一圈直到 2pi 的弧度。
 
 1560
-01:03:19,047 --> 01:03:21,447
-Hopefully everyone knows what radians are.
-
-1561
-01:03:21,449 --> 01:03:22,965
-Okay?
+01:03:19,047 --> 01:03:22,965
+Hopefully everyone knows what radians are. Okay?
+希望所有人都知道弧度是什么，
 
 1562
 01:03:22,966 --> 01:03:24,482
 So zero to 2pi that's good, and then clockwise or
+所以0到2pi很好，然后是顺时针还是
 
 1563
 01:03:24,485 --> 01:03:25,935
 counter clockwise,
+逆时针。
 
 1564
 01:03:25,936 --> 01:03:27,386
 I don't care cuz I'm going all the way around.
+我不在乎是顺还是逆，因为我只是画一个整圆。
 
 1565
 01:03:27,388 --> 01:03:28,953
 So I'll just say clockwise true.
+所以我选择顺时针 true。
 
 1566
 01:03:28,955 --> 01:03:31,823
 Now, when I do this, well first let's do
+现在，当我这么做，我们先定义
 
 1567
 01:03:31,825 --> 01:03:34,458
 our faceCenter and faceRadius here.
+我们的 faceCenter 和 faceRadius 吧。
 
 1568
 01:03:34,460 --> 01:03:40,630
 So I'm gonna make actually computed properties for those.
+事实上我将会让这俩变成 computed properties。
 
 1569
 01:03:40,632 --> 01:03:43,600
 So the faceCenter is a CGPoint.
+faceCenter 是一个 CGPoint。
 
 1570
 01:03:43,602 --> 01:03:47,970
 And really, it would be cool, yeah, I could do get and set.
+真的，这很酷炫，是的，我可以用 get 和 set。
 
 1571
-01:03:47,972 --> 01:03:49,905
-It's gonna be Get Only.
-
-1572
-01:03:49,907 --> 01:03:51,240
-Okay?
+01:03:47,972 --> 01:03:51,240
+It's gonna be Get Only. Okay?
+但在这里我只需要 get。
 
 1573
 01:03:51,241 --> 01:03:52,574
 I'm not gonna allow me to set my faceCenter,
+我将不允许去设定我的 faceCenter。
 
 1574
 01:03:52,576 --> 01:03:54,209
 I'm almost going to calculate it.
+我基本上在里面做计算。
 
 1575
 01:03:54,211 --> 01:03:56,644
 I could make it settable, actually too, but
+事实上我也可以让它能够被赋值，但
 
 1576
 01:03:56,646 --> 01:03:59,080
 I'm gonna make it so it's calculated only.
+我只让它能够计算。
 
 1577
 01:03:59,082 --> 01:04:00,681
 When you do calculated only,
+当你只用做计算，
 
 1578
 01:04:00,683 --> 01:04:03,050
 you actually don't need this part.
+你就不需要这一部分。
 
 1579
 01:04:03,052 --> 01:04:03,683
 This get.
+这个 get。
 
 1580
 01:04:03,685 --> 01:04:04,851
 You can take that out.
+你可以把它取出来。
 
 1581
 01:04:04,853 --> 01:04:06,352
 And if it's returned Only.
+如果它只是返回的。
 
 1582
 01:04:06,354 --> 01:04:08,253
 So I'll say return.
+我会写 return。
 
 1583
 01:04:08,255 --> 01:04:11,023
 Now I, you might be saying oh I'm gonna return center,
+现在你也许会说噢我要返回 center。
 
 1584
 01:04:11,025 --> 01:04:12,257
 let's put the face in the center.
+把脸放在 center 吧。
 
 1585
 01:04:12,259 --> 01:04:15,660
 Did everyone understand why this is very bad?
+大家都明白为什么这很糟糕吗？
 
 1586
 01:04:15,662 --> 01:04:17,528
 All right, cuz center is not in my coordinate system.
+因为这个 center 并不在我的坐标系中。
 
 1587
 01:04:17,530 --> 01:04:19,029
 It's in my super views coordinate system.
+它在我的父类 view 的坐标系中。
 
 1588
 01:04:19,031 --> 01:04:23,967
 Luckily, I can convert a point from my super views coordinate
+不过幸运地，我可以把这个点从父类坐标系转换到
 
 1589
 01:04:23,969 --> 01:04:29,138
 system using this nice method, convertpoint fromView:.
+我的坐标系中，用一个很好用的方法，convertpoint fromView:。
 
 1590
-01:04:29,140 --> 01:04:32,407
-So I'm gonna convert center from my superview.
-
-1591
-01:04:33,377 --> 01:04:34,876
-Okay?
+01:04:29,140 --> 01:04:34,876
+So I'm gonna convert center from my superview. Okay?
+所以我从父 view 转换 center。
 
 1592
 01:04:34,877 --> 01:04:36,376
 That's gonna put my face right in the center,
+这将会让我的 face 放在正中心。
 
 1593
 01:04:36,379 --> 01:04:39,680
 cuz I've converted that center from my superview's coordinate
+因为我从父 view 的坐标系转换过来
 
 1594
-01:04:39,682 --> 01:04:40,514
-system to mine.
-
-1595
-01:04:40,516 --> 01:04:41,381
-Okay?
+01:04:39,682 --> 01:04:41,381
+system to mine. Okay?
+成为我的坐标系的 center。
 
 1596
 01:04:41,383 --> 01:04:43,083
 So that's faceCenter.
+那么这个就是 faceCenter 了。
 
 1597
 01:04:43,085 --> 01:04:45,151
 Let's also do faceRadius.
+接着来定义 faceRadius。
 
 1598
 01:04:45,153 --> 01:04:46,786
 So for the faceRadius,
+那么对于这个 faceRadius。
 
 1599
-01:04:46,788 --> 01:04:49,488
-I'm gonna have it be as big as it can be.
-
-1600
-01:04:49,490 --> 01:04:50,990
-Okay?
+01:04:46,788 --> 01:04:50,990
+I'm gonna have it be as big as it can be. Okay?
+我将希望它尽可能的大。
 
 1601
 01:04:50,991 --> 01:04:52,491

@@ -1,4 +1,4 @@
-﻿1
+1
 00:00:00,001 --> 00:00:04,669
 [MUSIC]
 
@@ -6599,94 +6599,118 @@ So on Wednesday I'm going to continue the slides that I'm
 1601
 01:09:02,445 --> 01:09:04,111
 going to start in a minute here.
+我马上要讲的这个 Slide
 
 1602
 01:09:04,113 --> 01:09:05,612
 About multiple MVCs and
+这个 Slide 有关多个 MVC 
 
 1603
 01:09:05,614 --> 01:09:08,915
 then I'm gonna do a big demo creating multiple MVCs in
+我将要演示一个大的 demo，
 
 1604
 01:09:08,917 --> 01:09:11,717
 our happiness controller, okay.
+在 happiness controller 中创建多个 MVC
 
 1605
 01:09:11,719 --> 01:09:13,719
 And again, time permitting, at the end of Wednesday I'll do
+如果时间允许，在周三课程最后我会讲
 
 1606
 01:09:13,721 --> 01:09:16,788
 another topic view controller lifecycle.
+另一个主题，即 view controller 生命周期
 
 1607
 01:09:16,790 --> 01:09:20,558
 Friday, hopefully, it will have this instruments thing.
+在周五，希望可以能够给大家讲一讲 instruments
 
 1608
 01:09:20,560 --> 01:09:22,860
 And then next Monday I put auto layout question mark.
+在下周一… 我在 auto layout 后放了一个问号
 
 1609
 01:09:22,862 --> 01:09:24,128
 Because I was telling you I was going to
+因为我曾经告诉你们我会很快讲 auto layout 的内容
 
 1610
 01:09:24,130 --> 01:09:25,796
 do auto layout sooner but I keep putting it off.
+但是总是推迟。
 
 1611
 01:09:25,798 --> 01:09:27,597
 And I might put it off again, we'll see.
+或许我会继续推迟，到时候就知道了。
 
 1612
 01:09:27,599 --> 01:09:29,182
 But I won't be asking you in
+但是我不会要求你们
 
 1613
 01:09:29,183 --> 01:09:30,766
 your homework to do much sophisticated auto layout.
+在课后花太多时间熟悉 auto layout 的内容。
 
 1614
 01:09:30,769 --> 01:09:32,568
 So even it assignment three, there's very little.
+所以尽管在它（auto layout）是第三次作业，但是也只是很少一部分内容。
 
 1615
 01:09:32,570 --> 01:09:37,573
 Okay, so next topic, multiple MVCs.
+好的，下一个主题，多重 MVC。
 
 1616
 01:09:37,575 --> 01:09:39,574
 So you remember this picture, I hope.
+我希望你还记得这张图
 
 1617
 01:09:42,713 --> 01:09:45,847
 Which was at the of the MVC talk where I talked about how
+在讲到 MVC 的最后，我讲了如果我们想
+
 
 1618
 01:09:45,849 --> 01:09:47,214
 if we wanna build a big app,
+构建一个大的应用，
 
 1619
 01:09:47,216 --> 01:09:51,084
 we're gonna do it by putting multiple MVCs together, okay.
+我们将要把多个 MVC 放在一起来实现它。
 
 1620
 01:09:51,086 --> 01:09:52,719
 So we're gonna zoom in here and
+将这幅图缩小
 
 1621
 01:09:52,721 --> 01:09:55,254
 take a look at exactly how that's done.
+看一看到底是怎么实现的。
 
 1622
 01:09:55,256 --> 01:09:57,340
 Okay, how we're
+我们怎么
 
 1623
 01:09:57,341 --> 01:09:59,425
 gonna make multiple combine multiple MVC's.
+将多个 MVC 联系到一起。
 
 1624
 01:09:59,427 --> 01:10:00,977
@@ -6695,282 +6719,352 @@ Okay.
 1625
 01:10:00,978 --> 01:10:02,528
 So you see that MVC right there the purple one
+看最上边紫色的这个 MVC
 
 1626
 01:10:02,530 --> 01:10:05,030
-at the top, that's an MVC and you can
+at the top, that's an MVC and you can 
+这是一个 MVC ，而且它（MVC）的 view 
 
 1627
 01:10:05,032 --> 01:10:08,499
 see that this view is actually made up of other MVC's.
+实际上是由其它 MVC 组成的。
 
 1628
 01:10:10,003 --> 01:10:13,237
 So iOS provides some controllers for
+iOS 为 为一些 MVCs 中的 controllers 提供
 
 1629
 01:10:13,239 --> 01:10:17,474
 MVCs that have other MVCs as their view.
+了其它 MVCs 作为 controllers 的 view。
 
 1630
 01:10:17,476 --> 01:10:19,375
 And the three we're gonna talk about today,
+今天我们要讲到三个 controller,
 
 1631
 01:10:19,377 --> 01:10:20,776
 by the way you can build your own.
+BTW, 你可以创建自己的 controller。
 
 1632
 01:10:20,778 --> 01:10:22,645
 I'm not gonna talk about that today.
+今天我不会讲怎么自定义 controller
 
 1633
 01:10:22,646 --> 01:10:24,513
 You can build your own controllers that have MVCs as
+你可以自定义 controller ，并将 其它 MVC 作为 view
 
 1634
 01:10:24,515 --> 01:10:26,615
 the view, but I'm gonna talk about the three that are
+但是我今天要讲的三种 controller 是 iOS 内置的
 
 1635
 01:10:26,617 --> 01:10:29,884
 provided in iOS which you're gonna be using in this class.
+也是你们在这节课将要用到的。
 
 1636
 01:10:29,886 --> 01:10:32,153
 Which is TabBarController SplitViewControllers and
+这三个 controller 分别是 TabBarController SplitViewControllers
 
 1637
 01:10:32,155 --> 01:10:34,689
 NavigationControllers, 'kay.
+和 NavigationControllers。
 
 1638
 01:10:34,691 --> 01:10:35,856
 So these are just controllers,
+它们都是controller
 
 1639
 01:10:35,858 --> 01:10:39,893
-they're subclasses of UIViewcontroller.
+they're subclasses of UIViewController.
+是 UIViewcontroller 的子类。
 
 1640
 01:10:39,895 --> 01:10:42,261
 And they draw a little bit in their view but
+而且它们会在它们的 view 中绘制一些东西
 
 1641
 01:10:42,263 --> 01:10:45,564
 then most of their view is what other MVC's draw, so
+但是多数情况下，它们的 view 是其它 MVC 绘制的内容，
 
 1642
 01:10:45,566 --> 01:10:50,235
-the MVC's are part of their views.
+the MVCs are part of their views.
+所以其它 MVC 只是这些 controller 视图的一部分。
 
 1643
 01:10:50,237 --> 01:10:51,670
 So let's look at TabBarController,
+看看 TabBarController
 
 1644
 01:10:51,672 --> 01:10:53,471
 it's probably the simplest one of all these.
+它可能是三个中最简单的
 
 1645
 01:10:53,473 --> 01:10:55,006
 You've seen TabBarControllers,
+你们已经见过 TabBarControllers,
 
 1646
 01:10:55,008 --> 01:10:58,442
 you see it's got the four tabs along the bottom on this one.
+这个 TabBarController 底部罗列了四个 tab。
 
 1647
 01:10:58,444 --> 01:11:00,343
 This is the health app, I think.
+我觉得这个一个健康类的应用。
 
 1648
 01:11:02,814 --> 01:11:05,748
 And all that happens here is when you click one of those
+当你点击底部四个 tab button
 
 1649
 01:11:05,750 --> 01:11:10,318
 tab buttons at the bottom, the top gets replaced with an MVC.
+中的一个，上面就会被一个新的 MVC 替换。
 
 1650
 01:11:10,320 --> 01:11:12,987
 An entire MVC is controlling that top.
+整个 MVC 控制上面的内容。
 
 1651
 01:11:12,989 --> 01:11:16,457
 In this case, it's some sort of dashboard MVC or health
+在本例中，这上面要展现的是一个 MVC 的 dashboard（仪表盘）
 
 1652
 01:11:16,459 --> 01:11:20,494
 dashboard is being presented at the top, right here.
+或是一个 健康的 dashboard（仪表盘）。
 
 1653
 01:11:20,496 --> 01:11:22,195
 And the icon and
+dashboard（仪表盘）下面的 icon（图标）以及
 
 1654
 01:11:22,197 --> 01:11:25,699
 the title that goes along with the dashboard down there,
+title（标题）
 
 1655
 01:11:25,701 --> 01:11:29,468
 is actually gotten from the dashboard MVC.
+实际上来自这个 dashboard （仪表盘）MVC。
 
 1656
 01:11:29,470 --> 01:11:31,804
 In other words,
+换句话说，icon 和 title
 
 1657
 01:11:31,805 --> 01:11:34,139
 not a property you set on the UITabBarController MVC.
+不是你在 UITabBarController MVC 中设置的 property（属性）。
 
 1658
 01:11:34,141 --> 01:11:37,109
 You actually just have a property on
+实际上在你的 dashboard MVC 中，
 
 1659
 01:11:37,111 --> 01:11:39,844
 your dashboard MVC, it's called tabBarItem.
+你仅有一个叫做 tabBarItem 的属性
 
 1660
 01:11:39,846 --> 01:11:42,847
 And inside tabBarItem, if you go look it up in the doc,
+在 tabBarItem 中， 如果你查找文档，
 
 1661
 01:11:42,849 --> 01:11:47,751
 it's got things like title, icon, things that the tab bar
+tabBarItem 中有 title（标题），icon（图标），等，这些东西
 
 1662
 01:11:47,753 --> 01:11:50,754
 controller needs to put a nice tab on the bottom for
+都是 tabBarController 需要的，用来为你的 dashboard底部
 
 1663
 01:11:50,756 --> 01:11:52,589
 your dashboard MVC.
+呈现一个适当的 tab。
 
 1664
 01:11:52,590 --> 01:11:54,423
 So, as you can see, it's very object oriented, okay.
+可以看到，这非常符合面向对象的思想。
 
 1665
 01:11:54,426 --> 01:11:57,427
 Everything is contained in just this MVC.
+所有的东西都在这个 MVC 中。
 
 1666
 01:11:57,429 --> 01:11:59,395
 And so, if you press on a different tab,
+如果你按下另一个 tab，
 
 1667
 01:12:00,331 --> 01:12:02,064
 maybe the second tab, then this is a totally
+比如第二个 tab，然后
 
 1668
 01:12:02,066 --> 01:12:04,899
 different MVC that takes over the top of this screen.
+一个完全不同的MVC占据了屏幕的顶部。
 
 1669
 01:12:04,901 --> 01:12:08,269
 This would be Health Data MVC, and you can see that it's got
+这是 Health Data MVC, 可以看到
 
 1670
 01:12:08,271 --> 01:12:11,305
 a different icon and text down there, right?
+它有一个不同的 icon 和 title 在它下面，对吧？
 
 1671
 01:12:11,307 --> 01:12:13,374
 By the way, if there's too
+顺便说下，如果底部罗列了
 
 1672
 01:12:13,375 --> 01:12:15,442
 many tabs along the bottom there, I think you get five,
+太多 tab，比如有5个tab，
 
 1673
 01:12:15,444 --> 01:12:19,479
 if you go to six tabs then iOS will automatically let
+如果你要六个 tab，那么iOS将会自动让
 
 1674
 01:12:19,481 --> 01:12:22,248
 the user manage which ones he wants down there.
+用户来决定他想要哪些tab。
 
 1675
 01:12:22,250 --> 01:12:23,950
 It's pretty cool, okay.
+相当 cool，对吧。
 
 1676
 01:12:23,952 --> 01:12:25,168
 So you don't even have to and
+你可以在下面放
 
 1677
 01:12:25,169 --> 01:12:26,385
 you can put as many tabs you want.
+任意多的 tab。
 
 1678
 01:12:26,387 --> 01:12:27,720
 I don't really recommend more than five
+但是，我建议不超过五个。
 
 1679
 01:12:27,722 --> 01:12:28,720
 tabs here, by the way.
+顺便一说。 
 
 1680
 01:12:30,257 --> 01:12:31,940
 For users it's like, what,
+对于用户来说情况可能是：“ 什么？
 
 1681
 01:12:31,941 --> 01:12:33,624
 I have to manage my tabs down there, I don't wanna do that.
+我还得自己管理 tab，我可不想这么玛法 ”。
 
 1682
 01:12:33,626 --> 01:12:35,259
 It's just that you're asking yours to do more stuff.
+这是自己给自己找麻烦。
 
 1683
 01:12:35,261 --> 01:12:36,827
 So hopefully you can fit it in five.
+所以希望5个 tab 可以满足你的要求。
 
 1684
 01:12:38,097 --> 01:12:40,330
 And so we have other MVCs as well.
+我们也有其它 MVC
 
 1685
 01:12:40,332 --> 01:12:43,266
 So there's the sources of health data,
+这个是 health data（健康数据）的来源，
 
 1686
 01:12:43,268 --> 01:12:45,701
 I guess, in your Medical ID tab.
+在你的 Medical ID tab.
 
 1687
 01:12:45,703 --> 01:12:48,871
 And so this is a very simple thing you can understand.
+这些东西都很容易理解
 
 1688
 01:12:48,873 --> 01:12:50,706
-You've got this UI TabBarController,
+You've got this UITabBarController,
+你得到了这个 UITabBarController
 
 1689
 01:12:50,708 --> 01:12:53,108
 it's a controller of an MVC.
+它是一个 MVC 的 controller.
 
 1690
 01:12:53,109 --> 01:12:55,509
 The view is the little tabs along the bottom that it's
+它的（UITabBarController）的 view 是底部的它绘制的这些 tab
 
 1691
 01:12:55,512 --> 01:12:57,645
 drawing and the MVC's on the top.
+以及顶部的 MVC。
 
 1692
 01:12:58,915 --> 01:13:00,915
 Everyone understand what I
+大家都明白我说的吗？
 
 1693
 01:13:00,916 --> 01:13:02,916
 mean now about an MVC whose view contains other MVC's?
+关于一个 MVC 的 view 包含其它 MVC。
 
 1694
 01:13:02,918 --> 01:13:06,686
 So let's look at another one that does that.
+好的，一起看一下另一个 的 controller。
 
 1695
 01:13:06,688 --> 01:13:08,121
@@ -6979,178 +7073,223 @@ SplitViewController.
 1696
 01:13:08,123 --> 01:13:11,157
 So, SplitViewController takes two MVCs, and
+SplitViewController 包括两个 MVC，
 
 1697
 01:13:11,159 --> 01:13:13,892
 it puts them side-by-side, okay.
+并将它们并排放在一起。
 
 1698
 01:13:13,894 --> 01:13:15,460
 It puts the one on the left,
+它将一个放在左边。
 
 1699
 01:13:15,462 --> 01:13:19,630
 kind of a well known width there.
+似乎是一个熟知的宽度
 
 1700
 01:13:19,632 --> 01:13:21,198
 But, you don't care what that width is because,
+但是，你不必关心宽度是多少，
 
 1701
 01:13:21,200 --> 01:13:23,033
 hopefully, you've got auto-layout, and so
+你可以使用 auto-layout，
 
 1702
 01:13:23,035 --> 01:13:24,334
 it could be any width you want, or
+想让它多宽，
 
 1703
 01:13:24,336 --> 01:13:26,102
 any height you want, like this.
+想让它都高都可以，就像这样。
 
 1704
 01:13:26,104 --> 01:13:27,503
 And then it puts another one on the right.
+然后，它（UISplitViewController）将另一个 MVC 放在右边。
 
 1705
 01:13:27,505 --> 01:13:31,774
 Now, we call the MVC on the left, the Master in
+接下来，我们将左边的 MVC 叫做 split view 的 Master
 
 1706
 01:13:31,776 --> 01:13:34,576
 the split view and we call the MVC on the right the Detail.
+将右边的 MVC 叫做 Detail。
 
 1707
 01:13:38,615 --> 01:13:41,349
 Now here I've got a calculator and a calculator graph.
+目前我有一个计算器和一个计算器图表。
 
 1708
 01:13:41,351 --> 01:13:44,218
 You assignment three is going to be to build this basically.
+你们第三次作业基本上将要实现这个计算器。
 
 1709
 01:13:44,220 --> 01:13:46,353
 It doesn't have to look exactly like this, okay.
+你们的计算器不必和我的完全一样。
 
 1710
 01:13:46,355 --> 01:13:49,022
 I've made a simple looking one here.
+我只做了一个简单的外观。
 
 1711
 01:13:49,024 --> 01:13:51,791
 But it could look very much like this.
+但是你们的作业可能和我展示的样子差不了多少。
 
 1712
 01:13:51,793 --> 01:13:53,292
 But you do have to use a SplitViewController.
+但是你必须使用一个 SplitViewController。
 
 1713
 01:13:53,294 --> 01:13:54,260
 So this is what it looks like.
+现在它就是这个样子。
 
 1714
 01:13:54,262 --> 01:13:58,897
 Now, this is only happening on an iPad.
+当然，只有在 iPad 上才会这样。
 
 1715
 01:13:58,899 --> 01:14:00,732
 Now, when we talk about auto layout,
+当我们说到 auto layout，
 
 1716
 01:14:00,734 --> 01:14:04,335
 we're going to start talking about size classes.
+我们就要从 size classes 开始说起。
 
 1717
 01:14:04,337 --> 01:14:07,304
 So, different devices have been grouped into
+各种不同尺寸的 iOS 设备
 
 1718
 01:14:07,306 --> 01:14:08,839
 size classes.
+都被集成到了 size classes 中。
 
 1719
 01:14:08,841 --> 01:14:13,410
 And the sizes basically are regular, so regular width and
+size 通常为 regular，regular width 和 regular height
+
 
 1720
 01:14:13,412 --> 01:14:16,512
 regular height or compact width and height.
-
+或者 compact width， compact height。
 1721
 01:14:16,514 --> 01:14:18,614
 So an iPhone, all the iPhones except for
+对于 iPhone 来说，除了在 
 
 1722
 01:14:18,616 --> 01:14:21,083
 the iPhone 6+ in landscape,
+landscape（横向模式）的 iPhone 6+，
 
 1723
 01:14:21,085 --> 01:14:25,220
 are compact both vertically and horizontally, okay.
+在水平方向和竖直方向都是 compact。
 
 1724
 01:14:25,222 --> 01:14:28,656
 The iPad is regular width, okay.
+iPad 是 regular width。
 
 1725
 01:14:28,658 --> 01:14:30,458
 Now, that's of the whole device.
+这就是整个设备。
 
 1726
 01:14:30,460 --> 01:14:35,829
 But the MVC's inside also will have a certain size class.
+但是设备里（iPad）的 MVC 同样有特定的 size class。
 
 1727
 01:14:35,831 --> 01:14:39,265
 So this side by side business can only happen in
+所以这样并排排列的 MVC 只能出现在
 
 1728
 01:14:39,267 --> 01:14:42,168
 a device whose size class is regular width.
+拥有 regular width 的 size class。
 
 1729
 01:14:42,170 --> 01:14:46,238
 So that's the iPad in both landscape and portrait could
+所有只有 iPad 在 landscape（横向模式）和 portrait（纵向模式）是 regular width，
 
 1730
 01:14:46,240 --> 01:14:49,941
 be that, and the iPhone 6+ in landscape, okay.
+iPhone 6+ 在 landscape（横向模式）下也是 regular width 。
 
 1731
 01:14:49,943 --> 01:14:52,977
 So SplitView is only gonna do the side by
+所以 SplitView 只能在这几种情况下并排放置。
 
 1732
 01:14:52,979 --> 01:14:55,013
 side business there.
+所以 SplitView 只能在这几种情况下并排放置。
+
 
 1733
 01:14:55,015 --> 01:15:01,352
 And if you rotate the iPad, then the Master disappears.
+如果你旋转 iPad，Master 消失了。
 
 1734
 01:15:02,521 --> 01:15:04,688
 But it can be swiped out.
+但是可以将 Master 滑动唤出。
 
 1735
 01:15:04,690 --> 01:15:10,126
 If you just swipe from the left, when you rotate the only
+如果你从屏幕左边滑动，当 ipad 旋转时只有 Detail 视图，
 
 1736
 01:15:10,128 --> 01:15:12,361
 ones there is the Detail, you don't see the Master.
+看不到 Master。
 
 1737
 01:15:12,363 --> 01:15:14,129
 But if you swipe out from the left,
+但是如果你从左向右滑动，
 
 1738
 01:15:14,131 --> 01:15:15,830
 then you get to see the Master as well.
+你也可以看到 Master。
 
 1739
 01:15:15,832 --> 01:15:16,798
 Again, side by side.
+Master 和 Detail 又并排放在一起了。
 
 1740
 01:15:18,334 --> 01:15:19,633
@@ -7159,62 +7298,76 @@ Okay.
 1741
 01:15:19,635 --> 01:15:22,302
 And if you touch the Detail, it'll make the Master go
+如果你点击 Detail，会使 Master 返回消失
 
 1742
 01:15:22,304 --> 01:15:23,703
 back away and then you can swipe it.
+然后可以再次滑动唤出。
 
 1743
 01:15:23,705 --> 01:15:26,005
 So you can bring the Master out or not, okay.
+所以你可以决定是否唤出 Maser。
 
 1744
 01:15:26,007 --> 01:15:28,607
 That make sense?
+懂了吗？
 
 1745
 01:15:28,609 --> 01:15:30,609
 So that's the SplitViewController,
-
+以上是 SplitViewController
 1746
 01:15:30,611 --> 01:15:32,444
 kind of how it's arranged.
+以及它怎么排列。
 
 1747
 01:15:35,115 --> 01:15:37,915
 But most importantly, I want you to understand that again,
+最重要的是，我想让你们再次理解
 
 1748
 01:15:37,917 --> 01:15:40,217
 it's two MVCs that are the view.
+这两个 MVC 是 view。
 
 1749
 01:15:40,219 --> 01:15:43,653
 Now the SplitView draws nothing in its view,
+SplitView 并没有在它的 view 中绘制任何内容，
 
 1750
 01:15:44,656 --> 01:15:47,189
 except for maybe that vertical separator line.
+可能除了竖直的分界线。
 
 1751
 01:15:47,191 --> 01:15:48,590
 Okay, there's a vertical separator line.
+这条竖直的分界线。
 
 1752
 01:15:48,592 --> 01:15:52,327
 That's probably drawn by the SplitViewController, but
+可能是 SplitViewController 绘制的，
 
 1753
 01:15:52,329 --> 01:15:55,430
-otherwise it's only drawing whatever the MVCs draw.
+otherwise it's only drawing  whatever the MVCs draw.
+但是，他只展示了 MVC 绘制的内容
 
 1754
 01:15:55,432 --> 01:15:57,131
 So it doesn't even have any drawing on
+所以，它甚至不像 tabBarViewController 那样
 
 1755
 01:15:57,133 --> 01:15:58,632
 the bottom like the TabBar has.
+绘制底部的 tabBar。
 
 1756
 01:15:59,735 --> 01:16:00,884
@@ -7223,40 +7376,50 @@ Okay?
 1757
 01:16:00,885 --> 01:16:02,034
 So the next thing I'm going to talk about, and
+下面我要讲到的，
 
 1758
 01:16:02,037 --> 01:16:03,903
 we're going to start this next time,
+以及我们要再下一节课继续讲的是
 
 1759
 01:16:03,905 --> 01:16:07,407
 is NavigationController, which is a very powerful one.
+NavigationController， 这是一个功能强大的 controller。
 
 1760
 01:16:07,409 --> 01:16:10,242
 It draws at the top a little title and
+它在顶部绘制小的 title 和其他东西，
 
 1761
 01:16:10,244 --> 01:16:12,277
 some things, it can draw even around the bottom.
+它甚至可以在底部周围绘制内容。
 
 1762
 01:16:12,279 --> 01:16:15,380
 And then it can display any number of MVCs.
+还有，它可以展示任意多的 MVC。
 
 1763
 01:16:15,382 --> 01:16:19,917
 Okay, so we'll pick up the NavigationController next time
+好的，下节课我们将要学习 NavigationController
 
 1764
 01:16:19,919 --> 01:16:22,219
 and in the meantime if you have any questions,
+ 如果你有任何问题要问，
 
 1765
 01:16:22,221 --> 01:16:23,053
 I'll be here as usual.
+我会像往常一样在这里解答。
 
 1766
 01:16:24,623 --> 01:16:24,654
 >> For more, please visit us at www.stanford.edu
+>> 登录 www.stanford.edu 获取更多内容。
 

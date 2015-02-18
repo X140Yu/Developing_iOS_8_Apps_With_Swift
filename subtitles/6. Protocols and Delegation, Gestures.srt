@@ -5001,62 +5001,77 @@ So sometimes you have to pay attention to cancellation like
 1201
 00:52:20,861 --> 00:52:23,395
 that and sometimes not, it all depends on what you're doing
+就像刚才这种情况，而有时候不必，
 
 1202
 00:52:23,397 --> 00:52:25,430
 with your pan, sometimes your pan is updating.
+这全由pan手势的当前状态决定，有时候，pan正在更新。
 
 1203
 00:52:25,432 --> 00:52:27,264
 Whatever's there is in real time and
+无论状态机当前处于什么状态
 
 1204
 00:52:27,266 --> 00:52:29,900
 if the phone call comes in it just stops doing that and
+如果有电话打入，状态机将暂停原有操作，
 
 1205
 00:52:29,902 --> 00:52:32,569
 it's fine, everything is in perfectly fine state.
+没问题，一切都处于正常的状态。
 
 1206
 00:52:32,571 --> 00:52:35,305
 Other times it might be putting something in
+有时候，pan手势会将一些东西
 
 1207
 00:52:35,307 --> 00:52:36,873
 some temporary state and
+放入在临时状态中
 
 1208
 00:52:36,875 --> 00:52:40,643
 now it's interrupted it's gotta clean up, or something.
+当该手势被中断的时候，临时状态中得数据将被清空，或者做一些其他操作
 
 1209
 00:52:40,645 --> 00:52:42,111
 All right. So given this information,
+好，有了这些信息，
 
 1210
 00:52:42,113 --> 00:52:44,046
 what would the pan handler look like?
+那pan手势控制器到底是如何实现呢？
 
 1211
 00:52:44,048 --> 00:52:45,714
 Okay? The pan
+pan手势控制器
 
 1212
 00:52:45,715 --> 00:52:47,381
 handler would be a method called pan.
+是一个名叫 pan 的方法。
 
 1213
 00:52:47,384 --> 00:52:48,683
 It would take one argument which is
+该 方法带有一个参数
 
 1214
 00:52:48,685 --> 00:52:50,484
 the UIPanGestureRecognizer itself.
+即，UIPanGestureRecognizer本身。
 
 1215
 00:52:50,486 --> 00:52:52,453
 You can see right there.
+在这里你可以看到
 
 1216
 00:52:52,455 --> 00:52:53,721
@@ -5065,202 +5080,252 @@ Okay?
 1217
 00:52:53,722 --> 00:52:54,988
 We're going to look at the state machine and
+我们来看一下状态机，
 
 1218
 00:52:54,990 --> 00:52:55,822
 say what state it's in.
+状态机处于什么样的状态。
 
 1219
 00:52:55,824 --> 00:52:58,108
 So in my pan,
+在pan手势中
 
 1220
 00:52:58,109 --> 00:53:00,393
 I'm only going to do something when the gesture moves or
+当手势移动或者手指上划，
 
 1221
 00:53:00,395 --> 00:53:01,727
 the finger goes up.
+我只需要稍微做一点点事
 
 1222
 00:53:01,729 --> 00:53:04,096
 I'm not even gonna do anything when it first goes down.
+当它第一次下划的时候，我不需要做任何事。
 
 1223
 00:53:04,098 --> 00:53:05,364
 I can choose which things I wanna do.
+我可以选择，我想要的操作
 
 1224
 00:53:05,366 --> 00:53:08,099
 But that's what I wanna do.
+这些就是我想做的。
 
 1225
 00:53:08,101 --> 00:53:09,600
 Hopefully you know about fall through.
+愿你们对fall through有所了解
 
 1226
 00:53:09,602 --> 00:53:10,801
 You read that in the documentation.
+你在文档中查阅过相关内容
 
 1227
 00:53:10,803 --> 00:53:13,070
 Fall through is just a thing in switch that says
+Fall through 是在 switch 中用于
 
 1228
 00:53:13,072 --> 00:53:15,772
 the implementation of this case is to go to the next one.
+说明当前case的函数实现，即为下一个case的函数实现
 
 1229
 00:53:15,774 --> 00:53:17,807
 And do whatever the next one is, okay?
+无论下一个case的实现是什么。
 
 1230
 00:53:17,809 --> 00:53:19,175
 So it just falls through to the next case.
+所以，它就落到了下一个case.
 
 1231
 00:53:19,177 --> 00:53:20,660
 So in changed and
+在changed
 
 1232
 00:53:20,661 --> 00:53:22,144
 ended, I'm gonna do exactly the same thing.
+和ended中，我想执行相同的函数。
 
 1233
 00:53:22,146 --> 00:53:25,114
 What I'm gonna do is I'm gonna find out where
+我要做的就是
 
 1234
 00:53:25,116 --> 00:53:30,585
 the pan is in the coordinates of the panable view, so
+在可拖动view的坐标系中，找出pan手势的位置
 
 1235
 00:53:30,587 --> 00:53:32,020
 its coordinate system.
+pan手势所在的坐标系
 
 1236
 00:53:32,022 --> 00:53:33,721
 'Kay, that's translation in view.
+好，那就是pan手势在view中的坐标
 
 1237
 00:53:33,723 --> 00:53:35,534
 I give it the view.
+我在view中得到这个坐标值
 
 1238
 00:53:35,535 --> 00:53:37,346
 I want the coordinate system.
+我需要坐标系
 
 1239
 00:53:37,347 --> 00:53:39,158
 It's gonna give me the point in that view where the pan is.
+它将告诉我，在view中pan手势所在的点的位置
 
 1240
 00:53:39,161 --> 00:53:42,429
 Then I'm gonna update anything I want inside of my controller
+然后，我将更新控制器中我所需的东西
 
 1241
 00:53:42,431 --> 00:53:44,798
 cuz this is being handled by the controller.
+因为这就是由控制器来控制的
 
 1242
 00:53:44,800 --> 00:53:47,567
 So I'm gonna update anything I want based on that
+所以，我要，基于x,y坐标轴，来更新任何我所需要的东西，
 
 1243
 00:53:47,569 --> 00:53:51,103
 translation, x and y, then I'm gonna reset the translation
+然后，再重置坐标，
 
 1244
 00:53:51,105 --> 00:53:54,340
 and I don't have to do this but I'm going to in this case,
+我并非每次都必须执行这一步，只是需要在这种情况下执行，
 
 1245
 00:53:54,342 --> 00:53:56,441
 reset the translation back to 0, so
+将坐标重置为0，
 
 1246
 00:53:56,443 --> 00:53:59,544
 that the next time I get this called, in the next time it
+所以，当下一次调用这个方法的时候，即下一次手势状态
 
 1247
 00:53:59,546 --> 00:54:02,980
 changes it's gonna be just the difference.
+改变的时候，将得到当前位置与上一次位置之间的偏差
 
 1248
 00:54:02,982 --> 00:54:05,616
 Otherwise it's going to tell me from the time the gesture
+在其他情况下，将得到第一次识别到手势
 
 1249
 00:54:05,618 --> 00:54:07,351
 was first recognized to where I am now.
+到当前时间的时间差
 
 1250
 00:54:07,353 --> 00:54:08,719
 So that'd be a big distance when I
+当我移动的时候，我只想知道增加的距离
 
 1251
 00:54:08,721 --> 00:54:11,988
 just want the incremental distance as I move around.
+这有可能是一个很远的距离
 
 1252
 00:54:11,990 --> 00:54:13,756
 So that set translation to 0 is optional,
+所以将坐标设置为0是可选的
 
 1253
 00:54:13,758 --> 00:54:14,490
 you can do it if you want.
+如果你想做的话，可以做。
 
 1254
 00:54:16,060 --> 00:54:17,793
 Okay? So that's it.
+就这些
 
 1255
 00:54:17,795 --> 00:54:20,428
 That's how we handle a gesture.
+这是如何控制一个手势
 
 1256
 00:54:20,430 --> 00:54:21,496
 Very straight forward.
+非常直白
 
 1257
 00:54:22,865 --> 00:54:23,931
 So let's talk about some of
+我们来讨论一下，当前存在的几个
 
 1258
 00:54:23,933 --> 00:54:26,133
 the concrete gestures that exist.
+具体的手势。
 
 1259
 00:54:26,135 --> 00:54:27,300
 There's pinch.
+有缩放(pinch)手势
 
 1260
 00:54:27,302 --> 00:54:28,434
 Okay? Pinch,
 
+
 1261
 00:54:28,436 --> 00:54:29,735
 instead of giving you translation,
+pinch手势给你传递的不是坐标
 
 1262
 00:54:29,737 --> 00:54:31,103
 it gives you scale.
+而是比例
 
 1263
 00:54:31,105 --> 00:54:33,605
 So when the pinch starts, the scale is 1.
+当pinch手势开始的时候，比例为1
 
 1264
 00:54:33,607 --> 00:54:35,840
 If you spread your fingers out twice as wide,
+如果你把你的手指拉宽两倍
 
 1265
 00:54:35,842 --> 00:54:37,108
 the scale would be 2.
+比例将变成2
 
 1266
 00:54:37,110 --> 00:54:40,744
 If you go down to half as wide, the scale would be 0.5.
+如果你将手指靠拢到一半的位置，比例将变成0.5
 
 1267
 00:54:40,746 --> 00:54:42,379
@@ -5269,34 +5334,42 @@ Okay?
 1268
 00:54:42,381 --> 00:54:44,280
 So that's how pinches work.
+这就是pinch手势的工作原理
 
 1269
 00:54:44,282 --> 00:54:45,548
 And it'll tell you the velocity.
+它也会告诉你速度
 
 1270
 00:54:45,550 --> 00:54:47,283
 How fast the person is pinching.
+用户缩放的速度有多快
 
 1271
 00:54:47,285 --> 00:54:48,350
 There's also rotation.
+还有旋转(rotation)手势
 
 1272
 00:54:48,352 --> 00:54:50,218
 So that's a two finger thing as well.
+这也是一个两个手指的手势
 
 1273
 00:54:50,220 --> 00:54:52,020
 You turn in a circle.
+你转一个圈
 
 1274
 00:54:52,022 --> 00:54:54,305
 So it's like you're turning a knob.
+就像在转动一个旋钮
 
 1275
 00:54:54,306 --> 00:54:56,589
 It tells you how many radians the thing has been rotated.
+它会告诉你，该物体旋转了多少弧度
 
 1276
 00:54:56,592 --> 00:54:58,158
@@ -5305,258 +5378,322 @@ Okay?
 1277
 00:54:58,160 --> 00:54:59,826
 And it'll also tell you how fast in
+它也会告诉你，旋转的过程中
 
 1278
 00:54:59,828 --> 00:55:01,961
 radians per second the rotations happen.
+每秒转动的弧度
 
 1279
 00:55:01,963 --> 00:55:03,529
 So that's the way you can rotate.
+这就是你旋转的方式
 
 1280
 00:55:03,531 --> 00:55:04,997
 There's also swipes.
+接下来是滑动(swipes)手势
 
 1281
 00:55:04,999 --> 00:55:06,165
 Now, swipes are a little different.
+现在，swipes手势有一些不同
 
 1282
 00:55:06,167 --> 00:55:08,834
 When you create the swipe gesture, okay,
+当你创建一个swipes手势的时候，
 
 1283
 00:55:08,836 --> 00:55:11,670
 back in the property observer of the outlet,
+返回到outlet的property observer中
 
 1284
 00:55:11,672 --> 00:55:13,237
 I created a pan gesture.
+我创建了一个pan手势
 
 1285
 00:55:13,239 --> 00:55:15,239
 But if I created a swipe gesture there,
+但如果我创建了一个swipe手势
 
 1286
 00:55:15,241 --> 00:55:16,440
 I would send a message,
+我将发送一条消息
 
 1287
 00:55:16,442 --> 00:55:18,475
 set the property of the swipe gesture,
+来设置swipe手势的属性，
 
 1288
 00:55:18,477 --> 00:55:21,544
 number of touches required, or swipe direction there, and
+点击所需的次数，或者滑动的方向
 
 1289
 00:55:21,546 --> 00:55:24,580
 that determines whether it's a two finger swipe to the left
+这也决定了是两个手指向左滑动，
 
 1290
 00:55:24,582 --> 00:55:27,016
 or a one finger swipe down, or whatever.
+还是一个手指向下滑动，或者其他什么。
 
 1291
 00:55:27,018 --> 00:55:29,351
 You just kinda say what kind of swipe you're looking for,
+你只需要说明你在查找的滑动类型
 
 1292
 00:55:29,353 --> 00:55:32,487
 and then your handler would only be called once,
+在状态为.Recognized的情况下，
 
 1293
 00:55:32,489 --> 00:55:35,924
 with the state .Recognized when that combination
+一旦手指合并，且向指定方向滑动，
 
 1294
 00:55:35,926 --> 00:55:37,625
 of fingers and direction happens.
+控制器将会被调用
 
 1295
 00:55:37,627 --> 00:55:40,661
 So that's a little different than these other ones.
+所以，这里与其他的有些不同
 
 1296
 00:55:40,663 --> 00:55:41,995
 And there's also tap, a question.
+接下来是点击(Tap)手势，有问题。
 
 1297
 00:55:41,997 --> 00:55:46,366
 >> Also for these gestures I said you can now test in
+>> 对于这些手势，我想说，你现在可以在
 
 1298
 00:55:46,368 --> 00:55:48,668
 the simulator, right?
+模拟器中测试，对嘛？
 
 1299
 00:55:48,670 --> 00:55:50,036
 >> Can you test these in the simulator?
+>> 你可以在模拟器中，测试这些手势吗？
 
 1300
 00:55:50,038 --> 00:55:50,869
 Absolutely you can test these in
+你当然可以在模拟器中测试这些手势，
 
 1301
 00:55:50,871 --> 00:55:52,454
 the simulator, I'll show you.
+我将会展示给你们看。
 
 1302
 00:55:52,455 --> 00:55:54,038
 >> How do you test more than one finger?
+>> 你要如何测试多于一个手指的手势呢？
 
 1303
 00:55:54,041 --> 00:55:56,675
 >> Yes, how do you test more than one finger in
+>> 对，你要如何在模拟器中测试多于一个手指的手势
 
 1304
 00:55:56,677 --> 00:55:59,577
 the simulator, I'll show you how to do that.
+我将会给你们展示，这个手势的操作方法。
 
 1305
 00:55:59,579 --> 00:56:01,078
 Tap gesture is an interesting one.
+点击（Tap）手势是比较有趣的手势之一。
 
 1306
 00:56:01,080 --> 00:56:02,196
 It seems like it would be
+这个手势看起来似乎是
 
 1307
 00:56:02,197 --> 00:56:03,313
 discrete because it's kind of like swipe.
+间断的，因为这类似于滑动（swipe）手势。
 
 1308
 00:56:03,315 --> 00:56:05,582
 You set up the number of taps and the number of touches.
+你可以设置点击(tap)和触摸(touch)的次数
 
 1309
 00:56:05,584 --> 00:56:08,018
 Except for that if you have a double tap it'll actually tell
+除此之外，如果你双击，事实上它会告诉
 
 1310
 00:56:08,020 --> 00:56:10,887
 you about the first tap and the second tap.
+你第一次的点击和第二次的点击。
 
 1311
 00:56:10,889 --> 00:56:12,988
 So if you're only interested in the actual double tap you
+所以，如果你需要知道双击
 
 1312
 00:56:12,990 --> 00:56:14,323
 can just look at the state ending because
+你可以只关注结束的状态
 
 1313
 00:56:14,325 --> 00:56:15,957
 that's the end of that gesture.
+因为那是该手势的结尾
 
 1314
 00:56:15,959 --> 00:56:18,793
 But if you want to look at the intermediate states you
+但如果你想要关注中间状态
 
 1315
 00:56:18,795 --> 00:56:22,163
 can actually look at the dot changed stated as well, so
+实际上，你也可以查看点改变的状态
 
 1316
 00:56:22,165 --> 00:56:23,998
-it's not purely a discreet gesture tap.
+it's not purely a discrete gesture tap.
+所以这并不是一个真正的分离手势
 
 1317
 00:56:25,701 --> 00:56:28,535
 Okay, so let's go look at how we do gestures by putting some
+好，一起来看一下，我们应该如何为
 
 1318
 00:56:28,537 --> 00:56:29,436
 gestures in the FaceView.
+FaceView添加手势
 
 1319
 00:56:29,438 --> 00:56:31,137
 So I'm gonna put two gestures in.
+我要添加两个手势
 
 1320
 00:56:31,139 --> 00:56:35,141
 I'm gonna put in pinch to change the size of the face,
+添加pinch手势来改变脸的大小
 
 1321
 00:56:35,143 --> 00:56:40,612
 and then I'm gonna put in pan to control the happiness,
+然后，添加pan手势来控制表情
 
 1322
 00:56:40,614 --> 00:56:41,980
 in other words, control my model.
+换句话说，控制我的模型
 
 1323
 00:56:43,650 --> 00:56:44,515
 All right?
 
+
 1324
 00:56:44,517 --> 00:56:45,382
 With pan.
+用pan手势
 
 1325
 00:56:45,384 --> 00:56:46,900
 When I move up and
+当我上下拖动，
 
 1326
 00:56:46,901 --> 00:56:48,417
 down it's gonna be happy is up, sad is down.
+向上拖动时，是开心的表情；向下拖动时，是悲伤的表情。
 
 1327
 00:56:48,420 --> 00:56:50,020
 Not a swipe but actual pan so
+不是滑动，而是拖动
 
 1328
 00:56:50,022 --> 00:56:52,855
 I can move my happiness up in small increments if I want.
+所以，如果我想的话，我也可以将这个表情向上移动一点
 
 1329
 00:56:54,191 --> 00:56:57,693
 All right, so let's go back to here to do that.
+好，让我们继续。
 
 1330
 00:56:57,695 --> 00:57:03,765
 So let's go get some more space here.
+让我们腾出更多的空间
 
 1331
 00:57:03,767 --> 00:57:06,100
 So we'll go here.
+从这里开始
 
 1332
 00:57:06,102 --> 00:57:10,170
 So we'll do the pinch first.
+我们先来完成这个pinch手势
 
 1333
 00:57:10,172 --> 00:57:12,105
 Let's do the pinch first.
+先做pinch手势
 
 1334
 00:57:12,107 --> 00:57:14,707
 So the first thing I'm gonna do when I
+当我添加pinch手势的时候，我要做的第一件事
 
 1335
 00:57:14,709 --> 00:57:18,444
 make my pinch happen is to add a gesture recognizer.
+添加一个手势识别器
 
 1336
 00:57:18,446 --> 00:57:22,181
 A pinch gesture recognizer to my FaceView.
+针对FaceView的pinch手势识别器
 
 1337
 00:57:22,183 --> 00:57:24,483
 And so a great place to do that,
+添加这个方法的位置
 
 1338
 00:57:24,484 --> 00:57:26,784
 as I said, is in the property observer of the FaceView.
+正如我所说，就是在FaceView的Property Observer中
 
 1339
 00:57:26,787 --> 00:57:29,554
 So here I can just say, add gesture.
+所以，这里我只需要写addGesture
 
 1340
 00:57:29,556 --> 00:57:31,155
 Whoops, sorry, FaceView.
+抱歉，FaceView
 
 1341
 00:57:31,157 --> 00:57:32,490
@@ -5565,106 +5702,132 @@ FaceView.
 1342
 00:57:32,492 --> 00:57:34,458
 Add gesture recognizer.
+AddGestureRecognizer.
 
 1343
 00:57:34,460 --> 00:57:36,460
 And this is just any kind of gesture recognizer.
+这是任意类型的手势识别器
 
 1344
 00:57:36,462 --> 00:57:37,627
-I'm going to do a panGesture.
+I'm going to do a pan Gesture.
+而我要做的是pan手势
 
 1345
 00:57:37,629 --> 00:57:40,329
 So I'm going to say UI Pan gesture recognizer.
+所以，我要写 UIPanGestureRecognizer
 
 1346
 00:57:40,331 --> 00:57:41,497
 And then you can see that it
+你可以看到
 
 1347
 00:57:41,499 --> 00:57:44,199
 has target in action are the arguments.
+action中的target是参数
 
 1348
 00:57:44,201 --> 00:57:48,103
 So the target I'm gonna have the pinch be handled
 
+
 1349
 00:57:48,105 --> 00:57:50,171
 entirely by the view.
 
+
 1350
 00:57:50,173 --> 00:57:52,440
 Because all it's doing is changing the view scale.
+因为手势的所有操作，都是在改变view的比例
 
 1351
 00:57:52,442 --> 00:57:53,991
 Its own scale.
+view本身的比例
 
 1352
 00:57:53,992 --> 00:57:55,541
 So there's no reason I'm the controller I don't need to
+毫无疑问，controller没有必要
 
 1353
 00:57:55,544 --> 00:57:56,843
 get involved with that.
+涉及动作
 
 1354
 00:57:56,845 --> 00:58:00,347
 So I'm just going to have the target be the FaceView.
+所以，我只需要将FaceView传给target
 
 1355
 00:58:00,349 --> 00:58:04,183
 So the FaceView is going to handle this pan.
+由FaceView处理pan
 
 1356
 00:58:04,185 --> 00:58:06,085
 Or, sorry, we're doing pan, no, we'll do pinch.
+抱歉，我们正在写pan手势,我们本来要做pinch手势的
 
 1357
 00:58:06,087 --> 00:58:06,985
 So I'm doing pinch.
+我正在做pinch手势
 
 1358
 00:58:09,289 --> 00:58:10,522
 Your pinch first.
+先做pinch手势
 
 1359
 00:58:10,524 --> 00:58:11,940
 So we're doing pinch.
+正在做pinch手势
 
 1360
 00:58:11,941 --> 00:58:13,357
 So we're doing the pinch of scale, not pan, sorry.
+我们正在做比例的缩放，并不是pan，抱歉
 
 1361
 00:58:13,360 --> 00:58:15,426
 We're doing the pinch and I'm gonna have the FaceView
+我们在做pinch手势，我将要用FaceView
 
 1362
 00:58:15,428 --> 00:58:18,128
 handle this because it's just gonna modify its scale.
+来控制pinch手势，因为它仅仅改变了FaceView的比例
 
 1363
 00:58:19,064 --> 00:58:25,201
 And this action needs to be some nonprivate method
+对于action，在FaceView中，需要一个非私有的方法
 
 1364
 00:58:25,203 --> 00:58:28,904
 in my FaceView that I can call to handle it.
+用来调用这个函数。
 
 1365
 00:58:28,906 --> 00:58:33,308
 So, let's go ahead and go over to our faceview and
+继续，到faceview
 
 1366
 00:58:33,310 --> 00:58:34,509
 add such a thing.
+添加这样的一个东西
 
 1367
 00:58:34,511 --> 00:58:38,412
 So I'm going to call this method, what to call it?
+我要调用这个方法，那么，谁来调用它？
 
 1368
 00:58:38,414 --> 00:58:39,813
@@ -5677,14 +5840,17 @@ Okay?
 1370
 00:58:42,300 --> 00:58:44,784
 And it's going to take a UI pinch gesture recognizer
+它将把UIPinchGestureRecognizer
 
 1371
 00:58:44,787 --> 00:58:47,687
 as an argument, and we'll call that the gesture.
+作为参数，我们将使用这个手势。
 
 1372
 00:58:48,956 --> 00:58:52,157
 And all this is gonna do is modify our scale.
+所有的这些，都是用来调整比例大小的
 
 1373
 00:58:53,894 --> 00:58:54,459
@@ -5693,34 +5859,42 @@ Okay?
 1374
 00:58:55,661 --> 00:58:56,960
 Understand? You got this method here?
+明白吗？都理解这个方法了吗？
 
 1375
 00:58:56,962 --> 00:58:58,562
 So how is this method gonna do this?
+那么，这个方法将要做些什么呢？
 
 1376
 00:58:58,564 --> 00:59:03,833
 Well, I'm only going to adjust my scale when the pinch moves.
+好，pinch的时候，我只是在调整比例
 
 1377
 00:59:04,769 --> 00:59:06,869
 I'm not gonna do it when it first goes down because it's
+当手指第一次点击到屏幕的时候，我无需执行这个方法
 
 1378
 00:59:06,871 --> 00:59:09,037
 gonna be scale of 1 anyway, and
+因为此时无论如何它的比例都将是1
 
 1379
 00:59:09,039 --> 00:59:11,873
 I probably should do it when the fingers go up, but just to
+当手指移开的时候，我应该要执行这个方法，但是
 
 1380
 00:59:11,875 --> 00:59:14,842
 make less code here I'm just gonna do it when it changes.
+这里尽可能少写一点代码，因为我只想在手势改变的时候执行
 
 1381
 00:59:14,844 --> 00:59:23,450
 So I'm gonna say if the gesture state equals .changed.
+所以，我会写如果手势的状态等于 .changed
 
 1382
 00:59:23,452 --> 00:59:24,751
@@ -5729,10 +5903,12 @@ Okay.
 1383
 00:59:24,753 --> 00:59:28,955
 Then I'm going to take my own scale and
+然后，我将用原来的比例(scale)
 
 1384
 00:59:28,957 --> 00:59:32,891
 multiply it by the gestures scale.
+乘以手势的比例(gesture.scale)
 
 1385
 00:59:32,893 --> 00:59:33,992
@@ -5741,14 +5917,17 @@ Okay.
 1386
 00:59:33,994 --> 00:59:35,994
 So if the gesture pinch scales out.
+如果手势向外拉伸
 
 1387
 00:59:35,996 --> 00:59:37,261
 I'm going to make my scale bigger.
+将使得比例增大
 
 1388
 00:59:37,263 --> 00:59:39,630
 If it scales in I'm going to make my scale smaller.
+如果手势向内靠拢，将使得比例缩小
 
 1389
 00:59:39,632 --> 00:59:41,716
@@ -5757,46 +5936,57 @@ Okay.
 1390
 00:59:41,717 --> 00:59:43,801
 And I'm going to reset the gesture scale back to 1
+我要把手势的比例(gesture.scale)重置为1
 
 1391
 00:59:43,803 --> 00:59:45,403
 all the time.
+任何情况下
 
 1392
 00:59:45,404 --> 00:59:47,004
 By resetting it back to 1 then I'm only getting the
+通过将比例重置为1，我才能只获取到
 
 1393
 00:59:47,006 --> 00:59:49,439
 difference between the last time it told me to update.
+用于更新的最后一次变化的比例大小
 
 1394
 00:59:49,441 --> 00:59:52,975
 So that way I can update my scale every time it moves.
+每当手势移动的时候，我将会更新比例
 
 1395
 00:59:52,977 --> 00:59:54,643
 And since I keep resetting back to one,
+再将比例重置为1
 
 1396
 00:59:54,645 --> 00:59:56,178
 I keep getting incremental scale.
+我一直获取增加的比例
 
 1397
 00:59:56,180 --> 00:59:57,979
 It's gonna keep making my scale bigger or
+根据最后一次
 
 1398
 00:59:57,981 --> 01:00:00,148
 smaller depending on whether the last movement of
+缩放的情况
 
 1399
 01:00:00,150 --> 01:00:02,283
 the pinch was bigger or smaller.
+使得比例变大或者变小
 
 1400
 01:00:02,285 --> 01:00:04,552
 This makes my code a lot simpler.
+这使得代码简洁很多
 
 1401
 01:00:04,554 --> 01:00:06,887

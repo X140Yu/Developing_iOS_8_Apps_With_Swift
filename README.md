@@ -12,7 +12,7 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 1. Logistics, iOS 8 Overview | 完成 | 完成
 2. More Xcode and Swift, MVC | 完成 | 完成
 3. Applying MVC | 完成 | 完成
-4. More Swift and Foundation Frameworks | 完成 | 完成 4/6
+4. More Swift and Foundation Frameworks | 完成 | 完成 
 5. Objective-C Compatibility, Property List, Views | 完成 7/8  | 完成 0/6
 6. Protocols and Delegation, Gestures | 任务分配中 | 任务分配中
 7. Multiple MVCs | 未开始 | 未开始

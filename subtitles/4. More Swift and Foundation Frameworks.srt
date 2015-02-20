@@ -4419,7 +4419,7 @@ Because you'll essentially inherit all
 902
 00:37:48,949 --> 00:37:51,816
 the designateds and all the convenience in that case.
-所有指定的、方便的类
+所有 designated 和 convenience initializer
 
 903
 00:37:51,818 --> 00:37:53,884
@@ -4472,22 +4472,22 @@ Okay?
 913
 00:38:08,130 --> 00:38:10,430
 So it's all or nothing on designateds.
-所以 designated initializers 不是全有就是全无
+所以对于 designated initializers 不是全有就是全无
 
 914
 00:38:10,433 --> 00:38:13,067
 And on convenience, it's kind of all or nothing too.
-对于 convenience，同样也是这样
+而对于 convenience 也一样如此
 
 915
 00:38:13,069 --> 00:38:15,936
 Cuz you have to implement or not implement all of
-因为为了执行 convenience，你要实现或者不实现
+因为为了执行 convenience，你必须全实现或者
 
 916
 00:38:15,938 --> 00:38:18,939
 the designateds to get the conveniences.
-所有的 designated initializers
+全不实现 designated initializers
 
 917
 00:38:18,941 --> 00:38:23,876
@@ -4531,12 +4531,12 @@ you can only inherit them in these kind of restricted ways.
 925
 00:38:41,227 --> 00:38:42,426
 But once you do,
-只要你这么做了
+不过只要你这么做了
 
 926
 00:38:42,428 --> 00:38:46,063
 you can satisfy a lot of those previous rules.
-之前的所有规则你都可以满足了
+之前的所有规则就都可以满足了
 
 927
 00:38:46,065 --> 00:38:48,999
@@ -4591,7 +4591,7 @@ But if you implement any of the designated initializers,
 937
 00:39:07,950 --> 00:39:10,217
 you must implement the required ones.
-required 的你就必须自己实现
+你就必须实现 required 的那些
 
 938
 00:39:10,219 --> 00:39:11,885
@@ -4600,15 +4600,15 @@ Okay?
 939
 00:39:11,887 --> 00:39:15,554
 Finally, there's failable initializers.
-最后，failable initializers
+最后，再说说 failable initializers
 
 940
 00:39:15,556 --> 00:39:18,357
-Okay? So
+Okay?
 
 941
 00:39:18,358 --> 00:39:21,159
-some initializers are allowed to fail and return nil.
+So some initializers are allowed to fail and return nil.
 有一些 initializer 允许失败并且返回 nil
 
 942
@@ -4681,7 +4681,7 @@ But it doesn't put,
 
 956
 00:39:48,084 --> 00:39:49,250
-seem to put the question mark on there.
+the question mark on there.
 应该是把问号写在那儿
 
 957
@@ -4755,7 +4755,7 @@ That's a class in UIKit.
 
 971
 00:40:12,439 --> 00:40:14,772
-And [COUGH] it returns an image.
+And it returns an image.
 然后，它返回一个图片
 
 972
@@ -4841,22 +4841,22 @@ So watch out for those.
 988
 00:40:48,736 --> 00:40:51,670
 There's a few of them, a few dozen at the most.
-是啊
+这种情况非常少，最多不过十几种
 
 989
 00:40:51,672 --> 00:40:52,937
 Yeah.
-是啊
+说你的问题
 
 990
 00:40:52,939 --> 00:40:55,206
 So this is a replace like try-catch?
--所以，这是 try-catch 的一个取代吗？（学生提问）
+-（学生提问）
 
 991
 00:40:55,208 --> 00:40:58,642
 So the question is does this replace try-catch?
-问题是：这是 try-catch 的一个取代吗？
+-问题是：这是 try-catch 的一个取代吗？
 
 992
 00:40:58,644 --> 00:41:00,611
@@ -4866,7 +4866,7 @@ And we're not even going to talk about try-catch in
 993
 00:41:00,613 --> 00:41:01,979
 this class.
-在这节课
+在这门课
 
 994
 00:41:01,980 --> 00:41:03,346
@@ -4896,17 +4896,17 @@ try-catch, for
 999
 00:41:13,423 --> 00:41:15,189
 those of you who don't know, is you can raise exceptions in
-可以在你的项目中抛出异常
+try-catch 是你的程序引发异常时
 
 1000
 00:41:15,192 --> 00:41:17,926
 your program and they can percolate up the callstack and
-它们可以贯穿调用堆栈并且
+它们会遍历调用堆栈并且
 
 1001
 00:41:17,928 --> 00:41:20,161
 someone tries to catch them and handle them.
-有些人试图 catch 它们，处理它们
+查找处理此类异常的 catch 语句
 
 1002
 00:41:20,163 --> 00:41:22,013
@@ -5015,7 +5015,7 @@ All right. It's not being sent to
 1023
 00:42:09,238 --> 00:42:11,238
 a UIButton, it's being sent to the type,
-UIButton 的对象，它发送给了一个类型
+UIButton 的对象，而是一个类型
 
 1024
 00:42:11,240 --> 00:42:12,639
@@ -5030,12 +5030,12 @@ And so sometimes,
 1026
 00:42:14,042 --> 00:42:16,976
 you'll be creating things that way very rarely.
-很少见的情况下，用另外一种方式创建对象
+这种情况比较少见，需要你用另外一种方式创建对象
 
 1027
 00:42:16,978 --> 00:42:20,546
 They really, Apple's been moving away from that model
-很少见的情况，以至于 Apple 已经将它们从 Model 中移除
+甚至连 Apple 都已经将它们从 Model 中移除
 
 1028
 00:42:20,548 --> 00:42:24,049
@@ -5055,12 +5055,12 @@ Like remember UIImage on the previous page,
 1031
 00:42:31,324 --> 00:42:34,025
 that wasn't UIImage dot image named.
-这不是 UIImage.imageNamed
+那个不是像 UIImage.image 这样命名的
 
 1032
 00:42:34,027 --> 00:42:37,094
 That's kind of how it used to be in Apple, now it's UIImage
-曾经在 Apple 是被使用的，但是现在
+以前 Apple 就用那种创建对象的方法，但是现在用
 
 1033
 00:42:37,096 --> 00:42:39,996
@@ -5089,7 +5089,7 @@ Okay?
 1038
 00:42:51,857 --> 00:42:54,574
 Join takes an Array of Strings and it will separate them by
-join 方法接受一个由字符串组成的数组并
+Join 接受一个由字符串组成的数组并
 
 1039
 00:42:54,577 --> 00:42:57,545
@@ -5099,41 +5099,42 @@ whatever String you send join to.
 1040
 00:42:57,547 --> 00:43:00,447
 So comma.join up in Array will give you a comma
-所以，",".join(myArray) 会返回给你一个由逗号
+所以，",".join(myArray) 会返回给你一个
 
 1041
 00:43:00,449 --> 00:43:03,316
 separated String, a String with the things,
-分隔的字符串，而字符串是由
+由逗号分隔的字符串，就是说这个字符串
 
 1042
 00:43:03,318 --> 00:43:05,685
-then the Array comes separated.
-传入的数组参数中的元素所组成的
+in the Array comma separated.
+中间有一个逗号把前后分为两段
 
 1043
 00:43:05,687 --> 00:43:08,388
 And that's obviously creating a new Array (shoule be String).
-这很明显是创建一个新字符串的方法
+这明显是创建了一个新数组
 
 1044
 00:43:08,390 --> 00:43:10,489
 So this, this is kind of completely obvious.
-所以，这确实很明显
+这确实很明显
 
 1045
 00:43:10,491 --> 00:43:13,325
 But yes, some methods return objects to you that
-是的，一些方法返回给你一个创建出来的对象
+是的，一些方法会返回
 
 1046
 00:43:13,327 --> 00:43:14,593
 are created.
+创建出来的对象给你
 
 1047
 00:43:14,595 --> 00:43:16,478
 okay.
-继续
+
 
 1048
 00:43:16,479 --> 00:43:18,362
@@ -5179,6 +5180,7 @@ Array or whatever.
 00:43:35,279 --> 00:43:37,079
 And it's used primarily for
 AnyObject 主要用于
+
 1057
 00:43:37,081 --> 00:43:40,749
 compatibility with existing Objective-C APIs and iOS.
@@ -5202,7 +5204,7 @@ I suppose you could, but
 1061
 00:43:47,690 --> 00:43:49,557
 it'd be kind of, it'd be, again, kind of anti-Swift.
-但是，这有点点，不想 Swift 风格的做法
+但是，这有一点点，不像 Swift 风格的做法
 
 1062
 00:43:49,559 --> 00:43:54,161
@@ -5212,6 +5214,7 @@ Swift 是强类型语言，并有类型推断的特性
 1063
 00:43:54,163 --> 00:43:55,929
 all that.
+的那种语言
 
 1064
 00:43:55,930 --> 00:43:57,696
@@ -5251,7 +5254,7 @@ Meaning, an instance of a class.
 1071
 00:44:12,478 --> 00:44:13,310
 Okay? That you
-明白了吗？
+明白吗？
 
 1072
 00:44:13,312 --> 00:44:14,978
@@ -5286,7 +5289,7 @@ use it but that's what it is.
 1078
 00:44:26,923 --> 00:44:29,524
 And where will you see this in iOS?
-你们会在 iOS 开发中的哪里看到它呢？
+在 iOS 开发中，哪里能看到它呢？
 
 1079
 00:44:29,526 --> 00:44:32,360
@@ -5296,12 +5299,12 @@ Sometimes, you'll see properties that are in
 1080
 00:44:32,362 --> 00:44:36,430
 AnyObject, like there's a property on storyboard segues
-例如 Storyboard Segues 的一个属性
+例如我们下周会讲到的
 
 1081
 00:44:36,432 --> 00:44:38,932
 which we're gonna talk about next week.
-这个属性我们下周会讲到
+在 Storyboard Segues 的一个属性
 
 1082
 00:44:38,934 --> 00:44:41,401
@@ -5311,7 +5314,7 @@ Called destinationViewController,
 1083
 00:44:41,403 --> 00:44:44,403
 instead of being a UIViewController (which) is a type,
-它不是 UIViewController 作为它的类型
+它不是以 UIViewController 作为它的类型
 
 1084
 00:44:44,405 --> 00:44:45,604
@@ -5321,11 +5324,11 @@ it's AnyObject.
 1085
 00:44:45,606 --> 00:44:47,572
 Okay, for historical reasons really.
-因为某些历史性的原因
+这是某些历史遗留问题造成的
 
 1086
 00:44:47,574 --> 00:44:50,842
-And similarly u, in UIViewController,
+And similarly, in UIViewController,
 类似的，在 UIViewController 中
 
 1087
@@ -5341,7 +5344,7 @@ it would return to an Array of the AnyObject.
 1089
 00:44:57,150 --> 00:44:59,083
 Okay?
-明白了吗？
+
 
 1090
 00:44:59,084 --> 00:45:01,017
@@ -5356,7 +5359,7 @@ don't even know what they are.
 1092
 00:45:03,989 --> 00:45:05,421
 Kay?
-明白了吗？
+
 
 1093
 00:45:05,423 --> 00:45:07,623
@@ -5386,7 +5389,7 @@ sender 参数，这个参数的类型是 AnyObject 的
 1098
 00:45:17,834 --> 00:45:19,366
 Now in that case, it kinda makes sense because it
-在这个情况下，AnyObject 的说法更有说服性
+在这个情况下，AnyObject 的说法更有道理
 
 1099
 00:45:19,368 --> 00:45:21,068
@@ -5406,12 +5409,12 @@ interface, could be AnyObject, so it makes some sense.
 1102
 00:45:27,008 --> 00:45:30,276
 But there's addConstraints, kay?
-但这里是addConstraints，Okay？
+但这里是 addConstraints
 
 1103
 00:45:30,278 --> 00:45:32,311
 Which is another UIViewController thing.
-也是一种跟UIViewController的东西
+也是一种跟 UIViewController 类似的东西
 
 1104
 00:45:32,313 --> 00:45:34,746
@@ -5426,7 +5429,7 @@ Array of whatever class constraints are,
 1106
 00:45:36,717 --> 00:45:38,483
 I haven't taught you about this, but
-还没有教你们这些
+我还没有教你们这些
 
 1107
 00:45:38,485 --> 00:45:41,285
@@ -5441,22 +5444,22 @@ But again, for historical reasons, it's an Array of
 1109
 00:45:44,457 --> 00:45:47,290
 AnyObject and even in a appendDigit in calculator.
-这是一个任意对象的 Array ，甚至是计算器里的appendDigit
+这是一个任意对象的 Array ，甚至是计算器里的 appendDigit
 
 1110
 00:45:47,292 --> 00:45:51,294
 Okay, remember, when we drag, control, dragged the button to
-记住，当我按住control拖动时
+记住，当我按住 control
 
 1111
 00:45:51,296 --> 00:45:54,430
 make a appendDigit, and I made a big deal of of saying,
-拖动按钮去生成一个appendDigit的，我们其实是在说
+拖动按钮去生成一个 appendDigit 的，我们其实是在说
 
 1112
 00:45:54,432 --> 00:45:57,433
 change that from AnyObject to UI button, okay?
-把那个任意对象变成一个UI Button
+把那个任意对象变成一个 UI Button
 
 1113
 00:45:57,435 --> 00:46:01,070
@@ -5466,12 +5469,12 @@ Well, if you hadn't changed it, then you could've ended up
 1114
 00:46:01,072 --> 00:46:03,305
 with a appendDigit, sender AnyObject.
-appendDigit(sender: AnyObject)
+一个 appendDigit(sender: AnyObject)
 
 1115
 00:46:03,307 --> 00:46:03,872
 Kay?
-Kay?
+
 
 1116
 00:46:05,442 --> 00:46:08,142
@@ -5491,7 +5494,7 @@ It actually returns AnyObject,
 1119
 00:46:12,114 --> 00:46:14,948
 it doesn't return a UI button, you would think it would, but
-这不会返回一个UI Button，你可能想这会返回这样一个类型
+这不会返回一个 UI Button，你可能想这会返回这样一个类型
 
 1120
 00:46:14,950 --> 00:46:16,916
@@ -5546,7 +5549,7 @@ And so to use it, we convert it to a type we do know, kay?
 1130
 00:46:45,476 --> 00:46:49,044
 That's the only way we're really gonna use AnyObject,
-我们唯一的使用AnyObject的方式
+我们唯一的使用 AnyObject 的方式
 
 1131
 00:46:49,046 --> 00:46:52,547
@@ -5561,7 +5564,7 @@ And we do that with.
 1133
 00:46:56,319 --> 00:46:59,787
 By creating a new variable, so we, we've got some AnyObject,
-建立一个新的变量来做这件事。比如，我们得到一些 AnyObject
+建立一个新的变量来做这件事。比如，我们有一些 AnyObject
 
 1134
 00:46:59,789 --> 00:47:01,989
@@ -5576,12 +5579,12 @@ it's a local variable or
 1136
 00:47:03,559 --> 00:47:05,959
 something like that, and we wanna convert it.
-诸如此类，我们把它转换掉
+诸如此类，我们想把它转换掉
 
 1137
 00:47:05,961 --> 00:47:08,661
 So, we're gonna create a new variable of the,
-所以我们要建立一个新的变量
+所以我们可以建立一个新的变量
 
 1138
 00:47:08,663 --> 00:47:11,163
@@ -5601,7 +5604,7 @@ equal to that AnyObject thing converted.
 1141
 00:47:17,271 --> 00:47:18,704
 Now, of course,
-现在，当然
+接着
 
 1142
 00:47:18,705 --> 00:47:20,138
@@ -5635,12 +5638,12 @@ we can convert it to UIButton, cuz it is a UIButton.
 
 1148
 00:47:30,883 --> 00:47:32,666
-Kay? But
-但是
+Kay?
+
 
 1149
 00:47:32,667 --> 00:47:34,450
-we can't convert it to a UILabel, it's not a UILabel, so
+But we can't convert it to a UILabel, it's not a UILabel, so
 但是不能转换成 UILabel，因为他不是个 UILabel
 
 1150
@@ -5661,7 +5664,7 @@ yeah, see, it will crash our program if we do that.
 1153
 00:47:42,760 --> 00:47:44,392
 How do we do that conversion safely so
-如何安全的去做这个转型
+如何安全地去做这个转型
 
 1154
 00:47:44,394 --> 00:47:46,394
@@ -5691,17 +5694,17 @@ And we can typecast forcibly using the as keyword.
 1159
 00:48:00,441 --> 00:48:01,840
 A S, as.
-用as
+用 as
 
 1160
 00:48:01,842 --> 00:48:04,343
 Okay Swift as usual, very succinct.
-通常Swift是非常简洁的
+通常 Swift 是非常简洁的
 
 1161
 00:48:04,345 --> 00:48:06,811
 And so I'm gonna use that destination view
-下面我要用destinationViewController
+下面我要用 destinationViewController
 
 1162
 00:48:06,813 --> 00:48:08,813
@@ -5711,7 +5714,7 @@ controller thing as an example so
 1163
 00:48:08,815 --> 00:48:12,283
 I've got this property destinationViewController.
-我得到了这个destinationViewController作为属性
+我得到了这个 destinationViewController 作为属性
 
 1164
 00:48:12,285 --> 00:48:14,051
@@ -5721,7 +5724,7 @@ It's in AnyObject.
 1165
 00:48:14,053 --> 00:48:16,620
 And, I know it's a ViewController.
-我知道这是个ViewController
+我知道这是个 ViewController
 
 1166
 00:48:16,622 --> 00:48:20,223
@@ -5736,17 +5739,17 @@ So, I'm gonna be using in my
 1168
 00:48:21,493 --> 00:48:23,559
 examples CalculatorViewController.
-CalculatorViewController里面用
+CalculatorViewController 里面用
 
 1169
 00:48:23,561 --> 00:48:25,761
 Imagine we had called our CalculatorViewController,
-想象一下我们调用CalculatorViewController
+先想象一下我们调用 CalculatorViewController
 
 1170
 00:48:25,763 --> 00:48:28,864
 CalculatorViewController instead of ViewController.
-是CalculatorViewController而不是ViewController
+是 CalculatorViewController 而不是 ViewController
 
 1171
 00:48:28,866 --> 00:48:30,432
@@ -5761,7 +5764,7 @@ it's just going to make more sense, okay?
 1173
 00:48:32,002 --> 00:48:35,269
 So, I want to talk to this destinationViewController,
-所以我想说说这个destinationViewController
+所以我想说说这个 destinationViewController
 
 1174
 00:48:35,271 --> 00:48:37,037
@@ -5771,12 +5774,12 @@ which is AnyObject.
 1175
 00:48:37,039 --> 00:48:39,473
 And I know that it's a CalculatorViewController.
-同时我又知道这是个CalculatorViewController
+同时我又知道这是个 CalculatorViewController
 
 1176
 00:48:39,475 --> 00:48:41,474
 And if it's not a CalculatorViewController,
-如果这个不是个CalculatorViewController
+如果这个不是个 CalculatorViewController
 
 1177
 00:48:41,476 --> 00:48:43,209
@@ -5791,12 +5794,12 @@ Because, in the context I'm using it,
 1179
 00:48:45,179 --> 00:48:46,679
 I want it to be that.
-我需要它是CalculatorViewController
+我需要它是 CalculatorViewController
 
 1180
 00:48:46,681 --> 00:48:48,397
 Okay?
-Okay?
+
 
 1181
 00:48:48,398 --> 00:48:50,114
@@ -5805,7 +5808,7 @@ So, I can just say, let calcVC equals
 
 1182
 00:48:50,117 --> 00:48:52,484
-CalculatorViewController as CalculatorViewController.
+DestinationViewController as CalculatorViewController.
 destinationViewController as CalculatorViewController
 
 1183
@@ -5816,7 +5819,7 @@ And now, calcVC, this new constant, its type is
 1184
 00:48:56,823 --> 00:48:59,990
 not AnyObject, its type is CalculatorViewController.
-不是 AnyObject，而是CalculatorViewController
+不是 AnyObject，而是 CalculatorViewController
 
 1185
 00:48:59,992 --> 00:49:02,159
@@ -5841,27 +5844,27 @@ CalculatorViewControl 消息给 calcVC.
 1189
 00:49:08,999 --> 00:49:10,899
 Now, you can protect against crashing if
-现在你就可以防止崩溃了
+现在如果你想防止崩溃
 
 1190
 00:49:10,901 --> 00:49:13,801
 you're not sure whether that destinationViewController is
-你不确定destinationViewController是不是
+但你不确定 destinationViewController 是不是
 
 1191
 00:49:13,803 --> 00:49:16,771
 a CalculatorViewController, but you're hoping it is.
-一个CalculatorViewController，但你希望是
+一个 CalculatorViewController，但你希望是
 
 1192
 00:49:16,773 --> 00:49:18,272
 Okay?
-Okay?
+
 
 1193
 00:49:18,273 --> 00:49:19,772
 You can use as question mark.
-你可以用一个问号
+你可以用 as 加问号
 
 1194
 00:49:19,775 --> 00:49:22,909
@@ -5871,7 +5874,7 @@ as? 会返回一个可选的
 1195
 00:49:22,911 --> 00:49:26,879
 Same as as, right, as returns that AnyObject thing cast to
-跟as一样，as 返回 AnyObject 转换成
+跟 as 一样，as 返回 AnyObject 转换成
 
 1196
 00:49:26,881 --> 00:49:28,414

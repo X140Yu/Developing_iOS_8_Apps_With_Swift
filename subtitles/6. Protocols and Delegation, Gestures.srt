@@ -1,4 +1,4 @@
-﻿1
+1
 00:00:00,001 --> 00:00:04,669
 [MUSIC]
 
@@ -4001,862 +4001,1077 @@ Okay?
 1001
 00:44:19,600 --> 00:44:21,884
 You know, pinches and maybe rotations, swipes, taps,
+比如，pinchs，rotations，swipes，taps
 
 1002
 00:44:21,886 --> 00:44:24,170
 things like that.
+等手势。
 
 1003
 00:44:24,171 --> 00:44:26,455
 Now we could get the raw data about every finger that
+我们可以获取到手势按下、
 
 1004
 00:44:26,457 --> 00:44:29,691
 goes down, and where it is, that data is available, but
+移动的原始信息，
 
 1005
 00:44:29,693 --> 00:44:31,325
 we never look at that.
+但是我们很少直接使用这些信息。
 
 1006
 00:44:31,327 --> 00:44:34,061
 First of all it's very difficult to
+因为我们自己通过这些原始信息
 
 1007
 00:44:34,063 --> 00:44:35,562
 look at that raw data, and
+很难判断
 
 1008
 00:44:35,564 --> 00:44:39,199
 see, is this a swipe, or is it just moving over to the right.
+这是一个swipe手势，还是单纯向右滑动。
 
 1009
 00:44:40,168 --> 00:44:41,534
 So iOS does all that for
+不过ios为我们做了底层封装，
 
 1010
 00:44:41,536 --> 00:44:44,203
 you, and that's the only way I'm going to teach you
+而本课上，我只会教你
 
 1011
 00:44:44,205 --> 00:44:48,006
 to react to user touches is via gestures, okay?
+通过手势来处理用户的触摸事件，明白吗？
 
 1012
 00:44:48,008 --> 00:44:49,540
 So how do gestures work?
+那么手势是如何工作的呢？
 
 1013
 00:44:49,542 --> 00:44:52,677
 Gestures are recognized by UI views when
+当手指在视图边界内滑动时，
 
 1014
 00:44:52,679 --> 00:44:56,013
 the gesture happens inside their bounds.
+视图会识别特定的手势。
 
 1015
 00:44:56,015 --> 00:44:58,782
 Okay, I told you the views are rectangular areas where you
+是的，我说过，视图是用来绘制和
 
 1016
 00:44:58,784 --> 00:45:00,450
 draw and you recognize gestures so
+识别手势的矩形区域
 
 1017
 00:45:00,452 --> 00:45:02,085
 this is how it happens.
+手势就是这样被识别的。
 
 1018
 00:45:02,087 --> 00:45:04,620
 There's a class called UIGestureRecognizer.
+有一个叫UIGestureRecognizer的类。
 
 1019
 00:45:04,622 --> 00:45:06,255
 It's an abstract base class.
+它是一个抽象类。
 
 1020
 00:45:06,257 --> 00:45:09,424
 You never actually create a UIGestureRecognizer base
+通常，你不会直接创建UIGestureRecognizer基类，
 
 1021
 00:45:09,426 --> 00:45:13,128
 class, you create a sub class of UIGestureRecognizer.
+而是创建它的子类。
 
 1022
 00:45:13,130 --> 00:45:15,263
 And those subclasses are concrete in
+因为这些具体的子类
 
 1023
 00:45:15,265 --> 00:45:17,932
 that they know about certain gestures, swipes and pans and
+能够识别特定的手势，比如swipes、pans、touch
 
 1024
 00:45:17,934 --> 00:45:19,233
 touches, et cetera.
+等。
 
 1025
 00:45:19,235 --> 00:45:24,137
 So there are two sides to using a gesture recognizer.
+使用手势识别器有两个步骤。
 
 1026
 00:45:24,139 --> 00:45:27,674
 One is you have to add a gesture recognizer to a view.
+首先是为视图添加手势识别器。
 
 1027
 00:45:27,676 --> 00:45:30,643
 That says to the view, start recognizing this gesture.
+这表示，该视图现在能识别手势。
 
 1028
 00:45:30,645 --> 00:45:33,679
 If you recognize this gesture, you let somebody know.
+如果你识别了这个手势，就报告给某个对象。
 
 1029
 00:45:33,681 --> 00:45:34,279
 Okay?
+明白吗？
 
 1030
 00:45:34,281 --> 00:45:35,914
 And you do that with
+完成这个步骤，
 
 1031
 00:45:35,915 --> 00:45:37,548
 a function on UIView called add gesture recognizer.
+你只需要调用视图的addGestureRecognized方法。
 
 1032
 00:45:37,551 --> 00:45:38,950
 Couldn't be simpler.
+非常简单。
 
 1033
 00:45:38,952 --> 00:45:42,687
 Then the second piece, though, is when you create the gesture
+第二步是，当你创建手势识别器的时候，
 
 1034
 00:45:42,689 --> 00:45:46,323
 recognizer, you have to say, if you recognize the gesture,
+你必须指定一个对象，如果视图识别了这个手势
 
 1035
 00:45:46,325 --> 00:45:48,225
 who are you gonna tell about it?
+就报告给这个对象。
 
 1036
 00:45:48,227 --> 00:45:49,893
 Okay, you have to notify somebody and
+是的，你需要让某个对象知道
 
 1037
 00:45:49,895 --> 00:45:51,361
 say oh, I recognize that swipe.
+嘿，这是一个swipe手势。
 
 1038
 00:45:51,363 --> 00:45:51,961
 Okay?
+明白吗？
 
 1039
 00:45:51,963 --> 00:45:53,395
 So there's the handler.
+也就是说，你需要提供一个处理事件的对象。
 
 1040
 00:45:53,397 --> 00:45:56,365
 So you've got the recognizer, that's the view.
+一个是识别手势的对象，就是视图。
 
 1041
 00:45:56,367 --> 00:45:58,800
 Okay, the gesture recognizer in association with the view.
+是的，添加了手势识别器的视图。
 
 1042
 00:45:58,802 --> 00:46:00,935
 And then you've got the handler that's who handles it,
+然后是处理事件的对象，
 
 1043
 00:46:00,937 --> 00:46:02,870
 and those are not always the same person.
+这两个并不一定是同一个对象。
 
 1044
 00:46:02,872 --> 00:46:05,506
 Sometimes they're the same object, sometimes not.
+有些时候是的，有些时候不是。
 
 1045
 00:46:05,508 --> 00:46:08,775
 Usually the first one, adding a gesture recognizer to
+通常，为视图添加识别器
 
 1046
 00:46:08,777 --> 00:46:11,211
 a view is done by a controller.
+是通过控制器来完成的。
 
 1047
 00:46:11,213 --> 00:46:13,646
 Although a view will sometimes add it to itself, for
+不过有些时候，视图自己也可以添加识别器，
 
 1048
 00:46:13,648 --> 00:46:14,914
 example scroll view.
+比如scroll view。
 
 1049
 00:46:14,916 --> 00:46:17,449
 Scroll view doesn't even exist without the pan and
+scroll view 可以自动识别
 
 1050
 00:46:17,451 --> 00:46:19,451
 pinch gestures, that's what it does.
+pan和pinch手势。
 
 1051
 00:46:19,453 --> 00:46:22,020
 So it adds the gesture recognizers to itself.
+它为自身添加了这些识别器。
 
 1052
 00:46:22,022 --> 00:46:25,189
 But a lot of times other times you have a gesture that
+但是大多数时候，
 
 1053
 00:46:25,191 --> 00:46:28,992
 you're going to recognize only if the controller wants you to
+只有在控制器需要视图识别手势的时候，
 
 1054
 00:46:28,994 --> 00:46:31,411
 recognize it, so
+你才添加识别器到视图上，
 
 1055
 00:46:31,412 --> 00:46:33,829
 you make some public handler possibly in your view.
+你可能在视图中 实现公开的事件处理方法。
 
 1056
 00:46:33,832 --> 00:46:37,233
 And then your controller can add this gesture recognizer to
+然后控制器可以添加识别器到
 
 1057
 00:46:37,235 --> 00:46:39,035
 one of its views, one of its minions and say,
+视图，
 
 1058
 00:46:39,037 --> 00:46:41,804
 start recognizing this gesture and you can even handle it
+视图开始识别手势，甚至在手势被识别后
 
 1059
 00:46:41,806 --> 00:46:44,106
 yourself if you want, the controller might say.
+可以自己处理相关事件。
 
 1060
 00:46:44,108 --> 00:46:47,009
 Or the controller might say oh, and I'll handle it.
+又或者由控制器来处理。
 
 1061
 00:46:47,011 --> 00:46:49,778
 So the second thing, the handling is either done by
+所以，第二步中，如果是显示相关的事件
 
 1062
 00:46:49,780 --> 00:46:53,281
 the view if it's a display-oriented handling
+一般由视图自己来处理，
 
 1063
 00:46:53,283 --> 00:46:56,217
 thing, or it's done by the controller if it's handling
+而如果涉及到修改model的时候
 
 1064
 00:46:56,219 --> 00:46:58,719
 something that's going to modify the model.
+事件一般由控制器来处理。
 
 1065
 00:46:58,721 --> 00:47:00,320
 Okay? Or be something that's
+明白吗？ 如果
 
 1066
 00:47:00,322 --> 00:47:03,623
 complicated that's going to cause multiple views to
+涉及很多视图这种复杂情况的时候
 
 1067
 00:47:03,625 --> 00:47:05,525
 be involved and so the controller has to do it.
+就必须由控制器来处理了。
 
 1068
 00:47:05,527 --> 00:47:08,260
 And it's perfectly fine to have either the controller or
+所以，事件的处理通常都是由控制器
 
 1069
 00:47:08,262 --> 00:47:10,295
 the view handle something although you would
+或者视图两个中的一个来完成的，
 
 1070
 00:47:10,297 --> 00:47:13,665
 never have the view handle a gesture that is directly
+你绝不会在视图中直接
 
 1071
 00:47:13,667 --> 00:47:15,633
 modifying the model cuz a view can't see the model.
+修改model，因为model对view是不可见的。
 
 1072
 00:47:15,635 --> 00:47:17,635
 Only a controller can do that.
+只有控制器可以直接和model交互。
 
 1073
 00:47:18,838 --> 00:47:20,871
 Okay?
+明白吗？
 
 1074
 00:47:20,872 --> 00:47:22,905
 So how do you add a gesture recognizer to a UI view?
+那么，怎样为视图添加识别器呢？
 
 1075
 00:47:22,908 --> 00:47:24,274
 It's very simple.
+非常简单。
 
 1076
 00:47:24,276 --> 00:47:27,310
 I'm going to do it in a way that is very common, which is
+我会用一种很通用的方式，
 
 1077
 00:47:27,312 --> 00:47:31,147
 to do it in the property observer of an outlet setter,
+就是在属性监听的set方法中来完成，
 
 1078
 00:47:31,149 --> 00:47:34,784
 just exactly like we did when we set the face views delegate
+就和我们在设置face view代理一样
 
 1079
 00:47:34,786 --> 00:47:38,420
 in the property observer, when the face view got set.
+当face view调用set方法时，我们为它设置代理。
 
 1080
 00:47:38,422 --> 00:47:40,789
 We could do the same thing adding adjuster recognizer.
+我们可以通过同样的方法来添加手势识别器。
 
 1081
 00:47:40,791 --> 00:47:42,924
 In fact, we're going to do that in the demo.
+事实上，我们会在demo中演示这个过程。
 
 1082
 00:47:42,926 --> 00:47:44,926
 So here I have an IV outlet.
+这里我有一个IBOutlet属性。
 
 1083
 00:47:44,928 --> 00:47:47,361
 It's just a UI view.
+就是一个
 
 1084
 00:47:47,363 --> 00:47:49,363
 In my story board.
+storyboard中的视图。
 
 1085
 00:47:49,365 --> 00:47:50,864
 It's called pannableView and
+它叫pannableView
 
 1086
 00:47:50,866 --> 00:47:54,000
 I'm going to make it so it can pan around in there.
+我希望可以拖动这个视图。
 
 1087
 00:47:54,002 --> 00:47:58,170
 All right, and in his property observer there the did stat.
+好的，在这个属性监听器的didSet方法中。
 
 1088
 00:47:59,206 --> 00:48:02,274
 I'm going to add this gesture recognizer.
+我将添加这个识别器。
 
 1089
 00:48:02,276 --> 00:48:04,242
 I'm going to create a pan gesture recognizer and
+我需要创建pan手势识别器，
 
 1090
 00:48:04,244 --> 00:48:05,376
 then add it to the view.
+然后添加到视图中。
 
 1091
 00:48:05,378 --> 00:48:06,577
 So here I'm creating it.
+这里我创建它。
 
 1092
 00:48:06,579 --> 00:48:08,813
 This is just
+我只需要
 
 1093
 00:48:08,814 --> 00:48:11,048
 calling UIPanGestureRecognizer initializer here.
+调用UIPanGestureRecognizer的初始化方法即可。
 
 1094
 00:48:11,050 --> 00:48:13,750
 The arguments to the initializer are who to
+第一个参数表示，当手势被识别的时候，
 
 1095
 00:48:13,752 --> 00:48:18,421
 send a message to when the gesture is recognized.
+向谁发送消息。
 
 1096
 00:48:18,423 --> 00:48:20,122
 When we start seeing a pan.
+当视图识别到pan手势。
 
 1097
 00:48:20,124 --> 00:48:22,224
 And as the pan is happening we're gonna be
+我们会向这个对象
 
 1098
 00:48:22,226 --> 00:48:24,159
 sending a message to this object.
+发送一个消息。
 
 1099
 00:48:24,161 --> 00:48:25,560
 In this case it's self.
+这里，它是self。
 
 1100
 00:48:25,562 --> 00:48:28,496
 So this method would obviously be in a controller, right?
+所以这个方法肯定在一个控制器中，不是吗？
 
 1101
 00:48:28,498 --> 00:48:29,597
 Because controllers are the only
+因为只有
 
 1102
 00:48:29,599 --> 00:48:31,031
 things that have the outlets.
+控制器才会有outlets。
 
 1103
 00:48:31,033 --> 00:48:32,332
 So this thing's going to be
+所以这里
 
 1104
 00:48:32,334 --> 00:48:34,367
 handled by the controller itself.
+会由控制器来处理。
 
 1105
 00:48:34,369 --> 00:48:37,437
 And then action is the name of the method.
+action参数表示事件处理的方法名称。
 
 1106
 00:48:37,439 --> 00:48:38,971
 It's just a string that is the name of
+就是方法名称字符串，
 
 1107
 00:48:38,973 --> 00:48:41,874
 the method that's gonna be
+当手势被识别的时候，
 
 1108
 00:48:41,875 --> 00:48:44,776
 called in the controller when this gesture is recognized.
+会调用控制器中的这个方法。
 
 1109
 00:48:44,778 --> 00:48:47,278
 Now notice there's a little colon on the end there?
+看见后面的冒号了吗？
 
 1110
 00:48:47,280 --> 00:48:50,581
 That means that it's called a, it's gonna
+这表示
 
 1111
 00:48:50,583 --> 00:48:52,683
 call a method called pan that has an argument.
+这个pan方法会有一个参数。
 
 1112
 00:48:52,685 --> 00:48:54,251
 That's what the colon means.
+这就是冒号的意思。
 
 1113
 00:48:54,253 --> 00:48:55,786
 There's an argument there.
+表示方法需要一个参数。
 
 1114
 00:48:55,788 --> 00:48:58,221
 Okay, now you don't have to have the colon there if
+你也可以不添加冒号
 
 1115
 00:48:58,223 --> 00:49:00,690
 you want, but if you don't have it there, then you
+如果没有冒号，那么pan被调用的时候
 
 1116
 00:49:00,692 --> 00:49:02,958
 won't get the argument when pan gets called and
+你就得不到这个参数
 
 1117
 00:49:02,960 --> 00:49:05,327
 the argument you get is the gesture recognizer.
+而这个参数就是GestureRecognizer
 
 1118
 00:49:05,329 --> 00:49:07,829
 And for something like pan where you're gonna try and
+有时候你需要
 
 1119
 00:49:07,831 --> 00:49:09,330
 figure out where the finger is,
+判断手指的点击位置，
 
 1120
 00:49:09,332 --> 00:49:10,965
 you need the gesture recognizer so
+这样你就必须得到这个参数
 
 1121
 00:49:10,967 --> 00:49:13,501
 it can tell you where the finger is basically, okay?
+来判断手指的触点在哪里。
 
 1122
 00:49:13,503 --> 00:49:15,235
 So we almost always have a colon.
+因此，我们通常都有冒号。
 
 1123
 00:49:15,237 --> 00:49:16,837
 The only place you
+只有在
 
 1124
 00:49:16,838 --> 00:49:18,438
 wouldn't have a colon might be like a swipe.
+使用swipe手势的时候你不需要冒号。
 
 1125
 00:49:18,440 --> 00:49:20,507
 Because the swipe just got recognized,
+因为这就是一个swipe手势，
 
 1126
 00:49:20,509 --> 00:49:21,741
 you don't really need any information,
+你不需要额外的信息来判断，
 
 1127
 00:49:21,743 --> 00:49:25,762
 you just need to know what happened.
+你只需要确定这是一个swipe手势。
 
 1128
 00:49:25,763 --> 00:49:29,782
 So you might have action, quote, handle swipe, no colon.
+所以你只需要在双引号中加上方法名称即可，不需要冒号。
 
 1129
 00:49:29,784 --> 00:49:31,016
 Then we just ask the view,
+然后，
 
 1130
 00:49:31,018 --> 00:49:33,785
 this panable view, please recognize this gesture when it
+当一个pan手势发生在视图边界的时候，
 
 1131
 00:49:33,787 --> 00:49:35,286
 happens inside your bounds.
+这个视图就可以识别这个手势了。
 
 1132
 00:49:38,190 --> 00:49:40,257
 Okay that's simple, that's like turning on,
+就是这么简单，就像打开开关，
 
 1133
 00:49:40,259 --> 00:49:41,358
 this is the on switch, for
+比如switch控件，
 
 1134
 00:49:41,360 --> 00:49:43,159
 turning on that pan gesture I recognized,
+可以通过pan手势
 
 1135
 00:49:43,161 --> 00:49:45,161
 by asking some of you to recognize it.
+来切换状态。
 
 1136
 00:49:45,163 --> 00:49:48,864
 So now every time this view recognizes a pan going on
+每次视图在边界内识别了pan手势的时候
 
 1137
 00:49:48,866 --> 00:49:51,933
 inside its bounce it's going to send the message pan
+它就会向控制器发送带一个参数的
 
 1138
 00:49:51,935 --> 00:49:54,268
 with an argument to the controller.
+pan消息。
 
 1139
 00:49:56,105 --> 00:49:56,970
 Everybody okay with this?
+都明白了吗？
 
 1140
 00:49:57,940 --> 00:50:01,141
 This is how you set up a gesture recognizer.
+这是配置手势识别器的方法。
 
 1141
 00:50:01,143 --> 00:50:03,076
 How about the handler?
+那么如何处理事件呢？
 
 1142
 00:50:03,078 --> 00:50:06,379
 So that pan thing with that argument, how do we do that?
+有了这个参数后，我们可以做哪些事情呢？
 
 1143
 00:50:06,381 --> 00:50:09,448
 For us to handle the pan we need information about
+在处理pan手势的时候，我们需要
 
 1144
 00:50:09,450 --> 00:50:11,216
 what's going on in that pan.
+知道它的一些信息。
 
 1145
 00:50:11,218 --> 00:50:12,650
 Where are the fingers moving?
+比如手指移动到哪里了？
 
 1146
 00:50:12,652 --> 00:50:14,118
 We need to know about that.
+我们需要知道这些。
 
 1147
 00:50:14,120 --> 00:50:17,788
 So the concrete subclasses of UI gesture recognizer like UI
+UIGestureRecognizer的子类，比如
 
 1148
 00:50:17,790 --> 00:50:21,258
 pangesture recognizer, they add methods that
+PanGestureRecognizer，他们针对特定的手势
 
 1149
 00:50:21,260 --> 00:50:23,727
 are specific to whatever kind of gesture they are.
+添加了自己特定的方法。
 
 1150
 00:50:23,729 --> 00:50:26,930
 So the panGesture one has a translation in
+比如PanGesture就有translationInView方法，
 
 1151
 00:50:26,932 --> 00:50:30,900
 view which tells you how far the finger has moved since,
+用来告诉你 从手势被识别或重置开始
 
 1152
 00:50:30,902 --> 00:50:34,737
 either since the panGesture was first recognized, or
+手指移动了多远的
 
 1153
 00:50:34,739 --> 00:50:36,705
 since that last got reset.
+距离。
 
 1154
 00:50:38,141 --> 00:50:41,709
 And you can reset with this set translation which will
+你可以通过setTranslation方法
 
 1155
 00:50:41,711 --> 00:50:43,778
 reset this translation to a different spot so
+重置这个起点
 
 1156
 00:50:43,780 --> 00:50:45,813
 that the next time that you get notified,
+这样下一次计算拖动距离的时候
 
 1157
 00:50:45,815 --> 00:50:47,948
 it will be the distance between this.
+会以你重置的起点开始计算。
 
 1158
 00:50:47,950 --> 00:50:50,383
 So that's a good way to get incremental panning instead of
+这是一个得到增加距离的好方法
 
 1159
 00:50:50,385 --> 00:50:52,251
 just the total distance that you've panned.
+而不仅仅是得到总距离。
 
 1160
 00:50:52,253 --> 00:50:54,353
 And then also I can tell you velocity,
+还可以得到velocity（速度）
 
 1161
 00:50:54,355 --> 00:50:56,188
 how fast are you panning around?
+拖动的速度有多快？
 
 1162
 00:50:56,190 --> 00:50:58,123
 Is the person kinda moving real slow, or
+用户可能拖动得很慢，或者是想
 
 1163
 00:50:58,125 --> 00:50:59,457
 trying to put something in a perfect spot,
+拖动到某个特定的点，
 
 1164
 00:50:59,459 --> 00:51:01,559
 or are they kind of zooming it around, okay,
+又或者是在放大缩小等，
 
 1165
 00:51:01,561 --> 00:51:03,327
 you might react differently depending on the velocity.
+你可能对不同的速度做出不同的反应。
 
 1166
 00:51:03,329 --> 00:51:05,963
 So those are the things that are very specific to Pan, so
+这是pan手势的一些特有的东西，也是为什么
 
 1167
 00:51:05,965 --> 00:51:08,598
 that's why these methods are in panGesture Recognizer.
+这些方法属于PanGestureRecognizer。
 
 1168
 00:51:08,600 --> 00:51:11,434
 Now that last one is interesting because of
+最后一个是incremental translation，
 
 1169
 00:51:11,436 --> 00:51:12,669
 this incremental translation.
+这个很有趣。
 
 1170
 00:51:12,671 --> 00:51:15,071
 A lot of people really don't quite understand this.
+因为大多数人不是很理解这个。
 
 1171
 00:51:15,073 --> 00:51:16,538
 But you'll see when we do the demo, we'll
+但是在做demo的时候你会明白的，
 
 1172
 00:51:16,540 --> 00:51:19,341
 do incremental translation with our pinch gesture.
+我们会在pinch手势中演示incremental translation。
 
 1173
 00:51:19,343 --> 00:51:22,711
 And it'll make a little more sense what's going on there.
+那时候你就更容易理解它了。
 
 1174
 00:51:22,713 --> 00:51:24,912
 The abstract superclass UIGestureRecognizer.
+抽象类UIGestureRecognizer
 
 1175
 00:51:24,914 --> 00:51:27,581
 It also has a very important property called State.
+有个很重要的属性 叫state（状态）。
 
 1176
 00:51:27,583 --> 00:51:31,685
 Okay when you have a pan it actually goes through states.
+pan手势会经历许多个状态。
 
 1177
 00:51:31,687 --> 00:51:34,421
 It starts out in the state Possible.
+首先是Possible状态。
 
 1178
 00:51:34,423 --> 00:51:36,656
 It's possible a pan can happen.
+表示它或许是一个pan手势。
 
 1179
 00:51:36,658 --> 00:51:38,290
 Then if it were a swipe or
+然后如果手势是扫动或者
 
 1180
 00:51:38,292 --> 00:51:40,959
 a discrete gesture, you would just get one state.
+非连续类型的，就会变为另一个状态。
 
 1181
 00:51:40,961 --> 00:51:42,160
 Which is I recognize this.
+就是Recognized状态。
 
 1182
 00:51:42,162 --> 00:51:44,629
 So that's Recognized.
+表示手势被识别了。
 
 1183
 00:51:44,631 --> 00:51:45,730
 But if it's pan and
+但是如果是pan手势
 
 1184
 00:51:45,732 --> 00:51:48,599
 continuous, then you're gonna get began.
+即手势连续的，state状态就会变为Began状态。
 
 1185
 00:51:48,601 --> 00:51:50,534
 Okay, recognize that the pan has started.
+明白吗，表示pan手势开始识别了。
 
 1186
 00:51:50,536 --> 00:51:51,602
 You'll get that.
+就是这样。
 
 1187
 00:51:51,603 --> 00:51:52,669
 And then every time the finger moves,
-
+随着手指的移动，
+	
 1188
 00:51:52,671 --> 00:51:55,638
 you're gonna get another call to your handler saying,
+会不断通知事件处理对象
 
 1189
 00:51:55,640 --> 00:51:57,106
 changed, changed, changed.
+状态改变为Changed了。
 
 1190
 00:51:57,108 --> 00:51:58,374
 And then when the finger goes up,
+当手指离开屏幕的时候，
 
 1191
 00:51:58,376 --> 00:52:01,443
 you'll get another one that says the state is now ended.
+状态就变为Ended。
 
 1192
 00:52:01,445 --> 00:52:03,245
 So this is basically a little state machine.
+这就像一个时间机器。
 
 1193
 00:52:03,247 --> 00:52:06,014
 Obviously a pan goes through the state machine of possible,
+pan手势在不同的时刻有不同的状态。
 
 1194
 00:52:06,016 --> 00:52:08,416
 began, changed, ended.
+开始，改变，结束。
 
 1195
 00:52:09,518 --> 00:52:10,951
 All right?
+明白吗？
 
 1196
 00:52:10,953 --> 00:52:12,085
 There's also failed and
+也有Failed和Canceled状态，
 
 1197
 00:52:12,087 --> 00:52:13,720
 canceled, like you're in the middle of a pan and
+比如在pan手势的中途
 
 1198
 00:52:13,722 --> 00:52:15,721
 a phone call comes in, okay?
+一个电话打进来了，明白吗？
 
 1199
 00:52:15,723 --> 00:52:18,390
 That's going to cancel that pan, alright?
+这样这个pan手势就会被取消掉，知道吗？
 
 1200
 00:52:18,392 --> 00:52:20,859
 So sometimes you have to pay attention to cancellation like
+所以有时你需要注意手势的取消状态
 
 1201
 00:52:20,861 --> 00:52:23,395
 that and sometimes not, it all depends on what you're doing
+就像刚才这种情况，而有时候不必，
 
 1202
 00:52:23,397 --> 00:52:25,430
 with your pan, sometimes your pan is updating.
+这全由pan手势的当前状态决定，有时候，pan正在更新。
 
 1203
 00:52:25,432 --> 00:52:27,264
 Whatever's there is in real time and
+无论状态机当前处于什么状态
 
 1204
 00:52:27,266 --> 00:52:29,900
 if the phone call comes in it just stops doing that and
+如果有电话打入，状态机将暂停原有操作，
 
 1205
 00:52:29,902 --> 00:52:32,569
 it's fine, everything is in perfectly fine state.
+没问题，一切都处于正常的状态。
 
 1206
 00:52:32,571 --> 00:52:35,305
 Other times it might be putting something in
+有时候，pan手势会将一些东西
 
 1207
 00:52:35,307 --> 00:52:36,873
 some temporary state and
+放入在临时状态中
 
 1208
 00:52:36,875 --> 00:52:40,643
 now it's interrupted it's gotta clean up, or something.
+当该手势被中断的时候，临时状态中得数据将被清空，或者做一些其他操作
 
 1209
 00:52:40,645 --> 00:52:42,111
 All right. So given this information,
+好，有了这些信息，
 
 1210
 00:52:42,113 --> 00:52:44,046
 what would the pan handler look like?
+那pan手势控制器到底是如何实现呢？
 
 1211
 00:52:44,048 --> 00:52:45,714
 Okay? The pan
+pan手势控制器
 
 1212
 00:52:45,715 --> 00:52:47,381
 handler would be a method called pan.
+是一个名叫 pan 的方法。
 
 1213
 00:52:47,384 --> 00:52:48,683
 It would take one argument which is
+该 方法带有一个参数
 
 1214
 00:52:48,685 --> 00:52:50,484
 the UIPanGestureRecognizer itself.
+即，UIPanGestureRecognizer本身。
 
 1215
 00:52:50,486 --> 00:52:52,453
 You can see right there.
+在这里你可以看到
 
 1216
 00:52:52,455 --> 00:52:53,721
@@ -4865,202 +5080,252 @@ Okay?
 1217
 00:52:53,722 --> 00:52:54,988
 We're going to look at the state machine and
+我们来看一下状态机，
 
 1218
 00:52:54,990 --> 00:52:55,822
 say what state it's in.
+状态机处于什么样的状态。
 
 1219
 00:52:55,824 --> 00:52:58,108
 So in my pan,
+在pan手势中
 
 1220
 00:52:58,109 --> 00:53:00,393
 I'm only going to do something when the gesture moves or
+当手势移动或者手指上划，
 
 1221
 00:53:00,395 --> 00:53:01,727
 the finger goes up.
+我只需要稍微做一点点事
 
 1222
 00:53:01,729 --> 00:53:04,096
 I'm not even gonna do anything when it first goes down.
+当它第一次下划的时候，我不需要做任何事。
 
 1223
 00:53:04,098 --> 00:53:05,364
 I can choose which things I wanna do.
+我可以选择，我想要的操作
 
 1224
 00:53:05,366 --> 00:53:08,099
 But that's what I wanna do.
+这些就是我想做的。
 
 1225
 00:53:08,101 --> 00:53:09,600
 Hopefully you know about fall through.
+愿你们对fall through有所了解
 
 1226
 00:53:09,602 --> 00:53:10,801
 You read that in the documentation.
+你在文档中查阅过相关内容
 
 1227
 00:53:10,803 --> 00:53:13,070
 Fall through is just a thing in switch that says
+Fall through 是在 switch 中用于
 
 1228
 00:53:13,072 --> 00:53:15,772
 the implementation of this case is to go to the next one.
+说明当前case的函数实现，即为下一个case的函数实现
 
 1229
 00:53:15,774 --> 00:53:17,807
 And do whatever the next one is, okay?
+无论下一个case的实现是什么。
 
 1230
 00:53:17,809 --> 00:53:19,175
 So it just falls through to the next case.
+所以，它就落到了下一个case.
 
 1231
 00:53:19,177 --> 00:53:20,660
 So in changed and
+在changed
 
 1232
 00:53:20,661 --> 00:53:22,144
 ended, I'm gonna do exactly the same thing.
+和ended中，我想执行相同的函数。
 
 1233
 00:53:22,146 --> 00:53:25,114
 What I'm gonna do is I'm gonna find out where
+我要做的就是
 
 1234
 00:53:25,116 --> 00:53:30,585
 the pan is in the coordinates of the panable view, so
+在可拖动view的坐标系中，找出pan手势的位置
 
 1235
 00:53:30,587 --> 00:53:32,020
 its coordinate system.
+pan手势所在的坐标系
 
 1236
 00:53:32,022 --> 00:53:33,721
 'Kay, that's translation in view.
+好，那就是pan手势在view中的坐标
 
 1237
 00:53:33,723 --> 00:53:35,534
 I give it the view.
+我在view中得到这个坐标值
 
 1238
 00:53:35,535 --> 00:53:37,346
 I want the coordinate system.
+我需要坐标系
 
 1239
 00:53:37,347 --> 00:53:39,158
 It's gonna give me the point in that view where the pan is.
+它将告诉我，在view中pan手势所在的点的位置
 
 1240
 00:53:39,161 --> 00:53:42,429
 Then I'm gonna update anything I want inside of my controller
+然后，我将更新控制器中我所需的东西
 
 1241
 00:53:42,431 --> 00:53:44,798
 cuz this is being handled by the controller.
+因为这就是由控制器来控制的
 
 1242
 00:53:44,800 --> 00:53:47,567
 So I'm gonna update anything I want based on that
+所以，我要，基于x,y坐标轴，来更新任何我所需要的东西，
 
 1243
 00:53:47,569 --> 00:53:51,103
 translation, x and y, then I'm gonna reset the translation
+然后，再重置坐标，
 
 1244
 00:53:51,105 --> 00:53:54,340
 and I don't have to do this but I'm going to in this case,
+我并非每次都必须执行这一步，只是需要在这种情况下执行，
 
 1245
 00:53:54,342 --> 00:53:56,441
 reset the translation back to 0, so
+将坐标重置为0，
 
 1246
 00:53:56,443 --> 00:53:59,544
 that the next time I get this called, in the next time it
+所以，当下一次调用这个方法的时候，即下一次手势状态
 
 1247
 00:53:59,546 --> 00:54:02,980
 changes it's gonna be just the difference.
+改变的时候，将得到当前位置与上一次位置之间的偏差
 
 1248
 00:54:02,982 --> 00:54:05,616
 Otherwise it's going to tell me from the time the gesture
+在其他情况下，将得到第一次识别到手势
 
 1249
 00:54:05,618 --> 00:54:07,351
 was first recognized to where I am now.
+到当前时间的时间差
 
 1250
 00:54:07,353 --> 00:54:08,719
 So that'd be a big distance when I
+当我移动的时候，我只想知道增加的距离
 
 1251
 00:54:08,721 --> 00:54:11,988
 just want the incremental distance as I move around.
+这有可能是一个很远的距离
 
 1252
 00:54:11,990 --> 00:54:13,756
 So that set translation to 0 is optional,
+所以将坐标设置为0是可选的
 
 1253
 00:54:13,758 --> 00:54:14,490
 you can do it if you want.
+如果你想做的话，可以做。
 
 1254
 00:54:16,060 --> 00:54:17,793
 Okay? So that's it.
+就这些
 
 1255
 00:54:17,795 --> 00:54:20,428
 That's how we handle a gesture.
+这是如何控制一个手势
 
 1256
 00:54:20,430 --> 00:54:21,496
 Very straight forward.
+非常直白
 
 1257
 00:54:22,865 --> 00:54:23,931
 So let's talk about some of
+我们来讨论一下，当前存在的几个
 
 1258
 00:54:23,933 --> 00:54:26,133
 the concrete gestures that exist.
+具体的手势。
 
 1259
 00:54:26,135 --> 00:54:27,300
 There's pinch.
+有缩放(pinch)手势
 
 1260
 00:54:27,302 --> 00:54:28,434
 Okay? Pinch,
 
+
 1261
 00:54:28,436 --> 00:54:29,735
 instead of giving you translation,
+pinch手势给你传递的不是坐标
 
 1262
 00:54:29,737 --> 00:54:31,103
 it gives you scale.
+而是比例
 
 1263
 00:54:31,105 --> 00:54:33,605
 So when the pinch starts, the scale is 1.
+当pinch手势开始的时候，比例为1
 
 1264
 00:54:33,607 --> 00:54:35,840
 If you spread your fingers out twice as wide,
+如果你把你的手指拉宽两倍
 
 1265
 00:54:35,842 --> 00:54:37,108
 the scale would be 2.
+比例将变成2
 
 1266
 00:54:37,110 --> 00:54:40,744
 If you go down to half as wide, the scale would be 0.5.
+如果你将手指靠拢到一半的位置，比例将变成0.5
 
 1267
 00:54:40,746 --> 00:54:42,379
@@ -5069,34 +5334,42 @@ Okay?
 1268
 00:54:42,381 --> 00:54:44,280
 So that's how pinches work.
+这就是pinch手势的工作原理
 
 1269
 00:54:44,282 --> 00:54:45,548
 And it'll tell you the velocity.
+它也会告诉你速度
 
 1270
 00:54:45,550 --> 00:54:47,283
 How fast the person is pinching.
+用户缩放的速度有多快
 
 1271
 00:54:47,285 --> 00:54:48,350
 There's also rotation.
+还有旋转(rotation)手势
 
 1272
 00:54:48,352 --> 00:54:50,218
 So that's a two finger thing as well.
+这也是一个两个手指的手势
 
 1273
 00:54:50,220 --> 00:54:52,020
 You turn in a circle.
+你转一个圈
 
 1274
 00:54:52,022 --> 00:54:54,305
 So it's like you're turning a knob.
+就像在转动一个旋钮
 
 1275
 00:54:54,306 --> 00:54:56,589
 It tells you how many radians the thing has been rotated.
+它会告诉你，该物体旋转了多少弧度
 
 1276
 00:54:56,592 --> 00:54:58,158
@@ -5105,258 +5378,322 @@ Okay?
 1277
 00:54:58,160 --> 00:54:59,826
 And it'll also tell you how fast in
+它也会告诉你，旋转的过程中
 
 1278
 00:54:59,828 --> 00:55:01,961
 radians per second the rotations happen.
+每秒转动的弧度
 
 1279
 00:55:01,963 --> 00:55:03,529
 So that's the way you can rotate.
+这就是你旋转的方式
 
 1280
 00:55:03,531 --> 00:55:04,997
 There's also swipes.
+接下来是滑动(swipes)手势
 
 1281
 00:55:04,999 --> 00:55:06,165
 Now, swipes are a little different.
+现在，swipes手势有一些不同
 
 1282
 00:55:06,167 --> 00:55:08,834
 When you create the swipe gesture, okay,
+当你创建一个swipes手势的时候，
 
 1283
 00:55:08,836 --> 00:55:11,670
 back in the property observer of the outlet,
+返回到outlet的property observer中
 
 1284
 00:55:11,672 --> 00:55:13,237
 I created a pan gesture.
+我创建了一个pan手势
 
 1285
 00:55:13,239 --> 00:55:15,239
 But if I created a swipe gesture there,
+但如果我创建了一个swipe手势
 
 1286
 00:55:15,241 --> 00:55:16,440
 I would send a message,
+我将发送一条消息
 
 1287
 00:55:16,442 --> 00:55:18,475
 set the property of the swipe gesture,
+来设置swipe手势的属性，
 
 1288
 00:55:18,477 --> 00:55:21,544
 number of touches required, or swipe direction there, and
+点击所需的次数，或者滑动的方向
 
 1289
 00:55:21,546 --> 00:55:24,580
 that determines whether it's a two finger swipe to the left
+这也决定了是两个手指向左滑动，
 
 1290
 00:55:24,582 --> 00:55:27,016
 or a one finger swipe down, or whatever.
+还是一个手指向下滑动，或者其他什么。
 
 1291
 00:55:27,018 --> 00:55:29,351
 You just kinda say what kind of swipe you're looking for,
+你只需要说明你在查找的滑动类型
 
 1292
 00:55:29,353 --> 00:55:32,487
 and then your handler would only be called once,
+在状态为.Recognized的情况下，
 
 1293
 00:55:32,489 --> 00:55:35,924
 with the state .Recognized when that combination
+一旦手指合并，且向指定方向滑动，
 
 1294
 00:55:35,926 --> 00:55:37,625
 of fingers and direction happens.
+控制器将会被调用
 
 1295
 00:55:37,627 --> 00:55:40,661
 So that's a little different than these other ones.
+所以，这里与其他的有些不同
 
 1296
 00:55:40,663 --> 00:55:41,995
 And there's also tap, a question.
+接下来是点击(Tap)手势，有问题。
 
 1297
 00:55:41,997 --> 00:55:46,366
 >> Also for these gestures I said you can now test in
+>> 对于这些手势，我想说，你现在可以在
 
 1298
 00:55:46,368 --> 00:55:48,668
 the simulator, right?
+模拟器中测试，对嘛？
 
 1299
 00:55:48,670 --> 00:55:50,036
 >> Can you test these in the simulator?
+>> 你可以在模拟器中，测试这些手势吗？
 
 1300
 00:55:50,038 --> 00:55:50,869
 Absolutely you can test these in
+你当然可以在模拟器中测试这些手势，
 
 1301
 00:55:50,871 --> 00:55:52,454
 the simulator, I'll show you.
+我将会展示给你们看。
 
 1302
 00:55:52,455 --> 00:55:54,038
 >> How do you test more than one finger?
+>> 你要如何测试多于一个手指的手势呢？
 
 1303
 00:55:54,041 --> 00:55:56,675
 >> Yes, how do you test more than one finger in
+>> 对，你要如何在模拟器中测试多于一个手指的手势
 
 1304
 00:55:56,677 --> 00:55:59,577
 the simulator, I'll show you how to do that.
+我将会给你们展示，这个手势的操作方法。
 
 1305
 00:55:59,579 --> 00:56:01,078
 Tap gesture is an interesting one.
+点击（Tap）手势是比较有趣的手势之一。
 
 1306
 00:56:01,080 --> 00:56:02,196
 It seems like it would be
+这个手势看起来似乎是
 
 1307
 00:56:02,197 --> 00:56:03,313
 discrete because it's kind of like swipe.
+间断的，因为这类似于滑动（swipe）手势。
 
 1308
 00:56:03,315 --> 00:56:05,582
 You set up the number of taps and the number of touches.
+你可以设置点击(tap)和触摸(touch)的次数
 
 1309
 00:56:05,584 --> 00:56:08,018
 Except for that if you have a double tap it'll actually tell
+除此之外，如果你双击，事实上它会告诉
 
 1310
 00:56:08,020 --> 00:56:10,887
 you about the first tap and the second tap.
+你第一次的点击和第二次的点击。
 
 1311
 00:56:10,889 --> 00:56:12,988
 So if you're only interested in the actual double tap you
+所以，如果你需要知道双击
 
 1312
 00:56:12,990 --> 00:56:14,323
 can just look at the state ending because
+你可以只关注结束的状态
 
 1313
 00:56:14,325 --> 00:56:15,957
 that's the end of that gesture.
+因为那是该手势的结尾
 
 1314
 00:56:15,959 --> 00:56:18,793
 But if you want to look at the intermediate states you
+但如果你想要关注中间状态
 
 1315
 00:56:18,795 --> 00:56:22,163
 can actually look at the dot changed stated as well, so
+实际上，你也可以查看点改变的状态
 
 1316
 00:56:22,165 --> 00:56:23,998
-it's not purely a discreet gesture tap.
+it's not purely a discrete gesture tap.
+所以这并不是一个真正的分离手势
 
 1317
 00:56:25,701 --> 00:56:28,535
 Okay, so let's go look at how we do gestures by putting some
+好，一起来看一下，我们应该如何为
 
 1318
 00:56:28,537 --> 00:56:29,436
 gestures in the FaceView.
+FaceView添加手势
 
 1319
 00:56:29,438 --> 00:56:31,137
 So I'm gonna put two gestures in.
+我要添加两个手势
 
 1320
 00:56:31,139 --> 00:56:35,141
 I'm gonna put in pinch to change the size of the face,
+添加pinch手势来改变脸的大小
 
 1321
 00:56:35,143 --> 00:56:40,612
 and then I'm gonna put in pan to control the happiness,
+然后，添加pan手势来控制表情
 
 1322
 00:56:40,614 --> 00:56:41,980
 in other words, control my model.
+换句话说，控制我的模型
 
 1323
 00:56:43,650 --> 00:56:44,515
 All right?
 
+
 1324
 00:56:44,517 --> 00:56:45,382
 With pan.
+用pan手势
 
 1325
 00:56:45,384 --> 00:56:46,900
 When I move up and
+当我上下拖动，
 
 1326
 00:56:46,901 --> 00:56:48,417
 down it's gonna be happy is up, sad is down.
+向上拖动时，是开心的表情；向下拖动时，是悲伤的表情。
 
 1327
 00:56:48,420 --> 00:56:50,020
 Not a swipe but actual pan so
+不是滑动，而是拖动
 
 1328
 00:56:50,022 --> 00:56:52,855
 I can move my happiness up in small increments if I want.
+所以，如果我想的话，我也可以将这个表情向上移动一点
 
 1329
 00:56:54,191 --> 00:56:57,693
 All right, so let's go back to here to do that.
+好，让我们继续。
 
 1330
 00:56:57,695 --> 00:57:03,765
 So let's go get some more space here.
+让我们腾出更多的空间
 
 1331
 00:57:03,767 --> 00:57:06,100
 So we'll go here.
+从这里开始
 
 1332
 00:57:06,102 --> 00:57:10,170
 So we'll do the pinch first.
+我们先来完成这个pinch手势
 
 1333
 00:57:10,172 --> 00:57:12,105
 Let's do the pinch first.
+先做pinch手势
 
 1334
 00:57:12,107 --> 00:57:14,707
 So the first thing I'm gonna do when I
+当我添加pinch手势的时候，我要做的第一件事
 
 1335
 00:57:14,709 --> 00:57:18,444
 make my pinch happen is to add a gesture recognizer.
+添加一个手势识别器
 
 1336
 00:57:18,446 --> 00:57:22,181
 A pinch gesture recognizer to my FaceView.
+针对FaceView的pinch手势识别器
 
 1337
 00:57:22,183 --> 00:57:24,483
 And so a great place to do that,
+添加这个方法的位置
 
 1338
 00:57:24,484 --> 00:57:26,784
 as I said, is in the property observer of the FaceView.
+正如我所说，就是在FaceView的Property Observer中
 
 1339
 00:57:26,787 --> 00:57:29,554
 So here I can just say, add gesture.
+所以，这里我只需要写addGesture
 
 1340
 00:57:29,556 --> 00:57:31,155
 Whoops, sorry, FaceView.
+抱歉，FaceView
 
 1341
 00:57:31,157 --> 00:57:32,490
@@ -5365,106 +5702,132 @@ FaceView.
 1342
 00:57:32,492 --> 00:57:34,458
 Add gesture recognizer.
+AddGestureRecognizer.
 
 1343
 00:57:34,460 --> 00:57:36,460
 And this is just any kind of gesture recognizer.
+这是任意类型的手势识别器
 
 1344
 00:57:36,462 --> 00:57:37,627
-I'm going to do a panGesture.
+I'm going to do a pan Gesture.
+而我要做的是pan手势
 
 1345
 00:57:37,629 --> 00:57:40,329
 So I'm going to say UI Pan gesture recognizer.
+所以，我要写 UIPanGestureRecognizer
 
 1346
 00:57:40,331 --> 00:57:41,497
 And then you can see that it
+你可以看到
 
 1347
 00:57:41,499 --> 00:57:44,199
 has target in action are the arguments.
+action中的target是参数
 
 1348
 00:57:44,201 --> 00:57:48,103
 So the target I'm gonna have the pinch be handled
 
+
 1349
 00:57:48,105 --> 00:57:50,171
 entirely by the view.
 
+
 1350
 00:57:50,173 --> 00:57:52,440
 Because all it's doing is changing the view scale.
+因为手势的所有操作，都是在改变view的比例
 
 1351
 00:57:52,442 --> 00:57:53,991
 Its own scale.
+view本身的比例
 
 1352
 00:57:53,992 --> 00:57:55,541
 So there's no reason I'm the controller I don't need to
+毫无疑问，controller没有必要
 
 1353
 00:57:55,544 --> 00:57:56,843
 get involved with that.
+涉及动作
 
 1354
 00:57:56,845 --> 00:58:00,347
 So I'm just going to have the target be the FaceView.
+所以，我只需要将FaceView传给target
 
 1355
 00:58:00,349 --> 00:58:04,183
 So the FaceView is going to handle this pan.
+由FaceView处理pan
 
 1356
 00:58:04,185 --> 00:58:06,085
 Or, sorry, we're doing pan, no, we'll do pinch.
+抱歉，我们正在写pan手势,我们本来要做pinch手势的
 
 1357
 00:58:06,087 --> 00:58:06,985
 So I'm doing pinch.
+我正在做pinch手势
 
 1358
 00:58:09,289 --> 00:58:10,522
 Your pinch first.
+先做pinch手势
 
 1359
 00:58:10,524 --> 00:58:11,940
 So we're doing pinch.
+正在做pinch手势
 
 1360
 00:58:11,941 --> 00:58:13,357
 So we're doing the pinch of scale, not pan, sorry.
+我们正在做比例的缩放，并不是pan，抱歉
 
 1361
 00:58:13,360 --> 00:58:15,426
 We're doing the pinch and I'm gonna have the FaceView
+我们在做pinch手势，我将要用FaceView
 
 1362
 00:58:15,428 --> 00:58:18,128
 handle this because it's just gonna modify its scale.
+来控制pinch手势，因为它仅仅改变了FaceView的比例
 
 1363
 00:58:19,064 --> 00:58:25,201
 And this action needs to be some nonprivate method
+对于action，在FaceView中，需要一个非私有的方法
 
 1364
 00:58:25,203 --> 00:58:28,904
 in my FaceView that I can call to handle it.
+用来调用这个函数。
 
 1365
 00:58:28,906 --> 00:58:33,308
 So, let's go ahead and go over to our faceview and
+继续，到faceview
 
 1366
 00:58:33,310 --> 00:58:34,509
 add such a thing.
+添加这样的一个东西
 
 1367
 00:58:34,511 --> 00:58:38,412
 So I'm going to call this method, what to call it?
+我要调用这个方法，那么，谁来调用它？
 
 1368
 00:58:38,414 --> 00:58:39,813
@@ -5477,14 +5840,17 @@ Okay?
 1370
 00:58:42,300 --> 00:58:44,784
 And it's going to take a UI pinch gesture recognizer
+它将把UIPinchGestureRecognizer
 
 1371
 00:58:44,787 --> 00:58:47,687
 as an argument, and we'll call that the gesture.
+作为参数，我们将使用这个手势。
 
 1372
 00:58:48,956 --> 00:58:52,157
 And all this is gonna do is modify our scale.
+所有的这些，都是用来调整比例大小的
 
 1373
 00:58:53,894 --> 00:58:54,459
@@ -5493,34 +5859,42 @@ Okay?
 1374
 00:58:55,661 --> 00:58:56,960
 Understand? You got this method here?
+明白吗？都理解这个方法了吗？
 
 1375
 00:58:56,962 --> 00:58:58,562
 So how is this method gonna do this?
+那么，这个方法将要做些什么呢？
 
 1376
 00:58:58,564 --> 00:59:03,833
 Well, I'm only going to adjust my scale when the pinch moves.
+好，pinch的时候，我只是在调整比例
 
 1377
 00:59:04,769 --> 00:59:06,869
 I'm not gonna do it when it first goes down because it's
+当手指第一次点击到屏幕的时候，我无需执行这个方法
 
 1378
 00:59:06,871 --> 00:59:09,037
 gonna be scale of 1 anyway, and
+因为此时无论如何它的比例都将是1
 
 1379
 00:59:09,039 --> 00:59:11,873
 I probably should do it when the fingers go up, but just to
+当手指移开的时候，我应该要执行这个方法，但是
 
 1380
 00:59:11,875 --> 00:59:14,842
 make less code here I'm just gonna do it when it changes.
+这里尽可能少写一点代码，因为我只想在手势改变的时候执行
 
 1381
 00:59:14,844 --> 00:59:23,450
 So I'm gonna say if the gesture state equals .changed.
+所以，我会写如果手势的状态等于 .changed
 
 1382
 00:59:23,452 --> 00:59:24,751
@@ -5529,10 +5903,12 @@ Okay.
 1383
 00:59:24,753 --> 00:59:28,955
 Then I'm going to take my own scale and
+然后，我将用原来的比例(scale)
 
 1384
 00:59:28,957 --> 00:59:32,891
 multiply it by the gestures scale.
+乘以手势的比例(gesture.scale)
 
 1385
 00:59:32,893 --> 00:59:33,992
@@ -5541,14 +5917,17 @@ Okay.
 1386
 00:59:33,994 --> 00:59:35,994
 So if the gesture pinch scales out.
+如果手势向外拉伸
 
 1387
 00:59:35,996 --> 00:59:37,261
 I'm going to make my scale bigger.
+将使得比例增大
 
 1388
 00:59:37,263 --> 00:59:39,630
 If it scales in I'm going to make my scale smaller.
+如果手势向内靠拢，将使得比例缩小
 
 1389
 00:59:39,632 --> 00:59:41,716
@@ -5557,298 +5936,372 @@ Okay.
 1390
 00:59:41,717 --> 00:59:43,801
 And I'm going to reset the gesture scale back to 1
+我要把手势的比例(gesture.scale)重置为1
 
 1391
 00:59:43,803 --> 00:59:45,403
 all the time.
+任何情况下
 
 1392
 00:59:45,404 --> 00:59:47,004
 By resetting it back to 1 then I'm only getting the
+通过将比例重置为1，我才能只获取到
 
 1393
 00:59:47,006 --> 00:59:49,439
 difference between the last time it told me to update.
+用于更新的最后一次变化的比例大小
 
 1394
 00:59:49,441 --> 00:59:52,975
 So that way I can update my scale every time it moves.
+每当手势移动的时候，我将会更新比例
 
 1395
 00:59:52,977 --> 00:59:54,643
 And since I keep resetting back to one,
+再将比例重置为1
 
 1396
 00:59:54,645 --> 00:59:56,178
 I keep getting incremental scale.
+我一直获取增加的比例
 
 1397
 00:59:56,180 --> 00:59:57,979
 It's gonna keep making my scale bigger or
+根据最后一次
 
 1398
 00:59:57,981 --> 01:00:00,148
 smaller depending on whether the last movement of
+缩放的情况
 
 1399
 01:00:00,150 --> 01:00:02,283
 the pinch was bigger or smaller.
+使得比例变大或者变小
 
 1400
 01:00:02,285 --> 01:00:04,552
 This makes my code a lot simpler.
+这使得代码简洁很多
 
 1401
 01:00:04,554 --> 01:00:06,887
 So that's it. That's all that's necessary.
+就是这些，这就是所有必需的代码
 
 1402
 01:00:07,923 --> 01:00:11,257
 And it's typical for gesture recognizers to be this simple,
+一个典型的手势识别器的代码就是如此简单
 
 1403
 01:00:11,259 --> 01:00:14,827
 to not require a lot of code.
+不需要编写一大堆的代码
 
 1404
 01:00:14,829 --> 01:00:16,862
 So, this is the name of the handler.
+所以 scale 是 handler 的名称
 
 1405
 01:00:16,864 --> 01:00:18,731
 So, let's go back to our controller and
+让我们回到控制器的代码
 
 1406
 01:00:18,733 --> 01:00:20,932
 put that in here, the action is scale.
+把手势识别器的 action 设置为 scale
 
 1407
 01:00:20,934 --> 01:00:22,500
 And it did take that argument.
+由于这是其中的一个参数
 
 1408
 01:00:22,502 --> 01:00:23,835
 So, I do need to put the colon there.
+所以我需要在 scale 后面加上一个冒号
 
 1409
 01:00:23,837 --> 01:00:25,970
 Okay, and that's it.
+完成了
 
 1410
 01:00:27,206 --> 01:00:28,071
 That's all that's required.
+所有所需的代码我们都完成了
 
 1411
 01:00:28,073 --> 01:00:28,972
 So, let's go ahead and try it.
+让我们运行一下来看看
 
 1412
 01:00:30,075 --> 01:00:33,942
 Now as was being asked here, how do I do two fingers,
+这里我经常被问到的一个问题就是，如何我模拟两个手指的操作
 
 1413
 01:00:33,944 --> 01:00:35,477
 I only got one mouse here.
+我只有一个鼠标
 
 1414
 01:00:35,479 --> 01:00:38,279
 And the answer is you hold down the option key.
+回答是，你按住 option 键
 
 1415
 01:00:38,281 --> 01:00:41,582
 You see when you hold down option, you get two fingers.
+当你按住 option 键时，你模拟了两个手指的操作
 
 1416
 01:00:41,584 --> 01:00:46,353
 Okay, and they're evenly spaced from the middle, and
+没有问题吧？这两个手指与中心相对称
 
 1417
 01:00:46,355 --> 01:00:49,255
 I can use them to pinch in and out.
+我能使用这两个手指来模拟缩放的操作
 
 1418
 01:00:52,193 --> 01:00:55,311
 Okay, there we go.
+让我们继续
 
 1419
 01:00:55,312 --> 01:00:58,430
 So you can see adding gestures really, really simple, okay.
+你可以通过上面的演示看到，添加一个手势识别器是非常简单的
 
 1420
 01:00:58,432 --> 01:00:59,698
 You can do other things too.
+当然你也可以做其他的事情
 
 1421
 01:00:59,700 --> 01:01:04,702
 If I can remember here I think Cmd, what is it.
+可能是 ⌘ 键吧，我记得
 
 1422
 01:01:04,704 --> 01:01:06,287
 There's other things too,
+用鼠标模拟其他的手指操作
 
 1423
 01:01:06,288 --> 01:01:07,871
 I can't remember offhand what they are but
+我现在记不起来了，但是
 
 1424
 01:01:07,874 --> 01:01:11,408
 you can take the two things and move them.
+你可以模拟两指移动
 
 1425
 01:01:11,410 --> 01:01:12,843
 There we go. I'm using Shift.
+噢，就是这个，按住 Control 键的同时，按住 Shift 键
 
 1426
 01:01:12,845 --> 01:01:14,444
 Now you can move them up here.
+现在你可以用鼠标模拟两个手指同时上移
 
 1427
 01:01:14,446 --> 01:01:18,814
 So that you can expand them out from here or whatever.
+你可以模拟把这个图形扩展开或者其他的什么操作
 
 1428
 01:01:18,816 --> 01:01:20,282
 So you can control them a little bit.
+但是你只能用鼠标模拟一点点的手指动作
 
 1429
 01:01:20,284 --> 01:01:22,384
 Only two, you can't do three fingers or whatever.
+因为你只能模拟两个手指的动作，不能模拟两个手指以上的动作
 
 1430
 01:01:22,386 --> 01:01:25,020
 So there's some limitations but
+尽管有些局限性
 
 1431
 01:01:25,022 --> 01:01:28,089
 you can do some stuff there, all right.
+但是至少你能在模拟器里模拟一些手指动作，明白了吗？
 
 1432
 01:01:28,091 --> 01:01:29,274
 So that's good. So
+很好
 
 1433
 01:01:29,275 --> 01:01:30,458
 now let's talk about another gesture.
+让我们继续讲一下其他的手势
 
 1434
 01:01:30,460 --> 01:01:32,826
 Let's do a pan gesture, where
+让我们来做一个拖动手势识别器（Pan Gesture）
 
 1435
 01:01:36,165 --> 01:01:41,000
 if I pan up it's gonna make my guy happier and
+当我向上拖动的时候，我希望让我们的小人看上去比较开心
 
 1436
 01:01:41,002 --> 01:01:42,535
 if I pan down it's gonna make him sadder.
+当我向下拖动的时候，我希望让我们的小人看上去比较难过
 
 1437
 01:01:43,637 --> 01:01:44,736
 Okay.
+没问题吧？
 
 1438
 01:01:44,737 --> 01:01:45,836
 So I can use a pan gesture for that.
+我可以使用一个拖动手势识别器来实现
 
 1439
 01:01:45,839 --> 01:01:48,139
 Now, I could just go right here and
+我在这个 faceView 里添加与之前 Pinch Gesture 类似的代码
 
 1440
 01:01:48,141 --> 01:01:54,445
 do the same thing, I could say faceView.addGestureRecognizer-
+这里我输入 faceView.addGestureRecognizer
 
 1441
 01:01:54,447 --> 01:01:59,316
 (UIPanGestureRecognizer{target .
+UIPanGestureRecognizer(target: ...
 
 1442
 01:01:59,318 --> 01:02:00,884
 The target would be myself.
+target 将会是 self
 
 1443
 01:02:00,886 --> 01:02:05,154
 Because if I'm modifying the model with that pan gesture,
+因为我通过这个拖动手势识别器改变了我的 Model
 
 1444
 01:02:05,156 --> 01:02:06,555
 my view can't do that.
+我的 View 不能够完成这些
 
 1445
 01:02:06,557 --> 01:02:08,590
 The controller has to handle it itself.
+必须由控制器来处理
 
 1446
 01:02:08,592 --> 01:02:10,125
 And we can have the action of
+然后我们可以把这样的一个 Action
 
 1447
 01:02:10,127 --> 01:02:12,960
 this thing be something like changeHappiness.
+称之为 changeHappiness
 
 1448
 01:02:12,962 --> 01:02:14,362
 Take that argument or something.
+接受一个参数或者是其他什么的东西
 
 1449
 01:02:14,364 --> 01:02:15,813
 So I could do this.
+我可以按照之前我所说的这么做
 
 1450
 01:02:15,814 --> 01:02:17,263
 But I'm not gonna do it this way, okay.
+但我不想这么做，好吗？
 
 1451
 01:02:17,266 --> 01:02:18,231
 This would be perfectly fine.
+我这么写，一点问题都没有
 
 1452
 01:02:18,233 --> 01:02:19,332
 But I'm gonna show you how
+但是我想演示给你们
 
 1453
 01:02:19,334 --> 01:02:22,235
 you can set up gestures in the storyboard.
+如何在 Storyboard 中添加手势识别器
 
 1454
 01:02:22,237 --> 01:02:25,071
 So you don't even need this line of code, okay.
+所以你甚至都不需要这段代码
 
 1455
 01:02:25,073 --> 01:02:26,972
 So here's how that works.
+接下来看好
 
 1456
 01:02:26,974 --> 01:02:27,773
 We're gonna go over here.
+我们点击这里
 
 1457
 01:02:27,775 --> 01:02:29,207
 Let's get our storyboard.
+点击我们的 Main.storyboard
 
 1458
 01:02:30,944 --> 01:02:35,779
 And I wanna add a gesture recognizer to this view.
+我想在这个视图之上添加一个手势识别器
 
 1459
 01:02:35,781 --> 01:02:37,748
 I do it by going over here,
+我先点击这里
 
 1460
 01:02:37,750 --> 01:02:41,117
 same place where I add things to my view here.
+在我向我的视图添加控件的这个地方
 
 1461
 01:02:41,119 --> 01:02:43,519
 If you go down towards the bottom,
+如果你向下滚动
 
 1462
 01:02:43,521 --> 01:02:46,722
-you'll see that there's tab gesture, pinch gesture,
+you'll see that there's tap gesture, pinch gesture,
+你会看到里面有单击（Tap）、缩放（Pinch）
 
 1463
 01:02:46,724 --> 01:02:49,525
 rotation gesture, swipe gesture, pan gesture.
+旋转（Rotation）、滑动（Swipe）、拖动（Pan）的手势识别器
 
 1464
 01:02:49,527 --> 01:02:50,092
@@ -5857,522 +6310,652 @@ Okay.
 1465
 01:02:50,094 --> 01:02:54,763
 So I'm gonna grab this pan gesture and drop it on this
+我这里拖动这个拖动手势识别器并将其放在
 
 1466
 01:02:54,765 --> 01:02:59,266
 view, which says I want this view to recognize a pan.
+这个视图之上，这也就表示我希望这个视图识别一个拖动手势
 
 1467
 01:02:59,268 --> 01:03:01,268
 Now you might say, whoa, where'd that go?
+现在你可能会问，这个识别器去哪里了？
 
 1468
 01:03:01,270 --> 01:03:03,503
 I didn't see anything there what's going on?
+我没发现任何东西有变化
 
 1469
 01:03:03,505 --> 01:03:05,572
 Where is that thing, it's hard to tell.
+我怎么才能找到这个识别器呢？
 
 1470
 01:03:05,574 --> 01:03:06,839
 Well, there's two places you
+好的，有两个地方你可以
 
 1471
 01:03:06,841 --> 01:03:08,474
 can find that thing you just dropped.
+找到你刚才放置的手势识别器
 
 1472
 01:03:08,476 --> 01:03:10,009
 One is in the document outline.
+一个是在 Document Outline 中
 
 1473
 01:03:10,011 --> 01:03:11,443
 You see it right here?
+你在这里看到了吗？
 
 1474
 01:03:11,445 --> 01:03:13,345
 Pan Gesture Recognizer.
+Pan Gesture Recognizer
 
 1475
 01:03:13,347 --> 01:03:15,380
 Another one is, right at the top.
+另外一个地方是，就在这个视图的顶部
 
 1476
 01:03:15,382 --> 01:03:17,348
 If you look at the view controller right here, you'll
+如果你在 Storyboard 中查看你的 View Controller，你会
 
 1477
 01:03:17,350 --> 01:03:19,550
 see there's a Pan Gesture Recognizer right there.
+看到这里有一个叫 Pan Gesture Recognizer 的东西
 
 1478
 01:03:20,853 --> 01:03:22,852
 Okay. Now all you need to do
+好的，现在你所要做的就是
 
 1479
 01:03:22,854 --> 01:03:26,422
 to make this pan gesture recognizer be handled by your
+让这个拖动手势识别器被你的控制器所处理
 
 1480
 01:03:26,424 --> 01:03:28,257
 controller is Ctrl + drag.
+利用 Control 键加拖动
 
 1481
 01:03:28,259 --> 01:03:32,994
 So I'm holding down Ctrl and dragging in here, okay.
+我这里按住我的 Control 键，并拖动到这里
 
 1482
 01:03:32,996 --> 01:03:34,930
 Let go.
+释放拖动
 
 1483
 01:03:34,931 --> 01:03:36,865
 It's an action kind of like target action for
+这是一个 Action，类似于按钮中的 Target Action
 
 1484
 01:03:36,867 --> 01:03:38,800
 a button, but not quite exactly the same.
+但不是完全相同
 
 1485
 01:03:38,802 --> 01:03:42,803
 And I'm gonna call this change happiness cuz that's what
+我把这个 Action 称之为 changeHappiness 因为
 
 1486
 01:03:42,805 --> 01:03:44,137
 this pan gesture does.
+这是这个拖动手势识别器所做的事情
 
 1487
 01:03:44,139 --> 01:03:46,339
 Again, type I don't want to be any object.
+再一次注意，这里的类型我不希望是 AnyObject
 
 1488
 01:03:46,341 --> 01:03:47,640
 This is gonna be the type of the argument.
+这里设置的是参数的类型
 
 1489
 01:03:47,642 --> 01:03:49,775
 I want it to be Pan Gesture Recognizer.
+我想要让我参数的类型是 UIPanGestureRecognizer
 
 1490
 01:03:49,777 --> 01:03:51,477
 If you leave any object in there you'll have to be
+如果你这里保留的是 AnyObject，那么
 
 1491
 01:03:51,479 --> 01:03:55,247
 using as to turn it into a pan gesture recognizer so we can
+你将要使用 as 将其类型转换为一个 UIPanGestureRecognizer 再使用它
 
 1492
 01:03:55,249 --> 01:03:57,916
 use it, but obviously a lot easier to just click it here.
+显然我这里设置好比较简单
 
 1493
 01:03:57,918 --> 01:04:00,785
 The same as we had when we did button action.
+这和我们处理按钮的时候是一样的
 
 1494
 01:04:00,787 --> 01:04:03,988
 So it can connect, okay, here it is right here.
+单击 Connect，好的，一个 Action 方法就建立好了
 
 1495
 01:04:03,990 --> 01:04:06,656
 Let's go look at it.
+让我们看看
 
 1496
 01:04:07,626 --> 01:04:09,625
 Okay, change happiness.
+changeHappiness
 
 1497
 01:04:09,627 --> 01:04:11,360
 And now we just need to implement this one.
+现在我们只需要实现这个方法即可
 
 1498
 01:04:11,362 --> 01:04:15,464
 So, what do we need to do to change our happiness?
+我们需要在 changeHappiness 中做什么呢？
 
 1499
 01:04:15,466 --> 01:04:17,832
 Well the pan is moving up and down,
+我们知道，这个拖动手势识别的是拖上拖下的操作
 
 1500
 01:04:17,834 --> 01:04:20,668
 so I can get the coordinates of the pan in the face views
+我可以获取到，在 faceView 中拖动时手指的坐标位置
 
 1501
 01:04:20,670 --> 01:04:22,587
 coordinate system, but
+在 faceView 的坐标系中
 
 1502
 01:04:22,588 --> 01:04:24,505
 I really need to turn that into a happiness change in
+但是，我真正需要的是将坐标的变换
 
 1503
 01:04:24,507 --> 01:04:27,341
 some interpretations.
+解释成一些其他的东西，其他可以导致我的小人脸部表情变化的东西
 
 1504
 01:04:27,343 --> 01:04:29,676
 So again the controller is now interpreting what's
+再一次，控制器现在承担了解释的操作
 
 1505
 01:04:29,678 --> 01:04:32,212
 happening in the view for the model, so it's going in
+为 Model 解释 View 目前正在发生什么
 
 1506
 01:04:32,214 --> 01:04:34,280
 the opposite direction of where we went before.
+是不是与之前的方向相反
 
 1507
 01:04:34,282 --> 01:04:36,615
 And again, that's the controller's main job,
+再次重申，这个才是控制器的主要任务
 
 1508
 01:04:36,617 --> 01:04:38,650
 interpreting the model for the view and
+为 View 去解释 Model，同时
 
 1509
 01:04:38,652 --> 01:04:41,286
 the view input to modify the model.
+接受 View 的输入来改变 Model
 
 1510
 01:04:41,288 --> 01:04:42,654
 So how's this going to work?
+这里怎么让我们的方法工作？
 
 1511
 01:04:42,656 --> 01:04:48,159
 So again, I'm going to do sender.state = .changed.
+我输入 if sender.state == .changed
 
 1512
 01:04:48,161 --> 01:04:50,561
 I'm not going to do this because if I do this,
+噢，我不打算这么做，因为如果我这么做的话
 
 1513
 01:04:50,563 --> 01:04:52,229
 everyone out there is going to start doing the same thing.
+你们每一个人也将会做同样的事情
 
 1514
 01:04:52,231 --> 01:04:54,898
 So let's do a switch of this.
+让我们使用一个 switch
 
 1515
 01:04:54,900 --> 01:04:58,067
 I'm going to switch on the gestures, state.
+输入 switch gesture.state
 
 1516
 01:04:58,069 --> 01:05:02,004
 I'm going to handle the case where it ended and
+在里面，我会处理 .Ended 这样的情况
 
 1517
 01:05:02,006 --> 01:05:06,675
 I'm going to handle the case where it changed, okay.
+同样我会处理 .Changed 这样的情况
 
 1518
 01:05:06,677 --> 01:05:08,443
 And I'm just going to do them the same, so
+这两个情况之下，我将使用同样的处理方法
 
 1519
 01:05:08,445 --> 01:05:11,179
 I'll do this fall through like we did in the slides.
+所以我将 .Ended 情况设置为 fallthrough，就在我们之前所做的那样
 
 1520
 01:05:11,181 --> 01:05:16,150
 So, when this pan is changing or when the finger lifts up,
+所以，当用户正在拖动，或者当他们的手指离开屏幕的时候
 
 1521
 01:05:16,152 --> 01:05:19,052
 I'm going to try and change my happiness, okay.
+我将尝试改变我的小人的 happiness，明白了吗？
 
 1522
 01:05:20,722 --> 01:05:24,123
 So, first let's get the translation of the pan in
+首先我们先在 faceView 的坐标系空间里
 
 1523
 01:05:24,125 --> 01:05:26,392
 the face views coordinate system.
+将这个 translation
 
 1524
 01:05:26,394 --> 01:05:28,960
 And to do that I'm going to send a message to the sender,
+这里我要做的就是，给 Sender 发送一个消息
 
 1525
 01:05:28,962 --> 01:05:30,795
 you see sender right here?
+你看到这里的 Sender 了吗？
 
 1526
 01:05:30,797 --> 01:05:32,997
 That's the pan gesture recognizer that
+这就是我们在这里
 
 1527
 01:05:32,999 --> 01:05:34,465
 is being handled here.
+处理的 UIPanGestureRecognizer
 
 1528
 01:05:34,467 --> 01:05:36,567
 We call this gesture in the other one and
+我们称之为 sender
 
 1529
 01:05:36,569 --> 01:05:39,302
 a lot of people like to change this to gesture,
+另外有些人习惯称之为 gesture
 
 1530
 01:05:39,304 --> 01:05:42,172
 which I think is perfectly fine to want to do.
+这里我认为没有任何问题
 
 1531
 01:05:42,174 --> 01:05:43,873
 So I'm going to ask the gesture,
+接下来，我将要让 gesture
 
 1532
 01:05:43,875 --> 01:05:47,476
 tell me the translation in the face views coordinate system.
+告诉我在 faceView 坐标系中的转换结果
 
 1533
 01:05:47,478 --> 01:05:48,944
 So now I know how much it's moved in
+那么现在我就知道拖动操作在
 
 1534
 01:05:48,946 --> 01:05:50,812
 the face view coordinate system.
+faceView 的坐标系系统中到底移动了多少位置
 
 1535
 01:05:50,814 --> 01:05:53,448
 And so I'm going to let the happiness change, this is
+接下来，我要让 happinessChange
 
 1536
 01:05:53,450 --> 01:05:56,217
 the amount of change that's happening in my happiness.
+变成我希望在 happiness 中变化的量
 
 1537
 01:05:56,219 --> 01:06:00,888
 I could just have it be equal to translation.y, probably
+我可以这里让它等于 translation.y
 
 1538
 01:06:00,890 --> 01:06:04,291
 would wanna be -translation.y because up means happy and
+但是我更希望让它等于 -translation.y，因为向上拖动表示开心
 
 1539
 01:06:04,293 --> 01:06:06,310
 down means not happy.
+向下拖动表示不开心
 
 1540
 01:06:06,311 --> 01:06:08,328
 But that's going to change the happiness a lot with very
+但是这里的问题时，一个很小的拖动就会极大地改变
 
 1541
 01:06:08,330 --> 01:06:09,228
 small movements.
+happiness 的值
 
 1542
 01:06:09,230 --> 01:06:11,230
 So I don't really want that.
+我不希望是这样的
 
 1543
 01:06:11,232 --> 01:06:15,934
 So I really want to have, also it needs to be an int by
+我真正希望的是，当然我希望它是一个整形的值
 
 1544
 01:06:15,936 --> 01:06:21,272
 the way, so do that, because happiness is an int.
+因为 happiness 本身是一个整形的值
 
 1545
 01:06:21,274 --> 01:06:22,907
 I really want this changed last so
+我真正希望的是，它的变化量不那么大
 
 1546
 01:06:22,909 --> 01:06:25,542
 I'm going to actually divide this by a constant.
+所以我会将 -translation.y 除以一个常量
 
 1547
 01:06:25,544 --> 01:06:27,344
 So I'm going to create a constant here,
+这里我将创建一个常量
 
 1548
 01:06:27,346 --> 01:06:31,514
 Constants.HappinessGestureS- cale I'll call it.
+称之为 Constants.HappinessGestureScale
 
 1549
 01:06:31,516 --> 01:06:34,917
 And we'll go back up here and I'll do the private struct
+我们回到上面，定义一个叫 Constants 的 private struct
 
 1550
 01:06:34,919 --> 01:06:39,888
 constants, and this is a static let,
+里面输入 static let
 
 1551
 01:06:39,890 --> 01:06:45,594
 this thing which is a CG float.
+这个常量应该是一个 CGFloat
 
 1552
 01:06:48,965 --> 01:06:50,231
 Let's do four.
+让我们设置为4
 
 1553
 01:06:50,233 --> 01:06:52,199
 So for every four points we move,
+那么，我们每拖动或移动4个像素点
 
 1554
 01:06:52,201 --> 01:06:54,001
 we'll move our happiness by one.
+我们会让我们 happiness 改变1
 
 1555
 01:06:54,003 --> 01:06:55,586
 Then we could play with this constant.
+我们可以尝试不同的值
 
 1556
 01:06:55,587 --> 01:06:57,170
 That's part of the reason I'm putting it out in a constant.
+这就是为什么我把它单独拿出来的一个原因
 
 1557
 01:06:57,172 --> 01:06:59,639
 We could play with this number until we got the feel that we
+我们可以不断尝试其他的值，直到
 
 1558
 01:06:59,641 --> 01:07:03,576
 thought felt right for changing our happiness, okay.
+我们觉得合适了
 
 1559
 01:07:03,578 --> 01:07:04,610
 So we got our happiness changed.
+现在，我们有了 happinessChange
 
 1560
 01:07:04,612 --> 01:07:08,280
 So if the happiness change is not zero.
+然后，如果 happinessChange 不是0的话
 
 1561
 01:07:08,282 --> 01:07:11,416
 So if the happiness actually changed then I'm going to
+那么我将改变我的 happiness
 
 1562
 01:07:11,418 --> 01:07:17,822
 change my happiness, happiness += happinessChange.
+happiness += happinessChange
 
 1563
 01:07:17,824 --> 01:07:19,490
 I'm also going to do that reset thing.
+接着我将做一些重置工作
 
 1564
 01:07:19,492 --> 01:07:23,927
 So gesture.setTranslation(CGPoin-
+gesture.setTranslation(CGPointZero, 
 
 1565
 01:07:23,929 --> 01:07:26,629
 tZero in my faceView.
+inView: faceView)
 
 1566
 01:07:28,766 --> 01:07:32,167
 I'm resetting it because I'm changing my happiness every
+我重置它的原因是，当我每一次改变我的 happiness 的时候
 
 1567
 01:07:32,169 --> 01:07:34,836
 time it changes, so I'm going to constantly be resetting it
+我将持续重置它
 
 1568
 01:07:34,838 --> 01:07:37,338
 so that it's incremental, okay.
+以保证它是增量变化
 
 1569
 01:07:38,474 --> 01:07:41,775
 And then of course we need to have the default case,
+当然，我们需要 default 情况
 
 1570
 01:07:41,777 --> 01:07:44,478
 which is going to be cancelled or failed or
+比如说取消或者失败
 
 1571
 01:07:44,480 --> 01:07:46,880
 began, and I'm just going to do nothing in that case.
+或者是刚开始的情况，那么我将在 default 情况下不做任何操作
 
 1572
 01:07:47,949 --> 01:07:50,949
 So any other state that gets thrown to me, I'll do nothing.
+那么另外的状态触发了 changeHappiness 后，我将不做任何操作
 
 1573
 01:07:52,619 --> 01:07:53,952
 So let's see if that works, let's run.
+让我们看看是不是能够正常工作，让我们运行
 
 1574
 01:07:53,954 --> 01:07:59,457
 Here we go, so now up is happier.
+向上拖动，我们的小人看上去更开心了
 
 1575
 01:07:59,459 --> 01:08:00,758
 Down is sad.
+向下拖动，我们的小人看上去比较伤心
 
 1576
 01:08:00,760 --> 01:08:02,292
 Up, good.
+再向上，很好
 
 1577
 01:08:02,294 --> 01:08:05,762
 And we can still do this.
+当然我们还可以做缩放的操作
 
 1578
 01:08:07,498 --> 01:08:12,901
 Okay, so these gestures, they don't look the same.
+好的，所以这些手势，它们是不一样的
 
 1579
 01:08:12,903 --> 01:08:14,302
 Okay, they don't start the same.
+从根本上就不一样
 
 1580
 01:08:14,304 --> 01:08:16,021
 This one's a two-finger one,
+这一个是双指手势
 
 1581
 01:08:16,022 --> 01:08:17,739
 okay, and this is a one-finger one.
+这一个是单指手势
 
 1582
 01:08:17,741 --> 01:08:19,640
 So the system can easily tell the difference between
+系统可以轻易分辨出
 
 1583
 01:08:19,642 --> 01:08:21,775
 which one is going on and IOS is very good at
+到底是哪一种手势
 
 1584
 01:08:21,777 --> 01:08:24,678
 telling the difference between different gestures starting.
+iOS 尤其擅长这部分的东西
 
 1585
 01:08:26,281 --> 01:08:28,614
 Okay? So everybody got that?
+每个人都弄明白了吗？
 
 1586
 01:08:28,616 --> 01:08:29,982
 So we did a lot of different kind of
+我们在这里处理了不同种类的
 
 1587
 01:08:29,984 --> 01:08:30,916
 gesture handling there.
+手势
 
 1588
 01:08:30,918 --> 01:08:32,283
 We added one in a storyboard.
+我们学习了如何通过 Storyboard 添加一个手势
 
 1589
 01:08:32,285 --> 01:08:33,251
 We added one in code.
+也学习了如何通过代码来添加
 
 1590
 01:08:33,253 --> 01:08:34,485
 We handled one in our controller.
+我们在我们的控制器中处理了一个
 
 1591
 01:08:34,487 --> 01:08:36,320
 We handled one in our face view.
+另外一个在 faceView 里处理了
 
 1592
 01:08:36,322 --> 01:08:39,256
 One is scaling and pinching, the other one was translation.
+前者的的操作是处理尺寸缩放，后者是处理坐标系的变换
 
 1593
 01:08:39,258 --> 01:08:41,175
 So hopefully between those two,
+所以我希望你们通过这两个
 
 1594
 01:08:41,176 --> 01:08:43,093
 you can look through that code and kinda get a good feel for
+的代码，知道手势识别大致的一个处理流程
 
 1595
 01:08:43,095 --> 01:08:44,060
@@ -6381,114 +6964,143 @@ how the gestures go.
 1596
 01:08:47,165 --> 01:08:48,797
 Okay, good, so we do have some time left.
+好的，我们还剩下一些时间
 
 1597
 01:08:48,799 --> 01:08:51,600
 I'm going to get started on the next topic here.
+我将开始讲下一个话题
 
 1598
 01:08:52,669 --> 01:08:56,004
 Before I do that, because I'm going to get interrupted in
+在这之前，我想打断一下
 
 1599
 01:08:56,006 --> 01:08:59,206
 the middle, let's talk quickly about what's coming up.
+我要讲一下接下来的打算
 
 1600
 01:08:59,208 --> 01:09:02,443
 So on Wednesday I'm going to continue the slides that I'm
+周三我们会继续 Slide
 
 1601
 01:09:02,445 --> 01:09:04,111
 going to start in a minute here.
+我马上要讲的这个 Slide
 
 1602
 01:09:04,113 --> 01:09:05,612
 About multiple MVCs and
+这个 Slide 有关多个 MVC 
 
 1603
 01:09:05,614 --> 01:09:08,915
 then I'm gonna do a big demo creating multiple MVCs in
+我将要演示一个大的 demo，
 
 1604
 01:09:08,917 --> 01:09:11,717
 our happiness controller, okay.
+在 happiness controller 中创建多个 MVC
 
 1605
 01:09:11,719 --> 01:09:13,719
 And again, time permitting, at the end of Wednesday I'll do
+如果时间允许，在周三课程最后我会讲
 
 1606
 01:09:13,721 --> 01:09:16,788
 another topic view controller lifecycle.
+另一个主题，即 view controller 生命周期
 
 1607
 01:09:16,790 --> 01:09:20,558
 Friday, hopefully, it will have this instruments thing.
+在周五，希望可以能够给大家讲一讲 instruments
 
 1608
 01:09:20,560 --> 01:09:22,860
 And then next Monday I put auto layout question mark.
+在下周一… 我在 auto layout 后放了一个问号
 
 1609
 01:09:22,862 --> 01:09:24,128
 Because I was telling you I was going to
+因为我曾经告诉你们我会很快讲 auto layout 的内容
 
 1610
 01:09:24,130 --> 01:09:25,796
 do auto layout sooner but I keep putting it off.
+但是总是推迟。
 
 1611
 01:09:25,798 --> 01:09:27,597
 And I might put it off again, we'll see.
+或许我会继续推迟，到时候就知道了。
 
 1612
 01:09:27,599 --> 01:09:29,182
 But I won't be asking you in
+但是我不会要求你们
 
 1613
 01:09:29,183 --> 01:09:30,766
 your homework to do much sophisticated auto layout.
+在课后花太多时间熟悉 auto layout 的内容。
 
 1614
 01:09:30,769 --> 01:09:32,568
 So even it assignment three, there's very little.
+所以尽管在它（auto layout）是第三次作业，但是也只是很少一部分内容。
 
 1615
 01:09:32,570 --> 01:09:37,573
 Okay, so next topic, multiple MVCs.
+好的，下一个主题，多重 MVC。
 
 1616
 01:09:37,575 --> 01:09:39,574
 So you remember this picture, I hope.
+我希望你还记得这张图
 
 1617
 01:09:42,713 --> 01:09:45,847
 Which was at the of the MVC talk where I talked about how
+在讲到 MVC 的最后，我讲了如果我们想
+
 
 1618
 01:09:45,849 --> 01:09:47,214
 if we wanna build a big app,
+构建一个大的应用，
 
 1619
 01:09:47,216 --> 01:09:51,084
 we're gonna do it by putting multiple MVCs together, okay.
+我们将要把多个 MVC 放在一起来实现它。
 
 1620
 01:09:51,086 --> 01:09:52,719
 So we're gonna zoom in here and
+将这幅图缩小
 
 1621
 01:09:52,721 --> 01:09:55,254
 take a look at exactly how that's done.
+看一看到底是怎么实现的。
 
 1622
 01:09:55,256 --> 01:09:57,340
 Okay, how we're
+我们怎么
 
 1623
 01:09:57,341 --> 01:09:59,425
 gonna make multiple combine multiple MVC's.
+将多个 MVC 联系到一起。
 
 1624
 01:09:59,427 --> 01:10:00,977
@@ -6497,282 +7109,352 @@ Okay.
 1625
 01:10:00,978 --> 01:10:02,528
 So you see that MVC right there the purple one
+看最上边紫色的这个 MVC
 
 1626
 01:10:02,530 --> 01:10:05,030
-at the top, that's an MVC and you can
+at the top, that's an MVC and you can 
+这是一个 MVC ，而且它（MVC）的 view 
 
 1627
 01:10:05,032 --> 01:10:08,499
 see that this view is actually made up of other MVC's.
+实际上是由其它 MVC 组成的。
 
 1628
 01:10:10,003 --> 01:10:13,237
 So iOS provides some controllers for
+iOS 为 为一些 MVCs 中的 controllers 提供
 
 1629
 01:10:13,239 --> 01:10:17,474
 MVCs that have other MVCs as their view.
+了其它 MVCs 作为 controllers 的 view。
 
 1630
 01:10:17,476 --> 01:10:19,375
 And the three we're gonna talk about today,
+今天我们要讲到三个 controller,
 
 1631
 01:10:19,377 --> 01:10:20,776
 by the way you can build your own.
+BTW, 你可以创建自己的 controller。
 
 1632
 01:10:20,778 --> 01:10:22,645
 I'm not gonna talk about that today.
+今天我不会讲怎么自定义 controller
 
 1633
 01:10:22,646 --> 01:10:24,513
 You can build your own controllers that have MVCs as
+你可以自定义 controller ，并将 其它 MVC 作为 view
 
 1634
 01:10:24,515 --> 01:10:26,615
 the view, but I'm gonna talk about the three that are
+但是我今天要讲的三种 controller 是 iOS 内置的
 
 1635
 01:10:26,617 --> 01:10:29,884
 provided in iOS which you're gonna be using in this class.
+也是你们在这节课将要用到的。
 
 1636
 01:10:29,886 --> 01:10:32,153
 Which is TabBarController SplitViewControllers and
+这三个 controller 分别是 TabBarController SplitViewControllers
 
 1637
 01:10:32,155 --> 01:10:34,689
 NavigationControllers, 'kay.
+和 NavigationControllers。
 
 1638
 01:10:34,691 --> 01:10:35,856
 So these are just controllers,
+它们都是controller
 
 1639
 01:10:35,858 --> 01:10:39,893
-they're subclasses of UIViewcontroller.
+they're subclasses of UIViewController.
+是 UIViewcontroller 的子类。
 
 1640
 01:10:39,895 --> 01:10:42,261
 And they draw a little bit in their view but
+而且它们会在它们的 view 中绘制一些东西
 
 1641
 01:10:42,263 --> 01:10:45,564
 then most of their view is what other MVC's draw, so
+但是多数情况下，它们的 view 是其它 MVC 绘制的内容，
 
 1642
 01:10:45,566 --> 01:10:50,235
-the MVC's are part of their views.
+the MVCs are part of their views.
+所以其它 MVC 只是这些 controller 视图的一部分。
 
 1643
 01:10:50,237 --> 01:10:51,670
 So let's look at TabBarController,
+看看 TabBarController
 
 1644
 01:10:51,672 --> 01:10:53,471
 it's probably the simplest one of all these.
+它可能是三个中最简单的
 
 1645
 01:10:53,473 --> 01:10:55,006
 You've seen TabBarControllers,
+你们已经见过 TabBarControllers,
 
 1646
 01:10:55,008 --> 01:10:58,442
 you see it's got the four tabs along the bottom on this one.
+这个 TabBarController 底部罗列了四个 tab。
 
 1647
 01:10:58,444 --> 01:11:00,343
 This is the health app, I think.
+我觉得这个一个健康类的应用。
 
 1648
 01:11:02,814 --> 01:11:05,748
 And all that happens here is when you click one of those
+当你点击底部四个 tab button
 
 1649
 01:11:05,750 --> 01:11:10,318
 tab buttons at the bottom, the top gets replaced with an MVC.
+中的一个，上面就会被一个新的 MVC 替换。
 
 1650
 01:11:10,320 --> 01:11:12,987
 An entire MVC is controlling that top.
+整个 MVC 控制上面的内容。
 
 1651
 01:11:12,989 --> 01:11:16,457
 In this case, it's some sort of dashboard MVC or health
+在本例中，这上面要展现的是一个 MVC 的 dashboard（仪表盘）
 
 1652
 01:11:16,459 --> 01:11:20,494
 dashboard is being presented at the top, right here.
+或是一个 健康的 dashboard（仪表盘）。
 
 1653
 01:11:20,496 --> 01:11:22,195
 And the icon and
+dashboard（仪表盘）下面的 icon（图标）以及
 
 1654
 01:11:22,197 --> 01:11:25,699
 the title that goes along with the dashboard down there,
+title（标题）
 
 1655
 01:11:25,701 --> 01:11:29,468
 is actually gotten from the dashboard MVC.
+实际上来自这个 dashboard （仪表盘）MVC。
 
 1656
 01:11:29,470 --> 01:11:31,804
 In other words,
+换句话说，icon 和 title
 
 1657
 01:11:31,805 --> 01:11:34,139
 not a property you set on the UITabBarController MVC.
+不是你在 UITabBarController MVC 中设置的 property（属性）。
 
 1658
 01:11:34,141 --> 01:11:37,109
 You actually just have a property on
+实际上在你的 dashboard MVC 中，
 
 1659
 01:11:37,111 --> 01:11:39,844
 your dashboard MVC, it's called tabBarItem.
+你仅有一个叫做 tabBarItem 的属性
 
 1660
 01:11:39,846 --> 01:11:42,847
 And inside tabBarItem, if you go look it up in the doc,
+在 tabBarItem 中， 如果你查找文档，
 
 1661
 01:11:42,849 --> 01:11:47,751
 it's got things like title, icon, things that the tab bar
+tabBarItem 中有 title（标题），icon（图标），等，这些东西
 
 1662
 01:11:47,753 --> 01:11:50,754
 controller needs to put a nice tab on the bottom for
+都是 tabBarController 需要的，用来为你的 dashboard底部
 
 1663
 01:11:50,756 --> 01:11:52,589
 your dashboard MVC.
+呈现一个适当的 tab。
 
 1664
 01:11:52,590 --> 01:11:54,423
 So, as you can see, it's very object oriented, okay.
+可以看到，这非常符合面向对象的思想。
 
 1665
 01:11:54,426 --> 01:11:57,427
 Everything is contained in just this MVC.
+所有的东西都在这个 MVC 中。
 
 1666
 01:11:57,429 --> 01:11:59,395
 And so, if you press on a different tab,
+如果你按下另一个 tab，
 
 1667
 01:12:00,331 --> 01:12:02,064
 maybe the second tab, then this is a totally
+比如第二个 tab，然后
 
 1668
 01:12:02,066 --> 01:12:04,899
 different MVC that takes over the top of this screen.
+一个完全不同的MVC占据了屏幕的顶部。
 
 1669
 01:12:04,901 --> 01:12:08,269
 This would be Health Data MVC, and you can see that it's got
+这是 Health Data MVC, 可以看到
 
 1670
 01:12:08,271 --> 01:12:11,305
 a different icon and text down there, right?
+它有一个不同的 icon 和 title 在它下面，对吧？
 
 1671
 01:12:11,307 --> 01:12:13,374
 By the way, if there's too
+顺便说下，如果底部罗列了
 
 1672
 01:12:13,375 --> 01:12:15,442
 many tabs along the bottom there, I think you get five,
+太多 tab，比如有5个tab，
 
 1673
 01:12:15,444 --> 01:12:19,479
 if you go to six tabs then iOS will automatically let
+如果你要六个 tab，那么iOS将会自动让
 
 1674
 01:12:19,481 --> 01:12:22,248
 the user manage which ones he wants down there.
+用户来决定他想要哪些tab。
 
 1675
 01:12:22,250 --> 01:12:23,950
 It's pretty cool, okay.
+相当 cool，对吧。
 
 1676
 01:12:23,952 --> 01:12:25,168
 So you don't even have to and
+你可以在下面放
 
 1677
 01:12:25,169 --> 01:12:26,385
 you can put as many tabs you want.
+任意多的 tab。
 
 1678
 01:12:26,387 --> 01:12:27,720
 I don't really recommend more than five
+但是，我建议不超过五个。
 
 1679
 01:12:27,722 --> 01:12:28,720
 tabs here, by the way.
+顺便一说。 
 
 1680
 01:12:30,257 --> 01:12:31,940
 For users it's like, what,
+对于用户来说情况可能是：“ 什么？
 
 1681
 01:12:31,941 --> 01:12:33,624
 I have to manage my tabs down there, I don't wanna do that.
+我还得自己管理 tab，我可不想这么玛法 ”。
 
 1682
 01:12:33,626 --> 01:12:35,259
 It's just that you're asking yours to do more stuff.
+这是自己给自己找麻烦。
 
 1683
 01:12:35,261 --> 01:12:36,827
 So hopefully you can fit it in five.
+所以希望5个 tab 可以满足你的要求。
 
 1684
 01:12:38,097 --> 01:12:40,330
 And so we have other MVCs as well.
+我们也有其它 MVC
 
 1685
 01:12:40,332 --> 01:12:43,266
 So there's the sources of health data,
+这个是 health data（健康数据）的来源，
 
 1686
 01:12:43,268 --> 01:12:45,701
 I guess, in your Medical ID tab.
+在你的 Medical ID tab.
 
 1687
 01:12:45,703 --> 01:12:48,871
 And so this is a very simple thing you can understand.
+这些东西都很容易理解
 
 1688
 01:12:48,873 --> 01:12:50,706
-You've got this UI TabBarController,
+You've got this UITabBarController,
+你得到了这个 UITabBarController
 
 1689
 01:12:50,708 --> 01:12:53,108
 it's a controller of an MVC.
+它是一个 MVC 的 controller.
 
 1690
 01:12:53,109 --> 01:12:55,509
 The view is the little tabs along the bottom that it's
+它的（UITabBarController）的 view 是底部的它绘制的这些 tab
 
 1691
 01:12:55,512 --> 01:12:57,645
 drawing and the MVC's on the top.
+以及顶部的 MVC。
 
 1692
 01:12:58,915 --> 01:13:00,915
 Everyone understand what I
+大家都明白我说的吗？
 
 1693
 01:13:00,916 --> 01:13:02,916
 mean now about an MVC whose view contains other MVC's?
+关于一个 MVC 的 view 包含其它 MVC。
 
 1694
 01:13:02,918 --> 01:13:06,686
 So let's look at another one that does that.
+好的，一起看一下另一个 的 controller。
 
 1695
 01:13:06,688 --> 01:13:08,121
@@ -6781,178 +7463,223 @@ SplitViewController.
 1696
 01:13:08,123 --> 01:13:11,157
 So, SplitViewController takes two MVCs, and
+SplitViewController 包括两个 MVC，
 
 1697
 01:13:11,159 --> 01:13:13,892
 it puts them side-by-side, okay.
+并将它们并排放在一起。
 
 1698
 01:13:13,894 --> 01:13:15,460
 It puts the one on the left,
+它将一个放在左边。
 
 1699
 01:13:15,462 --> 01:13:19,630
 kind of a well known width there.
+似乎是一个熟知的宽度
 
 1700
 01:13:19,632 --> 01:13:21,198
 But, you don't care what that width is because,
+但是，你不必关心宽度是多少，
 
 1701
 01:13:21,200 --> 01:13:23,033
 hopefully, you've got auto-layout, and so
+你可以使用 auto-layout，
 
 1702
 01:13:23,035 --> 01:13:24,334
 it could be any width you want, or
+想让它多宽，
 
 1703
 01:13:24,336 --> 01:13:26,102
 any height you want, like this.
+想让它都高都可以，就像这样。
 
 1704
 01:13:26,104 --> 01:13:27,503
 And then it puts another one on the right.
+然后，它（UISplitViewController）将另一个 MVC 放在右边。
 
 1705
 01:13:27,505 --> 01:13:31,774
 Now, we call the MVC on the left, the Master in
+接下来，我们将左边的 MVC 叫做 split view 的 Master
 
 1706
 01:13:31,776 --> 01:13:34,576
 the split view and we call the MVC on the right the Detail.
+将右边的 MVC 叫做 Detail。
 
 1707
 01:13:38,615 --> 01:13:41,349
 Now here I've got a calculator and a calculator graph.
+目前我有一个计算器和一个计算器图表。
 
 1708
 01:13:41,351 --> 01:13:44,218
 You assignment three is going to be to build this basically.
+你们第三次作业基本上将要实现这个计算器。
 
 1709
 01:13:44,220 --> 01:13:46,353
 It doesn't have to look exactly like this, okay.
+你们的计算器不必和我的完全一样。
 
 1710
 01:13:46,355 --> 01:13:49,022
 I've made a simple looking one here.
+我只做了一个简单的外观。
 
 1711
 01:13:49,024 --> 01:13:51,791
 But it could look very much like this.
+但是你们的作业可能和我展示的样子差不了多少。
 
 1712
 01:13:51,793 --> 01:13:53,292
 But you do have to use a SplitViewController.
+但是你必须使用一个 SplitViewController。
 
 1713
 01:13:53,294 --> 01:13:54,260
 So this is what it looks like.
+现在它就是这个样子。
 
 1714
 01:13:54,262 --> 01:13:58,897
 Now, this is only happening on an iPad.
+当然，只有在 iPad 上才会这样。
 
 1715
 01:13:58,899 --> 01:14:00,732
 Now, when we talk about auto layout,
+当我们说到 auto layout，
 
 1716
 01:14:00,734 --> 01:14:04,335
 we're going to start talking about size classes.
+我们就要从 size classes 开始说起。
 
 1717
 01:14:04,337 --> 01:14:07,304
 So, different devices have been grouped into
+各种不同尺寸的 iOS 设备
 
 1718
 01:14:07,306 --> 01:14:08,839
 size classes.
+都被集成到了 size classes 中。
 
 1719
 01:14:08,841 --> 01:14:13,410
 And the sizes basically are regular, so regular width and
+size 通常为 regular，regular width 和 regular height
+
 
 1720
 01:14:13,412 --> 01:14:16,512
 regular height or compact width and height.
-
+或者 compact width， compact height。
 1721
 01:14:16,514 --> 01:14:18,614
 So an iPhone, all the iPhones except for
+对于 iPhone 来说，除了在 
 
 1722
 01:14:18,616 --> 01:14:21,083
 the iPhone 6+ in landscape,
+landscape（横向模式）的 iPhone 6+，
 
 1723
 01:14:21,085 --> 01:14:25,220
 are compact both vertically and horizontally, okay.
+在水平方向和竖直方向都是 compact。
 
 1724
 01:14:25,222 --> 01:14:28,656
 The iPad is regular width, okay.
+iPad 是 regular width。
 
 1725
 01:14:28,658 --> 01:14:30,458
 Now, that's of the whole device.
+这就是整个设备。
 
 1726
 01:14:30,460 --> 01:14:35,829
 But the MVC's inside also will have a certain size class.
+但是设备里（iPad）的 MVC 同样有特定的 size class。
 
 1727
 01:14:35,831 --> 01:14:39,265
 So this side by side business can only happen in
+所以这样并排排列的 MVC 只能出现在
 
 1728
 01:14:39,267 --> 01:14:42,168
 a device whose size class is regular width.
+拥有 regular width 的 size class。
 
 1729
 01:14:42,170 --> 01:14:46,238
 So that's the iPad in both landscape and portrait could
+所有只有 iPad 在 landscape（横向模式）和 portrait（纵向模式）是 regular width，
 
 1730
 01:14:46,240 --> 01:14:49,941
 be that, and the iPhone 6+ in landscape, okay.
+iPhone 6+ 在 landscape（横向模式）下也是 regular width 。
 
 1731
 01:14:49,943 --> 01:14:52,977
 So SplitView is only gonna do the side by
+所以 SplitView 只能在这几种情况下并排放置。
 
 1732
 01:14:52,979 --> 01:14:55,013
 side business there.
+所以 SplitView 只能在这几种情况下并排放置。
+
 
 1733
 01:14:55,015 --> 01:15:01,352
 And if you rotate the iPad, then the Master disappears.
+如果你旋转 iPad，Master 消失了。
 
 1734
 01:15:02,521 --> 01:15:04,688
 But it can be swiped out.
+但是可以将 Master 滑动唤出。
 
 1735
 01:15:04,690 --> 01:15:10,126
 If you just swipe from the left, when you rotate the only
+如果你从屏幕左边滑动，当 ipad 旋转时只有 Detail 视图，
 
 1736
 01:15:10,128 --> 01:15:12,361
 ones there is the Detail, you don't see the Master.
+看不到 Master。
 
 1737
 01:15:12,363 --> 01:15:14,129
 But if you swipe out from the left,
+但是如果你从左向右滑动，
 
 1738
 01:15:14,131 --> 01:15:15,830
 then you get to see the Master as well.
+你也可以看到 Master。
 
 1739
 01:15:15,832 --> 01:15:16,798
 Again, side by side.
+Master 和 Detail 又并排放在一起了。
 
 1740
 01:15:18,334 --> 01:15:19,633
@@ -6961,62 +7688,76 @@ Okay.
 1741
 01:15:19,635 --> 01:15:22,302
 And if you touch the Detail, it'll make the Master go
+如果你点击 Detail，会使 Master 返回消失
 
 1742
 01:15:22,304 --> 01:15:23,703
 back away and then you can swipe it.
+然后可以再次滑动唤出。
 
 1743
 01:15:23,705 --> 01:15:26,005
 So you can bring the Master out or not, okay.
+所以你可以决定是否唤出 Maser。
 
 1744
 01:15:26,007 --> 01:15:28,607
 That make sense?
+懂了吗？
 
 1745
 01:15:28,609 --> 01:15:30,609
 So that's the SplitViewController,
-
+以上是 SplitViewController
 1746
 01:15:30,611 --> 01:15:32,444
 kind of how it's arranged.
+以及它怎么排列。
 
 1747
 01:15:35,115 --> 01:15:37,915
 But most importantly, I want you to understand that again,
+最重要的是，我想让你们再次理解
 
 1748
 01:15:37,917 --> 01:15:40,217
 it's two MVCs that are the view.
+这两个 MVC 是 view。
 
 1749
 01:15:40,219 --> 01:15:43,653
 Now the SplitView draws nothing in its view,
+SplitView 并没有在它的 view 中绘制任何内容，
 
 1750
 01:15:44,656 --> 01:15:47,189
 except for maybe that vertical separator line.
+可能除了竖直的分界线。
 
 1751
 01:15:47,191 --> 01:15:48,590
 Okay, there's a vertical separator line.
+这条竖直的分界线。
 
 1752
 01:15:48,592 --> 01:15:52,327
 That's probably drawn by the SplitViewController, but
+可能是 SplitViewController 绘制的，
 
 1753
 01:15:52,329 --> 01:15:55,430
-otherwise it's only drawing whatever the MVCs draw.
+otherwise it's only drawing  whatever the MVCs draw.
+但是，他只展示了 MVC 绘制的内容
 
 1754
 01:15:55,432 --> 01:15:57,131
 So it doesn't even have any drawing on
+所以，它甚至不像 tabBarViewController 那样
 
 1755
 01:15:57,133 --> 01:15:58,632
 the bottom like the TabBar has.
+绘制底部的 tabBar。
 
 1756
 01:15:59,735 --> 01:16:00,884
@@ -7025,40 +7766,50 @@ Okay?
 1757
 01:16:00,885 --> 01:16:02,034
 So the next thing I'm going to talk about, and
+下面我要讲到的，
 
 1758
 01:16:02,037 --> 01:16:03,903
 we're going to start this next time,
+以及我们要再下一节课继续讲的是
 
 1759
 01:16:03,905 --> 01:16:07,407
 is NavigationController, which is a very powerful one.
+NavigationController， 这是一个功能强大的 controller。
 
 1760
 01:16:07,409 --> 01:16:10,242
 It draws at the top a little title and
+它在顶部绘制小的 title 和其他东西，
 
 1761
 01:16:10,244 --> 01:16:12,277
 some things, it can draw even around the bottom.
+它甚至可以在底部周围绘制内容。
 
 1762
 01:16:12,279 --> 01:16:15,380
 And then it can display any number of MVCs.
+还有，它可以展示任意多的 MVC。
 
 1763
 01:16:15,382 --> 01:16:19,917
 Okay, so we'll pick up the NavigationController next time
+好的，下节课我们将要学习 NavigationController
 
 1764
 01:16:19,919 --> 01:16:22,219
 and in the meantime if you have any questions,
+ 如果你有任何问题要问，
 
 1765
 01:16:22,221 --> 01:16:23,053
 I'll be here as usual.
+我会像往常一样在这里解答。
 
 1766
 01:16:24,623 --> 01:16:24,654
 >> For more, please visit us at www.stanford.edu
+>> 登录 www.stanford.edu 获取更多内容。
 

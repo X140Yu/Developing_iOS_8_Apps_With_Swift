@@ -56,7 +56,7 @@ bridging between the Swift world and the old world.
 12
 00:00:34,731 --> 00:00:37,931
 And we're gonna talk about an example of
-然后我们会讲 Property list，这是适用
+然后我们会讲 Property List，这是适用
 
 13
 00:00:37,933 --> 00:00:41,168
@@ -320,8 +320,8 @@ We talked briefly about NSNumber,
 
 67
 00:03:04,860 --> 00:03:06,960
-we talked about the NSNumber format and all that.
-我们讲了 NSNumber 的模版 。
+we talked about the NSNumberFormatter and all that.
+我们讲了 NSNumberFormatter 还有其他东西。
 
 68
 00:03:06,962 --> 00:03:10,430
@@ -511,7 +511,7 @@ it does thinks a little more accurately.
 106
 00:04:52,286 --> 00:04:57,189
 But NSArray is the same thing, you can cast from an Array,
-NSArray 也是一样的， 你可以从 Swift 的 Array 
+NSArray 也是一样的， 你可以从 Swift 的 Array
 
 107
 00:04:57,191 --> 00:04:59,457
@@ -591,7 +591,7 @@ because Dictionary, the key has to be an NSObject.
 122
 00:05:40,227 --> 00:05:42,594
 And of course, we know that String, and Array, and
-当然我们知道，String，Array 和 Dictionary 在 Swift 
+当然我们知道，String，Array 和 Dictionary 在 Swift
 
 123
 00:05:42,596 --> 00:05:45,663
@@ -626,7 +626,7 @@ are bridged to classes that inherit from NSObject,
 129
 00:06:00,345 --> 00:06:01,744
 because NSString, NSArray, and
-因为 NSString ，NSArray 和 
+因为 NSString ，NSArray 和
 
 130
 00:06:01,746 --> 00:06:03,412
@@ -650,7 +650,7 @@ even though it requires NSObject, okay?
 
 134
 00:06:11,921 --> 00:06:14,889
-And of course, all three of them can be values, 
+And of course, all three of them can be values,
 当然，它们3个也可以作为字典的值，
 
 135
@@ -703,7 +703,7 @@ seeing NSString, NSArray, what's going on, okay?
 146
 00:06:37,876 --> 00:06:40,109
 They're just being automatically bridged for you.
-它们都是自动桥接过来的。 
+它们都是自动桥接过来的。
 
 147
 00:06:41,579 --> 00:06:43,396
@@ -717,7 +717,7 @@ So, we talked about AnyObject last time,
 149
 00:06:45,216 --> 00:06:47,182
 and now I'm gonna talk about a use of AnyObject,
-现在我们要讲 AnyObject 的一个用处。 
+现在我们要讲 AnyObject 的一个用处。
 
 150
 00:06:47,184 --> 00:06:48,783
@@ -777,7 +777,7 @@ It's in AnyObject.
 161
 00:07:19,545 --> 00:07:21,478
 It's kind of unwieldy, because you have to do a lot,
-它看起来非常笨重，因为我们需要用 ising 或者 asing 做
+它看起来非常笨重，因为我们需要用 is 或者 as 做
 
 162
 00:07:21,481 --> 00:07:24,115
@@ -827,7 +827,7 @@ because only they know what Strings, Arrays,
 172
 00:07:45,168 --> 00:07:46,734
 Dictionaries, and stuff are in there.
-Dictionarie 还是别的什么。
+Dictionary 还是别的什么。
 
 173
 00:07:46,736 --> 00:07:48,252
@@ -847,7 +847,7 @@ So, all they can do, is pass it around to other things.
 176
 00:07:53,275 --> 00:07:57,010
 So, it's good for blind data passing, the other thing is,
-这是隐式数据传送的好处。 另一个原因是
+这是隐式数据传送的好处。另一个原因是
 
 177
 00:07:57,012 --> 00:08:00,580
@@ -862,12 +862,12 @@ Since it's got Arrays, and
 179
 00:08:02,016 --> 00:08:05,584
 Dictionaries, and Numbers, and Dates, and all that in there.
-Dictionarie， Number， Date ，都有可能。
+Dictionary， Number， Date，都有可能。
 
 180
 00:08:05,586 --> 00:08:10,021
 You can turn a data structure, like your r-ops stack,
-你可以把一个数据结构变成一个泛型的数据结构，就想你
+你可以把一个数据结构变成一个泛型的数据结构，就像你的
 
 181
 00:08:10,023 --> 00:08:12,523
@@ -877,12 +877,12 @@ CalculatorBrain类里面的opStack，
 182
 00:08:12,525 --> 00:08:14,392
 that's not a generic data structure, but
-它有一个叫做op的枚举，但是它不是泛型的
+它有一个叫做op的枚举，它不是泛型的
 
 183
 00:08:14,394 --> 00:08:17,461
 we can turn it into a generic data structure, for example,
-但是它不是泛型的。
+但是我们可以把它改成泛型的。
 
 184
 00:08:17,463 --> 00:08:20,831
@@ -917,7 +917,7 @@ NSUserDefaults 就像一个微型的数据库。
 190
 00:08:37,014 --> 00:08:39,347
 and it only knows how to store Property Lists.
-它只会存储Property List 。
+它只会存储Property List
 
 191
 00:08:39,349 --> 00:08:40,999
@@ -961,7 +961,7 @@ It can store and retrieve any Property List, and
 199
 00:08:57,798 --> 00:08:59,831
 it just stores it like a Dictionary,
-导出Property List ，
+导出Property List，
 
 200
 00:08:59,833 --> 00:09:03,034
@@ -971,7 +971,7 @@ NSUserDefaults本身就是一个字典。
 201
 00:09:03,036 --> 00:09:05,103
 And, it can store the whole Property List,
-它可以存储所有的属性列表。
+它可以存储所有的Property List。
 
 202
 00:09:05,105 --> 00:09:08,005
@@ -981,12 +981,12 @@ like setObject forkey: , that first method you see there.
 203
 00:09:08,007 --> 00:09:10,007
 And, repeat, retrieve all Property List,
-然后，重复，取回所有的属性列表。
+然后，重复，取回所有的Property List。
 
 204
 00:09:10,009 --> 00:09:12,642
 or, it can just do little tiny pieces of Property List,
-或者，它可以只处理属性列表中的一小部分。
+或者，它可以只处理Property List中的一小部分。
 
 205
 00:09:12,644 --> 00:09:14,377
@@ -1011,7 +1011,7 @@ it's like a Dictionary in it's key value, but
 209
 00:09:19,884 --> 00:09:21,350
 it only stores Property List.
-它只存储属性列表。
+它只存储Property List。
 
 210
 00:09:21,352 --> 00:09:23,919
@@ -1076,7 +1076,7 @@ Here's how you use NSUserDefaults.
 222
 00:09:45,505 --> 00:09:49,006
 You use this type method in NSUserDefaults called
-你在 NSUserDefaults 中使用这类方法 
+你在 NSUserDefaults 中使用这类方法
 
 223
 00:09:49,008 --> 00:09:50,974
@@ -1111,12 +1111,12 @@ And then you just send it messages like, you know,
 229
 00:10:02,119 --> 00:10:05,587
 setObject forkey:, store this Property List, and
-setObject forkey:，保存这个属性列表。
+setObject forkey:，保存这个Property List。
 
 230
 00:10:05,589 --> 00:10:07,989
 getObject forkey: to get it back.
-然后使用 getObject forkey，获取它。
+然后使用 getObject forkey:，获取它。
 
 231
 00:10:07,991 --> 00:10:09,257
@@ -1130,8 +1130,8 @@ are automatically saved, but, there is a method called
 
 233
 00:10:12,195 --> 00:10:15,929
-synchronized, which is kinda like save, which can force it,
-synchronized，类似于 save，这个方法可以强制
+synchronize, which is kinda like save, which can force it,
+synchronize，类似于 save，这个方法可以强制
 
 234
 00:10:15,931 --> 00:10:17,931
@@ -1140,13 +1140,13 @@ to save out to disc.
 
 235
 00:10:17,933 --> 00:10:19,666
-Why do you ever need synchronized when it
+Why do you ever need synchronize when it
 既然有自动保存，为什么你还需要
 
 236
 00:10:19,668 --> 00:10:21,868
 auto saves?
-synchronized？
+synchronize？
 
 237
 00:10:21,869 --> 00:10:24,069
@@ -1156,7 +1156,7 @@ Well, in auto save, when things happen like you app
 238
 00:10:24,072 --> 00:10:28,073
 stops being the front most app,
-停止做为最前端的 app，
+不再作为最前端的 app，
 
 239
 00:10:28,075 --> 00:10:29,708
@@ -1201,7 +1201,7 @@ it doesn't save, okay?
 247
 00:10:43,988 --> 00:10:47,289
 And so, you probably wanna throw some synchronizes in
-因此，你可能要放一些 synchronizes，
+因此，你可能要放一些 synchronize，
 
 248
 00:10:47,291 --> 00:10:49,157
@@ -1240,7 +1240,7 @@ Okay?
 255
 00:11:01,336 --> 00:11:03,403
 And yeah, synchronize return to Bool,
-当然， synchronize 返回 Bool 值，
+当然，synchronize 返回 Bool 值，
 
 256
 00:11:03,405 --> 00:11:05,021
@@ -1280,7 +1280,7 @@ All right, so, I'm gonna do a little demo here.
 263
 00:11:20,853 --> 00:11:23,086
 And show you a little more about Property List.
-给你展示更多的属性列表。
+给你展示更多的 Property List。
 
 264
 00:11:23,088 --> 00:11:24,821
@@ -1344,7 +1344,7 @@ But we don't wanna reveal our internal data structure, and
 276
 00:11:52,680 --> 00:11:55,113
 there's nothing anyone can do with that program.
-这样任何人就不能在这个程序上做任何事。
+这样任何人就不能在这个 program 上做任何事。
 
 277
 00:11:55,115 --> 00:11:56,848
@@ -1364,27 +1364,27 @@ CalculatorBrain，或者将来的其他 CalculatorBrain，
 280
 00:12:02,522 --> 00:12:05,389
 the future, and then say, evaluate.
-然后，评估。
+然后，调用 evaluate()
 
 281
 00:12:05,391 --> 00:12:07,724
 Okay, so you see the value of having this?
-你看到有这个的值？
+你们看到这样做的价值没？
 
 282
 00:12:07,726 --> 00:12:09,359
 So, basically getting the program out of
-基本上，从 CalculatorBrain 中获取 program，
+基本上就是，从 CalculatorBrain 中获取 program，
 
 283
 00:12:09,361 --> 00:12:10,793
 the CalculatorBrain and send it back.
-然后在返还它。
+然后把它送回去。
 
 284
 00:12:10,795 --> 00:12:13,162
 But we're gonna return it as a Property List.
-但我们将以属性列表返回。
+但我们将以 Property List 的形式返回。
 
 285
 00:12:13,164 --> 00:12:14,196
@@ -1404,7 +1404,7 @@ it's gonna be of type AnyObject, and
 288
 00:12:17,634 --> 00:12:20,068
 all they can do is get it, and then set it back.
-他们能做的是获取它，然后赋值返回。
+他们能做的是 get 它，然后 set 回去。
 
 289
 00:12:20,070 --> 00:12:21,503
@@ -1464,7 +1464,7 @@ And I'm just gonna add a var here.
 301
 00:12:42,321 --> 00:12:43,887
 A public var.
-一个共有的 var。
+一个 public 的 var。
 
 302
 00:12:43,889 --> 00:12:44,554
@@ -1483,12 +1483,12 @@ it's gonna be type AnyObject, but I'm gonna put comment here
 305
 00:12:49,227 --> 00:12:53,595
 that says guaranteed to be a Property List.
-要保证是个属性列表。
+要保证是个 Property List。
 
 306
 00:12:53,597 --> 00:12:56,965
 So, the callers know that this is a Property List.
-这样调用者知道这是个属性列表。
+这样调用者知道这是个 Property List。
 
 307
 00:12:56,967 --> 00:13:01,002
@@ -1518,12 +1518,12 @@ So, they could do that with it,
 312
 00:13:06,675 --> 00:13:09,375
 cuz they know it's a Property List, okay?
-他们知道它是个属性列表。
+他们知道它是个 Property List。
 
 313
 00:13:09,377 --> 00:13:13,346
 So, this is going to be a computed property.
-会有一个被计算的属性。
+这是个 computed property。
 
 314
 00:13:13,348 --> 00:13:15,948
@@ -1543,12 +1543,12 @@ we're just gonna get some sort of Property
 317
 00:13:18,419 --> 00:13:21,186
 List representation of our internal data structure.
-属性列表。
+Property List。
 
 318
 00:13:21,188 --> 00:13:23,521
 And when you set, we're gonna take that Property List and
-当你 set 时，我们将得到属性列表并且
+当你 set 时，我们将得到 Property List 并且
 
 319
 00:13:23,523 --> 00:13:27,057
@@ -1563,7 +1563,7 @@ So, the get,
 321
 00:13:30,362 --> 00:13:34,063
 how are we gonna represent ourselves as a Property List
-这是我们怎么将我们自己表现为一个属性列表，
+这是我们怎么将我们自己表现为一个 Property List，
 
 322
 00:13:34,065 --> 00:13:36,732
@@ -1573,12 +1573,12 @@ because this is really our internal data structure here,
 323
 00:13:36,734 --> 00:13:39,801
 it's Array of op, op is an enum,
-是个 op 数据，op 是枚举类型，
+是个 op 数组，op 是枚举类型，
 
 324
 00:13:39,803 --> 00:13:43,871
 clearly enums are not NSDates, or NSStrings, or NSArrays.
-显然，enums 不是 NSDates，也不是 NSStrings 或 NSArrays。
+显然，枚举不是 NSDates，也不是 NSStrings 或 NSArrays。
 
 325
 00:13:43,873 --> 00:13:46,407
@@ -1588,32 +1588,32 @@ So, we can't just return this thing, okay?
 326
 00:13:46,409 --> 00:13:48,208
 Cuz that's not a Property List.
-因为它不是一个属性列表。
+因为它不是一个 Property List。
 
 327
 00:13:48,210 --> 00:13:51,244
 So, we need to return some sort of Property List.
-我们必须返回某种属性列表。
+我们必须返回某种 Property List。
 
 328
 00:13:51,246 --> 00:13:53,980
 And I'm gonna return an Array of Strings.
-我将返回一个 Strings 数据。
+我将返回一个 String 数组。
 
 329
 00:13:53,982 --> 00:13:58,084
 And the String is either gonna be the symbol of an op,
-这个 String 是个运算符，
+这个 String 是某个 op 的符号，
 
 330
 00:13:58,086 --> 00:14:01,587
-in which case I will look it up in known ops, or
-这个运算符我可以在已知的运算符中找到的，或者
+in which case I will look it up in knownOps, or
+这个 op 我可以在 knownOps 中找到，或者
 
 331
 00:14:01,589 --> 00:14:04,956
 the String will be an numeric representation of
-这个 String 会是个代表数字类型的
+这个 String 会是个数字字符串，代表
 
 332
 00:14:04,958 --> 00:14:06,958
@@ -1653,7 +1653,7 @@ And I know how to turn it back.
 339
 00:14:19,637 --> 00:14:22,771
 Because I know how to use a number formatter to turn
-我知道怎么使用一个 number formatter 来把一个
+因为我知道怎么使用一个 number formatter 来把一个
 
 340
 00:14:22,773 --> 00:14:25,273
@@ -1663,11 +1663,11 @@ the String of a operand back into a Double and
 341
 00:14:25,275 --> 00:14:27,709
 obviously I know how to look up binary and
-显然我也知道怎么在我们的操作符中
+显然我也知道怎么在 knownOps 中
 
 342
 00:14:27,711 --> 00:14:30,645
-uniary operations in our known ops.
+uniary operations in our knownOps.
 查找二元和一元操作符。
 
 343
@@ -1677,7 +1677,7 @@ Okay?
 344
 00:14:32,765 --> 00:14:34,882
 So, we could say something along these lines.
-沿着这几行，我们可以说些东西。
+我们可以在这几行里写一些东西
 
 345
 00:14:34,884 --> 00:14:39,586
@@ -1687,17 +1687,17 @@ Our get, I'm gonna show you a much better get in a second,
 346
 00:14:39,588 --> 00:14:43,590
 but one way we could do our get is we could just say,
-但有一种方式，我们可以让我们的get，
+实现 get 的一种方式是：
 
 347
 00:14:43,592 --> 00:14:47,226
 we could make a returnValue that is going to be
-我们可以将字符串数组作为
+定义一个 returnValue，它的类型是
 
 348
 00:14:47,228 --> 00:14:48,861
 an Array of String.
-返回值。
+Array<String>
 
 349
 00:14:48,863 --> 00:14:52,764
@@ -1707,7 +1707,7 @@ Okay, in fact let's just create an empty Array of
 350
 00:14:52,766 --> 00:14:56,768
 String here, and then we can just go through our ops,
-然后我们可以在我们的 opStack 中查找我们的操作符，
+然后我们可以在我们的 opStack 中遍历我们的操作符，
 
 351
 00:14:56,770 --> 00:14:59,737
@@ -1717,22 +1717,22 @@ in our opStack here, and for each op,
 352
 00:14:59,739 --> 00:15:04,307
 we can just say returnValue.append, an op's description.
-我们可以紧紧使用 returnValue.append，将一个操作符的描述
+我们可以使用 returnValue.append，将一个操作符的描述
 
 353
 00:15:04,309 --> 00:15:07,877
 On to the end of it, and then we could return, returnValue.
-附加在它的后面，然后我们可以返回值。
+附加在它（returnValue）的后面，然后我们可以返回 returnValue。
 
 354
 00:15:10,748 --> 00:15:13,882
 Right, makes sense, I just my internal data structure into
-有道理，我刚刚把我的内部数据结构转变成一个
+懂了吗？我刚刚把我的内部数据结构转变成一个
 
 355
 00:15:13,884 --> 00:15:16,918
 a Property List, because this is a Property List.
-属性列表，因为这是一个属性列表。
+Property List，因为这是一个 Property List。
 
 356
 00:15:16,920 --> 00:15:20,588
@@ -1742,7 +1742,7 @@ Notice I can return, this through AnyObject,
 357
 00:15:20,590 --> 00:15:22,557
 because Arrays are bridged, and
-因为 Arrays 是关联的，
+因为 Arrays 是桥接好的，
 
 358
 00:15:22,559 --> 00:15:24,392
@@ -1756,27 +1756,27 @@ Okay.
 360
 00:15:25,394 --> 00:15:27,961
 But this is an awful lot of code for this.
-但这是可怕的多行代码。
+但这里这么多行代码，太可怕了。
 
 361
 00:15:27,963 --> 00:15:31,731
 We can actually do this in one line of code, okay?
-实际上，我们可以仅使用一行代码，
+实际上，我们可以仅使用一行代码
 
 362
 00:15:31,733 --> 00:15:34,834
 So if you paid attention in my last lecture, you'll remember
-如果你们注意我上次讲的课，你们就会
+如果你们注意我上次讲的课，你们就会记得
 
 363
 00:15:34,836 --> 00:15:36,969
 that I told you about this function called map.
-记得我跟你们说过，这个函数叫做 map。
+我跟你们说过，这个叫做 map 的函数。
 
 364
 00:15:36,971 --> 00:15:43,041
 And I can actually just return my opStack mapped,
-实际上我可以仅返回我的 opStack mapped。
+实际上我可以直接返回 opStack.map
 
 365
 00:15:43,043 --> 00:15:49,047
@@ -1806,7 +1806,7 @@ convert every single thing inside opStack,
 370
 00:16:00,725 --> 00:16:03,893
 which is an op, these are ops, into a String and it takes
-也就是将操作符，这些是操作符，转换成字符串，
+也就是将操作符，这些都是操作符，转换成字符串，
 
 371
 00:16:03,895 --> 00:16:07,396
@@ -1825,7 +1825,7 @@ So when you start getting familiar with Swift and
 374
 00:16:13,436 --> 00:16:14,785
 what it can do,
-和 Swift 能做的。
+和 Swift 能做的事情。
 
 375
 00:16:14,786 --> 00:16:16,135
@@ -1850,7 +1850,7 @@ So now let's talk about going the other way.
 379
 00:16:22,777 --> 00:16:25,177
 So now we have, someone gives us back our program.
-现在有人返回给我们 program，
+现在有人给我们返回 program，
 
 380
 00:16:25,179 --> 00:16:27,245
@@ -1890,7 +1890,7 @@ So what I'm going to do,
 387
 00:16:43,828 --> 00:16:47,529
 I'm going to let opSymbols equal newValue, right?
-我们将让这个 opSymobls 等于 newValue，
+输入 opSymobls = newValue，
 
 388
 00:16:47,531 --> 00:16:49,731
@@ -1900,12 +1900,12 @@ newValue 记得我们在 setter 里。
 389
 00:16:49,733 --> 00:16:52,633
 So, newValue is the newValue which is in AnyObject.
-这个 newValue 是 AnyObject 的 newValue。
+这个 newValue 是 AnyObject 的。
 
 390
 00:16:54,070 --> 00:16:57,571
 As an Array of String, because that's what it has to be.
-转化为一个字符串数组，它必须是这样的。
+as Array<String>，因为它必须是一个 Array<String> 才行。
 
 391
 00:16:57,573 --> 00:17:00,573
@@ -1944,7 +1944,7 @@ If it is, now I can convert back, so
 
 398
 00:17:19,392 --> 00:17:22,893
-I'm gonna create something called my new opStack which
+I'm gonna create something called my newOpStack which
 我将创建一个 newOpStack，
 
 399
@@ -1960,17 +1960,17 @@ opSymbols 里的每个 opSymbol。
 401
 00:17:32,836 --> 00:17:35,603
 opSymbols is this thing right here, that's the Array,
-opSymbols 是这个东西，它是 Array 泛型的
+opSymbols 是这个东西，这是 Array
 
 402
 00:17:35,605 --> 00:17:38,373
-that's the newValue, the AnyObject converted.
-这是从 AnyObject 转换来的 newValue
+that's the newValue, the AnyObject converted
+这是 newValue，AnyObject 转换成了
 
 403
 00:17:38,375 --> 00:17:42,776
-Into an Array of Strings, okay?
-转换成 Array<String> 类型的，明白了吗？
+into an Array of Strings, okay?
+Array<String> 类型，明白了吗？
 
 404
 00:17:42,778 --> 00:17:48,448
@@ -1990,12 +1990,12 @@ and so I will just add that op
 407
 00:17:56,257 --> 00:18:01,326
 to, to my stack, otherwise I'm gonna see
-那个 op 加至我的 newOpStack 中，否则
+那个 op 加至我的 newOpStack 中
 
 408
 00:18:01,328 --> 00:18:04,162
 if I could turn that String into an operand, and I'm gonna
-我将尝试把字符串转换成一个操作数
+否则我将尝试把字符串转换成一个操作数
 
 409
 00:18:04,164 --> 00:18:09,166
@@ -2014,8 +2014,8 @@ this opSymbol that I got out of that Array it gave me.
 
 412
 00:18:16,775 --> 00:18:20,042
-I'm going to use optional chaining here and
-这里我将使用 optional chaining 并且
+I'm going to use Optional Chaining here and
+这里我将使用 Optional Chaining 并且
 
 413
 00:18:20,044 --> 00:18:24,113
@@ -2024,8 +2024,8 @@ put a question mark, then doubleValue, okay.
 
 414
 00:18:24,115 --> 00:18:27,616
-Remember optional chaining, if you have an expression like
-记住，optional chaining，如果你有一个像这样的表达式
+Remember Optional Chaining, if you have an expression like
+记住，Optional Chaining 就是，如果你有一个像这样的表达式
 
 415
 00:18:27,618 --> 00:18:31,653
@@ -2045,12 +2045,12 @@ If you put a question mark after that term.
 418
 00:18:38,661 --> 00:18:40,927
 So, numberFromString can return nil if this is
-那么 numberFromString 如果接受一个不是 String 型的参数
+那么如果给 numberFromString 传一个不能被解释成一个数字的 String
 
 419
 00:18:40,929 --> 00:18:44,364
 not a String, that can be interpreted as a number.
-那么它就会返回 nil，即使这个字符串可以被解释成一个数字
+它就会返回 nil
 
 420
 00:18:44,366 --> 00:18:47,000
@@ -2070,27 +2070,27 @@ Otherwise keep going and send it doubleValue.
 423
 00:18:53,574 --> 00:18:57,709
 So this operand is either going to not get set,
-这个 operand 要么设值要么不被设值
+这个 operand 要么不被设值
 
 424
 00:18:57,711 --> 00:19:01,879
 because of the if let, or it's going to be a Double,
-因为 if let，它将成为一个 Double 型的
+因为有 if let 的存在，要么它将成为一个 Double
 
 425
 00:19:01,881 --> 00:19:03,580
 which is what this doubleValue comes out of here.
-也就是为什么这里出现 doubleValue 的原因
+也就是这里出现 doubleValue 的原因
 
 426
 00:19:04,883 --> 00:19:07,384
 Okay, so that's kind of explaining from last week how
-好的，这就是上周我们做 number formatter 
+好的，这就是上周我们讲的
 
 427
 00:19:07,386 --> 00:19:09,252
 we did this number formatter thing.
-的实现的一种解释
+使用 number formatter 的知识
 
 428
 00:19:09,254 --> 00:19:12,005
@@ -2190,7 +2190,7 @@ typealias 是一个类型的替身
 447
 00:19:55,894 --> 00:19:58,094
 It's just a way of another type, and
-是一种其他类型
+是其他类型的一个替身
 
 448
 00:19:58,096 --> 00:20:00,429
@@ -2229,37 +2229,37 @@ Now they're going to look at this typealias, and
 455
 00:20:16,311 --> 00:20:18,844
 say, oh, that's AnyObject, but they're really going to
-然后知道，那是 AnyObject，他们会知道
+然后知道，那是 AnyObject，但是他们会明确知道
 
 456
 00:20:18,846 --> 00:20:21,480
 understand that I'm returning the Property List to them, and
-我将返回一个 PropertyList 给他们
+我将返回一个 Property List 给他们
 
 457
 00:20:21,482 --> 00:20:22,848
-the reason it's Property List, again, so
-这就是为什么是 PropertyList 的原因
+the reason is Property List, again, so
+原因还是 Property List
 
 458
 00:20:22,850 --> 00:20:26,584
 I can throw it again as user defaults or whatever, okay?
-我可以不是使用 PropertyList 或者使用默认设置，甚至其他的值，明白了吗？
+我可以把它用作 NSUserDefaults 或者其他东西, 明白了吗？
 
 459
 00:20:28,354 --> 00:20:30,621
 But otherwise, it's only good, the only thing it's good for
-但是唯一的好处是
+但是它只有在
 
 460
 00:20:30,623 --> 00:20:33,056
 is giving it back to me to reset my program in
-当将来它返回给我，重置我的 program 的时候
+将来返回给我以重置 program 的时候才有用
 
 461
 00:20:33,058 --> 00:20:34,724
 the future; that's all this thing is good for.
-这就是它有利的地方
+这个东西就是这一点有用
 
 462
 00:20:36,394 --> 00:20:39,762
@@ -2269,12 +2269,12 @@ Now, you're gonna wanna add this to your assignment for
 463
 00:20:39,764 --> 00:20:41,497
 assignment three, okay?
-课后作业三中
+作业三中
 
 464
 00:20:44,802 --> 00:20:47,502
 So, all right, back to slides.
-好的，回到我们的 Slides
+好的，回到我们的幻灯片中
 
 465
 00:20:48,571 --> 00:20:50,871
@@ -2284,11 +2284,12 @@ I'm not gonna, I don't have time to really run this
 466
 00:20:50,873 --> 00:20:53,940
 unfortunately due to in test code because we are
-因为这个需要预先限制的测试代码
+因为这个代码可能还需要调试，
 
 467
 00:20:56,178 --> 00:20:57,577
 schedule constraint here.
+可是我们的时间表有限制
 
 468
 00:20:57,579 --> 00:20:59,979
@@ -2353,7 +2354,7 @@ views are within views are within views.
 480
 00:21:32,409 --> 00:21:34,742
 Any view only has one superview.
-但是任意的 view 只能有一个 superview
+但是任何一个 view 都只能有一个 superview
 
 481
 00:21:34,744 --> 00:21:37,478
@@ -2373,7 +2374,7 @@ So in our Calculator, we had a top level view,
 484
 00:21:41,950 --> 00:21:43,316
 which I'm gonna talk about in a moment,
-最高层的 view 一会儿我即将谈到
+这个一会儿我会讲到
 
 485
 00:21:43,318 --> 00:21:45,752
@@ -2398,12 +2399,12 @@ A bunch of subviews in that view.
 489
 00:21:53,093 --> 00:21:54,225
 But you can go even deeper.
-但是你可以研究更深入
+但是你可以更深入地研究它
 
 490
 00:21:54,227 --> 00:21:55,593
 It's hierarchical multi-layer.
-有层次的 multi-layer
+这是个有层次的 multi-layer
 
 491
 00:21:55,595 --> 00:21:58,295
@@ -2413,17 +2414,17 @@ We can go as deep as we want.
 492
 00:21:58,297 --> 00:22:01,231
 The two, you can see the two properties there for
-在这里，你看到这两个 properties 
+在这里，你看到这两个 properties
 
 493
 00:22:01,233 --> 00:22:03,317
-getting your super view.
-这两个 properties 是用来获取你的 superview
+getting your superview.
+用来获取你的 superview
 
 494
 00:22:03,318 --> 00:22:05,402
-Notice it returns a optional, because you
-注意它返回一个可选的类型，这是因为
+Notice it returns a Optional, because you
+注意，它返回一个 Optional，这是因为
 
 495
 00:22:05,404 --> 00:22:07,804
@@ -2438,12 +2439,12 @@ It's not currently in the view hierarchy so that can be nil.
 497
 00:22:11,509 --> 00:22:15,577
 Your subviews, I show Array of UIView there.
-还有一个属性是 subviews，这里我写的是由 UIView 对象组成的一个数组
+还有一个属性是 subviews，这里我写的是一个 UIView 数组
 
 498
 00:22:15,579 --> 00:22:18,847
 Actually the subview's property is an Array of AnyObject,
-实际上这个 subview property 是由 AnyObject 组成的一个数组
+实际上这个 subview property 是一个 AnyObject 数组
 
 499
 00:22:18,849 --> 00:22:20,482
@@ -2453,22 +2454,22 @@ again for historical reasons, but
 500
 00:22:20,484 --> 00:22:21,849
 there will always be UIViews in there.
-元素始终都是 UIView 的对象
+元素始终都是 UIView 对象
 
 501
 00:22:21,851 --> 00:22:26,086
 So don't even worry about that, okay?
-这里不需要关心，没有问题
+所以不用担心，okay?
 
 502
 00:22:26,088 --> 00:22:28,588
-And usually in this class on the the slides.
-在 Slides 中你经常看到这个类
+And usually in this class on the the slides,
+在这门课的幻灯片中，
 
 503
 00:22:28,590 --> 00:22:30,290
-If something's an Array of AnyObject,
-如果什么东西是由 AnyObject 组成的一个数组
+if something's an Array of AnyObject,
+如果看到一个 AnyObject 数组
 
 504
 00:22:30,292 --> 00:22:32,258
@@ -2488,12 +2489,12 @@ But when you write your code, then,
 507
 00:22:36,630 --> 00:22:40,565
 obviously, you might see, oh, that's Array of AnyObject, and
-你明显知道这是由 AnyObject 组成的一个数组
+很明显，你将会知道这是个 AnyObject 数组
 
 508
 00:22:40,567 --> 00:22:43,301
 that's again, the bridging will work here,
-再一次，bridging 起作用了
+再一次，桥接起作用了
 
 509
 00:22:43,303 --> 00:22:46,404
@@ -2518,7 +2519,7 @@ There is a UIWindow it's at the very,
 513
 00:22:53,512 --> 00:22:56,913
 very, very top of each device screen but
-iOS 上只有一个
+它在最高层上面
 
 514
 00:22:56,915 --> 00:22:59,515
@@ -2568,7 +2569,7 @@ You can drag things out in the StoryBoard.
 523
 00:23:17,666 --> 00:23:20,800
 You can drag views inside other views to
-你可以在其他 views 中拖入 views 
+你可以在其他 views 中拖入 views
 
 524
 00:23:20,802 --> 00:23:23,102
@@ -2583,7 +2584,7 @@ But you can do it in code as well.
 526
 00:23:25,106 --> 00:23:28,674
 It's pretty rare to do it in code, but you can.
-确实可以用代码创建图形部分，但是很少人这么做
+很少人用代码创建图形部分，但是你可以这么做
 
 527
 00:23:28,676 --> 00:23:30,809
@@ -2617,7 +2618,7 @@ And removeFromSuperview is sent to the view that you
 533
 00:23:40,986 --> 00:23:42,285
 want to remove.
-想你想要移除的 view 发送的消息
+向你想要移除的 view 发送的消息
 
 534
 00:23:42,287 --> 00:23:44,571
@@ -2682,7 +2683,7 @@ All right. So you have this StoryBoard.
 546
 00:24:12,546 --> 00:24:15,346
 You've got your scene that we've seen like your
-你有一个场景跟 Calculator one 差不多的场景
+你有一个场景跟 Calculator 差不多的场景
 
 547
 00:24:15,348 --> 00:24:17,331
@@ -2690,18 +2691,18 @@ Calculator one.
 
 548
 00:24:17,332 --> 00:24:19,315
-The top level one the place where you're going to add
+The top level one, the place where you're going to add
 在视图层次中最高层（你将要添加
 
 549
 00:24:19,318 --> 00:24:22,720
-your top level views is called view in your view controller.
-你顶层 views）的地方叫 view controller 中 view
+your top level views, is called view in your view controller.
+你顶层 views 的地方）在 view controller 中叫做 view
 
 550
 00:24:22,722 --> 00:24:24,688
 It's just a property in UIView Controller.
-一个在 UIViewController 的 property
+它就是一个在 UIViewController 中的 property
 
 551
 00:24:24,690 --> 00:24:27,390
@@ -2710,13 +2711,13 @@ So it really couldn't be simpler, okay?
 
 552
 00:24:27,392 --> 00:24:29,859
-Sometimes students they just forget that's there and there
-有时学生们忘记了UIViewController中还有这么一个 view
+Sometimes students they just forget that's there and
+有时学生们忘记了 UIViewController 中还有这么一个 view
 
 553
 00:24:29,861 --> 00:24:32,495
-like all right how do I add something to my StoryBoard?
-那在我 StordBoard 中添加一些东西
+ask how do I add something to my StoryBoard?
+然后问：我怎么在我的 StordBoard 中添加东西呢？
 
 554
 00:24:32,497 --> 00:24:34,229
@@ -2726,12 +2727,12 @@ You know in code or something like that.
 555
 00:24:34,231 --> 00:24:37,065
 Well you just you add it to the view of
-那么你就把它加入你 UIView Controller
+你只需要把它加入 UIViewController
 
 556
 00:24:37,067 --> 00:24:40,502
-your UIView Controller, okay?
-的 view property 中，明白了吗？
+your UIViewController, okay?
+的 view 中，明白了吗？
 
 557
 00:24:40,504 --> 00:24:46,741
@@ -2756,7 +2757,7 @@ So, to initialize any properties in
 561
 00:24:55,784 --> 00:24:58,584
 your view hopefully using equals or
-一些 properties 可以使用 = 
+一些 properties 可以使用 = 来赋值
 
 562
 00:24:58,586 --> 00:25:00,953
@@ -2786,7 +2787,7 @@ Only slightly.
 567
 00:25:08,928 --> 00:25:11,262
 In that UIView has two initializers you
-UIView 中有两个 initializers
+UIView 中有两个 initializers 是
 
 568
 00:25:11,264 --> 00:25:12,730
@@ -2806,17 +2807,17 @@ two different ways.
 571
 00:25:15,501 --> 00:25:18,468
 In code by just saying UIView and
-在代码中你会写 UIView
+在代码中你会写 UIView(frame: CGRect)
 
 572
 00:25:18,470 --> 00:25:22,438
-this frame initializer, which is just the frame in the super
-frame initializer，也就是你在 superview 的
+this frame initializer, which is just the frame in the superview,
+这个 frame 就是 superview 的 frame
 
 573
 00:25:22,440 --> 00:25:26,042
-view coordinate system where this view is gonna live.
-坐标系系统下存在的位置
+coordinate system where this view is gonna live.
+它是一个坐标系，这个 view 将在这个坐标系里面
 
 574
 00:25:26,044 --> 00:25:27,643
@@ -2851,22 +2852,22 @@ So, if you create a view by dragging on a StoryBoard,
 580
 00:25:38,320 --> 00:25:41,455
 its initializer is this coder thing, okay?
-它的 initializer 方法是 init(coder: NSCoder)，明白了吗？
+它的初始化方法就会是 init(coder: NSCoder)，明白了吗？
 
 581
 00:25:41,457 --> 00:25:44,858
 So, if you want, if you absolutely have to use
-如果你想的话，你绝对需要
+如果你想要，如果你不得不
 
 582
 00:25:44,860 --> 00:25:47,694
 an initializer to initialize something in your UIView,
-在你的 UIView 中使用一个 initializer
+在你的 UIView 中使用一个 initializer 时
 
 583
 00:25:47,696 --> 00:25:50,329
 you're gonna want to implement both of these things.
-你将要实现这两个方法
+你就要实现这两个方法
 
 584
 00:25:50,331 --> 00:25:53,432
@@ -2881,12 +2882,12 @@ Where you override init with frame there.
 586
 00:25:57,671 --> 00:26:00,271
 That is a designated initializer in UIView.
-这是一个UIView 的 designated initializer 
+这是一个UIView 的 designated initializer
 
 587
 00:26:00,273 --> 00:26:03,641
 And then, there's actually a required initializer,
-接下黎，还有一个 requried 的 initializer
+接下来，还有一个 requried 的 initializer
 
 588
 00:26:03,643 --> 00:26:05,042
@@ -2921,61 +2922,62 @@ initializers you won't inherit the init with the coder.
 594
 00:26:17,054 --> 00:26:18,787
 So, basically implement them both, and
-所以，实现这两者
+所以，简单来说就是实现这两者
 
 595
 00:26:18,789 --> 00:26:21,189
 then just factor your initialization code into some
-然后重构你的代码，讲这两个 initializer 放进
+然后将这两个 initializer 分解成
 
 596
 00:26:21,191 --> 00:26:24,659
 setup method or something, and call that, okay?
-setup 方法中或者其他的方法中，然后调用重构后的方法，明白了吗？
+setup 方法或者其他的方法，然后调用分解出来的方法，明白了吗？
 
 597
 00:26:24,661 --> 00:26:26,827
 So, that's only if you absolutely have to
-这就是你唯一要有的 initializer
+当且仅当你不得不
 
 598
 00:26:28,064 --> 00:26:28,895
 have an initializer.
+自己实现一个 initializer 才这么做
 
 599
 00:26:30,365 --> 00:26:33,566
 All right, there's another alternative to initializing.
-好的，还有另外关于初始化的一些东西
+好了，还有一个初始化的办法
 
 600
 00:26:33,568 --> 00:26:37,336
 Which is if you can wait until the initialization is finished
-也就是你等到初始化完成之后想做的
+那就是，如果你可以等初始化完成
 
 601
 00:26:37,338 --> 00:26:40,005
 but you want something really early in the view's life,
-如果你需要在视图加载完成后立即执行一些操作，
+但你真的需要在这个 view 构造好之前需要一些东西
 
 602
 00:26:40,007 --> 00:26:42,007
 you can implement this method awakeFromNib.
-你可以实现awakeFromNib方法。
+你可以实现 awakeFromNib 方法。
 
 603
 00:26:42,009 --> 00:26:43,508
 But that only works for
-但是只有storyboard中的视图
+但是只有 StoryBoard 中的 view
 
 604
 00:26:43,510 --> 00:26:46,411
 views that come out of a StoryBoard, okay?
-才会调用这个方法，记住了吗？
+才能调用这个方法，记住了吗？
 
 605
 00:26:46,413 --> 00:26:49,347
 awakeFromNib means I just awoke from coming out of
-awakeFromNib表示我已经从storyboard中
+awakeFromNib 表示我已经从 StoryBoard 中
 
 606
 00:26:49,349 --> 00:26:50,848
@@ -2995,7 +2997,7 @@ So it's a little bit limited, because it only is good for
 609
 00:26:56,021 --> 00:26:57,353
 views that come out of a StoryBoard.
-因为只是针对storyboard中的视图。
+因为只是针对StoryBoard中的视图。
 
 610
 00:26:58,322 --> 00:26:59,488
@@ -3846,7 +3848,7 @@ Most often views are created by dragging them out to
 779
 00:33:45,335 --> 00:33:46,801
 the StoryBoard.
-从storyboard中拖出来，而生成的。
+从StoryBoard中拖出来，而生成的。
 
 780
 00:33:46,803 --> 00:33:50,104
@@ -5900,7 +5902,7 @@ And so you just set a Dictionary that has
 00:49:55,829 --> 00:49:59,964
 the key NSFontAttribute and the value would be a UIFont.
 key 为 NSFontAttribute，value 为 UIFont 的一个 Dictionary
- 
+
 1192
 00:49:59,966 --> 00:50:01,799
 Okay?
@@ -8814,7 +8816,7 @@ this BezierPath using this thing up here for
 1800
 01:12:16,271 --> 01:12:19,005
 a smile, which is bezierPathForSmile.
-用这个函数 bezierPathForSmile 
+用这个函数 bezierPathForSmile
 
 1801
 01:12:19,007 --> 01:12:22,775
@@ -9072,4 +9074,3 @@ So now we're going to do multiple MVCs.
 01:14:03,703 --> 01:14:04,991
 So that's what we're gonna be doing on Monday.
 这就是下周一要完成的事情了
-

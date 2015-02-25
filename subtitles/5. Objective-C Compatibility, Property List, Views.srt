@@ -2960,12 +2960,12 @@ but you want something really early in the view's life,
 602
 00:26:40,007 --> 00:26:42,007
 you can implement this method awakeFromNib.
-你可以实现awakeFromNib方法。
+你可以实现 awakeFromNib 方法。
 
 603
 00:26:42,009 --> 00:26:43,508
 But that only works for
-但是只有storyboard中的视图
+但是只有 Storyboard 中的视图
 
 604
 00:26:43,510 --> 00:26:46,411
@@ -2975,7 +2975,7 @@ views that come out of a StoryBoard, okay?
 605
 00:26:46,413 --> 00:26:49,347
 awakeFromNib means I just awoke from coming out of
-awakeFromNib表示我已经从storyboard中
+awakeFromNib 表示我已经从 Storyboard 中
 
 606
 00:26:49,349 --> 00:26:50,848
@@ -2985,7 +2985,7 @@ a StoryBoard.
 607
 00:26:50,850 --> 00:26:53,617
 So now you can initialize me.
-你可以对我做一些初始化操作。
+你可以做一些初始化操作。
 
 608
 00:26:53,619 --> 00:26:56,019
@@ -2994,8 +2994,8 @@ So it's a little bit limited, because it only is good for
 
 609
 00:26:56,021 --> 00:26:57,353
-views that come out of a StoryBoard.
-因为只是针对storyboard中的视图。
+views that come out of a Storyboard.
+因为只是针对 Storyboard 中的视图。
 
 610
 00:26:58,322 --> 00:26:59,488
@@ -3044,13 +3044,13 @@ gonna use when we're drawing and handling events.
 
 619
 00:27:19,941 --> 00:27:24,843
-First of all, all coordinates are gonna be CGFloats.
-首先，所有的坐标系的单位都是CGFloats。
+First of all, all coordinates are gonna be CGFloat.
+首先，所有的坐标系的单位都是 CGFloat。
 
 620
 00:27:24,845 --> 00:27:27,879
-Okay, CGFloats is a type in Swift struct.
-是的，CGFloats在Swift中是结构体。
+Okay, CGFloat is a type in Swift struct.
+是的，CGFloat 在 Swift 中是结构体。
 
 621
 00:27:27,881 --> 00:27:31,315
@@ -3060,17 +3060,17 @@ And always use CGFloat when you're drawing or
 622
 00:27:31,317 --> 00:27:32,416
 handling events in a view.
-我们都用CGFloat类型。
+我们都用 CGFloat 类型。
 
 623
 00:27:32,418 --> 00:27:33,684
 Do not use Double.
-不要用double类型。
+不要用 Double 类型。
 
 624
 00:27:33,686 --> 00:27:34,951
 Do not use Float.
-也不要用Float类型。
+也不要用 Float 类型。
 
 625
 00:27:34,953 --> 00:27:35,952
@@ -3086,7 +3086,7 @@ you're gonna get dying, okay?
 627
 00:27:37,188 --> 00:27:38,020
 CGFloat.
-只能用CGFloat。
+只能用 CGFloat 。
 
 628
 00:27:39,056 --> 00:27:40,322
@@ -3096,17 +3096,17 @@ Now Doubles and
 629
 00:27:40,324 --> 00:27:44,059
 Floats can be converted to a CGFloat using the initializer.
-将Double和Float类型转换成CGFloat类型。
+将 Double 和 Float 类型转换成 CGFloat 类型。
 
 630
 00:27:44,061 --> 00:27:47,462
-CGFloat has initializer for Floats and Doubles.
-你也可以通过CGFloat的初始化方法
+CGFloat has initializer for Float and Double.
+你也可以通过 CGFloat 的初始化方法
 
 631
 00:27:47,464 --> 00:27:48,929
 that you can pass and turn into a Float.
-把CGFloat类型转换为double或float类型。
+把 CGFloat 类型转换为 Double 或 Float 类型。
 
 632
 00:27:48,931 --> 00:27:52,966
@@ -3116,7 +3116,7 @@ But, you always want things to be into CGFloat when you're
 633
 00:27:52,968 --> 00:27:55,568
 working in the coordinate system, okay?
-只会使用CGFloat类型。记住了吗？
+只会使用 CGFloat 类型。记住了吗？
 
 634
 00:27:56,671 --> 00:27:58,571
@@ -3131,12 +3131,12 @@ are important here.
 636
 00:27:59,540 --> 00:28:00,472
 One is CGPoint.
-一个是CGPoint。
+一个是 CGPoint。
 
 637
 00:28:00,474 --> 00:28:03,274
 It's just two Floats, X and Y.
-它由x和y两个Float类型组成。
+它由x和y两个 Float 类型组成。
 
 638
 00:28:03,276 --> 00:28:05,209
@@ -3151,7 +3151,7 @@ Couldn't be simpler.
 640
 00:28:06,212 --> 00:28:08,712
 Okay? And there's also CGSize,
-然后，另外一个是CGSize，
+然后，另外一个是 CGSize，
 
 641
 00:28:08,714 --> 00:28:09,846
@@ -3181,32 +3181,32 @@ I don't know, certainly Point,
 646
 00:28:16,787 --> 00:28:19,221
 I don't think has any other methods on it or anything.
-Point并没有其他的方法。
+Point 并没有其他的方法。
 
 647
 00:28:19,223 --> 00:28:22,223
 Size, maybe, I don't think so, though.
-Size可能有，不过也不一定。
+Size 可能有，不过也不一定。
 
 648
 00:28:22,225 --> 00:28:24,726
 But these two are combined, the points and
-Size和point组合在一起，
+Size 和 Point 组合在一起，
 
 649
 00:28:24,728 --> 00:28:27,928
 the size, to CGRect.
-就是CGRect。
+就是 CGRect。
 
 650
 00:28:27,930 --> 00:28:31,031
 So CGRect is struct that has a point and a size.
-所以CGRect是由point和size组成的结构体。
+所以 CGRect 是由 Point 和 Size 组成的结构体。
 
 651
 00:28:31,033 --> 00:28:33,100
 The point is the origin of the rect.
-point是这个矩形的原点。
+Point 是这个矩形的原点。
 
 652
 00:28:33,102 --> 00:28:34,734
@@ -3216,7 +3216,7 @@ Upper left, which I'm going to talk about in a second.
 653
 00:28:34,736 --> 00:28:37,270
 And then the size is the width and height.
-然后是size，它表示矩形的宽和高。
+然后是 Size ，它表示矩形的宽和高。
 
 654
 00:28:37,272 --> 00:28:40,740
@@ -3226,7 +3226,7 @@ Now rect has a lot of methods on it, okay?
 655
 00:28:40,742 --> 00:28:42,708
 Rect has things like minX,
-比如minX,
+比如 minX,
 
 656
 00:28:42,710 --> 00:28:44,242
@@ -3241,7 +3241,7 @@ Or midY, which is the midpoint of the rectangle vertically.
 658
 00:28:48,114 --> 00:28:49,880
 Or intersects.
-还有intersects方法。
+还有 intersects 方法。
 
 659
 00:28:49,882 --> 00:28:51,382
@@ -3271,17 +3271,17 @@ create a smaller rectangle,
 664
 00:28:59,323 --> 00:29:01,457
 which is the intersection of those two Rects.
-通过两个矩形交叉的部分。
+就是两个矩形交叉的部分。
 
 665
 00:29:02,459 --> 00:29:04,159
 Or contains point.
-contains方法。
+contains 方法。
 
 666
 00:29:04,161 --> 00:29:05,560
 Okay, we passed a point and
-我们传递一个point进去，
+就是我们传递一个 Point 进去，
 
 667
 00:29:05,562 --> 00:29:07,461
@@ -3306,7 +3306,7 @@ A whole bunch more.
 671
 00:29:12,734 --> 00:29:16,035
 You can just type a rect, type and
-你只需要键入rect，
+你只需要键入 rect，
 
 672
 00:29:16,037 --> 00:29:21,006
@@ -3346,7 +3346,7 @@ Some of you might be used to origin lower left,
 679
 00:29:35,654 --> 00:29:36,786
 like Cartesian coordinates,
-比如Cartesian坐标系，
+比如 Cartesian 坐标系，
 
 680
 00:29:36,788 --> 00:29:38,621
@@ -3466,7 +3466,7 @@ because maybe you're drawing something very finely detailed
 703
 00:30:33,838 --> 00:30:37,372
 and you want to control pixel boundaries.
-非常精细的细节和像素边境的是时候。
+非常精细的细节和像素边界的时候。
 
 704
 00:30:37,374 --> 00:30:39,708
@@ -3601,7 +3601,7 @@ you know where it is.
 730
 00:31:42,496 --> 00:31:45,063
 Now the origin of your bounds usually is 0,0.
-bounds的原点通常是（0，0）。
+bounds 的原点通常是（0，0）。
 
 731
 00:31:45,066 --> 00:31:46,865
@@ -3611,7 +3611,7 @@ But you could define it to mean something else, for
 732
 00:31:46,867 --> 00:31:49,935
 example, scroll views they define their origin to
-比如，scroll view在scroll的时候会
+比如，Scroll View 在scroll的时候会
 
 733
 00:31:49,937 --> 00:31:53,338
@@ -3621,12 +3621,12 @@ be where they are in the thing they're scrolling,
 734
 00:31:53,340 --> 00:31:55,707
 that's just what they define origin to be, but
-这是scroll view定义bounds原点的方式，
+这是 Scroll View 定义 bounds 原点的方式，
 
 735
 00:31:55,709 --> 00:31:58,442
 90% of the time, your origin is just going to be 0,0.
-但是百分之九十的情况下，bounds的原点是（0，0）。
+但是百分之九十的情况下， bounds 的原点是（0，0）。
 
 736
 00:31:58,444 --> 00:31:59,410
@@ -3646,7 +3646,7 @@ how big a space am I drawing into.
 739
 00:32:03,215 --> 00:32:06,082
 There are two other properties that often get confused with
-还有两个属性，容易和bounds混淆
+还有两个容易和 bounds 混淆的属性，
 
 740
 00:32:06,084 --> 00:32:08,551
@@ -3656,12 +3656,12 @@ bounds, but don't let this happen to you.
 741
 00:32:08,553 --> 00:32:10,252
 One is center.
-一个是center。
+一个是 center。
 
 742
 00:32:10,254 --> 00:32:14,589
 Center is the center of your view rectangle in your
-center是你自身视图矩形的中点，
+center 是你自身视图矩形的中点，
 
 743
 00:32:14,591 --> 00:32:17,158
@@ -3741,7 +3741,7 @@ it's only good to position you, not for drawing.
 758
 00:32:48,387 --> 00:32:50,186
 When you're drawing, you use bounds.
-绘制的时候，你使用bounds。
+绘制的时候，你使用 bounds。
 
 759
 00:32:50,188 --> 00:32:52,421
@@ -3756,7 +3756,7 @@ as better like you might think that
 761
 00:32:55,059 --> 00:32:59,361
 the frame size is exactly the same as the bound size.
-frame的size和bounds的size总是相同的。
+frame 的 size 和 bounds 的 size 总是相同的。
 
 762
 00:32:59,363 --> 00:33:02,563
@@ -3786,12 +3786,12 @@ if you rotate your view like this green view,
 767
 00:33:12,273 --> 00:33:14,707
 look how much bigger the frame is.
-你可以看到，frame要大的多。
+你可以看到，frame 要大的多。
 
 768
 00:33:14,709 --> 00:33:18,410
 The rectangle that contains you is much bigger than you.
-包含你的矩形，要你你自己大得多。
+包含你的矩形，要比你自己大得多。
 
 769
 00:33:18,412 --> 00:33:19,878
@@ -3845,8 +3845,8 @@ Most often views are created by dragging them out to
 
 779
 00:33:45,335 --> 00:33:46,801
-the StoryBoard.
-从storyboard中拖出来，而生成的。
+the Storyboard.
+从 Storyboard 中拖出来，而生成的。
 
 780
 00:33:46,803 --> 00:33:50,104
@@ -3891,7 +3891,7 @@ Once you drag it out though,
 788
 00:34:05,052 --> 00:34:07,319
 you have to go to the Identity Inspector and change the class
-你需要在它的Identity Inspector去
+你需要在它的Identity Inspector 里
 
 789
 00:34:07,321 --> 00:34:10,989
@@ -3921,12 +3921,12 @@ occasion, you might create an instance of your view in code.
 794
 00:34:25,036 --> 00:34:26,569
 Probably never in this class,
-至少本课程上永远不会，
+至少本课程上永远不会这样做，
 
 795
 00:34:26,571 --> 00:34:29,938
 maybe in your final project, although I doubt it.
-期末项目上可能会，但我还是怀疑。
+期末项目上可能会，但我还是怀疑是否有。
 
 796
 00:34:29,940 --> 00:34:34,442
@@ -3936,7 +3936,7 @@ You just do that using UIView's frame initializer.
 797
 00:34:34,444 --> 00:34:35,376
 Right? So you just say
-frame值来
+frame 值来
 
 798
 00:34:35,378 --> 00:34:36,644
@@ -3951,7 +3951,7 @@ You can even do UIView with no arguments and
 800
 00:34:40,416 --> 00:34:43,283
 it'll give you a CGRect to zero which is a frame zero
-这样视图的frame值就默认为
+这样视图的 frame 值就默认为
 
 801
 00:34:43,285 --> 00:34:45,485
@@ -3961,17 +3961,17 @@ size and width and
 802
 00:34:45,486 --> 00:34:47,686
 then you could later set its frame to position the view.
-在接下来你可设置它的frame在视图中的位置
+在接下来你可设置它的 frame 在视图中的位置
 
 803
 00:34:47,689 --> 00:34:50,189
 So here's an example of creating a view in code.
-所以这里有一个使用代码创建视图的例子
+所以这里有一个使用代码创建视图的例子。
 
 804
 00:34:50,191 --> 00:34:51,590
 I'm going to use UILabel.
-我接下来要使用UILabel控件
+我接下来要使用 UILabel 控件。
 
 805
 00:34:51,592 --> 00:34:55,093
@@ -3981,7 +3981,7 @@ UILabel 是 UIView的一个子类所以我可以发送过去
 806
 00:34:55,095 --> 00:34:57,495
 UILabels parentheses frame.
-UILabels 包括一个 frame
+UILabels 包括一个 frame。
 
 807
 00:34:57,497 --> 00:34:59,263
@@ -3991,7 +3991,7 @@ So I just give it this frame which is kind of in
 808
 00:34:59,265 --> 00:35:00,698
 the upper left.
-给它一个左上角
+设置它左上角位置。
 
 809
 00:35:00,700 --> 00:35:04,334
@@ -4006,37 +4006,37 @@ Okay.
 811
 00:35:06,004 --> 00:35:07,671
 Assuming this code here is in a view controller,
-假设这里的代码实在一个view controller里
+假设这里的代码实在一个 View controller 里
 
 812
 00:35:07,673 --> 00:35:10,640
 I could then say view.addSubview.
-我接下来可以说 view.addSubview.
+我接下来可以调用 view.addSubview.
 
 813
 00:35:10,642 --> 00:35:12,475
 Cuz remember view is a property in
-因为记住view是一个property
+因为记住 view 是一个 property，
 
 814
 00:35:12,477 --> 00:35:15,144
 my view controller which is that top level view.
-在我的view controller实在view的最顶层
+在我的 View controller 是在 View 的最顶层。
 
 815
 00:35:15,146 --> 00:35:17,279
 And I could say add subview of the label and
-我可以说添加一个lable类型的subview在底部
+我可以说添加一个 lable 类型的 subview 在底部
 
 816
 00:35:17,281 --> 00:35:18,613
 boom, it'll appear on screen.
-它将会出现在屏幕上
+它将会出现在屏幕上。
 
 817
 00:35:19,616 --> 00:35:20,514
 Okay? At 20,20 ,
-明白了么？在20，20
+明白了么？在20，20的位置上，
 
 818
 00:35:20,516 --> 00:35:22,716
@@ -4066,7 +4066,7 @@ We use Storyboard.
 823
 00:35:31,458 --> 00:35:35,727
 Okay, so when do I wanna create my own UIView?
-Okay，所以当我们想创建一个我自己的UIView时我会怎么做呢？
+Okay，所以当我们想创建一个我自己的 UIView 时我会怎么做呢？
 
 824
 00:35:35,729 --> 00:35:36,660
@@ -4076,17 +4076,17 @@ Right?
 825
 00:35:36,662 --> 00:35:38,162
 Well, when don't you want to?
-好吧，当你不想要？
+好吧，
 
 826
 00:35:38,164 --> 00:35:40,597
 Well you don't want to if you want a button or a slider or
-当你不想要一个按钮或者slider或者任何东西
+当你不想要一个按钮或者 slider 或者任何东西
 
 827
 00:35:40,599 --> 00:35:43,099
 anything where there's already an iOS view.
-已经存在于iOS系统view中
+这些已经存在于 iOS 系统 View 中的时候。
 
 828
 00:35:43,101 --> 00:35:44,400
@@ -4111,12 +4111,12 @@ taps以及pinches，不同的或者为了不同的目的
 832
 00:35:54,511 --> 00:35:58,212
 Then those things then you create your own custom view.
-接下来你可以通过这些东西创建你自己定制的view。
+接下来你可以通过这些东西创建你自己定制的 view。
 
 833
 00:35:58,214 --> 00:36:00,581
 So, we're going to focus on drawing today, and
-所以，我们今天将会专注于绘制，
+所以，我们今天将会专注于绘制,
 
 834
 00:36:00,583 --> 00:36:03,984
@@ -4126,12 +4126,12 @@ I'll do gestures in the next lec, in the next lecture.
 835
 00:36:03,986 --> 00:36:05,585
 To draw in your UIView,
-在你的UIView中绘制
+在你的UIView中绘制时，
 
 836
 00:36:05,587 --> 00:36:09,155
 all you need to do is override this method drawRect.
-所以你需要做的是重写drawRect方法
+你需要重写drawRect方法
 
 837
 00:36:10,591 --> 00:36:13,425
@@ -4141,32 +4141,32 @@ Okay，非常简单的方法仅仅使用一个参数。
 838
 00:36:13,427 --> 00:36:15,594
 In the code, it's actually called Rect, but
-在代码中，它实际上被叫做Rect
+在代码中，它实际上被叫做 Rect，
 
 839
 00:36:15,596 --> 00:36:18,697
 I've renamed it to be regionThatNeedsToBeDrawn, so
-但是我已经将它重新命名为 regionThatNeedsToBeDrawn
+但是我已经将它重新命名为 regionThatNeedsToBeDrawn，
 
 840
 00:36:18,699 --> 00:36:20,798
 that people understand what that argument is.
-这样人们就可以理解那个参数是什么意思了。
+这样人们就可以更好理解那个参数是什么意思了。
 
 841
 00:36:20,800 --> 00:36:23,734
 That argument is purely an optimization.
-那个参数纯粹是一个优化，
+那个参数纯粹是一个 optimization，
 
 842
 00:36:23,736 --> 00:36:27,338
 It's just the system saying, hey, draw yourself and really,
-那只是系统说，嗨，认真的绘制你自己
+那只是对系统说，嗨，认真的绘制你自己
 
 843
 00:36:27,340 --> 00:36:29,339
 I only care about this rectangle of you.
-我只是关心你画的的矩形范围
+我只是关心你画的的矩形区域 。
 
 844
 00:36:29,341 --> 00:36:31,641
@@ -4176,12 +4176,12 @@ But you can draw your, the whole self if you want.
 845
 00:36:31,643 --> 00:36:33,609
 But this is the only rectangle I really care about.
-但是只有这个矩形范围是我真正关心的
+但是只有这个矩形范围是我真正关心的。
 
 846
 00:36:33,611 --> 00:36:37,279
 So if you had a View that knew how to draw parts of itself,
-所以如果你有一个view你知道怎么去绘制它的部分区域
+所以如果你有一个view你知道怎么去绘制它的部分区域，
 
 847
 00:36:37,281 --> 00:36:40,182
@@ -4201,7 +4201,7 @@ you can completely ignore this rectangle if you want.
 850
 00:36:43,120 --> 00:36:45,387
 It's purely an optimization.
-它纯粹的是一个 optimization
+它纯粹的是一个 optimization 。
 
 851
 00:36:45,389 --> 00:36:45,953
@@ -4251,7 +4251,7 @@ you with red text on my slide.
 860
 00:37:01,602 --> 00:37:03,034
 Saying, never.
-说，永远不要
+说，永远不要。
 
 861
 00:37:03,036 --> 00:37:05,153
@@ -4261,7 +4261,7 @@ Okay.
 862
 00:37:05,154 --> 00:37:07,271
 Do not call drawRect, drawRect is called by the system.
-不要调用 drawRect 方法，drawRect 方式是被系统调用的
+不要调用 drawRect 方法，drawRect 方式是被系统调用的。
 
 863
 00:37:07,273 --> 00:37:09,190
@@ -4276,7 +4276,7 @@ It's called by the system when your view needs to be redrawn.
 865
 00:37:11,110 --> 00:37:13,010
 How does the system know your needs,
-系统是怎样你知道你需要什么的呢
+系统是怎样你知道你需要什么的呢，
 
 866
 00:37:13,012 --> 00:37:14,578
@@ -4286,7 +4286,7 @@ view 需要重新绘制？
 867
 00:37:14,580 --> 00:37:18,314
 Because somebody called setNeedsDisplay on your view.
-因为有一个叫做 setNeedDisplay的方法在你的view里
+因为有一个叫做 setNeedDisplay 的方法在你的 view 里。
 
 868
 00:37:18,316 --> 00:37:19,982
@@ -4296,7 +4296,7 @@ And you can call it on yourself if you want.
 869
 00:37:19,984 --> 00:37:22,985
 If something has changed about your view, some property or
-如果在你的view中一些东西发生变化了时
+如果在你的 view 中有内容发生变化时，
 
 870
 00:37:22,987 --> 00:37:24,887
@@ -4306,12 +4306,12 @@ something that would change the way it's drawn,
 871
 00:37:24,889 --> 00:37:26,888
 you call setNeedsDisplay on yourself,
-你调用 setNeedsDisplay通过你自己
+你可以自己调用 setNeedsDisplay 方法，
 
 872
 00:37:26,890 --> 00:37:29,691
 eventually the system will call your drawRect.
-最终系统会调用你的drawRect方法
+最终系统会调用你的drawRect方法 。
 
 873
 00:37:29,693 --> 00:37:31,993
@@ -4321,17 +4321,17 @@ But it's got to set some things up first, okay.
 874
 00:37:31,995 --> 00:37:33,928
 There's other views around you.
-在你周围有其他的views,
+在你周围有其他的 views,
 
 875
 00:37:33,930 --> 00:37:36,330
 That it has to get organized.
-它们必须被组织起来。
+它们必须先被处理（重绘）起来。
 
 876
 00:37:36,332 --> 00:37:38,965
 Okay, so never call drawRect, drawRect it's called for you.
-好的，所以永远不要调用 drawRect，drawRect 是用来调用你的
+好的，所以永远不要调用 drawRect，drawRect 是用来调用你的。
 
 877
 00:37:38,967 --> 00:37:42,002
@@ -4397,7 +4397,7 @@ all-powerful drawRect method?
 889
 00:38:05,924 --> 00:38:09,625
 You can use, kind of a C-like, function-based API,
-你可以使用，类似于C语言，基于函数的API
+你可以使用，类似于C语言，基于函数的API，
 
 890
 00:38:09,627 --> 00:38:11,259
@@ -4417,7 +4417,7 @@ Or you can use a nice object-oriented, thing,
 893
 00:38:15,598 --> 00:38:18,432
 called UIBezierPath, which is what we're gonna use,
-叫做UIBezierPath，就是我们接下来要使用的，
+叫做 UIBezierPath，就是我们接下来要使用的，
 
 894
 00:38:18,434 --> 00:38:20,367
@@ -4432,22 +4432,22 @@ But since the underlying stuff core graphics is what
 896
 00:38:23,605 --> 00:38:26,973
 UIBezierPath is built on, I'm gonna kinda explain a little
-UIBezierPath所运用用来构建的，我会介绍一些
+UIBezierPath 所运用用来构建的，我会介绍一些
 
 897
 00:38:26,975 --> 00:38:29,442
 bit about the concepts of Core Graphics.
-关于 Core Graphics的概念。
+关于 Core Graphics 的概念。
 
 898
 00:38:29,444 --> 00:38:31,944
 How one draws in Core Graphics.
-一个东西是怎么样在Core Graphics绘制的。
+一个东西是怎么样在 Core Graphics 绘制的。
 
 899
 00:38:31,946 --> 00:38:34,380
 The first thing in Core Graphics that's important is,
-在Core Graphics中第一件很重要的事是
+在 Core Graphics 中第一件很重要的事是
 
 900
 00:38:34,382 --> 00:38:37,416

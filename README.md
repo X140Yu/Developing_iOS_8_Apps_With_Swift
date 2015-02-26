@@ -1,7 +1,7 @@
 Developing iOS 8 Apps with Swift 字幕简体中文翻译项目
 ---
 
-iTunes U 课程地址：[iTunes U/developing-ios-8-apps-swift](https://itunes.apple.com/us/course/developing-ios-8-apps-swift/id961180099)
+iTunes U 课程地址：[iTunes U/Developing iOS 8 Apps Swift](https://itunes.apple.com/us/course/developing-ios-8-apps-swift/id961180099)
 
 CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanford.edu/class/cs193p/cgi-bin/drupal/)
 
@@ -12,13 +12,13 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 1. Logistics, iOS 8 Overview | 完成 | 完成
 2. More Xcode and Swift, MVC | 完成 | 完成
 3. Applying MVC | 完成 | 完成
-4. More Swift and Foundation Frameworks | 完成 | 完成 4/6
-5. Objective-C Compatibility, Property List, Views | 完成 7/8  | 完成 0/6
-6. Protocols and Delegation, Gestures | 任务分配中 | 任务分配中
-7. Multiple MVCs | 未开始 | 未开始
+4. More Swift and Foundation Frameworks | 完成 | 完成 
+5. Objective-C Compatibility, Property List, Views | 完成 | 完成 3/6
+6. Protocols and Delegation, Gestures | 完成 4/9 | 任务分配中
+7. Multiple MVCs | 完成 1/7 | 未开始
 8. View Controller Lifecycle, Autolayout | 未开始 | 未开始
 
-注：更新时间：北京时间2015年02月16日10时51分
+注：更新时间：北京时间2015年02月25日10时28分
 
 ### 校对规则
 
@@ -26,13 +26,13 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 
 ### 字幕下载
 
-因为当前字幕正在更新中，建议使用Git保持相关数据更新。
+因为当前字幕正在更新中，建议使用 Git 保持相关数据更新。
 
-也可以直接点击[项目Zip包](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/archive/master.zip)进行全部已有字幕的下载（可能包含翻译中和未开始翻译的字幕）。
+也可以直接点击[项目 Zip 包](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/archive/master.zip)进行全部已有字幕的下载（可能包含翻译中和未开始翻译的字幕）。
 
 ### 字幕的使用
 
-字幕的格式是.srt，所以您可能需要用带外挂字幕功能的视频播放器才可使用，比如[VLC](http://www.videolan.org/vlc/index.html)，如果字幕有乱码，请点击这里进行报错和寻求解决方案：[中文乱码报错用的issue](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/issues/131)。
+字幕的格式是.srt，所以您可能需要用带外挂字幕功能的视频播放器才可使用，比如 [VLC](http://www.videolan.org/vlc/index.html)，如果字幕有乱码，请点击这里进行报错和寻求解决方案：[中文乱码报错用的 Issue](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/issues/131)。
 
 ### 视频及课件第三方网盘下载
 
@@ -40,9 +40,9 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 
 ### 联系我们
 
-如果您想参与项目，请加入 CS193P 工作用 QQ 群：277542197 ，如果你只是想和我们取得联络，请直接在[Issues](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/issues)区发言。
+如果您想参与项目，请加入 CS193P 工作用 QQ 群：277542197 ，如果你只是想和我们取得联络，请直接在 [Issues](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/issues) 区发言。
 
-如果仅仅是想了解翻译的进度，无需加入 QQ 群，关注项目的更新或者到[Issues](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/issues)区发言即可。
+如果仅仅是想了解翻译的进度，无需加入 QQ 群，关注项目的更新或者到 [Issues](https://github.com/x140yu/Developing_iOS_8_Apps_With_Swift/issues) 区发言即可。
 
 ### 版权说明
 

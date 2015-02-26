@@ -3201,46 +3201,57 @@ Okay?
 801
 00:35:06,243 --> 00:35:08,943
 That just requires that we make our protocol,
+那仅仅要求我们使得 protocol，
 
 802
 00:35:08,945 --> 00:35:10,378
 you only work for classes.
+只对 class 类型起作用。
 
 803
 00:35:11,547 --> 00:35:12,446
 All right?
+明白了？
 
 804
 00:35:12,448 --> 00:35:13,964
 Okay? So now we
+现在我们
 
 805
 00:35:13,965 --> 00:35:15,481
 have this nice data source right here.
+有了个不错的 dataSource。
 
 806
 00:35:15,484 --> 00:35:18,018
 Let's go ahead and go to the next step,
+我们继续到下一步，
 
 807
 00:35:18,019 --> 00:35:20,553
 which to use the data source to get our smiliness, right?
+处理谁来使用这个 dataSource 得到 smiliness，对吗？
 
 808
 00:35:20,555 --> 00:35:22,355
 So we have our smiliness right here,
+于是我们在这里得到了 smiliness，
 
 809
 00:35:22,357 --> 00:35:26,058
 it's currently at constant minus 0.5, so we're going to
+现在是常量-0.5，所以我们要
 
 810
 00:35:26,060 --> 00:35:28,093
 get it from the data source by just saying to the data
+从 dataSource 里获取，简单告诉 dataSource，
 
 811
 00:35:28,095 --> 00:35:32,664
-source, please give us our smiliness for FaceViewSelf.
+source, please give us our smiliness for FaceView Self.
+请把 FaceView self 的 smiliness 给我们。
 
 812
 00:35:33,967 --> 00:35:34,865
@@ -3249,726 +3260,907 @@ Okay?
 813
 00:35:34,867 --> 00:35:36,100
 Now when I type that in,
+现在当我输入的时候，
 
 814
 00:35:36,102 --> 00:35:38,035
 Swift automatically put this question mark here.
+Swift 自动把"?"放在这里。
 
 815
 00:35:38,037 --> 00:35:39,035
 I didn't type that.
+我没有输入它。
 
 816
 00:35:39,037 --> 00:35:40,503
 It put it in here.
+它把它放在这里。
 
 817
 00:35:40,505 --> 00:35:42,872
 Why did it put here?
+为什么在这里？
 
 818
 00:35:42,873 --> 00:35:45,240
 Well it put it here because data source is an optional.
-
+因为 dataSource 是 optional。
 819
 00:35:45,243 --> 00:35:47,543
 And it could be nil, okay?
+它可能值为 nil，okay？
 
 820
 00:35:47,545 --> 00:35:49,678
 This is an optional, it could be nil.
+这是个 optional，可以是 nil。
 
 821
 00:35:49,680 --> 00:35:52,681
 And so Swift is assuming that we wanna use optional
+所以 Swift 假设我们想要在这里使用
 
 822
 00:35:52,683 --> 00:35:54,015
 chaining here.
+optional 链。
 
 823
 00:35:54,017 --> 00:35:57,618
 And just, if this is nil, then this whole rest of
+如果这是 nil，那么剩下所有的
 
 824
 00:35:57,620 --> 00:35:59,153
 this expression is gonna be ignored.
+表达式都将被忽略。
 
 825
 00:35:59,155 --> 00:36:00,854
 This whole thing would be nil.
+整体的值将是 nil。
 
 826
 00:36:00,856 --> 00:36:03,923
 And smiliness here would be set to nil, okay?
+这里 smiliness 将会被设置为 nil，okay？
 
 827
 00:36:03,925 --> 00:36:06,225
 But smiliness, you can see this error here is
+不过 smiliness，你会在这里看到这个 error
 
 828
 00:36:06,227 --> 00:36:08,327
 because smiliness, it can't be nil.
+是因为 smiliness，它不能为 nil。
 
 829
 00:36:08,329 --> 00:36:09,995
 It has to be a double.
+它必须是 double。
 
 830
 00:36:09,997 --> 00:36:12,431
 So we're going to use another cool little feature switch.
+所以我们要使用另一个酷酷的小特性转换。
 
 831
 00:36:12,433 --> 00:36:15,600
 Swift which is the question mark question mark operator.
+Swift 的 ?? 操作符。
 
 832
 00:36:15,602 --> 00:36:17,735
 Now what this operator says is,
+这个操作符的意思是，
 
 833
 00:36:17,737 --> 00:36:21,238
 if the thing on the left-hand side of the question mark
+如果操作符左侧的表达式
 
 834
 00:36:21,240 --> 00:36:25,275
 question mark is not nill, then use that.
+不是 nil，那么以它为值。
 
 835
 00:36:25,277 --> 00:36:28,779
 But if it is nil, then use what's on the righthand side,
+如果左侧表达式为 nil，那么使用右侧的表达式，
 
 836
 00:36:28,781 --> 00:36:32,048
 and to the right hand side I'm gonna put 0.0.
+在右侧我放上0.0。
 
 837
 00:36:32,050 --> 00:36:37,687
 So what that says is that if the data source is nil,
+它的意思是如果 dataSource 是 nil，
 
 838
 00:36:37,689 --> 00:36:39,955
 then we're going to use smiliness of 0,
+那么我们将使用0为 smiliness 的值，
 
 839
 00:36:39,957 --> 00:36:42,090
 which is not a frown or a smile, it's in the middle.
+它不是皱眉也不是微笑，它正好处在中间。
 
 840
 00:36:43,226 --> 00:36:45,426
 Now this is also gonna be working if
+这也会在
 
 841
 00:36:45,428 --> 00:36:48,796
-SmilinessForFaceView happens to return now because you
+smilinessForFaceView happens to return nil because you
+smilinessForFaceView 正好返回 nil 时起作用
 
 842
 00:36:48,798 --> 00:36:52,599
 remember it is also an optional double right here.
+因为你记得，它也是个 optinal double。
 
 843
 00:36:52,601 --> 00:36:54,968
 So that'll work perfectly fine there as well.
+所以这里处理得非常好。
 
 844
 00:36:54,970 --> 00:36:56,703
-So whether this returns nill or
+So whether this returns nil or
+所以无论是这里返回 nil
 
 845
 00:36:56,705 --> 00:37:00,406
-whether this is nill, invalidating the rest of this,
+whether this is nil, invalidating the rest of this,
+还是这里是 nil，使得这里剩下的都无效，
 
 846
 00:37:00,408 --> 00:37:01,741
 we're gonna get no smile or frown.
+我们将得不到笑脸或者皱眉。
 
 847
 00:37:01,743 --> 00:37:06,912
 So this is a cool little operator [INAUDIBLE].
+所以这是个酷酷的小操作符。
 
 848
 00:37:06,914 --> 00:37:09,681
 Okay, so we've got our face view doing its part.
+Okay，所以我们让 FaceView 干好了它的活。
 
 849
 00:37:09,683 --> 00:37:11,749
 It's declaring this nice property,
+它在这里声明了这个漂亮的 property，
 
 850
 00:37:11,751 --> 00:37:13,417
 this protocol right here.
+这个 protocol。
 
 851
 00:37:13,419 --> 00:37:16,854
 It's got a property which less people set themselves as
+它有个让别人把他们设置为
 
 852
 00:37:16,856 --> 00:37:18,055
 the data source and
+dataSource 然后
 
 853
 00:37:18,057 --> 00:37:21,224
 then it uses that data source to get its smiliness.
+使用 dataSource 获得 smiliness 的 property。
 
 854
 00:37:21,226 --> 00:37:23,226
 All right, so
+好了，所以
 
 855
 00:37:23,227 --> 00:37:25,227
 now let's go back to our happiness view controller.
+现在让我们回到 HappinessViewController。
 
 856
 00:37:25,230 --> 00:37:26,228
 Okay? The controller has to
+这个 controller 必须
 
 857
 00:37:26,230 --> 00:37:28,664
 implement the other side of delegation.
+实现 delegation 的另一面。
 
 858
 00:37:28,666 --> 00:37:30,932
 Now you remember one of the steps it has is it has to
+你们记住有一个步骤是，它必须
 
 859
 00:37:30,934 --> 00:37:34,302
 say to the world, I am HappinessViewController and
+对世界宣布，我是 HappinessViewController
 
 860
 00:37:34,304 --> 00:37:38,072
 I implement the FaceViewDataSource protocol.
+我会实现 FaceViewDataSource protocol。
 
 861
 00:37:38,074 --> 00:37:41,709
 And it does that by just saying FaceViewDataSource.
+声明 FaceViewDataSource 就完成了这些。
 
 862
 00:37:41,711 --> 00:37:43,344
 Now as soon as I put this on here,
+一旦我把它放在这里，
 
 863
 00:37:43,346 --> 00:37:44,811
 I'm going to get a warning right here,
+我会得到一个 warning，
 
 864
 00:37:44,813 --> 00:37:46,863
 an error that says,
+一个 error 说，
 
 865
 00:37:46,864 --> 00:37:48,914
 HappinessViewController does not conform to that protocol.
+HappinessViewController 没有遵从那个 protocol.
 
 866
 00:37:48,917 --> 00:37:51,918
 And indeed it doesn't because we do not implement
+实际上也没有，因为我们还没有
 
 867
 00:37:51,920 --> 00:37:54,787
 that smiliness by anywhere in our class.
+在我们的 class 里实现 smiliness。
 
 868
 00:37:54,789 --> 00:37:56,355
 So, easily fixed though.
+所以，简单地搞定它。
 
 869
 00:37:56,357 --> 00:37:59,458
 We go down here, now, since, we've already told it,
+我们往下到这里，我们已经说过了，
 
 870
 00:37:59,460 --> 00:38:01,376
 it implements this.
+它会实现这个。
 
 871
 00:38:01,377 --> 00:38:03,293
 If I just start typing smiliness it's going to
+如果我开始输入 smiliness， 它会
 
 872
 00:38:03,296 --> 00:38:05,530
 automatically know to escape complete.
+自动提示完成。
 
 873
 00:38:05,532 --> 00:38:07,064
 So I'll hit Tab.
+所以我点击 Tab 键，
 
 874
 00:38:07,066 --> 00:38:09,166
 I've got my nice method here.
+我就在这里得到了我的 method。
 
 875
 00:38:09,168 --> 00:38:13,570
 So how am I going to implement this protocol?
+所以我如何实现这个 protocal？
 
 876
 00:38:13,572 --> 00:38:15,571
 Okay, this method in this protocol,
+Okay，这个 protocol 的 method，
 
 877
 00:38:15,573 --> 00:38:17,273
 how am I going to implement that?
+我怎么实现呢？
 
 878
 00:38:17,275 --> 00:38:21,476
 Well the happiness view controller is going to
+好吧，HappinessViewController 要
 
 879
 00:38:21,478 --> 00:38:23,812
 interpret the happiness here.
+在这里解析 happiness。
 
 880
 00:38:23,814 --> 00:38:25,213
 Which is the model.
+这里是 model 层。
 
 881
 00:38:25,214 --> 00:38:26,613
 This is the happiness view controller's model.
+这是 HappinessViewController 的 model。
 
 882
 00:38:26,616 --> 00:38:30,718
 It's gonna interpret this for the view, because the view
+它要为 view 解析这些，因为 view
 
 883
 00:38:30,720 --> 00:38:33,487
 doesn't know about happiness, it only knows about smiliness.
+不知道 happiness，它只知道 smiliness。
 
 884
 00:38:33,489 --> 00:38:35,956
 Smiliness goes from 1 to minus 1.
+smiliness 的值介于-1到1之间。
 
 885
 00:38:35,958 --> 00:38:38,792
 Here, we're taking about the model which is happiness that
+这里，我们讨论 model 层也就是 happiness，
 
 886
 00:38:38,794 --> 00:38:40,226
 goes from 0 to 100.
+值介于0到100.
 
 887
 00:38:40,228 --> 00:38:43,162
 So it's a typical job of the controller to
+所以这是个典型的 controller 的任务
 
 888
 00:38:43,164 --> 00:38:46,965
 interpret the model for the view.
+为 view 解析 model。
 
 889
 00:38:46,967 --> 00:38:48,734
 You also interpret the view for the model and we'll see
+你也会为了 model 解析 view，我们
 
 890
 00:38:48,736 --> 00:38:51,536
 that a little bit later when we talk about gestures.
+待会儿讨论手势的时候再作说明。
 
 891
 00:38:51,538 --> 00:38:55,006
 But, here we're going to interpret the model for
+但是，这里我们要解析 model 来
 
 892
 00:38:55,008 --> 00:38:56,841
 the view.
+绘制 view。
 
 893
 00:38:56,842 --> 00:38:58,675
 So, I'm just going to return.
+所以，我要返回。
 
 894
 00:38:59,712 --> 00:39:04,047
 Now, happiness is an int, and smiliness is a double, so
+现在，happiness 是 int，smiliness 是 double，
 
 895
 00:39:04,049 --> 00:39:06,916
 I am going to have to convert the happiness.
+所以我必须转化 happiness。
 
 896
 00:39:07,952 --> 00:39:11,653
 Also, the happiness is on a scale of 0 to 100, so
+同样，happiness 是0到100之间的一个标量，
 
 897
 00:39:11,655 --> 00:39:14,088
 I am going to do minus 50.
+所以我要减去50.
 
 898
 00:39:15,158 --> 00:39:18,192
 Divide by 50 to convert it into that plus 1 to
+再除以50把它转化到
 
 899
 00:39:18,194 --> 00:39:19,626
 minus 1 scale.
+1到-1之间。
 
 900
 00:39:19,628 --> 00:39:22,762
 So here I'm just interpreting the model for the view.
+所以这里我刚刚为 view 解析了 model。
 
 901
 00:39:23,998 --> 00:39:25,197
 Make sense?
+听懂了吗？
 
 902
 00:39:25,199 --> 00:39:27,399
 Now the last thing that needs to happen here is
+现在这里最后一件事
 
 903
 00:39:27,401 --> 00:39:30,669
 that the controller needs to set itself
+是 controller 需要把自己
 
 904
 00:39:30,671 --> 00:39:35,773
 as the data source of the FaceView.
+设置为 FaceView 的 dataSource。
 
 905
 00:39:35,775 --> 00:39:36,807
 Let's all go back to FaceView,
+让我们回到 FaceView，
 
 906
 00:39:36,809 --> 00:39:38,575
 I'm going to show you a nice trick here.
+这里我要给你们展示一个技巧。
 
 907
 00:39:38,577 --> 00:39:43,946
 Cmd+Shift+O will let you type in like, start typing
+Cmd+Shift+O 让你们这么输入，开始输入
 
 908
 00:39:43,948 --> 00:39:46,215
 FaceView and you can see it appear right there, and
+"FaceView" 然后你会发现它出现在那，
 
 909
 00:39:46,217 --> 00:39:50,285
 you can switch really quick so Cmd+Shift+O is a great way to
+你能非常快速地切换。所以 Cmd+Shift+O 是非常棒的
 
 910
 00:39:50,287 --> 00:39:54,923
 switch really quickly between files in your project.
+在工程里快速切换文件的方式。
 
 911
 00:39:56,026 --> 00:39:59,093
 All right, so we need to set this data source right here
+好了，我们需要在这里设置我们的 FaceView 的 dataSource
 
 912
 00:39:59,095 --> 00:40:01,895
 inside of our face view to be the controller.
+为这个 controller。
 
 913
 00:40:02,964 --> 00:40:04,497
 So for the controller to do that,
+所以 controller 为了做这些，
 
 914
 00:40:04,499 --> 00:40:08,200
 though, it needs to have a pointer to the FaceView.
+它需要一个指向 FaceView 的 pointer。
 
 915
 00:40:08,202 --> 00:40:09,702
 And we do pointers to things in
+我们在 view 里用 outlets
 
 916
 00:40:09,704 --> 00:40:13,071
 our view using outlets, right?
+来实现指向事物的 pointer，对吗？
 
 917
 00:40:13,073 --> 00:40:18,209
 So let's go over here to our storyboard and wire up
+所以我们来到 storyboard 这里
 
 918
 00:40:18,211 --> 00:40:20,111
 an outlet from this.
+从这里引出一个 outlet。
 
 919
 00:40:20,113 --> 00:40:21,679
 We'll go to automatic mode up here.
+我们来到 automatic 模式这里。
 
 920
 00:40:21,681 --> 00:40:23,413
 Remember, when you go to automatic mode you're
+记住，当你进入 automatic 模式你会
 
 921
 00:40:23,415 --> 00:40:26,249
 gonna see the controller that matches what you
+看到一些 controller
 
 922
 00:40:26,251 --> 00:40:27,650
 have selected in your storyboard.
+这些 controller 跟你在 storyboard 里选择的控件有关。
 
 923
 00:40:29,387 --> 00:40:31,186
 So here we can have that.
+所以这里我们能看到它。
 
 924
 00:40:31,188 --> 00:40:34,589
 So I'm just going to take my controller right here and
+所以我要在这里选择我的 controller
 
 925
 00:40:34,591 --> 00:40:37,058
 I'm going to Ctrl+drag to create an outlet.
+同时 Ctrl+拖拽 创建一个 outlet。
 
 926
 00:40:37,060 --> 00:40:41,028
 This is the same way that I create an outlet to buttons or
+这种方式和为 button 或者
 
 927
 00:40:41,030 --> 00:40:42,529
 to the labels or whatever we've done.
+label 创建 outlet 的方式一摸一样。
 
 928
 00:40:42,531 --> 00:40:43,296
 It's exactly the same.
+完全一样。
 
 929
 00:40:43,298 --> 00:40:44,931
 It's just a normal outlet.
+这是个普通的 outlet。
 
 930
 00:40:44,933 --> 00:40:48,067
 I'm going to call it Face View.
+我把它命名为 faceView
 
 931
 00:40:49,103 --> 00:40:52,037
 So here's really nice FaceView right there.
+于是那里有个不错的 Faceview。
 
 932
 00:40:52,039 --> 00:40:55,473
 Now where in my code should I go and
+现在我在代码的哪里
 
 933
 00:40:55,475 --> 00:40:58,843
 set this var right here?
+设置这个变量呢？
 
 934
 00:40:58,845 --> 00:41:00,277
 Okay, this data source var.
+Okay，这个 dataSource 变量。
 
 935
 00:41:00,279 --> 00:41:03,914
 Well a great place to do it since this is
+好吧，一个合理的位置 (既然这是那个
 
 936
 00:41:03,916 --> 00:41:05,716
 the faceView we want to set that in,
+要被设置的 faceView）
 
 937
 00:41:05,718 --> 00:41:11,554
 is right here in the property observer for the FaceView.
+就是在这里，FaceView 的 property observer。
 
 938
-00:41:11,556 --> 00:41:15,124
+ 00:41:11,556 --> 00:41:15,124
 This property observer is called when the iOS starts up
+这个 property observer 会在 iOS 启动
 
 939
 00:41:15,126 --> 00:41:16,725
 and loads the story board.
+并加载这个 storyboard 时调用。
 
 940
 00:41:16,727 --> 00:41:18,360
 It connects this outlet.
+它连接这个 outlet。
 
 941
 00:41:18,362 --> 00:41:21,029
 It's going to set this variable.
+然后设置这个变量。
 
 942
 00:41:21,031 --> 00:41:23,998
 And so it's a perfect time when this is
+所以这是个完美的时刻
 
 943
 00:41:24,000 --> 00:41:25,399
 being set to go ahead and
+当这个变量被设置继续前行
 
 944
 00:41:25,401 --> 00:41:30,103
 say FaceView.dataSource equals self, okay?
+然后设置 faceView.dataSource = self, okay?
 
 945
 00:41:30,105 --> 00:41:31,504
 This is the controller.
+这是 controller。
 
 946
 00:41:31,506 --> 00:41:33,990
 It's perfectly legal for
+对它来说这么干完全合法，
 
 947
 00:41:33,991 --> 00:41:36,475
 it to say this because it is a FaceView data source, right?
+因为它是 FaceView 的 dataSource，对吗？
 
 948
 00:41:36,478 --> 00:41:38,911
 The happiness view controller is a face view data source so
+HappinessViewController 是 FaceView 的 dataSource
 
 949
 00:41:38,913 --> 00:41:41,547
 we can say that it is the new source.
+所以我们说它是新的来源。
 
 950
 00:41:41,549 --> 00:41:42,714
 It's perfectly fine equals.
+它是非常好的等价物。
 
 951
 00:41:42,716 --> 00:41:45,016
 All right?
+对吗？
 
 952
 00:41:45,018 --> 00:41:46,784
 That make sense that we're doing that?
+明白我们这么做的意义了吗？
 
 953
 00:41:48,087 --> 00:41:50,087
 Okay, so now everything is hooked,
+Okay，现在一切都组装好了，
 
 954
 00:41:50,089 --> 00:41:52,422
 and how is this gonna work.
+这是怎么工作的。
 
 955
 00:41:52,424 --> 00:41:55,391
 It's going to be very straight forward.
+非常直接。
 
 956
 00:41:56,561 --> 00:41:59,828
 Every time that the face redraws itself,
+每次 face 重绘自身的时候，
 
 957
 00:41:59,830 --> 00:42:03,265
 it's going to look for its data source.
+它会去查找自己的 dataSource。
 
 958
 00:42:03,267 --> 00:42:06,634
 Which we have set right here in our controller to
+也就是我们在 controller 这里设置的
 
 959
 00:42:06,636 --> 00:42:07,869
 be the controller itself.
+controller 自身。
 
 960
 00:42:09,038 --> 00:42:11,438
 It's going to get its smiliness from the data
+它会从 dataSource
 
 961
 00:42:11,440 --> 00:42:15,975
 source by calling the method in the protocol up here, okay?
+通过调用上面 protocol 里的 method， 来获得 smiliness，okay？
 
 962
 00:42:15,977 --> 00:42:18,478
 We implement that method in our controller.
+我们在 controller 里实现了对应的 method。
 
 963
 00:42:18,480 --> 00:42:20,813
 We interpret the model for the view.
+我们为 view 解析 model。
 
 964
 00:42:20,815 --> 00:42:22,815
 And the FaceView's gonna be able to draw the proper value.
+然后 FaceView 就会绘制出用合适的值。
 
 965
 00:42:22,817 --> 00:42:26,885
 Now there's only one other thing that I wanna do here.
+现在这里只剩下一件我要做的事了。
 
 966
 00:42:26,887 --> 00:42:29,120
 Which is every time something changes our model,
+也就是每次我们的model变动时，
 
 967
 00:42:29,122 --> 00:42:30,922
 I wanna make sure the face redraws itself.
+我要让 face 重新绘制自身。
 
 968
 00:42:30,924 --> 00:42:35,993
 Of course, because we're representing that in the face.
+这是当然的，因为我们要在 face 中表现出来。
 
 969
 00:42:35,995 --> 00:42:39,363
 So the best space to do that is in this update UI, so
+所以做这个的最佳的位置是 UpdateUI
 
 970
 00:42:39,365 --> 00:42:42,899
 every single time the happiness changes I'm going to
+每一次 happiness 值变动了
 
 971
 00:42:42,901 --> 00:42:48,304
-ask my FaceView to set needs display of itself.
+ask my faceView to set needs display of itself.
+我都会让 faceView 设置 setNeedsDisplay.
 
 972
 00:42:48,306 --> 00:42:50,272
 In other words, to redraw.
+换句话说，重绘。
 
 973
 00:42:50,274 --> 00:42:53,141
 Remember set needs display is the thing you do that says
+记住，setNeedsDisplay 就是那种
 
 974
 00:42:53,143 --> 00:42:55,744
 hey, call my draw rect, redraw me.
+“hey，调用我的 drawRect 函数，重绘我”的意思
 
 975
 00:42:55,746 --> 00:42:57,111
 Now if I didn't do this then every time I
+现在如果我没有做这个，那么每次
 
 976
 00:42:57,113 --> 00:42:59,680
 set my happiness the FaceView would not draw, okay?
+我设置 happiness， faceView都不会重新绘制，okay？
 
 977
 00:42:59,682 --> 00:43:02,716
 Now maybe if I rotated my device and
+现在可能是因为我旋转了我的设备
 
 978
 00:43:02,718 --> 00:43:06,519
 it redrew then it would show it but.
+然后它重新绘制显示出来了。
 
 979
 00:43:07,622 --> 00:43:12,024
 Otherwise it wasn't gonna show it.
+否则它不会显示出来。
 
 980
 00:43:12,026 --> 00:43:14,426
 We've got this hooked up, it really should be the happiness
+我们把这个关联上了，它应该是真正的
 
 981
 00:43:14,428 --> 00:43:17,495
 that's showing in here rather than the smiliness.
+显示在这里的 happiness 而不是 smiliness。
 
 982
 00:43:17,497 --> 00:43:19,731
 So it shouldn't be a flat line right here,
+所以它不该是这样一条水平的线段。
 
 983
 00:43:19,733 --> 00:43:21,432
 it should actually show the happiness.
+它应该实际展示 happiness。
 
 984
 00:43:21,434 --> 00:43:24,435
 Let's go ahead run, see what we got here.
+我们运行一下，看看效果如何。
 
 985
 00:43:29,107 --> 00:43:31,207
 I knew we should get a happiness of 75,
+我们应该得到一个75的 happiness。
 
 986
 00:43:31,209 --> 00:43:34,243
 which is a little bit happy.
+有一点点的 happy。
 
 987
 00:43:34,245 --> 00:43:36,078
 Yeah. That looks good right there.
+好的。看上去挺不错。
 
 988
 00:43:36,080 --> 00:43:40,048
 Let's go change our happiness here to be sad, like maybe 10.
+我们把 happiness 改成悲伤，比如说10.
 
 989
 00:43:40,050 --> 00:43:41,716
 Go ahead and re-run.
+重新运行。
+
 
 990
 00:43:44,053 --> 00:43:48,588
 Okay, we're sad, all right and
+Okay，我们是悲伤的，好了
 
 991
 00:43:48,590 --> 00:43:55,995
 let's go to the ecstatic and we're ecstatic, okay?
+我们展示一下狂喜，我们是狂喜的，okay？
 
 992
 00:43:55,997 --> 00:43:57,863
 Or we should be ecstatic because we
+或者我们应该是狂喜的，因为
 
 993
 00:43:57,865 --> 00:44:00,198
 successfully implemented delegation.
+我们成功地实现了 delegation。
 
 994
 00:44:04,404 --> 00:44:06,437
@@ -3977,10 +4169,12 @@ successfully implemented delegation.
 995
 00:44:06,438 --> 00:44:08,471
 Let's go back to our slides and
+我们回到课件上
 
 996
 00:44:08,474 --> 00:44:12,109
 cover the next thing here, which is gestures.
+讨论下一个东西，手势。
 
 997
 00:44:13,311 --> 00:44:14,544
@@ -3989,10 +4183,12 @@ All right.
 998
 00:44:14,545 --> 00:44:15,778
 So we know how to draw inner view,
+所以我们知道怎么去绘制内部 view，
 
 999
 00:44:15,780 --> 00:44:17,313
 now we wanna handle these gestures.
+现在我们要处理这些手势。
 
 1000
 00:44:17,315 --> 00:44:19,599
@@ -4011,12 +4207,12 @@ things like that.
 1003
 00:44:24,171 --> 00:44:26,455
 Now we could get the raw data about every finger that
-我们可以获取到手势按下、
+我们可以获取到每个手指按下、
 
 1004
 00:44:26,457 --> 00:44:29,691
 goes down, and where it is, that data is available, but
-移动的原始信息，
+位置的原始信息，
 
 1005
 00:44:29,693 --> 00:44:31,325
@@ -4041,7 +4237,7 @@ see, is this a swipe, or is it just moving over to the right.
 1009
 00:44:40,168 --> 00:44:41,534
 So iOS does all that for
-不过ios为我们做了底层封装，
+不过 iOS 为我们做了底层封装，
 
 1010
 00:44:41,536 --> 00:44:44,203

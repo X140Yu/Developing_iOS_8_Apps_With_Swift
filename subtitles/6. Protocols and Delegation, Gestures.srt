@@ -1,802 +1,1003 @@
 1
 00:00:00,001 --> 00:00:04,669
 [MUSIC]
+［音乐］
 
 2
 00:00:04,671 --> 00:00:08,272
 Stanford University.
+斯坦福大学
 
 3
 00:00:08,274 --> 00:00:11,742
 >> Okay well, welcome to lecture six of
+欢迎来到第六课
 
 4
 00:00:11,744 --> 00:00:15,646
 Stanford CS193P winter of 2015.
+2015冬季学期，斯坦福大学CS193P课程。
 
 5
 00:00:15,648 --> 00:00:18,882
 So today I am gonna do a little bit of
+今天我们将要做一点点
 
 6
 00:00:18,884 --> 00:00:21,451
 demo action right at the beginning.
+demo 在最开始的时候
 
 7
 00:00:21,453 --> 00:00:24,754
 I wanna show you a kind of a cool trick that you can do
+我将会向你展示一种很酷的技巧
 
 8
 00:00:24,756 --> 00:00:28,124
 inside your storyboard, and we also, last time,
+你可以在你的Storyboard里使用，我们同样的，在上次
 
 9
 00:00:28,126 --> 00:00:31,794
 didn't get to the point where we had actually a model for
+没有为我们的MVC创建一个实际的 model
 
 10
 00:00:31,796 --> 00:00:33,795
 our MVC, our happiness MVC.
+我们的 Happiness MVC
 
 11
 00:00:33,797 --> 00:00:36,398
 We had worked on the face view and got that working but
+我们在 face view上工作过并且已经开始工作了
 
 12
 00:00:36,400 --> 00:00:37,632
 we didn't have a model,
+我们没有一个 model
 
 13
 00:00:37,634 --> 00:00:40,368
 so I'm gonna just put that model in there, but then I am
+所以我准备在这里放置一个 model，但是随后
 
 14
 00:00:40,370 --> 00:00:43,103
 going to jump right back into the slides and I am going to
+我准备跳回进入 slides并且我准备
 
 15
 00:00:43,105 --> 00:00:45,906
 cover a very important concept, which is delegation.
+掩盖一个重要的概念，就是 delegation
 
 16
 00:00:45,908 --> 00:00:51,511
 And I'll have to kinda go over Swift's protocol syntax, and
+我很乐意去复习 Swift语言的 协议语法
 
 17
 00:00:51,513 --> 00:00:56,348
 then I will do a demo to show you how delegation works,
+随后我将会制作一个demo用来向你们展示 delegation是怎么工作的
 
 18
 00:00:56,350 --> 00:01:00,018
 then I'm gonna cover gestures, okay?
+随后我准备覆盖一些手势，明白？
 
 19
 00:01:00,020 --> 00:01:02,954
 We know how to draw in our view now from last time.
+在上节课中我们知道了怎么在我们的 view中进行绘制
 
 20
 00:01:02,956 --> 00:01:06,190
 So, now we're gonna then talk about how we handle gestures.
+所以，现在我们准备去探讨怎么样去处理手势
 
 21
 00:01:06,192 --> 00:01:08,859
 Pinches and pans and swipes and things like that.
+类似于捏合、滑动或者类似的动作
 
 22
 00:01:10,129 --> 00:01:12,295
 And I think that'll probably use all of my time up.
+我想这会在我所有的时间内使用的
 
 23
 00:01:12,297 --> 00:01:13,630
 But if I have a little bit of time at the end,
+但是如果我在结束前有一点时间的话
 
 24
 00:01:13,632 --> 00:01:15,732
 I'm gonna get started on the next major topic.
+我准备开始下一个主要的话题
 
 25
 00:01:15,734 --> 00:01:19,035
 Which we're gonna spend most of Wednesday on.
+我们准备在周三进行探讨的
 
 26
 00:01:19,037 --> 00:01:21,303
 Which is multiple MVCs, right?
+就是 multiple MVCs，明白？
 
 27
 00:01:21,305 --> 00:01:22,704
 We know how to build an MVC.
+我们知道如何去创建一个 MVC
 
 28
 00:01:22,706 --> 00:01:25,573
 It's got a controller, it's got a model, it's got a view.
+它有一个 controller，model，view
 
 29
 00:01:25,575 --> 00:01:27,675
 And now we're gonna build a bigger application by
+然后我们将要创建一个大一点的应用
 
 30
 00:01:27,677 --> 00:01:29,810
 combining MVCs, okay?
+通过结合多个 MVC，明白？
 
 31
 00:01:29,812 --> 00:01:31,478
 And that's critical, obviously,
+并且那是很关键的，很明显
 
 32
 00:01:31,480 --> 00:01:34,815
 to growing the capability of size of app you can build.
+增加功能会使你创建的APP的尺寸增加
 
 33
 00:01:34,817 --> 00:01:38,785
 So I'll try and fit in five or ten minutes of slides for
+所以我将会尝试在5到10分钟内进行适配
 
 34
 00:01:38,787 --> 00:01:41,921
 that just to make sure we have more time on Wednesday.
+以确保我们再周三的时候会有更多的时间
 
 35
 00:01:42,990 --> 00:01:45,690
 Anybody have any questions about any of this?
+有人对这部分内容有问题么？
 
 36
 00:01:47,227 --> 00:01:47,792
 All right.
+好吧
 
 37
 00:01:47,794 --> 00:01:54,531
 So, let's dive into this demo first, before I talk about.
+所以，让我们先潜入这个demo，在我谈论这个之前
 
 38
 00:01:54,533 --> 00:01:59,202
 That, okay I am just going to bring up
+那个，我只是准备造就
 
 39
 00:01:59,204 --> 00:02:03,272
 happiness from where we left off last time.
+happiness 从我们上次离开的地方
 
 40
 00:02:03,274 --> 00:02:07,476
 And really all we had done here was the Face View,
+然后我们在这里已经完成的是 Face View
 
 41
 00:02:07,478 --> 00:02:09,511
 we had not done our Happiness View.
+我们没有完成我们的 Happiness View
 
 42
 00:02:09,513 --> 00:02:12,280
 In fact, if I switch over to our Happiness View controller,
+事实上，如果我切换到我们的 Happiness View controller
 
 43
 00:02:12,282 --> 00:02:14,382
 you can see it is completely empty.
+你可以看到它完全是空的
 
 44
 00:02:14,384 --> 00:02:17,051
 So one thing we're gonna do is
+我们我们将要做的一件事是
 
 45
 00:02:17,053 --> 00:02:19,786
 fix our model here but before we do that I'm gonna show you
+修复我们的 model在我准备向你们展示
 
 46
 00:02:19,788 --> 00:02:22,455
 something really cool that you can do in story boards.
+一些你可以在storyboards里完成的很酷的事之前
 
 47
 00:02:22,457 --> 00:02:26,359
 So here we have our story board and it's pretty blank.
+所以这里我们拥有我们的 storyboard并且它是空白的
 
 48
 00:02:26,361 --> 00:02:29,762
 It looks blank there's this big blank square here.
+它看起来是空的因为那里有很大一块空白的地方
 
 49
 00:02:29,764 --> 00:02:32,865
 This is our face view in here that I have selected.
+在这里我选中的是我们的 face view
 
 50
 00:02:32,867 --> 00:02:36,168
 You can see the little resize handles are selected but
+你可以看到小的调节手柄被选中了
 
 51
 00:02:36,170 --> 00:02:38,403
 I can't even really tell that's a face view.
+但是我甚至不能告诉你那就是 face view
 
 52
 00:02:38,405 --> 00:02:40,638
 It's hard to tell where it is.
+很难去描述出来他们在哪儿
 
 53
 00:02:40,640 --> 00:02:42,640
 It's just kinda hard to tell what's going on.
+也很难描述出来他们将要到哪里去
 
 54
 00:02:42,642 --> 00:02:46,276
 And it's actually possible believe it or not to have your
+然后它实际上可能相信它存在或者不存在
 
 55
 00:02:46,278 --> 00:02:51,381
 custom UI view subclasses draw in your story board.
+去拥有你的自定义 UI view的 subclasses 在你的 storyboard里
 
 56
 00:02:51,383 --> 00:02:52,715
 Okay? So they can actually be
+明白？所以他们实际上
 
 57
 00:02:52,717 --> 00:02:54,784
 live drawing in your storyboard.
+已经在你的 stroyboard中被绘制了
 
 58
 00:02:54,786 --> 00:02:56,985
 And it's really incredibly easy to do.
+而且它实际上这么做是令人难以置信的简单
 
 59
 00:02:56,987 --> 00:02:59,121
 I'm just gonna go back to my face view.
+我准备返回我的 face view
 
 60
 00:02:59,123 --> 00:03:01,173
 Here it is.
+它在这里
 
 61
 00:03:01,174 --> 00:03:03,224
 And right before the class here I'm gonna say
+在这个类之前我准备探讨
 
 62
 00:03:03,226 --> 00:03:06,160
 at sign IBDesignable.
+IBDesignable标记处的内容
 
 63
 00:03:07,663 --> 00:03:11,264
 And if I put at sign IBDesignable in there,
+如果我在这里放置 IBDesignable标记
 
 64
 00:03:11,266 --> 00:03:12,899
 then when I go back to my storyboard,
+然后当我返回我的 storyboard的时候
 
 65
 00:03:12,901 --> 00:03:18,838
 Xcode automatically notices that's an IB designable
+Xcode 自动的识别那是一个 IB designable 类
 
 66
 00:03:18,840 --> 00:03:22,941
 class and it will draw it right here in the story board,
+然后它会在 storyboard中的这里绘制它
 
 67
 00:03:22,943 --> 00:03:26,511
 so now I can see much more easily what's going on with my
+所以现在我可以发现我的 faceview 会变得更加容易
 
 68
 00:03:26,513 --> 00:03:27,979
 face view, where it is here.
+它是在这里
 
 69
 00:03:29,349 --> 00:03:31,582
 And if I change something in my face,
+然后如果我在我的 face view中改变了什么的话
 
 70
 00:03:31,584 --> 00:03:34,585
 like let's go change that smile so it's not a frown.
+类似于我们将笑脸换成不是皱眉的那个
 
 71
 00:03:34,587 --> 00:03:37,821
 Whoops where is that, it's right here, minus 0.5.
+Whoops 哪里去了，它在这里，减掉0.5
 
 72
 00:03:37,823 --> 00:03:41,358
 Let's change that to plus 0.5.
+让我们给它增加0.5
 
 73
 00:03:41,360 --> 00:03:45,028
 Then you'll notice that this file has changed and
+然后一会发现这个文件被修改了
 
 74
 00:03:45,030 --> 00:03:49,098
 it will recompile it and redraw it.
+随后它将会重新编译它并且重新绘制它
 
 75
 00:03:49,100 --> 00:03:51,467
 Okay so you're always seeing the latest version.
+所以你可以始终看到最终的版本
 
 76
 00:03:51,469 --> 00:03:54,587
 Now another thing that would be really
+现在这里还有另外一件事会很酷
 
 77
 00:03:54,588 --> 00:03:57,706
 cool here is just like if we have a button or a label.
+就像如果我们拥有一个 button 或一个 label
 
 78
 00:03:57,708 --> 00:04:00,708
 When we bring up the attributes inspector here
+当我们在这里设置属性窗口中的内容
 
 79
 00:04:00,710 --> 00:04:03,411
 we can edit attributes of a button or a label.
+我们可以编辑 button或者 label的属性
 
 80
 00:04:03,413 --> 00:04:04,812
 Right? Like its alignment or its font.
+明白？类似于它的对其方式或者字体
 
 81
 00:04:04,814 --> 00:04:07,180
 Well wouldn't it be cool if we could edit the attributes of
+想象一下如果我们在这里可以编辑 face view的属性
 
 82
 00:04:07,182 --> 00:04:09,115
 this face view here as well?
+会不会变得很酷
 
 83
 00:04:09,117 --> 00:04:11,101
 And we can do that too.
+我们可以做到这一点
 
 84
 00:04:11,102 --> 00:04:13,086
 If we go back here to the face view here's some of
+如果我们返回到face view的这里
 
 85
 00:04:13,088 --> 00:04:15,287
 the things that are setable about a face view.
+这里是有一些地方是可以设置 face view的
 
 86
 00:04:15,289 --> 00:04:18,991
 The line width, the color, and the scale.
+线宽，颜色，和比例
 
 87
 00:04:18,993 --> 00:04:24,329
 And you can make any of these things editable inside of your
+并且你可以设置其中的任何一个属性在你的 storyboard中
 
 88
 00:04:25,732 --> 00:04:30,234
 storyboard by just putting in here i b inspectable.
+通过仅仅是在这里放置 i b inspectable
 
 89
 00:04:31,437 --> 00:04:33,136
 But I'd be inspectable before them.
+但我会在他们之前 放置inspectable
 
 90
 00:04:34,105 --> 00:04:36,272
 Then interface builder,
+随后 interface builder，
 
 91
 00:04:36,274 --> 00:04:39,041
 which is the part of x code that is doing part of your
+是Xcode的一部分会做 storyboard的部分工作
 
 92
 00:04:39,043 --> 00:04:46,414
 storyboard will create a new UI to make all those editable.
+比如创建一个新的 UI使所有的这些可编辑
 
 93
 00:04:46,416 --> 00:04:48,400
 Here is our storyboard.
+这里就是我们的 storyboard
 
 94
 00:04:48,401 --> 00:04:50,385
 Now if you look over here you can see face view.
+现在如果你查看这里你可以看见 face view
 
 95
 00:04:50,387 --> 00:04:52,153
 It's added things to be able to set these.
+它添加的东西才能够设置这些
 
 96
 00:04:52,155 --> 00:04:54,588
 I can set things like my line width.
+我可设置很多比如我的线宽
 
 97
 00:04:54,590 --> 00:04:57,190
 Maybe I want thicker lines.
+也许我想要加厚的线条
 
 98
 00:04:57,192 --> 00:04:58,892
 Maybe I want a different color.
+也许我想要不同的颜色
 
 99
 00:04:58,894 --> 00:05:00,626
 So we can go to the color chooser here.
+所以我们可以去颜色选择器
 
 100
 00:05:00,628 --> 00:05:05,531
 We could pick green color or orange or something like that.
+我们可以选择绿色或者橙色或者类似的颜色
 
 101
 00:05:05,533 --> 00:05:06,231
 Tangerine.
+橘黄色
 
 102
 00:05:06,233 --> 00:05:07,699
 It looks good.
+看起来不错
 
 103
 00:05:07,701 --> 00:05:09,734
 And we can change the scale as well, too.
+我们同样也可以改变比例
 
 104
 00:05:09,736 --> 00:05:14,071
 We can go down to 0.5, maybe we want to go 0.95, all right?
+我们可以向下调整0.5，或者我们想要调整0.95，明白？
 
 105
 00:05:14,073 --> 00:05:15,573
 We can change that.
+我们可以改变那个
 
 106
 00:05:15,574 --> 00:05:17,074
 Now, these are not only changing here in
+现在，这些不仅仅是在你的storyboard中改变了
 
 107
 00:05:17,076 --> 00:05:19,776
 your storyboard, but they're actually setting the default
+实际上他们在设置中参数也改变了
 
 108
 00:05:19,778 --> 00:05:21,978
 value so that when you run your application, so
+这样当你运行你的应用的时候
 
 109
 00:05:21,980 --> 00:05:23,846
 let's go and run our application here.
+现在让我们在这里运行我们的应用
+
 
 110
 00:05:23,848 --> 00:05:25,814
 It's going to use these values that are set in
+它将会使用这些你在
 
 111
 00:05:25,816 --> 00:05:27,833
 the storyboard.
+storyboard中设置的参数
 
 112
 00:05:27,834 --> 00:05:29,851
 Just like if those were buttons or labels and you had
+就像如果这些是按钮或者文本然后
 
 113
 00:05:29,853 --> 00:05:33,321
 changed something about them in the inspector, it's going
+你在inspector中改变了他们的一些参数
 
 114
 00:05:33,323 --> 00:05:35,456
 to change the way it works in your program as well.
+它将会在你的程序中改变它的工作方式
 
 115
 00:05:36,859 --> 00:05:38,809
 Yes, questions.
+有问题么？
 
 116
 00:05:38,810 --> 00:05:40,760
 >> So that overwrites what's in your code?
+>> 所以在你的代码中重写了？
 
 117
 00:05:40,763 --> 00:05:43,530
 >> Yes, so the question is does that overwrite what's in
+>> 好的，所以问题是在代码中
 
 118
 00:05:43,532 --> 00:05:44,430
 our code?
+进行重写了？
 
 119
 00:05:44,432 --> 00:05:46,232
 So for example, back here.
+举个例子，回到这里
 
 120
 00:05:46,234 --> 00:05:49,535
 We had equals three, we had equals blue color and
+我们拥有相同的3个，我们有三个相同的蓝色
 
 121
 00:05:49,537 --> 00:05:50,869
 the answer is yes, it overrides it.
+然后答案是是的，它重写了它
 
 122
 00:05:50,871 --> 00:05:54,272
 Basically, when interface loads it up it respects those.
+从根本上来说，当 interface加载了它
 
 123
 00:05:54,274 --> 00:05:57,175
 It will use those but as soon as you start editing them,
+它将会使用他们但是当你开始编辑他们的时候
 
 124
 00:05:57,177 --> 00:05:59,110
 then it's going to override them and
+它将会 override他们并且
 
 125
 00:05:59,112 --> 00:06:00,344
 reset them to the editor value.
+重置他们的值为编辑器的值
 
 126
 00:06:01,613 --> 00:06:03,213
 Any other questions about that?
+还有其他关于这里的问题么？
 
 127
 00:06:03,215 --> 00:06:04,113
 Question?
+还有问题么？
 
 128
 00:06:08,052 --> 00:06:09,651
 >> Yes, so the question is are there some,
+>> 好的，所以问题是那里
 
 129
 00:06:09,653 --> 00:06:11,686
 there's got to be some got-yous, or something.
+那里有一些你的或者一些东西
 
 130
 00:06:11,688 --> 00:06:15,323
 Why wouldn't it just be the ideal design be the default?
+为什么不让它的默认值达到一个完美的设计
 
 131
 00:06:15,325 --> 00:06:17,992
 And, yes, there are some gotchas.
+是的，那里有一些 gotchas
 
 132
 00:06:17,994 --> 00:06:22,796
 There's certain things that, really, it can't do.
+还有某些事情，真的是，我做不了
 
 133
 00:06:22,798 --> 00:06:26,466
 It can't load your code up, you might have dependencies on
+它不能加载你的代码，你也许有一些 dependencies在
 
 134
 00:06:26,468 --> 00:06:30,003
 other frameworks that it can't see, things like that.
-
+其他的 frameworks上并且是看不到的，事情就像那样
+ 
 135
 00:06:30,005 --> 00:06:31,537
 So yeah, there are some gotchas,
+所以，那里有一些 gotchas
 
 136
 00:06:31,539 --> 00:06:33,405
 I don't have time to go through them all but
+我没有时间去把他们都经历一遍
 
 137
 00:06:33,407 --> 00:06:35,340
 I just wanted to show you that this is here for
+但是我只是想要向你展示这里的东西
 
 138
 00:06:35,342 --> 00:06:37,175
 most straight forward sub class UI view,
+大多数的是跟 UI view 类相关的
 
 139
 00:06:37,177 --> 00:06:38,643
 it works great without gotchas.
+它在没有 gotchas的时候工作的很好
 
 140
 00:06:38,645 --> 00:06:42,880
 But yeah, there are obviously some times when it's not going
+但是，在那里明显也有一些时候它不工作了
 
 141
 00:06:42,882 --> 00:06:46,683
 to work, because you could have a complicated view, so
+以为你也许有一个复杂的视图
 
 142
 00:06:46,685 --> 00:06:49,152
 any other questions about it?
+所以还有其他的问题么？
 
 143
 00:06:49,154 --> 00:06:50,519
 That's all there is to know about that.
+这就是所有的关于这部分的内容
 
 144
 00:06:52,456 --> 00:06:55,957
 So let's go back to our model here, or
+所以让我们回到我们的 model
 
 145
 00:06:55,959 --> 00:07:00,028
 to our controller, and I want to put the model in here for
+或者我们的 controller，然后我想在这里放一个 model
 
 146
 00:07:00,030 --> 00:07:01,295
 the happiness view controller.
+提供给 happiness view controller
 
 147
 00:07:01,297 --> 00:07:04,331
 So it's model, because this is demoed and
+所以这里是 model，因为这是一个 demo
 
 148
 00:07:04,333 --> 00:07:06,199
 I want it all to be really quick and
+并且我想要所以的变得很快
 
 149
 00:07:06,201 --> 00:07:08,868
 you can even follow along with me, some of you.
+你甚至可以跟着我，你们中的一部分
 
 150
 00:07:08,870 --> 00:07:10,370
 This model's gonna be really simple.
+这个 model 将会变得非常简单
 
 151
 00:07:10,372 --> 00:07:12,738
 I'm gonna have the model of and
+我将要拥有 model
 
 152
 00:07:12,740 --> 00:07:14,006
 a model you know the model is right?
+一个你知道的 model
 
 153
 00:07:14,008 --> 00:07:16,141
 Your calculator's model was a calculator brain so
+你的计算器的 model 是一个计算器的大脑
 
 154
 00:07:16,143 --> 00:07:19,277
 it was a whole object that you created to be the model.
+所以你建立的 model是一整个对象
 
 155
 00:07:19,279 --> 00:07:22,547
 Here I'm gonna have my model be the happiness and
+在这里我准备使我的 model成为 happiness并且
 
 156
 00:07:22,549 --> 00:07:25,082
 it's going to be the very complicated data structure of
+这将是一个非常复杂的数据结构
 
 157
 00:07:25,084 --> 00:07:26,216
 an int.
+一个 int 型
 
 158
 00:07:26,218 --> 00:07:28,135
 Okay. So
+好的，所以
 
 159
 00:07:28,136 --> 00:07:30,053
 we're gonna represent our happiness as an Int.
+我们准备 represent我们的 happiness为一个 Int型
 
 160
 00:07:30,055 --> 00:07:32,422
 And I'm gonna start it out at 50.
+所以我准备给它出来的值设定为50
 
 161
 00:07:32,424 --> 00:07:36,559
 And I'm gonna have my happiness mean 0 is very sad,
+然后我准备设置我的 happiness为0的时候代表非常伤心
 
 162
 00:07:36,561 --> 00:07:39,094
 and 100 is ecstatic.
+100的时候代表欣喜若狂
 
 163
 00:07:39,096 --> 00:07:40,462
 Okay?
+明白？
 
 164
 00:07:40,464 --> 00:07:41,930
 So that's my model.
+所以那是我的 model
 
 165
 00:07:41,932 --> 00:07:44,966
 Super duper simple model, and don't get this model confused
+超级简单的一个 model，然后不要让这个 model感到困惑
 
 166
 00:07:44,968 --> 00:07:46,801
 with the smiliness in the face view,
+在 face view中使用一个笑脸
 
 167
 00:07:46,803 --> 00:07:49,903
 that's a different thing, that's just the angle of
+那是一件不同的事，这仅仅是
 
 168
 00:07:49,905 --> 00:07:52,572
 that arc in the face view, totally separate thing.
+face view中 圆弧的角度，完全独立的东西
 
 169
 00:07:52,574 --> 00:07:54,808
 And you notice they're kind of on different scales anyways.
+你注意到他们种在不同尺度上
 
 170
 00:07:54,810 --> 00:07:55,842
 This is 0 to 100,
+这是 0到 100
 
 171
 00:07:55,844 --> 00:08:00,379
 the smiliness is minus 1 to positive 1, etc.
+笑脸减1或者加1，等等
 
 172
 00:08:00,381 --> 00:08:01,680
 And that's okay because one of
+那是没关系的因为
 
 173
 00:08:01,682 --> 00:08:05,883
 the things that controllers do, one of their jobs really,
+事情中的一件事情由 controller做，他们中的任何一项工作
 
 174
 00:08:05,885 --> 00:08:09,487
 is to interpret the model for the view.
+是由 model interpret给 view 的
 
 175
 00:08:09,489 --> 00:08:11,755
 Okay, or vice versa in what happens in the view.
+好的，反之在该视图会发生什么
 
 176
 00:08:11,757 --> 00:08:12,723
 And they have to figure out what to
+他们必须弄清楚
 
 177
 00:08:12,725 --> 00:08:13,941
 communicate to the model.
+去用什么和 model沟通
 
 178
 00:08:13,942 --> 00:08:15,158
 That's a lot of what a controller does.
+controller做的是一件很大的工作
 
 179
 00:08:15,160 --> 00:08:17,026
 And so, we're going to have some coding here,
+所以，我们准备在这里添加一些代码
 
 180
 00:08:17,028 --> 00:08:19,712
 that does exactly that.
+这正是这么做的
 
 181
 00:08:19,713 --> 00:08:22,397
 Interprets our 0 to 100 happiness into a smile or not.
+Interprets 我们的 0 到 100 进入一个笑脸或者不进入
 
 182
 00:08:22,400 --> 00:08:23,665
 Now there's other things that
+现在有其他的事情
 
 183
 00:08:23,667 --> 00:08:25,567
 represent happiness besides smiling.
+represent happiness 除了 smiling
 
 184
 00:08:25,569 --> 00:08:27,001
 You know, little crinkly eyes.
+你知道的，有点弯曲的眼睛
 
 185
 00:08:27,003 --> 00:08:29,870
 And other things that make you appear that you're happy.
+和其他的东西，让你看来是快乐的
 
 186
 00:08:29,872 --> 00:08:32,139
 But we're just gonna use our face view which only knows how
+但我们只是要去使用我们的 face view 它只知道怎样
 
 187
 00:08:32,141 --> 00:08:34,975
 to smile or not.
+去微笑或者不微笑
 
 188
 00:08:34,977 --> 00:08:39,846
 Now one thing that we can do inside this model.
+现在在这个 model中有一件事我们可以做
 
 189
 00:08:41,282 --> 00:08:43,115
 I put the curly braces here and
+我在这里添加一个大括号然后
 
 190
 00:08:43,117 --> 00:08:44,750
 you might say why did I put that there?
+你可能会问我为什么我把它放在这里？
 
 191
 00:08:44,752 --> 00:08:48,353
 That is because I want to use the property observer for
+那是因为我想要对我的 model使用属性观察器
 
 192
 00:08:48,355 --> 00:08:52,790
 my model to, essentially, validate my model.
+实质上，验证我的 model
 
 193
 00:08:52,792 --> 00:08:55,359
 So you can use property observers to do evaluation,
+所以你可以使用属性观察期去进行评估
 
 194
 00:08:55,361 --> 00:08:57,527
 really, of any property that you want.
+任何你想查看的属性
 
 195
 00:08:57,529 --> 00:08:59,829
 So my happiness can only be 0 to a 100.
+所以我的 happiness 只能在 0 到 100内
 
 196
 00:08:59,831 --> 00:09:02,865
 If someone passes me happiness minus 1 or
+如果一个人传给我的 happiness 负1或者
 
 197
 00:09:02,867 --> 00:09:07,236
 5,000 I need to kind of keep it in range to 0 to 100.
+5000 我需要将它保持在 0到100的范围内
 
 198
 00:09:07,238 --> 00:09:09,871
 So I'm just going to say, in my setter here,
+所以，我只是想说，在我的 setter中
 
 199
 00:09:09,873 --> 00:09:11,606
 my property observer here,
+我的属性观察期中
 
 200
 00:09:11,608 --> 00:09:18,279
 I'm going to say min max of my happiness to 0 or 100,
+我想说在我的 happiness中最小和最大的值是 0和100
 
 201
 00:09:18,281 --> 00:09:21,048

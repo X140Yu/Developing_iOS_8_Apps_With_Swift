@@ -1,38 +1,47 @@
 ﻿1
 00:00:01,000 --> 00:00:04,630
 [MUSIC]
+［音乐］
 
 2
 00:00:04,630 --> 00:00:07,930
 Stanford University.
+斯坦福大学
 
 3
 00:00:07,940 --> 00:00:11,970
 Okay, well, welcome to lecture 7 of CS193P.
+欢迎来到 CS193P 课程的第七课
 
 4
 00:00:11,970 --> 00:00:14,240
 This is the winter of 2015.
+这是2015年冬季的课程
 
 5
 00:00:14,240 --> 00:00:16,070
 And today,
+今天
 
 6
 00:00:16,080 --> 00:00:19,180
 we are going to talk about multiple MVCs, all right?
+我们想讲一下多重 MVC（Multiple MVCs）的内容
 
 7
 00:00:19,180 --> 00:00:21,110
 That includes split view controller,
+这将涉及到 Split View Controller 和
 
 8
 00:00:21,110 --> 00:00:22,150
 navigation controller.
+Navigation Controller
 
 9
 00:00:22,150 --> 00:00:24,150
 We talked about tab bar controller a little bit
+我们在上一讲中已经讲过一点 Tab Bar Controller 的内容
 
 10
 00:00:24,150 --> 00:00:25,380
@@ -41,126 +50,157 @@ last time.
 11
 00:00:25,380 --> 00:00:27,920
 We're also gonna talk about segues which is how we make
+我们同样会在本节课中讲到 Segues
 
 12
 00:00:27,920 --> 00:00:32,820
 all those multiple MVCs kind of transition to each other.
+Segues 是多重 MVC 之间转换的一个东西
 
 13
 00:00:32,820 --> 00:00:35,590
 And I have a big demo that shows it all off.
+这里我会有一个比较大的 Demo 来演示这部分
 
 14
 00:00:35,590 --> 00:00:37,990
 And that after that demo I'll come back.
+在 Demo 之后，我们回到主题
 
 15
 00:00:37,990 --> 00:00:42,130
 We'll talk about popovers which are similar thing for
+然后，我们会谈到 Popovers，Popovers 和多重 MVC 有一些相似的地方
 
 16
 00:00:42,130 --> 00:00:44,830
 having multiple MVCs but are not quite the same.
+但不是完全一样的
 
 17
 00:00:44,830 --> 00:00:46,170
 So that's why I've kind of
+所以这是为什么我把 Popovers 这块
 
 18
 00:00:46,170 --> 00:00:47,500
 segregated them off to the end.
+放到最后的原因
 
 19
 00:00:47,500 --> 00:00:49,440
 And we'll have a demo about that.
+同样我们在这里有一个 Demo
 
 20
 00:00:50,640 --> 00:00:52,600
 All right. So MVCs working together.
+好了，介绍完毕。多重 MVC 一起协同工作
 
 21
 00:00:52,610 --> 00:00:55,910
 These are the slide we saw at the end of last time.
+这些是我们上次课最后看到的 Slide
 
 22
 00:00:55,910 --> 00:00:58,980
 We're trying to build apps by taking our MVCs and combining
+我们尝试通过让我们的 MVC 和
 
 23
 00:00:58,980 --> 00:01:02,580
 them with tab bar, split view, and navigation controller.
+Tab Bar, Split View, Navigation Controller 混合在一起来构建我们的应用
 
 24
 00:01:02,580 --> 00:01:04,420
 We talked about tab bar controller which is
+我们讲过 Tab Bar Controller 就是
 
 25
 00:01:04,420 --> 00:01:06,980
 just simply four or five or however many
+用一个小的 Tab Bar 来讲将四、五个或者任何数目的
 
 26
 00:01:06,990 --> 00:01:10,790
 MVCs all connected by just having this little tab bar so
+MVC 连接在一起，然后让你选择你想要展示那一个
 
 27
 00:01:10,790 --> 00:01:13,460
 the bottom just picks which MVC you want to see.
+MVC 的一个东西
 
 28
 00:01:13,460 --> 00:01:16,260
 Each MVC by the way in the tab bar's completely independent.
+在 Tab Bar 中的任意一个 MVC 都是独立的
 
 29
 00:01:16,260 --> 00:01:17,230
 It runs on its own.
+独立运行
 
 30
 00:01:17,230 --> 00:01:19,090
 It doesn't depend on the other ones.
+不依赖 Tab Bar 中的其他 MVC 而运行
 
 31
 00:01:19,100 --> 00:01:21,030
 It actually might be kind of bad object on your
+所以，假如你应用中，Tab Bar 中的 MVC
 
 32
 00:01:21,030 --> 00:01:23,430
 programming really for them to depend on the other one.
+是依赖于其他的 MVC 的话，这是一种不好的编程方式
 
 33
 00:01:23,430 --> 00:01:27,340
 So, tab bars for peers that aren't really talking to each
+所以 Tab Bar 是为了那些层次上互相有关系的 MVC 而设计的
 
 34
 00:01:27,340 --> 00:01:30,870
 other they're just working together, they're related.
+并不是为了那些在逻辑上协同工作的 MVC 而设计的
 
 35
 00:01:30,870 --> 00:01:32,440
 Maybe they share a model and
+可能它们共用同样一个 Model
 
 36
 00:01:32,440 --> 00:01:35,410
 they're each having a different part of the model
+也有可能它们用同一个 Model 中的不同部分
 
 37
 00:01:35,410 --> 00:01:36,580
 or whatever.
+或者其他情况
 
 38
 00:01:36,580 --> 00:01:37,740
 And then we talked about split view controller,
+接下来我们讲到 Split View Controller
 
 39
 00:01:37,750 --> 00:01:41,350
 which only has two MVCs in it, a master, and a detail.
+它其中只有两个 MVC，一个 Master，一个 Detail
 
 40
 00:01:41,350 --> 00:01:42,950
 We call them master and detail, by the way,
+我们称之这两者为 Master 和 Detail 是因为
 
 41
 00:01:42,950 --> 00:01:46,120
 because the master is usually the one determining what's in
+Master 决定了 Detail 的内容是什么
 
 42
 00:01:46,120 --> 00:01:47,570
@@ -169,34 +209,42 @@ the detail.
 43
 00:01:47,570 --> 00:01:49,020
 So the master is letting you view something,
+举例来说，Master 让你浏览一些东西
 
 44
 00:01:49,020 --> 00:01:52,060
 and then you're going to use the detail to see more detail
+然后 Detail 让你浏览你在 Master 中做的东西更加详细的信息
 
 45
 00:01:52,060 --> 00:01:54,090
 about what you're doing in the master, okay?
+明白了吗？
 
 46
 00:01:54,090 --> 00:01:57,330
 So that's why we call it master and detail.
+这就是我们为什么叫它们  Master 和 Detail
 
 47
 00:01:57,330 --> 00:02:00,400
 So we're going to pick up now with navigation controller.
+接下来，我们讲一下 Navigation Controller
 
 48
 00:02:00,400 --> 00:02:03,900
 So navigation controller is just yet another MVC whose
+Navigation Controller 就是一个 MVC
 
 49
 00:02:03,900 --> 00:02:07,800
 view is multiple of other MVCs and navigation controller can
+它的 view 由其他的 MVC 组成
 
 50
 00:02:07,810 --> 00:02:09,970
 handle any number of other MVCs.
+Navigation Controller 可以包含任意数量的 MVC
 
 51
 00:02:09,970 --> 00:02:11,270
@@ -205,118 +253,147 @@ Okay.
 52
 00:02:11,280 --> 00:02:14,810
 And it puts them on screen, it shares the screen instead of
+它把其他的 MVC 放在屏幕上，与其他类型的 Controller 不同的是，它共享这个屏幕
 
 53
 00:02:14,810 --> 00:02:17,550
 just putting them side by side or putting them with the tabs,
+而不是将其他的 MVC 一一放置，或者放在 Tab Bar 上
 
 54
 00:02:17,550 --> 00:02:20,010
 it puts them like a stack of cards.
+它像一堆卡片一样放置这些 MVC，这里我们把 MVC 类比成卡片
 
 55
 00:02:20,020 --> 00:02:21,150
 Okay?
+明白了吗？
 
 56
 00:02:21,150 --> 00:02:22,280
 So NavigationController's basically stacking them
+所以，Navigation Controller 基本上就是像一堆卡片一样放置 MVC
 
 57
 00:02:22,280 --> 00:02:24,080
 like cards and you can only see the one on top.
+所以，你只能看到最上面的那个 MVC
 
 58
 00:02:25,290 --> 00:02:26,920
 That's how NavigationController
+这就是 Navigation Controller 如何
 
 59
 00:02:26,920 --> 00:02:29,460
 shares the small screen space between multiple MVCs.
+在多重 MVC 之间共享一个小的屏幕空间的
 
 60
 00:02:29,460 --> 00:02:31,560
 So it's gonna stack these MVCs up.
+它会将这些 MVC 堆起来
 
 61
 00:02:31,560 --> 00:02:33,890
 So here's a NavigationController.
+这里有一个 Navigation Controller
 
 62
 00:02:33,890 --> 00:02:35,530
 And it's got an MVC in it.
+它的里面有一个 MVC
 
 63
 00:02:35,530 --> 00:02:39,200
 This is the All Settings MVC from your device.
+这里它显示的 MVC 是你设备的 All Settings MVC
 
 64
 00:02:39,200 --> 00:02:40,870
 If you go look in your iPhone or
+当你打开你的 iPhone
 
 65
 00:02:40,870 --> 00:02:42,530
 whatever, you'll see the settings app looks like this.
+或者其他 iOS 设备时，你会看到设置的应用程序样子就是这样
 
 66
 00:02:42,540 --> 00:02:45,200
 So this is just an MVC that's kind of the top level.
+这就是在最顶层的 MVC
 
 67
 00:02:45,200 --> 00:02:49,040
 Has all the settings accessible from here.
+它包含了所有设置的一个入口
 
 68
 00:02:49,040 --> 00:02:53,780
 Now the navigation controller is drawing only a little part
+需要注意的是，由 Navigation Controller 绘图的一小部分
 
 69
 00:02:53,780 --> 00:02:57,410
 of it's view here, which is that title bar.
+是 Title Bar（顶部的一块区域）
 
 70
 00:02:57,420 --> 00:02:59,950
 And the navigational controller will put the title
+Navigation Controller 会在 Title Bar 这里显示标题（Title）
 
 71
 00:02:59,950 --> 00:03:02,550
 there, and also you can have a couple of buttons up at
+当然你还可以在这里放置一些按钮
 
 72
 00:03:02,550 --> 00:03:05,490
 the top and the navigational controller draws that part.
+同样 Navigation Controller 会帮你绘制
 
 73
 00:03:05,490 --> 00:03:06,820
 The rest of it is totally drawn,
+而在它之外的部分
 
 74
 00:03:06,820 --> 00:03:10,390
 and even underneath that title bar, totally drawn by
+甚至是在 Title Bar 底下（而不是下方）的那部分
 
 75
 00:03:10,390 --> 00:03:13,660
 whatever MVC is on top of this stack of cards.
+由 MVC 堆栈顶部的那个 MVC 来负责绘图
 
 76
 00:03:13,660 --> 00:03:14,930
 Okay, and right now the only thing on
+在这个图片中
 
 77
 00:03:14,930 --> 00:03:18,700
 our stack of cards is this All Settings MVC.
+我们 MVC 堆栈顶部的那个 MVC 是 All Settings MVC
 
 78
 00:03:18,700 --> 00:03:19,870
 Now even though the contents of
+尽管顶部的部分由 Navigation Controller 来绘制
 
 79
 00:03:19,870 --> 00:03:22,700
 the top are drawn by the navigation controller, what
+但是，顶部部分的内容
 
 80
 00:03:22,700 --> 00:03:27,340
 the contents are is determined by the MVC that's showing.
+仍是由当前 MVC 堆栈顶部的 MVC 所决定的
 
 81
 00:03:27,340 --> 00:03:28,710
@@ -325,38 +402,47 @@ Okay? And that's done with this
 82
 00:03:28,710 --> 00:03:31,580
 UIViewController property called navigationItem.
+UIViewController 里有一个叫 navigationItem 的属性
 
 83
 00:03:31,580 --> 00:03:33,040
 So if you go look in the documentation for
+如果你查看 UIViewController 的文档时
 
 84
 00:03:33,050 --> 00:03:35,510
 UIViewController you'll see this property navigationItem.
+你会看到有 navigationItem 这么一个属性
 
 85
 00:03:35,510 --> 00:03:39,720
 If you click through to the type UINavigation item you'll
+如果你查看 UINavigation 类型的东西的文档时
 
 86
 00:03:39,720 --> 00:03:41,780
 see that it's got a lot of properties and
+你看到它有许多的属性
 
 87
 00:03:41,790 --> 00:03:45,690
 they're like left button, right button, title.
+例如左按钮、右按钮、标题
 
 88
 00:03:45,690 --> 00:03:47,540
 Things like that. So,
+等等类似的东西
 
 89
 00:03:47,540 --> 00:03:49,390
 the way the navigation controllers figures out
+Navigation Controlller 通过查询哪个 MVC 是当前 MVC 堆栈顶部的 MVC
 
 90
 00:03:49,390 --> 00:03:52,590
 what to put in the top bar is it asks whatever MVC is on
+来决定它在 Title Bar 上布局的方式
 
 91
 00:03:52,600 --> 00:03:54,100
@@ -365,130 +451,162 @@ top of the stack.
 92
 00:03:54,100 --> 00:03:56,900
 So as you go to different MVCs being on this stack of
+所以栈顶 MVC 在不断变化的同时
 
 93
 00:03:56,900 --> 00:03:59,200
 cards that thing at the top will change.
+Navigation Controlller 顶部区域也会随之变化
 
 94
 00:04:00,300 --> 00:04:01,200
 Okay?
+有问题吗？
 
 95
 00:04:01,200 --> 00:04:04,470
 So, let's say I click on General here,
+这里我说，我点击 General
 
 96
 00:04:04,470 --> 00:04:06,070
 because I want to see general settings.
+因为我想看看通用设置
 
 97
 00:04:06,070 --> 00:04:09,770
 Okay, so I click on it, and a new MVC gets put on top of
+好的，当我点击 General 的时候，一个新的 MVC 就放在 MVC 堆栈的顶部了
 
 98
 00:04:09,780 --> 00:04:12,910
 the stack of cards, so now I can't see the other one, okay?
+现在，我就看不到其他的 MVC 了
 
 99
 00:04:12,910 --> 00:04:14,180
 This new one is overlaying it,
+新出现的 MVC 覆盖在其他 MVC 之上了
 
 100
 00:04:14,180 --> 00:04:17,050
 and this is just a general settings MVC.
+这里是一个 General Settings MVC
 
 101
 00:04:17,050 --> 00:04:19,680
 Completely different MVC,
+一个完全不同的 MVC
 
 102
 00:04:19,680 --> 00:04:22,320
 completely independent of the other one working on its own.
+完全独立于其他 MVC 而工作的一个 MVC
 
 103
 00:04:22,320 --> 00:04:23,650
 By the way,
+这里顺便提一句
 
 104
 00:04:23,650 --> 00:04:24,990
 I don't have a good screenshot of this unfortunately, but
+这里我不巧，没有一个很棒的截图来给你们展示其他的功能
 
 105
 00:04:24,990 --> 00:04:27,720
 it's also possible for the navigation controller to
+但是 Navigation Controlller 可以
 
 106
 00:04:27,730 --> 00:04:31,730
 draw some buttons along the bottom there.
+在底部绘制几个新的按钮
 
 107
 00:04:31,730 --> 00:04:33,190
 A little small sliver on the bottom.
+可以在底部有一个小的灰色栏
 
 108
 00:04:33,200 --> 00:04:36,400
 And it get those button items to put there,
+然后将按钮至于那里
 
 109
 00:04:36,400 --> 00:04:40,000
 by asking the MVC that's on top of the stack of cards for
+而这个灰色栏的按钮布局是可以通过堆栈顶部的 MVC 的
 
 110
 00:04:40,000 --> 00:04:42,670
 the toolbar items property.
+toolbarItems 属性来设置的
 
 111
 00:04:42,670 --> 00:04:43,870
 So if you look at toolbar items,
+当你查看 toolbarItems 的文档时
 
 112
 00:04:43,870 --> 00:04:47,240
 it's just an array of these bar buttons, so
+你会发现它就是一系列 bar buttons 组成的数组
 
 113
 00:04:47,240 --> 00:04:50,080
 any MVC that returns anything in that array,
+当任意一个在 Navigation Controller 堆栈中的 MVC
 
 114
 00:04:50,080 --> 00:04:52,140
 when it's in a navigation controller like this,
+在 toolbarItems 数组中返回什么东西的时候
 
 115
 00:04:52,150 --> 00:04:54,280
 those buttons will appear at the bottom.
+这些按钮会出现在屏幕的底部
 
 116
 00:04:54,280 --> 00:04:55,710
 So those would change each time you go
+同样，每次当你在堆栈上添加新的 MVC 的时候
 
 117
 00:04:55,720 --> 00:04:58,320
 to the next thing on the stack as well.
+这些按钮也会随之变化
 
 118
 00:04:58,320 --> 00:05:00,920
 So let's go ahead and click on something here.
+现在让我们继续点击什么东西
 
 119
 00:05:01,920 --> 00:05:04,720
 Let's click on, oh sorry, the back button.
+让我们点击，噢，返回按钮
 
 120
 00:05:04,720 --> 00:05:07,290
 Yeah, you see there's a back button in the upper left.
+你可以在屏幕的左上方看到一个返回按钮
 
 121
 00:05:07,290 --> 00:05:11,090
 The back button says, Throw the top card off.
+这个返回按钮的意思是，移走最顶部的那张卡片
 
 122
 00:05:11,100 --> 00:05:12,260
 That's basically what back means.
+这是返回最基本的意思
 
 123
 00:05:12,260 --> 00:05:14,250
 Throw the top card on
+移走 MVC 堆栈中最顶部的那张卡片
 
 124
 00:05:14,250 --> 00:05:16,230
@@ -497,74 +615,92 @@ this stack of MVCs that we're building, throw it off, and
 125
 00:05:16,230 --> 00:05:18,000
 then I'm going to go back to where I was before.
+然后将我返回到我之前的那个位置
 
 126
 00:05:18,000 --> 00:05:19,670
 So that's how back works, it just throws it off.
+这就是返回如何工作的，扔掉卡片
 
 127
 00:05:19,670 --> 00:05:21,570
 And when it throws it off, it completely throws it off,
+当从MVC 堆栈中最顶部的那张卡片时，它是完全被移除的
 
 128
 00:05:21,570 --> 00:05:22,800
 it disappears.
+它消失了
 
 129
 00:05:22,810 --> 00:05:23,500
 Completely gone.
+完全消失
 
 130
 00:05:23,510 --> 00:05:24,400
 All right?
+明白了吗？
 
 131
 00:05:24,410 --> 00:05:27,170
 Out of the heep, okay?
+从堆栈中完全移除了
 
 132
 00:05:27,180 --> 00:05:30,010
 All right, so let's put another card on the stacks,
+好的，接下来让我们在堆栈中增加一个卡片
 
 133
 00:05:30,010 --> 00:05:32,140
 I'm going to click on accessibility here,
+我点击这里的 Accessibility
 
 134
 00:05:32,150 --> 00:05:34,350
 another card's going to slide in,
+另外一个卡片将会移入
 
 135
 00:05:34,350 --> 00:05:39,380
 I'm trying to simulate the animation of it but in keynote
+我尝试在 Keynote 里模仿这个动画
 
 136
 00:05:39,390 --> 00:05:42,290
 I can't exactly do it, but it slides in from the side.
+我不能很精确地模仿它，但是他从侧边移进去
 
 137
 00:05:42,290 --> 00:05:44,710
 And this is yet
+现在，这是另外
 
 138
 00:05:44,710 --> 00:05:47,120
 another completely different MVC, the accessibility MVC.
+另外的一个完全不同的 MVC，Accessibility MVC
 
 139
 00:05:47,130 --> 00:05:48,460
 And we can pick something out of here,
+这里我可以选择一些东西
 
 140
 00:05:48,460 --> 00:05:51,060
 like I'm going to pick larger text right there, and
+比如，我想让字体变大一点
 
 141
 00:05:51,060 --> 00:05:52,900
 another MVC is going to slide in.
+这时，会有另外的一个 MVC 移入
 
 142
 00:05:52,900 --> 00:05:55,530
 So we have four MVCs, totally different MVCs,
+现在，我们在卡片堆栈上有4个完全不同的 MVC 了
 
 143
 00:05:55,530 --> 00:05:57,530
@@ -573,326 +709,407 @@ on our stack of cards right here.
 144
 00:05:57,540 --> 00:06:00,400
 And the one on top, which is the last one that I chose,
+最顶上的那个，也就是我最后选择的那个
 
 145
 00:06:00,400 --> 00:06:02,600
 this larger text MVC, is showing.
+正在显示的，Larger Text MVC
 
 146
 00:06:02,610 --> 00:06:03,840
 Okay? The rest of them are there,
+明白了吗？在它的底下有其他的 MVC
 
 147
 00:06:03,840 --> 00:06:05,670
 you just can't see
+但你看不见
 
 148
 00:06:05,670 --> 00:06:07,510
 them because they're underneath this top card.
+因为被顶部的卡片覆盖住了
 
 149
 00:06:07,510 --> 00:06:08,940
 Okay, so now let's do the back button.
+好的，现在让我们做返回操作
 
 150
 00:06:08,950 --> 00:06:12,350
 So I'm going to click this back button in the upper left
+我将点击左上角的返回按钮
 
 151
 00:06:12,350 --> 00:06:15,420
 and when I do, it takes that larger text one off, throws it
+当我点击的时候，它会将 Larger Text MVC 移走
 
 152
 00:06:15,420 --> 00:06:18,750
 out, and now we've got the accessibility card, which is
+从堆栈里扔掉，现在我们有 Accessibility 的卡片了
 
 153
 00:06:18,750 --> 00:06:22,320
 now the top of our stack which only has three things on it.
+Accessibility 的卡片变成了堆栈上三个卡片中最顶端的那个
 
 154
 00:06:22,320 --> 00:06:23,690
 And we can do back again.
+我们继续返回
 
 155
 00:06:23,690 --> 00:06:25,690
 It goes back to the general one.
+现在返回到了 General 卡片
 
 156
 00:06:25,690 --> 00:06:26,560
 We do back again.
+再返回
 
 157
 00:06:26,560 --> 00:06:28,490
 It goes back to the very top.
+回到了最最上层
 
 158
 00:06:28,490 --> 00:06:30,430
 Of course, once we get back to the very top there's no
+当然，当我们回到了最最上层的时候
 
 159
 00:06:30,430 --> 00:06:33,700
 more back button because this is the only card on the stack.
+不会再有返回按钮了，因为那是堆栈上唯一的卡片了
 
 160
 00:06:33,700 --> 00:06:34,870
 Okay, so everyone understand what
+现在，每个人对 Navigation Controller
 
 161
 00:06:34,870 --> 00:06:35,800
 a NavigationController is?
+都理解了吗？
 
 162
 00:06:35,800 --> 00:06:37,230
 It's just a stack of MVCs.
+简单的说，就是 MVC 堆栈
 
 163
 00:06:37,240 --> 00:06:38,370
 All right?
+没问题吧？
 
 164
 00:06:38,370 --> 00:06:40,600
 But it's just like split view controller and
+但是它和 Split View Controller 和
 
 165
 00:06:40,610 --> 00:06:44,370
 UITabBar Controller in that it is showing multiple MVCs.
+UITabBarControlller 一样，它们的功能都是展示多重 MVC
 
 166
 00:06:44,380 --> 00:06:45,970
 So I'm going talk a little bit about how navigation
+所以我将更详细地讨论一下 Navigation Controller
 
 167
 00:06:45,980 --> 00:06:49,080
 controller works internally, so you can get a feel for it.
+内部的工作方式，让你们有一个更直观的感受
 
 168
 00:06:49,080 --> 00:06:52,950
 And I'm going to try to mix it with our MVC image that we
+同时，我会尝试将它和我们其他的 MVC 混合在一起
 
 169
 00:06:52,950 --> 00:06:56,220
 had so you can kind of combine the two concepts in your mind.
+这样你就能在你的大脑里混合这两种概念了
 
 170
 00:06:56,220 --> 00:06:58,690
 So, let's say I had an MVC.
+这里，我说，我有一个 MVC
 
 171
 00:06:58,690 --> 00:07:01,490
 This one up here, the purple MVC thing.
+顶上的那个紫色的 MVC
 
 172
 00:07:01,490 --> 00:07:04,420
 And I had more features I wanted to put on there, but
+我本想在这个 MVC 之上添加一些其他的功能，但是
 
 173
 00:07:04,430 --> 00:07:06,430
 there's just not enough room on the screen anymore,
+屏幕的空间不够
 
 174
 00:07:06,430 --> 00:07:07,830
 I've kind of maxed out.
+我已经尽量使用了所有可用的屏幕空间
 
 175
 00:07:07,830 --> 00:07:10,400
 Or it's just those features don't logically make sense to
+或者从逻辑上，我要添加的功能不应当
 
 176
 00:07:10,400 --> 00:07:12,100
 be in the same place.
+显示在这个 MVC 之上时
 
 177
 00:07:12,100 --> 00:07:15,300
 Well, what I would do is create another MVC to manage
+我应该怎么做呢？我应该创建另外一个 MVC
 
 178
 00:07:15,300 --> 00:07:18,300
 those other features that won't fit,okay?
+去管理那些不属于这个 MVC 的那些功能，对吗？
 
 179
 00:07:18,310 --> 00:07:22,710
 And, so now though I need a way to have those two MVCs
+所以，我应该找到某种方法，让这两个 MVC
 
 180
 00:07:22,710 --> 00:07:25,140
 share the screen and I can use a split view controller or
+能够共享一个屏幕空间。这里，我能使用一个 Split View Controller
 
 181
 00:07:25,140 --> 00:07:27,140
 tab bar controller if they were peers or
+或者 Tab Bar Controller，如果这两者之间是平等的关系
 
 182
 00:07:27,150 --> 00:07:28,910
 I could use navigation controller.
+当然我也可以使用 Navigation Controller
 
 183
 00:07:28,910 --> 00:07:30,280
 So, let's see what it would look like to
+让我们来看看
 
 184
 00:07:30,280 --> 00:07:33,950
 use a navigation controller to have these two MVCs which
+当我们使用一个 Navigation Controller 来结合这两个 MVC
 
 185
 00:07:33,950 --> 00:07:36,990
 they're related share the screen.
+使得它们共享同一屏幕空间的情况
 
 186
 00:07:36,990 --> 00:07:40,220
 So a navigation controller is just an MVC, okay?
+还记得 Navigation Controller 也是一个 MVC 吗？
 
 187
 00:07:40,220 --> 00:07:42,810
 It's a controller of an MVC.
+一个 MVC 的控制器（Controller）
 
 188
 00:07:42,810 --> 00:07:45,390
 And it's view is a little rectangular area that usually
+它的视图是一个小的
 
 189
 00:07:45,400 --> 00:07:47,930
 fills the entire screen or a portion of the screen.
+通常是布满整个屏幕空间，或是屏幕空间的一部分的矩形区域
 
 190
 00:07:47,930 --> 00:07:48,860
 It's got the title.
+它有一个标题
 
 191
 00:07:48,870 --> 00:07:53,000
 But it's a special MVC and they've just got an outlet
+但是它是一个特殊的 MVC，它有一个叫做 rootViewController 的 outlet
 
 192
 00:07:53,000 --> 00:07:56,070
 called Root View Controller that points to an MVC.
+这个 outlet 指向某个 MVC
 
 193
 00:07:56,070 --> 00:07:59,440
 [UUU] points to the controller of an MVC.
+确切的说，是指向某个 MVC 的控制器
 
 194
 00:07:59,440 --> 00:08:03,240
 And when it is pointing to that, then the navigation
+当这个 outlet 指向某个 MVC 的控制器时
 
 195
 00:08:03,240 --> 00:08:08,080
 controller puts that MVC's view, okay, its view property.
+Navigation Controller 便会将那个 MVC 的视图绘制出来，也就是 view 属性
 
 196
 00:08:08,080 --> 00:08:09,680
-All right, we know that UIVController has
+All right, we know that UIViewController has
+我们已经知道 UIViewController 有一个
 
 197
 00:08:09,680 --> 00:08:11,320
 this very important property called view,
+非常重要的属性，叫做 view
 
 198
 00:08:11,320 --> 00:08:12,980
 which is its top level of its view.
+它是所有视图中最顶层的那个
 
 199
 00:08:12,990 --> 00:08:16,520
 It puts that on the screen underneath this title thing.
+Navigation Controller 把它放置在屏幕上，标题栏之下
 
 200
 00:08:16,520 --> 00:08:18,860
 So it fills the entire rectangular area and
+因为它会布满整个矩形空间
 
 201
 00:08:18,860 --> 00:08:21,190
 then the title kind of overlaps it transparently,
+所以在标题栏会变成半透明，以显示标题栏之下的那部分
 
 202
 00:08:21,190 --> 00:08:25,060
 semi-lucent transparency.
+毛玻璃透明效果
 
 203
 00:08:25,060 --> 00:08:25,730
 Okay?
+明白了吗？
 
 204
 00:08:25,730 --> 00:08:26,860
 So that's great.
+很好
 
 205
 00:08:26,860 --> 00:08:28,480
 So we got it in there.
+我们现在成功把一个 MVC 和 Navigation Controller 结合在一起了
 
 206
 00:08:28,480 --> 00:08:30,100
 Now how do we get the other MVC on?
+我们如何让其他的 MVC 和 Navigation Controller 继续结合在一起？
 
 207
 00:08:30,100 --> 00:08:33,170
 Well, when a ui element inside the view of
+好的，当某个在这个视图中的 UI 元素
 
 208
 00:08:33,170 --> 00:08:35,970
 this MVC like a button or something like that
+例如一个按钮或者其他的东西
 
 209
 00:08:35,970 --> 00:08:40,110
 is pressed then it can cause another MVC to get created.
+被按下的时候，这能导致其他的 MVC 被创建
 
 210
 00:08:40,110 --> 00:08:42,010
 You notice that MVC just appeared?
+你注意到这个 MVC 刚出现了吗？
 
 211
 00:08:42,010 --> 00:08:43,310
 It wasn't there before.
+之前这个新的 MVC 没有出现过
 
 212
 00:08:43,310 --> 00:08:46,080
 But as soon as the button gets pressed in this guy's view,
+但是，在用户的视图中，只要有按钮一按下
 
 213
 00:08:46,080 --> 00:08:48,250
 this MVC's view, that thing gets created.
+那么一个新的 MVC 就会被创建
 
 214
 00:08:48,250 --> 00:08:50,880
 And that's something important to notice that we're always
+在这个过程中，需要注意到的是
 
 215
 00:08:50,890 --> 00:08:54,350
 going to be creating a new MVC when we do these transitions.
+当我们做这些转换时，我们始终会创建一个新的 MVC
 
 216
 00:08:54,360 --> 00:08:56,520
 Okay? Transitioning to a new card.
+明白了吗？转换到一个新的卡片
 
 217
 00:08:56,520 --> 00:08:58,060
 In a split view,
+在一个 Split View 中
 
 218
 00:08:58,060 --> 00:08:59,590
 we do something in the master that changes the detail.
+我们在 Master 中做的操作会改变 Detail
 
 219
 00:08:59,590 --> 00:09:00,890
 That's always creating a new,
+这也就是说，它始终创建了一个新的 Detail
 
 220
 00:09:00,890 --> 00:09:03,160
 even the first time we press a tab bar, but
+这种情况甚至存在于，当我们按下了 Tab Bar
 
 221
 00:09:03,160 --> 00:09:06,230
 only the first time for the tab bar, it creates a new MVC.
+而且也是 Tab Bar 第一次被用户按下的时候
 
 222
 00:09:06,230 --> 00:09:07,730
 Okay? So it creates this new MVC.
+明白了吗？所以这样的操作会创建一个新的 MVC
 
 223
 00:09:07,730 --> 00:09:10,470
 And then the NavigationController just
+接着，Navigation Controller 就会移动到
 
 224
 00:09:10,470 --> 00:09:13,270
 moves over to put that MVC's view on top.
+新创建的 MVC 之上
 
 225
 00:09:13,270 --> 00:09:15,000
@@ -901,22 +1118,27 @@ All right?
 226
 00:09:15,010 --> 00:09:16,840
 And then of course you've got the back button.
+当然，之后你就会在左上角有一个返回按钮
 
 227
 00:09:16,840 --> 00:09:18,310
 When you click the back button,
+当你按下返回按钮的时候
 
 228
 00:09:18,310 --> 00:09:20,640
 it goes back to the first MVC.
+Navigation Controller 回到了第一个 MVC
 
 229
 00:09:20,640 --> 00:09:22,580
 And look what happens to that MVC.
+让我们来看看新创建的 MVC，它会发生什么
 
 230
 00:09:22,580 --> 00:09:23,780
 Gone.
+消失了
 
 231
 00:09:23,780 --> 00:09:25,010
@@ -925,574 +1147,717 @@ Okay.
 232
 00:09:25,010 --> 00:09:26,350
 That is not hidden or something.
+它不是被隐藏起来了
 
 233
 00:09:26,350 --> 00:09:28,220
 It's just gone.
+它消失了
 
 234
 00:09:28,220 --> 00:09:30,080
-It got de-allocated probably from the heat.
+It got de-allocated probably from the heap.
+它从内存空间中被 deallocated 了
 
 235
 00:09:30,090 --> 00:09:31,380
 Okay? And then we're back to here.
+我们回到了第一个 MVC
 
 236
 00:09:32,590 --> 00:09:34,350
 Okay, so that's how navigation controller works.
+好的，这就是 Navigation Controller 工作的方式
 
 237
 00:09:34,360 --> 00:09:35,300
 Very simple.
+非常的简单
 
 238
 00:09:35,310 --> 00:09:36,250
 And, you know, split view and
+你要知道，Split View 和
 
 239
 00:09:36,260 --> 00:09:38,420
 tab bar are similar kind of mechanism.
+Tab Bar 的工作方式也是类似
 
 240
 00:09:39,690 --> 00:09:41,780
 Okay. So
+好的
 
 241
 00:09:41,780 --> 00:09:43,860
 how do we get at these sub-MVCs?
+另外一个问题，我们如何能够取得这些子 MVC 呢？
 
 242
 00:09:43,860 --> 00:09:45,960
 So let's say I had a split view controller or
+假设说，我有一个 Split View Controller
 
 243
 00:09:45,960 --> 00:09:47,530
 a navigation controller or a tab bar controller.
+或者一个 Navigation Controller 或是一个 Tab Bar Controller
 
 244
 00:09:47,530 --> 00:09:50,170
 How do I get at the things on the stack of cards,
+我如何去获取这些卡片堆栈上的东西呢？
 
 245
 00:09:50,170 --> 00:09:52,970
 or the two things the master and detail?
+或者说，我如何去获取 Master 和 Detail 中的东西呢？
 
 246
 00:09:52,970 --> 00:09:54,840
 And the answer is
+答案是
 
 247
 00:09:54,840 --> 00:09:56,710
 they all have a property called view controllers.
+它们都会有一个叫 viewControllers 的属性
 
 248
 00:09:56,710 --> 00:09:58,870
 And it's an array of view controller.
+它是由 UIViewController 组成的一个数组
 
 249
 00:09:58,880 --> 00:10:00,490
 Okay?
+明白了吗？
 
 250
 00:10:00,490 --> 00:10:02,110
 And that it's all the view controllers in a system.
+它里面存储的是一个系统中所有的 ViewController
 
 251
 00:10:02,110 --> 00:10:05,110
 So in a split view, there will be only two in there,
+在 Split View 中，这里面只会有两个元素
 
 252
 00:10:05,110 --> 00:10:07,550
 the master and the detail, in the tab bar there will be how
+Master 和 Detail，在 Tab Bar 中
 
 253
 00:10:07,550 --> 00:10:09,650
 ever many tabs there are, in a navigation controller there
+这里面会有 Tab 数目个元素，而在 Navigation Controller 中
 
 254
 00:10:09,650 --> 00:10:11,720
 will be however many cards are on the stack.
+这里面会有堆栈上卡片数目个元素
 
 255
 00:10:11,720 --> 00:10:13,050
 That's how many things will be in that array.
+这就是知道这个数组有多少个元素的方式
 
 256
 00:10:13,050 --> 00:10:15,420
 And it's settable too which is a little weird,
+当然它是可以被设值的，但是这么做有点点奇怪
 
 257
 00:10:15,420 --> 00:10:19,090
 we don't usually set things but you can do it.
+通常我们不会对它直接设值，但是不代表不可以这么做
 
 258
 00:10:19,090 --> 00:10:23,800
 And the way we usually set it is we're going to
+我们通常对它设值的方式是
 
 259
 00:10:23,800 --> 00:10:26,600
 do it in the story boards or navigation controller for
+比如我们在 Storyboard 的 Navigation Controller 中
 
 260
 00:10:26,600 --> 00:10:29,300
 example has methods like push and pop view controller that
+有 push 和 pop view controller 的方法
 
 261
 00:10:29,300 --> 00:10:31,400
 will push view controller onto the stack.
+这样的操作会在这个数组中 push view controller
 
 262
 00:10:31,400 --> 00:10:32,640
 But that is doing that in code and
+但是这是在代码中设值的方式
 
 263
 00:10:32,640 --> 00:10:35,210
 we are usually doing all of this stuff in story boards.
+通常我们在 Storyboard 中做这一系列的操作
 
 264
 00:10:35,210 --> 00:10:38,910
 So that's how you get at the sub things of
+以上就是如何你获得这些子 MVC
 
 265
 00:10:38,910 --> 00:10:41,740
 these three kinds of view controllers.
+这些 view controller 的方法
 
 266
 00:10:41,750 --> 00:10:44,550
 What about, how do I get a hold of the view controller?
+那么，我如何获得一个 view controller 呢？
 
 267
 00:10:44,550 --> 00:10:45,480
 Okay? How do I get that
+我如何获得一个
 
 268
 00:10:45,480 --> 00:10:46,550
 navigation controller?
+Navigation Controller
 
 269
 00:10:46,550 --> 00:10:48,620
 How do I get a pointer to it, or whatever?
+我怎么获得它的一个指针呢？
 
 270
 00:10:48,620 --> 00:10:52,420
 Well it turns out every view controller knows if it's
+答案是，每个 view controller 都知道
 
 271
 00:10:52,420 --> 00:10:55,660
 inside a navigation controller or if it's inside a split-view
+它自己是不是身处在一个 Navigation Controller 或者是 Split View
 
 272
 00:10:55,660 --> 00:10:57,590
 controller, or if it's inside a tab bar controller.
+Controller 或者是 Tab Bar Controller 中
 
 273
 00:10:57,590 --> 00:10:59,310
 It knows.
+它自身知道
 
 274
 00:10:59,310 --> 00:11:01,030
 And so UI view controller has these three properties: tab
+因为，UIViewController 有三个属性：
 
 275
 00:11:01,030 --> 00:11:02,360
 bar controller, split view controller,
+tabBarController，splitViewController
 
 276
 00:11:02,360 --> 00:11:03,560
 navigation controller.
+和 navigtionController
 
 277
 00:11:03,560 --> 00:11:05,530
 And they will return to you the split view
+splitViewController 属性会返回给你
 
 278
 00:11:05,530 --> 00:11:07,470
 controller that the view controller is in.
+它处在哪个 Split View Controller 中，其他的属性类推
 
 279
 00:11:07,470 --> 00:11:09,030
 Okay?
+明白了吗？
 
 280
 00:11:09,040 --> 00:11:11,070
 If it's in one, if it's not then it returns nil.
+如果它不在某个 Controller 中，这个属性返回的是 nil
 
 281
 00:11:11,070 --> 00:11:12,940
 And notice some view controllers might be inside a
+注意到某些 view controller 会在一个 Navigation Controller 中
 
 282
 00:11:12,940 --> 00:11:15,510
 navigation controller, inside a split view controller.
+而这个 Navigation Controller 又嵌套在一个 Split View Controller 中
 
 283
 00:11:16,440 --> 00:11:17,770
 So more than one of these things can be
+所以这些属性可以超过一个
 
 284
 00:11:17,780 --> 00:11:19,790
 non-nil at a time.
+同时不为 nil
 
 285
 00:11:19,790 --> 00:11:21,810
 Because we can nest these things to build more powerful
+我们可以利用这些嵌套来构建一个
 
 286
 00:11:21,810 --> 00:11:23,960
 user interfaces.
+强大的用户界面
 
 287
 00:11:23,960 --> 00:11:26,110
 So let's just use the example, if I'm the master in
+让我们举个例子，如果我是一个 Split View 中的 Master
 
 288
 00:11:26,120 --> 00:11:28,720
 a split view, and I want to get the detail.
+我想获取 Detail
 
 289
 00:11:28,720 --> 00:11:30,920
 Well I can get the split view controller I'm in by
+这里我可以通过访问 splitViewController
 
 290
 00:11:30,920 --> 00:11:32,390
 saying split view controller.
+来获得我在哪个 Split View Controller 的指针
 
 291
 00:11:32,390 --> 00:11:33,720
 I'll put the little question mark there,
+这里我会输入一个问号
 
 292
 00:11:33,720 --> 00:11:34,860
 that's optional chaining.
+因为 Optional Chaining
 
 293
 00:11:34,860 --> 00:11:36,010
 If it's nil,
+如果它返回的是 nil 的话
 
 294
 00:11:36,010 --> 00:11:37,160
 then I'm obviously not going to get my detail.
+那么显然我不应该获得 Detail（因为我根本不在一个 Split View Controller 中）
 
 295
 00:11:37,160 --> 00:11:39,260
 And then I'm going to say view controller sub 1,
+然后我输入 viewControllers[1]
 
 296
 00:11:39,260 --> 00:11:40,960
 because we know that view controller sub 1 in
+因为我们知道，viewControllers[1] 在
 
 297
 00:11:40,960 --> 00:11:43,100
 split controller is the detail.
+Split View Controller 中代表的是 Detail
 
 298
 00:11:43,100 --> 00:11:44,830
 So now I've got the detail and
+现在，我就获得了 Detail
 
 299
 00:11:44,830 --> 00:11:46,570
 I can talk to it I could, you know, get to my detail.
+我就能向 Detail 发送消息了
 
 300
 00:11:46,570 --> 00:11:47,830
 So presumably I might want to tell it to
+假设这里，我希望告诉 Detail
 
 301
 00:11:47,840 --> 00:11:50,800
 do things display things or whatever, okay?
+显示某些东西或者做其他的事情
 
 302
 00:11:52,010 --> 00:11:55,170
 So that's how we get at these things in code if we need to,
+所以，如果我们需要的话，我们可以通过这样的代码来获取我们想要的指针
 
 303
 00:11:55,180 --> 00:11:58,240
 but we often don't need to because we can manage most of
+但我们并不常需要，因为我们能够
 
 304
 00:11:58,240 --> 00:11:59,640
 this in the story board.
+在 Storyboard 完成大部分的操作
 
 305
 00:11:59,650 --> 00:12:02,550
 And so how do we wire this up, how do we create this
+所以，我们如何在 Storyboard 里链接起来这些 MVC
 
 306
 00:12:02,550 --> 00:12:05,720
 relationship between these split through tab bar and
+如何在在子 MVC 和 Split View Controller，Tab Bar Controller
 
 307
 00:12:05,720 --> 00:12:08,920
 navigation controller and these all the sub-MVCs.
+Navigation Controller 之间建立关系呢？
 
 308
 00:12:08,920 --> 00:12:11,750
 And it can be done in code, okay?
+这些都可以通过代码来完成
 
 309
 00:12:11,760 --> 00:12:12,890
 But we're gonna do it
+但是我们在这节课上
 
 310
 00:12:12,890 --> 00:12:15,390
 in storyboards in this class all the time.
+将通过 Storyboard 来完成
 
 311
 00:12:15,390 --> 00:12:17,190
 Okay. And we're just
+我们要做的就是
 
 312
 00:12:17,190 --> 00:12:18,990
 gonna use Ctrl + drag to do it.
+Control + 拖动来链接多重 MVC
 
 313
 00:12:19,000 --> 00:12:20,500
 So let's see what that looks like.
+让我们来看看这是什么样子的
 
 314
 00:12:20,500 --> 00:12:22,630
 I'll do it for split view controller,
+以 Split View Controller 举例
 
 315
 00:12:22,630 --> 00:12:24,330
 we're just going to go the utilities area,
+我们找到 Utilities 区域
 
 316
 00:12:24,330 --> 00:12:26,970
 the same place we drag out a button or something like that.
+和我们之间找到按钮和其他的 UI 元素同样的地方
 
 317
 00:12:26,970 --> 00:12:29,300
 We're going to drag out a split view controller.
+我们拖出来一个 Split View Controller
 
 318
 00:12:29,300 --> 00:12:30,600
 Now, when it comes out,
+当它被拖动出来的时候
 
 319
 00:12:30,610 --> 00:12:33,410
 it's going to come out with a whole bunch of other MVCs
+它会带出来一整连串的 MVC
 
 320
 00:12:33,410 --> 00:12:35,910
 pre-attached to it in attempt to help you, but
+这些 MVC 已经链接在一起以方便你的使用
 
 321
 00:12:35,910 --> 00:12:38,280
 usually you're just going to delete those so
+但通常你会删除它们以链接你自己的 MVC
 
 322
 00:12:38,280 --> 00:12:41,410
 that all you have left is the split view controller itself.
+所以你只需要保留的就是 Split View Controller 本身
 
 323
 00:12:41,420 --> 00:12:43,280
 Okay?
+明白了吗？
 
 324
 00:12:43,280 --> 00:12:45,150
 And then you're going to Ctrl+Drag from the split view
+然后，你从 Split View Controller 开始
 
 325
 00:12:45,150 --> 00:12:46,720
 controller to the master and
+按住 Control 键拖动，链接 Split View Controller 和 Master
 
 326
 00:12:46,720 --> 00:12:50,120
 Ctrl+Drag from the split view controller to the detail.
+同样方法，链接 Split View Controller 和 Detail
 
 327
 00:12:50,120 --> 00:12:51,150
 And that's how you are going to do the wire.
+这样你就链接起来了 Master 和 Detail
 
 328
 00:12:51,160 --> 00:12:52,360
 So this is what it looks like.
+这就是链接过程看上去的样子
 
 329
 00:12:52,360 --> 00:12:53,620
 Here I have a storyboard.
+这里我有一个 Storyboard
 
 330
 00:12:53,630 --> 00:12:55,120
 I've dragged out of split view controller.
+我从 Split View Controller 开始拖动
 
 331
 00:12:55,130 --> 00:12:56,990
 That's that gray thing on the left.
+Split View Controller 也就是左边灰色的那一个
 
 332
 00:12:56,990 --> 00:12:58,190
 Okay?
+没问题吧？
 
 333
 00:12:58,190 --> 00:12:59,390
 I deleted all the things it was attached to so
+我删除了之前附属在 Split View Controller 的东西
 
 334
 00:12:59,400 --> 00:13:00,360
 I just had that.
+所以我只保留了 Split View Controller 本身
 
 335
 00:13:00,360 --> 00:13:02,730
 Then I Ctrl+Drag to,
+然后我按住 Control 键并拖动
 
 336
 00:13:02,730 --> 00:13:05,500
 in this case my master, which is my calculator.
+在这个例子中，我的 Master 是我的计算器
 
 337
 00:13:05,500 --> 00:13:08,400
 When I do that, it's going to put up this little thing says
+当我做这个操作的时候，这里会提示说
 
 338
 00:13:08,400 --> 00:13:10,140
 okay, what kind of connection do you want to make?
+“你想要创建什么样类型的链接？”
 
 339
 00:13:10,140 --> 00:13:13,270
 And you're going to pick master view controller there.
+选择 Master View Controller
 
 340
 00:13:13,280 --> 00:13:15,540
 And that's going to make like a little connection to it.
+这样就建立了一个链接
 
 341
 00:13:15,540 --> 00:13:18,280
 And then I'm going to Ctrl+Drag down to my detail,
+然后，我按住 Control 键并拖动到 Detail 上
 
 342
 00:13:18,280 --> 00:13:20,980
 which is going to be the right side of my split view.
+这样 Detail 就会成为我 Split View 中右侧的部分了
 
 343
 00:13:20,980 --> 00:13:23,320
 And here I'm going to choose I want Detailed View Controller.
+这里同样会弹出一个提示，选择 Detailed View Controller
 
 344
 00:13:23,320 --> 00:13:25,180
 Okay?
+明白了吗？
 
 345
 00:13:25,190 --> 00:13:26,720
 And then I'm going to have this,
+然后我就拥有了一个
 
 346
 00:13:26,720 --> 00:13:28,050
 fully hooked up split view.
+完整的 Split View
 
 347
 00:13:28,050 --> 00:13:29,090
 And that's it.
+这就是如何通过 Storyboard 链接 Split View Controller 的方式
 
 348
 00:13:29,090 --> 00:13:31,290
 So it's very easy to hook these things up.
+非常简单就可以链接起来
 
 349
 00:13:31,290 --> 00:13:32,570
 All right, and tab bar,
+好的，Tab Bar Controller
 
 350
 00:13:32,570 --> 00:13:33,860
 you can hook up exactly the same way.
+你可以通过几乎相同的方法把子 MVC 链接起来
 
 351
 00:13:33,860 --> 00:13:36,130
 Connect as many of them as you want, okay?
+想链接多少 MVC 都可以
 
 352
 00:13:36,130 --> 00:13:38,290
 Navigation controllers can be done a little bit differently,
+Navigation Controller 有一点点的不同
 
 353
 00:13:38,300 --> 00:13:39,730
 which we'll see in a second, okay?
+稍后我们可以看到
 
 354
 00:13:41,030 --> 00:13:45,130
 But there's a problem here which is that a split view
+但是这里有一个问题，那就是
 
 355
 00:13:45,140 --> 00:13:48,970
 can't display side by side on an iPhone.
+Split View 不能在 iPhone 上显示
 
 356
 00:13:48,970 --> 00:13:50,900
 Or at least not anything but an iPhone 6 plus.
+更确切的说，不能在 iPhone 6 Plus 以外的 iPhone 型号上显示
 
 357
 00:13:50,910 --> 00:13:54,070
 That's the only one big enough to really display side
+因为 iPhone 6 Plus 是唯一一个拥有足够大小
 
 358
 00:13:54,080 --> 00:13:55,530
 by side.
+来显示 Master 和 Detail 的型号
 
 359
 00:13:55,530 --> 00:13:56,980
 So a split view really can't work on an iPhone.
+所以 Split View 不算是真正能够使用在 iPhone 上的
 
 360
 00:13:56,980 --> 00:13:59,500
 Okay?
+明白了吗？
 
 361
 00:13:59,500 --> 00:14:02,020
 The way we handle this is that iOS adapts its
+我们处理这个方式是 
 
 362
 00:14:02,020 --> 00:14:07,220
 user interface to whatever device it happens to be on,
+因为 iOS 会在不同屏幕大小的设备上改变其用户界面
 
 363
 00:14:07,220 --> 00:14:10,590
 depending on how its size class is.
+这依赖于其 Size Class 是什么
 
 364
 00:14:10,590 --> 00:14:13,930
 We'll talk about size classes later, but if it's compact,
+我们稍后会讲到 Size Class，但如果想要兼容不同设备的话
 
 365
 00:14:13,930 --> 00:14:17,730
 like a phone, then it can't show it in a split view.
+比如 iPhone，那么它没办法在 Split View 中显示
 
 366
 00:14:17,730 --> 00:14:19,300
 So how can I show it then?
+我如何显示它呢？
 
 367
 00:14:19,300 --> 00:14:21,030
 If I have it master in a detail and
+如果我有 Master 和 Detail
 
 368
 00:14:21,030 --> 00:14:24,030
 I wanna show it on an iPhone the way I show it is with
+而且我想在 iPhone 上显示它的话
 
 369
 00:14:24,040 --> 00:14:25,800
 a navigation controller.
+那么请使用 Navigation Controller
 
 370
 00:14:25,800 --> 00:14:26,940
 So instead of having master and
+来替代同时在屏幕上显示 Master 和 Detail
 
 371
 00:14:26,940 --> 00:14:28,900
 detail on the screen at the same time on an iPad,
+只有 iPad 可以同时显示
 
 372
 00:14:28,910 --> 00:14:32,810
 on the phone when I click in the master, same button that I
+在 iPhone 上，我点击 Master 中同样的按钮
 
 373
 00:14:32,810 --> 00:14:35,610
 clicked to make the detail show it in split view,
+用以在 Split View 中显示 Detail 的按钮
 
 374
 00:14:35,610 --> 00:14:38,410
 but when I click in the master on the iPhone is going to
+同样的操作会导致 Detail 卡片滑入
 
 375
 00:14:38,420 --> 00:14:41,150
@@ -1501,6 +1866,7 @@ slide the detail on as a card.
 376
 00:14:41,150 --> 00:14:41,980
 On the deck.
+在层面上
 
 377
 00:14:41,980 --> 00:14:42,880
@@ -1509,66 +1875,82 @@ All right.
 378
 00:14:42,890 --> 00:14:44,850
 On the navigation charts stack.
+在 Navigation Controller 的堆栈上
 
 379
 00:14:44,850 --> 00:14:46,450
 Now the thing is though we want to
+现在我们想要做的是
 
 380
 00:14:46,450 --> 00:14:48,650
 build one storyboard that will work for
+让同样的一个 Storyboard 文件在不同的
 
 381
 00:14:48,660 --> 00:14:51,820
 both platforms and automatically adapts.
+平台上适应其屏幕大小
 
 382
 00:14:51,830 --> 00:14:52,960
 So how do we do that?
+我们应该如何实现呢？
 
 383
 00:14:52,960 --> 00:14:56,330
 We're just going to wrap our master in
+我们要做的就是，将我们的 Master 嵌入
 
 384
 00:14:56,330 --> 00:14:58,730
 a navigation controller.
+在一个 Navigation Controller 中
 
 385
 00:14:58,730 --> 00:15:00,870
 So here is a Navigation Controller,
+这样，这里有一个 Navigation Controller
 
 386
 00:15:00,870 --> 00:15:04,130
 which is my master, it's the calculator, right?
+它就是我的 Split View Controller 中的 Master，也就是我的计算器，对吗？
 
 387
 00:15:04,140 --> 00:15:06,140
 And you can see it's hooked up to the split view already, and
+你能看到，它已经链接到 Split View 了
 
 388
 00:15:06,140 --> 00:15:08,710
 I'm just gonna select it, and then I'm gonna go to
+这里我选择它，找到
 
 389
 00:15:08,710 --> 00:15:13,810
 the Editor menu and pick Embed in Navigation Controller.
+Xcode 菜单中的 Editor，然后选择 Embed in Navigation Controller
 
 390
 00:15:13,810 --> 00:15:14,740
 See that embed?
+看到那个 Embed in 了吗？
 
 391
 00:15:14,750 --> 00:15:15,680
 And this is what's gonna happen.
+这就是我们要做的
 
 392
 00:15:17,880 --> 00:15:19,280
 Okay, the Navigation Controller,
+好的，Navigation Controller
 
 393
 00:15:19,280 --> 00:15:23,850
 is going to the interposed between the split view and
+将会在 Split View 和 Master 中充当一个中间者
 
 394
 00:15:23,850 --> 00:15:25,420
@@ -1577,426 +1959,532 @@ the master.
 395
 00:15:25,420 --> 00:15:26,990
 So now the master, is in a Navigation Controller.
+现在 Master 已经嵌入一个 Navigation Controller 中了
 
 396
 00:15:27,990 --> 00:15:31,190
 Now if I am on an iPhone, and I click in something
+当我在 iPhone 上运行的时候，当我点击什么东西
 
 397
 00:15:31,190 --> 00:15:34,260
 that would change the detail, then it's going to push it
+即将改变 Detail 的内容的时候，它会 push 这个
 
 398
 00:15:34,260 --> 00:15:37,600
 on that Navigation Controller, on top of the stack.
+到 Navigation Controller 的堆栈顶上
 
 399
 00:15:37,600 --> 00:15:39,330
 But if I am on an iPad it's going to
+当我在 iPad 上运行的时候
 
 400
 00:15:39,330 --> 00:15:40,930
 show them side by side.
+它就会在右侧展示这个 Detail
 
 401
 00:15:40,930 --> 00:15:42,470
 So this structure that you see right here,
+你这里看到的就是这个结构
 
 402
 00:15:42,470 --> 00:15:44,070
 split view, navigation control for
+用 Split View，Navigation Controller
 
 403
 00:15:44,070 --> 00:15:47,740
 the master and then detail is very common.
+这种结构来链接 Master 和 Detail 是十分普遍的
 
 404
 00:15:47,740 --> 00:15:50,470
 A universal way of specifying your UI so
+这就是一个定义用户界面的方法
 
 405
 00:15:50,480 --> 00:15:52,380
 it works on both, okay?
+而且这种方法是通用的（iPhone，iPad）
 
 406
 00:15:54,450 --> 00:15:57,350
 Now we can also put the detail inside of
+这里，我们同样可以将 Detail 嵌入一个 Navigation Controller 中
 
 407
 00:15:57,350 --> 00:16:00,050
 a Navigational Controller too, why would we want to do that?
+不过我们会问，为什么我们会想要这么做？
 
 408
 00:16:00,050 --> 00:16:01,480
 Well the only reason we would wanna do that,
+唯一这么做的理由是
 
 409
 00:16:01,490 --> 00:16:03,650
 is cuz maybe we want
+可能我们需要
 
 410
 00:16:03,650 --> 00:16:05,820
 the Navigation Controller's feature of a title, right?
+Navigation Controller 的标题栏的功能，对吗？
 
 411
 00:16:05,820 --> 00:16:08,060
 Or little buttons we wanna put at the top.
+或者是我们想在标题栏上放置一些按钮的功能
 
 412
 00:16:08,060 --> 00:16:09,560
 It's really nice for that.
+这么做是个好方法
 
 413
 00:16:09,560 --> 00:16:10,880
 But, we don't need
+但是，我们并不需要
 
 414
 00:16:10,880 --> 00:16:12,190
 a Navigation Controller down there for navigation,
+用一个 Navigation Controller 来做导航
 
 415
 00:16:12,190 --> 00:16:14,530
 because we are never navigating from the detail.
+因为我们从来不需要在 Detail 里导航
 
 416
 00:16:14,530 --> 00:16:17,160
 We only navigate to the detail.
+我们只会导航至 Detail
 
 417
 00:16:17,170 --> 00:16:20,330
 So, it doesn't, itself, need to be in its own
+它自身不需要一个 Navigation Controller
 
 418
 00:16:20,340 --> 00:16:22,900
 Navigation Controller, and we'll see that in the demo.
+稍后我们会在 Demo 中看到
 
 419
 00:16:22,900 --> 00:16:25,540
 All right, so that's how we wire these things up.
+好的，这就是我们如何链接这些东西的
 
 420
 00:16:25,540 --> 00:16:27,340
 Okay, and they end up looking like that.
+它们最后应该会是这个样子的
 
 421
 00:16:28,340 --> 00:16:31,980
 Now how do we make these things appear?
+接下来，我们如何将它们显示出来？
 
 422
 00:16:31,980 --> 00:16:34,750
 How do we make changes in our master,
+我们在 Master 中做了一些改变
 
 423
 00:16:34,750 --> 00:16:37,010
 that cause something to appear in the detail.
+如何能导致 Detail 去显示 Master 中的这些改变
 
 424
 00:16:37,020 --> 00:16:39,250
 Or if we have a Navigational Controller that has multiple
+或者说，我们有一个 Navigation Controller
 
 425
 00:16:39,250 --> 00:16:41,920
 cards, when we clicked all those buttons and another card
+它拥有许多卡片（MVC），当我们点击这些按钮的时候
 
 426
 00:16:41,920 --> 00:16:45,820
 kept coming on in the stack, how did we do that, okay?
+另外的卡片会 push 进入堆栈，我们如何做到呢？
 
 427
 00:16:45,820 --> 00:16:48,790
 And the answer is we use segues, okay?
+答案是，我们利用 Segues，明白吗？
 
 428
 00:16:48,790 --> 00:16:53,230
 So segues is, how these things transition from
+Segues 是如何从一个 view controller 转换到
 
 429
 00:16:53,230 --> 00:16:54,560
 view controller to view controller.
+另一个 view controller 的方式
 
 430
 00:16:55,970 --> 00:16:57,500
 There's really four kinds of segues.
+iOS 里已经定义了四种不同的 Segues
 
 431
 00:16:57,500 --> 00:16:58,730
 There are custom segues, too, but
+当然你还可以自定义 Segues
 
 432
 00:16:58,730 --> 00:17:00,200
 we're not gonna talk about that in this class,
+但是本节课我们不会讨论到
 
 433
 00:17:00,200 --> 00:17:02,070
 kind of advanced, you almost never need those.
+这些高级的 Segue，而且基本上你也不会用到
 
 434
 00:17:03,140 --> 00:17:04,870
 So there's four basic segues.
+所以，有四种基本的 Segues
 
 435
 00:17:04,870 --> 00:17:07,210
 There's show segue, okay?
+Show Segue
 
 436
 00:17:07,210 --> 00:17:11,640
 Which basically shows the MVC that you're talking about, and
+简而言之，就是展示你正在交互的那个 MVC
 
 437
 00:17:11,650 --> 00:17:14,210
 if you're a Navigation Controller, it will show it
+假如你是一个 Navigation Controller，它会将那个 MVC
 
 438
 00:17:14,210 --> 00:17:16,880
 on the, it'll put it on top of the stack of cards.
+放置于堆栈之上并显示它
 
 439
 00:17:16,880 --> 00:17:18,980
 If you're not in a Navigation Controller,
+假如你不是一个 Navigation Controller
 
 440
 00:17:18,980 --> 00:17:20,780
 then it will show it modally.
+那么它会 Modally 展示这个 MVC
 
 441
 00:17:20,790 --> 00:17:24,220
 Okay, so now, modal presentation of an MVC,
+下一个是 Modal 展示一个 MVC
 
 442
 00:17:24,220 --> 00:17:26,060
 we haven't talked about that with all these other things,
+我们目前还没有在其他的地方讲到过
 
 443
 00:17:26,060 --> 00:17:28,620
 but basically it just takes over the entire screen.
+但是，基本上它就是会布满整个屏幕空间
 
 444
 00:17:28,630 --> 00:17:30,030
 Okay? Just completely takes over the
+只是将你想要展示的 MVC
 
 445
 00:17:30,030 --> 00:17:34,500
 entire screen, puts the MVC that you wanna show on screen.
+完全布满整个屏幕空间
 
 446
 00:17:34,500 --> 00:17:37,230
 So it's very kind of disruptive to
+可能对于用户，这会有一点点混乱
 
 447
 00:17:37,230 --> 00:17:40,300
 the user a little bit, because their app is stuck,
+因为他们的 App 卡住了
 
 448
 00:17:40,300 --> 00:17:43,300
 it can only do what this MVC is asking them to do.
+只有当这个 MVC 要求用户做一些操作的时候，这种方式才推荐使用
 
 449
 00:17:43,310 --> 00:17:45,940
 So I kind of recommend against using modal, and
+我不太推荐使用 Modal
 
 450
 00:17:45,940 --> 00:17:48,910
 trying to keep your apps from doing that.
+尽量不要在你的 App 中用到它
 
 451
 00:17:48,910 --> 00:17:50,110
 So if you're using a show segue,
+所以当你使用一个 Show Segue 的时候
 
 452
 00:17:50,110 --> 00:17:52,510
 you probably wanna be in a navigation controller, so
+你大概想在 Navigation Controller 中使用到
 
 453
 00:17:52,510 --> 00:17:53,950
 that it will slide it on deck.
+因为这样的话会有一个滑入的效果
 
 454
 00:17:53,950 --> 00:17:55,980
 Because, then the user can always go back,
+而且，用户使用可以返回
 
 455
 00:17:55,980 --> 00:17:58,380
 if they didn't mean that, they can go back.
+用户假如误操作返回的话，还可以再回去
 
 456
 00:17:58,390 --> 00:18:02,190
 Then there is show detail segue, very similar to show,
+接下来的是 Show Detail Segue，和 Show Segue 非常相似
 
 457
 00:18:02,190 --> 00:18:05,360
 the only difference with show detail is that if
+唯一的区别就是，Show Detail Segue
 
 458
 00:18:05,360 --> 00:18:08,360
 you happen to be in a split view controller it
+在 Split View Controller 中的效果就是
 
 459
 00:18:08,360 --> 00:18:11,160
 will show this MVC as the detail, okay?
+在 Detail 中显示这个 MVC，明白了吗？
 
 460
 00:18:11,160 --> 00:18:13,160
 Otherwise if you are in Navigation Controller, but
+否则，如果你在一个 Navigation Controller 中
 
 461
 00:18:13,170 --> 00:18:14,960
 not in a split view controller it just pushes it
+而不是在 Split View Controller 中，这个效果就是
 
 462
 00:18:14,970 --> 00:18:16,670
 on the stack just like show would, okay?
+在堆栈上 push 这个 MVC，滑入的效果，明白了吗？
 
 463
 00:18:18,540 --> 00:18:20,470
 So, show detail tiny difference there.
+所以，和 Show 只有一点点的区别
 
 464
 00:18:20,470 --> 00:18:22,370
 It's just about split view.
+只和 Split View 相关
 
 465
 00:18:22,370 --> 00:18:24,410
 So, it really helps you when you're in a split view
+所以，如果你在使用 Split View 的时候，这个 Segues 确实很有帮助
 
 466
 00:18:24,410 --> 00:18:26,810
 decide whether what you want is the master to,
+帮助你决定，你想要 Master 是什么
 
 467
 00:18:26,810 --> 00:18:28,710
 if the master is in a Navigation Controller,
+如果 Master 嵌入 Navigation Controller 的话
 
 468
 00:18:28,710 --> 00:18:30,880
 if you want that to slide on the master?
+如果你想要在 Master 上滑入？
 
 469
 00:18:30,880 --> 00:18:32,410
 The thing you're segueing to or
+你 Segue 的目标 view controller
 
 470
 00:18:32,410 --> 00:18:33,680
 do you want it to appear in the detail, okay?
+你是否想要它在 Detail 中显示
 
 471
 00:18:34,950 --> 00:18:38,180
 Then there's modal which forces this full
+这里的 Modal 强制
 
 472
 00:18:38,190 --> 00:18:40,190
 screen takeover type of thing.
+整个屏幕被 MVC 接管
 
 473
 00:18:40,190 --> 00:18:42,090
 I'm not even gonna talk about that, I'll talk about it
+我不打算讨论到它
 
 474
 00:18:42,090 --> 00:18:43,520
 later in the quarter, but I don't wanna talk about it
+我会在学期后部分讲一下，但是我不想过早涉及到
 
 475
 00:18:43,520 --> 00:18:47,160
 early because it can be used as a crutch to build UIs.
+因为它可以作为构建 UI 的一个支撑
 
 476
 00:18:47,160 --> 00:18:49,490
 You really wanna be using Navigation Controllers, and
+你肯定会用到 Navigation Controller 和 
 
 477
 00:18:49,500 --> 00:18:50,790
 split view controllers to do that.
+Split View Controller 来这么做的
 
 478
 00:18:51,730 --> 00:18:53,030
 And then a popover segue.
+接着，Popover Segue
 
 479
 00:18:53,030 --> 00:18:56,400
 Now a popover segue pops the view controller that you're
+Popover Segue 弹出 Segue 的目标 view controller
 
 480
 00:18:56,400 --> 00:18:59,700
 segueing to, up into a little window that's on top of
+并让这个 view controller 显示在所有其他东西之上
 
 481
 00:18:59,700 --> 00:19:01,400
 everything else, but just a little window instead of
+但是并不布满整个屏幕
 
 482
 00:19:01,410 --> 00:19:02,640
 taking over the whole screen.
+它是一个小的窗口
 
 483
 00:19:02,640 --> 00:19:04,240
 But it, really is taking over the whole screen,
+但是，实质上它是布满整个屏幕的
 
 484
 00:19:04,240 --> 00:19:06,540
 because the user an only interact with what's in
+因为用户只能与这个 Popover 窗口（Window）进行交互
 
 485
 00:19:06,540 --> 00:19:09,210
 the little popover window, if they click anywhere else,
+如果用户点击了除窗口以外的其他区域
 
 486
 00:19:09,210 --> 00:19:11,350
 it dismisses the popover window.
+这就会取消这个 Popover 窗口
 
 487
 00:19:11,350 --> 00:19:14,250
 But what makes popover nicer than just modal is that,
+Popover Segue 比 Modal 好的地方是
 
 488
 00:19:14,250 --> 00:19:16,550
 since it doesn't take over the whole screen, you can still
+尽管它并不布满整个屏幕
 
 489
 00:19:16,550 --> 00:19:19,620
 kind of see grayed out where you came from, and if you
+但是你可以让窗口背后的用户界面变灰变暗（grayed out）
 
 490
 00:19:19,620 --> 00:19:22,190
 click where you came from, it puts the popover away.
+当你点击这些变灰变暗的区域，窗口会被弹走
 
 491
 00:19:22,190 --> 00:19:25,690
 So the popover has very easy to cancel, it's very easy for
+所以 Popover 很容易取消
 
 492
 00:19:25,690 --> 00:19:27,880
 you just to get back to
+很容易让用户回到
 
 493
 00:19:27,880 --> 00:19:30,060
 where they were if they didn't really mean to click that.
+他们之前的界面，如果他们无意中点击到了的话
 
 494
 00:19:30,060 --> 00:19:31,500
 Okay, so that's popovers.
+这就是 Popover Segues
 
 495
 00:19:31,500 --> 00:19:32,930
 So we'll talk over popovers at the end.
+我们会在最后再讲到 Popover
 
 496
 00:19:32,930 --> 00:19:36,500
 Again I wanna emphasize what she was talking about on
+再一次，我想强调的是
 
 497
 00:19:36,500 --> 00:19:39,240
 the previous slide segues of all kinds,
+我们在上一页 Slide 中讲到的各种 Segues
 
 498
 00:19:39,240 --> 00:19:43,810
 no matter what you're doing, show detail, modal or popover.
+无论你在干什么，Show Detail，Modal 或者 Popover
 
 499
 00:19:43,810 --> 00:19:45,640
 They always create a new MVC.
+他们都会创建一个新的 MVC
 
 500
 00:19:45,640 --> 00:19:49,550
 You're never segueing to an existing MVC anywhere.
+你从来不会 Segue 到一个已经存在的 MVC
 
 501
 00:19:49,550 --> 00:19:51,310

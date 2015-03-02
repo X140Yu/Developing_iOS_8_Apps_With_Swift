@@ -5935,6 +5935,480 @@ Okay？它们是
 to making the UI look good.
 创建漂亮 UI 的关键
 
+1200
+00:50:16,747 --> 00:50:18,497
+Okay?
+
+1201
+00:50:18,498 --> 00:50:20,248
+So, you've got to get the right fonts in your app.
+所以你需要让你的 app 拥有一个合适的字体
+
+1202
+00:50:20,250 --> 00:50:22,350
+And where do you get the right fonts?
+那么怎么能够使字体合适呢？
+
+1203
+00:50:22,352 --> 00:50:24,752
+Well, the number one place to get a font,
+使这个字体合适的，
+
+1204
+00:50:24,754 --> 00:50:28,489
+the right place 99% of the time, is this class function
+百分之九十九都能使你的字体好看的，是这个在 UIFont 这个类
+
+1205
+00:50:28,491 --> 00:50:32,826
+in UIFont called preferredFontForTextStyle, okay?
+里面的一个类函数，叫 preferredFontForTextStyle
+
+1206
+00:50:32,828 --> 00:50:36,696
+The text style is something like headline, or
+字体样式是类似标题，或者
+
+1207
+00:50:36,698 --> 00:50:38,548
+a body, okay?
+正文这些东西
+
+1208
+00:50:38,549 --> 00:50:40,399
+The body would be like the main content that your user is
+正文就是你展现给用户看的主要的
+
+1209
+00:50:40,401 --> 00:50:42,051
+looking at.
+内容
+
+1210
+00:50:42,052 --> 00:50:43,702
+Headline might be like a title at the top.
+标题一般就是顶部的这个标题
+
+1211
+00:50:43,704 --> 00:50:46,171
+Footnote might be a small little thing mentioned at
+注脚是在底部的一行小小的字，
+
+1212
+00:50:46,173 --> 00:50:47,923
+the bottom, okay?
+好吧？
+
+1213
+00:50:47,924 --> 00:50:49,674
+And there's a whole bunch more of these text styles.
+这里还有很多很多这种字体样式
+
+1214
+00:50:49,676 --> 00:50:51,559
+And so, you're gonna ask
+那么你可能会问，
+
+1215
+00:50:51,560 --> 00:50:53,443
+the assistant give me the preferred font for that style.
+这个字体助手给我了一个对应这种样式的推荐的字体
+
+1216
+00:50:53,446 --> 00:50:57,664
+The font includes a size. Okay?
+这个字体包含了字体大小
+
+1218
+00:50:57,665 --> 00:50:59,815
+UIFont include the size, as well as the face.
+UIFont 包括了其大小以及它的样子
+
+1219
+00:50:59,818 --> 00:51:02,852
+And users can go into their settings on their phone and
+用户可能会去设置里面改变了一些字体相关的设置，
+
+1220
+00:51:02,854 --> 00:51:05,321
+change and say I can't see it anymore.
+比如老花眼了看不清楚那些字
+
+1221
+00:51:05,323 --> 00:51:06,706
+Kinda like me.
+像我一样
+
+1222
+00:51:06,707 --> 00:51:08,657
+And they make their fonts bigger. Okay?
+那么他们设置大一点的字体
+
+1224
+00:51:08,659 --> 00:51:09,491
+And so this would
+那这个推荐字体将会
+
+1225
+00:51:09,493 --> 00:51:12,027
+automatically get that new size.
+自动地获取到新的字体大小
+
+1226
+00:51:12,029 --> 00:51:13,261
+Okay? So that's why you
+所以你
+
+1227
+00:51:13,263 --> 00:51:15,162
+always wanna use preferred font any
+用这个推荐的字体总是好的，
+
+1228
+00:51:15,164 --> 00:51:17,931
+time you're displaying any user content, okay?
+在任何时候都是，尤其是你要展示给用户看的时候
+
+1229
+00:51:17,933 --> 00:51:20,767
+Now, it is possible to create fonts where you say,
+你当然可以自己创建一个字体，
+
+1230
+00:51:20,769 --> 00:51:22,702
+give me Arial 15 narrow or what.
+比如说，给我一个 15 号大小的窄体 Arial 字体
+
+1231
+00:51:22,704 --> 00:51:25,071
+It is possible, but you really shouldn't be doing that.
+你可以这么做，但是你不该这么做
+
+1232
+00:51:25,073 --> 00:51:27,006
+You should be using this preferred font for style.
+你还是乖乖地用推荐的字体
+
+1233
+00:51:27,008 --> 00:51:28,941
+There's also a system font.
+这里也有系统默认字体
+
+1234
+00:51:28,943 --> 00:51:31,376
+This is something that appears on buttons and
+比如出现在按钮上的，或者
+
+1235
+00:51:31,378 --> 00:51:35,113
+in things like segmented controls, things like that.
+出现在 segmented control （UI控件的一种）上的
+
+1236
+00:51:35,115 --> 00:51:39,316
+You never wanna use only the system fonts for user content.
+你永远不会只想用系统设置的是吧？
+
+1237
+00:51:39,318 --> 00:51:42,719
+User content you wanna use the preferred fonts. Okay?
+你更希望用推荐的字体来显示你的内容给用户看
+
+1239
+00:51:44,155 --> 00:51:45,821
+So yeah, other ways to get fonts, ignore them.
+啊这里是些其他获得字体的方法，忽略它们
+
+1240
+00:51:45,823 --> 00:51:48,090
+I'm not gonna talk about it, okay?
+在这里我不会讲它
+
+1241
+00:51:48,092 --> 00:51:50,425
+All right, how about drawing images?
+好的，那么怎么显示图像呢？
+
+1242
+00:51:50,427 --> 00:51:52,227
+How do you do that?
+你会怎么做？
+
+1243
+00:51:52,228 --> 00:51:54,028
+Well there is a UILabel for
+我们有个叫做 UILabel 的类，
+
+1244
+00:51:54,031 --> 00:51:56,264
+images, it's called UIImageView.
+专门是搞图像，叫 UIImageView
+
+1245
+00:51:56,266 --> 00:51:58,065
+And you can use that to put an image on screen, but
+你可以用这个类把图像显示到屏幕上，但是呢，
+
+1246
+00:51:58,067 --> 00:52:01,368
+you might wanna draw an image, in your drawrect as well.
+你可能希望把这个图像丢到你的 drawrect 里面
+
+1247
+00:52:01,370 --> 00:52:04,338
+And usually you create an image by name, from that
+一般来说你会以名字来创建这个图像，
+
+1248
+00:52:04,340 --> 00:52:07,674
+Images.xcassets thing that we moved out of the way real
+从 Images.xcassets 里面拿出来，
+
+1249
+00:52:07,676 --> 00:52:10,076
+quick right at the beginning of our very first demo.
+一会第一个演示一开始就会给大家瞅瞅
+
+1250
+00:52:10,078 --> 00:52:12,345
+And if you click on that, it's pretty self-explanatory.
+如果你点击它，故名思议
+
+1251
+00:52:12,347 --> 00:52:13,679
+You can drag images.
+你可以拖动图像
+
+1252
+00:52:13,681 --> 00:52:16,081
+You can have different images of different resolutions for
+你可以根据不同的分辨率，不同的设备，
+
+1253
+00:52:16,083 --> 00:52:17,149
+different devices.
+设置不同尺寸的图像
+
+1254
+00:52:17,150 --> 00:52:18,216
+It's really pretty powerful.
+总之就是很强大
+
+1255
+00:52:18,218 --> 00:52:20,200
+That's usually how you create an image.
+这就是一般创建图像的步骤
+
+1256
+00:52:20,201 --> 00:52:23,120
+By name and dragging into the images.xcassets.
+通过图像的名字，拖进 images.xcassets 里面
+
+1257
+00:52:23,122 --> 00:52:25,389
+You can create it in other ways from the file system,
+你也可以用其他方法从系统文件中创建出来，
+
+1258
+00:52:25,391 --> 00:52:27,991
+which we haven't talked about, or even with drawing, but
+我们还没讲到这些，包括怎么画图像，
+
+1259
+00:52:27,993 --> 00:52:29,826
+we're not gonna talk about that either.
+我们也不会讲这些
+
+1260
+00:52:29,828 --> 00:52:33,429
+Once you have the UIImage, you can draw it by just sending it
+当你有了这个 UIImage，你可以发送一个消息去显示它，
+
+1261
+00:52:33,431 --> 00:52:35,231
+the message, drawAtPoint.
+这个函数是 drawAtPoint
+
+1262
+00:52:35,233 --> 00:52:38,133
+And it will draw in its normal size with that point as
+然后这个函数就会把正常尺寸的的图像在左上角的那个点上
+
+1263
+00:52:38,135 --> 00:52:39,634
+it's upper left.
+显示出来
+
+1264
+00:52:39,636 --> 00:52:41,403
+You can also say drawInRect, and
+你也可以用 drawInRect 这个函数，
+
+1265
+00:52:41,405 --> 00:52:44,605
+it'll scale to fit that rect, either bigger or smaller, or
+它会缩放图像让其适应这个长方形区域，可以放大或者缩小，或者
+
+1266
+00:52:44,607 --> 00:52:47,608
+you can draw a pattern in rect it'll tile it repeatedly to
+你可以在这个长方形区域里面画一个图案，它会不断地重复平铺，
+
+1267
+00:52:47,610 --> 00:52:50,044
+fill the rect. Okay?
+铺满整个长方形区域
+
+1269
+00:52:50,045 --> 00:52:51,645
+So really easy to draw images inside your drawRect.
+在你的 drawRect 里面显示图像真的是很简单
+
+1270
+00:52:51,647 --> 00:52:54,547
+And the last thing I wanna talk about is,
+那么关于这个我想补充的是，
+
+1271
+00:52:54,549 --> 00:52:58,484
+what happens when your bounds changes in your UIView?
+如果你的 UIView 的边框变了咋办？
+
+1272
+00:52:58,486 --> 00:53:00,719
+Like the, the user rotates the phone.
+比如说用户旋转了他的手机
+
+1273
+00:53:00,721 --> 00:53:02,721
+Now your bounds are wide and
+现在你的边框变得胖矮胖矮的，
+
+1274
+00:53:02,723 --> 00:53:06,257
+not very tall, instead of tall and not so wide.
+不是以前那样高瘦高瘦的
+
+1275
+00:53:07,427 --> 00:53:09,210
+You might think,
+你也许会想，
+
+1276
+00:53:09,211 --> 00:53:10,994
+oh my drawRect's gonna get called, and I'm gonna redraw.
+噢我需要再调用一次 drawRect，然后就会重新适应
+
+1277
+00:53:10,996 --> 00:53:12,529
+But no, that does not happen.
+但这是不可能的
+
+1278
+00:53:12,531 --> 00:53:16,666
+Instead, the bits that were on screen get stretched.
+相反，在屏幕中的图像会被拉扁
+
+1280
+00:53:16,668 --> 00:53:20,035
+Okay? So, usually that's not what you want.
+所一般来说得不到你想要的效果
+
+1281
+00:53:20,038 --> 00:53:22,772
+You can and
+你将会
+
+1282
+00:53:22,773 --> 00:53:25,507
+result in a very grainy, kind of bit stretching of your UI.
+使其变成马赛克那样，有点强行拉大了图像
+
+1283
+00:53:25,509 --> 00:53:27,426
+But that is the default,
+但这是默认设置
+
+1284
+00:53:27,427 --> 00:53:29,344
+is the bit stretching because it's higher performance.
+默认就会将图像拉伸，因为其有更好的性能
+
+1285
+00:53:29,346 --> 00:53:32,914
+Now, you control though, you can control what happens to
+其实呢，当边界改变了，你可以控制
+
+1286
+00:53:32,916 --> 00:53:35,049
+your view when the bounds change,
+你的 view 的变化，
+
+1287
+00:53:35,051 --> 00:53:38,052
+with this property in view called contentMode.
+用 view 中的一个叫 contentMode 的属性就能做到
+
+1288
+00:53:38,054 --> 00:53:40,821
+And here are some of the contentModes you can set.
+这里有些你可以修改的 contentMode，
+
+1289
+00:53:40,823 --> 00:53:43,323
+There's left, right, top, bottom, et cetera.
+这里有上下左右等等
+
+1290
+00:53:43,325 --> 00:53:46,592
+All these ones basically don't change the bits.
+这里的这些修改基本上不会像刚才那样的改变
+
+1291
+00:53:46,594 --> 00:53:48,461
+They don't re-draw, but
+它们不会重新显示图片，但是
+
+1292
+00:53:48,462 --> 00:53:50,329
+they just move your entire view to the left edge,
+它们只是让你的 view 整体移动到新的边界的左边，右边，
+
+1293
+00:53:50,331 --> 00:53:53,432
+right edge, top, or bottom of the new bounds.
+上边或者下边
+
+1294
+00:53:53,434 --> 00:53:54,933
+These are kinda strange ones.
+这是些奇怪的属性，
+
+1295
+00:53:54,935 --> 00:53:56,801
+You probably don't need that very often.
+一般来说你应该不会用到
+
+1296
+00:53:56,803 --> 00:53:58,169
+Then there's the scaling of the bits.
+这里是些缩放，
+
+1297
+00:53:58,171 --> 00:54:00,604
+So here's the default, ScaleToFill.
+默认的是 ScaleToFill
+
+1298
+00:54:00,606 --> 00:54:02,840
+'Kay, we'll scale the bits to fill the new bounds, but
+我们会缩放图像去填满新的边界，但是
+
+1299
+00:54:02,842 --> 00:54:05,842
+you can also fill or fit the bounds and
+你仍可以填满或者适应边界，
+
 1300
 00:54:05,844 --> 00:54:07,210
 keep it aspect ratio.

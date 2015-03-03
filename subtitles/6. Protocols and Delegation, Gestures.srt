@@ -2602,26 +2602,32 @@ Give me more of my data.
 601
 00:26:01,505 --> 00:26:02,838
 Okay? That's what it's going to
+明白了吗？这就是它将要
 
 602
 00:26:02,840 --> 00:26:04,806
 send and it's going to send it to this object right here,
+发送的消息，而且，它将会把这个消息发送给这里的对象
 
 603
 00:26:04,808 --> 00:26:06,858
 this delegate property.
+也就是这个 delegate 属性
 
 604
 00:26:06,859 --> 00:26:08,909
 And this delegate property, all it is is a protocol.
+然后，这个 delegate 属性，完全就是一种协议
 
 605
 00:26:08,912 --> 00:26:12,013
 So all that, anybody who implements that
+所以，只要是任何遵循这个协议的对象
 
 606
 00:26:12,015 --> 00:26:14,548
 protocol can be set as the value for that.
+都可以对这个属性设值
 
 607
 00:26:14,550 --> 00:26:15,115
@@ -2630,86 +2636,107 @@ Delegate.
 608
 00:26:15,117 --> 00:26:18,084
 All right then the controller is going to come along and
+好的，接下来的是控制器
 
 609
 00:26:18,086 --> 00:26:21,354
 it's going to first say that it implements that protocol.
+控制器首先会说，它自身实现了这个协议
 
 610
 00:26:21,356 --> 00:26:25,624
 Okay, so it's a class thing, it's going to say, yeah,
+由于它是一个类，那么它会说
 
 611
 00:26:25,626 --> 00:26:28,226
 I implement this view this delegate protocol.
+我实现了这个视图的代理协议的方法
 
 612
 00:26:28,228 --> 00:26:29,260
 Then the controller is going to
+接着，控制器将
 
 613
 00:26:29,262 --> 00:26:32,163
 set it's self as the delegate.
+会将它自身作为代理对象
 
 614
 00:26:32,165 --> 00:26:35,766
 So it's going to set that delegate property inside
+它会设置这个视图的代理属性为其自身
 
 615
 00:26:35,768 --> 00:26:39,703
 the view to itself, which is fine because it just said it
+这里没有任何问题，因为刚刚说了，它
 
 616
 00:26:39,705 --> 00:26:43,006
 implements that protocol, so that's good.
+声明自己已经实现了这个协议所需的方法
 
 617
 00:26:43,008 --> 00:26:45,042
 Then, of course,
+接下来，当然
 
 618
 00:26:45,043 --> 00:26:47,077
 the controllers going to have to implement the protocol, and
+这个控制器将填充这些方法，这些协议方法的具体实现细节
 
 619
 00:26:47,079 --> 00:26:49,779
 implement all the methods and properties required by
+并不一定要实现协议规定的所有方法，但是
 
 620
 00:26:49,781 --> 00:26:52,381
 the protocol so that it conforms to that protocol.
+一定需要实现这个协议必需（required）的方法
 
 621
 00:26:52,383 --> 00:26:53,782
 Otherwise compiler is going to complain.
+否则编译器会报错
 
 622
 00:26:55,085 --> 00:26:56,217
 And you're good to go.
+这就可以了
 
 623
 00:26:56,219 --> 00:26:58,886
 Now the view is hooked up to the controller, okay?
+现在，这个视图已经和控制器建立关系了，明白了吗？
 
 624
 00:26:58,888 --> 00:27:00,688
 But the view still knows nothing about the controller.
+但是视图仍旧不知道控制器是什么东西
 
 625
 00:27:00,690 --> 00:27:01,855
 It doesn't know what class it is.
+不知道控制器的类是什么
 
 626
 00:27:01,857 --> 00:27:03,423
 It doesn't know what its purpose in life is.
+不知道控制器的目的是什么
 
 627
 00:27:03,425 --> 00:27:05,142
 It knows nothing.
+什么都不知道
 
 628
 00:27:05,143 --> 00:27:06,860
 All it knows is it implements the methods in its protocol,
+唯一知道的是，这个控制器实现了视图中的协议必需的方法
 
 629
 00:27:06,862 --> 00:27:08,094
@@ -2718,434 +2745,542 @@ in the views protocol.
 630
 00:27:08,096 --> 00:27:09,662
 That's all it knows and that's all it needs to know.
+这就是所有它想知道的，和它应该知道的
 
 631
 00:27:10,598 --> 00:27:12,998
 Okay? So that keeps
+明白了吗？
 
 632
 00:27:12,999 --> 00:27:15,399
 the view completely generic and allows the controller to
+这种模式，就让这个视图完全变得通用起来，同时也让控制器
 
 633
 00:27:15,402 --> 00:27:19,771
 have complete control of this generic minion in its view.
+对这个视图有完全的控制
 
 634
 00:27:19,773 --> 00:27:21,472
 Remember the view is the controller's minions,
+还记得吗？形象地说，视图就是控制器的傀儡
 
 635
 00:27:21,474 --> 00:27:23,640
 it's how it's communicating with the user.
+这就是它如何跟用户打交道的
 
 636
 00:27:24,576 --> 00:27:27,243
 So that's how we do it.
+以上就是我们如何做的
 
 637
 00:27:27,245 --> 00:27:30,580
 So let's take a look at a demo of doing that in happiness.
+让我们看看在 Happiness 这个 Demo 中如何做这些操作
 
 638
 00:27:30,582 --> 00:27:32,348
 We're going to have
+首先，我们需要
 
 639
 00:27:32,349 --> 00:27:34,115
 the face view delegate getting its data.
+创建一个用于 faceView 来获取其数据的代理对象
 
 640
 00:27:34,118 --> 00:27:36,518
 Its data is basically its smiliness,
+这个数据基本上就是它的笑容程度
 
 641
 00:27:36,520 --> 00:27:38,320
 how much smileyness is going on.
+笑得多灿烂的程度
 
 642
 00:27:38,322 --> 00:27:40,889
 It's going to get that from the delegate.
+这就是 faceView 想从这个代理对象中获取的
 
 643
 00:27:40,891 --> 00:27:43,091
 And, of course, the happiness view controller is going to
+当然，happiness view controller 将会是
 
 644
 00:27:43,093 --> 00:27:44,358
 be the delegate it gets it from.
+成为它的代理，提供数据
 
 645
 00:27:45,895 --> 00:27:48,879
 >> Okay.
+好的
 
 646
 00:27:48,880 --> 00:27:51,864
 Well, let's now use delegation to hook up our
+让我们来使用代理模式来连接
 
 647
 00:27:51,867 --> 00:27:55,701
 face view to our happiness view controller.
+我们的 faceView 和我们的 happiness view controller
 
 648
 00:27:56,737 --> 00:27:58,036
 And we're gonna do that by
+我们将会
 
 649
 00:27:58,038 --> 00:27:59,904
 starting here in the face view.
+从 faceView 开始
 
 650
 00:27:59,906 --> 00:28:01,606
 We're gonna go through the same steps we
+根据我们刚才说的流程
 
 651
 00:28:01,608 --> 00:28:05,609
 just talked about in the slides to do delegation.
+来创建代理的关系
 
 652
 00:28:05,611 --> 00:28:09,146
 So remember the first step is that we need a protocol,
+还记得第一个方法吗？首先我们需要一个协议
 
 653
 00:28:09,148 --> 00:28:13,116
 some particular way that the face view is going to talk to
+一些具体的方式，让我们的 faceView 与
 
 654
 00:28:13,118 --> 00:28:16,285
 whoever's going to provide its data, and
+任何一个可以提供数据的对象进行沟通
 
 655
 00:28:16,287 --> 00:28:19,555
 the face view's data is really it's smiliness.
+这里的数据就是笑容的灿烂度
 
 656
 00:28:19,557 --> 00:28:20,989
 So the face view has this data.
+现在 faceView 已经有这个数据了
 
 657
 00:28:20,991 --> 00:28:23,258
 Now this is a very, very simple data.
+这个非常简单的常量
 
 658
 00:28:23,260 --> 00:28:25,360
 Probably in real life if this weren't,
+或许在实际中这个并不是一个简单的常量
 
 659
 00:28:25,362 --> 00:28:28,796
 you know a demo where I'm trying to show you delegation,
+但是，这里毕竟只是一个演示代理模式的 Demo
 
 660
 00:28:28,798 --> 00:28:31,565
 you would probably just set this, you
+你可以就简单设置成一个常量
 
 661
 00:28:31,567 --> 00:28:34,935
 can't own it's own data, it's such a simple piece of data.
+你不能拥有这个数据，它非常简单
 
 662
 00:28:34,937 --> 00:28:36,203
 But we're going to use delegation to
+但我们将会使用代理来
 
 663
 00:28:36,205 --> 00:28:39,072
 get this piece of data here.
+获得这里的数据
 
 664
 00:28:39,074 --> 00:28:41,974
 Rather than have it be set right here.
+而不是直接在这里设值
 
 665
 00:28:41,976 --> 00:28:44,360
 All right, so
+好的
 
 666
 00:28:44,361 --> 00:28:46,745
 we need some sort of protocol that gets this smiliness from
+所以， 我们需要一些协议，来从某些对象中获取我的笑容程度
 
 667
 00:28:46,748 --> 00:28:51,083
 someone and, so we're gonna type in here protocol and
+这里我们输入 protocol
 
 668
 00:28:51,085 --> 00:28:53,351
 I'm gonna call this protocol.
+这里我打算叫这个协议为
 
 669
 00:28:53,353 --> 00:28:58,522
 That I'm developing my face view data source protocol.
+因为这里我正在做的是我的 faceView 的数据来源协议，所以叫 FaceViewDataSource
 
 670
 00:28:59,692 --> 00:29:04,027
 And sometimes we call these delegation protocols delegate.
+通常我们将代理类型的协议后缀名起为 Delegate
 
 671
 00:29:04,029 --> 00:29:05,795
 Like face view delegate.
+类似于 FaceViewDelegate
 
 672
 00:29:05,797 --> 00:29:08,864
 But when the only purpose of the protocol is to
+但这里这个协议唯一的作用就是
 
 673
 00:29:08,866 --> 00:29:11,633
 get the data that the view is going to draw.
+获得这个视图用来绘制的一些数据
 
 674
 00:29:11,635 --> 00:29:14,269
 Because the view can't own its own data,
+因为这个视图不能拥有这个数据
 
 675
 00:29:14,271 --> 00:29:17,972
 then we often will call the protocol datasource.
+通常这种情况，我们称这种协议为 DataSource
 
 676
 00:29:19,142 --> 00:29:21,375
 So this just needs to have whatever functions and
+所以。这里需要的就是
 
 677
 00:29:21,377 --> 00:29:24,511
 properties are required to get this used data.
+用来获取数据的一些必需的函数和属性
 
 678
 00:29:24,513 --> 00:29:27,447
 Well such a simple view that it
+这里，这么一个简单的视图
 
 679
 00:29:27,449 --> 00:29:32,218
 just needs something to get the smile in some function so
+只需要一个用来获取笑容灿烂度的函数
 
 680
 00:29:32,220 --> 00:29:36,021
 I'm going to say smiliness for face view.
+这里我输入 smilinessForFaceView
 
 681
 00:29:36,023 --> 00:29:38,523
 I have an argument here which is the sender.
+这里有一个参数，也就是 sender
 
 682
 00:29:38,525 --> 00:29:39,891
 Face view.
+FaceView
 
 683
 00:29:39,892 --> 00:29:41,258
 And this is gonna be myself.
+这里会是这个控制器自身
 
 684
 00:29:41,261 --> 00:29:44,362
 So when I ask somebody else to provide my data by
+当我要求其他的对象来提供我的数据的时候
 
 685
 00:29:44,364 --> 00:29:45,463
 sending them this message.
+我发送这个消息
 
 686
 00:29:45,465 --> 00:29:48,032
 I'm gonna pass myself, this face view,
+我将传入 self，这个FaceView 
 
 687
 00:29:48,034 --> 00:29:49,433
 along as an argument.
+作为其参数
 
 688
 00:29:49,435 --> 00:29:53,336
 And you'll see all throughout iOS when they have
+你在 iOS 开发中会看到
 
 689
 00:29:53,338 --> 00:29:55,604
 a delegate or a data source.
+当某个对象拥有一个 Delegate 或者 DataSouce 的时候
 
 690
 00:29:55,606 --> 00:29:58,173
 They are always going to pass themselves along.
+他们都会传入他们自身
 
 691
 00:29:58,175 --> 00:30:00,709
 If you are trying to provide the smiliness for
+如果你尝试给这个 FaceView 提供笑容的灿烂度的时候
 
 692
 00:30:00,711 --> 00:30:03,678
 this FaceView, you have a point or two to FaceView.
+你将这个参数指向 FaceView
 
 693
 00:30:03,680 --> 00:30:05,913
 You know, which FaceView is asking you that, and
+你知道的，这个 FaceView 要求你这个
 
 694
 00:30:05,915 --> 00:30:08,115
 maybe if you need to ask the FaceView some other
+当然也许你也可以要求 FaceView 其他的问题
 
 695
 00:30:08,117 --> 00:30:11,318
 questions to answer this, you can do that.
+来回答这个，当然你可以这么做
 
 696
 00:30:11,320 --> 00:30:13,987
 Now, this smiliness what is it going to return?
+现在，这个 smiliness 方法，它会返回什么呢？
 
 697
 00:30:13,989 --> 00:30:15,822
 Now I'm going to have it return a double,
+我想让它返回一个 Double
 
 698
 00:30:15,824 --> 00:30:17,457
 which is going to be that smiliness,
+也就是笑容的灿烂度
 
 699
 00:30:17,459 --> 00:30:22,861
 remember that smiliness goes from a plus 1 down to minus 1,
+还记得笑容的灿烂度从-1到+1吗？
 
 700
 00:30:22,863 --> 00:30:24,129
 plus 1 that's very smiley and
++1代表很开心
 
 701
 00:30:24,131 --> 00:30:29,400
 minus 1 that's very frowny and so we made that double.
+-1代表很不开心，我们设置它为 Double
 
 702
 00:30:29,402 --> 00:30:33,404
 I'm also going to make this double be an optional.
+同时，我将设置它为一个可选的 Double
 
 703
 00:30:33,406 --> 00:30:36,607
 And that's because if the data source, if I ask it for
+那是因为，它作为一个 DataSource，如果我问
 
 704
 00:30:36,609 --> 00:30:39,360
 the smiliness, and for
+它要灿烂度的时候
 
 705
 00:30:39,361 --> 00:30:42,112
 some reason it can't provide that smiliness, then I'm gonna
+因为某些的原因，它无法提供相应的值
 
 706
 00:30:42,114 --> 00:30:47,083
 allow them to return nill, and just have no smile or
+那么我允许它们返回 nil，也就是说
 
 707
 00:30:47,085 --> 00:30:52,020
 no frown, just flatlined mouth there.
+既不是开心也不是不开心，一条线的嘴巴
 
 708
 00:30:52,022 --> 00:30:55,056
 Now we only by the way pass one argument here.
+这里我们只传入了一个参数
 
 709
 00:30:55,058 --> 00:30:57,859
 But we could definitely, if we were asking our data source,
+但是我们完全可以，如果我们在请求我们的 DataSource 的时候
 
 710
 00:30:57,861 --> 00:31:00,828
 we could have some more arguments in here.
+可以使用多个参数
 
 711
 00:31:00,830 --> 00:31:03,297
 And so that's perfectly reasonable.
+而且这么做也是完全合理的
 
 712
 00:31:03,299 --> 00:31:04,598
 You can have as many arguments as you
+你为了从 DataSource 中获取这个笑容的灿烂度，需要多少个
 
 713
 00:31:04,600 --> 00:31:08,134
 need to get this smiliness out of the data source.
+参数都可以
 
 714
 00:31:08,136 --> 00:31:11,637
 Okay, so that's step one, we have this data source here.
+好的，这就是步骤一，我们这里已经有了 DataSource
 
 715
 00:31:11,639 --> 00:31:17,676
 Step two is we need to have a public var in our face view,
+第二步是，我们需要在我们的 FaceView 中有一个公开的变量
 
 716
 00:31:17,678 --> 00:31:19,878
 which I'm going to call dataSource, and
+这里我将称之为 dataSource
 
 717
 00:31:19,880 --> 00:31:23,348
 it's going to be of type FaceViewDataSource.
+它的类型是 FaceViewDataSource
 
 718
 00:31:23,350 --> 00:31:25,450
 Okay?
+明白了吗？
 
 719
 00:31:25,451 --> 00:31:27,551
 I'm going to make that an optional as well.
+同样我这里会把它的类型变成可选的
 
 720
 00:31:27,553 --> 00:31:30,421
 So you can see here that I'm using FaceViewDataSource,
+这里你可以看到，我将 FaceViewDataSource
 
 721
 00:31:30,423 --> 00:31:33,590
 which is this protocol, just as a type.
+这个协议，作为一个类型
 
 722
 00:31:33,592 --> 00:31:34,691
 And what this means is,
+这代表的是
 
 723
 00:31:34,693 --> 00:31:37,093
 somebody who wants to provide my data,
+某个对象想要提供给我数据
 
 724
 00:31:37,095 --> 00:31:39,128
 who wants to be my dataSource,
+也就是想成为我的 dataSource
 
 725
 00:31:39,130 --> 00:31:43,265
 all they need to do is set themselves as this variable.
+那么，它们仅仅是需要将它们自身设置为这个变量的值
 
 726
 00:31:43,267 --> 00:31:46,702
 And then I'm going to talk to them through this variable to
+接着，我可以通过这个变量来向它们发送消息
 
 727
 00:31:46,704 --> 00:31:47,769
 call this function on them.
+来调用它们的某些函数
 
 728
 00:31:48,805 --> 00:31:50,405
 Okay?
+明白了吗？
 
 729
 00:31:50,406 --> 00:31:52,006
 Now, why did I make this an optional here?
+为什么这里我让它变成一个可选类型呢？
 
 730
 00:31:52,008 --> 00:31:54,575
 Because it's possible that
+因为有可能
 
 731
 00:31:54,577 --> 00:31:56,243
 I can just live without a data source.
+我们的 FaceView 并没有一个 dataSource
 
 732
 00:31:56,245 --> 00:31:58,578
 I will just always have a flat line, a flat mouth.
+那么在这种的情况下，FaceView 的嘴巴始终是一条直线
 
 733
 00:31:58,580 --> 00:32:01,814
 I won't be smiling or frowning.
+既不微笑也不伤心
 
 734
 00:32:01,816 --> 00:32:04,450
 And so this can be allowed to be nil.
+所以 dataSource 可以允许是 nil
 
 735
 00:32:04,452 --> 00:32:07,686
 Okay, now normally, this is not going to want to be nil,
+通常，我们不想让它是 nil
 
 736
 00:32:07,688 --> 00:32:11,489
 because we don't want a face with no frown and no smile.
+因为我们不希望看到一个既不微笑也不伤心的脸
 
 737
 00:32:11,491 --> 00:32:14,425
 But, we'll certainly allow it.
+我跟你们说的意思是，这里完全可以这么做（不提供 dataSource）
 
 738
 00:32:14,427 --> 00:32:15,760
@@ -3154,14 +3289,17 @@ So, allow that there.
 739
 00:32:16,896 --> 00:32:19,896
 Now one other thing we have to do about this data source here
+现在，我们还要继续对 dataSource 做的一件事情是
 
 740
 00:32:19,898 --> 00:32:23,867
 is we really want to describe it as weak.
+声明它是一个 weak 类型的
 
 741
 00:32:23,869 --> 00:32:26,703
 Now this is gonna be the first time we talk about
+这将成为我们讨论内存管理的第一堂课
 
 742
 00:32:26,705 --> 00:32:28,637
@@ -3170,234 +3308,292 @@ memory management in this class.
 743
 00:32:28,639 --> 00:32:29,972
 And really the memory's just been
+事实上，内存是被操作系统
 
 744
 00:32:29,974 --> 00:32:32,140
 managed automatically for you.
+自动管理的，所以你不用担心
 
 745
 00:32:32,142 --> 00:32:33,375
 But here we have to be a little bit
+但是我们需要注意的是
 
 746
 00:32:33,377 --> 00:32:36,811
 careful with the memory management of this pointer.
+对这个指针的内存管理
 
 747
 00:32:36,813 --> 00:32:38,930
 Because, for example,
+因为，例如
 
 748
 00:32:38,931 --> 00:32:41,048
 our controller is going to set itself as the data source.
+我们的控制器将会设置它自身为 dataSource
 
 749
 00:32:41,050 --> 00:32:44,418
 So it's going to set this pointer back to itself because
+然后它将设置这个指针为自身
 
 750
 00:32:44,420 --> 00:32:47,721
 our controller's going to be a FaceViewDataSource.
+因为我们的控制器将会成为一个 FaceViewDataSource
 
 751
 00:32:47,723 --> 00:32:50,657
 And, unfortunately, the controller also has
+不幸的是，我们的控制器
 
 752
 00:32:50,659 --> 00:32:54,127
 a pointer to this FaceView through the view hierarchy.
+在视图的层次上已经有一个指向 FaceView 的指针了
 
 753
 00:32:54,129 --> 00:32:57,296
 Because it's gonna have some outlet to the face view, and
+因为它有一个链接到 FaceView 的 outlet
 
 754
 00:32:57,298 --> 00:32:59,465
 so they'll be pointing to each other.
+这样，这两个对象就互相指向了对方
 
 755
 00:32:59,467 --> 00:33:02,668
 And since they're pointing to each other they're keeping
+那么在这个时候，它们
 
 756
 00:33:02,670 --> 00:33:04,669
 each other in memory at all times, so
+就会一直在内存中相互引用对方，形成一个圈
 
 757
 00:33:04,671 --> 00:33:07,605
 that kinda memory cycle is really bad.
+在内存中出现这样的圈是很可怕的
 
 758
 00:33:07,607 --> 00:33:09,607
 Because then the FaceView and
+因为 FaceView
 
 759
 00:33:09,609 --> 00:33:11,508
 the controller can never leave memory.
+和控制器都无法释放其的内存
 
 760
 00:33:11,510 --> 00:33:14,011
 They'll be stuck in memory forever.
+它们就会永远呆在了内存中
 
 761
 00:33:14,013 --> 00:33:17,681
 So, by making this weak, if we put weak in front of a var
+但是，通过在变量之前声明这个为 weak
 
 762
 00:33:17,683 --> 00:33:24,320
 pointer it means that this pointer, this thing, whatever
+这个的意思是，这个对象，无论它
 
 763
 00:33:24,322 --> 00:33:30,225
 this points to, should not be used to keep it in memory.
+指向的是什么东西，这个东西都不应该被用于在内存中保留它
 
 764
 00:33:30,227 --> 00:33:32,794
 So the controller is gonna set itself as this data source.
+也就是说，控制器将会设置它自身为 dataSource
 
 765
 00:33:32,796 --> 00:33:35,229
 This pointer, since it is going to be a weak pointer,
+这个指针，既然它声明了自己是一个 weak 指针
 
 766
 00:33:35,231 --> 00:33:36,864
 is not going to keep the controller in memory.
+将不会在内存中保存这个控制器
 
 767
 00:33:36,866 --> 00:33:38,932
 So the controller will be allowed to go out of memory.
+所以，这个控制器被允许从内存中释放
 
 768
 00:33:38,934 --> 00:33:40,033
 And when it goes out of memory,
+当它被释放的时候
 
 769
 00:33:40,035 --> 00:33:41,601
 of course the FaceView loss will go out of
+当然 FaceView 也会同样从内存中释放
 
 770
 00:33:41,603 --> 00:33:43,803
 memory with it because its entire view hierarchy,
+因为 FaceView 在控制器的视图层次中
 
 771
 00:33:43,805 --> 00:33:48,340
 the controller's view hierarchy will go out as well.
+而控制器的视图层次会随控制器一起被释放掉
 
 772
 00:33:48,342 --> 00:33:51,643
 And now you can see that we have an error here, okay?
+现在你看到这里有一个错误
 
 773
 00:33:51,645 --> 00:33:55,079
 And this error says weak cannot be applied to non-class
+这个错误说，weak 类型不能应用在非类的类型上
 
 774
 00:33:55,081 --> 00:33:56,280
 types, okay?
+明白了吗？
 
 775
 00:33:56,282 --> 00:34:00,250
 So FaceViewDataSource is a protocol, not a class.
+FaceViewDataSource 是一个协议，而不是一个类
 
 776
 00:34:00,252 --> 00:34:02,185
 So FaceViewDataSource could be an enum or
+所以我们需要把 FaceViewDataSource 改成枚举类型
 
 777
 00:34:02,187 --> 00:34:05,922
 a struct and that's a problem because we really need this to
+或者结构体，因为我们希望这个变量是 weak 类型的
 
 778
 00:34:05,924 --> 00:34:07,957
 be weak because we
+我们不希望
 
 779
 00:34:07,958 --> 00:34:09,991
 don't want that cycle things pointing back to each other.
+在内存中出现两个对象互相指向对方的环
 
 780
 00:34:09,994 --> 00:34:12,828
 So, we can actually make FaceViewDataSource, even
+所以我们要讲 FaceViewDataSource
 
 781
 00:34:12,830 --> 00:34:15,430
 though it's a protocol, we can make it be a class type.
+变成一个类，尽管它只是一个协议
 
 782
 00:34:15,432 --> 00:34:17,766
 If you remember from the slides in our
+如果你还记得 Slide 中的
 
 783
 00:34:17,768 --> 00:34:21,502
 protocol declaration, we can say colon class.
+协议声明的话，我们可以通过在协议后面加上 : class 来让它变成一个类
 
 784
 00:34:21,504 --> 00:34:24,372
 And that says that FaceViewDataSource can only be
+这代表的是，FaceViewDataSource 只能被一个类所实现
 
 785
 00:34:24,374 --> 00:34:27,307
 implemented by a class, it cannot be implemented by
+它不能被一个枚举类型或者一个结构体所实现
 
 786
 00:34:27,309 --> 00:34:30,477
 a struct or an enum, and that's perfectly fine and
+这是完全没有问题的
 
 787
 00:34:30,479 --> 00:34:33,046
 usually that's what we're going to want anyway, but
+同样也是我们所希望的
 
 788
 00:34:33,048 --> 00:34:35,815
 we definitely need that so we can have this weak behavior.
+因为我们想让这个变量为 weak
 
 789
 00:34:35,817 --> 00:34:38,751
 So this data source, the pointer it has to whatever its
+那么， 这个 dataSource，任何它指向的对象
 
 790
 00:34:38,753 --> 00:34:41,053
 data source will not keep it's data source in memory.
+都不会被保存在 dataSource 的内存中了
 
 791
 00:34:42,523 --> 00:34:45,090
 As long as the dataSource is in memory,
+只要是 dataSource 在内存中
 
 792
 00:34:45,092 --> 00:34:47,209
 this pointer will be good.
+那么这个指针就不会有问题
 
 793
 00:34:47,210 --> 00:34:49,327
 As soon as the dataSource goes out of memory then this
+一旦 dataSource 从内存中释放了
 
 794
 00:34:49,329 --> 00:34:52,697
 pointer will be set to nill automatically by the system.
+那么这个指针将会被系统自动设成 nil
 
 795
 00:34:52,699 --> 00:34:54,965
 So it's pretty cool, these banners are pretty cool.
+这非常酷
 
 796
 00:34:54,967 --> 00:34:57,734
 We don't use them a lot you saw that we used them for IB
+平时我们不会经常使用到 weak，但是我们看到在 IBOutlet
 
 797
 00:34:57,736 --> 00:35:00,303
 outlets and this is the second place that we have used them,
+里 weak 被大量使用到，这里
 
 798
 00:35:00,305 --> 00:35:02,038
 which is for delegation.
+代理，是第二个被大量使用到的地方
 
 799
 00:35:02,040 --> 00:35:04,707
 We're always gonna use a weak var when we have delegation.
+如果我们有一个代理的时候，我们始终需要一个 weak 类型的变量
 
 800
 00:35:04,709 --> 00:35:05,274
 Okay?
+明白了吗？
 
 801
 00:35:06,243 --> 00:35:08,943

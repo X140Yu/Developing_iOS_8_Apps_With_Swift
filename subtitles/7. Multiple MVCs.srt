@@ -3416,7 +3416,7 @@ And then in the story board,
 
 733
 00:29:25,110 --> 00:29:28,040
-of course, I need to go to the identity inspector here and
+of course, I need to go to the Identity Inspector here and
 
 734
 00:29:28,040 --> 00:29:30,640
@@ -4068,15 +4068,15 @@ Okay, so now we have this good UI, and we want to
 
 896
 00:35:48,860 --> 00:35:52,460
-make it so that it works with the Happiness View Controller.
+make it so that it works with the HappinessViewController.
 
 897
 00:35:52,470 --> 00:35:54,170
-So we need our Happiness View Controller.
+So we need our HappinessViewController.
 
 898
 00:35:54,170 --> 00:35:56,400
-So how are we going to get our Happiness View Controller?
+So how are we going to get our HappinessViewController?
 
 899
 00:35:56,400 --> 00:35:58,170
@@ -4112,7 +4112,7 @@ And I'm just gonna first of all copy the code over.
 
 907
 00:36:10,420 --> 00:36:13,680
-So I have my Face view and my Happiness view controller.
+So I have my Face view and my HappinessViewController.
 
 908
 00:36:13,690 --> 00:36:17,220
@@ -8227,8 +8227,8 @@ make sure that we set this thing's class in
 
 1869
 01:16:33,380 --> 01:16:36,080
-the identity inspector up here.
-在identity inspector区域 
+the Identity Inspector up here.
+在Identity Inspector区域 
 
 1870
 01:16:36,090 --> 01:16:38,320
@@ -8660,7 +8660,7 @@ We might, we know that this instigator right here is
 
 1956
 01:20:16,810 --> 01:20:19,070
-inside this happiness view controller.
+inside this HappinessViewController.
 在 happinessViewController 的煽动者
 
 1957
@@ -8691,166 +8691,207 @@ something we dragged in from another app.
 1962
 01:20:32,190 --> 01:20:35,220
 And maybe that's another app that's being worked on at
+也许是我们公司另一个 App 中的
 
 1963
 01:20:35,220 --> 01:20:37,990
 our company or that there's another programer who
+或是其他程序员
 
 1964
 01:20:37,990 --> 01:20:39,620
 owns this particular class.
+拥有的特殊的类
 
 1965
 01:20:39,630 --> 01:20:41,110
 And he said no, no,
+他不想让其他人添加
 
 1966
 01:20:41,110 --> 01:20:42,590
 you can't add prepare for segue to this class.
+prepareForSegue 在这个类里
 
 1967
 01:20:42,600 --> 01:20:45,230
 It's a generic happiness showing thing.
+它只是一个一般地展示笑脸的东西
 
 1968
 01:20:45,230 --> 01:20:46,960
 It doesn't know anything about diagnostic history.
+它对于诊断历史一无所知
 
 1969
 01:20:46,970 --> 01:20:51,770
 And they'd probably be right because if we started
+如果我们想把诊断历史相关的东西
 
 1970
 01:20:51,770 --> 01:20:54,400
 adding things about diagnostic history to a happiness view
+放进 HappinessViewController 里
 
 1971
 01:20:54,410 --> 01:20:57,340
 controller, it would be kind of a diagnostic or
+它就会更像一个
 
 1972
 01:20:57,340 --> 01:21:00,340
-diagnosed happiness view controller not
+DiagnosedHappinessViewController not
+DiagnosedHappinessViewController
 
 1973
 01:21:00,340 --> 01:21:02,610
-a happiness view controller anymore.
+a HappinessViewController anymore.
+而不是一个 HappinessViewController
 
 1974
 01:21:02,610 --> 01:21:04,750
 So where are we going to put our prepare for segue then?
+所以我们应该把 PrepareForSegue 放在哪里呢？
 
 1975
 01:21:04,750 --> 01:21:06,850
 The answer is that we are going to
+答案是
 
 1976
 01:21:06,850 --> 01:21:08,450
 actually create a subclass of
+我们会创建一个 HappinessViewController 的子类
 
 1977
 01:21:08,450 --> 01:21:11,450
-happiness view controller that we can use that's going to get
+HappinessViewController that we can use that's going to get
+然后我们就会获得所有
 
 1978
 01:21:11,450 --> 01:21:14,420
-all the behavior of happiness view controller.
+all the behavior of HappinessViewController.
+HappinessViewController 中的属性和方法
 
 1979
 01:21:14,420 --> 01:21:17,060
 Plus, we're going to add the ability to do
+除此以外，我们还会往类中
 
 1980
 01:21:17,060 --> 01:21:18,160
 the diagnostic history.
+添加诊断历史相关功能
 
 1981
 01:21:18,160 --> 01:21:19,430
 Okay. So we're going to
+我们开始
 
 1982
 01:21:19,430 --> 01:21:20,560
 create a subclass.
+创建子类
 
 1983
 01:21:20,560 --> 01:21:22,660
 We're just going to go up here.
+先来到这里
 
 1984
 01:21:22,660 --> 01:21:24,600
 New file.
+New file
 
 1985
 01:21:24,600 --> 01:21:26,530
-Again, I'm just going to create a SWF file this time.
+Again, I'm just going to create a Swift file this time.
+这一次我们创建一个 Swift 文件
 
 1986
 01:21:26,530 --> 01:21:32,700
-I'm going to call it diagnosed happiness view controller.
+I'm going to call it DiagnosedHappinessViewController.
+把它起名为 DiagnosedHappinessViewController
 
 1987
 01:21:32,710 --> 01:21:35,770
 Okay, because it's just like a happiness controller, but
+它和 happiness controller 类似
 
 1988
 01:21:35,770 --> 01:21:39,080
 it's diagnosed happiness.
+但是它是 diagnosed happiness
 
 1989
 01:21:39,080 --> 01:21:41,090
 Here it is right here.
+这就是这个文件
 
 1990
 01:21:41,100 --> 01:21:43,110
-I'm gonna import UI kit because it's a UI class.
+I'm gonna import UIKit because it's a UI class.
+在这里导入 UIKit，因为它是一个 UI 相关的类
 
 1991
 01:21:43,110 --> 01:21:47,250
 And I'm just gonna say that my class
+接着，让我的 DiagnosedHappinessViewController
 
 1992
 01:21:47,250 --> 01:21:52,220
-diagnosed happiness view controller inherits from
+DiagnosedHappinessViewController inherits from
+继承自
 
 1993
 01:21:52,220 --> 01:21:53,920
-happiness view controller, okay?
+HappinessViewController, okay?
+HappinessViewController
 
 1994
 01:21:54,920 --> 01:21:56,820
 So I am going to be
+所以现在
 
 1995
 01:21:56,830 --> 01:21:58,730
-a sub class that diagnosed happiness view controller.
+a sub class that DiagnosedHappinessViewController.
+DiagnosedHappinessViewController 是一个子类
 
 1996
 01:21:58,730 --> 01:22:01,360
 Make sense?
+我说明白了吗？
 
 1997
 01:22:01,360 --> 01:22:04,230
 Now, over here in my storyboard,
+在 storyboard 里
 
 1998
 01:22:04,230 --> 01:22:07,770
 I am going to select this scene right here.
+选择这里的场景
 
 1999
 01:22:07,770 --> 01:22:10,400
-And I'm going to go to the identity inspector, and
+And I'm going to go to the Identity Inspector, and
+选择 Identity Inspector
 
 2000
 01:22:10,410 --> 01:22:12,240
 I am going to say that this scene is no
+这个场景的类不再是
 
 2001
 01:22:12,240 --> 01:22:14,210
-longer a happiness view controller.
+longer a HappinessViewController.
+HappinessViewController
 
 2002
 01:22:14,210 --> 01:22:18,510
-It is a diagnosed happiness view controller.
+It is a DiagnosedHappinessViewController.
+而是 DiagnosedHappinessViewController
 
 2003
 01:22:18,510 --> 01:22:20,010
@@ -8870,11 +8911,11 @@ Okay? Because I'm gonna inherit all
 
 2007
 01:22:27,320 --> 01:22:30,490
-the capability of happiness view controller in my
+the capability of HappinessViewController in my
 
 2008
 01:22:30,490 --> 01:22:32,690
-diagnosed happiness view controller subclass.
+DiagnosedHappinessViewController subclass.
 
 2009
 01:22:32,690 --> 01:22:35,220
@@ -8882,7 +8923,7 @@ In fact, what's really cool is I have a scene right here.
 
 2010
 01:22:35,230 --> 01:22:39,530
-And this scene is a diagnose happiness view controller.
+And this scene is a diagnose HappinessViewController.
 
 2011
 01:22:39,530 --> 01:22:45,330
@@ -8894,7 +8935,7 @@ If I go back and
 
 2013
 01:22:46,820 --> 01:22:48,300
-pick my happiness view controller, and I see it here.
+pick my HappinessViewController, and I see it here.
 
 2014
 01:22:48,300 --> 01:22:51,500
@@ -8918,11 +8959,11 @@ So I can still go back and show my
 
 2019
 01:22:59,880 --> 01:23:03,150
-superclasses for my diagnose happiness view controller to
+superclasses for my diagnose HappinessViewController to
 
 2020
 01:23:03,150 --> 01:23:05,580
-happiness view controller, and see the outlets.
+HappinessViewController, and see the outlets.
 
 2021
 01:23:07,390 --> 01:23:09,120
@@ -9314,7 +9355,7 @@ And so how are we gonna set it, though?
 
 2118
 01:27:28,540 --> 01:27:30,980
-We are sub class of happiness view controller.
+We are sub class of HappinessViewController.
 
 2119
 01:27:30,980 --> 01:27:36,110
@@ -10058,7 +10099,7 @@ So here's our prepare in our diagnosed,
 
 2304
 01:35:29,420 --> 01:35:32,720
-diagnosed happiness view controller right here.
+DiagnosedHappinessViewController right here.
 
 2305
 01:35:32,720 --> 01:35:36,290
@@ -10798,11 +10839,11 @@ that's a common thing you wanna do.
 
 2489
 01:44:28,950 --> 01:44:31,650
-You have some reusable happiness view controller or
+You have some reusable HappinessViewController or
 
 2490
 01:44:31,660 --> 01:44:33,620
-something like happiness view controller.
+something like HappinessViewController.
 
 2491
 01:44:33,620 --> 01:44:36,660

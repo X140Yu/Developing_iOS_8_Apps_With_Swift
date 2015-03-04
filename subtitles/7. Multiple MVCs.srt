@@ -3676,7 +3676,7 @@ Boom. I've got this where I want it.
 
 798
 00:31:52,360 --> 00:31:55,800
-Okay, so that's another way to use auto layout there.
+Okay, so that's another way to use Auto Layout there.
 
 799
 00:31:56,970 --> 00:31:58,230
@@ -4804,7 +4804,7 @@ here, clicking here, doing what we always do when we
 
 1080
 00:42:42,580 --> 00:42:44,580
-have a problem with our auto layout,
+have a problem with our Auto Layout,
 
 1081
 00:42:44,580 --> 00:42:46,750
@@ -7443,8 +7443,8 @@ anything, even for the extra credits, you shouldn't.
 
 1712
 01:09:49,440 --> 01:09:51,870
-And then again, I have autolayout question mark,
-又一次，我为autolayout添加了问号， 
+And then again, I have Auto Layout question mark,
+又一次，我为Auto Layout添加了问号， 
 
 1713
 01:09:51,870 --> 01:09:53,670
@@ -7453,8 +7453,8 @@ kind of a running joke,
 
 1714
 01:09:53,670 --> 01:09:55,470
-we'll see, hopefully we'll get to autolayout eventually in
-我们会最终详细讲到autolayout的 
+we'll see, hopefully we'll get to Auto Layout eventually in
+我们会最终详细讲到Auto Layout的 
 
 1715
 01:09:55,480 --> 01:09:59,110
@@ -7463,8 +7463,8 @@ this quarter, but like I say, see I'm kind of sprinkling it
 
 1716
 01:09:59,110 --> 01:10:01,710
-in in every demo, a little bit of autolayout, so
-autolayout的知识， 
+in in every demo, a little bit of Auto Layout, so
+Auto Layout的知识， 
 
 1717
 01:10:01,720 --> 01:10:04,150
@@ -8388,102 +8388,127 @@ they look fine.
 1901
 01:17:45,610 --> 01:17:47,410
 Okay, so that's good.
+还不错
 
 1902
 01:17:47,410 --> 01:17:50,450
 I could also set some attributes maybe, about this
+我也可以设置一下这个 text view 的某些属性
 
 1903
 01:17:50,450 --> 01:17:54,180
 text view, like I probably don't want it to be editable.
+比如，我不想让它可以被编辑
 
 1904
 01:17:54,190 --> 01:17:57,050
 I don't want the diagnostic history to be actually,
+我不希望诊断历史可以被编辑
 
 1905
 01:17:57,050 --> 01:17:59,050
 you know, touched on and edited.
+因为点击就可以编辑
 
 1906
 01:17:59,060 --> 01:18:00,760
 But it's not bad to have it selectable,
+不过让它可以被选中是没什么问题的
 
 1907
 01:18:00,760 --> 01:18:03,930
 someone might wanna select the diagnostic history and
+有人可能会想要选中诊断历史
 
 1908
 01:18:03,930 --> 01:18:05,630
 then copy it and
+然后拷贝
 
 1909
 01:18:05,630 --> 01:18:07,330
 paste it somewhere, or something like that.
+把它粘贴到别处
 
 1910
 01:18:07,330 --> 01:18:09,530
 Or you could set the font to be larger too,
+你也可以把字体设置得大些
 
 1911
 01:18:09,530 --> 01:18:12,430
 maybe something 24 point or something like that.
+可以设置成24号字子类的
 
 1912
 01:18:13,370 --> 01:18:15,570
 And of course we've got this kind of
+在这里还有一些
 
 1913
 01:18:17,170 --> 01:18:19,710
 pseudo latin placeholder text right here.
+占位用的伪拉丁的文字
 
 1914
 01:18:19,710 --> 01:18:21,270
 But that's not gonna matter cuz that's not
+但是这也没什么关系
 
 1915
 01:18:21,280 --> 01:18:23,040
 gonna show because we're going to
+因为我们会在准备 segue 的时候
 
 1916
 01:18:23,040 --> 01:18:27,880
 set the text we want when we prepare for this segue, okay?
+设定这些文字
 
 1917
 01:18:27,880 --> 01:18:30,350
 So now let's go ahead and wire up this UI.
+现在，我们来把 UI 元素和代码联系起来
 
 1918
 01:18:30,350 --> 01:18:32,480
 We've got this text view right here.
+选中 text view
 
 1919
 01:18:32,480 --> 01:18:35,150
 Let's Ctrl + Drag to create an outlet to it, okay?
+按住 Ctrl 拖动，创建一个一个 outlet
 
 1920
 01:18:35,150 --> 01:18:37,750
-I'm gonna call that outlet text view.
+I'm gonna call that outlet textview.
+把这个 outlet 起名为 textview
 
 1921
 01:18:37,760 --> 01:18:39,190
 So, we've got a nice outlet here.
+已经创建好了一个 outlet
 
 1922
 01:18:39,190 --> 01:18:41,790
-And let's add a model to our text view controller.
+And let's add a model to our TextViewController.
+在 TextViewController 中添加一个 model
 
 1923
 01:18:41,790 --> 01:18:43,460
 My model, I'm going to call it text.
+称之为 text
 
 1924
 01:18:43,460 --> 01:18:44,860
-It's going to be a string.
+It's going to be a String.
+是一个 String 类型的
 
 1925
 01:18:44,860 --> 01:18:46,560
-We'll start out as an empty string.
+We'll start out as an empty String.
+先设置成一个空的 String
 
 1926
 01:18:47,560 --> 01:18:48,700
@@ -8492,94 +8517,117 @@ Okay.
 1927
 01:18:48,700 --> 01:18:51,130
 Now every time my model gets set,
+每一次 model 被 set 的时候
 
 1928
 01:18:52,170 --> 01:18:56,870
 I want to make sure that I update my text views text.
+都要确保 text view 的 text 实时被更新
 
 1929
 01:18:56,870 --> 01:19:00,410
 So text view is this thing that manages text.
+text view 就是一个管理 text 的东西
 
 1930
 01:19:00,410 --> 01:19:03,080
 And you can see has an enormous number of things you
+你可以看到，一个对 text view 做很多事情
 
 1931
 01:19:03,080 --> 01:19:05,810
 can do on it it's a very powerful text object, but
+它是一个非常强大的 text 对象
 
 1932
 01:19:05,810 --> 01:19:07,910
 it also has just a simple method called text.
+不过它也有一个很简单的属性叫做 text
 
 1933
 01:19:07,910 --> 01:19:11,520
-Just like UI label does, and we're gonna set that equal to
+Just like UILabel does, and we're gonna set that equal to
+就像 UILabel，我们把它
 
 1934
 01:19:11,520 --> 01:19:14,020
 our text the model's text right.
+设置成 model 的 text
 
 1935
 01:19:14,020 --> 01:19:16,720
 And just to be safe in case this is being called while
+为了安全起见
 
 1936
 01:19:16,720 --> 01:19:17,990
 we're preparing.
+防止在准备的时候此方法被调用
 
 1937
 01:19:17,990 --> 01:19:20,490
 Okay, we'll do the same thing with optional chaining in
+在这里也使用 optional chaining（可选链）
 
 1938
 01:19:20,490 --> 01:19:22,760
 case our outlet here has not been set.
+防止 oulet 在没被设置好的时候，导致程序崩溃
 
 1939
 01:19:22,760 --> 01:19:25,790
 And similarly when our outlet finally does get
+相似的，当 oulet 被设置好以后
 
 1940
 01:19:25,800 --> 01:19:31,530
 set by the system, we're going to have it, property observer,
+我们就可以获取到，在 property observer 里
 
 1941
 01:19:31,540 --> 01:19:35,000
 say text view dot text equals text.
+textview.text = text
 
 1942
 01:19:36,110 --> 01:19:37,600
 Okay. And here we don't have to do
+这里我们不需要加问号
 
 1943
 01:19:37,610 --> 01:19:40,340
 the question mark because where actually the text view
+因为这里 textview
 
 1944
 01:19:40,340 --> 01:19:41,840
 is being set by the system, so
+在 didSet 发生的时候
 
 1945
 01:19:41,840 --> 01:19:44,340
 we know it's set by the time this didSet happens.
+已经被系统设置完毕了
 
 1946
 01:19:44,350 --> 01:19:46,080
 Okay, so this is a very,
+这是一个我们使用的
 
 1947
 01:19:46,080 --> 01:19:49,350
 very simple MVC that we're using right here.
+非常简单地 MVC
 
 1948
 01:19:50,580 --> 01:19:55,920
 And it should have no
+它用于显示诊断历史
 
 1949
 01:19:55,920 --> 01:20:02,330
 problem displaying our little diagnostic history, there.
+也应该没什么问题
 
 1950
 01:20:02,330 --> 01:20:04,540
@@ -8588,46 +8636,57 @@ Okay?
 1951
 01:20:04,550 --> 01:20:06,760
 So now it's time to prepare this segue.
+现在是时候准备这个 segue 了
 
 1952
 01:20:06,770 --> 01:20:08,460
 All right? We want to
+我们想要
 
 1953
 01:20:08,470 --> 01:20:11,230
 prepare this segue so that you click on history,
+为这个 segue 做些准备，为了在点击 history 的时候
 
 1954
 01:20:11,240 --> 01:20:13,740
 it shows the diagnostic history here now.
+展示诊断的记录
 
 1955
 01:20:13,740 --> 01:20:16,810
 We might, we know that this instigator right here is
+我们知道这里的这个
 
 1956
 01:20:16,810 --> 01:20:19,070
 inside this happiness view controller.
+在 happinessViewController 的煽动者
 
 1957
 01:20:19,080 --> 01:20:22,310
 So we might think that we should go to our happiness
+所以我们也许会想
 
 1958
 01:20:22,310 --> 01:20:25,480
 view controller right here and add the prepare in here.
+把准备的代码放到这里
 
 1959
 01:20:26,450 --> 01:20:28,350
 Okay. And we could do that but
+我们可以这样做
 
 1960
 01:20:28,350 --> 01:20:29,920
 remember that happiness view control is
+还记得吗？ HappinessViewController 是我们从
 
 1961
 01:20:29,920 --> 01:20:32,180
 something we dragged in from another app.
+另一个 App 拽进来的
 
 1962
 01:20:32,190 --> 01:20:35,220
@@ -9107,7 +9166,7 @@ All right, so putting this in here it just, you know,
 
 2081
 01:25:55,230 --> 01:25:57,900
-collects all your constant strings together.
+collects all your constant Strings together.
 
 2082
 01:25:57,900 --> 01:25:59,970
@@ -9119,7 +9178,7 @@ Some people might even call this struct storyboard, so
 
 2084
 01:26:02,670 --> 01:26:06,110
-that every string that's in your storyboard that has to
+that every String that's in your storyboard that has to
 
 2085
 01:26:06,110 --> 01:26:08,540
@@ -9171,7 +9230,7 @@ So, it's just going to show this array,
 
 2097
 01:26:39,840 --> 01:26:42,300
-this diagnostic history array, as a string.
+this diagnostic history array, as a String.
 
 2098
 01:26:42,310 --> 01:26:42,940

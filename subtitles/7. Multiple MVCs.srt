@@ -550,12 +550,12 @@ So if you look at toolbar items,
 
 112
 00:04:43,870 --> 00:04:47,240
-it's just an array of these bar buttons, so
+it's just an Array of these bar buttons, so
 你会发现它就是一系列 bar buttons 组成的数组
 
 113
 00:04:47,240 --> 00:04:50,080
-any MVC that returns anything in that array,
+any MVC that returns anything in that Array,
 当任意一个在 Navigation Controller 堆栈中的 MVC
 
 114
@@ -1226,7 +1226,7 @@ they all have a property called view controllers.
 
 248
 00:09:56,710 --> 00:09:58,870
-And it's an array of view controller.
+And it's an Array of view controller.
 它是由 UIViewController 组成的一个数组
 
 249
@@ -1261,7 +1261,7 @@ will be however many cards are on the stack.
 
 255
 00:10:11,720 --> 00:10:13,050
-That's how many things will be in that array.
+That's how many things will be in that Array.
 这就是知道这个数组有多少个元素的方式
 
 256
@@ -2912,7 +2912,7 @@ Like the button, or whatever's causing it to segue.
 
 607
 00:23:58,830 --> 00:24:01,990
-That MVC implements a method called, prepare for segue.
+That MVC implements a method called, prepareForSegue.
 
 608
 00:24:02,000 --> 00:24:05,200
@@ -2928,7 +2928,7 @@ So let's talk about what that code looks like,
 
 611
 00:24:09,440 --> 00:24:11,200
-prepare for segue.
+prepareForSegue.
 
 612
 00:24:11,200 --> 00:24:12,740
@@ -6620,7 +6620,7 @@ You still Ctrl+drag to some view controller.
 
 1534
 01:02:02,900 --> 01:02:04,570
-You still get to do prepare for segue.
+You still get to do prepareForSegue.
 
 1535
 01:02:04,570 --> 01:02:06,770
@@ -6780,7 +6780,7 @@ We'll have a brief slide that talks about that in a second.
 
 1574
 01:03:57,100 --> 01:03:59,900
-But, first I want to show you how in prepare for segue you
+But, first I want to show you how in prepareForSegue you
 
 1575
 01:03:59,900 --> 01:04:02,800
@@ -6792,11 +6792,11 @@ you can do something like set this delegate.
 
 1577
 01:04:04,270 --> 01:04:07,470
-So this prepare for segue all of the green is basically
+So this prepareForSegue all of the green is basically
 
 1578
 01:04:07,480 --> 01:04:10,480
-the same as you would have in any other prepare for segue.
+the same as you would have in any other prepareForSegue.
 
 1579
 01:04:10,480 --> 01:04:13,950
@@ -7723,7 +7723,7 @@ It's gonna show the history of the diagnosis just as
 
 1768
 01:12:04,820 --> 01:12:07,450
-an array of ints, because we know that our happiness is
+an Array of ints, because we know that our happiness is
 一个整数数组，因为happiness程度用 
 
 1769
@@ -7733,7 +7733,7 @@ represented in int.
 
 1770
 01:12:08,490 --> 01:12:09,720
-So it's gonna be shown in an array of ints.
+So it's gonna be shown in an Array of ints.
 所以会以一组整数来显示。 
 
 1771
@@ -7743,7 +7743,7 @@ It might be nicer to show it in a different way, but
 
 1772
 01:12:12,330 --> 01:12:14,460
-we're gonna show it as an array of ints.
+we're gonna show it as an Array of ints.
 我只显示一个整数数组 。
 
 1773
@@ -8232,12 +8232,12 @@ the Identity Inspector up here.
 
 1870
 01:16:36,090 --> 01:16:38,320
-To be the text view controller, so
+To be the TextViewController, so
 与storyboard中的控制器 ，
 
 1871
 01:16:38,320 --> 01:16:41,390
-that we know this is a text view controller.
+that we know this is a TextViewController.
 关联起来 。
 
 1872
@@ -8710,7 +8710,7 @@ And he said no, no,
 
 1966
 01:20:41,110 --> 01:20:42,590
-you can't add prepare for segue to this class.
+you can't add prepareForSegue to this class.
 prepareForSegue 在这个类里
 
 1967
@@ -8750,7 +8750,7 @@ a HappinessViewController anymore.
 
 1974
 01:21:02,610 --> 01:21:04,750
-So where are we going to put our prepare for segue then?
+So where are we going to put our prepareForSegue then?
 所以我们应该把 PrepareForSegue 放在哪里呢？
 
 1975
@@ -8896,110 +8896,137 @@ It is a DiagnosedHappinessViewController.
 2003
 01:22:18,510 --> 01:22:20,010
 So now I'm this guy here.
+现在笑脸的类已经改变了
 
 2004
 01:22:20,010 --> 01:22:23,550
 Now, all my outlets that were set up will
+我曾经设置好的 outlet
 
 2005
 01:22:23,550 --> 01:22:24,820
 work absolutely just fine.
+如今也不会出现什么问题
 
 2006
 01:22:25,750 --> 01:22:27,320
 Okay? Because I'm gonna inherit all
+因为它是子类
 
 2007
 01:22:27,320 --> 01:22:30,490
 the capability of HappinessViewController in my
+继承了父类的
 
 2008
 01:22:30,490 --> 01:22:32,690
 DiagnosedHappinessViewController subclass.
+所有东西
 
 2009
 01:22:32,690 --> 01:22:35,220
 In fact, what's really cool is I have a scene right here.
+更 cool 的事情是
 
 2010
 01:22:35,230 --> 01:22:39,530
-And this scene is a diagnose HappinessViewController.
+And this scene is a DiagnosedHappinessViewController.
+这个 DiagnosedHappinessViewController 的场景
 
 2011
 01:22:39,530 --> 01:22:45,330
 But if I go up here to pick a different class.
+我选择一个不同的类
 
 2012
 01:22:45,330 --> 01:22:46,820
 If I go back and
+如果我返回
 
 2013
 01:22:46,820 --> 01:22:48,300
 pick my HappinessViewController, and I see it here.
+选择 HappinessViewController，看到这里
 
 2014
 01:22:48,300 --> 01:22:51,500
 You can see that it'll show me that that's hooked up.
+你可以看到，UI 元素已经连接起来了
 
 2015
 01:22:51,510 --> 01:22:53,510
 Okay, cuz it knows that this is inherited,
+它知道这是继承的
 
 2016
 01:22:53,510 --> 01:22:54,670
 this outlet is inherited.
+所以 outlet 也被继承了
 
 2017
 01:22:54,680 --> 01:22:56,540
 And so it's hooked up.
+也就是连接好了
 
 2018
 01:22:56,540 --> 01:22:59,880
 So I can still go back and show my
+所以我也可以
 
 2019
 01:22:59,880 --> 01:23:03,150
-superclasses for my diagnose HappinessViewController to
+superclasses for my DiagnosedHappinessViewController to
+在我的父类
 
 2020
 01:23:03,150 --> 01:23:05,580
 HappinessViewController, and see the outlets.
+看到这些 outlet
 
 2021
 01:23:07,390 --> 01:23:09,120
 Okay? So this is an important thing.
+这个事情就很重要了
 
 2022
 01:23:09,120 --> 01:23:11,250
 Polymorphism of controllers, here.
+controller 的多态性
 
 2023
 01:23:11,260 --> 01:23:13,760
 You often might have a reusable controller.
+你也许会有一个可重用的 controller
 
 2024
 01:23:13,760 --> 01:23:15,160
 And you wanna add something to it for
+也许你想要在某个 stroryboard 中
 
 2025
 01:23:15,160 --> 01:23:16,960
 a particular storyboard or
+为其添加特定的功能
 
 2026
 01:23:16,960 --> 01:23:18,590
 a particular use in the storyboard.
+或作为一个特殊的用途
 
 2027
 01:23:18,600 --> 01:23:21,730
 Then you can just create a little subclass of it and
+这样，你就可以创建一个它的子类
 
 2028
 01:23:21,730 --> 01:23:23,930
 put your prepare.
+在子类中实现 prepareForSegue
 
 2029
 01:23:23,930 --> 01:23:26,130
 So what we're gonna do is put our prepare right in here.
+所以我们要在这里实现 prepareForSegue
 
 2030
 01:23:27,270 --> 01:23:28,140
@@ -9008,166 +9035,207 @@ Okay?
 2031
 01:23:28,140 --> 01:23:30,090
 So this
+这个
 
 2032
 01:23:30,090 --> 01:23:32,040
-DiagnosedHappinessViewControl- ler, first of all it's
+DiagnosedHappinessViewController, first of all it's
+DiagnosedHappinessViewController
 
 2033
 01:23:32,040 --> 01:23:35,310
 going to have to keep track of the diagnosed happinesses.
+负责追踪诊断记录
 
 2034
 01:23:35,310 --> 01:23:38,510
 Okay. So we're gonna add a new var
+所以我们要给子类添加一个新的变量
 
 2035
 01:23:38,510 --> 01:23:43,080
 to this subclass called diagnosed happiness.
+叫做 diagnosedHappiness
 
 2036
 01:23:43,080 --> 01:23:46,990
-Or diagnostic history, let's call it.
+Or diagnosticHistory, let's call it.
+或者叫做 diagnosticHistory
 
 2037
 01:23:46,990 --> 01:23:49,450
 Okay it's the diagnostic history of this thing,
+它就是这个东西的诊断历史
 
 2038
 01:23:49,460 --> 01:23:52,690
-and we're just gonna keep it as an array of ints.
+and we're just gonna keep it as an Array of Ints.
+用它来存储一个 Int 数组
 
 2039
 01:23:52,690 --> 01:23:54,660
 So we've got our nice diagnostic history right
+现在我们已经有了诊断历史
 
 2040
 01:23:54,660 --> 01:24:00,400
 there, and now let's go ahead and let's do this.
+现在这样
 
 2041
 01:24:00,400 --> 01:24:04,530
 Let's go here and here and
+打开侧边栏，去到这里
 
 2042
 01:24:05,500 --> 01:24:07,800
 here to give ourselves some room.
+给我们一些空间
 
 2043
 01:24:07,810 --> 01:24:09,970
 And let's override.
+开始重写
 
 2044
 01:24:09,970 --> 01:24:14,080
 Actually, we don't even have to type the override here
+其实我们不必在这里输入 override
 
 2045
 01:24:14,080 --> 01:24:17,310
-because we start typing prepare for segway end tab.
+because we start typing prepareForSegue end tab.
+因为在输入 prepareForSegue 的时候，按一下 tab 键
 
 2046
 01:24:17,310 --> 01:24:18,450
 It's going to automatically put
+它就会自动
 
 2047
 01:24:18,450 --> 01:24:20,850
 the override func in there for us, which is nice.
+出现 override func
 
 2048
 01:24:20,850 --> 01:24:23,780
 We don't have to be typing this unnecessarily.
+我们就不需要键入这些不必要的东西了
 
 2049
 01:24:23,790 --> 01:24:25,250
-So here's our repair for segue.
+So here's our prepareForSegue.
+这就是我们的 prepareForSegue
 
 2050
 01:24:25,250 --> 01:24:28,490
-And so all we're going to be doing in this prepare for
+And so all we're going to be doing in this prepareForSegue
+我们在这个函数里需要做的就是
 
 2051
 01:24:28,490 --> 01:24:31,960
-segue is prepare our text to view controller, all right?
+is prepare our TextViewController, all right?
+为 TextViewController 做好准备
 
 2052
 01:24:31,960 --> 01:24:34,360
-Because our text view controller, here,
+Because our TextViewController, here,
+因为 TextViewController
 
 2053
 01:24:34,360 --> 01:24:37,100
 is what we're seguing to.
+是我们将要跳转的
 
 2054
 01:24:37,100 --> 01:24:38,900
 So we're preparing this segue right here.
+所以我们在这里做好准备
 
 2055
 01:24:38,900 --> 01:24:40,530
 So we wanna prepare this MVC,
+我们想要准备这个 MVC
 
 2056
 01:24:40,530 --> 01:24:43,000
-which is a text view controller, okay?
+which is a TextViewController, okay?
+这个 TextViewController
 
 2057
 01:24:43,000 --> 01:24:44,630
 So let's prepare that.
+所以我们开始做准备
 
 2058
 01:24:44,640 --> 01:24:49,510
 And let's, first of all, make sure that this is
+首先，确保
 
 2059
 01:24:49,510 --> 01:24:51,940
 the segue we're talking about, here.
+这是我们讨论的 segue
 
 2060
 01:24:51,940 --> 01:24:55,340
 So let's go right here, check our identifiers,
+到这里检查一下 identifier
 
 2061
 01:24:55,350 --> 01:24:57,710
 get our identifier out of there.
+获取一下 identifier
 
 2062
 01:24:57,720 --> 01:24:59,310
 Let's switch on our identifier.
+在这里 switch 这个 identifier
 
 2063
 01:24:59,320 --> 01:25:04,590
 Currently, we only support this one case.
+目前我们只支持这一种 case
 
 2064
 01:25:04,590 --> 01:25:06,620
 I'm also going to put this case,
+我也会把这种 case
 
 2065
 01:25:06,620 --> 01:25:08,650
 this is something you should probably always do,
+你们也应当这样做
 
 2066
 01:25:08,660 --> 01:25:11,990
 which is to put the segue identifier here into some
+把 segue 的 identifier
 
 2067
 01:25:11,990 --> 01:25:15,200
 sort of constants struct.
+放进某个装常量的结构体中
 
 2068
 01:25:15,200 --> 01:25:17,260
 I'm gonna call this my history struct.
+我把这个结构体命名为 History
 
 2069
 01:25:17,270 --> 01:25:21,630
 I'm going to have, and let me make sure this is private.
+我要把它设置为 private
 
 2070
 01:25:21,640 --> 01:25:25,770
 Oops. Let's type
+打错了
 
 2071
 01:25:25,770 --> 01:25:27,240
 this correctly here, private.
+更正一下，private
 
 2072
 01:25:27,240 --> 01:25:29,540
@@ -9180,22 +9248,27 @@ Yes.
 2074
 01:25:32,280 --> 01:25:35,010
 I'm going to have this be static let
+创建一个 static 常量
 
 2075
 01:25:35,010 --> 01:25:39,450
-segue equal that show diagnostic history.
+Segue equal that Show Diagnostic History.
+Segue = "Show Diagnostic History"
 
 2076
 01:25:39,450 --> 01:25:42,150
 So this would be a segue identifier.
+它现在就是一个 segue identifier 了
 
 2077
 01:25:42,150 --> 01:25:46,320
 Maybe we'd even want to call this identifier,
+也许，我更想称之为
 
 2078
 01:25:46,320 --> 01:25:48,120
 segue identifier.
+SegueIdentifier
 
 2079
 01:25:48,130 --> 01:25:52,190
@@ -9204,74 +9277,91 @@ All right.
 2080
 01:25:52,200 --> 01:25:55,230
 All right, so putting this in here it just, you know,
+这个结构体的作用
 
 2081
 01:25:55,230 --> 01:25:57,900
 collects all your constant Strings together.
+就是存放所有的常量 String
 
 2082
 01:25:57,900 --> 01:25:59,970
-And if you ever change something in your storybook.
+And if you ever change something in your storyboard.
+如果你想改变 storyboard 里的东西
 
 2083
 01:25:59,970 --> 01:26:02,670
 Some people might even call this struct storyboard, so
+有人会给它起名为 Storyboard
 
 2084
 01:26:02,670 --> 01:26:06,110
 that every String that's in your storyboard that has to
+也就是，在 storyboard 里出现的 String
 
 2085
 01:26:06,110 --> 01:26:08,540
 match up here in their code, is in one struct.
+都要和代码中的这个结构体连接起来
 
 2086
 01:26:08,540 --> 01:26:11,540
 We'll call this one History right here.
+在这里我们称之为 History
 
 2087
 01:26:11,550 --> 01:26:13,210
 It's kind of debatable which way to go there.
+它类似于一个数据库
 
 2088
 01:26:14,410 --> 01:26:16,500
 So what do
+所以
 
 2089
 01:26:16,500 --> 01:26:18,580
 we want to do when that history identifier happens?
+在是 history identifier 的这种情况，我们需要做什么
 
 2090
 01:26:18,590 --> 01:26:23,450
-Well, if we can get our segue's destination view
+Well, if we can get our segue's destinationViewController
+如果我们能够获取到 segue 的 destinationViewController
 
 2091
 01:26:23,460 --> 01:26:26,590
-controller as a text view controller,
+as a TextViewController,
+转型为 TextViewController
 
 2092
 01:26:26,590 --> 01:26:30,760
 that's the only thing we need to segue to with this segue.
+这是我们这个 segue 唯一需要跳转的地方
 
 2093
 01:26:30,760 --> 01:26:33,730
 Then we're just going to set the tvc's text equal to
+然后我们把 tvc.text = diagnosticHistory
 
 2094
 01:26:33,730 --> 01:26:35,100
-our diagnostic history,
+our diagnosticHistory,
 
 2095
 01:26:35,100 --> 01:26:37,630
-which I'm going to do by diagnostic history.
+which I'm going to do by diagnosticHistory.
+这就是我希望通过 diagnosticHistory 做的事情
 
 2096
 01:26:37,630 --> 01:26:39,830
-So, it's just going to show this array,
+So, it's just going to show this Array,
+我们需要显示这个 Array
 
 2097
 01:26:39,840 --> 01:26:42,300
-this diagnostic history array, as a String.
+this diagnostic history Array, as a String.
+把 Array 作为 String 显示出来
 
 2098
 01:26:42,310 --> 01:26:42,940
@@ -9280,10 +9370,12 @@ All right.
 2099
 01:26:45,640 --> 01:26:48,680
 And of course we'll need the default.
+当然，我们需要 default 情况
 
 2100
 01:26:48,680 --> 01:26:50,240
 Break out of here.
+break 就可以了
 
 2101
 01:26:51,310 --> 01:26:52,480
@@ -9383,11 +9475,11 @@ the happiness, okay?
 
 2125
 01:27:51,360 --> 01:27:53,300
-You can use plus equals with an array but
+You can use plus equals with an Array but
 
 2126
 01:27:53,300 --> 01:27:55,260
-you have to remember that the argument has to be an array,
+you have to remember that the argument has to be an Array,
 
 2127
 01:27:55,270 --> 01:27:57,900
@@ -9395,7 +9487,7 @@ so if you just want to add one thing,
 
 2128
 01:27:57,900 --> 01:28:00,540
-you can just wrap a little array around it here, okay?
+you can just wrap a little Array around it here, okay?
 
 2129
 01:28:00,540 --> 01:28:04,010
@@ -9699,7 +9791,7 @@ any object, but it has to be a property list, okay?
 
 2204
 01:30:56,490 --> 01:30:59,220
-But luckily an array of ints,
+But luckily an Array of ints,
 
 2205
 01:30:59,220 --> 01:31:02,320
@@ -9707,11 +9799,11 @@ which is what our diagnostic history is.
 
 2206
 01:31:02,330 --> 01:31:04,630
-Sorry, this isn't an array of ints,
+Sorry, this isn't an Array of ints,
 
 2207
 01:31:04,630 --> 01:31:09,160
-this diagnose is an array of ints,
+this diagnose is an Array of ints,
 
 2208
 01:31:09,160 --> 01:31:12,130
@@ -9727,7 +9819,7 @@ we're just gonna put our new value here.
 
 2211
 01:31:16,840 --> 01:31:19,770
-So that's gonna be an array of ints, the new value.
+So that's gonna be an Array of ints, the new value.
 
 2212
 01:31:19,770 --> 01:31:22,910
@@ -9831,15 +9923,15 @@ But one thing I wanna make sure of is that it's
 
 2237
 01:32:37,440 --> 01:32:39,240
-always an array of int.
+always an Array of int.
 
 2238
 01:32:39,240 --> 01:32:41,710
-So I'm gonna do as array of int.
+So I'm gonna do as Array of int.
 
 2239
 01:32:41,710 --> 01:32:45,150
-And if that returns nil then I'm gonna turn empty array.
+And if that returns nil then I'm gonna turn empty Array.
 
 2240
 01:32:45,150 --> 01:32:47,530
@@ -9863,7 +9955,7 @@ So we'll start out with a nice,
 
 2245
 01:32:55,690 --> 01:32:56,920
-empty array in that case.
+empty Array in that case.
 
 2246
 01:32:58,330 --> 01:33:00,430
@@ -9875,7 +9967,7 @@ And also, if somehow some junk had got written here that
 
 2248
 01:33:02,530 --> 01:33:03,690
-wasn't in an array of int for
+wasn't in an Array of Intfor
 
 2249
 01:33:03,700 --> 01:33:05,600
@@ -9883,7 +9975,7 @@ some reason, then this would also be nil and
 
 2250
 01:33:05,600 --> 01:33:06,900
-we would start out with a fresh array.
+we would start out with a fresh Array.
 
 2251
 01:33:06,900 --> 01:33:09,670
@@ -10403,7 +10495,7 @@ And if you think about who knows what the size of
 
 2380
 01:39:11,910 --> 01:39:15,250
-this is best, well it's the text view controller.
+this is best, well it's the TextViewController.
 
 2381
 01:39:15,250 --> 01:39:16,400
@@ -10427,11 +10519,11 @@ Let's go ahead and make it so
 
 2386
 01:39:25,090 --> 01:39:27,790
-the text view controller reports its preferred size.
+the TextViewController reports its preferred size.
 
 2387
 01:39:27,790 --> 01:39:33,430
-So I'm gonna go over here to the text view controller.
+So I'm gonna go over here to the TextViewController.
 
 2388
 01:39:33,430 --> 01:39:35,320
@@ -10443,7 +10535,7 @@ Okay.
 
 2390
 01:39:37,200 --> 01:39:41,300
-UIV controller so the text view controller could set that
+UIV controller so the TextViewController could set that
 
 2391
 01:39:41,310 --> 01:39:45,640

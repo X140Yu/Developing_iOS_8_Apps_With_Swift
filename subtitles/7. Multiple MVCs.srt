@@ -6889,1202 +6889,1501 @@ the delegate of the presentation controller.
 1601
 01:05:00,120 --> 01:05:02,420
 Okay, so
+好的 
 
 1602
 01:05:02,420 --> 01:05:06,860
 when you set yourself as the delegate, what can you do?
+当设置自身为代理时，你可以做些什么呢？ 
 
 1603
 01:05:06,860 --> 01:05:08,560
 What is it going to offer to let you do?
+你可以提供些什么呢？ 
 
 1604
 01:05:08,560 --> 01:05:09,860
-Well, there's a number of things, but
+Well, there's  number of things, but
+事实上，有很多， 
 
 1605
 01:05:09,860 --> 01:05:12,760
 I'm gonna talk about this adaptation behavior.
+我会讲下适配特性。
 
 1606
 01:05:12,770 --> 01:05:15,270
 So here's two methods that are in the protocol for
+代理可以实现协议中
 
 1607
 01:05:15,270 --> 01:05:17,070
 the delegate there.
+的两个 方法 。
 
 1608
 01:05:17,070 --> 01:05:19,340
 One is called adapter presentation,
+一个是
 
 1609
 01:05:19,340 --> 01:05:22,210
 presentation style for presentation controller.
+adaptivePres...方法（方法名很长）。
 
 1610
 01:05:22,210 --> 01:05:26,540
 Okay, so when the popover is trying to present, it's going
+没错，当popover弹出来的时候， 
 
 1611
 01:05:26,540 --> 01:05:30,810
 to ask you, how do you want me to adapt if I'm on an iPhone?
+会问代理，我在iphone上要怎样适配呢？ 
 
 1612
 01:05:31,980 --> 01:05:35,980
 Now by default, this is going to say full screen modal, but
+默认会以modal方式全屏显示， 
 
 1613
 01:05:35,990 --> 01:05:39,320
 you can say you want modal presentation style none
+但你可以将展示风格设置为none 。
 
 1614
 01:05:39,320 --> 01:05:42,060
 which means don't adapt.
+表示不需要适配 
 
 1615
 01:05:42,060 --> 01:05:44,490
 So presented on the iPhone exactly like you do
+这样就和ipad上的展示方式
 
 1616
 01:05:44,490 --> 01:05:46,090
 on the iPad.
+一样 了 。
 
 1617
 01:05:46,090 --> 01:05:48,460
 Okay, so for
+是的， 
 
 1618
 01:05:48,460 --> 01:05:50,830
 a small popover, this makes a lot of sense, okay.
+对于小的popover这并没问题 。
 
 1619
 01:05:50,830 --> 01:05:52,460
 So this is how you can basically turn off
+这是你怎样关闭适配特性 
 
 1620
 01:05:52,470 --> 01:05:53,970
 that adaptation behavior.
+的方法 。
 
 1621
 01:05:53,970 --> 01:05:55,970
 You can even go way more powerful than that,
+还有更强大的方法， 
 
 1622
 01:05:55,970 --> 01:05:57,900
 the other one here presentation controller view,
+用来展示另一个控制器， 
 
 1623
 01:05:57,900 --> 01:06:00,270
 view controller for adapted presentation style,
+就是presentationController（）->UIViewController方法， 
 
 1624
 01:06:00,270 --> 01:06:04,210
 you can return a whole other MVC on the iPhone.
+用来在iphone上你可以返回另一个完整的控制器 。
 
 1625
 01:06:04,210 --> 01:06:06,580
 That displays your MVC in a totally different way
+那会以另一种完全不同显示方式
 
 1626
 01:06:06,580 --> 01:06:09,110
 maybe it's wrapped in a navigation controller or
+可能被包含在导航控制器中或 
 
 1627
 01:06:09,110 --> 01:06:10,410
 it can be completely different.
+其他不同的形式 。
 
 1628
 01:06:10,420 --> 01:06:13,980
 So you can really customize it but I just wanted to
+你完全可以各种自定义， 
 
 1629
 01:06:13,990 --> 01:06:16,590
 show the this first one because it's common to say oh
+但我只想展示第一种，因为这种 
 
 1630
 01:06:16,590 --> 01:06:18,590
 I just have this small little pop over thing.
+小popover很常用 。
 
 1631
 01:06:18,590 --> 01:06:20,460
 I want it to look like a pop over on an iPhone and
+我想要在iphone上显示popover 
 
 1632
 01:06:20,460 --> 01:06:21,320
 this is how you do that.
+你用这种方式。
 
 1633
 01:06:22,560 --> 01:06:23,990
 Okay.
+好的 。
 
 1634
 01:06:23,990 --> 01:06:28,290
 The last thing about popover that's important is the size.
+poover最后一个重要的部分是尺寸。
 
 1635
 01:06:28,300 --> 01:06:31,000
 So you'd really like the popover to come up and
+你想要popover显示的尺寸 
 
 1636
 01:06:31,000 --> 01:06:33,870
 be exactly the right size to fit the MVC
+正确地适配到控制器中 
 
 1637
 01:06:33,870 --> 01:06:37,200
 because your MVC might be different sizes, okay?
+因为你的控制器尺寸可能不同，明白吗？ 
 
 1638
 01:06:37,200 --> 01:06:39,940
 Even as a given MVC might be different sizes and so
+甚至当特定控制器有不同尺寸 
 
 1639
 01:06:39,940 --> 01:06:41,940
 you really wanna be able to control the size.
+而且你希望能控制这个尺寸 。
 
 1640
 01:06:41,940 --> 01:06:44,410
 And in a really object oriented way,
+用一种面向对象的方式 ，
 
 1641
 01:06:44,410 --> 01:06:48,110
 the way the system does that, is it asks the MVC that is in
+也就是系统所用的方式，会询问控制器
 
 1642
 01:06:48,110 --> 01:06:50,880
 the popover what is your preferred size?
+合适的尺寸是多少？
 
 1643
 01:06:50,880 --> 01:06:54,620
 What would you like to be if I could grant your wish,
-
+如果我满足你的愿望，让你来指定尺寸，
+ 
 1644
 01:06:54,620 --> 01:06:57,320
 what would you like to be, okay?
+你希望是多少，明白吗？ 
 
 1645
 01:06:57,320 --> 01:07:00,320
 So it's cuz only that MVC really knows what
+所以只有控制器才知道 
 
 1646
 01:07:00,330 --> 01:07:03,190
 its preferred or ideal size might be.
+最理想的尺寸 
 
 1647
 01:07:03,190 --> 01:07:04,990
 Now that's only a recommendation because
+不过这只被作为参考建议，因为
 
 1648
 01:07:05,000 --> 01:07:07,130
 the popover has some constraints as well, right?
+popover自身也有一些约束，明白吗？ 
 
 1649
 01:07:07,130 --> 01:07:10,570
 Because it can only appear in certain places on screen, and
+因为它只能出现在屏幕的特定区域， 
 
 1650
 01:07:10,570 --> 01:07:13,940
 the screen is only so big, and those arrows might have to go
+而屏幕只有这么大，箭头要指向 
 
 1651
 01:07:13,940 --> 01:07:16,970
 a certain direction, they might be restricted, so
+特定方向，他们或许被 限制了，所以
 
 1652
 01:07:16,970 --> 01:07:20,070
 the popover has got its own things to deal with.
+popover也要考虑自身的约束。
 
 1653
 01:07:20,080 --> 01:07:25,080
 But it's going to ask the MVC it's putting inside of
-
+但是它会询问其中的控制器
+ 
 1654
 01:07:25,080 --> 01:07:27,080
 itself what would you like to be?
-
+应该怎样展示呢？
+ 
 1655
 01:07:27,080 --> 01:07:30,620
-And so this is just a property in your eye view controller.
+And so this is just a property in your UI view controller.
+这只是控制器的一个属性 .
 
 1656
 01:07:30,620 --> 01:07:33,650
 You can, for example, override this.
+你可以重写它 .
 
 1657
 01:07:33,650 --> 01:07:34,920
 Okay. Override the property and
+好的，重写这个属性 
 
 1658
 01:07:34,920 --> 01:07:36,820
 return your preferred size.
+并返回合适的尺寸 .
 
 1659
 01:07:36,820 --> 01:07:38,190
 Or you can set.
+或者你可以直接设置 .
 
 1660
 01:07:38,190 --> 01:07:39,220
 It's a settable property so
+这个属性是可写的 
 
 1661
 01:07:39,230 --> 01:07:41,230
 you can set your preferred size.
+所以你可以设置合适的尺寸 .
 
 1662
 01:07:41,230 --> 01:07:44,930
 If your preferred size is always an exact size just set
+如果你的尺寸是固定的 
 
 1663
 01:07:44,930 --> 01:07:46,400
 your preferred size to that.
+直接设置成它就可以了 。
 
 1664
 01:07:46,400 --> 01:07:48,530
 Or, if you have to calculate your preferred size based on
+或者，你必须计算合适的尺寸根据
 
 1665
 01:07:48,530 --> 01:07:50,470
 what your content is, which you're going to
+控制器的内容，你
 
 1666
 01:07:50,470 --> 01:07:54,100
 see in the demo that I'm going to show about popovers
+一会儿将会看到
 
 1667
 01:07:54,100 --> 01:07:58,370
 in a moment here, than you can override it,
-
+我如何在案例中
+ 
 1668
 01:07:58,380 --> 01:08:00,370
 which is what I did in that demo.
+重写属性。
 
 1669
 01:08:00,380 --> 01:08:03,340
 'Kay, so, we're gonna have
+好的，我们会 
 
 1670
 01:08:03,350 --> 01:08:08,010
 a demo here which is adding a popover to psychologists.
+在案例的时候为psychologists添加popover 
 
 1671
 01:08:08,020 --> 01:08:09,750
 Popovers I
+popovers会 
 
 1672
 01:08:09,750 --> 01:08:11,480
 made them extra credit on your homework assignment.
+为你的课后作业增加学分 
 
 1673
 01:08:12,620 --> 01:08:15,350
 So you don't have to do them but I recommend doing it cuz
+虽然你不需要做这个 但是我还是推荐你做 
 
 1674
 01:08:15,360 --> 01:08:17,620
 it's a good experience to make a popover.
+因为做popover的体验很有趣 。
 
 1675
 01:08:17,620 --> 01:08:18,920
 Okay, it is something.
+好的 
 
 1676
 01:08:20,190 --> 01:08:22,890
 If I had enough kind of room in your assignment to
-
+如果我觉得你的作业还有提升的空间
+ 
 1677
 01:08:22,900 --> 01:08:25,100
 fit popovers, I wouldn't have made it extra credit, but
-
+我不会给你额外的学分，但是
+ 
 1678
 01:08:25,100 --> 01:08:28,130
 I just feel I have only given you one week's worth of work,
-
+由于这只是一周的作业
+ 
 1679
 01:08:28,130 --> 01:08:29,930
 I don't want to over burden you,
+我不想你们有太多负担 
 
 1680
 01:08:29,930 --> 01:08:31,730
 but this is an extra credit you really want to try to do,
+但这个额外的学分很值得你尝试， 
 
 1681
 01:08:31,740 --> 01:08:33,720
 I think, if you can.
+如果你可以的话 。
 
 1682
 01:08:33,720 --> 01:08:35,700
 Because in your final project, you're almost certainly going
+因为在期末项目上，你很可能会 
 
 1683
 01:08:35,710 --> 01:08:39,140
 to have some reason, hopefully to put a popover in there.
+使用到popover 。
 
 1684
 01:08:39,140 --> 01:08:42,140
 Okay now before I do the demo let me talk about
+在我做案例之前我想讲一下 
 
 1685
 01:08:42,150 --> 01:08:45,110
 what's coming up because I never go back to the slides.
+接下来的内容，因为我不会再展示这个课件 
 
 1686
 01:08:45,120 --> 01:08:48,150
 Friday we are gonna have that Friday section again for
+星期五的部分 
 
 1687
 01:08:48,150 --> 01:08:51,650
 IT & T people sorry it's not gonna be on video.
+不会录制课程 
 
 1688
 01:08:51,650 --> 01:08:54,060
 It's not in a room that we can do the video in really.
+因为是在另外一个教室，我们无法录制课程。
 
 1689
 01:08:54,060 --> 01:08:57,360
 So that should be a good one.
+那应该是不错的内容。
 
 1690
 01:08:57,360 --> 01:08:59,490
 And that's also an extra credit item in
+这也是一个额外学分 
 
 1691
 01:08:59,500 --> 01:09:02,300
 your homework is to analyze your performance of your
+如果你在课后作业中 
 
 1692
 01:09:02,300 --> 01:09:05,630
 calculator that you're doing, your graphing calculator.
+分析你的计算器的性能。
 
 1693
 01:09:05,630 --> 01:09:07,830
 And find out where it's slow and
+然后找出是哪里导致程序变慢 
 
 1694
 01:09:07,840 --> 01:09:09,170
 then maybe you can fix it if you want,
+并修复它 ，
 
 1695
 01:09:09,170 --> 01:09:12,300
 that's another extra credit to try and go fix it.
+这是另外一个你可以尝试的额外学分 。
 
 1696
 01:09:12,310 --> 01:09:13,810
 Next Monday I'm
+下周一我会 
 
 1697
 01:09:13,810 --> 01:09:15,310
 going to dive into the View Controller Lifecycle.
+开始讲控制器生命周期 
 
 1698
 01:09:15,310 --> 01:09:18,310
 I hate to have had put the View Controller Lifecycle onff
+我真的很不想把这个内容推后 
 
 1699
 01:09:18,310 --> 01:09:19,710
 for so long.
+这么晚 。
 
 1700
 01:09:19,710 --> 01:09:22,950
 But in some ways it's kind of nice because it forces you to
+不过也有好处，它强迫你
 
 1701
 01:09:22,950 --> 01:09:24,850
 use other parts of your View Controller,
+使用控制器的其他部分 来实现，
 
 1702
 01:09:24,850 --> 01:09:28,050
 like the property observers in your outlets, and
+比如outlet的属性监听 ，
 
 1703
 01:09:28,050 --> 01:09:31,750
 in your model setting, and things ike that.
+就像你设置model那样 。
 
 1704
 01:09:31,760 --> 01:09:33,360
 But you're going to find out on Monday, you're
+但是在星期一你会发现， 
 
 1705
 01:09:33,360 --> 01:09:35,190
 probably going to be mad at me on Monday when I show you
+你可能会生气，当我展示一些 
 
 1706
 01:09:35,190 --> 01:09:37,490
 all these nice methods in the View Controller Lifecycle and
+控制器中有用的，生命周期相关方法 
 
 1707
 01:09:37,490 --> 01:09:39,890
 you're, like oh if you'd just told me that last week it
+你可能会觉得，如果你上星期告诉我这些方法 
 
 1708
 01:09:39,900 --> 01:09:41,730
 could have made something so much easier.
+可以减轻多少工作量啊 。
 
 1709
 01:09:41,730 --> 01:09:44,570
 But the homeworks are designed to not need any of the view
+但是课后作业就是这样设计的 
 
 1710
 01:09:44,570 --> 01:09:46,530
 controller life cycle methods, you shouldn't need them for
+不使用生命周期中的方法，你并不需要他们 
 
 1711
 01:09:46,540 --> 01:09:48,300
 anything, even for the extra credits, you shouldn't.
+即使额外学分中，你也不应该使用他们 。
 
 1712
 01:09:49,440 --> 01:09:51,870
 And then again, I have autolayout question mark,
-
+又一次，我为autolayout添加了问号，
+ 
 1713
 01:09:51,870 --> 01:09:53,670
 kind of a running joke,
-
+只是开个玩笑，
+ 
 1714
 01:09:53,670 --> 01:09:55,470
 we'll see, hopefully we'll get to autolayout eventually in
-
+我们会最终详细讲到autolayout的
+ 
 1715
 01:09:55,480 --> 01:09:59,110
 this quarter, but like I say, see I'm kind of sprinkling it
-
+就像我说的，我在每个案例中都会灌输一点点
+ 
 1716
 01:09:59,110 --> 01:10:01,710
 in in every demo, a little bit of autolayout, so
-
+autolayout的知识，
+ 
 1717
 01:10:01,720 --> 01:10:04,150
 hopefully you're learning a little bit along the way.
-
+希望这一路走来你已经学到了一些。
+ 
 1718
 01:10:04,150 --> 01:10:07,190
 And then, after Monday, we'll start diving into
+然后，星期一之后，我们开始 
 
 1719
 01:10:07,190 --> 01:10:10,320
 multithreading, because you're talking about a device,
+学习多线程，因为你在和设备交互 ，
 
 1720
 01:10:10,320 --> 01:10:13,790
 a phone, that needs to be highly responsive to the user.
+就是iphone，它需要有很高的响应速度 。
 
 1721
 01:10:13,790 --> 01:10:14,730
 Okay? It needs to
+明白吗？它需要 
 
 1722
 01:10:14,730 --> 01:10:16,460
 always be responding to touches.
+响应用户的每次点击 。
 
 1723
 01:10:16,460 --> 01:10:19,900
 It cannot, you press a touch and then it freezes for
+不能点一下屏幕后就卡在那里 
 
 1724
 01:10:19,900 --> 01:10:22,630
 two seconds or even a second, while it goes off and
+几秒钟都
 
 1725
 01:10:22,630 --> 01:10:23,920
 does something.
+没有 反应 。
 
 1726
 01:10:23,920 --> 01:10:25,200
 It needs to immediately animating a response to
+它必须立即以动画的方式响应 
 
 1727
 01:10:25,200 --> 01:10:26,890
 what you're doing.
+用户的操作 。
 
 1728
 01:10:26,890 --> 01:10:28,570
 So the only way to make that work if you're doing things
+完成耗时操作的唯一方式 
 
 1729
 01:10:28,570 --> 01:10:31,740
 like accessing the network, which is really slow,
+比如网络请求，这非常慢 ，
 
 1730
 01:10:31,740 --> 01:10:34,180
 compared to the things you're doing on-screen,
+相对于屏幕上的操作来说， 
 
 1731
 01:10:34,180 --> 01:10:36,840
 you need to be able to do those things offline of
+你需要将这些耗时操作移到 
 
 1732
 01:10:36,850 --> 01:10:40,350
 the main thread of execution, so we'll talk about that.
+主线程之外执行，我们会讲到的 。
 
 1733
 01:10:40,350 --> 01:10:42,180
 Then we'll start talking about scrolling.
+然后我们会讲scrolling 。
 
 1734
 01:10:42,180 --> 01:10:43,720
 Because you've got this small screen.
+因为屏幕很小 。
 
 1735
 01:10:43,720 --> 01:10:45,890
 It's nice because it fits in your pocket but
+虽然这样可以很方便的放在口袋中 
 
 1736
 01:10:45,890 --> 01:10:47,390
 if you want to show something big,
+但是如果你需要展示很大的东西 ，
 
 1737
 01:10:47,390 --> 01:10:49,020
 you need to be able to scroll around in it.
+你需要可以到处拖动它 。
 
 1738
 01:10:49,020 --> 01:10:50,690
 If you want to see a nice image and
+如果你想查看高清图片 
 
 1739
 01:10:50,690 --> 01:10:52,360
 you want to zoom in and see a really detailed part of it,
+而且想放大然后查看细节部分， 
 
 1740
 01:10:52,360 --> 01:10:55,130
 you have to be able to zoom in and scroll around.
+你就必须可以放大并拖动它 。
 
 1741
 01:10:55,130 --> 01:10:57,700
 And then we're going to talk about the next big thing and
+然后我们会讲 另一个大板块的知识
 
 1742
 01:10:57,700 --> 01:11:00,400
 the topic of your next homework after the calculator.
-
+你会在计算器后的下一个作业中用到。
+ 
 1743
 01:11:00,400 --> 01:11:02,770
 Which is, I know you love the calculator, but
+ 我知道你喜欢计算器，但是
 
 1744
 01:11:02,770 --> 01:11:05,070
 this is your last assignment for the calculator.
+ 这是你计算器部分的最后一次作业了。
 
 1745
 01:11:05,070 --> 01:11:07,900
 We're going to move on to a whole thing called table view.
+我们会开始tableview 。
 
 1746
 01:11:07,910 --> 01:11:12,340
 Which is really highly delicate based user interface
-
+它是一个非常精致的用户界面
+ 
 1747
 01:11:12,340 --> 01:11:15,710
 mechanism in iOS that really helps you understand
+ 它可以帮助你更好地理解
 
 1748
 01:11:15,710 --> 01:11:20,150
 how iOS works when it comes to sophisticated user interface.
+ ios是如何工作的，当遇到更复杂的界面的时候。
 
 1749
 01:11:20,150 --> 01:11:22,150
 Okay? So that's what we're going to
+明白吗？这是我们
 
 1750
 01:11:22,150 --> 01:11:22,950
 be doing next week.
+下周的 内容 。
 
 1751
 01:11:24,450 --> 01:11:25,050
 All right?
+没问题吧？ 
 
 1752
 01:11:25,050 --> 01:11:25,620
 Thank you.
+好的 。
 
 1753
 01:11:27,020 --> 01:11:28,390
 Okay. So,
+好的 ，
 
 1754
 01:11:28,390 --> 01:11:31,390
 let's continue with our psychologist demo, here.
+我们继续psychologist案例 。
 
 1755
 01:11:31,390 --> 01:11:33,090
 We're going to add a popover.
+我们会增加一个popover 。
 
 1756
 01:11:33,090 --> 01:11:37,400
 And the place I'm gonna add a popover is down here, okay?
+我会加在这里 ，
 
 1757
 01:11:37,400 --> 01:11:39,330
 In this HappinessViewController, here,
+在HappinessViewController这里 ，
 
 1758
 01:11:39,330 --> 01:11:41,270
 I'm gonna put a little button, here.
+我会加一个小按钮在这里 。
 
 1759
 01:11:41,270 --> 01:11:44,270
 And this popover is going to show the history of
+然后会用popover展示
 
 1760
 01:11:44,270 --> 01:11:47,240
 all the diagnoses made by the psychologist.
+psychologist 所有的diagnoses历史 。
 
 1761
 01:11:47,240 --> 01:11:50,070
 So the psychologist is going to be diagnosing things as we
-
+所以psychologist会记录
+ 
 1762
 01:11:50,080 --> 01:11:51,970
 click on what we see in our dreams, and
+ 我们的点击历史，
 
 1763
 01:11:51,980 --> 01:11:54,680
 we're going to want a little button here that brings up
+我们会用一个小按钮来弹出 
 
 1764
 01:11:54,680 --> 01:11:56,010
 a popover right here, and
+popover，然后 
 
 1765
 01:11:56,010 --> 01:11:58,980
 this popover is going to show the history of the diagnoses.
+这个popover会显示diagnoses历史 。
 
 1766
 01:11:58,980 --> 01:12:02,320
 Now since this is a demo, I wanna keep the code simple.
+因为只是案例，我想简单一点 。
 
 1767
 01:12:02,320 --> 01:12:04,820
 It's gonna show the history of the diagnosis just as
+我只会显示 
 
 1768
 01:12:04,820 --> 01:12:07,450
 an array of ints, because we know that our happiness is
+一个整数数组，因为happiness程度用 
 
 1769
 01:12:07,460 --> 01:12:08,490
 represented in int.
+整数来表示 。
 
 1770
 01:12:08,490 --> 01:12:09,720
 So it's gonna be shown in an array of ints.
+所以会以一组整数来显示。 
 
 1771
 01:12:09,730 --> 01:12:12,330
 It might be nicer to show it in a different way, but
+或许有更好的方式，但是 
 
 1772
 01:12:12,330 --> 01:12:14,460
 we're gonna show it as an array of ints.
+我只显示一个整数数组 。
 
 1773
 01:12:15,500 --> 01:12:19,730
 So let's build this popover segue first and
+我们先建popover  segue
 
 1774
 01:12:19,730 --> 01:12:23,000
 then we'll have to go on to build a brand new MVC,
+然后建一个全新的控制器 ，
 
 1775
 01:12:23,000 --> 01:12:24,970
 actually, to show the information.
+来显示信息 。
 
 1776
 01:12:24,970 --> 01:12:28,570
 It's just gonna be a simple MVC that shows text only, so
+只是一个显示文本的
 
 1777
 01:12:28,570 --> 01:12:29,810
 we'll have to do that.
+简单控制器 。
 
 1778
 01:12:29,810 --> 01:12:31,740
 And then we're obviously gonna prepare this segue.
+然后很显然，我们需要实现prepareForSegue方法。 
 
 1779
 01:12:31,740 --> 01:12:36,880
 But first let's build the ui portion of this and to do that
+我们需要先完成界面部分 
 
 1780
 01:12:36,880 --> 01:12:40,550
 I need to add a little bar but here is so I'm going to
+先添加一个小按钮 
 
 1781
 01:12:40,550 --> 01:12:45,990
 bring up my object palette here and zoom in on this guy.
+打开控件区域然后放大。 
 
 1782
 01:12:47,520 --> 01:12:54,230
 And when you put a button here you don't use this UI button.
+然后拖一个按钮，但不要用UIButton。 
 
 1783
 01:12:54,230 --> 01:12:57,960
 Okay so UI buttons, even if you drag the UI Button here it
+虽然你使用UIButton 
 
 1784
 01:12:57,970 --> 01:12:59,830
 will look like it is going to work but
+看起来没问题 
 
 1785
 01:12:59,830 --> 01:13:03,070
 actually don't do that, it will mess you up.
+但不要用UIButton，这会有很多问题。 
 
 1786
 01:13:04,170 --> 01:13:07,440
 Instead you want to go down here quite a ways
+你需要选择最下面的 
 
 1787
 01:13:07,440 --> 01:13:11,980
 towards the very bottom and there is this Bar Button Item.
+BarButtonItem按钮。 
 
 1788
 01:13:11,980 --> 01:13:15,480
 Bar Button Items is a little lighter weight button that
+BarButtonItem是轻量化的按钮 
 
 1789
 01:13:15,480 --> 01:13:19,750
 goes in bars like this, navigation bars and tool bars.
+在导航栏或工具栏中使用他们。 
 
 1790
 01:13:19,750 --> 01:13:21,920
 So I should put that one right there.
+我把它放在右上角 。
 
 1791
 01:13:21,920 --> 01:13:25,190
 We'll call this one history since it's the diagnostic
+我会叫它history 
 
 1792
 01:13:25,190 --> 01:13:29,190
 history of what's going on with this patient right here.
+因为是diagnostic的历史。 
 
 1793
 01:13:29,190 --> 01:13:31,530
 And of course if we're gonna have a popover,
+当然，如果我们使用popover， 
 
 1794
 01:13:31,530 --> 01:13:32,990
 the popover shows a MVC.
+popover里面包含一个控制器 。
 
 1795
 01:13:33,000 --> 01:13:34,660
 So we need to create a new MVC.
+所以我们还需要创建一个新控制器。 
 
 1796
 01:13:34,660 --> 01:13:38,300
 So let's go back to the top here and get ourselves
+所以我们回去创建 
 
 1797
 01:13:38,300 --> 01:13:41,070
 brand new view controllers, this is just the regular old
+一个新控制器，就是我们 
 
 1798
 01:13:41,070 --> 01:13:43,000
 view controller like we've dragged out before, so
+通常拖的普通控制器， 
 
 1799
 01:13:43,010 --> 01:13:48,270
 I'm just gonna drag that right in here, and make some room.
+我拖到这里，腾一些空间出来 。
 
 1800
 01:13:48,280 --> 01:13:50,840
 So here we have this, zoom out a little so
+缩小一点 ，
 
 1801
 01:13:50,850 --> 01:13:52,480
 you can see it a little better, and
+这样看起来更好， 
 
 1802
 01:13:52,480 --> 01:13:56,210
 what we want is for this little button to segue to this
+我们想这个小按钮可以segue到这个 
 
 1803
 01:13:56,220 --> 01:14:00,350
 MVC, and show it in a little popover right here.
+控制器，并显示在popover中。 
 
 1804
 01:14:00,350 --> 01:14:01,620
 Okay? So that's all we
+明白吗？这是 
 
 1805
 01:14:01,620 --> 01:14:02,690
 wanna do there.
+所有需要做的 。
 
 1806
 01:14:02,690 --> 01:14:04,890
 So let's just Ctrl+Drag, just like we
+我们只要Ctrl+Drag，就像我们 
 
 1807
 01:14:04,890 --> 01:14:06,790
 created in the other segue, we're gonna Ctrl+Drag from
+创建其他segue一样，直接从 
 
 1808
 01:14:06,790 --> 01:14:10,290
-the history button over to this MVC, and when we let go,
+the history button over to this MVC, and when we let history 按钮Ctrl+Drag到这个控制器，然后释放
 
 1809
 01:14:10,300 --> 01:14:13,130
 it's gonna say well, what kind of segue do you want?
+接下来会询问你，你想要什么类型到segue？ 
 
 1810
 01:14:13,130 --> 01:14:16,170
 And we want the propover presentation segue right here.
+我们需要popover类型 。
 
 1811
 01:14:16,170 --> 01:14:18,170
 So I'm gonna click that.
+所以点这个 。
 
 1812
 01:14:18,170 --> 01:14:20,450
 This is a popover.
+这是一个popover segue。 
 
 1813
 01:14:20,450 --> 01:14:22,740
 If I click here, on the segue, and go to the attributes
+如果我选中这个segue，
 
 1814
 01:14:22,740 --> 01:14:25,470
 inspector here, you can see that it is a popover segue.
+然后查看属性区域，你可以看到它是一个popover类型的segue。 
 
 1815
 01:14:25,480 --> 01:14:28,940
 I can control where the little arrow, if you remember
+我可以控制箭头的方向，回忆课件 里面
 
 1816
 01:14:28,950 --> 01:14:32,010
 the slide about the popover, there was a little kind of
+有一个 
 
 1817
 01:14:32,010 --> 01:14:35,280
 triangle that was pointing at the thing that brought it up.
+小三角形，指向触发popover的控件 
 
 1818
 01:14:35,280 --> 01:14:36,450
 Like this History button, or
+就像这里的history按钮，或者 
 
 1819
 01:14:36,450 --> 01:14:39,090
 in that slide it was a little search button.
+课件里面的搜索按钮。 
 
 1820
 01:14:39,090 --> 01:14:41,290
 So I can control which direction that arrow pointed.
+这样我可以控制箭头的指向。 
 
 1821
 01:14:41,290 --> 01:14:43,060
 And I can even see here the anchor.
+我甚至可以看到锚点 。
 
 1822
 01:14:43,060 --> 01:14:44,990
 See it highlighting there.
+看这个高亮的地方 。
 
 1823
 01:14:44,990 --> 01:14:47,690
 That is going to bring up this popover.
+它会弹出一个popover 。
 
 1824
 01:14:47,690 --> 01:14:48,560
 So that's great.
+非常好 。
 
 1825
 01:14:48,560 --> 01:14:49,830
 And of course I need an identifier,
+当然，我还需要一个identifier ，
 
 1826
 01:14:49,830 --> 01:14:51,760
 just like any other segue, I need an identifier.
+就像其他任何segue一样 。
 
 1827
 01:14:51,760 --> 01:14:54,930
 So, this shows the diagnostic history, so
+这个segue用来显示diagnostic历史 ，
 
 1828
 01:14:54,930 --> 01:14:58,370
 I'm gonna call this Show Diagnostic History.
+我就叫它Show Diagnostic History 。
 
 1829
 01:14:58,370 --> 01:15:00,140
 Oh, my caps lock.
+oh 大写键 。
 
 1830
 01:15:00,140 --> 01:15:01,500
 There she is, there.
+就是它了 。
 
 1831
 01:15:01,510 --> 01:15:02,770
 History, there we go.
+History 完成 。
 
 1832
 01:15:02,770 --> 01:15:04,770
 Show Diagnostic History.
+Show Diagnostic History 。
 
 1833
 01:15:04,780 --> 01:15:06,570
 Okay?
+明白吗？ 
 
 1834
 01:15:06,580 --> 01:15:09,080
 So now we've got this set up to this segue and
+现在我们已经设置好了segue和 
 
 1835
 01:15:09,080 --> 01:15:10,640
 show this MVC.
+被显示的控制器 。
 
 1836
 01:15:10,650 --> 01:15:13,250
 Now, this MVC is just a blank MVC right now,
+现在控制器是空白的 ，
 
 1837
 01:15:13,250 --> 01:15:15,820
 but let's go ahead and run and see what this looks like.
+我们先运行看下效果 。
 
 1838
 01:15:15,820 --> 01:15:18,920
 So this is going to show a blank MVC at this point.
+它应该会在这个点弹出一个空白控制器 。
 
 1839
 01:15:21,090 --> 01:15:24,020
 So here's our iPad right here and we'll.
+这是我们的ipad， 
 
 1840
 01:15:24,030 --> 01:15:25,660
 Go to Landscape Mode.
+切换到横屏模式 。
 
 1841
 01:15:25,660 --> 01:15:27,790
 And so if I click on this,
+如果我点击这里， 
 
 1842
 01:15:27,790 --> 01:15:29,930
 you see I get this nice blank MVC appearing right here.
+你可以看到，会弹出一个不错的控制器 。
 
 1843
 01:15:29,930 --> 01:15:34,500
 So our next step in this is we need to create this MVC.
+下一步我们需要创建这个控制器 。
 
 1844
 01:15:34,500 --> 01:15:35,930
 All right, we're going to.
+好的，我们需要 。
 
 1845
 01:15:36,940 --> 01:15:39,470
 Create the MVC that is going to go in here.
+创建一个控制器 。
 
 1846
 01:15:39,470 --> 01:15:42,170
 It's going to be a very, very simple little MVC.
+只是一个非常简单的控制器 。
 
 1847
 01:15:42,170 --> 01:15:46,010
 It's just going to have a text view in it here to show text.
+它只包含一个显示文本的textView 。
 
 1848
 01:15:46,010 --> 01:15:48,080
 And that's all it's gonna do is show text.
+它需要做的只是显示文本 。
 
 1849
 01:15:48,080 --> 01:15:50,180
 It doesn't do anything else.
+不需要做其他事情 。
 
 1850
 01:15:50,180 --> 01:15:51,800
 Okay?
+明白吗？ 
 
 1851
 01:15:51,800 --> 01:15:53,420
 So, let's start by creating a new
+我们先创建 
 
 1852
 01:15:54,520 --> 01:15:56,180
 UI view controller subclass.
+UIViewController子类 。
 
 1853
 01:15:56,190 --> 01:15:59,850
 So again I'm gonna go to iOS source cocoa touch class here
+所以我会到iOS source cocoa touch class区域 
 
 1854
 01:15:59,860 --> 01:16:01,620
 because I'm gonna create a cocoa touch class, and
+因为我需要创建cocoa touch class 
 
 1855
 01:16:01,620 --> 01:16:03,760
 it is gonna be a UI view controller.
+它是一个UIViewController 。
 
 1856
 01:16:03,760 --> 01:16:06,830
 I'm gonna call it text UI view controller because that's what
+我叫它textUIViewController 
 
 1857
 01:16:06,830 --> 01:16:08,260
 it does, it shows some text.
+因为它负责显示文本 。
 
 1858
 01:16:08,260 --> 01:16:09,960
 That's all this view controller knows how to do.
+这是这个控制器需要做的 。
 
 1859
 01:16:11,130 --> 01:16:13,900
 I'm gonna put it in the same place all the rest of
+我把它和剩下所有的swift文件
 
 1860
 01:16:13,900 --> 01:16:15,030
 my SWF files are.
+放 在一起 。
 
 1861
 01:16:16,140 --> 01:16:17,330
 Okay, here it is.
+好的，就是这里 。
 
 1862
 01:16:17,340 --> 01:16:18,800
 Here's the code for it.
+这是它的代码 。
 
 1863
 01:16:18,800 --> 01:16:21,270
 We're gonna delete all of this stuff in here.
+先全部删除 。
 
 1864
 01:16:22,210 --> 01:16:24,060
 Start.
+开始 。
 
 1865
 01:16:24,060 --> 01:16:25,910
 Right, so we've got a nice subclass of UIViewController.
+好的，我们有了UIViewController子类 。
 
 1866
 01:16:25,910 --> 01:16:28,180
 We'll have to put our implementation in here.
+我们需要在这里面实现 。
 
 1867
 01:16:28,180 --> 01:16:30,010
 Meanwhile, let's go back to our storyboard and
+除此之外，我们需要在storyboard中 
 
 1868
 01:16:30,010 --> 01:16:33,380
 make sure that we set this thing's class in
+确保这个类 
 
 1869
 01:16:33,380 --> 01:16:36,080
 the identity inspector up here.
+在identity inspector区域 
 
 1870
 01:16:36,090 --> 01:16:38,320
 To be the text view controller, so
+与storyboard中的控制器 ，
 
 1871
 01:16:38,320 --> 01:16:41,390
 that we know this is a text view controller.
+关联起来 。
 
 1872
 01:16:41,390 --> 01:16:42,690
 Okay?
+明白吗？ 
 
 1873
 01:16:42,690 --> 01:16:43,990
 Now, let's talk about this thing's UI.
+我们先看界面 。
 
 1874
 01:16:43,990 --> 01:16:45,430
 It has a very simple UI.
+界面会很简单 。
 
 1875
 01:16:45,430 --> 01:16:50,300
 I'm actually gonna drag out a text displaying object here.
+我将会拖一个文本控件到这里 。
 
 1876
 01:16:50,300 --> 01:16:51,700
 And I'm not going to use label.
+不要用label 。
 
 1877
 01:16:52,630 --> 01:16:54,400
 Label is nice for one and two and
+label适合两到 
 
 1878
 01:16:54,400 --> 01:16:58,040
 maybe three lines of static text.
+三行的静态文本 。
 
 1879
 01:16:58,040 --> 01:17:00,100
 But I really want something that kind of can show as
+而我需要尽可能多的显示 
 
 1880
 01:17:00,110 --> 01:17:01,870
 much diagnostic history as I want it.
+diagnostic历史 。
 
 1881
 01:17:01,870 --> 01:17:04,140
 So I want something that shows a lot more text.
+所以我需要可以显示很多文本的控件 。
 
 1882
 01:17:04,140 --> 01:17:05,740
 A text field is
+输入框 
 
 1883
 01:17:05,740 --> 01:17:07,340
 not really appropriate because that's editable.
+也不合适，因为它是可编辑的 。
 
 1884
 01:17:07,350 --> 01:17:08,610
 One, two, three liner.
+一到三行 。
 
 1885
 01:17:08,610 --> 01:17:10,910
 So label and text field are very similar.
+所以标签和输入框很相似 。
 
 1886
 01:17:10,920 --> 01:17:12,050
 It's just editable or not.
+区别在于能否编辑 。
 
 1887
 01:17:12,050 --> 01:17:14,530
 But there's yet
+但在下面还有一个 
 
 1888
 01:17:14,530 --> 01:17:17,020
 another one down here, called text view, right here.
+叫textView的控件 。
 
 1889
 01:17:17,020 --> 01:17:19,290
 And this displays multiple lines of editable text.
+它用来显示多行文本 。
 
 1890
 01:17:19,290 --> 01:17:23,860
 It lets you set the font, and the text can be selectable.
+你可以设置字体还可以选中文本 。
 
 1891
 01:17:23,860 --> 01:17:25,560
 You can copy and paste from it, things like that.
+还可以复制粘贴等 。
 
 1892
 01:17:25,560 --> 01:17:27,330
 So it's a much more powerful text styler, but
+功能非常强大， 
 
 1893
 01:17:27,330 --> 01:17:29,100
 we'll talk about this later in the quarter.
+后期会详细讲到 。
 
 1894
 01:17:29,100 --> 01:17:32,330
 But for now I'm just going to drag this in right here.
+现在我只需要拖到这里 。
 
 1895
 01:17:32,330 --> 01:17:34,730
 You noticed I used the blue lines.
+注意我如何使用辅助线 。
 
 1896
 01:17:34,740 --> 01:17:35,770
 I'm going to go up here and
+我会到这里 
 
 1897
 01:17:35,770 --> 01:17:37,800
 reset to suggested constraints.
+选择reset to suggested constraints 
 
 1898
 01:17:37,800 --> 01:17:41,140
 I'm going to go over here to the size inspector up here.
+然后到size inspector 。
 
 1899
 01:17:41,140 --> 01:17:44,880
 And verify that my constraints are the way I want, and
+确认所有约束正确 ，
 
 1900
 01:17:44,880 --> 01:17:45,610
 they look fine.
+他们看起来不错。
 
 1901
 01:17:45,610 --> 01:17:47,410

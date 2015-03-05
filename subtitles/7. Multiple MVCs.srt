@@ -9380,162 +9380,202 @@ break 就可以了
 2101
 01:26:51,310 --> 01:26:52,480
 Okay? So there we
+现在
 
 2102
 01:26:52,480 --> 01:26:54,310
 have this nice diagnostic history.
+我们已经有了诊断历史
 
 2103
 01:26:54,320 --> 01:26:57,220
 So let's go ahead and run this and see if this is working.
+运行一下程序，看看起没起作用
 
 2104
 01:27:01,390 --> 01:27:03,190
 All right, so again we click here.
+点击这里
 
 2105
 01:27:03,190 --> 01:27:04,690
 And, well, it seems to be working,
+看来是起作用了
 
 2106
 01:27:04,690 --> 01:27:06,560
 cuz it's showing no diagnostic history.
+它没有显示诊断记录
 
 2107
 01:27:06,560 --> 01:27:08,960
 I haven't clicked any of these.
+我也没有点击这些按钮
 
 2108
 01:27:08,960 --> 01:27:10,390
 So, since we added this code,
+我们已经添加了这部分代码
 
 2109
 01:27:10,400 --> 01:27:13,630
 anyway, I haven't gotten any diagnosis, so that's good.
+我也还没有做任何诊断，还不错
 
 2110
 01:27:13,630 --> 01:27:14,660
 So let's dismiss that.
+先把它隐藏起来
 
 2111
 01:27:14,670 --> 01:27:17,730
 And here, I'm gonna go there, go there.
+到处点一点
 
 2112
 01:27:17,740 --> 01:27:19,100
 Oh, it's not working.
+它不起作用了
 
 2113
 01:27:19,100 --> 01:27:19,870
 So why is it not working?
+为什么它不工作了呢
 
 2114
 01:27:20,940 --> 01:27:23,640
 Okay, well, we have this nice diagnostic history, but
+我们是有这个 diagnosticHistory
 
 2115
 01:27:23,640 --> 01:27:25,440
 we never actually set it.
+但我们从来没有 set 过它
 
 2116
 01:27:25,440 --> 01:27:27,270
 Okay, it's always just empty.
+它就一直是空的了
 
 2117
 01:27:27,280 --> 01:27:28,540
 And so how are we gonna set it, though?
+我们通过什么方法 set 它呢
 
 2118
 01:27:28,540 --> 01:27:30,980
 We are sub class of HappinessViewController.
+这个类是 HappinessViewController 的子类
 
 2119
 01:27:30,980 --> 01:27:36,110
 Well, we can just override our var happiness from
+我们直接重写 happiness 变量
 
 2120
 01:27:36,120 --> 01:27:40,080
-our super class, and do a did set of our own in here.
+our super class, and do a didSet of our own in here.
+在这里写一个自己的 didSet
 
 2121
 01:27:40,090 --> 01:27:43,420
-So that happiness has its own did set.
+So that happiness has its own didSet.
+happiness 有它自己的 didSet
 
 2122
 01:27:43,420 --> 01:27:45,120
-And we're gonna add our own did set here,
+And we're gonna add our own didSet here,
+添加自己的 didSet
 
 2123
 01:27:45,120 --> 01:27:48,960
-which is we're gonna say the diagnosing history plus equals
+which is we're gonna say the diagnosticHistory plus equals
+输入代码 diagnosticHistory += happiness
 
 2124
 01:27:48,960 --> 01:27:51,360
 the happiness, okay?
+OK？
 
 2125
 01:27:51,360 --> 01:27:53,300
 You can use plus equals with an Array but
+你可以对 Array 进行 += 操作
 
 2126
 01:27:53,300 --> 01:27:55,260
 you have to remember that the argument has to be an Array,
+但是你得记住，参数需要是另外一个 Array
 
 2127
 01:27:55,270 --> 01:27:57,900
 so if you just want to add one thing,
+如果你想给它添加一个元素
 
 2128
 01:27:57,900 --> 01:28:00,540
 you can just wrap a little Array around it here, okay?
+就需要给参数加一个方括号
 
 2129
 01:28:00,540 --> 01:28:04,010
-So here, it's perfectly fine to override a bar from your
+So here, it's perfectly fine to override a var from your
+在这里，重写父类的变量
 
 2130
 01:28:04,010 --> 01:28:05,320
 super class.
+是完全没有问题的
 
 2131
 01:28:05,320 --> 01:28:06,640
 If you go look at our super class,
+如果你查看一下父类
 
 2132
 01:28:06,640 --> 01:28:10,910
 happiness It has a var and even does it's own didsets.
+happiness 变量有它自己的 didSet
 
 2133
 01:28:10,910 --> 01:28:14,910
-So I'm over riding this var, and I do my own didset,
+So I'm overriding this var, and I do my own didset,
+所以我重写了这个变量，执行我自己的 didSet
 
 2134
 01:28:14,920 --> 01:28:18,520
 it does not override or replace this didset.
+它没有覆盖父类的 didSet
 
 2135
 01:28:18,520 --> 01:28:21,390
 So it's gonna do this didset, and
+它只是先执行了父类的 didSet
 
 2136
 01:28:21,390 --> 01:28:23,320
 then it's gonna do this didset.
+然后再执行子类的
 
 2137
 01:28:23,320 --> 01:28:25,260
 So, it'll do both of them.
+两个都会执行
 
 2138
 01:28:25,260 --> 01:28:27,190
 So it's a really nice feature, the property observers,
+所以这是个很不错的特性，property observer
 
 2139
 01:28:27,190 --> 01:28:29,830
 when you override they don't replace the super class as
+当你重写的时候，并没有取代父类的
 
 2140
 01:28:29,830 --> 01:28:31,800
 one, they add on to it.
+而是添加了一个
 
 2141
 01:28:32,770 --> 01:28:34,380
@@ -9544,126 +9584,157 @@ Okay.
 2142
 01:28:34,380 --> 01:28:36,000
 So now our diagnostic history is being added.
+所以诊断历史已经添加好了
 
 2143
 01:28:36,000 --> 01:28:37,630
 So hopefully now when we go and
+希望现在运行程序
 
 2144
 01:28:37,640 --> 01:28:39,440
 look in our diagnostic history, it will work.
+能够看到诊断的历史
 
 2145
 01:28:39,440 --> 01:28:41,200
 So here we'll go dancing tree.
+现在点击 Dancing Tree
 
 2146
 01:28:41,210 --> 01:28:42,770
 Look up here.
+查看一下这里
 
 2147
 01:28:42,770 --> 01:28:43,870
 And look at that!
+看！
 
 2148
 01:28:43,870 --> 01:28:45,640
 We've got our diagnostic history.
+我们已经拥有了诊断的历史
 
 2149
 01:28:45,640 --> 01:28:47,680
 Let's go over and do golden bear.
+再试试 Golden Bear
 
 2150
 01:28:47,680 --> 01:28:48,490
 Oh.
 
+
 2151
 01:28:48,490 --> 01:28:49,310
 That's kind of interesting.
+有点意思
 
 2152
 01:28:49,310 --> 01:28:50,480
 This is not a very good history.
+这个诊断历史并不完整
 
 2153
 01:28:50,480 --> 01:28:52,910
 It's only remembering the last thing I redo.
+它只记录了我上次点击的记录
 
 2154
 01:28:52,920 --> 01:28:56,650
 I wonder why it only remembers the last thing I redo.
+我想知道它为什么只记录了上一次的记录
 
 2155
 01:28:56,650 --> 01:28:57,250
 That's bad.
+不对
 
 2156
 01:28:57,250 --> 01:28:58,420
 That's a bug.
+这是一个 bug
 
 2157
 01:28:58,420 --> 01:29:01,090
 So, why has that happened?
+什么使得这种情况发生了呢
 
 2158
 01:29:01,090 --> 01:29:05,990
 Well, I did it this way to show you, and to remind you,
+我之所以这样做，是想要提醒你
 
 2159
 01:29:05,990 --> 01:29:08,760
 that these segues, all of these segues that
+这些所有的 segue
 
 2160
 01:29:08,760 --> 01:29:13,130
 are happening here, they are always creating a new MVC.
+每次跳转的时候，都会创建一个新的 MVC
 
 2161
 01:29:13,130 --> 01:29:17,430
 So this segue, when we click on golden bear, dancing tree,
+所以当我们每一次点击这些按钮
 
 2162
 01:29:17,440 --> 01:29:20,400
 and it segues to this, it creates a brand new MVC.
+程序跳转到这里，创建了一个新的 MVC
 
 2163
 01:29:20,410 --> 01:29:23,770
-And since this is a brand new diagnosed happiness view
+And since this is a brand new DiagnosedHappinessViewController
+这个新的 DiagnosedHappinessViewController
 
 2164
 01:29:23,770 --> 01:29:28,140
-controller, it's going to get a brand new
+it's going to get a brand new
+也会有一个新的
 
 2165
 01:29:28,150 --> 01:29:31,210
 diagnostic history, which is going to be empty.
+空的诊断历史
 
 2166
 01:29:31,210 --> 01:29:32,480
 So it is constantly going to
+所以每次跳转的时候
 
 2167
 01:29:32,480 --> 01:29:34,480
 be reentering it every time we segue.
+都会擦除之前的记录
 
 2168
 01:29:34,480 --> 01:29:36,200
 We really need to
+我们需要把这些诊断记录
 
 2169
 01:29:36,200 --> 01:29:37,920
 store this diagnostic history somewhere else.
+放在其他的地方
 
 2170
 01:29:37,920 --> 01:29:39,850
-We can't just have it be in afar here.
+We can't just have it be in a far here.
+我们不能单单把它放到这里
 
 2171
 01:29:39,860 --> 01:29:43,620
 And a great place to have permanent storage, of course,
+适合存放这些记录的地方是程序的
 
 2172
 01:29:43,620 --> 01:29:46,490
 is in its future defaults.
+NSUserDefaultss
 
 2173
 01:29:46,490 --> 01:29:47,880
@@ -9671,111 +9742,138 @@ Okay.
 
 2174
 01:29:47,880 --> 01:29:49,260
-So let's change this diagnostic history.
+So let's change this diagnosticHistory.
+我们把 diagnosticHistory 改变一下
 
 2175
 01:29:49,260 --> 01:29:52,230
 Instead of being a stored property here,
+用计算属性替代
 
 2176
 01:29:52,230 --> 01:29:55,370
 let's change it to be a computed property.
+之前的存储属性
 
 2177
 01:29:55,370 --> 01:29:57,100
 So I'm gonna have it be an Int.
+它是 Int 类型的
 
 2178
 01:29:57,100 --> 01:29:59,140
 And it's gonna become computed, so
+因为它是计算属性
 
 2179
 01:29:59,140 --> 01:30:00,470
 it's gonna have a get.
+所以它需要一个 get
 
 2180
 01:30:00,470 --> 01:30:01,540
 And the set.
+和 set
 
 2181
 01:30:01,540 --> 01:30:03,510
 And in the get and the set here, and
+在 get 和 set 中
 
 2182
 01:30:03,510 --> 01:30:05,570
 I'm gonna go into user defaults.
+需要 UserDefaults
 
 2183
 01:30:07,110 --> 01:30:09,380
 Put this diagnostic history into user defaults, and
+把诊断历史放入 UserDefaults 中
 
 2184
 01:30:09,380 --> 01:30:10,880
 out of user defaults.
+或者从 UserDefaults 中获取
 
 2185
 01:30:10,880 --> 01:30:13,110
 Since I'm going to be using user defaults,
+既然我要使用 UserDefaults
 
 2186
 01:30:13,120 --> 01:30:16,950
 I'm just gonna create a little private let called defaults.
+我创建一个 private 常量 defaults
 
 2187
 01:30:16,950 --> 01:30:17,920
 Which is just gonna be the
+它等于
 
 2188
 01:30:17,920 --> 01:30:20,450
-NSUserDefaults.standardUserDe- faults.
+NSUserDefaults.standardUserDefaults.
+NSUserDefaults.standardUserDefaults.
 
 2189
 01:30:20,460 --> 01:30:23,160
 You remember this is like a shared version of any of
+你们还记得
 
 2190
 01:30:23,160 --> 01:30:24,460
 those UserDefaults that we get.
+这个获取到的 UserDefaults 吗
 
 2191
 01:30:24,460 --> 01:30:27,060
 The whole app is gonna be sharing this, and
+整个 app 都共享这一个对象
 
 2192
 01:30:27,060 --> 01:30:31,030
 using it to read and write from NSUserDefaults.
+靠它读取或写入 NSUserDefaults
 
 2193
 01:30:31,030 --> 01:30:32,110
 Okay. This is nice,
+还不错
 
 2194
 01:30:32,110 --> 01:30:33,200
 it's convenient to have this.
+有它还是很方便的
 
 2195
 01:30:33,200 --> 01:30:35,000
 Makes the code a little more readable to
+有了这个变量，代码更具有可读性
 
 2196
 01:30:35,000 --> 01:30:36,300
 have this be repeated everywhere,
+我们没必要每次都重复这些
 
 2197
 01:30:36,300 --> 01:30:39,800
 versus just this little short thing right here.
+只需要简单地变量名就可以了
 
 2198
 01:30:39,810 --> 01:30:42,240
 All right. So how am I going to get the
+怎么利用 defaults 实现
 
 2199
 01:30:42,240 --> 01:30:45,580
 defaults and set the defaults, well let's do set first.
+get 和 set 呢？我们先处理 set
 
 2200
 01:30:45,580 --> 01:30:48,410
 Once we set maybe it will be easier to imagine our get.
+一旦完成了 set，get 也比较容易想了
 
 2201
 01:30:48,410 --> 01:30:49,780

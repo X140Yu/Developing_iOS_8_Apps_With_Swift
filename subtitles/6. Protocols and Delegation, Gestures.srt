@@ -1002,802 +1002,999 @@ I'm going to say min max of my happiness to 0 or 100,
 201
 00:09:18,281 --> 00:09:21,048
 so I'm just keeping it between zero and a hundred, right?
+因此我将把它保持在0到100之间, 对么?
 
 202
 00:09:21,050 --> 00:09:22,649
-So no matter what someone passes me,
+So no matter what someone passes me -1 or 5000,
+无论输入了-1还是5000.
 
 203
 00:09:22,651 --> 00:09:24,718
 my happiness won't ever be outside of that.
+我的"开心指数" 永远不会超出范围.
 
 204
 00:09:24,720 --> 00:09:26,986
 Again, this is kind of a trivial example.
+再说一遍, 这是一个很简易的例子.
 
 205
 00:09:26,988 --> 00:09:28,854
 You might have a much powerful model that
+你可以有个更强大的Model.
 
 206
 00:09:28,856 --> 00:09:31,457
-needs much more powerful validation this,
+needs much more powerful validation than this,
+需要比这更严谨的评估.
 
 207
 00:09:31,459 --> 00:09:34,526
 but you can see this as a place to put it.
+但是你能把它(这个Model)看做一个可行的方案.
 
 208
 00:09:34,528 --> 00:09:36,461
 Another thing you might want to have here is if someone
+你可能想做的另一件事情是
 
 209
 00:09:36,463 --> 00:09:39,630
 updates your model, you might want to update your UI.
+如果有人改变了你的Model, 你可能想要更新你的UI.
 
 210
 00:09:39,632 --> 00:09:42,333
 Okay, so I'm going to have update UI,
+好的, 因此我将升级UI.
 
 211
 00:09:42,335 --> 00:09:45,135
 and I'm just going to have a function down here, update UI,
+我将在下面这里加一个函数(Function), 叫updateUI.
 
 212
 00:09:45,137 --> 00:09:49,205
 and it's going to do something to update the user interface,
+它将会负责更新用户界面.
 
 213
 00:09:49,207 --> 00:09:50,073
 and that's a common thing.
+更新UI是一件很寻常的事情.
 
 214
 00:09:50,075 --> 00:09:51,440
 When your model changes,
+当你的Model改变时,
 
 215
 00:09:51,442 --> 00:09:55,177
 you want your controller to cause the UI to be updated.
+你想让你的Controller将UI更新.
 
 216
 00:09:55,179 --> 00:09:59,381
 I think I'm going to put in here also is a little println
+我还会在这里加个println() 命令,
 
 217
 00:09:59,383 --> 00:10:07,855
 happiness equals back slash happiness.
+Happiness =\  happiness.
 
 218
 00:10:07,857 --> 00:10:12,125
 Just so we can see our happiness changing in our
+这样我们总是能在接下来的演示中,
 
 219
 00:10:12,127 --> 00:10:15,962
 console all the time as we work the rest of the demos.
+在console(控制台)中看到happiness的变化.
 
 220
 00:10:15,964 --> 00:10:18,297
 So we'll work on this update UI piece when we
+好的,在我们回到demo之前,
 
 221
 00:10:18,299 --> 00:10:20,299
 get back to the demos.
+解决更新UI这部分.
 
 222
 00:10:20,300 --> 00:10:22,300
 I just wanted to show you the model of happiness.
+我就是想向你们展示Happiness的Model.
 
 223
 00:10:22,303 --> 00:10:24,503
 Right now it's not hooked up to a it's UI.
+现在, Model 并没有和UI关联.
 
 224
 00:10:24,505 --> 00:10:26,138
 So if I run my application,
+因此, 如果我现在运行应用
 
 225
 00:10:26,140 --> 00:10:31,109
 you'll see that this is not happiness of 50.
+你们将会看到(结果)并不是50.
 
 226
 00:10:31,111 --> 00:10:34,979
 This is not even looking at the happiness.
+甚至看上去不像是笑脸.
 
 227
 00:10:34,981 --> 00:10:37,815
 I could change this to anything that I want and
+我可以把这个变成任何我想要的值
 
 228
 00:10:37,817 --> 00:10:40,350
 it's not going to change this.
+但是这并不会改变运行结果.
 
 229
 00:10:40,352 --> 00:10:43,353
 And so later we'll show you how we hook up our UI
+所以, 稍后我会向你们展示如何通过Controller连接UI.
 
 230
 00:10:43,355 --> 00:10:44,687
 to our model through our controller,
+与Model关联.
 
 231
 00:10:44,689 --> 00:10:46,555
 that's one of the main things a controller does.
+这个是Controller的主要功能之一.
 
 232
 00:10:47,792 --> 00:10:51,026
 Okay, so let's go back to our slides though.
+好的, 现在我们回到幻灯片.
 
 233
 00:10:51,028 --> 00:10:55,430
 All right here, I'm going to start with this miscellaneous
+好的, 我将以这个混杂的
 
 234
 00:10:55,432 --> 00:10:59,633
 topic here, kind of a bonus topic, which is extensions.
+主题开始, 类似于额外的主题, 它就是extensions(扩展).
 
 235
 00:10:59,635 --> 00:11:01,835
 You read about in your reading assignments, so
+你已经在阅读作业里读到过了.
 
 236
 00:11:01,837 --> 00:11:03,770
 you know what this is,
+你知道它是什么.
 
 237
 00:11:03,771 --> 00:11:05,704
 hopefully you've been reading those reading assignments.
+希望你们一直以来都完成了阅读作业.
 
 238
 00:11:05,707 --> 00:11:07,373
 But I'm discovering here in class,
+ 但是我在课中发现,
 
 239
 00:11:07,375 --> 00:11:09,975
-not as much because it's an important feature per say but
+not as much because it's an important feature per se but
+并不与它本身本身的重要性相称
 
 240
 00:11:09,977 --> 00:11:12,011
 it can be a little bit of a dangerous feature so
+它(extensions)有时会变得有点危险,
 
 241
 00:11:12,013 --> 00:11:14,212
 I wanted to cover it a little bit.
+因此我想讲一点这个.
 
 242
 00:11:14,214 --> 00:11:16,481
 So an extension is really simple.
+extensions 真得很简单.
 
 243
 00:11:16,483 --> 00:11:20,685
 It's just a little syntax, to add methods and properties to
+它就是一个给一个现存类(class), 结构(structure)
 
 244
 00:11:20,687 --> 00:11:23,620
 existing classes, structures, and enums.
+和枚举(enums) 添加新方法或属性的小语法.
 
 245
 00:11:23,622 --> 00:11:25,355
 Okay? You do not have to
+好么? 你不是必须要
 
 246
 00:11:25,356 --> 00:11:27,089
 have the source code to those things you're adding it to.
+有目标的源代码.
 
 247
 00:11:27,092 --> 00:11:29,893
 You could just add these methods and
+你可以就把这些方法和属性
 
 248
 00:11:29,895 --> 00:11:32,428
 properties pretty much at will.
+凭想法加入.
 
 249
 00:11:32,430 --> 00:11:37,032
 There are some restrictions, one is that you can't add via
+这里有些限制, 其中之一是
 
 250
 00:11:37,034 --> 00:11:41,136
 an extension a method or property that already exists.
+你不能通过一个已存在的方法或特性添加extensions.
 
 251
 00:11:42,105 --> 00:11:45,306
 So it's not a way to replace it, this is not sub classing,
+因此这不是一个替换的手段, 这也不是创建子类,
 
 252
 00:11:45,308 --> 00:11:47,941
 you're not replacing or overwriting methods, so
+你不能替换或者覆盖一个方法, 因此
 
 253
 00:11:47,943 --> 00:11:49,810
 this has to be something where the property or
+这些你想添加进类的的
 
 254
 00:11:49,812 --> 00:11:51,544
 method you wanna add to a class.
+属性或方法
 
 255
 00:11:52,514 --> 00:11:53,612
 Does not exist.
+必须是之前不存在的.
 
 256
 00:11:53,614 --> 00:11:55,614
 The second thing is that any
+第二个是
 
 257
 00:11:55,615 --> 00:11:57,615
 properties you add cannot have any storage.
+你添加的属性不能有存储.
 
 258
 00:11:57,618 --> 00:11:59,818
 Okay so they can only be computed properties,
+好么? 因此这些属性只能是运算属性.
 
 259
 00:11:59,820 --> 00:12:01,252
 right the get, set, kind.
+set 和 get 方法这类的.
 
 260
 00:12:01,254 --> 00:12:03,454
 That's the only kind of property you can have.
+那是你唯一能添加的一种属性.
 
 261
 00:12:04,424 --> 00:12:06,924
 Okay, but inside an extension otherwise it kind of
+好的, 但是在一个extension中, 相反, 它
 
 262
 00:12:06,926 --> 00:12:09,026
 looks like you're in the definition of class.
+看起来有点像你在定义类.
 
 263
 00:12:09,028 --> 00:12:10,694
 You can refer to self if you want and
+你可以把它指向self,如果你想,
 
 264
 00:12:10,696 --> 00:12:13,396
 that will be the thing that you are extending.
+这样它就是你扩展的对象.
 
 265
 00:12:13,398 --> 00:12:15,698
 It's a pretty powerful feature actually.
+这实际上是一个很强大的特性.
 
 266
 00:12:17,034 --> 00:12:21,169
 This feature is easily abused however people putting all
+但是这个特性容易被误用, 人们把
 
 267
 00:12:21,171 --> 00:12:24,139
 kinds of adding methods to classes making it so it's
+一些方法加进类里把它变得
 
 268
 00:12:24,141 --> 00:12:28,542
 completely not understandable of what that does anymore.
+完全不能理解它是做什么的.
 
 269
 00:12:28,544 --> 00:12:32,713
-It's also whoever designed the class thinks a lot about it,
+It's also whoever designed the class thinks a lot about it,it's
+另外, 设计这个类的人考虑了很多关于
 
 270
 00:12:32,715 --> 00:12:34,781
 API and what should be in it and what shouldn't and
+它的API 和它应包含的和不包含的内容
 
 271
 00:12:34,783 --> 00:12:36,382
 now all of the sudden things are being added.
+但是现在突然加了这么多东西.
 
 272
 00:12:36,384 --> 00:12:37,216
 That's kind of weird.
+这有些奇怪.
 
 273
 00:12:38,252 --> 00:12:40,686
 This is really best used for beginners like you
+它对你们这些初学Swift的人
 
 274
 00:12:40,688 --> 00:12:44,556
 who are just starting with SWIFT to add little
+最有用的地方是加入一些
 
 275
 00:12:44,558 --> 00:12:47,859
 helper functions to enhance the readability of your code.
+小的help function(帮助函数)以增强代码的可读性.
 
 276
 00:12:47,861 --> 00:12:49,193
 Okay, so if there's something that it would be
+好的, 如果cgrect能做这件事
 
 277
 00:12:49,195 --> 00:12:53,563
 really great if a cgrect could do this little thing, you
+那么真的会很棒.
 
 278
 00:12:53,565 --> 00:12:55,665
 could add a little extension to a cgrect to do that.
+你可以给cgrect加个extension来做到这点.
 
 279
 00:12:55,667 --> 00:12:58,067
 Or maybe a UI view controller just once.
+或者给UI view controller 加一次.
 
 280
 00:12:58,069 --> 00:13:01,137
-This extra little property that it can calculate
+This extra little property that it can calculate about itself.
+这个额外的属性能计算它本身的.
 
 281
-00:13:01,139 --> 00:13:02,638
-about itself.
-
-282
 00:13:02,640 --> 00:13:05,307
 That's the kind of thing that you could use it for.
+这些是你能用extensions做到的事情.
 
-283
+282
 00:13:05,309 --> 00:13:09,010
 Now extensions actually can be used by advanced Swift users
+现在extensions实际上能被进阶Swift用户
+
+283
+00:13:10,179 --> 00:13:13,047
+to architects or, for architects, to really organize all your code.
+用来整理或设计全部代码.
 
 284
-00:13:09,012 --> 00:13:10,177
-by architects, or
-
-285
-00:13:10,179 --> 00:13:13,047
-for architects, to really organize all your code.
-
-286
 00:13:13,049 --> 00:13:14,682
 Because you can
+因为你可以
 
-287
+285
 00:13:14,683 --> 00:13:16,316
 put almost everything into extensions, and
+把几乎所有的东西放在extensions中
 
-288
+286
 00:13:16,318 --> 00:13:19,552
 use extensions as basically groupings of functionality.
+并且把extensions基本等同于给功能分组来用.
 
-289
+287
 00:13:19,554 --> 00:13:21,988
 And so, it's really a powerful feature and
+因此它真的是非常强大的特性.
 
-290
+288
 00:13:21,990 --> 00:13:24,657
 I don't want to make it sound like it's only for
+我不想让它听起来好像
 
-291
+289
 00:13:24,659 --> 00:13:28,060
-little kinda drips and drabs and tiny little helper things.
+little kinda dribes and drabs add tiny little helper things.
+它只能零碎地加些帮助注释.
 
-292
+290
 00:13:28,062 --> 00:13:30,862
 It can actually be used as a core foundation of how you
+它能被当做核心基础使用,
 
-293
+291
 00:13:30,864 --> 00:13:32,664
 architect.
+来帮助你规划.
 
-294
+292
 00:13:32,665 --> 00:13:34,465
 But that does require some one to sit down and
+但是完成它需要某人坐下来
 
-295
+293
 00:13:34,468 --> 00:13:36,634
 have an architectural plan to do that and
+并且有一个设计计划.
 
-296
+294
 00:13:36,636 --> 00:13:39,870
 you obviously a little early in the game to be doing that.
+现在你们这样做很显然有点早了.
 
-297
+295
 00:13:39,872 --> 00:13:42,206
 So I would say, when in doubt, if you're not sure whether or
+因此, 我会说, 如果你有点迷惘,
 
-298
+296
 00:13:42,208 --> 00:13:43,707
 not you should make something an extension,
+不知道这里是否要加extensions,
 
-299
+297
 00:13:43,709 --> 00:13:45,041
 don't do it for now.
+现在这个阶段就不用加了.
 
-300
+298
 00:13:45,043 --> 00:13:46,743
 And over time, you'll get more comfortable with it,
+随着时间, 你会越来越适应是用它,
 
-301
+299
 00:13:46,745 --> 00:13:49,345
 you'll understand what to do.
+你会明白怎么做.
 
-302
+300
 00:13:49,347 --> 00:13:51,246
 And again, the syntax for
+再说一遍, 它的语法
 
-303
+301
 00:13:51,248 --> 00:13:53,648
 it is all explained in the documentation.
+全部在文件里写得清清楚楚.
 
-304
+302
 00:13:53,650 --> 00:13:57,085
 Maybe in the demo here, I'll try and throw one in, so
+可能在今天的演示里, 我会加一个.
 
-305
+303
 00:13:57,087 --> 00:13:59,087
 you can see what it looks like.
+这样的话你们会明白它到是什么样的.
 
-306
+304
 00:13:59,089 --> 00:14:00,588
 That was just an aside,
+这些只是顺带提一提,
 
-307
+305
 00:14:00,590 --> 00:14:03,390
 now let's get back to the main guts, okay?
+现在我们回到真正的干货, 好么?
 
-308
+306
 00:14:03,392 --> 00:14:05,559
 This very important feature called delegation,
+有个非常重要的特性叫做委托(delegation)
 
-309
+307
 00:14:05,561 --> 00:14:07,427
 I have to teach you about protocols first,
+我先要教你们协议(protocols),
 
-310
+308
 00:14:07,429 --> 00:14:10,063
 again you probably read about this in reading assignments,
+你们应该已经在阅读作业里读到过这些了,
 
-311
+309
 00:14:10,065 --> 00:14:12,064
 but I want to go over it anyway.
+无论怎样我重头说一遍,
 
-312
+310
 00:14:12,066 --> 00:14:15,534
 A protocol is basically a way to express your
+一个协议基本上是
 
-313
+311
 00:14:15,536 --> 00:14:18,503
 API a little more minimally.
+一种相对简便的表示API的方法.
 
-314
+312
 00:14:18,505 --> 00:14:22,073
 Not to drag in so much API by, for example,
+不是通过添加比如
 
-315
+313
 00:14:22,075 --> 00:14:25,376
 having an argument to a function be a class where now
+传递一个代表类的参数给函数,
 
-316
+314
 00:14:25,378 --> 00:14:27,545
 you're passing an entire class into that function,
+你把整个类传递给了那个函数.
 
-317
+315
 00:14:27,547 --> 00:14:30,047
 who knows what that function might do with that class.
+谁知道那个函数会让那个类做什么.
 
-318
+316
 00:14:30,049 --> 00:14:34,017
 It could access the entire non private API of that thing.
+函数很能会访问类的所有的非私有API.
 
-319
+317
 00:14:34,019 --> 00:14:36,586
 So really, the function just wants to use the one method of
+所以, 说真的, 这个函数只是想用类中
 
-320
+318
 00:14:36,588 --> 00:14:37,520
 a class.
+的一个方法而已.
 
-321
+319
 00:14:37,522 --> 00:14:39,689
 Protocols are a way for
+协议是函数的一种表达方式,
 
-322
+320
 00:14:39,690 --> 00:14:41,857
 the function to express or really, I just want you to
+或者, 我只是想让你给我
 
-323
+321
 00:14:41,859 --> 00:14:43,926
 pass me something that can do this one function.
+一些能让这个函数运作的东西.
 
-324
+322
 00:14:43,928 --> 00:14:45,894
 Because that's what I'm going to call in here.
+因为我要再这里调用这些东西.
 
-325
+323
 00:14:45,896 --> 00:14:49,197
 So, it's a way to kind of minimize your API.
+所以, 这是一个简化API的方法.
 
-326
+324
 00:14:49,199 --> 00:14:51,432
 A protocol is a type.
+一个协议是一个数据类型.
 
-327
+325
 00:14:51,434 --> 00:14:54,535
 Okay, it's just like a class, or an enum, or a struct.
+就像一个class, 或者enums, 或者struct.
 
-328
+326
 00:14:54,537 --> 00:14:55,620
 Okay. It's a type.
+好么, 它是一个数据类型.
 
-329
+327
 00:14:55,621 --> 00:14:56,704
 It can be used everywhere a type is.
+它可以被用在任何数据类型能用的地方.
 
-330
+328
 00:14:56,706 --> 00:14:58,372
 A type of an argument to a function.
+一个函数的参数,
 
-331
+329
 00:14:58,374 --> 00:15:02,342
 A var or a let can be a protocol.
+一个变量或者一个let 也能是一个协议.
 
-332
+330
 00:15:02,344 --> 00:15:04,844
 Type. So it is absolutely a type.
+类型, 因此它绝对是一个数据类型.
 
-333
+331
 00:15:04,846 --> 00:15:07,112
 The only thing that is interesting about it is it
+唯一一个有趣的地方是,
 
-334
+332
 00:15:07,114 --> 00:15:08,380
 has no implementation.
+协议本身是没有实现的.
 
-335
+333
 00:15:09,349 --> 00:15:10,999
 Okay?
+好么?
 
-336
+334
 00:15:11,000 --> 00:15:12,650
 In fact, it's kind of the definition of a protocol,
+事实上, 这类似于协议的定义.
 
-337
+335
 00:15:12,652 --> 00:15:15,052
 it's a type with no implementation.
+这是一个没有实现的数据类型.
 
-338
+336
 00:15:15,054 --> 00:15:16,553
 It only has declaration.
+它只有声明
 
-339
+337
 00:15:17,623 --> 00:15:20,623
 Use a protocol to declare various properties and
+用协议来声明很多变量
 
-340
+338
 00:15:20,625 --> 00:15:22,191
 methods but it has no implementation.
+和方法, 但是没有相应的实现.
 
-341
+339
 00:15:22,193 --> 00:15:25,628
 The implementation is provided by other objects that conform
+"实现"是由其它遵从协议的对象
 
-342
+340
 00:15:25,630 --> 00:15:27,162
 to the protocol.
+提供的.
 
-343
+341
 00:15:27,164 --> 00:15:29,214
 Okay, and there might be
+好的, 可能会有成百个
 
-344
+342
 00:15:29,215 --> 00:15:31,265
 hundreds of objects that will conform to a certain protocol.
+遵从某同一个协议的对象,
 
-345
+343
 00:15:31,268 --> 00:15:33,635
 Okay?
+好么?
 
-346
+344
 00:15:33,636 --> 00:15:36,003
 But the protocol when you use it looks just like a type,
+但是, 协议在使用的时候看起来就是个数据类型.
 
-347
+345
 00:15:36,006 --> 00:15:37,605
 exactly like a type as you're gonna see here.
+你们将会看到, 跟数据类型一模一样.
 
-348
+346
 00:15:37,607 --> 00:15:41,409
 Now there's three aspects to a protocol, to using one.
+这有三个使用协议的条件.
 
-349
+347
 00:15:41,411 --> 00:15:43,277
 One is the declaration of the protocol.
+一个是协议的声明.
 
-350
+348
 00:15:43,279 --> 00:15:45,112
 This looks a lot like declaring your class or
+这看起来很像声明你的class,
 
-351
+349
 00:15:45,114 --> 00:15:46,346
 an enum or struct.
+或者enums或者struct.
 
-352
+350
 00:15:46,348 --> 00:15:47,847
 It's just that there is no implementations for
+它仅仅是没有任何属性或方法
 
-353
+351
 00:15:47,849 --> 00:15:49,782
 any of the properties or methods.
+的实现.
 
-354
+352
 00:15:49,784 --> 00:15:52,484
 Then there's the declaration part where a class or
+接着, 声明的部分会出现,
 
-355
+353
 00:15:52,486 --> 00:15:56,455
-a struct or an enum says, I will implement this protocol.
+a struct or an enum says, I will implement this protocol.如果一个class, struct 或者enum说我会实现这个协议.
 
-356
+354
 00:15:56,457 --> 00:15:59,724
 So it declares that it will conform to, or implement,
+因此它声明它会遵从或者实现
 
-357
+355
 00:15:59,726 --> 00:16:00,958
 this protocol.
+这个协议.
 
-358
+356
 00:16:00,960 --> 00:16:03,294
 And then there's the part where that class, struct or
+接着, 在class, struct 或者enum
 
-359
+357
 00:16:03,296 --> 00:16:05,095
 enum actually implements the protocol.
+会有负责实现协议的部分.
 
-360
+358
 00:16:05,097 --> 00:16:07,064
 So, it implements that, all the properties and
+所以, 它会实现, 所有在协议中需要的
 
-361
+359
 00:16:07,066 --> 00:16:09,833
 methods in the protocol that's required, all of them.
+属性和方法, 所有的.
 
-362
+360
 00:16:09,835 --> 00:16:11,351
 Okay?
+好么?
 
-363
+361
 00:16:11,352 --> 00:16:12,868
 So we'll see what that looks like in some code.
+我们会在几行代码里看到(协议)到底是怎样.
 
-364
+362
 00:16:12,871 --> 00:16:15,871
 So here's a declaration of a protocol itself, okay?
+这里是协议自身的声明, 好么?
 
-365
+363
 00:16:15,873 --> 00:16:19,107
 The protocol's called some protocol, all right?
+这个协议叫做"某个协议"(Some protocol), 好么?
 
-366
+364
 00:16:20,877 --> 00:16:25,179
 This protocol has really what some might call
+这个协议有些叫做
 
-367
+365
 00:16:25,181 --> 00:16:27,981
 inherited protocols, or a protocol that inherits.
+继承协议,或者, 一个协议它能够继承.
 
-368
+366
 00:16:27,983 --> 00:16:31,218
 Which are other protocols that if you want to implement some
+如果你想要实现某些协议,
 
-369
+367
 00:16:31,220 --> 00:16:33,586
 protocol you have to implement those too.
+你必须也将这些继承协议实现.
 
-370
+368
 00:16:33,588 --> 00:16:35,188
 Okay that's what this colon thing, so
+这就是代码里冒号所代表的.
 
-371
+369
 00:16:35,190 --> 00:16:37,390
 it kind of looks like this super class kind of thing but
+这感觉上有点像父类,
 
-372
+370
 00:16:37,392 --> 00:16:39,491
 there can be multiple of them, but it's not really
+但是能够有很多不同的继承协议.
 
-373
+371
 00:16:39,493 --> 00:16:42,060
 inherent in this, per se, like you think of in classes, it's
+继承协议并不是跟你想象中的类那样
 
-374
+372
 00:16:42,062 --> 00:16:44,429
 more just saying if you want to implement some protocol you
+我想说的是, 如果你想要实现协议,
 
-375
+373
 00:16:44,431 --> 00:16:46,497
 also have to implement inherited protocol one and
+你必须还要实现继承协议1
 
-376
+374
 00:16:46,499 --> 00:16:47,665
 inherited protocol two.
+以及继承协议2.
 
-377
+375
 00:16:47,667 --> 00:16:48,766
 If you don't implement those then you
+如果你没有实现这些, 也就是
 
-378
+376
 00:16:48,768 --> 00:16:51,268
 haven't implemented all of some protocol.
+没有实现所有的协议.
 
-379
+377
 00:16:51,270 --> 00:16:51,835
-Okay?
+Okay?好么?
 
-380
+378
 00:16:52,871 --> 00:16:57,406
 Now you have to specify, when you do a property,
+现在你必须明确, 当你设计一个属性,
 
-381
+379
 00:16:57,408 --> 00:16:58,740
 you don't put the implementation there but
+你并不加入实现部分
 
-382
+380
 00:16:58,742 --> 00:17:01,976
 you have to classify whether this is a get only property or
+但是你必须区分这是一个只有get的属性
 
-383
+381
 00:17:01,978 --> 00:17:04,012
 it's a get and set, okay?
+还是既有get也有set.
 
-384
+382
 00:17:04,014 --> 00:17:05,279
 The system needs to know whether it's
+系统需要知道它是否是一个set方法
 
-385
+383
 00:17:05,281 --> 00:17:08,182
 a set because structs and enums are value types and
+因为structs和enums都是数据类型并且
 
-386
+384
 00:17:08,184 --> 00:17:09,950
 it needs to know when it's being mutated so
+它需要知道什么时候被改变
 
-387
+385
 00:17:09,952 --> 00:17:12,852
-it can copy them and etcetera, okay?
+it can copy them and etcetera, okay?这样的话它才能复制和其他之类的, 好么?
 
-388
+386
 00:17:12,854 --> 00:17:17,223
 Any functions that are expected to mutate also need
+任何可能会被更改的函数还需要
 
-389
+387
 00:17:17,225 --> 00:17:20,492
 to be noted with this mutating keyword, okay?
+用这个mutating关键字标注
 
-390
+388
 00:17:20,494 --> 00:17:22,060
 You probably read that in the description,
+你可能在描述文件里读到了.
 
-391
+389
 00:17:22,062 --> 00:17:24,095
 you know that structs and enums,
+你知道structs和enums,
 
-392
+390
 00:17:24,097 --> 00:17:27,398
 insert value types, the system needs to know when a function
+插入值类型, 系统需要知道函数
 
-393
+391
 00:17:27,400 --> 00:17:31,869
 is actually changing them, so they can copy it on demand.
+具体什么时候会改变它们, 这样它们能根据需求复制.
 
-394
+392
 00:17:33,272 --> 00:17:36,039
 It is possible to limit your protocol to only work
+限制你的协议只能和类一起
 
-395
+393
 00:17:36,041 --> 00:17:38,141
 with classes.
+工作是可行的
 
-396
+394
 00:17:38,142 --> 00:17:40,242
 You put the word class right after that colon.
+你把class这个词放在那个冒号后面,
 
-397
+395
 00:17:40,245 --> 00:17:42,878
 So SomeProtocol colon class means this protocol can
+这样"SomeProtocol: class" 意味着
 
-398
+396
 00:17:42,880 --> 00:17:44,279
 only be implemented by a class.
+它只能被类实现.
 
-399
+397
 00:17:44,281 --> 00:17:46,782
 It cannot be implemented by a struct or an enum.
+它不能被一个struct或者enum实现.
 
-400
+398
 00:17:46,784 --> 00:17:47,549
 Okay? Then you wouldn't need
+好么? 这样你不需要
+
+399
+00:17:47,551 --> 00:17:49,584
+any mutatings because a class,
+任何 mutatings，因为这是一个类
+
+400
+00:17:49,586 --> 00:17:52,620
+since it's a reference passed by reference all the time,
+这是个引用，并且一直以引用被传递
 
 401
 00:17:47,551 --> 00:17:49,584

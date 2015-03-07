@@ -3062,7 +3062,7 @@ So it's going to set that delegate property inside
 615
 00:26:35,768 --> 00:26:39,703
 the view to itself, which is fine because it just said it
-这里没有任何问题，因为刚刚说了，它
+这里没有任何问题，因为它刚才
 
 616
 00:26:39,705 --> 00:26:43,006
@@ -3077,17 +3077,17 @@ Then, of course,
 618
 00:26:45,043 --> 00:26:47,077
 the controllers going to have to implement the protocol, and
-这个控制器将填充这些方法，这些协议方法的具体实现细节
+这个控制器将实现这个协议
 
 619
 00:26:47,079 --> 00:26:49,779
 implement all the methods and properties required by
-并不一定要实现协议规定的所有方法，但是
+实现协议规定的必须（required）实现的所有方法
 
 620
 00:26:49,781 --> 00:26:52,381
 the protocol so that it conforms to that protocol.
-一定需要实现这个协议必需（required）的方法
+这样它就遵循了这个协议
 
 621
 00:26:52,383 --> 00:26:53,782
@@ -3127,7 +3127,7 @@ It knows nothing.
 628
 00:27:05,143 --> 00:27:06,860
 All it knows is it implements the methods in its protocol,
-唯一知道的是，这个控制器实现了视图中的协议必需的方法
+唯一知道的是，这个控制器实现了视图中的协议的方法
 
 629
 00:27:06,862 --> 00:27:08,094
@@ -3136,7 +3136,7 @@ in the views protocol.
 630
 00:27:08,096 --> 00:27:09,662
 That's all it knows and that's all it needs to know.
-这就是所有它想知道的，和它应该知道的
+这就是所有它所知道的，这也是所有它需要知道的
 
 631
 00:27:10,598 --> 00:27:12,998
@@ -3161,7 +3161,7 @@ Remember the view is the controller's minions,
 635
 00:27:21,474 --> 00:27:23,640
 it's how it's communicating with the user.
-这就是它如何跟用户打交道的
+这就是它如何跟用户打交道
 
 636
 00:27:24,576 --> 00:27:27,243
@@ -3181,32 +3181,32 @@ We're going to have
 639
 00:27:32,349 --> 00:27:34,115
 the face view delegate getting its data.
-创建一个用于 faceView 来获取其数据的代理对象
+让 faceView 的代理获取它的数据
 
 640
 00:27:34,118 --> 00:27:36,518
 Its data is basically its smiliness,
-这个数据基本上就是它的笑容程度
+这个数据基本上就是它的 smiliness
 
 641
 00:27:36,520 --> 00:27:38,320
 how much smileyness is going on.
-笑得多灿烂的程度
+smiliness 会是多少
 
 642
 00:27:38,322 --> 00:27:40,889
 It's going to get that from the delegate.
-这就是 faceView 想从这个代理对象中获取的
+faceView 将从这个代理对象中获取数据
 
 643
 00:27:40,891 --> 00:27:43,091
 And, of course, the happiness view controller is going to
-当然，happiness view controller 将会是
+当然，happiness view controller 将会
 
 644
 00:27:43,093 --> 00:27:44,358
 be the delegate it gets it from.
-成为它的代理，提供数据
+成为它的代理，它从那里获取数据
 
 645
 00:27:45,895 --> 00:27:48,879
@@ -3236,32 +3236,32 @@ starting here in the face view.
 650
 00:27:59,906 --> 00:28:01,606
 We're gonna go through the same steps we
-根据我们刚才说的流程
+我们要按照我们刚才在幻灯片中说的步骤
 
 651
 00:28:01,608 --> 00:28:05,609
 just talked about in the slides to do delegation.
-来创建代理的关系
+来创建代理关系
 
 652
 00:28:05,611 --> 00:28:09,146
 So remember the first step is that we need a protocol,
-还记得第一个方法吗？首先我们需要一个协议
+还记得第一步吗？首先我们需要一个协议
 
 653
 00:28:09,148 --> 00:28:13,116
 some particular way that the face view is going to talk to
-一些具体的方式，让我们的 faceView 与
+某些具体的方式，让 faceView 与
 
 654
 00:28:13,118 --> 00:28:16,285
 whoever's going to provide its data, and
-任何一个可以提供数据的对象进行沟通
+任何一个可以提供它的数据的对象进行沟通
 
 655
 00:28:16,287 --> 00:28:19,555
 the face view's data is really it's smiliness.
-这里的数据就是笑容的灿烂度
+faceView 的数据就是它的 smiliness
 
 656
 00:28:19,557 --> 00:28:20,989
@@ -3271,12 +3271,12 @@ So the face view has this data.
 657
 00:28:20,991 --> 00:28:23,258
 Now this is a very, very simple data.
-这个非常简单的常量
+这个非常简单的数据
 
 658
 00:28:23,260 --> 00:28:25,360
 Probably in real life if this weren't,
-或许在实际中这个并不是一个简单的常量
+或许在实际中这个不是
 
 659
 00:28:25,362 --> 00:28:28,796
@@ -3286,12 +3286,12 @@ you know a demo where I'm trying to show you delegation,
 660
 00:28:28,798 --> 00:28:31,565
 you would probably just set this, you
-你可以就简单设置成一个常量
+你可以就简单设置这个
 
 661
 00:28:31,567 --> 00:28:34,935
 can't own it's own data, it's such a simple piece of data.
-你不能拥有这个数据，它非常简单
+你不能拥有这个数据，它是这样一个简单的数据块
 
 662
 00:28:34,937 --> 00:28:36,203
@@ -3301,7 +3301,7 @@ But we're going to use delegation to
 663
 00:28:36,205 --> 00:28:39,072
 get this piece of data here.
-获得这里的数据
+获得这里的数据块
 
 664
 00:28:39,074 --> 00:28:41,974
@@ -3316,7 +3316,7 @@ All right, so
 666
 00:28:44,361 --> 00:28:46,745
 we need some sort of protocol that gets this smiliness from
-所以， 我们需要一些协议，来从某些对象中获取我的笑容程度
+所以，我们需要某种协议，来从某些对象中获取这个 smiliness
 
 667
 00:28:46,748 --> 00:28:51,083
@@ -3336,7 +3336,7 @@ That I'm developing my face view data source protocol.
 670
 00:28:59,692 --> 00:29:04,027
 And sometimes we call these delegation protocols delegate.
-通常我们将代理类型的协议后缀名起为 Delegate
+通常我们将代理类型的协议命名为 Delegate
 
 671
 00:29:04,029 --> 00:29:05,795
@@ -3346,7 +3346,7 @@ Like face view delegate.
 672
 00:29:05,797 --> 00:29:08,864
 But when the only purpose of the protocol is to
-但这里这个协议唯一的作用就是
+但当这个协议唯一的作用是
 
 673
 00:29:08,866 --> 00:29:11,633
@@ -3356,17 +3356,17 @@ get the data that the view is going to draw.
 674
 00:29:11,635 --> 00:29:14,269
 Because the view can't own its own data,
-因为这个视图不能拥有这个数据
+因为这个视图不能拥有自己的数据
 
 675
 00:29:14,271 --> 00:29:17,972
 then we often will call the protocol datasource.
-通常这种情况，我们称这种协议为 DataSource
+通常我们称这种协议为 DataSource
 
 676
 00:29:19,142 --> 00:29:21,375
 So this just needs to have whatever functions and
-所以 这里需要的就是
+所以这里需要的就是
 
 677
 00:29:21,377 --> 00:29:24,511
@@ -3416,7 +3416,7 @@ sending them this message.
 686
 00:29:45,465 --> 00:29:48,032
 I'm gonna pass myself, this face view,
-我将传入 self，这个FaceView 
+我将传入 self，这个 FaceView 
 
 687
 00:29:48,034 --> 00:29:49,433
@@ -3441,7 +3441,7 @@ They are always going to pass themselves along.
 691
 00:29:58,175 --> 00:30:00,709
 If you are trying to provide the smiliness for
-如果你尝试给这个 FaceView 提供笑容的灿烂度的时候
+如果你尝试给这个 FaceView 提供 smiliness 的时候
 
 692
 00:30:00,711 --> 00:30:03,678
@@ -3466,7 +3466,7 @@ questions to answer this, you can do that.
 696
 00:30:11,320 --> 00:30:13,987
 Now, this smiliness what is it going to return?
-现在，这个 smiliness 方法，它会返回什么呢？
+现在，这个 smiliness，它会返回什么呢？
 
 697
 00:30:13,989 --> 00:30:15,822
@@ -3476,12 +3476,12 @@ Now I'm going to have it return a double,
 698
 00:30:15,824 --> 00:30:17,457
 which is going to be that smiliness,
-也就是笑容的灿烂度
+也就是那个 smiliness
 
 699
 00:30:17,459 --> 00:30:22,861
 remember that smiliness goes from a plus 1 down to minus 1,
-还记得笑容的灿烂度从-1到+1吗？
+还记得 smiliness 从-1到+1吗？
 
 700
 00:30:22,863 --> 00:30:24,129
@@ -3501,21 +3501,21 @@ I'm also going to make this double be an optional.
 703
 00:30:33,406 --> 00:30:36,607
 And that's because if the data source, if I ask it for
-那是因为，它作为一个 DataSource，如果我问
+那是因为这个 DataSource，如果我问
 
 704
 00:30:36,609 --> 00:30:39,360
 the smiliness, and for
-它要灿烂度的时候
+它要 smiliness 时
 
 705
 00:30:39,361 --> 00:30:42,112
 some reason it can't provide that smiliness, then I'm gonna
-因为某些的原因，它无法提供相应的值
+因为某些原因，它无法提供这个 smiliness
 
 706
 00:30:42,114 --> 00:30:47,083
-allow them to return nill, and just have no smile or
+allow them to return nil, and just have no smile or
 那么我允许它们返回 nil，也就是说
 
 707
@@ -3546,12 +3546,12 @@ And so that's perfectly reasonable.
 712
 00:31:03,299 --> 00:31:04,598
 You can have as many arguments as you
-你为了从 DataSource 中获取这个笑容的灿烂度，需要多少个
+你为了从 DataSource 中获取这个 smiliness
 
 713
 00:31:04,600 --> 00:31:08,134
 need to get this smiliness out of the data source.
-参数都可以
+需要多少个参数都可以
 
 714
 00:31:08,136 --> 00:31:11,637
@@ -3561,7 +3561,7 @@ Okay, so that's step one, we have this data source here.
 715
 00:31:11,639 --> 00:31:17,676
 Step two is we need to have a public var in our face view,
-第二步是，我们需要在我们的 FaceView 中有一个公开的变量
+第二步是，在我们的 FaceView 中我们需要有一个公开的变量
 
 716
 00:31:17,678 --> 00:31:19,878
@@ -3601,7 +3601,7 @@ And what this means is,
 723
 00:31:34,693 --> 00:31:37,093
 somebody who wants to provide my data,
-某个对象想要提供给我数据
+某个想要提供给我数据的对象
 
 724
 00:31:37,095 --> 00:31:39,128
@@ -3611,7 +3611,7 @@ who wants to be my dataSource,
 725
 00:31:39,130 --> 00:31:43,265
 all they need to do is set themselves as this variable.
-那么，它们仅仅是需要将它们自身设置为这个变量的值
+那么，它们所需要的是将它们自身设置为这个变量的值
 
 726
 00:31:43,267 --> 00:31:46,702
@@ -3671,11 +3671,12 @@ because we don't want a face with no frown and no smile.
 737
 00:32:11,491 --> 00:32:14,425
 But, we'll certainly allow it.
-我跟你们说的意思是，这里完全可以这么做（不提供 dataSource）
+但我们一定会允许（不提供 dataSource）
 
 738
 00:32:14,427 --> 00:32:15,760
 So, allow that there.
+允许这么做
 
 739
 00:32:16,896 --> 00:32:19,896
@@ -3690,11 +3691,12 @@ is we really want to describe it as weak.
 741
 00:32:23,869 --> 00:32:26,703
 Now this is gonna be the first time we talk about
-这将成为我们讨论内存管理的第一堂课
+这是我们在这次课中
 
 742
 00:32:26,705 --> 00:32:28,637
 memory management in this class.
+第一次讨论内存管理
 
 743
 00:32:28,639 --> 00:32:29,972
@@ -3729,7 +3731,7 @@ our controller is going to set itself as the data source.
 749
 00:32:41,050 --> 00:32:44,418
 So it's going to set this pointer back to itself because
-然后它将设置这个指针为自身
+然后它将把这个指针指向自身
 
 750
 00:32:44,420 --> 00:32:47,721
@@ -3764,12 +3766,12 @@ And since they're pointing to each other they're keeping
 756
 00:33:02,670 --> 00:33:04,669
 each other in memory at all times, so
-就会一直在内存中相互引用对方，形成一个圈
+就会一直在内存中相互引用对方
 
 757
 00:33:04,671 --> 00:33:07,605
 that kinda memory cycle is really bad.
-在内存中出现这样的圈是很可怕的
+在内存中出现这样的循环是很可怕的
 
 758
 00:33:07,607 --> 00:33:09,607
@@ -3779,7 +3781,7 @@ Because then the FaceView and
 759
 00:33:09,609 --> 00:33:11,508
 the controller can never leave memory.
-和控制器都无法释放其的内存
+和控制器都无法释放其内存
 
 760
 00:33:11,510 --> 00:33:14,011
@@ -3799,7 +3801,7 @@ pointer it means that this pointer, this thing, whatever
 763
 00:33:24,322 --> 00:33:30,225
 this points to, should not be used to keep it in memory.
-指向的是什么东西，这个东西都不应该被用于在内存中保留它
+指向的是什么东西，这个东西都不应该保留在内存中
 
 764
 00:33:30,227 --> 00:33:32,794
@@ -3884,7 +3886,7 @@ don't want that cycle things pointing back to each other.
 780
 00:34:09,994 --> 00:34:12,828
 So, we can actually make FaceViewDataSource, even
-所以我们要讲 FaceViewDataSource
+所以我们要将 FaceViewDataSource
 
 781
 00:34:12,830 --> 00:34:15,430
@@ -3894,12 +3896,12 @@ though it's a protocol, we can make it be a class type.
 782
 00:34:15,432 --> 00:34:17,766
 If you remember from the slides in our
-如果你还记得 Slide 中的
+如果你还记得幻灯片中的
 
 783
 00:34:17,768 --> 00:34:21,502
 protocol declaration, we can say colon class.
-协议声明的话，我们可以通过在协议后面加上 : class 来让它变成一个类
+协议声明的话，我们可以通过在协议后面加上 : class 
 
 784
 00:34:21,504 --> 00:34:24,372
@@ -3924,7 +3926,7 @@ usually that's what we're going to want anyway, but
 788
 00:34:33,048 --> 00:34:35,815
 we definitely need that so we can have this weak behavior.
-因为我们想让这个变量为 weak
+我们绝对需要这个，所以我们能够让这个变量为 weak
 
 789
 00:34:35,817 --> 00:34:38,751
@@ -3934,7 +3936,7 @@ So this data source, the pointer it has to whatever its
 790
 00:34:38,753 --> 00:34:41,053
 data source will not keep it's data source in memory.
-都不会被保存在 dataSource 的内存中了
+它的 dataSource 都不会在内存中保留它的数据源
 
 791
 00:34:42,523 --> 00:34:45,090
@@ -3959,12 +3961,12 @@ pointer will be set to nill automatically by the system.
 795
 00:34:52,699 --> 00:34:54,965
 So it's pretty cool, these banners are pretty cool.
-这非常酷
+这非常酷，这些横幅很酷
 
 796
 00:34:54,967 --> 00:34:57,734
 We don't use them a lot you saw that we used them for IB
-平时我们不会经常使用到 weak，但是我们看到在 IBOutlet
+平时我们不会经常使用到 weak，但是在 IBOutlet
 
 797
 00:34:57,736 --> 00:35:00,303
@@ -4019,7 +4021,7 @@ Let's go ahead and go to the next step,
 807
 00:35:18,019 --> 00:35:20,553
 which to use the data source to get our smiliness, right?
-处理谁来使用这个 dataSource 得到 smiliness，对吗？
+谁来使用这个 dataSource 以得到 smiliness，对吗？
 
 808
 00:35:20,555 --> 00:35:22,355
@@ -4068,12 +4070,13 @@ It put it in here.
 817
 00:35:40,505 --> 00:35:42,872
 Why did it put here?
-为什么在这里？
+为什么它要在这里？
 
 818
 00:35:42,873 --> 00:35:45,240
 Well it put it here because data source is an optional.
 因为 dataSource 是 optional 
+
 819
 00:35:45,243 --> 00:35:47,543
 And it could be nil, okay?
@@ -4087,7 +4090,7 @@ This is an optional, it could be nil.
 821
 00:35:49,680 --> 00:35:52,681
 And so Swift is assuming that we wanna use optional
-所以 Swift 假设我们想要在这里使用
+所以 Swift 认为我们想要在这里使用
 
 822
 00:35:52,683 --> 00:35:54,015
@@ -4137,12 +4140,12 @@ So we're going to use another cool little feature switch.
 831
 00:36:12,433 --> 00:36:15,600
 Swift which is the question mark question mark operator.
-Swift 的 ?? 操作符 
+Swift 中的 ?? 操作符 
 
 832
 00:36:15,602 --> 00:36:17,735
 Now what this operator says is,
-这个操作符的意思是，
+这个操作符的意思是
 
 833
 00:36:17,737 --> 00:36:21,238
@@ -4152,7 +4155,7 @@ if the thing on the left-hand side of the question mark
 834
 00:36:21,240 --> 00:36:25,275
 question mark is not nill, then use that.
-不是 nil，那么以它为值 
+不是 nil，那么使用它作为值 
 
 835
 00:36:25,277 --> 00:36:28,779
@@ -4236,7 +4239,7 @@ this protocol right here.
 
 851
 00:37:13,419 --> 00:37:16,854
-It's got a property which less people set themselves as
+It's got a property which let people set themselves as
 它有个让别人把他们设置为
 
 852
@@ -4247,7 +4250,7 @@ dataSource 然后
 853
 00:37:18,057 --> 00:37:21,224
 then it uses that data source to get its smiliness.
-使用 dataSource 获得 smiliness 的 property 
+使用 dataSource 获得 smiliness 
 
 854
 00:37:21,226 --> 00:37:23,226
@@ -4277,7 +4280,7 @@ Now you remember one of the steps it has is it has to
 859
 00:37:30,934 --> 00:37:34,302
 say to the world, I am HappinessViewController and
-对世界宣布，我是 HappinessViewController
+对外宣布，我是 HappinessViewController
 
 860
 00:37:34,304 --> 00:37:38,072
@@ -4417,7 +4420,7 @@ goes from 0 to 100.
 887
 00:38:40,228 --> 00:38:43,162
 So it's a typical job of the controller to
-所以这是个典型的 controller 的任务
+所以这是个 controller 的典型任务
 
 888
 00:38:43,164 --> 00:38:46,965

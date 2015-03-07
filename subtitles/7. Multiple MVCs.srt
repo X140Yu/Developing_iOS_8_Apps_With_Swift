@@ -4486,521 +4486,581 @@ I can't see the face.
 00:39:44,300 --> 00:39:45,860
 Okay? Let's try landscape.
 
+
 1001
 00:39:45,860 --> 00:39:47,000
 That doesn't work either.
+还是不行。
 
 1002
 00:39:47,000 --> 00:39:49,400
 So there's no way to get at the face, right now.
+看来是怎么都看不到笑脸了。
 
 1003
 00:39:49,400 --> 00:39:51,470
 Absolutely no way to get the face.
+貌似完全没办法了，
 
 1004
 00:39:51,470 --> 00:39:52,470
 And why is that?
+这是为什么呢？
 
 1005
 00:39:52,470 --> 00:39:54,230
 Well that's because again on phone which is
+刚才说过了，当设备处于
 
 1006
 00:39:54,240 --> 00:39:56,670
 a compact size trait device.
+横向compact尺寸的时候。
 
 1007
-00:39:56,670 --> 00:39:59,940
-Split view doesn't put things side by side,
-
-1008
-00:39:59,940 --> 00:40:02,310
-it just doesn't do that, okay.
+00:39:56,670 --> 00:40:02,310
+SplitView doesn't put things side by side, it just doesn't do that, okay.
+SplitView 是不会左右平铺开的， 
 
 1009
 00:40:02,310 --> 00:40:06,150
 Now if we do iPhone6 Plus.
+如果我们在iPhone6 Plus上
 
 1010
 00:40:06,150 --> 00:40:06,910
 Try that one.
+尝试一下
 
 1011
 00:40:11,380 --> 00:40:13,620
 It's kind of a hybrid.
+iPhone6 plus是一种混合的产品，
 
 1012
 00:40:13,620 --> 00:40:15,850
 First of all it's such high resolution that even the small
+首先来说，它虽然小，但是确有高分辨率的屏幕，
 
 1013
 00:40:15,860 --> 00:40:17,620
 versions, the smallest I can get it.
+是高分辨率设备里最小的。
 
 1014
 00:40:17,620 --> 00:40:18,590
 But see, in portrait,
+看，在竖屏的时候，
 
 1015
 00:40:18,590 --> 00:40:20,320
 I have the same problem as another iPhone.
+遇到了和其它iPhone一样的问题，
 
 1016
 00:40:20,330 --> 00:40:22,790
 There's just no way for me to get to the face.
+看不到笑脸
 
 1017
 00:40:22,790 --> 00:40:24,880
 Cuz it's no way to,
+没办法，
 
 1018
 00:40:24,880 --> 00:40:26,960
 if I try sliding out from the side, nothing happens.
+即使我从左边滑动，也没用。
 
 1019
 00:40:26,960 --> 00:40:28,600
 Okay? Because in portrait mode,
+因为在竖屏下，
 
 1020
 00:40:28,600 --> 00:40:31,270
 the iPhone 6 Plus works like an iPhone.
+iPhone6 Plus和其它iPhine没区别。
 
 1021
 00:40:31,270 --> 00:40:33,770
 But in landscape, on iPhone 6 Plus,
+但是在iPhone6 plus的横屏下，
 
 1022
-00:40:33,770 --> 00:40:35,940
-it's big enough, that it can actually show them both.
-
-1023
-00:40:37,240 --> 00:40:37,940
-Okay?
+00:40:33,770 --> 00:40:37,940
+it's big enough, that it can actually show them both. Okay?
+因为足够大，所以两部分就可以完全显示。
 
 1024
 00:40:37,940 --> 00:40:39,370
 So that's kinda cool.
+这个非常酷。
 
 1025
-00:40:39,370 --> 00:40:40,810
-Alright but it still doesn't work.
-
-1026
-00:40:40,810 --> 00:40:42,680
-Okay.
+00:40:39,370 --> 00:40:42,680
+Alright but it still doesn't work. Okay.
+但是这个摁钮依然不能用。
 
 1027
 00:40:42,680 --> 00:40:44,440
 So why does this not work?
+为什么没用？
 
 1028
 00:40:44,450 --> 00:40:47,710
 Well, it doesn't work because we have no segues.
+因为我们还没有加入segue。
 
 1029
 00:40:47,720 --> 00:40:51,550
 We don't describe how to get from one of
+还没有告诉程序如何从这个地方跳转到
 
 1030
 00:40:51,550 --> 00:40:53,620
 these things to another.
+另一个地方。
 
 1031
 00:40:53,620 --> 00:40:54,950
 So let's put some segues in.
+现在我们来加入segue。
 
 1032
 00:40:54,950 --> 00:40:56,320
 What we're gonna do,
+在segue之前，
 
 1033
 00:40:56,320 --> 00:40:58,620
 well, actually before we do the segues,
+我们要做的是，
 
 1034
 00:40:58,620 --> 00:41:02,590
 let's fix this problem with the iPhone not working.
+如何修复在iPhone上的这个问题，
 
 1035
 00:41:02,590 --> 00:41:05,500
 Okay, let's fix the problem where we can't see the iPhone.
+修复在iPhone上看不到两个视图的问题，
 
 1036
 00:41:05,500 --> 00:41:08,360
 In order to fix that, what we talked about in the slides,
+我们需要把主视图放到一个
 
 1037
-00:41:08,370 --> 00:41:10,700
-by putting this guy in a navigation controller.
-
-1038
-00:41:10,700 --> 00:41:11,730
-Okay.
+00:41:08,370 --> 00:41:11,730
+by putting this guy in a navigation controller.Okay.
+Navigation Controller里来解决这个问题。
 
 1039
 00:41:11,740 --> 00:41:13,030
 So let's go do that.
+下面开始做，
 
 1040
 00:41:13,040 --> 00:41:15,440
 We're gonna do that with embed.
+进到embed in里边，
 
 1041
 00:41:15,440 --> 00:41:17,270
 In Navigation Controller.
+选Navigation Controller。
 
 1042
 00:41:17,270 --> 00:41:19,740
 It puts it in a navigation controller, okay.
+现在主视图在Navigation Controller里，
 
 1043
 00:41:19,740 --> 00:41:22,710
 Now when we run on the iPhone, we'll just run it in normal
+现在我们在普通的iPhone上运行一下，
 
 1044
 00:41:22,710 --> 00:41:29,250
 iPhone, you'll see that we get the face.
+可以正常看到笑脸了。
 
 1045
 00:41:29,250 --> 00:41:30,350
 Okay? Awesome.
+厉害吧。
 
 1046
 00:41:30,350 --> 00:41:33,050
 And we can go back to the master and
+可以正常的回到主视图，
 
 1047
-00:41:33,050 --> 00:41:34,450
-there's no way to get back to the detail.
-
-1048
-00:41:34,460 --> 00:41:35,990
-Okay.
+00:41:33,050 --> 00:41:35,990
+there's no way to get back to the detail.Okay.
+但是没办法回到笑脸了。
 
 1049
 00:41:35,990 --> 00:41:37,720
 So now we definitely need those segues.
+所以现在我们必须要用到segue了。
 
 1050
-00:41:37,720 --> 00:41:40,930
-We need these buttons to cause a segue to happen to
-
-1051
-00:41:40,930 --> 00:41:41,660
-the detail.'
+00:41:37,720 --> 00:41:41,660
+We need these buttons to cause a segue to happen to the detail.
+所以我们现在需要通过点击这些摁钮跳转到笑脸。
 
 1052
-00:41:41,660 --> 00:41:43,430
-Okay. So
-
-1053
-00:41:43,430 --> 00:41:45,200
-that's what we're gonna do next.
+00:41:41,660 --> 00:41:45,200
+Okay. So that's what we're gonna do next.
+我们接下来做这个，
 
 1054
 00:41:45,200 --> 00:41:47,430
 And actually, let's take a second here and
+在这之前，我们先看一下
 
 1055
 00:41:47,430 --> 00:41:49,070
 show what this looks like on the iPad.
+加了Navigation Controller之后，
 
 1056
 00:41:50,540 --> 00:41:53,000
 We added the navigation controller here.
+在iPad上看起来是什么样的。
 
 1057
 00:41:53,000 --> 00:41:55,170
 Let's see what effect it had on the iPad.
+看一下在iPad上会有什么影响。
 
 1058
 00:41:55,170 --> 00:41:58,940
 And the answer is, that the master now has a title.
+看，主视图上现在有了一个标题，
 
 1059
-00:42:00,380 --> 00:42:01,540
-See?
-
-1060
-00:42:01,540 --> 00:42:02,940
-Has a title there.
+00:42:00,380 --> 00:42:02,940
+See? Has a title there.
+看到没？这有个标题。
 
 1061
 00:42:02,950 --> 00:42:04,610
 And this kind of would be nice,
+在这放一个标题我
 
 1062
 00:42:04,610 --> 00:42:06,700
 even to put a title in here.
+感觉挺好的。
 
 1063
 00:42:06,700 --> 00:42:08,780
 So we can go over here, and actually double click on here,
+现在我们可以双击这，
 
 1064
 00:42:08,780 --> 00:42:14,250
 and put in psychologist.
+然后输入 psychologist 。
 
 1065
 00:42:14,260 --> 00:42:16,150
 Put a title in there.
+设置一个标题。
 
 1066
 00:42:16,160 --> 00:42:18,460
 Notice, look what happened to our question.
+注意看我们刚才设置的问题。
 
 1067
 00:42:18,460 --> 00:42:19,720
 It kind of got obscured.
+被挡住了。
 
 1068
 00:42:19,730 --> 00:42:21,690
 Do you see that?
+看到了吗？
 
 1069
 00:42:21,690 --> 00:42:23,130
 By this title.
+被标题挡住了。
 
 1070
 00:42:23,130 --> 00:42:24,530
 And actually we have a warning up here.
+上边有一个警告，
 
 1071
 00:42:24,530 --> 00:42:25,830
 Do you see that warning?
+看见那个警告了么？
 
 1072
 00:42:25,830 --> 00:42:27,130
 That warning is about that.
+那个警告说的是。。
 
 1073
 00:42:27,130 --> 00:42:27,830
 Let's click on it.
+点一下看看。
 
 1074
-00:42:27,830 --> 00:42:29,570
-It says, the frame for
-
-1075
-00:42:29,570 --> 00:42:31,300
-what you see in your dreams will be different at run time.
+00:42:27,830 --> 00:42:31,300
+It says, the frame for what you see in your dreams will be different at run time.
+它说，这个问题的label的frame在运行时看上去会不一样。
 
 1076
-00:42:31,300 --> 00:42:35,140
-That's because it's going to automatically move it down
-
-1077
-00:42:35,140 --> 00:42:36,470
-underneath this.
+00:42:31,300 --> 00:42:36,470
+That's because it's going to automatically move it down underneath this.
+因为在运行时它会自动往下挪到标题下边。
 
 1078
 00:42:36,470 --> 00:42:39,240
 And we can make that happen in our storyboard by going over
+在 storyboard 上也可以修改好，
 
 1079
 00:42:39,240 --> 00:42:42,580
 here, clicking here, doing what we always do when we
+就像我们平时修复 auto layout的问题一样，
 
 1080
 00:42:42,580 --> 00:42:44,580
-have a problem with our Auto Layout,
+have a problem with our auto layout,
+点这里。
 
 1081
-00:42:44,580 --> 00:42:46,750
-fix our misplacement and it will move it back down.
-
-1082
-00:42:46,750 --> 00:42:47,310
-Okay.
+00:42:44,580 --> 00:42:47,310
+fix our misplacement and it will move it back down. Okay.
+修复一下，它就往下移了。
 
 1083
 00:42:49,080 --> 00:42:52,050
 Alright so this is looking good.
+现在看上去没问题了。
 
 1084
 00:42:52,050 --> 00:42:54,590
 So let's get this segue business happening.
+好了，现在开始加segue了。
 
 1085
 00:42:54,590 --> 00:42:57,790
-So I told you the segues are done just with control drag.
-
-1086
-00:42:57,790 --> 00:42:59,120
-Okay.
+So I told you the segues are done just with control drag. Okay.
+前面说过了，segue 也是通过control ＋ 拖拽实现的。
 
 1087
 00:42:59,130 --> 00:43:02,590
 When we click one of these things I wanna segue to
+当点击这些摁钮的时候，我希望看到一个脸
 
 1088
 00:43:02,600 --> 00:43:05,400
 a face that shows the diagnosis based on
+作为在梦里见到的东西
 
 1089
 00:43:05,400 --> 00:43:06,930
 what you saw in your dreams.
+的诊断结果。
 
 1090
 00:43:06,930 --> 00:43:09,030
 So we do this just with Ctrl+drag.
+开始 control ＋ 拖拽，
 
 1091
 00:43:09,030 --> 00:43:11,900
 So let's Ctrl+drag from Golden Bear.
+咱们从 Golden Bear 拽到
 
 1092
 00:43:11,900 --> 00:43:13,920
 Down here.
+这里。
 
 1093
 00:43:13,920 --> 00:43:15,940
 See how it's grabbing on to this MVC down here?
+看到下边这个MVC的变化了吗？
 
 1094
 00:43:15,940 --> 00:43:17,940
 So we'll let go and
+松手
 
 1095
 00:43:17,940 --> 00:43:19,940
-it says what kind of segue do you want?
+it says what kind of segue do you want.
+然后Xcode问我们需要什么类型的segue。
 
 1096
 00:43:19,940 --> 00:43:22,610
 And we're going to do show detail because we want it to
+我们选 show detail，因为我们希望诊断结果显示在
 
 1097
 00:43:22,610 --> 00:43:25,380
 show it in the detail side of the split view, and
+SplitView的细节视图部分，在Navination Controller里
 
 1098
 00:43:25,380 --> 00:43:27,650
 in the navigation control it will just push it.
+把它推进来。
 
 1099
 00:43:27,650 --> 00:43:30,220
 But the show detail will do the split view thing.
+虽然实际上它在做SplitView的事情。
 
 1100
 00:43:30,220 --> 00:43:31,890
 So, there we go and
+下边我们
 
 1101
 00:43:31,890 --> 00:43:33,550
 look what happened there we got this little segue.
+看看有了这个segue，会发生什么。
 
 1102
 00:43:33,560 --> 00:43:35,290
 If we inspect it, over here,
+如果我们点击它，在右边
 
 1103
 00:43:35,290 --> 00:43:36,690
 you can see there is its identifier.
+你会看到一个它的 identifier 。
 
 1104
 00:43:36,690 --> 00:43:37,760
 You can even change what kind of
+如果之后有需要，
 
 1105
 00:43:37,760 --> 00:43:39,860
 segue it is in the future if you wanted.
+你还能在这修改segue的类型。
 
 1106
 00:43:39,860 --> 00:43:42,560
 But this identifier is the Golden Bear one.
+这个 identifier 指的是 Golden Bear。
 
 1107
 00:43:42,560 --> 00:43:47,430
 I'm going to call this the sad identifier, okay.
+所以我想让这个 identifier 叫 sad。
 
 1108
 00:43:47,430 --> 00:43:49,330
 So whenever this goes through,
+之后无论何时用到这个segue，
 
 1109
 00:43:49,340 --> 00:43:51,970
 this identifier for this segue, is called sad.
+它的 identifier 就叫 sad。
 
 1110
 00:43:51,970 --> 00:43:53,100
 And we'll do the same thing here for
+下面是 Dancing Tree，是一样的，
 
 1111
 00:43:53,110 --> 00:43:57,010
 Dancing Tree, okay, show detail again.
+还是选 show detail。
 
 1112
 00:43:57,010 --> 00:44:00,910
 And dancing trees segue, which is right here.
+Dancing Tree 的segue在这，
 
 1113
 00:44:00,910 --> 00:44:02,780
 We're gonna call this one, happy.
+我们叫它 happy。
 
 1114
 00:44:02,780 --> 00:44:04,000
 That's the happy one.
+这个就叫happy了。
 
 1115
 00:44:04,000 --> 00:44:05,210
 Now, I told you these should be verbs so
+我之前说过这个名字最好用
 
 1116
 00:44:05,220 --> 00:44:07,250
 maybe this should be,
+动词。
 
 1117
 00:44:07,250 --> 00:44:09,280
 show happy diagnosis, show sad diagnosis.
+比如 ”显示 happy 的诊断“，”显示 sad 的诊断“
 
 1118
 00:44:09,290 --> 00:44:11,920
 But for demo it's less typing later,
+因为这是演示，我们就少打点字儿。
 
 1119
 00:44:11,920 --> 00:44:13,150
 I'm just putting happy in that.
+所以就叫 happy 吧。
 
 1120
 00:44:13,160 --> 00:44:14,860
 How about buckeye.
+Buckeye 呢？
 
 1121
 00:44:14,860 --> 00:44:16,490
 Okay, we'll say show detail.
+还是 show detail。
 
 1122
-00:44:16,490 --> 00:44:18,760
-And for the buckeye one.
-
-1123
-00:44:18,760 --> 00:44:19,560
-Where is that one?
+00:44:16,490 --> 00:44:19,560
+And for the buckeye one. Where is that one?
+Buckeye的segue 是哪个？
 
 1124
 00:44:19,560 --> 00:44:20,730
 That's this one I guess.
+应该是这个。
 
 1125
-00:44:20,730 --> 00:44:23,700
-We'll say meh.
-
-1126
-00:44:23,700 --> 00:44:24,800
-Okay, not happy or sad.
+00:44:20,730 --> 00:44:24,800
+We'll say meh. Okay, not happy or sad. 
+我们叫它 meh， 既不开心也不难过。
 
 1127
 00:44:25,830 --> 00:44:28,300
 Okay, and you can move these things around.
+你可以随意的拖拽。
 
 1128
 00:44:28,300 --> 00:44:30,200
 Right, if you're having trouble selecting them or
+当你不好选上这些的时候，
 
 1129
 00:44:30,200 --> 00:44:33,970
 whatever, you can move them around to get at them better.
+你能拖拽调整一下
 
 1130
 00:44:33,970 --> 00:44:35,420
@@ -5009,74 +5069,92 @@ Okay.
 1131
 00:44:35,420 --> 00:44:36,870
 So this is what our storyboard looks like now.
+现在我们的 storyboard 看上去是这样的。
 
 1132
 00:44:36,880 --> 00:44:40,840
 Let's make some more space so you can see it, right here.
+腾出点空间看的更清楚。
 
 1133
 00:44:40,850 --> 00:44:42,140
 And we've got our detail.
+这是我们的细节视图。
 
 1134
 00:44:42,150 --> 00:44:44,810
 Let me whip this up here.
+调整一下。
 
 1135
 00:44:44,820 --> 00:44:48,050
 And we got our master and we've got the segues now.
+这是主视图，这是segue。
 
 1136
 00:44:48,050 --> 00:44:50,890
 So let's go ahead and run, and see if this works.
+运行一下看看效果
 
 1137
 00:44:50,890 --> 00:44:53,340
 Let's go.
+走你。
 
 1138
 00:44:53,340 --> 00:44:55,790
-On i-Pad, okay, huh, does not appear to work on the i-Pad,
+On iPad, okay, huh, does not appear to work on the i-Pad,
+在iPad上运行，啊，貌似在iPad上不行，
 
 1139
 00:44:55,790 --> 00:44:57,660
 huh, that's interesting.
+奇怪。
 
 1140
 00:44:57,660 --> 00:44:59,290
-Alright, let's try it on the i-Phone.
+Alright, let's try it on the iPhone.
+到iPhone上试试。
 
 1141
 00:45:10,970 --> 00:45:12,100
 All right, so there's iPhone.
+iPhone来了。
 
 1142
 00:45:12,110 --> 00:45:14,070
 So we're at the face, let's go back to the master.
+我们先看到笑脸，点回到主视图。
 
 1143
 00:45:14,080 --> 00:45:15,690
 Here's the master,
+主视图。
 
 1144
 00:45:15,690 --> 00:45:17,310
 notice we have this nice title up here now, Psychologist.
+看到我们这有一个标题， Psychologist 。
 
 1145
 00:45:17,310 --> 00:45:18,680
 Let's do this.
+点一下，
 
 1146
 00:45:18,680 --> 00:45:20,040
 Oh, it's doing something, but,
+啊，有变化了，
 
 1147
 00:45:20,050 --> 00:45:21,850
 it's not actually showing the diagnosis.
+但是并没有显示出诊断结果。
 
 1148
 00:45:21,850 --> 00:45:25,680
 But at least it's segueing to the other one.
+但是至少跳转了。
 
 1149
 00:45:25,690 --> 00:45:27,400
@@ -5085,230 +5163,268 @@ Okay?
 1150
 00:45:27,400 --> 00:45:29,120
 So the iPad was working too, it's just there was nothing to
+所以说在iPad上也是没问题的，因为细节视图已经在
 
 1151
 00:45:29,120 --> 00:45:32,090
 see, because there was already a detail there and
+右边了，所以看不到变化。它只是生成了一个
 
 1152
 00:45:32,090 --> 00:45:33,990
 it replaced that detail with a new one.
+新的细节视图。
 
 1153
 00:45:33,990 --> 00:45:37,560
 But we didn't prepare that thing, so it doesn't know how
+我们没有准备segue，所以它们还不知道笑脸要变化成
 
 1154
 00:45:37,560 --> 00:45:39,800
 much to smile, it doesn't know how to show the diagnosis,
+什么样，不知道如何显示诊断结果，
 
 1155
 00:45:39,800 --> 00:45:41,500
 cuz we have to prepare it.
+我们要准备了它才能知道。
 
 1156
 00:45:41,500 --> 00:45:43,570
 Okay, so preparing is the next step.
+所以，下一步是准备。
 
 1157
-00:45:43,570 --> 00:45:45,370
-We do the preparation for
-
-1158
-00:45:45,370 --> 00:45:47,740
-these segues in this ViewController.
+00:45:43,570 --> 00:45:47,740
+We do the preparation for these segues in this ViewController.
+我们需要在这个 View controller里准备这几个segue。
 
 1159
 00:45:47,740 --> 00:45:50,470
 This is the ViewController that's instigating the segue,
+因为跳转是从这开始的，
 
 1160
 00:45:50,470 --> 00:45:53,140
 so here's where we have to put our preparation.
+所以我们要在这做准备。
 
 1161
 00:45:53,140 --> 00:45:55,810
 This is the PsychologistViewController.
+就是这个 PsychologistViewController 。
 
 1162
 00:45:55,810 --> 00:45:57,910
 Okay, so we're gonna go over here to
+所以我们现在到
 
 1163
 00:45:57,910 --> 00:46:02,150
 our PsychologistViewController code, delete that stuff.
+PsychologistViewController 的代码部分，删掉这些东西。
 
 1164
 00:46:03,720 --> 00:46:05,150
 Okay, here's PsychologistViewController.
+好了。
 
 1165
-00:46:05,150 --> 00:46:08,290
-And all we have to do here is implement that one prepare
-
-1166
-00:46:08,290 --> 00:46:09,990
-method, okay.
+00:46:05,150 --> 00:46:09,990
+And all we have to do here is implement that one prepare method, okay.
+我们要做的就是在这实现一个准备的方法，
 
 1167
 00:46:09,990 --> 00:46:15,090
 So it's called prepareForSegue.
+这个方法叫 prepareForSegue 。
 
 1168
 00:46:15,090 --> 00:46:18,760
 'Kay, I'll let it type it out for me by hitting tab.
+我可以先打这个字儿然后摁 tab 。
 
 1169
-00:46:18,760 --> 00:46:20,860
-And you can see there's the two arguments, the segue and
-
-1170
-00:46:20,870 --> 00:46:22,260
-the sender.
+00:46:18,760 --> 00:46:22,260
+And you can see there's the two arguments, the segue and the sender.
+可以看到这个方法有两个参数，segue 和 sender 。
 
 1171
 00:46:22,270 --> 00:46:26,140
 Now I'm gonna just say here, if the segue's
+这我就可以写，if segue 的 
 
 1172
 00:46:26,140 --> 00:46:31,040
-destination view controller, sorry, if I can let HVC,
+destinationViewController, sorry, if I can let HVC,
+destinationViewController，啊，对不起， if let HVC ，
 
 1173
 00:46:31,040 --> 00:46:36,980
 HappinessViewController, equal the DestinationViewController
+HappinessViewController 等于 segue的 destinationViewController 
 
 1174
 00:46:36,980 --> 00:46:41,350
 as a HappinessViewController, then I'm gonna do
+as HappinessViewController ， 然后我们就可以判断
 
 1175
 00:46:41,350 --> 00:46:45,290
 something based on what the identifier is.
+identifier 然后写代码了。
 
 1176
 00:46:45,290 --> 00:46:47,650
 Now, if this segue, if we have a prepareForSegue and we're
+在这个方法里，如果我们要跳转的
 
 1177
 00:46:47,660 --> 00:46:50,220
 segueing to something that's not a HappinessViewController,
+目的地不是 HappinessViewController。
 
 1178
 00:46:50,220 --> 00:46:51,660
 then this if let is not gonna happen.
+那么这个if let 就不会发生。
 
 1179
 00:46:51,660 --> 00:46:53,960
 So none of what I'm gonna type right here is gonna happen,
+所以下边我即将要完成的代码就不会运行，
 
 1180
 00:46:53,960 --> 00:46:55,390
 and that's perfectly fine.
+完全没有问题。
 
 1181
 00:46:55,400 --> 00:46:58,830
 You can kinda do the if let on what kind of
+你可以先if let要跳转到什么
 
 1182
 00:46:58,830 --> 00:47:00,560
 thing you're segueing to, or
+对象上，或者 segue 的identifier，
 
 1183
 00:47:00,570 --> 00:47:02,500
 on the identifier, one on the outside,
+一个在外边，一个在里边，
 
 1184
 00:47:02,500 --> 00:47:05,800
 one on the inside, kind of depends on what's going on.
+根据实际情况来。
 
 1185
 00:47:05,800 --> 00:47:08,100
 But in this case, I'm going to do the if let for
+在这里，我要在外边先if let我的
 
 1186
 00:47:08,110 --> 00:47:10,740
 my destinationViewController on the outside, and then I'm
+destinationViewController， 然后在里面if let segue的   
 
 1187
 00:47:10,740 --> 00:47:16,110
 going to do the if let on the identifier on the inside.
+identifier。
 
 1188
 00:47:16,110 --> 00:47:18,250
 Okay? So if I had a segue to
+如果我有一个跳转到
 
 1189
 00:47:18,250 --> 00:47:21,950
 a happiness controller that had no identifier set,
+HappinessViewController。而且没设置 identifier，
+
 
 1190
 00:47:21,950 --> 00:47:24,120
 then we would do nothing.
+那就不用做什么了。
 
 1191
 00:47:24,120 --> 00:47:25,820
 But if it's set, we're going to go in here,
+如果设置了，我们就需要一个
 
 1192
 00:47:25,820 --> 00:47:27,190
 we'll switch on it.
+switch 。
 
 1193
 00:47:27,190 --> 00:47:28,720
 So let's switch on identifier.
+对 identifier 做一个 switch。
 
 1194
 00:47:30,130 --> 00:47:34,430
 If it is the sad identifier, okay,
+如果它是 sad，
 
 1195
 00:47:34,430 --> 00:47:39,400
 the sad segue, then let's set our hvc's happiness to 0.
+那HVC的开心值我们设置成0
 
 1196
 00:47:41,770 --> 00:47:46,300
 Okay, so here's where I'm preparing, this newly created
+所以我在这里准备马上要显示在屏幕上的新
 
 1197
 00:47:46,310 --> 00:47:49,040
 HappinessViewController to be displayed on screen.
+生成的 HappinessViewController。
 
 1198
 00:47:50,280 --> 00:47:53,010
 Okay, and if it's the happy segue,
+继续，如果segue是happy，
 
 1199
 00:47:53,010 --> 00:47:56,710
 then we'll set the happiness to 100.
+就把开心值设为100.
 
 1200
-00:47:56,710 --> 00:47:58,950
-And then, actually for
-
-1201
-00:47:58,950 --> 00:48:01,180
-anything else, I'm just gonna set the happiness to 50.
+00:47:56,710 --> 00:48:01,180
+And then, actually for anything else, I'm just gonna set the happiness to 50.
+其他的情况，开心值是50就好了。
 
 1202
 00:48:01,180 --> 00:48:03,080
 Okay, something in the middle.
+中间值。
 
 1203
 00:48:04,550 --> 00:48:06,950
 Okay, so that's it, that's all I have to do here,
+好了，只是全部需要做的，
 
 1204
 00:48:06,960 --> 00:48:09,990
 that's all my ViewController needs to be prepared.
+这是我的view controller需要准备的所有东西。
 
 1205
 00:48:09,990 --> 00:48:12,830
 You know, if I had other things in here, I could
+当然，如果这里有别的东西，
 
 1206
 00:48:12,830 --> 00:48:16,030
 set other properties, but this is all this one needs.
+我可以在这里设置其他的属性，但是在这，现在就已经够了。
 
 1207
 00:48:16,030 --> 00:48:16,930
@@ -5317,78 +5433,92 @@ Okay?
 1208
 00:48:16,930 --> 00:48:18,100
 So it's prepared.
+已经准备好了。
 
 1209
 00:48:18,100 --> 00:48:19,260
 So let's go ahead and run this.
+我们来运行一下。
 
 1210
 00:48:19,270 --> 00:48:20,770
 This should all work, right?
+应该可以运行，
 
 1211
 00:48:20,770 --> 00:48:21,870
 It should be no problems.
+应该没什么问题了。
 
 1212
 00:48:22,800 --> 00:48:24,270
 Okay. Here's our psychologist.
+好，这是 psychologist 。
 
 1213
 00:48:24,270 --> 00:48:25,570
 Let's try dancing tree.
+试试 Dancing Tree 。
 
 1214
 00:48:25,570 --> 00:48:26,870
 Oh, crashed our program.
+哦。。。崩溃了。
 
 1215
 00:48:26,870 --> 00:48:30,070
 All right, kind of told you I was going to do this.
+之前应该说过我会这么做。
 
 1216
 00:48:30,080 --> 00:48:31,770
 Why did our program crash?
+为什么崩溃了呢？
 
 1217
 00:48:31,780 --> 00:48:33,280
 Well it says unexpected,
+它说有未知的。。
 
 1218
 00:48:33,280 --> 00:48:35,410
 I'm looking in the console down here.
+我正在看下边的控制台。
 
 1219
 00:48:35,410 --> 00:48:37,450
 You should always look in the console when it crashes.
+程序崩溃的时候一般都要看这。
 
 1220
 00:48:37,450 --> 00:48:38,380
-Okay? It's the first place
-
-1221
-00:48:38,380 --> 00:48:40,530
-you want to look.
+Okay? It's the first place you want to look.
+这是你最先要看的地方。
 
 1222
 00:48:40,530 --> 00:48:42,680
 This says unexpected found nil while unwrapping an optional.
+它说在解包一个可选值的时候意外的发现空值。
 
 1223
 00:48:42,690 --> 00:48:46,490
 Okay, so I accessed some optional that was nil.
+说明我使用了一个为空的可选值。
 
 1224
 00:48:46,490 --> 00:48:47,750
 So that's bad.
+很糟。
 
 1225
 00:48:47,760 --> 00:48:49,940
 Where did I do that?
+在哪发生的呢？
 
 1226
 00:48:49,940 --> 00:48:52,130
 Right here in updateUI, in HappinessViewController,
+就在这，HappinessViewController 里的 updateUI 。
 
 1227
 00:48:52,130 --> 00:48:53,260
@@ -5397,122 +5527,153 @@ HappinessViewController updateUI.
 1228
 00:48:53,260 --> 00:48:57,930
 Well, let's see, what in this line might be nil?
+让我们看一下，这行里什么东西是空值。
 
 1229
 00:48:57,930 --> 00:48:59,800
 Well, of course, it's the only thing that could be nil,
+当然，这是唯一有可能为空的，
 
 1230
 00:48:59,800 --> 00:49:02,170
 which is the faceView is nil.
+即使faceView。
 
 1231
 00:49:03,100 --> 00:49:04,500
 What is the faceView?
+faceView是什么？
 
 1232
 00:49:04,500 --> 00:49:06,040
 It's this outlet right here.
+它是在这的一个 outlet。
 
 1233
 00:49:06,040 --> 00:49:09,410
 Okay, we can also, by the way, go over here and
+另外，我们还能在这边
 
 1234
 00:49:09,410 --> 00:49:11,010
 find out how we got here.
+看看可以发现什么。
 
 1235
 00:49:11,010 --> 00:49:12,780
 So we got here because someone was setting our
+发现了updateUI 在属性观察器里
 
 1236
 00:49:12,780 --> 00:49:14,640
 model into the property observer,
+设置我们的model。
 
 1237
 00:49:14,650 --> 00:49:18,850
 we wanted to update UI, and we got there from preparation.
+我们希望更新UI，而且我们在这已经准备了。
 
 1238
 00:49:18,850 --> 00:49:19,910
 So here we are preparing,
+在这准备好了。
 
 1239
 00:49:19,920 --> 00:49:22,120
 we're trying to prepare this new MVC, and
+我们在这准备了新的 MVC， 
 
 1240
 00:49:22,120 --> 00:49:25,650
 it sets the model to be something,
+设置了我们的model ，
 
 1241
 00:49:25,660 --> 00:49:29,760
 that updates the UI, and we get here and we crash.
+然后更新UI， 然后我们在这就崩溃了。
 
 1242
 00:49:29,760 --> 00:49:31,690
 And why is faceView nil right there?
+那么为什么faceView在这是空？
 
 1243
 00:49:31,690 --> 00:49:34,160
 Because as I said in red,
+因为前面的slide我用红字提醒了，
 
 1244
 00:49:34,160 --> 00:49:37,200
 when you're preparing the outlets have not been set.
+当你准备segue的时候，outlet还没有设置。
 
 1245
 00:49:37,200 --> 00:49:40,330
 So this faceView outlet, down here, has not been set.
+所以这个faceView的 outlet，还没有被设置。
 
 1246
 00:49:40,330 --> 00:49:43,240
 So, you know, it's an implicit unwrapped optional, but
+这是一个强制解包的可选值，但是
 
 1247
 00:49:43,240 --> 00:49:46,770
 it's still an optional, and it has not been set yet.
+它依然是一个可选值，只是还没被设置。
 
 1248
 00:49:46,770 --> 00:49:48,540
 Okay, so how are we going to get around this?
+那么我们怎么解决这个问题呢？
 
 1249
 00:49:48,540 --> 00:49:52,340
 Well, luckily in our case, whenever we set, if we set our
+幸运的是，每当我们设置model的值时，
 
 1250
 00:49:52,350 --> 00:49:55,150
 model and we try to update the UI and the faceView's not
+我们就会尝试更新UI，如果这个时候faceView的outlet没有
 
 1251
 00:49:55,150 --> 00:49:57,810
 even connected yet, well, we can just ignore it then,
+连接，我们只需要忽略就好了。
+
 
 1252
 00:49:57,820 --> 00:50:00,980
 because obviously the faceView is up to date because it's
+因为很明显faceView是实时更新的，即使它在一开始
 
 1253
 00:50:00,990 --> 00:50:02,620
 not even hooked up.
+没有连接。
 
 1254
 00:50:02,620 --> 00:50:05,350
 So we can just use optional chaining here and
+所以我们可以使用可选值链条，
 
 1255
 00:50:05,360 --> 00:50:06,590
 just put a question mark there.
+在这加一个问号。
 
 1256
 00:50:07,560 --> 00:50:10,430
 Right, and what that says, if this thing is nil,
+这个意思就是，如果它是空值，
 
 1257
 00:50:10,430 --> 00:50:12,290
 than just ignore the rest of this statement.
+就忽略后边的部分。
 
 1258
 00:50:12,300 --> 00:50:14,030
@@ -5521,98 +5682,117 @@ Okay.
 1259
 00:50:14,030 --> 00:50:18,470
 So, one thing you'll probably end up doing a lot of times
+所以你之后应该经常做的一件事就是，
 
 1260
 00:50:18,470 --> 00:50:21,600
 is, in the things that could be called from a prepare,
+如果某个属性在准备的时候被调用，
 
 1261
 00:50:21,600 --> 00:50:23,770
 you might be putting this optional chaining in.
+你就需要把它们放到可选链里。
 
 1262
 00:50:23,770 --> 00:50:26,070
 Or checking, if base view does not equal nil,
+或者先检查它是否为空，
 
 1263
-00:50:26,070 --> 00:50:29,040
-then do something.
-
-1264
-00:50:29,040 --> 00:50:30,010
-Okay?
+00:50:26,070 --> 00:50:30,010
+then do something. Okay?
+然后在做其他的。
 
 1265
 00:50:30,010 --> 00:50:30,840
 So that should fix that.
+这样应该就解决问题了。
 
 1266
 00:50:30,840 --> 00:50:33,310
 Let's go ahead and run this.
+运行一下试试。
 
 1267
 00:50:33,310 --> 00:50:34,150
 Here it is.
+出来了
 
 1268
 00:50:34,150 --> 00:50:35,050
 Let's go back.
+先回去
 
 1269
 00:50:35,050 --> 00:50:37,450
 Dancing tree, very happy.
+Dancing Tree，非常开心的笑脸，
 
 1270
 00:50:37,450 --> 00:50:39,780
 Golden bear, very unhappy.
+Golden Bear，非常不爽。
 
 1271
 00:50:39,790 --> 00:50:41,380
 Buckeye?
+Buckeye？
 
 1272
 00:50:41,390 --> 00:50:42,650
 Okay.
+没问题
 
 1273
 00:50:42,650 --> 00:50:43,920
 Working fine, let's go take a look, and
+都没问题，然我们试试
 
 1274
 00:50:43,920 --> 00:50:46,860
 let's go look in landscape here.
+横屏。
 
 1275
 00:50:46,860 --> 00:50:48,160
 Golden Bear, working fine.
+Golden Bear，没问题。
 
 1276
 00:50:48,160 --> 00:50:53,230
 Notice that this MVC underlaps this title bar up here.
+注意这个 MVC 在标题条的下层。
 
 1277
 00:50:53,230 --> 00:50:57,000
 You can actually control that in storyboard if you inspect
+你可以在 storyboard 里点击这个 MVC，
 
 1278
 00:50:57,000 --> 00:50:58,630
 the MVC, you can click on there,
+设置它不要让
 
 1279
 00:50:58,630 --> 00:51:02,970
 say do not go under thing above me.
+任何东西覆盖在它的上面。
 
 1280
 00:51:02,970 --> 00:51:04,140
 Also notice that in landscape,
+另外要注意在横屏下，
 
 1281
 00:51:04,140 --> 00:51:06,340
 you get a little smaller title bar up here,
+标题条变的更小了。
 
 1282
 00:51:06,340 --> 00:51:08,410
 which is kind of nice.
+这样挺好看的。
 
 1283
 00:51:08,410 --> 00:51:09,810
@@ -5621,29 +5801,36 @@ Okay.
 1284
 00:51:09,810 --> 00:51:11,340
 But back in here, you get the bigger one,
+回到横屏，就大了一些。
 
 1285
 00:51:11,340 --> 00:51:14,650
 because you're getting the carrier and the time up here.
+因为上面有运营商和时间等等的东西。
 
 1286
 00:51:14,650 --> 00:51:17,680
 Okay, let's go look at it on the iPad.
+我们在iPad上运行一下看看。
 
 1287
 00:51:25,420 --> 00:51:28,490
 Okay, here's this, I can slide this thing out from the right,
+我能把主视图从左边滑出来，
 
 1288
 00:51:28,490 --> 00:51:31,590
 Golden Bear, Dancing Tree, Buckeye, working great.
+Golden Bear, Dancing Tree, Buckeye,没问题。
 
 1289
 00:51:31,600 --> 00:51:33,900
 We can go over here.
+再看看横屏。
 
 1290
 00:51:33,900 --> 00:51:37,530
+Golden Bear, Dancing Tree, Buckeye.
 Golden Bear, Dancing Tree, Buckeye.
 
 1291
@@ -5653,38 +5840,48 @@ Okay?
 1292
 00:51:40,020 --> 00:51:42,500
 So pretty straightforward, the stuff is all pretty easy to
+非常直观，所有东西在你的
 
 1293
 00:51:42,510 --> 00:51:44,340
 envisualize in your storyboard,
+storyboard 是可视的。
 
 1294
 00:51:44,340 --> 00:51:47,510
 when you're looking at the storyboard it's pretty clear,
+当你明白了这些连接的原理以后，
 
 1295
 00:51:47,510 --> 00:51:51,640
 once you understand how these connections happen, to see
+看一下 storyboard 你就会知道
+
 
 1296
 00:51:51,650 --> 00:51:52,680
 what's going on over here.
+运行的时候大致会发生什么。
 
 1297
 00:51:53,920 --> 00:51:59,120
 Okay, so one other thing I want to do here is make,
+好了，下边我要做的是。。。
 
 1298
 00:51:59,120 --> 00:52:04,690
 let me go back to my simulator.
+回到模拟器。
 
 1299
 00:52:04,690 --> 00:52:06,620
 Look at this guy over here.
+看这。
 
 1300
 00:52:06,630 --> 00:52:07,960
 This guy doesn't get a title.
+这边没有标题。
 
 1301
 00:52:08,960 --> 00:52:12,400

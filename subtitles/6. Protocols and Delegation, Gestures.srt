@@ -15,18 +15,18 @@ Stanford University.
 
 4
 00:00:11,744 --> 00:00:15,646
-Stanford CS193P winter of 2015.
-2015冬季学期，斯坦福大学CS193P课程 
+Stanford CS193p winter of 2015.
+2015 冬季学期，斯坦福大学 CS193p 课程
 
 5
 00:00:15,648 --> 00:00:18,882
 So today I am gonna do a little bit of
-今天我们将要做一点点
+今天我们将要在最开始的时候
 
 6
 00:00:18,884 --> 00:00:21,451
 demo action right at the beginning.
-demo 在最开始的时候
+做一点点演示
 
 7
 00:00:21,453 --> 00:00:24,754
@@ -35,13 +35,13 @@ I wanna show you a kind of a cool trick that you can do
 
 8
 00:00:24,756 --> 00:00:28,124
-inside your storyboard, and we also, last time,
-你可以在你的Storyboard里使用，我们同样的，在上次
+inside your Storyboard, and we also, last time,
+你可以在你的 Storyboard 里使用，同样的，我们在上次
 
 9
 00:00:28,126 --> 00:00:31,794
-didn't get to the point where we had actually a model for
-没有为我们的MVC创建一个实际的 model
+didn't get to the point where we had actually a Model for
+没有为我们的 MVC 创建一个实际的 Model
 
 10
 00:00:31,796 --> 00:00:33,795
@@ -50,48 +50,48 @@ our MVC, our happiness MVC.
 
 11
 00:00:33,797 --> 00:00:36,398
-We had worked on the face view and got that working but
-我们在 face view上工作过并且已经开始工作了
+We had worked on the FaceView and got that working but
+我们处理过 FaceView 并且使它能正常工作了
 
 12
 00:00:36,400 --> 00:00:37,632
-we didn't have a model,
-我们没有一个 model
+we didn't have a Model,
+但是我们没有一个 Model
 
 13
 00:00:37,634 --> 00:00:40,368
-so I'm gonna just put that model in there, but then I am
-所以我准备在这里放置一个 model，但是随后
+so I'm gonna just put that Model in there, but then I am
+所以我准备在那里放置一个 Model，但是随后
 
 14
 00:00:40,370 --> 00:00:43,103
 going to jump right back into the slides and I am going to
-我准备跳回进入 slides并且我准备
+我将回到幻灯片上，然后我将
 
 15
 00:00:43,105 --> 00:00:45,906
 cover a very important concept, which is delegation.
-掩盖一个重要的概念，就是 delegation
+介绍一个重要的概念，就是 delegation
 
 16
 00:00:45,908 --> 00:00:51,511
 And I'll have to kinda go over Swift's protocol syntax, and
-我很乐意去复习 Swift语言的 协议语法
+我将会重新讲述一下 Swift 语言的协议语法
 
 17
 00:00:51,513 --> 00:00:56,348
 then I will do a demo to show you how delegation works,
-随后我将会制作一个demo用来向你们展示 delegation是怎么工作的
+随后我将会进行一个演示向你们展示 delegation 是怎么工作的
 
 18
 00:00:56,350 --> 00:01:00,018
 then I'm gonna cover gestures, okay?
-随后我准备覆盖一些手势，明白？
+随后我准备介绍一些手势，明白？
 
 19
 00:01:00,020 --> 00:01:02,954
 We know how to draw in our view now from last time.
-在上节课中我们知道了怎么在我们的 view中进行绘制
+在上节课中我们知道了怎么在 view 中进行绘制
 
 20
 00:01:02,956 --> 00:01:06,190
@@ -101,12 +101,12 @@ So, now we're gonna then talk about how we handle gestures.
 21
 00:01:06,192 --> 00:01:08,859
 Pinches and pans and swipes and things like that.
-类似于捏合、滑动或者类似的动作
+类似于捏合、滑动之类的动作
 
 22
 00:01:10,129 --> 00:01:12,295
 And I think that'll probably use all of my time up.
-我想这会在我所有的时间内使用的
+我想这会花掉我所有的时间
 
 23
 00:01:12,297 --> 00:01:13,630
@@ -125,8 +125,8 @@ Which we're gonna spend most of Wednesday on.
 
 26
 00:01:19,037 --> 00:01:21,303
-Which is multiple MVCs, right?
-就是 multiple MVCs，明白？
+Which is Multiple MVCs, right?
+就是 Multiple MVCs，明白？
 
 27
 00:01:21,305 --> 00:01:22,704
@@ -135,8 +135,8 @@ We know how to build an MVC.
 
 28
 00:01:22,706 --> 00:01:25,573
-It's got a controller, it's got a model, it's got a view.
-它有一个 controller，model，view
+It's got a controller, it's got a Model, it's got a view.
+它有一个 controller，Model，view
 
 29
 00:01:25,575 --> 00:01:27,675
@@ -156,12 +156,12 @@ And that's critical, obviously,
 32
 00:01:31,480 --> 00:01:34,815
 to growing the capability of size of app you can build.
-增加功能会使你创建的APP的尺寸增加
+增加功能会使你创建的 App 的尺寸增加
 
 33
 00:01:34,817 --> 00:01:38,785
 So I'll try and fit in five or ten minutes of slides for
-所以我将会尝试在5到10分钟内进行适配
+所以我将会尽量控制在 5 到 10 分钟把幻灯片讲完
 
 34
 00:01:38,787 --> 00:01:41,921
@@ -180,58 +180,58 @@ All right.
 
 37
 00:01:47,794 --> 00:01:54,531
-So, let's dive into this demo first, before I talk about.
-所以，让我们先潜入这个demo，在我谈论这个之前
+So, let's dive into this demo first, before I talk about
+所以，让我们进行这个 demo，在我谈论其他那些内容之前
 
 38
 00:01:54,533 --> 00:01:59,202
-That, okay I am just going to bring up
-那个，我只是准备造就
+that, okay I am just going to bring up
+我准备
 
 39
 00:01:59,204 --> 00:02:03,272
-happiness from where we left off last time.
-happiness 从我们上次离开的地方
+Happiness from where we left off last time.
+从我们上次离开 Happiness 的地方开始
 
 40
 00:02:03,274 --> 00:02:07,476
-And really all we had done here was the Face View,
-然后我们在这里已经完成的是 Face View
+And really all we had done here was the FaceView,
+这是我们已经完成的 FaceView
 
 41
 00:02:07,478 --> 00:02:09,511
 we had not done our Happiness View.
-我们没有完成我们的 Happiness View
+我们没有完成 Happiness View
 
 42
 00:02:09,513 --> 00:02:12,280
-In fact, if I switch over to our Happiness View controller,
-事实上，如果我切换到我们的 Happiness View controller
+In fact, if I switch over to our HappinessViewController,
+事实上，如果我切换到 HappinessViewController
 
 43
 00:02:12,282 --> 00:02:14,382
 you can see it is completely empty.
-你可以看到它完全是空的
+你可以看到它是完全空的
 
 44
 00:02:14,384 --> 00:02:17,051
 So one thing we're gonna do is
-我们我们将要做的一件事是
+我们将要做的一件事是
 
 45
 00:02:17,053 --> 00:02:19,786
-fix our model here but before we do that I'm gonna show you
-修复我们的 model在我准备向你们展示
+fix our Model here but before we do that I'm gonna show you
+修复我们的 Model，但是在我向你们演示之前
 
 46
 00:02:19,788 --> 00:02:22,455
-something really cool that you can do in story boards.
-一些你可以在storyboards里完成的很酷的事之前
+something really cool that you can do in Storyboards.
+我要跟你们讲一些可以在 Storyboards 里完成的很酷的事
 
 47
 00:02:22,457 --> 00:02:26,359
 So here we have our story board and it's pretty blank.
-所以这里我们拥有我们的 storyboard并且它是空白的
+这里是我们的 Storyboard，它是空白的
 
 48
 00:02:26,361 --> 00:02:29,762
@@ -240,8 +240,8 @@ It looks blank there's this big blank square here.
 
 49
 00:02:29,764 --> 00:02:32,865
-This is our face view in here that I have selected.
-在这里我选中的是我们的 face view
+This is our FaceView in here that I have selected.
+在这里我选中的是我们的 FaceView
 
 50
 00:02:32,867 --> 00:02:36,168
@@ -250,28 +250,28 @@ You can see the little resize handles are selected but
 
 51
 00:02:36,170 --> 00:02:38,403
-I can't even really tell that's a face view.
-但是我甚至不能告诉你那就是 face view
+I can't even really tell that's a FaceView
+但是我甚至不能告诉你那就是 FaceView
 
 52
 00:02:38,405 --> 00:02:40,638
 It's hard to tell where it is.
-很难去描述出来他们在哪儿
+很难去描述出来他在哪儿
 
 53
 00:02:40,640 --> 00:02:42,640
 It's just kinda hard to tell what's going on.
-也很难描述出来他们将要到哪里去
+也很难描述这到底是怎么一回事
 
 54
 00:02:42,642 --> 00:02:46,276
 And it's actually possible believe it or not to have your
-然后它实际上可能相信它存在或者不存在
+不管你信不信，它实际上可以
 
 55
 00:02:46,278 --> 00:02:51,381
-custom UI view subclasses draw in your story board.
-去拥有你的自定义 UI view的 subclasses 在你的 storyboard里
+custom UIView subclasses draw in your Storyboard.
+把你的自定义的 UIView 子类绘制在了你的 Storyboard 里
 
 56
 00:02:51,383 --> 00:02:52,715
@@ -280,18 +280,18 @@ Okay? So they can actually be
 
 57
 00:02:52,717 --> 00:02:54,784
-live drawing in your storyboard.
-已经在你的 stroyboard中被绘制了
+live drawing in your Storyboard.
+已经在你的 Stroyboard 中被绘制了
 
 58
 00:02:54,786 --> 00:02:56,985
 And it's really incredibly easy to do.
-而且它实际上这么做是令人难以置信的简单
+这真是令人难以置信的简单
 
 59
 00:02:56,987 --> 00:02:59,121
-I'm just gonna go back to my face view.
-我准备返回我的 face view
+I'm just gonna go back to my FaceView.
+我准备返回 FaceView
 
 60
 00:02:59,123 --> 00:03:01,173
@@ -301,87 +301,87 @@ Here it is.
 61
 00:03:01,174 --> 00:03:03,224
 And right before the class here I'm gonna say
-在这个类之前我准备探讨
+在这个类之前我输入
 
 62
 00:03:03,226 --> 00:03:06,160
 at sign IBDesignable.
-IBDesignable标记处的内容
+@IBDesignable
 
 63
 00:03:07,663 --> 00:03:11,264
 And if I put at sign IBDesignable in there,
-如果我在这里放置 IBDesignable标记
+如果我在这里放置 IBDesignable 标记
 
 64
 00:03:11,266 --> 00:03:12,899
-then when I go back to my storyboard,
-然后当我返回我的 storyboard的时候
+then when I go back to my Storyboard,
+然后当我返回 Storyboard 的时候
 
 65
 00:03:12,901 --> 00:03:18,838
-Xcode automatically notices that's an IB designable
-Xcode 自动的识别那是一个 IB designable 类
+Xcode automatically notices that's an IBDesignable
+Xcode 会自动识别出来那是一个 IBDesignable 类
 
 66
 00:03:18,840 --> 00:03:22,941
-class and it will draw it right here in the story board,
-然后它会在 storyboard中的这里绘制它
+class and it will draw it right here in the Storyboard,
+然后它会在 Storyboard 中绘制它
 
 67
 00:03:22,943 --> 00:03:26,511
 so now I can see much more easily what's going on with my
-所以现在我可以发现我的 faceview 会变得更加容易
+所以现在我可以更加容易地看到 FaceView 发生了什么变化
 
 68
 00:03:26,513 --> 00:03:27,979
-face view, where it is here.
-它是在这里
+FaceView, where it is here.
+因为它在这里（被绘制出来了）
 
 69
 00:03:29,349 --> 00:03:31,582
-And if I change something in my face,
-然后如果我在我的 face view中改变了什么的话
+And if I change something in my FaceView,
+然后如果我在 FaceView 中改变了什么的话
 
 70
 00:03:31,584 --> 00:03:34,585
 like let's go change that smile so it's not a frown.
-类似于我们将笑脸换成不是皱眉的那个
+比如我们将笑脸换成不是皱眉的那个
 
 71
 00:03:34,587 --> 00:03:37,821
 Whoops where is that, it's right here, minus 0.5.
-Whoops 哪里去了，它在这里，减掉0.5
+Whoops 哪里去了，它在这里，-0.5
 
 72
 00:03:37,823 --> 00:03:41,358
 Let's change that to plus 0.5.
-让我们给它增加0.5
+让我们把它改成 0.5
 
 73
 00:03:41,360 --> 00:03:45,028
 Then you'll notice that this file has changed and
-然后一会发现这个文件被修改了
+然后你会发现这个文件被修改了
 
 74
 00:03:45,030 --> 00:03:49,098
 it will recompile it and redraw it.
-随后它将会重新编译它并且重新绘制它
+随后它将会重新编译并且绘制它
 
 75
 00:03:49,100 --> 00:03:51,467
 Okay so you're always seeing the latest version.
-所以你可以始终看到最终的版本
+所以你总是看到最新的版本
 
 76
 00:03:51,469 --> 00:03:54,587
 Now another thing that would be really
-现在这里还有另外一件事会很酷
+这里还有另外一件很酷的事
 
 77
 00:03:54,588 --> 00:03:57,706
 cool here is just like if we have a button or a label.
-就像如果我们拥有一个 button 或一个 label
+比如我们拥有一个 button 或一个 label
 
 78
 00:03:57,708 --> 00:04:00,708
@@ -396,16 +396,16 @@ we can edit attributes of a button or a label.
 80
 00:04:03,413 --> 00:04:04,812
 Right? Like its alignment or its font.
-明白？类似于它的对其方式或者字体
+明白？类似于它的对齐方式或者字体
 
 81
 00:04:04,814 --> 00:04:07,180
 Well wouldn't it be cool if we could edit the attributes of
-想象一下如果我们在这里可以编辑 face view的属性
+想象一下如果我们在这里可以编辑 FaceView 的属性
 
 82
 00:04:07,182 --> 00:04:09,115
-this face view here as well?
+this FaceView here as well?
 会不会变得很酷
 
 83
@@ -415,73 +415,73 @@ And we can do that too.
 
 84
 00:04:11,102 --> 00:04:13,086
-If we go back here to the face view here's some of
-如果我们返回到face view的这里
+If we go back here to the FaceView here's some of
+如果我们返回到 FaceView 的这里
 
 85
 00:04:13,088 --> 00:04:15,287
-the things that are setable about a face view.
-这里是有一些地方是可以设置 face view的
+the things that are setable about a FaceView.
+这里是有一些地方是可以设置 FaceView 的
 
 86
 00:04:15,289 --> 00:04:18,991
 The line width, the color, and the scale.
-线宽，颜色，和比例
+线宽、颜色和比例
 
 87
 00:04:18,993 --> 00:04:24,329
 And you can make any of these things editable inside of your
-并且你可以设置其中的任何一个属性在你的 storyboard中
+你可以令这些属性在 Storyboard 中变成可设置的
 
 88
 00:04:25,732 --> 00:04:30,234
-storyboard by just putting in here i b inspectable.
-通过仅仅是在这里放置 i b inspectable
+Storyboard by just putting in here IBInspectable.
+方法很简单，就是在这里放置 @IBInspectable 标记
 
 89
 00:04:31,437 --> 00:04:33,136
-But I'd be inspectable before them.
-但我会在他们之前 放置inspectable
+Put IBInspectable before them.
+在这些属性之前放置 @IBInspectable
 
 90
 00:04:34,105 --> 00:04:36,272
-Then interface builder,
-随后 interface builder，
+Then Interface Builder,
+然后 Interface Builder，
 
 91
 00:04:36,274 --> 00:04:39,041
-which is the part of x code that is doing part of your
-是Xcode的一部分会做 storyboard的部分工作
+which is the part of Xcode that is doing part of your
+这个 Xcode 的组件，这个完成 Storyboard 那部分工作的组件
 
 92
 00:04:39,043 --> 00:04:46,414
-storyboard will create a new UI to make all those editable.
-比如创建一个新的 UI使所有的这些可编辑
+Storyboard will create a new UI to make all those editable.
+会创建一个新的 UI 使所有的这些变成可设置的
 
 93
 00:04:46,416 --> 00:04:48,400
-Here is our storyboard.
-这里就是我们的 storyboard
+Here is our Storyboard.
+这是我们的 Storyboard
 
 94
 00:04:48,401 --> 00:04:50,385
-Now if you look over here you can see face view.
-现在如果你查看这里你可以看见 face view
+Now if you look over here you can see FaceView.
+现在你看这里，你可以看见 FaceView
 
 95
 00:04:50,387 --> 00:04:52,153
 It's added things to be able to set these.
-它添加的东西才能够设置这些
+这是新添加的选项，这些选项可以用来设置这些属性
 
 96
 00:04:52,155 --> 00:04:54,588
 I can set things like my line width.
-我可设置很多比如我的线宽
+我可设置很多东西，比如我的线宽
 
 97
 00:04:54,590 --> 00:04:57,190
 Maybe I want thicker lines.
-也许我想要加厚的线条
+也许我想要更粗的线条
 
 98
 00:04:57,192 --> 00:04:58,892
@@ -491,12 +491,12 @@ Maybe I want a different color.
 99
 00:04:58,894 --> 00:05:00,626
 So we can go to the color chooser here.
-所以我们可以去颜色选择器
+所以我们可以打开颜色选择器
 
 100
 00:05:00,628 --> 00:05:05,531
 We could pick green color or orange or something like that.
-我们可以选择绿色或者橙色或者类似的颜色
+我们可以选择绿色或者橙色或者其他颜色
 
 101
 00:05:05,533 --> 00:05:06,231
@@ -516,22 +516,22 @@ And we can change the scale as well, too.
 104
 00:05:09,736 --> 00:05:14,071
 We can go down to 0.5, maybe we want to go 0.95, all right?
-我们可以向下调整0.5，或者我们想要调整0.95，明白？
+我们可以向下调整 0.5，或者我们想要调整 0.95，看到没？
 
 105
 00:05:14,073 --> 00:05:15,573
 We can change that.
-我们可以改变那个
+我们可以改变这个参数
 
 106
 00:05:15,574 --> 00:05:17,074
 Now, these are not only changing here in
-现在，这些不仅仅是在你的storyboard中改变了
+现在，这些不仅仅是在你的 Storyboard 中改变了
 
 107
 00:05:17,076 --> 00:05:19,776
-your storyboard, but they're actually setting the default
-实际上他们在设置中参数也改变了
+your Storyboard, but they're actually setting the default
+实际上他们被当做了默认值
 
 108
 00:05:19,778 --> 00:05:21,978
@@ -541,8 +541,7 @@ value so that when you run your application, so
 109
 00:05:21,980 --> 00:05:23,846
 let's go and run our application here.
-现在让我们在这里运行我们的应用
-
+现在让我们来运行一下我们的应用
 
 110
 00:05:23,848 --> 00:05:25,814
@@ -551,23 +550,23 @@ It's going to use these values that are set in
 
 111
 00:05:25,816 --> 00:05:27,833
-the storyboard.
-storyboard中设置的参数
+the Storyboard.
+Storyboard 中设置的参数
 
 112
 00:05:27,834 --> 00:05:29,851
 Just like if those were buttons or labels and you had
-就像如果这些是按钮或者文本然后
+如果这些是 button 或者 label 然后
 
 113
 00:05:29,853 --> 00:05:33,321
 changed something about them in the inspector, it's going
-你在inspector中改变了他们的一些参数
+你在 inspector 中改变了他们的一些参数
 
 114
 00:05:33,323 --> 00:05:35,456
 to change the way it works in your program as well.
-它将会在你的程序中改变它的工作方式
+你的程序中这些参数的所代表的东西也会改变
 
 115
 00:05:36,859 --> 00:05:38,809
@@ -577,17 +576,17 @@ Yes, questions.
 116
 00:05:38,810 --> 00:05:40,760
 >> So that overwrites what's in your code?
->> 所以在你的代码中重写了？
+>> 所以重写了在你的代码中写的那些参数？
 
 117
 00:05:40,763 --> 00:05:43,530
 >> Yes, so the question is does that overwrite what's in
->> 好的，所以问题是在代码中
+>> 好的，问题是这是不是重写了在我们的代码中写的那些参数
 
 118
 00:05:43,532 --> 00:05:44,430
 our code?
-进行重写了？
+在我们的代码中写的那些参数？
 
 119
 00:05:44,432 --> 00:05:46,232
@@ -597,182 +596,182 @@ So for example, back here.
 120
 00:05:46,234 --> 00:05:49,535
 We had equals three, we had equals blue color and
-我们拥有相同的3个，我们有三个相同的蓝色
+我们写了 = 3，我们写了 = UIColor.blueColor()
 
 121
 00:05:49,537 --> 00:05:50,869
 the answer is yes, it overrides it.
-然后答案是是的，它重写了它
+答案是：是的，这重写了这些参数
 
 122
 00:05:50,871 --> 00:05:54,272
 Basically, when interface loads it up it respects those.
-从根本上来说，当 interface加载了它
+基本上，当 interface 加载它的时候，interface 会参考这些参数
 
 123
 00:05:54,274 --> 00:05:57,175
 It will use those but as soon as you start editing them,
-它将会使用他们但是当你开始编辑他们的时候
+它将会使用代码中设定的这些参数，但是当你设置这些参数的时候
 
 124
 00:05:57,177 --> 00:05:59,110
 then it's going to override them and
-它将会 override他们并且
+它将会重写他们
 
 125
 00:05:59,112 --> 00:06:00,344
 reset them to the editor value.
-重置他们的值为编辑器的值
+并将这些参数重置为编辑器的值
 
 126
 00:06:01,613 --> 00:06:03,213
 Any other questions about that?
-还有其他关于这里的问题么？
+关于这里还有其他问题么？
 
 127
 00:06:03,215 --> 00:06:04,113
 Question?
-还有问题么？
+你的问题是？
 
 128
 00:06:08,052 --> 00:06:09,651
 >> Yes, so the question is are there some,
->> 好的，所以问题是那里
+>> 好的，问题是：这是不是
 
 129
 00:06:09,653 --> 00:06:11,686
-there's got to be some got-yous, or something.
-那里有一些你的或者一些东西
+there's got to be some gotchas, or something.
+这里看上去像是个“陷阱”（需要注意的地方）什么的
 
 130
 00:06:11,688 --> 00:06:15,323
 Why wouldn't it just be the ideal design be the default?
-为什么不让它的默认值达到一个完美的设计
+为什么不直接设置一个理想的默认值呢？
 
 131
 00:06:15,325 --> 00:06:17,992
 And, yes, there are some gotchas.
-是的，那里有一些 gotchas
+是的，这有一些“陷阱”
 
 132
 00:06:17,994 --> 00:06:22,796
 There's certain things that, really, it can't do.
-还有某些事情，真的是，我做不了
+有些事情，真的是，它做不了
 
 133
 00:06:22,798 --> 00:06:26,466
 It can't load your code up, you might have dependencies on
-它不能加载你的代码，你也许有一些 dependencies在
+因为它不能加载你的代码，比如，你也许依赖于
 
 134
 00:06:26,468 --> 00:06:30,003
 other frameworks that it can't see, things like that.
-其他的 frameworks上并且是看不到的，事情就像那样
- 
+另外一些看不见的 frameworks
+
 135
 00:06:30,005 --> 00:06:31,537
 So yeah, there are some gotchas,
-所以，那里有一些 gotchas
+所以，是有一些“陷阱”
 
 136
 00:06:31,539 --> 00:06:33,405
 I don't have time to go through them all but
-我没有时间去把他们都经历一遍
+我没有时间去把这些都讲一遍
 
 137
 00:06:33,407 --> 00:06:35,340
 I just wanted to show you that this is here for
-但是我只是想要向你展示这里的东西
+我把这些放在这里说是因为
 
 138
 00:06:35,342 --> 00:06:37,175
-most straight forward sub class UI view,
-大多数的是跟 UI view 类相关的
+most straight forward subclass UIView,
+这是跟 UIView 直接相关的
 
 139
 00:06:37,177 --> 00:06:38,643
 it works great without gotchas.
-它在没有 gotchas的时候工作的很好
+它在没有“陷阱”的时候可以正常地运行
 
 140
 00:06:38,645 --> 00:06:42,880
 But yeah, there are obviously some times when it's not going
-但是，在那里明显也有一些时候它不工作了
+但是，很明显地，也有一些时候它会出问题
 
 141
 00:06:42,882 --> 00:06:46,683
 to work, because you could have a complicated view, so
-以为你也许有一个复杂的视图
+因为你也许有一个复杂的 view
 
 142
 00:06:46,685 --> 00:06:49,152
 any other questions about it?
-所以还有其他的问题么？
+还有其他的问题么？
 
 143
 00:06:49,154 --> 00:06:50,519
 That's all there is to know about that.
-这就是所有的关于这部分的内容
+这就是所有关于这部分的内容
 
 144
 00:06:52,456 --> 00:06:55,957
-So let's go back to our model here, or
-所以让我们回到我们的 model
+So let's go back to our Model here, or
+所以让我们回到我们的 Model
 
 145
 00:06:55,959 --> 00:07:00,028
-to our controller, and I want to put the model in here for
-或者我们的 controller，然后我想在这里放一个 model
+to our controller, and I want to put the Model in here for
+或者我们的 controller，然后我想在这里放一个 Model
 
 146
 00:07:00,030 --> 00:07:01,295
-the happiness view controller.
-提供给 happiness view controller
+the HappinessViewController.
+提供给 HappinessViewController
 
 147
 00:07:01,297 --> 00:07:04,331
-So it's model, because this is demoed and
-所以这里是 model，因为这是一个 demo
+So it's Model, because this is demoed and
+这里是 Model，因为这是一个 demo
 
 148
 00:07:04,333 --> 00:07:06,199
 I want it all to be really quick and
-并且我想要所以的变得很快
+并且我想要快点讲
 
 149
 00:07:06,201 --> 00:07:08,868
 you can even follow along with me, some of you.
-你甚至可以跟着我，你们中的一部分
+你们甚至可以跟着我，你们中的部分同学
 
 150
 00:07:08,870 --> 00:07:10,370
-This model's gonna be really simple.
-这个 model 将会变得非常简单
+This Model's gonna be really simple.
+这个 Model 将会变得非常简单
 
 151
 00:07:10,372 --> 00:07:12,738
-I'm gonna have the model of and
-我将要拥有 model
+I'm gonna have the Model of and
+我将会创建一个 Model ……
 
 152
 00:07:12,740 --> 00:07:14,006
-a model you know the model is right?
-一个你知道的 model
+a Model you know the Model is right?
+一个 Model，你们知道什么是 Model 吧
 
 153
 00:07:14,008 --> 00:07:16,141
-Your calculator's model was a calculator brain so
-你的计算器的 model 是一个计算器的大脑
+Your calculator's Model was a CalculatorBrain so
+你的计算器的 Model 是一个 CalculatorBrain
 
 154
 00:07:16,143 --> 00:07:19,277
-it was a whole object that you created to be the model.
-所以你建立的 model是一整个对象
+it was a whole object that you created to be the Model.
+所以你创建的 Model 是一整个对象
 
 155
 00:07:19,279 --> 00:07:22,547
-Here I'm gonna have my model be the happiness and
-在这里我准备使我的 model成为 happiness并且
+Here I'm gonna have my Model be the happiness and
+在这里我将使用 happiness 作为 Model
 
 156
 00:07:22,549 --> 00:07:25,082
@@ -781,8 +780,8 @@ it's going to be the very complicated data structure of
 
 157
 00:07:25,084 --> 00:07:26,216
-an int.
-一个 int 型
+an Int.
+一个 Int 型
 
 158
 00:07:26,218 --> 00:07:28,135
@@ -792,22 +791,22 @@ Okay. So
 159
 00:07:28,136 --> 00:07:30,053
 we're gonna represent our happiness as an Int.
-我们准备 represent我们的 happiness为一个 Int型
+我们用一个 Int 型来代表我们的 happiness
 
 160
 00:07:30,055 --> 00:07:32,422
 And I'm gonna start it out at 50.
-所以我准备给它出来的值设定为50
+所以我把它的初始值设定为 50
 
 161
 00:07:32,424 --> 00:07:36,559
 And I'm gonna have my happiness mean 0 is very sad,
-然后我准备设置我的 happiness为0的时候代表非常伤心
+然后我在这里注释：happiness 为 0 的时候代表非常伤心
 
 162
 00:07:36,561 --> 00:07:39,094
 and 100 is ecstatic.
-100的时候代表欣喜若狂
+100 的时候代表欣喜若狂
 
 163
 00:07:39,096 --> 00:07:40,462
@@ -816,63 +815,63 @@ Okay?
 
 164
 00:07:40,464 --> 00:07:41,930
-So that's my model.
-所以那是我的 model
+So that's my Model.
+所以那是我的 Model
 
 165
 00:07:41,932 --> 00:07:44,966
-Super duper simple model, and don't get this model confused
-超级简单的一个 model，然后不要让这个 model感到困惑
+Super duper simple Model, and don't get this Model confused
+超级简单的一个 Model，然后不要将这个 Model 跟
 
 166
 00:07:44,968 --> 00:07:46,801
-with the smiliness in the face view,
-在 face view中使用一个笑脸
+with the smiliness in the FaceView,
+FaceView 中的 smiliness 混淆起来
 
 167
 00:07:46,803 --> 00:07:49,903
 that's a different thing, that's just the angle of
-那是一件不同的事，这仅仅是
+那是一件不同的东西，这仅仅是
 
 168
 00:07:49,905 --> 00:07:52,572
-that arc in the face view, totally separate thing.
-face view中 圆弧的角度，完全独立的东西
+that arc in the FaceView, totally separate thing.
+FaceView 中圆弧的角度，完全独立的东西
 
 169
 00:07:52,574 --> 00:07:54,808
 And you notice they're kind of on different scales anyways.
-你注意到他们种在不同尺度上
+而且他们的取值也不同
 
 170
 00:07:54,810 --> 00:07:55,842
 This is 0 to 100,
-这是 0到 100
+这是 0 到 100
 
 171
 00:07:55,844 --> 00:08:00,379
 the smiliness is minus 1 to positive 1, etc.
-笑脸减1或者加1，等等
+smiliness 是 -1 到 +1，等等
 
 172
 00:08:00,381 --> 00:08:01,680
 And that's okay because one of
-那是没关系的因为
+那是没关系的，因为
 
 173
 00:08:01,682 --> 00:08:05,883
 the things that controllers do, one of their jobs really,
-事情中的一件事情由 controller做，他们中的任何一项工作
+controller 做的其中一件事，他们的其中一项工作
 
 174
 00:08:05,885 --> 00:08:09,487
-is to interpret the model for the view.
-是由 model interpret给 view 的
+is to interpret the Model for the view.
+就是为 View 解释 Model
 
 175
 00:08:09,489 --> 00:08:11,755
 Okay, or vice versa in what happens in the view.
-好的，反之在该视图会发生什么
+反之亦然
 
 176
 00:08:11,757 --> 00:08:12,723
@@ -881,13 +880,13 @@ And they have to figure out what to
 
 177
 00:08:12,725 --> 00:08:13,941
-communicate to the model.
-去用什么和 model沟通
+communicate to the Model.
+用什么去和 Model 沟通
 
 178
 00:08:13,942 --> 00:08:15,158
 That's a lot of what a controller does.
-controller做的是一件很大的工作
+这就是 controller 做的大部分工作
 
 179
 00:08:15,160 --> 00:08:17,026
@@ -897,37 +896,37 @@ And so, we're going to have some coding here,
 180
 00:08:17,028 --> 00:08:19,712
 that does exactly that.
-这正是这么做的
+完成我刚才说的那些工作
 
 181
 00:08:19,713 --> 00:08:22,397
 Interprets our 0 to 100 happiness into a smile or not.
-Interprets 我们的 0 到 100 进入一个笑脸或者不进入
+将 0 到 100 的 happiness 转换成一个笑脸或哭脸
 
 182
 00:08:22,400 --> 00:08:23,665
 Now there's other things that
-现在有其他的事情
+除了微笑，还有其他的东西
 
 183
 00:08:23,667 --> 00:08:25,567
 represent happiness besides smiling.
-represent happiness 除了 smiling
+可以代表 happiness
 
 184
 00:08:25,569 --> 00:08:27,001
 You know, little crinkly eyes.
-你知道的，有点弯曲的眼睛
+比如，有点弯曲的眼睛
 
 185
 00:08:27,003 --> 00:08:29,870
 And other things that make you appear that you're happy.
-和其他的东西，让你看来是快乐的
+和其他让你看起来快乐的东西
 
 186
 00:08:29,872 --> 00:08:32,139
-But we're just gonna use our face view which only knows how
-但我们只是要去使用我们的 face view 它只知道怎样
+But we're just gonna use our FaceView which only knows how
+但我们只会使用我们的 FaceView，它只知道怎样
 
 187
 00:08:32,141 --> 00:08:34,975
@@ -936,13 +935,13 @@ to smile or not.
 
 188
 00:08:34,977 --> 00:08:39,846
-Now one thing that we can do inside this model.
-现在在这个 model中有一件事我们可以做
+Now one thing that we can do inside this Model.
+现在在这个 Model 中有一件事我们可以做
 
 189
 00:08:41,282 --> 00:08:43,115
 I put the curly braces here and
-我在这里添加一个大括号然后
+我在这里添加一个大括号
 
 190
 00:08:43,117 --> 00:08:44,750
@@ -952,87 +951,87 @@ you might say why did I put that there?
 191
 00:08:44,752 --> 00:08:48,353
 That is because I want to use the property observer for
-那是因为我想要对我的 model使用属性观察器
+那是因为我想要对我的 Model 使用属性观察器来
 
 192
 00:08:48,355 --> 00:08:52,790
-my model to, essentially, validate my model.
-实质上，验证我的 model
+my Model to, essentially, validate my Model.
+验证我的 Model
 
 193
 00:08:52,792 --> 00:08:55,359
 So you can use property observers to do evaluation,
-所以你可以使用属性观察期去进行评估
+所以你可以使用属性观察器去进行评估
 
 194
 00:08:55,361 --> 00:08:57,527
 really, of any property that you want.
-任何你想查看的属性
+对任何你想查看的属性进行评估
 
 195
 00:08:57,529 --> 00:08:59,829
 So my happiness can only be 0 to a 100.
-所以我的 happiness 只能在 0 到 100内
+所以我的 happiness 只能是 0 到 100
 
 196
 00:08:59,831 --> 00:09:02,865
 If someone passes me happiness minus 1 or
-如果一个人传给我的 happiness 负1或者
+如果有人给我的 happiness 传递了 -1 或者
 
 197
 00:09:02,867 --> 00:09:07,236
 5,000 I need to kind of keep it in range to 0 to 100.
-5000 我需要将它保持在 0到100的范围内
+5000，我需要将它保持在 0 到 100 的范围内
 
 198
 00:09:07,238 --> 00:09:09,871
 So I'm just going to say, in my setter here,
-所以，我只是想说，在我的 setter中
+所以，我要写，在我的 setter 中
 
 199
 00:09:09,873 --> 00:09:11,606
 my property observer here,
-我的属性观察期中
+我的属性观察器中
 
 200
 00:09:11,608 --> 00:09:18,279
 I'm going to say min max of my happiness to 0 or 100,
-我想说在我的 happiness中最小和最大的值是 0和100
+我要写 happiness 的最小和最大值是 0 和 100
 
 201
 00:09:18,281 --> 00:09:21,048
 so I'm just keeping it between zero and a hundred, right?
-因此我将把它保持在0到100之间, 对么?
+因此我将把它保持在 0 到 100 之间, 对么?
 
 202
 00:09:21,050 --> 00:09:22,649
 So no matter what someone passes me -1 or 5000,
-无论输入了-1还是5000.
+无论输入了 -1 还是 5000
 
 203
 00:09:22,651 --> 00:09:24,718
 my happiness won't ever be outside of that.
-我的"开心指数" 永远不会超出范围.
+我的 happiness 永远不会超出范围
 
 204
 00:09:24,720 --> 00:09:26,986
 Again, this is kind of a trivial example.
-再说一遍, 这是一个很简易的例子.
+再说一遍, 这是一个很简易的例子
 
 205
 00:09:26,988 --> 00:09:28,854
-You might have a much powerful model that
-你可以有个更强大的Model.
+You might have a much powerful Model that
+你可以有个更强大的 Model
 
 206
 00:09:28,856 --> 00:09:31,457
 needs much more powerful validation than this,
-需要比这更严谨的评估.
+需要比这更严谨的评估
 
 207
 00:09:31,459 --> 00:09:34,526
 but you can see this as a place to put it.
-但是你能把它(这个Model)看做一个可行的方案.
+你可以把这些评估操作写在这里
 
 208
 00:09:34,528 --> 00:09:36,461
@@ -1041,78 +1040,78 @@ Another thing you might want to have here is if someone
 
 209
 00:09:36,463 --> 00:09:39,630
-updates your model, you might want to update your UI.
-如果有人改变了你的Model, 你可能想要更新你的UI.
+updates your Model, you might want to update your UI.
+如果有人改变了你的 Model, 你可能想要更新你的 UI
 
 210
 00:09:39,632 --> 00:09:42,333
-Okay, so I'm going to have update UI,
-好的, 因此我将升级UI.
+Okay, so I'm going to have updateUI,
+好的, 因此我在这里进行 updateUI 操作
 
 211
 00:09:42,335 --> 00:09:45,135
-and I'm just going to have a function down here, update UI,
-我将在下面这里加一个函数(Function), 叫updateUI.
+and I'm just going to have a function down here, updateUI,
+我将在下面这里加一个函数, 叫 updateUI
 
 212
 00:09:45,137 --> 00:09:49,205
 and it's going to do something to update the user interface,
-它将会负责更新用户界面.
+它将会负责更新用户界面
 
 213
 00:09:49,207 --> 00:09:50,073
 and that's a common thing.
-更新UI是一件很寻常的事情.
+更新 UI 是一件很寻常的事情
 
 214
 00:09:50,075 --> 00:09:51,440
-When your model changes,
-当你的Model改变时,
+When your Model changes,
+当你的 Model 改变时
 
 215
 00:09:51,442 --> 00:09:55,177
 you want your controller to cause the UI to be updated.
-你想让你的Controller将UI更新.
+你想让你的 Controller 将 UI 更新
 
 216
 00:09:55,179 --> 00:09:59,381
 I think I'm going to put in here also is a little println
-我还会在这里加个println() 命令,
+我还会在这里写一句
 
 217
 00:09:59,383 --> 00:10:07,855
 happiness equals back slash happiness.
-Happiness =\  happiness.
+println("happiness = \(happiness)")
 
 218
 00:10:07,857 --> 00:10:12,125
 Just so we can see our happiness changing in our
-这样我们总是能在接下来的演示中,
+这样我们就能在接下来的演示中
 
 219
 00:10:12,127 --> 00:10:15,962
 console all the time as we work the rest of the demos.
-在console(控制台)中看到happiness的变化.
+在 console（控制台）中看到 happiness 的变化情况
 
 220
 00:10:15,964 --> 00:10:18,297
-So we'll work on this update UI piece when we
-好的,在我们回到demo之前,
+So we'll work on this updateUI piece when we
+好的，在我们之后重新进行演示的时候会完成
 
 221
 00:10:18,299 --> 00:10:20,299
 get back to the demos.
-解决更新UI这部分.
+updateUI() 这部分
 
 222
 00:10:20,300 --> 00:10:22,300
-I just wanted to show you the model of happiness.
-我就是想向你们展示Happiness的Model.
+I just wanted to show you the Model of happiness.
+我就是想向你们展示 Happiness 的 Model
 
 223
 00:10:22,303 --> 00:10:24,503
 Right now it's not hooked up to a it's UI.
-现在, Model 并没有和UI关联.
+现在, Model 并没有和 UI 关联
 
 224
 00:10:24,505 --> 00:10:26,138
@@ -1122,12 +1121,12 @@ So if I run my application,
 225
 00:10:26,140 --> 00:10:31,109
 you'll see that this is not happiness of 50.
-你们将会看到(结果)并不是50.
+你们将会看到这并不是 happiness 为 50 的情况
 
 226
 00:10:31,111 --> 00:10:34,979
 This is not even looking at the happiness.
-甚至看上去不像是笑脸.
+这甚至跟这里鼠标所指的 happiness 没有任何关系
 
 227
 00:10:34,981 --> 00:10:37,815
@@ -1137,27 +1136,27 @@ I could change this to anything that I want and
 228
 00:10:37,817 --> 00:10:40,350
 it's not going to change this.
-但是这并不会改变运行结果.
+但是这并不会改变运行结果
 
 229
 00:10:40,352 --> 00:10:43,353
 And so later we'll show you how we hook up our UI
-所以, 稍后我会向你们展示如何通过Controller连接UI.
+所以, 稍后我会向你们展示如何通过 Controller 连接 UI
 
 230
 00:10:43,355 --> 00:10:44,687
-to our model through our controller,
-与Model关联.
+to our Model through our controller,
+与 Model 关联
 
 231
 00:10:44,689 --> 00:10:46,555
 that's one of the main things a controller does.
-这个是Controller的主要功能之一.
+这个是 Controller 的主要工作之一
 
 232
 00:10:47,792 --> 00:10:51,026
 Okay, so let's go back to our slides though.
-好的, 现在我们回到幻灯片.
+好的, 现在我们回到幻灯片
 
 233
 00:10:51,028 --> 00:10:55,430
@@ -1167,67 +1166,67 @@ All right here, I'm going to start with this miscellaneous
 234
 00:10:55,432 --> 00:10:59,633
 topic here, kind of a bonus topic, which is extensions.
-主题开始, 类似于额外的主题, 它就是extensions(扩展).
+主题开始, 类似于额外的主题, 它就是 extensions（扩展）
 
 235
 00:10:59,635 --> 00:11:01,835
 You read about in your reading assignments, so
-你已经在阅读作业里读到过了.
+你已经在阅读作业里读到过了
 
 236
 00:11:01,837 --> 00:11:03,770
 you know what this is,
-你知道它是什么.
+你知道它是什么
 
 237
 00:11:03,771 --> 00:11:05,704
 hopefully you've been reading those reading assignments.
-希望你们一直以来都完成了阅读作业.
+希望你们一直以来都完成了阅读作业
 
 238
 00:11:05,707 --> 00:11:07,373
 But I'm discovering here in class,
- 但是我在课中发现,
+但是我在课中发现并没有很多人
 
 239
 00:11:07,375 --> 00:11:09,975
 not as much because it's an important feature per se but
-并不与它本身本身的重要性相称
+完成了阅读作业，因为这本身是个重要的特性但是
 
 240
 00:11:09,977 --> 00:11:12,011
 it can be a little bit of a dangerous feature so
-它(extensions)有时会变得有点危险,
+它(extensions）有时会变得有点危险
 
 241
 00:11:12,013 --> 00:11:14,212
 I wanted to cover it a little bit.
-因此我想讲一点这个.
+因此我想讲一点这个
 
 242
 00:11:14,214 --> 00:11:16,481
 So an extension is really simple.
-extensions 真得很简单.
+extensions 真得很简单
 
 243
 00:11:16,483 --> 00:11:20,685
-It's just a little syntax, to add methods and properties to
-它就是一个给一个现存类(class), 结构(structure)
+It's just a way, a little syntax, to add methods and properties to
+它就是一个给一个现存类、结构和枚举
 
 244
 00:11:20,687 --> 00:11:23,620
 existing classes, structures, and enums.
-和枚举(enums) 添加新方法或属性的小语法.
+添加新方法或属性的小语法
 
 245
 00:11:23,622 --> 00:11:25,355
 Okay? You do not have to
-好么? 你不是必须要
+好么? 你无须修改
 
 246
 00:11:25,356 --> 00:11:27,089
 have the source code to those things you're adding it to.
-有目标的源代码.
+目标的源代码
 
 247
 00:11:27,092 --> 00:11:29,893
@@ -1237,22 +1236,22 @@ You could just add these methods and
 248
 00:11:29,895 --> 00:11:32,428
 properties pretty much at will.
-凭想法加入.
+想加就加
 
 249
 00:11:32,430 --> 00:11:37,032
-There are some restrictions, one is that you can't add via
+There are some restrictions, one is that you can't add, via
 这里有些限制, 其中之一是
 
 250
 00:11:37,034 --> 00:11:41,136
-an extension a method or property that already exists.
-你不能通过一个已存在的方法或特性添加extensions.
+an extension, a method or property that already exists.
+你不能通过 extensions 添加一个已存在的方法或特性
 
 251
 00:11:42,105 --> 00:11:45,306
 So it's not a way to replace it, this is not sub classing,
-因此这不是一个替换的手段, 这也不是创建子类,
+因此这不是一个替换的手段, 这也不是创建子类
 
 252
 00:11:45,308 --> 00:11:47,941
@@ -1262,7 +1261,7 @@ you're not replacing or overwriting methods, so
 253
 00:11:47,943 --> 00:11:49,810
 this has to be something where the property or
-这些你想添加进类的的
+这些你想添加进类的
 
 254
 00:11:49,812 --> 00:11:51,544
@@ -1272,7 +1271,7 @@ method you wanna add to a class.
 255
 00:11:52,514 --> 00:11:53,612
 Does not exist.
-必须是之前不存在的.
+必须是之前不存在的
 
 256
 00:11:53,614 --> 00:11:55,614
@@ -1282,47 +1281,47 @@ The second thing is that any
 257
 00:11:55,615 --> 00:11:57,615
 properties you add cannot have any storage.
-你添加的属性不能有存储.
+你添加的属性不能有存储
 
 258
 00:11:57,618 --> 00:11:59,818
 Okay so they can only be computed properties,
-好么? 因此这些属性只能是运算属性.
+Okay? 因此这些属性只能是运算属性
 
 259
 00:11:59,820 --> 00:12:01,252
 right the get, set, kind.
-set 和 get 方法这类的.
+有 get 和 set 方法的那些
 
 260
 00:12:01,254 --> 00:12:03,454
 That's the only kind of property you can have.
-那是你唯一能添加的一种属性.
+那是你唯一能添加的一种属性
 
 261
 00:12:04,424 --> 00:12:06,924
 Okay, but inside an extension otherwise it kind of
-好的, 但是在一个extension中, 相反, 它
+好的, 但是在一个 extension 中, 相反地, 它
 
 262
 00:12:06,926 --> 00:12:09,026
 looks like you're in the definition of class.
-看起来有点像你在定义类.
+看起来有点像你在定义类
 
 263
 00:12:09,028 --> 00:12:10,694
 You can refer to self if you want and
-你可以把它指向self,如果你想,
+你可以把它指向 self
 
 264
 00:12:10,696 --> 00:12:13,396
 that will be the thing that you are extending.
-这样它就是你扩展的对象.
+这样它就是你扩展的对象
 
 265
 00:12:13,398 --> 00:12:15,698
 It's a pretty powerful feature actually.
-这实际上是一个很强大的特性.
+这实际上是一个很强大的特性
 
 266
 00:12:17,034 --> 00:12:21,169
@@ -1337,7 +1336,7 @@ kinds of adding methods to classes making it so it's
 268
 00:12:24,141 --> 00:12:28,542
 completely not understandable of what that does anymore.
-完全不能理解它是做什么的.
+完全不能理解它是做什么的
 
 269
 00:12:28,544 --> 00:12:32,713
@@ -1347,72 +1346,72 @@ It's also whoever designed the class thinks a lot about it,it's
 270
 00:12:32,715 --> 00:12:34,781
 API and what should be in it and what shouldn't and
-它的API 和它应包含的和不包含的内容
+它的 API 和它应包含的和不包含的内容
 
 271
 00:12:34,783 --> 00:12:36,382
 now all of the sudden things are being added.
-但是现在突然加了这么多东西.
+但是现在突然加了这么多东西
 
 272
 00:12:36,384 --> 00:12:37,216
 That's kind of weird.
-这有些奇怪.
+这有些奇怪
 
 273
 00:12:38,252 --> 00:12:40,686
 This is really best used for beginners like you
-它对你们这些初学Swift的人
+它对你们这些初学 Swift 的人
 
 274
 00:12:40,688 --> 00:12:44,556
-who are just starting with SWIFT to add little
+who are just starting with Swift to add little
 最有用的地方是加入一些
 
 275
 00:12:44,558 --> 00:12:47,859
 helper functions to enhance the readability of your code.
-小的help function(帮助函数)以增强代码的可读性.
+小的 helper function（帮助函数）以增强代码的可读性
 
 276
 00:12:47,861 --> 00:12:49,193
 Okay, so if there's something that it would be
-好的, 如果cgrect能做这件事
+好的, 如果 CGRect 能做这件事
 
 277
 00:12:49,195 --> 00:12:53,563
-really great if a cgrect could do this little thing, you
-那么真的会很棒.
+really great if a CGRect could do this little thing, you
+那么真的会很棒
 
 278
 00:12:53,565 --> 00:12:55,665
-could add a little extension to a cgrect to do that.
-你可以给cgrect加个extension来做到这点.
+could add a little extension to a CGRect to do that.
+你可以给 CGRect 加个 extension 来做到这点
 
 279
 00:12:55,667 --> 00:12:58,067
-Or maybe a UI view controller just once.
-或者给UI view controller 加一次.
+Or maybe a UIViewController just once.
+或者给 UIViewController 加一次
 
 280
 00:12:58,069 --> 00:13:01,137
 This extra little property that it can calculate about itself.
-这个额外的属性能计算它本身的.
+这个小小的能计算它本身的额外属性
 
 281
 00:13:02,640 --> 00:13:05,307
 That's the kind of thing that you could use it for.
-这些是你能用extensions做到的事情.
+这就是你能用 extensions 做到的事情
 
 282
 00:13:05,309 --> 00:13:09,010
 Now extensions actually can be used by advanced Swift users
-现在extensions实际上能被进阶Swift用户
+现在 extensions 实际上能被进阶 Swift 用户
 
 283
 00:13:10,179 --> 00:13:13,047
 to architects or, for architects, to really organize all your code.
-用来整理或设计全部代码.
+用来整理或设计全部代码
 
 284
 00:13:13,049 --> 00:13:14,682
@@ -1422,17 +1421,17 @@ Because you can
 285
 00:13:14,683 --> 00:13:16,316
 put almost everything into extensions, and
-把几乎所有的东西放在extensions中
+把几乎所有的东西放在 extensions 中
 
 286
 00:13:16,318 --> 00:13:19,552
 use extensions as basically groupings of functionality.
-并且把extensions基本等同于给功能分组来用.
+并且将 extensions 主要用于功能的分组
 
 287
 00:13:19,554 --> 00:13:21,988
 And so, it's really a powerful feature and
-因此它真的是非常强大的特性.
+因此它真的是非常强大的特性
 
 288
 00:13:21,990 --> 00:13:24,657
@@ -1441,18 +1440,17 @@ I don't want to make it sound like it's only for
 
 289
 00:13:24,659 --> 00:13:28,060
-little kinda dribes and drabs add tiny little helper things.
-它只能零碎地加些帮助注释.
+little kinda dribs and drabs add tiny little helper things.
+只能零碎地加些 helper 函数
 
 290
 00:13:28,062 --> 00:13:30,862
 It can actually be used as a core foundation of how you
-它能被当做核心基础使用,
+其实它用作你的软件架构的核心基础
 
 291
 00:13:30,864 --> 00:13:32,664
 architect.
-来帮助你规划.
 
 292
 00:13:32,665 --> 00:13:34,465
@@ -1462,37 +1460,37 @@ But that does require some one to sit down and
 293
 00:13:34,468 --> 00:13:36,634
 have an architectural plan to do that and
-并且有一个设计计划.
+并且按照软件架构书来做
 
 294
 00:13:36,636 --> 00:13:39,870
 you obviously a little early in the game to be doing that.
-现在你们这样做很显然有点早了.
+现在你们这样做很显然有点早了
 
 295
 00:13:39,872 --> 00:13:42,206
 So I would say, when in doubt, if you're not sure whether or
-因此, 我会说, 如果你有点迷惘,
+因此, 我会说, 如果你有点迷惘
 
 296
 00:13:42,208 --> 00:13:43,707
 not you should make something an extension,
-不知道这里是否要加extensions,
+不知道这里是否要加 extensions
 
 297
 00:13:43,709 --> 00:13:45,041
 don't do it for now.
-现在这个阶段就不用加了.
+现在这个阶段就不用加了
 
 298
 00:13:45,043 --> 00:13:46,743
 And over time, you'll get more comfortable with it,
-随着时间, 你会越来越适应是用它,
+随着时间推移, 你会越来越适应使用它
 
 299
 00:13:46,745 --> 00:13:49,345
 you'll understand what to do.
-你会明白怎么做.
+你会明白怎么做
 
 300
 00:13:49,347 --> 00:13:51,246
@@ -1502,22 +1500,22 @@ And again, the syntax for
 301
 00:13:51,248 --> 00:13:53,648
 it is all explained in the documentation.
-全部在文件里写得清清楚楚.
+全部在文档里写得清清楚楚
 
 302
 00:13:53,650 --> 00:13:57,085
 Maybe in the demo here, I'll try and throw one in, so
-可能在今天的演示里, 我会加一个.
+可能在今天的演示里, 我会加一个
 
 303
 00:13:57,087 --> 00:13:59,087
 you can see what it looks like.
-这样的话你们会明白它到是什么样的.
+这样的话你们会明白它到是什么样的
 
 304
 00:13:59,089 --> 00:14:00,588
 That was just an aside,
-这些只是顺带提一提,
+这些只是顺带提一提
 
 305
 00:14:00,590 --> 00:14:03,390
@@ -1532,17 +1530,17 @@ This very important feature called delegation,
 307
 00:14:05,561 --> 00:14:07,427
 I have to teach you about protocols first,
-我先要教你们协议(protocols),
+我先要教你们协议(protocols)
 
 308
 00:14:07,429 --> 00:14:10,063
 again you probably read about this in reading assignments,
-你们应该已经在阅读作业里读到过这些了,
+你们应该已经在阅读作业里读到过这些了
 
 309
 00:14:10,065 --> 00:14:12,064
 but I want to go over it anyway.
-无论怎样我重头说一遍,
+不过我还是重头说一遍
 
 310
 00:14:12,066 --> 00:14:15,534
@@ -1562,22 +1560,22 @@ Not to drag in so much API by, for example,
 313
 00:14:22,075 --> 00:14:25,376
 having an argument to a function be a class where now
-传递一个代表类的参数给函数,
+传递一个代表类的参数给函数
 
 314
 00:14:25,378 --> 00:14:27,545
 you're passing an entire class into that function,
-你把整个类传递给了那个函数.
+你把整个类传递给了那个函数
 
 315
 00:14:27,547 --> 00:14:30,047
 who knows what that function might do with that class.
-谁知道那个函数会让那个类做什么.
+谁知道那个函数会让那个类做什么
 
 316
 00:14:30,049 --> 00:14:34,017
 It could access the entire non private API of that thing.
-函数很能会访问类的所有的非私有API.
+函数很能会访问类的所有的非私有API
 
 317
 00:14:34,019 --> 00:14:36,586
@@ -1587,12 +1585,12 @@ So really, the function just wants to use the one method of
 318
 00:14:36,588 --> 00:14:37,520
 a class.
-的一个方法而已.
+的一个方法而已
 
 319
 00:14:37,522 --> 00:14:39,689
 Protocols are a way for
-协议是函数的一种表达方式,
+协议是函数的一种表达方式
 
 320
 00:14:39,690 --> 00:14:41,857
@@ -1602,62 +1600,62 @@ the function to express or really, I just want you to
 321
 00:14:41,859 --> 00:14:43,926
 pass me something that can do this one function.
-一些能让这个函数运作的东西.
+一些能让这个函数运作的东西
 
 322
 00:14:43,928 --> 00:14:45,894
 Because that's what I'm going to call in here.
-因为我要再这里调用这些东西.
+因为我要再这里调用这些东西
 
 323
 00:14:45,896 --> 00:14:49,197
 So, it's a way to kind of minimize your API.
-所以, 这是一个简化API的方法.
+所以, 这是一个简化API的方法
 
 324
 00:14:49,199 --> 00:14:51,432
 A protocol is a type.
-一个协议是一个数据类型.
+一个协议是一个数据类型
 
 325
 00:14:51,434 --> 00:14:54,535
 Okay, it's just like a class, or an enum, or a struct.
-就像一个class, 或者enums, 或者struct.
+就像一个class, 或者enums, 或者struct
 
 326
 00:14:54,537 --> 00:14:55,620
 Okay. It's a type.
-好么, 它是一个数据类型.
+好么, 它是一个数据类型
 
 327
 00:14:55,621 --> 00:14:56,704
 It can be used everywhere a type is.
-它可以被用在任何数据类型能用的地方.
+它可以被用在任何数据类型能用的地方
 
 328
 00:14:56,706 --> 00:14:58,372
 A type of an argument to a function.
-一个函数的参数,
+一个函数的参数
 
 329
 00:14:58,374 --> 00:15:02,342
 A var or a let can be a protocol.
-一个变量或者一个let 也能是一个协议.
+一个变量或者一个let 也能是一个协议
 
 330
 00:15:02,344 --> 00:15:04,844
 Type. So it is absolutely a type.
-类型, 因此它绝对是一个数据类型.
+类型, 因此它绝对是一个数据类型
 
 331
 00:15:04,846 --> 00:15:07,112
 The only thing that is interesting about it is it
-唯一一个有趣的地方是,
+唯一一个有趣的地方是
 
 332
 00:15:07,114 --> 00:15:08,380
 has no implementation.
-协议本身是没有实现的.
+协议本身是没有实现的
 
 333
 00:15:09,349 --> 00:15:10,999
@@ -1667,12 +1665,12 @@ Okay?
 334
 00:15:11,000 --> 00:15:12,650
 In fact, it's kind of the definition of a protocol,
-事实上, 这类似于协议的定义.
+事实上, 这类似于协议的定义
 
 335
 00:15:12,652 --> 00:15:15,052
 it's a type with no implementation.
-这是一个没有实现的数据类型.
+这是一个没有实现的数据类型
 
 336
 00:15:15,054 --> 00:15:16,553
@@ -1687,7 +1685,7 @@ Use a protocol to declare various properties and
 338
 00:15:20,625 --> 00:15:22,191
 methods but it has no implementation.
-和方法, 但是没有相应的实现.
+和方法, 但是没有相应的实现
 
 339
 00:15:22,193 --> 00:15:25,628
@@ -1697,7 +1695,7 @@ The implementation is provided by other objects that conform
 340
 00:15:25,630 --> 00:15:27,162
 to the protocol.
-提供的.
+提供的
 
 341
 00:15:27,164 --> 00:15:29,214
@@ -1707,7 +1705,7 @@ Okay, and there might be
 342
 00:15:29,215 --> 00:15:31,265
 hundreds of objects that will conform to a certain protocol.
-遵从某同一个协议的对象,
+遵从某同一个协议的对象
 
 343
 00:15:31,268 --> 00:15:33,635
@@ -1717,32 +1715,32 @@ Okay?
 344
 00:15:33,636 --> 00:15:36,003
 But the protocol when you use it looks just like a type,
-但是, 协议在使用的时候看起来就是个数据类型.
+但是, 协议在使用的时候看起来就是个数据类型
 
 345
 00:15:36,006 --> 00:15:37,605
 exactly like a type as you're gonna see here.
-你们将会看到, 跟数据类型一模一样.
+你们将会看到, 跟数据类型一模一样
 
 346
 00:15:37,607 --> 00:15:41,409
 Now there's three aspects to a protocol, to using one.
-这有三个使用协议的条件.
+这有三个使用协议的条件
 
 347
 00:15:41,411 --> 00:15:43,277
 One is the declaration of the protocol.
-一个是协议的声明.
+一个是协议的声明
 
 348
 00:15:43,279 --> 00:15:45,112
 This looks a lot like declaring your class or
-这看起来很像声明你的class,
+这看起来很像声明你的class
 
 349
 00:15:45,114 --> 00:15:46,346
 an enum or struct.
-或者enums或者struct.
+或者enums或者struct
 
 350
 00:15:46,348 --> 00:15:47,847
@@ -1752,16 +1750,17 @@ It's just that there is no implementations for
 351
 00:15:47,849 --> 00:15:49,782
 any of the properties or methods.
-的实现.
+的实现
 
 352
 00:15:49,784 --> 00:15:52,484
 Then there's the declaration part where a class or
-接着, 声明的部分会出现,
+接着, 声明的部分会出现
 
 353
 00:15:52,486 --> 00:15:56,455
-a struct or an enum says, I will implement this protocol.如果一个class, struct 或者enum说我会实现这个协议.
+a struct or an enum says, I will implement this protocol.
+如果一个class, struct 或者enum说我会实现这个协议
 
 354
 00:15:56,457 --> 00:15:59,724
@@ -1771,7 +1770,7 @@ So it declares that it will conform to, or implement,
 355
 00:15:59,726 --> 00:16:00,958
 this protocol.
-这个协议.
+这个协议
 
 356
 00:16:00,960 --> 00:16:03,294
@@ -1781,7 +1780,7 @@ And then there's the part where that class, struct or
 357
 00:16:03,296 --> 00:16:05,095
 enum actually implements the protocol.
-会有负责实现协议的部分.
+会有负责实现协议的部分
 
 358
 00:16:05,097 --> 00:16:07,064
@@ -1791,7 +1790,7 @@ So, it implements that, all the properties and
 359
 00:16:07,066 --> 00:16:09,833
 methods in the protocol that's required, all of them.
-属性和方法, 所有的.
+属性和方法, 所有的
 
 360
 00:16:09,835 --> 00:16:11,351
@@ -1801,7 +1800,7 @@ Okay?
 361
 00:16:11,352 --> 00:16:12,868
 So we'll see what that looks like in some code.
-我们会在几行代码里看到(协议)到底是怎样.
+我们会在几行代码里看到(协议)到底是怎样
 
 362
 00:16:12,871 --> 00:16:15,871
@@ -1821,32 +1820,32 @@ This protocol has really what some might call
 365
 00:16:25,181 --> 00:16:27,981
 inherited protocols, or a protocol that inherits.
-继承协议,或者, 一个协议它能够继承.
+继承协议,或者, 一个协议它能够继承
 
 366
 00:16:27,983 --> 00:16:31,218
 Which are other protocols that if you want to implement some
-如果你想要实现某些协议,
+如果你想要实现某些协议
 
 367
 00:16:31,220 --> 00:16:33,586
 protocol you have to implement those too.
-你必须也将这些继承协议实现.
+你必须也将这些继承协议实现
 
 368
 00:16:33,588 --> 00:16:35,188
 Okay that's what this colon thing, so
-这就是代码里冒号所代表的.
+这就是代码里冒号所代表的
 
 369
 00:16:35,190 --> 00:16:37,390
 it kind of looks like this super class kind of thing but
-这感觉上有点像父类,
+这感觉上有点像父类
 
 370
 00:16:37,392 --> 00:16:39,491
 there can be multiple of them, but it's not really
-但是能够有很多不同的继承协议.
+但是能够有很多不同的继承协议
 
 371
 00:16:39,493 --> 00:16:42,060
@@ -1856,7 +1855,7 @@ inherent in this, per se, like you think of in classes, it's
 372
 00:16:42,062 --> 00:16:44,429
 more just saying if you want to implement some protocol you
-我想说的是, 如果你想要实现协议,
+我想说的是, 如果你想要实现协议
 
 373
 00:16:44,431 --> 00:16:46,497
@@ -1885,7 +1884,7 @@ Okay?好么?
 378
 00:16:52,871 --> 00:16:57,406
 Now you have to specify, when you do a property,
-现在你必须明确, 当你设计一个属性,
+现在你必须明确, 当你设计一个属性
 
 379
 00:16:57,408 --> 00:16:58,740
@@ -1900,7 +1899,7 @@ you have to classify whether this is a get only property or
 381
 00:17:01,978 --> 00:17:04,012
 it's a get and set, okay?
-还是既有get也有set.
+还是既有get也有set
 
 382
 00:17:04,014 --> 00:17:05,279
@@ -1934,12 +1933,12 @@ to be noted with this mutating keyword, okay?
 388
 00:17:20,494 --> 00:17:22,060
 You probably read that in the description,
-你可能在描述文件里读到了.
+你可能在描述文件里读到了
 
 389
 00:17:22,062 --> 00:17:24,095
 you know that structs and enums,
-你知道structs和enums,
+你知道structs和enums
 
 390
 00:17:24,097 --> 00:17:27,398
@@ -1949,7 +1948,7 @@ insert value types, the system needs to know when a function
 391
 00:17:27,400 --> 00:17:31,869
 is actually changing them, so they can copy it on demand.
-具体什么时候会改变它们, 这样它们能根据需求复制.
+具体什么时候会改变它们, 这样它们能根据需求复制
 
 392
 00:17:33,272 --> 00:17:36,039
@@ -1964,7 +1963,7 @@ with classes.
 394
 00:17:38,142 --> 00:17:40,242
 You put the word class right after that colon.
-你把class这个词放在那个冒号后面,
+你把class这个词放在那个冒号后面
 
 395
 00:17:40,245 --> 00:17:42,878
@@ -1974,12 +1973,12 @@ So SomeProtocol colon class means this protocol can
 396
 00:17:42,880 --> 00:17:44,279
 only be implemented by a class.
-它只能被类实现.
+它只能被类实现
 
 397
 00:17:44,281 --> 00:17:46,782
 It cannot be implemented by a struct or an enum.
-它不能被一个struct或者enum实现.
+它不能被一个struct或者enum实现
 
 398
 00:17:46,784 --> 00:17:47,549
@@ -2710,7 +2709,7 @@ the beginning of the quarter, we had this big graph.
 544
 00:23:59,903 --> 00:24:02,704
 And one of the things we showed was how views need to
-我们讲的其中一点是，views 如何和它们的 
+我们讲的其中一点是，views 如何和它们的
 
 545
 00:24:02,706 --> 00:24:05,306
@@ -2784,7 +2783,7 @@ something with a bunch of methods and
 559
 00:24:31,663 --> 00:24:33,529
 perhaps even properties.
-可能包含属性 
+可能包含属性
 
 560
 00:24:33,531 --> 00:24:37,800
@@ -2902,8 +2901,8 @@ the data is owned by the controller.
 
 583
 00:25:18,569 --> 00:25:19,868
-Really, it's probably in the model, but
-实际上，数据可能在 model 中
+Really, it's probably in the Model, but
+实际上，数据可能在 Model 中
 
 584
 00:25:19,870 --> 00:25:23,004
@@ -3416,7 +3415,7 @@ sending them this message.
 686
 00:29:45,465 --> 00:29:48,032
 I'm gonna pass myself, this face view,
-我将传入 self，这个 FaceView 
+我将传入 self，这个 FaceView
 
 687
 00:29:48,034 --> 00:29:49,433
@@ -3901,7 +3900,7 @@ If you remember from the slides in our
 783
 00:34:17,768 --> 00:34:21,502
 protocol declaration, we can say colon class.
-协议声明的话，我们可以通过在协议后面加上 : class 
+协议声明的话，我们可以通过在协议后面加上 : class
 
 784
 00:34:21,504 --> 00:34:24,372
@@ -3996,7 +3995,7 @@ That just requires that we make our protocol,
 802
 00:35:08,945 --> 00:35:10,378
 you only work for classes.
-只对 class 类型起作用 
+只对 class 类型起作用
 
 803
 00:35:11,547 --> 00:35:12,446
@@ -4011,7 +4010,7 @@ Okay? So now we
 805
 00:35:13,965 --> 00:35:15,481
 have this nice data source right here.
-有了个不错的 dataSource 
+有了个不错的 dataSource
 
 806
 00:35:15,484 --> 00:35:18,018
@@ -4041,7 +4040,7 @@ get it from the data source by just saying to the data
 811
 00:35:28,095 --> 00:35:32,664
 source, please give us our smiliness for FaceView Self.
-请把 FaceView self 的 smiliness 给我们 
+请把 FaceView self 的 smiliness 给我们
 
 812
 00:35:33,967 --> 00:35:34,865
@@ -4055,17 +4054,17 @@ Now when I type that in,
 814
 00:35:36,102 --> 00:35:38,035
 Swift automatically put this question mark here.
-Swift 自动把"?"放在这里 
+Swift 自动把"?"放在这里
 
 815
 00:35:38,037 --> 00:35:39,035
 I didn't type that.
-我没有输入它 
+我没有输入它
 
 816
 00:35:39,037 --> 00:35:40,503
 It put it in here.
-它把它放在这里 
+它把它放在这里
 
 817
 00:35:40,505 --> 00:35:42,872
@@ -4075,7 +4074,7 @@ Why did it put here?
 818
 00:35:42,873 --> 00:35:45,240
 Well it put it here because data source is an optional.
-因为 dataSource 是 optional 
+因为 dataSource 是 optional
 
 819
 00:35:45,243 --> 00:35:47,543
@@ -4085,7 +4084,7 @@ And it could be nil, okay?
 820
 00:35:47,545 --> 00:35:49,678
 This is an optional, it could be nil.
-这是个 optional，可以是 nil 
+这是个 optional，可以是 nil
 
 821
 00:35:49,680 --> 00:35:52,681
@@ -4095,7 +4094,7 @@ And so Swift is assuming that we wanna use optional
 822
 00:35:52,683 --> 00:35:54,015
 chaining here.
-optional 链 
+optional 链
 
 823
 00:35:54,017 --> 00:35:57,618
@@ -4105,12 +4104,12 @@ And just, if this is nil, then this whole rest of
 824
 00:35:57,620 --> 00:35:59,153
 this expression is gonna be ignored.
-表达式都将被忽略 
+表达式都将被忽略
 
 825
 00:35:59,155 --> 00:36:00,854
 This whole thing would be nil.
-整体的值将是 nil 
+整体的值将是 nil
 
 826
 00:36:00,856 --> 00:36:03,923
@@ -4125,22 +4124,22 @@ But smiliness, you can see this error here is
 828
 00:36:06,227 --> 00:36:08,327
 because smiliness, it can't be nil.
-是因为 smiliness，它不能为 nil 
+是因为 smiliness，它不能为 nil
 
 829
 00:36:08,329 --> 00:36:09,995
 It has to be a double.
-它必须是 double 
+它必须是 double
 
 830
 00:36:09,997 --> 00:36:12,431
 So we're going to use another cool little feature switch.
-所以我们要使用另一个酷酷的小特性转换 
+所以我们要使用另一个酷酷的小特性转换
 
 831
 00:36:12,433 --> 00:36:15,600
 Swift which is the question mark question mark operator.
-Swift 中的 ?? 操作符 
+Swift 中的 ?? 操作符
 
 832
 00:36:15,602 --> 00:36:17,735
@@ -4155,7 +4154,7 @@ if the thing on the left-hand side of the question mark
 834
 00:36:21,240 --> 00:36:25,275
 question mark is not nill, then use that.
-不是 nil，那么使用它作为值 
+不是 nil，那么使用它作为值
 
 835
 00:36:25,277 --> 00:36:28,779
@@ -4165,7 +4164,7 @@ But if it is nil, then use what's on the righthand side,
 836
 00:36:28,781 --> 00:36:32,048
 and to the right hand side I'm gonna put 0.0.
-在右侧我放上0.0 
+在右侧我放上0.0
 
 837
 00:36:32,050 --> 00:36:37,687
@@ -4180,7 +4179,7 @@ then we're going to use smiliness of 0,
 839
 00:36:39,957 --> 00:36:42,090
 which is not a frown or a smile, it's in the middle.
-它不是皱眉也不是微笑，它正好处在中间 
+它不是皱眉也不是微笑，它正好处在中间
 
 840
 00:36:43,226 --> 00:36:45,426
@@ -4195,12 +4194,12 @@ smilinessForFaceView 正好返回 nil 时起作用
 842
 00:36:48,798 --> 00:36:52,599
 remember it is also an optional double right here.
-因为你记得，它也是个 optinal double 
+因为你记得，它也是个 optinal double
 
 843
 00:36:52,601 --> 00:36:54,968
 So that'll work perfectly fine there as well.
-所以这里处理得非常好 
+所以这里处理得非常好
 
 844
 00:36:54,970 --> 00:36:56,703
@@ -4215,17 +4214,17 @@ whether this is nil, invalidating the rest of this,
 846
 00:37:00,408 --> 00:37:01,741
 we're gonna get no smile or frown.
-我们将得不到笑脸或者皱眉 
+我们将得不到笑脸或者皱眉
 
 847
 00:37:01,743 --> 00:37:06,912
 So this is a cool little operator [INAUDIBLE].
-所以这是个酷酷的小操作符 
+所以这是个酷酷的小操作符
 
 848
 00:37:06,914 --> 00:37:09,681
 Okay, so we've got our face view doing its part.
-Okay，所以我们让 FaceView 干好了它的活 
+Okay，所以我们让 FaceView 干好了它的活
 
 849
 00:37:09,683 --> 00:37:11,749
@@ -4235,7 +4234,7 @@ It's declaring this nice property,
 850
 00:37:11,751 --> 00:37:13,417
 this protocol right here.
-这个 protocol 
+这个 protocol
 
 851
 00:37:13,419 --> 00:37:16,854
@@ -4250,7 +4249,7 @@ dataSource 然后
 853
 00:37:18,057 --> 00:37:21,224
 then it uses that data source to get its smiliness.
-使用 dataSource 获得 smiliness 
+使用 dataSource 获得 smiliness
 
 854
 00:37:21,226 --> 00:37:23,226
@@ -4260,7 +4259,7 @@ All right, so
 855
 00:37:23,227 --> 00:37:25,227
 now let's go back to our happiness view controller.
-现在让我们回到 HappinessViewController 
+现在让我们回到 HappinessViewController
 
 856
 00:37:25,230 --> 00:37:26,228
@@ -4270,7 +4269,7 @@ Okay? The controller has to
 857
 00:37:26,230 --> 00:37:28,664
 implement the other side of delegation.
-实现 delegation 的另一面 
+实现 delegation 的另一面
 
 858
 00:37:28,666 --> 00:37:30,932
@@ -4285,12 +4284,12 @@ say to the world, I am HappinessViewController and
 860
 00:37:34,304 --> 00:37:38,072
 I implement the FaceViewDataSource protocol.
-我会实现 FaceViewDataSource protocol 
+我会实现 FaceViewDataSource protocol
 
 861
 00:37:38,074 --> 00:37:41,709
 And it does that by just saying FaceViewDataSource.
-声明 FaceViewDataSource 就完成了这些 
+声明 FaceViewDataSource 就完成了这些
 
 862
 00:37:41,711 --> 00:37:43,344
@@ -4320,12 +4319,12 @@ And indeed it doesn't because we do not implement
 867
 00:37:51,920 --> 00:37:54,787
 that smiliness by anywhere in our class.
-在我们的 class 里实现 smiliness 
+在我们的 class 里实现 smiliness
 
 868
 00:37:54,789 --> 00:37:56,355
 So, easily fixed though.
-所以，简单地搞定它 
+所以，简单地搞定它
 
 869
 00:37:56,357 --> 00:37:59,458
@@ -4335,7 +4334,7 @@ We go down here, now, since, we've already told it,
 870
 00:37:59,460 --> 00:38:01,376
 it implements this.
-它会实现这个 
+它会实现这个
 
 871
 00:38:01,377 --> 00:38:03,293
@@ -4345,7 +4344,7 @@ If I just start typing smiliness it's going to
 872
 00:38:03,296 --> 00:38:05,530
 automatically know to escape complete.
-自动提示完成 
+自动提示完成
 
 873
 00:38:05,532 --> 00:38:07,064
@@ -4355,7 +4354,7 @@ So I'll hit Tab.
 874
 00:38:07,066 --> 00:38:09,166
 I've got my nice method here.
-我就在这里得到了我的 method 
+我就在这里得到了我的 method
 
 875
 00:38:09,168 --> 00:38:13,570
@@ -4380,17 +4379,17 @@ Well the happiness view controller is going to
 879
 00:38:21,478 --> 00:38:23,812
 interpret the happiness here.
-在这里解析 happiness 
+在这里解析 happiness
 
 880
 00:38:23,814 --> 00:38:25,213
-Which is the model.
-这里是 model 层 
+Which is the Model.
+这里是 Model 层
 
 881
 00:38:25,214 --> 00:38:26,613
-This is the happiness view controller's model.
-这是 HappinessViewController 的 model 
+This is the happiness view controller's Model.
+这是 HappinessViewController 的 Model
 
 882
 00:38:26,616 --> 00:38:30,718
@@ -4400,17 +4399,17 @@ It's gonna interpret this for the view, because the view
 883
 00:38:30,720 --> 00:38:33,487
 doesn't know about happiness, it only knows about smiliness.
-不知道 happiness，它只知道 smiliness 
+不知道 happiness，它只知道 smiliness
 
 884
 00:38:33,489 --> 00:38:35,956
 Smiliness goes from 1 to minus 1.
-smiliness 的值介于-1到1之间 
+smiliness 的值介于-1到1之间
 
 885
 00:38:35,958 --> 00:38:38,792
-Here, we're taking about the model which is happiness that
-这里，我们讨论 model 层也就是 happiness，
+Here, we're taking about the Model which is happiness that
+这里，我们讨论 Model 层也就是 happiness，
 
 886
 00:38:38,794 --> 00:38:40,226
@@ -4424,33 +4423,33 @@ So it's a typical job of the controller to
 
 888
 00:38:43,164 --> 00:38:46,965
-interpret the model for the view.
-为 view 解析 model 
+interpret the Model for the view.
+为 view 解析 Model
 
 889
 00:38:46,967 --> 00:38:48,734
-You also interpret the view for the model and we'll see
-你也会为了 model 解析 view，我们
+You also interpret the view for the Model and we'll see
+你也会为了 Model 解析 view，我们
 
 890
 00:38:48,736 --> 00:38:51,536
 that a little bit later when we talk about gestures.
-待会儿讨论手势的时候再作说明 
+待会儿讨论手势的时候再作说明
 
 891
 00:38:51,538 --> 00:38:55,006
-But, here we're going to interpret the model for
-但是，这里我们要解析 model 来
+But, here we're going to interpret the Model for
+但是，这里我们要解析 Model 来
 
 892
 00:38:55,008 --> 00:38:56,841
 the view.
-绘制 view 
+绘制 view
 
 893
 00:38:56,842 --> 00:38:58,675
 So, I'm just going to return.
-所以，我要返回 
+所以，我要返回
 
 894
 00:38:59,712 --> 00:39:04,047
@@ -4460,7 +4459,7 @@ Now, happiness is an int, and smiliness is a double, so
 895
 00:39:04,049 --> 00:39:06,916
 I am going to have to convert the happiness.
-所以我必须转化 happiness 
+所以我必须转化 happiness
 
 896
 00:39:07,952 --> 00:39:11,653
@@ -4480,11 +4479,11 @@ Divide by 50 to convert it into that plus 1 to
 899
 00:39:18,194 --> 00:39:19,626
 minus 1 scale.
-1到-1之间 
+1到-1之间
 
 900
 00:39:19,628 --> 00:39:22,762
-So here I'm just interpreting the model for the view.
+So here I'm just interpreting the Model for the view.
 所以这里我做的是，将模型中的变量转换成视图所需要的数值
 
 901
@@ -4505,7 +4504,7 @@ that the controller needs to set itself
 904
 00:39:30,671 --> 00:39:35,773
 as the data source of the FaceView.
-设置为 FaceView 的 dataSource 
+设置为 FaceView 的 dataSource
 
 905
 00:39:35,775 --> 00:39:36,807
@@ -4515,7 +4514,7 @@ Let's all go back to FaceView,
 906
 00:39:36,809 --> 00:39:38,575
 I'm going to show you a nice trick here.
-这里，我要给你们展示一个小技巧 
+这里，我要给你们展示一个小技巧
 
 907
 00:39:38,577 --> 00:39:43,946
@@ -4535,7 +4534,7 @@ you can switch really quick so Cmd+Shift+O is a great way to
 910
 00:39:50,287 --> 00:39:54,923
 switch really quickly between files in your project.
-在工程中快速切换文件的方式 
+在工程中快速切换文件的方式
 
 911
 00:39:56,026 --> 00:39:59,093
@@ -4555,7 +4554,7 @@ So for the controller to do that,
 914
 00:40:04,499 --> 00:40:08,200
 though, it needs to have a pointer to the FaceView.
-它需要一个指向 FaceView 的指针 
+它需要一个指向 FaceView 的指针
 
 915
 00:40:08,202 --> 00:40:09,702
@@ -4569,13 +4568,13 @@ our view using outlets, right?
 
 917
 00:40:13,073 --> 00:40:18,209
-So let's go over here to our storyboard and wire up
+So let's go over here to our Storyboard and wire up
 所以我们进入 Storyboard 的这里
 
 918
 00:40:18,211 --> 00:40:20,111
 an outlet from this.
-从这里拖出一个 outlet 
+从这里拖出一个 outlet
 
 919
 00:40:20,113 --> 00:40:21,679
@@ -4594,13 +4593,13 @@ gonna see the controller that matches what you
 
 922
 00:40:26,251 --> 00:40:27,650
-have selected in your storyboard.
+have selected in your Storyboard.
 控制器实现的代码
 
 923
 00:40:29,387 --> 00:40:31,186
 So here we can have that.
-所以这里，我们有 FaceView 的实现代码 
+所以这里，我们有 FaceView 的实现代码
 
 924
 00:40:31,188 --> 00:40:34,589
@@ -4610,7 +4609,7 @@ So I'm just going to take my controller right here and
 925
 00:40:34,591 --> 00:40:37,058
 I'm going to Ctrl+drag to create an outlet.
-同时 Control 并拖拽来创建一个 outlet 
+同时 Control 并拖拽来创建一个 outlet
 
 926
 00:40:37,060 --> 00:40:41,028
@@ -4620,17 +4619,17 @@ This is the same way that I create an outlet to buttons or
 927
 00:40:41,030 --> 00:40:42,529
 to the labels or whatever we've done.
-label 的 outlet 的方式是一模一样的 
+label 的 outlet 的方式是一模一样的
 
 928
 00:40:42,531 --> 00:40:43,296
 It's exactly the same.
-完全一样 
+完全一样
 
 929
 00:40:43,298 --> 00:40:44,931
 It's just a normal outlet.
-好的，这就是个普通的 outlet 
+好的，这就是个普通的 outlet
 
 930
 00:40:44,933 --> 00:40:48,067
@@ -4640,7 +4639,7 @@ I'm going to call it Face View.
 931
 00:40:49,103 --> 00:40:52,037
 So here's really nice FaceView right there.
-于是这里有一个 faceView 了 
+于是这里有一个 faceView 了
 
 932
 00:40:52,039 --> 00:40:55,473
@@ -4655,7 +4654,7 @@ set this var right here?
 934
 00:40:58,845 --> 00:41:00,277
 Okay, this data source var.
-这个 dataSource 变量 
+这个 dataSource 变量
 
 935
 00:41:00,279 --> 00:41:03,914
@@ -4670,7 +4669,7 @@ the faceView we want to set that in,
 937
 00:41:05,718 --> 00:41:11,554
 is right here in the property observer for the FaceView.
-就是在这里，FaceView 的 property observer 
+就是在这里，FaceView 的 property observer
 
 938
  00:41:11,556 --> 00:41:15,124
@@ -4680,17 +4679,17 @@ This property observer is called when the iOS starts up
 939
 00:41:15,126 --> 00:41:16,725
 and loads the story board.
-并加载这个 Storyboard 时被调用 
+并加载这个 Storyboard 时被调用
 
 940
 00:41:16,727 --> 00:41:18,360
 It connects this outlet.
-它连接这个 outlet 
+它连接这个 outlet
 
 941
 00:41:18,362 --> 00:41:21,029
 It's going to set this variable.
-然后设置这个变量 
+然后设置这个变量
 
 942
 00:41:21,031 --> 00:41:23,998
@@ -4730,7 +4729,7 @@ HappinessViewController 是 FaceView 的 dataSource
 949
 00:41:38,913 --> 00:41:41,547
 we can say that it is the new source.
-所以我们说它是新的 dataSource 
+所以我们说它是新的 dataSource
 
 950
 00:41:41,549 --> 00:41:42,714
@@ -4755,7 +4754,7 @@ Okay, so now everything is hooked,
 954
 00:41:50,089 --> 00:41:52,422
 and how is this gonna work.
-你们会问，这是怎么工作的 
+你们会问，这是怎么工作的
 
 955
 00:41:52,424 --> 00:41:55,391
@@ -4770,7 +4769,7 @@ Every time that the face redraws itself,
 957
 00:41:59,830 --> 00:42:03,265
 it's going to look for its data source.
-它会去查找自己的 dataSource 
+它会去查找自己的 dataSource
 
 958
 00:42:03,267 --> 00:42:06,634
@@ -4780,7 +4779,7 @@ Which we have set right here in our controller to
 959
 00:42:06,636 --> 00:42:07,869
 be the controller itself.
-控制器自身 
+控制器自身
 
 960
 00:42:09,038 --> 00:42:11,438
@@ -4799,7 +4798,7 @@ We implement that method in our controller.
 
 963
 00:42:18,480 --> 00:42:20,813
-We interpret the model for the view.
+We interpret the Model for the view.
 我们为视图解析模型中的变量
 
 964
@@ -4810,22 +4809,22 @@ And the FaceView's gonna be able to draw the proper value.
 965
 00:42:22,817 --> 00:42:26,885
 Now there's only one other thing that I wanna do here.
-现在这里只剩下一件我另外要做的事了 
+现在这里只剩下一件我另外要做的事了
 
 966
 00:42:26,887 --> 00:42:29,120
-Which is every time something changes our model,
+Which is every time something changes our Model,
 也就是每次我们的模型有变动时
 
 967
 00:42:29,122 --> 00:42:30,922
 I wanna make sure the face redraws itself.
-我要让 faceView 重新绘制自身 
+我要让 faceView 重新绘制自身
 
 968
 00:42:30,924 --> 00:42:35,993
 Of course, because we're representing that in the face.
-这是当然的，因为我们要在 faceView 中表现出来 
+这是当然的，因为我们要在 faceView 中表现出来
 
 969
 00:42:35,995 --> 00:42:39,363
@@ -4845,7 +4844,7 @@ ask my faceView to set needs display of itself.
 972
 00:42:48,306 --> 00:42:50,272
 In other words, to redraw.
-换句话说，重绘 
+换句话说，重绘
 
 973
 00:42:50,274 --> 00:42:53,141
@@ -4890,37 +4889,37 @@ We've got this hooked up, it really should be the happiness
 981
 00:43:14,428 --> 00:43:17,495
 that's showing in here rather than the smiliness.
-显示在这里的 happiness 而不是 smiliness 
+显示在这里的 happiness 而不是 smiliness
 
 982
 00:43:17,497 --> 00:43:19,731
 So it shouldn't be a flat line right here,
-所以它不该是这样的一条水平直线 
+所以它不该是这样的一条水平直线
 
 983
 00:43:19,733 --> 00:43:21,432
 it should actually show the happiness.
-它应该实际展示 happiness 
+它应该实际展示 happiness
 
 984
 00:43:21,434 --> 00:43:24,435
 Let's go ahead run, see what we got here.
-我们运行一下，看看效果如何 
+我们运行一下，看看效果如何
 
 985
 00:43:29,107 --> 00:43:31,207
 I knew we should get a happiness of 75,
-我们应该得到一个值为75的 happiness 
+我们应该得到一个值为75的 happiness
 
 986
 00:43:31,209 --> 00:43:34,243
 which is a little bit happy.
-看上去有点的高兴的样子 
+看上去有点的高兴的样子
 
 987
 00:43:34,245 --> 00:43:36,078
 Yeah. That looks good right there.
-好的，看上去挺不错 
+好的，看上去挺不错
 
 988
 00:43:36,080 --> 00:43:40,048
@@ -4930,7 +4929,7 @@ Let's go change our happiness here to be sad, like maybe 10.
 989
 00:43:40,050 --> 00:43:41,716
 Go ahead and re-run.
-重新运行 
+重新运行
 
 990
 00:43:44,053 --> 00:43:48,588
@@ -4965,7 +4964,7 @@ Let's go back to our slides and
 996
 00:44:08,474 --> 00:44:12,109
 cover the next thing here, which is gestures.
-讨论下一个东西，也就是手势 
+讨论下一个东西，也就是手势
 
 997
 00:44:13,311 --> 00:44:14,544
@@ -4980,7 +4979,7 @@ So we know how to draw inner view,
 999
 00:44:15,780 --> 00:44:17,313
 now we wanna handle these gestures.
-现在我们要处理这些手势 
+现在我们要处理这些手势
 
 1000
 00:44:17,315 --> 00:44:19,599
@@ -4994,7 +4993,7 @@ You know, pinches and maybe rotations, swipes, taps,
 1002
 00:44:21,886 --> 00:44:24,170
 things like that.
-等手势 
+等手势
 
 1003
 00:44:24,171 --> 00:44:26,455
@@ -5023,7 +5022,7 @@ look at that raw data, and
 1008
 00:44:35,564 --> 00:44:39,199
 see, is this a swipe, or is it just moving over to the right.
-去判断，这是一个滑动手势，还是单纯地向右滑动 
+去判断，这是一个滑动手势，还是单纯地向右滑动
 
 1009
 00:44:40,168 --> 00:44:41,534
@@ -5053,7 +5052,7 @@ Gestures are recognized by UI views when
 1014
 00:44:52,679 --> 00:44:56,013
 the gesture happens inside their bounds.
-视图会识别特定的手势 
+视图会识别特定的手势
 
 1015
 00:44:56,015 --> 00:44:58,782
@@ -5068,17 +5067,17 @@ draw and you recognize gestures so
 1017
 00:45:00,452 --> 00:45:02,085
 this is how it happens.
-手势识别就是这样工作的 
+手势识别就是这样工作的
 
 1018
 00:45:02,087 --> 00:45:04,620
 There's a class called UIGestureRecognizer.
-有一个叫 UIGestureRecognizer 的类 
+有一个叫 UIGestureRecognizer 的类
 
 1019
 00:45:04,622 --> 00:45:06,255
 It's an abstract base class.
-它是一个抽象的基类 
+它是一个抽象的基类
 
 1020
 00:45:06,257 --> 00:45:09,424
@@ -5088,7 +5087,7 @@ You never actually create a UIGestureRecognizer base
 1021
 00:45:09,426 --> 00:45:13,128
 class, you create a sub class of UIGestureRecognizer.
-而是创建它的子类 
+而是创建它的子类
 
 1022
 00:45:13,130 --> 00:45:15,263
@@ -5103,27 +5102,27 @@ that they know about certain gestures, swipes and pans and
 1024
 00:45:17,934 --> 00:45:19,233
 touches, et cetera.
-触摸等 
+触摸等
 
 1025
 00:45:19,235 --> 00:45:24,137
 So there are two sides to using a gesture recognizer.
-使用手势识别器有两个步骤 
+使用手势识别器有两个步骤
 
 1026
 00:45:24,139 --> 00:45:27,674
 One is you have to add a gesture recognizer to a view.
-首先是为视图添加手势识别器 
+首先是为视图添加手势识别器
 
 1027
 00:45:27,676 --> 00:45:30,643
 That says to the view, start recognizing this gesture.
-这表示，该视图现在能识别手势 
+这表示，该视图现在能识别手势
 
 1028
 00:45:30,645 --> 00:45:33,679
 If you recognize this gesture, you let somebody know.
-如果你识别了这个手势，就报告给某个对象 
+如果你识别了这个手势，就报告给某个对象
 
 1029
 00:45:33,681 --> 00:45:34,279
@@ -5138,12 +5137,12 @@ And you do that with
 1031
 00:45:35,915 --> 00:45:37,548
 a function on UIView called add gesture recognizer.
-你只需要调用视图的 addGestureRecognized 方法 
+你只需要调用视图的 addGestureRecognized 方法
 
 1032
 00:45:37,551 --> 00:45:38,950
 Couldn't be simpler.
-非常简单 
+非常简单
 
 1033
 00:45:38,952 --> 00:45:42,687
@@ -5158,7 +5157,7 @@ recognizer, you have to say, if you recognize the gesture,
 1035
 00:45:46,325 --> 00:45:48,225
 who are you gonna tell about it?
-就报告给这个对象 
+就报告给这个对象
 
 1036
 00:45:48,227 --> 00:45:49,893
@@ -5168,7 +5167,7 @@ Okay, you have to notify somebody and
 1037
 00:45:49,895 --> 00:45:51,361
 say oh, I recognize that swipe.
-嘿，这是一个滑动手势 
+嘿，这是一个滑动手势
 
 1038
 00:45:51,363 --> 00:45:51,961
@@ -5178,17 +5177,17 @@ Okay?
 1039
 00:45:51,963 --> 00:45:53,395
 So there's the handler.
-也就是说，你需要提供一个处理事件的对象 
+也就是说，你需要提供一个处理事件的对象
 
 1040
 00:45:53,397 --> 00:45:56,365
 So you've got the recognizer, that's the view.
-一个是识别手势的对象，就是视图 
+一个是识别手势的对象，就是视图
 
 1041
 00:45:56,367 --> 00:45:58,800
 Okay, the gesture recognizer in association with the view.
-是的，添加了手势识别器的视图 
+是的，添加了手势识别器的视图
 
 1042
 00:45:58,802 --> 00:46:00,935
@@ -5198,12 +5197,12 @@ And then you've got the handler that's who handles it,
 1043
 00:46:00,937 --> 00:46:02,870
 and those are not always the same person.
-这两个并不一定是同一个对象 
+这两个并不一定是同一个对象
 
 1044
 00:46:02,872 --> 00:46:05,506
 Sometimes they're the same object, sometimes not.
-有些时候是的，有些时候不是 
+有些时候是的，有些时候不是
 
 1045
 00:46:05,508 --> 00:46:08,775
@@ -5213,7 +5212,7 @@ Usually the first one, adding a gesture recognizer to
 1046
 00:46:08,777 --> 00:46:11,211
 a view is done by a controller.
-是通过控制器来完成的 
+是通过控制器来完成的
 
 1047
 00:46:11,213 --> 00:46:13,646
@@ -5223,7 +5222,7 @@ Although a view will sometimes add it to itself, for
 1048
 00:46:13,648 --> 00:46:14,914
 example scroll view.
-比如 Scroll View 
+比如 Scroll View
 
 1049
 00:46:14,916 --> 00:46:17,449
@@ -5233,12 +5232,12 @@ Scroll View 可以自动识别
 1050
 00:46:17,451 --> 00:46:19,451
 pinch gestures, that's what it does.
-拖动和缩放手势 
+拖动和缩放手势
 
 1051
 00:46:19,453 --> 00:46:22,020
 So it adds the gesture recognizers to itself.
-它为自身添加了这些识别器 
+它为自身添加了这些识别器
 
 1052
 00:46:22,022 --> 00:46:25,189
@@ -5258,7 +5257,7 @@ recognize it, so
 1055
 00:46:31,412 --> 00:46:33,829
 you make some public handler possibly in your view.
-你可能在视图中实现公开的触摸事件响应方法 
+你可能在视图中实现公开的触摸事件响应方法
 
 1056
 00:46:33,832 --> 00:46:37,233
@@ -5278,12 +5277,12 @@ start recognizing this gesture and you can even handle it
 1059
 00:46:41,806 --> 00:46:44,106
 yourself if you want, the controller might say.
-可以自己处理相关事件 
+可以自己处理相关事件
 
 1060
 00:46:44,108 --> 00:46:47,009
 Or the controller might say oh, and I'll handle it.
-又或者控制器说“由我来处理” 
+又或者控制器说“由我来处理”
 
 1061
 00:46:47,011 --> 00:46:49,778
@@ -5302,8 +5301,8 @@ thing, or it's done by the controller if it's handling
 
 1064
 00:46:56,219 --> 00:46:58,719
-something that's going to modify the model.
-事件一般由控制器来处理 
+something that's going to modify the Model.
+事件一般由控制器来处理
 
 1065
 00:46:58,721 --> 00:47:00,320
@@ -5318,7 +5317,7 @@ complicated that's going to cause multiple views to
 1067
 00:47:03,625 --> 00:47:05,525
 be involved and so the controller has to do it.
-就必须由控制器来处理了 
+就必须由控制器来处理了
 
 1068
 00:47:05,527 --> 00:47:08,260
@@ -5337,13 +5336,13 @@ never have the view handle a gesture that is directly
 
 1071
 00:47:13,667 --> 00:47:15,633
-modifying the model cuz a view can't see the model.
-修改模型，因为模型对视图应该是不可见的 
+modifying the Model cuz a view can't see the Model.
+修改模型，因为模型对视图应该是不可见的
 
 1072
 00:47:15,635 --> 00:47:17,635
 Only a controller can do that.
-只有控制器可以直接和模型交互 
+只有控制器可以直接和模型交互
 
 1073
 00:47:18,838 --> 00:47:20,871
@@ -5358,7 +5357,7 @@ So how do you add a gesture recognizer to a UI view?
 1075
 00:47:22,908 --> 00:47:24,274
 It's very simple.
-非常简单 
+非常简单
 
 1076
 00:47:24,276 --> 00:47:27,310
@@ -5378,22 +5377,22 @@ just exactly like we did when we set the face views delegate
 1079
 00:47:34,786 --> 00:47:38,420
 in the property observer, when the face view got set.
-当 faceView 调用 set 方法时，我们为它设置代理 
+当 faceView 调用 set 方法时，我们为它设置代理
 
 1080
 00:47:38,422 --> 00:47:40,789
 We could do the same thing adding adjuster recognizer.
-我们可以通过同样的方法来添加手势识别器 
+我们可以通过同样的方法来添加手势识别器
 
 1081
 00:47:40,791 --> 00:47:42,924
 In fact, we're going to do that in the demo.
-事实上，我们会在 Demo 中演示这个过程 
+事实上，我们会在 Demo 中演示这个过程
 
 1082
 00:47:42,926 --> 00:47:44,926
 So here I have an IV outlet.
-这里我有一个 IBOutlet 属性 
+这里我有一个 IBOutlet 属性
 
 1083
 00:47:44,928 --> 00:47:47,361
@@ -5403,7 +5402,7 @@ It's just a UI view.
 1084
 00:47:47,363 --> 00:47:49,363
 In my story board.
-在 Storyboard 中的一个视图 
+在 Storyboard 中的一个视图
 
 1085
 00:47:49,365 --> 00:47:50,864
@@ -5413,17 +5412,17 @@ It's called pannableView and
 1086
 00:47:50,866 --> 00:47:54,000
 I'm going to make it so it can pan around in there.
-我希望可以拖动这个视图 
+我希望可以拖动这个视图
 
 1087
 00:47:54,002 --> 00:47:58,170
 All right, and in his property observer there the did stat.
-好的，在这个属性监听器的 didSet 方法中 
+好的，在这个属性监听器的 didSet 方法中
 
 1088
 00:47:59,206 --> 00:48:02,274
 I'm going to add this gesture recognizer.
-我将添加这个识别器 
+我将添加这个识别器
 
 1089
 00:48:02,276 --> 00:48:04,242
@@ -5433,12 +5432,12 @@ I'm going to create a pan gesture recognizer and
 1090
 00:48:04,244 --> 00:48:05,376
 then add it to the view.
-然后添加到视图中 
+然后添加到视图中
 
 1091
 00:48:05,378 --> 00:48:06,577
 So here I'm creating it.
-这里我创建它 
+这里我创建它
 
 1092
 00:48:06,579 --> 00:48:08,813
@@ -5448,7 +5447,7 @@ This is just
 1093
 00:48:08,814 --> 00:48:11,048
 calling UIPanGestureRecognizer initializer here.
-调用 UIPanGestureRecognizer 的初始化方法即可 
+调用 UIPanGestureRecognizer 的初始化方法即可
 
 1094
 00:48:11,050 --> 00:48:13,750
@@ -5458,12 +5457,12 @@ The arguments to the initializer are who to
 1095
 00:48:13,752 --> 00:48:18,421
 send a message to when the gesture is recognized.
-向谁发送消息 
+向谁发送消息
 
 1096
 00:48:18,423 --> 00:48:20,122
 When we start seeing a pan.
-当视图识别到拖动手势 
+当视图识别到拖动手势
 
 1097
 00:48:20,124 --> 00:48:22,224
@@ -5473,12 +5472,12 @@ And as the pan is happening we're gonna be
 1098
 00:48:22,226 --> 00:48:24,159
 sending a message to this object.
-发送一个消息 
+发送一个消息
 
 1099
 00:48:24,161 --> 00:48:25,560
 In this case it's self.
-这里，它是 self 
+这里，它是 self
 
 1100
 00:48:25,562 --> 00:48:28,496
@@ -5493,7 +5492,7 @@ Because controllers are the only
 1102
 00:48:29,599 --> 00:48:31,031
 things that have the outlets.
-控制器才会有 outlets 
+控制器才会有 outlets
 
 1103
 00:48:31,033 --> 00:48:32,332
@@ -5503,12 +5502,12 @@ So this thing's going to be
 1104
 00:48:32,334 --> 00:48:34,367
 handled by the controller itself.
-会由控制器来处理 
+会由控制器来处理
 
 1105
 00:48:34,369 --> 00:48:37,437
 And then action is the name of the method.
-action 参数表示事件处理的方法名称 
+action 参数表示事件处理的方法名称
 
 1106
 00:48:37,439 --> 00:48:38,971
@@ -5523,7 +5522,7 @@ the method that's gonna be
 1108
 00:48:41,875 --> 00:48:44,776
 called in the controller when this gesture is recognized.
-会调用控制器中的这个方法 
+会调用控制器中的这个方法
 
 1109
 00:48:44,778 --> 00:48:47,278
@@ -5538,17 +5537,17 @@ That means that it's called a, it's gonna
 1111
 00:48:50,583 --> 00:48:52,683
 call a method called pan that has an argument.
-这个 pan: 方法会有一个参数 
+这个 pan: 方法会有一个参数
 
 1112
 00:48:52,685 --> 00:48:54,251
 That's what the colon means.
-这就是冒号的意思 
+这就是冒号的意思
 
 1113
 00:48:54,253 --> 00:48:55,786
 There's an argument there.
-表示方法需要一个参数 
+表示方法需要一个参数
 
 1114
 00:48:55,788 --> 00:48:58,221
@@ -5588,12 +5587,12 @@ you need the gesture recognizer so
 1121
 00:49:10,967 --> 00:49:13,501
 it can tell you where the finger is basically, okay?
-来判断手指的触点在哪里 
+来判断手指的触点在哪里
 
 1122
 00:49:13,503 --> 00:49:15,235
 So we almost always have a colon.
-因此，我们通常都有冒号 
+因此，我们通常都有冒号
 
 1123
 00:49:15,237 --> 00:49:16,837
@@ -5603,7 +5602,7 @@ The only place you
 1124
 00:49:16,838 --> 00:49:18,438
 wouldn't have a colon might be like a swipe.
-使用滑动手势的时候你不需要冒号 
+使用滑动手势的时候你不需要冒号
 
 1125
 00:49:18,440 --> 00:49:20,507
@@ -5618,12 +5617,12 @@ you don't really need any information,
 1127
 00:49:21,743 --> 00:49:25,762
 you just need to know what happened.
-你只需要知道识别到了一个滑动手势 
+你只需要知道识别到了一个滑动手势
 
 1128
 00:49:25,763 --> 00:49:29,782
 So you might have action, quote, handle swipe, no colon.
-所以你只需要在双引号中加上方法名称即可，不需要冒号 
+所以你只需要在双引号中加上方法名称即可，不需要冒号
 
 1129
 00:49:29,784 --> 00:49:31,016
@@ -5673,7 +5672,7 @@ inside its bounce it's going to send the message pan
 1138
 00:49:51,935 --> 00:49:54,268
 with an argument to the controller.
-pan 消息 
+pan 消息
 
 1139
 00:49:56,105 --> 00:49:56,970
@@ -5683,7 +5682,7 @@ Everybody okay with this?
 1140
 00:49:57,940 --> 00:50:01,141
 This is how you set up a gesture recognizer.
-这是配置手势识别器的方法 
+这是配置手势识别器的方法
 
 1141
 00:50:01,143 --> 00:50:03,076
@@ -5703,7 +5702,7 @@ For us to handle the pan we need information about
 1144
 00:50:09,450 --> 00:50:11,216
 what's going on in that pan.
-知道它的一些信息 
+知道它的一些信息
 
 1145
 00:50:11,218 --> 00:50:12,650
@@ -5713,7 +5712,7 @@ Where are the fingers moving?
 1146
 00:50:12,652 --> 00:50:14,118
 We need to know about that.
-我们需要知道这些 
+我们需要知道这些
 
 1147
 00:50:14,120 --> 00:50:17,788
@@ -5728,7 +5727,7 @@ PanGestureRecognizer，他们针对特定的手势
 1149
 00:50:21,260 --> 00:50:23,727
 are specific to whatever kind of gesture they are.
-添加了自己特定的方法 
+添加了自己特定的方法
 
 1150
 00:50:23,729 --> 00:50:26,930
@@ -5748,7 +5747,7 @@ either since the panGesture was first recognized, or
 1153
 00:50:34,739 --> 00:50:36,705
 since that last got reset.
-距离 
+距离
 
 1154
 00:50:38,141 --> 00:50:41,709
@@ -5768,7 +5767,7 @@ that the next time that you get notified,
 1157
 00:50:45,815 --> 00:50:47,948
 it will be the distance between this.
-会以你重置的起点开始计算 
+会以你重置的起点开始计算
 
 1158
 00:50:47,950 --> 00:50:50,383
@@ -5778,7 +5777,7 @@ So that's a good way to get incremental panning instead of
 1159
 00:50:50,385 --> 00:50:52,251
 just the total distance that you've panned.
-而不是得到移动的总距离 
+而不是得到移动的总距离
 
 1160
 00:50:52,253 --> 00:50:54,353
@@ -5808,7 +5807,7 @@ or are they kind of zooming it around, okay,
 1165
 00:51:01,561 --> 00:51:03,327
 you might react differently depending on the velocity.
-你可能对不同的速度做出不同的反应 
+你可能对不同的速度做出不同的反应
 
 1166
 00:51:03,329 --> 00:51:05,963
@@ -5818,7 +5817,7 @@ So those are the things that are very specific to Pan, so
 1167
 00:51:05,965 --> 00:51:08,598
 that's why these methods are in panGesture Recognizer.
-这些方法属于 PanGestureRecognizer 
+这些方法属于 PanGestureRecognizer
 
 1168
 00:51:08,600 --> 00:51:11,434
@@ -5833,7 +5832,7 @@ this incremental translation.
 1170
 00:51:12,671 --> 00:51:15,071
 A lot of people really don't quite understand this.
-因为大多数人不是很理解这个 
+因为大多数人不是很理解这个
 
 1171
 00:51:15,073 --> 00:51:16,538
@@ -5848,7 +5847,7 @@ do incremental translation with our pinch gesture.
 1173
 00:51:19,343 --> 00:51:22,711
 And it'll make a little more sense what's going on there.
-那时候你就更容易理解它了 
+那时候你就更容易理解它了
 
 1174
 00:51:22,713 --> 00:51:24,912
@@ -5863,17 +5862,17 @@ It also has a very important property called State.
 1176
 00:51:27,583 --> 00:51:31,685
 Okay when you have a pan it actually goes through states.
-拖动手势会经历许多个状态 
+拖动手势会经历许多个状态
 
 1177
 00:51:31,687 --> 00:51:34,421
 It starts out in the state Possible.
-首先是 Possible 状态 
+首先是 Possible 状态
 
 1178
 00:51:34,423 --> 00:51:36,656
 It's possible a pan can happen.
-表示它或许可能是一个拖动手势 
+表示它或许可能是一个拖动手势
 
 1179
 00:51:36,658 --> 00:51:38,290
@@ -5893,7 +5892,7 @@ Which is I recognize this.
 1182
 00:51:42,162 --> 00:51:44,629
 So that's Recognized.
-表示手势被识别了 
+表示手势被识别了
 
 1183
 00:51:44,631 --> 00:51:45,730
@@ -5903,23 +5902,23 @@ But if it's pan and
 1184
 00:51:45,732 --> 00:51:48,599
 continuous, then you're gonna get began.
-即手势是连续的，state 就会变为 Began 状态 
+即手势是连续的，state 就会变为 Began 状态
 
 1185
 00:51:48,601 --> 00:51:50,534
 Okay, recognize that the pan has started.
-明白吗，表示拖动手势开始识别了 
+明白吗，表示拖动手势开始识别了
 
 1186
 00:51:50,536 --> 00:51:51,602
 You'll get that.
-就是这样 
+就是这样
 
 1187
 00:51:51,603 --> 00:51:52,669
 And then every time the finger moves,
 随着手指的移动，
-	
+
 1188
 00:51:52,671 --> 00:51:55,638
 you're gonna get another call to your handler saying,
@@ -5928,7 +5927,7 @@ you're gonna get another call to your handler saying,
 1189
 00:51:55,640 --> 00:51:57,106
 changed, changed, changed.
-状态改变为 Changed 了 
+状态改变为 Changed 了
 
 1190
 00:51:57,108 --> 00:51:58,374
@@ -5938,12 +5937,12 @@ And then when the finger goes up,
 1191
 00:51:58,376 --> 00:52:01,443
 you'll get another one that says the state is now ended.
-状态就变为 Ended 
+状态就变为 Ended
 
 1192
 00:52:01,445 --> 00:52:03,245
 So this is basically a little state machine.
-这是一个简单的状态机 
+这是一个简单的状态机
 
 1193
 00:52:03,247 --> 00:52:06,014
@@ -5953,7 +5952,7 @@ Obviously a pan goes through the state machine of possible,
 1194
 00:52:06,016 --> 00:52:08,416
 began, changed, ended.
-Began，Changed，Ended 
+Began，Changed，Ended
 
 1195
 00:52:09,518 --> 00:52:10,951
@@ -5993,7 +5992,7 @@ that and sometimes not, it all depends on what you're doing
 1202
 00:52:23,397 --> 00:52:25,430
 with your pan, sometimes your pan is updating.
-这全由pan手势的当前状态决定，有时候，pan正在更新 
+这全由pan手势的当前状态决定，有时候，pan正在更新
 
 1203
 00:52:25,432 --> 00:52:27,264
@@ -6008,7 +6007,7 @@ if the phone call comes in it just stops doing that and
 1205
 00:52:29,902 --> 00:52:32,569
 it's fine, everything is in perfectly fine state.
-没问题，一切都处于正常的状态 
+没问题，一切都处于正常的状态
 
 1206
 00:52:32,571 --> 00:52:35,305
@@ -6043,7 +6042,7 @@ pan手势控制器
 1212
 00:52:45,715 --> 00:52:47,381
 handler would be a method called pan.
-是一个名叫 pan 的方法 
+是一个名叫 pan 的方法
 
 1213
 00:52:47,384 --> 00:52:48,683
@@ -6053,7 +6052,7 @@ It would take one argument which is
 1214
 00:52:48,685 --> 00:52:50,484
 the UIPanGestureRecognizer itself.
-即，UIPanGestureRecognizer本身 
+即，UIPanGestureRecognizer本身
 
 1215
 00:52:50,486 --> 00:52:52,453
@@ -6072,7 +6071,7 @@ We're going to look at the state machine and
 1218
 00:52:54,990 --> 00:52:55,822
 say what state it's in.
-状态机处于什么样的状态 
+状态机处于什么样的状态
 
 1219
 00:52:55,824 --> 00:52:58,108
@@ -6092,7 +6091,7 @@ the finger goes up.
 1222
 00:53:01,729 --> 00:53:04,096
 I'm not even gonna do anything when it first goes down.
-当它第一次下划的时候，我不需要做任何事 
+当它第一次下划的时候，我不需要做任何事
 
 1223
 00:53:04,098 --> 00:53:05,364
@@ -6102,7 +6101,7 @@ I can choose which things I wanna do.
 1224
 00:53:05,366 --> 00:53:08,099
 But that's what I wanna do.
-这些就是我想做的 
+这些就是我想做的
 
 1225
 00:53:08,101 --> 00:53:09,600
@@ -6127,7 +6126,7 @@ the implementation of this case is to go to the next one.
 1229
 00:53:15,774 --> 00:53:17,807
 And do whatever the next one is, okay?
-无论下一个case的实现是什么 
+无论下一个case的实现是什么
 
 1230
 00:53:17,809 --> 00:53:19,175
@@ -6142,7 +6141,7 @@ So in changed and
 1232
 00:53:20,661 --> 00:53:22,144
 ended, I'm gonna do exactly the same thing.
-和ended中，我想执行相同的函数 
+和ended中，我想执行相同的函数
 
 1233
 00:53:22,146 --> 00:53:25,114
@@ -6247,7 +6246,7 @@ So that set translation to 0 is optional,
 1253
 00:54:13,758 --> 00:54:14,490
 you can do it if you want.
-如果你想做的话，可以做 
+如果你想做的话，可以做
 
 1254
 00:54:16,060 --> 00:54:17,793
@@ -6272,7 +6271,7 @@ So let's talk about some of
 1258
 00:54:23,933 --> 00:54:26,133
 the concrete gestures that exist.
-具体的手势 
+具体的手势
 
 1259
 00:54:26,135 --> 00:54:27,300
@@ -6430,7 +6429,7 @@ that determines whether it's a two finger swipe to the left
 1290
 00:55:24,582 --> 00:55:27,016
 or a one finger swipe down, or whatever.
-还是一个手指向下滑动，或者其他什么 
+还是一个手指向下滑动，或者其他什么
 
 1291
 00:55:27,018 --> 00:55:29,351
@@ -6460,7 +6459,7 @@ So that's a little different than these other ones.
 1296
 00:55:40,663 --> 00:55:41,995
 And there's also tap, a question.
-接下来是点击(Tap)手势，有问题 
+接下来是点击(Tap)手势，有问题
 
 1297
 00:55:41,997 --> 00:55:46,366
@@ -6485,7 +6484,7 @@ Absolutely you can test these in
 1301
 00:55:50,871 --> 00:55:52,454
 the simulator, I'll show you.
-我将会展示给你们看 
+我将会展示给你们看
 
 1302
 00:55:52,455 --> 00:55:54,038
@@ -6500,12 +6499,12 @@ the simulator, I'll show you.
 1304
 00:55:56,677 --> 00:55:59,577
 the simulator, I'll show you how to do that.
-我将会给你们展示，这个手势的操作方法 
+我将会给你们展示，这个手势的操作方法
 
 1305
 00:55:59,579 --> 00:56:01,078
 Tap gesture is an interesting one.
-点击（Tap）手势是比较有趣的手势之一 
+点击（Tap）手势是比较有趣的手势之一
 
 1306
 00:56:01,080 --> 00:56:02,196
@@ -6515,7 +6514,7 @@ It seems like it would be
 1307
 00:56:02,197 --> 00:56:03,313
 discrete because it's kind of like swipe.
-间断的，因为这类似于滑动（swipe）手势 
+间断的，因为这类似于滑动（swipe）手势
 
 1308
 00:56:03,315 --> 00:56:05,582
@@ -6530,7 +6529,7 @@ Except for that if you have a double tap it'll actually tell
 1310
 00:56:08,020 --> 00:56:10,887
 you about the first tap and the second tap.
-你第一次的点击和第二次的点击 
+你第一次的点击和第二次的点击
 
 1311
 00:56:10,889 --> 00:56:12,988
@@ -6589,7 +6588,7 @@ and then I'm gonna put in pan to control the happiness,
 
 1322
 00:56:40,614 --> 00:56:41,980
-in other words, control my model.
+in other words, control my Model.
 换句话说，控制我的模型
 
 1323
@@ -6610,7 +6609,7 @@ When I move up and
 1326
 00:56:46,901 --> 00:56:48,417
 down it's gonna be happy is up, sad is down.
-向上拖动时，是开心的表情；向下拖动时，是悲伤的表情 
+向上拖动时，是开心的表情；向下拖动时，是悲伤的表情
 
 1327
 00:56:48,420 --> 00:56:50,020
@@ -6625,7 +6624,7 @@ I can move my happiness up in small increments if I want.
 1329
 00:56:54,191 --> 00:56:57,693
 All right, so let's go back to here to do that.
-好，让我们继续 
+好，让我们继续
 
 1330
 00:56:57,695 --> 00:57:03,765
@@ -6799,7 +6798,7 @@ And this action needs to be some nonprivate method
 1364
 00:58:25,203 --> 00:58:28,904
 in my FaceView that I can call to handle it.
-用来调用这个函数 
+用来调用这个函数
 
 1365
 00:58:28,906 --> 00:58:33,308
@@ -6832,7 +6831,7 @@ And it's going to take a UI pinch gesture recognizer
 1371
 00:58:44,787 --> 00:58:47,687
 as an argument, and we'll call that the gesture.
-作为参数，我们将使用这个手势 
+作为参数，我们将使用这个手势
 
 1372
 00:58:48,956 --> 00:58:52,157
@@ -7187,7 +7186,7 @@ target 将会是 self
 
 1443
 01:02:00,886 --> 01:02:05,154
-Because if I'm modifying the model with that pan gesture,
+Because if I'm modifying the Model with that pan gesture,
 因为我通过这个拖动手势识别器改变了我的 Model
 
 1444
@@ -7237,7 +7236,7 @@ But I'm gonna show you how
 
 1453
 01:02:19,334 --> 01:02:22,235
-you can set up gestures in the storyboard.
+you can set up gestures in the Storyboard.
 如何在 Storyboard 中添加手势识别器
 
 1454
@@ -7257,7 +7256,7 @@ We're gonna go over here.
 
 1457
 01:02:27,775 --> 01:02:29,207
-Let's get our storyboard.
+Let's get our Storyboard.
 点击我们的 Main.storyboard
 
 1458
@@ -7496,7 +7495,7 @@ So again the controller is now interpreting what's
 
 1505
 01:04:29,678 --> 01:04:32,212
-happening in the view for the model, so it's going in
+happening in the view for the Model, so it's going in
 为 Model 解释 View 目前正在发生什么
 
 1506
@@ -7511,12 +7510,12 @@ And again, that's the controller's main job,
 
 1508
 01:04:36,617 --> 01:04:38,650
-interpreting the model for the view and
+interpreting the Model for the view and
 为 View 去解释 Model，同时
 
 1509
 01:04:38,652 --> 01:04:41,286
-the view input to modify the model.
+the view input to modify the Model.
 接受 View 的输入来改变 Model
 
 1510
@@ -7792,7 +7791,7 @@ I'm also going to do that reset thing.
 1564
 01:07:19,492 --> 01:07:23,927
 So gesture.setTranslation(CGPoin-
-在 faceView 中 gesture.setTranslation(CGPointZero, 
+在 faceView 中 gesture.setTranslation(CGPointZero,
 
 1565
 01:07:23,929 --> 01:07:26,629
@@ -7911,7 +7910,7 @@ gesture handling there.
 
 1588
 01:08:30,918 --> 01:08:32,283
-We added one in a storyboard.
+We added one in a Storyboard.
 我们学习了如何通过 Storyboard 添加一个手势
 
 1589
@@ -8027,7 +8026,7 @@ do Auto Layout sooner but I keep putting it off.
 1611
 01:09:25,798 --> 01:09:27,597
 And I might put it off again, we'll see.
-或许我会继续推迟，到时候就知道了 
+或许我会继续推迟，到时候就知道了
 
 1612
 01:09:27,599 --> 01:09:29,182
@@ -8037,17 +8036,17 @@ But I won't be asking you in
 1613
 01:09:29,183 --> 01:09:30,766
 your homework to do much sophisticated Auto Layout.
-在课后花太多时间熟悉 Auto Layout 的内容 
+在课后花太多时间熟悉 Auto Layout 的内容
 
 1614
 01:09:30,769 --> 01:09:32,568
 So even it assignment three, there's very little.
-所以尽管在它（Auto Layout）是第三次作业，但是也只是很少一部分内容 
+所以尽管在它（Auto Layout）是第三次作业，但是也只是很少一部分内容
 
 1615
 01:09:32,570 --> 01:09:37,573
 Okay, so next topic, multiple MVCs.
-好的，下一个主题，多重 MVC 
+好的，下一个主题，多重 MVC
 
 1616
 01:09:37,575 --> 01:09:39,574
@@ -8067,7 +8066,7 @@ if we wanna build a big app,
 1619
 01:09:47,216 --> 01:09:51,084
 we're gonna do it by putting multiple MVCs together, okay.
-我们将要把多个 MVC 放在一起来实现它 
+我们将要把多个 MVC 放在一起来实现它
 
 1620
 01:09:51,086 --> 01:09:52,719
@@ -8077,7 +8076,7 @@ So we're gonna zoom in here and
 1621
 01:09:52,721 --> 01:09:55,254
 take a look at exactly how that's done.
-看一看这到底是怎么实现的 
+看一看这到底是怎么实现的
 
 1622
 01:09:55,256 --> 01:09:57,340
@@ -8100,8 +8099,8 @@ So you see that MVC right there the purple one
 
 1626
 01:10:02,530 --> 01:10:05,030
-at the top, that's an MVC and you can 
-这是一个 MVC ，而且它的 view 
+at the top, that's an MVC and you can
+这是一个 MVC ，而且它的 view
 
 1627
 01:10:05,032 --> 01:10:08,499
@@ -8146,7 +8145,7 @@ the view, but I'm gonna talk about the three that are
 1635
 01:10:26,617 --> 01:10:29,884
 provided in iOS which you're gonna be using in this class.
-也是你们在这门课将要用到的 
+也是你们在这门课将要用到的
 
 1636
 01:10:29,886 --> 01:10:32,153
@@ -8166,7 +8165,7 @@ So these are just controllers,
 1639
 01:10:35,858 --> 01:10:39,893
 they're subclasses of UIViewController.
-是 UIViewController 的子类 
+是 UIViewController 的子类
 
 1640
 01:10:39,895 --> 01:10:42,261
@@ -8181,7 +8180,7 @@ then most of their view is what other MVC's draw, so
 1642
 01:10:45,566 --> 01:10:50,235
 the MVCs are part of their views.
-所以其它 MVC 只是这些 controller view 的一部分 
+所以其它 MVC 只是这些 controller view 的一部分
 
 1643
 01:10:50,237 --> 01:10:51,670
@@ -8201,12 +8200,12 @@ You've seen TabBarControllers,
 1646
 01:10:55,008 --> 01:10:58,442
 you see it's got the four tabs along the bottom on this one.
-这个 TabBarController 底部罗列了四个 tab 
+这个 TabBarController 底部罗列了四个 tab
 
 1647
 01:10:58,444 --> 01:11:00,343
 This is the health app, I think.
-我觉得这个一个健康类的应用 
+我觉得这个一个健康类的应用
 
 1648
 01:11:02,814 --> 01:11:05,748
@@ -8216,17 +8215,17 @@ And all that happens here is when you click one of those
 1649
 01:11:05,750 --> 01:11:10,318
 tab buttons at the bottom, the top gets replaced with an MVC.
-上面就会被一个新的 MVC 替换 
+上面就会被一个新的 MVC 替换
 
 1650
 01:11:10,320 --> 01:11:12,987
 An entire MVC is controlling that top.
-整个 MVC 控制上面的内容 
+整个 MVC 控制上面的内容
 
 1651
 01:11:12,989 --> 01:11:16,457
 In this case, it's some sort of Dashboard MVC or health
-在本例中，这上面要展现的是某种 "Dashboard" MVC 
+在本例中，这上面要展现的是某种 "Dashboard" MVC
 
 1652
 01:11:16,459 --> 01:11:20,494
@@ -8246,7 +8245,7 @@ the title that goes along with the Dashboard down there,
 1655
 01:11:25,701 --> 01:11:29,468
 is actually gotten from the Dashboard MVC.
-实际上来自这个 "Dashboard" MVC 
+实际上来自这个 "Dashboard" MVC
 
 1656
 01:11:29,470 --> 01:11:31,804
@@ -8256,7 +8255,7 @@ In other words,
 1657
 01:11:31,805 --> 01:11:34,139
 not a property you set on the UITabBarController MVC.
-不是你在 UITabBarController MVC 中设置的 property（属性） 
+不是你在 UITabBarController MVC 中设置的 property（属性）
 
 1658
 01:11:34,141 --> 01:11:37,109
@@ -8286,17 +8285,17 @@ controller needs to put a nice tab on the bottom for
 1663
 01:11:50,756 --> 01:11:52,589
 your Dashboard MVC.
-呈现一个适当的 tab 
+呈现一个适当的 tab
 
 1664
 01:11:52,590 --> 01:11:54,423
 So, as you can see, it's very object oriented, okay.
-可以看到，这非常符合面向对象的思想 
+可以看到，这非常符合面向对象的思想
 
 1665
 01:11:54,426 --> 01:11:57,427
 Everything is contained in just this MVC.
-所有的东西都在这个 MVC 中 
+所有的东西都在这个 MVC 中
 
 1666
 01:11:57,429 --> 01:11:59,395
@@ -8311,7 +8310,7 @@ maybe the second tab, then this is a totally
 1668
 01:12:02,066 --> 01:12:04,899
 different MVC that takes over the top of this screen.
-一个完全不同的 MVC 占据了屏幕的顶部 
+一个完全不同的 MVC 占据了屏幕的顶部
 
 1669
 01:12:04,901 --> 01:12:08,269
@@ -8341,12 +8340,12 @@ if you go to six tabs then iOS will automatically let
 1674
 01:12:19,481 --> 01:12:22,248
 the user manage which ones he wants down there.
-用户来管理这些 tab 
+用户来管理这些 tab
 
 1675
 01:12:22,250 --> 01:12:23,950
 It's pretty cool, okay.
-相当 cool，对吧 
+相当 cool，对吧
 
 1676
 01:12:23,952 --> 01:12:25,168
@@ -8356,17 +8355,17 @@ So you don't even have to and
 1677
 01:12:25,169 --> 01:12:26,385
 you can put as many tabs you want.
-任意多的 tab 
+任意多的 tab
 
 1678
 01:12:26,387 --> 01:12:27,720
 I don't really recommend more than five
-但是，我建议不超过五个 
+但是，我建议不超过五个
 
 1679
 01:12:27,722 --> 01:12:28,720
 tabs here, by the way.
-顺便一说  
+顺便一说
 
 1680
 01:12:30,257 --> 01:12:31,940
@@ -8376,17 +8375,17 @@ For users it's like, what,
 1681
 01:12:31,941 --> 01:12:33,624
 I have to manage my tabs down there, I don't wanna do that.
-我还得自己管理 tab，我可不想这么麻烦 ” 
+我还得自己管理 tab，我可不想这么麻烦 ”
 
 1682
 01:12:33,626 --> 01:12:35,259
 It's just that you're asking yours to do more stuff.
-这是自己给自己找麻烦 
+这是自己给自己找麻烦
 
 1683
 01:12:35,261 --> 01:12:36,827
 So hopefully you can fit it in five.
-所以希望5个 tab 可以满足你的要求 
+所以希望5个 tab 可以满足你的要求
 
 1684
 01:12:38,097 --> 01:12:40,330
@@ -8426,7 +8425,7 @@ The view is the little tabs along the bottom that it's
 1691
 01:12:55,512 --> 01:12:57,645
 drawing and the MVC's on the top.
-以及顶部的 MVC 
+以及顶部的 MVC
 
 1692
 01:12:58,915 --> 01:13:00,915
@@ -8436,12 +8435,12 @@ Everyone understand what I
 1693
 01:13:00,916 --> 01:13:02,916
 mean now about an MVC whose view contains other MVC's?
-关于一个 MVC 的 view 包含其它 MVC 
+关于一个 MVC 的 view 包含其它 MVC
 
 1694
 01:13:02,918 --> 01:13:06,686
 So let's look at another one that does that.
-好的，一起看一下另一个 的 controller 
+好的，一起看一下另一个 的 controller
 
 1695
 01:13:06,688 --> 01:13:08,121
@@ -8455,12 +8454,12 @@ SplitViewController 包括两个 MVC，
 1697
 01:13:11,159 --> 01:13:13,892
 it puts them side-by-side, okay.
-并将它们并排放在一起 
+并将它们并排放在一起
 
 1698
 01:13:13,894 --> 01:13:15,460
 It puts the one on the left,
-它将一个放在左边 
+它将一个放在左边
 
 1699
 01:13:15,462 --> 01:13:19,630
@@ -8485,12 +8484,12 @@ it could be any width you want, or
 1703
 01:13:24,336 --> 01:13:26,102
 any height you want, like this.
-想让它都高都可以，就像这样 
+想让它都高都可以，就像这样
 
 1704
 01:13:26,104 --> 01:13:27,503
 And then it puts another one on the right.
-然后，它（UISplitViewController）将另一个 MVC 放在右边 
+然后，它（UISplitViewController）将另一个 MVC 放在右边
 
 1705
 01:13:27,505 --> 01:13:31,774
@@ -8500,47 +8499,47 @@ Now, we call the MVC on the left, the Master in
 1706
 01:13:31,776 --> 01:13:34,576
 the split view and we call the MVC on the right the Detail.
-将右边的 MVC 叫做 Detail 
+将右边的 MVC 叫做 Detail
 
 1707
 01:13:38,615 --> 01:13:41,349
 Now here I've got a calculator and a calculator graph.
-目前我有一个计算器和一个计算器图表 
+目前我有一个计算器和一个计算器图表
 
 1708
 01:13:41,351 --> 01:13:44,218
 You assignment three is going to be to build this basically.
-你们第三次作业基本上将要实现这个计算器 
+你们第三次作业基本上将要实现这个计算器
 
 1709
 01:13:44,220 --> 01:13:46,353
 It doesn't have to look exactly like this, okay.
-你们的计算器不必和我的完全一样 
+你们的计算器不必和我的完全一样
 
 1710
 01:13:46,355 --> 01:13:49,022
 I've made a simple looking one here.
-我只做了一个简单的外观 
+我只做了一个简单的外观
 
 1711
 01:13:49,024 --> 01:13:51,791
 But it could look very much like this.
-但是你们的作业可能和我展示的样子差不了多少 
+但是你们的作业可能和我展示的样子差不了多少
 
 1712
 01:13:51,793 --> 01:13:53,292
 But you do have to use a SplitViewController.
-但是你必须使用一个 SplitViewController 
+但是你必须使用一个 SplitViewController
 
 1713
 01:13:53,294 --> 01:13:54,260
 So this is what it looks like.
-现在它就是这个样子 
+现在它就是这个样子
 
 1714
 01:13:54,262 --> 01:13:58,897
 Now, this is only happening on an iPad.
-当然，只有在 iPad 上才会这样 
+当然，只有在 iPad 上才会这样
 
 1715
 01:13:58,899 --> 01:14:00,732
@@ -8550,7 +8549,7 @@ Now, when we talk about Auto Layout,
 1716
 01:14:00,734 --> 01:14:04,335
 we're going to start talking about Size Classes.
-我们就要从 Size Classes 开始说起 
+我们就要从 Size Classes 开始说起
 
 1717
 01:14:04,337 --> 01:14:07,304
@@ -8560,7 +8559,7 @@ So, different devices have been grouped into
 1718
 01:14:07,306 --> 01:14:08,839
 size classes.
-都被集成到了 size classes 中 
+都被集成到了 size classes 中
 
 1719
 01:14:08,841 --> 01:14:13,410
@@ -8570,12 +8569,12 @@ size 通常为 regular，regular width 和 regular height
 1720
 01:14:13,412 --> 01:14:16,512
 regular height or compact width and height.
-或者 compact width， compact height 
+或者 compact width， compact height
 
 1721
 01:14:16,514 --> 01:14:18,614
 So an iPhone, all the iPhones except for
-对于 iPhone 来说，除了在 
+对于 iPhone 来说，除了在
 
 1722
 01:14:18,616 --> 01:14:21,083
@@ -8585,22 +8584,22 @@ landscape（横向模式）的 iPhone 6 plus，
 1723
 01:14:21,085 --> 01:14:25,220
 are compact both vertically and horizontally, okay.
-在水平方向和竖直方向都是 compact 
+在水平方向和竖直方向都是 compact
 
 1724
 01:14:25,222 --> 01:14:28,656
 The iPad is regular width, okay.
-iPad 是 regular width 
+iPad 是 regular width
 
 1725
 01:14:28,658 --> 01:14:30,458
 Now, that's of the whole device.
-这就是整个设备 
+这就是整个设备
 
 1726
 01:14:30,460 --> 01:14:35,829
 But the MVC's inside also will have a certain size class.
-但是设备里的 MVC 同样有特定的 size class 
+但是设备里的 MVC 同样有特定的 size class
 
 1727
 01:14:35,831 --> 01:14:39,265
@@ -8610,7 +8609,7 @@ So this side by side business can only happen in
 1728
 01:14:39,267 --> 01:14:42,168
 a device whose size class is regular width.
-拥有 regular width 的 size class 
+拥有 regular width 的 size class
 
 1729
 01:14:42,170 --> 01:14:46,238
@@ -8620,7 +8619,7 @@ So that's the iPad in both landscape and portrait could
 1730
 01:14:46,240 --> 01:14:49,941
 be that, and the iPhone 6 plus in landscape, okay.
-iPhone 6 plus 在 landscape（横向模式）下也是 regular width  
+iPhone 6 plus 在 landscape（横向模式）下也是 regular width
 
 1731
 01:14:49,943 --> 01:14:52,977
@@ -8630,17 +8629,17 @@ So SplitView is only gonna do the side by
 1732
 01:14:52,979 --> 01:14:55,013
 side business there.
-这几种情况下并排放置 
+这几种情况下并排放置
 
 1733
 01:14:55,015 --> 01:15:01,352
 And if you rotate the iPad, then the Master disappears.
-如果你旋转 iPad，Master 消失了 
+如果你旋转 iPad，Master 消失了
 
 1734
 01:15:02,521 --> 01:15:04,688
 But it can be swiped out.
-但是可以将 Master 滑动唤出 
+但是可以将 Master 滑动唤出
 
 1735
 01:15:04,690 --> 01:15:10,126
@@ -8650,7 +8649,7 @@ If you just swipe from the left, when you rotate the only
 1736
 01:15:10,128 --> 01:15:12,361
 ones there is the Detail, you don't see the Master.
-看不到 Master 
+看不到 Master
 
 1737
 01:15:12,363 --> 01:15:14,129
@@ -8660,12 +8659,12 @@ But if you swipe out from the left,
 1738
 01:15:14,131 --> 01:15:15,830
 then you get to see the Master as well.
-你也可以看到 Master 
+你也可以看到 Master
 
 1739
 01:15:15,832 --> 01:15:16,798
 Again, side by side.
-Master 和 Detail 又并排放在一起了 
+Master 和 Detail 又并排放在一起了
 
 1740
 01:15:18,334 --> 01:15:19,633
@@ -8679,12 +8678,12 @@ And if you touch the Detail, it'll make the Master go
 1742
 01:15:22,304 --> 01:15:23,703
 back away and then you can swipe it.
-然后可以再次滑动唤出 
+然后可以再次滑动唤出
 
 1743
 01:15:23,705 --> 01:15:26,005
 So you can bring the Master out or not, okay.
-所以你可以决定是否唤出 Maser 
+所以你可以决定是否唤出 Maser
 
 1744
 01:15:26,007 --> 01:15:28,607
@@ -8699,7 +8698,7 @@ So that's the SplitViewController,
 1746
 01:15:30,611 --> 01:15:32,444
 kind of how it's arranged.
-以及它怎么排列 
+以及它怎么排列
 
 1747
 01:15:35,115 --> 01:15:37,915
@@ -8709,7 +8708,7 @@ But most importantly, I want you to understand that again,
 1748
 01:15:37,917 --> 01:15:40,217
 it's two MVCs that are the view.
-这两个 MVC 是 view 
+这两个 MVC 是 view
 
 1749
 01:15:40,219 --> 01:15:43,653
@@ -8719,12 +8718,12 @@ SplitView 并没有在它的 view 中绘制任何内容，
 1750
 01:15:44,656 --> 01:15:47,189
 except for maybe that vertical separator line.
-可能除了竖直的分界线 
+可能除了竖直的分界线
 
 1751
 01:15:47,191 --> 01:15:48,590
 Okay, there's a vertical separator line.
-这条竖直的分界线 
+这条竖直的分界线
 
 1752
 01:15:48,592 --> 01:15:52,327
@@ -8744,7 +8743,7 @@ So it doesn't even have any drawing on
 1755
 01:15:57,133 --> 01:15:58,632
 the bottom like the TabBar has.
-绘制底部的 tabBar 
+绘制底部的 tabBar
 
 1756
 01:15:59,735 --> 01:16:00,884
@@ -8763,7 +8762,7 @@ we're going to start this next time,
 1759
 01:16:03,905 --> 01:16:07,407
 is NavigationController, which is a very powerful one.
-NavigationController， 这是一个功能强大的 controller 
+NavigationController， 这是一个功能强大的 controller
 
 1760
 01:16:07,409 --> 01:16:10,242
@@ -8773,12 +8772,12 @@ It draws at the top a little title and
 1761
 01:16:10,244 --> 01:16:12,277
 some things, it can draw even around the bottom.
-它甚至可以在底部周围绘制内容 
+它甚至可以在底部周围绘制内容
 
 1762
 01:16:12,279 --> 01:16:15,380
 And then it can display any number of MVCs.
-还有，它可以展示任意多的 MVC 
+还有，它可以展示任意多的 MVC
 
 1763
 01:16:15,382 --> 01:16:19,917
@@ -8793,10 +8792,9 @@ and in the meantime if you have any questions,
 1765
 01:16:22,221 --> 01:16:23,053
 I'll be here as usual.
-我会像往常一样在这里解答 
+我会像往常一样在这里解答
 
 1766
 01:16:24,623 --> 01:16:25,654
 >> For more, please visit us at www.stanford.edu
->> 登录 www.stanford.edu 获取更多内容 
-
+>> 登录 www.stanford.edu 获取更多内容

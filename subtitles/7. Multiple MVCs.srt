@@ -10361,1219 +10361,1527 @@ Once we set maybe it will be easier to imagine our get.
 2201
 01:30:48,410 --> 01:30:49,780
 So I am just going to go to defaults,
+所以，我只是要去使用 defaults
 
 2202
 01:30:49,780 --> 01:30:53,680
 I am going to set an object and remember that this is
+我准备创建一个对象并且记住它是一个任意对象
 
 2203
 01:30:53,680 --> 01:30:56,480
 any object, but it has to be a property list, okay?
+但它必须是一个属性列表，明白？
 
 2204
 01:30:56,490 --> 01:30:59,220
 But luckily an Array of ints,
+但是幸运的是它是一个 int型的数组
 
 2205
 01:30:59,220 --> 01:31:02,320
 which is what our diagnostic history is.
+这就是我们的诊断历史
 
 2206
 01:31:02,330 --> 01:31:04,630
 Sorry, this isn't an Array of ints,
+抱歉，这不是一个 int型数组
 
 2207
 01:31:04,630 --> 01:31:09,160
 this diagnose is an Array of ints,
+这个诊断是一个 int型的数组
 
 2208
 01:31:09,160 --> 01:31:12,130
 that is a property so luckily, we can do that.
+很幸运的是这只是一个属性，我们可以操作它
 
 2209
 01:31:12,130 --> 01:31:14,500
 And here we're in the setting, okay, so
+在这里我们在设置中，好的
 
 2210
 01:31:14,500 --> 01:31:16,840
 we're just gonna put our new value here.
+所以我们只需要把我们的心得值放到这里
 
 2211
 01:31:16,840 --> 01:31:19,770
 So that's gonna be an Array of ints, the new value.
+所以那个新的变量将会成为一个 int型的数组
 
 2212
 01:31:19,770 --> 01:31:22,910
 For key we need a key, so let's go back down to
+对于Key来说我们需要一个Key，所以让我们回到
 
 2213
 01:31:22,910 --> 01:31:25,940
 our constants here and add another one, and
+我们在这里原来的常量并且添加另外一个
 
 2214
 01:31:25,950 --> 01:31:30,250
 this is going to be our called defaults key, for the history.
+这个常量对于历史来说将会被叫做我们默认的key
 
 2215
 01:31:30,250 --> 01:31:34,320
 And we can really put anything we want in here, any name for
+并且在这里我们可以把任何想放的东西放到这里
 
 2216
 01:31:34,320 --> 01:31:38,220
 the key, but remember that default is a database that is
+key的任何名字，但是记住这是默认的数据库
 
 2217
 01:31:38,220 --> 01:31:41,790
 shared in our entire application, so we might want
+在我们的整个应用程序中共享，所以我们也许想要
 
 2218
 01:31:41,790 --> 01:31:44,860
 to kind of name space it a little bit by saying
+这个名字多占一点命名空间通过给他起一个类似于
 
 2219
 01:31:44,860 --> 01:31:48,430
 diagnosedHappinessViewControl- ler.History or
+diagnosedHappinessViewControl- ler.History 或者
 
 2220
 01:31:48,430 --> 01:31:50,130
 something like that.
+一些类似于这样的名字
 
 2221
 01:31:50,130 --> 01:31:54,300
 So this is just a naming convention to throw the name
+所以，这只是一个命名约定将
 
 2222
 01:31:54,300 --> 01:31:57,300
 of the ViewContoller or the name of the class in general.
+ViewContoller的名字扔进一般类中
 
 2223
 01:31:57,310 --> 01:31:59,340
 That is writing to the default in front.
+这是写在 defaults前面的
 
 2224
 01:32:00,510 --> 01:32:01,880
 You don't have to do this.
+你不必做成这样
 
 2225
 01:32:01,880 --> 01:32:05,280
 This is purely something you just want to be consistent
+这是一件纯粹的事情你只是想要和
 
 2226
 01:32:05,280 --> 01:32:06,750
 with in your whole application and
+你的整个程序保持一致并且
 
 2227
 01:32:06,750 --> 01:32:09,150
 how you divide up this name space for the defaults,
+你如何瓜分这个 defaults的命名空间
 
 2228
 01:32:09,150 --> 01:32:12,920
 because this is a global name space inside your application.
+因为这是一个全局的命名空间在你的应用里
 
 2229
 01:32:14,020 --> 01:32:18,060
 So this will be our History and DefaultsKey.
+所以这将会成为我们的历史记录和默认键值
 
 2230
 01:32:18,060 --> 01:32:21,630
 All right, so that's the new write our any time we set this
+好的，所以在任何时间那都是新写的
 
 2231
 01:32:21,630 --> 01:32:25,800
 diagnostic history it's gonna write it out to user defaults.
+我们创建的这个诊断历史，它将会写在用户的 defaults中
 
 2232
 01:32:25,800 --> 01:32:27,100
 Then similarly we can get it
+那么同样的，我们可以得到它
+
 
 2233
 01:32:27,100 --> 01:32:30,970
 out by just returning defaults.objectForKey.
+仅仅通过返回defaults.objectForKey
 
 2234
 01:32:30,970 --> 01:32:32,130
 Same thing.
+同样的事情
 
 2235
 01:32:32,140 --> 01:32:33,300
 This History.DefaultsKey.
+这个 History.DefaultsKey
 
 2236
 01:32:33,300 --> 01:32:37,440
 But one thing I wanna make sure of is that it's
+但是有一件我想要确定的关于这个的事情是
 
 2237
 01:32:37,440 --> 01:32:39,240
 always an Array of int.
+它始终是一个int型的数组
 
 2238
 01:32:39,240 --> 01:32:41,710
 So I'm gonna do as Array of int.
+所以我将会做和int型数组同样的事
 
 2239
 01:32:41,710 --> 01:32:45,150
 And if that returns nil then I'm gonna turn empty Array.
+并且如果那个返回一个空值的话我将要把它转为一个空的数组
 
 2240
 01:32:45,150 --> 01:32:47,530
 Okay. So if I have
+Okay，如果我
 
 2241
 01:32:47,530 --> 01:32:49,920
 never saved the diagnostic history to the defaults for
+从没有存储诊断记录到例子中的 defaults中
 
 2242
 01:32:49,920 --> 01:32:52,020
 example, then this is going to come back nil,
+那么这个将会返回一个空值回来
 
 2243
 01:32:52,020 --> 01:32:54,620
 okay, but I never have saved it before.
+okay，但是我从来没有存储过它
 
 2244
 01:32:54,620 --> 01:32:55,690
 So we'll start out with a nice,
+所以我们将会在开始时拥有一个漂亮的
 
 2245
 01:32:55,690 --> 01:32:56,920
 empty Array in that case.
+空的数组在那种情况下
 
 2246
 01:32:58,330 --> 01:33:00,430
+Okay.
 Okay.
 
 2247
 01:33:00,430 --> 01:33:02,530
 And also, if somehow some junk had got written here that
+同样的，如果莫名其毛的一些垃圾写到了这里
 
 2248
 01:33:02,530 --> 01:33:03,690
-wasn't in an Array of Intfor
+wasn't in an Array of Int for
+由于一些原因不是Int 型的数组
 
 2249
 01:33:03,700 --> 01:33:05,600
 some reason, then this would also be nil and
+那么这也将会是空值并且
 
 2250
 01:33:05,600 --> 01:33:06,900
 we would start out with a fresh Array.
+我们将和一个新的数组开始
 
 2251
 01:33:06,900 --> 01:33:09,670
 It would be kind of a weird case, but anyway so you
+它也许会是一种怪异的情况，但是无论如何你可以
 
 2252
 01:33:09,670 --> 01:33:14,100
 can see a simple way here to read and write from default.
+在这里看到一种简单的方式去从 default中进行读写
 
 2253
 01:33:14,110 --> 01:33:19,270
 Okay make sense, all right so now let's go run around and
+好的体会一下，所以现在让我们来回的看一下
 
 2254
 01:33:19,280 --> 01:33:22,310
 see if this fixed our problem, of our defaults not
+如果这个修复我们的问题，我们的 defaults没有在附近
 
 2255
 01:33:22,310 --> 01:33:24,650
 lying around, so let's see golden bear, dancing tree,
+所以让我们看 golden bear，dancing tree
 
 2256
 01:33:24,650 --> 01:33:26,350
 buckeye, put a whole bunch in there,
+buckeye，放了一大堆在那里
 
 2257
 01:33:26,350 --> 01:33:28,720
 history it's remembering them all.
+历史记录它把他们全记下来了
 
 2258
 01:33:28,720 --> 01:33:31,800
+Okay.
 Okay.
 
 2259
 01:33:31,800 --> 01:33:34,890
 Golden Bear, 0, Dancing Tree, 100.
+Golden Bear, 0, Dancing Tree, 100.
 
 2260
 01:33:34,890 --> 01:33:36,160
 Okay?
+明白？
 
 2261
 01:33:36,160 --> 01:33:38,460
 That looks quite awesome.
+那看起来很惊人
 
 2262
 01:33:38,460 --> 01:33:39,660
 All right.
+阿红的
 
 2263
 01:33:39,660 --> 01:33:40,860
 Let's try one other thing here.
+让我们在这里尝试另外一件事
 
 2264
 01:33:40,860 --> 01:33:42,060
 Let's go try running this on an iPhone.
+让我们在iPhone上运行这个程序
 
 2265
 01:33:42,060 --> 01:33:45,600
 Let's see how this works on an iPhone, with our great new
+让我们看看在iPhone上它是怎么工作的，和我们伟大的
 
 2266
 01:33:45,600 --> 01:33:48,730
 feature here, and we'll see what it looks like.
+新的特性，我们会看到它的样子
 
 2267
 01:33:52,710 --> 01:33:54,870
 All right so we got there a gold bear.
+好吧，没所以我们在这里得到了一只 gold bear
 
 2268
 01:33:54,870 --> 01:33:56,370
 We got a dancing tree.
+我们得到了一个 dancing tree
 
 2269
 01:33:56,380 --> 01:33:58,510
 We got the buckeye.
+我们得到了 buckeye
 
 2270
 01:33:58,510 --> 01:34:01,010
 Okay, let's see that history.
+好的，让我们看看那个 history
 
 2271
 01:34:01,010 --> 01:34:05,980
 Whoa, that looks really, really bad, okay?
+哇，那个看起来非常，非常糟糕，不是么？
 
 2272
 01:34:05,980 --> 01:34:07,020
 Well, hm.
+好的
 
 2273
 01:34:07,020 --> 01:34:08,520
 So it didn't put up the history in
+所以它没有将 history 营造出来
 
 2274
 01:34:08,520 --> 01:34:10,550
 the little popover like that.
+像那个小的 popover一样
 
 2275
 01:34:10,550 --> 01:34:12,620
 It took over the whole screen.
+它接管了整个屏幕
 
 2276
 01:34:12,620 --> 01:34:16,120
 Modal, it's what a modal segue looks like.
+Modal, 这看起来就是一个 modal的 segue 
 
 2277
 01:34:16,130 --> 01:34:17,390
 And I put it up here, and
+我把它挂载到这里
 
 2278
 01:34:17,390 --> 01:34:19,660
 smashed into my carrier thing up here, and
+然后把我的运载的东西砸到这里
 
 2279
 01:34:19,660 --> 01:34:22,800
 there's no way to get out of here there's no done button or
+这里没有办法离开这里，这里没有完成按钮或者没有
 
 2280
 01:34:22,800 --> 01:34:26,030
 dismiss or something, because in a popover we don't need to
+dismiss 或者一些事，因为在popover里我们不需要
 
 2281
 01:34:26,030 --> 01:34:28,770
 dismiss because you just click on the background.
+dismiss因为你只需要点击一下背景
 
 2282
 01:34:28,770 --> 01:34:32,870
 So you know, this is really a small amount of information I
+所以你知道，这的确是一个非常少的信息
 
 2283
 01:34:32,870 --> 01:34:36,810
 could have put it in a popover there why did iOS adapt that
+我可以把他们放到popover中，这里为什么 iOS适配
 
 2284
 01:34:36,810 --> 01:34:40,240
 popover for the iPhone and put it to your screen?
+popover为 iPhone并且把它们放到你的屏幕中
 
 2285
 01:34:40,250 --> 01:34:42,580
 Well, because it doesn't really know how big this is
+好的，应为它的确不知道它将会变得多大
 
 2286
 01:34:42,580 --> 01:34:45,050
 going to be and how much data is going to be drawn or
+有多少数据将要被绘制或者怎么样绘制
 
 2287
 01:34:45,050 --> 01:34:48,690
 whatever until it's being displayed.
+直到它被显示出来
 
 2288
 01:34:48,690 --> 01:34:51,890
 And so on an iPhone to be safe it always adapts
+所以在iPhone上为了确保稳定，它通常会适应
 
 2289
 01:34:51,890 --> 01:34:54,820
 popovers to make them full screen presentation like
+popovers 使他们作为全屏展示像是
 
 2290
 01:34:54,830 --> 01:34:55,990
 this to take over the screen.
+这个接管了整个屏幕一样
 
 2291
 01:34:56,990 --> 01:34:59,060
 Okay, but in this case, we don't actually want that.
+好的，但是在这个例子中，我们实际上不想那样
 
 2292
 01:34:59,060 --> 01:35:00,700
 We dont want that adaptation behavior.
+我们不想要那个适配行为
 
 2293
 01:35:00,700 --> 01:35:02,900
 We want to prevent this adaptation behavior so
+我们想防止这个适配行为
 
 2294
 01:35:02,900 --> 01:35:06,200
 they just keep putting it in its nice little popover.
+他们只是不停的把它放进它的可爱的小 popover中
 
 2295
 01:35:06,200 --> 01:35:07,770
 It'll be perfectly fine in iPad and
+它在iPad上将会非常完美
 
 2296
 01:35:07,770 --> 01:35:09,440
 it will be perfectly fine for iPhone.
+并且它在iPhone上也会非常好
 
 2297
 01:35:09,440 --> 01:35:13,140
 So, how do we prevent this adaptation behavior
+所以，我们如何组织这个适配行为
 
 2298
 01:35:13,140 --> 01:35:14,610
 from happening?
+发生呢？
 
 2299
 01:35:15,610 --> 01:35:19,540
 To do that, we need to get at that popover presentation
+要想实现那样，我们需要得到那个 popover presentation controller
 
 2300
 01:35:19,550 --> 01:35:24,180
 controller I was talking to you about in the slides.
+我和你谈论过的关于 slides
 
 2301
 01:35:24,180 --> 01:35:26,120
-And it's pretty easy to get ahold of it.
+And it's pretty easy to get a hold of it.
+并且得到它是非常容易的
 
 2302
 01:35:26,120 --> 01:35:27,550
 Inside our prepare-
+在我们的准备中
 
 2303
 01:35:27,550 --> 01:35:29,420
 So here's our prepare in our diagnosed,
+所以这里是我们在我们的 diagnosed中的准备
 
 2304
 01:35:29,420 --> 01:35:32,720
 DiagnosedHappinessViewController right here.
+DiagnosedHappinessViewController 在这里
 
 2305
 01:35:32,720 --> 01:35:36,290
 The same place down here where we're doing the preparation
+在这里的同一个地方我们准备那些将要发生的事情
 
 2306
 01:35:36,290 --> 01:35:40,500
 happening, we can also say if we can let,
+我们也可以说如果我们可以 let
 
 2307
 01:35:40,500 --> 01:35:43,330
 ppc I'll call it, equal the text view
+ppc 我将会调用它，同样的对于 text view
 
 2308
 01:35:43,330 --> 01:35:46,830
 controller's popover presentation controller.
+controller的 popover presentation controller
 
 2309
 01:35:46,840 --> 01:35:49,450
 Okay.
+好的
 
 2310
 01:35:49,460 --> 01:35:52,070
 So, this is a method in UI viewcontroller and
+所以，这里是一个在 UI viewcontroller中的方法并且
 
 2311
 01:35:52,080 --> 01:35:54,740
 it'll return nil if you're not currently in the process of
+它将会返回一个 nil如果你不在目前的进程中
 
 2312
 01:35:54,740 --> 01:35:57,310
 being presented in a popover.
+呈现一个 popover
 
 2313
 01:35:57,310 --> 01:36:00,280
 So if this segue if we changed this segue to
+所以如果这个 segue 如果我们改变这个 segue 去
 
 2314
 01:36:00,280 --> 01:36:03,020
 segue somehow else other than a popover,
+一个不是 popover
 
 2315
 01:36:03,020 --> 01:36:06,990
 maybe we wanted to go full modal for some reason or
+也许我们因为某些原因想要完整的 modal
 
 2316
 01:36:06,990 --> 01:36:09,690
 we decided to push it on a navigation stack or
+我们决定把它推入一个导航栈或者
 
 2317
 01:36:09,690 --> 01:36:11,820
 whatever then this would return nill and
+无论怎么样这将返回一个空值
 
 2318
 01:36:11,830 --> 01:36:14,060
 so nothing that I'm gonna do right here would even happen.
+这样的话我在这里做的任何事都将不会发生
 
 2319
 01:36:15,530 --> 01:36:18,050
 So what am I going to do?
+所以接下来我要做什么？
 
 2320
 01:36:18,050 --> 01:36:20,560
 I'm just going to set the popoverPresentationControll-
+我只是要设置 popoverPresentationController的
 
 2321
 01:36:20,570 --> 01:36:24,670
 er's delegate to myself, and that's because the popover
+代理给自己，那是因为popover controller的
 
 2322
 01:36:24,670 --> 01:36:27,340
 controller's delegate allows you to
+代理允许你
 
 2323
 01:36:27,340 --> 01:36:31,510
 have someone else control the way the presentation works.
+使用别的方式来控制当前显示的工作
 
 2324
 01:36:31,510 --> 01:36:35,340
 And this is the first time you're seeing the [COUGH]
+并且这是第一次你看到
 
 2325
 01:36:35,350 --> 01:36:39,380
 present the idea of a delegate in an action in an iOS.
+在iOS系统的一个动作中呈现出当前的代理
 
 2326
 01:36:39,380 --> 01:36:41,280
 Now you remember when we set ourselves as
+现在你记住当我们设置我们自己作为
 
 2327
 01:36:41,280 --> 01:36:43,980
 a delegate you can see there's an error right here it says
+一个代理的时候 你可以看到哪里有一个错误
 
 2328
 01:36:43,990 --> 01:36:46,690
 DiagnosedHappinessViewContro- ller does not conform to
+它的意思是 DiagnosedHappinessViewController 没有符合
 
 2329
 01:36:46,690 --> 01:36:48,520
 this protocol
+这个
 
 2330
 01:36:48,520 --> 01:36:50,360
 UIPopoverPrsentationControlle- rDelegate.
+UIPopoverPrsentationControllerDelegate 的协议
 
 2331
 01:36:50,360 --> 01:36:54,630
 And that's true, because up here we have to say we are a
+这是真的，因为在这里我们必须说明我们是一个
 
 2332
 01:36:54,630 --> 01:36:56,760
 UIPopoverPresentationControll- erDelegate.
+UIPopoverPresentationControllerDelegate
 
 2333
 01:36:57,730 --> 01:36:59,060
 Okay? And now,
+明白？现在
 
 2334
 01:36:59,070 --> 01:37:03,770
 once we put this on here, we have to go down here and
+一旦我们把这个放在这里，我们必须从这里往下走并且去
 
 2335
 01:37:03,770 --> 01:37:08,440
 actually implement that method, the method we want.
+真正地实现那个方法，我们想要的那个方法
 
 2336
 01:37:08,440 --> 01:37:10,540
 And this method that we want is called
+并且那个我们想要的方法被称作
 
 2337
 01:37:10,540 --> 01:37:13,980
 adaptive presentation style for presentation controller.
+自适应的显示凡是对于 presentation controller
 
 2338
 01:37:15,050 --> 01:37:18,000
 Okay?
+明白？
 
 2339
 01:37:18,000 --> 01:37:20,950
 And this is basically saying, here's a popover controller.
+在这里基本上可以说，这里是一个 popover controller
 
 2340
 01:37:20,950 --> 01:37:23,180
 [INAUDIBLE] You know how, in a delegate method, we
+[听不清] 你知道怎样，在一个代理的方法中
 
 2341
 01:37:23,190 --> 01:37:25,850
 usually pass along the thing that's doing the delegation.
+我们通常传递的东西在 delegation中传递一样
 
 2342
 01:37:25,860 --> 01:37:29,120
 So this is that same popover presentation controller being
+所以这是相同的对于 popover presentation controller把
 
 2343
 01:37:29,130 --> 01:37:30,790
 passed back to us.
+东西传递回来给我们
 
 2344
 01:37:30,790 --> 01:37:35,400
 And it's saying, please return a presentation style which you
+并且它说，请返回一种你想要的呈现方式
 
 2345
 01:37:35,400 --> 01:37:38,760
 want and when you're adapting on the iPhone.
+当你在这个iPhone上适应了后
 
 2346
 01:37:38,770 --> 01:37:43,170
 So I'm gonna return the UI modal presentation style none,
+所以我准备返回 UI modal呈现方式为空
 
 2347
 01:37:43,170 --> 01:37:46,440
 which means don't adapt, Okay do not when you're on
+它的意思是不进行适配，不要在iPhone上进行适配
 
 2348
 01:37:46,440 --> 01:37:49,370
 iPhone do no adaptations do what you normally do,
+不做任何你通常做的修改
 
 2349
 01:37:50,310 --> 01:37:51,840
 which is put the pop over in a little window.
+把 pop over放到一个小的窗口里
 
 2350
 01:37:53,310 --> 01:37:54,480
 And that's it. That's all I
+就是这样
 
 2351
 01:37:54,480 --> 01:37:56,310
 need to do to suppress that.
+那就是所以我需要压制它的
 
 2352
 01:37:56,310 --> 01:37:58,680
 Now, by the way,
+现在，顺便说一下
 
 2353
 01:37:58,680 --> 01:38:01,050
 in addition to PPC delegating inside here, I could, there
+除了在 这里的PPT中的代理外，我可以
 
 2354
 01:38:01,050 --> 01:38:04,690
 are other methods in popover presentation controller.
+那儿还有其他的方法在 popover presentation controller中
 
 2355
 01:38:04,690 --> 01:38:10,190
 You can go take a look at, and they will show you things that
+你可以去看一下并且他们会向你展示出那些
 
 2356
 01:38:10,190 --> 01:38:12,860
 you can find out about what's going on with the popover.
+你可以发现的关于与 popover相关的东西
 
 2357
 01:38:12,860 --> 01:38:16,360
 But setting its delegates so that you can control that
+但是设置它的 delegates这样的话你可以控制
 
 2358
 01:38:16,370 --> 01:38:19,230
 adaptation is a popular thing to want to do.
+你想做的任何适配操作
 
 2359
 01:38:19,240 --> 01:38:20,300
 All right.
+好的
 
 2360
 01:38:20,300 --> 01:38:21,840
 So let's go try it now on the iPhone again.
+所以让我们在iPhone上再次尝试一次
 
 2361
 01:38:21,840 --> 01:38:25,770
 Here we go let's hit history and
+这里让我们敲击 history
 
 2362
 01:38:25,770 --> 01:38:28,670
 now it's working okay coming up in the pop over here.
+现在它在这里弹出的 popover中工作的很好
 
 2363
 01:38:28,680 --> 01:38:31,980
 Let's go add history let's go another dancing tree over here
+让我们添加 history，让我们在这里添加另一个dancing tree
+
 
 2364
 01:38:31,980 --> 01:38:34,780
 now we've dancing tree added there.
+现在我们已经在这里添加了 dancing tree
 
 2365
 01:38:34,780 --> 01:38:37,150
 Okay?
+明白？
 
 2366
 01:38:37,150 --> 01:38:39,520
 And it'll work fine landscape or portrait.
+并且它在垂直和水平模式下工作的很好
 
 2367
 01:38:42,590 --> 01:38:42,990
 Okay?
+明白？
 
 2368
 01:38:42,990 --> 01:38:43,390
 Questions about that?
+有关于这些的问题么？
 
 2369
 01:38:44,560 --> 01:38:46,440
 All right.
+好的
 
 2370
 01:38:46,440 --> 01:38:48,320
 The last thing I want to do with the pop over is
+最后一件我想对 popover做的事情是
 
 2371
 01:38:48,330 --> 01:38:50,160
 when we ran this pop over,
+当我运行这个 popover的时候
 
 2372
 01:38:50,160 --> 01:38:51,990
 over here, you notice that it's kind of big.
+在这里，你注意到他是很大的
 
 2373
 01:38:52,000 --> 01:38:54,600
 It's covering the whole smiley face for no reason,
+它无缘无故地遮盖了住了整个笑脸
 
 2374
 01:38:54,600 --> 01:38:58,530
 because it really only needs to be big enough to hold that.
+因为它的确是需要变得足够大
 
 2375
 01:38:58,540 --> 01:39:02,300
 Well, that's because really again the popover presentation
+好吧，那是因为真的 popover presentation
 
 2376
 01:39:02,310 --> 01:39:05,710
 controller really has no idea how big this information is
+controller 的确是不知道在这里的信息是有
 
 2377
 01:39:05,710 --> 01:39:06,340
 in here.
+多大
 
 2378
 01:39:07,380 --> 01:39:09,240
 And, but there is a way to tell it.
+但是，这里有一种方式可以告诉它
 
 2379
 01:39:09,240 --> 01:39:11,910
 And if you think about who knows what the size of
+如果你考虑谁知道什么样的尺寸是最好的
 
 2380
 01:39:11,910 --> 01:39:15,250
 this is best, well it's the TextViewController.
+那就是 TextViewController
 
 2381
 01:39:15,250 --> 01:39:16,400
 Cuz the text view
+因为 text view 
 
 2382
 01:39:16,400 --> 01:39:17,550
 controller's the one that's gonna display this.
+controller 是将会在这里显示的控件之一
 
 2383
 01:39:17,550 --> 01:39:20,950
 It knows what it's preferred size would be.
+它知道它的首选的大小将会是多少
 
 2384
 01:39:20,950 --> 01:39:23,050
 So as we're talking about in the slides.
+所以当我们在 slides中讨论的时候
 
 2385
 01:39:23,060 --> 01:39:25,090
 Let's go ahead and make it so
+让我们继续制作它
 
 2386
 01:39:25,090 --> 01:39:27,790
 the TextViewController reports its preferred size.
+这样的化 TextViewController 会报告它的首选的尺寸
 
 2387
 01:39:27,790 --> 01:39:33,430
 So I'm gonna go over here to the TextViewController.
+所以我将到这个 TextViewController中
 
 2388
 01:39:33,430 --> 01:39:35,320
 Okay.
+好的
 
 2389
 01:39:35,320 --> 01:39:37,200
 [COUGH] Now the prefered size is just a var in
+现在首选的尺寸仅仅是一个 var在
 
 2390
 01:39:37,200 --> 01:39:41,300
 UIV controller so the TextViewController could set that
+UIV controller中，所以 TextViewController 可以对它进行设置
 
 2391
 01:39:41,310 --> 01:39:45,640
 somewhere, it could just say preferred content size equals
+它可以仅仅说首选的内容大小和什么东西一样
 
 2392
 01:39:45,640 --> 01:39:49,910
 something, but since this is a subclass UIV controller and
+但是因为这是一个UIV controller 的子类并且
 
 2393
 01:39:49,910 --> 01:39:55,150
 the content size would change every time this is changing.
+内容的大小可能随时发生变化
 
 2394
 01:39:55,150 --> 01:39:57,050
 And also might change depending on
+也可能根据一些内容进行改变例如
 
 2395
 01:39:57,050 --> 01:39:59,720
 how big a space the popover is being popped into.
+当popover popped进入的时候它占了多大
 
 2396
 01:40:01,060 --> 01:40:06,560
 We can actually do better here by overriding the var
+实际上我们可以在这里做的更好通过重写这个 var
 
 2397
 01:40:06,560 --> 01:40:12,400
 preferredContentSize, which is a CGSsize.
+preferredContentSize，是一个 CGSsize
 
 2398
 01:40:12,400 --> 01:40:16,730
 I'm going to override it and do the get set.
+我准备重写它并且做好 get 和 set.
 
 2399
 01:40:16,740 --> 01:40:19,200
 Okay, so it's going to be a computed property,
+好的，所以这将会是一个计算好的属性
 
 2400
 01:40:19,210 --> 01:40:20,940
+get and set.
 get and set.
 
 2401
 01:40:20,940 --> 01:40:23,440
 And on the setting side of this,
+这里的 setting的地方
 
 2402
 01:40:23,440 --> 01:40:25,440
 if someone set the preferred content size,
+如果某人设置好了首选的内容尺寸
 
 2403
 01:40:25,440 --> 01:40:27,140
 I'm just gonna let my super class.
+我只需要让我的 super class
 
 2404
 01:40:27,150 --> 01:40:32,480
 Preferred content size do its thing, okay?
+首选的内容尺寸做这件事情，明白？
 
 2405
 01:40:32,480 --> 01:40:33,920
 We'll just let the new value do that.
+我们将会让新的变量做那个
 
 2406
 01:40:33,920 --> 01:40:36,180
 So I'm going to let my super class handle it or
+所以我准备让我的 super class处理它或者
 
 2407
 01:40:36,190 --> 01:40:36,880
 someone sets it.
+有些人设置它
 
 2408
 01:40:37,920 --> 01:40:40,920
 All right?
+明白？
 
 2409
 01:40:40,920 --> 01:40:43,920
 But if someone tries to get it, then if my text view has
+但是如果有人想要得到它，接下来如果我的 text view
 
 2410
 01:40:43,930 --> 01:40:46,890
 been set, so if this outlet has been set, and if I'm in
+已经被设置了，所以如果这个 outlet已经被设置了，并且如果
 
 2411
 01:40:46,900 --> 01:40:52,100
 the middle of being presented on screen, okay, then I can
+我在中途把它呈现到了屏幕上，好的，接下来我可以
 
 2412
 01:40:52,100 --> 01:40:55,100
 ask the text view what its preferred size would be.
+向text view询问它的首选的尺寸将会是多少 
 
 2413
 01:40:56,100 --> 01:40:58,540
 Okay, so we're going to let the textView do the work here.
+好的，所以我们准备让 textView在这里工作
 
 2414
 01:40:58,540 --> 01:40:59,870
 So what does that look like?
+所以它看起来的怎么样？
 
 2415
 01:41:01,510 --> 01:41:03,910
 So, we might say,
+我们也许会说
 
 2416
 01:41:03,910 --> 01:41:09,110
 for example here, if textView does not equal nil.
+例如在这里，如果 textView不等于空
 
 2417
 01:41:09,110 --> 01:41:13,180
 Oops, I've got sticky keys on here, so
+哦，我在这里按了热键
 
 2418
 01:41:13,180 --> 01:41:15,480
 you see that in the lower corner there.
+所以你可以看到那个在右下角
 
 2419
 01:41:15,490 --> 01:41:18,650
 If textView doesn't equal nil, and if we're
+如果 textview 不等于空，并且如果我们
 
 2420
 01:41:18,660 --> 01:41:22,120
 being presented right now so how can we find that out?
+现在把它呈现出来我们怎么才能找到它呢
 
 2421
 01:41:22,130 --> 01:41:25,530
 UIViewController has another great bar
+UIViewController 拥有另一个伟大的 bar
 
 2422
 01:41:25,530 --> 01:41:28,760
 called presentingViewController.
+叫做 presentingViewController
 
 2423
 01:41:29,900 --> 01:41:31,900
 The presentingViewController is the view controller that
+presentingViewController 是一个视图的 controller
 
 2424
 01:41:31,900 --> 01:41:35,940
 is currently presenting you via some sort of segue.
+在当前呈现给你一些 segue的种类
 
 2425
 01:41:35,940 --> 01:41:39,610
 So, in the popover case, it's going to be that diagnosed
+所以，在 popover 案例中，它将会被诊断为
 
 2426
 01:41:39,610 --> 01:41:41,840
 view controller's gonna be presenting me.
+视图控制器将会把我呈现出来
 
 2427
 01:41:41,840 --> 01:41:44,610
 But whoever it is, I can check to make sure that's not nil.
+但是无论它是谁，我可以检查它以确定它不是空值
 
 2428
 01:41:45,550 --> 01:41:48,450
 So, this is only gonna happen right here,
+所以，这个仅仅会在这里发生
 
 2429
 01:41:48,450 --> 01:41:51,180
 in the case where I'm in the middle of a presentation.
+在例子中我在呈现的中部
 
 2430
 01:41:51,180 --> 01:41:53,550
 Okay, also my text here not to be no it's not clear that I
+好的，同样的我在这里的文本不是很清晰
 
 2431
 01:41:53,550 --> 01:41:56,720
 really need to set this because, probably my
+所以我很需要设置这个，因为也许我的
 
 2432
 01:41:56,720 --> 01:41:59,690
 outlets are all gonna be set before this gets there.
+outlets在这之前就已经都被设置好了
 
 2433
 01:41:59,690 --> 01:42:03,790
 But just to be safe I'll set both of these things and
+但是保险起见我将会同时设定他们
 
 2434
 01:42:03,800 --> 01:42:06,600
 in this case I'm gonna let the text view tell me a size that
+并且在这个例子中我准备让text view 告诉我一个尺寸
 
 2435
 01:42:06,600 --> 01:42:10,500
 fits inside my presenting view controllers.
+可以在我呈现的视图控制器中进行适配
 
 2436
 01:42:10,500 --> 01:42:13,030
+Viewbounds.size.
 Viewbounds.size.
 
 2437
 01:42:14,040 --> 01:42:15,300
 'Kay?
+明白？
 
 2438
 01:42:15,300 --> 01:42:18,210
 And this of course we will need to unwrap.
+在这节课中我们需要解开它
 
 2439
 01:42:18,210 --> 01:42:20,090
 But it's okay,
+但是这没关系
 
 2440
 01:42:20,090 --> 01:42:21,970
 cuz we checked to make sure it's not nil first.
+因为我们去检查确保它在开始的时候不为空
 
 2441
 01:42:21,980 --> 01:42:23,760
 'Kay?
+明白？
 
 2442
 01:42:23,760 --> 01:42:25,540
 So this is the bounds.size of our presentingViewController.
+所以这是我们 presentingViewController的 bounds.size
 
 2443
 01:42:25,550 --> 01:42:27,710
 So in the diagnosedHappinessViewContro-
+所以在 diagnosedHappinessViewController例子中
 
 2444
 01:42:27,720 --> 01:42:30,920
 ller case, it's the whole seam, basically.
+它是整个的，从根本上来说
 
 2445
 01:42:30,920 --> 01:42:34,190
 And we're just gonna see what is a good size that fits.
+我们只是想看到什么样是好的尺寸和适配
 
 2446
 01:42:34,190 --> 01:42:36,860
 Now this is only a preferred content size.
+现在这个只是首选的内容尺寸
 
 2447
 01:42:36,860 --> 01:42:39,420
 So if this size that fits were really huge, for
+所以如果这个尺寸适配的事内容是非常大的
 
 2448
 01:42:39,430 --> 01:42:43,230
 example, the popover's still going to limit the size to
+例如说，popover 仍然准备去不限制它的
 
 2449
 01:42:43,230 --> 01:42:45,130
 whatever its restrictions are, okay?
+大小，明白？
 
 2450
 01:42:45,130 --> 01:42:47,310
 So we just prefer.
+所以我们只是提前设定
 
 2451
 01:42:47,320 --> 01:42:49,500
 This is not actual content size, it's just preferred.
+这不是实际的内容大小，他只是预先设定的
 
 2452
 01:42:49,500 --> 01:42:50,770
 Now, what if we're not in
+现在，如果我们不在
 
 2453
 01:42:50,770 --> 01:42:52,030
 the middle of presenting right here?
+这里呈现的视图的中间
 
 2454
 01:42:52,040 --> 01:42:55,610
 Well, then once again I'm going to let my
+好吧，然后再一次我去让我的
 
 2455
 01:42:55,610 --> 01:42:58,940
 super class do the work here so whatever it
+super class完成这里的工作所以不管
 
 2456
 01:42:58,940 --> 01:43:01,880
 would normally return I'm going to have it return.
+它是否能正常的反回我都准备让他有一个返回值
 
 2457
 01:43:01,880 --> 01:43:04,780
 So remember I'm overriding this my super class.
+所以记住我准备重写我的 super class
 
 2458
 01:43:04,780 --> 01:43:06,130
 So really I'm just getting involved in
+所以我只是卷入
 
 2459
 01:43:06,130 --> 01:43:07,480
 this one case where I happen to be in the middle of
+在这个案例中，我碰巧在呈现视图的中间
 
 2460
 01:43:07,480 --> 01:43:10,250
 presenting something, then I pretty much know what my
+呈现了一些东西，然后我非常想知道我的
 
 2461
 01:43:10,250 --> 01:43:13,490
 size is based on my text field okay?
+基于 textfield的尺寸是多少，明白？
 
 2462
 01:43:14,490 --> 01:43:17,690
 So let's run and see how that fixes it.
+所以让我们运行并且看下它是如何适配的
 
 2463
 01:43:17,690 --> 01:43:20,560
 All right, so the goal is to get our history, excellent.
+好的，所以目标是去得到我们的 history，非常棒
 
 2464
 01:43:20,560 --> 01:43:23,430
 Now notice also, our history was remembered even
+现在可以看到，我们的 history 记住了
 
 2465
 01:43:23,430 --> 01:43:26,670
 after we quit our app and run it again because we are using
+即使我们离开了我们的应用并且又重新运行了一下它，因为我们使用了
 
 2466
 01:43:26,670 --> 01:43:30,300
 defaults which these defaults remember things when it quits.
+默认的参数，这些参数是我们离开的时候记录下来的
 
 2467
 01:43:30,300 --> 01:43:34,570
 So here we got 0, 150, 100, let's go back over here and
+所以这里我们得到了0, 150, 100,让我们重新回到这里并且
 
 2468
 01:43:34,570 --> 01:43:35,470
 do nothing.
+什么都不做
 
 2469
 01:43:35,480 --> 01:43:36,610
 25.
+25
 
 2470
 01:43:36,610 --> 01:43:37,510
 Looks good.
+看起来很棒
 
 2471
 01:43:37,510 --> 01:43:40,040
 Let's go back and do Golden Bear.
+让我们返回并且看一下 Golden Bear
 
 2472
 01:43:40,050 --> 01:43:42,780
 Zero, so it's working beautifully there.
+0，所以它在这里工作的很完美
 
 2473
 01:43:42,780 --> 01:43:46,150
 Okay, again it works no matter what size you use.
+好的，它再一次工作了不论你设置了什么尺寸
 
 2474
 01:43:46,150 --> 01:43:52,520
 Go on there and it will also work on the iPad as well.
+它同样在iPad上工作的很好
 
 2475
 01:43:52,520 --> 01:43:57,660
+There we go.
 There we go.
 
 2476
 01:43:57,660 --> 01:43:58,730
 So, there's the history.
+所以，这是 history
 
 2477
 01:43:58,730 --> 01:44:00,530
 Shows it up there.
+在那里显示它
 
 2478
 01:44:00,530 --> 01:44:02,730
 There too.
+同样在那里
 
 2479
 01:44:02,730 --> 01:44:05,930
 Okay, so that's it for popovers, but we also managed
+好的，所以这个它的 popovers，但是我们同样想
 
 2480
 01:44:05,930 --> 01:44:09,040
 to cover a couple other things there along the way.
+去盖住其他的两个东西通过同样的方式
 
 2481
 01:44:09,040 --> 01:44:12,200
 Most notably was the polymorphism of
+最显著的动态特性对于
 
 2482
 01:44:12,210 --> 01:44:14,010
 view controllers.
+view controllers
 
 2483
 01:44:14,940 --> 01:44:17,740
 And we were in our storyboard here,
+并且我们现在在我们这里的 storyboard
 
 2484
 01:44:17,740 --> 01:44:20,450
 we ended up actually creating a sub class,
+我们结束了实际创建一个 subclass
 
 2485
 01:44:20,450 --> 01:44:23,580
 DiagnosedHappinessViewContro- ller here to add some more
+在这里 01:44:20,450 --> 01:44:23,580
+DiagnosedHappinessViewController去添加一些更多的
 
 2486
 01:44:23,580 --> 01:44:25,480
 functionality, okay?
+功能，明白？
 
 2487
 01:44:25,480 --> 01:44:27,620
 And that is not an edge case,
+并且这不是在一种极端的情况下
 
 2488
 01:44:27,620 --> 01:44:28,950
 that's a common thing you wanna do.
+这是一件你想要达成的事的普遍性
 
 2489
 01:44:28,950 --> 01:44:31,650
 You have some reusable HappinessViewController or
+你有一些可重复使用的 HappinessViewController或者
 
 2490
 01:44:31,660 --> 01:44:33,620
 something like HappinessViewController.
+一些像是 HappinessViewController的东西
 
 2491
 01:44:33,620 --> 01:44:36,660
 You wanna use it, but you need to add something to it and
+你想要使用它，但是你需要去添加一些东西给它并且
 
 2492
 01:44:36,660 --> 01:44:37,460
 you don't wanna change it.
+你不想改变它
 
 2493
 01:44:37,460 --> 01:44:38,460
 Well, that's exactly what
+好的，那实际上就是
 
 2494
 01:44:38,460 --> 01:44:39,690
 object oriented programming is for!
+面向对象编程的特点
 
 2495
 01:44:39,700 --> 01:44:41,800
 You can create a subclass of it and
+你可以为它创建一个 subclass并且
 
 2496
 01:44:41,800 --> 01:44:48,600
 add the methods that you wanna add to it, to your diagnosed.
+添加一些你想要给它添加的方法，对你的 diagnosed
 
 2497
 01:44:48,600 --> 01:44:50,570
 And what's kind of nice too
+并且和那样也不错的是
 
 2498
 01:44:50,570 --> 01:44:52,540
 is diagnosed view controller contains all the stuff that
+diagnosed视图控制器包含了所有的东西
 
 2499
 01:44:52,540 --> 01:44:56,110
 has to do with the diagnostic business and nothing else.
+diagnostic 可以实现的所有事情
 
 2500
 01:44:56,110 --> 01:44:59,850
 So this is a very nice class well contained,
+所以这是一个非常好的包含的类
 
 2501
 01:44:59,850 --> 01:45:02,950
 only has the diagnostic stuff in it.
+只有 diagnostic的成员在里面
 
 2502
 01:45:02,950 --> 01:45:06,050
 Okay, so that's it, and you don't need this for
+好的，所以那就是，你不需要这个为
 
 2503
 01:45:06,050 --> 01:45:09,490
 your homework per se, but there is an extra credit item
+你的家庭作业，到那时那里还有一个额外的信用项目
 
 2504
 01:45:09,490 --> 01:45:13,320
 to add a popover so hopefully you'll decide to tackle that.
+去添加一个 popover，所以希望你决定去解决它
 
 2505
 01:45:15,430 --> 01:45:15,460
 >> For more, please visit us at stanford.edu.
+想要了解更多，请访问我们的网站：stanford.edu

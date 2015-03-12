@@ -1,582 +1,727 @@
 1
 00:00:00,001 --> 00:00:04,669
 [MUSIC]
+［音乐］
 
 2
 00:00:04,671 --> 00:00:08,072
 Stanford University.
+斯坦福大学
 
 3
 00:00:08,074 --> 00:00:11,275
 Okay, well, welcome to Lecture 8 of
+好的，欢迎来到2015年冬季学期 
 
 4
 00:00:11,277 --> 00:00:14,812
 Stanford CS193P winter of 2015.
+ CS193P 的课程
 
 5
 00:00:14,814 --> 00:00:18,348
 Today we have two major topics we're gonna talk about,
+今天我们会讲到两个主要的话题
 
 6
 00:00:18,350 --> 00:00:21,584
 one is view controller life cycle which is your view
+一个是 View Controller 的生命周期
 
 7
 00:00:21,586 --> 00:00:23,119
 controller gets born.
+也就是 View Controller 从产生
 
 8
 00:00:23,121 --> 00:00:25,021
 It lives and does a lot of things and
+然后完成了一系列的操作
 
 9
 00:00:25,023 --> 00:00:27,856
 then it dies and so you want to be able to find out about
+到 View Controller 死亡，你希望能够知道
 
 10
 00:00:27,858 --> 00:00:30,392
 all those things that are going on and you can.
+这些生命周期中，什么事情正在发生，你能在其中做什么
 
 11
 00:00:30,394 --> 00:00:32,627
 I'm gonna have a brief demo about that and
+这里我会有一个简单的关于生命周期的 Demo
 
 12
 00:00:32,629 --> 00:00:34,762
 then we're gonna go into auto layout and
+接着我们涉及 Auto Layout 的内容
 
 13
 00:00:34,764 --> 00:00:37,331
 I keep promising we're gonna talk about it, so
+我保证我们会在这节课中讲到它
 
 14
 00:00:37,333 --> 00:00:39,967
 I am gonna finally talk about auto layout.
+但是我打算最后再讲 Auto Layout
 
 15
 00:00:39,969 --> 00:00:42,002
 Of course you all ready know a lot about auto layout and
+当然，你已经知道一点点 Auto Layout 的知识了
 
 16
 00:00:42,004 --> 00:00:43,987
 I'm gonna review that.
+我们在今天的课程中会先回顾它们
 
 17
 00:00:43,988 --> 00:00:45,971
 Then we're gonna talk about an important piece of auto
+然后，我们会讲一讲 Auto Layout 中一个比较重要的部分
 
 18
 00:00:45,974 --> 00:00:50,343
 layout that we haven't talked so far which is size classes,
+我们从未涉及到的 Size Classes
 
 19
 00:00:50,345 --> 00:00:53,078
 and then I'll be doing a humongous couple of
+这里，我会做一系列的 Demo
 
 20
 00:00:53,080 --> 00:00:56,181
 demos on auto lab because, you know, it's the kind of thing
+来帮助你理解 Auto Layout，你知道，真正看过的东西
 
 21
 00:00:56,183 --> 00:00:59,918
 you're going to have to see it to really understand it, but
+才是最容易理解的
 
 22
 00:00:59,920 --> 00:01:02,453
 first, let's talk about view controller life cycle.
+但是首先，我们先讲一下 View Controller 的生命周期
 
 23
 00:01:03,723 --> 00:01:06,090
 When we refer to the view controller life cycle,
+当我们谈到 View Controller 的生命周期的时候
 
 24
 00:01:06,092 --> 00:01:07,691
 we're just talking about a sequence of
+我们讲的是，在这个 View Controller 的生命周期中
 
 25
 00:01:07,693 --> 00:01:11,261
 messages that is sent to your view controller as it
+一系列发送至它的消息
 
 26
 00:01:11,263 --> 00:01:12,929
 progresses through its lifetime.
+这些消息伴随着整个的生命周期
 
 27
 00:01:14,332 --> 00:01:16,231
 Why do we care about this?
+我们可能会问，为什么我要关心这个？
 
 28
 00:01:16,233 --> 00:01:18,967
 Well because you very commonly wanna override these
+那是因为，你们通常会在你们的子类中覆写这些
 
 29
 00:01:18,969 --> 00:01:20,935
 messages that are sent to the view controller in
+发送给 View Controller 的消息
 
 30
 00:01:20,937 --> 00:01:23,871
 your subclass to find out what's going on, because you
+来知道，你的应用正在干什么
 
 31
 00:01:23,873 --> 00:01:26,140
 might need to do things, make certain decisions or
+因为你可能希望做一些决定或者其他的操作
 
 32
 00:01:26,142 --> 00:01:29,343
 whatever at certain points in your view controller life
+在你的 View Controller 生命周期的某个特定的时刻
 
 33
 00:01:29,345 --> 00:01:32,846
 cycle, so let's talk about the cycle and how it goes.
+所以，让我们来讲一下 View Controller 的生命周期以及它如何工作的
 
 34
 00:01:32,848 --> 00:01:34,881
 It starts off with creation.
+生命周期由创建一个 View Controller 开始
 
 35
 00:01:34,883 --> 00:01:39,352
 99% of the time, this is from a storyboard, all right.
+99%的情况下，它是从 Storyboard 中创建的
 
 36
 00:01:39,354 --> 00:01:41,987
 As you know, you create these scenes in the storyboard.
+你所知道的，你可以在 Storyboard 中创建这些场景
 
 37
 00:01:41,989 --> 00:01:44,856
 Those scenes have a view controller class associated
+这些场景会关联一个 View Controller 的类
 
 38
 00:01:44,858 --> 00:01:48,493
 with them and you're just, you're segueing to an MVC,
+并且，你 segue 到一个 MVC
 
 39
 00:01:48,495 --> 00:01:52,897
 even if you create an MVC in code, which I don't even talk
+甚至是你通过代码来创建一个 MVC 的
 
 40
 00:01:52,899 --> 00:01:54,732
 about how to do, maybe we'll talk about it a little later
+虽然我目前还没有讲到如何通过代码来创建，不过可能之后会讲到
 
 41
 00:01:54,734 --> 00:01:56,433
 in the quarter, but could look up in the documentation,
+不过你还是可以通过查找文档来获取这些方法
 
 42
 00:01:56,435 --> 00:01:58,218
 it's quite easy.
+挺容易的
 
 43
 00:01:58,219 --> 00:02:00,002
 Even in that case, you're going to instantiate a view
+就在这样的情况下，你将会使用一个标识符（identifier）
 
 44
 00:02:00,005 --> 00:02:03,006
 controller using identifier in the storyboard, okay, and
+在 Storyboard 中去初始化一个 View Controller
 
 45
 00:02:03,008 --> 00:02:04,707
 that's how you're gonna get the view controller,
+那就是你如何得到 View Controller 的
 
 46
 00:02:04,709 --> 00:02:07,643
 so creation is all most always from the storyboard, and
+所以，大多数情况下，是通过 Storyboard 创建 View Controller 的
 
 47
 00:02:07,645 --> 00:02:10,479
 there is an init that gets called, it's kind of a weird
+并且，有一个 init 方法被调用，但是是一个挺奇怪的 init 方法
 
 48
 00:02:10,481 --> 00:02:12,847
 init, initWithCoder, I'm not gonna talk about it too much,
+initWithCoder: ，我不打算花时间讲这个方法
 
 49
 00:02:12,849 --> 00:02:15,283
 I mentioned it a little bit in the reading assignment,
+我会在阅读作业中涉及一点点
 
 50
 00:02:15,285 --> 00:02:16,784
 number one or number two.
+好像是作业 No.1 或者 No.2
 
 51
 00:02:16,786 --> 00:02:20,654
 I don't remember, so there is an init but we try to stay
+我不记得了，所以，这里有一个 init
 
 52
 00:02:20,656 --> 00:02:23,223
 away from init so if we can, if they're somewhere else, and
+但是我们尽可能不去调用 init，有其他的初始化方法
 
 53
 00:02:23,225 --> 00:02:25,492
 in the view control life cycle there's a lot of
+在 View Controller 的生命周期里，你可以看到一大堆
 
 54
 00:02:25,494 --> 00:02:28,995
 somewhere else's to initialize things besides in init, so
+除了 init 之外的其他的初始化方法
 
 55
 00:02:28,997 --> 00:02:32,698
 I'm not even gonna talk about the init right here.
+所以我现在并不打算涉及到 init
 
 56
 00:02:32,700 --> 00:02:35,100
 Okay, what happens after that initialization though?
+好的，初始化之后会发生什么呢？
 
 57
 00:02:35,102 --> 00:02:36,468
 Well, the first thing is,
+第一个发生的事情是
 
 58
 00:02:36,470 --> 00:02:40,638
 you get prepared if you're being segued to, all right,
+如果你被 segue 到这个 View Controller 的话，那么你会准备好（get prepared）
 
 59
 00:02:40,640 --> 00:02:44,575
 the next thing is your outlets are gonna get set, 'kay.
+另外一个发生的事情是，你的 outlets 都被设置好了，明白了吗？
 
 60
 00:02:44,577 --> 00:02:47,444
 It's just we're gonna wire up all those at sign IV outlets
+就是那些我们与 IBOutlet 链接的东西
 
 61
 00:02:47,446 --> 00:02:50,747
 that you have, and then your view controller's gonna
+接下来，你的 View Controller 会显示在屏幕上
 
 62
 00:02:50,749 --> 00:02:53,316
 appear on screen and then it might disappear and
+接着消失在屏幕上
 
 63
 00:02:53,318 --> 00:02:56,486
 then might reappear and then disappear, okay, and
+之后可能又显示在屏幕上，再次消失
 
 64
 00:02:56,488 --> 00:02:59,155
 its geometry might change because of auto rotation or
+而且，它的几何位置（geometry）可能因为自动旋转
 
 65
 00:02:59,157 --> 00:03:02,991
 something else happens and changes the geometry review,
+或者发生一些其他的事情导致了几何位置的改变
 
 66
 00:03:02,993 --> 00:03:04,292
 so that's happening.
+这就是发生的东西
 
 67
 00:03:04,294 --> 00:03:06,494
 And then in obscure cases,
+在一些复杂的情况下
 
 68
 00:03:06,496 --> 00:03:09,296
 you might have a low memory situation on your device and
+你可能会遇到一个设备可用内容低的一个情况
 
 69
 00:03:09,298 --> 00:03:13,367
 the system might try to get you involved to resolve that,
+系统可能尝试让你解决这个问题
 
 70
 00:03:13,369 --> 00:03:15,402
 and we'll talk about that briefly, all right, so
+我们会简单地讲讲这个，好的
 
 71
 00:03:15,404 --> 00:03:17,104
 that's the cycle.
+这就是 View Controller 的生命周期
 
 72
 00:03:17,105 --> 00:03:18,805
 So what are these methods that are involved in that cycle?
+在生命周期中，会有哪些方法涉及到呢？
 
 73
 00:03:18,807 --> 00:03:22,408
 Well you know about the preparation that's prepared
+你知道的，preparedForSegue 做了准备工作
 
 74
 00:03:22,410 --> 00:03:25,044
 for segue and some other MVC that's what prepares you,
+一些其他的 MVC 准备你
 
 75
 00:03:25,046 --> 00:03:28,047
 and you know about outlet setting, right, just
+并且，你知道 outlet 设置
 
 76
 00:03:28,049 --> 00:03:30,549
 system automatically sets your outlook from your storyboard.
+即系统自动从 Storyboard 中设置了你的 outlet
 
 77
 00:03:30,551 --> 00:03:32,550
 So the next thing that happens is loading,
+接下去发生的事情，就是载入（loading）
 
 78
 00:03:32,552 --> 00:03:35,720
 as your view gets load, well we call that outlet setting,
+你的视图被载入。在这之前设置了 outlet
 
 79
 00:03:35,722 --> 00:03:39,023
 the loading process, and when it's done loading it sends you
+接着进入载入的过程，当完成载入的时候
 
 80
 00:03:39,025 --> 00:03:40,924
 this message viewDidLoad.
+它会发送一个 viewDidLoad 的消息
 
 81
 00:03:40,926 --> 00:03:43,760
 ViewDidLoad is an exceptionally good place to
+viewDidLoad 是一个非常好的地方
 
 82
 00:03:43,762 --> 00:03:47,297
 put stuff to initialize your view, why is it so good?
+去放置你初始化你的视图的代码，为什么？
 
 83
 00:03:47,299 --> 00:03:51,634
 Because you're prepared by whoever's segueing to you, and
+那是因为，你，View Controller，已经由 segue 到你的对象准备好了
 
 84
 00:03:51,636 --> 00:03:54,970
 your outlets are all set, 'kay, so you're in
+而且你的 outlet 也被设置完成了
 
 85
 00:03:54,972 --> 00:03:57,706
 great shape to go do things to initialize your view,
+你处于一个初始化你的视图操作的最佳时机
 
 86
 00:03:57,708 --> 00:04:01,343
 cuz you are all kinda set up and ready to go.
+因为你需要的设置已经都设置完了，你已经准备做接下来的操作了
 
 87
 00:04:01,345 --> 00:04:03,644
 Now, when you override viewDidLoad, it's important to
+现在，如果你覆写了 viewDidLoad 方法
 
 88
 00:04:03,646 --> 00:04:06,147
 call super.viewDidLoad and in fact in
+一件很重要的事情就是，别忘了调用 super.viewDidLoad
 
 89
 00:04:06,149 --> 00:04:09,249
 all these life cycle methods you always wanna call super.
+而且在 View Controller 中所有生命周期相关的方法中，你始终希望调用 super 的相应方法
 
 90
 00:04:09,251 --> 00:04:10,817
 You can either call it at the beginning or at the end,
+你可以在方法的开头或者结尾调用 super.viewDidLoad
 
 91
 00:04:10,819 --> 00:04:13,586
 kind of up to you, doesn't really matter usually but
+这个你自己来决定，通常不会有太大的关系
 
 92
 00:04:13,588 --> 00:04:16,289
 you definitely want to let super have a chance to do it,
+但是，你希望 super 有机会去做它的事情
 
 93
 00:04:16,291 --> 00:04:18,457
 'kay, so don't forget about that.
+所以，千万不要忘了
 
 94
 00:04:19,560 --> 00:04:23,095
 Now one thing that you often wanna do in vewDidLoad is
+通常你在 viewDidLoad 里做的一件事情是
 
 95
 00:04:23,097 --> 00:04:24,729
 update your UI, okay?
+更新你的用户界面，明白了吗？
 
 96
 00:04:24,731 --> 00:04:27,765
 Now you're gonna be updating your UI in the property
+之前我们说过，一旦你的模型发生了改变
 
 97
 00:04:27,767 --> 00:04:31,035
 observers of all your things that change the model, and
+你会在模型的属性观察器（property observer）中更新用户界面
 
 98
 00:04:31,037 --> 00:04:33,804
 you should continue to do that because your view
+你应该继续去做这个操作，因为你的 View Controller
 
 99
 00:04:33,806 --> 00:04:36,440
 control might be on screen all ready loaded,
+已经被载入，也显示在屏幕上了
 
 100
 00:04:36,442 --> 00:04:39,576
 someone changes the model, you gotta update the UI.
+有些人改变了模型，你必须更新你的用户界面
 
 101
 00:04:39,578 --> 00:04:42,178
 But when you're first having your thing created and
+但是，当你刚创建了一个 View Controller 的时候
 
 102
 00:04:42,180 --> 00:04:44,313
 you want to update your UI, it's kind of,
+你同样需要更新你的用户界面
 
 103
 00:04:44,315 --> 00:04:47,149
 you know, your property observer's in your model, and
+那是因为，你的在模型中的属性观察器
 
 104
 00:04:47,151 --> 00:04:50,152
 aren't really updating the UI because your outlets aren't
+并不会在 outlet 设置之前去真正更新你的用户界面
 
 105
 00:04:50,154 --> 00:04:52,354
 set maybe because you're in the prepare for
+因为你在 preparedForSegue 的过程中
 
 106
 00:04:52,356 --> 00:04:53,688
 segue phase right?
+对吗？
 
 107
 00:04:53,690 --> 00:04:55,956
 So a lot of times, you get to viewDidLoad and
+所以，很多时候，当 View Controller 被调用 viewDidLoad 的时候
 
 108
 00:04:55,958 --> 00:04:59,059
 you haven't really been able to update your UI because your
+用户界面并没有真正被更新，因为你的
 
 109
 00:04:59,061 --> 00:05:00,660
 outlets haven't been set, so
+outlet 在这之前还没有被设置好
 
 110
 00:05:00,662 --> 00:05:03,430
 viewDidLoad is a great place to then update your UI.
+所以，viewDidLoad 是一个更新用户界面的好时候
 
 111
 00:05:03,432 --> 00:05:07,033
 So if you factor out updating UI into a separate method like
+如果你重构了用户界面的代码并将其分离一些其他的代码
 
 112
 00:05:07,035 --> 00:05:09,502
 we did in the demo called update UI, but
+比如我们在 Demo 中称之为 updateUI 的方法
 
 113
 00:05:09,504 --> 00:05:11,637
 you can call whatever you want, or
+但是，你可以调用任何你想要调用的方法
 
 114
 00:05:11,639 --> 00:05:15,273
 you can even have a couple different UI updating methods,
+或者是，你还可以有一些不同的更新用户界面的方法
 
 115
 00:05:15,275 --> 00:05:18,677
 calling those in viewDidLoad is very common, 'kay,
+在 viewDidLoad 里调用它们是很常见的方法
 
 116
 00:05:18,679 --> 00:05:22,313
 cuz your view is ready to be updated, however, you have to
+需要注意的是，虽然你的视图准备被更新
 
 117
 00:05:22,315 --> 00:05:26,183
 be careful here because your geometry is not yet set, 'kay?
+但是，你的几何位置还没有被设置，好吗？
 
 118
 00:05:26,185 --> 00:05:27,517
 You only get loaded once,
+你只会被载入一次
 
 119
 00:05:27,519 --> 00:05:29,753
 when you first come out of the storyboard and
+也就是从 Storyboard 中出来
 
 120
 00:05:29,755 --> 00:05:31,921
 you get prepared, your outlets gets set,
+准备就绪，outlet 设置完毕
 
 121
 00:05:31,923 --> 00:05:33,756
 you get viewDidLoad, that's it.
+你被调用了 viewDidLoad，仅此一次
 
 122
 00:05:33,758 --> 00:05:37,059
 That only happens once in the lifetime of a view controller,
+一个 View Controller 的生命周期中只会有一次
 
 123
 00:05:37,061 --> 00:05:39,661
 but your geometry, like what your bounds are,
+但是你的几何位置，也就是你的边界
 
 124
 00:05:39,663 --> 00:05:41,096
 that has not been set yet,
+在这个时刻还没有被设置
 
 125
 00:05:41,098 --> 00:05:44,332
 that's not gonna be set till later in its lifetime, okay?
+在这个 View Controller 生命周期的较晚的时候，它才会被设置，明白了吗？
 
 126
 00:05:44,334 --> 00:05:47,702
 So do not do, I should have put this in red, do not put,
+所以，不要，我这里把它标记成了红色
 
 127
 00:05:47,704 --> 00:05:51,005
 do geometry related things in viewDidLoad, 'kay,
+不要在 viewDidLoad 里做与几何位置相关的操作
 
 128
 00:05:51,007 --> 00:05:54,374
 you can do almost everything else in viewDidLoad, but
+除此之外，你可以做几乎其他的任何操作
 
 129
 00:05:54,376 --> 00:05:57,877
 do not do that, 'kay, and we'll talk about where you do
+唯独这个不行，你可能会问什么时候才可以做几何位置相关的操作呢？
 
 130
 00:05:57,879 --> 00:06:01,180
 do those things in a moment here, all right.
+我们稍后会讲到
 
 131
 00:06:01,182 --> 00:06:04,517
 Next one in the life cycle is viewWillAppear,
+下一个在生命周期中被调用的方法是 viewWillAppear
 
 132
 00:06:04,519 --> 00:06:07,386
 'kay, so that's sent to you right before you're going to
+当你的 View Controller 马上要显示在屏幕上的时候
 
 133
 00:06:07,388 --> 00:06:08,854
 appear on screen.
+它会被调用
 
 134
 00:06:08,856 --> 00:06:10,889
 Now, that could be right after viewDidLoad or
+这有可能在 viewDidLoad 之后直接被调用
 
 135
 00:06:10,891 --> 00:06:12,623
 it could be a long time after viewDidLoad.
+或者也有可能在 viewDidLoad 之后，过一会儿才被调用
 
 136
 00:06:12,625 --> 00:06:15,192
 It depends on what's going on in your UI,
+这个依赖于你用户界面上做的操作
 
 137
 00:06:15,194 --> 00:06:17,995
 okay, and viewWillAppear gets an argument, which is
+好的，viewWillAppear 会有一个参数
 
 138
 00:06:17,997 --> 00:06:20,831
 whether it's an animated appearance or not, 'kay?
+这个参数表示这个 View Controller 的出现是否有动画效果的
 
 139
 00:06:20,833 --> 00:06:22,966
 Usually you don't care about that.
+通常你不需要关心这个参数
 
 140
 00:06:22,968 --> 00:06:24,734
 And when would your appearance be animated?
+什么时候需要你的 View Controller 的出现带有动画效果呢？
 
 141
 00:06:24,736 --> 00:06:27,069
 Well you're in a navigation controller and
+当你在一个 Navigation Controller 里
 
 142
 00:06:27,071 --> 00:06:29,471
 someone presses to segue you on screen,
+什么东西出发了 segue 到你的 View Controller 的时候
 
 143
 00:06:29,473 --> 00:06:32,207
 you'll slide in, that's the animation, okay?
+那么你会通过滑入的方式显示出来，这就是动画效果，明白了吗？
 
 144
 00:06:33,677 --> 00:06:35,743
 So, viewWillAppear,
+好的，viewWillAppear
 
 145
 00:06:35,745 --> 00:06:38,812
 this could happen all the time, this could happen
+这可以在你的 View Controller 的整个生命周期里多次被调用
 
 146
 00:06:38,814 --> 00:06:40,981
@@ -585,254 +730,317 @@ repeatedly in the lifetime of your view controller,
 147
 00:06:40,983 --> 00:06:43,416
 cuz your view controller can come on screen or go off.
+因为你的 View Controller 能显示在屏幕上，也能从屏幕上消失
 
 148
 00:06:43,418 --> 00:06:45,651
 Let's think of an example, split view,
+让我们设想一个情况，Split View
 
 149
 00:06:45,653 --> 00:06:47,586
 the master of a split view.
+Split View 的 Master
 
 150
 00:06:47,588 --> 00:06:50,522
 When you first bring up your iPad user interface,
+当你第一次打开 iPad 的用户界面时候
 
 151
 00:06:50,524 --> 00:06:52,524
 it's in portrait, you don't see the master,
+它是在竖屏模式（portrait）的，你不会看到 Master
 
 152
 00:06:52,526 --> 00:06:54,659
 you have to kind of slide it out to see the master,
+你必须通过滑动来显示 Master
 
 153
 00:06:54,661 --> 00:06:57,462
 you only see the detail, right, so it's not visible.
+这种情况下，你只能看到 Detail，Master 是不可见的
 
 154
 00:06:57,464 --> 00:07:00,564
 You rotate to landscape, now the master becomes visible, so
+但是，当你旋转你的设备到横屏模式（landscape）的时候，那么 Master 就变的可见了
 
 155
 00:07:00,566 --> 00:07:02,066
 you're gonna get viewWillAppear.
+这时候 viewWillAppear 会被调用
 
 156
 00:07:02,068 --> 00:07:05,902
 You rotate back to portrait, it's off screen.
+当你又旋转回竖屏模式的时候，Master 从屏幕上消失了
 
 157
 00:07:05,904 --> 00:07:07,904
 You rotate back to landscape, it's gonna appear again,
+然后你又旋转到横屏模式，又显示了
 
 158
 00:07:07,906 --> 00:07:09,706
 it's gonna send you viewWillAppear again.
+viewWillAppear 又会被调用
 
 159
 00:07:09,708 --> 00:07:12,475
 So you're gonna get viewWillAppear every time it
+所以，每一次 Master 显示在屏幕上的时候
 
 160
 00:07:12,477 --> 00:07:14,477
 appears on screen,
+viewWillAppear 都会被调用
 
 161
 00:07:14,478 --> 00:07:16,478
 'kay, now what would you do when a viewWillAppear?
+那么在 viewWillAppear 中，你能够做些什么呢？
 
 162
 00:07:16,480 --> 00:07:19,014
 A lot of times maybe, if you have to do something very
+可能通常的情况下，如果你需要做一些费时间的事情
 
 163
 00:07:19,016 --> 00:07:21,282
 expensive, like let's say you have to go out to the network
+比如你到网络上去获取什么东西
 
 164
 00:07:21,284 --> 00:07:24,118
 to get something, an image or something like that,
+一个图片或者其他的
 
 165
 00:07:24,120 --> 00:07:27,121
 you might not want to do that in viewDidLoad because maybe
+你不想让这些代码在 viewDidLoad 中允许因为
 
 166
 00:07:27,123 --> 00:07:30,057
 the user never turns view to landscape and never looks at
+用户可能从来不会将屏幕横过来
 
 167
 00:07:30,059 --> 00:07:32,426
 your master, maybe you've got an app where the details all
+从来不会看你的 Master，用户只关心 Detail 中的内容
 
 168
 00:07:32,428 --> 00:07:34,894
 are that matters and people rarely pull out the master.
+很少用户会拉出 Master 来看
 
 169
 00:07:34,896 --> 00:07:36,646
 Well, you wouldn't wanna do
+那么，你不想每一次都调用这些花时间的代码
 
 170
 00:07:36,647 --> 00:07:38,397
 that expensive thing until the master actually appeared.
+只有当 Master 真正要显示的时候你才希望调用这些代码
 
 171
 00:07:38,400 --> 00:07:40,633
 Now, you're gonna wanna do that expensive thing in
+而且， 通常你希望能够将这些花时间的代码
 
 172
 00:07:40,635 --> 00:07:42,401
 another thread, we'll talk about it on
+跑在另外一个线程中，这个我们周三会提到
 
 173
 00:07:42,403 --> 00:07:44,236
 Wednesday to keep the main thread active.
+如何保持主线程不被阻塞
 
 174
 00:07:44,238 --> 00:07:46,438
 And, of course, when that master appeared, if
+而且，如果当 Master 显示的时候
 
 175
 00:07:46,440 --> 00:07:49,140
 you're waiting for something on the network there's gonna
+如果你在等待网络上的数据返回
 
 176
 00:07:49,142 --> 00:07:51,642
 be a blank space or something that we'll fill in later,
+Master 会是一片空白，或者是一些我们稍后会填充的东西
 
 177
 00:07:51,644 --> 00:07:54,078
 maybe you put a spinning wheel, things like that, but
+或许你会放置一个 Loading 的滚轮，或者其他的东西
 
 178
 00:07:54,080 --> 00:07:56,780
 viewWillAppear since you know you're actually gonna get on
+viewWillAppear 已经知道，你要放置在屏幕上的东西可能要花一点点时间
 
 179
 00:07:56,782 --> 00:07:59,149
 screen is a place we might kick off something that's
+你目前放置的是一个替代物，之后会被替换
 
 180
 00:07:59,151 --> 00:08:01,718
 a little bit expensive, also your geometry is set here.
+同时你的几何位置也被设置好了
 
 181
 00:08:01,720 --> 00:08:04,987
 Okay, by the time you get view will appear your bounds,
+所以，当 viewWillAppear 被调用的时候
 
 182
 00:08:04,989 --> 00:08:08,424
 your view's bounds, you're a view controller right, so
+你视图的边界，还记得你是一个 View Controller 吧？
 
 183
 00:08:08,426 --> 00:08:11,059
 your view's bound, view.bound is set, so
+你视图的边界，view.bound 已经设置好了
 
 184
 00:08:11,061 --> 00:08:13,061
 you can do geometry stuff here.
+那么你可以在这里做一些几何位置相关的代码
 
 185
 00:08:13,063 --> 00:08:16,597
 It's legal and you might want to, 'kay, but
+这是完全没有问题的，也正是你希望的
 
 186
 00:08:16,599 --> 00:08:19,266
 I'm gonna show you another place you can do that as well
+但是，在后面几个 Slide 中，我想给你们展示一个另外的地方
 
 187
 00:08:19,268 --> 00:08:21,335
 on the next couple slides.
+同样你可以做一些几何位置相关的代码
 
 188
 00:08:21,337 --> 00:08:24,804
 There's also a viewDidAppear in addition to viewWillAppear,
+除了 viewWillAppear 之外，还有一个 viewDidAppear
 
 189
 00:08:24,806 --> 00:08:26,072
 'kay, so
+好的
 
 190
 00:08:26,074 --> 00:08:29,208
 viewDidAppear gets sent to you after you are now on screen.
+当你已经显示在屏幕上之后，viewDidAppear 被调用
 
 191
 00:08:29,210 --> 00:08:33,912
 You are visible now, 'kay, pretty straightforward, and
+此时你是可见的，明白了吗？很明显易懂
 
 192
 00:08:33,914 --> 00:08:36,681
 similarly there's viewWillDisappear, so
+同样的，与这两个方法相对，有 viewWillDeisappear
 
 193
 00:08:36,683 --> 00:08:38,416
 you're just about to be taken off screen.
+你正要从屏幕上消失的时候被调用
 
 194
 00:08:38,418 --> 00:08:41,352
 Again, you're the split view master in landscape,
+我们接着上面举的例子，你是横屏模式中 Split View 中的 Master
 
 195
 00:08:41,354 --> 00:08:43,320
 the person rotates the portrait, you're gonna
+如果用户旋转到了竖屏模式，那么
 
 196
 00:08:43,322 --> 00:08:46,790
 get viewWillDisappear cuz you're going to disappear,
+你的 View Controller 会被调用 viewWillDisappear 方法，因为 Master 视图从屏幕上消失了
 
 197
 00:08:46,792 --> 00:08:50,794
 it's just going to show only the detail, 'kay?
+随后，屏幕上只会显示 Detail，明白了吗？
 
 198
 00:08:50,796 --> 00:08:54,864
 Here you might clean up some stuff, you might get rid of
+这里你可以做一些清理的操作，你可能会
 
 199
 00:08:54,866 --> 00:08:57,867
 some resources that are expensive, like a big image or
+清除一些占用资源的对象，类似于一副大图
 
 200
 00:08:57,869 --> 00:09:00,135
 something that you can reconstitute fairly quickly,
+或者其他你能够快速
 
 201
 00:09:00,137 --> 00:09:02,170
 maybe from disk or something.
+从磁盘中恢复的东西
 
 202
 00:09:02,172 --> 00:09:03,605
 That's the kind of thing you'll do in
+这就是你要在 viewWillDisappear 中做的，当然
 
 203
 00:09:03,606 --> 00:09:05,039
 viewWillDisappear, and of course, there's a did version
+同样的，viewWillDisappear 也有一个 did 版本
 
 204
 00:09:05,042 --> 00:09:11,178
 of this too, viewDidDisappear, 'kay, so that will disappear,
+viewDidDisappear，明白了吗？
 
 205
 00:09:11,180 --> 00:09:14,048
 will appear and will disappear in their dids, okay?
+willAppear 和 willDisappear 的 did 形态
 
 206
 00:09:14,050 --> 00:09:16,317
 Now let's talk about geometry.
+接下来，让我们讲一下几何位置
 
 207
 00:09:16,318 --> 00:09:18,585
 So when your geometry changes, when your bounds change,
+当你几何位置有所变化时，你的边界同样发生了变化
 
 208
 00:09:18,587 --> 00:09:21,521
 the system knows that your bounds changed, and
+系统知道你的边界改变了，而且
 
 209
 00:09:21,523 --> 00:09:24,891
 it knows that you probably have to re-layout your user
+他知道，你大概需要重新布局你的用户界面
 
 210
 00:09:24,893 --> 00:09:26,158
@@ -841,30 +1049,37 @@ interface, okay?
 211
 00:09:26,160 --> 00:09:29,728
 Now 99% of the time, that's gonna happen by magic because
+所以，99%的情况下，重新布局是自动完成的
 
 212
 00:09:29,730 --> 00:09:32,798
 you've set up your auto layout properly, right, so
+因为你已经设置好了 Auto Layout 属性
 
 213
 00:09:32,800 --> 00:09:35,467
 you don't even have to do anything, but if for
+所以你甚至不需要去做其他的事情
 
 214
 00:09:35,469 --> 00:09:37,802
 some reason you wanted to do something,
+但是鉴于某些原因，你可能想在这个过程中做什么的话
 
 215
 00:09:37,804 --> 00:09:40,271
 you can override one of these two methods,
+你可以覆写两个方法中的一个
 
 216
 00:09:40,273 --> 00:09:43,574
 viewWillLayoutSubviews and viewDidLayoutSubviews,
+viewWillLayoutSubviews 和 viewDidLayoutSubviews
 
 217
 00:09:43,576 --> 00:09:46,643
 so the system calls viewWillLayoutSubviews anytime
+然后系统会在它认为合适的时候去调用 viewWillLayoutSubviews
 
 218
 00:09:46,645 --> 00:09:48,445
@@ -873,38 +1088,47 @@ it wants to,
 219
 00:09:48,446 --> 00:09:50,246
 make sure that your views are properly laid out.
+确保你的视图被正确布局
 
 220
 00:09:50,248 --> 00:09:54,550
 Now, when it calls, this is not viewsBoundsDidChange,
+现在，当它调用的时候，注意这个方法名字不是 viewsBoundsDidChange
 
 221
 00:09:54,552 --> 00:09:55,818
 that's not the name of this method,
+这不是这个方法的名字
 
 222
 00:09:55,820 --> 00:09:58,620
 okay, it's a viewWillLayoutSubviews, so
+这个方法名字是 viewWillLayoutSubviews
 
 223
 00:09:58,622 --> 00:10:01,523
 your subviews can get laid out for lots of different reasons,
+你的子视图会因为多种原因被重新布局
 
 224
 00:10:01,525 --> 00:10:04,325
 maybe one of your subviews changes in a way that causes
+可能你视图中的一个发生了改变
 
 225
 00:10:04,327 --> 00:10:07,762
 it to change shape and has to be relaid out, et cetera.
+比如它的形状发生了改变，整个视图需要重新布局，或者其他类似的情况
 
 226
 00:10:07,764 --> 00:10:10,497
 So, viewWillLayoutSubviews is sent to
+所以，当你的视图层次或者你的顶层视图的边界发生改变的时候
 
 227
 00:10:10,499 --> 00:10:13,400
 you when someone inside your
+你会收到 viewWillLayoutSubviews 的消息
 
 228
 00:10:13,402 --> 00:10:17,037
@@ -913,186 +1137,232 @@ view hierarchy or your top level bounds change in a way
 229
 00:10:17,039 --> 00:10:20,840
 where the system needs you to layout your subviews, okay?
+因为系统需要你去重新布局你的子视图，明白了吗？
 
 230
 00:10:20,842 --> 00:10:23,576
 Now, you can make this happen by calling, just like you
+你可以通过通过调用来实现这个
 
 231
 00:10:23,578 --> 00:10:26,478
 have set needs display you can say set needs layout.
+就像你设置 setNeedsDisplay 那样，setNeedsLayout
 
 232
 00:10:26,480 --> 00:10:30,715
 You say set needs layout, then the next pass around the event
+当你调用了 setNeedsLayout 之后，在下一轮的 Event Loop 中
 
 233
 00:10:30,717 --> 00:10:35,286
 loop, the system will re-layout your subviews, 'kay.
+系统会重新布局你的子视图，明白了吗？
 
 234
 00:10:35,288 --> 00:10:38,288
 Now this can be called, quite often this viewWill and
+viewWillLayoutSubviews 和 viewDidLayoutSubviews
 
 235
 00:10:38,290 --> 00:10:42,092
 DidLayoutSubviews because changes are being made all
+经常被调用，因为无时无刻都会发生变化
 
 236
 00:10:42,094 --> 00:10:44,061
 the time and the system doesn't
+系统并不是始终都知道
 
 237
 00:10:44,062 --> 00:10:46,029
 always quite know whether that affected your subview, so
+是否某个操作影响了你的子视图
 
 238
 00:10:46,031 --> 00:10:48,898
 it might ask you to just lay them out again, okay?
+所以它可能会让你重新来对子视图布局，明白了吗？
 
 239
 00:10:48,900 --> 00:10:52,101
 So don't be surprised when you get viewWillLayoutSubviews two
+所以，当你的边界改动了一次
 
 240
 00:10:52,103 --> 00:10:55,203
 or three times when the bounds only changed once, let's say,
+但是你的 viewWillLayoutSubviews 方法被调用了两次或者三次的时候，不要觉得惊讶
 
 241
 00:10:55,205 --> 00:10:56,438
 'kay, and you have to,
+而且，你需要
 
 242
 00:10:56,440 --> 00:10:59,040
 if you're gonna do something in these two methods,
+如果你在这两个方法中做了什么的话
 
 243
 00:10:59,042 --> 00:11:01,108
 you're gonna have to do the right thing,
+你必须做的对
 
 244
 00:11:01,110 --> 00:11:03,711
 even if like your bounds don't actually change.
+甚至是，你的边界并没有真正改变的情况下
 
 245
 00:11:05,114 --> 00:11:07,447
 This whole process of laying out your subviews,
+整个布局你子视图的过程
 
 246
 00:11:07,449 --> 00:11:10,717
 the idea is to make sure that your subviews
+唯一的想法就是，确保你的子视图是
 
 247
 00:11:10,719 --> 00:11:13,185
 are properly laid out.
+正确被布局的
 
 248
 00:11:13,187 --> 00:11:16,655
 Now again, most of that's happening with auto layout,
+在一次重申，大多数布局都可以通过 Auto Layout 来做到
 
 249
 00:11:16,657 --> 00:11:19,958
 and the auto layout happens between these two methods, so
+Auto Layout 在这两个方法之间起作用
 
 250
 00:11:19,960 --> 00:11:23,361
 you get view a layout subviews, you do whatever you
+首先是 viewWillLayoutSubviews，接着做任何你想做的
 
 251
 00:11:23,363 --> 00:11:26,264
 wanna do, then auto layout happens, then you get
+然后，Auto Layout 起作用
 
 252
 00:11:26,266 --> 00:11:29,200
 viewDidLayoutSubviews, 'kay, so your subviews might have
+接下来，viewDidLayoutSubviews，好的
 
 253
 00:11:29,202 --> 00:11:33,136
 moved around between the two calls of these, make sense?
+你的子视图可能在这两个方法调用之中被移动了，明白了吗？
 
 254
 00:11:33,138 --> 00:11:34,170
 Any questions about that?
+有什么问题吗？
 
 255
 00:11:34,172 --> 00:11:39,008
 So, yeah, these things might be called quite a lot and
+好的，这些方法可能会经常被调用到
 
 256
 00:11:39,010 --> 00:11:41,510
 we'll see that in the demo that they might get called,
+我们可以在 Demo 中看到，这些方法可能被调用
 
 257
 00:11:41,512 --> 00:11:43,462
 and called, and called.
+调用、调用
 
 258
 00:11:43,463 --> 00:11:45,413
 Autorotation, really you wanna think of
+Autorotation，真正要考虑的是
 
 259
 00:11:45,416 --> 00:11:49,718
 autorotation primarily as just your bounds changed, so
+你的边界的改变
 
 260
 00:11:49,720 --> 00:11:52,720
 autorotation is really a non-event.
+所以 Autorotation 其实不是一个事件
 
 261
 00:11:52,722 --> 00:11:55,856
 As we have seen in all of our apps we have been writing so
+目前为止，我们在我们的 App 中编写的代码
 
 262
 00:11:55,858 --> 00:11:58,092
 far, we don't even think about autorotation,
+我们根本没有考虑过 Autorotation
 
 263
 00:11:58,094 --> 00:12:00,961
 it just happens our bounds change, auto layout works and
+它自动发生，我们的边界改变，Auto Layout 工作
 
 264
 00:12:00,963 --> 00:12:03,380
 the world is good.
+一切都很正常
 
 265
 00:12:03,381 --> 00:12:05,798
 And that's the way you should think of it 99% of the time,
+那就是你99%的情况下会考虑的
 
 266
 00:12:05,800 --> 00:12:07,833
 but if for some reason,
+但是在某些原因之下
 
 267
 00:12:07,835 --> 00:12:11,203
 you care about the actual case where rotation is happening,
+你需要关心一下，怎么样的旋转正在发生？
 
 268
 00:12:11,205 --> 00:12:13,905
 in other words, your device got turned and
+换言之，你的设备旋转了
 
 269
 00:12:13,907 --> 00:12:16,775
 so the bounds got to be wider than tall and when they used
+边界是变宽了还是变窄了
 
 270
 00:12:16,777 --> 00:12:20,345
 to be taller than wide, then you can participate.
+然后你可以参与这个过程，做一些事情
 
 271
 00:12:20,347 --> 00:12:23,848
 By the way, first line there says you can go to
+顺便一提，这里的第一行说了，你可以
 
 272
 00:12:23,850 --> 00:12:25,449
 your project settings and
+到你的项目设置（Project Settings）中
 
 273
 00:12:25,451 --> 00:12:27,918
 prevent certain autorotation from happening,
+取消特定的 Autorotation
 
 274
 00:12:27,920 --> 00:12:30,787
 and the default by the way is that portrait upside down
+默认取消的是，颠倒的竖屏模式
 
 275
 00:12:30,789 --> 00:12:31,854
@@ -1101,114 +1371,142 @@ is prevented.
 276
 00:12:31,856 --> 00:12:33,856
 That's why you noticed your app,
+这就是你在我们的 App 中看到的
 
 277
 00:12:33,858 --> 00:12:36,425
 you go in the simulator and you rotate it to landscape and
+当你在模拟器中，你旋转到了横屏模式
 
 278
 00:12:36,427 --> 00:12:38,493
 then you rotate it again to upside down and
+然后你再进行一次旋转，到了颠倒的竖屏模式
 
 279
 00:12:38,495 --> 00:12:40,128
 it doesn't autorotate,
+我们的 App 并没有自动旋转
 
 280
 00:12:40,130 --> 00:12:42,063
 that's because in your private setting you said, oh,
+这是因为在你的项目设置中，你说
 
 281
 00:12:42,065 --> 00:12:45,199
 portrait upside down is not a supported orientation.
+“不支持颠倒的竖屏模式”
 
 282
 00:12:45,201 --> 00:12:46,767
 So when you go to portrait upside down,
+所以，当你的 App 处于颠倒的竖屏模式中
 
 283
 00:12:46,769 --> 00:12:49,603
 it just does not autorotate, and you can flip those four
+Autorotation 将不起作用，当然你可以
 
 284
 00:12:49,605 --> 00:12:52,572
 switches for the landscapes and portraits any way you
+随意开关竖屏模式和横屏模式的四种模式
 
 285
 00:12:52,574 --> 00:12:56,376
 want, okay, it depends on your UI and what makes sense.
+这一切都取决于你的用户界面
 
 286
 00:12:56,378 --> 00:12:59,145
 Some UIs make no sense in landscape, some only make
+一些用户界面不需要横屏模式
 
 287
 00:12:59,147 --> 00:13:00,713
 sense in landscape, there might be a game or
+一些用户界面只需要横屏模式，比如说游戏
 
 288
 00:13:00,715 --> 00:13:04,449
 something that just doesn't make sense in portrait, 'kay?
+或者其他不适用于竖屏模式的应用，明白了吗？
 
 289
 00:13:04,451 --> 00:13:06,384
 So, but if you want to participate in the
+所以，如果你想在 Autorotation 中插一手的话
 
 290
 00:13:06,386 --> 00:13:09,821
 autorotation, 'kay, like you want to do some animation of
+比如你想要定制你自己的动画效果
 
 291
 00:13:09,823 --> 00:13:12,656
 your own, because you notice that the rotation is animated,
+你注意到了旋转中的动画效果了吗？
 
 292
 00:13:12,658 --> 00:13:16,026
 right it goes from portrait to landscape, it kinda moves the
+对，比如从竖屏模式切换到横屏模式
 
 293
 00:13:16,028 --> 00:13:18,495
 views around, it's hard to see cause it's happening so fast,
+它移动了视图，但这个效果很难看清，因为速度实在是太快了
 
 294
 00:13:18,497 --> 00:13:21,197
 but it is animating it, and you can actually participate
+但是，肯定是有动画的，你可以参与其中
 
 295
 00:13:21,199 --> 00:13:24,934
 that by this method viewWillTransitionToSize,
+通过 viewWillTransitionToSize 这个方法
 
 296
 00:13:24,936 --> 00:13:28,904
 which is part of the life cycle.
+同样也是 View Controller 生命周期的一部分
 
 297
 00:13:28,906 --> 00:13:30,772
 And this transition coordinator you get,
+而且你得到的变换坐标系
 
 298
 00:13:30,774 --> 00:13:32,340
 now I'm not gonna talk about how to implement this,
+现在我不打算说，如何去实现它
 
 299
 00:13:32,342 --> 00:13:33,708
 I haven't even talked about animation,
+因为我目前还没有谈到动画这部分
 
 300
 00:13:33,710 --> 00:13:35,343
 we're not gonna talk about that for a couple of weeks,
+所以在最近的几周里，我们都不会讲到它
 
 301
 00:13:36,278 --> 00:13:39,479
 but there is a method in that coordinator, for example,
+但是在那个 coordinator中有一个方法，比如说
 
 302
 00:13:39,481 --> 00:13:43,649
 called animate alongside, and you can specify what kinda
+叫做 animate alongside，并且你可以指定什么样的
 
 303
 00:13:43,651 --> 00:13:46,452
 animations you want to animate alongside the rotation.
+动画你想要 animate alongside回转
 
 304
 00:13:46,454 --> 00:13:48,253
@@ -2401,1202 +2699,1502 @@ It can't move a view where you want.
 601
 00:25:55,410 --> 00:25:57,343
 So what's an example of that?
+所以有什么这方面的例子呢？
 
 602
 00:25:57,345 --> 00:25:59,077
 Lets consider our calculator.
+让我回忆一下我们的计算器
 
 603
 00:25:59,079 --> 00:26:01,813
 Okay lets say we had 20 buttons in our calculator.
+好的，我们的计算器有20个按键
 
 604
 00:26:01,815 --> 00:26:02,447
 Okay.
+好的
 
 605
 00:26:02,449 --> 00:26:04,816
 Now in landscape,
+现在横屏
 
 606
 00:26:04,817 --> 00:26:07,184
 I might want them to be five buttons across and four down.
+那么我希望它应该有五列四行
 
 607
 00:26:07,186 --> 00:26:08,585
 But when I switch to portrait,
+但是当我想转换成竖屏
 
 608
 00:26:08,587 --> 00:26:10,454
 now I might want four across and five down.
+现在我希望它是四列五行
 
 609
 00:26:11,823 --> 00:26:13,373
 Okay, there's no
+没有办法
 
 610
 00:26:13,374 --> 00:26:14,924
 way you're gonna write autolayout to do that.
+使用自动布局去实现这个效果
 
 611
 00:26:14,926 --> 00:26:19,128
 Autolayout cannot make such a huge change like doing that.
+自动布局不能做如此巨大的变动
 
 612
 00:26:19,130 --> 00:26:21,296
 Okay, so how do we deal with that?
+所以我们该怎么解决呢？
 
 613
 00:26:21,298 --> 00:26:23,031
 We still wanna do that, so how do we do it?
+我们仍然想要做到这个效果，那我们要怎么做呢?
 
 614
 00:26:25,902 --> 00:26:28,802
 It's not just in the case of rotation where this is
+这也并不是只在旋转情况下
 
 615
 00:26:28,804 --> 00:26:30,003
 happening to.
+发生
 
 616
 00:26:30,005 --> 00:26:32,639
 It also happens, for example, in a split view.
+它也同样发生在, 比如说分屏的时候
 
 617
 00:26:32,641 --> 00:26:36,576
 When you have the master in the spilt view on the left,
+当你左侧屏幕的主干
 
 618
 00:26:36,578 --> 00:26:39,612
 it kind of is tall and thin, just like it was on an iPhone.
+它高高瘦瘦的, 就像它在 iPhone 一样
 
 619
 00:26:39,614 --> 00:26:42,047
 Even though it was on an iPad, it's kind of in a shape,
+但是它其实是在 iPad 上，就像在一块形状里面
 
 620
 00:26:42,049 --> 00:26:44,850
 a space that's shaped more like an iPhone, right?
+一个就像 iPhone 的形状，懂吗？
 
 621
 00:26:44,852 --> 00:26:47,652
 Lots of vertical space, but not much horizontal space.
+有很多垂直空间，但是只有很少的水平空间
 
 622
 00:26:47,654 --> 00:26:50,104
 So it's not just rotation where we
+也并不是只有在旋转
 
 623
 00:26:50,105 --> 00:26:52,555
 care about this size business, the relative size of things.
+我们所在意的尺寸，相对大小事物
 
 624
 00:26:53,592 --> 00:26:57,694
 So the solution to this is called size classes, and so
+因此这解决方式叫作尺寸等级，并且
 
 625
 00:26:57,696 --> 00:27:00,697
 your view controller always exists in
+的视图控制器一直存在
 
 626
 00:27:00,699 --> 00:27:03,399
 a size class environment.
+这个尺寸等级的环境里
 
 627
 00:27:03,401 --> 00:27:05,100
 For width and height.
+对于所有的宽度高度来说
 
 628
 00:27:05,102 --> 00:27:08,703
 And currently the size class can either be compact
+并且当前的尺寸等级可以是紧凑的
 
 629
 00:27:08,705 --> 00:27:09,804
 or regular.
+或者是普通的
 
 630
 00:27:09,806 --> 00:27:11,839
 Regular just means it's not compact.
+普通意味着就不紧凑
 
 631
 00:27:11,841 --> 00:27:15,743
 Okay, and so lets try and
+好的, 让我们试一下
 
 632
 00:27:15,745 --> 00:27:19,613
 understand what when you're in these different situations.
+理解当你在这些不同的情景之下的反应
 
 633
 00:27:19,615 --> 00:27:24,217
 So for example the iPhone 6+ is an interesting device.
+比如 iPhone6+是一个有意思的设备
 
 634
 00:27:24,219 --> 00:27:27,920
 In portrait it's width is compact.
+在竖屏下它的宽是紧凑的
 
 635
 00:27:27,922 --> 00:27:29,321
 It's height is regular.
+它的高是普通的
 
 636
 00:27:30,390 --> 00:27:32,407
 Okay so that's if you
+因此如果你
 
 637
 00:27:32,408 --> 00:27:34,425
 had like a full screen view controller on an iPhone 6+.
+在 iPhone 6+ 上满屏操作
 
 638
 00:27:34,427 --> 00:27:37,795
 When you go to landscape on the 6+ now it's compact in
+当你6+横屏时现在高
 
 639
 00:27:37,797 --> 00:27:39,530
 height and regular in width.
+紧凑, 宽普通
 
 640
 00:27:40,966 --> 00:27:42,399
 That make sense?
+要怎么做呢？
 
 641
 00:27:42,401 --> 00:27:44,901
 All right, it makes perfect sense in that one.
+当然, 要做一个完美的感受
 
 642
 00:27:44,903 --> 00:27:46,669
 But the iPhone is kind of an interesting one,
+但是 iPhone 是一个有意思的设备
 
 643
 00:27:46,671 --> 00:27:49,171
 other iPhones besides the iPhone 6+,
+其他 iPhone 除 iPhone 6+ 之外的
 
 644
 00:27:49,173 --> 00:27:53,041
 in portrait it is compact in width and regular in height,
+竖屏时宽紧凑高普通
 
 645
 00:27:53,043 --> 00:27:55,677
 just like an iPhone 6+, but in landscaped,
+就像是 iPhone 6+, 但是在横屏的时候
 
 646
 00:27:55,679 --> 00:27:59,147
 it is considered compact in width and compact in height.
+它应该被考虑成宽紧凑高也是紧凑
 
 647
 00:27:59,149 --> 00:28:02,383
 And that might seem non-intuitive,.
+它不是凭直觉的
 
 648
 00:28:02,385 --> 00:28:06,653
 But it just turns out that a non iPhone 6+, the width of
+但是事实证明非 iPhone 6+，这个宽
 
 649
 00:28:06,655 --> 00:28:09,823
 it is just not quite enough to say this is a regular width.
+它不充分作为普通宽
 
 650
 00:28:09,825 --> 00:28:12,492
 Most UIs just will look better if you
+大部分 UI 只是看起来友好如果你
 
 651
 00:28:12,494 --> 00:28:14,994
 consider it compact, okay?
+只是考虑它的紧凑性，了解吗？
 
 652
 00:28:14,996 --> 00:28:18,964
 Now the iPad is always regular in both directions.
+现在 iPad 一直作为全方向上的普通处理
 
 653
 00:28:18,966 --> 00:28:20,632
 Portrait or landscape, it's always so
+竖屏或者横屏，它一直都是
 
 654
 00:28:20,634 --> 00:28:22,734
 big that it's just regular in both directions.
+大并且全方向普通
 
 655
 00:28:22,736 --> 00:28:24,635
 There's no compact on the iPad.
+iPad 上面没有紧凑
 
 656
 00:28:24,637 --> 00:28:26,370
 But again a particular view controller on
+但是再次声明一个特别的视图控制器
 
 657
 00:28:26,372 --> 00:28:27,904
 an iPad like the master of
+在 iPad 上面主要
 
 658
 00:28:27,906 --> 00:28:31,074
 a split view side by side that's going to be compact.
+分屏并列紧凑的
 
 659
 00:28:31,076 --> 00:28:34,844
 Regular height, compact width.
+普通的高, 紧凑的宽
 
 660
 00:28:34,846 --> 00:28:37,947
 All right, this whole thing is extensible it's not kinda all
+当然, 整个事物都是可扩展的, 它没有
 
 661
 00:28:37,949 --> 00:28:39,715
 frozen in stone.
+固定住
 
 662
 00:28:39,717 --> 00:28:41,983
 You if you have a view controller you can find out
+你如果你有一个视图控制器你可以发现
 
 663
 00:28:41,985 --> 00:28:45,987
 your size class by using this property called trait
+你尺寸等级，它是通过使用的属性即特征
 
 664
 00:28:45,989 --> 00:28:47,121
 collection.
+集合
 
 665
 00:28:47,123 --> 00:28:48,489
 And inside traitCollection,
+并且在特征集合里
 
 666
 00:28:48,491 --> 00:28:50,957
 it's gonna return the horizontal size class and
+它将返回水平尺寸等级和
 
 667
 00:28:50,959 --> 00:28:52,976
 the vertical size class,
+竖直尺寸等级
 
 668
 00:28:52,977 --> 00:28:54,994
 and that's just an enum that's either .Compact or
+并且这只是枚举的两种。紧凑
 
 669
 00:28:54,996 --> 00:28:56,429
 .Regular, okay?
+或者普通，了解？
 
 670
 00:28:56,431 --> 00:29:00,232
 Now, you probably almost never need to do this because you're
+现在你很可能几乎从不需要这些因为你将
 
 671
 00:29:00,234 --> 00:29:03,669
 gonna edit this in your storyboard, 'kay?
+在 storyboard 里编辑，了解吗？
 
 672
 00:29:03,671 --> 00:29:07,039
 You're going to set up your storyboard to deal with
+你将设置你的 storyboard 去处理
 
 673
 00:29:07,041 --> 00:29:08,573
 size classes.
+尺寸等级
 
 674
 00:29:08,575 --> 00:29:10,942
 And then your code, it's just all gonna work.
+然后你的代码，它将正常工作
 
 675
 00:29:10,944 --> 00:29:12,176
 Okay as long as you got your
+直到你的自动布局
 
 676
 00:29:12,178 --> 00:29:14,111
 rest of your auto layout going.
+不起作用的时候
 
 677
 00:29:14,113 --> 00:29:16,130
 So how does that work?
+要怎么让它工作？
 
 678
 00:29:16,131 --> 00:29:18,148
 All right so here's the size classes right horizontal and
+当然这里有尺寸等级正确的水平和
 
 679
 00:29:18,150 --> 00:29:20,383
 vertical, compact and regular.
+垂直，紧凑和普通
 
 680
 00:29:20,385 --> 00:29:21,918
 See these four boxes right,
+看四个盒子
 
 681
 00:29:21,920 --> 00:29:24,086
 that's every possible combination.
+这每一个都可能是混合的
 
 682
 00:29:24,088 --> 00:29:27,956
 Okay and so for my calculator for example here's what
+对于我们的计算器比如这里
 
 683
 00:29:27,958 --> 00:29:30,992
 my UI might look like in those situations.
+我们的 UI 可能看起来在这些情况下
 
 684
 00:29:30,994 --> 00:29:33,995
 Okay you see here that I've gone five across and four
+你所看到的这里有五列四行
 
 685
 00:29:33,997 --> 00:29:39,467
 down when I have a compact height and regular width.
+当它高紧凑宽普通
 
 686
 00:29:39,469 --> 00:29:47,507
 But I basically anytime I have a regular width I'm gonna
+但是我基本定期有一个普通的宽我将
 
 687
 00:29:47,509 --> 00:29:51,711
 go what did I do, every time I actually every time I have.
+做我该做的，每一次的确每一次都如此
 
 688
 00:29:51,713 --> 00:29:57,449
 A regular height, I go five high.
+一个普通的高度，我设置5列
 
 689
 00:29:58,619 --> 00:30:01,953
 Okay so lower right is regular height, it's five high.
+当然右下角是个普通高，它是五列
 
 690
 00:30:01,955 --> 00:30:04,422
 Lower left is regular height is five high.
+左下角普通高也是五列
 
 691
 00:30:04,424 --> 00:30:06,490
 The top two are compact height,
+最上两个是紧凑高
 
 692
 00:30:06,492 --> 00:30:10,093
 I've gone to four high five wide.
+我将设置四列五行
 
 693
 00:30:10,095 --> 00:30:12,028
 Okay.
+当然
 
 694
 00:30:12,029 --> 00:30:13,962
 So it'd be kinda a pain though if I had to do all four of
+它有些问题以至于我只能设置四个
 
 695
 00:30:13,965 --> 00:30:16,866
 these for every user interface I built.
+这些每一个我建立的用户界面
 
 696
 00:30:16,868 --> 00:30:20,703
 So we actually have another size class called any.
+因此我们的确有其他的尺寸等级
 
 697
 00:30:20,705 --> 00:30:23,872
 And if you throw any into the mix,
+并且如果你抛弃这些混乱的
 
 698
 00:30:23,874 --> 00:30:27,642
 now I can do this exactly the way I just said which is.
+现在我可以确定这个我所说的这个方式
 
 699
 00:30:27,644 --> 00:30:31,245
 Any, first of all I'm gonna have an any any,
+当然，起先我需要这个 any any 
 
 700
 00:30:31,247 --> 00:30:33,347
 which is the middle, and that's gonna be my base UI.
+这个在中间，这些作为我的基本用户界面
 
 701
 00:30:34,350 --> 00:30:38,018
 So, if I don't specify any particular size class, it's
+因此，如果我指定一些特殊的尺寸等级
 
 702
 00:30:38,020 --> 00:30:40,453
 gonna look like that, which is four across and five down.
+它就像是这个四列五行
 
 703
 00:30:41,556 --> 00:30:44,289
 But in the case where it's vertically compact.
+但是在这个垂直紧凑的条件下
 
 704
 00:30:45,793 --> 00:30:48,727
 I'm going to go to five across and only four high.
+我将它设置为五列可是只有四列
 
 705
 00:30:48,729 --> 00:30:50,361
 And I don't care what the width is so
+并且我不关心它的宽度
 
 706
 00:30:50,363 --> 00:30:51,629
 that's why it's any.
+为什么它是 any
 
 707
 00:30:51,631 --> 00:30:53,664
 So now I only have to do two user interfaces.
+现在我只想做好这两个用户界面
 
 708
 00:30:53,666 --> 00:30:57,134
 My main user interface, the any any and one other one
+我的主要的用户界面，any any 和这个和另外一个
 
 709
 00:30:57,136 --> 00:30:59,602
 which is I'm in a compact vertical situation so
+在这个紧凑的垂直条件下
 
 710
 00:30:59,604 --> 00:31:00,436
 I want to go four high.
+我想有四列
 
 711
 00:31:01,673 --> 00:31:04,273
 Okay so this makes it a little easier now I only have to do
+这有点简单现在我就想
 
 712
 00:31:04,275 --> 00:31:06,208
 things and
+这个和
 
 713
 00:31:06,209 --> 00:31:08,142
 still covers all the same bases as the previous slide.
+仍然覆盖的所有的正如之前幻灯片相同的基本框架
 
 714
 00:31:08,145 --> 00:31:12,480
 And incredibly, Interface Builder will have a graph that
+难以置信的是，界面建立者将有一个图形
 
 715
 00:31:12,482 --> 00:31:15,750
 looks almost exactly like this slide that lets you pick
+看起来就像幻灯片所说的你所选的
 
 716
 00:31:15,752 --> 00:31:18,752
 between these various boxes, and you can design your
+这些不同盒子之间的，你可以设计你
 
 717
 00:31:18,754 --> 00:31:20,854
 user interface in any of these boxes.
+用户界面
 
 718
 00:31:21,990 --> 00:31:23,222
 Okay? And it will
+好？然后它将
 
 719
 00:31:23,224 --> 00:31:24,457
 just magically work.
+只是神奇地运作
 
 720
 00:31:24,459 --> 00:31:26,892
 So let's take a look at a demo here.
+因此让它看起来就像这里的例子
 
 721
 00:31:26,894 --> 00:31:28,293
 I actually have a couple of demos.
+我的确有一对演示
 
 722
 00:31:28,295 --> 00:31:30,628
 The one is called ShowSizeClass,
+这个个叫做 ShowSizeClass
 
 723
 00:31:30,630 --> 00:31:35,099
 it's just an app that I wrote that shows the size
+这个应用，我是为了展示尺寸
 
 724
 00:31:35,101 --> 00:31:38,369
 class of whatever device you're on at the time.
+等级不管你现在处于何种设备之下
 
 725
 00:31:38,371 --> 00:31:39,553
 Okay?
+可否？
 
 726
 00:31:39,554 --> 00:31:40,736
 And we're gonna take a look at the code for that.
+我们将看一下这个代码
 
 727
 00:31:40,739 --> 00:31:43,173
 And then I'm gonna do an app from scratch.
+然后我先用 scratch 做这个应用
 
 728
 00:31:43,175 --> 00:31:45,208
 Which is called Autolayout.
+这个被称为自动布局
 
 729
 00:31:45,210 --> 00:31:46,575
 That's the name of my app.
+这是应用的名称
 
 730
 00:31:46,577 --> 00:31:47,943
 Add it's just gonna have some
+添加这个将有一些
 
 731
 00:31:47,944 --> 00:31:49,310
 very interesting autolayout things including
+非常有趣的自动布局的包括
 
 732
 00:31:49,313 --> 00:31:52,080
 the size class problem that we're gonna have to solve.
+尺寸等级等这些我们会解决的问题
 
 733
 00:31:52,082 --> 00:31:53,615
 Okay so it's kind of kitchen sink of that.
+这就像是厨房的污水槽
 
 734
 00:31:53,617 --> 00:31:55,516
 All right let's go and
+接下来
 
 735
 00:31:55,518 --> 00:31:59,520
 look at this app I wrote called ShowSizeClass.
+看这个我写的被称为 ShowSizeClass 的应用
 
 736
 00:31:59,522 --> 00:32:00,821
 So here's ShowSizeClass, and
+在这个 ShowSizeClass 应用里
 
 737
 00:32:00,823 --> 00:32:02,956
 I'm just going to run this on some various devices.
+我将运行在这些设备上
 
 738
 00:32:02,958 --> 00:32:06,459
 Let's run this on an iPhone 6 Plus for example.
+例如让我们先运行在 iPhone 6+ 上
 
 739
 00:32:07,695 --> 00:32:09,795
 Here's an iPhone 6 Plus.
+这是 iPhone 6 +
 
 740
 00:32:09,797 --> 00:32:10,962
 How do I make this small?
+怎么把它变小？
 
 741
 00:32:10,964 --> 00:32:12,447
 I guess I can't.
+我猜我不能
 
 742
 00:32:12,448 --> 00:32:13,931
 This is as small as I can make it.
+这是我所能做到的最小的
 
 743
 00:32:13,933 --> 00:32:17,301
 You see how iPhone 6 Plus in portrait here
+你看到 iPhone 6 + 在这里怎样竖屏
 
 744
 00:32:17,303 --> 00:32:19,403
 is horizontally compact.
+水平紧凑的
 
 745
 00:32:19,405 --> 00:32:22,039
 And it's regular vertically.
+并且竖直普通的
 
 746
 00:32:22,041 --> 00:32:22,872
 That's what the green means.
+这是绿颜色的意思
 
 747
 00:32:23,975 --> 00:32:26,559
 Okay?
+下一步？
 
 748
 00:32:26,560 --> 00:32:29,144
 If I rotate it, it's regular horizontally and
+如果我旋转它，它是水平整齐
 
 749
 00:32:29,146 --> 00:32:30,112
 compact vertically.
+竖直紧凑的
 
 750
 00:32:31,381 --> 00:32:32,280
 Everybody cool with that?
+大家是不是觉得它相当酷炫？
 
 751
 00:32:33,416 --> 00:32:34,248
 All right. Now,
+当然，现在
 
 752
 00:32:34,249 --> 00:32:35,081
 let's look on the iPhone 6.
+让我们再看回 iPhone 6
 
 753
 00:32:40,155 --> 00:32:41,954
 All right, iPhone 6 again,
+当然，再一次 iPhone 6
 
 754
 00:32:41,956 --> 00:32:44,557
 regular vertically, compact width.
+垂直普通，水平紧凑
 
 755
 00:32:44,559 --> 00:32:47,125
 But if we rotate, it's compact in both directions.
+但是如果我们旋转，它将全方向紧凑了
 
 756
 00:32:49,162 --> 00:32:53,698
 Okay, let's go to like iPhone 4s or something like that.
+下一步，让我们看 iPhone 4s 或者其他设备
 
 757
 00:32:59,271 --> 00:33:00,637
 Okay, so here's 4S.
+这是 4s
 
 758
 00:33:00,639 --> 00:33:02,405
 It's also, even though it's kind of short,
+也是，虽然它看起来有点短
 
 759
 00:33:02,407 --> 00:33:04,640
 it's still considered regular vertically.
+它仍然是垂直普通的
 
 760
 00:33:04,642 --> 00:33:06,075
 And compact this way,
+这个紧凑的方式
 
 761
 00:33:06,077 --> 00:33:09,345
 and compact in both directions just like an iPhone 6.
+全方向紧凑就像是 iPhone 6
 
 762
 00:33:09,347 --> 00:33:11,897
 Okay?
+下一步？
 
 763
 00:33:11,898 --> 00:33:14,448
 And lastly, let's take a quick look at iPad2, or any iPad.
+最后，让我们看一下 iPad2，或者其他 iPad
 
 764
 00:33:14,451 --> 00:33:17,085
 I do iPad too because it fits on this screen.
+我选 iPad 是因为它有合适的屏幕
 
 765
 00:33:17,087 --> 00:33:18,820
 All the rest of them are too high of resolution again.
+其余的又太高了
 
 766
 00:33:18,822 --> 00:33:20,154
 All right, look, see.
+看这里
 
 767
 00:33:20,156 --> 00:33:23,090
 It's regular this way and regular both ways,
+这个方式是普通的并且所有方式都是普通的
 
 768
 00:33:23,092 --> 00:33:24,658
 this way, okay.
+这个方向，当然
 
 769
 00:33:24,660 --> 00:33:27,794
 So let's look at the app that I wrote to do that.
+因此让我们看我写的这个应用
 
 770
 00:33:27,796 --> 00:33:30,963
 I keep going back here to iPhone 6.
+我将回到 iPhone 6
 
 771
 00:33:34,802 --> 00:33:37,836
 Okay, let's look at the app that I wrote.
+让我们看一下这个我写的应用
 
 772
 00:33:37,838 --> 00:33:40,172
 Here it is, ShowSizeClass.
+这里，ShowSizeClass
 
 773
 00:33:40,174 --> 00:33:42,040
 It has a storyboard here.
+这是一个 storyboard
 
 774
 00:33:42,042 --> 00:33:43,975
 Here's its storyboard.
+这是 storyboard
 
 775
 00:33:43,976 --> 00:33:45,909
 Let's see if we can find anything in the storyboard.
+让我们看看如果我们可以发现 storyboard 的其他东西
 
 776
 00:33:45,912 --> 00:33:47,545
 There it is, okay.
+这里，好的
 
 777
 00:33:47,547 --> 00:33:48,779
 Hm, nteresting.
+恩，有趣
 
 778
 00:33:48,781 --> 00:33:52,148
 This storyboard, there's no arrows.
+这个 storyboard，没有箭头
 
 779
 00:33:53,451 --> 00:33:54,750
 There's the dot in the middle, but
+这里中间有个小黑点，但是
 
 780
 00:33:54,752 --> 00:33:55,751
 where the heck did those arrows?
+没有箭头？
 
 781
 00:33:55,753 --> 00:33:57,219
 Oh, I must draw them in my code.
+哦，我必须把他们画到我的代码里
 
 782
 00:33:57,221 --> 00:33:58,586
 Let's look at the View control.
+让我们看这个视图控制器
 
 783
 00:33:58,588 --> 00:34:00,855
 Oh, my View control had no code.
+哦，我的视图控制器没有代码
 
 784
 00:34:00,857 --> 00:34:02,556
 This app has no code.
+这个应用没有代码
 
 785
 00:34:02,558 --> 00:34:06,560
 How is it possible that it drew those arrows, okay?
+我怎样画出这些箭头呢？
 
 786
 00:34:06,562 --> 00:34:11,097
 Well, the answer is that those arrows are only drawn for
+这些箭头是画来解决
 
 787
 00:34:11,099 --> 00:34:13,132
 the SizeClass in question.
+这个 SIzeClass 的问题
 
 788
 00:34:13,134 --> 00:34:15,401
 So for
+因此为了
 
 789
 00:34:15,402 --> 00:34:17,669
 example if I have something that is horizontally compact I
+例如如果我有一些水平紧凑
 
 790
 00:34:17,672 --> 00:34:20,839
 draw those two red arrows and where is that, well
+我画这两个红色箭头在这里，
 
 791
 00:34:20,841 --> 00:34:24,042
 look down at the bottom of the screen here it says any any.
+看屏幕下方的 any any 这个区域
 
 792
 00:34:24,044 --> 00:34:27,112
 So this is the user interface if you're in any any
+这个用户界面如果你在任意
 
 793
 00:34:27,114 --> 00:34:29,747
 the default user interface okay.
+默认的用户界面
 
 794
 00:34:29,749 --> 00:34:33,617
 If I click on this right here I can pick any of
+如果我点击右边这里我可以挑出这些
 
 795
 00:34:33,619 --> 00:34:36,487
 those nine boxes that I showed on that slide.
+九个盒子就我在幻灯片显示的
 
 796
 00:34:36,489 --> 00:34:38,789
 So for example look at this box right here.
+例如看在这里的这个盒子
 
 797
 00:34:38,791 --> 00:34:42,759
 This is any width but a compact height.
+这个任意宽度但是紧凑的高
 
 798
 00:34:42,761 --> 00:34:45,094
 Now when I click here its actually gonna change my user
+现在当我点击这里它的确改变了我们的用户
 
 799
 00:34:45,096 --> 00:34:48,030
 interface and show me what the user interface looks like on
+界面并且给我们在设备上展示这个用户界面
 
 800
 00:34:48,032 --> 00:34:51,266
 a device that is any width but a compact height.
+这设备是任意宽但是紧凑的高
 
 801
 00:34:52,969 --> 00:34:56,571
 See, these are just two labels I threw out here that do
+看，这里有两个标签去作为
 
 802
 00:34:56,573 --> 00:35:00,174
 that and same thing let's say over here, any height,
+相同事物让我们展示这里，任意高
 
 803
 00:35:00,176 --> 00:35:01,041
 compact width.
+紧凑的宽
 
 804
 00:35:03,145 --> 00:35:06,679
 Or, over here we have regular width, any height.
+或者这里普通的宽，任意高
 
 805
 00:35:08,282 --> 00:35:10,349
 And over here we have any width,
+这里我们用任意宽
 
 806
 00:35:10,351 --> 00:35:12,017
 regular height, yeah, there we go.
+整齐的高，好，继续
 
 807
 00:35:12,019 --> 00:35:13,218
 So that's it.
+就这样
 
 808
 00:35:13,219 --> 00:35:14,418
 That's my entire user interface.
+这是我们整体的用户界面
 
 809
 00:35:14,421 --> 00:35:19,456
 I just put the arrows in whichever SizeClass was
+我只是在 SizeClass 上放箭头
 
 810
 00:35:19,458 --> 00:35:21,792
 appropriate there.
+在合适的位置上
 
 811
 00:35:22,961 --> 00:35:25,828
 This is really cool to be able to go here and basically edit
+这实在是酷能够到达这里，并且有基本编辑
 
 812
 00:35:25,830 --> 00:35:28,164
 your user interface in any of these circumstances.
+在这些任何状况下在你的用户界面里
 
 813
 00:35:28,166 --> 00:35:29,698
 Including specific ones,
+在这些特殊的情况下
 
 814
 00:35:29,700 --> 00:35:31,500
 like this Compact Width Compact Height.
+就像这个紧凑的宽紧凑的高
 
 815
 00:35:31,502 --> 00:35:33,535
 That's basically, you're editing your user
+这是最基本的，你在编辑的你的用户
 
 816
 00:35:33,537 --> 00:35:37,138
 interface for non-iPhone 6 Pluses in Landscape.
+界面在横屏非 iPhone 6 plus 上
 
 817
 00:35:37,140 --> 00:35:39,840
 Because that's the only one that is both Compact Width and
+因为那是只有一个全部紧凑宽
 
 818
 00:35:39,842 --> 00:35:41,275
 Compact Height.
+和紧凑高
 
 819
 00:35:41,277 --> 00:35:42,510
 Okay?
+下一步？
 
 820
 00:35:42,511 --> 00:35:43,744
 So you could actually have a specific one just for
+隐藏你们的确可以有一个特殊的在
 
 821
 00:35:43,746 --> 00:35:45,478
 that circumstance.
+特定状况下
 
 822
 00:35:45,480 --> 00:35:46,579
 Okay? But it's nicer to
+下一步？但是非常好去使用
 
 823
 00:35:46,581 --> 00:35:49,415
 have these Anys, to use these Anys out here so
+这些 Any，使用 Any 使
 
 824
 00:35:49,417 --> 00:35:51,850
 that they'll work, and we'll see in the demo.
+他们运行，我们将在演示中见到的
 
 825
 00:35:51,852 --> 00:35:54,353
 And one of the things I challenged,
+有一个我们改变的事物
 
 826
 00:35:54,355 --> 00:35:56,054
 I didn't really talk about it in the slides there,
+我没有在幻灯片里讨论
 
 827
 00:35:56,056 --> 00:35:58,756
 but I challenged you to do is, I actually added this as an
+但是我期待你去做，我给做出作业3的额外的分数
 
 828
 00:35:58,758 --> 00:36:01,258
 extra credit to the homework number three, if you want.
+如果你们想的话
 
 829
 00:36:01,260 --> 00:36:03,711
 Go back and
+回去
 
 830
 00:36:03,712 --> 00:36:06,163
 make your calculator user interface look different.
+让你们的计数器与众不同
 
 831
 00:36:06,165 --> 00:36:07,731
 In different SizeClasses.
+在不同的 SizeClasses
 
 832
 00:36:07,733 --> 00:36:11,034
 Maybe do five buttons by four instead of four by five,
+可能是五列四行替代了四列五行
 
 833
 00:36:11,036 --> 00:36:12,335
 okay, or something like that.
+当然或者其他的
 
 834
 00:36:12,337 --> 00:36:15,804
 Or even, some ones have more buttons.
+也可以加更多的按键
 
 835
 00:36:15,806 --> 00:36:18,807
 If you look at the calculator that Apple ships on
+你看 Apple 商城的计算器
 
 836
 00:36:18,809 --> 00:36:20,675
 the iPhone, when you go to Landscape,
+当你横屏看的时候
 
 837
 00:36:20,677 --> 00:36:22,110
 it has a lot more operations.
+它有更多的操作
 
 838
 00:36:22,112 --> 00:36:23,277
 The buttons are all smaller, but
+这些按键更小，但是
 
 839
 00:36:23,279 --> 00:36:25,879
 it has a lot of operations that aren't even there.
+有更多的操作在那里
 
 840
 00:36:25,881 --> 00:36:27,714
 And you can do that with side classes as well.
+你可以用 side classes 去实现这些
 
 841
 00:36:29,017 --> 00:36:32,785
 Okay, alright so
+当然
 
 842
 00:36:32,787 --> 00:36:35,054
 now we're gonna write an app here from scratch.
+现在我们将用 scratch 写一个应用
 
 843
 00:36:36,957 --> 00:36:39,958
 And it is going to look like this.
+它将看起来像这个
 
 844
 00:36:39,960 --> 00:36:42,160
 Okay here's what it's UIs gonna look like.
+这些 UI 看起来像这样的
 
 845
 00:36:42,162 --> 00:36:43,661
 It's very, very, this is a demo, okay,
+他非常非常，这就是一个演示
 
 846
 00:36:43,663 --> 00:36:45,429
 so it's a very simple app.
+一个很简单的应用
 
 847
 00:36:45,431 --> 00:36:48,165
 It asks for a username and password up here, so
+它请求帐号密码
 
 848
 00:36:48,167 --> 00:36:52,869
 I have madbum, and password is foo.
+我有登录密码
 
 849
 00:36:52,871 --> 00:36:56,005
 Now, I can change the security on my password.
+我更改这个密码的安全性
 
 850
 00:36:56,007 --> 00:37:00,475
 I can have it be secured so I can't see it, okay.
+我可以使其可靠，让我看不到它
 
 851
 00:37:00,477 --> 00:37:03,445
 But when I log in, it's gonna show me.
+但是当我登录，它将会显示
 
 852
 00:37:03,447 --> 00:37:06,514
 An icon for the person,
+一个面向用户的图标
 
 853
 00:37:06,515 --> 00:37:09,582
 the persons name, and what company they work for, okay.
+用户的名字他们工作的公司
 
 854
 00:37:09,585 --> 00:37:11,485
 Madison Bumgarner in this case.
+Madison Bumgarner 也在那
 
 855
 00:37:11,487 --> 00:37:15,088
 And if I rotate it's gonna say the same information but
+如果我旋转它将显示这些相同的信息但是
 
 856
 00:37:15,090 --> 00:37:19,192
 notice that this is not below here,
+这个并不在下方
 
 857
 00:37:19,194 --> 00:37:22,895
 it's actually moved to be beside it.
+它被移除去了
 
 858
 00:37:23,931 --> 00:37:25,881
 Okay?
+下一步？
 
 859
 00:37:25,882 --> 00:37:27,832
 So, basically, on Sizeclasses that are regular height, or
+因此，基本的，SizeClasses 是普通高或者
 
 860
 00:37:27,834 --> 00:37:30,068
 have a lot of room, I put the words at the bottom.
+有很多空间，我放很多单词在下面
 
 861
 00:37:30,070 --> 00:37:33,604
 I try to use this space to show their picture more.
+我尝试用这些空间去显示更多的照片
 
 862
 00:37:33,606 --> 00:37:38,475
 And in other SizeClasses, I put it off to the side, okay?
+在另外一个 SizeClasses，我把它放到另一边
 
 863
 00:37:38,477 --> 00:37:44,914
 And we have other users here, like, Same password.
+我们有其他的用户在这里，就像，相同的密码
 
 864
 00:37:44,916 --> 00:37:49,151
 Okay it's all got all the different icon or old j apple.
+它得到所有不同的图标或者 japple
 
 865
 00:37:51,088 --> 00:37:52,487
 Okay John Appleseed.
+John Appleseed
 
 866
 00:37:52,489 --> 00:37:55,490
 Okay? In all of these cases
+下一步？这些所有的情况下
 
 867
 00:37:55,492 --> 00:37:56,223
 it's going to do that.
+它将这么做
 
 868
 00:37:57,259 --> 00:38:00,127
 Okay so lot going on here to make this work with
+很多将在这使其运作通过
 
 869
 00:38:00,129 --> 00:38:01,161
 auto layout.
+自动布局
 
 870
 00:38:01,163 --> 00:38:02,562
 Right you got
+你所得到的正确的方式
 
 871
 00:38:02,563 --> 00:38:03,962
 this thing automatically changing right here.
+这个自动化地在这里改变
 
 872
 00:38:03,965 --> 00:38:06,332
 You've got this you've got this image here which you
+你将得到这个图片
 
 873
 00:38:06,334 --> 00:38:09,001
 want to be the right aspect ration.
+这图片是你将在正确方面配给
 
 874
 00:38:09,003 --> 00:38:11,403
 You know we got he SizeClass things so
+你知道你得到 SizeClass 图片
 
 875
 00:38:11,405 --> 00:38:14,172
 we can put the words underneath when it's tall etc.
+所以我们可以放这些单词到下面当它很高等
 
 876
 00:38:15,641 --> 00:38:16,640
 Okay.
+好的
 
 877
 00:38:16,642 --> 00:38:18,775
 So that's what we're going to build.
+因此我们将建立这个
 
 878
 00:38:18,777 --> 00:38:22,612
 Alright, let's go and we're going to start from
+好的，让我们开始
 
 879
 00:38:22,614 --> 00:38:25,148
 scratch as I like to do usually, so
+从 scratch 就像我们通常做的那样
 
 880
 00:38:25,150 --> 00:38:27,950
 it's creating a new XCode project, iOS application.
+它创建一个新的 xcode 项目，iOS 应用
 
 881
 00:38:27,952 --> 00:38:29,618
 I'm going to call it auto layout, okay.
+我将称它为自动布局
 
 882
 00:38:29,620 --> 00:38:33,355
 I'm going to put it the same place I put all of my
+我将放在同一个位置我放在所有
 
 883
 00:38:33,357 --> 00:38:34,455
 apps there.
+我的应用那里
 
 884
 00:38:34,457 --> 00:38:36,424
 Here it is.
+就这里
 
 885
 00:38:36,425 --> 00:38:38,392
 I'm gonna move this app delegate out of the way.
+我将不用这个方式移动这个应用
 
 886
 00:38:38,394 --> 00:38:40,027
 And the launch screen out of the way.
+不用这个方式登录界面
 
 887
 00:38:40,029 --> 00:38:41,928
 For the first time we're actually gonna
+第一次我们将
 
 888
 00:38:41,930 --> 00:38:44,698
 talk about these image assets here today.
+告诉这些图片连接这个地方
 
 889
 00:38:44,700 --> 00:38:46,432
 It's a good opportunity to talk about that.
+这是一个很好的机会阐述这个
 
 890
 00:38:47,702 --> 00:38:48,734
 Okay. And in my controller,
+好，在我的控制下
 
 891
 00:38:48,736 --> 00:38:49,968
 I'm gonna clear out this code.
+我将清理这些代码
 
 892
 00:38:49,970 --> 00:38:51,569
 Don't need any of that.
+并不需要这么做
 
 893
 00:38:51,571 --> 00:38:53,137
 By the way, the things that I cleared out here,
+顺便说一下，这个我清理的地方
 
 894
 00:38:53,139 --> 00:38:54,739
 you starting to recognize them?
+你开始认出他们？
 
 895
 00:38:54,741 --> 00:38:56,340
 View controller life cycle methods.
+视图控制器生命周期方法
 
 896
 00:38:57,543 --> 00:38:58,108
 Okay.
+好的
 
 897
 00:38:59,177 --> 00:39:02,511
 But if I need those, I'll put them back but okay.
+但是我需要这些，我将他们放回去
 
 898
 00:39:03,714 --> 00:39:05,914
 So, let's go to our storyboard and start building this UI.
+让我们到这个 storyboard 并且开始建立这个 UI
 
 899
 00:39:05,916 --> 00:39:09,984
 Now this is gonna be a lot of clicking things around.
+现在这里将有很多点击事物在周围
 
 900
 00:39:09,986 --> 00:39:12,019
 I'm gonna make this as big as possible for us here.
+我将使这些在这里尽可能大的显示
 
 901
 00:39:12,021 --> 00:39:15,589
@@ -3997,66 +4595,82 @@ So you can click on these things and
 1000
 00:43:02,214 --> 00:43:04,481
 click Edit to get rid of these.
+点击编辑来去掉他们
 
 1001
 00:43:04,483 --> 00:43:08,084
 Even 8, which had got by the blue lines, okay?
+即使是8，是通过蓝色的线条来得到的，明白？
 
 1002
 00:43:08,086 --> 00:43:09,452
 I don't like that either.
+我同样也不喜欢那个
 
 1003
 00:43:09,453 --> 00:43:10,819
 I'm just going to go here and say zero, because
+我将要到这里并说0，因为
 
 1004
 00:43:10,822 --> 00:43:13,956
 I want that to be right up against the edge, okay?
+我想要挨着那个边界，明白？
 
 1005
 00:43:13,958 --> 00:43:16,458
 Oops. Sorry.
+哦，对不起
 
 1006
 00:43:16,460 --> 00:43:19,294
 Same thing, oh, did I do the right thing there?
+同样的，我在这里做的对么？
 
 1007
 00:43:19,296 --> 00:43:22,364
 Leading space, username, yeah, trailing spaces, you're right.
+距离顶部的空间，用户名，好的，距离底部的空间，你是对的
 
 1008
 00:43:22,366 --> 00:43:23,949
 How about this one?
+这个怎么样？
 
 1009
 00:43:23,950 --> 00:43:25,533
 Top Space to Top Layout right here,
+这里就是顶部布局的顶部空间
 
 1010
 00:43:25,535 --> 00:43:26,867
 I'll use the Standard Value for that.
+我将对它们使用默认的值
 
 1011
 00:43:26,869 --> 00:43:28,135
 Okay?
+明白？
 
 1012
 00:43:28,137 --> 00:43:30,270
 Oops, sorry, keep clicking there.
+哦，对不起，继续点击那里
 
 1013
 00:43:30,272 --> 00:43:33,340
 And then here, Align Baseline equals three.
+然后在这里，距离基线的距离等于3
 
 1014
 00:43:33,342 --> 00:43:36,609
 Okay I want these baselines exactly aligned not three off
+好的我想要这些基线的实际距离不为3
 
 1015
 00:43:36,611 --> 00:43:39,912
 of each other so I'm gonna say zero right here.
+所以我准备在这里设置为0
 
 1016
 00:43:39,914 --> 00:43:44,249
@@ -6001,2579 +6615,3224 @@ Well, a simple way to do that would be just to
 1501
 01:03:02,727 --> 01:03:06,995
 Ctrl+drag between these two and set the vertical spacing.
+按住 Ctrl 拖动，设置他们的垂直间距
 
 1502
 01:03:06,997 --> 01:03:07,729
 Okay? And then I
+看到了吗？
 
 1503
 01:03:07,731 --> 01:03:09,397
 can even double click this and
+我也可以双击它
 
 1504
 01:03:09,399 --> 01:03:14,001
 make this vertical spacing be a standard value.
+把垂直间距设置成一个标准值
 
 1505
 01:03:14,003 --> 01:03:15,335
 Okay? Now, let's go ahead and
+懂了吗？
 
 1506
 01:03:15,337 --> 01:03:17,070
 update frames.
+现在我们来 Update Frames（更新框架）
 
 1507
 01:03:17,072 --> 01:03:18,971
 And it doesn't smash into the ones on top.
+它并没有挤压到上面的元素
 
 1508
 01:03:20,975 --> 01:03:21,740
 Okay?
+OK?
 
 1509
 01:03:21,742 --> 01:03:23,441
 Simple solution there.
+很简单的解决方案
 
 1510
 01:03:23,443 --> 01:03:25,243
 But we still have this right here.
+但是我们仍然有一个警告
 
 1511
 01:03:25,245 --> 01:03:27,978
 Eight views are vertically ambiguous.
+8个 view 在垂直方向会产生歧义
 
 1512
 01:03:27,980 --> 01:03:29,213
 Oh my gosh!
+我的天！
 
 1513
 01:03:29,215 --> 01:03:30,180
 What did I do?
+我都做什么了？
 
 1514
 01:03:30,182 --> 01:03:31,314
 It looks perfect to me.
+这看起来很完美啊
 
 1515
 01:03:31,316 --> 01:03:32,982
 Why is it saying that?
+它为什么会有这个警告呢？
 
 1516
 01:03:32,984 --> 01:03:35,751
 Well, when you get this kinda thing, it's time to go back to
+如果有类似这种警告
 
 1517
 01:03:35,753 --> 01:03:37,953
 our old friend, the document outline here, okay.
+就应该到 Document Outline 去检查一下
 
 1518
 01:03:37,955 --> 01:03:40,889
 Let's make some more space.
+把程序最大化
 
 1519
 01:03:40,891 --> 01:03:42,657
 In the document outline,
+在 Document Outline 中
 
 1520
 01:03:42,659 --> 01:03:45,126
 we can click on this thing in the corner here.
+我们可以点击角落里的这个按钮
 
 1521
 01:03:45,128 --> 01:03:46,494
 And look at all these problems we have.
+可以看到出现的所有问题
 
 1522
 01:03:46,496 --> 01:03:49,063
 Okay, you can see that it's all these vertical things
+它们都是关于垂直布局的问题
 
 1523
 01:03:49,065 --> 01:03:51,999
 here, understandably, and look what it keeps suggesting.
+我们来具体看看它的建议
 
 1524
 01:03:52,001 --> 01:03:52,999
 Oh, set the vertical
+哦
 
 1525
 01:03:53,001 --> 01:03:54,701
 compression resistance priority.
+设置 Compression Resistance Priority
 
 1526
 01:03:54,703 --> 01:03:56,135
 Set the vertical hugging.
+设置 Vertical Hugging
 
 1527
 01:03:56,137 --> 01:03:58,470
 What the heck is compression resistance priority and
+Compression Resistance Priority 和 Vertical Hugging 
 
 1528
 01:03:58,472 --> 01:03:59,338
 vertical hugging?
+是什么？
 
 1529
 01:03:59,340 --> 01:04:01,673
 What the heck is that?
+它们到底是什么？
 
 1530
 01:04:01,675 --> 01:04:03,675
 Okay?
+OK?
 
 1531
 01:04:03,676 --> 01:04:05,676
 That has to do with this user interface is going to
+它们可以使得 UI
 
 1532
 01:04:05,679 --> 01:04:08,779
 be expanding and compressing vertically.
+在垂直方向扩张或者压缩
 
 1533
 01:04:08,781 --> 01:04:11,515
 And when it does, who gets the extra space?
+当扩张时，谁能获取额外空间？
 
 1534
 01:04:11,517 --> 01:04:16,152
 And when it compresses down, who allows themselves to
+当压缩时，谁允许它们被压缩
 
 1535
 01:04:16,154 --> 01:04:18,988
 be compressed, and who can't compress?
+谁又不能压缩？
 
 1536
 01:04:18,990 --> 01:04:20,256
 Okay?
+OK？
 
 1537
 01:04:20,257 --> 01:04:21,523
 That's what this hugging and
+这就是 Hugging 
 
 1538
 01:04:21,526 --> 01:04:23,926
 compression resistance is about.
+和 Compression Resistance 的作用
 
 1539
 01:04:23,928 --> 01:04:28,697
 So, here we've got, these guys are all lined up.
+这些元素都已经设置好了
 
 1540
 01:04:28,699 --> 01:04:30,898
 This, okay, these two guys, and
+这两个元素和这个按钮
 
 1541
 01:04:30,900 --> 01:04:33,334
 this button, they can not be compressed.
+它们不能被压缩
 
 1542
 01:04:33,336 --> 01:04:34,368
 If they get compressed,
+如果它们被压缩了
 
 1543
 01:04:34,370 --> 01:04:36,436
 their text is gonna get squished down.
+它们上面的文字就会被挤压
 
 1544
 01:04:36,438 --> 01:04:38,405
 So, we do not want them compressed.
+所以我们不希望这些元素被压缩
 
 1545
 01:04:38,407 --> 01:04:40,573
 But this guy, he could be compressed.
+但是这个元素，它可以被压缩
 
 1546
 01:04:40,575 --> 01:04:42,442
 Because it's an image,
+因为它是一张图片
 
 1547
 01:04:42,443 --> 01:04:44,310
 it can just redraw itself at a shorter height.
+它可以以一个较短的高度重绘自己
 
 1548
 01:04:44,312 --> 01:04:48,313
 So, I need to set the resistance to being compressed
+所以我需要把阻力设置成可以被压缩
 
 1549
 01:04:48,315 --> 01:04:50,548
 for this guy to be lower.
+对于这个图片，设置地低一些
 
 1550
 01:04:50,550 --> 01:04:52,917
 You've got to lower resistance to being compressed.
+把可以被压缩的指数设置地低一些
 
 1551
 01:04:52,919 --> 01:04:54,218
 So how do I do that?
+我该怎么做呢？
 
 1552
 01:04:54,220 --> 01:04:55,753
 You do that in the Size Inspector.
+你可以去到 Size INspector
 
 1553
 01:04:55,755 --> 01:04:58,655
 If you select something, you'll see down here at
+如果你选中了某个元素
 
 1554
 01:04:58,657 --> 01:05:00,857
 the bottom, Content Hugging Priority and
+可以看到底部有 Content Hugging Priority
 
 1555
 01:05:00,859 --> 01:05:03,693
 Content Compression Resistance Priority.
+和 Content Compression Resistance Priority
 
 1556
 01:05:03,695 --> 01:05:05,061
 Okay? Now, these are priorities.
+这些就是 Priority
 
 1557
 01:05:05,063 --> 01:05:06,695
 These are just arbitrary numbers.
+它们都用数字代表
 
 1558
 01:05:06,697 --> 01:05:10,065
 Right now, this one is 750 in the vertical.
+这个元素在垂直方向的 Priority 是 750
 
 1559
 01:05:10,067 --> 01:05:12,167
 This one is also 750.
+这个也是 750
 
 1560
 01:05:12,169 --> 01:05:13,935
 This one is 750.
+这个是 750
 
 1561
 01:05:13,937 --> 01:05:15,436
 This one is 750.
+这个是 750
 
 1562
 01:05:15,438 --> 01:05:18,205
 They all have the same priority to be compressed.
+它们的压缩系数都是一样的
 
 1563
 01:05:18,207 --> 01:05:20,707
 That's why it's complaining, okay?
+这就是为什么 Xcode 会有这些警告
 
 1564
 01:05:20,709 --> 01:05:23,176
 Cuz it doesn't know which one to compress,
+因为它不知道该压缩哪一个
 
 1565
 01:05:23,178 --> 01:05:24,911
 cuz they're all the same.
+因为它们的数值都是相同的
 
 1566
 01:05:24,912 --> 01:05:26,645
 So we can just go back to this one and say, okay well,
+现在我们选择这个 ImageView
 
 1567
 01:05:26,648 --> 01:05:29,882
 we're gonna lower this guy's compression resistance to 700.
+我要把它的压缩系数降到 700
 
 1568
 01:05:29,884 --> 01:05:32,551
 Oh, all my problems went away.
+所有问题都不见了
 
 1569
 01:05:33,720 --> 01:05:34,986
 Okay? Now I
+看到了吗？
 
 1570
 01:05:34,987 --> 01:05:36,253
 have no yellow thing up here.
+这里已经没有黄色的警告了
 
 1571
 01:05:36,256 --> 01:05:37,488
 This resolved everything.
+这一个修改解决了所有问题
 
 1572
 01:05:37,490 --> 01:05:39,023
 I had eight things that were ambiguous.
+曾经有8个有歧义的东西
 
 1573
 01:05:39,025 --> 01:05:40,290
 Now they're all fine.
+现在都没有问题了
 
 1574
 01:05:40,292 --> 01:05:42,158
 Why? Because, when we compress now,
+为什么呢？因为压缩的时候
 
 1575
 01:05:42,160 --> 01:05:44,794
 we're gonna know that this is the guy who gets compressed,
+系统已经知道该压缩哪个元素了
 
 1576
 01:05:46,931 --> 01:05:47,880
 and these guys don't.
+其它元素就不需要被压缩了
 
 1577
 01:05:47,881 --> 01:05:48,830
 Okay? So that's what the compression
+这就是有关于压缩的事情
 
 1578
 01:05:48,833 --> 01:05:51,800
 thing, and we'll see hugging in in a second, and com, and
+稍后我们会讲到 Hugging
 
 1579
 01:05:51,802 --> 01:05:54,469
 more compression a little later, okay?
+和更多与 Compression 相关的
 
 1580
 01:05:54,471 --> 01:05:55,403
 So that's what these are about.
+这就是相关的东西
 
 1581
 01:05:55,405 --> 01:05:56,237
 A lot of people are, like,
+许多人会说
 
 1582
 01:05:56,238 --> 01:05:57,070
 well, I don't understand these.
+我不理解这些东西
 
 1583
 01:05:57,073 --> 01:05:57,938
 But it's quite simple.
+但是这些概念真的很简单
 
 1584
 01:05:57,940 --> 01:05:59,606
 It's just how much is this view,
+它只是一个与其它 view 对比的值
 
 1585
 01:05:59,608 --> 01:06:02,809
 compared to other views, resisting being compressed?
+数值越大代表越不希望被压缩
 
 1586
 01:06:02,811 --> 01:06:04,577
 And hugging priority is,
+Hugging Priority 是
 
 1587
 01:06:04,579 --> 01:06:06,712
 how much does it want to be its size?
+它有多希望变得更小
 
 1588
 01:06:06,714 --> 01:06:09,014
 How much does it want to be small, in other words?
+换句话说，你到底想不想变小
 
 1589
 01:06:09,016 --> 01:06:12,484
 So, like this guy always, that button always wants to
+好比这个按钮
 
 1590
 01:06:12,486 --> 01:06:15,520
 be only big enough to hold the login.
+它总是希望能装下 Login 这几个字符
 
 1591
 01:06:15,522 --> 01:06:18,923
 It does not want to be really tall or really wide.
+它不希望变得更高或更宽
 
 1592
 01:06:18,925 --> 01:06:19,990
 It wants to hug.
+它希望 Hug
 
 1593
 01:06:19,992 --> 01:06:22,226
 So, it has a high hugging priority.
+所以它的 Hugging Priority 会很高
 
 1594
 01:06:22,228 --> 01:06:25,762
 Other things, they might not care if they get bigger.
+其他的元素，它们不在乎是否变得更大
 
 1595
 01:06:25,764 --> 01:06:26,713
 Okay?
+懂了吗？
 
 1596
 01:06:26,714 --> 01:06:27,663
 Like this thing right here,
+就像它
 
 1597
 01:06:27,665 --> 01:06:29,765
 it really wants to hug vertically.
+它总是希望在垂直方向 Hug
 
 1598
 01:06:29,767 --> 01:06:32,067
 It doesn't mind if it gets stretched out horizontally.
+它不在乎自己是否在横向被拉抻
 
 1599
 01:06:33,203 --> 01:06:33,768
 All right?
+懂了吗？
 
 1600
 01:06:34,971 --> 01:06:35,669
 Okay.
+好的
 
 1601
 01:06:35,671 --> 01:06:37,070
 So, that's that.
+就是这样
 
 1602
 01:06:37,072 --> 01:06:41,474
 Now, let's go to, what are we going to do next here?
+下一步应该做什么呢？
 
 1603
 01:06:41,476 --> 01:06:44,243
 Let's add a couple more fields.
+我们再添加几个 Text Field
 
 1604
 01:06:44,245 --> 01:06:47,012
 That name, remember we had the name and the company?
+还记得 name 和 company 吗？
 
 1605
 01:06:47,014 --> 01:06:49,181
 Let's go add those and see what happens here.
+把这些添加上去，看看会发生什么
 
 1606
 01:06:50,450 --> 01:06:52,784
 So those are going to be text fields.
+它们都是 Text Field
 
 1607
 01:06:52,786 --> 01:06:54,752
 So they're labels rather, they're right here at the top.
+它们是 Label，在顶部这里
 
 1608
 01:06:54,754 --> 01:06:56,387
 So I'm just going to put these out here,
+所以我们要把它们放在这里
 
 1609
 01:06:56,389 --> 01:06:57,654
 grab a couple of these.
+拽几个 Label
 
 1610
 01:06:57,656 --> 01:06:59,756
 We'll make this one be name.
+把这个改成 Name
 
 1611
 01:06:59,758 --> 01:07:02,492
 We'll make this one be the company.
+把这个改成 Company
 
 1612
 01:07:02,494 --> 01:07:05,161
 All right, now where do I want these to be located?
+我应该把它们放到哪里呢？
 
 1613
 01:07:05,163 --> 01:07:08,530
 Well, I kind of want this to be right here.
+我想把它放到这里
 
 1614
 01:07:08,532 --> 01:07:11,099
 I really want it to be kind of like right here.
+就是放在这里
 
 1615
 01:07:11,101 --> 01:07:13,068
 Okay, not perfectly in the middle because I
+不是放在最中间
 
 1616
 01:07:13,070 --> 01:07:14,502
 am gonna put company right here.
+因为我想把 Company 放在这里
 
 1617
 01:07:14,504 --> 01:07:17,371
 So now it would be kind of offset down.
+稍稍往下面偏移一点
 
 1618
 01:07:17,373 --> 01:07:19,640
 But I guess I can say all right,
+我觉得这还可以
 
 1619
 01:07:19,642 --> 01:07:21,174
 I'll make these two things.
+我可以处理好这两个
 
 1620
 01:07:21,176 --> 01:07:23,476
 I'll have their horizontal spacing and
+我会让它们 Horizontal Spacing
 
 1621
 01:07:23,478 --> 01:07:25,445
 their Center Y's matched up.
+并且把 Center Y 匹配起来
 
 1622
 01:07:25,447 --> 01:07:26,579
 The centers vertically.
+垂直部分的中央
 
 1623
 01:07:27,915 --> 01:07:31,049
 It's kinda not exactly what I want, but it's close.
+这可能有点不是我想要的，但是已经非常接近了
 
 1624
 01:07:31,051 --> 01:07:34,819
 And then this guy, I will have his vertical spacing, and
+对于这个 Label，我要让它 Vertical Spacing
 
 1625
 01:07:34,821 --> 01:07:38,089
 his left edge lined up with the name.
+并且 Left Edge 和 Name 连接起来
 
 1626
 01:07:38,091 --> 01:07:38,957
 Right?
+对吧？
 
 1627
 01:07:38,958 --> 01:07:39,824
 That's pretty much what I want.
+这大体上是我想要的
 
 1628
 01:07:39,826 --> 01:07:41,358
 So that's not bad, but
+还不错
 
 1629
 01:07:41,360 --> 01:07:43,860
 really I don't want this lined up with the middle here.
+但是我不想让它和中间排成一行
 
 1630
 01:07:43,862 --> 01:07:46,730
 I want the bottom of this lined up with the middle.
+我想让它的底部和中间排成一行
 
 1631
 01:07:46,732 --> 01:07:48,064
 So how can I do that?
+我怎么才能做到呢？
 
 1632
 01:07:48,066 --> 01:07:49,432
 Okay, pay attention now.
+现在集中注意力
 
 1633
 01:07:49,434 --> 01:07:51,066
 It's very important to understand, because now
+理解这部分很重要
 
 1634
 01:07:51,068 --> 01:07:53,568
 we're gonna start looking at how these constraints work.
+因为我们要开始看看这些 Constraint 是怎么工作的
 
 1635
 01:07:53,570 --> 01:07:55,470
 So I'm gonna click on this constraint,
+我先点击这个 Constraint
 
 1636
 01:07:55,472 --> 01:07:58,773
 which causes me to inspect it here in the Inspector.
+在 Inspector 中，我就可以对其进行检查
 
 1637
 01:07:58,775 --> 01:07:59,941
 Okay? This is
+OK?
 
 1638
 01:07:59,942 --> 01:08:01,108
 what a constraint looks like.
+这就是一个 Constraint
 
 1639
 01:08:01,110 --> 01:08:04,111
 Notice the constraint has two items, a first item and
+注意看这里的 Constraint 有两个 item
 
 1640
 01:08:04,113 --> 01:08:04,978
 a second item.
+First Item 和 Second Item
 
 1641
 01:08:04,980 --> 01:08:10,917
 And, for each item, it says something about that item,
+对于每一个 Item，都有一些关于 Item 的信息
 
 1642
 01:08:10,919 --> 01:08:15,654
 like its center, or its bottom, or its top.
+例如它的中间，底部或者顶部
 
 1643
 01:08:15,656 --> 01:08:17,456
 Okay? If it had text,
+如果上面有文字
 
 1644
 01:08:17,458 --> 01:08:19,124
 it could be base lines.
+Baseline 也可以选择
 
 1645
 01:08:19,126 --> 01:08:20,792
 All right?
+懂了吗？
 
 1646
 01:08:20,793 --> 01:08:22,459
 So, each of them has something like that.
+每一个都有类似的东西
 
 1647
 01:08:22,462 --> 01:08:23,994
 And then, it has a relationship between them,
+然后，它还有一个两个 Item 之间的关系
 
 1648
 01:08:23,996 --> 01:08:25,929
 which could be equal, less than or
+这个关系可是相等，小于或等于
 
 1649
 01:08:25,931 --> 01:08:28,298
 equal, or greater than or equal.
+大于或等于
 
 1650
 01:08:28,300 --> 01:08:31,901
 So right now I have the center of this Stanford thing
+现在，我使得 Standford 图标的中间和
 
 1651
 01:08:31,903 --> 01:08:34,270
 equal to the center of the name thing.
+Name 的中间相等
 
 1652
 01:08:34,272 --> 01:08:38,007
 But it's perfectly fine for me to say I want the center of
+对于我来说
 
 1653
 01:08:38,009 --> 01:08:41,843
 the Stanford thing to match the bottom of the name thing.
+把这个图标的中间和 Name 的底部对齐也是可以的
 
 1654
 01:08:41,845 --> 01:08:43,945
 Okay?
+OK？
 
 1655
 01:08:43,947 --> 01:08:45,947
 Understand that?
+懂了吗？
 
 1656
 01:08:45,949 --> 01:08:48,249
 And then, down here you have this constant.
+在这里，有一个 Constant
 
 1657
 01:08:48,251 --> 01:08:49,200
 Okay?
+OK？
 
 1658
 01:08:49,201 --> 01:08:50,150
 The constants, there's two constants.
+这里有两个常数
 
 1659
 01:08:50,152 --> 01:08:52,319
 One is a multiplier, and one is a constant.
+一个是 Multiplier 一个是 Constant
 
 1660
 01:08:52,321 --> 01:08:54,488
 Okay?
+OK?
 
 1661
 01:08:54,489 --> 01:08:56,656
 So the constant is always added onto the end,
+Constant 总是加在最后
 
 1662
 01:08:56,658 --> 01:08:59,459
 and the multiplier is going to multiply the things that
+Multiplier 的作用是
 
 1663
 01:08:59,461 --> 01:09:01,127
 are being compared.
+把比较的地方相乘
 
 1664
 01:09:01,129 --> 01:09:04,430
 So it really doesn't make sense too much to multiply.
+其实相乘没什么意义
 
 1665
 01:09:04,432 --> 01:09:06,465
 But it kind of does.
+但是也有点意义
 
 1666
 01:09:06,466 --> 01:09:08,499
 Watch if I do four to one ratio.
+我在这里填入 4:1
 
 1667
 01:09:08,502 --> 01:09:10,869
 It's putting this bottom of this
+它把它底部的设置成了
 
 1668
 01:09:12,005 --> 01:09:16,073
 the ratio of four to one of the size of here.
+这里大小的四倍
 
 1669
 01:09:16,075 --> 01:09:16,807
 Okay? And
+OK?
 
 1670
 01:09:16,809 --> 01:09:20,276
 this can also be like, 0.5.
+这里也可以填 0.5
 
 1671
 01:09:20,278 --> 01:09:21,861
 Okay.
+好的
 
 1672
 01:09:21,862 --> 01:09:23,445
 Which is really tiny, so tiny that it's one.
+0.5 有点小
 
 1673
 01:09:23,448 --> 01:09:24,246
 Let's say two.
+试试2
 
 1674
 01:09:25,249 --> 01:09:26,781
 All right? So these can be numbers, or
+这里可以填数字
 
 1675
 01:09:26,783 --> 01:09:29,000
 they can be ratios.
+也可以填比率
 
 1676
 01:09:29,001 --> 01:09:31,218
 And then the constant is an amount added to it, like 50.
+Constant 是增加的数量，例如50
 
 1677
 01:09:31,221 --> 01:09:33,954
 Okay, so I've just added fixed 50 pixels.
+在这里添加了50个像素
 
 1678
 01:09:33,956 --> 01:09:36,473
 So it's just always added.
+它总是在原有的基础上添加
 
 1679
 01:09:36,474 --> 01:09:38,991
 So constant is always added, multiplier is multiplied.
+Constant 总是添加，Multiplier 就是相乘
 
 1680
 01:09:38,994 --> 01:09:42,495
 All constraints are this way, every single one.
+每一个 Constraint 都是这样的
 
 1681
 01:09:42,497 --> 01:09:43,596
 Okay? And,
+OK?
 
 1682
 01:09:43,598 --> 01:09:46,132
 some make sense with center or top bottom.
+有一些对于 Center Top Bottom 有意义
 
 1683
 01:09:46,134 --> 01:09:48,667
 Some of them make sense with width and height.
+而有一些是 Width 和 Height 有意义
 
 1684
 01:09:48,669 --> 01:09:50,402
 And when we do one in code,
+当我们在代码里实现 Constraint 的时候
 
 1685
 01:09:50,403 --> 01:09:52,136
 you're gonna see we're gonna do width and height.
+你会看到，我们会处理 Width 和 Height
 
 1686
 01:09:52,139 --> 01:09:55,473
 You know, but they're still in the same form.
+但是它们的形式都是相同的
 
 1687
 01:09:55,475 --> 01:09:57,142
 They always have the same form.
+他们总是有相同的形式
 
 1688
 01:09:57,143 --> 01:09:58,810
 That's why there's only one constructor for
+这就是为什么在代码中
 
 1689
 01:09:58,812 --> 01:10:00,678
 these layout constraint in the code.
+这个 Layout Constraint 只有一个 Constructor（构造器）
 
 1690
 01:10:00,680 --> 01:10:02,980
 Okay, and it just takes all of these things.
+它把所有这些当做参数
 
 1691
 01:10:02,982 --> 01:10:06,149
 The constant, the multiplier the first item.
+Constant，Multiplier，First Item
 
 1692
 01:10:06,151 --> 01:10:07,250
 Which thing on the first item?
+哪个元素是 First Item
 
 1693
 01:10:07,252 --> 01:10:08,117
 The relationship.
+Relationship
 
 1694
 01:10:08,119 --> 01:10:10,086
 And the second item, the second, and
+Second Item
 
 1695
 01:10:10,088 --> 01:10:12,287
 the thing on that, okay?
+和 Second Item 上面的元素
 
 1696
 01:10:12,289 --> 01:10:13,388
 So we're gonna see that.
+我们以后会看到的
 
 1697
 01:10:13,390 --> 01:10:15,256
 So, lets see if this worked.
+看看我们所做的有没有效果
 
 1698
 01:10:15,258 --> 01:10:18,326
 Just for fun let's go ahead and go back to our code, and
+回到代码里
 
 1699
 01:10:18,328 --> 01:10:19,794
 why are these things up.
+把这些东西连接起来
 
 1700
 01:10:21,797 --> 01:10:24,097
 Okay, so Ctrl+Drag.
+按住 Ctrl 拖动鼠标
 
 1701
 01:10:24,099 --> 01:10:26,466
 That's alright, from the name.
+从 Name
 
 1702
 01:10:26,468 --> 01:10:29,569
 oops, Undo, okay.
+搞错了
 
 1703
 01:10:29,571 --> 01:10:31,437
 Ctrl+Drag from the name.
+从 Name
 
 1704
 01:10:31,439 --> 01:10:34,239
 That is our Name Label and we'll go and
+起名为 nameLabel
 
 1705
 01:10:34,241 --> 01:10:36,875
 Ctrl+Drag from the company here.
+同样方法
 
 1706
 01:10:36,877 --> 01:10:39,611
 That is our Company Label.
+把 Company 设置好
 
 1707
 01:10:39,613 --> 01:10:40,311
 All right.
+好的
 
 1708
 01:10:40,313 --> 01:10:41,812
 And in our Update UI,
+在 UpdateUI 里面
 
 1709
 01:10:41,814 --> 01:10:45,349
 sorry about the width here, let's do this.
+这有点挡住了，把它收回去点
 
 1710
 01:10:45,351 --> 01:10:49,786
 In our Update UI here, we are going to update those.
+在 UpdateUI 里面，我们来更新这两个 Label
 
 1711
 01:10:49,788 --> 01:10:54,824
 So we'll just say that our Name Label that text,
+把 nameLabel 的 text 
 
 1712
 01:10:54,826 --> 01:10:58,360
 equals our logged in user.
+设置为 loggedInUser?
 
 1713
 01:10:58,362 --> 01:11:00,062
 And if our logged in user is nil,
+如果 loggedInUser 是 nil
 
 1714
 01:11:00,064 --> 01:11:02,530
 then we'll just set the text to be nil as well.
+把 text 设置为 nil 就可以了
 
 1715
 01:11:02,532 --> 01:11:04,799
 So I'm using optional chaining there.
+所以在这里我使用了可选链
 
 1716
 01:11:04,801 --> 01:11:06,901
 But that's the name of the person.
+这就是登陆者的名字
 
 1717
 01:11:06,903 --> 01:11:10,871
 And then, our company label's text equals the logged in
+然后，Company Label 的 text
 
 1718
 01:11:10,873 --> 01:11:12,205
 user's company.
+等于 loggedInUser?.company
 
 1719
 01:11:13,708 --> 01:11:14,774
 Okay? Let's also set
+OK?
 
 1720
 01:11:14,776 --> 01:11:16,308
 that image view right there.
+在这里也把 imageView 给设置好
 
 1721
 01:11:16,310 --> 01:11:16,875
 Okay?
+OK?
 
 1722
 01:11:18,779 --> 01:11:20,545
 So we'll Ctrl+Drag from the image view
+按住 Ctrl 拖动 imageView
 
 1723
 01:11:20,547 --> 01:11:22,113
 that's just like any other thing.
+就像之前做的一样
 
 1724
 01:11:22,115 --> 01:11:24,715
 I can Ctrl+Drag this thing over, so let's do that.
+我可以拖动它
 
 1725
 01:11:24,717 --> 01:11:27,217
 I'm gonna call it the Image View.
+把它起名为 imageView
 
 1726
 01:11:27,219 --> 01:11:29,970
 Okay. And
+OK.
 
 1727
 01:11:29,971 --> 01:11:32,722
 we'll set that as well in our Update UI.
+我们也要在 UpdateUI 里更新它
 
 1728
 01:11:32,724 --> 01:11:38,227
 Here by saying imageview.image equals the logged in
+把这里的 imageView.image 设置为
 
 1729
 01:11:38,229 --> 01:11:40,595
 user's image.
+登陆用户的 image
 
 1730
 01:11:40,597 --> 01:11:41,863
 Unfortunately, this is not gonna work.
+但是，这不会起作用
 
 1731
 01:11:41,865 --> 01:11:44,132
 And why is this not gonna work?
+它为什么不起作用呢？
 
 1732
 01:11:44,134 --> 01:11:47,001
 Because Image is not defined in User.
+因为 User 中没有定义 image
 
 1733
 01:11:47,003 --> 01:11:48,168
 If we go look at User.
+如果我们查看一下 User 类
 
 1734
 01:11:52,407 --> 01:11:56,442
 Okay, user can't have an image because it's a model.
+User 不能拥有 image，因为它是 model
 
 1735
 01:11:56,444 --> 01:11:57,810
 It doesn't have any UI kit.
+它没有导入 UIKit
 
 1736
 01:11:57,812 --> 01:11:58,777
 There's no UI.
+这里没有 UI
 
 1737
 01:11:58,779 --> 01:12:00,178
 And UI image is a UI thing.
+UIImage 是一个 UI 元素
 
 1738
 01:12:00,180 --> 01:12:01,012
 Okay.
+OK.
 
 1739
 01:12:01,014 --> 01:12:02,646
 So we can't even model.
+所以 model 里不能有它
 
 1740
 01:12:02,648 --> 01:12:05,683
 But that doesn't stop us from having an image
+但是这也不能组织我们拥有 image 这个 property
 
 1741
 01:12:05,685 --> 01:12:11,855
 property MUser, because we can use extensions.
+因为我们可以使用 extension
 
 1742
 01:12:11,857 --> 01:12:13,840
 Okay.
+OK
 
 1743
 01:12:13,841 --> 01:12:15,824
 So here I'm gonna make an extension to User.
+所以这里，我给 User 添加一个 extension
 
 1744
 01:12:16,761 --> 01:12:19,128
 Okay, it's gonna be a var called image.
+一个叫 image 的变量
 
 1745
 01:12:19,130 --> 01:12:23,565
 It's gonna be a UIImage, UIImage, but I'm adding this
+类型是 UIImage
 
 1746
 01:12:23,567 --> 01:12:27,135
 in my controller so that's fine because, it's extending
+我把它放到 controller 里
 
 1747
 01:12:27,137 --> 01:12:29,337
 my model but it's not actually touching my model.
+它扩展了我的 model，但是没有接触我的 model
 
 1748
 01:12:29,339 --> 01:12:32,106
 My model is still purely fine.
+model 还是没问题的
 
 1749
 01:12:32,108 --> 01:12:36,343
 And to do this, I'm just gonna return basically a UIImage,
+为了实现功能，在这里返回一个 UIImage
 
 1750
 01:12:36,345 --> 01:12:39,479
 that is named the user's login.
+name 是 User 中的 login
 
 1751
 01:12:39,481 --> 01:12:42,515
 Now notice, I can refer to login here because this
+看到了吗，我可以获取到 login
 
 1752
 01:12:42,517 --> 01:12:43,215
 is user.
+因为我们在 User 类中
 
 1753
 01:12:43,217 --> 01:12:44,683
 This is on user, so
+这是对 User 的扩展
 
 1754
 01:12:44,685 --> 01:12:49,220
 login is a user thing, so I can refer to that, 'kay.
+所以我可以获取到
 
 1755
 01:12:49,222 --> 01:12:52,656
 But this is saying no, because this might return nil.
+但是这有一个错误，因为它也许会返回 nil
 
 1756
 01:12:52,658 --> 01:12:54,324
 So I'm gonna say.
+我会说
 
 1757
 01:12:54,326 --> 01:12:56,426
 If I can get let the image equal that,.
+如果我能获取到 image
 
 1758
 01:13:01,399 --> 01:13:03,833
 Then, I will return it.
+我就返回它
 
 1759
 01:13:05,202 --> 01:13:12,107
 Otherwise, I will return a UI image of some unknown user.
+否则我就返回一个未知用户的 UIImage 
 
 1760
 01:13:12,109 --> 01:13:13,574
 I have. A thing there I
+在这里
 
 1761
 01:13:13,576 --> 01:13:15,042
 put in there called, unknown user.
+我输入 unknown_user
 
 1762
 01:13:15,044 --> 01:13:17,978
 That's just an image that I put there.
+这是一张图片的名字
 
 1763
 01:13:20,449 --> 01:13:23,316
 And this, I'm gonna make this optional so
+我把它变成 optional
 
 1764
 01:13:23,318 --> 01:13:25,851
 the whole thing can return optional.
+所以内部就可以返回 optional
 
 1765
 01:13:25,853 --> 01:13:27,353
 Okay?
+OK?
 
 1766
 01:13:27,355 --> 01:13:30,355
 So now, this is implemented.
+现在，这个已经实现完毕了
 
 1767
 01:13:30,357 --> 01:13:31,957
 This might return nill but
+这个也许会返回 nil
 
 1768
 01:13:31,958 --> 01:13:33,558
 that's okay, because this is allowed to be nill.
+但是这也没问题，因为这个允许是 nil 的
 
 1769
 01:13:33,560 --> 01:13:34,492
 And all is well.
+万事俱备
 
 1770
 01:13:34,494 --> 01:13:35,977
 So let's go take a look,
+我们运行程序来看一下
 
 1771
 01:13:35,978 --> 01:13:37,461
 now we should have our full UI functioning here.
+所有 UI 的功能都已经实现了
 
 1772
 01:13:38,564 --> 01:13:39,896
 Let's go on our iPhone here.
+用 iPhone 运行一下
 
 1773
 01:13:39,898 --> 01:13:47,437
 Oh, I know, right here,
+哦，我知道了
 
 1774
 01:13:47,439 --> 01:13:53,208
 okay, run, okay, here it is, so let's log in as madbum.
+运行一下，我们用 madbum 登陆
 
 1775
 01:13:54,611 --> 01:13:56,077
 And log in, and there we go.
+登陆完毕
 
 1776
 01:13:56,079 --> 01:13:57,612
 Oh, that looks terrible.
+这看起来太糟糕了
 
 1777
 01:13:59,082 --> 01:14:00,447
 What's going on here?
+到底发生了什么？
 
 1778
 01:14:00,449 --> 01:14:04,718
 Look at how it stretched this thing out, okay?
+这个东西被拉抻开了
 
 1779
 01:14:04,720 --> 01:14:06,886
 I want this hugging.
+我希望它是 Hug 的
 
 1780
 01:14:06,888 --> 01:14:07,586
 I don't like this.
+我不希望这样
 
 1781
 01:14:07,588 --> 01:14:09,221
 This is not hugging, okay?
+它没有 Hug
 
 1782
 01:14:09,223 --> 01:14:10,655
 But there's another problem too,
+这里也有个问题
 
 1783
 01:14:10,657 --> 01:14:12,374
 we'll look at this in a second.
+我们稍后再看
 
 1784
 01:14:12,375 --> 01:14:14,092
 But let's look at it this way, though.
+我们旋转一下屏幕
 
 1785
 01:14:14,094 --> 01:14:15,426
 Same thing, it's no good.
+同样地，效果很不好
 
 1786
 01:14:16,429 --> 01:14:17,795
 Okay? So, we're getting close.
+不过已经很接近了
 
 1787
 01:14:17,797 --> 01:14:19,697
 Why is this happening?
+为什么会这样呢？
 
 1788
 01:14:19,698 --> 01:14:21,598
 Well, the reason that this is happening is because we have
+发生这件事的原因是
 
 1789
 01:14:21,600 --> 01:14:24,834
 all these things attached to each other, and, so
+我们把这些 view 都相互依附在一起
 
 1790
 01:14:24,836 --> 01:14:27,103
 we can fix this in two ways, actually.
+其实我们可以通过两种方式修复
 
 1791
 01:14:27,105 --> 01:14:32,408
 One way is I can go here, and change this guy,
+一种是，去到这里，改变它
 
 1792
 01:14:32,410 --> 01:14:35,310
 who's hugging priority can just be less so
+把它的 Hugging Priority 调低
 
 1793
 01:14:35,312 --> 01:14:37,712
 that these guys will be more likely to hug.
+所以其他这些就更可能 Hug
 
 1794
 01:14:37,714 --> 01:14:38,697
 Okay.
+OK.
 
 1795
 01:14:38,698 --> 01:14:39,681
 Down on their text.
+在它们的 text 下面
 
 1796
 01:14:39,683 --> 01:14:43,084
 So I'm gonna set this guy's vertical hugging priority
+所以我要设置它的 Vertical Hugging Priority
 
 1797
 01:14:43,086 --> 01:14:44,184
 down to let's say 200.
+把它调到 200
 
 1798
 01:14:44,186 --> 01:14:47,087
 The rest of these are at say, 250.
+剩下的这些还是 250
 
 1799
 01:14:47,089 --> 01:14:49,122
 Okay, these are all at 250.
+它们都是 250
 
 1800
 01:14:49,124 --> 01:14:51,024
 I'm gonna set mine down to 200.
+我把它调低到 200
 
 1801
 01:14:51,026 --> 01:14:51,824
 Okay.
+好的。
 
 1802
 01:14:52,793 --> 01:14:56,361
 So we run, let's log in as mad mom again.
+我们再次以madbum登陆。
 
 1803
 01:14:59,833 --> 01:15:02,367
 There we go, okay, so it didn't squish this,
+走起，很好，这个没被压扁了，
 
 1804
 01:15:02,369 --> 01:15:04,802
 although wow, now it's stretched this thing way up.
+但是，下面的图片被拉伸了。
 
 1805
 01:15:04,804 --> 01:15:07,204
 I don't really like that either.
+我不希望这样。
 
 1806
 01:15:07,206 --> 01:15:07,904
 Okay?
+明白吗？
 
 1807
 01:15:07,906 --> 01:15:09,406
 So why is that happening?
+那这是为什么呢?
 
 1808
 01:15:09,408 --> 01:15:12,675
 Well that's happening because of this constraint right here.
+这是因为这个约束。
 
 1809
 01:15:12,677 --> 01:15:14,677
 This constraint says,
+这个约束说，
 
 1810
 01:15:14,678 --> 01:15:16,678
 that the distance from the top of the image to the bottom of
+从图片顶部到登陆按钮底部的距离
 
 1811
 01:15:16,681 --> 01:15:18,914
 here has to equal.
+必须相等于。
 
 1812
 01:15:18,916 --> 01:15:20,215
 The standard value equal.
+标准值。
 
 1813
 01:15:20,217 --> 01:15:22,267
 I don't want equal.
+但我不想等于一个确定的值。
 
 1814
 01:15:22,268 --> 01:15:24,318
 I'm gonna say, if it's greater than or equal, that's fine.
+我只需要，大于或等于就可以了。
 
 1815
 01:15:25,722 --> 01:15:27,288
 Okay? So this is where you
+明白吗？这种情况下
 
 1816
 01:15:27,289 --> 01:15:28,855
 would use a greater than or equals, because this spacing,
+就可以用到大于或等于选项，因为这个距离，
 
 1817
 01:15:28,858 --> 01:15:31,091
 I just want to make sure it doesn't smash into it.
+我只需要确保图片不和按钮重叠就行。
 
 1818
 01:15:31,093 --> 01:15:32,625
 But if it's smaller, that's okay.
+所以图片小一点也是没问题的。
 
 1819
 01:15:32,627 --> 01:15:33,993
 I don't mind that.
+我并不在意。
 
 1820
 01:15:35,963 --> 01:15:36,962
 All right. So now, let's try madbum.
+好的，我们再次登陆。
 
 1821
 01:15:36,964 --> 01:15:37,529
 Madbum.
+输入madbum
 
 1822
 01:15:41,501 --> 01:15:43,534
 Okay, perfect, so now it's doing that, and
+很好，完美解决，看这里，而且
 
 1823
 01:15:43,536 --> 01:15:46,536
 over here, oops, over this way, working fine.
+在横屏模式下，同样没问题。
 
 1824
 01:15:47,839 --> 01:15:48,971
 Okay?
+看到没？
 
 1825
 01:15:48,973 --> 01:15:50,957
 So we're getting good,
+事情很顺利，
 
 1826
 01:15:50,958 --> 01:15:52,942
 there's only really two things left that are problems in
+整个程序就只剩下
 
 1827
 01:15:52,944 --> 01:15:55,027
 this whole thing,
+两个问题了，
 
 1828
 01:15:55,028 --> 01:15:57,111
 one is this guy getting smashed off, gotta fix that.
+一个是这两个文本的内容没有显示完整，我们来修复它。
 
 1829
 01:15:57,114 --> 01:15:58,447
 And we fix that.
+来解决这个问题。
 
 1830
 01:15:58,449 --> 01:15:59,614
 You already know how to fix that.
+你应该知道如何解决这个问题了
 
 1831
 01:15:59,616 --> 01:16:01,549
 I'm just gonna take this, and make it so
+只需要选中它，然后
 
 1832
 01:16:01,551 --> 01:16:04,452
 that this thing hooks to this edge.
+和父视图的边界关联起来。
 
 1833
 01:16:04,454 --> 01:16:08,088
 And same thing with this thing hooking to this guy's edge.
+这个标签也是一样。
 
 1834
 01:16:08,090 --> 01:16:11,224
 And again, I don't want them to be anything but
+同样，我需要把他们的值设置为
 
 1835
 01:16:11,226 --> 01:16:12,392
 a standard value here.
+标准值。
 
 1836
 01:16:12,394 --> 01:16:14,193
 So I'm gonna have this one be zero.
+选这个或者0.
 
 1837
 01:16:16,397 --> 01:16:17,963
 And same thing with this one right here.
+这个也是一样。
 
 1838
 01:16:17,965 --> 01:16:19,264
 I don't like this.
+我不想要这个。
 
 1839
 01:16:20,633 --> 01:16:21,565
 Nonstandard values.
+非标准值。
 
 1840
 01:16:21,567 --> 01:16:23,767
 In fact, I've got a couple of them
+事实上，前面还有很多
 
 1841
 01:16:23,768 --> 01:16:25,968
 left over from previous things here, so let's fix these.
+这样的问题需要修复。
 
 1842
 01:16:25,971 --> 01:16:29,506
 Standard Values.
+标准值。
 
 1843
 01:16:29,508 --> 01:16:30,506
 Okay?
+明白吗？
 
 1844
 01:16:30,508 --> 01:16:31,574
 All right.
+好的。
 
 1845
 01:16:31,576 --> 01:16:32,641
 Everything look good there?
+现在看起来都正常了。
 
 1846
 01:16:32,643 --> 01:16:33,408
 No magic numbers?
+没有 magic numbers吧？
 
 1847
 01:16:33,410 --> 01:16:34,275
 Oh, here's the magic number.
+oh， 这里还有一个。
 
 1848
 01:16:34,277 --> 01:16:35,009
 Let's get rid of that.
+改掉它。
 
 1849
 01:16:37,180 --> 01:16:37,745
 Standard Value.
+标准值。
 
 1850
 01:16:39,148 --> 01:16:41,548
 That it, okay, got all those.
+好的，全部修改了。
 
 1851
 01:16:41,550 --> 01:16:43,216
 Everything looks fine, it moved.
+看起来很不错。
 
 1852
 01:16:43,218 --> 01:16:45,317
 So now, we should be all fixed and ready to go.
+现在，应该都修改正确了，可以测试了。
 
 1853
 01:16:45,319 --> 01:16:50,022
 Alright, madbum again.
+好的，再次登录。
 
 1854
 01:16:50,024 --> 01:16:52,791
 Secure this time, don't want you to know madbum's password.
+换成安全状态，不想让你看到密码。
 
 1855
 01:16:53,993 --> 01:16:56,761
 Okay, looking good, oh, still didn't quite work.
+好的，看起来很好，但是，好像还是有问题。
 
 1856
 01:16:56,763 --> 01:17:00,697
 We got the name but why did this thing.
+姓名标签很正常，但是下面这个。
 
 1857
 01:17:00,699 --> 01:17:01,798
 Not do that.
+不对。
 
 1858
 01:17:01,800 --> 01:17:02,865
 What's going on there?
+这是怎么回事？
 
 1859
 01:17:02,867 --> 01:17:04,266
 Same circle Giants got put up.
+同样的问题有发生了。
 
 1860
 01:17:04,268 --> 01:17:08,270
 The reason there is this guy's hogging priority is too
+原因是这个标签的hugging 优先级别太
 
 1861
 01:17:08,272 --> 01:17:10,638
 low, okay.
+低了。
 
 1862
 01:17:10,640 --> 01:17:12,373
 I'm sorry, his compression resistance, I mean,
+很抱歉，是compression resistance值才对，
 
 1863
 01:17:12,375 --> 01:17:14,075
 is too low.
+太低了。
 
 1864
 01:17:14,076 --> 01:17:15,776
 He's allowing himself to be compressed.
+它允许自己被挤压。
 
 1865
 01:17:15,778 --> 01:17:17,111
 Okay.
+好的。
 
 1866
 01:17:17,112 --> 01:17:18,445
 So here, we need to have the horizontal compression
+这里，我们需要提高它的水平
 
 1867
 01:17:18,447 --> 01:17:20,247
 resistance of this guy be higher.
+resistance值。
 
 1868
 01:17:20,249 --> 01:17:21,381
 So I'm gonna set it to 800.
+就设置为800.
 
 1869
 01:17:21,383 --> 01:17:22,882
 Doesn't really matter what we set,
+具体设置成多大并不是很重要，
 
 1870
 01:17:22,884 --> 01:17:24,216
 as long as it's higher than.
+只要大于
 
 1871
 01:17:24,218 --> 01:17:27,119
 The other things, like this one, which is 750, so
+其他视图的值，比如这个，它是750，
 
 1872
 01:17:27,121 --> 01:17:31,990
 let's set this guy's also, oops, it's compression to 800.
+把这个也设置为800.
 
 1873
 01:17:31,992 --> 01:17:35,926
 Okay, so that prevents them from being compressed down so
+这样一来，就可以避免他们被挤压
 
 1874
 01:17:35,928 --> 01:17:37,528
 that their text won't show.
+ 而无法完整显示文本了。
 
 1875
 01:17:37,530 --> 01:17:40,130
 Okay.
+好的。
 
 1876
 01:17:40,132 --> 01:17:46,235
 Oh, well, that's not so good.
+oh，情况不妙。
 
 1877
 01:17:46,237 --> 01:17:49,138
 Okay, so we fixed one problem, we introduces another one.
+看，我们解决了一个问题，又来了另一个。
 
 1878
 01:17:49,140 --> 01:17:50,807
 So we certainly-
+所以实际上
 
 1879
 01:17:50,808 --> 01:17:52,475
 There are two problems with this,
+这里有两个问题，
 
 1880
 01:17:52,476 --> 01:17:54,143
 actually, number one, this is not the right aspect ratio.
+首先，图片的宽高比例不对。
 
 1881
 01:17:54,145 --> 01:17:55,610
 This is not what the Giants logo looks like,
+Giants logo可不是这样的，
 
 1882
 01:17:55,612 --> 01:17:57,245
 you can barely even tell it's the Giants.
+你甚至都认不出来。
 
 1883
 01:17:57,247 --> 01:18:00,481
 And number two is, it's way too small, okay?
+问题二，太小了，不是吗？
 
 1884
 01:18:00,483 --> 01:18:03,784
 Look at all this empty space I've got up here, okay, so
+看上面的空白空间。
 
 1885
 01:18:03,786 --> 01:18:05,085
 we've got two things to fix here.
+所以还有两个问题解决后
 
 1886
 01:18:05,087 --> 01:18:06,787
 And then we're done.
+就完成了。
 
 1887
 01:18:06,789 --> 01:18:09,889
 One is make this aspect ratio be enforced, and
+一个是修正图片的宽高比问题，
 
 1888
 01:18:09,891 --> 01:18:13,026
 another one is put this in the right space.
+另一个是将它放到正确的位置。
 
 1889
 01:18:13,028 --> 01:18:16,595
 In this size class which is I got a lot of vertical space.
+在这个size class 我们有充足的垂直空间。
 
 1890
 01:18:16,597 --> 01:18:20,198
 So, lets go ahead and fix the aspect ratio one first.
+我们先修复图宽高比的问题。
 
 1891
 01:18:20,200 --> 01:18:22,867
 You know that one.
+你可能会想。
 
 1892
 01:18:22,869 --> 01:18:25,236
 We'd like to be able to just go here and
+我们可以到这里
 
 1893
 01:18:25,238 --> 01:18:27,805
 add some kind of constraint, but we can't actually do that.
+加一些约束就好了，但事实上，不可以。
 
 1894
 01:18:27,807 --> 01:18:30,708
 And that's because if you remember, when we look
+因为，不知道你是否记得
 
 1895
 01:18:30,710 --> 01:18:35,845
 at a constraint, its constant and multiplier are constants.
+一个约束的的constant和multiplier值是常量。
 
 1896
 01:18:35,847 --> 01:18:38,348
 And every time we get a new image,
+每次图片更新的时候，
 
 1897
 01:18:38,350 --> 01:18:40,216
 it has a different aspect ratio.
+它的宽高比不同。
 
 1898
 01:18:41,318 --> 01:18:42,718
 Okay?
+明白吗？
 
 1899
 01:18:42,719 --> 01:18:44,119
 So, unless we wanted to force everyone's image to
+除非我们限制每个图片
 
 1900
 01:18:44,121 --> 01:18:46,788
 be the same aspect ratio, we need code to
+的宽高比相同，不然的话，我们需要
 
 1901
 01:18:46,790 --> 01:18:49,791
 do this because we have to calculate that aspect ratio.
+在代码中来计算这个宽高比才行。
 
 1902
 01:18:49,793 --> 01:18:50,858
 So, this is what that looks like.
+所以，仔细看好了。
 
 1903
 01:18:50,860 --> 01:18:53,027
 I'm gonna go through this pretty fast because
+我会以非常快的速度演示因为
 
 1904
 01:18:53,029 --> 01:18:56,730
 we're over time already, so you can watch it here.
+时间不多了，看这里。
 
 1905
 01:18:56,732 --> 01:18:58,765
 So, I'm gonna do this like this.
+我会这样做。
 
 1906
 01:18:58,767 --> 01:19:00,400
 I'm gonna create a new var,
+新建一个变量，
 
 1907
 01:19:00,402 --> 01:19:04,503
 which is an aspectRatioConstraint(), and
+命名为aspectRatioConstraint
 
 1908
 01:19:04,505 --> 01:19:07,706
 it's going to be of type NSLayoutConstraint.
+类型为NSLayoutConstraint
 
 1909
 01:19:07,708 --> 01:19:10,575
 This is the type of those constraints.
+这是所有约束的类型。
 
 1910
 01:19:10,577 --> 01:19:13,845
 All those constraints in there it is of this type, okay.
+所有的约束都是这个类型，是的。
 
 1911
 01:19:13,847 --> 01:19:17,448
 Now, I'm gonna create another var called image, UIImage.
+现在创建另一个变量，叫做image
 
 1912
 01:19:18,717 --> 01:19:21,851
 And it can be optional, it's fine.
+可以为空，所以设置为optional类型。
 
 1913
 01:19:21,853 --> 01:19:24,253
 And it's just gonna be a computed property,
+这将使一个computed property，
 
 1914
 01:19:24,255 --> 01:19:28,424
 where I'm gonna get and set my image views properties.
+我会在其中设置和获取我的image view视图。
 
 1915
 01:19:28,426 --> 01:19:31,126
 So I'm really just gonna return imageView.image,
+我只需要返回 imageView.image,
 
 1916
 01:19:31,128 --> 01:19:32,327
 I'm gonna set her.
+设置她。
 
 1917
 01:19:32,329 --> 01:19:33,594
 I'm just going to set it.
+设置好就可以了。
 
 1918
 01:19:33,596 --> 01:19:35,896
 Let's go to wide here.
+这边加宽一点。
 
 1919
 01:19:35,898 --> 01:19:37,965
 Wide mode.
+更宽一点。
 
 1920
 01:19:41,203 --> 01:19:42,435
 Okay, in the center,
+好的，在setter方法里面，
 
 1921
 01:19:42,437 --> 01:19:45,238
 I'm just gonna set it imageView.image = image.
+我只需要设置imageView.image = image.
 
 1922
 01:19:45,240 --> 01:19:47,873
 Now, why am I creating this little computer property?
+那么，我为什么创建这个computed property？
 
 1923
 01:19:47,875 --> 01:19:51,443
 Because every time I set my imageView's image I
+因为每当我设置imageView的image的时候
 
 1924
 01:19:51,445 --> 01:19:55,547
 want to update this aspect ration constraint, okay.
+我需要更新图片的宽高比例约束，明白？
 
 1925
 01:19:55,549 --> 01:19:58,082
 So, if I can let this constrained view,
+所以，如果imageView不为空
 
 1926
 01:19:58,084 --> 01:20:00,785
 this is the view I'm trying to constrain,
+就是我想添加约束的视图，
 
 1927
 01:20:00,787 --> 01:20:02,353
 which is the image view.
+也就是imageView。
 
 1928
 01:20:02,355 --> 01:20:04,054
 If I can let it equal something.
+如果我可以let出来。
 
 1929
 01:20:04,056 --> 01:20:07,590
 In other words it's not nill, okay?
+换句话说就是不为nil，明白吗？
 
 1930
 01:20:07,592 --> 01:20:12,161
 And if I can let the new image equal new value,
+然后如果newValue不为空，
 
 1931
 01:20:12,163 --> 01:20:14,563
 because this is, we're setting an image here, so
+就是我们设置的新图片，
 
 1932
 01:20:14,565 --> 01:20:18,800
 if I'm able to set an image in this constraint, screen view.
+我们就可以为他添加约束了。
 
 1933
 01:20:18,802 --> 01:20:20,168
 Then I'm gonna create this
+这样我只需要让
 
 1934
 01:20:20,170 --> 01:20:22,436
 aspectRatioConstraint equal to something.
+aspectRatioConstraint等于某个值就可以了。
 
 1935
 01:20:22,438 --> 01:20:24,605
 If I can't set the new image, then I'm gonna
+如果image为空，
 
 1936
 01:20:24,607 --> 01:20:29,409
 set the aspectRatioContraint equal to nil, 'kay.
+我会讲aspectRatioConstraint设置为nil，明白吗？
 
 1937
 01:20:29,411 --> 01:20:31,644
 So someone set my image to nil.
+如果别人将图片设置为nil。
 
 1938
 01:20:31,646 --> 01:20:32,945
 I can't have a constraint.
+我就无法添加约束了。
 
 1939
 01:20:32,947 --> 01:20:35,647
 The aspect ration of nil image is nothing, so I don't,
+空图片并没有宽高比，所以不必，
 
 1940
 01:20:35,649 --> 01:20:37,849
 can't even have a constraint there.
+设置约束。
 
 1941
 01:20:37,851 --> 01:20:39,684
 So how do I create this constraint in the case I
+当我们获取到图片的时候
 
 1942
 01:20:39,686 --> 01:20:41,419
 do have an image for imageView?
+怎样创建这个约束呢？
 
 1943
 01:20:41,421 --> 01:20:43,220
 I just do it with a constructor,
+只需要调用构造器即可，
 
 1944
 01:20:43,222 --> 01:20:45,556
 NSLayoutConstraint, okay?
+NSLayoutConstraint（），明白吗？
 
 1945
 01:20:45,558 --> 01:20:47,024
 Here's what NSLayoutConstraint's
+NSLayoutConstraint（）构造器
 
 1946
 01:20:47,026 --> 01:20:48,058
 constructor looks like.
+就是这样子的。
 
 1947
 01:20:48,060 --> 01:20:49,592
 It's got all these things here,
+它需要很多参数，
 
 1948
 01:20:49,594 --> 01:20:52,061
 let's go through them one at a time, and
+我们一个一个来，
 
 1949
 01:20:52,063 --> 01:20:54,863
 it looks just like that inspector I showed you.
+就像inspector一样。
 
 1950
 01:20:54,865 --> 01:20:59,067
 So one is the thing we're trying to constrain.
+首先是你需要添加约束的视图。
 
 1951
 01:20:59,069 --> 01:21:03,404
 Which is our image view, what attribute of that, it's width,
+也就是imageView，被约束的属性是width，
 
 1952
 01:21:04,440 --> 01:21:08,742
 how do we want to relate it to our constants and multipliers?
+和constants和multipliers的关系是怎样的呢？
 
 1953
 01:21:08,744 --> 01:21:10,343
 Well, we're going to do aspect ratio, so
+我们想做宽高比约束，所以
 
 1954
 01:21:10,345 --> 01:21:12,979
 we want the width multiplied times the height.
+我们需要width=height*x
 
 1955
 01:21:12,981 --> 01:21:17,616
 So the width is going to equal the height times the aspect
+所以我们让 宽 等于 高 乘以 宽高比
 
 1956
 01:21:17,618 --> 01:21:19,551
 ratio, so this is going to be equal.
+所以我们选择等号。
 
 1957
 01:21:20,587 --> 01:21:22,053
 And what are we relating it to?
+然后相对于哪个视图呢？
 
 1958
 01:21:22,055 --> 01:21:24,121
 We could relate it to another thing, but
+我们可以选择其他视图，但是
 
 1959
 01:21:24,123 --> 01:21:27,057
 this is the imageviews own aspect ratio, so it's relating
+这里是imageView自己的宽高比，所以相对于
 
 1960
 01:21:27,059 --> 01:21:31,661
 it to itself, okay, and what attribute is it relating to?
+它自己，好，那相对于哪个属性呢？
 
 1961
 01:21:31,663 --> 01:21:35,365
 It's height, and what is the multiplier going to be?
+是height，那么乘以哪个数呢？
 
 1962
 01:21:35,367 --> 01:21:39,168
 It's going to be that new image aspect ratio.
+乘以图片的aspectRatio属性。
 
 1963
 01:21:40,404 --> 01:21:42,504
 Okay? And then this constant gets
+明白吗？然后是增加的常量
 
 1964
 01:21:42,506 --> 01:21:43,438
 added in.
+数值。
 
 1965
 01:21:43,440 --> 01:21:44,805
 We don't want to add anything else in.
+我们不需要增加多余的值。
 
 1966
 01:21:44,807 --> 01:21:46,073
 We just want to multiply.
+我们只需要乘以宽高比就可以了。
 
 1967
 01:21:46,075 --> 01:21:49,643
 So here I'm making this image view's width equal to it's
+所以我们让宽等于高乘以
 
 1968
 01:21:49,645 --> 01:21:51,411
 height times this multiplier.
+乘以宽高比即可。
 
 1969
 01:21:52,814 --> 01:21:54,030
 Make sense?
+明白吗？
 
 1970
 01:21:54,031 --> 01:21:55,247
 That's the constraint I'm putting on it.
+这是我天津的约束。
 
 1971
 01:21:55,249 --> 01:21:56,281
 That's how constraints work.
+约束就是这样工作的。
 
 1972
 01:21:56,283 --> 01:21:57,366
 That's all it is.
+就是这些。
 
 1973
 01:21:57,367 --> 01:21:58,450
 Now a couple of things are not good here.
+现在还有一些问题。
 
 1974
 01:21:58,452 --> 01:22:02,087
 One is there is no such method aspect ratio on UI image.
+一个是，UIImage没有aspectRatio方法。
 
 1975
 01:22:02,089 --> 01:22:04,622
 So I'm gonna go down here and do an extension for that too.
+所以我们到下面添加一个extension。
 
 1976
 01:22:05,558 --> 01:22:10,727
 UIImage var aspectRatio.
+添加一个aspectRatio熟悉。
 
 1977
 01:22:10,729 --> 01:22:12,195
 It's gonna be a CGFloat.
+CGFloat类型。
 
 1978
 01:22:13,198 --> 01:22:16,565
 I'm just going to return if my size.height is not zero,
+如果不为0就直接返回，
 
 1979
 01:22:16,567 --> 01:22:20,069
 because I don't wanna have to divide by zero.
+因为我不想除数为0.
 
 1980
 01:22:20,071 --> 01:22:23,005
 Then I'm going to return size.width divided by
+然后返回宽除以高，
 
 1981
 01:22:23,007 --> 01:22:26,675
 size.height, otherwise I guess I'll just return zero.
+如果为0救直接返回。
 
 1982
 01:22:26,677 --> 01:22:30,378
 Okay, so I just added this var to UI image,
+好的，为UIImage添加了这个属性，
 
 1983
 01:22:30,380 --> 01:22:32,463
 because I wanted it and
+因为我需要它而且
 
 1984
 01:22:32,464 --> 01:22:34,547
 it makes my code read really nicely right here, okay?
+这让代码非常可读又美观，不是吗？
 
 1985
 01:22:34,550 --> 01:22:36,850
 Perfectly reasonable.
+非常完美。
 
 1986
 01:22:36,851 --> 01:22:39,151
 And the only other thing is, when I set this aspect ratio
+最后一个问题是，当我设置这个宽高比约束时
 
 1987
 01:22:39,154 --> 01:22:42,589
 constraint I'm creating it, but now I need to enforce it.
+我需要将它添加到图片上并使之生效。
 
 1988
 01:22:42,591 --> 01:22:45,058
 So how do you enforce a constraint?
+那么怎样使一个约束生效呢？
 
 1989
 01:22:45,060 --> 01:22:47,226
 If you have one in your hand, how do you force it?
+如果你现在有一个约束，怎样使他生效？
 
 1990
 01:22:47,228 --> 01:22:48,594
 And it's very simple,
+非常简单，
 
 1991
 01:22:48,596 --> 01:22:51,697
 you just add it as a constraint to the view.
+你只需要将它添加到视图就可以了。
 
 1992
 01:22:51,699 --> 01:22:53,031
 So I'm in my view controller here, so
+我现在在控制器中，
 
 1993
 01:22:53,033 --> 01:22:57,335
 I'm going to add this constraint to my view.
+我将在这里为视图添加约束。
 
 1994
 01:22:57,337 --> 01:23:00,971
 So in didSet, any time this aspect ratio gets set up here,
+在didSet方法中，每次设置aspetRatio的时候，
 
 1995
 01:23:00,973 --> 01:23:02,138
 this is where I set it.
+我就在这里设置它。
 
 1996
 01:23:02,140 --> 01:23:03,106
 Either to nil or this.
+要么为空或不为空。
 
 1997
 01:23:04,242 --> 01:23:07,976
 Then if I can let this new
+如果这个约束
 
 1998
 01:23:07,978 --> 01:23:11,813
 constraint equal the aspect ratio of constraint.
+我可以let出来。
 
 1999
 01:23:11,815 --> 01:23:13,581
 In other words, if its not nil.
+换句话说，如果不为空。
 
 2000
 01:23:13,583 --> 01:23:16,884
 Then I'm gonna tell my view please add this constraint.
+我就让视图添加这个约束。
 
 2001
 01:23:20,122 --> 01:23:23,490
 Now I also, by the way, when it set I want to
+同样，随便的，在willSet中
 
 2002
 01:23:23,492 --> 01:23:26,793
 remove any old constraint cause I might already have
+我们需要移除掉
 
 2003
 01:23:26,795 --> 01:23:29,328
 put a constraint from the previous image I was showing.
+已经存在的约束。
 
 2004
 01:23:29,330 --> 01:23:33,099
 So I'm gonna say if let the existing constraint
+所以如果aspectRatioConstant
 
 2005
 01:23:33,101 --> 01:23:34,867
 equal the aspect ratio constraint and
+不为空而且
 
 2006
 01:23:34,869 --> 01:23:38,636
 this is my will set so this hasn't been set yet.
+由于这是willSet方法，所以这时aspectRatioConstrain还没有设置
 
 2007
 01:23:39,606 --> 01:23:41,538
 Then I'm gonna say remove the constraint.
+我只需要移除已存在的约束即可。
 
 2008
 01:23:44,343 --> 01:23:46,710
 Make sense? So that's it.
+明白吗？就是这样。
 
 2009
 01:23:46,712 --> 01:23:49,278
 Okay, and that's all we need to do.
+这是我们所有需要做的。
 
 2010
 01:23:49,280 --> 01:23:51,180
 So let's go ahead and run here.
+让我们来测试一下。
 
 2011
 01:23:51,182 --> 01:23:53,615
 So I'm going to go back to this view here,
+更换一下视图模式，
 
 2012
 01:23:53,617 --> 01:23:55,884
 and select Storyboard here.
+选择storyboard。
 
 2013
 01:23:55,886 --> 01:23:57,719
 All right, so we're going to run this.
+开始运行。
 
 2014
 01:23:57,721 --> 01:23:59,454
 I haven't changed the storyboard since last we
+我们至始至终都没有更改过storyboard，
 
 2015
 01:23:59,456 --> 01:24:02,756
 talked, but now when we go madbomb here.
+我们直接运行看看。
 
 2016
 01:24:04,360 --> 01:24:07,660
 This thing, it didn't work.
+好像没有成功。
 
 2017
 01:24:07,662 --> 01:24:09,696
 So why does this not work?
+这是为什么呢？
 
 2018
 01:24:09,698 --> 01:24:12,465
 because, sorry about this, forgot something.
+因为，很抱歉，忘了设置些东西。
 
 2019
 01:24:12,467 --> 01:24:17,102
 When I set my image, I'm not calling my new image property.
+当我设置imageView视图的时候，我没有调用这个新image属性。
 
 2020
 01:24:17,104 --> 01:24:20,838
 I put all that nice code here inside this image
+我把实现都写在了image属性的
 
 2021
 01:24:20,840 --> 01:24:23,174
 property, right?
+的监听方法中，记得吗？
 
 2022
 01:24:23,176 --> 01:24:24,274
 Right here.
+就是这里。
 
 2023
 01:24:24,276 --> 01:24:25,909
 But I didn't call it.
+但是，我忘了使用它。
 
 2024
 01:24:25,911 --> 01:24:28,144
 So here I'm actually calling that, so sorry about that.
+所以，现在我们改成image，很抱歉。
 
 2025
 01:24:28,146 --> 01:24:32,314
 Why did I [INAUDIBLE] there, imageView.image equals
+这里好像写错了，imageView.image应该等于
 
 2026
 01:24:32,316 --> 01:24:35,384
 newValue, sorry about that, newValue.
+newValue，很抱歉。
 
 2027
 01:24:35,386 --> 01:24:39,554
 Let's go back here, all right.
+再运行一次看看。
 
 2028
 01:24:39,556 --> 01:24:43,457
 See, when I rush, then I make mistakes like that.
+你看，当我写的太匆忙，就会出些错误。
 
 2029
 01:24:43,459 --> 01:24:44,258
 Okay, all right!
+好的！
 
 2030
 01:24:44,260 --> 01:24:44,825
 Whoo.
+Whoo。
 
 2031
 01:24:45,927 --> 01:24:48,361
 I think that's the Giants logo down there.
+这下面应该就是Giants logo了。
 
 2032
 01:24:48,363 --> 01:24:50,329
 At least it's the right aspect ratio.
+至少宽高比是正确的。
 
 2033
 01:24:50,331 --> 01:24:52,498
 But clearly, it's terrible to have that thing there
+但是很显然，把它放在这里很糟糕
 
 2034
 01:24:52,500 --> 01:24:54,533
 because it's too tiny and we got all this space.
+因为太小了，而上面却有这么大空间空着。
 
 2035
 01:24:54,535 --> 01:24:57,035
 So last thing we're going to do is
+所以，最后一步操作需要
 
 2036
 01:24:57,036 --> 01:24:59,536
 use the size classes to put this thing up here, okay?
+使用size class把logo放到上面来，明白吗？
 
 2037
 01:24:59,539 --> 01:25:00,738
 How do we do that?
+那要怎样做呢？
 
 2038
 01:25:00,740 --> 01:25:03,774
 We go back to our storyboard right here.
+我们回到storyboard。
 
 2039
 01:25:03,776 --> 01:25:04,875
 And right now, we've been doing all our
+现在为止，我们都是用的
 
 2040
 01:25:04,877 --> 01:25:07,210
 work in this any any.
+any any来布局。
 
 2041
 01:25:07,212 --> 01:25:10,613
 Okay, and what we want to do is when we're regular height,
+我们只需要，在regular高度的时候，
 
 2042
 01:25:10,615 --> 01:25:13,182
 we're gonna put the name and the company underneath.
+将name和company标签放在底部。
 
 2043
 01:25:13,184 --> 01:25:17,419
 So I'm gonna go here to where it says any width,
+所以我需要到这里改成any 宽度，
 
 2044
 01:25:17,421 --> 01:25:18,904
 regular height.
+regular高度。
 
 2045
 01:25:18,905 --> 01:25:20,388
 You see where it says along the top, any width,
+你看到了吗？可以在上面改成any宽度，
 
 2046
 01:25:20,390 --> 01:25:21,089
 regular height.
+regular高度。
 
 2047
 01:25:21,091 --> 01:25:21,989
 See that?
+看到了吗？
 
 2048
 01:25:21,991 --> 01:25:23,657
 I'm gonna click there.
+我点击这里。
 
 2049
 01:25:23,659 --> 01:25:25,025
 Now I'm editing.
+开始编辑。
 
 2050
 01:25:25,026 --> 01:25:26,392
 You see the bar at the bottom is bright blue.
+你看底部有一个蓝色的条目。
 
 2051
 01:25:26,395 --> 01:25:28,462
 That's to remind you,
+这是用来提醒你，
 
 2052
 01:25:28,463 --> 01:25:30,530
 oh hey, you are editing a specific size class here.
+嘿，你现在是在一个特定的size class下编辑。
 
 2053
 01:25:30,532 --> 01:25:33,299
 But we're editing any width, regular height.
+因为我们现在在any 宽度和register高度下编辑。
 
 2054
 01:25:33,301 --> 01:25:36,469
 And so here, this should be in red if I
+如果我现在移动他们，
 
 2055
 01:25:36,471 --> 01:25:39,838
 was doing a slide, this would be in red, which is
+约束会变成红色，也就是说
 
 2056
 01:25:39,840 --> 01:25:42,607
 when you go to another size class, and you're going to be
+当你在一个的新size class下编辑的时候，如果你打算
 
 2057
 01:25:42,609 --> 01:25:45,510
 moving things around, remove the constraints on
+移动视图，先去除你要移动的视图上的约束
 
 2058
 01:25:45,512 --> 01:25:49,147
 the things you're going to be moving before you move them.
+再进行移动，
 
 2059
 01:25:49,149 --> 01:25:50,799
 Because once you start moving them,
+因为一旦你开始移动视图，
 
 2060
 01:25:50,800 --> 01:25:52,450
 it's going to be hard to remember, what did that go to.
+你就很难记住这些约束了。
 
 2061
 01:25:52,452 --> 01:25:54,651
 So here I am selecting these all and
+所以我选中这几个视图然后
 
 2062
 01:25:54,653 --> 01:25:58,488
 I am going to go over here and remove the constraint,
+到这里移除约束，
 
 2063
 01:25:58,490 --> 01:26:00,757
 clear the constraints, only from the selected views,
+选择清除约束，只清除选中视图的约束，
 
 2064
 01:26:00,759 --> 01:26:01,991
 these three things I have selected.
+也就是我选中的这三个视图。
 
 2065
 01:26:01,993 --> 01:26:03,826
 So we're going to clear those constraints,
+我们会清除他们所有的约束，
 
 2066
 01:26:03,828 --> 01:26:05,494
 now they have no constraints,
+现在他们身上没有约束了，
 
 2067
 01:26:05,496 --> 01:26:07,496
 now I am just going to move them around to where I want.
+我可以随便移动了。
 
 2068
 01:26:07,498 --> 01:26:09,130
 So I want that one there,
+我把这个放这里，
 
 2069
 01:26:09,132 --> 01:26:11,399
 I want these down here at the bottom.
+这个放在底部。
 
 2070
 01:26:11,401 --> 01:26:12,366
 Put that in the corner.
+放在角落。
 
 2071
 01:26:12,368 --> 01:26:13,701
 I'll put that on top of there.
+然后把这个放在上面。
 
 2072
 01:26:13,703 --> 01:26:15,769
 We'll put this down here like that.
+放下一点。
 
 2073
 01:26:15,771 --> 01:26:17,604
 Now we'll put the new constraints, so
+现在我们加新的约束，这样
 
 2074
 01:26:17,606 --> 01:26:20,206
 now all new constraints that I'm making are only for
+所有新加的约束
 
 2075
 01:26:20,208 --> 01:26:22,008
 this size class.
+只对当前size class有效。
 
 2076
 01:26:22,010 --> 01:26:23,542
 Okay? Not for any-any anymore.
+明白吗？不再对any-any有效。
 
 2077
 01:26:23,544 --> 01:26:25,544
 I'm kind of forked off here.
+就像叉掉了一样。
 
 2078
 01:26:25,546 --> 01:26:27,946
 So let's put some new constraints on here.
+现在我会加新的约束。
 
 2079
 01:26:27,948 --> 01:26:29,547
 This one is leaving space.
+这个leading space。
 
 2080
 01:26:29,549 --> 01:26:31,449
 This one is leading space.
+这个leading space。
 
 2081
 01:26:31,451 --> 01:26:34,018
 This one is bottom space.
+这个bottom space。
 
 2082
 01:26:34,020 --> 01:26:35,819
 We want these separated.
+这两个需要分开。
 
 2083
 01:26:35,821 --> 01:26:36,653
 Vertical space.
+vertical space。
 
 2084
 01:26:36,655 --> 01:26:38,888
 We want these two separated.
+我们需要这两个也分开。
 
 2085
 01:26:38,890 --> 01:26:41,657
 We want this one over here leading space.
+这个也添加leading space。
 
 2086
 01:26:41,659 --> 01:26:45,160
 We want this to go all the way across, and
+这一个横向延伸到边缘，然后
 
 2087
 01:26:45,162 --> 01:26:47,029
 then go trailing space.
+加上trailing space。
 
 2088
 01:26:47,031 --> 01:26:51,199
 You also want this one to go all the way across, and
+这样也占满宽度，然后
 
 2089
 01:26:51,201 --> 01:26:52,166
 trailing space.
+trailing space。
 
 2090
 01:26:53,269 --> 01:26:54,101
 Okay.
+好的。
 
 2091
 01:26:54,103 --> 01:26:55,769
 Again, we would probably go here.
+同样，我们需要到这里。
 
 2092
 01:26:55,771 --> 01:26:57,403
 Let's see what we've got here.
+好像有警告。
 
 2093
 01:26:57,405 --> 01:26:58,738
 Frames are different, that's good.
+Frames不同，这很简单。
 
 2094
 01:26:58,740 --> 01:27:01,039
 Let's go ahead and update our frames.
+更新frame就可以了。
 
 2095
 01:27:02,476 --> 01:27:03,675
 Okay, looks good.
+好的，看起来不错。
 
 2096
 01:27:03,677 --> 01:27:05,677
 All looks good.
+都很好。
 
 2097
 01:27:05,678 --> 01:27:07,678
 Again, we would probably get rid of these magic numbers
+再次强调，我们肯能需要去除所有magic numbers
 
 2098
 01:27:07,680 --> 01:27:08,245
 like this.
+像这个。
 
 2099
 01:27:08,247 --> 01:27:09,046
 We don't like that.
+我们不需要它。
 
 2100
 01:27:09,048 --> 01:27:09,879
 We get rid of that.
+去掉。
 
 2101
 01:27:09,881 --> 01:27:11,280
 We did this one.
+这个改了。
 
 2102
 01:27:11,282 --> 01:27:12,581
 We don't like that.
+也不需要这个。
 
 2103
 01:27:12,583 --> 01:27:14,917
 We go select on this guy.
+选择这个视图。
 
 2104
 01:27:14,919 --> 01:27:19,287
 We've got this here, that.
+这个也需要更改。
 
 2105
 01:27:19,289 --> 01:27:20,421
 Same thing this one.
+这个也是。
 
 2106
 01:27:20,423 --> 01:27:21,589
 Okay, he got none, so we're good.
+好的，修改完毕。
 
 2107
 01:27:21,591 --> 01:27:22,489
 We're good to go.
+可以测试了。
 
 2108
 01:27:22,491 --> 01:27:25,225
 So now we've created this size class.
+现在我们创建了这个size class。
 
 2109
 01:27:25,227 --> 01:27:28,828
 One has different arrangement of views and
+它有着不同的布局和
 
 2110
 01:27:28,830 --> 01:27:29,995
 different constraints.
+不同的约束。
 
 2111
 01:27:29,997 --> 01:27:30,963
 So now when we run.
+我们运行看看。
 
 2112
 01:27:33,133 --> 01:27:33,832
 We'll see here.
+马上就看到效果了。
 
 2113
 01:27:34,868 --> 01:27:35,733
 Hit mad bum again.
+登陆。
 
 2114
 01:27:37,570 --> 01:27:38,602
 There it is.
+就是这样。
 
 2115
 01:27:38,603 --> 01:27:39,635
 It's using this space much more
+现在更充分地利用了
 
 2116
 01:27:39,638 --> 01:27:42,739
 effectively keeping this in it's normal aspect ratio, but
+垂直方向上的空间，同时保证宽高比正确，并且
 
 2117
 01:27:42,741 --> 01:27:44,874
 in this way it goes back to the old way.
+在横屏模式下以原来的方式布局。
 
 2118
 01:27:44,876 --> 01:27:47,843
 The any, any way, right?
+也就是any any 记得吗？
 
 2119
 01:27:47,845 --> 01:27:50,312
 Okay, and this is true if we go to someone else.
+好的，我们用另一个账户登陆试试。
 
 2120
 01:27:50,314 --> 01:27:51,880
 Hennessy.
+Hennessy。
 
 2121
 01:27:51,882 --> 01:27:55,250
 There, okay, see how that keeps the same aspect ratio
+看，宽高比正常
 
 2122
 01:27:55,252 --> 01:27:56,884
 and uses that space?
+而且充分利用水平空间。
 
 2123
 01:27:56,886 --> 01:27:58,953
 Really uses the space nicely here, no.
+真的充分利用了空间，不。
 
 2124
 01:27:58,955 --> 01:28:00,421
 >> [LAUGH]
+laugh
 
 2125
 01:28:00,423 --> 01:28:02,756
 >> Now why did that happen, okay?
+这是为什么呢？
 
 2126
 01:28:02,758 --> 01:28:05,692
 Because when I cleared the constraints here,
+因为当我清除约束的时候，
 
 2127
 01:28:05,694 --> 01:28:10,296
 okay, to make this new space, I also cleared this little
+增加控件的同时，我也清除了
 
 2128
 01:28:10,298 --> 01:28:13,665
 constraint that went up here, this vertical spacing.
+上面这个约束，垂直距离约束。
 
 2129
 01:28:13,667 --> 01:28:15,550
 Right?
+明白吗？
 
 2130
 01:28:15,551 --> 01:28:17,434
 This vertical spacing here wants to be the greater than
+垂直距离需要大于
 
 2131
 01:28:17,437 --> 01:28:20,171
 or equal to, and standard value.
+或等于标准值。
 
 2132
 01:28:20,173 --> 01:28:21,505
 Okay? So sometimes when you
+明白吗？有时候当你
 
 2133
 01:28:21,507 --> 01:28:24,174
 go to another size class, you delete the constraints,
+切换到新的size class，你删除约束，
 
 2134
 01:28:24,176 --> 01:28:26,076
 you move things around, oh, you still have
+然后移动视图，你仍然需要
 
 2135
 01:28:26,078 --> 01:28:29,446
 to basically debug the new one just as much as the old one.
+做一些调试来保证之前的约束有效。
 
 2136
 01:28:29,448 --> 01:28:31,548
 So here now,
+好，再运行看看。
 
 2137
 01:28:31,549 --> 01:28:33,649
 let's go see if our illustrious leader's log in.
+登陆看是否显示正确。
 
 2138
 01:28:35,419 --> 01:28:36,385
 It's good and it is.
+很好，显示正常。
 
 2139
 01:28:38,155 --> 01:28:38,720
 Okay?
+看到了吗？
 
 2140
 01:28:39,889 --> 01:28:40,938
 All right.
+好的。
 
 2141
 01:28:40,939 --> 01:28:41,988
 Sorry to take so long.
+很抱歉拖堂这么久。
 
 2142
 01:28:41,991 --> 01:28:43,757
 Thank you.
+非常感谢。
 
 2143
 01:28:43,758 --> 01:28:45,524
 I'll be here if you have any questions,
+如果有问题可以提问，
 
 2144
 01:28:45,527 --> 01:28:46,926
 otherwise I'll see you on Wednesday.
+没有的话我们星期三见。
 
 2145
 01:28:47,962 --> 01:28:47,993
 >> For more, please visit us at Stanford.edu.
+更多内容，请访问Stanford.edu.

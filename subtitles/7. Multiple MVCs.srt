@@ -2489,2003 +2489,2487 @@ You're never segueing to an existing MVC anywhere.
 501
 00:19:49,550 --> 00:19:51,310
 You're always creating a new one always,
+我们总是创建一个新的
 
 502
 00:19:51,320 --> 00:19:52,880
 that's what segues do.
+这就是 segue 所做的事
 
 503
 00:19:52,880 --> 00:19:54,550
 Okay, that takes a little bit of
+这需要你慢慢去
 
 504
 00:19:54,550 --> 00:19:55,780
 getting used to in your mind.
+习惯这个概念
 
 505
 00:19:55,790 --> 00:19:57,550
 Because of course you see this stack of cards.
+因为当你看到 stack 中的 View 的时候
 
 506
 00:19:57,550 --> 00:19:59,890
 Navigation one, and you press back.
+跳转到一个，然后你点击返回
 
 507
 00:19:59,890 --> 00:20:01,760
 And then you click to go back to where you were.
+然后你再点击进入到刚刚的界面
 
 508
 00:20:01,760 --> 00:20:03,420
 And you think you're going back to the same one.
+你会认为你回到了原来的那个界面
 
 509
 00:20:03,430 --> 00:20:04,690
 But you're not. Because as soon as
+但事实并不是这样的。因为当
 
 510
 00:20:04,690 --> 00:20:06,960
 that thing comes off the stack, [SOUND] it's gone.
+这个 View 从 stack 中退出时，呼，它就消失了
 
 511
 00:20:06,960 --> 00:20:08,360
 Even in split view.
+即便在 split view 中也是这样的
 
 512
 00:20:08,360 --> 00:20:11,500
 You click in the master it updates your detail.
+点击 master 界面上的东西，你的 detail 界面就会更新
 
 513
 00:20:11,500 --> 00:20:13,430
 You click again in the master to update the detail,
+你再次点击 master 界面的东西来更新 detail
 
 514
 00:20:13,430 --> 00:20:15,300
 and the detail changes and you think oh,
+然后 detail 改变了，然后你会想，噢
 
 515
 00:20:15,300 --> 00:20:17,200
 that was the same thing it just got changed.
+这和刚刚是一样的东西，只是改变了一点东西
 
 516
 00:20:17,200 --> 00:20:19,040
 No the previous one got thrown away and
+不是这样的，先前的那个被丢掉了
 
 517
 00:20:19,040 --> 00:20:21,140
 new detail got created, okay?
+你看到的是新的 detail 界面
 
 518
 00:20:22,070 --> 00:20:23,870
 So segues always created a new MVC.
+因此 segues 总是创建新的 MVC
 
 519
 00:20:25,140 --> 00:20:28,180
 All right, so how do we make these segues happen, okay?
+好的，我们怎么用这些 segue 呢
 
 520
 00:20:28,180 --> 00:20:29,640
 You can do this in code as well, and
+你可以用代码来实现
 
 521
 00:20:29,650 --> 00:20:32,350
 I'm gonna show briefly how you do this in code.
+我也会简单给你们展示一下怎么用代码实现
 
 522
 00:20:32,350 --> 00:20:34,580
 But in 90% of the time you're gonna do it
+但是百分之九十的情况你都将会用
 
 523
 00:20:34,580 --> 00:20:36,450
 in a storyboard with control drag,
+storyboard 中的 control 加拖动来实现
 
 524
 00:20:36,450 --> 00:20:39,820
 which is how we create most of the things we do in IOS.
+这也是我们在 iOS 中创建东西的最常用的方法
 
 525
 00:20:39,820 --> 00:20:42,620
 So here's an example of doing it with the control drag,
+这里是用 control 加拖动来实现 segue 的例子
 
 526
 00:20:43,990 --> 00:20:47,230
 I'm control dragging from a button in my calculator, so
+我按住 control 然后从按钮拖动到我的 calculator
 
 527
 00:20:47,230 --> 00:20:48,260
 I added a button.
+那么我添加了一个按钮
 
 528
 00:20:48,260 --> 00:20:49,600
 The icon is very, very small but
+它的图标很小很小
 
 529
 00:20:51,870 --> 00:20:53,450
 it actually looks like a little graph.
+但是事实上它看起来像一个小图表
 
 530
 00:20:53,450 --> 00:20:55,030
 So I'm control dragging from that in the upper right corner
+那么我 control 拖动，从右上角
 
 531
 00:20:55,040 --> 00:20:58,070
 there down to the detail, because I
+拖到 detail 这个界面
 
 532
 00:20:58,070 --> 00:21:01,340
 want when that buttons pressed I want the detail to be
+因为我想当我点击了这个按钮，detail 界面就能够
 
 533
 00:21:01,340 --> 00:21:06,440
 replaced with a new graphing MVC, okay?
+被替换为一个图标 MVC
 
 534
 00:21:06,450 --> 00:21:07,680
 When I let go it that,
+当我放开鼠标
 
 535
 00:21:07,680 --> 00:21:11,310
 it's gonna say, what kind of segue do you want?
+Xcode 就会问你想要哪一种 segue
 
 536
 00:21:11,320 --> 00:21:13,980
 This little black box is gonna appear.
+将会弹出这个小小的黑色框框
 
 537
 00:21:13,990 --> 00:21:15,420
 And here I'm gonna pick Show Detail,
+这里我会选择 Show Detail
 
 538
 00:21:15,420 --> 00:21:16,650
 because if I'm in a split view,
+因为这是个 split view
 
 539
 00:21:16,650 --> 00:21:18,450
 I wanted to replace the detail.
+我想要替代 detail
 
 540
 00:21:18,460 --> 00:21:21,160
 If I was in a Navigation Controller only,
+如果这是个 Navigation Controller
 
 541
 00:21:21,160 --> 00:21:23,190
 I probably still would choose Show Detail because that
+我也许仍然会选择 Show Detail 因为
 
 542
 00:21:23,190 --> 00:21:25,030
 also pushes on the stack.
+这也会把 View 推入 stack 内
 
 543
 00:21:25,030 --> 00:21:27,130
 But if I were the master in a split view and
+但是如果是 split view 中的 master
 
 544
 00:21:27,130 --> 00:21:28,500
 I didn't want it to do the detail,
+我不希望它是 detail
 
 545
 00:21:28,500 --> 00:21:31,260
 I wanted it to actually slide on the stack of the master,
+我希望它存在在 master 中的 stack 中
 
 546
 00:21:31,270 --> 00:21:34,070
 cuz the master could be a stack then I would use show.
+因为 master 可以是一个 stack，这种情况我就会用 show
 
 547
 00:21:34,070 --> 00:21:35,700
 All right?
+好吧
 
 548
 00:21:35,700 --> 00:21:39,570
 I could also make it a popover or a model here.
+我也可以让它以 popover 或者 model 的形式展示
 
 549
 00:21:39,570 --> 00:21:42,710
 So I'm gonna pick show detail, that's what I want.
+这里我选择 show detail，这是正是我想要的
 
 550
 00:21:42,710 --> 00:21:46,840
 And it's gonna make a line appear in the story board.
+这将会在 storyboard 中出现一条连线
 
 551
 00:21:46,850 --> 00:21:49,210
 And the middle of the line is a little round circle.
+线的中间有个小小的圆圈
 
 552
 00:21:49,220 --> 00:21:51,520
-If you click on that and bring up the attributes and
+If you click on that and bring up the attribute
+如果你点击它，会在 attribute inspector 中显示出它的属性
 
 553
 00:21:51,520 --> 00:21:54,920
-specter, on the right you'll see that there's a little pop
+inspector, on the right you'll see that there's a little pop
+在右边你就能看到这个下拉框
 
 554
 00:21:54,920 --> 00:21:56,750
 up that says what kind of segue you want.
+上面显示你用的是哪种 segue
 
 555
 00:21:56,760 --> 00:21:59,660
 We already, we already chose this one to be show detail.
+我们已经选择了这个 segue 为 show detail 这个类型
 
 556
 00:21:59,660 --> 00:22:02,430
 And there's also a critical field there called Identifier.
+这里还有一个重要的区域，叫做 Identifier
 
 557
 00:22:02,430 --> 00:22:04,630
 That's a unique Identifier for
+这是你的这个 segue 唯一的标志
 
 558
 00:22:04,630 --> 00:22:07,700
 this segue, and you need this Identifier.
+你将会在后面用得到这个 Identifier
 
 559
 00:22:07,700 --> 00:22:10,900
 Let's talk about, why we need this Identifier?
+我们来说说为什么需要这个 Identifier
 
 560
 00:22:10,900 --> 00:22:12,500
 So I'm gonna call this Identifier for
+我就把这个 Identifier
 
 561
 00:22:12,500 --> 00:22:14,820
-this own show graph.
+this one Show Graph.
+叫做 Show Graph
 
 562
 00:22:14,820 --> 00:22:17,140
 And you should usually, call the segue something that
+一般来说你应该把 segue 命名为
 
 563
 00:22:17,140 --> 00:22:20,370
 is probably a verb phrase that says what this segue does.
+也许是一个动词词组，这个名字能够告诉别人这个 segue 是用来做什么的
 
 564
 00:22:20,380 --> 00:22:21,980
 So this segue when you're pressing the button it
+这里的这个 segue 是当你按下那个按钮
 
 565
 00:22:21,980 --> 00:22:25,850
-shows a graph so I'm gonna call it show graph, okay?
+shows a graph so I'm gonna call it Show Graph, okay?
+它显示出一个图标，所以我就叫它为 Show Graph
 
 566
 00:22:25,850 --> 00:22:27,210
 So just type that in there.
+把名字输入上去就好了
 
 567
 00:22:27,220 --> 00:22:29,680
 So, I told you before that everything in the storyboard
+我曾经曰过，storyboard 的所有东西
 
 568
 00:22:29,680 --> 00:22:32,320
 is linked up with what's in your code by name.
+都是通过名字来和你的代码连接在一起的
 
 569
 00:22:32,320 --> 00:22:33,720
 Whether it's the class of view controller.
+不管是 ViewController 的 class
 
 570
 00:22:33,720 --> 00:22:35,090
 Class of of UI view.
+或者是 UIView 的 class
 
 571
 00:22:35,090 --> 00:22:36,150
 Name of an outlet.
+outlet 的名字
 
 572
 00:22:36,160 --> 00:22:37,250
 Name of an action.
+action 的名字
 
 573
 00:22:37,260 --> 00:22:38,870
 Name of a segue which is
+segue 的名字
 
 574
 00:22:38,870 --> 00:22:40,490
 basically what the Identifier of a segue is.
+这里说的就是 segue 的 Identifier
 
 575
 00:22:40,490 --> 00:22:41,930
 They're all just names, and
+它们通通都只是名字而已
 
 576
 00:22:41,930 --> 00:22:44,060
 we have to make the names the same in our code.
+我们需要让代码中的名字和 storyboard 中的名字一致
 
 577
 00:22:44,060 --> 00:22:46,700
 So it's a loose coupling to make those two
+这是一种松散耦合，能让两个
 
 578
 00:22:46,700 --> 00:22:48,630
 things work together.
+东西连接在一起
 
 579
 00:22:48,630 --> 00:22:50,570
 So, we'll have to reference this name in our code.
+因此我们需要让我们的代码和这个名字关联起来
 
 580
 00:22:51,870 --> 00:22:54,040
 Okay, so where, where are we gonna use that Identifier?
+好的，那我们在哪里用到这个 Identifier 呢
 
 581
 00:22:54,040 --> 00:22:57,740
 Well, one way we can do it, only the 10% case I said,
+其中一种方法，很少用到，可能只有 10% 的情况
 
 582
 00:22:57,740 --> 00:23:00,640
 is to cause a segue to happen from code.
+就是在代码中触发这个 segue
 
 583
 00:23:00,640 --> 00:23:02,690
 And you do that with
+你会用
 
 584
 00:23:02,690 --> 00:23:04,740
 UIViewController method performSequeWithIdentifier.
+UIViewController 的一个方法，叫 performSequeWithIdentifier
 
 585
 00:23:04,750 --> 00:23:06,480
 And you just specify that Identifier, and
+你只要在里面用了这个 Identifier，
 
 586
 00:23:06,480 --> 00:23:08,010
 it's gonna make that segue happen, okay?
+就能触发这个 segue
 
 587
 00:23:09,620 --> 00:23:10,880
 Simple as that,
+很简单
 
 588
 00:23:10,890 --> 00:23:12,180
-as long as they're talking about this one,
+so I am not gonna talk about this,
+所以我不会讲这个的，
 
 589
 00:23:12,190 --> 00:23:14,120
 because you're not gonna be doing this one,
+因为你们不会用这个，
 
 590
 00:23:14,120 --> 00:23:15,990
-probably ion this class, maybe in your final project,
+probably in this class, maybe in your final project,
+也许在这节课不会用，也许你们的最后的项目会用到
 
 591
 00:23:15,990 --> 00:23:17,560
 you might find a reason to do it.
+你也许能找到一个用它的理由
 
 592
 00:23:18,890 --> 00:23:21,730
 But the number one reason to have the Identifier in there
+但是使用 Identifier 最主要的理由
 
 593
 00:23:21,730 --> 00:23:23,460
 and the main thing that it's used for
+也是最主要的用到的地方
 
 594
 00:23:23,460 --> 00:23:27,730
 is to prepare a segue, because when that segue happens,
+是准备一个 segue，因为当这些 segue 被触发
 
 595
 00:23:27,730 --> 00:23:32,000
 it creates a new MVC, that new MVC was just born.
+它会创建一个新的 MVC，这个 MVC 刚来到这个世界
 
 596
 00:23:32,000 --> 00:23:34,570
 It needs to be prepared to do what it wants to do.
+它需要一些准备才能做一些你想它做的事情
 
 597
 00:23:34,570 --> 00:23:36,760
 So for example,
+举例说明
 
 598
 00:23:36,760 --> 00:23:38,940
 in the calculator case, when I segue to a graphing MVC,
+在 calculator 的例子中，当我 segue 到一个画图表的 MVC
 
 599
 00:23:39,880 --> 00:23:41,680
 it's just a blank graphing MVC.
+它只是一个空白的图表 MVC
 
 600
 00:23:41,680 --> 00:23:43,340
 I have to tell it what to graph.
+我需要告诉它画啥
 
 601
 00:23:43,350 --> 00:23:46,150
 I have to prepare it basically, okay?
+我需要为它准备最基本的东西
 
 602
 00:23:46,150 --> 00:23:48,150
 So, that's the number one thing, preparing.
+所以这是最重要的，准备
 
 603
 00:23:48,150 --> 00:23:50,120
 So how does preparing work?
+怎么做这个准备工作呢
 
 604
 00:23:50,120 --> 00:23:52,080
 Preparing very simple.
+准备很简单的
 
 605
 00:23:52,090 --> 00:23:55,690
 The MVC that contains the instigator of this segue.
+MVC 包含着一个 segue 的发起者
 
 606
 00:23:55,690 --> 00:23:58,820
 Like the button, or whatever's causing it to segue.
+比如按钮，或者任何能够触发 segue 的东西
 
 607
 00:23:58,830 --> 00:24:01,990
 That MVC implements a method called, prepareForSegue.
+MVC 实现了一个方法，叫做 prepareForeSegue
 
 608
 00:24:02,000 --> 00:24:05,200
 And inside, it gets the MVC that was just created, and
+在里面，它存着刚刚创建出来的 MVC，
 
 609
 00:24:05,200 --> 00:24:06,960
 it has to prepare it.
+它需要为这个 MVC 做准备
 
 610
 00:24:06,970 --> 00:24:09,430
 So let's talk about what that code looks like,
+接着我们来说说这个 prepareForSegue
 
 611
 00:24:09,440 --> 00:24:11,200
 prepareForSegue.
+里面的代码长什么样子
 
 612
 00:24:11,200 --> 00:24:12,740
 It takes two arguments, okay?
+它有两个参数
 
 613
 00:24:12,740 --> 00:24:14,940
 The first one is the segue.
+第一个就是 segue
 
 614
 00:24:14,940 --> 00:24:16,840
-That's UI storyboard segue instance and
+That's UIStoryboardSegue instance and
+UIStoryboardSegue 的实例
 
 615
 00:24:16,840 --> 00:24:18,910
 it really has two important things in there.
+这个实例里有两个相当重要的东西
 
 616
 00:24:18,910 --> 00:24:20,480
 One is the Identifier, so
+一个是 Identifier
 
 617
 00:24:20,480 --> 00:24:22,310
 you know which segue you're preparing.
+这能让你知道你在准备哪一个 segue
 
 618
 00:24:22,310 --> 00:24:24,200
 And two is,
+第二个是
 
 619
 00:24:24,200 --> 00:24:26,080
 the MVC that it just created that you're going to segue to,
+这个 segue 发生时新建的那个 MVC
 
 620
 00:24:26,080 --> 00:24:28,780
-which is called the destination view controller.
+which is called the destinationViewController.
+名字叫 destinationViewController
 
 621
 00:24:28,780 --> 00:24:30,150
 It has a second argument there,
+第二个参数是
 
 622
 00:24:30,150 --> 00:24:33,220
-which is sender, that's just the UI button or
+which is sender, that's just the UIButton or
+叫做 sender 的，这就是比如说我们这里的 UIButton
 
 623
 00:24:33,220 --> 00:24:36,120
 whatever that caused the segue to happen.
+或者触发这个 segue 的东西
 
 624
 00:24:36,120 --> 00:24:38,220
 You don't usually need to look at that but sometimes.
+一般来说你不需要经常用到这个参数
 
 625
 00:24:38,230 --> 00:24:40,560
 We'll see later in the quarter when we wanna look at that.
+这学期后面一点我们将会用到它的，到那时我们再看看它
 
 626
 00:24:40,560 --> 00:24:42,590
 But that's all it is,
+这就是它的全部了
 
 627
 00:24:42,600 --> 00:24:44,630
 it's just what object caused the segue to happen.
+它就是一个触发 segue 的对象
 
 628
 00:24:45,730 --> 00:24:48,000
 So we're gonna look at that segue identifier.
+我们来看一看这个 segue 的 Identifier
 
 629
 00:24:48,000 --> 00:24:49,770
 It's just a property, segue.identifier.
+它只是一个 segue 的属性，通过 segue.identifier 来访问
 
 630
 00:24:49,770 --> 00:24:52,240
 It could be nil, because you might not have set it.
+它可能是 nil 值，因为你可能没有给它赋值
 
 631
 00:24:52,240 --> 00:24:54,670
 And so you wanna check if it's nil here, so
+所以你需要去检查一下它是不是 nil
 
 632
 00:24:54,670 --> 00:24:57,710
-here I am doing if, let to check if that thing is nil.
+here I am doing "if let" to check if that thing is nil.
+所以这里我做解包，用 if let 来检查一下它是不是 nil
 
 633
 00:24:57,710 --> 00:25:00,410
 Then I'm just gonna switch on it, okay?
+接着我只需要用 switch 来区分
 
 634
 00:25:00,410 --> 00:25:03,080
 And I'm gonna look for Show Graph, and
+我需要的是 Show Graph
 
 635
 00:25:03,080 --> 00:25:06,750
-once I know that, but I'm preparing to show a graph,
+once I know that, I'm preparing to show a graph,
+一旦我知道了是哪一个，我就需要准备显示图表了
 
 636
 00:25:06,750 --> 00:25:08,920
 then I can say, give me the MVC,
+我可以告诉它，把 MVC 给我
 
 637
 00:25:08,920 --> 00:25:12,450
 that graphing calculator MVC that you just made.
+这个 MVC 是你刚刚新建的用来画图表的 MVC
 
 638
 00:25:12,460 --> 00:25:15,220
-Now, the thing is segue dot destination view controller,
+Now, the thing is segue.destinationViewController,
+现在，这个 MVC 就是 segue.destinationViewController
 
 639
 00:25:15,220 --> 00:25:16,960
-that property is any object.
+that property is anyObject.
+这个属性是一个 anyObject
 
 640
 00:25:18,230 --> 00:25:21,590
 Okay, so you have to use as to turn it into
+你需要把这个 anyObject 变成
 
 641
 00:25:21,600 --> 00:25:24,460
 the right class of the MVC you just create.
+你刚刚创建的 MVC 的类
 
 642
 00:25:24,470 --> 00:25:26,070
 Now in the case here,
+在这个例子中
 
 643
 00:25:26,070 --> 00:25:28,630
 I created a calculator graph view controller,
+我创建了一个计算器画图的 View Controller
 
 644
 00:25:28,640 --> 00:25:30,940
-I've abbreviated here calc graph view controller,
+I've abbreviated here calcGraphViewController,
+我缩写成 calcGraphViewController
 
 645
 00:25:30,940 --> 00:25:33,200
 although you shouldn't do that in your homework, okay?
+尽管如此，你不该在你的作业中这么写
 
 646
 00:25:33,210 --> 00:25:34,970
 It's just that it wouldn't fit on the slide here,
+我这么写是因为如果不缩写就太长了，ppt单行容纳不下
 
 647
 00:25:34,970 --> 00:25:37,440
-so calculator graph view controllers are on,
+so CalculatorGraphViewControllers are on,
+所以 CalculatorGraphViewControllers 是
 
 648
 00:25:37,440 --> 00:25:38,640
-turning that destination view
+turning that destinationViewController
+把 destinationView 变成
 
 649
 00:25:38,640 --> 00:25:40,610
-controller into a calculator graph view controller, and
+into a CalculatorGraphViewController, and
+一个 CalculatorGraphViewController
 
 650
 00:25:40,610 --> 00:25:42,410
 if I can't do it, well then I can't prepare it.
+如果我不能把它变成 CalculatorGraphViewController，那我就不能准备它了
 
 651
 00:25:42,410 --> 00:25:44,310
 So, I'm just gonna do if let there.
+所以我这里用 if let 来解包
 
 652
 00:25:45,450 --> 00:25:50,390
 So if I can, then I'm just going to call methods and set
+如果我能够解包，也就是不是 nil 值，那我就可以在
 
 653
 00:25:50,390 --> 00:25:54,620
 properties in that calculator graph view controller, that
+CalculatorGraphViewController 中调用方法和设定属性的值
 
 654
 00:25:54,620 --> 00:25:58,830
 are needed to prepare that thing to come onscreen, okay?
+这样就可以准备展现在屏幕上的东西了
 
 655
 00:25:58,830 --> 00:26:01,060
 So again in this case I
+再一次在这个例子中
 
 656
 00:26:01,060 --> 00:26:03,300
 would probably tell it what I wanted it to graph here.
+我很可能会告诉它我想要画什么
 
 657
 00:26:03,300 --> 00:26:06,270
 Okay, maybe I would set it to color, or something else.
+也许我会设定它的颜色之类的
 
 658
 00:26:06,270 --> 00:26:09,670
 The scale, or I don't know whatever we wanted to set here
+或者缩放大小，或者一些其他的东西
 
 659
 00:26:09,670 --> 00:26:12,240
 we can do, okay?
+我们都能这么做
 
 660
 00:26:12,240 --> 00:26:15,540
 Now, I don't put a lot of red on my slides.
+一般来说，我不会在我的幻灯片中放红色的东西
 
 661
 00:26:15,540 --> 00:26:18,040
 And when I do, you really should pay attention, okay?
+如果我放了，那你就真的要认真看一看了
 
 662
 00:26:18,050 --> 00:26:20,080
 Very important thing to understand,
+需要理解的很重要很重要的东西
 
 663
 00:26:20,080 --> 00:26:23,150
 is when you are preparing that newly created MVC,
+就是当你在准备新创建的 MVC 的时候
 
 664
 00:26:24,220 --> 00:26:26,620
 it's outlets have not been set.
+它的 outlet 还没被设定
 
 665
 00:26:28,290 --> 00:26:30,170
 Remember outlets are these
+记得这些 outlet 是
 
 666
 00:26:30,170 --> 00:26:32,050
 implicitly unwrapped optionals, we are always kind
+隐性解包的 optional，一般来说
 
 667
 00:26:32,060 --> 00:26:33,890
 of expecting them to have been set.
+它们都是被设定值的
 
 668
 00:26:33,890 --> 00:26:36,320
 Well, this is one case where that's not true.
+但是这个情况例外
 
 669
 00:26:36,330 --> 00:26:39,060
 When you're preparing your MVC, it's outlets are not yet
+当你正在准备你的 MVC 的时候，它的 outlet 还没
 
 670
 00:26:39,060 --> 00:26:40,860
 set, okay?
+被设定
 
 671
 00:26:40,860 --> 00:26:44,800
 That can cause crashers, that can cause you to unexpected
+这会让你的程序崩了，也可能会产生一些意想不到的
 
 672
 00:26:44,800 --> 00:26:48,400
 behavior, because you set something in preparing it and
+行为，因为你在准备的时候设定了一些东西
 
 673
 00:26:48,400 --> 00:26:51,570
 you're expecting something in the view to have been set, but
+你希望设定的东西是已经设定过的了，但是
 
 674
 00:26:51,570 --> 00:26:54,470
 it didn't happen because the outlet is just not set yet.
+它没发生，因为这些 outlet 还么被赋值
 
 675
 00:26:54,480 --> 00:26:57,640
 So you have to take whatever the preparation is and hold
+所以你需要把你的关于这些 oulet 的准备工作暂时存到一个地方
 
 676
 00:26:57,650 --> 00:27:01,250
 onto it, and then later on when the outlet does get set,
+当这些 outlet 被赋值了以后
 
 677
 00:27:01,250 --> 00:27:04,780
 maybe in the property observer of that outlet, you can load
+也许在 outlet 中的 property observer，你可以把
 
 678
 00:27:04,790 --> 00:27:08,390
 up the information that you're prepared with here, okay?
+刚刚准备的那些信息读取然后再设定
 
 679
 00:27:08,390 --> 00:27:09,290
 I'll see that in the demo.
+一会展示给你们看
 
 680
 00:27:09,290 --> 00:27:10,890
 I've made my demo
+我已经故意让我的展示
 
 681
 00:27:10,890 --> 00:27:12,490
 intentionally crash because of this.
+因为这个而崩溃了
 
 682
 00:27:12,490 --> 00:27:14,890
 And we'll go back and look at why that happens, okay?
+我们会看看为什么会这样
 
 683
 00:27:14,890 --> 00:27:18,960
 But this is red, pay attention, you know,
+这个是红色的，请注意，你知道
 
 684
 00:27:18,960 --> 00:27:20,630
 if your segue doesn't work the first time,
+如果你的 segue 一开始没正常工作
 
 685
 00:27:20,630 --> 00:27:23,200
 it might well be because you're expecting outlets to
+有可能是因为你以为 outlet 在
 
 686
 00:27:23,200 --> 00:27:29,340
 be set when your MVC is being prepared, okay?
+准备的时候已经赋值了
 
 687
 00:27:29,340 --> 00:27:30,740
 So that's preparing for a segue.
+这就是准备 segue
 
 688
 00:27:30,740 --> 00:27:33,140
 You can also prevent a segue from happening.
+你也可以防止一个 segue 的触发
 
 689
 00:27:33,140 --> 00:27:34,540
 If there's some reason it doesn't make sense for
+如果有些原因让 segue 的发生不合理
 
 690
 00:27:34,540 --> 00:27:36,710
 that segue to happen, you could just disable the button,
+你直接可以禁用那个按钮
 
 691
 00:27:36,710 --> 00:27:39,950
 but if you didn't wanna disable the button you could
+不过如果你不想禁用按钮的话，你希望能够
 
 692
 00:27:39,950 --> 00:27:41,920
 click the button.
+点击那个按钮
 
 693
 00:27:41,920 --> 00:27:43,880
 And what'll happen here is your UIViewController will be
+这时候你的 UIViewController 会被问到
 
 694
 00:27:43,890 --> 00:27:47,220
 asked, should I perform this segue with Identifier?
+我应该执行这个 Identifier 的 segue 吗
 
 695
 00:27:47,220 --> 00:27:49,290
 It'll pass you the Identifier and the sender.
+它会把 Identifier 和 sender 传给你
 
 696
 00:27:49,290 --> 00:27:51,060
 And you can just return, false.
+然后你可以返回 false
 
 697
 00:27:51,060 --> 00:27:53,960
 And then it won't do that segue.
+那么它就不会执行 segue 了
 
 698
 00:27:53,960 --> 00:27:56,150
 It won't crash or anything.
+这样做所有东西都不会崩
 
 699
 00:27:56,150 --> 00:27:58,330
 It just, you know, touch the button, it does nothing.
+它只是，当你按这个按钮，它什么都不会触发
 
 700
 00:27:58,330 --> 00:28:01,430
 'Kay, so you can control your segues kind of
+所以你可以某种意义上
 
 701
-00:28:01,440 --> 00:28:02,730
-programmatically as well like that.
-
-702
-00:28:04,240 --> 00:28:05,440
-Okay?
+00:28:01,440 --> 00:28:05,440
+programmatically as well like that.Okay?
+用代码来控制你的 segue 了
 
 703
 00:28:05,440 --> 00:28:07,200
 So, demo time here.
+那么，演示时间开始
 
 704
 00:28:07,210 --> 00:28:09,770
 We're gonna demonstrate all of this.
+我们将要演示刚刚说的那些
 
 705
 00:28:09,780 --> 00:28:13,680
 And I'm gonna do this demonstration by creating
+为了演示这些，我将会创建一个
 
 706
 00:28:13,680 --> 00:28:18,450
 completely new application called Psychologist.
+完全新的应用，叫 Psychologist
 
 707
 00:28:18,450 --> 00:28:21,420
 Okay, so, let's go over here.
+那么我们开始吧
 
 708
 00:28:22,750 --> 00:28:24,420
 So I'm going to Xcode.
+我将要打开 Xcode
 
 709
 00:28:24,420 --> 00:28:25,690
-And here's happiness and calculator.
+And here's Happiness and Calculator.
+这里是 Happiness 和 Calculator 项目
 
 710
 00:28:25,690 --> 00:28:27,890
 But I'm gonna create a new project here.
+但是我将要创建一个新的项目
 
 711
 00:28:27,890 --> 00:28:33,190
 I'm gonna call it psychologist, Psychologist.
+我将其命名为 Psychologist
 
 712
 00:28:33,190 --> 00:28:37,400
 Okay this gonna put it in the same place that
+我把它放在和我们前两个项目
 
 713
 00:28:37,400 --> 00:28:40,030
-my calculator and happiness apps were.
+my Calculator and Happiness apps were.
+Calculator 和 Happiness 相同的目录下
 
 714
 00:28:41,230 --> 00:28:42,750
 Here it is.
+创建好了
 
 715
 00:28:42,750 --> 00:28:44,270
 I'm gonna move these things out of the way,
+我将把这些东西放到 Supporting Files，
 
 716
 00:28:44,270 --> 00:28:46,470
 like we always do.
+就像我们之前做的那样
 
 717
 00:28:46,470 --> 00:28:48,670
 The images, the assets, the launch screen so that I
+这些 images 啊， assets 啊， LaunchScreen 啊都放进去
 
 718
 00:28:48,670 --> 00:28:53,140
 just have my main storyboard here and this view controller.
+那么外面只剩下 MainStoryboard 和这个 ViewController 了
 
 719
 00:28:53,150 --> 00:28:55,810
 And I'm actually gonna rename this view controller.
+事实上我会改一下这个 ViewController 的名字
 
 720
 00:28:55,810 --> 00:28:59,080
-I don't like the name GenericViewController.
+I don't like the name generic ViewController.
+我不喜欢用这个普通的 ViewController 这个名字
 
 721
 00:28:59,080 --> 00:29:00,280
 I even had you change it
+我甚至会要求你们也要改
 
 722
 00:29:01,220 --> 00:29:02,850
 in the latest homework assignment, because I
+在这一次作业中要你们改，因为我
 
 723
 00:29:02,850 --> 00:29:04,720
 just don't think that's a very descriptive name.
+觉得这不是一个带有描述性的名字
 
 724
 00:29:04,720 --> 00:29:07,190
 So, I'm gonna change the name of
+于是我把我的 ViewController
 
 725
 00:29:07,190 --> 00:29:09,660
-my view controller here to be PsychologistViewController.
+my ViewController here to be PsychologistViewController.
+的名字改成 PsychologistViewController
 
 726
 00:29:09,660 --> 00:29:12,090
 So I have to do that in three different places again,
+所以我需要改三个地方
 
 727
-00:29:12,090 --> 00:29:15,560
-so here I'm gonna say Psychologist.
-
-728
-00:29:15,560 --> 00:29:17,330
-Okay?
+00:29:12,090 --> 00:29:17,330
+so here I'm gonna say Psychologist. Okay?
+这里加上 Psychologist
 
 729
 00:29:17,330 --> 00:29:19,100
 Here I'm gonna change the name of the file,
+这里我更改文件的名字
 
 730
 00:29:19,100 --> 00:29:20,900
 to be Psychologist.
+加上 Psychologist
 
 731
 00:29:20,900 --> 00:29:23,640
 That's surprisingly hard to type by the way.
+抱怨一下，这挺难打的
 
 732
 00:29:23,640 --> 00:29:25,100
 And then in the story board,
+接着在 Storyboard 中
 
 733
 00:29:25,110 --> 00:29:28,040
-of course, I need to go to the Identity Inspector here and
+of course, I need to go to the identity inspector here and
+当然，我需要在 identity inspector 这里
 
 734
 00:29:28,040 --> 00:29:30,640
 change it to be a PsychologistViewController.
+修改成 PsychologistViewController
 
 735
 00:29:31,810 --> 00:29:33,840
-So let's add those three steps.
+So that's those three steps.
+就是这三个地方了
 
 736
 00:29:33,850 --> 00:29:35,880
 So now I have this PsychologistViewController.
+那么现在我有了这个 PsychologistViewController
 
 737
 00:29:35,880 --> 00:29:37,280
 What's this Psychologist gonna do?
+它需要做什么呢
 
 738
 00:29:37,280 --> 00:29:40,650
 Well, he can ask you a question like Psychologists
+他可以像一个心理学家一样问你一个
 
 739
 00:29:40,650 --> 00:29:41,890
 want to do.
+问题
 
 740
 00:29:41,890 --> 00:29:43,120
 And you're gonna give an answer.
+然后你需要提供一个答案
 
 741
 00:29:43,120 --> 00:29:45,450
 And then he's gonna make a diagnosis.
+紧接着他将会对此做出判断
 
 742
 00:29:45,460 --> 00:29:47,090
 Okay. Based on your answer as to
+好了，基于你的回答然后
 
 743
 00:29:47,090 --> 00:29:48,690
 how happy you are or not.
+判断出你快不快乐
 
 744
 00:29:48,690 --> 00:29:51,790
 And then it's gonna use the HappinessViewController,
+然后它就会用 HappinessViewController
 
 745
 00:29:51,800 --> 00:29:55,000
 to show how happy you are, show the diagnosis basically.
+来告诉你快不快乐，显示出判断结果
 
 746
 00:29:55,000 --> 00:29:56,630
 Okay, so we are gonna use both the
+所以我们将会同时
 
 747
 00:29:56,630 --> 00:29:58,430
 PsychologistViewController, and
+用到 PsychologistViewController
 
 748
 00:29:58,430 --> 00:30:00,870
 the HappinessViewController from our last app.
+和 HappinessViewController，后者是我们上一个 app 中写的
 
 749
 00:30:00,870 --> 00:30:03,200
-But let's start with this psychologist view
+But let's start with this PsychologistViewController
+那么，让我们开始实现这个 PsychologistViewController
 
 750
 00:30:03,210 --> 00:30:05,270
-controller here, let's build its UI.
+here, let's build its UI.
+先设计它的 UI
 
 751
 00:30:05,270 --> 00:30:06,870
 He's going to ask a question, so
+他会提问题，所以
 
 752
 00:30:06,870 --> 00:30:09,240
 I'm going to bring out a label for the question.
+我拖出一个 label 用来显示问题
 
 753
 00:30:09,240 --> 00:30:12,010
 He's going to ask the question,
+他将会问
 
 754
 00:30:12,010 --> 00:30:15,810
 what do you see in your dreams?
+你在梦中看到了什么
 
 755
 00:30:15,820 --> 00:30:17,700
 That sounds like
+这听起来像
 
 756
 00:30:17,700 --> 00:30:19,580
 a very psychologisty kind of question.
+一个很心理学的问题
 
 757
 00:30:19,590 --> 00:30:21,820
 And let's make it bigger font.
+让字体变大一点
 
 758
 00:30:22,890 --> 00:30:25,690
 Maybe like, 36 point or something like that.
+大概 36 point 上下
 
 759
 00:30:27,430 --> 00:30:31,190
 We can make it larger here.
+让文本框也大一点
 
 760
 00:30:32,900 --> 00:30:36,060
 Let's center it, make this text centered.
+让文本居中
 
 761
 00:30:36,070 --> 00:30:38,070
 Let's try to put it in a nice place, okay?
+我们试着把它放到一个好的位置
 
 762
 00:30:38,070 --> 00:30:40,370
 Let's use our blue lines to put it somewhere here.
+用这些兰线条来对齐
 
 763
 00:30:40,370 --> 00:30:43,440
 Let's put it like that, so it's nice.
+这么放就挺好的
 
 764
 00:30:43,440 --> 00:30:46,970
 And put it in a good place.
+让它呆在一个好的位置
 
 765
 00:30:46,980 --> 00:30:48,170
 Let's try.
+尝试一下
 
 766
 00:30:48,180 --> 00:30:49,740
 I'm going to show you a little bit of
+我每节课都尝试给你们传授一点
 
 767
 00:30:49,740 --> 00:30:51,040
 Auto Layout every lecture.
+关于 Auto Layout 的秘籍
 
 768
 00:30:51,050 --> 00:30:53,110
-Just show you the things you can do.
+Just show you kind of things you can do.
+展示一下你们可以怎么做
 
 769
 00:30:53,110 --> 00:30:55,110
 So let's try and see if we can.
+那我们一起试试看能不能这么做
 
 770
 00:30:55,120 --> 00:30:57,180
 We put this all on blue lines up here.
+我们把它全按照蓝线来放
 
 771
 00:30:57,180 --> 00:30:58,780
 Right.
+好的
 
 772
 00:30:58,780 --> 00:31:00,380
 So let's see if we can request, or have it
+接着来看看我们能否让它用这个
 
 773
 00:31:00,390 --> 00:31:03,390
-reset to Suggested Constraints and see if it'll work, okay?
+Reset to Suggested Constraints and see if it'll work, okay?
+Reset to Suggested Constraints，然后看看行不行
 
 774
 00:31:03,390 --> 00:31:05,620
 So here I'm, this is for the Selected View.
+这里是给选中的 View 的
 
 775
 00:31:05,620 --> 00:31:07,260
-To un-select this view.
+To select this view.
+选中这个view
 
 776
 00:31:07,260 --> 00:31:10,830
 I'm gonna go reset to Suggested Constraints.
+我将要重置到推荐的 Constraints
 
 777
 00:31:10,830 --> 00:31:11,730
 Now, let's see what happened.
+现在看看发生了什么
 
 778
 00:31:11,730 --> 00:31:12,560
 Now, this doesn't look good.
+这并不好
 
 779
 00:31:12,560 --> 00:31:14,430
 I don't like this,
+我不喜欢这个
 
 780
 00:31:14,430 --> 00:31:16,300
 cuz I really don't want this thing attached to the bottom.
+因为我真的不想这个东西和 view 的底部有关系
 
 781
 00:31:16,300 --> 00:31:19,000
 But the real place, a good place to look for
+但是一个能看到我们 constraint 的地方是
 
 782
 00:31:19,000 --> 00:31:22,570
 the constraints is over here again in Size Inspector.
+这里的 Size Inspector
 
 783
 00:31:22,570 --> 00:31:24,000
 If you look down at the bottom,
+如果你看下去
 
 784
 00:31:24,010 --> 00:31:26,970
 you can see all the constraints that that reset to
+你能看到所有的 constraints
 
 785
 00:31:26,980 --> 00:31:28,810
 Suggested Constraints did.
+这些都是刚刚建议生成的
 
 786
 00:31:28,810 --> 00:31:32,680
 And I'd like this one, and I like that one.
+我喜欢这个，也喜欢那个
 
 787
 00:31:32,680 --> 00:31:33,810
 And I like that one.
+还有这个也是
 
 788
 00:31:33,810 --> 00:31:35,010
 But I don't like that one.
+但是我不喜欢那个
 
 789
 00:31:35,020 --> 00:31:36,350
 So I can just click on it and
+所以我可以点击它
 
 790
 00:31:36,350 --> 00:31:37,880
 hit delete, and get rid of that.
+然后按 delete 键，就把它删了
 
 791
 00:31:37,880 --> 00:31:39,350
 Now as soon as I did that,
+当我删掉它以后
 
 792
 00:31:39,350 --> 00:31:42,120
 of course I got the yellow cuz it's misplaced.
+我就会得到了这些黄色的线因为它没有足够的 constraint 了
 
 793
 00:31:42,120 --> 00:31:43,390
 So I'm gonna go back and
+所以我需要回到这里
 
 794
 00:31:43,390 --> 00:31:46,290
 do what we did all the way, way back in lecture one,
+然后做我们在第一课里面做过的动作
 
 795
 00:31:46,290 --> 00:31:49,460
 which I'm gonna update this frame, fix the misplacement.
+更新这个 frame，修正这个位置的问题
 
 796
 00:31:49,460 --> 00:31:50,660
 No issues.
+没问题了
 
 797
 00:31:50,660 --> 00:31:52,360
 Boom. I've got this where I want it.
+咔的一下，我得到了我向要得结果
 
 798
 00:31:52,360 --> 00:31:55,800
-Okay, so that's another way to use Auto Layout there.
+Okay, so that's another way to use auto layout there.
+所以这是另一个用 autolayout 的方法
 
 799
 00:31:56,970 --> 00:31:58,230
 Alright, so let's get the answers out.
+好的，接着把答案给拖出来
 
 800
 00:31:58,230 --> 00:31:59,500
 Here's our question.
+这里是我们的问题
 
 801
 00:31:59,500 --> 00:32:00,770
 Let's grab our answers out here.
+现在把答案抓出来
 
 802
 00:32:00,770 --> 00:32:05,670
 So let's, maybe I see a dancing tree, okay?
+所以，也许我在这里输入“我看到一棵会跳舞的树”
 
 803
 00:32:05,670 --> 00:32:07,710
-If I see a dancing tree in my grid,
+If I see a dancing tree in my dream,
+如果我在梦里看到一棵会跳舞的树
 
 804
 00:32:07,710 --> 00:32:09,840
 let's make this font bigger again on this one too.
+先让我把字体调大一点点
 
 805
 00:32:11,550 --> 00:32:14,550
 If I see a dancing tree in my dreams I'm probably gonna be
+如果我在梦里看到一棵会跳舞的树，我想我应该会
 
 806
 00:32:14,550 --> 00:32:16,280
 pretty happy I think.
+挺开心的
 
 807
 00:32:16,280 --> 00:32:18,580
 So let's try and put this one where it should be.
+尝试把它放在它该在的地方
 
 808
 00:32:18,590 --> 00:32:20,350
 So I'm gonna try and
+所以我尝试把它放在
 
 809
 00:32:20,350 --> 00:32:22,120
 put this one right in the center of my view.
+我的 view 的正中间
 
 810
 00:32:22,120 --> 00:32:25,090
 So again, let's try and reset the suggested constraints and
+再一次，试一下用 Reset to the Suggest Constraint
 
 811
 00:32:25,090 --> 00:32:26,320
 see if that works.
+看这行不行
 
 812
 00:32:26,330 --> 00:32:28,220
 Okay well that looks bad too.
+好吧这个也不太行
 
 813
 00:32:28,230 --> 00:32:29,690
 So let's go look over and see what it did.
+所以我们看看它做了些什么
 
 814
 00:32:31,600 --> 00:32:34,100
 Alright, well, it aligns center to the super view.
+啊好的它在父类 view 中居中了
 
 815
 00:32:34,100 --> 00:32:35,260
 That looks good.
+这看起来不错
 
 816
 00:32:35,270 --> 00:32:39,170
 But it aligned the X up with this thing up here and
+但是它和 X 轴的上面对齐
 
 817
 00:32:39,170 --> 00:32:40,940
 I don't really want that, so I'm gonna delete that.
+我并不想要这样，所以我删掉它
 
 818
 00:32:40,940 --> 00:32:43,470
 The bottom space, I definitely don't want that.
+离底部的距离，我肯定也不想要这个
 
 819
 00:32:43,470 --> 00:32:45,270
 And it fixed the width.
+还有固定了它的宽度
 
 820
 00:32:45,270 --> 00:32:46,870
 I definitely don't want the width fixed.
+我肯定不想要宽度是固定的
 
 821
 00:32:46,880 --> 00:32:50,140
 I want the width to match whatever the size of
+我希望宽度随着里面的内容变化
 
 822
 00:32:50,150 --> 00:32:51,480
 this thing is.
+而变化
 
 823
 00:32:51,480 --> 00:32:52,810
 So, kinda got most things here.
+看起来做了很多东西
 
 824
 00:32:52,810 --> 00:32:55,780
 But I really don't have a vertical position or
+但是我并不想设定这个东西的
 
 825
 00:32:55,780 --> 00:32:58,150
 horizontal position of this thing set.
+垂直位置和水平位置
 
 826
 00:32:58,150 --> 00:33:00,690
 So I'm gonna use another one down here.
+所以我需要用这下面的另一个按钮
 
 827
 00:33:00,690 --> 00:33:02,150
 This is the alignment one.
+这就是 alignment 的这个按钮
 
 828
 00:33:02,160 --> 00:33:05,260
 And I'm gonna go down here and say, I want the alignment,
+然后我在最下面，我希望这个对齐
 
 829
 00:33:05,260 --> 00:33:10,590
 the horizontal and vertical centers to be lined up.
+到水平中心和垂直中心
 
 830
 00:33:10,600 --> 00:33:15,030
 So I really already got the vertical center right there.
+所以我已经在有垂直中心的这个 constraint 了
 
 831
 00:33:15,030 --> 00:33:16,400
 So I just do horizontal center, so
+我只需要再加一个水平中心的就可以了
 
 832
 00:33:16,400 --> 00:33:17,770
 I'll add that constraint.
+那么我就添加了这个 constraint
 
 833
 00:33:17,770 --> 00:33:20,370
 So now I've got these two things lined up,
+所以现在我有这两个 constraint 来对齐
 
 834
 00:33:20,370 --> 00:33:21,870
 that looks like what I want.
+这看起来就是我想要的
 
 835
 00:33:21,870 --> 00:33:25,910
 Again, it's a little off this placement probably size is
+再一次，这有一点点和放置的位置或者大小不一样
 
 836
 00:33:25,910 --> 00:33:28,710
 not quite right, we'll put that right.
+我们把它放到正确地位置
 
 837
-00:33:28,710 --> 00:33:31,250
-And boom, now we've got this tree in the middle.
-
-838
-00:33:31,250 --> 00:33:32,850
-Okay.
+00:33:28,710 --> 00:33:32,850
+And boom, now we've got this tree in the middle.Okay.
+然后我们就让这个树居中了
 
 839
 00:33:32,850 --> 00:33:34,450
 So let's add some more answers. I'm just going
+接下来我们再添加多几个答案，我只要
 
 840
 00:33:34,450 --> 00:33:36,050
-to copy and paste because I like this font combination.
+to copy and paste because I like this fun combination.
+复制和粘贴就行了，因为我喜欢这个有趣的组合
 
 841
 00:33:36,050 --> 00:33:40,790
 Let's say you dream of a dirty Golden, no not dirty,
+比如说你梦见了一个肮脏的黄金，不不是肮脏
 
 842
 00:33:40,790 --> 00:33:43,790
 we'll just say, a Golden Bear.
+我们说，一个金色的熊
 
 843
 00:33:43,790 --> 00:33:45,960
 [NOISE] Okay so let's say the Golden Bear somehow shows up
+好吧这头金色的熊无意中出现
 
 844
 00:33:45,960 --> 00:33:46,590
 in your dreams.
+在你的梦里
 
 845
 00:33:46,590 --> 00:33:50,030
 Doesn't sound very good.
+听起来不太好
 
 846
 00:33:50,030 --> 00:33:51,100
 So there's that.
+就这样啦
 
 847
 00:33:51,100 --> 00:33:54,100
 And this one, let's see if we
+这个呢，我们看一下我们
 
 848
 00:33:54,100 --> 00:33:56,870
 can do suggested constraints with this one.
+能不能用推荐的 constraint
 
 849
 00:33:58,270 --> 00:34:00,700
 Okay, we do that. Now this one looks good.
+好的我们点击。哦！这看起来不错
 
 850
 00:34:00,710 --> 00:34:04,240
 It's got the bottom space and the center.
+它有底部距离，还有居中
 
 851
 00:34:04,240 --> 00:34:05,110
 Looks good, okay?
+看起来不错
 
 852
 00:34:05,110 --> 00:34:06,470
 So we're rocking with that one.
+所以我们就搞掂了这个了
 
 853
 00:34:06,480 --> 00:34:07,610
 No need to do anything.
+这个啥都不用做了
 
 854
 00:34:07,610 --> 00:34:08,540
 Let's do another one.
+来加另一个
 
 855
 00:34:09,680 --> 00:34:12,550
 Buckeye, I'm not even sure what that is, but
+加一个“七叶树”，我不太确定这是什么，但是
 
 856
 00:34:12,550 --> 00:34:14,080
 we'll put that in there.
+我们就把它放这里
 
 857
 00:34:14,080 --> 00:34:17,420
 We'll reset suggested constraints for this one too.
+我们也对它做 Reset Suggest Constraints
 
 858
 00:34:17,420 --> 00:34:19,690
 Make sure that looks good, yes it does, okay,
+保证它看起来不错，啊，是的看起来不错
 
 859
 00:34:19,690 --> 00:34:22,050
 this is just the size inspector right here, alright.
+这个是 Size Inspector
 
 860
 00:34:22,060 --> 00:34:23,640
 Alright, so that's good.
+好了，这不错
 
 861
 00:34:23,640 --> 00:34:25,220
 So let's run our app and see how it looks.
+先跑跑我们的程序看看怎么样
 
 862
 00:34:30,230 --> 00:34:31,360
 Okay, here we go.
+好的跑了
 
 863
 00:34:31,360 --> 00:34:32,500
 Oh, that's doesn't look good.
+噢这看起来不太好
 
 864
 00:34:32,500 --> 00:34:34,060
 What do you see is getting cut off?
+你看到这些字被切掉了
 
 865
 00:34:34,070 --> 00:34:35,530
 Let's see, if we rotate.
+我们旋转着看一看
 
 866
 00:34:35,530 --> 00:34:36,930
 So it's good in landscape.
+横屏模式看起来很好
 
 867
 00:34:36,940 --> 00:34:39,170
 It doesn't look very good in portrait.
+但是竖屏就不太好了
 
 868
 00:34:39,170 --> 00:34:40,900
 So why is that happening right there?
+为什么会这样呢
 
 869
 00:34:40,910 --> 00:34:43,670
 Some of you found this out in your homework.
+你们也能自己在作业中找到答案
 
 870
 00:34:43,670 --> 00:34:44,910
 It's because right now,
+因为在这里
 
 871
 00:34:44,910 --> 00:34:48,440
 we have this thing set to be of a fixed size.
+我们把这个的大小定死了
 
 872
 00:34:48,450 --> 00:34:52,550
 The font size are here, see auto shrink, fixed font size.
+字体大小，看这个 Autoshrink， Fixed Font Size（固定字体大小）
 
 873
 00:34:52,550 --> 00:34:54,010
 And that doesn't need to be fixed,
+但这个并不需要固定大小
 
 874
 00:34:54,020 --> 00:34:55,820
 I'm happy if that's any size.
+我会希望
 
 875
 00:34:55,820 --> 00:34:57,520
 I really don't want it to
+我不希望它的字体大小
 
 876
 00:34:57,520 --> 00:34:59,220
 be any smaller than like 12 point.
+比 12 点小
 
 877
 00:34:59,220 --> 00:35:01,190
 That's getting pretty small in the UI so,
+如果比这小整个 UI 就会很小
 
 878
 00:35:01,190 --> 00:35:04,090
 I'm gonna set the minimum size to 12.
+我把最小尺寸设为 12
 
 879
 00:35:04,090 --> 00:35:05,720
 And now when we run,
+现在当我们运行
 
 880
 00:35:05,730 --> 00:35:08,160
 it'll make the font smaller to fit the size.
+会让字体缩小来适应屏幕的尺寸
 
 881
 00:35:08,160 --> 00:35:10,300
 But if we go to a larger, it will make the font bigger.
+但是如果我们屏幕变宽，字体就会跟着变大
 
 882
 00:35:11,460 --> 00:35:12,980
 Okay. Question back there.
+好的后面有问题
 
 883
 00:35:12,980 --> 00:35:14,500
 >> Is there any way to make it wrap around to the next line?
+有没有办法让这段文字自动换行呢
 
 884
 00:35:14,500 --> 00:35:16,170
 >> So the question is,
+所以问题是
 
 885
 00:35:16,170 --> 00:35:18,770
 is there any way to make this text wrap to the next line?
+有没有办法让这些文字自动换行到下一行
 
 886
 00:35:18,770 --> 00:35:21,040
 And there is.There's a couple of ways to do it.
+有的，有几个方法来实现
 
 887
 00:35:21,040 --> 00:35:22,440
 There's UI text view,
+有一个是 UI TextView
 
 888
 00:35:22,440 --> 00:35:26,580
 which is a very powerful text wrapping one.
+这是个非常强大的可以让文字换行的东西
 
 889
 00:35:26,580 --> 00:35:29,310
 But even Label, you can go here to the Label and
+不过即使使用 Label，你可以点击你的 Label
 
 890
 00:35:29,310 --> 00:35:32,410
 when you inspect it, you can say,
+然后去到 inspector，你可以选择
 
 891
 00:35:32,420 --> 00:35:34,120
 how you want the line breaks to happen.
+你想怎么断句
 
 892
 00:35:34,120 --> 00:35:36,820
 You see here it says truncate tail.
+你看这里说的是删减尾部
 
 893
 00:35:36,820 --> 00:35:40,850
 And you can also control how many lines long you're gonna
+你也可以控制你想要这个 label
 
 894
 00:35:40,860 --> 00:35:42,420
 allow the label to be.
+能显示多少行
 
 895
 00:35:43,730 --> 00:35:48,860
 Okay, so now we have this good UI, and we want to
+好的，所以我们有这个做好的 UI，然后我们打算
 
 896
 00:35:48,860 --> 00:35:52,460
-make it so that it works with the HappinessViewController.
+make it so that it works with the Happiness View Controller.
+让它和我们的 Happiness View Controller 一起工作
 
 897
 00:35:52,470 --> 00:35:54,170
-So we need our HappinessViewController.
+So we need our Happiness View Controller.
+所以我们需要我们的 Happiness View Controller
 
 898
 00:35:54,170 --> 00:35:56,400
-So how are we going to get our HappinessViewController?
+So how are we going to get our Happiness View Controller?
+那我们怎么获得这个 Happiness View Controller 呢
 
 899
 00:35:56,400 --> 00:35:58,170
 And the answer is,
+答案是
 
 900
 00:35:58,170 --> 00:35:59,940
 we're just going to copy and paste it from our other app.
+我们只需要从另一个 app 中复制粘贴过来
 
 901
 00:35:59,940 --> 00:36:02,240
 So let's go open our other app.
+让我们打开另一个 app
 
 902
 00:36:02,240 --> 00:36:03,810
 Okay, where is it?
+唔，在哪儿呢
 
 903
 00:36:03,810 --> 00:36:05,370
 It's here, Developer Happiness.
+啊，在这儿，Developer文件夹，Happiness
 
 904
 00:36:05,380 --> 00:36:07,110
-I'm just gonna open Happiness in X code.
+I'm just gonna open Happiness in Xcode.
+我用 Xcode 打开 Happiness
 
 905
 00:36:07,110 --> 00:36:08,760
 Here it is.
+这就是了
 
 906
 00:36:08,760 --> 00:36:10,410
 And I'm just gonna first of all copy the code over.
+接着我只需要复制所有代码过来
 
 907
 00:36:10,420 --> 00:36:13,680
-So I have my Face view and my HappinessViewController.
+So I have my FaceView and my HappinessViewController.
+这里我有 FaceView 和 HappinessViewController
 
 908
 00:36:13,690 --> 00:36:17,220
 I'm just gonna drag them from one into the other.
+我只需要把它们从这里拖到那里
 
 909
 00:36:18,160 --> 00:36:20,460
 Okay, just drag them from one project into the other.
+只用把它们从一个项目拖到另一个项目
 
 910
 00:36:20,460 --> 00:36:23,460
 When you do, it'll allow you to copy them if you want, or
+当你这么做时，它会询问你是复制它们，还是
 
 911
 00:36:23,460 --> 00:36:25,060
 you could have a reference.
+只是做一个引用
 
 912
 00:36:25,060 --> 00:36:27,830
 If you're going to have a reference, make sure that that
+如果你选择了引用，请确认
 
 913
 00:36:27,830 --> 00:36:30,330
 place you're referencing to stays around,
+你放这个引用的位置在哪里
 
 914
 00:36:30,330 --> 00:36:32,330
 that you're not deleting it and things like that.
+你不会删除它或做其他操作
 
 915
 00:36:32,330 --> 00:36:34,420
 Or you could have a copy.
+或者你可以选择复制
 
 916
 00:36:34,420 --> 00:36:36,500
 I'm going to add a copy, the items right here.
+我选复制，选择这里
 
 917
 00:36:36,500 --> 00:36:37,970
 Okay, so, copy those two things in.
+好的，把这俩复制进来
 
 918
 00:36:37,970 --> 00:36:40,070
 And then what about my storyboard here?
+那么我们的 Storyboard 怎么办
 
 919
 00:36:40,070 --> 00:36:42,870
-I need to kind of get this Happiness view
+I need to kind of get this HappinessViewController
+我需要有这个 HappinessView
 
 920
 00:36:42,880 --> 00:36:44,540
-controller over here.
+over here.
+这里的
 
 921
 00:36:44,540 --> 00:36:46,810
 Okay. Over, into this guy.
+复制到这里
 
 922
 00:36:46,810 --> 00:36:48,680
 Okay, well I can copy and paste that too.
+我也可以复制粘贴这个
 
 923
 00:36:48,680 --> 00:36:50,810
 Just select this thing, copy.
+只需要选中它，复制
 
 924
 00:36:50,820 --> 00:36:52,250
 Go over to here and paste.
+来到这里，然后粘贴
 
 925
 00:36:52,250 --> 00:36:53,480
 Okay.
+就好了
 
 926
 00:36:53,490 --> 00:36:59,860
 So, now I have somewhere my two view controllers.
+那么现在我有两个我的 ViewController 了
 
 927
 00:36:59,860 --> 00:37:02,260
 Okay.
+好的
 
 928
 00:37:02,260 --> 00:37:04,490
 Now one thing I notice when you do copy and
+现在我注意到一件事情
 
 929
 00:37:04,490 --> 00:37:07,900
 paste, it doesn't draw the face.
+当我复制粘贴以后，脸没有了
 
 930
 00:37:07,900 --> 00:37:11,100
 It seems like it needs kind of a little bit of a kick,
+看起来这需要一些触发，
 
 931
 00:37:11,100 --> 00:37:13,700
 a little boost before I do that.
+一些小的触发动作
 
 932
 00:37:13,700 --> 00:37:15,640
 So like if you go to FaceView and
+比如我去到 FaceView 的文件
 
 933
 00:37:15,640 --> 00:37:17,800
 just edit this file and hit save.
+然后稍稍编辑一下然后保存
 
 934
 00:37:17,810 --> 00:37:20,840
 It seems like that gives it the kick in the head,
+这似乎就可以看到笑脸了
 
 935
 00:37:20,840 --> 00:37:23,810
 literally, that it needs to draw the head, okay?
+确实，它需要把脸画出来
 
 936
 00:37:23,810 --> 00:37:25,900
 So, now we have it.
+那么现在我们是有脸的人了
 
 937
 00:37:25,900 --> 00:37:27,980
 So, we got our two view controllers here and
+所以我们有两个 ViewController 了
 
 938
 00:37:27,980 --> 00:37:29,950
 we want to put them in a split view.
+我想把它们放进 SplitView 里面
 
 939
 00:37:29,950 --> 00:37:33,280
 So that this is the master, and this is the detail.
+这样做让这个是 master，而这个是 detail
 
 940
 00:37:33,290 --> 00:37:34,290
 So let's do that.
+我们来做这个吧
 
 941
 00:37:34,290 --> 00:37:36,050
 Super simple, we're gonna go down here.
+超级简单，我们只需要滚到这里
 
 942
 00:37:36,990 --> 00:37:39,060
 Go grab a split view controller, okay?
+拖一个 SplitViewController 出来
 
 943
 00:37:39,060 --> 00:37:40,690
 The split view controller's right here.
+SplitViewController 在这里
 
 944
 00:37:40,690 --> 00:37:42,930
 See, here's tab bar controller.
+看，这个是 TabBarController
 
 945
 00:37:42,930 --> 00:37:45,860
 Here's navigation controller, somewhere.
+这个是 NavigationController
 
 946
 00:37:45,860 --> 00:37:46,900
 Page view controller, even.
+这个是 PageViewController
 
 947
 00:37:46,900 --> 00:37:48,060
 We're not gonna talk about that, but
+我们不会说这个，但是
 
 948
 00:37:48,070 --> 00:37:50,500
 that's another way to combine MVCs.
+这是另一种组合 MVC 的方法
 
 949
 00:37:50,500 --> 00:37:53,200
 But let's drag this split view controller out.
+我们把 SplitViewController 拖出来
 
 950
 00:37:53,200 --> 00:37:54,770
 Now see how it
+现在我们看看怎么把
 
 951
 00:37:54,770 --> 00:37:56,340
 comes with other stuff that you don't want?
+你不想要的它的一切其他东西删掉
 
 952
 00:37:56,340 --> 00:37:58,640
 So when you drop it in there, literally just
+那么当你把它放在这里，简单地选择
 
 953
 00:37:58,640 --> 00:38:01,070
 select the stuff you don't want and delete it.
+你不想要的东西，然后删除
 
 954
 00:38:02,080 --> 00:38:04,210
 Okay. Don't want any of that stuff.
+好吧。不想要
 
 955
 00:38:04,210 --> 00:38:05,780
 Trying to be helpful.
+那些可能有用而我们不想要的东西
 
 956
 00:38:05,780 --> 00:38:08,810
 And so here's my split view controller, okay and
+那么这就是我的 Split View Controller 了，
 
 957
 00:38:08,820 --> 00:38:10,550
-here's my mastering detail.
+here's my master and detail.
+然后这个是 master 和 detail
 
 958
 00:38:10,550 --> 00:38:12,750
 I'm just gonna control drag.
+我只需要 control 加拖动
 
 959
 00:38:12,750 --> 00:38:14,320
 To set my master.
+去设置它为 master
 
 960
 00:38:14,320 --> 00:38:16,200
 So here's the master.
+这就是 master 了
 
 961
 00:38:16,200 --> 00:38:18,090
 And I'm gonna control drag, to set the detail.
+接着我 control 加拖动去设置 detail
 
 962
 00:38:20,190 --> 00:38:21,360
 Okay. That's it.
+好了就这样
 
 963
 00:38:21,360 --> 00:38:22,360
 So let's run.
+让我们运行一下
 
 964
 00:38:22,360 --> 00:38:24,330
 Let's actually run on an iPad.
+让我们在 iPad 上运行一下
 
 965
 00:38:24,330 --> 00:38:27,460
 See what this looks like.
+看看效果怎样
 
 966
 00:38:27,470 --> 00:38:33,370
 [BLANK AUDIO] Alright, so here's an iPad.
+好咧，这是 iPad
 
 967
 00:38:33,370 --> 00:38:36,970
 Oh, I thought I was gonna get a split view, with this thing.
+噢我想我会在这里得到一个 Split View
 
 968
 00:38:36,970 --> 00:38:38,110
 How come I don't get a split view?
+但是为什么我没有 Split View 呢
 
 969
 00:38:38,110 --> 00:38:42,040
 >> [INAUDIBLE] >> What?
+什么
 
 970
 00:38:42,040 --> 00:38:45,980
 >> [INAUDIBLE] >> Yes, exactly.
+对哒
 
 971
 00:38:45,980 --> 00:38:47,850
 Very good job.
+机智如你
 
 972
 00:38:47,850 --> 00:38:50,450
 You should get extra credit or something up there.
+我应该给你一些棒棒糖奖励
 
 973
 00:38:50,450 --> 00:38:53,950
 Yeah, the problem is this UI comes in through this arrow,
+是的，问题在于 UI 启动会从这个箭头开始
 
 974
 00:38:53,950 --> 00:38:54,850
 so it comes to here.
+现在它从这里启动
 
 975
 00:38:54,860 --> 00:38:56,420
 So it's bypassing the split view.
+所以它跳过了这个 Split View
 
 976
 00:38:56,420 --> 00:38:57,790
 It's not even going.
+它甚至没有经过
 
 977
 00:38:57,790 --> 00:38:59,360
 So it's just a common mistake you'll do,
+这是个常见的错误
 
 978
 00:38:59,360 --> 00:39:00,770
 you'll forget to move this.
+你可能会忘记移动这个箭头
 
 979
 00:39:00,780 --> 00:39:02,190
 And you can just pick this arrow up and
+那么你只需要把箭头拖动
 
 980
 00:39:02,190 --> 00:39:02,790
 move it over here.
+移动到这里
 
 981
 00:39:04,330 --> 00:39:06,380
 Okay.
+好的
 
 982
 00:39:06,380 --> 00:39:08,430
 Now when we run, it's going to come in, via the split view.
+现在当我们运行，UI 将从 Split View 开始
 
 983
 00:39:08,430 --> 00:39:09,400
 And it is a split view.
+这里确实有 Split View
 
 984
 00:39:09,400 --> 00:39:11,000
 If I slide out from the left,
+如果我从左边划开
 
 985
 00:39:11,000 --> 00:39:14,600
 there's my master and here's my detail.
+这是我的 master，而这是我的 detail
 
 986
 00:39:14,600 --> 00:39:17,070
 Okay. And if I rotate.
+好的，如果我旋转屏幕
 
 987
 00:39:17,070 --> 00:39:18,210
-Okay. I get the mastering detail on
+Okay. I get the master and detail on
+那么我就有 master 和 detail 同时在
 
 988
 00:39:18,210 --> 00:39:19,140
 the screen at the same time.
+同一个屏幕上了
 
 989
 00:39:20,940 --> 00:39:23,240
 Sound good? Now clicking this doesn't seem
+听起来很棒不是么？现在，点击似乎没有
 
 990
 00:39:23,250 --> 00:39:24,910
 to do anything, okay.
+触发什么
 
 991
 00:39:24,910 --> 00:39:26,150
 So we're gonna have to fix that.
+接下来我们需要实现它们
 
 992
 00:39:26,150 --> 00:39:28,210
 And let's go look at it on an iPhone see what it
+让我们看看程序在 iPhone 上跑
 
 993
 00:39:28,220 --> 00:39:29,180
 looks like there?
+是什么样子的
 
 994
 00:39:33,320 --> 00:39:38,960
 I didn't hit the button sorry Alright, here's my iPhone.
+我忘记点运行按钮了抱歉同学们，好的，这是我的 iPhone
 
 995
 00:39:38,960 --> 00:39:40,620
 Okay?
+好吧
 
 996
 00:39:40,630 --> 00:39:41,120
 Oh.
+噢
 
 997
 00:39:41,130 --> 00:39:41,660
 Wait.
+等等
 
 998
 00:39:41,660 --> 00:39:43,060
 How do I?
+怎么办？
 
 999
 00:39:43,060 --> 00:39:44,290
 I can't see the face.
+我看不到笑脸了
 
 1000
 00:39:44,300 --> 00:39:45,860
 Okay? Let's try landscape.
-
+好吧？试试横着屏幕
 
 1001
 00:39:45,860 --> 00:39:47,000
@@ -4575,7 +5059,7 @@ if I try sliding out from the side, nothing happens.
 1019
 00:40:26,960 --> 00:40:28,600
 Okay? Because in portrait mode,
-因为在竖屏下，
+因为在竖屏模式下，
 
 1020
 00:40:28,600 --> 00:40:31,270
@@ -4600,7 +5084,7 @@ So that's kinda cool.
 1025
 00:40:39,370 --> 00:40:42,680
 Alright but it still doesn't work. Okay.
-但是这个摁钮依然不能用。
+但是这个按钮依然不能用。
 
 1027
 00:40:42,680 --> 00:40:44,440
@@ -4710,7 +5194,7 @@ So now we definitely need those segues.
 1050
 00:41:37,720 --> 00:41:41,660
 We need these buttons to cause a segue to happen to the detail.
-所以我们现在需要通过点击这些摁钮跳转到笑脸。
+所以我们现在需要通过点击这些按钮跳转到笑脸。
 
 1052
 00:41:41,660 --> 00:41:45,200
@@ -4860,7 +5344,7 @@ So I told you the segues are done just with control drag. Okay.
 1087
 00:42:59,130 --> 00:43:02,590
 When we click one of these things I wanna segue to
-当点击这些摁钮的时候，我希望看到一个脸
+当点击这些按钮的时候，我希望看到一个脸
 
 1088
 00:43:02,600 --> 00:43:05,400
@@ -8372,17 +8856,17 @@ So here we have this, zoom out a little so
 1801
 01:13:50,850 --> 01:13:52,480
 you can see it a little better, and
-这样看起来更好， 
+这样看起来更好
 
 1802
 01:13:52,480 --> 01:13:56,210
 what we want is for this little button to segue to this
-我们想这个小按钮可以segue到这个 
+我们想这个小按钮可以 segue 到这个 
 
 1803
 01:13:56,220 --> 01:14:00,350
 MVC, and show it in a little popover right here.
-控制器，并显示在popover中。 
+控制器，并通过一个小的 Popover 显示在这里 
 
 1804
 01:14:00,350 --> 01:14:01,620
@@ -8392,141 +8876,142 @@ Okay? So that's all we
 1805
 01:14:01,620 --> 01:14:02,690
 wanna do there.
-所有需要做的 。
+所有我们想要的
 
 1806
 01:14:02,690 --> 01:14:04,890
 So let's just Ctrl+Drag, just like we
-我们只要Ctrl+Drag，就像我们 
+我们只要 Control + Drag，就像我们 
 
 1807
 01:14:04,890 --> 01:14:06,790
 created in the other segue, we're gonna Ctrl+Drag from
-创建其他segue一样，直接从 
+创建其他的 segue 一样，直接从 
 
 1808
 01:14:06,790 --> 01:14:10,290
-the history button over to this MVC, and when we let history 按钮Ctrl+Drag到这个控制器，然后释放
+the history button over to this MVC, and when we let go
+History 按钮链接到这个控制器，然后释放鼠标
 
 1809
 01:14:10,300 --> 01:14:13,130
 it's gonna say well, what kind of segue do you want?
-接下来会询问你，你想要什么类型到segue？ 
+接下来 Xcode 会询问你，你想要什么类型的 segue？ 
 
 1810
 01:14:13,130 --> 01:14:16,170
 And we want the propover presentation segue right here.
-我们需要popover类型 。
+我们这里需要 popover presentation
 
 1811
 01:14:16,170 --> 01:14:18,170
 So I'm gonna click that.
-所以点这个 。
+所以点这个 
 
 1812
 01:14:18,170 --> 01:14:20,450
 This is a popover.
-这是一个popover segue。 
+这是一个 popover segue。 
 
 1813
 01:14:20,450 --> 01:14:22,740
 If I click here, on the segue, and go to the attributes
-如果我选中这个segue，
+如果我选中这个 segue
 
 1814
 01:14:22,740 --> 01:14:25,470
 inspector here, you can see that it is a popover segue.
-然后查看属性区域，你可以看到它是一个popover类型的segue。 
+然后查看 Attributes Inspector，你可以看到它是一个 popover 类型的 segue
 
 1815
 01:14:25,480 --> 01:14:28,940
 I can control where the little arrow, if you remember
-我可以控制箭头的方向，回忆课件 里面
+如果你回忆起来了之前我们讲 popover 的 Slide
 
 1816
 01:14:28,950 --> 01:14:32,010
 the slide about the popover, there was a little kind of
-有一个 
+这里，我可以控制 popover 箭头的方向
 
 1817
 01:14:32,010 --> 01:14:35,280
 triangle that was pointing at the thing that brought it up.
-小三角形，指向触发popover的控件 
+也就是那个小三角形，指向触发 popover 的控件 
 
 1818
 01:14:35,280 --> 01:14:36,450
 Like this History button, or
-就像这里的history按钮，或者 
+就像这里的 History 按钮，或者 
 
 1819
 01:14:36,450 --> 01:14:39,090
 in that slide it was a little search button.
-课件里面的搜索按钮。 
+课件里面的搜索按钮
 
 1820
 01:14:39,090 --> 01:14:41,290
 So I can control which direction that arrow pointed.
-这样我可以控制箭头的指向。 
+这样我可以控制箭头的指向
 
 1821
 01:14:41,290 --> 01:14:43,060
 And I can even see here the anchor.
-我甚至可以看到锚点 。
+我甚至可以看到锚点 （Anchor）
 
 1822
 01:14:43,060 --> 01:14:44,990
 See it highlighting there.
-看这个高亮的地方 。
+看这个高亮的地方 
 
 1823
 01:14:44,990 --> 01:14:47,690
 That is going to bring up this popover.
-它会弹出一个popover 。
+它代表，这里会弹出一个 popover 
 
 1824
 01:14:47,690 --> 01:14:48,560
 So that's great.
-非常好 。
+非常好 
 
 1825
 01:14:48,560 --> 01:14:49,830
 And of course I need an identifier,
-当然，我还需要一个identifier ，
+当然，我还需要一个标识符（identifier ）
 
 1826
 01:14:49,830 --> 01:14:51,760
 just like any other segue, I need an identifier.
-就像其他任何segue一样 。
+就像其他任何 segue 一样
 
 1827
 01:14:51,760 --> 01:14:54,930
 So, this shows the diagnostic history, so
-这个segue用来显示diagnostic历史 ，
+这个 segue 用来显示诊断的历史 ，
 
 1828
 01:14:54,930 --> 01:14:58,370
 I'm gonna call this Show Diagnostic History.
-我就叫它Show Diagnostic History 。
+我就叫它 Show Diagnostic History 
 
 1829
 01:14:58,370 --> 01:15:00,140
 Oh, my caps lock.
-oh 大写键 。
+噢，这里不小心大写锁定了
 
 1830
 01:15:00,140 --> 01:15:01,500
 There she is, there.
-就是它了 。
+好的
 
 1831
 01:15:01,510 --> 01:15:02,770
 History, there we go.
-History 完成 。
+History，让我们继续
 
 1832
 01:15:02,770 --> 01:15:04,770
 Show Diagnostic History.
-Show Diagnostic History 。
+Show Diagnostic History 
 
 1833
 01:15:04,780 --> 01:15:06,570
@@ -8536,82 +9021,82 @@ Okay?
 1834
 01:15:06,580 --> 01:15:09,080
 So now we've got this set up to this segue and
-现在我们已经设置好了segue和 
+现在我们已经设置好了 segue 和 
 
 1835
 01:15:09,080 --> 01:15:10,640
 show this MVC.
-被显示的控制器 。
+被显示的控制器 
 
 1836
 01:15:10,650 --> 01:15:13,250
 Now, this MVC is just a blank MVC right now,
-现在控制器是空白的 ，
+虽然现在控制器是空白的 
 
 1837
 01:15:13,250 --> 01:15:15,820
 but let's go ahead and run and see what this looks like.
-我们先运行看下效果 。
+但我们先运行看下效果 ，看看这个 popover 是怎么样子的
 
 1838
 01:15:15,820 --> 01:15:18,920
 So this is going to show a blank MVC at this point.
-它应该会在这个点弹出一个空白控制器 。
+它应该会在这个点弹出一个空白控制器 
 
 1839
 01:15:21,090 --> 01:15:24,020
 So here's our iPad right here and we'll.
-这是我们的ipad， 
+这是我们的 iPad  模拟器
 
 1840
 01:15:24,030 --> 01:15:25,660
 Go to Landscape Mode.
-切换到横屏模式 。
+切换到横屏模式 
 
 1841
 01:15:25,660 --> 01:15:27,790
 And so if I click on this,
-如果我点击这里， 
+如果我点击这里 
 
 1842
 01:15:27,790 --> 01:15:29,930
 you see I get this nice blank MVC appearing right here.
-你可以看到，会弹出一个不错的控制器 。
+你可以看到，会弹出一个空白的控制器 
 
 1843
 01:15:29,930 --> 01:15:34,500
 So our next step in this is we need to create this MVC.
-下一步我们需要创建这个控制器 。
+所以，下一步，我们需要做的就是创建这个控制器 
 
 1844
 01:15:34,500 --> 01:15:35,930
 All right, we're going to.
-好的，我们需要 。
+好的，让我们继续
 
 1845
 01:15:36,940 --> 01:15:39,470
 Create the MVC that is going to go in here.
-创建一个控制器 。
+继续创建一个在这里的控制器 
 
 1846
 01:15:39,470 --> 01:15:42,170
 It's going to be a very, very simple little MVC.
-只是一个非常简单的控制器 。
+这会是一个非常简单的控制器 
 
 1847
 01:15:42,170 --> 01:15:46,010
 It's just going to have a text view in it here to show text.
-它只包含一个显示文本的textView 。
+它只包含一个显示文本的 textView 
 
 1848
 01:15:46,010 --> 01:15:48,080
 And that's all it's gonna do is show text.
-它需要做的只是显示文本 。
+它需要做的只是显示文本 
 
 1849
 01:15:48,080 --> 01:15:50,180
 It doesn't do anything else.
-不需要做其他事情 。
+不需要做其他事情 
 
 1850
 01:15:50,180 --> 01:15:51,800
@@ -8626,102 +9111,102 @@ So, let's start by creating a new
 1852
 01:15:54,520 --> 01:15:56,180
 UI view controller subclass.
-UIViewController子类 。
+UIViewController 子类 。
 
 1853
 01:15:56,190 --> 01:15:59,850
 So again I'm gonna go to iOS source cocoa touch class here
-所以我会到iOS source cocoa touch class区域 
+所以我们选择 iOS -> Source -> Cocoa Touch Class
 
 1854
 01:15:59,860 --> 01:16:01,620
 because I'm gonna create a cocoa touch class, and
-因为我需要创建cocoa touch class 
+因为我需要创建一个 Cocoa Touch Class
 
 1855
 01:16:01,620 --> 01:16:03,760
 it is gonna be a UI view controller.
-它是一个UIViewController 。
+它将一个 UIViewController 
 
 1856
 01:16:03,760 --> 01:16:06,830
 I'm gonna call it text UI view controller because that's what
-我叫它textUIViewController 
+我叫它 TextViewController 
 
 1857
 01:16:06,830 --> 01:16:08,260
 it does, it shows some text.
-因为它负责显示文本 。
+因为它负责显示文本 
 
 1858
 01:16:08,260 --> 01:16:09,960
 That's all this view controller knows how to do.
-这是这个控制器需要做的 。
+这是这个控制器需要做的 
 
 1859
 01:16:11,130 --> 01:16:13,900
 I'm gonna put it in the same place all the rest of
-我把它和剩下所有的swift文件
+我把它和剩下所有的 Swift 文件
 
 1860
 01:16:13,900 --> 01:16:15,030
 my SWF files are.
-放 在一起 。
+放 在一起 
 
 1861
 01:16:16,140 --> 01:16:17,330
 Okay, here it is.
-好的，就是这里 。
+好的，就是这里
 
 1862
 01:16:17,340 --> 01:16:18,800
 Here's the code for it.
-这是它的代码 。
+这是它的代码 
 
 1863
 01:16:18,800 --> 01:16:21,270
 We're gonna delete all of this stuff in here.
-先全部删除 。
+我们先删除里面的所有东西 
 
 1864
 01:16:22,210 --> 01:16:24,060
 Start.
-开始 。
+这样
 
 1865
 01:16:24,060 --> 01:16:25,910
 Right, so we've got a nice subclass of UIViewController.
-好的，我们有了UIViewController子类 。
+我们有了一个干净的 UIViewController 子类
 
 1866
 01:16:25,910 --> 01:16:28,180
 We'll have to put our implementation in here.
-我们需要在这里面实现 。
+我们需要在这里面放置实现的代码
 
 1867
 01:16:28,180 --> 01:16:30,010
 Meanwhile, let's go back to our storyboard and
-除此之外，我们需要在storyboard中 
+除此之外，我们需要在 Storyboard 中 
 
 1868
 01:16:30,010 --> 01:16:33,380
 make sure that we set this thing's class in
-确保这个类 
+确保我们设置这个类 为 popover 的类
 
 1869
 01:16:33,380 --> 01:16:36,080
-the Identity Inspector up here.
-在Identity Inspector区域 
+the Identity Inspector up here.
+在 Identity Inspector 中
 
 1870
 01:16:36,090 --> 01:16:38,320
 To be the TextViewController, so
-与storyboard中的控制器 ，
+设置 Custom Class 为 TextViewController
 
 1871
 01:16:38,320 --> 01:16:41,390
 that we know this is a TextViewController.
-关联起来 。
+那么这样，Xcode 就知道了这是一个 TextViewController
 
 1872
 01:16:41,390 --> 01:16:42,690
@@ -8731,47 +9216,47 @@ Okay?
 1873
 01:16:42,690 --> 01:16:43,990
 Now, let's talk about this thing's UI.
-我们先看界面 。
+我们说说它的用户界面
 
 1874
 01:16:43,990 --> 01:16:45,430
 It has a very simple UI.
-界面会很简单 。
+界面会很简单 
 
 1875
 01:16:45,430 --> 01:16:50,300
 I'm actually gonna drag out a text displaying object here.
-我将会拖一个文本控件到这里 。
+我将会拖一个文本控件到这里 
 
 1876
 01:16:50,300 --> 01:16:51,700
 And I'm not going to use label.
-不要用label 。
+这里我不打算使用 Label
 
 1877
 01:16:52,630 --> 01:16:54,400
 Label is nice for one and two and
-label适合两到 
+Label 适合于那些一到两 
 
 1878
 01:16:54,400 --> 01:16:58,040
 maybe three lines of static text.
-三行的静态文本 。
+或者是三行的静态文本
 
 1879
 01:16:58,040 --> 01:17:00,100
 But I really want something that kind of can show as
-而我需要尽可能多的显示 
+但是这里，我需要尽可能多的显示 
 
 1880
 01:17:00,110 --> 01:17:01,870
 much diagnostic history as I want it.
-diagnostic历史 。
+诊断的历史
 
 1881
 01:17:01,870 --> 01:17:04,140
 So I want something that shows a lot more text.
-所以我需要可以显示很多文本的控件 。
+所以我需要一个可以显示很多文本的控件
 
 1882
 01:17:04,140 --> 01:17:05,740
@@ -8781,92 +9266,92 @@ A text field is
 1883
 01:17:05,740 --> 01:17:07,340
 not really appropriate because that's editable.
-也不合适，因为它是可编辑的 。
+也不合适，因为它是可编辑的
 
 1884
 01:17:07,350 --> 01:17:08,610
 One, two, three liner.
-一到三行 。
+而且同样适用于一到三行
 
 1885
 01:17:08,610 --> 01:17:10,910
 So label and text field are very similar.
-所以标签和输入框很相似 。
+所以标签和输入框很相似
 
 1886
 01:17:10,920 --> 01:17:12,050
 It's just editable or not.
-区别在于能否编辑 。
+两者区别在于能否编辑 
 
 1887
 01:17:12,050 --> 01:17:14,530
 But there's yet
-但在下面还有一个 
+但在这两个下面还有一个
 
 1888
 01:17:14,530 --> 01:17:17,020
 another one down here, called text view, right here.
-叫textView的控件 。
+叫 text view 的控件
 
 1889
 01:17:17,020 --> 01:17:19,290
 And this displays multiple lines of editable text.
-它用来显示多行文本 。
+它用来显示多行可编辑的文本
 
 1890
 01:17:19,290 --> 01:17:23,860
 It lets you set the font, and the text can be selectable.
-你可以设置字体还可以选中文本 。
+你可以设置字体，还可以让用户选中其中的文本
 
 1891
 01:17:23,860 --> 01:17:25,560
 You can copy and paste from it, things like that.
-还可以复制粘贴等 。
+从这些文本中复制粘贴等等操作
 
 1892
 01:17:25,560 --> 01:17:27,330
 So it's a much more powerful text styler, but
-功能非常强大， 
+所以它是一个功能非常强大的文本显示空间 
 
 1893
 01:17:27,330 --> 01:17:29,100
 we'll talk about this later in the quarter.
-后期会详细讲到 。
+后期我们会详细讲到
 
 1894
 01:17:29,100 --> 01:17:32,330
 But for now I'm just going to drag this in right here.
-现在我只需要拖到这里 。
+现在，我只需要拖动这个控件到这里
 
 1895
 01:17:32,330 --> 01:17:34,730
 You noticed I used the blue lines.
-注意我如何使用辅助线 。
+这里注意我是使用到了蓝色的辅助线
 
 1896
 01:17:34,740 --> 01:17:35,770
 I'm going to go up here and
-我会到这里 
+接着我点击这里
 
 1897
 01:17:35,770 --> 01:17:37,800
 reset to suggested constraints.
-选择reset to suggested constraints 
+选择 Reset to Suggested Constraints 
 
 1898
 01:17:37,800 --> 01:17:41,140
 I'm going to go over here to the size inspector up here.
-然后到size inspector 。
+然后到 Size Inspector
 
 1899
 01:17:41,140 --> 01:17:44,880
 And verify that my constraints are the way I want, and
-确认所有约束正确 ，
+确认所有约束正确 
 
 1900
 01:17:44,880 --> 01:17:45,610
 they look fine.
-他们看起来不错。
+它们看上去都没问题
 
 1901
 01:17:45,610 --> 01:17:47,410
@@ -8891,7 +9376,7 @@ I don't want the diagnostic history to be actually,
 1905
 01:17:57,050 --> 01:17:59,050
 you know, touched on and edited.
-因为点击就可以编辑
+因为这样的话，用户一点击就开始编辑
 
 1906
 01:17:59,060 --> 01:18:00,760
@@ -8921,7 +9406,7 @@ Or you could set the font to be larger too,
 1911
 01:18:09,530 --> 01:18:12,430
 maybe something 24 point or something like that.
-可以设置成24号字子类的
+比如可以设置成24 pt 的字体之类的
 
 1912
 01:18:13,370 --> 01:18:15,570
@@ -8931,12 +9416,12 @@ And of course we've got this kind of
 1913
 01:18:17,170 --> 01:18:19,710
 pseudo latin placeholder text right here.
-占位用的伪拉丁的文字
+占位（placeholder）用的文字
 
 1914
 01:18:19,710 --> 01:18:21,270
 But that's not gonna matter cuz that's not
-但是这也没什么关系
+不用管它，因为没什么关系
 
 1915
 01:18:21,280 --> 01:18:23,040
@@ -8946,7 +9431,7 @@ gonna show because we're going to
 1916
 01:18:23,040 --> 01:18:27,880
 set the text we want when we prepare for this segue, okay?
-设定这些文字
+设定这些文字，所以这些默认的文字不会显示出来，明白了吗？
 
 1917
 01:18:27,880 --> 01:18:30,350
@@ -8961,22 +9446,22 @@ We've got this text view right here.
 1919
 01:18:32,480 --> 01:18:35,150
 Let's Ctrl + Drag to create an outlet to it, okay?
-按住 Ctrl 拖动，创建一个一个 outlet
+按住 Ctrl 并拖动，创建一个 outlet 的链接
 
 1920
 01:18:35,150 --> 01:18:37,750
 I'm gonna call that outlet textview.
-把这个 outlet 起名为 textview
+把这个 outlet 起名为 textView
 
 1921
 01:18:37,760 --> 01:18:39,190
 So, we've got a nice outlet here.
-已经创建好了一个 outlet
+这样，我们创建好了一个 outlet
 
 1922
 01:18:39,190 --> 01:18:41,790
-And let's add a model to our TextViewController.
-在 TextViewController 中添加一个 model
+And let's add a model to our TextViewController.
+在 TextViewController 中添加一个 model
 
 1923
 01:18:41,790 --> 01:18:43,460
@@ -9000,27 +9485,27 @@ Okay.
 1927
 01:18:48,700 --> 01:18:51,130
 Now every time my model gets set,
-每一次 model 被 set 的时候
+每一次我的 model 被设值的时候
 
 1928
 01:18:52,170 --> 01:18:56,870
 I want to make sure that I update my text views text.
-都要确保 text view 的 text 实时被更新
+我都要确保 text view 上的文字被更新了
 
 1929
 01:18:56,870 --> 01:19:00,410
 So text view is this thing that manages text.
-text view 就是一个管理 text 的东西
+所以，text view 就是一个显示 text 内容的东西
 
 1930
 01:19:00,410 --> 01:19:03,080
 And you can see has an enormous number of things you
-你可以看到，一个对 text view 做很多事情
+你可以看到，text view 能够做很多事情
 
 1931
 01:19:03,080 --> 01:19:05,810
 can do on it it's a very powerful text object, but
-它是一个非常强大的 text 对象
+它是一个非常强大的显示文本的控件
 
 1932
 01:19:05,810 --> 01:19:07,910
@@ -9045,32 +9530,32 @@ And just to be safe in case this is being called while
 1936
 01:19:16,720 --> 01:19:17,990
 we're preparing.
-防止在准备的时候此方法被调用
+防止我们正在准备 segue 的时候，此方法被调用
 
 1937
 01:19:17,990 --> 01:19:20,490
 Okay, we'll do the same thing with optional chaining in
-在这里也使用 optional chaining（可选链）
+在这里也使用可选链（optional chaining）
 
 1938
 01:19:20,490 --> 01:19:22,760
 case our outlet here has not been set.
-防止 oulet 在没被设置好的时候，导致程序崩溃
+防止 outlet 在没被设置好的时候，设置了其中的属性而导致程序崩溃
 
 1939
 01:19:22,760 --> 01:19:25,790
 And similarly when our outlet finally does get
-相似的，当 oulet 被设置好以后
+类似的，当 outlet 被设置好以后
 
 1940
 01:19:25,800 --> 01:19:31,530
 set by the system, we're going to have it, property observer,
-我们就可以获取到，在 property observer 里
+我们在它的 property observer 里
 
 1941
 01:19:31,540 --> 01:19:35,000
 say text view dot text equals text.
-textview.text = text
+设置 textView.text = text
 
 1942
 01:19:36,110 --> 01:19:37,600
@@ -9085,22 +9570,22 @@ the question mark because where actually the text view
 1944
 01:19:40,340 --> 01:19:41,840
 is being set by the system, so
-在 didSet 发生的时候
+在 didSet 被调用的时候
 
 1945
 01:19:41,840 --> 01:19:44,340
 we know it's set by the time this didSet happens.
-已经被系统设置完毕了
+已经被系统设置完毕了，它不可能是 nil 了
 
 1946
 01:19:44,350 --> 01:19:46,080
 Okay, so this is a very,
-这是一个我们使用的
+这就是一个我们将要使用的
 
 1947
 01:19:46,080 --> 01:19:49,350
 very simple MVC that we're using right here.
-非常简单地 MVC
+非常简单的 MVC
 
 1948
 01:19:50,580 --> 01:19:55,920
@@ -9110,7 +9595,7 @@ And it should have no
 1949
 01:19:55,920 --> 01:20:02,330
 problem displaying our little diagnostic history, there.
-也应该没什么问题
+应该没什么问题了吧？
 
 1950
 01:20:02,330 --> 01:20:04,540
@@ -9129,22 +9614,22 @@ All right? We want to
 1953
 01:20:08,470 --> 01:20:11,230
 prepare this segue so that you click on history,
-为这个 segue 做些准备，为了在点击 history 的时候
+为这个 segue 做些准备，当我们点击 History 的时候
 
 1954
 01:20:11,240 --> 01:20:13,740
 it shows the diagnostic history here now.
-展示诊断的记录
+这个 MVC 就会展示出诊断的记录
 
 1955
 01:20:13,740 --> 01:20:16,810
 We might, we know that this instigator right here is
-我们知道这里的这个
+我们知道这里的
 
 1956
 01:20:16,810 --> 01:20:19,070
 inside this HappinessViewController.
-在 happinessViewController 的煽动者
+HappinessViewController 是 segue 的发起者
 
 1957
 01:20:19,080 --> 01:20:22,310
@@ -9154,17 +9639,17 @@ So we might think that we should go to our happiness
 1958
 01:20:22,310 --> 01:20:25,480
 view controller right here and add the prepare in here.
-把准备的代码放到这里
+把 segue 准备的代码放到这里
 
 1959
 01:20:26,450 --> 01:20:28,350
 Okay. And we could do that but
-我们可以这样做
+我们完全可以这样做
 
 1960
 01:20:28,350 --> 01:20:29,920
 remember that happiness view control is
-还记得吗？ HappinessViewController 是我们从
+但是，还记得吗？ HappinessViewController 是我们从
 
 1961
 01:20:29,920 --> 01:20:32,180
@@ -9174,7 +9659,7 @@ something we dragged in from another app.
 1962
 01:20:32,190 --> 01:20:35,220
 And maybe that's another app that's being worked on at
-也许是我们公司另一个 App 中的
+也许是我们公司正在开发的另一个 App
 
 1963
 01:20:35,220 --> 01:20:37,990
@@ -9184,32 +9669,32 @@ our company or that there's another programer who
 1964
 01:20:37,990 --> 01:20:39,620
 owns this particular class.
-拥有的特殊的类
+管理这个 HappinessViewController 的类
 
 1965
 01:20:39,630 --> 01:20:41,110
 And he said no, no,
-他不想让其他人添加
+他不想让其他人添加代码
 
 1966
 01:20:41,110 --> 01:20:42,590
 you can't add prepareForSegue to this class.
-prepareForSegue 在这个类里
+他说：“你不能在这个类里添加 prepareForSegue”
 
 1967
 01:20:42,600 --> 01:20:45,230
 It's a generic happiness showing thing.
-它只是一个一般地展示笑脸的东西
+它只是一个通用的展示笑脸的东西
 
 1968
 01:20:45,230 --> 01:20:46,960
 It doesn't know anything about diagnostic history.
-它对于诊断历史一无所知
+它（应该）对于诊断历史一无所知
 
 1969
 01:20:46,970 --> 01:20:51,770
 And they'd probably be right because if we started
-如果我们想把诊断历史相关的东西
+他这么说是对的，因为，如果我们想把诊断历史相关的东西
 
 1970
 01:20:51,770 --> 01:20:54,400
@@ -9234,7 +9719,7 @@ a HappinessViewController anymore.
 1974
 01:21:02,610 --> 01:21:04,750
 So where are we going to put our prepareForSegue then?
-所以我们应该把 PrepareForSegue 放在哪里呢？
+所以，我们应该把 prepareForSegue 放在哪里呢？
 
 1975
 01:21:04,750 --> 01:21:06,850
@@ -9249,7 +9734,7 @@ actually create a subclass of
 1977
 01:21:08,450 --> 01:21:11,450
 HappinessViewController that we can use that's going to get
-然后我们就会获得所有
+然后我们就会继承所有
 
 1978
 01:21:11,450 --> 01:21:14,420
@@ -9259,12 +9744,12 @@ HappinessViewController 中的属性和方法
 1979
 01:21:14,420 --> 01:21:17,060
 Plus, we're going to add the ability to do
-除此以外，我们还会往类中
+除此之外，我们还会往这个子类中
 
 1980
 01:21:17,060 --> 01:21:18,160
 the diagnostic history.
-添加诊断历史相关功能
+添加显示诊断历史的功能
 
 1981
 01:21:18,160 --> 01:21:19,430
@@ -9274,26 +9759,26 @@ Okay. So we're going to
 1982
 01:21:19,430 --> 01:21:20,560
 create a subclass.
-创建子类
+首先，我们创建一个子类
 
 1983
 01:21:20,560 --> 01:21:22,660
 We're just going to go up here.
-先来到这里
+先点击这里
 
 1984
 01:21:22,660 --> 01:21:24,600
 New file.
-New file
+New File
 
 1985
 01:21:24,600 --> 01:21:26,530
 Again, I'm just going to create a Swift file this time.
-这一次我们创建一个 Swift 文件
+这次我们创建一个 Swift 文件
 
 1986
 01:21:26,530 --> 01:21:32,700
-I'm going to call it DiagnosedHappinessViewController.
+I'm going to call it DiagnosedHappinessViewController.
 把它起名为 DiagnosedHappinessViewController
 
 1987
@@ -9309,17 +9794,17 @@ it's diagnosed happiness.
 1989
 01:21:39,080 --> 01:21:41,090
 Here it is right here.
-这就是这个文件
+创建完毕
 
 1990
 01:21:41,100 --> 01:21:43,110
 I'm gonna import UIKit because it's a UI class.
-在这里导入 UIKit，因为它是一个 UI 相关的类
+我要在文件开头导入 UIKit，因为它是一个 UI 相关的类
 
 1991
 01:21:43,110 --> 01:21:47,250
 And I'm just gonna say that my class
-接着，让我的 DiagnosedHappinessViewController
+接着，我让 DiagnosedHappinessViewController
 
 1992
 01:21:47,250 --> 01:21:52,220
@@ -9334,37 +9819,37 @@ HappinessViewController
 1994
 01:21:54,920 --> 01:21:56,820
 So I am going to be
-所以现在
+那么现在
 
 1995
 01:21:56,830 --> 01:21:58,730
 a sub class that DiagnosedHappinessViewController.
-DiagnosedHappinessViewController 是一个子类
+我有一个叫 DiagnosedHappinessViewController 的子类了
 
 1996
 01:21:58,730 --> 01:22:01,360
 Make sense?
-我说明白了吗？
+我这么说，明白吗？
 
 1997
 01:22:01,360 --> 01:22:04,230
 Now, over here in my storyboard,
-在 storyboard 里
+回到 Storyboard 中
 
 1998
 01:22:04,230 --> 01:22:07,770
 I am going to select this scene right here.
-选择这里的场景
+选择这个的场景
 
 1999
 01:22:07,770 --> 01:22:10,400
-And I'm going to go to the Identity Inspector, and
-选择 Identity Inspector
+And I'm going to go to the Identity Inspector, and
+打开 Identity Inspector
 
 2000
 01:22:10,410 --> 01:22:12,240
 I am going to say that this scene is no
-这个场景的类不再是
+这个场景的类，不再是
 
 2001
 01:22:12,240 --> 01:22:14,210
@@ -9384,12 +9869,12 @@ So now I'm this guy here.
 2004
 01:22:20,010 --> 01:22:23,550
 Now, all my outlets that were set up will
-我曾经设置好的 outlet
+我之前设置好的那些 outlet
 
 2005
 01:22:23,550 --> 01:22:24,820
 work absolutely just fine.
-如今也不会出现什么问题
+不会出现任何的问题
 
 2006
 01:22:25,750 --> 01:22:27,320
@@ -9409,7 +9894,7 @@ DiagnosedHappinessViewController subclass.
 2009
 01:22:32,690 --> 01:22:35,220
 In fact, what's really cool is I have a scene right here.
-更 cool 的事情是
+更酷的事情是
 
 2010
 01:22:35,230 --> 01:22:39,530
@@ -9419,72 +9904,72 @@ And this scene is a DiagnosedHappinessViewController.
 2011
 01:22:39,530 --> 01:22:45,330
 But if I go up here to pick a different class.
-我选择一个不同的类
+我在 Assistant View 里选择一个不同的类
 
 2012
 01:22:45,330 --> 01:22:46,820
 If I go back and
-如果我返回
+如果我选择
 
 2013
 01:22:46,820 --> 01:22:48,300
 pick my HappinessViewController, and I see it here.
-选择 HappinessViewController，看到这里
+选择 HappinessViewController，这里我看到它显示出来了
 
 2014
 01:22:48,300 --> 01:22:51,500
 You can see that it'll show me that that's hooked up.
-你可以看到，UI 元素已经连接起来了
+你可以看到，outlet 依旧是链接起来的
 
 2015
 01:22:51,510 --> 01:22:53,510
 Okay, cuz it knows that this is inherited,
-它知道这是继承的
+因为它知道其中的继承关系
 
 2016
 01:22:53,510 --> 01:22:54,670
 this outlet is inherited.
-所以 outlet 也被继承了
+outlet 也被继承了
 
 2017
 01:22:54,680 --> 01:22:56,540
 And so it's hooked up.
-也就是连接好了
+所以一切都链接好了
 
 2018
 01:22:56,540 --> 01:22:59,880
 So I can still go back and show my
-所以我也可以
+所以当你继承了某个类的时候，如果你担心 outlet 的链接的话
 
 2019
 01:22:59,880 --> 01:23:03,150
 superclasses for my DiagnosedHappinessViewController to
-在我的父类
+你可以返回这个子类的父类
 
 2020
 01:23:03,150 --> 01:23:05,580
 HappinessViewController, and see the outlets.
-看到这些 outlet
+来检查这些 outlet 的链接
 
 2021
 01:23:07,390 --> 01:23:09,120
 Okay? So this is an important thing.
-这个事情就很重要了
+所以这是一个很重要的事情
 
 2022
 01:23:09,120 --> 01:23:11,250
 Polymorphism of controllers, here.
-controller 的多态性
+这里你看到的是，控制器的多态性
 
 2023
 01:23:11,260 --> 01:23:13,760
 You often might have a reusable controller.
-你也许会有一个可重用的 controller
+你通常会有一个可重用的控制器
 
 2024
 01:23:13,760 --> 01:23:15,160
 And you wanna add something to it for
-也许你想要在某个 stroryboard 中
+也许你想要在某个 Stroryboard 中
 
 2025
 01:23:15,160 --> 01:23:16,960
@@ -9518,7 +10003,7 @@ Okay?
 2031
 01:23:28,140 --> 01:23:30,090
 So this
-这个
+首先，这个
 
 2032
 01:23:30,090 --> 01:23:32,040
@@ -9558,27 +10043,27 @@ and we're just gonna keep it as an Array of Ints.
 2039
 01:23:52,690 --> 01:23:54,660
 So we've got our nice diagnostic history right
-现在我们已经有了诊断历史
+现在我们有了一个 diagnosticHistory 变量
 
 2040
 01:23:54,660 --> 01:24:00,400
 there, and now let's go ahead and let's do this.
-现在这样
+接着，让我们
 
 2041
 01:24:00,400 --> 01:24:04,530
 Let's go here and here and
-打开侧边栏，去到这里
+让我们关闭侧边栏
 
 2042
 01:24:05,500 --> 01:24:07,800
 here to give ourselves some room.
-给我们一些空间
+留出一些空间
 
 2043
 01:24:07,810 --> 01:24:09,970
 And let's override.
-开始重写
+让我们开始重写
 
 2044
 01:24:09,970 --> 01:24:14,080
@@ -9588,7 +10073,7 @@ Actually, we don't even have to type the override here
 2045
 01:24:14,080 --> 01:24:17,310
 because we start typing prepareForSegue end tab.
-因为在输入 prepareForSegue 的时候，按一下 tab 键
+因为在输入 prepareForSegue 的时候，按一下 Tab 键
 
 2046
 01:24:17,310 --> 01:24:18,450
@@ -9643,22 +10128,22 @@ So we wanna prepare this MVC,
 2056
 01:24:40,530 --> 01:24:43,000
 which is a TextViewController, okay?
-这个 TextViewController
+也就是一个 TextViewController
 
 2057
 01:24:43,000 --> 01:24:44,630
 So let's prepare that.
-所以我们开始做准备
+所以我们开始实现准备的代码
 
 2058
 01:24:44,640 --> 01:24:49,510
 And let's, first of all, make sure that this is
-首先，确保
+首先，我们要确保
 
 2059
 01:24:49,510 --> 01:24:51,940
 the segue we're talking about, here.
-这是我们讨论的 segue
+这是我们的想要的那个 segue
 
 2060
 01:24:51,940 --> 01:24:55,340
@@ -9673,32 +10158,32 @@ get our identifier out of there.
 2062
 01:24:57,720 --> 01:24:59,310
 Let's switch on our identifier.
-在这里 switch 这个 identifier
+在这里 switch identifier
 
 2063
 01:24:59,320 --> 01:25:04,590
 Currently, we only support this one case.
-目前我们只支持这一种 case
+目前我们只有这一种 case
 
 2064
 01:25:04,590 --> 01:25:06,620
 I'm also going to put this case,
-我也会把这种 case
+所以我会把它放在这里
 
 2065
 01:25:06,620 --> 01:25:08,650
 this is something you should probably always do,
-你们也应当这样做
+在这里有一个需要你们注意的地方，通常你们应该也会这么做的
 
 2066
 01:25:08,660 --> 01:25:11,990
 which is to put the segue identifier here into some
-把 segue 的 identifier
+就是，把 segue 的 identifier
 
 2067
 01:25:11,990 --> 01:25:15,200
 sort of constants struct.
-放进某个装常量的结构体中
+放进某个结构体中，作为一个常亮
 
 2068
 01:25:15,200 --> 01:25:17,260
@@ -9723,6 +10208,7 @@ this correctly here, private.
 2072
 01:25:27,240 --> 01:25:29,540
 All right.
+好的
 
 2073
 01:25:29,540 --> 01:25:32,280
@@ -9731,12 +10217,12 @@ Yes.
 2074
 01:25:32,280 --> 01:25:35,010
 I'm going to have this be static let
-创建一个 static 常量
+接着我会创建一个静态常量
 
 2075
 01:25:35,010 --> 01:25:39,450
 Segue equal that Show Diagnostic History.
-Segue = "Show Diagnostic History"
+static let Segue = "Show Diagnostic History"
 
 2076
 01:25:39,450 --> 01:25:42,150
@@ -9770,17 +10256,17 @@ collects all your constant Strings together.
 2082
 01:25:57,900 --> 01:25:59,970
 And if you ever change something in your storyboard.
-如果你想改变 storyboard 里的东西
+如果你想改变 Storyboard 里的东西，你也得对这个进行一个修改
 
 2083
 01:25:59,970 --> 01:26:02,670
 Some people might even call this struct storyboard, so
-有人会给它起名为 Storyboard
+有人可能希望给这个结构体起名为 Storyboard
 
 2084
 01:26:02,670 --> 01:26:06,110
 that every String that's in your storyboard that has to
-也就是，在 storyboard 里出现的 String
+也就是，在 Storyboard 里出现的每一个字符串
 
 2085
 01:26:06,110 --> 01:26:08,540
@@ -9790,12 +10276,12 @@ match up here in their code, is in one struct.
 2086
 01:26:08,540 --> 01:26:11,540
 We'll call this one History right here.
-在这里我们称之为 History
+对这个结构体起名是有争议的
 
 2087
 01:26:11,550 --> 01:26:13,210
 It's kind of debatable which way to go there.
-它类似于一个数据库
+但这里，我们久称之为 History
 
 2088
 01:26:14,410 --> 01:26:16,500
@@ -9805,27 +10291,27 @@ So what do
 2089
 01:26:16,500 --> 01:26:18,580
 we want to do when that history identifier happens?
-在是 history identifier 的这种情况，我们需要做什么
+在 History.SegueIdentifier 的这种情况下，我们需要做什么
 
 2090
 01:26:18,590 --> 01:26:23,450
 Well, if we can get our segue's destinationViewController
-如果我们能够获取到 segue 的 destinationViewController
+们能够获取到 segue 的 destinationViewController
 
 2091
 01:26:23,460 --> 01:26:26,590
 as a TextViewController,
-转型为 TextViewController
+并将其类型转换成 TextViewController
 
 2092
 01:26:26,590 --> 01:26:30,760
 that's the only thing we need to segue to with this segue.
-这是我们这个 segue 唯一需要跳转的地方
+这是这个 segue 跳转到的唯一的那个控制器
 
 2093
 01:26:30,760 --> 01:26:33,730
 Then we're just going to set the tvc's text equal to
-然后我们把 tvc.text = diagnosticHistory
+然后我们输入 tvc.text = diagnosticHistory
 
 2094
 01:26:33,730 --> 01:26:35,100
@@ -9834,17 +10320,17 @@ our diagnosticHistory,
 2095
 01:26:35,100 --> 01:26:37,630
 which I'm going to do by diagnosticHistory.
-这就是我希望通过 diagnosticHistory 做的事情
+这就是我希望对 diagnosticHistory 做的事情
 
 2096
 01:26:37,630 --> 01:26:39,830
 So, it's just going to show this Array,
-我们需要显示这个 Array
+所以，这里它就显示出这个数组的内容了
 
 2097
 01:26:39,840 --> 01:26:42,300
 this diagnostic history Array, as a String.
-把 Array 作为 String 显示出来
+把 diagnosticHistory 这个数组作为一个字符串显示出来
 
 2098
 01:26:42,310 --> 01:26:42,940
@@ -9853,12 +10339,12 @@ All right.
 2099
 01:26:45,640 --> 01:26:48,680
 And of course we'll need the default.
-当然，我们需要 default 情况
+当然，我们需要考虑 default 情况
 
 2100
 01:26:48,680 --> 01:26:50,240
 Break out of here.
-break 就可以了
+这里输入简单的 break 就可以了
 
 2101
 01:26:51,310 --> 01:26:52,480
@@ -9893,7 +10379,7 @@ cuz it's showing no diagnostic history.
 2107
 01:27:06,560 --> 01:27:08,960
 I haven't clicked any of these.
-我也没有点击这些按钮
+我还没有点击这些按钮
 
 2108
 01:27:08,960 --> 01:27:10,390
@@ -9978,7 +10464,7 @@ which is we're gonna say the diagnosticHistory plus equals
 2124
 01:27:48,960 --> 01:27:51,360
 the happiness, okay?
-OK？
+OK?
 
 2125
 01:27:51,360 --> 01:27:53,300
@@ -10017,27 +10503,27 @@ If you go look at our super class,
 
 2132
 01:28:06,640 --> 01:28:10,910
-happiness It has a var and even does it's own didsets.
+happiness It has a var and even does it's own didSets.
 happiness 变量有它自己的 didSet
 
 2133
 01:28:10,910 --> 01:28:14,910
-So I'm overriding this var, and I do my own didset,
+So I'm overriding this var, and I do my own didSet,
 所以我重写了这个变量，执行我自己的 didSet
 
 2134
 01:28:14,920 --> 01:28:18,520
-it does not override or replace this didset.
+it does not override or replace this didSet.
 它没有覆盖父类的 didSet
 
 2135
 01:28:18,520 --> 01:28:21,390
-So it's gonna do this didset, and
+So it's gonna do this didSet, and
 它只是先执行了父类的 didSet
 
 2136
 01:28:21,390 --> 01:28:23,320
-then it's gonna do this didset.
+then it's gonna do this didSet.
 然后再执行子类的
 
 2137
@@ -10063,6 +10549,7 @@ one, they add on to it.
 2141
 01:28:32,770 --> 01:28:34,380
 Okay.
+OKay.
 
 2142
 01:28:34,380 --> 01:28:36,000
@@ -10107,11 +10594,11 @@ Let's go over and do golden bear.
 2150
 01:28:47,680 --> 01:28:48,490
 Oh.
-
+哦
 
 2151
 01:28:48,490 --> 01:28:49,310
-That's kind of interesting.
+That's kind of Interesting.
 有点意思
 
 2152
@@ -10171,8 +10658,8 @@ and it segues to this, it creates a brand new MVC.
 
 2163
 01:29:20,410 --> 01:29:23,770
-And since this is a brand new DiagnosedHappinessViewController
-这个新的 DiagnosedHappinessViewController
+And since this is a brand new DiagnosedHappinessViewController
+这个新的 DiagnosedHappinessViewController
 
 2164
 01:29:23,770 --> 01:29:28,140
@@ -10182,7 +10669,7 @@ it's going to get a brand new
 2165
 01:29:28,150 --> 01:29:31,210
 diagnostic history, which is going to be empty.
-空的诊断历史
+空的诊断历史
 
 2166
 01:29:31,210 --> 01:29:32,480
@@ -10222,6 +10709,7 @@ NSUserDefaultss
 2173
 01:29:46,490 --> 01:29:47,880
 Okay.
+Okay.
 
 2174
 01:29:47,880 --> 01:29:49,260
@@ -10236,7 +10724,7 @@ Instead of being a stored property here,
 2176
 01:29:52,230 --> 01:29:55,370
 let's change it to be a computed property.
-之前的存储属性
+之前的存储属性
 
 2177
 01:29:55,370 --> 01:29:57,100
@@ -10265,22 +10753,22 @@ And in the get and the set here, and
 
 2182
 01:30:03,510 --> 01:30:05,570
-I'm gonna go into user defaults.
+I'm gonna go Into UserDefaults.
 需要 UserDefaults
 
 2183
 01:30:07,110 --> 01:30:09,380
-Put this diagnostic history into user defaults, and
+Put this diagnostic history Into UserDefaults, and
 把诊断历史放入 UserDefaults 中
 
 2184
 01:30:09,380 --> 01:30:10,880
-out of user defaults.
+out of UserDefaults.
 或者从 UserDefaults 中获取
 
 2185
 01:30:10,880 --> 01:30:13,110
-Since I'm going to be using user defaults,
+Since I'm going to be using UserDefaults,
 既然我要使用 UserDefaults
 
 2186
@@ -10311,7 +10799,7 @@ those UserDefaults that we get.
 2191
 01:30:24,460 --> 01:30:27,060
 The whole app is gonna be sharing this, and
-整个 app 都共享这一个对象
+整个 App 都共享这一个对象
 
 2192
 01:30:27,060 --> 01:30:31,030
@@ -10346,7 +10834,7 @@ versus just this little short thing right here.
 2198
 01:30:39,810 --> 01:30:42,240
 All right. So how am I going to get the
-怎么利用 defaults 实现
+怎么写 defaults 的
 
 2199
 01:30:42,240 --> 01:30:45,580
@@ -10361,1219 +10849,1524 @@ Once we set maybe it will be easier to imagine our get.
 2201
 01:30:48,410 --> 01:30:49,780
 So I am just going to go to defaults,
+所以，我只是要去使用 defaults
 
 2202
 01:30:49,780 --> 01:30:53,680
 I am going to set an object and remember that this is
+我准备创建一个对象并且记住它是一个 AnyObject
 
 2203
 01:30:53,680 --> 01:30:56,480
 any object, but it has to be a property list, okay?
+但它必须是一个属性列表，明白？
 
 2204
 01:30:56,490 --> 01:30:59,220
-But luckily an Array of ints,
+But luckily an Array of Ints,
+但是幸运的是它是一个 Int 型的数组
 
 2205
 01:30:59,220 --> 01:31:02,320
 which is what our diagnostic history is.
+这就是我们的诊断历史
 
 2206
 01:31:02,330 --> 01:31:04,630
-Sorry, this isn't an Array of ints,
+Sorry, this isn't an Array of Ints,
+抱歉，这不是一个 Int 型数组
 
 2207
 01:31:04,630 --> 01:31:09,160
-this diagnose is an Array of ints,
+this diagnose is an Array of Ints,
+这个诊断是一个 Int 型的数组
 
 2208
 01:31:09,160 --> 01:31:12,130
 that is a property so luckily, we can do that.
+很幸运的是这只是一个属性，我们可以操作它
 
 2209
 01:31:12,130 --> 01:31:14,500
 And here we're in the setting, okay, so
+在这里我们在 set 中
 
 2210
 01:31:14,500 --> 01:31:16,840
 we're just gonna put our new value here.
+所以我们只需要把我们的新的值放到这里
 
 2211
 01:31:16,840 --> 01:31:19,770
-So that's gonna be an Array of ints, the new value.
+So that's gonna be an Array of Ints, the new value.
+所以 newValue 将会是一个 Int 型的数组
 
 2212
 01:31:19,770 --> 01:31:22,910
 For key we need a key, so let's go back down to
+我们需要一个 Key，所以让我们回到
 
 2213
 01:31:22,910 --> 01:31:25,940
 our constants here and add another one, and
+常量这里再添加一个
 
 2214
 01:31:25,950 --> 01:31:30,250
 this is going to be our called defaults key, for the history.
+起名为 DefaultsKey
 
 2215
 01:31:30,250 --> 01:31:34,320
 And we can really put anything we want in here, any name for
+并且我们可以起任何名字
 
 2216
 01:31:34,320 --> 01:31:38,220
 the key, but remember that default is a database that is
+但是记住这是默认的数据库
 
 2217
 01:31:38,220 --> 01:31:41,790
 shared in our entire application, so we might want
+在我们的整个应用程序中共享，所以我们也许想要
 
 2218
 01:31:41,790 --> 01:31:44,860
 to kind of name space it a little bit by saying
+起一个带有命名空间的名字
 
 2219
 01:31:44,860 --> 01:31:48,430
-diagnosedHappinessViewControl- ler.History or
+diagnosedHappinessViewController.History or
+diagnosedHappinessViewController.History 或者
 
 2220
 01:31:48,430 --> 01:31:50,130
 something like that.
+一些类似于这样的名字
 
 2221
 01:31:50,130 --> 01:31:54,300
 So this is just a naming convention to throw the name
+所以，这只是一个命名约定将
 
 2222
 01:31:54,300 --> 01:31:57,300
 of the ViewContoller or the name of the class in general.
+ViewContoller 的名字 或者类的名字放到
 
 2223
 01:31:57,310 --> 01:31:59,340
 That is writing to the default in front.
+名字的前面
 
 2224
 01:32:00,510 --> 01:32:01,880
 You don't have to do this.
+你不必做成这样
 
 2225
 01:32:01,880 --> 01:32:05,280
 This is purely something you just want to be consistent
+这只是使你的程序
 
 2226
 01:32:05,280 --> 01:32:06,750
 with in your whole application and
+保持一致并且
 
 2227
 01:32:06,750 --> 01:32:09,150
 how you divide up this name space for the defaults,
+对于 defaults，把它分成不同的命名空间
 
 2228
 01:32:09,150 --> 01:32:12,920
 because this is a global name space inside your application.
+因为在你的应用里这是一个全局的命名空间
 
 2229
 01:32:14,020 --> 01:32:18,060
-So this will be our History and DefaultsKey.
+So this will be our History.DefaultsKey.
+这里写 History.DefaultsKey
 
 2230
 01:32:18,060 --> 01:32:21,630
 All right, so that's the new write our any time we set this
+每一次 set 以后
 
 2231
 01:32:21,630 --> 01:32:25,800
 diagnostic history it's gonna write it out to user defaults.
+我们创建的这个诊断历史，它将会写在用户的 defaults 中
 
 2232
 01:32:25,800 --> 01:32:27,100
 Then similarly we can get it
+那么同样的，我们处理一下 get 方法
 
 2233
 01:32:27,100 --> 01:32:30,970
 out by just returning defaults.objectForKey.
+直接通过返回 defaults.objectForKey
 
 2234
 01:32:30,970 --> 01:32:32,130
 Same thing.
+这都是类似的
 
 2235
 01:32:32,140 --> 01:32:33,300
 This History.DefaultsKey.
+这个 History.DefaultsKey
 
 2236
 01:32:33,300 --> 01:32:37,440
 But one thing I wanna make sure of is that it's
+但是有一件我想要确定的关于这个的事情是
 
 2237
 01:32:37,440 --> 01:32:39,240
-always an Array of int.
+always an Array of Int.
+它始终是一个 Int 型的数组
 
 2238
 01:32:39,240 --> 01:32:41,710
-So I'm gonna do as Array of int.
+So I'm gonna do as Array of Int.
+所以我把它转型成 Int 数组
 
 2239
 01:32:41,710 --> 01:32:45,150
 And if that returns nil then I'm gonna turn empty Array.
+并且如果那个返回一个空值的话我将要把它转为一个空的数组
 
 2240
 01:32:45,150 --> 01:32:47,530
 Okay. So if I have
+Okay，如果我
 
 2241
 01:32:47,530 --> 01:32:49,920
 never saved the diagnostic history to the defaults for
+从没有存储诊断记录到 defaults 中
 
 2242
 01:32:49,920 --> 01:32:52,020
 example, then this is going to come back nil,
+那么这个将会返回一个空值回来
 
 2243
 01:32:52,020 --> 01:32:54,620
 okay, but I never have saved it before.
+okay，但是我从来没有存储过它
 
 2244
 01:32:54,620 --> 01:32:55,690
 So we'll start out with a nice,
+所以我们将会在开始时拥有一个漂亮的
 
 2245
 01:32:55,690 --> 01:32:56,920
 empty Array in that case.
+空的数组
 
 2246
 01:32:58,330 --> 01:33:00,430
+Okay.
 Okay.
 
 2247
 01:33:00,430 --> 01:33:02,530
 And also, if somehow some junk had got written here that
+同样的，如果一些杂乱的数据被写到了这里
 
 2248
 01:33:02,530 --> 01:33:03,690
-wasn't in an Array of Intfor
+wasn't in an Array of Int for
+由于一些原因不是 Int 型的数组
 
 2249
 01:33:03,700 --> 01:33:05,600
 some reason, then this would also be nil and
+那么这也将会是空值并且
 
 2250
 01:33:05,600 --> 01:33:06,900
 we would start out with a fresh Array.
+我们将以一个新的数组开始
 
 2251
 01:33:06,900 --> 01:33:09,670
 It would be kind of a weird case, but anyway so you
+它也许会是一种奇怪的情况，但是无论如何你可以
 
 2252
 01:33:09,670 --> 01:33:14,100
 can see a simple way here to read and write from default.
+在这里看到一种使用 default 进行读写的简单的方式
 
 2253
 01:33:14,110 --> 01:33:19,270
 Okay make sense, all right so now let's go run around and
+好的体会一下，所以现在让我们运行起来看一下
 
 2254
 01:33:19,280 --> 01:33:22,310
 see if this fixed our problem, of our defaults not
+如果这个修复我们的问题，我们的 defaults 有没有起作用
 
 2255
 01:33:22,310 --> 01:33:24,650
 lying around, so let's see golden bear, dancing tree,
+所以让我们看 Golden Bear，Dancing Tree
 
 2256
 01:33:24,650 --> 01:33:26,350
 buckeye, put a whole bunch in there,
+Buckeye，放了几个数据
 
 2257
 01:33:26,350 --> 01:33:28,720
 history it's remembering them all.
+历史记录它把他们全记下来了
 
 2258
 01:33:28,720 --> 01:33:31,800
+Okay.
 Okay.
 
 2259
 01:33:31,800 --> 01:33:34,890
 Golden Bear, 0, Dancing Tree, 100.
+Golden Bear, 0, Dancing Tree, 100.
 
 2260
 01:33:34,890 --> 01:33:36,160
 Okay?
+明白？
 
 2261
 01:33:36,160 --> 01:33:38,460
 That looks quite awesome.
+这看起来很不错
 
 2262
 01:33:38,460 --> 01:33:39,660
 All right.
+好的
 
 2263
 01:33:39,660 --> 01:33:40,860
 Let's try one other thing here.
+让我们在这里尝试另外一件事
 
 2264
 01:33:40,860 --> 01:33:42,060
 Let's go try running this on an iPhone.
+让我们在 iPhone 上运行这个程序
 
 2265
 01:33:42,060 --> 01:33:45,600
 Let's see how this works on an iPhone, with our great new
+让我们看看在 iPhone 上它是怎么工作的
 
 2266
 01:33:45,600 --> 01:33:48,730
 feature here, and we'll see what it looks like.
+使用我们这些新的特性，我们看看它到底什么样
 
 2267
 01:33:52,710 --> 01:33:54,870
 All right so we got there a gold bear.
+好吧，按一下 Golden Bear
 
 2268
 01:33:54,870 --> 01:33:56,370
 We got a dancing tree.
+点一下 Dancing Tree
 
 2269
 01:33:56,380 --> 01:33:58,510
 We got the buckeye.
+点一些 Buckeye
 
 2270
 01:33:58,510 --> 01:34:01,010
 Okay, let's see that history.
+好的，让我们看看那个 history
 
 2271
 01:34:01,010 --> 01:34:05,980
 Whoa, that looks really, really bad, okay?
+这看起来非常早
 
 2272
 01:34:05,980 --> 01:34:07,020
 Well, hm.
+好的
 
 2273
 01:34:07,020 --> 01:34:08,520
 So it didn't put up the history in
+它没把历史记录放到类似 iPad 
 
 2274
 01:34:08,520 --> 01:34:10,550
 the little popover like that.
+一样的，小的 popover 里
 
 2275
 01:34:10,550 --> 01:34:12,620
 It took over the whole screen.
+它占据了整个屏幕
 
 2276
 01:34:12,620 --> 01:34:16,120
 Modal, it's what a modal segue looks like.
+这看起来就是一个 modal 的 segue 
 
 2277
 01:34:16,130 --> 01:34:17,390
 And I put it up here, and
+它占据了这里
 
 2278
 01:34:17,390 --> 01:34:19,660
-smashed into my carrier thing up here, and
+smashed Into my carrier thing up here, and
+把我运营商的地方都占据了
 
 2279
 01:34:19,660 --> 01:34:22,800
 there's no way to get out of here there's no done button or
+也没有办法退出，这里没有完成按钮
 
 2280
 01:34:22,800 --> 01:34:26,030
 dismiss or something, because in a popover we don't need to
+dismiss 之类的，因为在 popover 里我们不需要
 
 2281
 01:34:26,030 --> 01:34:28,770
 dismiss because you just click on the background.
+dismiss 因为你只需要点击一下背景
 
 2282
 01:34:28,770 --> 01:34:32,870
 So you know, this is really a small amount of information I
+所以你知道，我们可以把它放到 popover 中
 
 2283
 01:34:32,870 --> 01:34:36,810
 could have put it in a popover there why did iOS adapt that
+因为信息量很少，这里为什么 iOS
 
 2284
 01:34:36,810 --> 01:34:40,240
 popover for the iPhone and put it to your screen?
+把 popover 适配为 占据 iPhone 的整个屏幕呢？
 
 2285
 01:34:40,250 --> 01:34:42,580
 Well, because it doesn't really know how big this is
+好的，应为它的确不知道它将会变得多大
 
 2286
 01:34:42,580 --> 01:34:45,050
 going to be and how much data is going to be drawn or
+有多少数据将要被绘制或者怎么样绘制
 
 2287
 01:34:45,050 --> 01:34:48,690
 whatever until it's being displayed.
+直到它被显示出来
 
 2288
 01:34:48,690 --> 01:34:51,890
 And so on an iPhone to be safe it always adapts
+所以在 iPhone 上为了确保稳定，它通常会适应
 
 2289
 01:34:51,890 --> 01:34:54,820
 popovers to make them full screen presentation like
+popovers 使他们作为全屏展示像是
 
 2290
 01:34:54,830 --> 01:34:55,990
 this to take over the screen.
+这个接管了整个屏幕一样
 
 2291
 01:34:56,990 --> 01:34:59,060
 Okay, but in this case, we don't actually want that.
+好的，但是在这个例子中，我们实际上不想那样
 
 2292
 01:34:59,060 --> 01:35:00,700
-We dont want that adaptation behavior.
+We don‘t want that adaptation behavior.
+我们不想要那个适配行为
 
 2293
 01:35:00,700 --> 01:35:02,900
 We want to prevent this adaptation behavior so
+我们想防止这个适配行为
 
 2294
 01:35:02,900 --> 01:35:06,200
 they just keep putting it in its nice little popover.
+只需要把这些数据放入 popover 里就可以了
 
 2295
 01:35:06,200 --> 01:35:07,770
 It'll be perfectly fine in iPad and
+它在 iPad 上看起来很不错
 
 2296
 01:35:07,770 --> 01:35:09,440
 it will be perfectly fine for iPhone.
+并且它在 iPhone 也会这样
 
 2297
 01:35:09,440 --> 01:35:13,140
 So, how do we prevent this adaptation behavior
+所以，我们如何阻止这个适配行为
 
 2298
 01:35:13,140 --> 01:35:14,610
 from happening?
+发生呢？
 
 2299
 01:35:15,610 --> 01:35:19,540
 To do that, we need to get at that popover presentation
+要想实现，我们需要得到那个 popoverPresentationController
 
 2300
 01:35:19,550 --> 01:35:24,180
 controller I was talking to you about in the slides.
+slide 中讨论过的那个
 
 2301
 01:35:24,180 --> 01:35:26,120
-And it's pretty easy to get ahold of it.
+And it's pretty easy to get a hold of it.
+并且得到它是非常容易的
 
 2302
 01:35:26,120 --> 01:35:27,550
 Inside our prepare-
+在 prepareForSegue 中
 
 2303
 01:35:27,550 --> 01:35:29,420
 So here's our prepare in our diagnosed,
+这个 DiagnosedHappinessViewController 
 
 2304
 01:35:29,420 --> 01:35:32,720
 DiagnosedHappinessViewController right here.
+里面的
 
 2305
 01:35:32,720 --> 01:35:36,290
 The same place down here where we're doing the preparation
+在这里的同一个地方我们准备那些将要发生的事情
 
 2306
 01:35:36,290 --> 01:35:40,500
 happening, we can also say if we can let,
+我们也可以说
 
 2307
 01:35:40,500 --> 01:35:43,330
 ppc I'll call it, equal the text view
+if let ppc = 
 
 2308
 01:35:43,330 --> 01:35:46,830
-controller's popover presentation controller.
+controller's PopoverPresentationController.
+tvc.popoverPresentationController
 
 2309
 01:35:46,840 --> 01:35:49,450
 Okay.
+好的
 
 2310
 01:35:49,460 --> 01:35:52,070
 So, this is a method in UI viewcontroller and
+所以，这里是一个在 UIViewcontroller 中的方法并且
 
 2311
 01:35:52,080 --> 01:35:54,740
 it'll return nil if you're not currently in the process of
+它将会返回一个 nil 
 
 2312
 01:35:54,740 --> 01:35:57,310
 being presented in a popover.
+如果你当前没有显示 popover
 
 2313
 01:35:57,310 --> 01:36:00,280
 So if this segue if we changed this segue to
+如果我们改变这个 segue
 
 2314
 01:36:00,280 --> 01:36:03,020
 segue somehow else other than a popover,
+跳转到不是 popover 的地方
 
 2315
 01:36:03,020 --> 01:36:06,990
 maybe we wanted to go full modal for some reason or
+也许我们因为某些原因想要完整的 modal 模式
 
 2316
 01:36:06,990 --> 01:36:09,690
 we decided to push it on a navigation stack or
+我们决定把它放入一个导航栈中或者
 
 2317
 01:36:09,690 --> 01:36:11,820
 whatever then this would return nill and
+其他怎么样，这将返回一个空值
 
 2318
 01:36:11,830 --> 01:36:14,060
 so nothing that I'm gonna do right here would even happen.
+这样的话我在这里做的任何事都将不会发生
 
 2319
 01:36:15,530 --> 01:36:18,050
 So what am I going to do?
+所以接下来我要做什么？
 
 2320
 01:36:18,050 --> 01:36:20,560
 I'm just going to set the popoverPresentationControll-
+我只是要设置 popoverPresentationController的
 
 2321
 01:36:20,570 --> 01:36:24,670
 er's delegate to myself, and that's because the popover
+delegate 给 self，那是因为 PopoverController 的
 
 2322
 01:36:24,670 --> 01:36:27,340
 controller's delegate allows you to
+delegate 允许你
 
 2323
 01:36:27,340 --> 01:36:31,510
 have someone else control the way the presentation works.
+让其他人控制 popover 工作的方式
 
 2324
 01:36:31,510 --> 01:36:35,340
-And this is the first time you're seeing the [COUGH]
+And this is the first time you're seeing the
+并且这是第一次你看到
 
 2325
 01:36:35,350 --> 01:36:39,380
-present the idea of a delegate in an action in an iOS.
+idea of a delegate in an action in an iOS.
+在 iOS 系统中的 delegate
 
 2326
 01:36:39,380 --> 01:36:41,280
 Now you remember when we set ourselves as
+现在你记住当我们设置我们自己作为
 
 2327
 01:36:41,280 --> 01:36:43,980
 a delegate you can see there's an error right here it says
+一个 delegate 的时候 你可以看到这里有一个错误
 
 2328
 01:36:43,990 --> 01:36:46,690
 DiagnosedHappinessViewContro- ller does not conform to
+它的意思是 DiagnosedHappinessViewController 没有符合
 
 2329
 01:36:46,690 --> 01:36:48,520
 this protocol
+这个 protocol
 
 2330
 01:36:48,520 --> 01:36:50,360
 UIPopoverPrsentationControlle- rDelegate.
+UIPopoverPrsentationControllerDelegate 的协议
 
 2331
 01:36:50,360 --> 01:36:54,630
 And that's true, because up here we have to say we are a
+这是真的，因为在这里我们必须说明我们是一个
 
 2332
 01:36:54,630 --> 01:36:56,760
 UIPopoverPresentationControll- erDelegate.
+UIPopoverPresentationControllerDelegate
 
 2333
 01:36:57,730 --> 01:36:59,060
 Okay? And now,
+明白？现在
 
 2334
 01:36:59,070 --> 01:37:03,770
 once we put this on here, we have to go down here and
+一旦我们把这个放在这里，我们必须去实现方法
 
 2335
 01:37:03,770 --> 01:37:08,440
 actually implement that method, the method we want.
+我们想要的那个方法
 
 2336
 01:37:08,440 --> 01:37:10,540
 And this method that we want is called
+并且那个我们想要的方法被称作
 
 2337
 01:37:10,540 --> 01:37:13,980
-adaptive presentation style for presentation controller.
+adaptivePresentationStyleForPresentationController.
+adaptivePresentationStyleForPresentationController
 
 2338
 01:37:15,050 --> 01:37:18,000
 Okay?
+明白？
 
 2339
 01:37:18,000 --> 01:37:20,950
 And this is basically saying, here's a popover controller.
+这里的意思是，这里是一个 popoverController
 
 2340
 01:37:20,950 --> 01:37:23,180
-[INAUDIBLE] You know how, in a delegate method, we
+You know how, in a delegate method, we
+在一个 delegate 方法中
 
 2341
 01:37:23,190 --> 01:37:25,850
 usually pass along the thing that's doing the delegation.
+我们通常传递的东西在 delegation 中传递一样
 
 2342
 01:37:25,860 --> 01:37:29,120
-So this is that same popover presentation controller being
+So this is that same PopoverPresentationController being
+所以这就是这个 popoverPresentationController 
 
 2343
 01:37:29,130 --> 01:37:30,790
 passed back to us.
+被传递回来了
 
 2344
 01:37:30,790 --> 01:37:35,400
 And it's saying, please return a presentation style which you
+并且它说，请返回一种你想要的呈现方式
 
 2345
 01:37:35,400 --> 01:37:38,760
 want and when you're adapting on the iPhone.
+当你运行在 iPhone 上时
 
 2346
 01:37:38,770 --> 01:37:43,170
-So I'm gonna return the UI modal presentation style none,
+So I'm gonna return the UIModalPresentationStyle.None,
+所以我返回 UIModalPresentationStyle.None
 
 2347
 01:37:43,170 --> 01:37:46,440
 which means don't adapt, Okay do not when you're on
+它的意思是不进行适配，不要在 iPhone 上进行适配
 
 2348
 01:37:46,440 --> 01:37:49,370
 iPhone do no adaptations do what you normally do,
+不做任何你通常做的修改
 
 2349
 01:37:50,310 --> 01:37:51,840
 which is put the pop over in a little window.
+把 popover 放到一个小的窗口里
 
 2350
 01:37:53,310 --> 01:37:54,480
 And that's it. That's all I
+就是这样
 
 2351
 01:37:54,480 --> 01:37:56,310
 need to do to suppress that.
+这就是我需要做的
 
 2352
 01:37:56,310 --> 01:37:58,680
 Now, by the way,
+现在，顺便说一下
 
 2353
 01:37:58,680 --> 01:38:01,050
 in addition to PPC delegating inside here, I could, there
+对于 ppc 的 delegate
 
 2354
 01:38:01,050 --> 01:38:04,690
-are other methods in popover presentation controller.
+are other methods in PopoverPresentationController.
+还有其他 PopoverPresentationController 的方法
 
 2355
 01:38:04,690 --> 01:38:10,190
 You can go take a look at, and they will show you things that
+你可以查看一下文档
 
 2356
 01:38:10,190 --> 01:38:12,860
 you can find out about what's going on with the popover.
+你可以发现关于 popover 相关的东西
 
 2357
 01:38:12,860 --> 01:38:16,360
 But setting its delegates so that you can control that
+但是设置成它的 delegate 这样的话你可以控制
 
 2358
 01:38:16,370 --> 01:38:19,230
 adaptation is a popular thing to want to do.
+你想做的任何适配操作
 
 2359
 01:38:19,240 --> 01:38:20,300
 All right.
+好的
 
 2360
 01:38:20,300 --> 01:38:21,840
 So let's go try it now on the iPhone again.
+所以让我们在 iPhone 上再次尝试一次
 
 2361
 01:38:21,840 --> 01:38:25,770
 Here we go let's hit history and
+这里让我们敲击 history
 
 2362
 01:38:25,770 --> 01:38:28,670
 now it's working okay coming up in the pop over here.
+现在它在这里弹出的 popover 中工作的很好
 
 2363
 01:38:28,680 --> 01:38:31,980
 Let's go add history let's go another dancing tree over here
+让我们添加 history，让我们在这里点击 Dancing Tree
 
 2364
 01:38:31,980 --> 01:38:34,780
 now we've dancing tree added there.
+现在我们已经在这里添加了 Dancing Tree
 
 2365
 01:38:34,780 --> 01:38:37,150
 Okay?
+明白？
 
 2366
 01:38:37,150 --> 01:38:39,520
 And it'll work fine landscape or portrait.
+并且它在垂直和水平模式下工作的很好
 
 2367
 01:38:42,590 --> 01:38:42,990
 Okay?
+明白？
 
 2368
 01:38:42,990 --> 01:38:43,390
 Questions about that?
+有关于这些的问题么？
 
 2369
 01:38:44,560 --> 01:38:46,440
 All right.
+好的
 
 2370
 01:38:46,440 --> 01:38:48,320
 The last thing I want to do with the pop over is
+最后一件我想对 popover 做的事情是
 
 2371
 01:38:48,330 --> 01:38:50,160
 when we ran this pop over,
+当我运行这个 popover 的时候
 
 2372
 01:38:50,160 --> 01:38:51,990
 over here, you notice that it's kind of big.
+在这里，你注意到它是很大的
 
 2373
 01:38:52,000 --> 01:38:54,600
 It's covering the whole smiley face for no reason,
+它无缘无故地遮盖了住了整个笑脸
 
 2374
 01:38:54,600 --> 01:38:58,530
 because it really only needs to be big enough to hold that.
+因为它的确是需要变得足够大
 
 2375
 01:38:58,540 --> 01:39:02,300
 Well, that's because really again the popover presentation
+好吧，那是因为 PopoverPresentationController
 
 2376
 01:39:02,310 --> 01:39:05,710
 controller really has no idea how big this information is
+不知道在这里的信息是有
 
 2377
 01:39:05,710 --> 01:39:06,340
 in here.
+多大
 
 2378
 01:39:07,380 --> 01:39:09,240
 And, but there is a way to tell it.
+但是，这里有一种方式可以告诉它
 
 2379
 01:39:09,240 --> 01:39:11,910
 And if you think about who knows what the size of
+如果你考虑谁知道什么样的尺寸是最好的
 
 2380
 01:39:11,910 --> 01:39:15,250
 this is best, well it's the TextViewController.
+那就是 TextViewController
 
 2381
 01:39:15,250 --> 01:39:16,400
 Cuz the text view
+因为 TextViewController
 
 2382
 01:39:16,400 --> 01:39:17,550
 controller's the one that's gonna display this.
+是将会在这里显示的控件之一
 
 2383
 01:39:17,550 --> 01:39:20,950
 It knows what it's preferred size would be.
+它知道它的首选的大小将会是多少
 
 2384
 01:39:20,950 --> 01:39:23,050
 So as we're talking about in the slides.
+所以当我们在 slide 中讨论的时候
 
 2385
 01:39:23,060 --> 01:39:25,090
 Let's go ahead and make it so
+让我们继续实现它
 
 2386
 01:39:25,090 --> 01:39:27,790
 the TextViewController reports its preferred size.
+这样的话 TextViewController 会报告它的首选的尺寸
 
 2387
 01:39:27,790 --> 01:39:33,430
 So I'm gonna go over here to the TextViewController.
+所以我将到这个 TextViewController 中
 
 2388
 01:39:33,430 --> 01:39:35,320
 Okay.
+好的
 
 2389
 01:39:35,320 --> 01:39:37,200
-[COUGH] Now the prefered size is just a var in
+Now the prefered size is just a var in
+现在首选的尺寸在 UIViewController 是一个 var
 
 2390
 01:39:37,200 --> 01:39:41,300
 UIV controller so the TextViewController could set that
+所以 TextViewController 可以对它进行设置
 
 2391
 01:39:41,310 --> 01:39:45,640
-somewhere, it could just say preferred content size equals
+somewhere, it could just say preferredContentSize equals
+可以进行 preferredContentSize = _ 之类的操作
 
 2392
 01:39:45,640 --> 01:39:49,910
 something, but since this is a subclass UIV controller and
+但是因为这是一个 UIViewController 的子类并且
 
 2393
 01:39:49,910 --> 01:39:55,150
 the content size would change every time this is changing.
+内容的大小可能随时发生变化
 
 2394
 01:39:55,150 --> 01:39:57,050
 And also might change depending on
+也可能根据一些内容进行改变例如
 
 2395
 01:39:57,050 --> 01:39:59,720
-how big a space the popover is being popped into.
+how big a space the popover is being popped Into.
+当 popover 进入的时候它占了多大
 
 2396
 01:40:01,060 --> 01:40:06,560
 We can actually do better here by overriding the var
+实际上我们可以在这里做的更好，通过重写这个 var
 
 2397
 01:40:06,560 --> 01:40:12,400
 preferredContentSize, which is a CGSsize.
+preferredContentSize，类型是 CGSsize
 
 2398
 01:40:12,400 --> 01:40:16,730
 I'm going to override it and do the get set.
+我准备重写它并且做好 get 和 set.
 
 2399
 01:40:16,740 --> 01:40:19,200
 Okay, so it's going to be a computed property,
+好的，所以这将会是一个计算属性
 
 2400
 01:40:19,210 --> 01:40:20,940
 get and set.
+get 和 set.
 
 2401
 01:40:20,940 --> 01:40:23,440
 And on the setting side of this,
+在 set 中
 
 2402
 01:40:23,440 --> 01:40:25,440
-if someone set the preferred content size,
+if someone set the preferredContentSize,
+如果某人设置好了 preferredContentSize
 
 2403
 01:40:25,440 --> 01:40:27,140
 I'm just gonna let my super class.
+我只需要让我的父类的
 
 2404
 01:40:27,150 --> 01:40:32,480
-Preferred content size do its thing, okay?
+preferredContentSize do its thing, okay?
+preferredContentSize 
 
 2405
 01:40:32,480 --> 01:40:33,920
 We'll just let the new value do that.
+等于 newValue
 
 2406
 01:40:33,920 --> 01:40:36,180
 So I'm going to let my super class handle it or
+所以当有人 set 的时候
 
 2407
 01:40:36,190 --> 01:40:36,880
 someone sets it.
+我让父类来处理
 
 2408
 01:40:37,920 --> 01:40:40,920
 All right?
+明白？
 
 2409
 01:40:40,920 --> 01:40:43,920
 But if someone tries to get it, then if my text view has
+但是如果有人想要 get 它，接下来如果我的 textView
 
 2410
 01:40:43,930 --> 01:40:46,890
 been set, so if this outlet has been set, and if I'm in
+已经 set 了，所以如果这个 outlet 已经被设置了，并且如果
 
 2411
 01:40:46,900 --> 01:40:52,100
 the middle of being presented on screen, okay, then I can
+我在中途把它呈现到了屏幕上，好的，接下来我可以
 
 2412
 01:40:52,100 --> 01:40:55,100
 ask the text view what its preferred size would be.
+向 textView 询问它的首选的尺寸将会是多少 
 
 2413
 01:40:56,100 --> 01:40:58,540
 Okay, so we're going to let the textView do the work here.
+好的，所以我们准备让 textView 处理这里
 
 2414
 01:40:58,540 --> 01:40:59,870
 So what does that look like?
+所以它看起来的怎么样？
 
 2415
 01:41:01,510 --> 01:41:03,910
 So, we might say,
+我们也许会说
 
 2416
 01:41:03,910 --> 01:41:09,110
 for example here, if textView does not equal nil.
+if textView != nil
 
 2417
 01:41:09,110 --> 01:41:13,180
 Oops, I've got sticky keys on here, so
+哦，我启用了粘滞键
 
 2418
 01:41:13,180 --> 01:41:15,480
 you see that in the lower corner there.
+你可以在右下角看得到
 
 2419
 01:41:15,490 --> 01:41:18,650
 If textView doesn't equal nil, and if we're
+如果 textView 不等于空，并且它正呈现在屏幕中
 
 2420
 01:41:18,660 --> 01:41:22,120
 being presented right now so how can we find that out?
+怎么能知道正在屏幕当中显示？
 
 2421
 01:41:22,130 --> 01:41:25,530
-UIViewController has another great bar
+UIViewController has another great var
+UIViewController 拥有另一个 var
 
 2422
 01:41:25,530 --> 01:41:28,760
 called presentingViewController.
+叫做 presentingViewController
 
 2423
 01:41:29,900 --> 01:41:31,900
 The presentingViewController is the view controller that
+presentingViewController 是一个 ViewController
 
 2424
 01:41:31,900 --> 01:41:35,940
 is currently presenting you via some sort of segue.
+通过某种 segue 正在屏幕中显示的 ViewController
 
 2425
 01:41:35,940 --> 01:41:39,610
 So, in the popover case, it's going to be that diagnosed
+所以，在 popover 情形中
 
 2426
 01:41:39,610 --> 01:41:41,840
 view controller's gonna be presenting me.
+这个 ViewController 是 DiagnosedViewController
 
 2427
 01:41:41,840 --> 01:41:44,610
 But whoever it is, I can check to make sure that's not nil.
+但是无论是谁在呈现，我可以检查它以确保它不是 nil 
 
 2428
 01:41:45,550 --> 01:41:48,450
 So, this is only gonna happen right here,
+所以这里只会在 
 
 2429
 01:41:48,450 --> 01:41:51,180
 in the case where I'm in the middle of a presentation.
+presentingViewController 不是 nil 的时候才会运行
 
 2430
 01:41:51,180 --> 01:41:53,550
 Okay, also my text here not to be no it's not clear that I
+textView 在这里没必要检查一下
 
 2431
 01:41:53,550 --> 01:41:56,720
 really need to set this because, probably my
+也许在这之前
 
 2432
 01:41:56,720 --> 01:41:59,690
 outlets are all gonna be set before this gets there.
+outlets 已经都被设置好了
 
 2433
 01:41:59,690 --> 01:42:03,790
 But just to be safe I'll set both of these things and
+这样做只是为了保险起见
 
 2434
 01:42:03,800 --> 01:42:06,600
 in this case I'm gonna let the text view tell me a size that
+在这里返回 textView.sizeThatFits
 
 2435
 01:42:06,600 --> 01:42:10,500
 fits inside my presenting view controllers.
+PresentingViewController.
 
 2436
 01:42:10,500 --> 01:42:13,030
+Viewbounds.size.
 Viewbounds.size.
 
 2437
 01:42:14,040 --> 01:42:15,300
 'Kay?
+明白？
 
 2438
 01:42:15,300 --> 01:42:18,210
 And this of course we will need to unwrap.
+当然我们需要解包
 
 2439
 01:42:18,210 --> 01:42:20,090
 But it's okay,
+但是这没关系
 
 2440
 01:42:20,090 --> 01:42:21,970
 cuz we checked to make sure it's not nil first.
+因为我们去检查确保它在开始的时候不为空
 
 2441
 01:42:21,980 --> 01:42:23,760
 'Kay?
+明白？
 
 2442
 01:42:23,760 --> 01:42:25,540
 So this is the bounds.size of our presentingViewController.
+所以这是我们 presentingViewController 的 bounds.size
 
 2443
 01:42:25,550 --> 01:42:27,710
 So in the diagnosedHappinessViewContro-
+所以在 DiagnosedHappinessViewController 中
 
 2444
 01:42:27,720 --> 01:42:30,920
-ller case, it's the whole seam, basically.
+ller case, it's the whole scene, basically.
+它是整个屏幕
 
 2445
 01:42:30,920 --> 01:42:34,190
 And we're just gonna see what is a good size that fits.
+我们只是想看到什么样是适合的尺寸
 
 2446
 01:42:34,190 --> 01:42:36,860
-Now this is only a preferred content size.
+Now this is only a preferredContentSize.
+现在这个只是 preferredContentSize
 
 2447
 01:42:36,860 --> 01:42:39,420
 So if this size that fits were really huge, for
+它适应的尺寸是非常巨大的
 
 2448
 01:42:39,430 --> 01:42:43,230
 example, the popover's still going to limit the size to
+popover 仍然在限定的尺寸范围中
 
 2449
 01:42:43,230 --> 01:42:45,130
 whatever its restrictions are, okay?
+限制它自己的大小
 
 2450
 01:42:45,130 --> 01:42:47,310
 So we just prefer.
+所以我们只是提前设定
 
 2451
 01:42:47,320 --> 01:42:49,500
 This is not actual content size, it's just preferred.
+这不是实际的内容大小，只是希望它的大小
 
 2452
 01:42:49,500 --> 01:42:50,770
 Now, what if we're not in
+现在，如果
 
 2453
 01:42:50,770 --> 01:42:52,030
 the middle of presenting right here?
+presentingViewController 是 nil 
 
 2454
 01:42:52,040 --> 01:42:55,610
 Well, then once again I'm going to let my
+好吧，然后再一次我去让我的
 
 2455
 01:42:55,610 --> 01:42:58,940
 super class do the work here so whatever it
+父类完成这里的工作
 
 2456
 01:42:58,940 --> 01:43:01,880
 would normally return I'm going to have it return.
+无论正常返回的是什么，我都得让它返回一个值
 
 2457
 01:43:01,880 --> 01:43:04,780
 So remember I'm overriding this my super class.
+记住，我是在重写
 
 2458
 01:43:04,780 --> 01:43:06,130
 So really I'm just getting involved in
+所以我只是恰巧
 
 2459
 01:43:06,130 --> 01:43:07,480
 this one case where I happen to be in the middle of
+在这个案例中，屏幕中展示了我
 
 2460
 01:43:07,480 --> 01:43:10,250
 presenting something, then I pretty much know what my
+然后我非常想知道我
 
 2461
 01:43:10,250 --> 01:43:13,490
 size is based on my text field okay?
+基于 textfield 的尺寸是多少，明白？
 
 2462
 01:43:14,490 --> 01:43:17,690
 So let's run and see how that fixes it.
+所以让我们运行并且看下问题是否得到解决
 
 2463
 01:43:17,690 --> 01:43:20,560
 All right, so the goal is to get our history, excellent.
+好的，所以目标是得到 history，非常棒
 
 2464
 01:43:20,560 --> 01:43:23,430
 Now notice also, our history was remembered even
+现在可以看到，我们的 history 已经被记住了
 
 2465
 01:43:23,430 --> 01:43:26,670
 after we quit our app and run it again because we are using
+即使我们退出了的应用又重新运行了一下它，因为我们使用了
 
 2466
 01:43:26,670 --> 01:43:30,300
 defaults which these defaults remember things when it quits.
+NSUserDefault，退出程序也能存储数据
 
 2467
 01:43:30,300 --> 01:43:34,570
 So here we got 0, 150, 100, let's go back over here and
+所以这里我们得到了0, 150, 100,让我们重新回到这里并且
 
 2468
 01:43:34,570 --> 01:43:35,470
 do nothing.
+什么都不做
 
 2469
 01:43:35,480 --> 01:43:36,610
 25.
+25
 
 2470
 01:43:36,610 --> 01:43:37,510
 Looks good.
+看起来很棒
 
 2471
 01:43:37,510 --> 01:43:40,040
 Let's go back and do Golden Bear.
+让我们返回并且点一下 Golden Bear
 
 2472
 01:43:40,050 --> 01:43:42,780
 Zero, so it's working beautifully there.
+0，所以它在这里表现地很不错
 
 2473
 01:43:42,780 --> 01:43:46,150
 Okay, again it works no matter what size you use.
+好的，无论你的尺寸是多少，它都工作地不错
 
 2474
 01:43:46,150 --> 01:43:52,520
 Go on there and it will also work on the iPad as well.
+它同样在 iPad 上工作的很好
 
 2475
 01:43:52,520 --> 01:43:57,660
 There we go.
+启动程序
 
 2476
 01:43:57,660 --> 01:43:58,730
 So, there's the history.
+点击 history
 
 2477
 01:43:58,730 --> 01:44:00,530
 Shows it up there.
+展示了出来
 
 2478
 01:44:00,530 --> 01:44:02,730
 There too.
+横屏也一样
 
 2479
 01:44:02,730 --> 01:44:05,930
 Okay, so that's it for popovers, but we also managed
+好的，popover 就到这里
 
 2480
 01:44:05,930 --> 01:44:09,040
 to cover a couple other things there along the way.
+demo 过程中也涉及了几点知识
 
 2481
 01:44:09,040 --> 01:44:12,200
 Most notably was the polymorphism of
+尤其是 ViewController 的
 
 2482
 01:44:12,210 --> 01:44:14,010
 view controllers.
+多态性
 
 2483
 01:44:14,940 --> 01:44:17,740
 And we were in our storyboard here,
+在 storyboard 中
 
 2484
 01:44:17,740 --> 01:44:20,450
 we ended up actually creating a sub class,
+我们创建了一个子类
 
 2485
 01:44:20,450 --> 01:44:23,580
 DiagnosedHappinessViewContro- ller here to add some more
+去添加更多的功能
 
 2486
 01:44:23,580 --> 01:44:25,480
 functionality, okay?
+明白？
 
 2487
 01:44:25,480 --> 01:44:27,620
 And that is not an edge case,
+并且这不是在一种边缘情况
 
 2488
 01:44:27,620 --> 01:44:28,950
 that's a common thing you wanna do.
+这么做很正常
 
 2489
 01:44:28,950 --> 01:44:31,650
 You have some reusable HappinessViewController or
+你有一些可重复使用的 HappinessViewController 或者
 
 2490
 01:44:31,660 --> 01:44:33,620
 something like HappinessViewController.
+一些像是 HappinessViewController 的东西
 
 2491
 01:44:33,620 --> 01:44:36,660
 You wanna use it, but you need to add something to it and
+你想要使用它，但是你需要给它添加一些东西
 
 2492
 01:44:36,660 --> 01:44:37,460
 you don't wanna change it.
+你不想改变它
 
 2493
 01:44:37,460 --> 01:44:38,460
 Well, that's exactly what
+这就是
 
 2494
 01:44:38,460 --> 01:44:39,690
 object oriented programming is for!
+面向对象编程的特点
 
 2495
 01:44:39,700 --> 01:44:41,800
 You can create a subclass of it and
+你可以为它创建一个子类
 
 2496
 01:44:41,800 --> 01:44:48,600
 add the methods that you wanna add to it, to your diagnosed.
+添加一些你想要给它添加特定的方法
 
 2497
 01:44:48,600 --> 01:44:50,570
 And what's kind of nice too
+还不错的是
 
 2498
 01:44:50,570 --> 01:44:52,540
-is diagnosed view controller contains all the stuff that
+is DiagnosedViewController contains all the stuff that
+DiagnosedViewController 中包含了所有
 
 2499
 01:44:52,540 --> 01:44:56,110
 has to do with the diagnostic business and nothing else.
+有关于诊断的事情，而没有其他别的东西
 
 2500
 01:44:56,110 --> 01:44:59,850
 So this is a very nice class well contained,
+所以这是一个非常好类
 
 2501
 01:44:59,850 --> 01:45:02,950
 only has the diagnostic stuff in it.
+只有关于诊断的东西
 
 2502
 01:45:02,950 --> 01:45:06,050
 Okay, so that's it, and you don't need this for
+这就是今天的内容
 
 2503
 01:45:06,050 --> 01:45:09,490
 your homework per se, but there is an extra credit item
+你不需要把它当成作业
 
 2504
 01:45:09,490 --> 01:45:13,320
 to add a popover so hopefully you'll decide to tackle that.
+但是 extra credit 中有关于 popover 的内容，希望你们能够解决
 
 2505
 01:45:15,430 --> 01:45:15,460
 >> For more, please visit us at stanford.edu.
+想要了解更多，请访问：stanford.edu

@@ -16,7 +16,7 @@ Okay, well, welcome to lecture 7 of CS193P.
 4
 00:00:11,970 --> 00:00:14,240
 This is the winter of 2015.
-这是2015年冬季的课程
+这是 2015 年冬季课程
 
 5
 00:00:14,240 --> 00:00:16,070
@@ -30,17 +30,17 @@ we are going to talk about multiple MVCs, all right?
 
 7
 00:00:19,180 --> 00:00:21,110
-That includes split view controller,
+That includes Split View Controller,
 这将涉及到 Split View Controller 和
 
 8
 00:00:21,110 --> 00:00:22,150
-navigation controller.
+Navigation Controller.
 Navigation Controller
 
 9
 00:00:22,150 --> 00:00:24,150
-We talked about tab bar controller a little bit
+We talked about Tab Bar Controller a little bit
 我们在上一讲中已经讲过一点 Tab Bar Controller 的内容
 
 10
@@ -90,7 +90,7 @@ segregated them off to the end.
 19
 00:00:47,500 --> 00:00:49,440
 And we'll have a demo about that.
-同样我们在这里有一个 Demo
+同样我们也会有一个关于 Popovers 的 Demo
 
 20
 00:00:50,640 --> 00:00:52,600
@@ -109,18 +109,18 @@ We're trying to build apps by taking our MVCs and combining
 
 23
 00:00:58,980 --> 00:01:02,580
-them with tab bar, split view, and navigation controller.
+them with tab bar, Split View, and Navigation Controller.
 Tab Bar, Split View, Navigation Controller 混合在一起来构建我们的应用
 
 24
 00:01:02,580 --> 00:01:04,420
-We talked about tab bar controller which is
+We talked about Tab Bar Controller which is
 我们讲过 Tab Bar Controller 就是
 
 25
 00:01:04,420 --> 00:01:06,980
 just simply four or five or however many
-用一个小的 Tab Bar 来讲将四、五个或者任何数目的
+用一个小的 Tab Bar 来将四、五个或者任何数目的
 
 26
 00:01:06,990 --> 00:01:10,790
@@ -184,7 +184,7 @@ or whatever.
 
 38
 00:01:36,580 --> 00:01:37,740
-And then we talked about split view controller,
+And then we talked about Split View Controller,
 接下来我们讲到 Split View Controller
 
 39
@@ -224,22 +224,22 @@ about what you're doing in the master, okay?
 46
 00:01:54,090 --> 00:01:57,330
 So that's why we call it master and detail.
-这就是我们为什么叫它们  Master 和 Detail
+这就是我们为什么叫它们 Master 和 Detail
 
 47
 00:01:57,330 --> 00:02:00,400
-So we're going to pick up now with navigation controller.
+So we're going to pick up now with Navigation Controller.
 接下来，我们讲一下 Navigation Controller
 
 48
 00:02:00,400 --> 00:02:03,900
-So navigation controller is just yet another MVC whose
+So Navigation Controller is just yet another MVC whose
 Navigation Controller 就是一个 MVC
 
 49
 00:02:03,900 --> 00:02:07,800
-view is multiple of other MVCs and navigation controller can
-它的 view 由其他的 MVC 组成
+View is multiple of other MVCs and Navigation Controller can
+它的 View 由其他的 MVC 组成
 
 50
 00:02:07,810 --> 00:02:09,970
@@ -272,7 +272,7 @@ Okay?
 
 56
 00:02:21,150 --> 00:02:22,280
-So NavigationController's basically stacking them
+So Navigation Controller's basically stacking them
 所以，Navigation Controller 基本上就是像一堆卡片一样放置 MVC
 
 57
@@ -282,7 +282,7 @@ like cards and you can only see the one on top.
 
 58
 00:02:25,290 --> 00:02:26,920
-That's how NavigationController
+That's how Navigation Controller
 这就是 Navigation Controller 如何
 
 59
@@ -297,7 +297,7 @@ So it's gonna stack these MVCs up.
 
 61
 00:02:31,560 --> 00:02:33,890
-So here's a NavigationController.
+So here's a Navigation Controller.
 这里有一个 Navigation Controller
 
 62
@@ -307,8 +307,8 @@ And it's got an MVC in it.
 
 63
 00:02:35,530 --> 00:02:39,200
-This is the All Settings MVC from your device.
-这里它显示的 MVC 是你设备的 All Settings MVC
+This is the "All Settings" MVC from your device.
+这里它显示的 MVC 是你设备的 "All Settings" MVC
 
 64
 00:02:39,200 --> 00:02:40,870
@@ -318,7 +318,7 @@ If you go look in your iPhone or
 65
 00:02:40,870 --> 00:02:42,530
 whatever, you'll see the settings app looks like this.
-或者其他 iOS 设备时，你会看到设置的应用程序样子就是这样
+或者其他 iOS 设备时，你会看到设置 App 的样子就是这样
 
 66
 00:02:42,540 --> 00:02:45,200
@@ -332,17 +332,17 @@ Has all the settings accessible from here.
 
 68
 00:02:49,040 --> 00:02:53,780
-Now the navigation controller is drawing only a little part
-需要注意的是，由 Navigation Controller 绘图的一小部分
+Now the Navigation Controller is drawing only a little part
+需要注意的是，由 Navigation Controller 只会绘制它的 View 的一小部分
 
 69
 00:02:53,780 --> 00:02:57,410
-of it's view here, which is that title bar.
-是 Title Bar（顶部的一块区域）
+of its View here, which is that title bar.
+就是 Title Bar（顶部的一块区域）
 
 70
 00:02:57,420 --> 00:02:59,950
-And the navigational controller will put the title
+And the Navigation Controller will put the title
 Navigation Controller 会在 Title Bar 这里显示标题（Title）
 
 71
@@ -352,8 +352,8 @@ there, and also you can have a couple of buttons up at
 
 72
 00:03:02,550 --> 00:03:05,490
-the top and the navigational controller draws that part.
-同样 Navigation Controller 会帮你绘制
+the top and the Navigation Controller draws that part.
+Navigation Controller 也会帮你绘制
 
 73
 00:03:05,490 --> 00:03:06,820
@@ -377,8 +377,8 @@ Okay, and right now the only thing on
 
 77
 00:03:14,930 --> 00:03:18,700
-our stack of cards is this All Settings MVC.
-我们 MVC 堆栈顶部的那个 MVC 是 All Settings MVC
+our stack of cards is this "All Settings" MVC.
+我们 MVC 堆栈顶部的那个 MVC 是 "All Settings" MVC
 
 78
 00:03:18,700 --> 00:03:19,870
@@ -387,7 +387,7 @@ Now even though the contents of
 
 79
 00:03:19,870 --> 00:03:22,700
-the top are drawn by the navigation controller, what
+the top are drawn by the Navigation Controller, what
 但是，顶部部分的内容
 
 80
@@ -436,13 +436,13 @@ Things like that. So,
 
 89
 00:03:47,540 --> 00:03:49,390
-the way the navigation controllers figures out
-Navigation Controlller 通过查询哪个 MVC 是当前 MVC 堆栈顶部的 MVC
+the way the Navigation Controllers figures out
+Navigation Controller 通过查询当前 MVC 堆栈顶部的 MVC
 
 90
 00:03:49,390 --> 00:03:52,590
 what to put in the top bar is it asks whatever MVC is on
-来决定它在 Title Bar 上布局的方式
+来决定它在 Title Bar 上显示的内容
 
 91
 00:03:52,600 --> 00:03:54,100
@@ -456,7 +456,7 @@ So as you go to different MVCs being on this stack of
 93
 00:03:56,900 --> 00:03:59,200
 cards that thing at the top will change.
-Navigation Controlller 顶部区域也会随之变化
+Navigation Controller 顶部区域也会随之变化
 
 94
 00:04:00,300 --> 00:04:01,200
@@ -466,7 +466,7 @@ Okay?
 95
 00:04:01,200 --> 00:04:04,470
 So, let's say I click on General here,
-这里我说，我点击 General
+假如我点击 General
 
 96
 00:04:04,470 --> 00:04:06,070
@@ -490,8 +490,8 @@ This new one is overlaying it,
 
 100
 00:04:14,180 --> 00:04:17,050
-and this is just a general settings MVC.
-这里是一个 General Settings MVC
+and this is just a "General Settings" MVC.
+这里是一个 "General Settings" MVC
 
 101
 00:04:17,050 --> 00:04:19,680
@@ -515,8 +515,8 @@ I don't have a good screenshot of this unfortunately, but
 
 105
 00:04:24,990 --> 00:04:27,720
-it's also possible for the navigation controller to
-但是 Navigation Controlller 可以
+it's also possible for the Navigation Controller to
+但是 Navigation Controller 可以
 
 106
 00:04:27,730 --> 00:04:31,730
@@ -531,7 +531,7 @@ A little small sliver on the bottom.
 108
 00:04:33,200 --> 00:04:36,400
 And it get those button items to put there,
-然后将按钮至于那里
+然后将按钮置于那里
 
 109
 00:04:36,400 --> 00:04:40,000
@@ -550,8 +550,8 @@ So if you look at toolbar items,
 
 112
 00:04:43,870 --> 00:04:47,240
-it's just an Array of these bar buttons, so
-你会发现它就是一系列 bar buttons 组成的数组
+it's just an Array of these Bar Buttons, so
+你会发现它就是一系列 Bar Button 组成的数组
 
 113
 00:04:47,240 --> 00:04:50,080
@@ -560,13 +560,13 @@ any MVC that returns anything in that Array,
 
 114
 00:04:50,080 --> 00:04:52,140
-when it's in a navigation controller like this,
+when it's in a Navigation Controller like this,
 在 toolbarItems 数组中返回什么东西的时候
 
 115
 00:04:52,150 --> 00:04:54,280
 those buttons will appear at the bottom.
-这些按钮会出现在屏幕的底部
+那些按钮会出现在屏幕的底部
 
 116
 00:04:54,280 --> 00:04:55,710
@@ -606,11 +606,12 @@ That's basically what back means.
 123
 00:05:12,260 --> 00:05:14,250
 Throw the top card on
-移走 MVC 堆栈中最顶部的那张卡片
+移走 MVC 堆栈中
 
 124
 00:05:14,250 --> 00:05:16,230
 this stack of MVCs that we're building, throw it off, and
+最顶部的那张卡片
 
 125
 00:05:16,230 --> 00:05:18,000
@@ -625,7 +626,7 @@ So that's how back works, it just throws it off.
 127
 00:05:19,670 --> 00:05:21,570
 And when it throws it off, it completely throws it off,
-当从MVC 堆栈中最顶部的那张卡片时，它是完全被移除的
+当从 MVC 堆栈中移除最顶部的那张卡片时，它是完全被移除的
 
 128
 00:05:21,570 --> 00:05:22,800
@@ -654,7 +655,7 @@ All right, so let's put another card on the stacks,
 
 133
 00:05:30,010 --> 00:05:32,140
-I'm going to click on accessibility here,
+I'm going to click on Accessibility here,
 我点击这里的 Accessibility
 
 134
@@ -675,12 +676,12 @@ I can't exactly do it, but it slides in from the side.
 137
 00:05:42,290 --> 00:05:44,710
 And this is yet
-现在，这是另外
+现在，这是
 
 138
 00:05:44,710 --> 00:05:47,120
-another completely different MVC, the accessibility MVC.
-另外的一个完全不同的 MVC，Accessibility MVC
+another completely different MVC, the "Accessibility" MVC.
+另外的一个完全不同的 MVC，"Accessibility" MVC
 
 139
 00:05:47,130 --> 00:05:48,460
@@ -689,8 +690,8 @@ And we can pick something out of here,
 
 140
 00:05:48,460 --> 00:05:51,060
-like I'm going to pick larger text right there, and
-比如，我想让字体变大一点
+like I'm going to pick Larger Text right there, and
+比如，我点击 Larger Text
 
 141
 00:05:51,060 --> 00:05:52,900
@@ -700,11 +701,12 @@ another MVC is going to slide in.
 142
 00:05:52,900 --> 00:05:55,530
 So we have four MVCs, totally different MVCs,
-现在，我们在卡片堆栈上有4个完全不同的 MVC 了
+现在，我们有 4 个完全不同的 MVC 了
 
 143
 00:05:55,530 --> 00:05:57,530
 on our stack of cards right here.
+都在卡片堆栈上
 
 144
 00:05:57,540 --> 00:06:00,400
@@ -713,8 +715,8 @@ And the one on top, which is the last one that I chose,
 
 145
 00:06:00,400 --> 00:06:02,600
-this larger text MVC, is showing.
-正在显示的，Larger Text MVC
+this "Larger Text" MVC, is showing.
+"Larger Text" MVC，就是正在显示的这个 MVC
 
 146
 00:06:02,610 --> 00:06:03,840
@@ -743,12 +745,12 @@ So I'm going to click this back button in the upper left
 
 151
 00:06:12,350 --> 00:06:15,420
-and when I do, it takes that larger text one off, throws it
-当我点击的时候，它会将 Larger Text MVC 移走
+and when I do, it takes that "Larger Text" one off, throws it
+当我点击的时候，它会将 "Larger Text" MVC 移走
 
 152
 00:06:15,420 --> 00:06:18,750
-out, and now we've got the accessibility card, which is
+out, and now we've got the Accessibility card, which is
 从堆栈里扔掉，现在我们有 Accessibility 的卡片了
 
 153
@@ -793,7 +795,7 @@ Okay, so everyone understand what
 
 161
 00:06:34,870 --> 00:06:35,800
-a NavigationController is?
+a Navigation Controller is?
 都理解了吗？
 
 162
@@ -808,13 +810,13 @@ All right?
 
 164
 00:06:38,370 --> 00:06:40,600
-But it's just like split view controller and
+But it's just like Split View Controller and
 但是它和 Split View Controller 和
 
 165
 00:06:40,610 --> 00:06:44,370
-UITabBar Controller in that it is showing multiple MVCs.
-UITabBarControlller 一样，它们的功能都是展示多重 MVC
+UITabBarController in that it is showing multiple MVCs.
+UITabBarController 一样，它们的功能都是展示多重 MVC
 
 166
 00:06:44,380 --> 00:06:45,970
@@ -829,7 +831,7 @@ controller works internally, so you can get a feel for it.
 168
 00:06:49,080 --> 00:06:52,950
 And I'm going to try to mix it with our MVC image that we
-同时，我会尝试将它和我们其他的 MVC 混合在一起
+同时，我会尝试将它和我们的其他 MVC 混合在一起
 
 169
 00:06:52,950 --> 00:06:56,220
@@ -839,7 +841,7 @@ had so you can kind of combine the two concepts in your mind.
 170
 00:06:56,220 --> 00:06:58,690
 So, let's say I had an MVC.
-这里，我说，我有一个 MVC
+这里，假设我有一个 MVC
 
 171
 00:06:58,690 --> 00:07:01,490
@@ -878,7 +880,7 @@ Well, what I would do is create another MVC to manage
 
 178
 00:07:15,300 --> 00:07:18,300
-those other features that won't fit,okay?
+those other features that won't fit, okay?
 去管理那些不属于这个 MVC 的那些功能，对吗？
 
 179
@@ -888,17 +890,17 @@ And, so now though I need a way to have those two MVCs
 
 180
 00:07:22,710 --> 00:07:25,140
-share the screen and I can use a split view controller or
+share the screen and I can use a Split View Controller or
 能够共享一个屏幕空间。这里，我能使用一个 Split View Controller
 
 181
 00:07:25,140 --> 00:07:27,140
-tab bar controller if they were peers or
-或者 Tab Bar Controller，如果这两者之间是平等的关系
+Tab Bar Controller if they were peers or
+或者如果这两个 MVC 之间是平等关系的话，我可以使用 Tab Bar Controller
 
 182
 00:07:27,150 --> 00:07:28,910
-I could use navigation controller.
+I could use Navigation Controller.
 当然我也可以使用 Navigation Controller
 
 183
@@ -908,7 +910,7 @@ So, let's see what it would look like to
 
 184
 00:07:30,280 --> 00:07:33,950
-use a navigation controller to have these two MVCs which
+use a Navigation Controller to have these two MVCs which
 当我们使用一个 Navigation Controller 来结合这两个 MVC
 
 185
@@ -918,7 +920,7 @@ they're related share the screen.
 
 186
 00:07:36,990 --> 00:07:40,220
-So a navigation controller is just an MVC, okay?
+So a Navigation Controller is just an MVC, okay?
 还记得 Navigation Controller 也是一个 MVC 吗？
 
 187
@@ -929,12 +931,12 @@ It's a controller of an MVC.
 188
 00:07:42,810 --> 00:07:45,390
 And it's view is a little rectangular area that usually
-它的视图是一个小的
+它的视图是一个小的矩形区域
 
 189
 00:07:45,400 --> 00:07:47,930
 fills the entire screen or a portion of the screen.
-通常是布满整个屏幕空间，或是屏幕空间的一部分的矩形区域
+通常布满整个屏幕空间，或是占屏幕空间的一部分
 
 190
 00:07:47,930 --> 00:07:48,860
@@ -944,16 +946,16 @@ It's got the title.
 191
 00:07:48,870 --> 00:07:53,000
 But it's a special MVC and they've just got an outlet
-但是它是一个特殊的 MVC，它有一个叫做 rootViewController 的 outlet
+但它是一个特殊的 MVC，它有一个叫做 rootViewController 的 outlet
 
 192
 00:07:53,000 --> 00:07:56,070
-called Root View Controller that points to an MVC.
+called rootViewController that points to an MVC.
 这个 outlet 指向某个 MVC
 
 193
 00:07:56,070 --> 00:07:59,440
-[UUU] points to the controller of an MVC.
+Okay, points to the controller of an MVC.
 确切的说，是指向某个 MVC 的控制器
 
 194
@@ -994,7 +996,7 @@ So it fills the entire rectangular area and
 201
 00:08:18,860 --> 00:08:21,190
 then the title kind of overlaps it transparently,
-所以在标题栏会变成半透明，以显示标题栏之下的那部分
+所以标题栏会变成半透明，以显示标题栏之下的那部分
 
 202
 00:08:21,190 --> 00:08:25,060
@@ -1039,7 +1041,7 @@ is pressed then it can cause another MVC to get created.
 210
 00:08:40,110 --> 00:08:42,010
 You notice that MVC just appeared?
-你注意到这个 MVC 刚出现了吗？
+你注意到这个 MVC 刚刚出现了吗？
 
 211
 00:08:42,010 --> 00:08:43,310
@@ -1073,7 +1075,7 @@ Okay? Transitioning to a new card.
 
 217
 00:08:56,520 --> 00:08:58,060
-In a split view,
+In a Split View,
 在一个 Split View 中
 
 218
@@ -1094,7 +1096,7 @@ even the first time we press a tab bar, but
 221
 00:09:03,160 --> 00:09:06,230
 only the first time for the tab bar, it creates a new MVC.
-而且也是 Tab Bar 第一次被用户按下的时候
+并且是第一次按下 Tab Bar 的时候
 
 222
 00:09:06,230 --> 00:09:07,730
@@ -1103,7 +1105,7 @@ Okay? So it creates this new MVC.
 
 223
 00:09:07,730 --> 00:09:10,470
-And then the NavigationController just
+And then the Navigation Controller just
 接着，Navigation Controller 就会移动到
 
 224
@@ -1156,8 +1158,8 @@ It's just gone.
 
 234
 00:09:28,220 --> 00:09:30,080
-It got de-allocated probably from the heap.
-它从内存空间中被 deallocated 了
+It got deallocated probably from the heap.
+它所占用的内存空间中被释放了
 
 235
 00:09:30,090 --> 00:09:31,380
@@ -1166,7 +1168,7 @@ Okay? And then we're back to here.
 
 236
 00:09:32,590 --> 00:09:34,350
-Okay, so that's how navigation controller works.
+Okay, so that's how Navigation Controller works.
 好的，这就是 Navigation Controller 工作的方式
 
 237
@@ -1176,7 +1178,7 @@ Very simple.
 
 238
 00:09:35,310 --> 00:09:36,250
-And, you know, split view and
+And, you know, Split View and
 你要知道，Split View 和
 
 239
@@ -1196,13 +1198,13 @@ how do we get at these sub-MVCs?
 
 242
 00:09:43,860 --> 00:09:45,960
-So let's say I had a split view controller or
+So let's say I had a Split View Controller or
 假设说，我有一个 Split View Controller
 
 243
 00:09:45,960 --> 00:09:47,530
-a navigation controller or a tab bar controller.
-或者一个 Navigation Controller 或是一个 Tab Bar Controller
+a Navigation Controller or a Tab Bar Controller.
+或者一个 Navigation Controller 或者一个 Tab Bar Controller
 
 244
 00:09:47,530 --> 00:09:50,170
@@ -1221,12 +1223,12 @@ And the answer is
 
 247
 00:09:54,840 --> 00:09:56,710
-they all have a property called view controllers.
+they all have a property called viewControllers.
 它们都会有一个叫 viewControllers 的属性
 
 248
 00:09:56,710 --> 00:09:58,870
-And it's an Array of view controller.
+And it's an Array of View Controller.
 它是由 UIViewController 组成的一个数组
 
 249
@@ -1236,12 +1238,12 @@ Okay?
 
 250
 00:10:00,490 --> 00:10:02,110
-And that it's all the view controllers in a system.
-它里面存储的是一个系统中所有的 ViewController
+And that it's all the View Controllers in a system.
+它里面存储的是一个系统中所有的 View Controller
 
 251
 00:10:02,110 --> 00:10:05,110
-So in a split view, there will be only two in there,
+So in a Split View, there will be only two in there,
 在 Split View 中，这里面只会有两个元素
 
 252
@@ -1251,13 +1253,13 @@ Master 和 Detail，在 Tab Bar 中
 
 253
 00:10:07,550 --> 00:10:09,650
-ever many tabs there are, in a navigation controller there
-这里面会有 Tab 数目个元素，而在 Navigation Controller 中
+ever many tabs there are, in a Navigation Controller there
+有多少个 Tab，这里面就有多少个元素，而在 Navigation Controller 中
 
 254
 00:10:09,650 --> 00:10:11,720
 will be however many cards are on the stack.
-这里面会有堆栈上卡片数目个元素
+堆栈上有多少卡片，这里面就有多少个元素
 
 255
 00:10:11,720 --> 00:10:13,050
@@ -1267,7 +1269,7 @@ That's how many things will be in that Array.
 256
 00:10:13,050 --> 00:10:15,420
 And it's settable too which is a little weird,
-当然它是可以被设值的，但是这么做有点点奇怪
+当然它是可以被设值的，但是这么做有点奇怪
 
 257
 00:10:15,420 --> 00:10:19,090
@@ -1281,43 +1283,43 @@ And the way we usually set it is we're going to
 
 259
 00:10:23,800 --> 00:10:26,600
-do it in the story boards or navigation controller for
+do it in the Storyboards or Navigation Controller for
 比如我们在 Storyboard 的 Navigation Controller 中
 
 260
 00:10:26,600 --> 00:10:29,300
-example has methods like push and pop view controller that
-有 push 和 pop view controller 的方法
+example has methods like push and pop View Controller that
+有 push 和 pop View Controller 的方法
 
 261
 00:10:29,300 --> 00:10:31,400
-will push view controller onto the stack.
-这样的操作会在这个数组中 push view controller
+will push View Controller onto the stack.
+这样的操作会把 View Controller push 到堆栈中
 
 262
 00:10:31,400 --> 00:10:32,640
 But that is doing that in code and
-但是这是在代码中设值的方式
+但这是在代码中设值的方式
 
 263
 00:10:32,640 --> 00:10:35,210
-we are usually doing all of this stuff in story boards.
+we are usually doing all of this stuff in Storyboards.
 通常我们在 Storyboard 中做这一系列的操作
 
 264
 00:10:35,210 --> 00:10:38,910
 So that's how you get at the sub things of
-以上就是如何你获得这些子 MVC
+以上就是你如何获得这些子 MVC
 
 265
 00:10:38,910 --> 00:10:41,740
-these three kinds of view controllers.
-这些 view controller 的方法
+these three kinds of View Controllers.
+这些 View Controller 的方法
 
 266
 00:10:41,750 --> 00:10:44,550
-What about, how do I get a hold of the view controller?
-那么，我如何获得一个 view controller 呢？
+What about, how do I get a hold of the View Controller?
+那么，我如何获得一个 View Controller 呢？
 
 267
 00:10:44,550 --> 00:10:45,480
@@ -1326,8 +1328,8 @@ Okay? How do I get that
 
 268
 00:10:45,480 --> 00:10:46,550
-navigation controller?
-Navigation Controller
+Navigation Controller?
+Navigation Controller？
 
 269
 00:10:46,550 --> 00:10:48,620
@@ -1336,47 +1338,47 @@ How do I get a pointer to it, or whatever?
 
 270
 00:10:48,620 --> 00:10:52,420
-Well it turns out every view controller knows if it's
-答案是，每个 view controller 都知道
+Well it turns out every View Controller knows if it's
+答案是，每个 View Controller 都知道
 
 271
 00:10:52,420 --> 00:10:55,660
-inside a navigation controller or if it's inside a split-view
-它自己是不是身处在一个 Navigation Controller 或者是 Split View
+inside a Navigation Controller or if it's inside a split-view
+它自己是不是身处在一个 Navigation Controller 或者
 
 272
 00:10:55,660 --> 00:10:57,590
-controller, or if it's inside a tab bar controller.
-Controller 或者是 Tab Bar Controller 中
+controller, or if it's inside a Tab Bar Controller.
+Split View Controller 或者 Tab Bar Controller 中
 
 273
 00:10:57,590 --> 00:10:59,310
 It knows.
-它自身知道
+它自己知道
 
 274
 00:10:59,310 --> 00:11:01,030
-And so UI view controller has these three properties: tab
+And so UIView controller has these three properties:
 因为，UIViewController 有三个属性：
 
 275
 00:11:01,030 --> 00:11:02,360
-bar controller, split view controller,
+tabBarController, splitViewController,
 tabBarController，splitViewController
 
 276
 00:11:02,360 --> 00:11:03,560
-navigation controller.
-和 navigtionController
+navigationController.
+和 navigationController
 
 277
 00:11:03,560 --> 00:11:05,530
-And they will return to you the split view
+And they will return to you the splitViewController
 splitViewController 属性会返回给你
 
 278
 00:11:05,530 --> 00:11:07,470
-controller that the view controller is in.
+that the View Controller is in.
 它处在哪个 Split View Controller 中，其他的属性类推
 
 279
@@ -1391,18 +1393,18 @@ If it's in one, if it's not then it returns nil.
 
 281
 00:11:11,070 --> 00:11:12,940
-And notice some view controllers might be inside a
-注意到某些 view controller 会在一个 Navigation Controller 中
+And notice some View Controllers might be inside a
+注意到某些 View Controller 会在一个 Navigation Controller 中
 
 282
 00:11:12,940 --> 00:11:15,510
-navigation controller, inside a split view controller.
+Navigation Controller, inside a Split View Controller.
 而这个 Navigation Controller 又嵌套在一个 Split View Controller 中
 
 283
 00:11:16,440 --> 00:11:17,770
 So more than one of these things can be
-所以这些属性可以超过一个
+所以这些属性可以有多个
 
 284
 00:11:17,780 --> 00:11:19,790
@@ -1426,17 +1428,17 @@ So let's just use the example, if I'm the master in
 
 288
 00:11:26,120 --> 00:11:28,720
-a split view, and I want to get the detail.
+a Split View, and I want to get the detail.
 我想获取 Detail
 
 289
 00:11:28,720 --> 00:11:30,920
-Well I can get the split view controller I'm in by
+Well I can get the splitViewController I'm in by
 这里我可以通过访问 splitViewController
 
 290
 00:11:30,920 --> 00:11:32,390
-saying split view controller.
+saying Split View Controller.
 来获得我在哪个 Split View Controller 的指针
 
 291
@@ -1447,7 +1449,7 @@ I'll put the little question mark there,
 292
 00:11:33,720 --> 00:11:34,860
 that's optional chaining.
-因为 Optional Chaining
+这是 Optional Chaining
 
 293
 00:11:34,860 --> 00:11:36,010
@@ -1461,12 +1463,12 @@ then I'm obviously not going to get my detail.
 
 295
 00:11:37,160 --> 00:11:39,260
-And then I'm going to say view controller sub 1,
+And then I'm going to say viewController sub 1,
 然后我输入 viewControllers[1]
 
 296
 00:11:39,260 --> 00:11:40,960
-because we know that view controller sub 1 in
+because we know that viewController sub 1 in
 因为我们知道，viewControllers[1] 在
 
 297
@@ -1506,7 +1508,7 @@ but we often don't need to because we can manage most of
 
 304
 00:11:58,240 --> 00:11:59,640
-this in the story board.
+this in the Storyboard.
 在 Storyboard 完成大部分的操作
 
 305
@@ -1521,7 +1523,7 @@ relationship between these split through tab bar and
 
 307
 00:12:05,720 --> 00:12:08,920
-navigation controller and these all the sub-MVCs.
+Navigation Controller and these all the sub-MVCs.
 Navigation Controller 之间建立关系呢？
 
 308
@@ -1536,7 +1538,7 @@ But we're gonna do it
 
 310
 00:12:12,890 --> 00:12:15,390
-in storyboards in this class all the time.
+in Storyboards in this class all the time.
 将通过 Storyboard 来完成
 
 311
@@ -1556,7 +1558,7 @@ So let's see what that looks like.
 
 314
 00:12:20,500 --> 00:12:22,630
-I'll do it for split view controller,
+I'll do it for Split View Controller,
 以 Split View Controller 举例
 
 315
@@ -1571,7 +1573,7 @@ the same place we drag out a button or something like that.
 
 317
 00:12:26,970 --> 00:12:29,300
-We're going to drag out a split view controller.
+We're going to drag out a Split View Controller.
 我们拖出来一个 Split View Controller
 
 318
@@ -1596,7 +1598,7 @@ usually you're just going to delete those so
 
 322
 00:12:38,280 --> 00:12:41,410
-that all you have left is the split view controller itself.
+that all you have left is the Split View Controller itself.
 所以你只需要保留的就是 Split View Controller 本身
 
 323
@@ -1606,17 +1608,17 @@ Okay?
 
 324
 00:12:43,280 --> 00:12:45,150
-And then you're going to Ctrl+Drag from the split view
+And then you're going to Ctrl+Drag from the Split View
 然后，你从 Split View Controller 开始
 
 325
 00:12:45,150 --> 00:12:46,720
-controller to the master and
+Controller to the master and
 按住 Control 键拖动，链接 Split View Controller 和 Master
 
 326
 00:12:46,720 --> 00:12:50,120
-Ctrl+Drag from the split view controller to the detail.
+Ctrl+Drag from the Split View Controller to the detail.
 同样方法，链接 Split View Controller 和 Detail
 
 327
@@ -1631,12 +1633,12 @@ So this is what it looks like.
 
 329
 00:12:52,360 --> 00:12:53,620
-Here I have a storyboard.
+Here I have a Storyboard.
 这里我有一个 Storyboard
 
 330
 00:12:53,630 --> 00:12:55,120
-I've dragged out of split view controller.
+I've dragged out of Split View Controller.
 我从 Split View Controller 开始拖动
 
 331
@@ -1681,7 +1683,7 @@ okay, what kind of connection do you want to make?
 
 339
 00:13:10,140 --> 00:13:13,270
-And you're going to pick master view controller there.
+And you're going to pick Master View Controller there.
 选择 Master View Controller
 
 340
@@ -1696,7 +1698,7 @@ And then I'm going to Ctrl+Drag down to my detail,
 
 342
 00:13:18,280 --> 00:13:20,980
-which is going to be the right side of my split view.
+which is going to be the right side of my Split View.
 这样 Detail 就会成为我 Split View 中右侧的部分了
 
 343
@@ -1716,7 +1718,7 @@ And then I'm going to have this,
 
 346
 00:13:26,720 --> 00:13:28,050
-fully hooked up split view.
+fully hooked up Split View.
 完整的 Split View
 
 347
@@ -1756,7 +1758,7 @@ which we'll see in a second, okay?
 
 354
 00:13:41,030 --> 00:13:45,130
-But there's a problem here which is that a split view
+But there's a problem here which is that a Split View
 但是这里有一个问题，那就是
 
 355
@@ -1781,7 +1783,7 @@ by side.
 
 359
 00:13:55,530 --> 00:13:56,980
-So a split view really can't work on an iPhone.
+So a Split View really can't work on an iPhone.
 所以 Split View 不算是真正能够使用在 iPhone 上的
 
 360
@@ -1811,7 +1813,7 @@ We'll talk about size classes later, but if it's compact,
 
 365
 00:14:13,930 --> 00:14:17,730
-like a phone, then it can't show it in a split view.
+like a phone, then it can't show it in a Split View.
 比如 iPhone，那么它没办法在 Split View 中显示
 
 366
@@ -1831,7 +1833,7 @@ I wanna show it on an iPhone the way I show it is with
 
 369
 00:14:24,040 --> 00:14:25,800
-a navigation controller.
+a Navigation Controller.
 那么请使用 Navigation Controller
 
 370
@@ -1851,7 +1853,7 @@ on the phone when I click in the master, same button that I
 
 373
 00:14:32,810 --> 00:14:35,610
-clicked to make the detail show it in split view,
+clicked to make the detail show it in Split View,
 用以在 Split View 中显示 Detail 的按钮
 
 374
@@ -1884,7 +1886,7 @@ Now the thing is though we want to
 
 380
 00:14:46,450 --> 00:14:48,650
-build one storyboard that will work for
+build one Storyboard that will work for
 让同样的一个 Storyboard 文件在不同的
 
 381
@@ -1904,7 +1906,7 @@ We're just going to wrap our master in
 
 384
 00:14:56,330 --> 00:14:58,730
-a navigation controller.
+a Navigation Controller.
 在一个 Navigation Controller 中
 
 385
@@ -1919,7 +1921,7 @@ which is my master, it's the calculator, right?
 
 387
 00:15:04,140 --> 00:15:06,140
-And you can see it's hooked up to the split view already, and
+And you can see it's hooked up to the Split View already, and
 你能看到，它已经链接到 Split View 了
 
 388
@@ -1949,7 +1951,7 @@ Okay, the Navigation Controller,
 
 393
 00:15:19,280 --> 00:15:23,850
-is going to the interposed between the split view and
+is going to the interposed between the Split View and
 将会在 Split View 和 Master 中充当一个中间者
 
 394
@@ -1993,7 +1995,7 @@ So this structure that you see right here,
 
 402
 00:15:42,470 --> 00:15:44,070
-split view, navigation control for
+Split View, Navigation Controller for
 用 Split View，Navigation Controller
 
 403
@@ -2124,12 +2126,12 @@ And the answer is we use segues, okay?
 428
 00:16:48,790 --> 00:16:53,230
 So segues is, how these things transition from
-Segues 是如何从一个 view controller 转换到
+Segues 是如何从一个 View Controller 转换到
 
 429
 00:16:53,230 --> 00:16:54,560
-view controller to view controller.
-另一个 view controller 的方式
+View Controller to View Controller.
+另一个 View Controller 的方式
 
 430
 00:16:55,970 --> 00:16:57,500
@@ -2243,7 +2245,7 @@ So if you're using a show segue,
 
 452
 00:17:50,110 --> 00:17:52,510
-you probably wanna be in a navigation controller, so
+you probably wanna be in a Navigation Controller, so
 你大概想在 Navigation Controller 中使用到
 
 453
@@ -2273,7 +2275,7 @@ the only difference with show detail is that if
 
 458
 00:18:05,360 --> 00:18:08,360
-you happen to be in a split view controller it
+you happen to be in a Split View Controller it
 在 Split View Controller 中的效果就是
 
 459
@@ -2288,7 +2290,7 @@ Otherwise if you are in Navigation Controller, but
 
 461
 00:18:13,170 --> 00:18:14,960
-not in a split view controller it just pushes it
+not in a Split View Controller it just pushes it
 而不是在 Split View Controller 中，这个效果就是
 
 462
@@ -2303,12 +2305,12 @@ So, show detail tiny difference there.
 
 464
 00:18:20,470 --> 00:18:22,370
-It's just about split view.
+It's just about Split View.
 只和 Split View 相关
 
 465
 00:18:22,370 --> 00:18:24,410
-So, it really helps you when you're in a split view
+So, it really helps you when you're in a Split View
 所以，如果你在使用 Split View 的时候，这个 Segues 确实很有帮助
 
 466
@@ -2329,7 +2331,7 @@ if you want that to slide on the master?
 469
 00:18:30,880 --> 00:18:32,410
 The thing you're segueing to or
-你 Segue 的目标 view controller
+你 Segue 的目标 View Controller
 
 470
 00:18:32,410 --> 00:18:33,680
@@ -2368,7 +2370,7 @@ You really wanna be using Navigation Controllers, and
 
 477
 00:18:49,500 --> 00:18:50,790
-split view controllers to do that.
+Split View Controllers to do that.
 Split View Controller 来这么做的
 
 478
@@ -2378,13 +2380,13 @@ And then a popover segue.
 
 479
 00:18:53,030 --> 00:18:56,400
-Now a popover segue pops the view controller that you're
-Popover Segue 弹出 Segue 的目标 view controller
+Now a popover segue pops the View Controller that you're
+Popover Segue 弹出 Segue 的目标 View Controller
 
 480
 00:18:56,400 --> 00:18:59,700
 segueing to, up into a little window that's on top of
-并让这个 view controller 显示在所有其他东西之上
+并让这个 View Controller 显示在所有其他东西之上
 
 481
 00:18:59,700 --> 00:19:01,400
@@ -2538,8 +2540,8 @@ that thing comes off the stack, [SOUND] it's gone.
 
 511
 00:20:06,960 --> 00:20:08,360
-Even in split view.
-即便在 split view 中也是这样的
+Even in Split View.
+即便在 Split View 中也是这样的
 
 512
 00:20:08,360 --> 00:20:11,500
@@ -2598,8 +2600,8 @@ But in 90% of the time you're gonna do it
 
 523
 00:20:34,580 --> 00:20:36,450
-in a storyboard with control drag,
-storyboard 中的 control 加拖动来实现
+in a Storyboard with control drag,
+Storyboard 中的 control 加拖动来实现
 
 524
 00:20:36,450 --> 00:20:39,820
@@ -2673,8 +2675,8 @@ And here I'm gonna pick Show Detail,
 
 538
 00:21:15,420 --> 00:21:16,650
-because if I'm in a split view,
-因为这是个 split view
+because if I'm in a Split View,
+因为这是个 Split View
 
 539
 00:21:16,650 --> 00:21:18,450
@@ -2698,8 +2700,8 @@ also pushes on the stack.
 
 543
 00:21:25,030 --> 00:21:27,130
-But if I were the master in a split view and
-但是如果是 split view 中的 master
+But if I were the master in a Split View and
+但是如果是 Split View 中的 master
 
 544
 00:21:27,130 --> 00:21:28,500
@@ -2733,8 +2735,8 @@ So I'm gonna pick show detail, that's what I want.
 
 550
 00:21:42,710 --> 00:21:46,840
-And it's gonna make a line appear in the story board.
-这将会在 storyboard 中出现一条连线
+And it's gonna make a line appear in the Storyboard.
+这将会在 Storyboard 中出现一条连线
 
 551
 00:21:46,850 --> 00:21:49,210
@@ -2818,8 +2820,8 @@ So just type that in there.
 
 567
 00:22:27,220 --> 00:22:29,680
-So, I told you before that everything in the storyboard
-我曾经曰过，storyboard 的所有东西
+So, I told you before that everything in the Storyboard
+我曾经说过，Storyboard 的所有东西
 
 568
 00:22:29,680 --> 00:22:32,320
@@ -2828,7 +2830,7 @@ is linked up with what's in your code by name.
 
 569
 00:22:32,320 --> 00:22:33,720
-Whether it's the class of view controller.
+Whether it's the class of View Controller.
 不管是 ViewController 的 class
 
 570
@@ -2864,7 +2866,7 @@ They're all just names, and
 576
 00:22:41,930 --> 00:22:44,060
 we have to make the names the same in our code.
-我们需要让代码中的名字和 storyboard 中的名字一致
+我们需要让代码中的名字和 Storyboard 中的名字一致
 
 577
 00:22:44,060 --> 00:22:46,700
@@ -3198,7 +3200,7 @@ Now in the case here,
 
 643
 00:25:26,070 --> 00:25:28,630
-I created a calculator graph view controller,
+I created a calculator graph View Controller,
 我创建了一个计算器画图的 View Controller
 
 644
@@ -3248,7 +3250,7 @@ So if I can, then I'm just going to call methods and set
 
 653
 00:25:50,390 --> 00:25:54,620
-properties in that calculator graph view controller, that
+properties in that CalculatorGraphViewController, that
 CalculatorGraphViewController 中调用方法和设定属性的值
 
 654
@@ -3568,12 +3570,12 @@ The images, the assets, the launch screen so that I
 
 718
 00:28:48,670 --> 00:28:53,140
-just have my main storyboard here and this view controller.
+just have my main Storyboard here and this View Controller.
 那么外面只剩下 MainStoryboard 和这个 ViewController 了
 
 719
 00:28:53,150 --> 00:28:55,810
-And I'm actually gonna rename this view controller.
+And I'm actually gonna rename this View Controller.
 事实上我会改一下这个 ViewController 的名字
 
 720
@@ -3633,7 +3635,7 @@ That's surprisingly hard to type by the way.
 
 732
 00:29:23,640 --> 00:29:25,100
-And then in the story board,
+And then in the Storyboard,
 接着在 Storyboard 中
 
 733
@@ -4558,7 +4560,7 @@ Okay, so, copy those two things in.
 
 918
 00:36:37,970 --> 00:36:40,070
-And then what about my storyboard here?
+And then what about my Storyboard here?
 那么我们的 Storyboard 怎么办
 
 919
@@ -4598,7 +4600,7 @@ Okay.
 
 926
 00:36:53,490 --> 00:36:59,860
-So, now I have somewhere my two view controllers.
+So, now I have somewhere my two View Controllers.
 那么现在我有两个我的 ViewController 了
 
 927
@@ -4653,12 +4655,12 @@ So, now we have it.
 
 937
 00:37:25,900 --> 00:37:27,980
-So, we got our two view controllers here and
+So, we got our two View Controllers here and
 所以我们有两个 ViewController 了
 
 938
 00:37:27,980 --> 00:37:29,950
-we want to put them in a split view.
+we want to put them in a Split View.
 我想把它们放进 SplitView 里面
 
 939
@@ -4678,27 +4680,27 @@ Super simple, we're gonna go down here.
 
 942
 00:37:36,990 --> 00:37:39,060
-Go grab a split view controller, okay?
+Go grab a Split View Controller, okay?
 拖一个 SplitViewController 出来
 
 943
 00:37:39,060 --> 00:37:40,690
-The split view controller's right here.
+The Split View Controller's right here.
 SplitViewController 在这里
 
 944
 00:37:40,690 --> 00:37:42,930
-See, here's tab bar controller.
+See, here's Tab Bar Controller.
 看，这个是 TabBarController
 
 945
 00:37:42,930 --> 00:37:45,860
-Here's navigation controller, somewhere.
-这个是 NavigationController
+Here's Navigation Controller, somewhere.
+这个是 Navigation Controller
 
 946
 00:37:45,860 --> 00:37:46,900
-Page view controller, even.
+PageViewController, even.
 这个是 PageViewController
 
 947
@@ -4713,7 +4715,7 @@ that's another way to combine MVCs.
 
 949
 00:37:50,500 --> 00:37:53,200
-But let's drag this split view controller out.
+But let's drag this Split View Controller out.
 我们把 SplitViewController 拖出来
 
 950
@@ -4748,7 +4750,7 @@ Trying to be helpful.
 
 956
 00:38:05,780 --> 00:38:08,810
-And so here's my split view controller, okay and
+And so here's my Split View Controller, okay and
 那么这就是我的 Split View Controller 了，
 
 957
@@ -4803,12 +4805,12 @@ See what this looks like.
 
 967
 00:38:33,370 --> 00:38:36,970
-Oh, I thought I was gonna get a split view, with this thing.
+Oh, I thought I was gonna get a Split View, with this thing.
 噢我想我会在这里得到一个 Split View
 
 968
 00:38:36,970 --> 00:38:38,110
-How come I don't get a split view?
+How come I don't get a Split View?
 但是为什么我没有 Split View 呢
 
 969
@@ -4843,7 +4845,7 @@ so it comes to here.
 
 975
 00:38:54,860 --> 00:38:56,420
-So it's bypassing the split view.
+So it's bypassing the Split View.
 所以它跳过了这个 Split View
 
 976
@@ -4878,12 +4880,12 @@ Okay.
 
 982
 00:39:06,380 --> 00:39:08,430
-Now when we run, it's going to come in, via the split view.
+Now when we run, it's going to come in, via the Split View.
 现在当我们运行，UI 将从 Split View 开始
 
 983
 00:39:08,430 --> 00:39:09,400
-And it is a split view.
+And it is a Split View.
 这里确实有 Split View
 
 984
@@ -5004,7 +5006,7 @@ a compact size trait device.
 1007
 00:39:56,670 --> 00:40:02,310
 SplitView doesn't put things side by side, it just doesn't do that, okay.
-SplitView 是不会左右平铺开的， 
+SplitView 是不会左右平铺开的，
 
 1009
 00:40:02,310 --> 00:40:06,150
@@ -5138,7 +5140,7 @@ In order to fix that, what we talked about in the slides,
 
 1037
 00:41:08,370 --> 00:41:11,730
-by putting this guy in a navigation controller.Okay.
+by putting this guy in a Navigation Controller.Okay.
 Navigation Controller里来解决这个问题。
 
 1039
@@ -5158,7 +5160,7 @@ In Navigation Controller.
 
 1042
 00:41:17,270 --> 00:41:19,740
-It puts it in a navigation controller, okay.
+It puts it in a Navigation Controller, okay.
 现在主视图在Navigation Controller里，
 
 1043
@@ -5213,7 +5215,7 @@ show what this looks like on the iPad.
 
 1056
 00:41:50,540 --> 00:41:53,000
-We added the navigation controller here.
+We added the Navigation Controller here.
 在iPad上看起来是什么样的。
 
 1057
@@ -5308,8 +5310,8 @@ That's because it's going to automatically move it down underneath this.
 
 1078
 00:42:36,470 --> 00:42:39,240
-And we can make that happen in our storyboard by going over
-在 storyboard 上也可以修改好，
+And we can make that happen in our Storyboard by going over
+在 Storyboard 上也可以修改好，
 
 1079
 00:42:39,240 --> 00:42:42,580
@@ -5393,17 +5395,17 @@ And we're going to do show detail because we want it to
 
 1097
 00:43:22,610 --> 00:43:25,380
-show it in the detail side of the split view, and
+show it in the detail side of the Split View, and
 SplitView的细节视图部分，在Navination Controller里
 
 1098
 00:43:25,380 --> 00:43:27,650
-in the navigation control it will just push it.
+in the Navigation Controller it will just push it.
 把它推进来。
 
 1099
 00:43:27,650 --> 00:43:30,220
-But the show detail will do the split view thing.
+But the show detail will do the Split View thing.
 虽然实际上它在做SplitView的事情。
 
 1100
@@ -5528,7 +5530,7 @@ That's this one I guess.
 
 1125
 00:44:20,730 --> 00:44:24,800
-We'll say meh. Okay, not happy or sad. 
+We'll say meh. Okay, not happy or sad.
 我们叫它 meh， 既不开心也不难过。
 
 1127
@@ -5552,8 +5554,8 @@ Okay.
 
 1131
 00:44:35,420 --> 00:44:36,870
-So this is what our storyboard looks like now.
-现在我们的 storyboard 看上去是这样的。
+So this is what our Storyboard looks like now.
+现在我们的 Storyboard 看上去是这样的。
 
 1132
 00:44:36,880 --> 00:44:40,840
@@ -5737,7 +5739,7 @@ And you can see there's the two arguments, the segue and the sender.
 1171
 00:46:22,270 --> 00:46:26,140
 Now I'm gonna just say here, if the segue's
-这我就可以写，if segue 的 
+这我就可以写，if segue 的
 
 1172
 00:46:26,140 --> 00:46:31,040
@@ -5747,7 +5749,7 @@ destinationViewController，啊，对不起， if let HVC ，
 1173
 00:46:31,040 --> 00:46:36,980
 HappinessViewController, equal the DestinationViewController
-HappinessViewController 等于 segue的 destinationViewController 
+HappinessViewController 等于 segue的 destinationViewController
 
 1174
 00:46:36,980 --> 00:46:41,350
@@ -5812,7 +5814,7 @@ But in this case, I'm going to do the if let for
 1186
 00:47:08,110 --> 00:47:10,740
 my destinationViewController on the outside, and then I'm
-destinationViewController， 然后在里面if let segue的   
+destinationViewController， 然后在里面if let segue的
 
 1187
 00:47:10,740 --> 00:47:16,110
@@ -5898,7 +5900,7 @@ Okay, so that's it, that's all I have to do here,
 1204
 00:48:06,960 --> 00:48:09,990
 that's all my ViewController needs to be prepared.
-这是我的view controller需要准备的所有东西。
+这是我的ViewController需要准备的所有东西。
 
 1205
 00:48:09,990 --> 00:48:12,830
@@ -6066,7 +6068,7 @@ So here we are preparing,
 1239
 00:49:19,920 --> 00:49:22,120
 we're trying to prepare this new MVC, and
-我们在这准备了新的 MVC， 
+我们在这准备了新的 MVC，
 
 1240
 00:49:22,120 --> 00:49:25,650
@@ -6250,8 +6252,8 @@ Notice that this MVC underlaps this title bar up here.
 
 1277
 00:50:53,230 --> 00:50:57,000
-You can actually control that in storyboard if you inspect
-你可以在 storyboard 里点击这个 MVC，
+You can actually control that in Storyboard if you inspect
+你可以在 Storyboard 里点击这个 MVC，
 
 1278
 00:50:57,000 --> 00:50:58,630
@@ -6328,18 +6330,18 @@ So pretty straightforward, the stuff is all pretty easy to
 
 1293
 00:51:42,510 --> 00:51:44,340
-envisualize in your storyboard,
-storyboard 是可视的。
+envisualize in your Storyboard,
+Storyboard 是可视的。
 
 1294
 00:51:44,340 --> 00:51:47,510
-when you're looking at the storyboard it's pretty clear,
+when you're looking at the Storyboard it's pretty clear,
 当你明白了这些连接的原理以后，
 
 1295
 00:51:47,510 --> 00:51:51,640
 once you understand how these connections happen, to see
-看一下 storyboard 你就会知道
+看一下 Storyboard 你就会知道
 
 
 1296
@@ -6538,12 +6540,12 @@ Because the destinationViewController is
 1335
 00:53:38,940 --> 00:53:40,340
 no longer a HappinessController,
-HappinessController
+一个 HappinessController
 
 1336
 00:53:40,340 --> 00:53:41,670
-it's a NavigationController.
-它是 NavigationController
+it's a Navigation Controller.
+它是一个 Navigation Controller
 
 1337
 00:53:41,670 --> 00:53:44,770
@@ -6568,7 +6570,7 @@ I'm gonna create a variable here called destination, which
 1341
 00:53:52,280 --> 00:53:57,850
 I'm gonna set equal to the destinationViewController as
-我将这个变量等于 destinationViewController as? 
+我将这个变量等于 destinationViewController as?
 
 1342
 00:53:57,850 --> 00:53:59,790
@@ -6578,16 +6580,16 @@ UIViewController
 1343
 00:53:59,790 --> 00:54:02,720
 cuz I know it's a UIViewController of some sort.
-我知道它是某类 UIViewController 
+我知道它是某类 UIViewController
 
 1344
 00:54:02,730 --> 00:54:07,390
 And then I'm gonna say, if I can let navCon equal
-我将说，if let navCon = destination 
+我将说，if let navCon = destination
 
 1345
 00:54:07,400 --> 00:54:12,260
-the destination as a UI Navigation Controller,
+the destination as a UINavigationController,
 as? UINavigationController
 
 1346
@@ -6665,8 +6667,8 @@ this is the HappinessViewController,
 
 1361
 00:54:44,160 --> 00:54:46,060
-in other words, I don't have the navigation controller,
-换句话说，我没有 navigation controller
+in other words, I don't have the Navigation Controller,
+换句话说，我没有 Navigation Controller
 
 1362
 00:54:46,060 --> 00:54:47,360
@@ -6685,8 +6687,8 @@ This will work.
 
 1365
 00:54:49,600 --> 00:54:51,060
-Otherwise, if it's a navigation controller,
-否则，如果它是 navigation controller
+Otherwise, if it's a Navigation Controller,
+否则，如果它是 Navigation Controller
 
 1366
 00:54:51,070 --> 00:54:53,530
@@ -6715,8 +6717,8 @@ to make it so that if you ever think that the thing you're
 
 1371
 00:55:02,210 --> 00:55:04,680
-segueing to might be wrapped in a navigation controller,
-可能包裹在 navigation controller 中
+segueing to might be wrapped in a Navigation Controller,
+可能包裹在 Navigation Controller 中
 
 1372
 00:55:04,680 --> 00:55:06,940
@@ -6775,11 +6777,11 @@ briefly how to do a segue in code.
 1383
 00:55:31,870 --> 00:55:34,830
 Because this segue we did with control dragging in
-因为这个 segue，我们都在 storyboard
+因为这个 segue，我们都在 Storyboard
 
 1384
 00:55:34,840 --> 00:55:36,800
-the storyboard entirely.
+the Storyboard entirely.
 中使用 control 拖拽实现的
 
 1385
@@ -6850,7 +6852,7 @@ I'm rocking!
 1398
 00:56:08,760 --> 00:56:10,700
 But instead of control dragging from here to make
-但不是在这里用 control 拖拽以创建 
+但不是在这里用 control 拖拽以创建
 
 1399
 00:56:10,700 --> 00:56:13,730
@@ -6937,8 +6939,8 @@ So base this segue in code, so how am I gonna do that?
 
 1416
 00:56:51,470 --> 00:56:56,570
-Well, I still have to create the segue in the storyboard.
-我依然要在 storyboard 中创建 segue
+Well, I still have to create the segue in the Storyboard.
+我依然要在 Storyboard 中创建 segue
 
 1417
 00:56:56,570 --> 00:56:59,210
@@ -7011,8 +7013,8 @@ I'm gonna take this guy and I'm gonna control drag over to
 
 1431
 00:57:26,800 --> 00:57:29,060
-here, to this navigation controller.
-这里，到这个 navigation controller
+here, to this Navigation Controller.
+这里，到这个 Navigation Controller
 
 1432
 00:57:29,070 --> 00:57:31,370
@@ -7046,8 +7048,8 @@ And so notice that when I select this one,
 
 1438
 00:57:48,250 --> 00:57:51,150
-it's showing the whole view controller sending this, and
-可以看到，整个 view controller 发送这个
+it's showing the whole View Controller sending this, and
+可以看到，整个 View Controller 发送这个
 
 1439
 00:57:51,150 --> 00:57:56,050
@@ -7077,7 +7079,7 @@ now in nothing I can say, let's make this nice and wide,
 1444
 00:58:09,870 --> 00:58:15,400
 performSegueWithIdentifier the nothing segue.
-performSegueWithIdentifier ("nothing", 
+performSegueWithIdentifier ("nothing",
 
 1445
 00:58:15,410 --> 00:58:18,940
@@ -7092,7 +7094,7 @@ we could make this actually be self, so
 1447
 00:58:21,350 --> 00:58:23,550
 that the view control itself could be the sender.
-因此 view controller 本身可以作为 sender
+因此 View Controller 本身可以作为 sender
 
 1448
 00:58:23,550 --> 00:58:25,280
@@ -7229,7 +7231,7 @@ All right?
 1475
 00:59:28,720 --> 00:59:30,870
 I believe that's all I wanted to cover today on that, yes.
-我相信这是我今天要讲解的有关 （navigation controller）所有内容了
+我相信这是我今天要讲解的有关 （Navigation Controller）所有内容了
 
 1476
 00:59:30,870 --> 00:59:35,140
@@ -7269,7 +7271,7 @@ This is the calendar app.
 1483
 00:59:56,690 --> 00:59:59,290
 And you can see the popover is that whole area there where
-你可以看到 popover，就是我在 
+你可以看到 popover，就是我在
 
 1484
 00:59:59,300 --> 01:00:01,960
@@ -7293,7 +7295,7 @@ the upper righthand corner, that is all one MVC.
 1488
 01:00:10,740 --> 01:00:15,040
 It's the search for appointment MVC, okay?
-这个搜索是为了 appointment MVC 
+这个搜索是为了 appointment MVC
 
 1489
 01:00:15,040 --> 01:00:18,640
@@ -7516,8 +7518,8 @@ it still segues and all that stuff exactly the same.
 
 1533
 01:02:00,030 --> 01:02:02,900
-You still Ctrl+drag to some view controller.
-你依然可以 Ctrl＋拖拽到一些 ViewController
+You still Ctrl+drag to some View Controller.
+你依然可以 Ctrl＋拖拽到一些 View Controller
 
 1534
 01:02:02,900 --> 01:02:04,570
@@ -7531,8 +7533,8 @@ It all looks exactly the same because it's still doing
 
 1536
 01:02:06,770 --> 01:02:08,840
-segues even though it's not its own view controller.
-即使它不是自己的 ViewController
+segues even though it's not its own View Controller.
+即使它不是自己的 View Controller
 
 1537
 01:02:08,840 --> 01:02:11,540
@@ -7557,7 +7559,7 @@ can get ahold of what's called the presentation controller.
 1541
 01:02:26,260 --> 01:02:28,390
 And the presentation controller for
-这个创建 popover 的 PresentationController 
+这个创建 popover 的 PresentationController
 
 1542
 01:02:28,390 --> 01:02:31,960
@@ -7691,18 +7693,18 @@ iOS 自动为你进行了适配
 
 1568
 01:03:39,690 --> 01:03:42,450
-just like it automatically adapts to split view and
-就像他自动适配 SpliteView 和
+just like it automatically adapts to Split View and
+就像他自动适配 SplitView 和
 
 1569
 01:03:42,450 --> 01:03:45,260
-navigation controller if you build your storyboard right
-NavigationController，如果你在 iPhone
+Navigation Controller if you build your Storyboard right
+Navigation Controller，如果你在 iPhone
 
 1570
 01:03:45,260 --> 01:03:48,730
 on iPhone, but using the delegate or the presentation
-创建 storyboard，使用 delegate 或 PresentationController
+创建 Storyboard，使用 delegate 或 PresentationController
 
 1571
 01:03:48,730 --> 01:03:51,530
@@ -7751,7 +7753,7 @@ But the yellow line there is where I am,
 
 1580
 01:04:13,950 --> 01:04:17,220
-from the view controller that I'm segue-ing to,
+from the View Controller that I'm segue-ing to,
 从 ViewController 中我将 segue 到它那里去
 
 1581
@@ -7786,8 +7788,8 @@ If I'm being segued some other way,
 
 1587
 01:04:30,200 --> 01:04:33,460
-like just pushing in a navigation controller, or
-比如在 NavigationController 被 push
+like just pushing in a Navigation Controller, or
+比如在 Navigation Controller 被 push
 
 1588
 01:04:33,470 --> 01:04:35,600
@@ -7802,7 +7804,7 @@ I'm just gonna ignore it, cuz I do if let right there.
 1590
 01:04:38,840 --> 01:04:40,840
 But if it is popover, then I make it this popover
-但如果它是 popover，那么我将让它等于这个 
+但如果它是 popover，那么我将让它等于这个
 
 1591
 01:04:40,840 --> 01:04:42,200
@@ -7961,13 +7963,13 @@ You can even go way more powerful than that,
 
 1622
 01:05:55,970 --> 01:05:57,900
-the other one here presentation controller view,
-用来展示另一个 ViewController
+the other one here presentationController view,
+这里还有一个
 
 1623
 01:05:57,900 --> 01:06:00,270
-view controller for adapted presentation style,
-就是 presentationController 方法
+viewControllerForAdaptedPresentationStyle,
+presentationController(viewControllerForAdaptedPresentationStyle:) 方法
 
 1624
 01:06:00,270 --> 01:06:04,210
@@ -7981,8 +7983,8 @@ That displays your MVC in a totally different way
 
 1626
 01:06:06,580 --> 01:06:09,110
-maybe it's wrapped in a navigation controller or
-可能被包含在 NavigationController 中或 
+maybe it's wrapped in a Navigation Controller or
+可能被包含在 Navigation Controller 中或 
 
 1627
 01:06:09,110 --> 01:06:10,410
@@ -8126,8 +8128,8 @@ itself what would you like to be?
 
 1655
 01:07:27,080 --> 01:07:30,620
-And so this is just a property in your UI view controller.
-这只是 MVC 的一个属性 
+And so this is just a property in your UIViewController.
+这只是 UIViewController 的一个属性 
 
 1656
 01:07:30,620 --> 01:07:33,650
@@ -8836,12 +8838,12 @@ So let's go back to the top here and get ourselves
 
 1797
 01:13:38,300 --> 01:13:41,070
-brand new view controllers, this is just the regular old
+brand new View Controllers, this is just the regular old
 一个新的 View Controller，就是我们 
 
 1798
 01:13:41,070 --> 01:13:43,000
-view controller like we've dragged out before, so
+View Controller like we've dragged out before, so
 通常拖的普通 View Controller
 
 1799
@@ -9047,7 +9049,7 @@ So this is going to show a blank MVC at this point.
 1839
 01:15:21,090 --> 01:15:24,020
 So here's our iPad right here and we'll.
-这是我们的 iPad  模拟器
+这是我们的 iPad 模拟器
 
 1840
 01:15:24,030 --> 01:15:25,660
@@ -9111,7 +9113,7 @@ So, let's start by creating a new
 
 1852
 01:15:54,520 --> 01:15:56,180
-UI view controller subclass.
+UIViewController subclass.
 UIViewController 子类 。
 
 1853
@@ -9126,12 +9128,12 @@ because I'm gonna create a cocoa touch class, and
 
 1855
 01:16:01,620 --> 01:16:03,760
-it is gonna be a UI view controller.
+it is gonna be a UIViewController.
 它将一个 UIViewController 
 
 1856
 01:16:03,760 --> 01:16:06,830
-I'm gonna call it text UI view controller because that's what
+I'm gonna call it TextViewController because that's what
 我叫它 TextViewController 
 
 1857
@@ -9141,7 +9143,7 @@ it does, it shows some text.
 
 1858
 01:16:08,260 --> 01:16:09,960
-That's all this view controller knows how to do.
+That's all this View Controller knows how to do.
 这是这个控制器需要做的 
 
 1859
@@ -9186,7 +9188,7 @@ We'll have to put our implementation in here.
 
 1867
 01:16:28,180 --> 01:16:30,010
-Meanwhile, let's go back to our storyboard and
+Meanwhile, let's go back to our Storyboard and
 除此之外，我们需要在 Storyboard 中 
 
 1868
@@ -9634,12 +9636,12 @@ HappinessViewController 是 segue 的发起者
 
 1957
 01:20:19,080 --> 01:20:22,310
-So we might think that we should go to our happiness
+So we might think that we should go to our
 所以我们也许会想
 
 1958
 01:20:22,310 --> 01:20:25,480
-view controller right here and add the prepare in here.
+HappinessViewController right here and add the prepare in here.
 把 segue 准备的代码放到这里
 
 1959
@@ -9649,7 +9651,7 @@ Okay. And we could do that but
 
 1960
 01:20:28,350 --> 01:20:29,920
-remember that happiness view control is
+remember that HappinessViewController is
 但是，还记得吗？ HappinessViewController 是我们从
 
 1961
@@ -9834,7 +9836,7 @@ Make sense?
 
 1997
 01:22:01,360 --> 01:22:04,230
-Now, over here in my storyboard,
+Now, over here in my Storyboard,
 回到 Storyboard 中
 
 1998
@@ -9974,12 +9976,12 @@ And you wanna add something to it for
 
 2025
 01:23:15,160 --> 01:23:16,960
-a particular storyboard or
+a particular Storyboard or
 为其添加特定的功能
 
 2026
 01:23:16,960 --> 01:23:18,590
-a particular use in the storyboard.
+a particular use in the Storyboard.
 或作为一个特殊的用途
 
 2027
@@ -10256,17 +10258,17 @@ collects all your constant Strings together.
 
 2082
 01:25:57,900 --> 01:25:59,970
-And if you ever change something in your storyboard.
+And if you ever change something in your Storyboard.
 如果你想改变 Storyboard 里的东西，你也得对这个进行一个修改
 
 2083
 01:25:59,970 --> 01:26:02,670
-Some people might even call this struct storyboard, so
+Some people might even call this struct Storyboard, so
 有人可能希望给这个结构体起名为 Storyboard
 
 2084
 01:26:02,670 --> 01:26:06,110
-that every String that's in your storyboard that has to
+that every String that's in your Storyboard that has to
 也就是，在 Storyboard 里出现的每一个字符串
 
 2085
@@ -11210,7 +11212,7 @@ Well, hm.
 2273
 01:34:07,020 --> 01:34:08,520
 So it didn't put up the history in
-它没把历史记录放到类似 iPad 
+它没把历史记录放到类似 iPad
 
 2274
 01:34:08,520 --> 01:34:10,550
@@ -11225,7 +11227,7 @@ It took over the whole screen.
 2276
 01:34:12,620 --> 01:34:16,120
 Modal, it's what a modal segue looks like.
-这看起来就是一个 modal 的 segue 
+这看起来就是一个 modal 的 segue
 
 2277
 01:34:16,130 --> 01:34:17,390
@@ -11360,7 +11362,7 @@ Inside our prepare-
 2303
 01:35:27,550 --> 01:35:29,420
 So here's our prepare in our diagnosed,
-这个 DiagnosedHappinessViewController 
+这个 DiagnosedHappinessViewController
 
 2304
 01:35:29,420 --> 01:35:32,720
@@ -11380,7 +11382,7 @@ happening, we can also say if we can let,
 2307
 01:35:40,500 --> 01:35:43,330
 ppc I'll call it, equal the text view
-if let ppc = 
+if let ppc =
 
 2308
 01:35:43,330 --> 01:35:46,830
@@ -11400,7 +11402,7 @@ So, this is a method in UI viewcontroller and
 2311
 01:35:52,080 --> 01:35:54,740
 it'll return nil if you're not currently in the process of
-它将会返回一个 nil 
+它将会返回一个 nil
 
 2312
 01:35:54,740 --> 01:35:57,310
@@ -11555,7 +11557,7 @@ usually pass along the thing that's doing the delegation.
 2342
 01:37:25,860 --> 01:37:29,120
 So this is that same PopoverPresentationController being
-所以这就是这个 popoverPresentationController 
+所以这就是这个 popoverPresentationController
 
 2343
 01:37:29,130 --> 01:37:30,790
@@ -11865,7 +11867,7 @@ I'm just gonna let my super class.
 2404
 01:40:27,150 --> 01:40:32,480
 preferredContentSize do its thing, okay?
-preferredContentSize 
+preferredContentSize
 
 2405
 01:40:32,480 --> 01:40:33,920
@@ -11905,7 +11907,7 @@ the middle of being presented on screen, okay, then I can
 2412
 01:40:52,100 --> 01:40:55,100
 ask the text view what its preferred size would be.
-向 textView 询问它的首选的尺寸将会是多少 
+向 textView 询问它的首选的尺寸将会是多少
 
 2413
 01:40:56,100 --> 01:40:58,540
@@ -11959,7 +11961,7 @@ called presentingViewController.
 
 2423
 01:41:29,900 --> 01:41:31,900
-The presentingViewController is the view controller that
+The presentingViewController is the View Controller that
 presentingViewController 是一个 ViewController
 
 2424
@@ -11969,23 +11971,23 @@ is currently presenting you via some sort of segue.
 
 2425
 01:41:35,940 --> 01:41:39,610
-So, in the popover case, it's going to be that diagnosed
+So, in the popover case, it's going to be that
 所以，在 popover 情形中
 
 2426
 01:41:39,610 --> 01:41:41,840
-view controller's gonna be presenting me.
+DiagnosedViewController's gonna be presenting me.
 这个 ViewController 是 DiagnosedViewController
 
 2427
 01:41:41,840 --> 01:41:44,610
 But whoever it is, I can check to make sure that's not nil.
-但是无论是谁在呈现，我可以检查它以确保它不是 nil 
+但是无论是谁在呈现，我可以检查它以确保它不是 nil
 
 2428
 01:41:45,550 --> 01:41:48,450
 So, this is only gonna happen right here,
-所以这里只会在 
+所以这里只会在
 
 2429
 01:41:48,450 --> 01:41:51,180
@@ -12019,7 +12021,7 @@ in this case I'm gonna let the text view tell me a size that
 
 2435
 01:42:06,600 --> 01:42:10,500
-fits inside my presenting view controllers.
+fits inside my PresentingViewControllers.
 PresentingViewController.
 
 2436
@@ -12110,7 +12112,7 @@ Now, what if we're not in
 2453
 01:42:50,770 --> 01:42:52,030
 the middle of presenting right here?
-presentingViewController 是 nil 
+presentingViewController 是 nil
 
 2454
 01:42:52,040 --> 01:42:55,610
@@ -12254,13 +12256,13 @@ Most notably was the polymorphism of
 
 2482
 01:44:12,210 --> 01:44:14,010
-view controllers.
+View Controllers.
 多态性
 
 2483
 01:44:14,940 --> 01:44:17,740
-And we were in our storyboard here,
-在 storyboard 中
+And we were in our Storyboard here,
+在 Storyboard 中
 
 2484
 01:44:17,740 --> 01:44:20,450

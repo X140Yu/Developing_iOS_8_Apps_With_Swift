@@ -1201,86 +1201,107 @@ But we're zooming the whole contents, so
 301
 00:12:20,097 --> 00:12:21,346
 everything gets zoomed,
+全部都会缩放，
 
 302
 00:12:21,347 --> 00:12:22,596
 but that's gonna be the view that you're zooming in.
+但是你需要在一个视图里进行缩放。
 
 303
 00:12:22,599 --> 00:12:24,932
 So you have to tell it which view that is.
+你需要告诉系统这是哪个视图。
 
 304
 00:12:24,934 --> 00:12:26,066
 It's usually pretty obvious.
+通常来说这是显而易见的。
 
 305
 00:12:26,068 --> 00:12:28,085
 Often times in ScrollView,
+通常来说
 
 306
 00:12:28,086 --> 00:12:30,103
 you're only scrolling on one view anyway but
+你只会在一个视图上滚动，但是
 
 307
 00:12:30,105 --> 00:12:32,405
 you still have to implement this, okay.
+你依然需要实现这个方法。
 
 308
 00:12:33,541 --> 00:12:35,775
 You can zoom programatically once you've set those two
+正确的完成这两步后，你就可以使用代码
 
 309
 00:12:35,777 --> 00:12:37,076
 things up properly.
+来进行缩放了。
 
 310
 00:12:37,078 --> 00:12:40,112
 Then you can set the zoom scale, how zoomed in you are.
+你可以设置缩放比例。
 
 311
 00:12:40,114 --> 00:12:41,713
 It looks kind of like this.
+就像这样，
 
 312
 00:12:41,715 --> 00:12:43,114
 So, here I've got a picture.
+这里有一张图片。
 
 313
 00:12:43,116 --> 00:12:45,483
 Let's say my zoomScale is 1.2.
+我的缩放比例是1.2.
 
 314
 00:12:45,485 --> 00:12:46,784
 I go to zoomScale 1.
+现在改成1
 
 315
 00:12:46,786 --> 00:12:50,987
 I zoom out, zoom back to 1.2 zoomed in.
+然后再放大，现在是1.2.
 
 316
 00:12:50,989 --> 00:12:53,089
 Okay? And same thing with zoom rect.
+缩放矩形也是一样的。
 
 317
 00:12:53,091 --> 00:12:55,658
 So if I had a little rectangle like that yellow area and
+如果我有一个黄色区域这样的小矩形。
 
 318
 00:12:55,660 --> 00:12:58,861
 I said zoom to that rect, it would zoom to make that
+然后我要缩放到这个矩形，图片就会缩放
 
 319
 00:12:58,863 --> 00:13:01,630
 rect fill the edges as much as it could.
+到尽可能适应这个矩形。
 
 320
 00:13:01,632 --> 00:13:03,798
 Or if I have a rect that was really big, and
+或者我有一个很大的矩形，
 
 321
 00:13:03,800 --> 00:13:07,335
 I said zoom it would zoom it down to fit.
+图片就会缩小去适应它。
 
 322
 00:13:07,337 --> 00:13:08,702
@@ -1289,10 +1310,12 @@ Okay?
 323
 00:13:08,704 --> 00:13:13,440
 So, zoomToRect means make this rect kind of either go big or
+所以zoomToRect方法就是提供一个矩形，然后背景放大或
 
 324
 00:13:13,442 --> 00:13:14,774
 go small to fit.
+缩小去适应它。
 
 325
 00:13:14,776 --> 00:13:16,776
@@ -1301,522 +1324,652 @@ Okay?
 326
 00:13:16,778 --> 00:13:18,143
 All right?
+好的。
 
 327
 00:13:18,145 --> 00:13:19,978
 There are tons of other delegate methods in
+滚动视图有非常多的代理
 
 328
 00:13:19,980 --> 00:13:21,730
 scroll view.
+方法。
 
 329
 00:13:21,731 --> 00:13:23,481
 One thing, when you start using scroll view,
+这里有一个问题，当你开始使用滚动视图的时候，
 
 330
 00:13:23,483 --> 00:13:25,183
 you're going to ask me is,
+你可能会问我，
 
 331
 00:13:25,185 --> 00:13:28,085
 hey, scroll view has 12 delegate methods.
+滚动视图有12个代理方法。
 
 332
 00:13:28,087 --> 00:13:30,854
 And when I say I implement the UIScrollView delegate
+当我要实现滚动视图的代理协议时
 
 333
 00:13:30,856 --> 00:13:33,790
 protocol, how come the compiler doesn't complain and
+为什么编译器没有抱怨说我必须实现
 
 334
 00:13:33,792 --> 00:13:36,659
 say that it will implement those 12 methods because I
+这12个代理方法？我认为如果我说要实现
 
 335
 00:13:36,661 --> 00:13:38,995
 thought if I said I implemented a protocol,
+一个协议，我就要实现协议规定的
 
 336
 00:13:38,997 --> 00:13:41,630
 I have to implement all those protocols, okay?
+所有方法。
 
 337
 00:13:43,300 --> 00:13:45,633
 The reason that that happens, that you don't get
+编译器没有警告的原因是
 
 338
 00:13:45,635 --> 00:13:48,636
 a warning there is because there is actually, for
+因为一些历史原因，
 
 339
 00:13:48,638 --> 00:13:51,605
 historical reasons, a different kind of protocol,
+还有一种其他类型的协议，
 
 340
 00:13:51,607 --> 00:13:54,641
-which is an Objective C style protocol.
+which is an Objective-C style protocol.
+也就是 Objective-C 的协议。
 
 341
 00:13:54,643 --> 00:13:56,276
 Objective C was the old language that iOS
+Objective-C 是一种老语言，iOS就是用它写成的。
 
 342
 00:13:56,278 --> 00:13:59,279
 was written in and in the Objective C style protocols
+在 Objective-C 的协议里，
 
 343
 00:13:59,281 --> 00:14:02,248
 some methods in the protocol were allowed to be optional.
+一些方法可以是可选的。
 
 344
 00:14:02,250 --> 00:14:03,716
 Now that's not true in Swift,
+Swift不可以这样，
 
 345
 00:14:03,718 --> 00:14:06,819
 but that's true in Objective C.
+但是 Objective-C 可以。
 
 346
 00:14:06,821 --> 00:14:11,156
 So all these old delegate protocols like
+所以像滚动视图代理协议这种老的
 
 347
 00:14:11,158 --> 00:14:13,658
 scroll view that have optional methods in them,
+协议，里边都是有可选方法的。
 
 348
 00:14:13,660 --> 00:14:16,160
 Swift knows how to bridge them.
+Swift 知道如何桥接他们。
 
 349
 00:14:16,162 --> 00:14:19,363
 You can actually create your own Objective C compatible
+事实上你也可以自己写一个 有可选方法的 Objective-C 风格的
 
 350
 00:14:19,365 --> 00:14:22,799
 protocol with optional methods by saying @objc in front of
+协议，只需要在协议声明之前加上
 
 351
 00:14:22,801 --> 00:14:24,534
 your protocol declaration.
+@objc 。
 
 352
 00:14:24,536 --> 00:14:27,403
 So where you would say protocol face view delegate or
+比如你可以写一个 FaceViewDelegate 或者
 
 353
 00:14:27,405 --> 00:14:29,271
 face view data source you would say
+FaceViewDataSource，在声明的时候
 
 354
 00:14:29,273 --> 00:14:32,007
 @objc space protocol, whatever delegate, and
+写@objc 空格 protocol, 
 
 355
 00:14:32,009 --> 00:14:34,109
 then you could put optional in there.
+然后你就可以定义可选方法了。
 
 356
 00:14:34,111 --> 00:14:35,744
 And you can read,
+你可以在
 
 357
 00:14:35,745 --> 00:14:37,378
 this is all covered in the reading assignments, so
+阅读材料里读到这些内容，希望
 
 358
 00:14:37,381 --> 00:14:39,547
 hopefully you've got that.
+你们已经都看过了。
 
 359
 00:14:39,549 --> 00:14:42,116
 But that's the magic that makes it so that when you say
+正是因为有这个魔法，所以在你
 
 360
 00:14:42,118 --> 00:14:44,918
 you implement the UIScrollView delegate protocol and
+需要实现滚动视图代理协议的时候，你不需要
 
 361
 00:14:44,920 --> 00:14:48,088
 you don't yet implement all the 12 methods in there.
+实现它里边全部的12个方法。
 
 362
 00:14:48,090 --> 00:14:49,656
 In fact you only need to implement the ones you
+你只需要实现你想实现的方法，
 
 363
 00:14:49,658 --> 00:14:53,325
 want like view for zooming and scroll view.
+比如缩放什么的。
 
 364
 00:14:53,327 --> 00:14:54,793
 That's why that works.
+这就是为什么不会报错。
 
 365
 00:14:54,795 --> 00:14:55,994
 So anyway there are a bunch of
+当然还有很多
 
 366
 00:14:55,996 --> 00:14:57,395
 other delegate methods in there.
+别的代理方法。
 
 367
 00:14:57,397 --> 00:15:00,665
 For example scrollViewDidEndZooming.
+比如 scrollViewDidEndZooming 。
 
 368
 00:15:00,667 --> 00:15:03,467
 So that will be sent to you when the user pinches and
+这个方法会在用户用手指缩放完毕离开屏幕的时候
 
 369
 00:15:03,469 --> 00:15:05,302
 then they lift their finger up.
+被调用。
 
 370
 00:15:05,304 --> 00:15:06,603
 'Kay? And it'll say oh,
+它会知道
 
 371
 00:15:06,605 --> 00:15:08,371
 the user has finished zooming and
+用户现在已经结束缩放，而且也能知道
 
 372
 00:15:08,373 --> 00:15:10,673
 this is the scale they left it at.
+现在的缩放比例。
 
 373
 00:15:10,675 --> 00:15:13,142
 And you, at that point, might want to redraw your view to
+在这个时间点，你可能需要重绘你的视图让它看上去
 
 374
 00:15:14,278 --> 00:15:16,511
 be less grainy, or something like that.
+不那么模糊，或者类似的事儿。
 
 375
 00:15:16,513 --> 00:15:18,747
-If you do withdraw your view at the new scale,
+If you do redraw your view at the new scale,
+如果你确实要在新的缩放比例重绘视图，
 
 376
 00:15:18,749 --> 00:15:21,616
 you want to make sure you reset the transform.
+那么你需要确保你重置了 transform 。
 
 377
 00:15:21,618 --> 00:15:22,850
 Okay. This property on
+这是一个视图的属性，
 
 378
 00:15:22,852 --> 00:15:25,953
 view called transform is an Affine transform.
+它是一种仿射变换。
 
 379
 00:15:25,955 --> 00:15:28,789
 Really that's all scroll view is modifying.
+当你在滚动视图上滑动手指或者
 
 380
 00:15:28,791 --> 00:15:29,989
 When you pan around and
+所缩放操作的时候，
 
 381
 00:15:29,991 --> 00:15:32,759
 zoom in, it's just modifying the property transform.
+实际上就是在改动这个属性。
 
 382
 00:15:32,761 --> 00:15:35,261
 So, you can go look at the documentation for transform in
+你们可以去看视图里 transform的文档去
 
 383
 00:15:35,263 --> 00:15:37,196
 view to understand what's going on there.
+深入了解一下。
 
 384
 00:15:37,198 --> 00:15:40,699
 Yeah, it makes scroll view really easy in that it
+这使得滚动视图的操作很好理解，因为都是
 
 385
 00:15:40,701 --> 00:15:42,233
 just is modifying this transform.
+在改变这个属性。
 
 386
 00:15:43,370 --> 00:15:44,235
 All right, so that's scroll view.
+好，这就是滚动视图。
 
 387
 00:15:44,237 --> 00:15:45,636
 So, I have a demo of scroll view.
+下边有一个滚动视图的演示。
 
 388
 00:15:45,638 --> 00:15:46,937
 We're going to learn some other
+在做这个演示的时候，我们还会学
 
 389
 00:15:46,939 --> 00:15:49,039
 things along the way while we're doing that.
+一些其他的东西。
 
 390
 00:15:49,041 --> 00:15:52,408
 Okay, let's do that.
+开始
 
 391
 00:15:52,410 --> 00:15:53,476
 Let's go over here.
+这里
 
 392
 00:15:53,478 --> 00:15:54,977
 We're gonna start from scratch again.
+我们从头开始做。
 
 393
 00:15:54,979 --> 00:15:57,446
 So I'm gonna create a new Xcode project.
+建一个新的Xcode项目。
 
 394
 00:15:57,448 --> 00:15:58,914
 'Kay. It's gonna be Single View.
+单视图应用。
 
 395
 00:15:58,915 --> 00:16:00,381
 Those of you who like to follow along are not gonna be
+想跟着做的人今天可能
 
 396
 00:16:00,384 --> 00:16:01,015
 able to today.
+不行了。
 
 397
 00:16:01,017 --> 00:16:02,183
 Sorry.
+不好意思。
 
 398
 00:16:02,185 --> 00:16:05,452
 Because I'm going to be dragging in a file with some
+因为我要直接拖一个有很多URL的文件
 
 399
 00:16:05,454 --> 00:16:07,855
 URLs in it.
+进来。
 
 400
 00:16:07,856 --> 00:16:10,257
 I'm going to call this thing Cassini.
+给项目起名叫cassini。
 
 401
 00:16:10,259 --> 00:16:12,826
 That's going to be the name of my app.
+这个就是我的应用的名字。
 
 402
 00:16:12,828 --> 00:16:14,794
 And I'm gonna put it where I always put everything.
+还放在原来的地方。
 
 403
 00:16:15,763 --> 00:16:18,831
 All right, I'm not going to be doing anything with the app
+跟原来一样，我们不需要改动AppDelegate这个
 
 404
 00:16:18,833 --> 00:16:19,898
 delegate as usual.
+文件。
 
 405
 00:16:19,900 --> 00:16:21,599
 I'm not going to be doing image assets.
+这次也不改动图片库。
 
 406
 00:16:21,601 --> 00:16:24,035
 I'm not going to do the launch screen.
+不改动启动屏幕。
 
 407
 00:16:24,037 --> 00:16:27,138
 So, here I just have a simple storyboard.
+只需要这个简单的 storyboard。
 
 408
 00:16:27,140 --> 00:16:28,472
 I'm gonna also get rid of
+这些关于视图控制器
 
 409
 00:16:28,474 --> 00:16:30,574
-all this ViewControl life cycle here.
+all this ViewController life cycle here.
+生命周期的方法也没用。
 
 410
 00:16:30,576 --> 00:16:31,174
 I don't need that.
+这次不需要。
 
 411
 00:16:32,410 --> 00:16:33,809
 Get rid of that.
+删掉。
 
 412
 00:16:33,811 --> 00:16:37,112
 And so here, simple storyboard only has this one
+现在这个简单的storyboard只有一个叫
 
 413
 00:16:37,114 --> 00:16:40,382
 view controller here called ViewController.
+ViewController的视图控制器。
 
 414
 00:16:40,384 --> 00:16:41,683
 And I'm not even gonna pay any attention to
+而且我也不需要关注这个
 
 415
 00:16:41,685 --> 00:16:43,168
 this view controller.
+视图控制器。
 
 416
 00:16:43,169 --> 00:16:44,652
 Actually, I'm gonna create a new view controller.
+我要建一个新的视图控制器。
 
 417
 00:16:44,654 --> 00:16:47,722
 I'm gonna drag it out here and this new view controller,
+从这拖一个出来，这个新的视图控制器
 
 418
 00:16:47,724 --> 00:16:51,958
 its only job in life it's going to display an image.
+唯一的任务就是显示一个图片。
 
 419
 00:16:51,960 --> 00:16:56,662
 So I'm going give it the URL of an image, a JPEG file or
+我可能会传递给它一个图片的URL，JPEG文件或者别的
 
 420
 00:16:56,664 --> 00:16:59,765
 whatever, and it's going to display it.
+什么东西，反正就是显示图片。
 
 421
 00:16:59,767 --> 00:17:01,734
 That's going to be its job in life.
+这就是它全部的工作。
 
 422
 00:17:01,736 --> 00:17:03,669
 So I need a new view controller for that.
+我需要一个新的视图控制器文件。
 
 423
 00:17:03,671 --> 00:17:06,504
 So I'm going to call this new view controller.
+我要给它起名叫。。。。
 
 424
 00:17:06,506 --> 00:17:07,822
 All right? I'm going here,
+点这，
 
 425
 00:17:07,823 --> 00:17:09,139
 Cocoa Touch Class, it's a view controller.
+Cocoa Touch 类，视图控制器。
 
 426
 00:17:09,142 --> 00:17:11,842
 I'm gonna call it ImageViewController.
+起名叫 ImageViewController 。
 
 427
 00:17:11,844 --> 00:17:14,278
 Cuz that's what it does, it displays an image.
+因为这就是它要干的活，显示一张图片。
 
 428
 00:17:14,280 --> 00:17:16,180
 Okay? Very, very simple.
+非常简单。
 
 429
 00:17:16,181 --> 00:17:18,081
 I'm gonna put it where all the rest of my stuff goes, there.
+把它跟我其他的东西放到一起，这。
 
 430
 00:17:19,017 --> 00:17:20,183
 All right? So here we go again.
+好了，又要来一次，
 
 431
 00:17:20,185 --> 00:17:21,484
 Again, I'm gonna get rid of my
+把所有的视图控制器生命周期
 
 432
 00:17:21,486 --> 00:17:22,985
 view controller life cycle there.
+相关的方法删掉。
 
 433
 00:17:22,987 --> 00:17:25,787
 We're gonna actually add some of those back,
+实际上一会儿可能会加一些方法回来，
 
 434
 00:17:25,789 --> 00:17:28,857
 cuz part of the reason I'm doing this demo, also,
+这也是我们做这个演示的一部分，
 
 435
 00:17:28,859 --> 00:17:30,925
 is to show you a little bit where and
+会给你们演示一些视图控制器生命
 
 436
 00:17:30,927 --> 00:17:34,128
 why, how we would use a view controller life cycle.
+周期的内容。
 
 437
 00:17:34,130 --> 00:17:37,097
 So, my ImageViewController, one other thing,
+还有一个事，
 
 438
 00:17:37,099 --> 00:17:40,667
-let me make sure in our story board here, we got this thing,
+let me make sure in our storyboard here, we got this thing,
+我得确认一下在storyboard里，
 
 439
 00:17:40,669 --> 00:17:43,436
 I'm gonna make sure I change the identity of it
+我要把这个视图控制器的类改成
 
 440
 00:17:43,438 --> 00:17:45,371
 to be an ImageViewController.
+ImageViewController
 
 441
 00:17:45,373 --> 00:17:47,506
 So this is an ImageViewController.
+现在是 ImageViewController 了。
 
 442
 00:17:47,508 --> 00:17:51,710
 This is an easy thing to forget, but do that.
+这个事情非常容易忘。
 
 443
 00:17:51,712 --> 00:17:54,479
 Okay, so what do I need in my ImageViewController.
+在我的 ImageViewController 里，
 
 444
 00:17:54,481 --> 00:17:57,048
 Well, I need a UIImageView.
+我需要一个 UIImageView 。
 
 445
 00:17:57,050 --> 00:17:59,550
 We saw that in the Auto Layout demo.
+我们在自动布局的演示里见过了。
 
 446
 00:17:59,552 --> 00:18:02,286
 It's a just a view, kind of like a UI label for images.
+它就是一种视图，一种显示图片的标签。
 
 447
 00:18:02,288 --> 00:18:03,787
 Obviously if I'm going to have ImageViewController,
+显然如果我要做一个显示图片的视图控制器，
 
 448
 00:18:03,789 --> 00:18:05,656
 I'm going to need one of those.
+我肯定需要一个这个东西。
 
 449
 00:18:05,657 --> 00:18:07,524
 Now, I could just drag it out into my story board, but
+我可以从storyboard里拖一个进去，但是
 
 450
 00:18:07,526 --> 00:18:10,560
 I want to use this demo as an example to show you
+我希望通过这个演示给你们看一下如何通过代码
 
 451
 00:18:10,562 --> 00:18:14,096
 how you create a view in code, create and use a view in code.
+来新建一个视图并使用它。
 
 452
 00:18:14,098 --> 00:18:17,700
 So instead, I'm just gonna have a private var here.
+这里我建一个私有变量。
 
 453
 00:18:17,702 --> 00:18:19,534
 I'm gonna call it imageView.
+我叫它 imageView 。
 
 454
 00:18:19,536 --> 00:18:21,736
 And it's going to be a UIImageView.
+类型是 UIImageView。
 
 455
 00:18:21,738 --> 00:18:24,105
 In fact, I'm just gonna create it right here.
+我要在这直接新建。
 
 456
 00:18:24,107 --> 00:18:25,089
@@ -1825,78 +1978,97 @@ Okay.
 457
 00:18:25,090 --> 00:18:26,072
 So I have this image view.
+现在我又了这个图片视图。
 
 458
 00:18:26,075 --> 00:18:27,574
 I'm just calling it there.
+我在这直接新建了。
 
 459
 00:18:27,576 --> 00:18:29,242
 Notice, I'm not using the frame.
+注意我没用frame新建。
 
 460
 00:18:29,244 --> 00:18:30,443
 So it's going to create this image view.
+所以我这个新的图片视图
 
 461
 00:18:30,445 --> 00:18:32,812
 It's going to be zero, zero, by zero, zero.
+的frame就是
 
 462
 00:18:32,814 --> 00:18:34,380
 It's going to be, it's framed.
+（0,0,0,0)
 
 463
 00:18:34,382 --> 00:18:37,383
 It's going to be, now it's not in any super view anyways, so
+现在它不属于任何视图，
 
 464
 00:18:37,385 --> 00:18:39,184
 it really doesn't matter what its frame is yet.
+所以它的frame 是啥也不重要。
 
 465
 00:18:39,186 --> 00:18:40,418
 Okay. It's obviously going to
+当然，在我们让它显示
 
 466
 00:18:40,420 --> 00:18:42,920
 matter a lot once we start putting images in there.
+图片的时候就很重要了。
 
 467
 00:18:42,922 --> 00:18:46,157
 I'm also going to create a little private var
+这里我还要写一个叫 image 的
 
 468
 00:18:46,159 --> 00:18:48,058
 here called image.
+私有变量。
 
 469
 00:18:48,060 --> 00:18:50,127
 And this is going to be a computed var.
+这是一个计算属性。
 
 470
 00:18:50,129 --> 00:18:51,695
 I did this in Auto Layout as well.
+在自动布局演示里我做过。
 
 471
 00:18:51,697 --> 00:18:54,063
 It's going to be a UIImage.
+它是UIImage类型的。
 
 472
 00:18:54,065 --> 00:18:57,099
 And all I'm going to to here in the getter,
+在 getter 方法里，
 
 473
 00:18:57,101 --> 00:19:00,536
 I'm just going to return the imageView's image.
+我让它返回 imageView.image 。
 
 474
 00:19:00,538 --> 00:19:02,438
 And in the setter,
+在 setter 方法里，
 
 475
 00:19:02,439 --> 00:19:04,339
 I'm basically just going to set the imageView's image to
+我直接就写 imageView.image = newValue.
 
 476
 00:19:04,341 --> 00:19:05,507
@@ -1905,238 +2077,298 @@ the new value.
 477
 00:19:05,509 --> 00:19:07,041
 Now, why do I do this?
+为什么要这么做？
 
 478
 00:19:07,043 --> 00:19:09,310
 'Kay, I'm doing this for
+我这么做的原因
 
 479
 00:19:09,311 --> 00:19:11,578
 the exact same reason that I was doing it in the other one,
+跟我之前做的完全一样，
 
 480
 00:19:11,581 --> 00:19:14,848
 which is that when the image is set in my imageView,
+我希望我的 imageView 的图片设定好以后，
 
 481
 00:19:14,850 --> 00:19:17,117
 I want to be able to do things, I want to intervene.
+我可以对它做事，我可以干预它。 
 
 482
 00:19:17,119 --> 00:19:19,719
 So I basically I want to kind of be able to do
+所以我想要做一些
 
 483
 00:19:19,721 --> 00:19:22,955
 the did set kind of thing to make that work.
+类似于didSet的事情。
 
 484
 00:19:24,692 --> 00:19:28,126
 So, what's my warning here, UIImage.
+啊，这个警告是什么，UIImage 。
 
 485
 00:19:28,128 --> 00:19:31,830
 Okay, so here we go.
+好了。
 
 486
 00:19:31,832 --> 00:19:34,766
 So in other words right here, when this is set,
+换句话说，当这个设置的时候，
 
 487
 00:19:34,768 --> 00:19:36,167
 when this image gets set.
+当这个图片设置的时候。
 
 488
 00:19:36,169 --> 00:19:38,769
 Setting this image just is going to set the image in
+设置这个图片就是设置了imageView的图片，
 
 489
 00:19:38,771 --> 00:19:40,570
 the imageView, that's all it does.
+这是这句代码的意思。
 
 490
 00:19:40,572 --> 00:19:42,072
 But I can put other code that I
+下边我还想加更多的
 
 491
 00:19:42,074 --> 00:19:43,539
 want down here because I'm going to
+代码，因为我希望在我的图片变更的时候
 
 492
 00:19:43,541 --> 00:19:45,975
 need to do some things every time my image changes.
+可以做更多的事情。
 
 493
 00:19:45,977 --> 00:19:48,577
 I don't care about getting but every time my
+我不关心 getter，但是每次图片设置了
 
 494
 00:19:48,579 --> 00:19:51,880
 image gets set in my imageView I need to do some stuff.
+的时候我希望imageView可以做一些事情。
 
 495
 00:19:51,882 --> 00:19:52,447
 Let me see.
+那么
 
 496
 00:19:52,449 --> 00:19:55,249
 Well, let's talk about what some of those things might be.
+让我们看看可以做什么。
 
 497
 00:19:55,251 --> 00:19:57,301
 For example,
+比如，
 
 498
 00:19:57,302 --> 00:19:59,352
 when I set it I probably want to do imageView.sizeToFit.
+当我设置图片的时候，我希望做 imageView.sizeToFit 。
 
 499
 00:20:00,823 --> 00:20:02,622
 Okay. So when you change the image
+当我们改变图片视图里的图片时，
 
 500
 00:20:02,624 --> 00:20:05,625
 that's in image view, this is kind of like saying label.text
+这个就好像是 label.text 等于什么什么。
 
 501
 00:20:05,627 --> 00:20:08,661
 equals something, right, I'm changing the imageView that,
+事实上我是在修改图片视图，
 
 502
 00:20:08,663 --> 00:20:10,729
 the image that the imageView's showing.
+修改它的显示的图片。
 
 503
 00:20:10,731 --> 00:20:13,699
 When you change it, it does not change the bounds or
+但是当我们改这个的时候，不会改变图片视图的bounds
 
 504
 00:20:13,701 --> 00:20:15,400
 the frames of the image view.
+或者frame。
 
 505
 00:20:15,402 --> 00:20:18,069
 So, sizeToFit causes it to.
+sizeToFit 可以。
 
 506
 00:20:18,071 --> 00:20:21,872
 So ImageView looks at the image, sees how big it is and
+图片视图会观察图片，看它有多大，然后根据这个来拓展自己的
 
 507
 00:20:21,874 --> 00:20:23,707
 expands its frame to fit.
+frame去适应它。
+
 
 508
 00:20:23,709 --> 00:20:26,676
 So that's clearly something I'm going to do every time I
+这个很显然在我每次变更图片的时候希望
 
 509
 00:20:26,678 --> 00:20:28,044
 change the image I want to do that.
+做到的。
 
 510
 00:20:28,046 --> 00:20:31,013
 So now you can see why I have this nice little convenience.
+所以现在你知道我为啥要这么做了。
 
 511
 00:20:31,015 --> 00:20:32,915
 You can kind of think this is similar to
+你可以把它想成setImage
 
 512
 00:20:32,917 --> 00:20:35,450
 having a function called setImage.
+方法。
 
 513
 00:20:35,452 --> 00:20:37,619
 But it's just nicer to do it as a property cuz then I
+但是把它当作属性这样处理更好，我同时有了 getter 和 setter，
 
 514
 00:20:37,621 --> 00:20:41,089
 get set and get and my code looks really nice.
+而且代码更漂亮。
 
 515
 00:20:41,091 --> 00:20:43,691
 'Kay, so there's that.
+这个完事了。
 
 516
 00:20:43,693 --> 00:20:47,828
 I'm also going to do viewDidLoad, okay?
+下边我要实现一下 viewDidLoad 。
 
 517
 00:20:47,830 --> 00:20:50,597
 So viewDidLoad, we know that we of course need to call
+首先，我们当然需要调用super,
 
 518
 00:20:50,599 --> 00:20:53,099
 super, and what I'm gonna do in viewDidLoad?
+我要在 viewDidLoad 里做什么呢？
 
 519
 00:20:53,101 --> 00:20:56,135
 Well, I'm just gonna add my imageView to
+我需要把图片视图加入到
 
 520
 00:20:56,137 --> 00:20:58,637
 the view hierarchy.
+视图的继承树里。
 
 521
 00:20:58,639 --> 00:21:00,506
 Okay, I'm going to plop it right here.
+我要把它放在这。
 
 522
 00:21:00,508 --> 00:21:02,507
 Again my storyboard, got this thing,
+在我的storyboard里，要把这个视图
 
 523
 00:21:02,509 --> 00:21:04,042
 got my view as a top level view.
+作为顶级视图。
 
 524
 00:21:04,044 --> 00:21:05,743
 I'm just going to add my view in here.
+我现在要把图片视图加进来。
 
 525
 00:21:05,745 --> 00:21:07,878
 Now, I'm not doing a scroll view yet, okay.
+到目前，我还没开始做滚动视图。
 
 526
 00:21:07,880 --> 00:21:09,513
 I'm going to do it without a scroll view, so
+我现在要通过不使用滚动视图来实现，然后看看
 
 527
 00:21:09,515 --> 00:21:12,549
 we can see what that looks like.
+是什么样的。
 
 528
 00:21:12,550 --> 00:21:15,584
 So I'm just gonna say view, addSubView, my ImageView.
+我这里写 view.addSubView(ImageView)
 
 529
 00:21:17,055 --> 00:21:19,021
 Okay, and we know that this is fine to do because
+这样做没有问题因为我们知道
 
 530
 00:21:19,023 --> 00:21:23,291
 viewDidLoad happens after pretty late in the process.
+viewDidLoad 会在很晚才回被调用。
 
 531
 00:21:23,293 --> 00:21:26,127
-Now, I'm doing anything here that's geometry based.
+Now, I'm not doing anything here that's geometry based.
+现在我做的事儿跟尺寸什么的没有关系。
 
 532
 00:21:26,129 --> 00:21:29,263
 I don't set any frames or anything like that, so this is
+我没有设置frame或者别的什么，我就仅仅
 
 533
 00:21:29,265 --> 00:21:31,866
 just putting the ImageView in there with whatever frame it
+把图片视图加了进来，并不管它的frame是多大，
 
 534
 00:21:31,868 --> 00:21:36,269
 has, either from the last sizeToFit that it got or
+不论它从 sizeToFit得到的尺寸还是仍然是0，
 
 535
 00:21:36,271 --> 00:21:38,238
 it's still zero, zero because it's never been set.
+0是因为它还没设置 frame 。
 
 536
 00:21:39,274 --> 00:21:40,356
@@ -2145,94 +2377,117 @@ Okay.
 537
 00:21:40,357 --> 00:21:41,439
 So I'm just adding it as a subview there.
+我仅仅是加了一个子视图而已。
 
 538
 00:21:42,810 --> 00:21:45,977
 Now, let's talk about what the model is in this
+现在我们还看一下这个视图控制器的
 
 539
 00:21:45,979 --> 00:21:46,578
 view controller.
+model是什么。
 
 540
 00:21:46,580 --> 00:21:48,363
 What is it's model?
+它的model。
 
 541
 00:21:48,364 --> 00:21:50,147
 Look for the model right at the top here.
+咱们把model加在最上边。
 
 542
 00:21:50,150 --> 00:21:54,218
 It's model is going to be into public.
+model应该是公有的。
 
 543
 00:21:54,220 --> 00:21:56,086
 It's going to be a public resettable model,
+应该是公有并且可以重置的，
 
 544
 00:21:56,088 --> 00:21:58,555
 which is an image URL.
+它是图片的URL。
 
 545
 00:21:58,557 --> 00:22:02,091
 And it's just going to be an NSURL, so an NSURL is a class
+类型是 NSURL，NSURL是用来存储 NSURL 的类，
 
 546
 00:22:02,093 --> 00:22:07,363
-that holds a URL, like http// some Stanford.edu something
+that holds a URL, like http:// some Stanford.edu something
+比如类似 http://Stanford.edu 的东西。
 
 547
 00:22:07,365 --> 00:22:09,931
 and that's going to be the model, and every time we
+这就是我们的model，每次设置它的时候，我们就会得到
 
 548
 00:22:09,933 --> 00:22:13,068
 set the model it's going to get to that image and
+它相应的图片然后把
 
 549
 00:22:13,070 --> 00:22:16,204
 put it in the view, okay?
+图片放到视图里。
 
 550
 00:22:16,206 --> 00:22:18,205
 Everyone understand our nice model here.
+大家都明白这个很棒的model了吧。
 
 551
 00:22:18,207 --> 00:22:20,291
 It's a very,
+这是一个非常
 
 552
 00:22:20,292 --> 00:22:22,376
 this is a very well designed MVC it has a very clear model.
+设计的非常好的MVC，有一个非常清晰的model。
 
 553
 00:22:22,378 --> 00:22:25,045
 It's clear what it does in its view.
+model对于视图的作用也非常清晰。
 
 554
 00:22:25,047 --> 00:22:27,881
 So one thing that whenever our model is set,
+只要我们的model设置了，
 
 555
 00:22:27,883 --> 00:22:31,184
 though, we want to make sure that we update our UI.
+我们就希望UI可以确保被更新。
 
 556
 00:22:31,186 --> 00:22:34,954
 So when our, if we set a new image URL I'm immediately
+如果我们设置了一个新的图片URL，我就会把现有的
 
 557
 00:22:34,956 --> 00:22:38,657
 going to set whatever existing image we have to nil.
+图片设置为空。
 
 558
 00:22:38,659 --> 00:22:39,791
 Because we're changing it,
+因为我们要变更图片，
 
 559
 00:22:39,793 --> 00:22:43,327
 and then I'm going to call a function fetchImage.
+然后我要调用一个fetchImage方法。
 
 560
 00:22:47,800 --> 00:22:49,783
@@ -2241,162 +2496,202 @@ Okay? And
 561
 00:22:49,784 --> 00:22:51,767
 fetchImage is just going to fetch the image that's in
+这个方法会根据URL提取图片，
 
 562
 00:22:51,770 --> 00:22:55,672
 the URL, and load it up into my image view.
+并把图片载入到图片视图里。
 
 563
 00:22:55,674 --> 00:23:01,877
 So, I need this private function fetchImage, okay?
+所以我们需有一个私有方法 fetchImage 。
 
 564
 00:23:01,879 --> 00:23:04,546
 So let's talk about how we get an image from a URL.
+下面我们看看如何从一个URL里提取图片。
 
 565
 00:23:04,548 --> 00:23:07,349
 If someone give me a URL, how do I get the JPEG image or
+如果有人给了我一个URL，我如何才能得到JPEG图片或者
 
 566
 00:23:07,351 --> 00:23:09,451
 whatever that goes along to it?
+里面的其他内容？
 
 567
 00:23:09,453 --> 00:23:11,152
 And it turned out to be quite simple.
+非常简单。
 
 568
 00:23:11,154 --> 00:23:16,056
 First, I'm gonna make sure that my image URL is not nil.
+首先，我要确保这个图片的URL不为空。
 
 569
 00:23:16,058 --> 00:23:18,892
 If someone asks me to load up nil,
+如果有人要求我载入一个空的URL，
 
 570
 00:23:18,894 --> 00:23:20,160
 I'm not gonna do anything.
+我就什么都不做。
 
 571
 00:23:20,162 --> 00:23:23,362
 So I'm just gonna basically ignore that.
+忽略掉它。
 
 572
 00:23:24,465 --> 00:23:27,032
 So if it's not nil, so my URL is not nil, I'm gonna go and
+如果不为空，我的URL不为空，我就要到
 
 573
 00:23:27,034 --> 00:23:30,435
 go out to the Internet, or if it was a local file,
+网上或者本地，因为它也有可能是一个本地
 
 574
 00:23:30,437 --> 00:23:33,504
 it would be the local file, and get the image data.
+文件，去拿到图片的数据。
 
 575
 00:23:33,506 --> 00:23:35,806
 So I'm gonna say imageData equals, and
+这里写 imageData 等于
 
 576
 00:23:35,808 --> 00:23:37,608
 I can do that with the class NSData.
+这里我要用 NSData 类，
 
 577
 00:23:37,610 --> 00:23:41,111
 And you'll remember NSData from a long-ago lecture,
+也许你会记得 NSData 在很久以前的一堂课上讲到过，
 
 578
 00:23:41,113 --> 00:23:43,079
 maybe lecture three or four.
+第三课或者第四课吧。
 
 579
 00:23:43,081 --> 00:23:45,481
 NSData is just a bag of bits.
+NSData 就是一个装比特的包裹。
 
 580
 00:23:45,483 --> 00:23:47,783
 Right? So I'm gonna reach out on the
+所以我现在要到网上
 
 581
 00:23:47,785 --> 00:23:51,887
 Internet and grab the bag of bits, which is this JPEG file.
+把这个包裹抓下来，这个包里就是一个JPEG文件。
 
 582
 00:23:51,889 --> 00:23:55,123
 And I do that by using contentsOfURL initializer
+这里用 contentOfUrl 这个初始化器
 
 583
 00:23:55,125 --> 00:23:57,325
 here, and I just give it the URL.
+然后把URL传递给它。
 
 584
 00:23:57,327 --> 00:23:59,860
 So I can go out and get that.
+然后我就在网上得到数据了。
 
 585
 00:23:59,862 --> 00:24:01,895
 Now this could return nil.
+但是这个是有可能返回空值的。
 
 586
 00:24:01,897 --> 00:24:04,398
 What if I just gave it some bogus URL, 'kay?
+如果我传递了一个假的URL呢？
 
 587
 00:24:04,400 --> 00:24:05,699
 There's no file there.
+里边没有文件。
 
 588
 00:24:05,701 --> 00:24:08,401
 So let's check and make sure this is nil.
+我们需要检查它是否为空。
 
 589
 00:24:08,403 --> 00:24:13,939
 So I'm gonna say if the imageData does not equal nil.
+这里写 if imageData != nil
 
 590
 00:24:13,941 --> 00:24:16,675
 Why do I keep getting the caps lock there?
+我怎么一直开着大写？
 
 591
 00:24:16,677 --> 00:24:18,576
 I'm not really sure what I'm doing there.
+实在不知道我在干嘛。
 
 592
 00:24:18,578 --> 00:24:20,511
 ImageData does not equal nil,
+ImageData 不等于空，
 
 593
 00:24:20,513 --> 00:24:23,714
 then I can do something about it, else, I can't.
+然后我就可以对它做些什么了，如果为空，就不能。
 
 594
 00:24:24,683 --> 00:24:29,185
 So I could do if let, by the way, here, but
+我可以写成 if let，但是我这么写
 
 595
 00:24:29,187 --> 00:24:30,286
 I'm doing it this way for a reason.
+是有原因的。
 
 596
 00:24:30,288 --> 00:24:32,621
 You'll see a little bit later.
+一会儿你就知道了。
 
 597
 00:24:32,623 --> 00:24:34,756
 So if the imageData's not nil, what am I gonna do?
+如果imageData不为空，我要做什么呢？
 
 598
 00:24:34,758 --> 00:24:37,492
 Well, I need to turn that imageData, that bag of bits,
+我要把imageData，装着比特的包裹，
 
 599
 00:24:37,494 --> 00:24:39,160
 into a UIImage.
+转化成一个UIImage对象。
 
 600
 00:24:39,162 --> 00:24:42,896
 UIImage is the class in iOS that represents an image.
+UIImage是iOS里展示图片的类。
 
 601
 00:24:42,898 --> 00:24:44,131

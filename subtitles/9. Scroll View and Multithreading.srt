@@ -3896,182 +3896,227 @@ See right down here where we add the image view to
 901
 00:38:58,265 --> 00:39:01,049
 our view?
+我们的视图？
 
 902
 00:39:01,050 --> 00:39:03,834
 Instead, I'm just gonna add it to the scroll view, 'kay?
+相反，我只是把它添加到滚动视图中
 
 903
 00:39:03,837 --> 00:39:06,437
 So you can build your view hierarchy in view did load.
+这样你可以在 viewDidLoad 中建立视图层次关系
 
 904
 00:39:06,439 --> 00:39:08,172
 It's actually a pretty good place to build it,
+这里实际上是个很好的地方来创建它
 
 905
 00:39:08,174 --> 00:39:10,908
 cuz all your outlets are set, so we know this is set, and so
+因为你的所有 outlets 都设置好了，我们知道这个已经设置好了
 
 906
 00:39:10,910 --> 00:39:13,410
 we can build our view hierarchy here, 'kay?
+我们可以在这里建立我们的视图层次
 
 907
 00:39:13,412 --> 00:39:16,446
-So I just added the subview to there bu I do actually need
+So I just added the subview to there but I do actually need
+我刚才已在那里添加了子视图，但实际上我
 
 908
 00:39:16,448 --> 00:39:17,513
 this didset here.
+需要在这里调用 didset
 
 909
 00:39:17,515 --> 00:39:19,348
 I need again to make this wider so
+我需要再次把这个变宽
 
 910
 00:39:19,350 --> 00:39:23,985
 you can see it because when I set my scroll view what's
+这样你们可以看到，因为当我设置我的滚动视图时，
 
 911
 00:39:23,987 --> 00:39:26,087
 the most important thing to make a scroll view work?
+让一个滚动视图工作最重要的事情是什么？
 
 912
 00:39:28,257 --> 00:39:29,523
 The content size, right.
+contentSize，对吧
 
 913
 00:39:29,525 --> 00:39:31,024
 So when my scroll view gets set,
+因此当我的滚动视图被设置了
 
 914
 00:39:31,026 --> 00:39:32,392
 I need to set the content size, so
+我需要设置 contentSize
 
 915
 00:39:32,394 --> 00:39:35,962
 I'm gonna say scrollView.contentSize, and
+所以我要设置 scrollView.contentSize
 
 916
 00:39:35,964 --> 00:39:37,697
 what size do I want it to be?
+我需要设置怎样的大小？
 
 917
 00:39:37,698 --> 00:39:39,431
 Well I want the content size to be exactly the same size as
+好吧，我需要 contentSize 和 imageView
 
 918
 00:39:39,434 --> 00:39:40,899
 the image view, so
+的大小一致
 
 919
 00:39:40,901 --> 00:39:45,403
 I'm just gonna say imageView.frame.size.
+我要设 imageView.frame.size
 
 920
 00:39:45,405 --> 00:39:49,674
 'Kay, now that's not, oops, equals.
+这不是，等于
 
 921
 00:39:49,676 --> 00:39:52,643
 That's not the only place I need to do this, though, 'kay?
+这里不是我需要做这个操作的唯一地方
 
 922
 00:39:52,645 --> 00:39:53,944
 Any time my image changes,
+任何时候我的图片改变了
 
 923
 00:39:53,946 --> 00:39:55,779
 obviously my image view might change,
+显然我的图片视图也可能改变
 
 924
 00:39:55,781 --> 00:39:58,214
 I need to change the content size of my scroll view.
+我需要改变滚动视图的内容大小
 
 925
 00:39:58,216 --> 00:39:59,482
 So also here.
+这里也需要
 
 926
 00:39:59,484 --> 00:40:04,686
 Inside the setter for image I need to set my scrollView's
+在 setter 里面，我需要设置滚动视图的
 
 927
 00:40:04,688 --> 00:40:10,291
 content size equal to the imageView's frame size.
+contentSize 等于图片视图的大小
 
 928
 00:40:10,293 --> 00:40:12,526
 Here I'm going to do something kind of interesting,
+这里我要做些有趣的事情
 
 929
 00:40:12,528 --> 00:40:15,662
 which I actually did in auto layout demo after the fact
+这是在我发布代码之后在自动布局
 
 930
 00:40:15,664 --> 00:40:17,097
 when I posted the code, but
+例子中做的
 
 931
 00:40:17,099 --> 00:40:18,832
 I'm going to put a question mark right here.
+但我要在这里放个问号
 
 932
 00:40:19,801 --> 00:40:22,802
 And the reason I'm gonna do that, it allows me to set my
+我这样做的原因，我可以在内部设置
 
 933
 00:40:22,804 --> 00:40:29,007
 image internally, even if my outlets have not been set yet.
+图片，即使我的 outlets 还没被设置。
 
 934
 00:40:29,009 --> 00:40:34,512
 I know that these outlets are implicitly wrapped optionals,
+我知道这些 outlets 都是可选的
 
 935
 00:40:34,514 --> 00:40:35,913
 and of course that means that you can access them,
+当然这意味着你可以访问它们
 
 936
 00:40:35,915 --> 00:40:39,249
 but the reality is you need to protect against the cases
+但事实是你在这些变量可为
 
 937
 00:40:39,251 --> 00:40:41,051
 where those things might me nil.
+nil 的情况下做些保护措施
 
 938
 00:40:41,053 --> 00:40:42,452
 Like setting your image,
+比如设置你的图片
 
 939
 00:40:42,454 --> 00:40:45,288
 somehow, before that was your set.
+某种方式，在你设置前
 
 940
 00:40:45,290 --> 00:40:47,256
 So, now I don't need to do it here,
+现在这里我不需要了
 
 941
 00:40:47,258 --> 00:40:48,457
 because I'm in viewDidLoad.
+因为我在 viewDidLoad
 
 942
 00:40:48,459 --> 00:40:51,026
 And I don't need to do it here because, of course,
+我不需要在这里做这些，当然
 
 943
 00:40:51,028 --> 00:40:52,494
 it just got set.
+它已经被设置了
 
 944
 00:40:52,496 --> 00:40:54,262
 But here, I'm going to do it just to be safe.
+但这里，为了安全我需要做这个
 
 945
 00:40:54,264 --> 00:40:59,066
 Everyone understand that?
+每个人都理解了吗？
 
 946
 00:40:59,068 --> 00:40:59,933
@@ -4080,38 +4125,47 @@ Okay.
 947
 00:40:59,935 --> 00:41:01,001
 So, let's see.
+让我们看看
 
 948
 00:41:01,003 --> 00:41:01,567
 It should work.
+它应该可以工作
 
 949
 00:41:03,971 --> 00:41:06,271
 All right here we go, let's go try Cassini.
+我们从这里，让我试试 Cassini
 
 950
 00:41:06,273 --> 00:41:08,907
 Slow, okay.
+很慢
 
 951
 00:41:08,909 --> 00:41:10,942
 Oh yeah, look, oh stars.
+看看，星星
 
 952
 00:41:10,944 --> 00:41:15,680
 Oh, what's that?
+这是什么？
 
 953
 00:41:15,682 --> 00:41:18,716
 Oh, look at that.
+看这个
 
 954
 00:41:18,718 --> 00:41:19,883
 Oh, sorry.
+抱歉
 
 955
 00:41:19,885 --> 00:41:21,051
 There it is.
+在这里
 
 956
 00:41:21,053 --> 00:41:24,620
@@ -4120,70 +4174,87 @@ Oh, oh,.
 957
 00:41:24,622 --> 00:41:26,856
 It's a spacecraft of some sort.
+这是某种太空船
 
 958
 00:41:26,858 --> 00:41:28,390
 Hard to tell, kay?
+很难说清楚
 
 959
 00:41:28,392 --> 00:41:30,659
 We don't really get to see a lot of it, but
+我实际上没看到它的大部分
 
 960
 00:41:30,661 --> 00:41:31,860
 [INAUDIBLE] Cassini.
+Cassini
 
 961
 00:41:31,862 --> 00:41:34,228
 Okay, well obviously we need zooming, kay?
+显然我们需要缩放
 
 962
 00:41:34,230 --> 00:41:36,630
 Because I can't see really what's going on here.
+因为我不能看清楚这里所发生的
 
 963
 00:41:36,632 --> 00:41:39,199
 All right, so let's go back and add zooming.
+让我回去，然后添加 zooming
 
 964
 00:41:39,201 --> 00:41:40,701
 Again, very straightforward.
+非常简单
 
 965
 00:41:40,702 --> 00:41:42,202
 Remember, there's only two things you really need to do.
+记住，实际上你只需要做两件事情
 
 966
 00:41:42,204 --> 00:41:43,903
 You gotta set that min max, and
+你要设置 min 和 max
 
 967
 00:41:43,905 --> 00:41:45,872
 you gotta implement that delegate method.
+然后你要实现代理方法
 
 968
 00:41:45,874 --> 00:41:48,040
 Great place to set delegate methods, of course,
+这里是实现代理方法的好地方，当然
 
 969
 00:41:48,042 --> 00:41:50,009
 is in the setter of outlets.
+在 outlets 的 setter 中
 
 970
 00:41:50,011 --> 00:41:51,877
 If you wanna set the delegate of an outlet, so
+如果你想设置一个 outlet 的代理
 
 971
 00:41:51,879 --> 00:41:55,480
 I'm gonna set the scrollView's delegate to be myself.
+我将设置滚动视图的代理为我自己
 
 972
 00:41:55,482 --> 00:41:57,582
 Of course I'm gonna have to say that I implemented.
+当然我必须实现（代理）
 
 973
 00:41:57,584 --> 00:41:58,916
 That's the problem here.
+这是问题所在
 
 974
 00:41:58,918 --> 00:41:59,750
@@ -4192,38 +4263,47 @@ Okay.
 975
 00:41:59,752 --> 00:42:02,286
 We'll do that in a second.
+我们一会就做这个
 
 976
 00:42:02,287 --> 00:42:04,821
 While I'm here I'm going to set the minimum zoom scale
+这里，我将设置 minimumZoomScale 
 
 977
 00:42:04,823 --> 00:42:05,455
 to 0.03.
+为 0.03
 
 978
 00:42:05,457 --> 00:42:07,574
 This is a very,
+这是张非常
 
 979
 00:42:07,575 --> 00:42:09,692
 very large image that we'll be able to look at here.
+非常大的图片，我们可以在这里看到
 
 980
 00:42:09,694 --> 00:42:12,061
 And the maximum zoom scale to 1.0 and
+然后 maximumZoomScale 为 1.0
 
 981
 00:42:12,063 --> 00:42:15,297
 maybe these don't wanna be magic numbers.
+可能它们不想为神奇的数字
 
 982
 00:42:15,299 --> 00:42:17,632
 Maybe these want to based on the actual size of
+可能它们想要根据图片视图的
 
 983
 00:42:17,634 --> 00:42:18,599
 the imageView.
+实际大小
 
 984
 00:42:18,601 --> 00:42:20,757
@@ -4232,162 +4312,202 @@ Okay?
 985
 00:42:20,758 --> 00:42:22,914
 So you might want to make it so
+所以你可能想要让它
 
 986
 00:42:22,915 --> 00:42:25,071
 that you can perfectly zoom out to fit the scrollView or
+完全缩小以适合滚动视图或
 
 987
 00:42:25,074 --> 00:42:26,156
 something like that.
+其他类似的视图
 
 988
 00:42:26,157 --> 00:42:27,239
 But I'm just picking numbers here to
+但我挑这些数字只是为了
 
 989
 00:42:27,242 --> 00:42:28,541
 make this code simpler.
+让代码简单
 
 990
 00:42:28,543 --> 00:42:30,943
 So let's go fix the fact about the delegate here.
+让我们修改下这里的代理
 
 991
 00:42:30,945 --> 00:42:33,779
 So I'm just going to go up here and say,
+我要到这上面来，我要设置
 
 992
 00:42:33,780 --> 00:42:36,614
 oh yes, ImageViewController is a UIScrollView delegate.
+ImageViewController 为滚动视图的代理
 
 993
 00:42:36,617 --> 00:42:38,116
 And, as soon as I say that,
+一旦我设置了
 
 994
 00:42:38,118 --> 00:42:39,884
 this warning went away down here, but
+这下面的警告就没了
 
 995
 00:42:39,886 --> 00:42:41,686
 I didn't get a new one that said, oh,
+我没有另一个新的（警告）
 
 996
 00:42:41,688 --> 00:42:43,120
 you don't implement this.
+你没有实现这个
 
 997
 00:42:43,122 --> 00:42:45,022
 And again, cuz this is the old objective C
+因为这是老式的 objective C
 
 998
 00:42:45,024 --> 00:42:47,457
 style protocol where there's optional methods.
+风格的协议，这是可选方法
 
 999
 00:42:49,027 --> 00:42:50,226
 So, I'm going to implement one of
+我要实现它们中的一个
 
 1000
 00:42:50,228 --> 00:42:52,761
 them though which is view for zooming in scrollView.
+即 viewForZoomingInScrollView
 
 1001
 00:42:52,763 --> 00:42:55,330
 Okay, as soon as I typed viewFor,
+只要我输入 viewFor
 
 1002
 00:42:55,332 --> 00:42:57,032
 it knew what I was talking about.
+它知道我想输入什么
 
 1003
 00:42:57,034 --> 00:42:59,434
 And I'm just going to return my imageView because that is
+我只要回到图片视图，因为
 
 1004
 00:42:59,436 --> 00:43:02,770
 the view that's inside the scrollView's content area that
+它在滚动视图的内容区域中
 
 1005
 00:43:02,772 --> 00:43:03,437
 I want to zoom on.
+就是我想放大的
 
 1006
 00:43:03,439 --> 00:43:05,105
 And that's it.
+这就是了
 
 1007
 00:43:06,174 --> 00:43:08,307
 That's all we need to do, so let's go run.
+这就是所有我们需要做的，让我们运行下
 
 1008
 00:43:10,211 --> 00:43:11,410
 Now we should be able to go and
+现在我们应该能够
 
 1009
 00:43:11,412 --> 00:43:14,346
 take a look at Cassini in all of its grandeur.
+看到 Cassini 的全部华丽壮美
 
 1010
 00:43:14,348 --> 00:43:17,348
 I'm just going to hold down Option so that I can pinch.
+我要按住 Option 键，这样我可以捏（图片）
 
 1011
 00:43:17,350 --> 00:43:18,549
 And I'm just pinching in here.
+我在这里捏
 
 1012
 00:43:19,985 --> 00:43:21,685
 Oh there it is. And let's go ahead and
+这就是，让我们继续
 
 1013
 00:43:21,687 --> 00:43:23,286
 rotate the other way.
+旋转到其他方式
 
 1014
 00:43:23,288 --> 00:43:26,122
 There we go.
+我们看到了
 
 1015
 00:43:26,123 --> 00:43:28,957
 So we can see it and zoom out a little bit.
+因此我们可以看到它缩小了一点点
 
 1016
 00:43:28,960 --> 00:43:31,193
 We can still scroll in addition to zooming.
+我们依然可以在缩放的时候滚动
 
 1017
 00:43:32,129 --> 00:43:33,361
 Okay? And let's go look at
+让我们看看
 
 1018
 00:43:33,363 --> 00:43:35,430
 this Earth thing so
+这个 Earth 图片
 
 1019
 00:43:35,431 --> 00:43:37,498
 we can figure out what the heck is going on with that.
+现在我们总算清楚它在干什么了
 
 1020
 00:43:41,203 --> 00:43:41,968
 So slow.
+这么慢
 
 1021
 00:43:41,970 --> 00:43:43,169
 Okay, so here it is.
+这就是了
 
 1022
 00:43:43,171 --> 00:43:44,971
 Oh, now we can move around and look at things.
+让我们移动开，看看
 
 1023
 00:43:44,973 --> 00:43:46,172
 Let's zoom in on this a little.
+让我们在这里缩小一点
 
 1024
 00:43:46,174 --> 00:43:49,841
 [INAUDIBLE] oh, whoa, it's the Earth.
+它是地球
 
 1025
 00:43:49,843 --> 00:43:51,543
@@ -4396,34 +4516,42 @@ Woo, okay.
 1026
 00:43:51,545 --> 00:43:54,812
 So, yes and as we can imagine, guess what this one is.
+既然我们可以想象，猜猜这个是什么
 
 1027
 00:43:56,916 --> 00:43:58,616
 Pictures of people.
+很多人的照片
 
 1028
 00:43:58,617 --> 00:44:00,317
 So this is actually made up of composites of images of
+所以这个实际上是人们向 Cassini 挥手的
 
 1029
 00:44:00,319 --> 00:44:01,918
 people waving at Cassini.
+照片拼图
 
 1030
 00:44:01,920 --> 00:44:05,988
 Kay they're taking pictures of themselves waving, see?
+他们在挥手的时候拍的照片
 
 1031
 00:44:05,990 --> 00:44:07,523
 Hello Cassini.
+你好，Cassini
 
 1032
 00:44:07,525 --> 00:44:09,524
 So that's what this composite is made of and
+这就是这张拼图的内容
 
 1033
 00:44:09,526 --> 00:44:11,559
 then I'll push in that Saturn out of there.
+我要推动土星离开那里
 
 1034
 00:44:11,561 --> 00:44:12,627
@@ -4432,6 +4560,7 @@ then I'll push in that Saturn out of there.
 1035
 00:44:12,629 --> 00:44:14,795
 NASA, pretty cool.
+NASA，相当酷
 
 1036
 00:44:14,797 --> 00:44:15,929
@@ -4440,66 +4569,82 @@ All right.
 1037
 00:44:15,931 --> 00:44:17,147
 Okay, so that's good.
+这很好
 
 1038
 00:44:17,148 --> 00:44:18,364
 So that's all I'm gonna show for now.
+这是我现在想演示的所有内容了
 
 1039
 00:44:18,367 --> 00:44:20,700
 We'll get back and work on the fact that our app is really,
+我们一会将返回，然后解决我们 app 相当相当慢的
 
 1040
 00:44:20,702 --> 00:44:21,768
 really slow in a minute.
+问题
 
 1041
 00:44:22,737 --> 00:44:25,537
 Gotta show you some stuff first though.
+先给你们看些材料
 
 1042
 00:44:25,539 --> 00:44:26,672
 'Kay, any questions about that?
+关于这个有问题吗
 
 1043
 00:44:26,674 --> 00:44:29,474
 ScrollView's really easy to use, but you just
+滚动视图很容易掌握，但你们
 
 1044
 00:44:29,476 --> 00:44:32,276
 gotta know these particular things like the delegate and
+要知道这些特别的东西，比如代理和
 
 1045
 00:44:32,278 --> 00:44:35,479
 that min max zoom scale and that content size.
+minmaxZoomScale 以及 contentSize
 
 1046
 00:44:35,481 --> 00:44:36,680
 As long as you do those things,
+只要你们做了这些事情
 
 1047
 00:44:36,682 --> 00:44:38,081
 it'll work really great.
+它就能工作的相当好了
 
 1048
 00:44:39,084 --> 00:44:40,583
 All right, so a little aside here.
+先把这些放一边
 
 1049
 00:44:40,585 --> 00:44:42,285
 Just a two minute aside.
+只是放一两分钟
 
 1050
 00:44:42,286 --> 00:44:43,986
 I'm gonna rip through these slides about closures, but
+我要讲讲这些幻灯片上的闭包
 
 1051
 00:44:43,988 --> 00:44:45,721
 there's an important aspect about closure that
+这是关于闭包非常重要的方面
 
 1052
 00:44:45,723 --> 00:44:46,388
 you need to know.
+你们需要知道
 
 1053
 00:44:46,390 --> 00:44:48,090
@@ -4508,94 +4653,117 @@ Kay?
 1054
 00:44:48,091 --> 00:44:49,791
 Closures, when you have a closure in your code,
+闭包，但你们的代码中有闭包时
 
 1055
 00:44:49,793 --> 00:44:53,695
 it captures any variables that are used inside
+它会捕获闭包中使用的任何外部变量
 
 1056
 00:44:53,697 --> 00:44:57,431
 the closure from the outer scope, where the thing is,
+这个是
 
 1057
 00:44:57,433 --> 00:44:59,199
 which is a really cool feature.
+是非常酷的特点
 
 1058
 00:44:59,201 --> 00:45:01,335
 That's what makes it a closure really, okay.
+这实际上也让它成为了一个闭包
 
 1059
 00:45:01,337 --> 00:45:03,570
 Is that it captures them, okay.
+闭包是这样捕获它们
 
 1060
 00:45:03,572 --> 00:45:05,805
 You can make incredibly elegant code out of
+你可以使用闭包写出难以置信的
 
 1061
 00:45:05,807 --> 00:45:06,605
 this, okay.
+优雅代码
 
 1062
 00:45:06,607 --> 00:45:08,607
 Now here's where I'm going to
+现在我要向你们演示
 
 1063
 00:45:08,608 --> 00:45:10,608
 show you something about the calculator that if you
+计算器的一些东西，如果你们
 
 1064
 00:45:10,611 --> 00:45:12,644
 didn't do this in your assignment, that's good.
+在你们的作业没做这个，没关系
 
 1065
 00:45:12,646 --> 00:45:14,079
 Because in your assignment I wanted you to
+因为在你们的作业中，我希望你们
 
 1066
 00:45:14,081 --> 00:45:15,613
 use delegation, okay.
+使用代理
 
 1067
 00:45:15,615 --> 00:45:20,384
 However, sometimes closures can be a substitute or
+然而，有时候闭包可以作为一种替代或者
 
 1068
 00:45:20,386 --> 00:45:23,653
 a better tool to use than delegation.
+是个比代理更好的工具
 
 1069
 00:45:23,655 --> 00:45:25,155
 Lets look at this code right here.
+看这里的代码
 
 1070
 00:45:25,157 --> 00:45:26,823
 Lets say I have a class called grapher.
+我有一个类叫做 grapher
 
 1071
 00:45:26,825 --> 00:45:29,258
 I'm not going to say what kind of thing it could be
+我不打算讲这是什么样的东西
 
 1072
 00:45:29,260 --> 00:45:31,660
 because some of you haven't turned in your homework yet,
+因为你们中有些还没把作业交上来
 
 1073
 00:45:31,662 --> 00:45:34,329
 but lets say I had a grapher, okay.
+但我有一个 grapher
 
 1074
 00:45:34,331 --> 00:45:37,298
 And it doesn't have a delegate method or anything it just has
+它没有代理方法或其他方法，它只有
 
 1075
 00:45:37,300 --> 00:45:42,036
 a var called yForX whose type is a function.
+一个变量叫做 yForX，它的类型是函数
 
 1076
 00:45:42,038 --> 00:45:44,605
 A function that takes an x and returns a double.
+这个函数有个参数 x，并返回 double
 
 1077
 00:45:44,607 --> 00:45:45,872
@@ -4604,134 +4772,167 @@ Okay?
 1078
 00:45:45,874 --> 00:45:47,140
 Now that's an optional function.
+这是个可选函数
 
 1079
 00:45:47,142 --> 00:45:49,742
 That's fine, doesn't have to be set in this grapher.
+这很好，在 grapher 中不一定需要设置这个函数
 
 1080
 00:45:49,744 --> 00:45:51,677
 And then what if I just said,
+然后如果我
 
 1081
 00:45:51,678 --> 00:45:53,611
 well I'm going to let the grapher equal a new grapher.
+让 grapher 等于一个新的 grapher 会怎样？
 
 1082
 00:45:53,614 --> 00:45:56,882
 I'm going to let variable graphing brain be
+我将让变量 graphingBrain 等于
 
 1083
 00:45:56,884 --> 00:45:59,251
 a calculator brain instance I just created.
+我刚刚创建的 CalculatorBrain 实例
 
 1084
 00:45:59,253 --> 00:46:01,886
 Then I'm gonna set the program of the graphingBrain I
+然后我设置我刚刚创建的 graphingBrain 
 
 1085
 00:46:01,888 --> 00:46:04,889
 just created to some other program that I wanna graph.
+的程序为另一个我想要做图表的程序
 
 1086
 00:46:04,891 --> 00:46:08,792
 Then I'm just gonna say yForX equals a closure and
+然后我只要让 yForX 等于一个闭包
 
 1087
 00:46:08,794 --> 00:46:10,527
 inside the closure it just says,
+然后在闭包内部，只要
 
 1088
 00:46:10,529 --> 00:46:13,963
 set the variable value to the argument to the closure and
+将变量的值传递给闭包的参数
 
 1089
 00:46:13,965 --> 00:46:16,032
 then return the graphingBrain at evaluate.
+然后返回 graphingBrain.evaluate()
 
 1090
 00:46:19,637 --> 00:46:22,237
 So do you see how by using this,
+通过这个你们就知道怎么使用闭包
 
 1091
 00:46:22,239 --> 00:46:25,173
 first of all we have grapher is completely generic.
+首先，我们有一个完全普遍的 grapher
 
 1092
 00:46:25,175 --> 00:46:27,442
 Knows nothing about a calculator brain.
+对于 CalculatorBrain 一无所知
 
 1093
 00:46:27,444 --> 00:46:29,310
 And yet we have this five line,
+然后我有这五行
 
 1094
 00:46:29,312 --> 00:46:32,613
 six lines of code to implement our graphing and
+六行代码来实现我们的制图
 
 1095
 00:46:32,615 --> 00:46:37,484
 it's all incredibly easy to kind of parse what's going on.
+这一切都非常容易解析发生了什么
 
 1096
 00:46:37,486 --> 00:46:40,053
 Now this works because the closure,
+这个能起作用是因为闭包
 
 1097
 00:46:40,055 --> 00:46:41,421
 that little thing in the curly braces,
+即在大括号里的小东西
 
 1098
 00:46:41,423 --> 00:46:45,257
 captured the little graphing brain that I created.
+捕获了我创建的小 graphingBrain
 
 1099
 00:46:45,259 --> 00:46:47,793
 Okay, so that every time disclosure is called,
+因此每次闭包被调用
 
 1100
 00:46:47,795 --> 00:46:51,396
 every time, you know, grapher one to yForX.
+每次，你们知道的，grapher 一个给 yForX
 
 1101
 00:46:51,398 --> 00:46:53,832
 It keeps reusing this graphing brain over and over and over.
+它一直保持重复使用这个 graphingBrain
 
 1102
 00:46:53,834 --> 00:46:55,133
 Which is exactly what I want because this
+这正是我想要的，因为这个
 
 1103
 00:46:55,135 --> 00:46:57,068
 graphing brain's got the right program in it.
+graphingBrain 在它里面获得了正确的程序
 
 1104
 00:46:57,070 --> 00:46:58,869
 It just keeps calling it over and over.
+它只是保持不断调用它
 
 1105
 00:46:58,871 --> 00:47:00,570
 It doesn't create a new one every time, it just keeps
+它并不是每次都创建一个新的，它只是
 
 1106
 00:47:00,572 --> 00:47:03,039
 reusing it because it captured it from the outer scope.
+重复使用它（graphingBrain），因为它从外部范围捕获了它
 
 1107
 00:47:04,409 --> 00:47:05,975
 Everyone understand what I mean by capture?
+每个人都理解我所说的捕获了吗？
 
 1108
 00:47:07,345 --> 00:47:09,678
 Now, this is really cool and really elegant,
+这相当酷，相当优雅
 
 1109
 00:47:09,680 --> 00:47:11,946
 it looks really awesome, it is awesome, but
+看起来棒极了，太棒了，但
 
 1110
 00:47:11,948 --> 00:47:13,214
 there are some dangers.
+有些危险
 
 1111
 00:47:13,216 --> 00:47:14,415
@@ -4740,78 +4941,97 @@ Okay?
 1112
 00:47:14,417 --> 00:47:16,767
 Capture danger.
+捕获危险
 
 1113
 00:47:16,768 --> 00:47:19,118
 The problem is, if a closure captures a pointer to
+问题是，如果一个闭包捕获了一个指向某个东西的
 
 1114
 00:47:19,121 --> 00:47:23,056
 something and that something has a pointer back to
+指针，而这个东西有个指针指回
 
 1115
 00:47:23,058 --> 00:47:26,225
 the closure, now you have a loop.
+闭包，这样你们就有了一个环
 
 1116
 00:47:26,227 --> 00:47:28,094
 A memory cycle that's going to keep them both in
+一个内存周期，这将导致它们永远被
 
 1117
 00:47:28,096 --> 00:47:29,695
 memory forever.
+保留在内存中
 
 1118
 00:47:29,697 --> 00:47:31,597
 Okay? Kind of
+像
 
 1119
 00:47:31,598 --> 00:47:33,498
 like the memory cycle we were talking about before.
+我之前讲过的内存周期
 
 1120
 00:47:33,499 --> 00:47:35,399
 This is easy to have happen in a closure.
+这在闭包内很容易发生
 
 1121
 00:47:35,402 --> 00:47:36,901
 This is what it looks like, so
+它就像这样
 
 1122
 00:47:36,903 --> 00:47:39,137
 here's another example here of closures.
+这里是另一个闭包的例子
 
 1123
 00:47:39,139 --> 00:47:40,871
 I've got this class called Foo.
+我们称这个类为 Foo
 
 1124
 00:47:40,873 --> 00:47:44,508
 It's got one property which is a function called action.
+它有一个叫做 action 的函数属性
 
 1125
 00:47:44,510 --> 00:47:47,678
 It's got another function called show,
+它有另一个函数叫做 show
 
 1126
 00:47:47,680 --> 00:47:51,448
 which takes an integer and shows it, prints it.
+这个函数接收一个整型输入，然后输出它
 
 1127
 00:47:51,450 --> 00:47:54,784
 And then it's got a method called setupMyAction, and
+然后它有个方法叫做 setupMyAction
 
 1128
 00:47:54,786 --> 00:47:57,319
 setupMyAction has a local variable, x,
+setupMyAction 有个本地变量，x
 
 1129
 00:47:57,321 --> 00:47:58,654
 which is an integer.
+x 是个整型
 
 1130
 00:47:58,656 --> 00:48:02,157
-That it assigns that action,.
+That it assigns that action.
+它分配了那个 action
 
 1131
 00:48:02,159 --> 00:48:03,608
@@ -4820,66 +5040,82 @@ That it assigns that action,.
 1132
 00:48:03,609 --> 00:48:05,058
 Function, property to a closure.
+函数，一个闭包属性
 
 1133
 00:48:05,061 --> 00:48:08,462
 Inside that closure it uses the x.
+它在闭包里面使用了 x
 
 1134
 00:48:08,464 --> 00:48:10,464
 That's cool, it captures x.
+这很酷，它捕获了 x
 
 1135
 00:48:10,466 --> 00:48:12,065
 This will actually work.
+这将能工作
 
 1136
 00:48:12,067 --> 00:48:13,800
 This will print 1, 2, 3, 4, 5, 6, 7, 8, 9, 10.
+这将输出 1，2，3，4，5，6，7，8，9，10
 
 1137
 00:48:13,802 --> 00:48:15,435
 You can see the doMyAction10times at
+你可以看到下面的 doMyAction10times
 
 1138
 00:48:15,437 --> 00:48:17,137
 the bottom.
+函数
 
 1139
 00:48:17,138 --> 00:48:18,838
 If you set up my action it will do it because the x
+如果你调用 setupMyAction()，它可行，因为
 
 1140
 00:48:18,840 --> 00:48:20,839
 gets captured by the closure and
+x 已被闭包捕获，然后
 
 1141
 00:48:20,841 --> 00:48:23,041
 every time the closure get executed.
+每次闭包都被执行
 
 1142
 00:48:23,043 --> 00:48:25,276
 [COUGH]. It increments that x and
+它递增 x
 
 1143
 00:48:25,278 --> 00:48:26,744
 counts to 10.
+然后累计到 10
 
 1144
 00:48:26,746 --> 00:48:29,947
 It's also cool because it's capturing self.
+捕获本身也很酷
 
 1145
 00:48:29,949 --> 00:48:32,549
 Because I'm using myself to show the number,
+因为我使用我自己来显示这个数字
 
 1146
 00:48:32,551 --> 00:48:34,217
 by calling self.show.
+通过调用 self.show
 
 1147
 00:48:34,219 --> 00:48:36,419
 But here's where the danger comes in.
+但这也是危险的来源
 
 1148
 00:48:36,421 --> 00:48:38,555
@@ -4888,30 +5124,37 @@ Okay?
 1149
 00:48:38,556 --> 00:48:40,690
 Because self has a pointer to the closure and
+因为 self 有个指针指向闭包，然后
 
 1150
 00:48:40,692 --> 00:48:43,859
 the closure inside has a pointer back to self.
+闭包内部有个指针指回 self
 
 1151
 00:48:43,861 --> 00:48:46,729
 Now, when you write a closure you'll notice that any
+当你们写一个闭包时，你将注意到任何
 
 1152
 00:48:46,731 --> 00:48:49,931
 time you call methods it makes you put self,
+时候你调用方法，它都要你输入 self
 
 1153
 00:48:49,933 --> 00:48:51,833
 makes you say self dot.
+让你输入 self.
 
 1154
 00:48:51,835 --> 00:48:53,501
 That's because it wants you to be clear.
+这是因为它要让你清楚知道
 
 1155
 00:48:53,503 --> 00:48:56,904
 You are capturing self when you call show.
+在你调用 show 时，你正在捕获你自己
 
 1156
 00:48:56,906 --> 00:48:58,105
@@ -4920,26 +5163,32 @@ Okay?
 1157
 00:48:58,107 --> 00:49:01,174
 Now, this is a problem, this class
+这是一个问题，这个 Foo
 
 1158
 00:49:01,176 --> 00:49:04,043
 Foo and this closure are pointed to each other, they
+类，和这个闭包互相指向对方，它们
 
 1159
 00:49:04,045 --> 00:49:06,779
 will stay in memory forever, they can never be released.
+将永远保存在内存中，它们永远不会被释放
 
 1160
 00:49:06,781 --> 00:49:08,914
 How do we fix that problem?
+我们如何修复这个问题
 
 1161
 00:49:08,916 --> 00:49:10,282
 Well, we can actually say,
+实际上我们可以
 
 1162
 00:49:10,284 --> 00:49:15,553
 when we make a closure, do not capture this variable in here.
+当我们创建一个闭包时，别在这里捕获这个变量
 
 1163
 00:49:15,555 --> 00:49:17,088
@@ -4948,82 +5197,102 @@ Okay?
 1164
 00:49:17,089 --> 00:49:18,622
 You do that by saying, [COUGH] unowned,
+你通过使用 unowned 来实现
 
 1165
 00:49:18,624 --> 00:49:22,359
 whatever the variables you don't want to be captured.
+不管变量是什么，你都不想捕获
 
 1166
 00:49:22,361 --> 00:49:24,094
 Okay? You just put it right at
+你必须把它放在
 
 1167
 00:49:24,095 --> 00:49:25,828
 the beginning of the closure, before the in.
+闭包的最开始，在 in 之前
 
 1168
 00:49:25,831 --> 00:49:27,097
 Okay? If you have arguments,
+如果你有参数
 
 1169
 00:49:27,099 --> 00:49:29,031
 you put it right before the, in, there.
+你把它放在 in 前面，这里
 
 1170
 00:49:30,935 --> 00:49:31,900
 That will make it work.
+这样它就能工作
 
 1171
 00:49:31,902 --> 00:49:34,369
 You can also say weak self.
+你也可以使用 weak self
 
 1172
 00:49:34,371 --> 00:49:36,254
 Which is a little different.
+这个有点不同
 
 1173
 00:49:36,255 --> 00:49:38,138
 That will make the self be a weak pointer in there.
+这将使得 self 为一个弱指针
 
 1174
 00:49:38,141 --> 00:49:40,875
 We learned about weak pointers in the lecture when we
+在我们讲代理时我们学习了
 
 1175
 00:49:40,877 --> 00:49:42,876
 talked about delegation.
+弱指针
 
 1176
 00:49:42,878 --> 00:49:43,944
 So weak would work, too.
+所以 weak 也可行
 
 1177
 00:49:43,946 --> 00:49:46,280
 It wouldn't do it.
+它不能够
 
 1178
 00:49:46,281 --> 00:49:48,615
 The difference between unowned is that pointer doesn't have
+无主引用和弱引用的区别是，指针若不是一个
 
 1179
 00:49:48,617 --> 00:49:51,184
 to be an optional that can be set to nil.
+可选型，那么它可以被设置为 nil
 
 1180
 00:49:51,186 --> 00:49:52,786
 It can just be anything.
+它可以是任何东西
 
 1181
 00:49:52,787 --> 00:49:54,387
 You just guarantee that self will never become nil.
+你只要保证 self 永远不会变成 nil
 
 1182
 00:49:54,389 --> 00:49:56,388
 So, for the lifetime of this closure,
+因此，在这个闭包的生命周期
 
 1183
 00:49:56,390 --> 00:49:58,824
 self can never become nil.
+self 永远不会变成 nil
 
 1184
 00:49:58,826 --> 00:50:00,042
@@ -5032,30 +5301,37 @@ Okay?
 1185
 00:50:00,043 --> 00:50:01,259
 Now, self can be released from the heap,
+现在，self 能够在堆中被释放
 
 1186
 00:50:01,261 --> 00:50:03,061
 which will release the closure now, from the heap.
+这将从堆中释放闭包
 
 1187
 00:50:03,063 --> 00:50:04,095
 That's great, but
+非常棒，但
 
 1188
 00:50:04,097 --> 00:50:06,463
 that closure can never be executed while self,
+在 self，即 Fool 为 nil 时，闭包将
 
 1189
 00:50:06,465 --> 00:50:07,831
 this Foo thing, is nil.
+永不被执行
 
 1190
 00:50:07,833 --> 00:50:09,499
 Which is fine, because it's only used inside Foo,
+很好，因为他只在 Foo 内部使用
 
 1191
 00:50:09,501 --> 00:50:10,600
 [COUGH] That would never happen.
+这永远不会发生
 
 1192
 00:50:11,536 --> 00:50:12,167
@@ -5064,34 +5340,42 @@ Okay?
 1193
 00:50:12,169 --> 00:50:13,619
 Unowned self.
+无主 self
 
 1194
 00:50:13,620 --> 00:50:15,070
 This is all covered in the documentation that you
+这全都可以在文档中查阅，你们
 
 1195
 00:50:15,072 --> 00:50:17,038
 were supposed to have read, but, you might have
+应该读过了，但，你们可能
 
 1196
 00:50:17,040 --> 00:50:19,307
 not really understood this, or glossed over it, so I'm
+没真正理解它，或忽略了它，因此我
 
 1197
 00:50:19,309 --> 00:50:22,276
 just revisiting it to tell you that [COUGH] It's important.
+只是重新审视它，告诉你们这很重要
 
 1198
 00:50:22,278 --> 00:50:23,243
 Okay. Because we're going to
+因为我们将在这门课程中
 
 1199
 00:50:23,245 --> 00:50:24,845
 start using closures more and
+越来越多地使用闭包
 
 1200
 00:50:24,847 --> 00:50:28,981
 more in this class and you will be capturing values and
+你们将捕获变量
 
 1201
 00:50:28,983 --> 00:50:31,350

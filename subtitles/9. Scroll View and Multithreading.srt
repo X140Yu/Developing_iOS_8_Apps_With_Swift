@@ -5975,7 +5975,7 @@ you don't want to run on the main queue.
 1320
 00:55:30,307 --> 00:55:32,574
 You get a queue from the system by asking for
-你通过向系统申请一个恰当档次的服务
+你通过向系统申请一个恰当档次的service
 
 1321
 00:55:32,576 --> 00:55:34,809
@@ -5985,720 +5985,897 @@ a certain quality of service.
 1322
 00:55:34,811 --> 00:55:36,110
 And the four qualities of service,
-有四个档次的服务
+有四个档次的service
 
 1323
 00:55:36,112 --> 00:55:37,511
 there's user interactive,
-
+这是user interactive
 
 1324
 00:55:37,513 --> 00:55:39,646
 which is I'm going to do something off the main queue,
+表示我将要在主队列外做一些事情
 
 1325
 00:55:39,648 --> 00:55:41,715
 but the user really wants this done fast, and
+但用户想非常快的处理它
 
 1326
 00:55:41,717 --> 00:55:43,016
 it's not going to take very long.
+不能耽误太久
 
 1327
 00:55:43,018 --> 00:55:44,150
 So do it right now.
+所以现在就做
 
 1328
 00:55:44,152 --> 00:55:45,818
 Okay? So it's a high
+Okay?所以这是个
 
 1329
 00:55:45,819 --> 00:55:47,485
 priority queue for things that go really fast.
+高优先级的队列来让事情处理的很快
 
 1330
 00:55:47,488 --> 00:55:50,522
 Then there's USER_INITIATED which is the user just
+下一个是USER_INITIATED，是一个
 
 1331
 00:55:50,524 --> 00:55:53,692
 asked for this, but I know it's going to take a long time
+用户请求这个，但我知道这要很长时间
 
 1332
 00:55:53,694 --> 00:55:55,694
 fetching an image off the network,
+去从网络抓取图片
 
 1333
 00:55:55,696 --> 00:55:59,364
 we would USER_INITIATED, but it's still pretty important.
+我就会用USER_INITIATED，但这也很重要
 
 1334
 00:55:59,366 --> 00:56:02,166
 Then there's utility, which is I'm just doing something.
+下一个是utility，是我只是做一些事情
 
 1335
 00:56:02,168 --> 00:56:03,734
 The user didn't just ask me to do this.
+用户没有让我去做
 
 1336
 00:56:03,736 --> 00:56:05,035
 But it's just something I
+但我只是
 
 1337
 00:56:05,037 --> 00:56:08,505
 need to do in the background processing things or whatever.
+需要做一些后台进程之类的事
 
 1338
 00:56:08,507 --> 00:56:11,908
 But it is something that matters right now to the user.
+但这是一些现在就关系到用户的事
 
 1339
 00:56:11,910 --> 00:56:14,176
 So it would be nice if it returned somewhat soon, but
+如果现在就能返回一些东西那就最好了
 
 1340
 00:56:14,178 --> 00:56:16,211
 it's not like got to have it.
+但不会去主动获取这个
 
 1341
 00:56:16,213 --> 00:56:18,513
 And then there's background which is like things that
+下一个是background
 
 1342
 00:56:18,515 --> 00:56:20,482
 are not concerned with what the user is doing right now.
+像是一个不关心用户现在在做什么的事
 
 1343
 00:56:20,484 --> 00:56:23,584
 Like oh I'm pre-fetching some data, updating some database,
+比如我正在预抓取一些数据，更新数据库
 
 1344
 00:56:23,586 --> 00:56:26,320
 cleaning up a database, doing stuff in the background.
+清楚数据库，在后台做一些事
 
 1345
 00:56:26,322 --> 00:56:28,255
 It really has nothing to do with the user doing now,
+这真的跟用户现在做的事没关系
 
 1346
 00:56:28,257 --> 00:56:29,956
 you understand what I mean?
+你理解我的意思吗
 
 1347
 00:56:29,958 --> 00:56:30,990
 Just background task.
+只是后台任务
 
 1348
 00:56:31,960 --> 00:56:34,827
 So you create a quality of service,
+所以你建立一种级别的service
 
 1349
 00:56:34,829 --> 00:56:37,129
 you do that with this really odd int.
+你用一个奇怪的int去做
 
 1350
 00:56:37,131 --> 00:56:38,797
 One of these constants above there,
+上面的其中一个常数
 
 1351
 00:56:38,799 --> 00:56:41,800
 .value, close parentheses, okay.
+.value，闭括弧
 
 1352
 00:56:41,802 --> 00:56:44,035
 For historical reasons, they have them put a nice,
+因为历史原因，他们在swift里有个很好看
 
 1353
 00:56:44,037 --> 00:56:45,870
 new UI in there Swift, which is interesting.
+的新UI，很有趣
 
 1354
 00:56:45,872 --> 00:56:47,271
 But anyway, you do that.
+不管怎样，你就是做了这个
 
 1355
 00:56:47,273 --> 00:56:49,089
 And then you just say,
+然后
 
 1356
 00:56:49,090 --> 00:56:50,906
+queue equals dispatch_get_global_queue with
 queue equals dispatch_get_global_queue with
 
 1357
 00:56:50,909 --> 00:56:53,076
 that quality of service, comma 0.
+that quality of service, comma 0.
 
 1358
 00:56:53,078 --> 00:56:56,412
 That comma 0 is reserved for future use, okay?
+那个0留着以后会用到
 
 1359
 00:56:56,414 --> 00:56:57,146
 And that's it.
+就是这样
 
 1360
 00:56:57,148 --> 00:56:58,547
 Now you have another queue.
+现在你有了另外一个队列
 
 1361
 00:56:58,549 --> 00:57:00,916
 You can now dispatch async to it, and
+你现在可以dispatch async给它
 
 1362
 00:57:00,918 --> 00:57:02,517
 be running code off the main queue.
+并且在主队列外运行代码
 
 1363
 00:57:04,354 --> 00:57:04,919
 Simple as that.
+就是这么简单
 
 1364
 00:57:05,988 --> 00:57:07,788
 You can create your own serial queues too.
+你可以建立自己的连续队列
 
 1365
 00:57:07,790 --> 00:57:09,222
 I'm not going to talk about that really, but
+我不准备讲那个
 
 1366
 00:57:09,224 --> 00:57:11,524
 you might have something where these queues that I'm
+但你可能会在我上面提到的
 
 1367
 00:57:11,526 --> 00:57:13,109
 talking about at the top,
+几种service中
 
 1368
 00:57:13,110 --> 00:57:14,693
 these quality service based ones, are concurrent.
+同时用到
 
 1369
 00:57:14,696 --> 00:57:17,896
 So actually a single queue, like the user interactive
+所以一个单独的队列，像是user interactive队列
 
 1370
 00:57:17,898 --> 00:57:20,032
 queue, could actually have multiple threads running,
+可以真的多线程运行
 
 1371
 00:57:20,034 --> 00:57:21,066
 working on it at the same time.
+同时在上面工作
 
 1372
 00:57:21,068 --> 00:57:22,533
 If you have a multi-core processor they can
+如果你有个多核处理器
 
 1373
 00:57:22,535 --> 00:57:25,936
 even actually be working on them.
+它可以真的在上面工作
 
 1374
 00:57:25,938 --> 00:57:27,871
 But mostly it's time sharing,
+但大多数情况是分时的
 
 1375
 00:57:27,873 --> 00:57:30,540
 time slicing between the various threads.
+时间分给了数个线程
 
 1376
 00:57:30,542 --> 00:57:32,142
 But, anyway, you can do a serial 1.
+但是你可以做一个serial 1
 
 1377
 00:57:32,144 --> 00:57:34,410
 And you would do that only if you wanted to do something off
+只有当你想在主队列外
 
 1378
 00:57:34,412 --> 00:57:38,014
 the main thread that something depends on the next things,
+做一些事的时候，这些事根据下面的事区分
 
 1379
 00:57:38,016 --> 00:57:39,065
 depends on the next things.
+根据下面的事区分
 
 1380
 00:57:39,066 --> 00:57:40,115
 So you want to want to do them serially or
+所以你想连续的去做
 
 1381
 00:57:40,117 --> 00:57:41,283
 you want to throttle.
+或者你想可控速度的去做
 
 1382
 00:57:41,285 --> 00:57:43,251
 Like you're fetching a bunch of images, but
+比如你想要抓去一些图片
 
 1383
 00:57:43,253 --> 00:57:45,119
 you don't want to bombard, you know,
+但你又不想让他们占了全部网速
 
 1384
 00:57:45,121 --> 00:57:47,922
 Flicker or whoever you're requesting the images from
+Flicker或者任何你想用上百个问题
 
 1385
 00:57:47,924 --> 00:57:49,056
 with hundreds of questions.
+来请求图片的网站
 
 1386
 00:57:49,058 --> 00:57:50,624
 You're just going to do them one at a time.
+你只想一次做一个
 
 1387
 00:57:50,626 --> 00:57:52,058
 And they're going to appear in the UI one at a time.
+任何他们就会一次在UI上显示一个
 
 1388
 00:57:52,060 --> 00:57:54,427
 So you can do your own
+所以你用dispatch_queue_create
 
 1389
 00:57:54,428 --> 00:57:56,795
 serial queues with dispatch_queue_create.
+自己做一个连续的队列了
 
 1390
 00:57:56,798 --> 00:57:57,363
+Okay?
 Okay?
 
 1391
 00:57:59,099 --> 00:58:01,099
 You can also use the multi-threading stuff to
+你以后也可以
 
 1392
 00:58:01,101 --> 00:58:02,834
 do something in the future.
+用多线程去做一些事
 
 1393
 00:58:02,836 --> 00:58:03,567
 Okay? You do that with
+你通过
 
 1394
 00:58:03,569 --> 00:58:04,968
 this dispatch after.
+稍后发送这个做到
 
 1395
 00:58:04,970 --> 00:58:07,404
 It's kind of odd again.
+这又有点奇怪了
 
 1396
 00:58:07,406 --> 00:58:11,174
-The arguments are kind of weird, you do this nth 64
+The arguments are kind of weird, you do this Int 64
+参数有些奇怪，Int 64
 
 1397
 00:58:11,176 --> 00:58:15,111
 delay in seconds times double insect per min insect per
+delayInSeconds*Double...
 
 1398
 00:58:15,113 --> 00:58:18,914
 milliseconds dispatch time now delay, blah blah.
+...(念语句)
 
 1399
 00:58:18,916 --> 00:58:23,118
 You create this basically time dispatched_time t
+你只是最基本的
 
 1400
 00:58:23,120 --> 00:58:26,421
 that is in the future and then you just say
+用dispatched_time创建了队列
 
 1401
 00:58:26,423 --> 00:58:31,058
 dispatch after that amount of time on to the main queue.
+在之后的一段时间会发送到主队列
 
 1402
 00:58:31,060 --> 00:58:32,793
 So you're almost always doing dispatch after on
+所以你差不多经常要
 
 1403
 00:58:32,795 --> 00:58:34,578
 the main queue.
+稍后发送到主队列
 
 1404
 00:58:34,579 --> 00:58:36,362
 It's rare that you'd be on another queue
+你在别的队列做这个真的很罕见
 
 1405
 00:58:36,365 --> 00:58:39,065
 because those other queues are kind of
+因为另外一个队列
 
 1406
 00:58:39,067 --> 00:58:41,768
 concurrent running queues and such.
+事同时发生在运行队列的
 
 1407
 00:58:41,770 --> 00:58:45,571
 Anyway it's more likely, I want to put up an alert in
+这更像如果用户十秒钟什么都不做
 
 1408
 00:58:45,573 --> 00:58:49,274
 ten seconds if the user hasn't done something, or
+我就显示一个警告
 
 1409
 00:58:49,276 --> 00:58:50,942
 something like that.
+或者类似的
 
 1410
 00:58:50,944 --> 00:58:53,544
 Which is kind of a weird UI, but anyway.
+是一种奇怪的UI
 
 1411
 00:58:53,546 --> 00:58:55,913
 You never want to block the main queue saying oh wait,
+你绝对不要想阻塞主队列，说：嘿，等下
 
 1412
 00:58:55,915 --> 00:58:58,349
 20 seconds and then it will be able to do this.
+20秒，然后就可以做这个了
 
 1413
 00:58:58,351 --> 00:59:00,350
 But you want to be able to notify it.
+但是为了提示这个
 
 1414
 00:59:00,352 --> 00:59:02,085
 And there's tons and
+并且有很多
 
 1415
 00:59:02,086 --> 00:59:03,819
 tons of stuff that I'm not even going to talk about, but
+很多的东西我还没讲到
 
 1416
 00:59:03,822 --> 00:59:06,155
 you can do readers and writers.
+你可以做readers 和 writers
 
 1417
 00:59:06,157 --> 00:59:07,757
 You can protect critical sections of
+你可以保护你代码的
 
 1418
 00:59:07,759 --> 00:59:08,891
 your code doing this.
+关键部分去做这个
 
 1419
 00:59:08,893 --> 00:59:10,592
 You can do synchronous dispatch.
+你可以做synchronous dispatch
 
 1420
 00:59:10,594 --> 00:59:12,494
 Okay, instead of asynchronously firing these
+代替异步去执行
 
 1421
 00:59:12,496 --> 00:59:13,795
 things off to put on the queues.
+这个队列
 
 1422
 00:59:13,797 --> 00:59:15,763
 You can wait for them to execute.
+你可以等待他们去执行
 
 1423
 00:59:15,765 --> 00:59:17,014
 All that stuff.
+所以的东西
 
 1424
 00:59:17,015 --> 00:59:18,264
 You won't need any of that for this class probably.
+你可能不需要他们中的任何一项
 
 1425
 00:59:18,267 --> 00:59:20,667
 The things I showed you, that's the basics of it.
+我给你们看的，是最基础的
 
 1426
 00:59:20,669 --> 00:59:21,935
 That's probably all you're going to need.
+这可能就是你们需要的全部
 
 1427
 00:59:22,937 --> 00:59:25,921
 'Kay?
+Okay？
 
 1428
 00:59:25,922 --> 00:59:28,906
 There are APIs in iOS that are multi-threaded.
+这在iOS中的API是multi-threaded
 
 1429
 00:59:28,909 --> 00:59:30,275
 So, you've got to be careful.
+所以你要小心
 
 1430
 00:59:30,277 --> 00:59:31,676
 If you're doing something, and
+如果你做了什么
 
 1431
 00:59:31,678 --> 00:59:33,644
 it seems like this might be multi-threaded,
+可能会是多线程的
 
 1432
 00:59:33,646 --> 00:59:35,146
 this seems like it might take a little while,
+这就表示可能要一会功夫
 
 1433
 00:59:35,148 --> 00:59:36,513
 like it's gonna access the network or
+可能要获取网络
 
 1434
 00:59:36,515 --> 00:59:38,181
 something like that.
+一类的事情
 
 1435
 00:59:38,183 --> 00:59:39,916
 Then you want to read the documentation and
+任何你就要读文档
 
 1436
 00:59:39,918 --> 00:59:42,485
 see, are you giving it a block, for
+看是否让他阻塞了
 
 1437
 00:59:42,487 --> 00:59:45,087
 example, that's going to be executed off the main thread?
+比如，是不是要执行完主现场了？
 
 1438
 00:59:45,089 --> 00:59:47,990
 Because in that block, if you want to do something with
+因为在这个阻塞里，如果你想要做一些UI的事
 
 1439
 00:59:47,992 --> 00:59:50,192
 the UI you have to post back to the main thread.
+你需要发送会主线程
 
 1440
 00:59:51,361 --> 00:59:52,060
 Okay? So here's what
+Okay?所以这就是
 
 1441
 00:59:52,062 --> 00:59:54,762
 that looks like for example.
+例子看起来的样子
 
 1442
 00:59:54,763 --> 00:59:57,463
 Here is an API, this is the NSURL session API.
+这有个API，这个NSURL session API
 
 1443
 00:59:58,567 --> 01:00:00,967
 The thing in yellow is all that really matters.
+黄字非常重要
 
 1444
 01:00:00,969 --> 01:00:04,337
 It lets you download a file from a URL.
+它让你从一个URL中下载一个文件
 
 1445
 01:00:04,339 --> 01:00:05,905
 And it does it asynchronously.
+而且是异步的去做
 
 1446
 01:00:05,907 --> 01:00:08,907
 And you give it a block, which is the completion handler.
+你用completion handler给它一个block
 
 1447
 01:00:08,909 --> 01:00:11,176
 So when it's done, it invokes your block,
+当它做完了，它会唤醒你的block
 
 1448
 01:00:11,178 --> 01:00:12,844
 and it's got some arguments there.
+并且这会获取一些参数
 
 1449
 01:00:12,846 --> 01:00:16,114
 It moves the file to a local URL that you can open.
+这会移动文件到一个你可以打开的本地URL
 
 1450
 01:00:16,116 --> 01:00:19,316
 You get HTTP response, you can get an error, et cetera.
+你获取HTTP应答，你看你会得到一个error或者别的什么
 
 1451
 01:00:21,053 --> 01:00:24,054
 So, you want to do something in there to update the UI,
+所以，你想要在这做一些事来更新UI
 
 1452
 01:00:24,056 --> 01:00:26,422
 cause you got the file back, and can you?
+因为你取回了文件，那么你可以吗？
 
 1453
 01:00:26,424 --> 01:00:29,425
 No, you can't, because that's not on the main queue,
+不，你不可以，因为那个不在主队列里
 
 1454
 01:00:29,427 --> 01:00:32,728
 however you can put dispatch async in there.
+但你可以放一个dispatch async在这
 
 1455
 01:00:32,730 --> 01:00:33,995
 Okay, so this is exactly the same code,
+所以是完全一样的代码
 
 1456
 01:00:33,997 --> 01:00:35,530
 I just add dispatch async in there.
+我只是在这加了dispatch async
 
 1457
 01:00:38,601 --> 01:00:39,834
+All right?
 All right?
 
 1458
 01:00:39,836 --> 01:00:41,201
 So that's example where you dispatch a.
+这就是你在哪放dispatch async的例子
 
 1459
 01:00:41,203 --> 01:00:43,537
 That is the exactly the same thing as I showed you on that
+这就是我刚才在第一张课件给你们看的东西
 
 1460
 01:00:43,539 --> 01:00:46,006
 very first slide, it's just that it's wrapped inside an
+只是包含了一个iOS API
 
 1461
 01:00:46,008 --> 01:00:48,508
 iOS API instead of just your own dispatch to another queue.
+而不是发送到另外一个队列
 
 1462
 01:00:48,510 --> 01:00:50,443
+Okay.
 Okay.
 
 1463
 01:00:50,445 --> 01:00:52,111
 All right so.
+所以
 
 1464
 01:00:52,113 --> 01:00:56,048
 Again, a demo's worth of vowels and words.
+一个值得仔细说的例子
 
 1465
 01:00:56,050 --> 01:00:59,617
 So let's go look what it looks to make an Imaginarium there.
+所以来看看看如何做一个Imaginarium
 
 1466
 01:01:00,687 --> 01:01:03,287
 Or Christini I guess I called it this time.
+这次我猜我叫他Christini
 
 1467
 01:01:03,289 --> 01:01:06,456
 Let's make this thing be multi-threaded.
+来把它变成多线程
 
 1468
 01:01:06,458 --> 01:01:09,592
 So we know that it's really bad UI, it blocks every
+我们知道这是个糟糕大UI，每次我们请求大图片
 
 1469
 01:01:09,594 --> 01:01:13,196
 time we ask for these big images, it's completely stuck.
+都会阻塞，真的很不好
 
 1470
 01:01:13,198 --> 01:01:16,766
 So where we fetch the image right here,
+所以我们在哪获取图片呢？
 
 1471
 01:01:16,768 --> 01:01:20,535
 we need to be doing that on a different thread.
+我们要在另外一个线程里做
 
 1472
 01:01:20,537 --> 01:01:21,236
 All right? So how are we
+All right?
 
 1473
 01:01:21,238 --> 01:01:22,270
 going to do that?
+所以我准备做这个
 
 1474
 01:01:22,272 --> 01:01:24,038
 We'll we're going to do exactly what I
+我们就是要做
 
 1475
 01:01:24,040 --> 01:01:25,456
 did in the slides there.
+之前课件里讲的
 
 1476
 01:01:25,457 --> 01:01:26,873
 Which is I'm going to create one of these quality of
+我要在这建立一个之前说的
 
 1477
 01:01:26,876 --> 01:01:28,342
 service things here, okay.
+service中的一个
 
 1478
 01:01:28,344 --> 01:01:29,275
 First of all, I don't need to do
+首先，我如果image URL为空
 
 1479
 01:01:29,277 --> 01:01:32,445
 anything if my image URL is nil.
+我什么都不要做
 
 1480
 01:01:32,447 --> 01:01:33,679
 So if it's not nil though,
+如果不是
 
 1481
 01:01:33,681 --> 01:01:35,614
 then I'm going to let my quality of service equal,
+如何就让qos等于
 
 1482
 01:01:35,616 --> 01:01:42,887
 let's go ahead and do this so you can see lots of code here.
+继续，你可以看到很多代码
 
 1483
 01:01:42,889 --> 01:01:44,606
 All right,
+All right
 
 1484
 01:01:44,607 --> 01:01:46,324
 I'm gonna select this quality of service to this weird thing
+我要选这些service中的一个
 
 1485
 01:01:46,326 --> 01:01:49,760
 int and the quality of service I want is going to be this
+有些奇怪的service
 
 1486
 01:01:49,762 --> 01:01:54,331
 user initiated because the user has asked for something.
+我想要这个user initiated，用户请求一些东西
 
 1487
 01:01:54,333 --> 01:01:56,232
 It's not gonna be quick,
+这不会很快
 
 1488
 01:01:56,234 --> 01:01:58,935
 but I want it to be done as soon as it can.
+当要经快的完成
 
 1489
 01:01:58,937 --> 01:02:01,170
 Because the user's waiting for it basically.
+因为用户在等着
 
 1490
 01:02:01,172 --> 01:02:03,505
 So that's gonna be my quality of service there.
+这就是我要的service
 
 1491
 01:02:03,507 --> 01:02:06,675
 And then I'm just going to say dispatch, async.
+然后就是dispatch async
 
 1492
 01:02:06,677 --> 01:02:08,943
 The queue I want is a global queue, so
+我要的是一个global queue
 
 1493
 01:02:08,945 --> 01:02:12,113
 I'm going to say get global queue.
+获取一个global queue
 
 1494
 01:02:12,115 --> 01:02:15,783
 I'm gonna actually use a different one of these,
+我要用一个完全不一样的
 
 1495
 01:02:15,785 --> 01:02:16,483
 hold on.
+等等
 
 1496
 01:02:16,485 --> 01:02:18,351
 Identifier global queue.
+Identifier global queue
 
 1497
 01:02:18,353 --> 01:02:20,153
 And use this one,
+用这个
 
 1498
 01:02:20,155 --> 01:02:23,289
 which is the one that takes the quality of service there.
+一个要选service的
 
 1499
 01:02:23,291 --> 01:02:24,556
 So quality of service.
+quality of service
 
 1500
 01:02:26,527 --> 01:02:29,461
 Not caps, Q O S, there we go.
+qos，好了
 
 1501
 01:02:29,463 --> 01:02:32,764

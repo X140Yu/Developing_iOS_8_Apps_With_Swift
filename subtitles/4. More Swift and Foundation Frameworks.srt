@@ -233,7 +233,7 @@ really complicated, but it's pretty simple really it's just
 48
 00:02:17,453 --> 00:02:20,787
 syntax sugar, syntactic sugar to do this Optional.
-这只是语法上的甜头，为了实现 Optional
+这只是语法糖，为了实现 Optional
 
 49
 00:02:20,789 --> 00:02:25,124
@@ -422,7 +422,7 @@ Using this square bracket notation,
 86
 00:04:04,179 --> 00:04:07,146
 which is just square bracket, key colon value, comma
-[key:value], [key:value]
+[key:value, key:value]
 
 87
 00:04:07,148 --> 00:04:08,914
@@ -1197,7 +1197,7 @@ you're gonna build an app like that some day you wonna really
 241
 00:11:03,508 --> 00:11:06,542
 understand date and all it's friends here.
-你需要理解和 NSData 相关的东西
+你需要理解和 NSDate 相关的东西
 
 242
 00:11:06,544 --> 00:11:07,977
@@ -1221,8 +1221,8 @@ But it's just untyped data that's just in there it's just
 
 246
 00:11:18,588 --> 00:11:21,055
-you can think of it almost like a point or two memory and
-你可以把它看成是一个点或者一段内存
+you can think of it almost like a pointer to memory and
+你可以把它看成是一个指向内存的指针
 
 247
 00:11:21,057 --> 00:11:22,256
@@ -1971,7 +1971,7 @@ is your SignMinus?
 396
 00:17:34,675 --> 00:17:39,210
 Whereas Double.abs is a type function on Double.
-然而， abs 是 Double 这个类的方法（所有对象共享）
+然而， abs 是 Double 这个类型的方法（不依赖类型的实例）
 
 397
 00:17:39,212 --> 00:17:42,379
@@ -1991,12 +1991,12 @@ But your, and you're not sending abs to a particular
 400
 00:17:46,385 --> 00:17:48,385
 Double, you're sending it to the class, or
-而是向 Double 这个类在发送消息，
+而是向 Double 的类型在发送消息，
 
 401
 00:17:48,387 --> 00:17:49,952
 the struct in this case, the type.
-在这个例子中的结构体、类型
+在这个例子中是向着 struct 类型（Double 是 struct）
 
 402
 00:17:49,954 --> 00:17:51,721
@@ -2031,17 +2031,17 @@ It's just that, who you asked to do the work.
 408
 00:18:05,668 --> 00:18:08,101
 You declare a type method or
-你声明一个类方法或者或者一个 property
+你声明一个类方法或者
 
 409
 00:18:08,103 --> 00:18:11,037
 a property by using static in front of it.
-之前必须使用静态变量
+前面使用关键字 static 修饰的一个 property
 
 410
 00:18:11,039 --> 00:18:14,474
 So, like abs, there would static func abs,
-就像绝对值，就是
+就像 abs 方法，原型是
 
 411
 00:18:14,476 --> 00:18:16,842
@@ -2051,7 +2051,7 @@ static func abs(d: Double) -> Double
 412
 00:18:16,844 --> 00:18:19,345
 And that makes it so you send it that to, the Double type
-这就规定了你要向 Double 类发消息
+这就规定了你要向 Double 类型发消息
 
 413
 00:18:19,347 --> 00:18:21,880
@@ -2061,7 +2061,7 @@ instead of sending it to a particular Double.
 414
 00:18:21,882 --> 00:18:24,749
 In a class you use the word class not static.
-在一个类中你使用关键字 class 而不是 static
+在一个 class 中你使用关键字 class 而不是 static（static 用于 struct 和 enum）
 
 415
 00:18:24,751 --> 00:18:26,617
@@ -2081,12 +2081,12 @@ So, I just don't want you to be confused,
 418
 00:18:31,056 --> 00:18:33,290
 when you start seeing methods like abs that are sent to
-当你看见一个类似于abs的方法
+当你看见一个类似于 abs 的方法
 
 419
 00:18:33,292 --> 00:18:35,108
 the Double type.
-被发送给 Double 类时
+被发送给 Double 类型时
 
 420
 00:18:35,109 --> 00:18:36,925
@@ -2171,12 +2171,12 @@ creation, that kinda thing.
 436
 00:19:10,891 --> 00:19:12,991
 And they're, now I wouldn't, I don't wanna say, they're rare,
-类方法，我不想说很少见
+我不想说类方法很少见
 
 437
 00:19:12,993 --> 00:19:15,960
 they're not super common, you'll see them in, in iOS and
-类方法并不是非常常见，你们在 iOS 里面会看到
+说类方法不是非常常见，你们在 iOS 里面会看到
 
 438
 00:19:15,962 --> 00:19:18,496
@@ -2186,12 +2186,12 @@ you'll probably use them occasionally.
 439
 00:19:18,498 --> 00:19:21,565
 you, you would use them really instead of global functions.
-你可能会使用类方法而非全局方法
+你可能会使用类方法而非全局函数
 
 440
 00:19:21,567 --> 00:19:23,801
 You can't have global functions.
-你可以没有全局方法
+你不允许使用全局函数
 
 441
 00:19:23,803 --> 00:19:25,936
@@ -2216,7 +2216,7 @@ the type and kind of, unless it's
 445
 00:19:33,544 --> 00:19:35,844
 truly a global function that applies to the world.
-一个世界通用的全局方法
+一个世界通用的全局函数
 
 446
 00:19:35,846 --> 00:19:39,348
@@ -2361,7 +2361,7 @@ So, you can have both external,
 474
 00:20:41,403 --> 00:20:42,368
 internal names, they can be different.
-以及内部的名字，他们是不同的
+以及内部的名字，他们可以不一样
 
 475
 00:20:43,604 --> 00:20:45,037
@@ -2375,7 +2375,7 @@ remember under bar is kinda the don't care thing in Swift.
 
 477
 00:20:48,475 --> 00:20:50,808
-Even under bar if you don't want callers, so
+Even under bar if you don't want callers to
 如果你不想有调用者
 
 478
@@ -2561,12 +2561,12 @@ Because the method does something,
 514
 00:22:25,625 --> 00:22:27,424
 it operates on something or whatever.
-它在某个变量之上进行操作
+它在某个事物之上进行操作
 
 515
 00:22:27,426 --> 00:22:29,309
 That should be the first argument.
-那个变量就应该是第一个参数
+那个事物就应该是第一个参数
 
 516
 00:22:29,310 --> 00:22:31,193
@@ -2606,12 +2606,12 @@ really long method that says you know, do this, and
 523
 00:22:42,939 --> 00:22:44,405
 that, with this other thing, and
-干什么、使用了那些变量
+做了 A 和 B ，使用了 C 跟 D
 
 524
 00:22:44,407 --> 00:22:47,408
 that, and then in parenthesis you have four arguments and
-然后你就能够在圆括号中将这四个参数
+然后你需要在括号中将这四个参数
 
 525
 00:22:47,410 --> 00:22:49,810
@@ -2636,7 +2636,7 @@ So, it's really a lot easier to read and
 529
 00:22:55,016 --> 00:22:57,516
 a lot easier to understand, what the heck is going on?
-也比较方便去理解，我们讨论这些有什么意义呢？
+也比较方便去理解，方法这里到底是在干什么？
 
 530
 00:22:57,518 --> 00:22:59,718
@@ -2651,7 +2651,7 @@ I don't recommend putting the under bar in, in parameters.
 532
 00:23:03,657 --> 00:23:05,089
 There, there are some exceptions, but
-虽然有一些是特例，但是
+虽然有一些特例，但是
 
 533
 00:23:05,091 --> 00:23:08,692
@@ -2791,7 +2791,7 @@ saying get instead like a computer property.
 560
 00:24:02,474 --> 00:24:05,675
 I say, will set and did set, 'kay?
-而是 willSet 和 didSet 来得到的，明白了吗？
+而是有 willSet 和 didSet，明白了吗？
 
 561
 00:24:05,677 --> 00:24:09,277
@@ -2806,7 +2806,7 @@ dill, didSet.
 563
 00:24:11,397 --> 00:24:13,514
 They get called when that property gets set by anybody,
-会在设置或获取 property 的值时被调用
+会在设置 property 的值的过程中被调用
 
 564
 00:24:13,517 --> 00:24:16,884
@@ -2816,7 +2816,7 @@ so it's called an a property observer cause I'm observing
 565
 00:24:16,886 --> 00:24:20,021
 with this code I'm observing this thing is being set.
-因为这段代码 observe 这个 property 的设置或获取方法
+因为这段代码 observe 这个 property 的设置方法
 
 566
 00:24:20,023 --> 00:24:21,989
@@ -2976,12 +2976,12 @@ So, the observers are really cool, they're a really good
 597
 00:25:33,886 --> 00:25:35,852
 way to kinda keep track of what's going on and
-同时也是追踪哪些 property 被设置或获取的
+他们是跟踪发生了什么事情以及
 
 598
 00:25:35,854 --> 00:25:36,853
 keep things in sync.
-一种好方法
+保持事务同步的一种好方法
 
 599
 00:25:38,323 --> 00:25:42,624
@@ -3016,12 +3016,12 @@ happen until someone actually accesses that property.
 605
 00:25:59,307 --> 00:26:03,876
 Or you can actually initialize it by putting a closure there,
-你也可以在初始化的时候在后面放一个圆括号
+你也可以在初始化的时候使用闭包
 
 606
 00:26:03,878 --> 00:26:06,712
 put parenthesis after it, and we'll execute that closure.
-也就是通过执行这个闭包
+后面放一对圆括号，也就是通过执行这个闭包
 
 607
 00:26:06,714 --> 00:26:10,048
@@ -3061,7 +3061,7 @@ methods in your class until you're fully initialized, so
 615
 00:26:31,535 --> 00:26:33,535
 there's kinda a catch 22 there.
-这好像是个不可以违背的规定
+有点像第22条军规
 
 616
 00:26:33,537 --> 00:26:34,736
@@ -4985,7 +4985,7 @@ It's completely obvious there.
 1017
 00:41:54,893 --> 00:41:58,561
 You notice you don't always create objects by doing that.
-你可能会发现你并不是一直通过这种方式来创建对象
+你可能会发现你并不总是通过这种方式来创建对象
 
 1018
 00:41:58,563 --> 00:42:01,196
@@ -5055,7 +5055,7 @@ Like remember UIImage on the previous page,
 1031
 00:42:31,324 --> 00:42:34,025
 that wasn't UIImage dot image named.
-那个不是像 UIImage.image 这样命名的
+那个不是像 UIImage.imageNamed: 这样的
 
 1032
 00:42:34,027 --> 00:42:37,094
@@ -8289,7 +8289,7 @@ So there's kind of a hidden thing there.
 1687
 01:09:35,647 --> 01:09:38,214
 Notice that you can't do String of 52.5,
-但是，注意你不能调用 let s = Stirng(52.5)
+但是，注意你不能调用 let s = String(52.5)
 
 1688
 01:09:38,216 --> 01:09:40,950
@@ -8413,7 +8413,7 @@ assert 方法会在你生成程序的 Release 版本的时候
 1712
 01:10:35,798 --> 01:10:37,497
 release, like to the App Store.
-失效，也就是提交到 App Store 的版本
+失效，比如提交到 App Store 的版本
 
 1713
 01:10:37,499 --> 01:10:40,600

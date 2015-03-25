@@ -2696,26 +2696,32 @@ UIImage是iOS里展示图片的类。
 601
 00:24:42,898 --> 00:24:44,131
 So that's really easy to do.
+非常容易实现。
 
 602
 00:24:44,133 --> 00:24:45,565
 I'm just gonna say,
+我只需要写，
 
 603
 00:24:45,567 --> 00:24:48,835
 in fact, I'm just gonna assign it to my image.
+我要把它赋予image变量里。
 
 604
 00:24:48,837 --> 00:24:50,836
 I'm sorry, we don't need self there.
+啊，对不起，这里不需要写self。
 
 605
 00:24:50,838 --> 00:24:54,973
 I would say image equals UIImage with the data
+写 UIImage(data: )
 
 606
 00:24:54,975 --> 00:24:57,241
 being that imageData.
+参数是刚才的imageData。
 
 607
 00:24:59,379 --> 00:25:01,846
@@ -2724,142 +2730,178 @@ Okay?
 608
 00:25:01,847 --> 00:25:04,314
 Now, otherwise, I'm just gonna say my image equals nil, 'kay?
+要不然，我的image就为空。
 
 609
 00:25:04,316 --> 00:25:09,252
 And, remember, this image equals something like this is
+记住我们给image赋值的时候，这里的代码
 
 610
 00:25:09,254 --> 00:25:12,288
 just calling this right down here to
+就会被执行。
 
 611
 00:25:12,290 --> 00:25:16,625
 set the image in our imageView or whatever, okay?
+给我们的图片视图设置一个图片。
 
 612
 00:25:16,627 --> 00:25:19,327
 And then, of course, this needs to be unwrapped.
+当然，data需要解包。
 
 613
 00:25:19,329 --> 00:25:21,196
 But we know we can unwrap it because I
+我们知道这个肯定可以解包，因为我之前
 
 614
 00:25:21,198 --> 00:25:22,363
 checked to make sure it's not nil.
+检查过以确保它不为空。
 
 615
 00:25:23,733 --> 00:25:29,403
 Okay, now, this line of code is a very bad line of code for
+现在我们回头来看，这行代码是非常有问题的
 
 616
 00:25:29,405 --> 00:25:32,472
 us because it might go out over the network.
+因为它会访问网络。
 
 617
 00:25:33,808 --> 00:25:35,240
 Okay? I could be on cellular.
+我可能在用蜂窝网络。
 
 618
 00:25:35,242 --> 00:25:39,644
 This might take ten seconds, or a minute, or it might just
+这个操作可能需要10秒，甚至一分钟，也有可能
 
 619
 00:25:39,646 --> 00:25:44,448
 fail because I have no network connectivity right now, okay?
+因为没有网络连接而直接失败。
 
 620
 00:25:44,450 --> 00:25:47,651
 So this is not a line of code we wanna be executing in
+我们不希望在我们的程序里有这样
 
 621
 00:25:47,653 --> 00:25:50,020
 our program, but
+的代码。
 
 622
 00:25:50,021 --> 00:25:52,388
 we don't know what to do about it right now and I'm gonna
+但是我们现在还不知道怎么做，在这次课的后边我会讲到
 
 623
 00:25:52,391 --> 00:25:55,759
 show you later in the lecture what we can do about it.
+应该怎么做。
 
 624
 00:25:55,761 --> 00:25:58,394
 So, for now, we just got this kind of bummer line of
+现在我们先把这行会让我们程序变得很慢
 
 625
 00:25:58,396 --> 00:26:00,629
 code here that's gonna be really slow.
+的烂代码放在这。
 
 626
 00:26:00,631 --> 00:26:02,531
 Our app is gonna be really slow.
+我们的程序会因为它变的很慢
 
 627
 00:26:02,533 --> 00:26:04,833
-Although the network at Stanford here is so
+Although the network at Stanford here is so、
+尽管斯坦福大学的网很快所以你可能
 
 628
 00:26:04,835 --> 00:26:07,702
 fast that it probably won't even seem that slow, but
+感觉不到慢，但是
 
 629
 00:26:07,704 --> 00:26:10,738
 it will be slow cuz I'm gonna grab some pretty huge images.
+如果我要下载一些很大的图片，它就会慢下来。
 
 630
 00:26:11,974 --> 00:26:16,076
 All right, there's one other thing I wanna show here in
+下面我可能会给你们看一些关于
+
 
 631
 00:26:16,078 --> 00:26:20,346
 terms of view controller life cycle, though, which is,
+viewcontroller生命周期的东西。如果
 
 632
 00:26:20,348 --> 00:26:23,315
 if someone sets my imageURL, okay, and
+有人设置了图片的URL。但是
 
 633
 00:26:23,317 --> 00:26:26,552
 I'm not on screen, do I really want to go and
+我们的app不在这个界面上，我是不是需要开始用客户的
 
 634
 00:26:26,554 --> 00:26:30,155
 start using up their cellular data plan, okay?
+蜂窝网络开始下载呢？
 
 635
 00:26:30,157 --> 00:26:32,357
 Probably not, 'kay?
+不应该这样，对吧？
 
 636
 00:26:32,359 --> 00:26:35,693
 You gotta remember that people don't have Stanford WiFi
+人们不可能在哪都能连到
 
 637
 00:26:35,695 --> 00:26:37,094
 internet everywhere.
+斯坦福的wifi。
 
 638
 00:26:37,096 --> 00:26:40,731
 Some people are using cellular, and it costs money.
+很多人在用蜂窝网络，是花钱的。
 
 639
 00:26:40,733 --> 00:26:43,800
 So I am not going to actually fetch this
+所以如果我不在这个界面上的时候，我不希望
 
 640
 00:26:43,802 --> 00:26:46,769
 image unless I'm currently on screen.
+图片开始下载。
 
 641
 00:26:48,239 --> 00:26:50,272
 So how do I tell if I'm currently on screen?
+那我怎么知道是不是在这个界面呢？
 
 642
 00:26:50,274 --> 00:26:53,475
 Actually I can do that with view.window does not
+我可以这么做，view.window != nil
 
 643
 00:26:53,477 --> 00:26:55,943
@@ -2868,26 +2910,32 @@ equal nil, 'kay?
 644
 00:26:55,945 --> 00:26:59,180
 So remember view is our top level view in our
+view这个属性是我们viewcontroller最顶层的
 
 645
 00:26:59,182 --> 00:27:03,217
 controller's view ,and .window is the UI window it's in,
+视图，它的window属性如果为空，就说明
 
 646
 00:27:03,219 --> 00:27:08,254
 which will be nil if it's not currently on screen, 'kay?
+我们现在不在当前的界面上。
 
 647
 00:27:08,256 --> 00:27:09,856
 But there's a little bit of a problem here,
+但是这里有个小问题，
 
 648
 00:27:09,858 --> 00:27:14,326
 which is what if I'm offscreen and someone sets my imageURL,
+如果我不在这个界面，有人设置了图片的URL。
 
 649
 00:27:14,328 --> 00:27:16,795
 I don't fetch the image, and then I come on screen?
+图片不会开始下载，但是如果我之后回来了呢？
 
 650
 00:27:16,797 --> 00:27:18,329
@@ -2896,86 +2944,107 @@ Aah!
 651
 00:27:18,331 --> 00:27:20,631
 Then I gotta fetch the image, 'kay?
+那么我就应该开始下载，对吧？
 
 652
 00:27:20,633 --> 00:27:22,366
 So where does that happen?
+那在哪实现这个部分呢？
 
 653
 00:27:22,368 --> 00:27:25,002
 Anyone wanna hazard a guess where I would put that code?
+有人想猜一下我应该把代码放在哪吗？
 
 654
 00:27:27,272 --> 00:27:28,971
 Nobody?
+没有人？
 
 655
 00:27:28,973 --> 00:27:31,207
 ViewWillAppear, exactly, very good.
+ViewWillAppear，没错，非常好。
 
 656
 00:27:31,209 --> 00:27:33,142
 So in viewWillAppear down here,
+在 ViewWillAppear 里，
 
 657
 00:27:33,144 --> 00:27:35,644
 I'm gonna say super.viewWillAppear.
+先要调用 super.ViewWillAppear。
 
 658
 00:27:36,880 --> 00:27:41,549
 And then I'm just gonna say, if my image is nil,
+然后这里我要写，如果我的图片为空，
 
 659
 00:27:41,551 --> 00:27:44,551
 then fetch the image, 'kay?
+那么就开始下载图片。
 
 660
 00:27:44,553 --> 00:27:46,253
 Now it could be that my image is nil because I
+有可能我的图片为空是因为我尝试下载
 
 661
 00:27:46,255 --> 00:27:47,687
 tried to fetch it and it failed, but
+但是失败了，这里就会再试一次，然后
 
 662
 00:27:47,689 --> 00:27:50,423
 it's just gonna try again and fail, that's okay.
+可能又失败了，不过这样没问题。
 
 663
 00:27:50,425 --> 00:27:53,726
 But, obviously, my image is not nil,
+但是显然如果我的图片不为空，
 
 664
 00:27:53,728 --> 00:27:55,361
 then I don't wanna fetch it again.
+我就不会再下载一次了。
 
 665
 00:27:55,363 --> 00:27:58,597
 That would be wasting their cellular data even more, okay?
+这样会浪费用户的蜂窝网络。
 
 666
 00:27:58,599 --> 00:28:00,899
 So here's a classic example of where we
+所以这里是实用 ViewWillAppear 的一个
 
 667
 00:28:00,901 --> 00:28:02,000
 would use viewWillAppear,
+经典例子。
 
 668
 00:28:02,002 --> 00:28:04,735
 because we know it's worth it to go get that data,
+因为我们知道我们马上要看到界面，所以在这个点开始从
 
 669
 00:28:04,737 --> 00:28:09,639
 because we know we're going to appear onscreen, 'kay?
+网络上获取数据是必要的。
 
 670
 00:28:09,641 --> 00:28:10,907
 Everybody understand that,
+大家都懂了吗？
 
 671
 00:28:11,943 --> 00:28:15,277
 view controller lifecycle coming to life for you?
+对viewcontroller的生命周期了解了吗？
 
 672
 00:28:15,279 --> 00:28:16,528
@@ -2984,62 +3053,77 @@ Okay?
 673
 00:28:16,529 --> 00:28:17,778
 So that's good. So let's go ahead and run.
+很好，我们继续。
 
 674
 00:28:17,781 --> 00:28:19,948
 So you, actually, let's go ahead and
+现在我们要放一个
 
 675
 00:28:19,950 --> 00:28:21,549
 put a default image in here.
+默认的图片。
 
 676
 00:28:21,551 --> 00:28:23,384
 I actually have some URLs.
+实际上我已经有一些URL了。
 
 677
 00:28:23,386 --> 00:28:28,755
 I'm just gonna drag this DemoURL.swift in here.
+我要把 DemoURL.swift 这个文件拖进来。
 
 678
 00:28:28,757 --> 00:28:32,392
 And all this DemoURL.swift does is it just defines
+这个文件只是有一些我们今天这个演示
 
 679
 00:28:32,394 --> 00:28:36,395
 a bunch of URLs that we're gonna use in our demo today.
+用到的URL。
 
 680
 00:28:36,397 --> 00:28:39,064
 So one of them is Stanford, right here.
+其中一个是斯坦福的。
 
 681
 00:28:39,066 --> 00:28:41,066
 So I'm going to load that up.
+我要把它加载进来。
 
 682
 00:28:41,068 --> 00:28:48,539
 So in my viewDidLoad, I'm gonna say, if my image is nil,
+在viewDidLoad里，我要写，如果我的图片为空。
 
 683
 00:28:48,541 --> 00:28:55,846
 then my imageURL equals my DemoURL.Stanford, 'kay?
+那么我图片的URL就等于 DemoURL.Stanford 。
 
 684
 00:28:55,848 --> 00:28:57,398
 So I'm just gonna,
+我在
 
 685
 00:28:57,399 --> 00:28:58,949
 in viewDidLoad, I'm gonna set my imageURL.
+viewDidLoad 里设置了我的URL。
 
 686
 00:28:58,951 --> 00:29:01,317
 Now, it's not gonna actually load this until it
+在视图要出现的时候，图片才会真正
 
 687
 00:29:01,319 --> 00:29:02,051
 will appear.
+开始加载。 
 
 688
 00:29:02,053 --> 00:29:03,319
@@ -3048,18 +3132,22 @@ That's okay.
 689
 00:29:03,321 --> 00:29:06,789
 But I'm just setting it right here, 'kay?
+在这设置。
 
 690
 00:29:06,791 --> 00:29:08,523
 And I'm not, this is really for testing anyway.
+不过这个只是为了测试。
 
 691
 00:29:08,525 --> 00:29:11,292
 I probably don't even need to do that just cuz we're gonna
+我们一会儿在正式开始之前，
 
 692
 00:29:11,294 --> 00:29:14,462
 remove this code once we start really not testing and
+会删了这行代码。
 
 693
 00:29:14,464 --> 00:29:16,964
@@ -3068,50 +3156,62 @@ actually working.
 694
 00:29:16,965 --> 00:29:19,465
 So let's go ahead and run this and see what we got.
+这里我们运行一下看会发生什么。
 
 695
 00:29:19,468 --> 00:29:20,734
 Oh, so it's not gonna work.
+哦，什么都没有。
 
 696
 00:29:20,736 --> 00:29:22,802
 Okay, so this comes up, it's blank.
+是空白的。
 
 697
 00:29:22,804 --> 00:29:23,970
 Why is this blank?
+为什么是空白的呢？
 
 698
 00:29:23,972 --> 00:29:25,871
 Well, let's look at our storyboard.
+让我们看一下 storyboard 。
 
 699
 00:29:25,873 --> 00:29:27,973
 Here's the entry point to our storyboard.
+这里是 storyboard 的入口。
 
 700
 00:29:27,975 --> 00:29:29,608
 It's this blank view controller.
+它指向一个空的 view controller。
 
 701
 00:29:29,610 --> 00:29:30,809
 Anyway, we don't want that.
+我们不希望这样。
 
 702
 00:29:30,810 --> 00:29:32,009
 Let's move them over here and have it
+把它挪到这，让它从
 
 703
 00:29:32,012 --> 00:29:35,847
 come into our view controller image view controller here.
+我们的图片视图控制器进入。
 
 704
 00:29:35,849 --> 00:29:37,782
 Oh yeah, there we go, we got Stanford.
+Oh yeah，我们看到了斯坦福的图片。
 
 705
 00:29:37,784 --> 00:29:41,852
 That's very nice, but can't scroll around, 'kay?
+非常漂亮，但是不能滚动。
 
 706
 00:29:41,854 --> 00:29:43,186
@@ -3120,10 +3220,12 @@ Oops.
 707
 00:29:43,188 --> 00:29:47,023
 I can't zoom, can't turn the pinch, nothing.
+不能缩放，不能用手指缩放。
 
 708
 00:29:47,025 --> 00:29:48,724
 Okay, so I can't see it, 'kay?
+什么都不能做。
 
 709
 00:29:48,726 --> 00:29:50,258
@@ -3132,94 +3234,117 @@ Can't see anything.
 710
 00:29:50,260 --> 00:29:53,294
 So that's, obviously, we need a scroll view, all right?
+显然，我们还需要一个滚动视图。
 
 711
 00:29:53,296 --> 00:29:55,163
 So, let's go ahead and
+我们继续
 
 712
 00:29:55,165 --> 00:29:59,566
 first of all, actually, what should we do first here?
+首先，我们应该先做什么呢？
 
 713
 00:29:59,568 --> 00:30:02,936
 Let's do, let's enhance our user interface a little bit
+我们需要增强一下我们的用户界面
 
 714
 00:30:02,938 --> 00:30:04,871
 more so we can pick other images.
+让我们可以选择更多的图片。
 
 715
 00:30:04,873 --> 00:30:07,540
 I don't wanna just have this Stanford image, I wanna have
+我不希望只能看见斯坦福图片，我希望能看见
 
 716
 00:30:07,542 --> 00:30:09,809
 some different images that we can look around in.
+一些不同的图片。
 
 717
 00:30:09,811 --> 00:30:11,744
 So I'm gonna go over here and
+我们到这里拖一个
 
 718
 00:30:11,746 --> 00:30:14,212
 drag out a split view controller.
+split view controller
 
 719
 00:30:15,448 --> 00:30:17,014
 Where's that split view?
+在哪呢？
 
 720
 00:30:17,016 --> 00:30:18,683
 Right here.
+在这。
 
 721
 00:30:18,684 --> 00:30:20,351
 So let's drag out this splitViewController.
+让我们拽一个 splitViewController 出来。
 
 722
 00:30:20,353 --> 00:30:22,652
 And, as usual, with the split view controller, I'm going to,
+跟以前一样，在这个 splitViewController，我要。。。
 
 723
 00:30:22,654 --> 00:30:26,256
 when I zoom out a little here, we can look at it.
+我先缩小一点就能看见了。
 
 724
 00:30:26,258 --> 00:30:28,824
 I'm gonna delete a lot of the stuff that came with it here.
+我得删掉这些没用的东西。
 
 725
 00:30:29,760 --> 00:30:30,692
 Keep that one.
+留着这个，
 
 726
 00:30:30,694 --> 00:30:32,127
 We'll delete that.
+删掉这个。
 
 727
 00:30:32,129 --> 00:30:33,828
 I'm gonna have,
+我需要
 
 728
 00:30:33,830 --> 00:30:39,600
 my image view controller is going to be the detail, 'kay?
+让我们的图片视图控制器作为细节视图。
 
 729
 00:30:39,602 --> 00:30:41,118
 So I made the detail.
+细节视图。
 
 730
 00:30:41,119 --> 00:30:42,635
 I'm gonna make my entry point here be my
+我要把入口挪到
 
 731
 00:30:42,638 --> 00:30:45,138
 split view controller.
+splitViewController
 
 732
 00:30:45,140 --> 00:30:49,575
 And I'm gonna have my master be this little one that was in
+把之前的那个view controller作为主视图。
 
 733
 00:30:49,577 --> 00:30:51,443
@@ -3228,70 +3353,87 @@ here before.
 734
 00:30:51,445 --> 00:30:54,646
 By the way, I just Ctrl+drag there and set this little view
+我Ctrl ＋ 拖拽到这个view controller，这是
 
 735
 00:30:54,648 --> 00:30:56,681
 controller that was there when we first started our app,
+我们第一次启动app的时候看见的。
 
 736
 00:30:56,683 --> 00:30:58,483
 this blank view controller.
+这个空的 view controller。
 
 737
 00:30:58,485 --> 00:31:00,151
 I can set it as the root view controller of
+我把它设置成导航控制器的根视图控制器，
 
 738
 00:31:00,153 --> 00:31:02,519
 the navigation controller with Ctrl+drag and
+Ctrl ＋ 拖拽到这，选择
 
 739
 00:31:02,521 --> 00:31:03,920
 pick root view controller here.
+根视图控制器
 
 740
 00:31:05,057 --> 00:31:08,458
 In your, in the demo and in your thing, we, you probably
+在你们自己做的时候，你们应该选
 
 741
 00:31:08,460 --> 00:31:12,061
 did this in Editor > Embed In > Navigation Controller, but
+Editor > Embed In > Navigation Controller
 
 742
 00:31:12,063 --> 00:31:14,730
 you can also do it with Ctrl+drag, 'kay?
+你也可以用 Ctrl ＋ 拖拽.
 
 743
 00:31:14,732 --> 00:31:17,165
 So now I have a nice UI here.
+这里我们有一个非常漂亮的UI。
 
 744
 00:31:19,803 --> 00:31:22,536
 Comes up, shows my nice image view right there.
+运行一下，漂亮的图片视图。
 
 745
 00:31:22,538 --> 00:31:24,204
 If I go back, here's my master.
+点返回，这里是我的主视图。
 
 746
 00:31:24,206 --> 00:31:27,240
 So now, in this master, I'm gonna put some buttons so
+现在，在这个主视图里我要加入一些摁钮，这样我们就可以
 
 747
 00:31:27,242 --> 00:31:29,943
 we can pick different images to look at instead of
+选择其他的图片，就不用一直看着
 
 748
 00:31:29,945 --> 00:31:32,078
 just looking at that Stanford thing.
+斯坦福了。
 
 749
 00:31:32,080 --> 00:31:33,746
 So let's do that, really easy.
+开始，非常容易。
 
 750
 00:31:33,748 --> 00:31:35,814
 I'm just gonna grab some buttons here.
+拖一些摁钮过来。
 
 751
 00:31:35,816 --> 00:31:37,349
@@ -3300,18 +3442,22 @@ Let's do this.
 752
 00:31:37,351 --> 00:31:41,219
 Let's make the buttons really big,
+我们把摁钮弄的大一些。
 
 753
 00:31:41,221 --> 00:31:44,488
 maybe like 48 point, okay?
+48差不多。
 
 754
 00:31:44,490 --> 00:31:47,458
 This button bigger.
+这个更大。
 
 755
 00:31:47,460 --> 00:31:51,027
 And let's make three of them.
+弄3个摁钮。
 
 756
 00:31:51,029 --> 00:31:52,796
@@ -3320,22 +3466,27 @@ And let's make three of them.
 757
 00:31:52,797 --> 00:31:54,564
 One of them is gonna be a picture of
+一个代表Cassini卫星的
 
 758
 00:31:54,566 --> 00:31:56,666
 the Cassini satellite.
+图片。
 
 759
 00:31:56,668 --> 00:31:58,734
 Okay, that was sent out as Saturn.
+通过土星运载火箭发射的。
 
 760
 00:31:58,736 --> 00:32:01,803
 Another one is gonna be a picture of Earth.
+另外一个是地球的图片。
 
 761
 00:32:01,805 --> 00:32:03,338
 Another one is gonna be Saturn.
+最后一个是土星。
 
 762
 00:32:03,340 --> 00:32:05,206
@@ -3344,46 +3495,57 @@ Okay?
 763
 00:32:05,208 --> 00:32:08,842
 So let's do a little bit of our favorite thing here,
+现在我们做一些好玩的事儿，
 
 764
 00:32:08,844 --> 00:32:10,510
 which is auto layouts.
+自动布局。
 
 765
 00:32:10,512 --> 00:32:12,645
 So put that one right in the middle.
+把这个放中间。
 
 766
 00:32:12,647 --> 00:32:15,982
 Put that one right underneath.
+这个放它下面。
 
 767
 00:32:15,984 --> 00:32:19,885
 This one right on top, 'kay?
+这个在最上面。
 
 768
 00:32:19,887 --> 00:32:22,654
 I'm gonna try and reset to suggested constraints and
+现在我要重置建议的约束看看
 
 769
 00:32:22,656 --> 00:32:24,122
 see how that works.
+会发生什么。
 
 770
 00:32:24,124 --> 00:32:25,657
 That didn't work very good, let's undo.
+看上去不怎么样，回退。
 
 771
 00:32:25,659 --> 00:32:28,326
 I think that's because,
+我觉得这是因为，
 
 772
 00:32:28,328 --> 00:32:34,031
 let me make this thing be its normal size, that's why.
+我们先把它弄小一点，我觉得这个就是原因。
 
 773
 00:32:34,033 --> 00:32:34,798
 There we go.
+走你。
 
 774
 00:32:34,800 --> 00:32:35,999
@@ -3392,30 +3554,37 @@ There we go.
 775
 00:32:36,001 --> 00:32:37,233
 Put these back.
+放回运来的位置，
 
 776
 00:32:37,235 --> 00:32:40,936
 Hopefully, this will, there we go,
+希望这次能行，
 
 777
 00:32:40,938 --> 00:32:45,273
 Reset to Suggested Constraints.
+重置建议的约束。
 
 778
 00:32:45,275 --> 00:32:46,241
 Oh, still didn't work.
+哦，还是不行。
 
 779
 00:32:46,242 --> 00:32:47,208
 Okay, well, we'll fix them up, manually.
+好吧，我们来手动修复一下吧。
 
 780
 00:32:47,210 --> 00:32:49,477
 So this guy, right here.
+这个，在这，
 
 781
 00:32:49,479 --> 00:32:52,346
 oh, that's so bad, it's not even close.
+哦，糟糕，完全不对
 
 782
 00:32:52,348 --> 00:32:54,648
@@ -3424,230 +3593,287 @@ Okay. So
 783
 00:32:54,649 --> 00:32:56,949
 I'm just going to do this all manually here,
+所以我们完全手动吧。
 
 784
 00:32:56,952 --> 00:33:00,687
 going to uh-huh, sorry, wrong thing there.
+啊，对不起，弄错了，
 
 785
 00:33:00,689 --> 00:33:05,358
 Okay, Ctrl+drag, let's make it center vertically.
+Ctrl ＋ 拖拽，垂直居中。
 
 786
 00:33:05,360 --> 00:33:09,395
 Let's Ctrl+drag and center horizontally as well.
+水平居中。
 
 787
 00:33:09,397 --> 00:33:12,364
 Let's make this be vertical spacing.
+这个的垂直距离。
 
 788
 00:33:12,366 --> 00:33:16,968
 We'll make this one be vertical spacing we'll have
+和它的垂直距离，这里让它们有一样的
 
 789
 00:33:16,970 --> 00:33:20,738
 these things share their center x, center x.
+x中心。
 
 790
 00:33:20,740 --> 00:33:22,906
 I think we're good to go there.
+我觉得这样可以了，
 
 791
 00:33:22,908 --> 00:33:25,375
 Yep, frames.
+对，frame的警告。
 
 792
 00:33:25,376 --> 00:33:27,843
 So, let's update our frames, less time.
+更新一下frame。
 
 793
 00:33:27,846 --> 00:33:30,130
 Okay, there we go.
+好了，这下对了。
 
 794
 00:33:30,131 --> 00:33:32,415
 All right, so we've got some nice auto layout there, and so
+现在也有了很棒的自动布局，
 
 795
 00:33:32,417 --> 00:33:35,718
 now all we need to do is to segue when these are pressed.
+现在我们需要做的就是设置segue，通过点击响应。
 
 796
 00:33:35,720 --> 00:33:38,821
 We're gonna segue to our Image View Controller down here.
+segue到下边的图片视图控制器。
 
 797
 00:33:38,823 --> 00:33:42,157
 So let's set that up and just Ctrl+drag.
+Ctrl ＋ 拖拽连起来。
 
 798
 00:33:42,159 --> 00:33:45,126
 nope, Ctrl+drag, all right.
+不对，Ctrl ＋ 拖拽，对了。
 
 799
 00:33:45,128 --> 00:33:46,527
 So I'm gonna show detail because in
+选择show detail因为
 
 800
 00:33:46,529 --> 00:33:49,397
 the split view I want it to show up on the detail side and
+在split view我希望它显示在细节视图上，在iphone上
 
 801
 00:33:49,399 --> 00:33:51,532
 on iPhone it's gonna push,.
+就是push。
 
 802
 00:33:51,534 --> 00:33:54,668
 So there's that one, let's go ahead and set its segue.
+我们继续，设置它
 
 803
 00:33:54,670 --> 00:33:58,871
 So this one I'll just call it Earth, 'kay, this one,
+就叫它 Earth 吧
 
 804
 00:33:58,873 --> 00:34:04,677
 down here, show detail we'll call this one Cassini, and
+再弄一个show detail，我叫它 Cassini
 
 805
 00:34:07,314 --> 00:34:12,283
-with this one, show detail, we'll call that one Saturn.
+with this one, show detail, we'll call that one Saturn.、
+最后一个，叫Saturn
 
 806
 00:34:15,455 --> 00:34:18,622
 Okay, so there we go, we've got a nice story board here,
+ok了，我们现在有了个漂亮的 storyboard。
 
 807
 00:34:18,624 --> 00:34:21,525
 we've got these segues all set up in here all
+我们设置好了全部的segue，现在要做的是
 
 808
 00:34:21,527 --> 00:34:23,927
 we need to do is prepare for these segues.
+准备他们。
 
 809
 00:34:23,929 --> 00:34:25,628
 This View Controller right here, okay,
+打开view controller。
 
 810
 00:34:25,630 --> 00:34:28,965
 I'm going to select on this and go here to see its code.
+我点这就能看见它的代码。
 
 811
 00:34:28,967 --> 00:34:31,767
 So here's the code for that View Controller.
+这就是view controller的代码。
 
 812
 00:34:31,769 --> 00:34:34,236
 It's just this blank one that got created when we
+这就是我们建立app的时候那个空白
 
 813
 00:34:34,238 --> 00:34:35,003
 created our app.
+的文件。
 
 814
 00:34:36,139 --> 00:34:38,206
 Okay, and all I need in this ViewController is
+我要在这实现 prepareForSegue 。
 
 815
 00:34:38,208 --> 00:34:41,075
 prepareForSegue, nothing more, so I'm gonna prepareForSegue.
+仅此而已，实现 prepareForSegue 。
 
 816
 00:34:41,077 --> 00:34:44,244
 Actually I'm going to make
+我得把它弄的宽
 
 817
 00:34:44,246 --> 00:34:46,713
 this quite a bit wider here with these huge fonts.
+一点，字体太大了。
 
 818
 00:34:47,683 --> 00:34:50,817
 And in here I'm going to see if it's a segue to
+现在我要检查它是不是要segue到我的
 
 819
 00:34:50,819 --> 00:34:53,336
 an image ViewController.
+图片视图控制器。
 
 820
 00:34:53,337 --> 00:34:55,854
 So I'm gonna say if I can let image view controller equal my
+这里写if let ivc = 
 
 821
 00:34:55,857 --> 00:34:58,691
 segue's destinationViewController as
+segue.destinationViewController as 
 
 822
 00:34:58,693 --> 00:35:00,592
 an ImageViewController.
+ImageViewController
 
 823
 00:35:00,594 --> 00:35:01,760
-Okay, so we know we're segueying into
+Okay, so we know we're segueing into
+现在我们可以确定是segue到
 
 824
 00:35:01,762 --> 00:35:03,812
 an image view controller.
+图片视图控制器。
 
 825
 00:35:03,813 --> 00:35:05,863
 Then if I can let the identifier equal
+然后if let identifier 等于
 
 826
 00:35:05,865 --> 00:35:10,100
 the segue's identifier, so the identifier's not null,
+segue.identifier，这样确保identifier不为空，
 
 827
 00:35:10,102 --> 00:35:11,868
 then I'm gonna switch on the identifier.
+然后对 identifier 作 switch.
 
 828
 00:35:11,870 --> 00:35:13,937
 This code should all look very familiar to you,
+你们应该很熟悉这个了。
 
 829
 00:35:13,939 --> 00:35:17,473
 and then in case of Earth, 'kay,
+然后，如果是 Earth。
 
 830
 00:35:17,475 --> 00:35:20,976
 we are going to have to set the image URL, 'kay?
+我们就要设置图片的URL。
 
 831
 00:35:20,978 --> 00:35:23,512
 So ivc is an image view controller,
+ivc就是我们的图片视图控制器。
 
 832
 00:35:23,514 --> 00:35:26,648
 its public settable model is the imageURL.
+它的公有的可设置的model就是 imageURL。
 
 833
 00:35:26,650 --> 00:35:30,952
 So I'm gonna set that to DemoURL.NASA.Earth.
+我把它设置成 DemoURL.NASA.Earth 。
 
 834
 00:35:30,954 --> 00:35:33,921
 'Kay, I have a nice one ready to go there.
+这个做好了。
 
 835
 00:35:33,923 --> 00:35:38,191
 I'm also gonna set the title of that to Earth,
+我还要把它的标题设置成 Earth ，
 
 836
 00:35:38,193 --> 00:35:42,028
 'kay, and then same thing here for Saturn.
+下边是Saturn，一样的。
 
 837
 00:35:43,264 --> 00:35:45,698
 It's image view controllers,
+这个是图片视图控制器。
 
 838
 00:35:45,700 --> 00:35:49,301
 imageURL equals the DemoURL.NASA.Saturn.
+imageURL 等于 DemoURL.NASA.Saturn 。
 
 839
 00:35:49,303 --> 00:35:54,939
 ivc.title equals Saturn, and same thing for Cassini.
+ivc.title 是 Saturn，下面是Cassini 。 
 
 840
 00:36:07,353 --> 00:36:07,951
@@ -3656,242 +3882,302 @@ Let's see.
 841
 00:36:14,393 --> 00:36:17,927
 'Kay, and otherwise we will just break, and
+最后如果都不是，就break。什么也
 
 842
 00:36:17,929 --> 00:36:19,528
 do nothing, okay?
+不做。
 
 843
 00:36:20,764 --> 00:36:22,297
 Everybody understand this code?
+这些代码大家都能看懂吧？
 
 844
 00:36:22,299 --> 00:36:24,399
 Hopefully it's completely familiar to you.
+希望你们已经非常熟悉了。
 
 845
 00:36:24,401 --> 00:36:26,267
 Nothing special there at all.
+没什么特别的。
 
 846
 00:36:26,269 --> 00:36:29,470
 Okay, so I think that should work.
+我觉得应该没问题了。
 
 847
 00:36:29,472 --> 00:36:30,470
 Let's try it.
+试试看。
 
 848
 00:36:30,472 --> 00:36:34,607
 Hopefully it didn't clean anything.
+希望没弄坏什么东西。
 
 849
 00:36:34,609 --> 00:36:36,842
 All right, so we go back, we've got these things.
+我们点返回，看到这些摁钮。
 
 850
 00:36:36,844 --> 00:36:37,876
 Let's go ahead, oh,
+继续，
 
 851
 00:36:37,878 --> 00:36:39,745
 my auto layout doesn't look very good there.
+啊，自动布局貌似不怎么好。
 
 852
 00:36:39,747 --> 00:36:43,148
 Probably messed that up, but anyway, close enough.
+可能是弄乱了，不过也差不多了。
 
 853
 00:36:43,150 --> 00:36:45,917
 Let's go Earth, oh, it didn't work, okay?
+点 Earth， 啊，不行。
 
 854
 00:36:45,919 --> 00:36:48,986
 That's because we have back here,
+这是因为，我们回到这，
 
 855
 00:36:48,988 --> 00:36:54,591
-here in our engine controller, we have this test code here.
+here in our image controller, we have this test code here.
+因为在我们的图片视图控制器，有一些测试代码。
 
 856
 00:36:54,593 --> 00:36:56,726
 Let's get rid of that, right there.
+把测试代码删掉。
 
 857
 00:36:56,728 --> 00:36:58,628
 Try again.
+再试一下。
 
 858
 00:36:58,630 --> 00:37:00,796
 Right back now, let's look at Earth, and
+试试 Earth
 
 859
 00:37:00,798 --> 00:37:03,766
 look how slow this this, you see what I'm talking about?
+非常慢，看到没？
 
 860
 00:37:03,768 --> 00:37:04,933
 Like, hello,
+hi
 
 861
 00:37:04,935 --> 00:37:08,770
 can't do anything, can't click on any buttons.
+啥也干不了，也点不了别的摁钮。
 
 862
 00:37:08,772 --> 00:37:11,706
 Finally, we get this and this does not look like
+最后我们看到了图片，貌似不是地球，
 
 863
 00:37:11,708 --> 00:37:14,775
 the Earth to me, looks like a bunch of dim photos.
+像是一些很暗的照片。
 
 864
 00:37:14,777 --> 00:37:17,711
 I don't know what that is how about Cassini?
+不知道这是些什么，那Cassini呢？
 
 865
 00:37:17,713 --> 00:37:21,882
 oh, we got the outer space part of Cassini right, but
+啊，我们看到了外太空的部分，
 
 866
 00:37:21,884 --> 00:37:26,419
 that's all we can see because we need the scroll view now.
+但是也只有这些了，我们需要滚动视图。
 
 867
 00:37:26,421 --> 00:37:27,787
 We absolutely have to have the scroll view.
+必须要用滚动视图了，
 
 868
 00:37:27,789 --> 00:37:30,155
 These are big images so we can not see anything without it.
+如果没有，这些很大的图片，我们什么也看不见。
 
 869
 00:37:30,157 --> 00:37:32,891
 So let's go back and put our scroll view in here.
+咱们回来，加上滚动视图。
 
 870
 00:37:34,994 --> 00:37:37,028
 All right, so how are we gonna put the scroll view in here?
+怎么加入滚动视图呢？
 
 871
 00:37:37,030 --> 00:37:39,830
 Well, I'm actually gonna put the scroll view in
+我要用 storyboard 来加入
 
 872
 00:37:39,832 --> 00:37:41,698
 using the storyboard.
+滚动视图。
 
 873
 00:37:41,700 --> 00:37:43,400
 So, I'm gonna drag a scroll view in.
+拖一个滚动视图进来。
 
 874
 00:37:43,402 --> 00:37:44,701
 That's kinda a simple way to do it.
+应该是比较简单的方法了。
 
 875
 00:37:44,703 --> 00:37:47,069
 So, let's bounce out here so
+缩小一点，
 
 876
 00:37:47,071 --> 00:37:49,238
 now we're back to our Image View Controller.
+来到图片视图控制器。
 
 877
 00:37:50,307 --> 00:37:52,207
 All right, this is our Image View Controller, and
+在这，我要拖
 
 878
 00:37:52,209 --> 00:37:54,042
 I'm just going to drag out a scroll view.
+一个滚动视图进来。
 
 879
 00:37:54,044 --> 00:37:55,176
 I'm gonna search for
+在这里搜索，
 
 880
 00:37:55,178 --> 00:37:58,845
 it, scroll, there it is, drag it out here.
+scroll，啊，在这，拖进来。
 
 881
 00:37:59,881 --> 00:38:03,182
 I'm gonna place it so that it's right on the edges with
+这样放，沿着蓝线，这样
 
 882
 00:38:03,184 --> 00:38:04,917
 the blue lines right there.
+就跟边缘对齐了。
 
 883
 00:38:04,919 --> 00:38:08,487
 I'm definitely gonna do Reset to Suggested Constraints.
+肯定也是需要重置建议的约束。
 
 884
 00:38:08,489 --> 00:38:11,256
 I'm gonna make sure that works, which it did,
+检查一下是不是成功，行了。
 
 885
 00:38:11,258 --> 00:38:13,224
 'kay, no magic numbers.
+没有魔法数字。
 
 886
 00:38:13,226 --> 00:38:16,194
 Everything looks nice right there, and now I
+看上去没问题了，
 
 887
 00:38:16,196 --> 00:38:20,964
 just need to put my image view inside this scroll view right.
+现在我需要把我的图片视图放到滚动视图里。
 
 888
 00:38:20,966 --> 00:38:24,101
 So I got this scroll view here all I wanna do is put
+我要做的就是这个，把图片视图放到滚动视图
 
 889
 00:38:24,103 --> 00:38:25,468
 the image view inside of it.
+的里边。
 
 890
 00:38:25,470 --> 00:38:28,004
 So how am I gonna put that imageView inside of it.
+我要怎么做呢？
 
 891
 00:38:28,006 --> 00:38:30,773
 That's very, very, very simple I'm just going to
+非常非常简单。我只需要给滚动视图一个
 
 892
 00:38:30,775 --> 00:38:32,941
 create an outlet to this thing.
+outlet。
 
 893
 00:38:32,943 --> 00:38:34,509
 Let's put the outlet right here.
+把outlet放在这。
 
 894
 00:38:34,511 --> 00:38:39,347
 Okay, I'm going to call the outlet scroll view, and
+起名叫scrollView，
 
 895
 00:38:39,349 --> 00:38:42,183
 as soon as that outlet is set
+设置好了。
 
 896
 00:38:42,185 --> 00:38:47,121
 in it's did Set I'm going to simply say to.
+在didSet里我们要做，
 
 897
 00:38:50,693 --> 00:38:52,392
 The scroll, well actually, we, you know,
+实际上我们已经加上了
 
 898
 00:38:52,394 --> 00:38:53,559
 we already added the scroll view.
+滚动视图。
 
 899
 00:38:53,561 --> 00:38:54,994
 Let me make this a little easier on you.
+我们做的简单一点。
 
 900
 00:38:54,996 --> 00:38:58,263
 See right down here where we add the image view to
+看到这里图片视图已经加到
 
 901
 00:38:58,265 --> 00:39:01,049

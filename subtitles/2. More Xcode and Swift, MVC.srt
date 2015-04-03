@@ -50,7 +50,7 @@ demo that we started, in last lecture and then we're gonna
 11
 00:00:29,926 --> 00:00:32,526
 have some slides about this model view controller,
-一些关于 model view controller，
+一些关于模型-视图-控制器，
 
 12
 00:00:32,528 --> 00:00:35,462
@@ -4983,7 +4983,7 @@ I'm going to right click on it also because I don't want it
 1000
 00:45:02,773 --> 00:45:04,939
 sending appendage or anything else, So
-和 controller 里的任何 Action 或者属性关联
+和控制器里的任何动作或者属性关联
 
 1001
 00:45:04,941 --> 00:45:06,841
@@ -6444,7 +6444,7 @@ it shouldn't be in our controller.
 1294
 00:58:38,639 --> 00:58:43,841
 And then the second camp is the controller, the controller
-第二个阵营叫做 controller ，controller
+第二个阵营叫做控制器，控制器
 
 1295
 00:58:43,843 --> 00:58:48,178
@@ -6454,7 +6454,7 @@ controls how the model is presented on screen.
 1296
 00:58:48,180 --> 00:58:51,348
 And the view is the minions, the classes that
-视图是 controller 要
+视图是控制器要
 
 1297
 00:58:51,350 --> 00:58:52,916
@@ -6479,12 +6479,12 @@ But, you know, these things we're gong to do to build our
 1301
 00:59:00,291 --> 00:59:02,524
 UI, we're going to use in the view.
-要做的事，我们在 view 中要用到它
+要做的事，我们在视图中要用到它
 
 1302
 00:59:02,526 --> 00:59:06,127
 So the stuff that's in the view is pretty generic, okay,
-在 view 中的内容是相当通用的
+在视图中的内容是相当通用的
 
 1303
 00:59:06,129 --> 00:59:07,795
@@ -6574,7 +6574,8 @@ the Model.
 1320
 00:59:47,296 --> 00:59:50,097
 Going from that side of the road over to the Model side is
-从控制器这侧到模型 (Model) 这侧是
+从控制器这侧到模型这侧是
+
 1321
 00:59:50,099 --> 00:59:51,565
 a dashed white line, in other words,
@@ -6598,7 +6599,7 @@ you can go right across, okay?
 1325
 00:59:56,604 --> 00:59:58,938
 The controller has to know everything about the model,
-控制器必须了解 Model 的一切行为，
+控制器必须了解模型的一切行为，
 
 1326
 00:59:58,940 --> 01:00:01,740
@@ -6608,12 +6609,12 @@ and it has to have complete ability to talk to
 1327
 01:00:01,742 --> 01:00:04,776
 the model, use its public API as much as it wants
-模型（Model）通信，根据控制器需要，使用模型的开放 API
+模型通信，根据控制器需要，使用模型的开放 API
 
 1328
 01:00:04,778 --> 01:00:08,313
 because the controller's job is to present the model to
-因为控制器的职责就是展示模型（Model）给
+因为控制器的职责就是展示模型给
 
 1329
 01:00:08,315 --> 01:00:10,848
@@ -6728,7 +6729,7 @@ What about this communication?
 1351
 01:00:56,356 --> 01:00:57,554
 Model to view?
-可以从 Model 到视图吗？
+可以从模型到视图吗？
 
 1352
 01:00:57,556 --> 01:00:58,422
@@ -6778,7 +6779,7 @@ Similarly, since the view objects are kind of generic,
 1361
 01:01:16,239 --> 01:01:18,272
 they can't be talking to any specific model.
-他们就不能和任何特定的 Model 对象通讯
+他们就不能和任何特定的模型对象通讯
 
 1362
 01:01:18,274 --> 01:01:20,674
@@ -7249,12 +7250,12 @@ B that information, those 10,000 songs belongs where?
 1455
 01:05:01,066 --> 01:05:02,131
 In the model.
-在 Model 层
+在模型层
 
 1456
 01:05:02,133 --> 01:05:04,900
 Okay, because your song database is a model.
-OKay，因为你的音乐数据库是一个 Model
+OKay，因为你的音乐数据库是一个模型
 
 1457
 01:05:04,902 --> 01:05:06,468
@@ -7269,7 +7270,7 @@ It's just a list of songs and artists and albums and
 1459
 01:05:08,038 --> 01:05:09,604
 all that, it's in the model.
-它在 Model 层
+它在模型层
 
 1460
 01:05:09,606 --> 01:05:12,073
@@ -7309,7 +7310,7 @@ how does that communication happen?
 1467
 01:05:28,089 --> 01:05:30,923
 And the answer is, we have another special kind of
-答案是我们 有另一种特殊的
+答案是我们有另一种特殊的
 
 1468
 01:05:30,925 --> 01:05:33,992
@@ -7334,7 +7335,7 @@ like how many songs are there?
 1472
 01:05:41,100 --> 01:05:42,900
 And the controller looks in the model,
-控制器查找 Model
+控制器查找模型
 
 1473
 01:05:42,902 --> 01:05:45,435
@@ -7399,7 +7400,7 @@ Now it's saying 250, 10 more items.
 1485
 01:06:07,357 --> 01:06:10,257
 And so the control is going back to the model and
-控制器再次与 Model 通信，并
+控制器再次与模型通信，并
 
 1486
 01:06:10,259 --> 01:06:11,725
@@ -7409,17 +7410,17 @@ saying give me more, give me more data.
 1487
 01:06:11,727 --> 01:06:14,361
 And it's providing it to the view in this blind way.
-控制器用这种 blind 方式提供数据给视图
+控制器用这种盲目的方式提供数据给视图
 
 1488
 01:06:14,363 --> 01:06:17,230
 So to see how the view is getting data from the model
-来看一下视图如何从 Model 得到数据,
+来看一下视图如何从模型得到数据,
 
 1489
 01:06:17,232 --> 01:06:20,232
 through the controller in this kind of blind structured way.
-是通过控制器用这种 blind structured 方式实现的
+是通过控制器的这种盲目结构化方式实现的
 
 1490
 01:06:20,234 --> 01:06:21,767
@@ -7504,7 +7505,7 @@ We are going to set those properties.
 1506
 01:06:56,032 --> 01:06:58,766
 And so the view then would have that data set in it but
-所以 view 里会有设置好的数据，但是
+所以视图里会有设置好的数据，但是
 
 1507
 01:06:58,768 --> 01:07:00,267
@@ -7514,7 +7515,7 @@ it wouldn't be owning it.
 1508
 01:07:00,269 --> 01:07:02,536
 Right? The model would still be
-model 仍然会是花色和点数的
+模型仍然会是花色和点数的
 
 1509
 01:07:02,538 --> 01:07:04,571
@@ -7524,22 +7525,22 @@ owning the suit and
 1510
 01:07:04,572 --> 01:07:06,605
 rank, the view is just getting that data to present it.
-view 仅仅是为了显示而获取那些数据
+视图仅仅是为了显示而获取那些数据
 
 1511
 01:07:06,608 --> 01:07:07,840
-'Kay. So simple data,
+OKay. So simple data,
 所以对于简单的数据，
 
 1512
 01:07:07,842 --> 01:07:10,743
 we might transfer to the view but it's merely for
-我们会把它传递到 view 里，但是
+我们会把它传递到视图里，但是
 
 1513
 01:07:10,745 --> 01:07:12,878
 it to display it.
-只是给 view 来显示
+只是给视图来显示
 
 1514
 01:07:12,880 --> 01:07:14,312
@@ -7548,22 +7549,22 @@ Okay.
 1515
 01:07:14,314 --> 01:07:17,615
 This all adds up to the controller's job being to
-所以 controller 的工作就是
+所以控制器的工作就是
 
 1516
 01:07:17,617 --> 01:07:22,520
 interpret and format the model's data for the view.
-给 view 解释并格式化这些 model 提供的数据
+给视图解释并格式化这些模型提供的数据
 
 1517
 01:07:22,522 --> 01:07:23,654
 That's the controller's job.
-这就是 controller 的工作
+这就是控制器的工作
 
 1518
 01:07:23,656 --> 01:07:25,188
 And when we do our demo,
-在我们做 deomo 的时候，
+在我们做示例的时候，
 
 1519
 01:07:25,190 --> 01:07:28,758
@@ -7573,17 +7574,17 @@ I'm going to be marking like, oh see I'm writing this code.
 1520
 01:07:28,760 --> 01:07:31,494
 This is to make the controller perform its job,
-这段代码是为了让 controller 执行它的工作，
+这段代码是为了让控制器执行它的工作，
 
 1521
 01:07:31,496 --> 01:07:34,430
 which is to take the model data and
-也就是从 model 中取出数据然后
+也就是从模型中取出数据然后
 
 1522
 01:07:34,432 --> 01:07:36,265
 using its view minion to put it on screen.
-送到 view 中去，然后显示到屏幕上
+送到视图中去，然后显示到屏幕上
 
 1523
 01:07:36,267 --> 01:07:37,132
@@ -7593,7 +7594,7 @@ Okay? That's what
 1524
 01:07:37,134 --> 01:07:38,667
 the controller does.
-controller 做的事情
+控制器做的事情
 
 1525
 01:07:38,669 --> 01:07:40,468
@@ -7603,12 +7604,12 @@ What about this communication?
 1526
 01:07:40,470 --> 01:07:42,970
 Can the model talk to the controller?
-model 可以和 controller 通信吗？
+模型可以和控制器通信吗？
 
 1527
 01:07:42,972 --> 01:07:46,040
 Again, obviously that's verboten because model knows
-同样的，显然是不可以 因为 model 对于 UI
+同样的，显然是不可以 因为模型对于 UI
 
 1528
 01:07:46,042 --> 01:07:47,708
@@ -7618,17 +7619,17 @@ nothing about UI, so
 1529
 01:07:47,710 --> 01:07:50,710
 it couldn't possibly talk to a UI object like the controller.
-它不可能同像 controller 一样的 UI 对象进行通信
+它不可能同像控制器一样的 UI 对象进行通信
 
 1530
 01:07:50,712 --> 01:07:53,046
 But sometimes things change in the model, and
-但是有些时候，model 中的数据变了，
+但是有些时候，模型中的数据变了，
 
 1531
 01:07:53,048 --> 01:07:54,580
 the controller needs to know about it, okay?
-controller 需要知道这个变化
+控制器需要知道这个变化
 
 1532
 01:07:54,582 --> 01:07:56,782
@@ -7638,7 +7639,7 @@ Data changes, a database changes or
 1533
 01:07:56,784 --> 01:07:59,017
 the model is some network database, and
-model 是网络数据库，
+模型是网络数据库，
 
 1534
 01:07:59,019 --> 01:08:01,186
@@ -7648,7 +7649,7 @@ somebody changes something on the network and it changes.
 1535
 01:08:01,188 --> 01:08:02,587
 And the controller needs to find out.
-controller 需要了解这些
+控制器需要了解这些
 
 1536
 01:08:02,589 --> 01:08:04,555
@@ -7696,7 +7697,7 @@ Notification 和 KVO
 1545
 01:08:28,478 --> 01:08:31,211
 And so, the model can just say, oh, anytime
-所以，model 可以这样，
+所以，模型可以这样，
 
 1546
 01:08:31,213 --> 01:08:33,547
@@ -7706,7 +7707,7 @@ something changes in my model I'm just gonna broadcast on
 1547
 01:08:33,549 --> 01:08:37,484
 my radio station, and then the controller simply tunes into
-广播一下，随后，controller
+广播一下，随后，控制器
 
 1548
 01:08:37,486 --> 01:08:40,453
@@ -7721,7 +7722,7 @@ And when he finds out something changes,
 1550
 01:08:42,256 --> 01:08:46,058
 it's gonna communicate via its green arrow to the model and
-它就会通过它的绿剪头同 model 进行通信，
+它就会通过它的绿剪头同模型进行通信，
 
 1551
 01:08:46,060 --> 01:08:47,659
@@ -7755,12 +7756,12 @@ example, if the data in a database changes.
 1557
 01:08:57,336 --> 01:09:00,070
 We'll get a notification, the UI can then, you know,
-我们将会获取一个 notification，UI 的 controller
+我们将会获取一个 notification，UI 的控制器
 
 1558
 01:09:00,072 --> 01:09:03,272
 controller can then go talk to the model to get the info.
-随后可以同 model 通信来获取信息
+随后可以同模型通信来获取信息
 
 1559
 01:09:05,309 --> 01:09:06,286
@@ -7774,7 +7775,7 @@ Some people have asked,
 1561
 01:09:07,265 --> 01:09:08,242
 can a view tune into the radio station?
-view 可以接收广播吗？
+视图可以接收广播吗？
 
 1562
 01:09:08,245 --> 01:09:09,878
@@ -7871,7 +7872,7 @@ MVC 当做仆从使用
 
 1581
 01:09:56,053 --> 01:09:57,803
-'Kay?
+OKay?
 
 1582
 01:09:57,804 --> 01:09:59,554
@@ -7946,7 +7947,7 @@ where you're going and when it is et cetera, okay?
 1596
 01:10:32,184 --> 01:10:36,452
 Well, each of those views, year view, month view, the day
-这些 view 中的每一个，年视图，月视图，日视图，
+这些视图中的每一个，年视图，月视图，日视图，
 
 1597
 01:10:36,454 --> 01:10:40,155
@@ -7960,7 +7961,7 @@ Okay?
 1599
 01:10:41,858 --> 01:10:43,558
 But you can see how the last three, okay,
-但是你可以发现，最后三个 view,
+但是你可以发现，最后三个视图,
 
 1600
 01:10:43,560 --> 01:10:47,628
@@ -7990,7 +7991,7 @@ So it's part of its view,okay?
 1605
 01:11:00,408 --> 01:11:03,476
 So, you see this also in iOS with tab bar
-所以你也在带有 tab bar 的 iOS 应用
+所以你也在带有标签栏的 iOS 应用
 
 1606
 01:11:03,478 --> 01:11:05,228
@@ -8000,7 +8001,7 @@ controllers, right?
 1607
 01:11:05,229 --> 01:11:06,979
 You have the tab bar at the bottom, I have four or
-在底部有一个 tab bar，有四个或五个
+在底部有一个标签栏，有四个或五个
 
 1608
 01:11:06,981 --> 01:11:09,615
@@ -8020,12 +8021,12 @@ four minions, which are the four MVCs that are each going
 1611
 01:11:15,122 --> 01:11:17,488
 to appear in a tab bar, okay?
-tab bar 的 MVC，
+标签栏的 MVC，
 
 1612
 01:11:17,490 --> 01:11:18,673
 We'll be doing that for
-我们将会做一个这方面的 demo，
+我们将会做一个这方面的示例，
 
 1613
 01:11:18,674 --> 01:11:19,857
@@ -8035,7 +8036,7 @@ example, in assignment number two or
 1614
 01:11:19,859 --> 01:11:21,792
 three where we'll be making a tab bar and
-制作一个 tab bar，
+制作一个标签栏，
 
 1615
 01:11:21,794 --> 01:11:25,328
@@ -8064,7 +8065,7 @@ Where you got this MVC, and
 1620
 01:11:32,969 --> 01:11:34,502
 you see the purple one that's like underneath the word
-找到'together' 下面的那个
+找到 'together' 下面的那个
 
 1621
 01:11:34,505 --> 01:11:37,239
@@ -8074,7 +8075,7 @@ together there, and
 1622
 01:11:37,240 --> 01:11:39,974
 it points to three other MVCs outside of its view thing.
-它从 view 指向了另外三个 MVC，
+它从视图指向了另外三个 MVC，
 
 1623
 01:11:39,977 --> 01:11:40,542
@@ -8083,7 +8084,7 @@ Okay?
 1624
 01:11:41,478 --> 01:11:42,710
 That's how we're going to build it, so
-这就是我们创建 tab bar 的方式，
+这就是我们创建标签栏的方式，
 
 1625
 01:11:42,712 --> 01:11:43,944
@@ -8113,12 +8114,12 @@ Doesn't even know,
 1630
 01:11:52,419 --> 01:11:54,586
 it's a generic reusable view like thing at this point.
-普通的可重用的 view 之类的东西，
+普通的可重用的视图之类的东西，
 
 1631
 01:11:54,589 --> 01:11:56,689
 Doesn't even know that it's in a tab bar.
-它甚至不知道它在 tab bar 中
+它甚至不知道它在标签栏中
 
 1632
 01:11:56,691 --> 01:11:58,090
@@ -8148,12 +8149,12 @@ other, there's no other arrows, except for
 1637
 01:12:06,399 --> 01:12:08,249
 some of the models.
-一些 model
+一些模型
 
 1638
 01:12:08,250 --> 01:12:10,100
 You see some of the models are communicating with each other.
-某些 model 之间在互相通信
+某些模型之间在互相通信
 
 1639
 01:12:10,102 --> 01:12:11,852
@@ -8163,12 +8164,12 @@ You know a big
 1640
 01:12:11,853 --> 01:12:13,603
 application might have a single shared model.
-一个大型的应用也许会有一个单独的共享 model
+一个大型的应用也许会有一个单独的共享模型
 
 1641
 01:12:13,605 --> 01:12:17,606
 Or the models might be split off into pieces to be used by
-或者，model 会被分开来
+或者，模型会被分开来
 
 1642
 01:12:18,876 --> 01:12:20,208

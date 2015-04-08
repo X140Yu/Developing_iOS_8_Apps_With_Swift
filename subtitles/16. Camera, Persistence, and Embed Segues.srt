@@ -1,114 +1,142 @@
 ﻿1
 00:00:00,001 --> 00:00:04,669
 [MUSIC]
+音乐
 
 2
 00:00:04,671 --> 00:00:07,638
->> Stanford university.
+Stanford University.
+斯坦福大学
 
 3
 00:00:07,640 --> 00:00:13,210
->> Okay well, welcome to lecture 16 of Stanford CS193p,
+Okay well, welcome to lecture 16 of Stanford CS193p,
+好的，欢迎来到斯坦福 CS193p 2015 冬季课程，
 
 4
 00:00:13,212 --> 00:00:15,178
 winter of 2015.
+第16课。
 
 5
 00:00:15,180 --> 00:00:16,680
 So today,
+今天，
 
 6
 00:00:16,681 --> 00:00:18,181
 we're going to be talking about three major topics.
+我们将要讲到三个主要的主题。
 
 7
 00:00:18,183 --> 00:00:21,451
 One is the camera, how to basically take a picture with
+第一个是 Camera，怎么样基本的使用相机拍照
 
 8
 00:00:21,453 --> 00:00:23,853
 the camera or get video from the camera.
+或者使用相机拍摄视频
 
 9
 00:00:23,855 --> 00:00:27,823
 Then persistence which is an important topic about how to
+接下来是 Persistence，一个重要的话题关于
 
 10
 00:00:27,825 --> 00:00:30,625
-store stuff in the flash memory of your.
+store stuff in the flash memory of your phone,
+如何往你手机的内存中存储东西，
 
 11
 00:00:30,627 --> 00:00:33,194
-Phone, and a lot of you have already kind of dived into
+and a lot of you have already kind of dived into
+很多同学已经钻研了这个
 
 12
 00:00:33,196 --> 00:00:35,796
 this as part of your final project, but I'm just gonna
+在他们的 Final Project 中，但是我仅仅只是
 
 13
 00:00:35,798 --> 00:00:38,565
 kind of give you a tour of the various ways that can be done.
+给你们介绍一下各种完成这个话题的方法。
 
 14
 00:00:38,567 --> 00:00:41,968
-And then the last one is kind of an interesting segway.
+And then the last one is kind of an interesting segue.
+最后一个话题是关于一个有趣的 Segue。
 
 15
 00:00:41,970 --> 00:00:45,338
 I leave it for last because it's kind of requires you to
+我把这个放在最后，因为这需要你们
 
 16
 00:00:45,340 --> 00:00:48,408
 be a little bit of a visual thinker, to see what's
+有一点，是一个视觉思考者（Visual Thinker），来思考
 
 17
 00:00:48,410 --> 00:00:51,977
 happening when we do it, but it's called an embed segue,
+我们在使用这个 Segue 时发生了什么，这个被叫做 Embed Segue，
 
 18
 00:00:51,979 --> 00:00:54,546
 which is where we basically take one MVC.
+这个基本上就是我们拿一个 MVC，
 
 19
 00:00:54,548 --> 00:00:59,284
 And we embed its view into another MVC's view hierarchy
+然后我们把它的 View 嵌入到另一个 MVC 的 View 中去
 
 20
 00:00:59,286 --> 00:01:01,085
 which is kind of fun.
+挺有趣的。
 
 21
 00:01:01,087 --> 00:01:04,255
 So let's dive in right in to the camera.
+好，让我们直接开始进入 Camera
 
 22
 00:01:04,257 --> 00:01:06,390
 The camera is accessed via this file or
+Camera 可通过这个文件或者说
 
 23
 00:01:06,392 --> 00:01:09,092
-this class called UI ImagePickerController.
+this class called UIImagePickerController.
+这个被叫做 UIImagePickerController 的类来访问。
 
 24
 00:01:09,094 --> 00:01:12,696
-It is a UI view controller, sub-class actually of UI
+It is a UIViewController, sub-class actually of
+它是一个 UIViewController，我认为
 
 25
 00:01:12,698 --> 00:01:15,231
-navigation controller, I believe.
+UINavigationController, I believe.
+它实际上是 UINavigationController 的子类。
 
 26
 00:01:15,233 --> 00:01:18,134
 And it's very simple to use.
+并且使用起来很简单
 
 27
 00:01:18,136 --> 00:01:19,868
 You really just configure it and
+你只要配置好它然后
 
 28
 00:01:19,870 --> 00:01:21,370
 then you put it up modally.
+把它设置成 Modally。
 
 29
 00:01:21,372 --> 00:01:22,654
@@ -117,274 +145,343 @@ Okay?
 30
 00:01:22,655 --> 00:01:23,937
 So there's really nothing more to it than that.
+真的没有其他要做的了。
 
 31
 00:01:23,940 --> 00:01:26,574
 We learned about how to put things up modally last time
+我们学习了怎样把东西设置成 Modally，在上次
 
 32
 00:01:26,576 --> 00:01:28,175
 with presentViewController.
+和 presentViewController 一起。
 
 33
 00:01:28,177 --> 00:01:29,977
 That's all you're gonna have to do.
+这就是我们要做的所有的事了。
 
 34
 00:01:29,979 --> 00:01:32,779
-So, the process of using the UI image picker controller
+So, the process of using the UIImagePickerController
+所以，使用 UIImagePickerController
 
 35
 00:01:32,781 --> 00:01:34,514
 to get something from the camera,
+来从相机获得某些东西的过程，
 
 36
 00:01:34,516 --> 00:01:36,849
 is, you create it, and you set its delegate.
+就是，你创建一个UIImagePickerController，然后设置它的委托。
 
 37
 00:01:36,851 --> 00:01:39,285
-It won't do anything without its delegate, so
+It won't do anything without its delegate,
+如果没有委托它不能做任何事，
 
 38
 00:01:39,287 --> 00:01:40,819
-you have to set its delegate.
+so you have to set its delegate.
+所以你需要设置它的委托。
 
 39
 00:01:40,821 --> 00:01:42,354
 Then you're gonna configure it, for you know?
+然后你要配置它，比如说
 
 40
 00:01:42,356 --> 00:01:44,356
 Do you want just still images or video, or
+你只是想要图像或者视频
 
 41
 00:01:44,358 --> 00:01:46,358
 that kind of stuff?
+这些东西？
 
 42
 00:01:46,359 --> 00:01:48,359
 Do you want users to be able to edit the pictures they've
+你想要用户能够编辑他们
 
 43
 00:01:48,361 --> 00:01:49,727
-taken before?
+taken before
+以前照的照片
 
 44
 00:01:49,728 --> 00:01:51,094
 They import them into your app, etc.
+他们导入以前的照片到你的 App，等等
 
 45
 00:01:51,097 --> 00:01:53,764
 Then you just present it with presentViewController.
+然你你通过 presentViewController 展示出来，
 
 46
 00:01:53,766 --> 00:01:57,034
 And then you're gonna respond to delegate methods that tell
+接下来你将要对委托作出反映，委托告诉你
 
 47
 00:01:57,036 --> 00:01:59,936
 you, okay, I took a photo, here's the image data,
+我拍了一张照，这是图像的数据，
 
 48
 00:01:59,938 --> 00:02:02,972
 or the video, the URL of the video, that the user took.
+或者是用户拍摄的视频，或者是视频的 URL
 
 49
 00:02:02,974 --> 00:02:06,342
 So that's pretty much it.
+就是这么些。
 
 50
 00:02:06,344 --> 00:02:09,028
 Each device.
+每个设备，
 
 51
 00:02:09,029 --> 00:02:11,713
 Kinda has different hardware, although that's becoming less
+各种不同的硬件，虽然这个话随着时间的流逝
 
 52
 00:02:11,715 --> 00:02:13,815
 and less true as the years go by.
+越来越不对了。
 
 53
 00:02:13,817 --> 00:02:16,617
 It used to be that there were some iOS devices that didn't
+那就是有一些 iOS 设备
 
 54
 00:02:16,619 --> 00:02:17,918
 even have a camera at all.
+根本就没有相机。
 
 55
 00:02:17,920 --> 00:02:21,822
-But certainly there were early on iOS devices that could.
+But certainly there were early on iOS devices that could
+不过现在有一些早期的 iOS 设备
 
 56
 00:02:21,824 --> 00:02:25,559
 Do still images, but couldn't do video for example.
+可以拍照但是不能拍摄视频。
 
 57
 00:02:25,561 --> 00:02:29,763
 So as with all the hardware things, whether it's you know,
+所以对于这些关于硬件的东西来说，不管是
 
 58
 00:02:29,765 --> 00:02:33,599
-core motion or any of those things we always wanna ask and
+Core Motion or any of those things we always wanna ask and
+CoreMotion 或者其他的，我们总是会先问问并且
 
 59
 00:02:33,601 --> 00:02:35,334
 see what we can do first.
+看看我们能干什么。
 
 60
 00:02:35,336 --> 00:02:38,503
-So it's very easy for the image picker controller it has
+So it's very easy for the ImagePickerController it has
+这件事对 ImagePickerController 是非常简单的
 
 61
 00:02:38,505 --> 00:02:41,573
-a class function called, is source type available.
+a class function called isSourceTypeAvailable
+它有一个类方法叫做 isSourceTypeAvailable。
 
 62
 00:02:41,575 --> 00:02:45,309
 And there's three different sources for images or
+对图像和视频来说，有三个来源
 
 63
 00:02:45,311 --> 00:02:47,378
 video to come into your app.
+来进入你的 App
 
 64
 00:02:47,380 --> 00:02:49,246
 One is the camera, obviously.
+第一个显然是相机。
 
 65
 00:02:49,248 --> 00:02:51,581
 Another one is the saved photos album,
+第二个是保存的图片专辑（Photos Album），
 
 66
 00:02:51,583 --> 00:02:53,916
 that's essentially the camera roll.
+这个其实就是 Camera Roll。
 
 67
 00:02:53,918 --> 00:02:56,285
 Right, things that they've taken with the camera.
+没错，就是那些早就被相机拍下来的东西。
 
 68
 00:02:56,287 --> 00:02:57,986
 And then there's the photo library,
+最后是 Photo Library，
 
 69
 00:02:57,988 --> 00:03:00,522
 which is the same thing they see in the photos app, okay.
+就是跟你在图片 App 里看到的那个是一个东西。
 
 70
 00:03:00,524 --> 00:03:03,224
 So you can kinda pick which one of those things.
+所以你可以选择一个来源
 
 71
 00:03:03,226 --> 00:03:06,094
 You wanna get your image or video from and
+来获得照片或者视频。
 
 72
 00:03:06,096 --> 00:03:08,562
 they're a little bit different.
+他们有一点点的不同。
 
 73
 00:03:08,564 --> 00:03:10,764
-A little bit of photo library and the saved photos album
+photo library and the saved photos album
+Photo Library 和保存的图片专辑（photo album）
 
 74
 00:03:10,766 --> 00:03:12,666
 are treated pretty much exactly the same, but
+基本上可以当作一样来对待
 
 75
 00:03:12,668 --> 00:03:14,367
 the camera is a little bit different in how
+不过相机在如何展示出方面有一点不同
 
 76
 00:03:14,369 --> 00:03:16,703
 it's presented, so we'll talk about that in a moment.
+所以让我们来讲一下。
 
 77
 00:03:16,705 --> 00:03:20,272
 Once you know your source type then you're gonna say,
+一旦你之道了来源的类型，然后你会问，
 
 78
 00:03:20,274 --> 00:03:23,742
 what are the available media types, image or video.
+可用的媒体类型是什么？图片还是视频？
 
 79
 00:03:23,744 --> 00:03:25,561
 Or both.
+或者两个都是。
 
 80
 00:03:25,562 --> 00:03:27,379
 Now it's almost not even worth checking for image anymore.
+现在你根本不值得去为图片检查。
 
 81
 00:03:27,381 --> 00:03:29,614
 Because if you have a camera, it can get an image.
+因为你现在的来源是相机，相机可以拍照。
 
 82
 00:03:29,616 --> 00:03:32,516
 So, I think it'd probably be okay if you just never even
+所以，我觉得这可能是可以的，如果你从不
 
 83
 00:03:32,518 --> 00:03:35,185
 called this available media types for source type,
+调用这个 availableMediaTypesForSourceType(Camera) 方法
 
 84
 00:03:35,187 --> 00:03:36,953
-camera if you're trying to get.
+if you're trying to get.
+如果你在试图获得
 
 85
 00:03:36,955 --> 00:03:39,489
 An image, okay, because it's gonna be there.
+一张图片，因为图片在那会有。
 
 86
 00:03:39,491 --> 00:03:41,791
 But if you wanna get video, you definitely should call
+不过如果你想要获得视频，你绝对应该调用
 
 87
 00:03:41,793 --> 00:03:44,093
 this in case someone has an older iPhone that won't,
+这个方法以防某人的旧 iPhone 不能，
 
 88
 00:03:44,095 --> 00:03:45,194
 doesn't capture video.
+无法拍摄视频。
 
 89
 00:03:45,196 --> 00:03:49,097
 Now these two types, the kuTTypeImage and
+这两个类型，kuTTypeImage 和
 
 90
 00:03:49,099 --> 00:03:53,634
 kuTTypeMovie, which are basically strings that
+kuTTypeMovie，实际上就是能
 
 91
 00:03:53,636 --> 00:03:56,570
 specify these two media types.
+区分这两个媒体类型的字符串。
 
 92
 00:03:56,572 --> 00:03:58,839
-Strangely, they come from this.
+Strangely, they come from this
+奇怪的是，他们来自一个
 
 93
 00:03:58,841 --> 00:04:02,009
 Framework that your otherwise never gonna import which is
+除了这个情况外你永远不会想导入的 Framework
 
 94
 00:04:02,011 --> 00:04:04,077
 the mobile core services framework.
+就是 MobileCoreServices Framework。
 
 95
 00:04:04,079 --> 00:04:08,714
 So if you wanna use those two types right there or
+所以如果你想使用这两个类型
 
 96
 00:04:08,716 --> 00:04:12,818
-two constantsKUTType images and movie.
+two constants KUTType images and movie.
+或者两个常量 KUTTypeImages 和 KUTTypeMovie
+
 
 97
 00:04:12,820 --> 00:04:14,886
 You need to import mobile core services.
+你需要导入 MobileCoreServices。
 
 98
 00:04:14,888 --> 00:04:16,288
@@ -393,310 +490,387 @@ Okay?
 99
 00:04:16,289 --> 00:04:17,689
 I'm kinda lingering on this one because this is some
+我讲这个讲了很久因为这是
 
 100
 00:04:17,691 --> 00:04:19,102
 people forget.
+一些人经常忘记这事。
 
 101
 00:04:19,103 --> 00:04:20,514
 And they're just like what the heck?
+然后他们会说一些比如 这是什么鬼错误？
 
 102
 00:04:20,515 --> 00:04:21,926
 Because if you search in the documentation it's kind of
+因为如果你在文档中搜索,
 
 103
 00:04:21,928 --> 00:04:22,910
 hard to find.
+这很难找到说
 
 104
 00:04:22,911 --> 00:04:23,893
 That you're supposed to do this.
+你应该导入 MobileCoreServices。
 
 105
 00:04:23,896 --> 00:04:26,697
 Whatever.
+不管怎么说
 
 106
 00:04:26,698 --> 00:04:29,499
 So I made a special slide and emphasize it there for you.
+所以我做了幻灯片来强调这个事情。
 
 107
 00:04:29,501 --> 00:04:32,368
-You can obviously ask UI inventory picker controller
+You can obviously ask UIImagePickerController
+你显然可以问 UIImagePickerController 要
 
 108
 00:04:32,370 --> 00:04:34,103
 for more detail even than this.
+比这更多的细节。
 
 109
 00:04:34,105 --> 00:04:36,705
 Is there a camera and what kind of things can it take?
+比如是不是摄像头？它可以拍摄什么，图片或者视频？
 
 110
 00:04:36,707 --> 00:04:40,442
 You can say, is there a front camera?
+在比如那是不是前置摄像头？
 
 111
 00:04:40,444 --> 00:04:41,743
 Is there a rear camera?
+是不是后置摄像头？
 
 112
 00:04:41,745 --> 00:04:44,178
 Which you might care if you have an app that's like selfie
+你可能会关心这些如果你的 App
 
 113
 00:04:44,180 --> 00:04:45,529
 oriented.
+可以拿来自拍。
 
 114
 00:04:45,530 --> 00:04:46,879
 It might wanna know that there's a front camera.
+它可能想知道有没有前置摄像头
 
 115
 00:04:46,882 --> 00:04:48,415
 For that.
+给它使用。
 
 116
 00:04:48,417 --> 00:04:50,950
 And you can also tell whether a flash is available on that
+而且你也可以之道闪光灯是否是可以用的
 
 117
 00:04:50,952 --> 00:04:52,168
 device, etc.
+在这台设备上，等等。
 
 118
 00:04:52,169 --> 00:04:53,385
-So there's a bunch of class functions and
+So there's a bunch of class functions in
+所以有一大堆类方法在
 
 119
 00:04:53,388 --> 00:04:54,653
-UI image picker controllers.
+UIImagePickerControllers.
+UIImagePickerControllers 中。
 
 120
 00:04:54,655 --> 00:04:57,556
 You can find out what's going on.
+你能知道发生一些什么。
 
 121
 00:04:57,558 --> 00:04:59,991
 So here's the code, typically,
+这里是通常用来
 
 122
 00:04:59,993 --> 00:05:02,460
 to prepare to present the picker.
+准备展示 picker 的代码。
 
 123
 00:05:02,462 --> 00:05:04,462
 You're going to create the picker.
+你将会创建 picker。
 
 124
 00:05:04,464 --> 00:05:06,030
 You're gonna set its delegate.
+你将会设置它的委托。
 
 125
 00:05:06,032 --> 00:05:08,098
 You're gonna ask if the camera is available.
+你将会问它相机是否可用。
 
 126
 00:05:08,100 --> 00:05:11,268
 If it is, you're gonna set the source type to be the camera.
+如课可用，你就会设置来源为相机。
 
 127
 00:05:11,270 --> 00:05:14,704
 Then you're gonna ask and see if, for example in this case,
+比如在这个例子中
 
 128
 00:05:14,706 --> 00:05:16,739
 I wanna take a movie with my camera.
+我想要用相机拍摄视频
 
 129
 00:05:16,741 --> 00:05:21,210
 So I'm gonna ask is that kuTTypeMovie available.
+所以我问它 kuTTypeMovie 是否可用
 
 130
 00:05:21,212 --> 00:05:25,513
 Now, this line of code right there, if availableTypes as
+现在，在这的这行代码，if (availableTypes as
 
 131
 00:05:25,515 --> 00:05:29,283
-NSArray).containsObject(kuTTy- peMovie.
+NSArray).containsObject(kuTTypeMovie).
+NSArray).containsObject(kuTTypeMovie).
 
 132
 00:05:29,285 --> 00:05:30,584
 That's kind of a weird line of code.
+真是一行奇怪的代码
 
 133
 00:05:30,586 --> 00:05:31,518
 Really, it doesn't.
+它真的没有
 
 134
 00:05:31,520 --> 00:05:34,521
 Fit into the swift world very well.
+很好的融入 Swift 这个世界
 
 135
 00:05:34,523 --> 00:05:36,589
 You just do it.
+你只要这样写就好了
 
 136
 00:05:36,591 --> 00:05:41,093
-I's an old objectice C based API.
+I's an old Objective-C based API.
+这是一个 Objective-C 写的旧 API
 
 137
 00:05:41,095 --> 00:05:45,230
 And kuTTypeMovie is even kind of an older kind of string
+而且 kuTTypeMovie 是一种比
 
 138
 00:05:45,232 --> 00:05:46,865
 even than NSString.
+NSString 还要古老的 String
 
 139
 00:05:46,867 --> 00:05:48,366
 And, so.
+因此
 
 140
 00:05:48,368 --> 00:05:50,067
 We kind of have to do this old style thing.
+我们会写这种老旧风格的代码
 
 141
 00:05:50,069 --> 00:05:53,804
 I'm sure probably somewhere they'll probably come up with
+我能肯定可能某些地方以后会推出
 
 142
 00:05:53,806 --> 00:05:57,441
 some new API for this whole camera thing that doesn't have
+新的 API 来控制这些相机，没有这些
 
 143
 00:05:57,443 --> 00:06:00,377
 this old stuff, but for now you have to do that.
+老旧的东西，不过现在你只能这么写
 
 144
 00:06:00,379 --> 00:06:02,979
 And then you just tell the picker the media types I want
+然后你只要告诉 picker 媒体类型。
 
 145
 00:06:02,981 --> 00:06:05,114
 the user to be able to take is just a movie, so
+我想要用户只能拍视频，所以
 
 146
 00:06:05,116 --> 00:06:07,883
 in this case they wouldn't be able to take a still image,
+在这个列子里用户不能拍照片
 
 147
 00:06:07,885 --> 00:06:10,218
 they would only be able to take a movie, if you.
+他们只能拍视频
 
 148
 00:06:10,220 --> 00:06:12,721
 Pass an array with just kuTTypeMovie.
+只要你传入了一个只有 kuTTypeMovie 的数组
 
 149
 00:06:12,723 --> 00:06:13,855
 So that's it.
+好。
 
 150
 00:06:13,857 --> 00:06:17,058
 You've configured the picker now, you just need to
+你已经配置好了 picker，你现在只需要
 
 151
 00:06:17,060 --> 00:06:19,993
 present it with that present view controller.
+用 presentViewController 把它展示出来
 
 152
 00:06:19,995 --> 00:06:22,129
 There are some other things you can kind of configure with
+这里还有一些东西你可以配置
 
 153
 00:06:22,131 --> 00:06:23,329
 the picker before you put it up.
+在你展示 picker 之前
 
 154
 00:06:23,331 --> 00:06:24,530
 One is editability.
+第一个是 Editability
 
 155
 00:06:24,532 --> 00:06:26,999
 That's whether you're gonna allow the user to crop.
+就是你是否允许用户去切割
 
 156
 00:06:27,001 --> 00:06:29,134
 The image or edit the video.
+图片或者编辑视频
 
 157
 00:06:29,136 --> 00:06:32,237
 There's actually a video editor built in there
+那实际上有一个内置的视频编辑器
 
 158
 00:06:32,239 --> 00:06:36,007
 that they can edit the video before it returns to your app.
+用户可以编辑视频在返回你的 App 之前
 
 159
 00:06:36,009 --> 00:06:38,209
 You can also limit video capture, for example,
+你也能限制视频的拍摄，比如
 
 160
 00:06:38,211 --> 00:06:40,711
 to be lower resolution if you're just doing something
+降低分辨率如果你在做
 
 161
 00:06:40,713 --> 00:06:43,380
 that's gonna be in a little square somewhere in a webpage,
+网页中的小方块
 
 162
 00:06:43,382 --> 00:06:44,648
 you can go low resolution.
+你可以设置低分辨率
 
 163
 00:06:44,650 --> 00:06:45,882
 If it's something that.
+如果有某些其他事
 
 164
 00:06:45,884 --> 00:06:48,584
 Maybe it's going to be Airplayed to a high resolution
+可能是 Airplay 到高分辨率
 
 165
 00:06:48,586 --> 00:06:51,053
 device or something like that, and you can go for
+的设备之类的东西，你可以
 
 166
 00:06:51,055 --> 00:06:52,838
 a higher resolution.
+设置高分辨率
 
 167
 00:06:52,839 --> 00:06:54,622
 And of course high resolution, you're gonna use more memory.
+当然，高分辨率会使用更多的内存
 
 168
 00:06:54,625 --> 00:06:57,292
 Etcetera, etcetera, okay?
+等等等等
 
 169
 00:06:57,294 --> 00:07:00,395
 You present using view controller.
+你使用 presentViewController 来展示
 
 170
 00:07:00,397 --> 00:07:02,130
 Now, the thing about this is interesting is
+一个关于这个的有趣的是
 
 171
 00:07:02,132 --> 00:07:03,397
 when you're doing the camera.
+当你在相机中时
 
 172
 00:07:03,399 --> 00:07:04,898
 You're always gonna present view controller.
+你总是会展示 View Controller
 
 173
 00:07:04,900 --> 00:07:08,101
 It's always gonna be take over the screen even on the iPad.
+这总是会占据整个屏幕，就算在 iPad 上也一样
 
 174
 00:07:08,103 --> 00:07:09,836
 So on the iPad when you do the camera,
+所以当你在 iPad 上使用相机时
 
 175
 00:07:09,838 --> 00:07:12,372
 you're gonna have this huge camera taking picture.
+你总会得到这个巨大的相机用来拍照
 
 176
 00:07:12,374 --> 00:07:13,339
@@ -705,50 +879,62 @@ Okay?
 177
 00:07:13,341 --> 00:07:14,907
 The whole screen is gonna be the camera.
+整个屏幕都会变成相机
 
 178
 00:07:14,909 --> 00:07:16,141
 However, on the iPad,
+然而，在 iPad 上
 
 179
 00:07:16,143 --> 00:07:18,977
 if you're just looking at the photo library, okay?
+如果你只是在 Photo Library 里查看
 
 180
 00:07:18,979 --> 00:07:22,813
 Or the camera roll you want to present that in a pop over.
+或者是 Camera Roll，你会展示在一个 Popover 中
 
 181
 00:07:22,815 --> 00:07:24,915
 It's only gonna be fairly small,
+它们只会有很小
 
 182
 00:07:24,917 --> 00:07:27,784
 like the 320 wide by I don't know how high.
+大概320宽乘我不知道多高
 
 183
 00:07:27,786 --> 00:07:29,552
 600 or something.
+600或者别的高度
 
 184
 00:07:29,554 --> 00:07:32,655
 So that's really something you're supposed to put in
+所以这是你应该放到
 
 185
 00:07:32,657 --> 00:07:33,623
 a popover.
+Popover 中的
 
 186
 00:07:33,624 --> 00:07:34,590
 Now an iPhone, it doesn't matter.
+在 iPhone 上，这没什么关系
 
 187
 00:07:34,592 --> 00:07:36,859
 In both cases it's gonna be full modal,
+两种情况都会是完整的 modal
 
 188
 00:07:36,861 --> 00:07:38,160
 take over the screen.
+占据整个屏幕
 
 189
 00:07:38,162 --> 00:07:40,229
@@ -757,6 +943,7 @@ Okay?
 190
 00:07:40,230 --> 00:07:42,297
 Cuz it's just too big to put any other way on the iPhone.
+因为用别的方法展示在 iPhone 上都来说都太大了
 
 191
 00:07:42,299 --> 00:07:44,733
@@ -765,78 +952,97 @@ Okay?
 192
 00:07:44,734 --> 00:07:47,168
 So, you present this thing, and it sits there on screen,
+好，你展示了这个 picker， 它出现在屏幕上
 
 193
 00:07:47,170 --> 00:07:50,404
 and then, when the user use this photo, okay, or
+然后，用户使用了这张照片，或者
 
 194
 00:07:50,406 --> 00:07:53,774
 use this video, this is gonna be called right here,
+这个视频，这个会马上被调用
 
 195
 00:07:53,776 --> 00:07:57,611
 this delegate method: image picker controller did finish
+这个委托方法 image picker controller did finish
 
 196
 00:07:57,613 --> 00:08:01,447
 picking media with info, and with info dictionary there,
+picking media with info, 那里的 info 字典
 
 197
 00:08:01,449 --> 00:08:03,649
 has the results of what they did.
+有他们做的结果
 
 198
 00:08:03,651 --> 00:08:04,784
 And when you get there,
+当你到这个时候
 
 199
 00:08:04,785 --> 00:08:05,918
 we'll talk about what's in there in a minute.
+过一会我们会讲到那有什么
 
 200
 00:08:05,920 --> 00:08:09,187
 But when you get this and you get your image, or whatever,
+不过当你得到这个并且得到你的图像或者别的什么
 
 201
 00:08:09,189 --> 00:08:11,189
 then you wanna dismiss this thing.
+然后你想让这个东西消失
 
 202
 00:08:11,191 --> 00:08:13,191
 And I've kind of put here a line of code,
+我在这放了一行代码
 
 203
 00:08:13,193 --> 00:08:16,727
-presentingViewController.dism- issViewControllerAnimated.
+presentingViewController.dismissViewControllerAnimated
+presentingViewController.dismissViewControllerAnimated
 
 204
 00:08:16,729 --> 00:08:19,430
 Usually you're not putting the presentingViewCcontroller in
+通常你不会把 presentingViewCcontroller 放在
 
 205
 00:08:19,432 --> 00:08:21,898
 there, because you are the presentingViewController.
+这里，因为你就是 presentingViewCcontroller
 
 206
 00:08:21,900 --> 00:08:23,833
 You just presented this thing.
+你只是展示这个东西
 
 207
 00:08:23,835 --> 00:08:25,335
 So you wouldn't need that part of it.
+所以你不需要这个部分
 
 208
 00:08:25,337 --> 00:08:27,503
 But I just wanted to emphasize that again, you dismiss by
+不过我要再强调一遍，你消失靠
 
 209
 00:08:27,505 --> 00:08:29,805
 sending a message through the presentingViewController,
+通过 presentingViewController 发生一个消息
 
 210
 00:08:29,807 --> 00:08:31,039
-which is probably gonna be you.
+which is probably gonna be you
+这个 presentingViewController 可能是你
 
 211
 00:08:31,041 --> 00:08:33,508

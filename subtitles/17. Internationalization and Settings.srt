@@ -1,0 +1,6692 @@
+﻿1
+00:00:00,001 --> 00:00:04,769
+[MUSIC]
+
+2
+00:00:04,771 --> 00:00:08,773
+Stanford University.
+
+3
+00:00:08,775 --> 00:00:11,709
+>> Okay. Well, welcome to lecture 17,
+
+4
+00:00:11,711 --> 00:00:15,178
+Stanford CS193P, winter 2015.
+
+5
+00:00:15,180 --> 00:00:17,947
+Today, our topics are Internationalization and
+
+6
+00:00:17,949 --> 00:00:19,349
+Localization.
+
+7
+00:00:19,351 --> 00:00:20,750
+That's making your application so
+
+8
+00:00:20,752 --> 00:00:23,552
+you can ship it all around the world in different languages.
+
+9
+00:00:23,554 --> 00:00:26,188
+And then also, kind of a minor topic,
+
+10
+00:00:26,190 --> 00:00:29,824
+settings which is a way that you can add a little bit of
+
+11
+00:00:29,826 --> 00:00:34,428
+UI to the general settings application on the phone.
+
+12
+00:00:34,430 --> 00:00:36,897
+And I have demos for both of these things.
+
+13
+00:00:38,133 --> 00:00:39,483
+All right. So let's talk about
+
+14
+00:00:39,484 --> 00:00:40,834
+internationalization and localization.
+
+15
+00:00:40,836 --> 00:00:42,568
+Those are actually two different things.
+
+16
+00:00:42,570 --> 00:00:43,703
+Okay? Internationalization,
+
+17
+00:00:43,705 --> 00:00:44,937
+sometimes called I18N.
+
+18
+00:00:46,373 --> 00:00:49,174
+Because of 18 letters in there between I and the N.
+
+19
+00:00:49,176 --> 00:00:53,544
+That's the process of making your application localizable.
+
+20
+00:00:53,546 --> 00:00:56,313
+And then, localization is the process of actually
+
+21
+00:00:56,315 --> 00:00:58,382
+translating it to another language.
+
+22
+00:00:58,384 --> 00:01:00,116
+So internationalization.
+
+23
+00:01:00,118 --> 00:01:01,984
+That's work that you do as the developer.
+
+24
+00:01:01,986 --> 00:01:03,452
+Okay?
+
+25
+00:01:03,453 --> 00:01:04,919
+You have to take your app and do some things to it.
+
+26
+00:01:04,922 --> 00:01:07,556
+Not a lot, but some little bit of things.
+
+27
+00:01:07,558 --> 00:01:10,525
+To make all the strings that you have in there be pulled
+
+28
+00:01:10,527 --> 00:01:13,395
+out or pullable out of there so
+
+29
+00:01:13,397 --> 00:01:15,596
+that our translator can translate all of them.
+
+30
+00:01:15,598 --> 00:01:17,798
+And then there's a little bit of formatting as well.
+
+31
+00:01:17,800 --> 00:01:19,433
+Certain things, numbers, dates,
+
+32
+00:01:19,435 --> 00:01:22,069
+et cetera, look different in different languages so
+
+33
+00:01:22,071 --> 00:01:23,903
+you have to be able to do that.
+
+34
+00:01:23,905 --> 00:01:26,539
+And then localization is a process that.
+
+35
+00:01:26,541 --> 00:01:28,240
+A localization company usually does.
+
+36
+00:01:28,242 --> 00:01:29,375
+Someone else does that.
+
+37
+00:01:29,377 --> 00:01:31,343
+Someone who's fluent in both languages.
+
+38
+00:01:32,679 --> 00:01:34,178
+Maybe even someone who has a little bit of
+
+39
+00:01:34,180 --> 00:01:36,814
+domain knowledge about what your application does.
+
+40
+00:01:36,816 --> 00:01:38,248
+So if it's a social networking app,
+
+41
+00:01:38,250 --> 00:01:40,650
+they're familiar with other social networking apps, so
+
+42
+00:01:40,652 --> 00:01:43,253
+they kind of know what various words and phrases.
+
+43
+00:01:43,255 --> 00:01:46,322
+Would be in a UI like that.
+
+44
+00:01:46,324 --> 00:01:48,257
+And so this is kind of a two step process, and
+
+45
+00:01:48,259 --> 00:01:51,193
+so, you're always working on adding new features and
+
+46
+00:01:51,195 --> 00:01:52,961
+internationalizing those features, and
+
+47
+00:01:52,963 --> 00:01:56,464
+the localizer is pretty much kind of always getting a dump
+
+48
+00:01:56,466 --> 00:01:58,132
+of the latest strings from you, and
+
+49
+00:01:58,134 --> 00:02:00,668
+they are translating them and sending back to you and
+
+50
+00:02:00,670 --> 00:02:02,369
+you're checking to see if it looks okay in UI.
+
+51
+00:02:02,371 --> 00:02:03,837
+You're going back and forth, so
+
+52
+00:02:03,839 --> 00:02:06,439
+it's an iterative process back and forth between you
+
+53
+00:02:06,441 --> 00:02:09,575
+as the internationalizer and the localizer,
+
+54
+00:02:09,577 --> 00:02:11,177
+which is usually some third-party company.
+
+55
+00:02:11,179 --> 00:02:15,047
+There's plenty of companies out there that do it.
+
+56
+00:02:15,049 --> 00:02:17,215
+So, let's talk about your side of it first,
+
+57
+00:02:17,217 --> 00:02:19,084
+the internationalization part.
+
+58
+00:02:19,086 --> 00:02:23,421
+And there's really two places that you have strings
+
+59
+00:02:23,423 --> 00:02:25,723
+in your code,
+
+60
+00:02:25,724 --> 00:02:28,024
+strings meaning text that is going to appear in the UI.
+
+61
+00:02:28,027 --> 00:02:29,760
+One is in your storyboard.
+
+62
+00:02:29,762 --> 00:02:33,096
+A lot of strings in there, labels and all that stuff.
+
+63
+00:02:33,098 --> 00:02:35,431
+And for storyboards, the way we do internationalization
+
+64
+00:02:35,433 --> 00:02:37,233
+there is we.
+
+65
+00:02:38,336 --> 00:02:40,135
+Xcode knows how to reach in there and
+
+66
+00:02:40,137 --> 00:02:42,137
+grab all those strings and
+
+67
+00:02:42,138 --> 00:02:44,138
+pull them out in a way that you can give to a localizer.
+
+68
+00:02:44,141 --> 00:02:46,374
+And then we use Autolayout,
+
+69
+00:02:46,376 --> 00:02:49,076
+to make sure everything looks nice when these strings
+
+70
+00:02:49,078 --> 00:02:51,912
+come back cuz these strings might be shorter or longer.
+
+71
+00:02:51,914 --> 00:02:55,715
+And so Autolayout is an extremely important part of
+
+72
+00:02:55,717 --> 00:02:57,150
+internationalization.
+
+73
+00:02:57,152 --> 00:02:57,950
+Okay. It's just one word,
+
+74
+00:02:57,952 --> 00:02:59,935
+Autolayout, but
+
+75
+00:02:59,936 --> 00:03:01,919
+it encompasses a lot of the work that you have to do.
+
+76
+00:03:01,922 --> 00:03:03,455
+Cuz you have to build your UI to be able to
+
+77
+00:03:03,457 --> 00:03:05,023
+deal with these different length strings.
+
+78
+00:03:05,025 --> 00:03:06,891
+So that's the first part.
+
+79
+00:03:06,893 --> 00:03:10,828
+Now the way you get these strings out of the storyboard,
+
+80
+00:03:10,830 --> 00:03:13,564
+the very first thing you need to do before you do
+
+81
+00:03:13,566 --> 00:03:16,066
+any internationalization is register
+
+82
+00:03:16,068 --> 00:03:17,767
+localizable languages.
+
+83
+00:03:17,769 --> 00:03:20,269
+Languages that you want your app to be able to ship in.
+
+84
+00:03:20,271 --> 00:03:21,570
+Now. This isn't something you have
+
+85
+00:03:21,572 --> 00:03:23,539
+to do upfront and pick them all when you're done, this,
+
+86
+00:03:23,541 --> 00:03:25,974
+you can always add a new language along the way.
+
+87
+00:03:25,976 --> 00:03:28,576
+But, when you add a new language it's automatically,
+
+88
+00:03:28,578 --> 00:03:30,178
+the first time you add a new language it's
+
+89
+00:03:30,180 --> 00:03:32,213
+automatically going to make your story boards, so
+
+90
+00:03:32,215 --> 00:03:34,481
+that their strings can be pulled out.
+
+91
+00:03:34,483 --> 00:03:35,382
+Okay.
+
+92
+00:03:35,383 --> 00:03:36,282
+This is super easy to do.
+
+93
+00:03:36,285 --> 00:03:38,752
+You're just going to click on your project.
+
+94
+00:03:38,754 --> 00:03:40,654
+And when you click on your project,
+
+95
+00:03:40,655 --> 00:03:42,555
+you're actually gonna want the project, not the target.
+
+96
+00:03:42,557 --> 00:03:44,623
+Sometimes when you click on the project in the very upper
+
+97
+00:03:44,625 --> 00:03:47,126
+left of the navigator, it's gonna be selecting the target,
+
+98
+00:03:47,128 --> 00:03:49,728
+which is that thing that says autolayout
+
+99
+00:03:49,730 --> 00:03:51,763
+in the second column, the second autolayout down.
+
+100
+00:03:51,765 --> 00:03:54,499
+So you want the top one, which is your actual project, and
+
+101
+00:03:54,501 --> 00:03:56,500
+when you do, you're gonna have two tabs across the top,
+
+102
+00:03:56,502 --> 00:03:58,936
+info and build settings, you see those?
+
+103
+00:03:58,938 --> 00:04:00,570
+And you want to be in the info tab and
+
+104
+00:04:00,572 --> 00:04:04,007
+you'll see about halfway down towards the bottom there.
+
+105
+00:04:04,009 --> 00:04:05,475
+It says localizations and
+
+106
+00:04:05,477 --> 00:04:08,711
+there's actually just a list there of languages.
+
+107
+00:04:08,713 --> 00:04:13,515
+So here my app is going to be localizable into Chinese,
+
+108
+00:04:13,517 --> 00:04:14,949
+simplified and traditional.
+
+109
+00:04:14,951 --> 00:04:17,318
+Also into French and Japanese.
+
+110
+00:04:17,320 --> 00:04:18,219
+Okay. So you just keep
+
+111
+00:04:18,221 --> 00:04:19,987
+hitting plus button there.
+
+112
+00:04:19,988 --> 00:04:21,754
+It's just gonna ask what language you wanna add and
+
+113
+00:04:21,757 --> 00:04:22,622
+you add them.
+
+114
+00:04:22,624 --> 00:04:24,574
+Okay.
+
+115
+00:04:24,575 --> 00:04:26,525
+Now, you're gonna see why this is important later.
+
+116
+00:04:28,696 --> 00:04:31,330
+Now once you do this, the storyboards,
+
+117
+00:04:31,332 --> 00:04:33,131
+if you look in the Navigator in your storyboard,
+
+118
+00:04:33,133 --> 00:04:36,167
+it's gonna show all these localizations, right?
+
+119
+00:04:36,169 --> 00:04:38,569
+It's gonna have a list of all the localizations.
+
+120
+00:04:38,571 --> 00:04:40,738
+If you expand the little storyboard.
+
+121
+00:04:40,740 --> 00:04:43,306
+And also if you inspect the storyboard
+
+122
+00:04:44,343 --> 00:04:46,159
+in the file inspector.
+
+123
+00:04:46,160 --> 00:04:47,976
+Which is the left most tab in the utilities column there.
+
+124
+00:04:48,913 --> 00:04:50,479
+If you have a storyboard inspected,
+
+125
+00:04:50,481 --> 00:04:52,948
+it's gonna show you the localizations there too.
+
+126
+00:04:52,950 --> 00:04:54,849
+And so that's a good way to just double check.
+
+127
+00:04:54,851 --> 00:04:57,051
+Oh yeah, yeah, I've got all the localizations for
+
+128
+00:04:57,053 --> 00:04:57,718
+all these languages.
+
+129
+00:04:57,720 --> 00:04:58,986
+It's what I expect.
+
+130
+00:04:58,988 --> 00:05:00,620
+Usually you don't have to manipulate.
+
+131
+00:05:00,622 --> 00:05:02,789
+These two things in any way.
+
+132
+00:05:02,791 --> 00:05:03,656
+It's just there.
+
+133
+00:05:03,658 --> 00:05:05,491
+Usually you'll have it closed up.
+
+134
+00:05:05,493 --> 00:05:06,992
+You'll have the little triangle pressed
+
+135
+00:05:06,994 --> 00:05:07,993
+there by the storyboard.
+
+136
+00:05:07,995 --> 00:05:09,861
+You won't even see these things.
+
+137
+00:05:09,863 --> 00:05:12,530
+But that's just to show you what's happening
+
+138
+00:05:12,532 --> 00:05:15,433
+when you do that.
+
+139
+00:05:15,435 --> 00:05:17,034
+So there are other strings in your app, though,
+
+140
+00:05:17,036 --> 00:05:18,835
+besides those storyboard things.
+
+141
+00:05:18,837 --> 00:05:20,236
+Things in labels and stuff.
+
+142
+00:05:20,238 --> 00:05:21,270
+There are literal strings.
+
+143
+00:05:21,272 --> 00:05:24,340
+Strings that in your code you put into the UI.
+
+144
+00:05:24,342 --> 00:05:27,543
+And the way you localize those is by calling this function
+
+145
+00:05:27,545 --> 00:05:29,544
+NSLocalizedString, okay?
+
+146
+00:05:29,546 --> 00:05:31,312
+Very, very important function.
+
+147
+00:05:31,314 --> 00:05:34,215
+Every single literal string that's ever gonna appear in UI
+
+148
+00:05:34,217 --> 00:05:37,685
+needs to be wrapped in a call to NSLocalizedString.
+
+149
+00:05:37,687 --> 00:05:38,919
+So the arguments to this thing are,
+
+150
+00:05:38,921 --> 00:05:41,054
+the first thing is the key.
+
+151
+00:05:41,056 --> 00:05:43,957
+Basically this is the thing that uniquely identifies this
+
+152
+00:05:43,959 --> 00:05:45,391
+string.
+
+153
+00:05:45,393 --> 00:05:47,927
+Okay?
+
+154
+00:05:47,928 --> 00:05:50,462
+And this is usually the thing that you want to put on screen
+
+155
+00:05:50,465 --> 00:05:52,331
+in the language of the developer.
+
+156
+00:05:52,333 --> 00:05:55,233
+Okay, if English is your language,
+
+157
+00:05:55,235 --> 00:05:56,735
+then this would be in English.
+
+158
+00:05:56,737 --> 00:06:00,204
+If you're, you know, developing an application in.
+
+159
+00:06:00,206 --> 00:06:02,740
+Czechoslovakia and Czech is your language then this string
+
+160
+00:06:02,742 --> 00:06:04,241
+would be in Czech, okay?
+
+161
+00:06:04,243 --> 00:06:06,176
+Or whatever, is that a language, Czech?
+
+162
+00:06:06,178 --> 00:06:06,743
+I think so.
+
+163
+00:06:07,712 --> 00:06:09,345
+So that's what usually this is.
+
+164
+00:06:09,347 --> 00:06:10,646
+But it wouldn't necessarily be that,
+
+165
+00:06:10,648 --> 00:06:14,349
+because you might have the same word appear two places in
+
+166
+00:06:14,351 --> 00:06:17,085
+the UI and actually, possibly have different translations.
+
+167
+00:06:17,087 --> 00:06:19,587
+Because they might mean slightly different things.
+
+168
+00:06:19,589 --> 00:06:21,989
+So this key might not necessarily.
+
+169
+00:06:21,991 --> 00:06:24,058
+Be that.
+
+170
+00:06:24,059 --> 00:06:26,126
+If it's not, then the value option, okay?
+
+171
+00:06:26,128 --> 00:06:29,529
+See the third one or actually fourth one there value, that's
+
+172
+00:06:29,531 --> 00:06:32,565
+the thing that it will use if it can't find this thing.
+
+173
+00:06:32,567 --> 00:06:36,035
+A translator doesn't translate this key.
+
+174
+00:06:36,037 --> 00:06:37,236
+Okay?
+
+175
+00:06:37,237 --> 00:06:38,436
+Now the table name in the bundle,
+
+176
+00:06:38,439 --> 00:06:41,239
+that's a way of kind of organizing these localized
+
+177
+00:06:41,241 --> 00:06:42,107
+strings into groups.
+
+178
+00:06:42,109 --> 00:06:44,275
+You can put them in little tables.
+
+179
+00:06:44,277 --> 00:06:45,776
+The bundle thing is more for
+
+180
+00:06:45,778 --> 00:06:49,013
+if you're localizing maybe a framework versus your app.
+
+181
+00:06:49,015 --> 00:06:53,516
+We'll talk about those two arguments in a second here.
+
+182
+00:06:53,518 --> 00:06:56,552
+And then the last argument, comment, super important.
+
+183
+00:06:56,554 --> 00:06:59,588
+This is a comment that goes to the translator.
+
+184
+00:06:59,590 --> 00:07:02,591
+So this tells the translator, this is the context of this.
+
+185
+00:07:02,593 --> 00:07:05,193
+Now the translator when they're doing the storyboard,
+
+186
+00:07:05,195 --> 00:07:07,262
+they see your storyboard cuz you're gonna send them your
+
+187
+00:07:07,264 --> 00:07:08,129
+storyboard as well.
+
+188
+00:07:08,131 --> 00:07:09,864
+So they're gonna see the context.
+
+189
+00:07:09,866 --> 00:07:12,566
+Oh, this is a label for a field, I get it.
+
+190
+00:07:12,568 --> 00:07:15,469
+But here these strings are in your code, and so
+
+191
+00:07:15,471 --> 00:07:17,637
+they have no idea where this thing's gonna pop in the UI.
+
+192
+00:07:17,639 --> 00:07:20,139
+So you need to give very good comments here
+
+193
+00:07:20,141 --> 00:07:21,808
+to localize, you know.
+
+194
+00:07:21,809 --> 00:07:23,476
+This is the title I'm gonna work that comes up.
+
+195
+00:07:23,478 --> 00:07:26,278
+When this bad thing happens because the user did this or
+
+196
+00:07:26,280 --> 00:07:28,747
+whatever, so that they know what the best
+
+197
+00:07:28,749 --> 00:07:31,316
+translation of that word to put up is.
+
+198
+00:07:32,285 --> 00:07:34,085
+So in this localized string, you pass these arguments and
+
+199
+00:07:34,087 --> 00:07:35,185
+it gives you back a string,
+
+200
+00:07:35,187 --> 00:07:37,688
+and the string it gives you back will either be,
+
+201
+00:07:37,690 --> 00:07:40,557
+if there's no translation, the value there, or
+
+202
+00:07:40,559 --> 00:07:42,658
+the key itself if there's no value.
+
+203
+00:07:42,660 --> 00:07:44,660
+Or it's gonna be the translated string that came
+
+204
+00:07:44,662 --> 00:07:46,895
+back from the localizer, okay?
+
+205
+00:07:46,897 --> 00:07:48,163
+And then you're gonna use that string.
+
+206
+00:07:48,165 --> 00:07:49,581
+You can put it in the UI.
+
+207
+00:07:49,582 --> 00:07:50,998
+So you wanna wrap every literal string in this.
+
+208
+00:07:51,001 --> 00:07:54,268
+Now most of the time, the table name and
+
+209
+00:07:54,270 --> 00:07:56,270
+bundle are defaulted.
+
+210
+00:07:56,272 --> 00:07:59,206
+The table name is just gonna be Localizable.
+
+211
+00:07:59,208 --> 00:08:01,942
+Which is where mostly you put all your strings actually in
+
+212
+00:08:01,944 --> 00:08:03,576
+a table called localizable, and
+
+213
+00:08:03,578 --> 00:08:05,578
+the bundle's gonna be your main bundle.
+
+214
+00:08:05,580 --> 00:08:07,513
+That means your app, okay?
+
+215
+00:08:07,515 --> 00:08:09,915
+Now we haven't talked too much about bundles, but
+
+216
+00:08:09,917 --> 00:08:11,316
+when you have frameworks and other things,
+
+217
+00:08:11,318 --> 00:08:14,185
+you can have other bundles of code in your app.
+
+218
+00:08:14,187 --> 00:08:16,621
+And they might have their own bundles of strings, but
+
+219
+00:08:16,623 --> 00:08:19,523
+I'm not gonna really talk about that.
+
+220
+00:08:19,525 --> 00:08:21,258
+I'm just going to say that most of the time you're
+
+221
+00:08:21,260 --> 00:08:23,627
+just gonna call this version of NSLocalizedString that
+
+222
+00:08:23,629 --> 00:08:27,063
+only has the key and a comment.
+
+223
+00:08:27,065 --> 00:08:28,181
+Okay?
+
+224
+00:08:28,182 --> 00:08:29,298
+Because it's gonna use the key as the value
+
+225
+00:08:29,300 --> 00:08:30,799
+if there's no translation, and
+
+226
+00:08:30,801 --> 00:08:33,902
+you've gotta have that comment to the translator, okay?
+
+227
+00:08:33,904 --> 00:08:36,771
+So that 90% of the time you just skip it.
+
+228
+00:08:36,773 --> 00:08:39,374
+No NS localized string comma colon around your
+
+229
+00:08:39,376 --> 00:08:40,274
+literal strings.
+
+230
+00:08:40,276 --> 00:08:41,792
+And that's it.
+
+231
+00:08:41,793 --> 00:08:43,309
+That's all you need to do to get all those little strings
+
+232
+00:08:43,312 --> 00:08:44,344
+to be translatable.
+
+233
+00:08:44,346 --> 00:08:46,713
+All right?
+
+234
+00:08:46,715 --> 00:08:49,515
+Now, if you use a format string.
+
+235
+00:08:49,517 --> 00:08:51,150
+So this format string,
+
+236
+00:08:51,152 --> 00:08:55,253
+the result is %g or the result is %d, okay?
+
+237
+00:08:55,255 --> 00:08:56,821
+So you're using a format string.
+
+238
+00:08:56,823 --> 00:09:00,391
+You're gonna wanna use this string, class method called
+
+239
+00:09:00,393 --> 00:09:03,894
+localized string with format to create a string from it.
+
+240
+00:09:03,896 --> 00:09:07,964
+So it takes var args at the end for
+
+241
+00:09:07,966 --> 00:09:11,768
+all the %ds or %gs or whatever in the string.
+
+242
+00:09:11,770 --> 00:09:15,004
+And you would want that format string to also be
+
+243
+00:09:15,006 --> 00:09:17,006
+NS localized string.
+
+244
+00:09:17,008 --> 00:09:20,175
+Okay because the words in there, the result is,
+
+245
+00:09:20,177 --> 00:09:22,010
+those need to be translated as well.
+
+246
+00:09:22,012 --> 00:09:25,080
+But the reason you wanna use this localizedStringWithFormat
+
+247
+00:09:25,082 --> 00:09:27,648
+is because numbers are not always displayed the same
+
+248
+00:09:27,650 --> 00:09:28,949
+in different languages.
+
+249
+00:09:28,951 --> 00:09:32,753
+So you wanna give the system a chance to display any %gs or
+
+250
+00:09:32,755 --> 00:09:34,921
+%ds properly in there.
+
+251
+00:09:34,923 --> 00:09:36,222
+You're actually not even gonna
+
+252
+00:09:36,224 --> 00:09:37,723
+use this that much because you are gonna
+
+253
+00:09:37,725 --> 00:09:40,325
+use a number formatter which I'm gonna talk about.
+
+254
+00:09:40,327 --> 00:09:42,361
+In a second, and the number formatter does an even more
+
+255
+00:09:42,363 --> 00:09:44,562
+powerful job of making sure the number looks good.
+
+256
+00:09:45,732 --> 00:09:48,799
+If you have multiple percent things in there, %d, %g,
+
+257
+00:09:48,801 --> 00:09:52,636
+a lot of them, the localizer is able to specify the order.
+
+258
+00:09:52,638 --> 00:09:54,771
+Because, as you can imagine, as some languages,
+
+259
+00:09:54,773 --> 00:09:57,007
+the words might come in a little different order,
+
+260
+00:09:57,009 --> 00:09:59,242
+just because of the way phrasing works in a language.
+
+261
+00:09:59,244 --> 00:10:01,310
+And they are able to do that when they translate, so
+
+262
+00:10:01,312 --> 00:10:02,378
+no worries.
+
+263
+00:10:02,380 --> 00:10:02,944
+There.
+
+264
+00:10:04,314 --> 00:10:05,646
+All right. So that's strings,
+
+265
+00:10:05,648 --> 00:10:08,115
+strings in your storybook, little strings in your code.
+
+266
+00:10:08,117 --> 00:10:10,851
+Now, let's talk about formatters.
+
+267
+00:10:10,853 --> 00:10:13,320
+So, formatters work based on a locale.
+
+268
+00:10:13,322 --> 00:10:16,389
+So there's really two parts of what makes something
+
+269
+00:10:16,391 --> 00:10:18,725
+localized.
+
+270
+00:10:18,726 --> 00:10:21,060
+One is the language, Japanese or French or whatever.
+
+271
+00:10:21,062 --> 00:10:23,596
+But the other is locale.
+
+272
+00:10:23,598 --> 00:10:26,398
+And the locale is where in the world you are essentially.
+
+273
+00:10:26,400 --> 00:10:29,134
+So your language might be Spanish but
+
+274
+00:10:29,136 --> 00:10:31,836
+maybe you're in Mexico or maybe you're in Spain or
+
+275
+00:10:31,838 --> 00:10:33,438
+some other part of the world that speaks Spanish.
+
+276
+00:10:33,440 --> 00:10:34,989
+Okay.
+
+277
+00:10:34,990 --> 00:10:36,539
+So you would have a different locale, Mexico or
+
+278
+00:10:36,542 --> 00:10:39,309
+Spain, than your language which might be Spanish.
+
+279
+00:10:39,311 --> 00:10:40,844
+Okay? So
+
+280
+00:10:40,845 --> 00:10:42,378
+the formatters are gonna format things, numbers and
+
+281
+00:10:42,381 --> 00:10:43,580
+dates and stuff.
+
+282
+00:10:43,582 --> 00:10:45,481
+Currencies, based on your locale.
+
+283
+00:10:46,751 --> 00:10:48,217
+Okay?
+
+284
+00:10:48,218 --> 00:10:49,684
+And so what kind of formatters are there?
+
+285
+00:10:49,687 --> 00:10:51,720
+Well we've already seen number formatter,
+
+286
+00:10:51,722 --> 00:10:53,788
+actually we saw it the very first day of this class.
+
+287
+00:10:53,790 --> 00:10:55,923
+Number formatter knows how to take a number and
+
+288
+00:10:55,925 --> 00:10:57,558
+turn it into a string.
+
+289
+00:10:57,560 --> 00:11:01,862
+And we didn't really worry about locale when we
+
+290
+00:11:01,864 --> 00:11:03,430
+used it early in the quarter.
+
+291
+00:11:03,432 --> 00:11:05,765
+It was a little advanced topic at that time.
+
+292
+00:11:05,767 --> 00:11:08,367
+But it was using the locale even though we weren't
+
+293
+00:11:08,369 --> 00:11:10,402
+worrying about it, it was using it.
+
+294
+00:11:10,404 --> 00:11:12,204
+This number of format will also be used for
+
+295
+00:11:12,206 --> 00:11:13,872
+formatting currencies.
+
+296
+00:11:13,874 --> 00:11:16,541
+Okay, your local currencies.
+
+297
+00:11:16,543 --> 00:11:18,776
+And then dates is another one.
+
+298
+00:11:18,778 --> 00:11:21,679
+Dates are displayed myriad different ways across
+
+299
+00:11:21,681 --> 00:11:22,963
+the globe.
+
+300
+00:11:22,964 --> 00:11:24,246
+So you definitely need to use a date formatter if you're
+
+301
+00:11:24,249 --> 00:11:26,616
+gonna put any kind of date in your UI.
+
+302
+00:11:26,618 --> 00:11:28,718
+There's also date components formatter, so
+
+303
+00:11:28,720 --> 00:11:32,188
+date components are like the day of the week, the month.
+
+304
+00:11:32,190 --> 00:11:36,325
+Okay, those also are displayed differently across the world.
+
+305
+00:11:36,327 --> 00:11:39,461
+And there's even kind of some fringe formatters you wouldn't
+
+306
+00:11:39,463 --> 00:11:42,764
+think but you need to like byte count formatters, okay?
+
+307
+00:11:42,766 --> 00:11:47,401
+So if you wanna say 350 kilobytes left of 2 gigabytes.
+
+308
+00:11:47,403 --> 00:11:50,237
+Okay, those numbers look a little different in different
+
+309
+00:11:50,239 --> 00:11:51,305
+languages.
+
+310
+00:11:51,306 --> 00:11:52,372
+You can't just put the number in there and
+
+311
+00:11:52,374 --> 00:11:55,275
+put kb after it and expect that to be kilobytes.
+
+312
+00:11:55,277 --> 00:11:57,243
+It's not necessarily gonna be right.
+
+313
+00:11:57,245 --> 00:11:59,712
+So the byte count format I can help you with that, and
+
+314
+00:11:59,714 --> 00:12:01,847
+then in map kit there's the distance formatter.
+
+315
+00:12:01,849 --> 00:12:04,216
+So you can specify here's the distance between two places
+
+316
+00:12:04,218 --> 00:12:06,885
+because that also needs to be localized.
+
+317
+00:12:06,887 --> 00:12:08,753
+Health kit also has a number of things.
+
+318
+00:12:08,755 --> 00:12:11,288
+Like energy, calories used.
+
+319
+00:12:11,290 --> 00:12:13,157
+Those kinds of things.
+
+320
+00:12:13,159 --> 00:12:16,159
+Some of those are different in different locales.
+
+321
+00:12:16,161 --> 00:12:19,229
+So any time you're gonna put a number or
+
+322
+00:12:19,231 --> 00:12:22,565
+a date on screen, you're gonna wanna see if there's a proper
+
+323
+00:12:22,567 --> 00:12:25,434
+formatter to format this thing, okay?
+
+324
+00:12:25,436 --> 00:12:26,535
+So how do formatters work?
+
+325
+00:12:26,537 --> 00:12:27,536
+Let's look at a couple of them.
+
+326
+00:12:27,538 --> 00:12:28,937
+Let's look at NS Number Formatter.
+
+327
+00:12:28,939 --> 00:12:30,405
+Now NS Number Formatter.
+
+328
+00:12:30,407 --> 00:12:31,856
+A lot of API there.
+
+329
+00:12:31,857 --> 00:12:33,306
+You're really gonna wanna check out the documentation.
+
+330
+00:12:33,309 --> 00:12:35,943
+But I'm gonna look at the two most basic cases.
+
+331
+00:12:35,945 --> 00:12:37,778
+One is just displaying a number.
+
+332
+00:12:37,780 --> 00:12:39,846
+So you create an NSNumberFormatter
+
+333
+00:12:39,848 --> 00:12:41,447
+like we did in the calculator.
+
+334
+00:12:41,449 --> 00:12:43,883
+Then you set the style of the number.
+
+335
+00:12:43,885 --> 00:12:47,519
+So for example, decimal style or currency style.
+
+336
+00:12:47,521 --> 00:12:50,288
+There's also a style even spell out style that will
+
+337
+00:12:50,290 --> 00:12:53,458
+spell the number out, 3,000, T-H-R-E-E T-H-O-U-S-A-N-D,
+
+338
+00:12:53,460 --> 00:12:57,261
+right it'll set it out as words in the local language.
+
+339
+00:12:57,263 --> 00:12:58,929
+So there's a few styles in there.
+
+340
+00:13:00,066 --> 00:13:02,165
+Then you can set other things about the formatter,
+
+341
+00:13:02,167 --> 00:13:03,933
+how many digits you want before and
+
+342
+00:13:03,935 --> 00:13:06,969
+after the decimal point, how you want rounding to happen,
+
+343
+00:13:06,971 --> 00:13:08,104
+all that kind of stuff.
+
+344
+00:13:08,106 --> 00:13:09,938
+Set that all up and
+
+345
+00:13:09,940 --> 00:13:15,110
+then you just call formatter string from number.
+
+346
+00:13:15,112 --> 00:13:18,012
+You give it the number you want and it will return to you
+
+347
+00:13:18,014 --> 00:13:21,115
+a string that uses all those attributes that you set up and
+
+348
+00:13:21,117 --> 00:13:23,150
+be proper for the locale you're in.
+
+349
+00:13:23,152 --> 00:13:25,986
+Okay?
+
+350
+00:13:25,988 --> 00:13:27,137
+So that's that way.
+
+351
+00:13:27,138 --> 00:13:28,287
+And of course, think about the other way.
+
+352
+00:13:28,290 --> 00:13:29,689
+If you're gonna ask the user for
+
+353
+00:13:29,691 --> 00:13:33,526
+a number then, you better use a number formatter to parse
+
+354
+00:13:33,528 --> 00:13:36,295
+that number into a number from a string.
+
+355
+00:13:36,297 --> 00:13:38,864
+And, that's because, as you know, some parts of the world,
+
+356
+00:13:38,866 --> 00:13:41,266
+the decimal separator's actually a comma.
+
+357
+00:13:41,268 --> 00:13:43,434
+So if they type three comma two,.
+
+358
+00:13:43,436 --> 00:13:45,036
+And you don't use a formatter,
+
+359
+00:13:45,038 --> 00:13:46,170
+you're gonna look at that and say, oh.
+
+360
+00:13:46,172 --> 00:13:47,804
+They want, what do they want, three?
+
+361
+00:13:47,806 --> 00:13:49,806
+Or that's just not even a valid number, right?
+
+362
+00:13:49,808 --> 00:13:52,508
+But if they type three comma two and they're locale is some
+
+363
+00:13:52,510 --> 00:13:54,143
+place where that's the way numbers are expressed,
+
+364
+00:13:54,145 --> 00:13:57,846
+then that's gonna give you 3.2 back out of it, okay?
+
+365
+00:13:57,848 --> 00:14:01,449
+So displaying of parsing numbers main job event is for
+
+366
+00:14:01,451 --> 00:14:02,595
+number formatter.
+
+367
+00:14:02,596 --> 00:14:03,740
+But there's a lot more in there.
+
+368
+00:14:03,741 --> 00:14:04,885
+So you definitely wanna familiarize yourself with
+
+369
+00:14:04,888 --> 00:14:05,619
+that class.
+
+370
+00:14:06,789 --> 00:14:07,821
+On the date side.
+
+371
+00:14:07,823 --> 00:14:10,824
+Okay, formatting dates, very complicated.
+
+372
+00:14:10,826 --> 00:14:13,593
+Okay, how we as humans represent dates,
+
+373
+00:14:13,595 --> 00:14:16,195
+we don't do it in a simple way, unfortunately.
+
+374
+00:14:16,197 --> 00:14:20,966
+Luckily there's some built in, pretty simple styles for
+
+375
+00:14:20,968 --> 00:14:22,500
+showing numbers.
+
+376
+00:14:22,502 --> 00:14:26,070
+Short style, medium style, long style, full style.
+
+377
+00:14:26,072 --> 00:14:28,939
+And hopefully those will do what you want.
+
+378
+00:14:28,941 --> 00:14:31,108
+Cuz if you can use one of those, then the way to
+
+379
+00:14:31,110 --> 00:14:33,643
+do it is you just create an NS Date Formatter,
+
+380
+00:14:33,645 --> 00:14:36,913
+you set the time style and the date style to be one of these
+
+381
+00:14:36,915 --> 00:14:41,150
+kind of styles, and then you just get you string from date.
+
+382
+00:14:41,152 --> 00:14:43,886
+And now you'll have a string that you can put in the UI
+
+383
+00:14:43,888 --> 00:14:46,688
+that will be fully localized in the local language and
+
+384
+00:14:46,690 --> 00:14:47,822
+in the right locale.
+
+385
+00:14:47,824 --> 00:14:50,091
+Okay?
+
+386
+00:14:50,093 --> 00:14:52,259
+EY image, how about images?
+
+387
+00:14:52,261 --> 00:14:56,063
+Because some street signs or other things like that might
+
+388
+00:14:56,065 --> 00:14:58,265
+look different in other language.
+
+389
+00:14:58,267 --> 00:15:00,633
+And there's a couple of ways to do that.
+
+390
+00:15:00,635 --> 00:15:04,771
+If you put the JPEGs or the PNGs directly in your project,
+
+391
+00:15:04,773 --> 00:15:07,940
+in other words you don't put them in the images.xcassets
+
+392
+00:15:07,942 --> 00:15:09,642
+thing.
+
+393
+00:15:09,643 --> 00:15:11,343
+Then actually those can become localizable files.
+
+394
+00:15:11,345 --> 00:15:13,979
+And you just click on them, go to the file inspector, and
+
+395
+00:15:13,981 --> 00:15:15,413
+say make this localizable.
+
+396
+00:15:15,415 --> 00:15:16,714
+And you can have a different version for
+
+397
+00:15:16,716 --> 00:15:21,051
+every language that you want.
+
+398
+00:15:21,053 --> 00:15:24,221
+But maybe a better way to do it is put them in your
+
+399
+00:15:24,223 --> 00:15:26,106
+xcassets.
+
+400
+00:15:26,107 --> 00:15:27,990
+Put all the images from all the languages.
+
+401
+00:15:27,993 --> 00:15:30,560
+And give them names
+
+402
+00:15:30,562 --> 00:15:34,329
+that you can then look up using NSLocalizedString.
+
+403
+00:15:34,331 --> 00:15:36,198
+Okay? Okay.
+
+404
+00:15:36,199 --> 00:15:38,066
+And then your translators can translate the name of stop
+
+405
+00:15:38,068 --> 00:15:41,903
+sign to French stop sign, or something like that.
+
+406
+00:15:41,905 --> 00:15:44,305
+And then that'll be the name in the image.scs.
+
+407
+00:15:44,307 --> 00:15:46,340
+And then you can use some naming convention to group
+
+408
+00:15:46,342 --> 00:15:47,574
+them, or whatever you wanna do.
+
+409
+00:15:47,576 --> 00:15:50,177
+But that's probably a little bit better way to do it,
+
+410
+00:15:50,179 --> 00:15:52,445
+because then your translator has a little more
+
+411
+00:15:52,447 --> 00:15:53,947
+control of it.
+
+412
+00:15:53,948 --> 00:15:55,448
+Now you'll have to coordinate with your translator to
+
+413
+00:15:55,450 --> 00:15:57,817
+make sure you name the images in your xcassets to match what
+
+414
+00:15:57,819 --> 00:15:59,084
+they've translated them to.
+
+415
+00:15:59,086 --> 00:16:02,254
+But still a pretty straight forward way of doing that.
+
+416
+00:16:02,256 --> 00:16:06,224
+Okay, so congratulations.
+
+417
+00:16:06,226 --> 00:16:07,792
+You've done all those things, right?
+
+418
+00:16:07,794 --> 00:16:11,295
+You did the story boards, you added the languages,
+
+419
+00:16:11,297 --> 00:16:15,865
+you used NS localize string, you
+
+420
+00:16:15,867 --> 00:16:18,334
+put the formatters in there, now your app is localizable.
+
+421
+00:16:18,336 --> 00:16:19,869
+And now you wanna localize it.
+
+422
+00:16:19,871 --> 00:16:21,637
+'Kay, how do you do that?
+
+423
+00:16:21,639 --> 00:16:23,005
+Could not be simpler.
+
+424
+00:16:23,007 --> 00:16:25,073
+You just go to the project again,
+
+425
+00:16:25,075 --> 00:16:27,175
+the same place that you added the languages, and
+
+426
+00:16:27,177 --> 00:16:30,544
+from the Editor menu, you just say Export for Localization.
+
+427
+00:16:30,546 --> 00:16:33,313
+And it will export all the languages.
+
+428
+00:16:33,315 --> 00:16:35,048
+You can actually select which ones you want,
+
+429
+00:16:35,050 --> 00:16:38,151
+but it'll export all your languages in a format called
+
+430
+00:16:38,153 --> 00:16:42,221
+.xliff, 'kay, which is this international file format for
+
+431
+00:16:42,223 --> 00:16:43,722
+translators, 'kay?
+
+432
+00:16:43,724 --> 00:16:46,825
+They have tools, translators have tools that read .xliff
+
+433
+00:16:46,827 --> 00:16:49,494
+files and let them translate, and
+
+434
+00:16:49,496 --> 00:16:53,498
+then they press, you know, send or whatever.
+
+435
+00:16:53,500 --> 00:16:55,933
+It generates an .xliff with the translations in it.
+
+436
+00:16:55,935 --> 00:16:57,101
+So this is kind of the,
+
+437
+00:16:57,103 --> 00:16:59,903
+you know, industry standard communication mechanism
+
+438
+00:16:59,905 --> 00:17:02,739
+between developers and translators.
+
+439
+00:17:02,741 --> 00:17:06,476
+And so Xcode localization will generate them all.
+
+440
+00:17:06,478 --> 00:17:09,545
+And then your translator will use their tool, translate it,
+
+441
+00:17:09,547 --> 00:17:12,548
+give you an .xliff file back, and you will then,
+
+442
+00:17:12,550 --> 00:17:16,751
+in that same place, say Import Localizations, 'kay?
+
+443
+00:17:16,753 --> 00:17:19,153
+You can only import one .xliff at a time.
+
+444
+00:17:19,155 --> 00:17:21,655
+A single .xliff can have multiple translations for
+
+445
+00:17:21,657 --> 00:17:24,892
+multiple languages, by the way, and your translator,
+
+446
+00:17:24,894 --> 00:17:26,693
+if they're doing ten languages for you, they might give
+
+447
+00:17:26,695 --> 00:17:28,595
+you one .xliff with all the languages in there.
+
+448
+00:17:28,597 --> 00:17:30,997
+But anyway, you do import localizations, and
+
+449
+00:17:30,999 --> 00:17:33,265
+it will import it into your project.
+
+450
+00:17:33,267 --> 00:17:34,600
+And what's really cool then,
+
+451
+00:17:34,602 --> 00:17:38,036
+is if you then change some things and export again,
+
+452
+00:17:38,038 --> 00:17:41,973
+all of their translations will get exported, so that you
+
+453
+00:17:41,975 --> 00:17:44,342
+can just keep going back and forth, import, export, import,
+
+454
+00:17:44,344 --> 00:17:46,911
+export, and the translators doing the opposite.
+
+455
+00:17:46,913 --> 00:17:49,279
+They're importing what you send, they translate it,
+
+456
+00:17:49,281 --> 00:17:51,198
+they send it out.
+
+457
+00:17:51,199 --> 00:17:53,116
+When you send something new it has all the old work they did,
+
+458
+00:17:53,118 --> 00:17:55,719
+becaus export keeps that.
+
+459
+00:17:55,721 --> 00:17:56,987
+Okay?
+
+460
+00:17:56,988 --> 00:17:58,254
+So it's really super simple system.
+
+461
+00:17:58,256 --> 00:18:00,907
+It's totally built for
+
+462
+00:18:00,908 --> 00:18:03,559
+that iterative process, really well designed.
+
+463
+00:18:03,561 --> 00:18:08,129
+This is new for iOS 8, they did a great job with this.
+
+464
+00:18:08,131 --> 00:18:09,531
+Okay? So it's just import,
+
+465
+00:18:09,532 --> 00:18:10,932
+export, and that's all it takes, 'kay?
+
+466
+00:18:12,068 --> 00:18:16,269
+Once you have a localization back
+
+467
+00:18:16,271 --> 00:18:18,638
+you can preview it in really two different places.
+
+468
+00:18:18,640 --> 00:18:20,907
+One, you can preview it in Xcode, and
+
+469
+00:18:20,909 --> 00:18:23,342
+I actually showed you this earlier in the quarter.
+
+470
+00:18:23,344 --> 00:18:27,279
+There's that little preview pane on the right and
+
+471
+00:18:27,281 --> 00:18:29,815
+you can preview it, and in the lower right hand corner of
+
+472
+00:18:29,817 --> 00:18:32,617
+the preview pane, it actually has all the languages that you
+
+473
+00:18:32,619 --> 00:18:33,618
+have translations for.
+
+474
+00:18:33,620 --> 00:18:34,819
+You just pick it and boom,
+
+475
+00:18:34,821 --> 00:18:36,387
+right there in Xcode it'll show you.
+
+476
+00:18:36,389 --> 00:18:38,655
+Now that's only gonna show your static story board
+
+477
+00:18:38,657 --> 00:18:40,357
+though, it's not showing your app running.
+
+478
+00:18:40,359 --> 00:18:43,292
+You're not gonna see any of your NS localized strings
+
+479
+00:18:43,294 --> 00:18:44,627
+in there.
+
+480
+00:18:44,628 --> 00:18:45,961
+You're only going to see the translations that were made to
+
+481
+00:18:45,963 --> 00:18:47,096
+something in a story board.
+
+482
+00:18:48,432 --> 00:18:50,799
+And yeah, notice there's that nice little double length
+
+483
+00:18:50,801 --> 00:18:52,551
+pseudo language.
+
+484
+00:18:52,552 --> 00:18:54,302
+That's a good way to make everything really long and
+
+485
+00:18:54,304 --> 00:18:55,403
+make sure everything's fitting.
+
+486
+00:18:55,405 --> 00:18:57,004
+Maybe there's places you're out of layout,
+
+487
+00:18:57,006 --> 00:18:59,406
+you need to make more room, something like that.
+
+488
+00:18:59,408 --> 00:19:01,141
+So that's kind of a cool, it's not real language,
+
+489
+00:19:01,143 --> 00:19:03,309
+just doubles the length of every string, but
+
+490
+00:19:03,311 --> 00:19:04,643
+it's kinda cool.
+
+491
+00:19:04,645 --> 00:19:08,113
+The other way, and this is mostly the way you're gonna
+
+492
+00:19:08,115 --> 00:19:11,917
+test your app is you want to run it using the translations.
+
+493
+00:19:11,919 --> 00:19:14,285
+Now, it would be a pain in the neck,
+
+494
+00:19:14,287 --> 00:19:16,721
+if every time you wanted to run in Arabic
+
+495
+00:19:16,723 --> 00:19:19,890
+you had to go on your device or your simulator.
+
+496
+00:19:19,892 --> 00:19:23,493
+Go over here to, actually, here, let's put this up here,
+
+497
+00:19:23,495 --> 00:19:24,794
+and I'll show you.
+
+498
+00:19:28,466 --> 00:19:29,665
+Okay, so here's my device.
+
+499
+00:19:29,667 --> 00:19:32,634
+So if I had to go to Settings and go to,
+
+500
+00:19:32,636 --> 00:19:35,437
+I think it's under General.
+
+501
+00:19:35,439 --> 00:19:39,140
+And then go to, where is it.
+
+502
+00:19:39,142 --> 00:19:40,274
+Language and region.
+
+503
+00:19:40,276 --> 00:19:43,010
+And then go over here to my iPhone language,
+
+504
+00:19:43,012 --> 00:19:44,611
+go find Arabic in here.
+
+505
+00:19:44,613 --> 00:19:47,146
+If had to do that for all of the ten languages,
+
+506
+00:19:47,148 --> 00:19:50,116
+I would just be going crazy doing that.
+
+507
+00:19:50,118 --> 00:19:52,351
+So luckily, you don't have to do any of that.
+
+508
+00:19:52,353 --> 00:19:54,920
+All you have to do is create a scheme.
+
+509
+00:19:54,922 --> 00:19:56,688
+'Kay? A run scheme for
+
+510
+00:19:56,690 --> 00:19:58,923
+your app that sets the language.
+
+511
+00:19:58,925 --> 00:20:00,558
+So the way you create a scheme.
+
+512
+00:20:00,560 --> 00:20:04,028
+In the upper left hand corner of Xcode where you click run.
+
+513
+00:20:04,030 --> 00:20:07,397
+Right now you only ever see it say the name of your app.
+
+514
+00:20:07,399 --> 00:20:09,833
+But you can actually hold down on that, and
+
+515
+00:20:09,835 --> 00:20:12,735
+there'll be a little menu, and you can say edit scheme.
+
+516
+00:20:12,737 --> 00:20:15,671
+And edit scheme will bring up this thing that you see there,
+
+517
+00:20:15,673 --> 00:20:19,842
+the big window, and it's going to say what are the settings
+
+518
+00:20:19,844 --> 00:20:22,978
+you want when you build, when you run, when you test, when
+
+519
+00:20:22,980 --> 00:20:27,348
+you profile this app, when you're stack analyzing, etc.
+
+520
+00:20:27,350 --> 00:20:29,116
+And in the build, in the run section,
+
+521
+00:20:29,118 --> 00:20:31,752
+there you can see that there's application language and
+
+522
+00:20:31,754 --> 00:20:34,905
+application regions.
+
+523
+00:20:34,906 --> 00:20:38,057
+So you can set those to French or maybe Spanish and Mexico,
+
+524
+00:20:38,060 --> 00:20:40,360
+if you wanted a locale.
+
+525
+00:20:40,362 --> 00:20:43,596
+And then, it will make a new entry, okay?
+
+526
+00:20:43,598 --> 00:20:45,998
+Sorry, first of all, you duplicate an existing scheme.
+
+527
+00:20:46,000 --> 00:20:46,999
+You see that, lower left?
+
+528
+00:20:47,001 --> 00:20:49,034
+Duplicate an existing scheme.
+
+529
+00:20:49,036 --> 00:20:51,069
+Then you set all these things, and save it, and
+
+530
+00:20:51,071 --> 00:20:52,536
+now you have two schemes.
+
+531
+00:20:52,538 --> 00:20:54,972
+The original one, that doesn't have a language set, and
+
+532
+00:20:54,974 --> 00:20:56,173
+the duplicated one.
+
+533
+00:20:56,175 --> 00:20:57,874
+'Kay, that you've set the language in.
+
+534
+00:20:57,876 --> 00:20:59,876
+Now if you wanna run in that other language,
+
+535
+00:20:59,878 --> 00:21:04,546
+like French, you just hit that pop-up, pick French, hit run.
+
+536
+00:21:04,548 --> 00:21:06,314
+Okay? And it's gonna run using that
+
+537
+00:21:06,316 --> 00:21:08,550
+language and locale.
+
+538
+00:21:08,552 --> 00:21:10,318
+It's really cool, fast way.
+
+539
+00:21:10,320 --> 00:21:12,553
+You can check ten languages really quick.
+
+540
+00:21:12,555 --> 00:21:15,022
+You add in a new feature or a new translation came back,
+
+541
+00:21:15,024 --> 00:21:18,091
+you just click run, check it out, okay.
+
+542
+00:21:18,093 --> 00:21:19,159
+Click run.
+
+543
+00:21:19,161 --> 00:21:20,927
+Checking out, back and forth, okay?
+
+544
+00:21:21,963 --> 00:21:25,697
+So that's how you preview a localization at runtime, 'kay?
+
+545
+00:21:25,699 --> 00:21:29,834
+And I'll show that in a demo.
+
+546
+00:21:29,836 --> 00:21:32,537
+There's also this little localization debugging switch
+
+547
+00:21:32,539 --> 00:21:34,171
+you see in there, and
+
+548
+00:21:34,173 --> 00:21:35,739
+that's going to do a couple of things.
+
+549
+00:21:35,741 --> 00:21:38,709
+One thing is on localize strings from your story boards
+
+550
+00:21:38,711 --> 00:21:42,945
+will show up in all caps in your UI, so that's nice.
+
+551
+00:21:42,947 --> 00:21:45,781
+Also things that were not localized,
+
+552
+00:21:45,783 --> 00:21:48,283
+will spit something out on the console,
+
+553
+00:21:48,285 --> 00:21:49,985
+saying this string on localized, okay?
+
+554
+00:21:51,021 --> 00:21:52,820
+So when you're getting something back from
+
+555
+00:21:52,822 --> 00:21:55,122
+the localizer you wanna make sure they didn't make any
+
+556
+00:21:55,124 --> 00:21:57,825
+mistakes, although the import is gonna find mistakes,
+
+557
+00:21:57,827 --> 00:21:59,292
+I'll show you that too in the demo.
+
+558
+00:21:59,294 --> 00:22:01,895
+But if there's something else in there, you'll be able to
+
+559
+00:22:01,897 --> 00:22:06,899
+see it with this localization debugging on, 'kay?
+
+560
+00:22:06,901 --> 00:22:08,667
+And that's it, 'kay?
+
+561
+00:22:08,669 --> 00:22:12,971
+So all you gotta do is autolayout, get your localized
+
+562
+00:22:12,973 --> 00:22:16,207
+strings in there, use formatters properly, and
+
+563
+00:22:16,209 --> 00:22:17,441
+you'll be internationalizeable.
+
+564
+00:22:17,443 --> 00:22:19,910
+And then it's just question, go hire your localizer.
+
+565
+00:22:21,080 --> 00:22:23,646
+Back and forth with the .xliffs, all right?
+
+566
+00:22:23,648 --> 00:22:25,548
+So let me show you what this looks like.
+
+567
+00:22:28,720 --> 00:22:33,789
+Here, we're going to localize autolayout, okay?
+
+568
+00:22:33,791 --> 00:22:37,092
+Do you remember this app back when we were doing autolayout,
+
+569
+00:22:37,094 --> 00:22:38,659
+looks like this?
+
+570
+00:22:38,661 --> 00:22:41,862
+So we're going to localize this to a number of different
+
+571
+00:22:41,864 --> 00:22:42,896
+languages.
+
+572
+00:22:42,898 --> 00:22:44,931
+And I added one feature to this, actually,
+
+573
+00:22:44,933 --> 00:22:47,434
+which is this little guy right here Last Login.
+
+574
+00:22:47,436 --> 00:22:50,303
+So I just made it when you log in it puts a last log in
+
+575
+00:22:50,305 --> 00:22:51,888
+date in here,
+
+576
+00:22:51,889 --> 00:22:53,472
+because it's gonna let us talk about date formatters and
+
+577
+00:22:53,474 --> 00:22:57,576
+number formatters, things like that, in here.
+
+578
+00:22:57,578 --> 00:23:01,279
+But otherwise it works exactly the same as it always is.
+
+579
+00:23:01,281 --> 00:23:03,148
+We type the username and password, we hit log in,
+
+580
+00:23:03,150 --> 00:23:04,549
+we can do change security and
+
+581
+00:23:04,551 --> 00:23:07,151
+it'll change this word right here.
+
+582
+00:23:07,153 --> 00:23:09,019
+And that's it.
+
+583
+00:23:09,021 --> 00:23:13,423
+So, what do we need to do
+
+584
+00:23:13,425 --> 00:23:15,491
+if we want to make this localizable?
+
+585
+00:23:15,493 --> 00:23:16,926
+Well the first thing we wanna do
+
+586
+00:23:16,928 --> 00:23:19,294
+is go up to our project up here.
+
+587
+00:23:19,296 --> 00:23:21,163
+And again, you want to be careful here
+
+588
+00:23:21,165 --> 00:23:22,630
+not to have the target selected,
+
+589
+00:23:22,632 --> 00:23:24,866
+you actually want the project selected, okay.
+
+590
+00:23:24,868 --> 00:23:26,701
+Target, project.
+
+591
+00:23:26,703 --> 00:23:29,370
+In the project selection you're gonna have info and
+
+592
+00:23:29,372 --> 00:23:31,104
+build settings.
+
+593
+00:23:31,106 --> 00:23:33,740
+And, so let's create some localizations,
+
+594
+00:23:33,742 --> 00:23:35,108
+you see it down here localizations?
+
+595
+00:23:35,110 --> 00:23:37,476
+We don't have any currently, it just says English.
+
+596
+00:23:37,478 --> 00:23:39,411
+So I'm gonna create some, you know, let's do French.
+
+597
+00:23:39,413 --> 00:23:41,029
+That's a good one.
+
+598
+00:23:41,030 --> 00:23:42,646
+And it's saying here, what do you wanna make localizable?
+
+599
+00:23:42,649 --> 00:23:45,650
+And, yes, my storyboard, and also that launch screen, which
+
+600
+00:23:45,652 --> 00:23:48,052
+we really haven't [LAUGH] talked about in this class.
+
+601
+00:23:48,054 --> 00:23:49,286
+The launch screen, by the way,
+
+602
+00:23:49,288 --> 00:23:51,855
+is just this thing that pops up briefly while your app is
+
+603
+00:23:51,857 --> 00:23:52,756
+getting up and running.
+
+604
+00:23:52,758 --> 00:23:54,374
+You've probably seen that.
+
+605
+00:23:54,375 --> 00:23:55,991
+You can edit it and create, put an image there or
+
+606
+00:23:55,994 --> 00:23:57,260
+something like that.
+
+607
+00:23:57,262 --> 00:23:59,895
+But that's something you might wanna be localize both,
+
+608
+00:23:59,897 --> 00:24:01,296
+it has text or something on it.
+
+609
+00:24:01,298 --> 00:24:02,931
+So we gonna leave that.
+
+610
+00:24:02,933 --> 00:24:03,898
+So there's French.
+
+611
+00:24:03,900 --> 00:24:07,635
+Let's do, yeah let's do Chinese.
+
+612
+00:24:07,637 --> 00:24:09,737
+Let's do traditional also.
+
+613
+00:24:09,739 --> 00:24:13,407
+Let's do, I don't know.
+
+614
+00:24:13,409 --> 00:24:19,278
+How about something Arabic, how about is a good one.
+
+615
+00:24:20,281 --> 00:24:22,247
+How about Japanese?
+
+616
+00:24:22,249 --> 00:24:23,482
+Yeah, there's Japanese.
+
+617
+00:24:23,484 --> 00:24:27,185
+So I'm adding a bunch of languages here, and
+
+618
+00:24:28,254 --> 00:24:32,556
+when I now go here to this Editor menu and
+
+619
+00:24:32,558 --> 00:24:35,091
+say Export For Localization.
+
+620
+00:24:35,093 --> 00:24:37,393
+It's gonna say, where do you wanna put them?
+
+621
+00:24:37,395 --> 00:24:43,132
+I have a directory here called my L10N, my localization one.
+
+622
+00:24:43,134 --> 00:24:45,934
+And, I have this folder called To Localizer.
+
+623
+00:24:45,936 --> 00:24:48,936
+I don't have anything in there right now.
+
+624
+00:24:50,273 --> 00:24:52,306
+We're gonna put our auto layout stuff in here.
+
+625
+00:24:52,308 --> 00:24:54,374
+Here, you see, it's asking what languages you wanna
+
+626
+00:24:54,376 --> 00:24:56,276
+generate these .xliffs for.
+
+627
+00:24:56,278 --> 00:24:57,477
+So I'm going to hit save.
+
+628
+00:24:57,479 --> 00:24:59,412
+And it's going to generate .xliffs,
+
+629
+00:24:59,414 --> 00:25:02,214
+which we're going to go look at for all of these things.
+
+630
+00:25:02,216 --> 00:25:03,565
+Okay? So
+
+631
+00:25:03,566 --> 00:25:04,915
+here's all the files that are going to my localizer.
+
+632
+00:25:04,918 --> 00:25:07,118
+I'm going to send these to my localizer so
+
+633
+00:25:07,120 --> 00:25:08,269
+let's look at one.
+
+634
+00:25:08,270 --> 00:25:09,419
+It really doesn't matter because nothing's been
+
+635
+00:25:09,422 --> 00:25:10,588
+localized yet.
+
+636
+00:25:10,590 --> 00:25:12,190
+But here we go,
+
+637
+00:25:12,191 --> 00:25:13,791
+see storyboard, here's all this strings.
+
+638
+00:25:13,793 --> 00:25:15,058
+You recognize these strings?
+
+639
+00:25:15,060 --> 00:25:19,062
+Company, last log in, the log in button, user name.
+
+640
+00:25:19,064 --> 00:25:21,864
+Name, password, the change security button.
+
+641
+00:25:21,866 --> 00:25:24,366
+Those are all the strings that it extracted
+
+642
+00:25:24,368 --> 00:25:26,268
+from the storyboard.
+
+643
+00:25:26,270 --> 00:25:31,305
+I send these off to my localizer,
+
+644
+00:25:31,307 --> 00:25:35,342
+and they go work on them, and then we get some back.
+
+645
+00:25:35,344 --> 00:25:37,261
+So, okay.
+
+646
+00:25:37,262 --> 00:25:39,179
+Look, they just came back from the localizer, here they are.
+
+647
+00:25:39,181 --> 00:25:42,849
+So let's go ahead and take a look at the Japanese one.
+
+648
+00:25:42,851 --> 00:25:44,751
+So here's the Japanese one right here,
+
+649
+00:25:44,753 --> 00:25:46,819
+what does this look like?
+
+650
+00:25:46,821 --> 00:25:51,056
+So the localizer has put localizations for
+
+651
+00:25:51,058 --> 00:25:53,491
+each of these things into this X-look.
+
+652
+00:25:53,493 --> 00:25:56,227
+Now they didn't edit it here in text edit [LAUGH],
+
+653
+00:25:56,229 --> 00:25:59,397
+they have a tool that lets them do that.
+
+654
+00:25:59,399 --> 00:26:01,231
+And so let's go ahead and import that.
+
+655
+00:26:01,233 --> 00:26:02,416
+So we go here, and
+
+656
+00:26:02,417 --> 00:26:03,600
+we're going to import this localization for
+
+657
+00:26:03,602 --> 00:26:07,236
+Japanese from the localizer.
+
+658
+00:26:07,238 --> 00:26:08,304
+Japanese.
+
+659
+00:26:08,306 --> 00:26:08,904
+Okay.
+
+660
+00:26:08,906 --> 00:26:10,238
+Oh, there's a problem.
+
+661
+00:26:10,240 --> 00:26:13,208
+Okay, now if there's no problem, this just loads up.
+
+662
+00:26:13,210 --> 00:26:14,342
+And you're good to go.
+
+663
+00:26:14,344 --> 00:26:16,110
+But here there's a problem.
+
+664
+00:26:16,111 --> 00:26:17,877
+And when there's a problem it shows you in detail
+
+665
+00:26:17,880 --> 00:26:19,046
+what the problems are.
+
+666
+00:26:19,048 --> 00:26:23,049
+So here it says there's incoming translation for
+
+667
+00:26:23,051 --> 00:26:26,152
+one of the things in IB that was not done.
+
+668
+00:26:26,154 --> 00:26:27,987
+And you can see it right here, no translation.
+
+669
+00:26:27,989 --> 00:26:30,255
+So they didn't translate the word company.
+
+670
+00:26:30,257 --> 00:26:33,692
+Now luckily, company never actually appears in our UI.
+
+671
+00:26:33,694 --> 00:26:35,493
+That's just like the little thing like where you know,
+
+672
+00:26:35,495 --> 00:26:36,627
+Madison Bumgarner, and
+
+673
+00:26:36,629 --> 00:26:38,562
+it was were old champion San Fransisco Giants.
+
+674
+00:26:38,564 --> 00:26:40,664
+So company always gets replaced with whatever
+
+675
+00:26:40,666 --> 00:26:41,965
+the logged in user's company is.
+
+676
+00:26:41,967 --> 00:26:43,633
+So, whew, we're okay.
+
+677
+00:26:43,635 --> 00:26:46,436
+But you can see it's showing all the other translations.
+
+678
+00:26:46,438 --> 00:26:47,370
+And those look good, right?
+
+679
+00:26:47,372 --> 00:26:49,271
+So this one, this one, this one.
+
+680
+00:26:49,273 --> 00:26:50,605
+It's showing the translations.
+
+681
+00:26:50,607 --> 00:26:54,376
+So this will only appear if you've got something where
+
+682
+00:26:54,378 --> 00:26:57,945
+your translation company failed in their translation.
+
+683
+00:26:57,947 --> 00:26:59,564
+In this case, it's okay.
+
+684
+00:26:59,565 --> 00:27:01,182
+So I'm gonna accept this and import it.
+
+685
+00:27:01,184 --> 00:27:02,416
+Okay?
+
+686
+00:27:02,417 --> 00:27:03,649
+Now I can actually go to my storyboard here and
+
+687
+00:27:03,652 --> 00:27:06,987
+without even running my app I can make a second
+
+688
+00:27:06,989 --> 00:27:09,556
+window here and go down to Preview.
+
+689
+00:27:09,558 --> 00:27:11,457
+So let's preview what our main storyboard's going to
+
+690
+00:27:11,459 --> 00:27:12,725
+look like.
+
+691
+00:27:12,727 --> 00:27:14,493
+Of course, our S is cut off because,
+
+692
+00:27:14,495 --> 00:27:17,429
+if you'll remember from auto layout demo,
+
+693
+00:27:17,431 --> 00:27:19,798
+we put that in code.
+
+694
+00:27:19,800 --> 00:27:21,616
+We put a constraint for
+
+695
+00:27:21,617 --> 00:27:23,433
+the aspect ratio so that's in code so that's not here.
+
+696
+00:27:24,370 --> 00:27:27,638
+So here's what it looks like in English, right down here.
+
+697
+00:27:27,640 --> 00:27:29,240
+If I go up here and say,
+
+698
+00:27:29,241 --> 00:27:30,841
+well tell me what this looks like in Japanese,
+
+699
+00:27:30,843 --> 00:27:35,445
+then it will use those translations for Japanese.
+
+700
+00:27:35,447 --> 00:27:37,246
+Now notice company is in all caps,
+
+701
+00:27:37,248 --> 00:27:39,448
+that's because that was not translated.
+
+702
+00:27:39,450 --> 00:27:43,385
+Notice that they translated the word name to be the same.
+
+703
+00:27:43,387 --> 00:27:44,919
+If we look at the Japanese translation,
+
+704
+00:27:44,921 --> 00:27:49,289
+and we look at what they did for name, which is right here.
+
+705
+00:27:49,291 --> 00:27:52,192
+They said, oh well, there's just no word in Japanese for
+
+706
+00:27:52,194 --> 00:27:53,693
+that part of the UI so
+
+707
+00:27:53,695 --> 00:27:55,628
+we're just going to leave it in English.
+
+708
+00:27:55,630 --> 00:27:56,929
+Okay? They have that
+
+709
+00:27:56,931 --> 00:27:58,264
+option to do that.
+
+710
+00:27:58,265 --> 00:27:59,598
+But you might say, I don't want that and so
+
+711
+00:27:59,600 --> 00:28:01,299
+you can easily see that here.
+
+712
+00:28:01,301 --> 00:28:03,702
+Especially with a language like Japanese.
+
+713
+00:28:03,704 --> 00:28:06,404
+Versus some western script language like English,
+
+714
+00:28:06,406 --> 00:28:07,972
+you can see quickly, oh, whoa, whoops.
+
+715
+00:28:07,974 --> 00:28:09,039
+It's not there.
+
+716
+00:28:09,041 --> 00:28:10,474
+Okay. So that's great.
+
+717
+00:28:10,476 --> 00:28:12,175
+And if we run our app,
+
+718
+00:28:12,177 --> 00:28:13,810
+we could run it in Japanese as well.
+
+719
+00:28:13,812 --> 00:28:14,961
+And so let's do that.
+
+720
+00:28:14,962 --> 00:28:16,111
+Let's do this edit scheme thing.
+
+721
+00:28:16,114 --> 00:28:18,981
+So you see, I'm just taking this thing up here that
+
+722
+00:28:18,983 --> 00:28:20,482
+normally is always saying autolayout.
+
+723
+00:28:20,484 --> 00:28:22,350
+And I'm gonna say Edit Scheme.
+
+724
+00:28:22,352 --> 00:28:24,619
+And when I edit its scheme, I can edit scheme for
+
+725
+00:28:24,621 --> 00:28:26,387
+lots of different things, building, et cetera.
+
+726
+00:28:26,389 --> 00:28:27,788
+But I want it for running.
+
+727
+00:28:27,790 --> 00:28:29,322
+I wanna edit the scheme for running.
+
+728
+00:28:29,324 --> 00:28:32,025
+And I'm gonna duplicate this scheme, okay, and
+
+729
+00:28:32,027 --> 00:28:36,228
+I'm gonna call this my Japanese scheme right here.
+
+730
+00:28:36,230 --> 00:28:40,232
+And I'm gonna change the Japanese scheme so that.
+
+731
+00:28:40,234 --> 00:28:42,000
+It is Japanese.
+
+732
+00:28:42,002 --> 00:28:44,135
+And it's, Japan here.
+
+733
+00:28:44,137 --> 00:28:46,504
+But if we, if it wasn't there,
+
+734
+00:28:46,506 --> 00:28:47,671
+we could go look for it up here.
+
+735
+00:28:47,673 --> 00:28:49,506
+But here's Japanese.
+
+736
+00:28:49,508 --> 00:28:52,208
+And so now this is my locale.
+
+737
+00:28:52,210 --> 00:28:54,877
+And this is my language, okay?
+
+738
+00:28:54,879 --> 00:28:56,612
+So now, if I ever wanna run in Japanese,
+
+739
+00:28:56,614 --> 00:28:57,946
+now that I have this scheme,
+
+740
+00:28:57,948 --> 00:28:59,715
+you see that I have two schemes now.
+
+741
+00:28:59,717 --> 00:29:02,817
+Now that I have this Japanese scheme, I can just hit Run
+
+742
+00:29:02,819 --> 00:29:05,953
+with this scheme selected and it's gonna run in Japanese.
+
+743
+00:29:05,955 --> 00:29:11,125
+Let's go ahead and make this smaller.
+
+744
+00:29:11,127 --> 00:29:11,925
+Even smaller.
+
+745
+00:29:11,927 --> 00:29:12,792
+Okay.
+
+746
+00:29:12,794 --> 00:29:14,827
+So here's our app in Japanese.
+
+747
+00:29:14,829 --> 00:29:17,963
+And maybe we type, oh, and so I'm trying to start to type.
+
+748
+00:29:17,965 --> 00:29:19,865
+Notice that in my locale it's even bringing up
+
+749
+00:29:19,867 --> 00:29:21,066
+a Japanese keyboard.
+
+750
+00:29:21,068 --> 00:29:24,336
+I believe I can get an English keyboard here somehow.
+
+751
+00:29:24,338 --> 00:29:26,170
+There we go.
+
+752
+00:29:26,172 --> 00:29:30,808
+So, let's go madbomb and log in.
+
+753
+00:29:30,810 --> 00:29:32,676
+Here it is.
+
+754
+00:29:32,677 --> 00:29:34,543
+Notice this is not translated at all.
+
+755
+00:29:34,546 --> 00:29:36,846
+Notice this is not translated.
+
+756
+00:29:36,848 --> 00:29:39,315
+Okay because we put those in our code.
+
+757
+00:29:39,317 --> 00:29:42,218
+Those are not in our storyboard anyway.
+
+758
+00:29:42,220 --> 00:29:45,020
+So we're part of the ways down making this
+
+759
+00:29:45,022 --> 00:29:45,887
+internationalizeable.
+
+760
+00:29:45,889 --> 00:29:47,689
+We've got our storyboard.
+
+761
+00:29:47,691 --> 00:29:51,225
+So let's take the next step which is those strings,
+
+762
+00:29:51,227 --> 00:29:54,595
+like the passwords, secure password and oh,
+
+763
+00:29:54,597 --> 00:29:57,631
+I added one other feature to this app I'll show you.
+
+764
+00:29:59,034 --> 00:30:00,299
+Try and just make this wide cuz it makes it
+
+765
+00:30:00,301 --> 00:30:01,567
+a little bigger for you.
+
+766
+00:30:01,569 --> 00:30:03,369
+It's this. Is if you type a bad user name
+
+767
+00:30:03,371 --> 00:30:06,071
+and password, it says, Login Error Invalid user name or
+
+768
+00:30:06,073 --> 00:30:07,272
+password Try Again.
+
+769
+00:30:07,274 --> 00:30:11,208
+So this also needs to be localized to Japanese.
+
+770
+00:30:11,210 --> 00:30:12,693
+Okay? So
+
+771
+00:30:12,694 --> 00:30:14,177
+we got some strings here to work on, so
+
+772
+00:30:14,180 --> 00:30:16,913
+let's go work on this string and that alert string.
+
+773
+00:30:18,183 --> 00:30:21,217
+You haven't seen this code in a while but
+
+774
+00:30:21,219 --> 00:30:22,985
+here's what it looks like.
+
+775
+00:30:22,987 --> 00:30:25,520
+I'll show you all of the code I added, very simple.
+
+776
+00:30:25,522 --> 00:30:29,957
+I just added this which is doing that last log in thing
+
+777
+00:30:29,959 --> 00:30:32,093
+and I added this.
+
+778
+00:30:32,095 --> 00:30:33,961
+If the logged in user couldn't be found
+
+779
+00:30:33,963 --> 00:30:35,629
+then I'm gonna put up an alert.
+
+780
+00:30:35,631 --> 00:30:36,396
+Okay. Now that you know what
+
+781
+00:30:36,398 --> 00:30:37,614
+alerts are.
+
+782
+00:30:37,615 --> 00:30:38,831
+You didn't know what alerts were at the time that
+
+783
+00:30:38,833 --> 00:30:40,032
+we wrote this, so I can put it in.
+
+784
+00:30:40,034 --> 00:30:42,167
+But, now, you certainly do.
+
+785
+00:30:42,169 --> 00:30:44,119
+Okay?
+
+786
+00:30:44,120 --> 00:30:46,070
+And then, here's where we do that secured password thing.
+
+787
+00:30:46,073 --> 00:30:48,540
+This has not changed, from our last demo.
+
+788
+00:30:48,542 --> 00:30:49,941
+So let's fix this one first.
+
+789
+00:30:49,943 --> 00:30:51,108
+This is a pretty simple thing.
+
+790
+00:30:51,110 --> 00:30:52,910
+We got these two literal strings here, and
+
+791
+00:30:52,912 --> 00:30:54,678
+we need them to be localizable.
+
+792
+00:30:54,680 --> 00:30:58,848
+So I'm just going to create a little local here,
+
+793
+00:30:58,850 --> 00:31:02,851
+which I'm going to use NS localized string for, and
+
+794
+00:31:02,853 --> 00:31:05,153
+you can see here's that long version of it.
+
+795
+00:31:05,155 --> 00:31:07,489
+And first let's do password.
+
+796
+00:31:07,491 --> 00:31:09,857
+So I'm just going to take my literal string and
+
+797
+00:31:09,859 --> 00:31:11,425
+plop it right in here.
+
+798
+00:31:11,427 --> 00:31:14,261
+I don't need the table or bundle or value.
+
+799
+00:31:14,263 --> 00:31:16,413
+Okay?
+
+800
+00:31:16,414 --> 00:31:18,564
+And this is going to be a comment to the localizer, this
+
+801
+00:31:18,567 --> 00:31:23,503
+is something like, this is a prompt for the users password
+
+802
+00:31:25,073 --> 00:31:29,274
+when it is not secure i.e.
+
+803
+00:31:29,276 --> 00:31:31,676
+plain text.
+
+804
+00:31:31,678 --> 00:31:34,512
+Okay, so I'm trying to give the localizer as much
+
+805
+00:31:35,748 --> 00:31:36,980
+context there, as I can.
+
+806
+00:31:36,982 --> 00:31:39,549
+May, I might even put a much longer comment, there.
+
+807
+00:31:39,551 --> 00:31:42,952
+You really can't go wrong with nice long comments.
+
+808
+00:31:42,954 --> 00:31:45,955
+And then, the secure password.
+
+809
+00:31:45,957 --> 00:31:48,557
+We will just do another NS localized string, here.
+
+810
+00:31:48,559 --> 00:31:53,595
+We'll take this secured password thing out of here,
+
+811
+00:31:53,597 --> 00:31:54,829
+put it here.
+
+812
+00:31:54,831 --> 00:31:57,832
+Get rid of all this.
+
+813
+00:31:57,834 --> 00:32:01,935
+And we'll say, a Prompt for.
+
+814
+00:32:01,937 --> 00:32:09,709
+An obscured (not plain text) password.
+
+815
+00:32:09,711 --> 00:32:11,177
+Okay?
+
+816
+00:32:11,179 --> 00:32:12,344
+So that's it. So now,
+
+817
+00:32:12,346 --> 00:32:14,680
+these two locals here are just strings.
+
+818
+00:32:14,682 --> 00:32:17,315
+If we look at their type, they're just a string.
+
+819
+00:32:17,317 --> 00:32:20,451
+But they've had a chance to be localized by a translator.
+
+820
+00:32:20,453 --> 00:32:22,019
+So now I can say, if it's secure,
+
+821
+00:32:22,021 --> 00:32:23,487
+return the obscure password.
+
+822
+00:32:23,489 --> 00:32:25,689
+If it's not secure, then do the password.
+
+823
+00:32:27,125 --> 00:32:28,357
+Okay, simple as that.
+
+824
+00:32:28,359 --> 00:32:31,160
+And, you can put these things right in line, right here,
+
+825
+00:32:31,162 --> 00:32:31,727
+if you want.
+
+826
+00:32:31,729 --> 00:32:33,028
+Okay?
+
+827
+00:32:33,030 --> 00:32:35,530
+We could have even put this, obviously,
+
+828
+00:32:35,532 --> 00:32:38,833
+right here without even having this local, or I guess,
+
+829
+00:32:38,835 --> 00:32:41,802
+this right here, without having this local, but
+
+830
+00:32:41,804 --> 00:32:44,171
+it's kind of nicer to put them in here.
+
+831
+00:32:44,173 --> 00:32:45,905
+It starts getting a little hard to read
+
+832
+00:32:45,907 --> 00:32:48,441
+if we had all that stuff here, a humongous line of code.
+
+833
+00:32:48,443 --> 00:32:50,576
+But, it's perfectly legal.
+
+834
+00:32:50,578 --> 00:32:52,077
+One thing about these localized strings,
+
+835
+00:32:52,079 --> 00:32:54,680
+these do need to be literals, okay?
+
+836
+00:32:54,682 --> 00:32:56,348
+This and this, they need to be literals.
+
+837
+00:32:56,350 --> 00:33:00,518
+They can't be themselves variables, okay?
+
+838
+00:33:00,520 --> 00:33:02,320
+Because, obviously,
+
+839
+00:33:02,321 --> 00:33:04,121
+the code is being scanned to extract this out of here.
+
+840
+00:33:04,123 --> 00:33:05,689
+All right?
+
+841
+00:33:05,691 --> 00:33:07,490
+How about our alert down here?
+
+842
+00:33:07,492 --> 00:33:09,625
+Well, I'm gonna do this a little differently.
+
+843
+00:33:09,627 --> 00:33:14,830
+I'm going to put the strings into a little constant,
+
+844
+00:33:14,832 --> 00:33:17,566
+okay, a struct that's kind of like constants.
+
+845
+00:33:17,568 --> 00:33:19,300
+So, I have my struct alert strings.
+
+846
+00:33:19,302 --> 00:33:21,002
+Actually, I have a little struct inside of it called
+
+847
+00:33:21,004 --> 00:33:23,137
+the alert strings for
+
+848
+00:33:23,138 --> 00:33:25,271
+the login error alert, cuz I might have multiple alerts.
+
+849
+00:33:25,274 --> 00:33:27,207
+And, so then I have a localized string for
+
+850
+00:33:27,209 --> 00:33:29,509
+the title of the alert, a localized string for
+
+851
+00:33:29,511 --> 00:33:31,845
+the message in the alert, and a localized string for
+
+852
+00:33:31,847 --> 00:33:33,880
+the dismiss button of the alert, right?
+
+853
+00:33:33,882 --> 00:33:37,016
+Login error, invalid username, try again.
+
+854
+00:33:37,018 --> 00:33:40,052
+And again, I've put nice, long description here, so that
+
+855
+00:33:40,054 --> 00:33:42,954
+the translator can figure out what the context of this is.
+
+856
+00:33:42,956 --> 00:33:46,524
+And then down here, I need to replace these literal
+
+857
+00:33:46,526 --> 00:33:49,327
+strings with the things from my struct.
+
+858
+00:33:49,329 --> 00:33:53,997
+So this is the title, this is the message right here.
+
+859
+00:33:53,999 --> 00:33:56,933
+Strings.loginerror.message.
+
+860
+00:33:56,935 --> 00:33:59,336
+And here is our dismiss button.
+
+861
+00:34:03,941 --> 00:34:06,608
+Okay, so I replace that.
+
+862
+00:34:06,610 --> 00:34:07,910
+Okay? So now,
+
+863
+00:34:07,911 --> 00:34:09,211
+I basically got all my strings, except for
+
+864
+00:34:09,213 --> 00:34:10,211
+this last login thing,
+
+865
+00:34:10,213 --> 00:34:12,280
+which we're gonna do in a second here.
+
+866
+00:34:12,282 --> 00:34:15,616
+I pulled all my strings out into NSLocalizedString.
+
+867
+00:34:15,618 --> 00:34:18,819
+I don't have any other literal strings other than this
+
+868
+00:34:18,821 --> 00:34:20,821
+in my app that appear in the UI.
+
+869
+00:34:20,823 --> 00:34:26,526
+So, again, I'm gonna go back to my project, right here.
+
+870
+00:34:26,528 --> 00:34:30,262
+And, this time I'm going to send
+
+871
+00:34:30,264 --> 00:34:32,197
+out to my localizers again.
+
+872
+00:34:32,199 --> 00:34:33,698
+Now, this time when I send out,
+
+873
+00:34:33,700 --> 00:34:35,667
+so this is going to the localizer again.
+
+874
+00:34:35,669 --> 00:34:38,836
+So I'm gonna send it out, I can replace these.
+
+875
+00:34:38,838 --> 00:34:42,239
+If we look at what I sent this time to the localizer,
+
+876
+00:34:42,241 --> 00:34:45,308
+let's look at Japanese, you can see that, look,
+
+877
+00:34:45,310 --> 00:34:48,144
+the old things that that localizer did are in there.
+
+878
+00:34:48,146 --> 00:34:51,481
+So, that localizer hasn't lost any work.
+
+879
+00:34:51,483 --> 00:34:55,818
+But, down here is all the new things that we just added.
+
+880
+00:34:55,820 --> 00:34:59,121
+Invalid username and password, login error, password.
+
+881
+00:34:59,123 --> 00:35:01,790
+And, here's my nice comments to tell them what it is.
+
+882
+00:35:01,792 --> 00:35:03,091
+So, they'll bring this up in their tool and
+
+883
+00:35:03,093 --> 00:35:05,192
+they'll translate it, okay?
+
+884
+00:35:05,194 --> 00:35:06,527
+So, you can how, what I mean by,
+
+885
+00:35:06,529 --> 00:35:08,662
+if we can go back and forth and back and forth?
+
+886
+00:35:08,664 --> 00:35:11,164
+So, they translate it and it comes back.
+
+887
+00:35:11,166 --> 00:35:13,199
+So, here we are from the translator.
+
+888
+00:35:15,036 --> 00:35:17,369
+We'll say we did all of our languages.
+
+889
+00:35:17,371 --> 00:35:19,471
+So, let's go to a different language here.
+
+890
+00:35:19,473 --> 00:35:22,507
+Let's do Chinese, let's say.
+
+891
+00:35:22,509 --> 00:35:25,677
+Let's do traditional Chinese.
+
+892
+00:35:25,679 --> 00:35:28,446
+Okay, so here's what Chinese looks like here.
+
+893
+00:35:28,448 --> 00:35:30,247
+There's the storyboard.
+
+894
+00:35:30,249 --> 00:35:33,350
+And here, all the literal strings have been
+
+895
+00:35:33,352 --> 00:35:35,051
+translated, okay?
+
+896
+00:35:35,053 --> 00:35:36,185
+So, let's import that.
+
+897
+00:35:36,187 --> 00:35:39,755
+So, I'm gonna go here, Import Localizations.
+
+898
+00:35:39,757 --> 00:35:40,989
+From the localizer.
+
+899
+00:35:40,991 --> 00:35:43,224
+Want this one.
+
+900
+00:35:43,226 --> 00:35:44,192
+Traditional.
+
+901
+00:35:44,194 --> 00:35:45,760
+There it is.
+
+902
+00:35:45,761 --> 00:35:47,327
+Again, I'll make another scheme here, okay?
+
+903
+00:35:47,330 --> 00:35:50,997
+This one, I'm gonna call, Chinese Traditional.
+
+904
+00:35:52,167 --> 00:35:54,100
+Let's go ahead in the Run.
+
+905
+00:35:54,102 --> 00:35:56,335
+We'll change this to Chinese.
+
+906
+00:35:56,337 --> 00:35:59,972
+And, we'll set our location to be China, our locale.
+
+907
+00:35:59,974 --> 00:36:01,640
+Okay? So, now we have one for
+
+908
+00:36:01,642 --> 00:36:03,008
+Japan and one for China.
+
+909
+00:36:03,010 --> 00:36:04,676
+Okay?
+
+910
+00:36:04,677 --> 00:36:06,343
+So, let's do this and let's just run.
+
+911
+00:36:09,682 --> 00:36:11,181
+Okay? Gonna make this wider.
+
+912
+00:36:11,183 --> 00:36:13,016
+So, this is, here we have in Chinese now.
+
+913
+00:36:13,018 --> 00:36:15,352
+Notice that this is working.
+
+914
+00:36:15,353 --> 00:36:17,687
+Notice the auto-layout is adjusting just like it did in
+
+915
+00:36:17,689 --> 00:36:19,706
+English.
+
+916
+00:36:19,707 --> 00:36:21,724
+If we try to log in, we get our error right here.
+
+917
+00:36:23,293 --> 00:36:24,659
+Some of you probably speak Chinese, so
+
+918
+00:36:24,661 --> 00:36:26,294
+hopefully these translations are good.
+
+919
+00:36:26,296 --> 00:36:27,495
+I take full responsibility.
+
+920
+00:36:27,497 --> 00:36:28,962
+I don't know any Chinese.
+
+921
+00:36:28,964 --> 00:36:30,797
+So, I'll take responsibility if they're wrong even though
+
+922
+00:36:30,799 --> 00:36:32,132
+I didn't do the translations.
+
+923
+00:36:32,134 --> 00:36:34,334
+But anyway, there's that.
+
+924
+00:36:34,336 --> 00:36:38,470
+Now if I log in, so let's log in here.
+
+925
+00:36:38,472 --> 00:36:40,406
+That's MadBum.
+
+926
+00:36:40,407 --> 00:36:42,341
+Okay, I still don't have this thing translated, and
+
+927
+00:36:42,343 --> 00:36:43,775
+this is obviously content,
+
+928
+00:36:43,777 --> 00:36:46,277
+so that we're not going to translate Madison Bumgarner.
+
+929
+00:36:46,279 --> 00:36:47,895
+Okay?
+
+930
+00:36:47,896 --> 00:36:49,512
+Although we could I suppose, but we're not going to.
+
+931
+00:36:49,515 --> 00:36:51,548
+So, this is content just coming out of our database,
+
+932
+00:36:51,550 --> 00:36:52,549
+or whatever.
+
+933
+00:36:52,551 --> 00:36:54,117
+So, this is the last thing we need to do.
+
+934
+00:36:54,119 --> 00:36:55,885
+Now, let's look at this last login.
+
+935
+00:36:55,887 --> 00:36:57,186
+It's pretty bad.
+
+936
+00:36:57,188 --> 00:36:58,520
+Okay? This is bad even in
+
+937
+00:36:58,522 --> 00:36:59,788
+English, okay?
+
+938
+00:36:59,790 --> 00:37:03,024
+This is really ugly looking time and date.
+
+939
+00:37:03,026 --> 00:37:04,459
+I want this to be much nicer.
+
+940
+00:37:04,461 --> 00:37:07,478
+I'm gonna have it be,
+
+941
+00:37:07,479 --> 00:37:10,496
+last logged in certain number of days ago at this time.
+
+942
+00:37:10,499 --> 00:37:12,416
+Okay? 12 and
+
+943
+00:37:12,417 --> 00:37:14,334
+a half days ago at 4:15 or something like that.
+
+944
+00:37:14,336 --> 00:37:16,703
+So, if I do that, I need two things.
+
+945
+00:37:16,705 --> 00:37:19,439
+I need to format that time, the time you logged in and
+
+946
+00:37:19,441 --> 00:37:21,140
+I also need to format the number,
+
+947
+00:37:21,142 --> 00:37:22,675
+how many days ago you logged in.
+
+948
+00:37:22,677 --> 00:37:24,309
+So, I'm gonna use a number formatter and
+
+949
+00:37:24,311 --> 00:37:26,511
+a date formatter to make that work.
+
+950
+00:37:26,513 --> 00:37:28,012
+Okay? And then I'm also then gonna
+
+951
+00:37:28,014 --> 00:37:31,148
+use a format string, you know, something with percent this
+
+952
+00:37:31,150 --> 00:37:33,417
+and then present that in there, to do that.
+
+953
+00:37:33,419 --> 00:37:34,852
+And, that string,
+
+954
+00:37:34,853 --> 00:37:36,286
+of course, as a whole, is gonna be localizable.
+
+955
+00:37:36,288 --> 00:37:38,455
+So, a lot going on to localize this here, but
+
+956
+00:37:38,457 --> 00:37:40,957
+you're gonna see the code's not too bad to do that.
+
+957
+00:37:40,959 --> 00:37:42,792
+So let's go, whoops.
+
+958
+00:37:42,794 --> 00:37:46,028
+Let's go back to our controller.
+
+959
+00:37:46,030 --> 00:37:48,964
+Here's where that nasty, offending,
+
+960
+00:37:48,966 --> 00:37:52,300
+non-internationalized code is right here.
+
+961
+00:37:52,302 --> 00:37:55,970
+So, here, this is where I get the last login.
+
+962
+00:37:55,972 --> 00:37:57,338
+So this is an NS Date.
+
+963
+00:37:57,340 --> 00:37:58,605
+Right? This last login is
+
+964
+00:37:58,607 --> 00:38:01,574
+an NS Date of the last time this guy logged in.
+
+965
+00:38:01,576 --> 00:38:08,114
+And so, I don't really want this badness in here,
+
+966
+00:38:08,116 --> 00:38:12,984
+so I really wanna say something like,
+
+967
+00:38:12,986 --> 00:38:17,689
+Last Login %@ days ago at %@.
+
+968
+00:38:17,691 --> 00:38:19,890
+So, I'd really like to say something like that.
+
+969
+00:38:19,892 --> 00:38:21,458
+And, you know,
+
+970
+00:38:21,460 --> 00:38:24,428
+to do the format, I wanna make sure that I'm doing
+
+971
+00:38:24,430 --> 00:38:27,831
+String.localizedStringWithFor- mat, okay?
+
+972
+00:38:27,833 --> 00:38:29,532
+So, put this format string in here.
+
+973
+00:38:34,071 --> 00:38:35,404
+Okay? And, we need the arguments
+
+974
+00:38:35,406 --> 00:38:39,073
+here that correspond, so we'll call that daysAgo and time.
+
+975
+00:38:40,143 --> 00:38:42,142
+Those are the two arguments that are correspond to
+
+976
+00:38:42,144 --> 00:38:44,778
+here and here.
+
+977
+00:38:44,779 --> 00:38:47,413
+But, of course, this needs to, itself, be localized.
+
+978
+00:38:47,416 --> 00:38:50,817
+Okay? So,
+
+979
+00:38:50,818 --> 00:38:54,219
+I'm gonna call this lastLoginFormatString.
+
+980
+00:38:54,222 --> 00:38:55,521
+And we will put here let
+
+981
+00:38:58,826 --> 00:39:03,094
+lastLoginFormatString equal NSLocalizedString.
+
+982
+00:39:03,096 --> 00:39:04,895
+And then, I'll put that format string in there.
+
+983
+00:39:04,897 --> 00:39:08,799
+Again, I don't use this.
+
+984
+00:39:08,801 --> 00:39:12,936
+In the comment here, we'll say something like,
+
+985
+00:39:12,938 --> 00:39:17,607
+Reports the number of days ago and time that the user last
+
+986
+00:39:17,609 --> 00:39:21,744
+logged in, or something along those lines to make
+
+987
+00:39:21,746 --> 00:39:26,481
+sure that the localizer understands what's going on.
+
+988
+00:39:27,851 --> 00:39:28,616
+Okay, so that's it.
+
+989
+00:39:28,618 --> 00:39:30,501
+We've localized that.
+
+990
+00:39:30,502 --> 00:39:32,385
+All we have to now is the daysAgo and time.
+
+991
+00:39:32,388 --> 00:39:34,588
+And, these are both going to be strings.
+
+992
+00:39:34,590 --> 00:39:37,757
+And, we're gonna get each of them by using a formatter.
+
+993
+00:39:37,759 --> 00:39:40,259
+So, let's start with the date.
+
+994
+00:39:40,261 --> 00:39:42,161
+So, I'm gonna create a date formatter.
+
+995
+00:39:43,531 --> 00:39:45,063
+NSDateFormatter, okay?
+
+996
+00:39:45,065 --> 00:39:48,033
+If you just create one, no arguments or whatever.
+
+997
+00:39:48,035 --> 00:39:50,535
+And, now we're gonna configure this date formatter to
+
+998
+00:39:50,537 --> 00:39:51,535
+present the date.
+
+999
+00:39:51,537 --> 00:39:53,003
+So, I'm gonna say,
+
+1000
+00:39:53,005 --> 00:39:56,907
+set the timeStyle of the thing to be kind of a short time.
+
+1001
+00:39:56,909 --> 00:39:59,075
+Okay, this is just saying when you last log in,
+
+1002
+00:39:59,077 --> 00:40:01,110
+I don't need the seconds and the time zone.
+
+1003
+00:40:01,112 --> 00:40:04,480
+I just need, basically, the time is a short time, so
+
+1004
+00:40:04,482 --> 00:40:05,981
+I'm gonna say NSDate.
+
+1005
+00:40:05,983 --> 00:40:09,884
+FormatterSTyle.ShortStyle.
+
+1006
+00:40:09,886 --> 00:40:11,386
+So you can see here's the styles.
+
+1007
+00:40:11,388 --> 00:40:12,019
+Full style.
+
+1008
+00:40:12,021 --> 00:40:12,619
+Long style.
+
+1009
+00:40:12,621 --> 00:40:13,286
+Medium style.
+
+1010
+00:40:13,288 --> 00:40:15,388
+I'm gonna go short style.
+
+1011
+00:40:15,390 --> 00:40:16,689
+Now, I only want the time.
+
+1012
+00:40:16,691 --> 00:40:18,491
+I don't want the date portion at all.
+
+1013
+00:40:18,493 --> 00:40:22,794
+So I'm gonna say dateFormatter.dateStyle equals
+
+1014
+00:40:22,796 --> 00:40:26,397
+NSDateFOrmatterStyle.NoStyle.
+
+1015
+00:40:26,399 --> 00:40:27,799
+Okay, that means,
+
+1016
+00:40:27,800 --> 00:40:29,200
+don't give me the date portion, I just want the time.
+
+1017
+00:40:30,503 --> 00:40:31,735
+Okay?
+
+1018
+00:40:31,737 --> 00:40:33,937
+So now that I've kind of configured this date
+
+1019
+00:40:33,939 --> 00:40:37,807
+formatter, I can let that time string, this thing right here
+
+1020
+00:40:37,809 --> 00:40:42,311
+that I want this percent at sign to correspond to.
+
+1021
+00:40:42,313 --> 00:40:45,981
+I can say dateFormatter.dateFromString.
+
+1022
+00:40:45,983 --> 00:40:47,182
+That's all right, other way around.
+
+1023
+00:40:47,184 --> 00:40:52,720
+StringFromDate the lastLogin.
+
+1024
+00:40:52,722 --> 00:40:54,221
+Okay? And that's it.
+
+1025
+00:40:54,223 --> 00:40:56,440
+So I've just use the date former.
+
+1026
+00:40:56,441 --> 00:40:58,658
+Now, not only is this going to put this is a nice format for
+
+1027
+00:40:58,660 --> 00:41:01,528
+me for English, it's also going to work in the local
+
+1028
+00:41:01,530 --> 00:41:03,029
+language, as you're going to see.
+
+1029
+00:41:03,998 --> 00:41:05,564
+All right.
+
+1030
+00:41:05,565 --> 00:41:07,131
+How about the number, how many days ago?
+
+1031
+00:41:07,134 --> 00:41:09,334
+I said I only want it to be like 3.5.
+
+1032
+00:41:09,336 --> 00:41:13,304
+I don't want it to be logged in 3.5876 days ago.
+
+1033
+00:41:13,306 --> 00:41:15,073
+Okay?
+
+1034
+00:41:15,074 --> 00:41:16,841
+I could maybe just go for three days ago, but
+
+1035
+00:41:16,843 --> 00:41:20,010
+I'm gonna say 3 point one decimal digit just to show you
+
+1036
+00:41:20,012 --> 00:41:21,211
+how to do that.
+
+1037
+00:41:21,213 --> 00:41:23,279
+So, let's create a number formatter.
+
+1038
+00:41:26,451 --> 00:41:29,919
+And again, we already did this back in the calculator days.
+
+1039
+00:41:29,921 --> 00:41:31,253
+So we create this number formatter.
+
+1040
+00:41:31,255 --> 00:41:34,156
+Then we're gonna configure it, and the only thing I'm gonna
+
+1041
+00:41:34,158 --> 00:41:36,891
+say is that I want the maximum number of fraction digits
+
+1042
+00:41:36,893 --> 00:41:37,458
+to be one.
+
+1043
+00:41:37,460 --> 00:41:38,526
+Okay?
+
+1044
+00:41:38,528 --> 00:41:41,628
+3.5, not 3.5267, okay, just one digit.
+
+1045
+00:41:41,630 --> 00:41:45,432
+Then I'm gonna let that daysAgo thing equal
+
+1046
+00:41:45,434 --> 00:41:47,567
+the numberFormatter.
+
+1047
+00:41:47,569 --> 00:41:50,436
+A string from number.
+
+1048
+00:41:50,438 --> 00:41:53,772
+And so, now I just need to take this login date and
+
+1049
+00:41:53,774 --> 00:41:55,474
+turn it into the number of days ago.
+
+1050
+00:41:55,476 --> 00:41:57,326
+Which I can do with
+
+1051
+00:41:57,327 --> 00:41:59,177
+lastLogin.timeIntervalSince- Now.
+
+1052
+00:41:59,179 --> 00:42:02,046
+Of course that's negative, okay?
+
+1053
+00:42:02,048 --> 00:42:04,915
+Cuz that's gonna be in the past.
+
+1054
+00:42:04,917 --> 00:42:08,952
+And we'll just divide that times 60, times 60, times 24.
+
+1055
+00:42:08,954 --> 00:42:10,954
+Which is the number of seconds in a day.
+
+1056
+00:42:10,956 --> 00:42:13,156
+Because the time intervals are seconds.
+
+1057
+00:42:13,158 --> 00:42:14,290
+Okay?
+
+1058
+00:42:14,292 --> 00:42:16,859
+Make sense?
+
+1059
+00:42:16,861 --> 00:42:19,127
+All right.
+
+1060
+00:42:19,129 --> 00:42:20,762
+What do we got here.
+
+1061
+00:42:20,764 --> 00:42:22,230
+Oh, exclamation point, yeah.
+
+1062
+00:42:22,232 --> 00:42:25,032
+So string from number [INAUDIBLE] is an optional.
+
+1063
+00:42:25,034 --> 00:42:29,036
+It returns an optional string and you might say why would
+
+1064
+00:42:29,038 --> 00:42:32,005
+you ever do that because this argument if it's a double,
+
+1065
+00:42:32,007 --> 00:42:35,175
+it's always gonna be turned into a string.
+
+1066
+00:42:35,177 --> 00:42:38,277
+But string from number also knows how to deal with
+
+1067
+00:42:38,279 --> 00:42:39,612
+things such as Booleans and
+
+1068
+00:42:39,614 --> 00:42:41,947
+things like that from the old objective C days.
+
+1069
+00:42:41,949 --> 00:42:43,766
+So that's why.
+
+1070
+00:42:43,767 --> 00:42:45,584
+Just so you're pretty safe to always go ahead and
+
+1071
+00:42:45,586 --> 00:42:48,186
+unwrap the optional if that gets back if what you're
+
+1072
+00:42:48,188 --> 00:42:51,189
+passing in here is a double or an int.
+
+1073
+00:42:51,191 --> 00:42:52,323
+Okay? Or some number.
+
+1074
+00:42:53,292 --> 00:42:54,558
+Okay? You could do if let if you're
+
+1075
+00:42:54,560 --> 00:42:55,792
+a little worried about it.
+
+1076
+00:42:55,794 --> 00:42:57,260
+But I didn't do that.
+
+1077
+00:42:57,262 --> 00:42:58,678
+Okay?
+
+1078
+00:42:58,679 --> 00:43:00,095
+So there we go. Now we've got the date and
+
+1079
+00:43:00,098 --> 00:43:00,696
+the time.
+
+1080
+00:43:00,698 --> 00:43:02,631
+And again, like you say,
+
+1081
+00:43:02,632 --> 00:43:04,565
+localizers won't be able to change the order of these two
+
+1082
+00:43:04,568 --> 00:43:06,935
+things if they're a sentence in a different language.
+
+1083
+00:43:07,937 --> 00:43:09,837
+Makes sense to do that.
+
+1084
+00:43:09,839 --> 00:43:12,306
+All right?
+
+1085
+00:43:12,307 --> 00:43:14,774
+Let's go back to our project again.
+
+1086
+00:43:15,744 --> 00:43:17,710
+Let's go ahead and export this.
+
+1087
+00:43:17,712 --> 00:43:19,745
+Okay?
+
+1088
+00:43:19,747 --> 00:43:22,447
+So I export this to localizer.
+
+1089
+00:43:24,818 --> 00:43:26,351
+Replace all that.
+
+1090
+00:43:26,353 --> 00:43:27,852
+All right. We've sent them out there.
+
+1091
+00:43:27,854 --> 00:43:30,554
+Let's go take a quick look at what that looks like.
+
+1092
+00:43:30,556 --> 00:43:34,657
+We'll look at oh, yeah, let's look at French.
+
+1093
+00:43:34,659 --> 00:43:35,958
+Okay, so here's French.
+
+1094
+00:43:35,960 --> 00:43:37,960
+If we go down, here's the last log in.
+
+1095
+00:43:37,962 --> 00:43:40,396
+Notice here's the dollar one and dollar two.
+
+1096
+00:43:40,398 --> 00:43:44,532
+That's how they can control which one is which and so
+
+1097
+00:43:44,534 --> 00:43:47,268
+they need to translate though, this into French.
+
+1098
+00:43:47,270 --> 00:43:48,803
+Okay? So
+
+1099
+00:43:48,804 --> 00:43:50,337
+let's go ahead and have that happen.
+
+1100
+00:43:50,340 --> 00:43:51,238
+Okay.
+
+1101
+00:43:51,240 --> 00:43:52,072
+It happened.
+
+1102
+00:43:52,074 --> 00:43:54,607
+Okay. Now let's load it in.
+
+1103
+00:43:54,609 --> 00:43:57,443
+Okay. Import localizations
+
+1104
+00:43:57,445 --> 00:43:58,844
+from our localizer.
+
+1105
+00:43:59,947 --> 00:44:01,713
+Let's go ahead and let's do French.
+
+1106
+00:44:02,649 --> 00:44:03,214
+Okay?
+
+1107
+00:44:04,450 --> 00:44:06,583
+So let's edit a scheme here for French.
+
+1108
+00:44:06,585 --> 00:44:09,553
+I always like to do the edit schemes because
+
+1109
+00:44:09,555 --> 00:44:11,354
+you're always gonna come back to it.
+
+1110
+00:44:11,356 --> 00:44:13,856
+It's not like oh, you're only ever gonna run French once.
+
+1111
+00:44:13,858 --> 00:44:15,057
+You're gonna run it multiple times.
+
+1112
+00:44:15,059 --> 00:44:18,560
+So here's French, and we'll make it in France.
+
+1113
+00:44:18,562 --> 00:44:19,160
+Okay.
+
+1114
+00:44:19,162 --> 00:44:19,894
+So let's run.
+
+1115
+00:44:20,863 --> 00:44:22,463
+See if we got this right.
+
+1116
+00:44:22,465 --> 00:44:23,430
+Oops.
+
+1117
+00:44:23,432 --> 00:44:26,966
+All right, so this all looks like French.
+
+1118
+00:44:26,968 --> 00:44:29,535
+Okay? That looks like in French.
+
+1119
+00:44:29,537 --> 00:44:30,787
+Yeah, there's some French.
+
+1120
+00:44:30,788 --> 00:44:32,038
+I don't know if it's right French but
+
+1121
+00:44:32,040 --> 00:44:34,973
+oh, again my keyboard is French.
+
+1122
+00:44:34,975 --> 00:44:37,876
+So let's go ahead and bring up our keyboard so
+
+1123
+00:44:37,878 --> 00:44:38,777
+we can see that.
+
+1124
+00:44:40,113 --> 00:44:41,496
+Okay? Yeah,
+
+1125
+00:44:41,497 --> 00:44:42,880
+we got our French keyboard here.
+
+1126
+00:44:42,882 --> 00:44:44,648
+So, I'll type it here.
+
+1127
+00:44:44,650 --> 00:44:47,084
+Mad, madbum.
+
+1128
+00:44:47,086 --> 00:44:49,252
+Oops.
+
+1129
+00:44:49,254 --> 00:44:51,454
+Madbum.
+
+1130
+00:44:51,456 --> 00:44:52,621
+How do I back up?
+
+1131
+00:44:52,623 --> 00:44:53,956
+There we go.
+
+1132
+00:44:53,957 --> 00:44:55,290
+[LAUGH] Madbum and here we go.
+
+1133
+00:44:55,292 --> 00:44:56,925
+Foo. Hopefully, I typed that right,
+
+1134
+00:44:56,927 --> 00:44:58,860
+but there we go.
+
+1135
+00:44:58,862 --> 00:44:59,794
+All right. So there's madbum.
+
+1136
+00:44:59,796 --> 00:45:07,201
+And you can see [FOREIGN].
+
+1137
+00:45:07,203 --> 00:45:08,135
+Whatever.
+
+1138
+00:45:08,137 --> 00:45:08,968
+Okay? [LAUGH] So
+
+1139
+00:45:08,970 --> 00:45:10,470
+there's the time and date and
+
+1140
+00:45:10,472 --> 00:45:12,271
+you can see it's put a comma there.
+
+1141
+00:45:12,273 --> 00:45:15,341
+Okay? Not 10.7, but 10, 7.
+
+1142
+00:45:15,343 --> 00:45:18,143
+It's like those French have a different word for everything,
+
+1143
+00:45:18,145 --> 00:45:19,944
+but they also have a different way to put the number there.
+
+1144
+00:45:21,581 --> 00:45:22,880
+Okay? So there's French.
+
+1145
+00:45:22,882 --> 00:45:25,382
+Now I'm gonna show you one other language which is kind
+
+1146
+00:45:25,384 --> 00:45:28,085
+of a fun, different, interesting language,
+
+1147
+00:45:28,087 --> 00:45:29,519
+which is Arabic.
+
+1148
+00:45:29,521 --> 00:45:31,654
+So let's go ahead and import Arabic.
+
+1149
+00:45:31,656 --> 00:45:34,590
+Those of you who know anything about
+
+1150
+00:45:34,592 --> 00:45:39,561
+languages will know why this is an interesting language.
+
+1151
+00:45:39,563 --> 00:45:41,296
+So let's duplicate it.
+
+1152
+00:45:41,298 --> 00:45:43,731
+Arabic.
+
+1153
+00:45:43,733 --> 00:45:45,900
+And okay, it's Arabic.
+
+1154
+00:45:45,902 --> 00:45:46,667
+We'll have a country.
+
+1155
+00:45:46,669 --> 00:45:47,701
+We'll have it be Egypt.
+
+1156
+00:45:47,703 --> 00:45:50,637
+They speak Arabic in Egypt.
+
+1157
+00:45:50,639 --> 00:45:51,755
+All those okay.
+
+1158
+00:45:51,756 --> 00:45:52,872
+So now, let's run this in Arabic.
+
+1159
+00:45:55,609 --> 00:45:59,111
+And, whoa, it broke my UI.
+
+1160
+00:45:59,113 --> 00:46:02,080
+Look at that, it put those things over on the right side.
+
+1161
+00:46:03,049 --> 00:46:03,981
+And, what's going on here?
+
+1162
+00:46:04,917 --> 00:46:06,716
+This changed securities on the wrong side.
+
+1163
+00:46:06,718 --> 00:46:08,384
+This was supposed to be over.
+
+1164
+00:46:08,386 --> 00:46:11,554
+So, Arabic is a right to left language, right?
+
+1165
+00:46:11,556 --> 00:46:14,790
+The text flows from the right hand side of the page to
+
+1166
+00:46:14,792 --> 00:46:15,457
+the left.
+
+1167
+00:46:15,459 --> 00:46:17,559
+Not from left to right.
+
+1168
+00:46:17,560 --> 00:46:19,660
+So, not only does that mean the text needs to flow right
+
+1169
+00:46:19,663 --> 00:46:22,630
+to left, but my whole UI needs to flow right to left.
+
+1170
+00:46:22,632 --> 00:46:24,866
+Okay?
+
+1171
+00:46:24,867 --> 00:46:27,101
+So labels need to be on the right with the text going to
+
+1172
+00:46:27,103 --> 00:46:28,235
+the left.
+
+1173
+00:46:28,237 --> 00:46:29,870
+Same thing with these buttons.
+
+1174
+00:46:29,872 --> 00:46:30,737
+Okay? They need to go
+
+1175
+00:46:30,739 --> 00:46:31,371
+for right and left.
+
+1176
+00:46:31,373 --> 00:46:32,972
+So, this is in here.
+
+1177
+00:46:32,974 --> 00:46:34,073
+I have an English keyboard so
+
+1178
+00:46:34,075 --> 00:46:36,008
+it's gonna be left to right typing here.
+
+1179
+00:46:36,010 --> 00:46:37,108
+But if I had an Arabic keyboard,
+
+1180
+00:46:37,110 --> 00:46:39,243
+it would be typing right to left.
+
+1181
+00:46:39,245 --> 00:46:40,644
+So let's go ahead and log in.
+
+1182
+00:46:40,646 --> 00:46:41,378
+That's [LAUGH] this one.
+
+1183
+00:46:41,380 --> 00:46:42,746
+Not this one.
+
+1184
+00:46:42,748 --> 00:46:43,613
+There it is.
+
+1185
+00:46:43,615 --> 00:46:45,982
+And here's our last log in.
+
+1186
+00:46:45,984 --> 00:46:49,551
+Whatever that is in Arabic and here's the time in Arabic.
+
+1187
+00:46:50,487 --> 00:46:53,788
+Okay, from right to left, so it's all right to left.
+
+1188
+00:46:53,790 --> 00:46:55,390
+Okay.
+
+1189
+00:46:55,391 --> 00:46:56,991
+Even this got made right to left.
+
+1190
+00:46:58,260 --> 00:46:59,159
+Okay.
+
+1191
+00:46:59,161 --> 00:47:01,294
+And, that happened automatically.
+
+1192
+00:47:01,296 --> 00:47:04,964
+Notice I didn't absolutely nothing whatsoever
+
+1193
+00:47:04,966 --> 00:47:07,733
+in my entire storyboard to make that happen.
+
+1194
+00:47:07,735 --> 00:47:09,601
+But if we look at our constraints,
+
+1195
+00:47:09,603 --> 00:47:12,170
+like we look at this constraint right here.
+
+1196
+00:47:12,172 --> 00:47:13,405
+This guy.
+
+1197
+00:47:13,407 --> 00:47:15,073
+Let's look at his constraints.
+
+1198
+00:47:15,075 --> 00:47:18,075
+You see it's trailing space to super view.
+
+1199
+00:47:18,077 --> 00:47:18,909
+Trailing space.
+
+1200
+00:47:18,911 --> 00:47:21,378
+Not right edge to super view.
+
+1201
+00:47:21,380 --> 00:47:22,746
+Trailing space.
+
+1202
+00:47:22,748 --> 00:47:24,765
+Okay? So that's just
+
+1203
+00:47:24,766 --> 00:47:26,783
+saying that we wanna be attached to the trailing edge.
+
+1204
+00:47:26,785 --> 00:47:28,751
+And if we're in a right to left language,
+
+1205
+00:47:28,753 --> 00:47:30,853
+that means the other side.
+
+1206
+00:47:30,855 --> 00:47:32,954
+So, this auto layout did the right thing.
+
+1207
+00:47:32,956 --> 00:47:35,857
+It attached this edge over to here.
+
+1208
+00:47:35,859 --> 00:47:37,291
+Because this is the trailing edge.
+
+1209
+00:47:37,293 --> 00:47:39,393
+Everyone understand that?
+
+1210
+00:47:40,662 --> 00:47:42,579
+Okay?
+
+1211
+00:47:42,580 --> 00:47:44,497
+So when you go and do a right to left language, probably
+
+1212
+00:47:44,499 --> 00:47:47,867
+when you run it's not gonna work as nice as this one was.
+
+1213
+00:47:47,869 --> 00:47:49,301
+I was actually very.
+
+1214
+00:47:49,303 --> 00:47:51,236
+Pleased that it just worked, okay?
+
+1215
+00:47:51,238 --> 00:47:53,438
+But sometimes it'll be like oh, oops,
+
+1216
+00:47:53,440 --> 00:47:56,141
+I made an assumption there that was also going to be
+
+1217
+00:47:56,143 --> 00:47:59,043
+left to right, something smashing into each other,
+
+1218
+00:47:59,045 --> 00:48:01,545
+so I really always strongly recommend doing at
+
+1219
+00:48:01,547 --> 00:48:04,448
+least one right to left language, Hebrew or Arabic or
+
+1220
+00:48:04,450 --> 00:48:07,718
+something that tests out that part of your user interface.
+
+1221
+00:48:07,720 --> 00:48:08,718
+Okay?
+
+1222
+00:48:08,720 --> 00:48:10,219
+So that's it for localization.
+
+1223
+00:48:10,221 --> 00:48:12,688
+Pretty powerful system.
+
+1224
+00:48:12,690 --> 00:48:14,456
+Pretty easy, really, for you.
+
+1225
+00:48:15,426 --> 00:48:17,826
+Apple's made it actually quite easy for you.
+
+1226
+00:48:17,828 --> 00:48:21,462
+For the translators, depends, sometimes it's easy for them,
+
+1227
+00:48:21,464 --> 00:48:23,330
+sometimes it's a pain in the neck trying to figure out what
+
+1228
+00:48:23,332 --> 00:48:24,832
+it is you're actually trying to
+
+1229
+00:48:24,834 --> 00:48:27,034
+say to them about where this word appears.
+
+1230
+00:48:27,036 --> 00:48:29,135
+You'll get some funny translation back sometimes
+
+1231
+00:48:29,137 --> 00:48:31,070
+when they don't really understand
+
+1232
+00:48:31,072 --> 00:48:32,204
+what it is you're saying.
+
+1233
+00:48:34,875 --> 00:48:36,875
+But these underlying system is pretty easy to
+
+1234
+00:48:36,877 --> 00:48:37,575
+iterate with them.
+
+1235
+00:48:38,545 --> 00:48:39,276
+Okay. Any questions
+
+1236
+00:48:39,278 --> 00:48:42,246
+about localization?
+
+1237
+00:48:42,248 --> 00:48:43,213
+Okay.
+
+1238
+00:48:43,215 --> 00:48:47,550
+Let's go back to our slide.
+
+1239
+00:48:47,552 --> 00:48:48,617
+Oops.
+
+1240
+00:48:48,619 --> 00:48:50,819
+Slides are here. All right.
+
+1241
+00:48:53,056 --> 00:48:54,088
+Okay.
+
+1242
+00:48:54,090 --> 00:48:57,458
+So, the next topic is Settings, all right?
+
+1243
+00:48:57,460 --> 00:48:59,993
+So the settings is a.
+
+1244
+00:48:59,995 --> 00:49:04,230
+Let's go back here, and let's show this on here.
+
+1245
+00:49:07,135 --> 00:49:10,269
+Okay, so the settings app, every device has a settings
+
+1246
+00:49:10,271 --> 00:49:13,238
+app, it's this little icon right here.
+
+1247
+00:49:13,240 --> 00:49:14,706
+Okay? See that icon right there?
+
+1248
+00:49:14,708 --> 00:49:16,941
+So, I'm gonna click on that and this gives settings for
+
+1249
+00:49:16,943 --> 00:49:18,576
+the whole device.
+
+1250
+00:49:18,578 --> 00:49:20,712
+Okay? We were earlier,
+
+1251
+00:49:20,713 --> 00:49:22,847
+we were looking for example, inside General so that we
+
+1252
+00:49:22,849 --> 00:49:26,450
+could find the Language & Region and all that.
+
+1253
+00:49:26,452 --> 00:49:28,885
+But there's more than General settings here.
+
+1254
+00:49:28,887 --> 00:49:31,121
+There's also application specific settings.
+
+1255
+00:49:31,123 --> 00:49:32,355
+You see them right here?
+
+1256
+00:49:32,356 --> 00:49:33,588
+Mail, Notes, Reminders, Phone.
+
+1257
+00:49:33,591 --> 00:49:35,791
+Those are settings for those apps.
+
+1258
+00:49:35,793 --> 00:49:37,493
+Okay?
+
+1259
+00:49:37,494 --> 00:49:39,194
+And even all the way down at the bottom here, okay?
+
+1260
+00:49:39,196 --> 00:49:41,463
+There's one of our apps that has setting.
+
+1261
+00:49:41,465 --> 00:49:42,981
+Trax?
+
+1262
+00:49:42,982 --> 00:49:44,498
+I don't have, remember doing a settings for Trax.
+
+1263
+00:49:44,501 --> 00:49:47,735
+But that's because Trax used photos library,
+
+1264
+00:49:47,737 --> 00:49:49,203
+used the Camera, etc.
+
+1265
+00:49:49,205 --> 00:49:51,088
+And so
+
+1266
+00:49:51,089 --> 00:49:52,972
+it has some settings that were automatically built into it.
+
+1267
+00:49:52,975 --> 00:49:54,758
+Okay?
+
+1268
+00:49:54,759 --> 00:49:56,542
+But what we're gonna do today is add settings,
+
+1269
+00:49:56,545 --> 00:50:00,080
+specific to our app that would have, you know, some setting,
+
+1270
+00:50:00,082 --> 00:50:03,049
+that's just only our app has that setting.
+
+1271
+00:50:03,051 --> 00:50:05,584
+How do we put the UI in this
+
+1272
+00:50:05,586 --> 00:50:07,653
+general settings app right here?
+
+1273
+00:50:07,655 --> 00:50:09,822
+Okay?
+
+1274
+00:50:09,823 --> 00:50:11,990
+So in the slide here you can see some examples of some app
+
+1275
+00:50:11,992 --> 00:50:17,061
+settings, Maps and Safari have lots of settings, et cetera.
+
+1276
+00:50:17,063 --> 00:50:19,864
+You're gonna build this UI using something like
+
+1277
+00:50:19,866 --> 00:50:20,764
+Info.plist.
+
+1278
+00:50:20,766 --> 00:50:22,165
+okay? [LAUGH] So
+
+1279
+00:50:22,167 --> 00:50:25,001
+it's not exactly gonna build this in your storyboard.
+
+1280
+00:50:25,003 --> 00:50:26,936
+Okay? Very restricted,
+
+1281
+00:50:26,938 --> 00:50:30,673
+can only do a few things but you can
+
+1282
+00:50:30,675 --> 00:50:33,876
+build surprisingly a lot of stuff here with switches and
+
+1283
+00:50:33,878 --> 00:50:35,711
+sliders and text fields.
+
+1284
+00:50:35,713 --> 00:50:39,580
+But anything that's set in this UI is communicated
+
+1285
+00:50:39,582 --> 00:50:42,483
+to your app via NSUserDefaults.
+
+1286
+00:50:42,485 --> 00:50:44,335
+Okay? So
+
+1287
+00:50:44,336 --> 00:50:46,186
+basically, this UI in the settings app is just setting
+
+1288
+00:50:46,188 --> 00:50:48,121
+NSUserDefault in your app.
+
+1289
+00:50:48,123 --> 00:50:48,922
+That's what it's doing.
+
+1290
+00:50:50,091 --> 00:50:51,124
+Okay?
+
+1291
+00:50:51,125 --> 00:50:52,158
+So let's look to see how it works.
+
+1292
+00:50:52,160 --> 00:50:56,428
+You add a little settings bundle to your app.
+
+1293
+00:50:56,430 --> 00:50:58,930
+That's how you get it to display some UI.
+
+1294
+00:50:58,932 --> 00:51:00,698
+And you do that by saying New File and
+
+1295
+00:51:00,700 --> 00:51:03,034
+you go to this place here, iOS, Resource, and
+
+1296
+00:51:03,036 --> 00:51:05,836
+inside there you'll see, Settings Bundle.
+
+1297
+00:51:05,838 --> 00:51:08,038
+'Kay? You pick Settings Bundle and
+
+1298
+00:51:08,040 --> 00:51:10,173
+you're gonna get a sample Settings Bundle.
+
+1299
+00:51:10,175 --> 00:51:11,541
+This is the best thing, for
+
+1300
+00:51:11,543 --> 00:51:14,043
+something that's barely supported it seems like,
+
+1301
+00:51:14,045 --> 00:51:15,878
+in some ways, this was the best thing they did.
+
+1302
+00:51:15,880 --> 00:51:17,979
+Is they just gave you a sample one, okay?
+
+1303
+00:51:17,981 --> 00:51:22,750
+And the sample one, at least as of this lecture, that they
+
+1304
+00:51:22,752 --> 00:51:26,320
+give you has a little grouping there with the text field.
+
+1305
+00:51:26,322 --> 00:51:28,722
+A little switch, and a slider.
+
+1306
+00:51:28,724 --> 00:51:32,693
+And if you open up the, inside the settings bundle
+
+1307
+00:51:32,695 --> 00:51:35,628
+there's this little file in there called, root.plist,
+
+1308
+00:51:35,630 --> 00:51:37,363
+as you'll see.
+
+1309
+00:51:37,365 --> 00:51:40,866
+And it's just a bunch of property list and
+
+1310
+00:51:40,868 --> 00:51:43,268
+that's describing what's in there.
+
+1311
+00:51:43,270 --> 00:51:46,938
+So, let's look at this thing on the right, the UI, and
+
+1312
+00:51:46,940 --> 00:51:48,273
+what's corresponding on the left.
+
+1313
+00:51:48,275 --> 00:51:51,542
+So look at on the left where it says Item 0 Group
+
+1314
+00:51:51,544 --> 00:51:52,510
+at the top.
+
+1315
+00:51:52,512 --> 00:51:54,511
+See that's making that little group.
+
+1316
+00:51:54,513 --> 00:51:56,179
+The gray group thing.
+
+1317
+00:51:56,181 --> 00:51:58,281
+It's just basically a static table view.
+
+1318
+00:51:58,283 --> 00:52:02,284
+And, that is basically causing a static table view
+
+1319
+00:52:02,286 --> 00:52:03,719
+section to be created.
+
+1320
+00:52:03,721 --> 00:52:05,053
+And, that's the title of it, Group.
+
+1321
+00:52:05,055 --> 00:52:07,455
+And then, see item 1, Text field, name?
+
+1322
+00:52:07,457 --> 00:52:08,589
+That's got
+
+1323
+00:52:08,591 --> 00:52:10,524
+things that describe what that text field is.
+
+1324
+00:52:10,526 --> 00:52:14,128
+It's not just the title of the text field, which is name.
+
+1325
+00:52:14,130 --> 00:52:17,130
+But it's also things like, what's the default value, and
+
+1326
+00:52:17,132 --> 00:52:20,400
+what kind of keyboard should I bring up, a URL keyboard, or,
+
+1327
+00:52:20,402 --> 00:52:23,536
+you know, just a normal alphabetic keyboard,
+
+1328
+00:52:23,538 --> 00:52:25,438
+or whatever.
+
+1329
+00:52:25,439 --> 00:52:27,339
+Then you see item two, toggle switch, all right?
+
+1330
+00:52:27,342 --> 00:52:28,674
+It's got the toggle switch there.
+
+1331
+00:52:28,676 --> 00:52:30,809
+Item three, is the slider, you've got the slider.
+
+1332
+00:52:30,811 --> 00:52:32,210
+Slider very limited.
+
+1333
+00:52:32,212 --> 00:52:34,545
+You can specify an image on the left, and
+
+1334
+00:52:34,547 --> 00:52:35,880
+an image on the right.
+
+1335
+00:52:35,882 --> 00:52:37,448
+Okay? That's the only thing you
+
+1336
+00:52:37,450 --> 00:52:39,516
+can kind of customize about the slider.
+
+1337
+00:52:39,518 --> 00:52:40,617
+So if you add a minimum,
+
+1338
+00:52:40,619 --> 00:52:43,086
+maximum value you have to do it with images.
+
+1339
+00:52:43,088 --> 00:52:44,120
+It is localizable.
+
+1340
+00:52:44,122 --> 00:52:45,821
+I'll talk about that in a second.
+
+1341
+00:52:47,024 --> 00:52:50,492
+And if you lookin all of them see number one, two and three,
+
+1342
+00:52:50,494 --> 00:52:52,460
+they have a line there, identifier.
+
+1343
+00:52:52,462 --> 00:52:54,995
+You see in item one it's called name preference.
+
+1344
+00:52:54,997 --> 00:52:57,965
+In item two it's called Enable Preference
+
+1345
+00:52:57,967 --> 00:53:00,067
+in line three is called Slider Preference.
+
+1346
+00:53:00,069 --> 00:53:03,336
+That is the name of the NSUserDefault
+
+1347
+00:53:03,338 --> 00:53:05,371
+that this is going to be set to, okay?
+
+1348
+00:53:05,373 --> 00:53:07,740
+So every time that slider moves it's going to update
+
+1349
+00:53:07,742 --> 00:53:10,743
+the slider under bar preference NSUserDefault in
+
+1350
+00:53:10,745 --> 00:53:13,211
+this app, okay?
+
+1351
+00:53:13,213 --> 00:53:17,348
+So, pretty straight forward and simple actually.
+
+1352
+00:53:17,350 --> 00:53:20,884
+Localization is a pain in the neck for settings.
+
+1353
+00:53:20,886 --> 00:53:21,852
+Okay? Because
+
+1354
+00:53:21,854 --> 00:53:24,688
+the X lift stuff doesn't work with it.
+
+1355
+00:53:24,690 --> 00:53:26,356
+You have to do it all manually.
+
+1356
+00:53:26,358 --> 00:53:30,159
+You essentially create these directories inside the setting
+
+1357
+00:53:30,161 --> 00:53:35,797
+bundle called a two letter code for the language, .lproj.
+
+1358
+00:53:35,799 --> 00:53:39,434
+And inside there you're gonna put a strings file for
+
+1359
+00:53:39,436 --> 00:53:42,770
+each page of your settings UI.
+
+1360
+00:53:42,772 --> 00:53:45,373
+Now in the previous one, we just saw one page.
+
+1361
+00:53:45,375 --> 00:53:47,708
+But it's actually possible to click and
+
+1362
+00:53:47,710 --> 00:53:50,277
+transition into another page of settings, okay?
+
+1363
+00:53:50,279 --> 00:53:51,611
+You see this in a lot of settings.
+
+1364
+00:53:51,613 --> 00:53:53,746
+That's where they're kind of going down multiple levels.
+
+1365
+00:53:53,748 --> 00:53:55,198
+So you can do that.
+
+1366
+00:53:55,199 --> 00:53:56,649
+And so for every level you've gotta have a strings file.
+
+1367
+00:53:56,651 --> 00:53:58,817
+The strings file looks like this.
+
+1368
+00:53:58,819 --> 00:54:01,119
+And you have to send these off to your translator and
+
+1369
+00:54:01,121 --> 00:54:02,921
+they have to translate them as well,
+
+1370
+00:54:02,923 --> 00:54:04,422
+in addition to the x-lifts.
+
+1371
+00:54:04,424 --> 00:54:06,524
+So this is a pain.
+
+1372
+00:54:06,526 --> 00:54:08,292
+I'm sure Apple eventually will
+
+1373
+00:54:08,294 --> 00:54:09,659
+integrate into the x-lifts system.
+
+1374
+00:54:09,661 --> 00:54:13,029
+However, it's a little bit showing you that settings is
+
+1375
+00:54:13,031 --> 00:54:15,531
+not a primary user interface for your app.
+
+1376
+00:54:15,533 --> 00:54:17,433
+You really wanna use it sparingly.
+
+1377
+00:54:17,435 --> 00:54:20,069
+You don't want people to have to go to Settings unless
+
+1378
+00:54:20,071 --> 00:54:23,071
+you know, there's setting something that's really gonna
+
+1379
+00:54:23,073 --> 00:54:25,173
+be set once and maybe never changed again.
+
+1380
+00:54:25,175 --> 00:54:26,507
+Okay?
+
+1381
+00:54:26,509 --> 00:54:28,576
+Or, something that they set and then,
+
+1382
+00:54:28,578 --> 00:54:31,378
+it only changes in the future because something big happens.
+
+1383
+00:54:31,380 --> 00:54:34,915
+Like, in mail, you set your accounts up once.
+
+1384
+00:54:34,917 --> 00:54:36,550
+And they only change if you decide
+
+1385
+00:54:36,551 --> 00:54:38,184
+not to use that email account or you change your password.
+
+1386
+00:54:38,186 --> 00:54:39,552
+Maybe you have to go back in there.
+
+1387
+00:54:39,554 --> 00:54:40,553
+That makes sense for
+
+1388
+00:54:40,554 --> 00:54:41,553
+that to not be in the main user interface.
+
+1389
+00:54:41,556 --> 00:54:44,156
+It may be off in settings.
+
+1390
+00:54:44,158 --> 00:54:46,025
+Okay?
+
+1391
+00:54:46,026 --> 00:54:47,893
+But you do not want to have the normal use of your app
+
+1392
+00:54:47,895 --> 00:54:50,795
+require them to be going to settings all of the time.
+
+1393
+00:54:50,797 --> 00:54:51,963
+Okay? If you have a setting that
+
+1394
+00:54:51,965 --> 00:54:54,165
+people are setting
+
+1395
+00:54:54,166 --> 00:54:56,366
+constantly you should have UI in your normal app for it.
+
+1396
+00:54:56,369 --> 00:54:57,801
+'Kay?
+
+1397
+00:54:57,803 --> 00:55:00,437
+This is just UI that you want to kind of get out of the way
+
+1398
+00:55:00,439 --> 00:55:03,673
+of your main UI because people aren't going there very much.
+
+1399
+00:55:04,742 --> 00:55:05,607
+All right? So that's what
+
+1400
+00:55:05,609 --> 00:55:06,742
+setting's about.
+
+1401
+00:55:06,744 --> 00:55:08,643
+So I'm going to do a demo with settings,
+
+1402
+00:55:08,645 --> 00:55:11,579
+but since I won't come back to the slides,
+
+1403
+00:55:11,581 --> 00:55:13,347
+let's talk about what's coming up here.
+
+1404
+00:55:13,349 --> 00:55:15,949
+Wednesday is the alternate final as you know
+
+1405
+00:55:15,951 --> 00:55:18,452
+I need your slides today if you want to present at
+
+1406
+00:55:18,454 --> 00:55:20,020
+that alternate final.
+
+1407
+00:55:20,022 --> 00:55:25,024
+No section on Friday but your final project is due 11:59 and
+
+1408
+00:55:25,026 --> 00:55:27,426
+59 seconds on Friday night.
+
+1409
+00:55:27,428 --> 00:55:28,293
+Okay? Pacific time.
+
+1410
+00:55:29,329 --> 00:55:32,330
+Saturday your slides are due by midnight.
+
+1411
+00:55:32,332 --> 00:55:33,297
+Okay?
+
+1412
+00:55:33,299 --> 00:55:34,765
+Please make your slides 1280 by 720.
+
+1413
+00:55:34,767 --> 00:55:36,166
+Okay?
+
+1414
+00:55:36,168 --> 00:55:37,867
+In other words widescreen format.
+
+1415
+00:55:37,869 --> 00:55:43,105
+Do not give me those 1024 by 768s or 640 [LAUGH] by 480.
+
+1416
+00:55:43,107 --> 00:55:44,390
+Okay?
+
+1417
+00:55:44,391 --> 00:55:45,674
+Widescreen just like this, like you see right here
+
+1418
+00:55:45,676 --> 00:55:48,643
+because it can be projected right here just like this.
+
+1419
+00:55:48,645 --> 00:55:49,210
+Okay?
+
+1420
+00:55:49,212 --> 00:55:50,411
+I prefer Keynote.
+
+1421
+00:55:50,413 --> 00:55:53,481
+If you can do Keynote, please do Keynote because
+
+1422
+00:55:53,483 --> 00:55:56,283
+what you see in Keynote is what I'm gonna get, and
+
+1423
+00:55:56,285 --> 00:55:58,685
+what everyone's gonna get when I put it on screen.
+
+1424
+00:55:58,687 --> 00:55:59,919
+If you send me a PowerPoint,
+
+1425
+00:55:59,921 --> 00:56:02,255
+Keynote is really good at opening up PowerPoints, but
+
+1426
+00:56:02,257 --> 00:56:03,689
+if you have a weird font in there,
+
+1427
+00:56:03,691 --> 00:56:05,858
+it might get turned into Helvetica or something.
+
+1428
+00:56:05,860 --> 00:56:07,726
+And then it's gonna looks like a mess.
+
+1429
+00:56:07,728 --> 00:56:09,039
+Okay?
+
+1430
+00:56:09,040 --> 00:56:10,351
+So if you can do Keynote, please do,
+
+1431
+00:56:10,352 --> 00:56:11,663
+I understand not everyone has a Mac with Keynote.
+
+1432
+00:56:11,665 --> 00:56:12,830
+Totally understandable.
+
+1433
+00:56:12,832 --> 00:56:15,866
+So PowerPoint I will accept.
+
+1434
+00:56:15,868 --> 00:56:18,335
+But please, if you can do Keynote.
+
+1435
+00:56:18,337 --> 00:56:20,971
+And then, next week normal exam period.
+
+1436
+00:56:20,973 --> 00:56:24,874
+I believe it's Thursday of finals week, 12:15 to 3:15.
+
+1437
+00:56:24,876 --> 00:56:27,110
+If that's, anyone correct me if I'm wrong, but
+
+1438
+00:56:27,112 --> 00:56:27,977
+I think that's when it is.
+
+1439
+00:56:28,946 --> 00:56:30,879
+Then we will do the presentations.
+
+1440
+00:56:30,881 --> 00:56:32,731
+There's so many of you,
+
+1441
+00:56:32,732 --> 00:56:34,582
+this is the largest enrollment we've ever had, so
+
+1442
+00:56:34,584 --> 00:56:36,751
+you'll only get 90 seconds each.
+
+1443
+00:56:36,753 --> 00:56:39,253
+I know that sounds tight.
+
+1444
+00:56:39,255 --> 00:56:41,155
+If we have a lot of people going Wednesday,
+
+1445
+00:56:41,157 --> 00:56:43,790
+maybe I'll try and give you an extra ten seconds or
+
+1446
+00:56:43,792 --> 00:56:45,025
+something like that.
+
+1447
+00:56:45,027 --> 00:56:47,226
+But if you just do the math, a hundred people,
+
+1448
+00:56:47,228 --> 00:56:50,596
+three hours, especially with the time to transition,
+
+1449
+00:56:50,598 --> 00:56:53,499
+walk up and down and technical problems.
+
+1450
+00:56:53,501 --> 00:56:55,800
+We really can't give you more than that, unfortunately.
+
+1451
+00:56:57,837 --> 00:56:59,337
+Any questions before I do this last demo?
+
+1452
+00:56:59,339 --> 00:57:02,006
+And then we'll be done for today.
+
+1453
+00:57:02,008 --> 00:57:03,240
+Okay.
+
+1454
+00:57:03,242 --> 00:57:05,408
+So, the way I'm gonna do the Settings bundle,
+
+1455
+00:57:05,410 --> 00:57:08,378
+is I'm gonna add a setting to Bouncer.
+
+1456
+00:57:08,380 --> 00:57:09,512
+Remember Bouncer?
+
+1457
+00:57:09,514 --> 00:57:12,114
+Thing bouncing, the square, bouncing around?
+
+1458
+00:57:12,116 --> 00:57:13,448
+I'm going to make it so
+
+1459
+00:57:13,450 --> 00:57:18,519
+that bouncer, we can set its elasticity in settings.
+
+1460
+00:57:18,521 --> 00:57:20,021
+Now, elasticity,
+
+1461
+00:57:20,022 --> 00:57:21,522
+you're probably going to be setting a lot in Bouncer.
+
+1462
+00:57:21,524 --> 00:57:24,792
+You want to set it to the way you like Bouncer to happen and
+
+1463
+00:57:24,794 --> 00:57:25,859
+you're just going to leave it.
+
+1464
+00:57:25,861 --> 00:57:26,660
+Okay? So
+
+1465
+00:57:26,661 --> 00:57:27,460
+that's what we're going to do.
+
+1466
+00:57:27,462 --> 00:57:29,328
+So let's go back to Bouncer.
+
+1467
+00:57:29,330 --> 00:57:30,830
+Here's Bouncer.
+
+1468
+00:57:30,832 --> 00:57:32,431
+That's where we left it off last time.
+
+1469
+00:57:32,433 --> 00:57:34,499
+I'm gonna run Bouncer here just so
+
+1470
+00:57:34,501 --> 00:57:39,203
+that we can remind ourselves what it looks like.
+
+1471
+00:57:40,840 --> 00:57:41,972
+All right. So Bouncer,
+
+1472
+00:57:41,974 --> 00:57:43,707
+remember this thing just bounces off the walls.
+
+1473
+00:57:43,709 --> 00:57:46,376
+And it's pretty bouncy.
+
+1474
+00:57:46,378 --> 00:57:47,910
+It's not super bouncy.
+
+1475
+00:57:47,912 --> 00:57:52,081
+But if I take it up to the top and I just let it fall down.
+
+1476
+00:57:52,083 --> 00:57:55,417
+You know, it bounces about half way back up, okay?
+
+1477
+00:57:55,419 --> 00:57:57,118
+Slowly bouncing less and less.
+
+1478
+00:57:57,120 --> 00:58:00,154
+And that's because we set the elasticity in Bouncer
+
+1479
+00:58:00,156 --> 00:58:02,089
+over here to be 0.85.
+
+1480
+00:58:02,091 --> 00:58:04,458
+So it's not full bouncing, okay?
+
+1481
+00:58:04,460 --> 00:58:07,294
+It's 85% bouncing.
+
+1482
+00:58:07,296 --> 00:58:09,195
+So it's losing energy with each collision,
+
+1483
+00:58:09,197 --> 00:58:10,863
+but not too bad.
+
+1484
+00:58:10,865 --> 00:58:13,632
+So this is the thing that we're going to have
+
+1485
+00:58:13,634 --> 00:58:15,184
+set in settings.
+
+1486
+00:58:15,185 --> 00:58:16,735
+Instead of being point 85 all the time we're going to set it
+
+1487
+00:58:16,737 --> 00:58:17,302
+in settings.
+
+1488
+00:58:18,438 --> 00:58:21,072
+So let's just add a settings bundle to our app.
+
+1489
+00:58:21,074 --> 00:58:24,508
+So we go new file, we go IoS resource,
+
+1490
+00:58:24,510 --> 00:58:25,909
+here's settings bundle right here.
+
+1491
+00:58:26,879 --> 00:58:29,145
+Just double click, what do you want to call it?
+
+1492
+00:58:29,147 --> 00:58:30,413
+We'll call it settings,
+
+1493
+00:58:30,415 --> 00:58:33,249
+that what people usually call their settings bundles.
+
+1494
+00:58:33,251 --> 00:58:35,351
+And here it is, our settings bundle right here.
+
+1495
+00:58:35,353 --> 00:58:36,618
+If you click on the bundle itself,
+
+1496
+00:58:36,620 --> 00:58:39,187
+you just get this little lego brick.
+
+1497
+00:58:39,189 --> 00:58:43,358
+But if you go down here to root.plist, you will see
+
+1498
+00:58:43,360 --> 00:58:47,661
+here is that default one I was showing you in the slide,
+
+1499
+00:58:47,663 --> 00:58:50,030
+that it gives you.
+
+1500
+00:58:50,031 --> 00:58:52,398
+And here is the strings that go along with this plist.
+
+1501
+00:58:52,401 --> 00:58:54,934
+This is what you would send off to your localizer right
+
+1502
+00:58:54,936 --> 00:58:57,603
+here for this particular plist file.
+
+1503
+00:58:57,605 --> 00:59:03,375
+So we're gonna Run just to see this UI, which has got
+
+1504
+00:59:03,377 --> 00:59:07,712
+a group with a text field and a toggle switch and a slider.
+
+1505
+00:59:07,714 --> 00:59:10,181
+We're gonna see that in our Settings app.
+
+1506
+00:59:10,183 --> 00:59:12,383
+So let's just Run.
+
+1507
+00:59:12,384 --> 00:59:14,584
+Now, every time you Run, it installs the Settings
+
+1508
+00:59:14,587 --> 00:59:18,689
+bundle into your system.
+
+1509
+00:59:18,691 --> 00:59:20,591
+So here we go.
+
+1510
+00:59:20,592 --> 00:59:22,492
+We have this thing, it's 0.85, so let's go over to settings.
+
+1511
+00:59:24,095 --> 00:59:26,495
+Actually, let's make our slide a little easier here,
+
+1512
+00:59:26,497 --> 00:59:27,529
+a little less swapping around.
+
+1513
+00:59:27,531 --> 00:59:29,031
+Let's put Bouncer on this page.
+
+1514
+00:59:29,033 --> 00:59:32,300
+Okay? So let's go to settings and
+
+1515
+00:59:32,302 --> 00:59:34,602
+now, when we go down to settings, see we got Bouncer.
+
+1516
+00:59:34,604 --> 00:59:36,037
+Okay, it added things for bouncer and
+
+1517
+00:59:36,039 --> 00:59:37,438
+if we click on Bouncer.
+
+1518
+00:59:37,440 --> 00:59:38,405
+There it is.
+
+1519
+00:59:38,407 --> 00:59:40,507
+That name field right here.
+
+1520
+00:59:40,509 --> 00:59:42,241
+And Enabled in this slider.
+
+1521
+00:59:43,611 --> 00:59:45,678
+Okay? So that's a good start.
+
+1522
+00:59:45,680 --> 00:59:49,114
+Now, let's change this UI right here to be what we want,
+
+1523
+00:59:49,116 --> 00:59:51,983
+which is we just really want a slider for elasticity.
+
+1524
+00:59:51,985 --> 00:59:55,153
+I'm going to keep this group at the top, but instead of
+
+1525
+00:59:55,155 --> 00:59:58,122
+calling it group, I'm going to call it Elasticity.
+
+1526
+00:59:59,191 --> 01:00:01,458
+Elasticity, okay?
+
+1527
+01:00:01,460 --> 01:00:03,326
+And I don't need a text field.
+
+1528
+01:00:03,328 --> 01:00:04,527
+We're not typing a text field.
+
+1529
+01:00:04,529 --> 01:00:06,328
+So you can delete things by just hitting
+
+1530
+01:00:06,330 --> 01:00:07,596
+Backspace to delete.
+
+1531
+01:00:07,598 --> 01:00:08,897
+Same thing, toggle switch.
+
+1532
+01:00:08,899 --> 01:00:10,365
+Delete, I don't want that.
+
+1533
+01:00:10,367 --> 01:00:11,999
+But I do want the slider.
+
+1534
+01:00:12,001 --> 01:00:14,668
+I'm gonna have the default value be the 0.85
+
+1535
+01:00:14,670 --> 01:00:16,803
+that we have now.
+
+1536
+01:00:16,805 --> 01:00:19,639
+Let's say the maximum is about 1.1.
+
+1537
+01:00:19,641 --> 01:00:21,541
+If we start getting to more than 1.1,
+
+1538
+01:00:21,543 --> 01:00:24,143
+in other words when it bounces off it gains energy,
+
+1539
+01:00:24,145 --> 01:00:27,279
+that thing is going to be ripping around so fast.
+
+1540
+01:00:27,281 --> 01:00:29,514
+So that's the maximum we want to allow.
+
+1541
+01:00:29,516 --> 01:00:31,583
+The minimum, we don't really want zero,
+
+1542
+01:00:31,585 --> 01:00:33,551
+that would be just death.
+
+1543
+01:00:33,553 --> 01:00:37,755
+So let's make it like 0.5, which is pretty dampened.
+
+1544
+01:00:37,757 --> 01:00:41,291
+But not complete death when it hits something, okay?
+
+1545
+01:00:41,293 --> 01:00:45,561
+And then I don't really like this as my NS user default
+
+1546
+01:00:45,563 --> 01:00:48,214
+name.
+
+1547
+01:00:48,215 --> 01:00:50,866
+I'm gonna call it, how about BouncerBehavior, since that's
+
+1548
+01:00:50,868 --> 01:00:54,603
+the class that we're gonna be setting this in, .Elasticity.
+
+1549
+01:00:54,605 --> 01:00:58,240
+Okay? It's kind of decent name.
+
+1550
+01:00:58,242 --> 01:01:01,376
+Okay? Comma name spaced name.
+
+1551
+01:01:01,378 --> 01:01:04,579
+So now, we're gonna get a slider
+
+1552
+01:01:04,581 --> 01:01:06,347
+with elasticity as the name of the group.
+
+1553
+01:01:06,349 --> 01:01:07,314
+So let's take a look at that.
+
+1554
+01:01:11,787 --> 01:01:12,452
+All right. So we go
+
+1555
+01:01:12,454 --> 01:01:13,619
+back here to Settings.
+
+1556
+01:01:14,789 --> 01:01:15,687
+And we look at Bouncer.
+
+1557
+01:01:15,689 --> 01:01:16,621
+Here it is. Elasticity.
+
+1558
+01:01:16,623 --> 01:01:17,755
+And we've got this on sliders.
+
+1559
+01:01:17,757 --> 01:01:20,825
+Now as I move this slider, it is changing that
+
+1560
+01:01:20,827 --> 01:01:24,528
+ns user default from 1.1 all the way down to 0.5.
+
+1561
+01:01:24,530 --> 01:01:26,496
+Okay? 1.1, 0.5,
+
+1562
+01:01:26,498 --> 01:01:28,264
+and everywhere in between.
+
+1563
+01:01:28,266 --> 01:01:29,816
+Okay?
+
+1564
+01:01:29,817 --> 01:01:31,367
+Now, it's only setting the NS user default at this point.
+
+1565
+01:01:31,369 --> 01:01:33,535
+We're not actually looking at the value.
+
+1566
+01:01:33,537 --> 01:01:35,637
+So when we go back.
+
+1567
+01:01:35,639 --> 01:01:38,540
+Sorry. When we go back here to
+
+1568
+01:01:38,542 --> 01:01:40,742
+Bouncer, it's still bouncing along at 0.85,
+
+1569
+01:01:40,744 --> 01:01:43,778
+no matter what I set that to, okay?
+
+1570
+01:01:43,780 --> 01:01:47,247
+So now, we need to look at the NS user default and
+
+1571
+01:01:47,249 --> 01:01:49,716
+have it change the elasticity.
+
+1572
+01:01:49,718 --> 01:01:50,917
+We can do that right here.
+
+1573
+01:01:51,920 --> 01:01:53,386
+Nice and wide.
+
+1574
+01:01:53,388 --> 01:01:54,186
+I set a 0.85.
+
+1575
+01:01:54,188 --> 01:01:57,639
+I'm gonna say,
+
+1576
+01:01:57,640 --> 01:02:01,091
+NSUserDefaults.standardUserDe- faults().doubleForKey.
+
+1577
+01:02:01,094 --> 01:02:02,393
+And, we called it Bouncer.
+
+1578
+01:02:02,395 --> 01:02:05,663
+I should probably have a nice constant for this,
+
+1579
+01:02:05,665 --> 01:02:08,432
+but we'll type it in for speed here.
+
+1580
+01:02:09,634 --> 01:02:11,134
+To behavior, that elasticity.
+
+1581
+01:02:11,136 --> 01:02:12,435
+Now, this is a double.
+
+1582
+01:02:12,437 --> 01:02:15,671
+And elasticity here is a CGFloat.
+
+1583
+01:02:15,673 --> 01:02:18,039
+So we need to put that in CGFloat.
+
+1584
+01:02:20,543 --> 01:02:21,475
+Okay?
+
+1585
+01:02:21,477 --> 01:02:22,643
+And so, that's good.
+
+1586
+01:02:22,645 --> 01:02:24,444
+So let's go ahead and now see what happens.
+
+1587
+01:02:29,017 --> 01:02:29,982
+Okay. So
+
+1588
+01:02:29,984 --> 01:02:33,152
+it looks like we have low elasticity.
+
+1589
+01:02:33,154 --> 01:02:35,420
+See how it's barely bouncing?
+
+1590
+01:02:35,422 --> 01:02:36,788
+'Kay?
+
+1591
+01:02:36,790 --> 01:02:39,190
+And so let's go look and see what our elasticity is set to.
+
+1592
+01:02:40,226 --> 01:02:42,526
+Bouncer, we have it right in the middle.
+
+1593
+01:02:42,528 --> 01:02:44,928
+So let's set it to high elasticity.
+
+1594
+01:02:44,930 --> 01:02:46,730
+And go back and see if that'll work.
+
+1595
+01:02:46,732 --> 01:02:47,530
+So we go up to Bouncer.
+
+1596
+01:02:47,532 --> 01:02:49,965
+And, oh. It's still low.
+
+1597
+01:02:49,967 --> 01:02:51,533
+Well, what's going on?
+
+1598
+01:02:51,535 --> 01:02:53,969
+Okay? Why didn't that pick that up?
+
+1599
+01:02:53,971 --> 01:02:59,607
+That's because we only call this once when our app starts.
+
+1600
+01:02:59,609 --> 01:03:02,610
+So whatever the elasticity was in the settings
+
+1601
+01:03:02,612 --> 01:03:05,012
+at the time our app launched, that's what we get.
+
+1602
+01:03:05,014 --> 01:03:06,447
+And if the user goes and
+
+1603
+01:03:06,448 --> 01:03:07,881
+changes it, it makes no difference.
+
+1604
+01:03:07,883 --> 01:03:10,483
+So, how do we make it so that the user can go to settings,
+
+1605
+01:03:10,485 --> 01:03:11,751
+change the elasticity and come back.
+
+1606
+01:03:11,753 --> 01:03:14,520
+And it will be different in Bouncer without quitting and
+
+1607
+01:03:14,522 --> 01:03:16,588
+restarting Bouncer and all that stuff?
+
+1608
+01:03:16,590 --> 01:03:20,325
+Well, the answer to that is Notifications.
+
+1609
+01:03:20,327 --> 01:03:23,595
+There's an NS notification you get every time your NS user
+
+1610
+01:03:23,597 --> 01:03:24,562
+defaults change.
+
+1611
+01:03:25,498 --> 01:03:27,131
+Okay? That's pretty cool.
+
+1612
+01:03:27,133 --> 01:03:31,634
+So, let's go NS Notification Center, Default Center,
+
+1613
+01:03:31,636 --> 01:03:34,537
+add Observer for name.
+
+1614
+01:03:34,539 --> 01:03:38,574
+The name is NSUserDefaultDidChange,
+
+1615
+01:03:38,576 --> 01:03:39,975
+as you might imagine.
+
+1616
+01:03:39,977 --> 01:03:41,743
+okay?
+
+1617
+01:03:41,744 --> 01:03:43,510
+The object is I don't care, anybody can send me that.
+
+1618
+01:03:43,513 --> 01:03:46,381
+The queue, we'll just do the main queue, and using
+
+1619
+01:03:46,383 --> 01:03:49,316
+block this is what's gonna happen when things change.
+
+1620
+01:03:49,318 --> 01:03:51,485
+And I'm actually going to do our closing,
+
+1621
+01:03:51,487 --> 01:03:56,056
+trailing, closure notation here.
+
+1622
+01:03:56,058 --> 01:03:58,391
+So here's the notification, this getting passed to me,
+
+1623
+01:03:58,393 --> 01:04:01,193
+I actually don't even need to look at that.
+
+1624
+01:04:01,195 --> 01:04:02,961
+And inside here I'm just gonna do this.
+
+1625
+01:04:05,399 --> 01:04:07,082
+Okay.
+
+1626
+01:04:07,083 --> 01:04:08,766
+So every time my NS user default change,
+
+1627
+01:04:08,768 --> 01:04:11,568
+I'm just going to update the elasticity.
+
+1628
+01:04:13,706 --> 01:04:14,704
+Okay.
+
+1629
+01:04:14,706 --> 01:04:16,973
+Now really, to be a good citizen here,
+
+1630
+01:04:16,975 --> 01:04:19,475
+I should be doing, let observer equals.
+
+1631
+01:04:19,477 --> 01:04:21,043
+And somewhere else, I should be doing
+
+1632
+01:04:21,045 --> 01:04:25,080
+NSNotificationDefaultCenter remove observer, this thing.
+
+1633
+01:04:25,082 --> 01:04:28,683
+But the way our app is right now, pretty much Bouncer
+
+1634
+01:04:28,685 --> 01:04:31,386
+comes up, takes over the screen and never leaves.
+
+1635
+01:04:31,388 --> 01:04:33,921
+So it's probably okay to not be doing that here.
+
+1636
+01:04:33,923 --> 01:04:36,156
+Besides, it's a demo so we're not going to do it.
+
+1637
+01:04:36,158 --> 01:04:37,924
+But generally, when you add an observer,
+
+1638
+01:04:37,926 --> 01:04:39,926
+you want to get that observer cookie back and
+
+1639
+01:04:39,928 --> 01:04:41,728
+you want to remove it somewhere sensible.
+
+1640
+01:04:42,964 --> 01:04:44,363
+All right? So let's see if this works.
+
+1641
+01:04:46,666 --> 01:04:48,683
+Okay? Now,
+
+1642
+01:04:48,684 --> 01:04:50,701
+last time we changed the elasticity to 1.1, I think.
+
+1643
+01:04:50,704 --> 01:04:52,070
+Right. See? So look,
+
+1644
+01:04:52,071 --> 01:04:53,437
+this guy's gonna go pretty wild, okay?
+
+1645
+01:04:53,439 --> 01:04:55,839
+He's gaining speed with every bounce.
+
+1646
+01:04:55,841 --> 01:04:57,074
+So let's slow him down.
+
+1647
+01:04:57,076 --> 01:04:58,241
+Let's go over into Settings.
+
+1648
+01:05:00,211 --> 01:05:01,811
+Notice that every time you install it,
+
+1649
+01:05:01,813 --> 01:05:03,979
+it's gonna install it here.
+
+1650
+01:05:03,981 --> 01:05:07,449
+So let's change our elasticity from 1.1 down to really slow.
+
+1651
+01:05:08,585 --> 01:05:09,751
+Okay?
+
+1652
+01:05:09,752 --> 01:05:10,918
+Now, we can go back to Bouncer and
+
+1653
+01:05:10,920 --> 01:05:14,287
+the next time Bouncer hits, it slows down, okay?
+
+1654
+01:05:15,223 --> 01:05:16,422
+See that? Almost dead.
+
+1655
+01:05:17,458 --> 01:05:18,641
+Very little bounce.
+
+1656
+01:05:18,642 --> 01:05:19,825
+Let's go back and change it again.
+
+1657
+01:05:20,761 --> 01:05:22,460
+Go all the way back up to.
+
+1658
+01:05:22,462 --> 01:05:23,161
+Whoops.
+
+1659
+01:05:23,163 --> 01:05:25,129
+Up to high speed.
+
+1660
+01:05:27,866 --> 01:05:30,266
+And the next hit gaining energy.
+
+1661
+01:05:30,268 --> 01:05:31,568
+Oh, yeah.
+
+1662
+01:05:31,569 --> 01:05:32,869
+Gaining more and more speed with every bounce.
+
+1663
+01:05:32,871 --> 01:05:34,203
+Okay?
+
+1664
+01:05:34,205 --> 01:05:36,605
+There we go.
+
+1665
+01:05:36,607 --> 01:05:39,074
+I don't even need to look.
+
+1666
+01:05:39,076 --> 01:05:41,326
+Okay.
+
+1667
+01:05:41,327 --> 01:05:43,577
+[LAUGH] And it just bounced off and just disappeared.
+
+1668
+01:05:43,580 --> 01:05:45,513
+Went into some ether.
+
+1669
+01:05:45,515 --> 01:05:47,748
+Okay. [SOUND] That is it.
+
+1670
+01:05:47,750 --> 01:05:51,251
+I finished early for once today, so thank you all for
+
+1671
+01:05:51,253 --> 01:05:52,252
+coming.
+
+1672
+01:05:52,254 --> 01:05:53,886
+And I'll be here if you have any questions.
+
+1673
+01:05:55,256 --> 01:05:55,287
+>> For more, please visit us at stanford.edu
+

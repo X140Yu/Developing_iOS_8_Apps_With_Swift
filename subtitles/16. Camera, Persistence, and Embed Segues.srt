@@ -1,0 +1,7228 @@
+﻿1
+00:00:00,001 --> 00:00:04,669
+[MUSIC]
+
+2
+00:00:04,671 --> 00:00:07,638
+>> Stanford university.
+
+3
+00:00:07,640 --> 00:00:13,210
+>> Okay well, welcome to lecture 16 of Stanford CS193p,
+
+4
+00:00:13,212 --> 00:00:15,178
+winter of 2015.
+
+5
+00:00:15,180 --> 00:00:16,680
+So today,
+
+6
+00:00:16,681 --> 00:00:18,181
+we're going to be talking about three major topics.
+
+7
+00:00:18,183 --> 00:00:21,451
+One is the camera, how to basically take a picture with
+
+8
+00:00:21,453 --> 00:00:23,853
+the camera or get video from the camera.
+
+9
+00:00:23,855 --> 00:00:27,823
+Then persistence which is an important topic about how to
+
+10
+00:00:27,825 --> 00:00:30,625
+store stuff in the flash memory of your.
+
+11
+00:00:30,627 --> 00:00:33,194
+Phone, and a lot of you have already kind of dived into
+
+12
+00:00:33,196 --> 00:00:35,796
+this as part of your final project, but I'm just gonna
+
+13
+00:00:35,798 --> 00:00:38,565
+kind of give you a tour of the various ways that can be done.
+
+14
+00:00:38,567 --> 00:00:41,968
+And then the last one is kind of an interesting segway.
+
+15
+00:00:41,970 --> 00:00:45,338
+I leave it for last because it's kind of requires you to
+
+16
+00:00:45,340 --> 00:00:48,408
+be a little bit of a visual thinker, to see what's
+
+17
+00:00:48,410 --> 00:00:51,977
+happening when we do it, but it's called an embed segue,
+
+18
+00:00:51,979 --> 00:00:54,546
+which is where we basically take one MVC.
+
+19
+00:00:54,548 --> 00:00:59,284
+And we embed its view into another MVC's view hierarchy
+
+20
+00:00:59,286 --> 00:01:01,085
+which is kind of fun.
+
+21
+00:01:01,087 --> 00:01:04,255
+So let's dive in right in to the camera.
+
+22
+00:01:04,257 --> 00:01:06,390
+The camera is accessed via this file or
+
+23
+00:01:06,392 --> 00:01:09,092
+this class called UI ImagePickerController.
+
+24
+00:01:09,094 --> 00:01:12,696
+It is a UI view controller, sub-class actually of UI
+
+25
+00:01:12,698 --> 00:01:15,231
+navigation controller, I believe.
+
+26
+00:01:15,233 --> 00:01:18,134
+And it's very simple to use.
+
+27
+00:01:18,136 --> 00:01:19,868
+You really just configure it and
+
+28
+00:01:19,870 --> 00:01:21,370
+then you put it up modally.
+
+29
+00:01:21,372 --> 00:01:22,654
+Okay?
+
+30
+00:01:22,655 --> 00:01:23,937
+So there's really nothing more to it than that.
+
+31
+00:01:23,940 --> 00:01:26,574
+We learned about how to put things up modally last time
+
+32
+00:01:26,576 --> 00:01:28,175
+with presentViewController.
+
+33
+00:01:28,177 --> 00:01:29,977
+That's all you're gonna have to do.
+
+34
+00:01:29,979 --> 00:01:32,779
+So, the process of using the UI image picker controller
+
+35
+00:01:32,781 --> 00:01:34,514
+to get something from the camera,
+
+36
+00:01:34,516 --> 00:01:36,849
+is, you create it, and you set its delegate.
+
+37
+00:01:36,851 --> 00:01:39,285
+It won't do anything without its delegate, so
+
+38
+00:01:39,287 --> 00:01:40,819
+you have to set its delegate.
+
+39
+00:01:40,821 --> 00:01:42,354
+Then you're gonna configure it, for you know?
+
+40
+00:01:42,356 --> 00:01:44,356
+Do you want just still images or video, or
+
+41
+00:01:44,358 --> 00:01:46,358
+that kind of stuff?
+
+42
+00:01:46,359 --> 00:01:48,359
+Do you want users to be able to edit the pictures they've
+
+43
+00:01:48,361 --> 00:01:49,727
+taken before?
+
+44
+00:01:49,728 --> 00:01:51,094
+They import them into your app, etc.
+
+45
+00:01:51,097 --> 00:01:53,764
+Then you just present it with presentViewController.
+
+46
+00:01:53,766 --> 00:01:57,034
+And then you're gonna respond to delegate methods that tell
+
+47
+00:01:57,036 --> 00:01:59,936
+you, okay, I took a photo, here's the image data,
+
+48
+00:01:59,938 --> 00:02:02,972
+or the video, the URL of the video, that the user took.
+
+49
+00:02:02,974 --> 00:02:06,342
+So that's pretty much it.
+
+50
+00:02:06,344 --> 00:02:09,028
+Each device.
+
+51
+00:02:09,029 --> 00:02:11,713
+Kinda has different hardware, although that's becoming less
+
+52
+00:02:11,715 --> 00:02:13,815
+and less true as the years go by.
+
+53
+00:02:13,817 --> 00:02:16,617
+It used to be that there were some iOS devices that didn't
+
+54
+00:02:16,619 --> 00:02:17,918
+even have a camera at all.
+
+55
+00:02:17,920 --> 00:02:21,822
+But certainly there were early on iOS devices that could.
+
+56
+00:02:21,824 --> 00:02:25,559
+Do still images, but couldn't do video for example.
+
+57
+00:02:25,561 --> 00:02:29,763
+So as with all the hardware things, whether it's you know,
+
+58
+00:02:29,765 --> 00:02:33,599
+core motion or any of those things we always wanna ask and
+
+59
+00:02:33,601 --> 00:02:35,334
+see what we can do first.
+
+60
+00:02:35,336 --> 00:02:38,503
+So it's very easy for the image picker controller it has
+
+61
+00:02:38,505 --> 00:02:41,573
+a class function called, is source type available.
+
+62
+00:02:41,575 --> 00:02:45,309
+And there's three different sources for images or
+
+63
+00:02:45,311 --> 00:02:47,378
+video to come into your app.
+
+64
+00:02:47,380 --> 00:02:49,246
+One is the camera, obviously.
+
+65
+00:02:49,248 --> 00:02:51,581
+Another one is the saved photos album,
+
+66
+00:02:51,583 --> 00:02:53,916
+that's essentially the camera roll.
+
+67
+00:02:53,918 --> 00:02:56,285
+Right, things that they've taken with the camera.
+
+68
+00:02:56,287 --> 00:02:57,986
+And then there's the photo library,
+
+69
+00:02:57,988 --> 00:03:00,522
+which is the same thing they see in the photos app, okay.
+
+70
+00:03:00,524 --> 00:03:03,224
+So you can kinda pick which one of those things.
+
+71
+00:03:03,226 --> 00:03:06,094
+You wanna get your image or video from and
+
+72
+00:03:06,096 --> 00:03:08,562
+they're a little bit different.
+
+73
+00:03:08,564 --> 00:03:10,764
+A little bit of photo library and the saved photos album
+
+74
+00:03:10,766 --> 00:03:12,666
+are treated pretty much exactly the same, but
+
+75
+00:03:12,668 --> 00:03:14,367
+the camera is a little bit different in how
+
+76
+00:03:14,369 --> 00:03:16,703
+it's presented, so we'll talk about that in a moment.
+
+77
+00:03:16,705 --> 00:03:20,272
+Once you know your source type then you're gonna say,
+
+78
+00:03:20,274 --> 00:03:23,742
+what are the available media types, image or video.
+
+79
+00:03:23,744 --> 00:03:25,561
+Or both.
+
+80
+00:03:25,562 --> 00:03:27,379
+Now it's almost not even worth checking for image anymore.
+
+81
+00:03:27,381 --> 00:03:29,614
+Because if you have a camera, it can get an image.
+
+82
+00:03:29,616 --> 00:03:32,516
+So, I think it'd probably be okay if you just never even
+
+83
+00:03:32,518 --> 00:03:35,185
+called this available media types for source type,
+
+84
+00:03:35,187 --> 00:03:36,953
+camera if you're trying to get.
+
+85
+00:03:36,955 --> 00:03:39,489
+An image, okay, because it's gonna be there.
+
+86
+00:03:39,491 --> 00:03:41,791
+But if you wanna get video, you definitely should call
+
+87
+00:03:41,793 --> 00:03:44,093
+this in case someone has an older iPhone that won't,
+
+88
+00:03:44,095 --> 00:03:45,194
+doesn't capture video.
+
+89
+00:03:45,196 --> 00:03:49,097
+Now these two types, the kuTTypeImage and
+
+90
+00:03:49,099 --> 00:03:53,634
+kuTTypeMovie, which are basically strings that
+
+91
+00:03:53,636 --> 00:03:56,570
+specify these two media types.
+
+92
+00:03:56,572 --> 00:03:58,839
+Strangely, they come from this.
+
+93
+00:03:58,841 --> 00:04:02,009
+Framework that your otherwise never gonna import which is
+
+94
+00:04:02,011 --> 00:04:04,077
+the mobile core services framework.
+
+95
+00:04:04,079 --> 00:04:08,714
+So if you wanna use those two types right there or
+
+96
+00:04:08,716 --> 00:04:12,818
+two constantsKUTType images and movie.
+
+97
+00:04:12,820 --> 00:04:14,886
+You need to import mobile core services.
+
+98
+00:04:14,888 --> 00:04:16,288
+Okay?
+
+99
+00:04:16,289 --> 00:04:17,689
+I'm kinda lingering on this one because this is some
+
+100
+00:04:17,691 --> 00:04:19,102
+people forget.
+
+101
+00:04:19,103 --> 00:04:20,514
+And they're just like what the heck?
+
+102
+00:04:20,515 --> 00:04:21,926
+Because if you search in the documentation it's kind of
+
+103
+00:04:21,928 --> 00:04:22,910
+hard to find.
+
+104
+00:04:22,911 --> 00:04:23,893
+That you're supposed to do this.
+
+105
+00:04:23,896 --> 00:04:26,697
+Whatever.
+
+106
+00:04:26,698 --> 00:04:29,499
+So I made a special slide and emphasize it there for you.
+
+107
+00:04:29,501 --> 00:04:32,368
+You can obviously ask UI inventory picker controller
+
+108
+00:04:32,370 --> 00:04:34,103
+for more detail even than this.
+
+109
+00:04:34,105 --> 00:04:36,705
+Is there a camera and what kind of things can it take?
+
+110
+00:04:36,707 --> 00:04:40,442
+You can say, is there a front camera?
+
+111
+00:04:40,444 --> 00:04:41,743
+Is there a rear camera?
+
+112
+00:04:41,745 --> 00:04:44,178
+Which you might care if you have an app that's like selfie
+
+113
+00:04:44,180 --> 00:04:45,529
+oriented.
+
+114
+00:04:45,530 --> 00:04:46,879
+It might wanna know that there's a front camera.
+
+115
+00:04:46,882 --> 00:04:48,415
+For that.
+
+116
+00:04:48,417 --> 00:04:50,950
+And you can also tell whether a flash is available on that
+
+117
+00:04:50,952 --> 00:04:52,168
+device, etc.
+
+118
+00:04:52,169 --> 00:04:53,385
+So there's a bunch of class functions and
+
+119
+00:04:53,388 --> 00:04:54,653
+UI image picker controllers.
+
+120
+00:04:54,655 --> 00:04:57,556
+You can find out what's going on.
+
+121
+00:04:57,558 --> 00:04:59,991
+So here's the code, typically,
+
+122
+00:04:59,993 --> 00:05:02,460
+to prepare to present the picker.
+
+123
+00:05:02,462 --> 00:05:04,462
+You're going to create the picker.
+
+124
+00:05:04,464 --> 00:05:06,030
+You're gonna set its delegate.
+
+125
+00:05:06,032 --> 00:05:08,098
+You're gonna ask if the camera is available.
+
+126
+00:05:08,100 --> 00:05:11,268
+If it is, you're gonna set the source type to be the camera.
+
+127
+00:05:11,270 --> 00:05:14,704
+Then you're gonna ask and see if, for example in this case,
+
+128
+00:05:14,706 --> 00:05:16,739
+I wanna take a movie with my camera.
+
+129
+00:05:16,741 --> 00:05:21,210
+So I'm gonna ask is that kuTTypeMovie available.
+
+130
+00:05:21,212 --> 00:05:25,513
+Now, this line of code right there, if availableTypes as
+
+131
+00:05:25,515 --> 00:05:29,283
+NSArray).containsObject(kuTTy- peMovie.
+
+132
+00:05:29,285 --> 00:05:30,584
+That's kind of a weird line of code.
+
+133
+00:05:30,586 --> 00:05:31,518
+Really, it doesn't.
+
+134
+00:05:31,520 --> 00:05:34,521
+Fit into the swift world very well.
+
+135
+00:05:34,523 --> 00:05:36,589
+You just do it.
+
+136
+00:05:36,591 --> 00:05:41,093
+I's an old objectice C based API.
+
+137
+00:05:41,095 --> 00:05:45,230
+And kuTTypeMovie is even kind of an older kind of string
+
+138
+00:05:45,232 --> 00:05:46,865
+even than NSString.
+
+139
+00:05:46,867 --> 00:05:48,366
+And, so.
+
+140
+00:05:48,368 --> 00:05:50,067
+We kind of have to do this old style thing.
+
+141
+00:05:50,069 --> 00:05:53,804
+I'm sure probably somewhere they'll probably come up with
+
+142
+00:05:53,806 --> 00:05:57,441
+some new API for this whole camera thing that doesn't have
+
+143
+00:05:57,443 --> 00:06:00,377
+this old stuff, but for now you have to do that.
+
+144
+00:06:00,379 --> 00:06:02,979
+And then you just tell the picker the media types I want
+
+145
+00:06:02,981 --> 00:06:05,114
+the user to be able to take is just a movie, so
+
+146
+00:06:05,116 --> 00:06:07,883
+in this case they wouldn't be able to take a still image,
+
+147
+00:06:07,885 --> 00:06:10,218
+they would only be able to take a movie, if you.
+
+148
+00:06:10,220 --> 00:06:12,721
+Pass an array with just kuTTypeMovie.
+
+149
+00:06:12,723 --> 00:06:13,855
+So that's it.
+
+150
+00:06:13,857 --> 00:06:17,058
+You've configured the picker now, you just need to
+
+151
+00:06:17,060 --> 00:06:19,993
+present it with that present view controller.
+
+152
+00:06:19,995 --> 00:06:22,129
+There are some other things you can kind of configure with
+
+153
+00:06:22,131 --> 00:06:23,329
+the picker before you put it up.
+
+154
+00:06:23,331 --> 00:06:24,530
+One is editability.
+
+155
+00:06:24,532 --> 00:06:26,999
+That's whether you're gonna allow the user to crop.
+
+156
+00:06:27,001 --> 00:06:29,134
+The image or edit the video.
+
+157
+00:06:29,136 --> 00:06:32,237
+There's actually a video editor built in there
+
+158
+00:06:32,239 --> 00:06:36,007
+that they can edit the video before it returns to your app.
+
+159
+00:06:36,009 --> 00:06:38,209
+You can also limit video capture, for example,
+
+160
+00:06:38,211 --> 00:06:40,711
+to be lower resolution if you're just doing something
+
+161
+00:06:40,713 --> 00:06:43,380
+that's gonna be in a little square somewhere in a webpage,
+
+162
+00:06:43,382 --> 00:06:44,648
+you can go low resolution.
+
+163
+00:06:44,650 --> 00:06:45,882
+If it's something that.
+
+164
+00:06:45,884 --> 00:06:48,584
+Maybe it's going to be Airplayed to a high resolution
+
+165
+00:06:48,586 --> 00:06:51,053
+device or something like that, and you can go for
+
+166
+00:06:51,055 --> 00:06:52,838
+a higher resolution.
+
+167
+00:06:52,839 --> 00:06:54,622
+And of course high resolution, you're gonna use more memory.
+
+168
+00:06:54,625 --> 00:06:57,292
+Etcetera, etcetera, okay?
+
+169
+00:06:57,294 --> 00:07:00,395
+You present using view controller.
+
+170
+00:07:00,397 --> 00:07:02,130
+Now, the thing about this is interesting is
+
+171
+00:07:02,132 --> 00:07:03,397
+when you're doing the camera.
+
+172
+00:07:03,399 --> 00:07:04,898
+You're always gonna present view controller.
+
+173
+00:07:04,900 --> 00:07:08,101
+It's always gonna be take over the screen even on the iPad.
+
+174
+00:07:08,103 --> 00:07:09,836
+So on the iPad when you do the camera,
+
+175
+00:07:09,838 --> 00:07:12,372
+you're gonna have this huge camera taking picture.
+
+176
+00:07:12,374 --> 00:07:13,339
+Okay?
+
+177
+00:07:13,341 --> 00:07:14,907
+The whole screen is gonna be the camera.
+
+178
+00:07:14,909 --> 00:07:16,141
+However, on the iPad,
+
+179
+00:07:16,143 --> 00:07:18,977
+if you're just looking at the photo library, okay?
+
+180
+00:07:18,979 --> 00:07:22,813
+Or the camera roll you want to present that in a pop over.
+
+181
+00:07:22,815 --> 00:07:24,915
+It's only gonna be fairly small,
+
+182
+00:07:24,917 --> 00:07:27,784
+like the 320 wide by I don't know how high.
+
+183
+00:07:27,786 --> 00:07:29,552
+600 or something.
+
+184
+00:07:29,554 --> 00:07:32,655
+So that's really something you're supposed to put in
+
+185
+00:07:32,657 --> 00:07:33,623
+a popover.
+
+186
+00:07:33,624 --> 00:07:34,590
+Now an iPhone, it doesn't matter.
+
+187
+00:07:34,592 --> 00:07:36,859
+In both cases it's gonna be full modal,
+
+188
+00:07:36,861 --> 00:07:38,160
+take over the screen.
+
+189
+00:07:38,162 --> 00:07:40,229
+Okay?
+
+190
+00:07:40,230 --> 00:07:42,297
+Cuz it's just too big to put any other way on the iPhone.
+
+191
+00:07:42,299 --> 00:07:44,733
+Okay?
+
+192
+00:07:44,734 --> 00:07:47,168
+So, you present this thing, and it sits there on screen,
+
+193
+00:07:47,170 --> 00:07:50,404
+and then, when the user use this photo, okay, or
+
+194
+00:07:50,406 --> 00:07:53,774
+use this video, this is gonna be called right here,
+
+195
+00:07:53,776 --> 00:07:57,611
+this delegate method: image picker controller did finish
+
+196
+00:07:57,613 --> 00:08:01,447
+picking media with info, and with info dictionary there,
+
+197
+00:08:01,449 --> 00:08:03,649
+has the results of what they did.
+
+198
+00:08:03,651 --> 00:08:04,784
+And when you get there,
+
+199
+00:08:04,785 --> 00:08:05,918
+we'll talk about what's in there in a minute.
+
+200
+00:08:05,920 --> 00:08:09,187
+But when you get this and you get your image, or whatever,
+
+201
+00:08:09,189 --> 00:08:11,189
+then you wanna dismiss this thing.
+
+202
+00:08:11,191 --> 00:08:13,191
+And I've kind of put here a line of code,
+
+203
+00:08:13,193 --> 00:08:16,727
+presentingViewController.dism- issViewControllerAnimated.
+
+204
+00:08:16,729 --> 00:08:19,430
+Usually you're not putting the presentingViewCcontroller in
+
+205
+00:08:19,432 --> 00:08:21,898
+there, because you are the presentingViewController.
+
+206
+00:08:21,900 --> 00:08:23,833
+You just presented this thing.
+
+207
+00:08:23,835 --> 00:08:25,335
+So you wouldn't need that part of it.
+
+208
+00:08:25,337 --> 00:08:27,503
+But I just wanted to emphasize that again, you dismiss by
+
+209
+00:08:27,505 --> 00:08:29,805
+sending a message through the presentingViewController,
+
+210
+00:08:29,807 --> 00:08:31,039
+which is probably gonna be you.
+
+211
+00:08:31,041 --> 00:08:33,508
+And you'll see in the demo, we're gonna do this, and
+
+212
+00:08:33,510 --> 00:08:35,443
+we're just gonna call dismiss directly.
+
+213
+00:08:35,445 --> 00:08:38,079
+We don't have to say presentingViewController.
+
+214
+00:08:38,081 --> 00:08:41,015
+The other delegate method you're gonna get of interest
+
+215
+00:08:41,017 --> 00:08:43,183
+is image figure controller and d cancel.
+
+216
+00:08:43,185 --> 00:08:44,584
+And that means they hit cancel.
+
+217
+00:08:44,586 --> 00:08:47,387
+So now you don't want to use the image that they were
+
+218
+00:08:47,389 --> 00:08:48,587
+taking, whatever.
+
+219
+00:08:48,589 --> 00:08:51,990
+So in that case, you just need to dismiss, 'kay?
+
+220
+00:08:51,992 --> 00:08:53,275
+So that's it.
+
+221
+00:08:53,276 --> 00:08:54,559
+Those are the two delegates methods you get.
+
+222
+00:08:54,561 --> 00:08:57,162
+So let's look in that info dictionary,
+
+223
+00:08:57,164 --> 00:08:58,629
+see what's in there.
+
+224
+00:08:58,631 --> 00:08:59,930
+All kinds of stuff in there.
+
+225
+00:08:59,932 --> 00:09:01,498
+There is the image they took, obviously,
+
+226
+00:09:01,500 --> 00:09:02,799
+if they're taking a still image.
+
+227
+00:09:02,801 --> 00:09:04,167
+If you allowed editing,
+
+228
+00:09:04,169 --> 00:09:07,403
+then it's gonna have also the edited image like cropped,
+
+229
+00:09:07,405 --> 00:09:10,072
+right, if they picked a different space of it.
+
+230
+00:09:10,074 --> 00:09:11,407
+Also if they cropped it,
+
+231
+00:09:11,409 --> 00:09:14,710
+you'll get the rectangle that they chose inside the thing.
+
+232
+00:09:14,712 --> 00:09:15,944
+If it's a video,
+
+233
+00:09:15,946 --> 00:09:19,147
+then you're gonna get this media URL, okay.
+
+234
+00:09:19,149 --> 00:09:21,982
+It's just gonna be URL to some file somewhere in your
+
+235
+00:09:21,984 --> 00:09:25,052
+sandbox, which I'll talk about sandbox later today.
+
+236
+00:09:25,054 --> 00:09:29,056
+It points to the video, 'kay?
+
+237
+00:09:29,058 --> 00:09:32,692
+When you get this image or video you might wanna save it.
+
+238
+00:09:32,694 --> 00:09:35,094
+We're gonna save it in our demo to a file in the file
+
+239
+00:09:35,096 --> 00:09:37,697
+system cuz I wanna show you how the file system works.
+
+240
+00:09:37,699 --> 00:09:39,064
+But really, most likely,
+
+241
+00:09:39,066 --> 00:09:42,267
+you're gonna save it to the device's photo library, 'kay?
+
+242
+00:09:42,269 --> 00:09:44,936
+That probably if someone takes a photo and you wanna save it,
+
+243
+00:09:44,938 --> 00:09:47,472
+that's likely where you would store, you might store in
+
+244
+00:09:47,474 --> 00:09:49,740
+the file system but more like in the photo library,
+
+245
+00:09:49,742 --> 00:09:52,376
+you do all that with this, I'm not gonna for time reasons,
+
+246
+00:09:52,378 --> 00:09:54,545
+cover that, but.
+
+247
+00:09:54,546 --> 00:09:56,713
+You an check out this class's ALAssetsLibrary, it's pretty
+
+248
+00:09:56,715 --> 00:09:59,849
+straightforward how you access the assets library, and
+
+249
+00:09:59,851 --> 00:10:02,418
+you can put things in the photo library there.
+
+250
+00:10:02,420 --> 00:10:04,070
+By the way,
+
+251
+00:10:04,071 --> 00:10:05,721
+the UIImagePickerController is kind of an old API,
+
+252
+00:10:05,723 --> 00:10:08,424
+it's a simple way to get things with the camera, but
+
+253
+00:10:08,426 --> 00:10:10,926
+there's a whole, much more powerful API called
+
+254
+00:10:10,928 --> 00:10:13,995
+AVCaptureDevice, especially if you're getting video,
+
+255
+00:10:13,997 --> 00:10:15,763
+you might wanna check into that.
+
+256
+00:10:15,765 --> 00:10:20,234
+It's kind of a more powerful way to do the stuff that
+
+257
+00:10:20,236 --> 00:10:22,669
+the UIImagePicker can do.
+
+258
+00:10:22,671 --> 00:10:24,304
+So I'm not gonna cover it, but just so
+
+259
+00:10:24,306 --> 00:10:26,423
+you know that it's there.
+
+260
+00:10:26,424 --> 00:10:28,541
+If you're just getting simple image, or just a simple clip
+
+261
+00:10:28,543 --> 00:10:31,677
+of video, you're okay with UIImagePickerController, but
+
+262
+00:10:31,679 --> 00:10:34,513
+if you wanna do more with that, then AVCaptureDevice.
+
+263
+00:10:34,515 --> 00:10:37,349
+The last thing about your ImagePickingController is that
+
+264
+00:10:37,351 --> 00:10:39,084
+it does support putting overlays.
+
+265
+00:10:39,086 --> 00:10:40,885
+So when that camera is on screen and
+
+266
+00:10:40,887 --> 00:10:42,853
+the user's trying to take a picture,
+
+267
+00:10:42,855 --> 00:10:45,956
+you can have your own controls on there, your own buttons or
+
+268
+00:10:45,958 --> 00:10:48,258
+whatever you want, using an overlay view.
+
+269
+00:10:48,260 --> 00:10:52,862
+The camera is always full screen, of course, so you need
+
+270
+00:10:52,864 --> 00:10:57,433
+to make sure that the view that you're putting overlay,
+
+271
+00:10:57,435 --> 00:11:01,569
+you know, matches up with that screen's bounds,
+
+272
+00:11:01,571 --> 00:11:05,906
+which you can get using the UIScreen classes bounds.
+
+273
+00:11:05,908 --> 00:11:10,143
+You might have your controls actually have the take a photo
+
+274
+00:11:10,145 --> 00:11:11,862
+button.
+
+275
+00:11:11,863 --> 00:11:13,580
+In which case you might wanna hide the Take a Photo button
+
+276
+00:11:13,582 --> 00:11:16,082
+that comes with the camera, and you can do that with
+
+277
+00:11:16,084 --> 00:11:17,950
+showsCameraControls equals false.
+
+278
+00:11:17,952 --> 00:11:19,852
+And then it won't show its Take a Photo button, but
+
+279
+00:11:19,854 --> 00:11:21,420
+then you better provide one,
+
+280
+00:11:21,421 --> 00:11:22,987
+because you won't be able to take a picture otherwise.
+
+281
+00:11:22,990 --> 00:11:26,891
+And then finally, you have this cameraViewTransform.
+
+282
+00:11:26,893 --> 00:11:30,128
+Normally, the camera maybe takes a square picture, or
+
+283
+00:11:30,130 --> 00:11:33,531
+it might take its picture, in any case, if the aspect ratio
+
+284
+00:11:33,533 --> 00:11:37,034
+doesn't match the aspect ratio of the screen, but you might
+
+285
+00:11:37,036 --> 00:11:40,437
+want it to basically take a full, you know, basically take
+
+286
+00:11:40,439 --> 00:11:43,540
+the piece of it that is the aspect ratio of the screen.
+
+287
+00:11:43,542 --> 00:11:46,309
+And you can do that by controlling the transform of
+
+288
+00:11:46,311 --> 00:11:47,309
+the cameraView.
+
+289
+00:11:47,311 --> 00:11:49,878
+So AffineTransform there, remember,
+
+290
+00:11:49,880 --> 00:11:52,614
+AffineTransforms are scale, rotation.
+
+291
+00:11:52,616 --> 00:11:54,215
+In translation, so
+
+292
+00:11:54,217 --> 00:11:58,419
+you can do the scale there to scale it up if you want to.
+
+293
+00:11:58,421 --> 00:12:00,487
+Let's do that, all right.
+
+294
+00:12:00,489 --> 00:12:03,323
+All right, so that is the ImagePickerController,
+
+295
+00:12:03,325 --> 00:12:05,959
+let's go ahead and go back to our tracked demo and
+
+296
+00:12:05,961 --> 00:12:08,494
+use the ImagePickerController to make it, so
+
+297
+00:12:08,496 --> 00:12:11,464
+that if we have a waypoint, one of our custom waypoints
+
+298
+00:12:11,466 --> 00:12:13,932
+that we now can edit, that we can add a photo,
+
+299
+00:12:13,934 --> 00:12:16,601
+just by taking a picture with the camera, okay?
+
+300
+00:12:16,603 --> 00:12:18,403
+That's what we're gonna do here.
+
+301
+00:12:18,405 --> 00:12:20,038
+So let's go back to tracks.
+
+302
+00:12:20,040 --> 00:12:22,340
+Here we are in tracks.
+
+303
+00:12:22,342 --> 00:12:24,041
+Just remember where we are here.
+
+304
+00:12:24,043 --> 00:12:28,478
+We've built this thing that allows us to click on
+
+305
+00:12:28,480 --> 00:12:31,948
+the map and then we can see the images.
+
+306
+00:12:31,950 --> 00:12:33,482
+And we can also drop a pin.
+
+307
+00:12:33,484 --> 00:12:36,518
+And when we click on the little detail disclosure,
+
+308
+00:12:36,520 --> 00:12:39,554
+we bring up this little new controller right here,
+
+309
+00:12:39,556 --> 00:12:41,923
+where we can edit the name and the info.
+
+310
+00:12:41,925 --> 00:12:45,326
+So what I wanna do here is actually use this nice big
+
+311
+00:12:45,328 --> 00:12:48,729
+space we have at the bottom of our editor to show and
+
+312
+00:12:48,731 --> 00:12:52,733
+edit the photo, okay that goes along with this waypoint.
+
+313
+00:12:52,735 --> 00:12:56,370
+Now, you might think the first thing I'm gonna do here is go
+
+314
+00:12:56,372 --> 00:13:00,040
+down to my object palette and grab an image view, down here,
+
+315
+00:13:00,042 --> 00:13:02,442
+but I'm not gonna do that, 'kay, and
+
+316
+00:13:02,444 --> 00:13:05,845
+I'm gonna show you kind of a little bit of an interesting
+
+317
+00:13:05,847 --> 00:13:07,479
+trick about ImageViews.
+
+318
+00:13:07,481 --> 00:13:11,583
+One thing about ImageViews is that they have an intrinsic
+
+319
+00:13:11,585 --> 00:13:13,040
+size.
+
+320
+00:13:13,041 --> 00:13:14,496
+They're like labels.
+
+321
+00:13:14,497 --> 00:13:15,952
+They want to be the size of their image, okay, for
+
+322
+00:13:15,955 --> 00:13:17,488
+auto-layout purposes.
+
+323
+00:13:17,490 --> 00:13:19,456
+They strongly want to be that size.
+
+324
+00:13:19,458 --> 00:13:20,557
+You have a question, sorry.
+
+325
+00:13:20,559 --> 00:13:21,491
+>> [INAUDIBLE].
+
+326
+00:13:21,493 --> 00:13:22,392
+>> No, I'm not.
+
+327
+00:13:22,394 --> 00:13:25,428
+Close.
+
+328
+00:13:25,430 --> 00:13:27,830
+Let's see here, close.
+
+329
+00:13:27,832 --> 00:13:31,400
+[INAUDIBLE].
+
+330
+00:13:31,402 --> 00:13:34,069
+So you guys are only gonna get it from, starting from here,
+
+331
+00:13:34,071 --> 00:13:35,837
+cuz I'm not gonna go back to the start.
+
+332
+00:13:35,839 --> 00:13:41,875
+I'm [INAUDIBLE] much.
+
+333
+00:13:41,877 --> 00:13:44,878
+Okay, so if I have auto-layout and I drag an image view in
+
+334
+00:13:44,880 --> 00:13:47,847
+there, then when I set the image, it's gonna wanna make
+
+335
+00:13:47,849 --> 00:13:50,683
+the auto layout huge because the image is gonna be big,
+
+336
+00:13:50,685 --> 00:13:53,252
+especially if I have a high resolution photo, so
+
+337
+00:13:53,254 --> 00:13:54,787
+I don't want that to happen,
+
+338
+00:13:54,789 --> 00:13:57,723
+I want this image view to be the size I say it's gonna be.
+
+339
+00:13:57,725 --> 00:14:01,159
+Basically I want it to use whatever space is available
+
+340
+00:14:01,161 --> 00:14:01,992
+and no more.
+
+341
+00:14:01,994 --> 00:14:04,661
+So, well,
+
+342
+00:14:04,662 --> 00:14:07,329
+kind of a cool way to do this is to use a generic UIView.
+
+343
+00:14:07,332 --> 00:14:09,299
+So, instead of taking a UIView,
+
+344
+00:14:09,301 --> 00:14:11,801
+I'm gonna pull a generic UIView out here.
+
+345
+00:14:11,803 --> 00:14:14,403
+Now, by the way, when you put a generic UIView out,
+
+346
+00:14:14,405 --> 00:14:16,905
+sometimes it's hard to see what the heck is going on
+
+347
+00:14:16,907 --> 00:14:18,440
+because it's white on white.
+
+348
+00:14:18,442 --> 00:14:21,409
+So a lot of times when I do that, I think I might have
+
+349
+00:14:21,411 --> 00:14:24,612
+mentioned this before, I'll just set it to some other
+
+350
+00:14:24,614 --> 00:14:27,915
+color for a moment, so that while I'm editing it here in
+
+351
+00:14:27,917 --> 00:14:31,285
+the storyboard I can size it and set up its constraints and
+
+352
+00:14:31,287 --> 00:14:34,454
+all that stuff, and I can kinda see what's going on.
+
+353
+00:14:34,456 --> 00:14:39,025
+Okay, so let's put this thing in reasonable spots over here,
+
+354
+00:14:39,027 --> 00:14:42,995
+let's set some constraints for it, put some vertical
+
+355
+00:14:42,997 --> 00:14:46,598
+spacing to the top there, trailing over to here,
+
+356
+00:14:46,600 --> 00:14:50,302
+this guy over to here, and I'll put this one down to
+
+357
+00:14:50,304 --> 00:14:53,471
+the bottom, and we used to have a constraint
+
+358
+00:14:53,473 --> 00:14:57,208
+on this one to the bottom which we want to get rid of.
+
+359
+00:14:57,210 --> 00:14:59,143
+Where is that?
+
+360
+00:14:59,144 --> 00:15:01,077
+Bottom of space to bottom layup, it's this one.
+
+361
+00:15:01,080 --> 00:15:03,447
+And, we could also, while we're here,
+
+362
+00:15:03,449 --> 00:15:05,882
+make sure this is standard value, 'kay?
+
+363
+00:15:05,884 --> 00:15:07,116
+So that look's good.
+
+364
+00:15:07,118 --> 00:15:10,319
+This guy also standard value.
+
+365
+00:15:10,321 --> 00:15:12,388
+All right.
+
+366
+00:15:12,389 --> 00:15:14,456
+So, we've got this UIView in here, and really what we're
+
+367
+00:15:14,458 --> 00:15:16,925
+gonna do is put the UIImageView inside of it.
+
+368
+00:15:16,927 --> 00:15:19,327
+And I'm gonna manage it manually.
+
+369
+00:15:19,329 --> 00:15:22,363
+So I'm gonna size it to the right size
+
+370
+00:15:22,365 --> 00:15:24,598
+that I want in code, okay?
+
+371
+00:15:24,600 --> 00:15:27,501
+And that way, it'll never be trying to fight the auto
+
+372
+00:15:27,503 --> 00:15:29,736
+layout system to make things really big,
+
+373
+00:15:29,738 --> 00:15:31,971
+and smash other things off the screen, or
+
+374
+00:15:31,973 --> 00:15:35,008
+make my popover really gigantic, or things like that.
+
+375
+00:15:35,010 --> 00:15:36,175
+'Kay?
+
+376
+00:15:36,177 --> 00:15:38,544
+So, let's go ahead and do that.
+
+377
+00:15:38,546 --> 00:15:39,678
+Gonna go over here.
+
+378
+00:15:39,680 --> 00:15:41,330
+I'm gonna go back,
+
+379
+00:15:41,331 --> 00:15:42,981
+this is our editable waypoint view controller,
+
+380
+00:15:42,983 --> 00:15:45,049
+the view controller for this whole thing.
+
+381
+00:15:45,051 --> 00:15:49,286
+So I'm gonna go down here,
+
+382
+00:15:49,288 --> 00:15:56,092
+let's create a new little mark for images.
+
+383
+00:15:56,094 --> 00:15:57,410
+Okay.
+
+384
+00:15:57,411 --> 00:15:58,727
+So this'll be our image handling area right here.
+
+385
+00:15:58,730 --> 00:16:02,064
+So I'm gonna control drag from this generic view out here.
+
+386
+00:16:02,066 --> 00:16:06,134
+This is not my ImageView, this is my, what did I call this,
+
+387
+00:16:06,136 --> 00:16:07,035
+container?
+
+388
+00:16:07,037 --> 00:16:09,570
+Yeah, ImageViewContainer.
+
+389
+00:16:09,572 --> 00:16:13,307
+Okay, this is going to be just a generic UIView, see,
+
+390
+00:16:13,309 --> 00:16:15,342
+that contains my image view.
+
+391
+00:16:15,344 --> 00:16:19,579
+And so my image view is actually gonna be something
+
+392
+00:16:19,581 --> 00:16:21,881
+here that I create in code.
+
+393
+00:16:21,883 --> 00:16:24,983
+I'll just say equals UIImageView, actually.
+
+394
+00:16:24,985 --> 00:16:28,854
+Okay, so there's my image view and on my didSet here,
+
+395
+00:16:28,856 --> 00:16:32,791
+when this thing is set, I'll go ahead and put that image
+
+396
+00:16:32,793 --> 00:16:36,994
+view into this thing by just saying image view controller,
+
+397
+00:16:36,996 --> 00:16:38,028
+add sub view.
+
+398
+00:16:38,030 --> 00:16:42,766
+Image view, capitalize this for me.
+
+399
+00:16:42,768 --> 00:16:48,704
+Okay, so I basically just put that image view in there and.
+
+400
+00:16:48,706 --> 00:16:50,572
+Let's see, what's the problem here?
+
+401
+00:16:50,574 --> 00:16:56,478
+It's, oh, imageViewContainer, yeah, thanks.
+
+402
+00:16:56,480 --> 00:16:58,980
+ImageViewContainer, too used to typing in controller.
+
+403
+00:16:58,982 --> 00:17:02,249
+Let's make this bigger, too, by the way, so
+
+404
+00:17:02,251 --> 00:17:04,351
+we can see what we're doing.
+
+405
+00:17:04,353 --> 00:17:05,402
+Okay.
+
+406
+00:17:05,403 --> 00:17:06,452
+So, everyone see what I did there?
+
+407
+00:17:06,455 --> 00:17:08,188
+I just created this generic UI View,
+
+408
+00:17:08,190 --> 00:17:09,622
+I put the image view in there.
+
+409
+00:17:09,624 --> 00:17:11,691
+I'm gonna have to manage the size myself, though.
+
+410
+00:17:11,693 --> 00:17:13,425
+I'm not gonna do autolayout in there, et cetera.
+
+411
+00:17:13,427 --> 00:17:16,228
+And, basically, I'm just gonna always set the image
+
+412
+00:17:16,230 --> 00:17:19,164
+view inside to be the right aspect ratio for my image, but
+
+413
+00:17:19,166 --> 00:17:20,865
+no wider than my container view.
+
+414
+00:17:20,867 --> 00:17:25,102
+And if my overall controller gives me no space for
+
+415
+00:17:25,104 --> 00:17:29,006
+the view image, then I don't get it, okay?
+
+416
+00:17:29,008 --> 00:17:31,808
+And also anytime my image changes I'm going to ask for
+
+417
+00:17:31,810 --> 00:17:34,544
+more space by resetting my preferred content size.
+
+418
+00:17:34,546 --> 00:17:36,879
+Remember preferred content size for the pop over?
+
+419
+00:17:36,881 --> 00:17:38,113
+And so I'm going to ask for more space.
+
+420
+00:17:38,115 --> 00:17:39,548
+I may or may not get it.
+
+421
+00:17:39,550 --> 00:17:42,817
+Cause pop over might be near the edge, but I'll ask for
+
+422
+00:17:42,819 --> 00:17:45,753
+it and we'll see that code in just a second here.
+
+423
+00:17:45,755 --> 00:17:47,955
+Alright, so I got that.
+
+424
+00:17:47,957 --> 00:17:50,224
+Here is some code.
+
+425
+00:17:50,226 --> 00:17:52,859
+Let's put some code in here to do that.
+
+426
+00:17:52,861 --> 00:17:55,995
+I have this extension that I added to my way point
+
+427
+00:17:55,997 --> 00:17:59,232
+controller and it has this method update image.
+
+428
+00:17:59,234 --> 00:18:02,234
+Now update image, the reason I snippeted this in here instead
+
+429
+00:18:02,236 --> 00:18:04,903
+of typing all into you've seen it all before, right?
+
+430
+00:18:04,905 --> 00:18:06,738
+I'm dispatching to another thread,
+
+431
+00:18:06,740 --> 00:18:08,173
+I'm getting the image data.
+
+432
+00:18:08,175 --> 00:18:11,209
+Here I'm getting the URL and getting the image.
+
+433
+00:18:11,211 --> 00:18:13,811
+I'm dispatching back to the main thread,
+
+434
+00:18:13,813 --> 00:18:16,213
+I'm setting the image in my ImageView so
+
+435
+00:18:16,215 --> 00:18:19,583
+this is just not worth our time to go through this again.
+
+436
+00:18:19,585 --> 00:18:21,217
+We've done this two or three times.
+
+437
+00:18:21,219 --> 00:18:24,854
+But I am calling this function here makeRoomForImage, and
+
+438
+00:18:24,856 --> 00:18:28,124
+all that makeRoomForImage is, it sees if the image is
+
+439
+00:18:28,126 --> 00:18:30,492
+any bigger than the last image we had.
+
+440
+00:18:30,494 --> 00:18:33,161
+And if so, it updates the preferred content size to
+
+441
+00:18:33,163 --> 00:18:35,130
+give it a little bit of a extra height.
+
+442
+00:18:35,132 --> 00:18:37,732
+And this extra height might be negative if we just set
+
+443
+00:18:37,734 --> 00:18:39,333
+the image to nil, for example,
+
+444
+00:18:39,335 --> 00:18:41,235
+it might try to collapse it back down.
+
+445
+00:18:41,237 --> 00:18:44,604
+So again, this is just pertaining to what we prefer
+
+446
+00:18:44,606 --> 00:18:46,706
+our overall content size to be.
+
+447
+00:18:46,708 --> 00:18:49,809
+And if we can get this space then my generic UI view that
+
+448
+00:18:49,811 --> 00:18:52,278
+contains my image is going to get bigger.
+
+449
+00:18:52,280 --> 00:18:55,848
+And there's going to be more space for me and I can make my
+
+450
+00:18:55,850 --> 00:18:59,117
+UIImageView bigger, see more of my UIImageView.
+
+451
+00:18:59,119 --> 00:18:59,751
+Okay?
+
+452
+00:18:59,753 --> 00:19:01,403
+So that's it.
+
+453
+00:19:01,404 --> 00:19:03,054
+So we do need to update this image.
+
+454
+00:19:03,056 --> 00:19:04,855
+We'll do it in updateUI, right?
+
+455
+00:19:04,857 --> 00:19:08,992
+So we have updateUI up here that updates the text fields,
+
+456
+00:19:08,994 --> 00:19:12,962
+so we also wanna update our image there in that as well.
+
+457
+00:19:12,964 --> 00:19:14,163
+Okay, so that's it.
+
+458
+00:19:14,165 --> 00:19:17,166
+That's how all that's necessary here to display
+
+459
+00:19:17,168 --> 00:19:19,234
+the image in my view controller and
+
+460
+00:19:19,236 --> 00:19:20,936
+keep it's size contained.
+
+461
+00:19:20,938 --> 00:19:24,472
+So let's go ahead and kinda put a test image into our
+
+462
+00:19:24,474 --> 00:19:27,842
+edited waypoints just to see if this is working.
+
+463
+00:19:27,844 --> 00:19:31,812
+So I'm gonna go back to GPXViewController and
+
+464
+00:19:31,814 --> 00:19:35,982
+where I add a waypoint here by dropping I'm gonna
+
+465
+00:19:35,984 --> 00:19:38,018
+say waypoint.links.
+
+466
+00:19:38,020 --> 00:19:39,252
+Let's append.
+
+467
+00:19:39,254 --> 00:19:43,255
+I'm gonna append a new GPX link,
+
+468
+00:19:43,257 --> 00:19:49,294
+that's the thing that has the reference to a URL,
+
+469
+00:19:49,296 --> 00:19:54,599
+to the image or whatever and so we'll do http
+
+470
+00:19:54,601 --> 00:19:59,336
+CS193p Stanford images panorama.
+
+471
+00:19:59,338 --> 00:20:01,071
+Okay.
+
+472
+00:20:01,072 --> 00:20:02,805
+I'm just picking one of the ones we had there at random.
+
+473
+00:20:02,808 --> 00:20:06,009
+So, now this waypoint has a link, okay?
+
+474
+00:20:06,011 --> 00:20:09,845
+Just like the waypoints that came out of that GPX file,
+
+475
+00:20:09,847 --> 00:20:11,447
+they have links also.
+
+476
+00:20:11,449 --> 00:20:14,816
+One other thing we're gonna need to do is over here in our
+
+477
+00:20:14,818 --> 00:20:17,519
+MK GPX right here, our EditableWaypoint.
+
+478
+00:20:17,521 --> 00:20:19,554
+Right now, it gets its thumbnail and
+
+479
+00:20:19,556 --> 00:20:22,223
+image URL by looking them up by this type thing.
+
+480
+00:20:22,225 --> 00:20:23,991
+Thumbnail type, large type.
+
+481
+00:20:23,993 --> 00:20:28,028
+And just for the purpose of the demo, I'm gonna make it
+
+482
+00:20:28,030 --> 00:20:31,898
+just return the first link in its link list of links.
+
+483
+00:20:31,900 --> 00:20:38,237
+So let's go down here and just say return links.first.URL.
+
+484
+00:20:38,239 --> 00:20:40,539
+And then we'll have the thumbnail be the same as
+
+485
+00:20:40,541 --> 00:20:43,241
+the image URL, so it won't have a separate thumbnail.
+
+486
+00:20:43,243 --> 00:20:46,945
+I'm just kinda cheating this really quick so
+
+487
+00:20:46,947 --> 00:20:49,847
+that we can see some image in our UI.
+
+488
+00:20:49,849 --> 00:20:52,683
+So let's go ahead and run this and see what happens this is
+
+489
+00:20:52,685 --> 00:20:55,519
+for, oh we got, what do we got here, oh sorry override,
+
+490
+00:20:55,521 --> 00:20:56,820
+we gotta override these.
+
+491
+00:20:56,822 --> 00:21:00,423
+Override.
+
+492
+00:21:00,425 --> 00:21:02,892
+Okay.
+
+493
+00:21:02,894 --> 00:21:04,193
+All right.
+
+494
+00:21:04,194 --> 00:21:05,493
+So I'm gonna run this here, in the simulator.
+
+495
+00:21:05,496 --> 00:21:07,896
+We'll switch the device in a second here.
+
+496
+00:21:07,898 --> 00:21:08,930
+All right.
+
+497
+00:21:08,932 --> 00:21:10,432
+So here we are.
+
+498
+00:21:10,433 --> 00:21:11,933
+You all remember this UI I've got here.
+
+499
+00:21:11,935 --> 00:21:14,635
+And I've got these images on the left, for there.
+
+500
+00:21:14,637 --> 00:21:17,271
+So I'm gonna go ahead and drop one for
+
+501
+00:21:17,273 --> 00:21:19,339
+an editable waypoint here.
+
+502
+00:21:19,341 --> 00:21:21,107
+So I'm gonna click on it, you can see.
+
+503
+00:21:21,109 --> 00:21:23,042
+And there it is, there's our panorama.
+
+504
+00:21:23,044 --> 00:21:25,678
+See, I used that as the default image, and
+
+505
+00:21:25,680 --> 00:21:29,514
+if I click our editor here, there's panorama, it appears.
+
+506
+00:21:29,516 --> 00:21:31,583
+Okay, so, that's kind of fun and
+
+507
+00:21:31,585 --> 00:21:35,286
+notice that that's a very wide aspect ratio, but it only made
+
+508
+00:21:35,288 --> 00:21:38,089
+enough space to do that, and so we can edit it.
+
+509
+00:21:38,091 --> 00:21:41,792
+So, now we want to be able to change this view.
+
+510
+00:21:41,794 --> 00:21:43,026
+We don't want it to be panorama.
+
+511
+00:21:43,028 --> 00:21:46,629
+I only just showed that to show you how this would work.
+
+512
+00:21:46,631 --> 00:21:48,631
+So we need to go back to add some UI,
+
+513
+00:21:48,633 --> 00:21:51,934
+some button that lets us take a picture with the camera and
+
+514
+00:21:51,936 --> 00:21:53,335
+put that here instead.
+
+515
+00:21:53,337 --> 00:21:55,303
+Okay, so that's what we're going to do now.
+
+516
+00:21:55,305 --> 00:21:57,605
+Let's go to our storyboard here.
+
+517
+00:21:57,607 --> 00:22:00,975
+I'm gonna put that button like right here, I think.
+
+518
+00:22:00,977 --> 00:22:02,877
+Let's move this over a little bit and
+
+519
+00:22:02,879 --> 00:22:04,578
+I'm gonna put it right in here.
+
+520
+00:22:04,580 --> 00:22:06,713
+I have a nice button for that, or image for
+
+521
+00:22:06,715 --> 00:22:07,914
+that with the camera.
+
+522
+00:22:07,916 --> 00:22:13,219
+So, let's go ahead and
+
+523
+00:22:13,221 --> 00:22:16,422
+get a button.
+
+524
+00:22:16,424 --> 00:22:18,523
+Okay.
+
+525
+00:22:18,525 --> 00:22:22,994
+Here's a button.
+
+526
+00:22:22,996 --> 00:22:26,097
+Okay so we'll put this button right in here.
+
+527
+00:22:26,099 --> 00:22:30,334
+Okay I'm going to set this image to be that camera, so
+
+528
+00:22:30,336 --> 00:22:34,270
+let's go ahead and drag that camera image into our
+
+529
+00:22:34,272 --> 00:22:37,540
+XC assets, so here's our image assets.
+
+530
+00:22:37,542 --> 00:22:40,342
+Drag this guy in here.
+
+531
+00:22:40,344 --> 00:22:42,544
+Okay.
+
+532
+00:22:42,546 --> 00:22:46,280
+We could put higher resolution versions in, et cetera, but
+
+533
+00:22:46,282 --> 00:22:48,049
+we're just gonna use that.
+
+534
+00:22:48,051 --> 00:22:50,351
+So let's go to Button here.
+
+535
+00:22:50,352 --> 00:22:52,652
+I'm gonna go to the button here and change its image to
+
+536
+00:22:52,655 --> 00:22:56,556
+be the camera, and I don't want the word button on there,
+
+537
+00:22:56,558 --> 00:22:58,558
+okay, so here's my button.
+
+538
+00:22:58,560 --> 00:23:03,228
+Now we'll do some auto layout here, to get this thing,
+
+539
+00:23:03,230 --> 00:23:05,597
+in here.
+
+540
+00:23:05,598 --> 00:23:07,965
+So I will put this up against this edge.
+
+541
+00:23:07,968 --> 00:23:11,102
+Let's put something between here the horizontal spacing.
+
+542
+00:23:11,104 --> 00:23:14,839
+Let's have these two be center Y.
+
+543
+00:23:14,841 --> 00:23:17,742
+We had another one in here that we'll have to delete now
+
+544
+00:23:17,744 --> 00:23:20,411
+because we used to have this thing on this edge, so
+
+545
+00:23:20,413 --> 00:23:21,545
+let's go find that.
+
+546
+00:23:21,547 --> 00:23:23,913
+That's trailing space to super view right here.
+
+547
+00:23:23,915 --> 00:23:28,201
+We'll get rid of that.
+
+548
+00:23:28,202 --> 00:23:32,488
+We'll make these to be standard spacing right there.
+
+549
+00:23:32,490 --> 00:23:33,467
+All the rest of it looks like it's standard,
+
+550
+00:23:33,468 --> 00:23:34,445
+must have lined them up perfectly there.
+
+551
+00:23:34,446 --> 00:23:35,423
+Any problems, oh, horizontally ambiguous?
+
+552
+00:23:35,426 --> 00:23:38,794
+Okay.
+
+553
+00:23:38,795 --> 00:23:42,163
+So this guy wants to hug, the button wants to hug itself
+
+554
+00:23:42,165 --> 00:23:47,802
+because this guy's willing to be as wide as we want.
+
+555
+00:23:47,804 --> 00:23:50,471
+It doesn't want to hug down but this one does and
+
+556
+00:23:50,473 --> 00:23:53,140
+the system has to know who gets the space there.
+
+557
+00:23:53,142 --> 00:23:54,374
+So now the frames will be different.
+
+558
+00:23:54,376 --> 00:23:56,175
+Okay let's go down here,
+
+559
+00:23:56,177 --> 00:23:59,778
+update our frames make sure everything looks good.
+
+560
+00:23:59,780 --> 00:24:00,979
+It does.
+
+561
+00:24:00,981 --> 00:24:02,047
+Okay, excellent.
+
+562
+00:24:02,049 --> 00:24:03,648
+So we've added this little button to our UI.
+
+563
+00:24:03,650 --> 00:24:05,049
+So now we're just gonna have this button.
+
+564
+00:24:05,051 --> 00:24:07,918
+When we click it it's gonna bring up the camera.
+
+565
+00:24:07,920 --> 00:24:10,454
+So let's go do that.
+
+566
+00:24:10,456 --> 00:24:14,824
+All right, I'm just gonna control drag from this button
+
+567
+00:24:14,826 --> 00:24:16,692
+right here, and here.
+
+568
+00:24:16,694 --> 00:24:20,629
+And it's gonna be an action, we'll call it Take Photo.
+
+569
+00:24:20,631 --> 00:24:21,963
+That's what it does.
+
+570
+00:24:21,965 --> 00:24:25,933
+And we don't need any argument, or anything.
+
+571
+00:24:25,935 --> 00:24:27,301
+There's Take Photo.
+
+572
+00:24:27,303 --> 00:24:29,970
+So, in here.
+
+573
+00:24:29,972 --> 00:24:34,273
+All we need to do is create that picker and present it.
+
+574
+00:24:34,275 --> 00:24:37,243
+And then we're gonna implement those delegate methods and
+
+575
+00:24:37,245 --> 00:24:38,310
+we'll be good to go.
+
+576
+00:24:38,312 --> 00:24:41,279
+All right, so what do we need to do in here?
+
+577
+00:24:41,281 --> 00:24:43,648
+First I'm gonna check and make sure I have a camera.
+
+578
+00:24:43,650 --> 00:24:46,351
+Actually I'm gonna, first I'm gonna go and
+
+579
+00:24:46,353 --> 00:24:48,285
+give us some space to work with.
+
+580
+00:24:48,287 --> 00:24:49,520
+All right.
+
+581
+00:24:49,522 --> 00:24:53,289
+So first I'm gonna check here, and
+
+582
+00:24:53,291 --> 00:24:56,793
+see UIImagePickerController.
+
+583
+00:24:56,795 --> 00:24:58,961
+If I have a camera available, so
+
+584
+00:24:58,963 --> 00:25:02,064
+I'm gonna say source type available camera.
+
+585
+00:25:02,066 --> 00:25:02,731
+Okay?
+
+586
+00:25:02,733 --> 00:25:04,132
+So if I have a camera,
+
+587
+00:25:04,134 --> 00:25:07,168
+then I'm gonna set my picker's source type.
+
+588
+00:25:07,170 --> 00:25:10,338
+To be the camera.
+
+589
+00:25:10,340 --> 00:25:13,273
+Okay?
+
+590
+00:25:13,275 --> 00:25:14,274
+What else have we got?
+
+591
+00:25:14,276 --> 00:25:16,009
+Oh, sorry.
+
+592
+00:25:16,011 --> 00:25:18,077
+I've got to create my picker.
+
+593
+00:25:18,079 --> 00:25:21,513
+So here I'm gonna say let the picker equal UI image picker
+
+594
+00:25:21,515 --> 00:25:23,766
+controller.
+
+595
+00:25:23,767 --> 00:25:26,018
+So when you create it, it's just parentheses, parentheses,
+
+596
+00:25:26,020 --> 00:25:27,886
+you don't have to specify any.
+
+597
+00:25:27,888 --> 00:25:29,854
+X-ray information when you're creating it.
+
+598
+00:25:29,856 --> 00:25:30,955
+So now I've set the source type.
+
+599
+00:25:30,957 --> 00:25:34,391
+Now here I would maybe, if I was doing video.
+
+600
+00:25:34,393 --> 00:25:38,395
+You know, I would check media types to make sure that media
+
+601
+00:25:38,397 --> 00:25:39,796
+type is available.
+
+602
+00:25:39,798 --> 00:25:42,732
+And then I would say picker.mediaTypes equals.
+
+603
+00:25:42,734 --> 00:25:44,166
+And then the types I want.
+
+604
+00:25:44,168 --> 00:25:48,103
+So, in this case I just want image only.
+
+605
+00:25:48,105 --> 00:25:50,571
+Okay?
+
+606
+00:25:50,573 --> 00:25:55,376
+And then we obviously need the picker to set its delegate to
+
+607
+00:25:55,378 --> 00:25:56,176
+be self.
+
+608
+00:25:56,178 --> 00:25:57,694
+Okay?
+
+609
+00:25:57,695 --> 00:25:59,211
+Without the delegate this thing does nothing.
+
+610
+00:25:59,214 --> 00:26:03,249
+We could also set some other fun things here like maybe we
+
+611
+00:26:03,251 --> 00:26:04,450
+allow editing.
+
+612
+00:26:04,452 --> 00:26:06,335
+True?
+
+613
+00:26:06,336 --> 00:26:08,219
+So we'll see what that UI looks like.
+
+614
+00:26:08,222 --> 00:26:12,256
+And then we can just present.
+
+615
+00:26:12,258 --> 00:26:13,758
+ViewController.
+
+616
+00:26:13,760 --> 00:26:14,658
+The picker.
+
+617
+00:26:14,660 --> 00:26:15,258
+Animated?
+
+618
+00:26:15,260 --> 00:26:17,060
+Yes.
+
+619
+00:26:17,061 --> 00:26:18,861
+And, we don't wanna find out that a capture has
+
+620
+00:26:18,864 --> 00:26:19,846
+been put up.
+
+621
+00:26:19,847 --> 00:26:20,829
+And, what else do we got in here?
+
+622
+00:26:20,832 --> 00:26:21,831
+Oh, okay.
+
+623
+00:26:21,833 --> 00:26:23,799
+So this is the famous, oh.
+
+624
+00:26:23,801 --> 00:26:25,167
+Where does this coming from?
+
+625
+00:26:25,169 --> 00:26:27,135
+So, we have to come up here.
+
+626
+00:26:27,137 --> 00:26:33,574
+Import MobileCoreServices.
+
+627
+00:26:33,576 --> 00:26:35,209
+That takes care of that.
+
+628
+00:26:35,211 --> 00:26:37,811
+And this one of course is we don't implement.
+
+629
+00:26:37,813 --> 00:26:39,346
+UI Image Picker Controller Delegate.
+
+630
+00:26:39,348 --> 00:26:43,549
+Okay, let's do that, UI Image Picker Controller Delegate.
+
+631
+00:26:43,551 --> 00:26:46,552
+Now what's interesting here is that we still have an error
+
+632
+00:26:46,554 --> 00:26:49,254
+once we put this UI Image Picker Controller Delegate
+
+633
+00:26:49,256 --> 00:26:49,921
+thing here.
+
+634
+00:26:49,923 --> 00:26:52,324
+It says.
+
+635
+00:26:52,325 --> 00:26:54,726
+Wave point controller does not conform to UI navigation
+
+636
+00:26:54,728 --> 00:26:56,360
+controller delegate.
+
+637
+00:26:56,362 --> 00:26:57,494
+Why the heck does it say that?
+
+638
+00:26:57,496 --> 00:26:59,930
+UI navigation hasn't got anything to do with that.
+
+639
+00:26:59,932 --> 00:27:02,866
+Well that's because the UI image picker controller is
+
+640
+00:27:02,868 --> 00:27:05,702
+a UI navigation controller, inherits from it, and
+
+641
+00:27:05,704 --> 00:27:07,770
+they use the same variable delegate.
+
+642
+00:27:07,772 --> 00:27:09,589
+To be their delegate.
+
+643
+00:27:09,590 --> 00:27:11,407
+So, we also have to come up here and say that we are a UI
+
+644
+00:27:11,409 --> 00:27:14,109
+navigation controller delegate, even though we don't
+
+645
+00:27:14,111 --> 00:27:16,845
+actually implement any of these methods in the protocol.
+
+646
+00:27:16,847 --> 00:27:17,445
+That's fine.
+
+647
+00:27:17,447 --> 00:27:19,246
+They're all optional.
+
+648
+00:27:19,248 --> 00:27:20,881
+Okay?
+
+649
+00:27:20,882 --> 00:27:22,515
+So, that's a little tricky thing sometimes people don't
+
+650
+00:27:22,518 --> 00:27:24,017
+understand with the picker, but.
+
+651
+00:27:24,019 --> 00:27:26,286
+You definitely need to do that.
+
+652
+00:27:26,287 --> 00:27:28,554
+So, that's all that's required to put that picker on-screen,
+
+653
+00:27:28,557 --> 00:27:30,189
+so it's gonna be on-screen and
+
+654
+00:27:30,191 --> 00:27:32,992
+now we just have to implement those delegate methods.
+
+655
+00:27:32,994 --> 00:27:34,760
+So, here they are.
+
+656
+00:27:34,762 --> 00:27:37,229
+This one, by the way, is deprecated,
+
+657
+00:27:37,231 --> 00:27:38,563
+don't use that one.
+
+658
+00:27:38,565 --> 00:27:40,365
+Here is the one where they pick something, and
+
+659
+00:27:40,367 --> 00:27:41,832
+here is the one where they cancelled.
+
+660
+00:27:41,834 --> 00:27:42,900
+Okay?
+
+661
+00:27:42,901 --> 00:27:43,967
+So let's do the one where they picked.
+
+662
+00:27:43,969 --> 00:27:46,286
+Something, so
+
+663
+00:27:46,287 --> 00:27:48,604
+I'm just going to say that the image they picked is the info,
+
+664
+00:27:48,607 --> 00:27:52,042
+that info dictionary that's being passed along here.
+
+665
+00:27:52,044 --> 00:27:54,410
+And there's a bunch of constants in
+
+666
+00:27:54,412 --> 00:27:57,847
+UIImagePickerController, and one of them here,
+
+667
+00:27:57,849 --> 00:28:00,883
+ImagePickerControllerEditedIm- age, so
+
+668
+00:28:00,885 --> 00:28:04,819
+that's the edited image, and I wanna get it as a UIImage.
+
+669
+00:28:04,821 --> 00:28:07,722
+Okay, because this info is,
+
+670
+00:28:07,724 --> 00:28:12,559
+AnyObject is the value, so I have to cast it here.
+
+671
+00:28:12,561 --> 00:28:16,129
+If I couldn't get the image, okay, the edited image,
+
+672
+00:28:16,131 --> 00:28:17,864
+then I'm gonna just try and
+
+673
+00:28:17,866 --> 00:28:21,334
+set the image equal to the unedited image, which is the
+
+674
+00:28:21,336 --> 00:28:24,270
+ImagePickerControllerOriginal- Image.
+
+675
+00:28:24,272 --> 00:28:27,773
+As UI image.
+
+676
+00:28:27,775 --> 00:28:30,876
+Now you might say, why am I doing this line of code right
+
+677
+00:28:30,878 --> 00:28:33,945
+here because I'm clearly allowing editing up here.
+
+678
+00:28:33,947 --> 00:28:35,580
+Yeah, we're allowing editing today but
+
+679
+00:28:35,582 --> 00:28:37,282
+if I some day just said, eh,
+
+680
+00:28:37,283 --> 00:28:38,983
+I'm not gonna let people edit and I change this to false,
+
+681
+00:28:38,985 --> 00:28:40,635
+well, all of the sudden,
+
+682
+00:28:40,636 --> 00:28:42,286
+this code would break if I didn't have this nice little.
+
+683
+00:28:42,288 --> 00:28:43,904
+Thing here.
+
+684
+00:28:43,905 --> 00:28:45,521
+So I'm thinking ahead a little bit to make it so that
+
+685
+00:28:45,524 --> 00:28:48,391
+a change somewhere else in my code won't break me here.
+
+686
+00:28:48,393 --> 00:28:49,559
+Okay?
+
+687
+00:28:49,560 --> 00:28:50,726
+And so I've got the image.
+
+688
+00:28:50,729 --> 00:28:52,728
+So I'm just gonna set the,
+
+689
+00:28:52,730 --> 00:28:55,330
+my image views image equal to that.
+
+690
+00:28:55,332 --> 00:28:57,232
+And I'm gonna make room for it.
+
+691
+00:28:57,234 --> 00:29:00,068
+Okay, that's this makeRoomForImage that I told
+
+692
+00:29:00,070 --> 00:29:01,369
+you I added down here.
+
+693
+00:29:01,371 --> 00:29:02,670
+Okay?
+
+694
+00:29:02,672 --> 00:29:04,938
+And that's it.
+
+695
+00:29:04,940 --> 00:29:06,773
+I've got everything, so I'm just gonna dismiss.
+
+696
+00:29:06,775 --> 00:29:08,141
+And notice, I'm not saying,
+
+697
+00:29:08,143 --> 00:29:10,076
+presenting view controller dismiss here.
+
+698
+00:29:10,078 --> 00:29:11,944
+Because I am the presenting view controller.
+
+699
+00:29:11,946 --> 00:29:13,712
+So I'm just saying, dismiss true.
+
+700
+00:29:13,714 --> 00:29:17,549
+And completion.
+
+701
+00:29:17,551 --> 00:29:19,668
+Okay?
+
+702
+00:29:19,669 --> 00:29:21,786
+We have to do the same thing here for the cancelled case.
+
+703
+00:29:21,788 --> 00:29:22,486
+Okay?
+
+704
+00:29:22,488 --> 00:29:24,221
+But in the cancelled case,
+
+705
+00:29:24,223 --> 00:29:27,457
+I'm only gonna do this dismiss right here, okay?
+
+706
+00:29:27,459 --> 00:29:29,693
+Obviously, I'm not gonna grab the image or
+
+707
+00:29:29,695 --> 00:29:30,993
+anything if they cancel.
+
+708
+00:29:30,995 --> 00:29:32,094
+All right?
+
+709
+00:29:32,096 --> 00:29:35,714
+So let's take a look at this.
+
+710
+00:29:35,715 --> 00:29:39,333
+Let's look at this, let's go on iPhone 6 plus here.
+
+711
+00:29:39,336 --> 00:29:40,635
+There it is, okay?
+
+712
+00:29:40,637 --> 00:29:42,704
+Actually, let's go.
+
+713
+00:29:42,706 --> 00:29:44,872
+We still have our little panoram in here.
+
+714
+00:29:44,874 --> 00:29:48,042
+Let's go to that really quick.
+
+715
+00:29:48,044 --> 00:29:51,712
+That's over here.
+
+716
+00:29:51,714 --> 00:29:55,849
+So we'll just go back here and we'll comment this out.
+
+717
+00:29:55,851 --> 00:30:00,453
+So that if we're testing again in the future we can go
+
+718
+00:30:00,455 --> 00:30:01,487
+back to it.
+
+719
+00:30:01,489 --> 00:30:03,589
+All right.
+
+720
+00:30:03,590 --> 00:30:05,690
+But let's get this code back up on the screen here so
+
+721
+00:30:05,693 --> 00:30:06,758
+you can see it.
+
+722
+00:30:06,760 --> 00:30:08,359
+All right, so here's our photo stuff.
+
+723
+00:30:08,361 --> 00:30:13,464
+All right, so
+
+724
+00:30:13,466 --> 00:30:20,337
+let's run again.
+
+725
+00:30:20,339 --> 00:30:22,038
+All right so I'm gonna drop a pin.
+
+726
+00:30:22,040 --> 00:30:24,573
+Notice that we don't have an image right here.
+
+727
+00:30:24,575 --> 00:30:25,558
+Okay?
+
+728
+00:30:25,559 --> 00:30:26,542
+It took away that little test image.
+
+729
+00:30:26,544 --> 00:30:28,377
+And clicking our edit thing and
+
+730
+00:30:28,379 --> 00:30:30,211
+we've got this big space now.
+
+731
+00:30:30,213 --> 00:30:33,614
+There's that big grey box right there because I set that
+
+732
+00:30:33,616 --> 00:30:35,850
+UI image in my storyboard to be grey.
+
+733
+00:30:35,852 --> 00:30:36,684
+Right?
+
+734
+00:30:36,686 --> 00:30:39,419
+So let's go look at that.
+
+735
+00:30:39,421 --> 00:30:40,653
+See over here, this is gray.
+
+736
+00:30:40,655 --> 00:30:42,855
+So really, when I'm shipping,
+
+737
+00:30:42,857 --> 00:30:45,157
+I'm obviously gonna go here, and
+
+738
+00:30:45,159 --> 00:30:49,061
+set this back to its standard, which is clear basically.
+
+739
+00:30:49,063 --> 00:30:50,562
+Okay?
+
+740
+00:30:50,564 --> 00:30:52,797
+Back to our code.
+
+741
+00:30:52,799 --> 00:30:53,698
+All right.
+
+742
+00:30:53,700 --> 00:30:54,631
+So we're gonna take a photo here.
+
+743
+00:30:54,633 --> 00:30:56,366
+I'm gonna press that little camera.
+
+744
+00:30:56,368 --> 00:30:58,068
+Okay, camera.
+
+745
+00:30:58,070 --> 00:31:01,137
+And you can see camera comes up right here.
+
+746
+00:31:01,139 --> 00:31:04,674
+And this was helicopter skiing.
+
+747
+00:31:04,676 --> 00:31:06,608
+So let's look at our favorite hat.
+
+748
+00:31:06,610 --> 00:31:08,910
+Ski hat, we got our favorite ski hat.
+
+749
+00:31:08,912 --> 00:31:10,578
+It's R2D2.
+
+750
+00:31:10,580 --> 00:31:13,314
+Actually it's better than R2D2.
+
+751
+00:31:13,316 --> 00:31:15,616
+There a little San Francisco Giants R2D2.
+
+752
+00:31:15,618 --> 00:31:18,318
+Okay, so we're gonna take this picture.
+
+753
+00:31:18,320 --> 00:31:21,621
+Okay, so we can now crop it.
+
+754
+00:31:21,623 --> 00:31:22,706
+Okay?
+
+755
+00:31:22,707 --> 00:31:23,790
+We could zoom in on the really important part.
+
+756
+00:31:23,792 --> 00:31:25,024
+All right?
+
+757
+00:31:25,026 --> 00:31:28,160
+And then we can say Use Photo, and it comes back and
+
+758
+00:31:28,162 --> 00:31:30,062
+it appears in our thing here.
+
+759
+00:31:30,064 --> 00:31:31,630
+If we take a different picture,
+
+760
+00:31:31,632 --> 00:31:34,599
+maybe if we decide, okay, we want the whole hat, all right,
+
+761
+00:31:34,601 --> 00:31:37,101
+we'll zoom out there, and we'll use that photo.
+
+762
+00:31:37,103 --> 00:31:38,369
+We got it, okay?
+
+763
+00:31:38,371 --> 00:31:41,572
+Now, of course, this is not going to save this, so
+
+764
+00:31:41,574 --> 00:31:44,875
+as soon as I go away and come back, it's not there and
+
+765
+00:31:44,877 --> 00:31:48,478
+that's because we need to save that picture somewhere.
+
+766
+00:31:48,480 --> 00:31:51,647
+And we're gonna save that in the file system with our
+
+767
+00:31:51,649 --> 00:31:54,767
+next demo.
+
+768
+00:31:54,768 --> 00:31:57,886
+Let's take a quick look what this looks like on the iPad.
+
+769
+00:31:57,888 --> 00:32:05,660
+Make sure that it works over there as well.
+
+770
+00:32:05,662 --> 00:32:06,327
+All right.
+
+771
+00:32:06,329 --> 00:32:08,496
+So, we'll drop a pin here.
+
+772
+00:32:08,498 --> 00:32:10,130
+We'll go there.
+
+773
+00:32:10,132 --> 00:32:13,033
+Bring up our little popover.
+
+774
+00:32:13,035 --> 00:32:17,603
+Take a photo, again we get the huge size screen.
+
+775
+00:32:17,605 --> 00:32:19,338
+We'll have to do front facing camera,
+
+776
+00:32:19,340 --> 00:32:20,706
+because I got it on this thing.
+
+777
+00:32:20,708 --> 00:32:23,775
+Here we go, this R2-D2 hat there.
+
+778
+00:32:23,777 --> 00:32:25,643
+There we go.
+
+779
+00:32:25,645 --> 00:32:26,477
+All right.
+
+780
+00:32:26,479 --> 00:32:27,545
+And there it is.
+
+781
+00:32:27,547 --> 00:32:28,912
+And so we can put it into our little popover,
+
+782
+00:32:28,914 --> 00:32:30,414
+which is kind of fun.
+
+783
+00:32:30,415 --> 00:32:31,915
+And because we have that generic UI view, and
+
+784
+00:32:31,917 --> 00:32:34,884
+I asked for a bigger preferred content size, it made some
+
+785
+00:32:34,886 --> 00:32:37,820
+more size and then the generic UI image view got bigger.
+
+786
+00:32:37,822 --> 00:32:40,923
+And so then I was able to make the image view inside of it
+
+787
+00:32:40,925 --> 00:32:41,490
+bigger.
+
+788
+00:32:41,492 --> 00:32:43,525
+Okay.
+
+789
+00:32:43,527 --> 00:32:45,627
+Excellent.
+
+790
+00:32:45,628 --> 00:32:47,728
+Okay, let's go back to the slides, and
+
+791
+00:32:47,731 --> 00:32:51,299
+learn a little bit about storing stuff, and
+
+792
+00:32:51,301 --> 00:32:54,835
+then we can come back and store that image.
+
+793
+00:32:54,837 --> 00:32:58,905
+All right, so there are a number of ways to make
+
+794
+00:32:58,907 --> 00:33:01,775
+things persist on your device.
+
+795
+00:33:01,777 --> 00:33:03,810
+In other words,
+
+796
+00:33:03,811 --> 00:33:05,844
+some data that you want to live forever on your device.
+
+797
+00:33:05,847 --> 00:33:07,146
+Okay. Even as your application
+
+798
+00:33:07,148 --> 00:33:08,847
+is quit, the phone gets powered off,
+
+799
+00:33:08,849 --> 00:33:10,749
+whatever, you want that stuff to exist.
+
+800
+00:33:10,751 --> 00:33:13,551
+So I'm gonna talk about four different ways.
+
+801
+00:33:13,553 --> 00:33:15,186
+You already know one, actually,
+
+802
+00:33:15,188 --> 00:33:16,487
+which is NS user defaults.
+
+803
+00:33:16,489 --> 00:33:17,855
+Okay.
+
+804
+00:33:17,856 --> 00:33:19,222
+That's a really simple, kind of small amount.
+
+805
+00:33:19,225 --> 00:33:21,425
+This is for bigger data, these four things.
+
+806
+00:33:21,427 --> 00:33:24,361
+The first two, I'm just gonna really, briefly pass through.
+
+807
+00:33:24,363 --> 00:33:26,295
+I'm barely even gonna talk about them.
+
+808
+00:33:26,297 --> 00:33:29,165
+Because, really, you're certainly not gonna use them,
+
+809
+00:33:29,167 --> 00:33:31,133
+I don't think, in your final project.
+
+810
+00:33:31,135 --> 00:33:35,704
+Maybe some SQL master out there will be doing some SQL
+
+811
+00:33:35,706 --> 00:33:37,472
+thing.
+
+812
+00:33:37,473 --> 00:33:39,239
+But I don't think anyone will use that.
+
+813
+00:33:39,242 --> 00:33:41,876
+But then the File System and Core Data, I know a lot of you
+
+814
+00:33:41,878 --> 00:33:43,911
+are doing Core Data as your final project.
+
+815
+00:33:43,913 --> 00:33:45,045
+And that's a great,
+
+816
+00:33:45,046 --> 00:33:46,178
+not covered in lecture thing, by the way.
+
+817
+00:33:46,181 --> 00:33:47,580
+Even though I'm gonna talk about it today,
+
+818
+00:33:47,582 --> 00:33:49,148
+that doesn't mean I'm covering it in lecture,
+
+819
+00:33:49,150 --> 00:33:50,216
+I'm barely gonna talk about it.
+
+820
+00:33:50,218 --> 00:33:52,584
+But, so I know I lot of you are doing that.
+
+821
+00:33:52,586 --> 00:33:54,086
+And some of you wanna use the File System, also.
+
+822
+00:33:54,088 --> 00:33:55,820
+You're reading and writing files from the File System.
+
+823
+00:33:55,822 --> 00:33:57,955
+So hopefully, this will get you up to speed there.
+
+824
+00:33:57,957 --> 00:33:59,490
+So let's talk about Archiving.
+
+825
+00:33:59,492 --> 00:34:04,094
+Archiving is a way to store a graph of objects,
+
+826
+00:34:04,096 --> 00:34:06,029
+okay, on to disc.
+
+827
+00:34:06,031 --> 00:34:08,998
+And those objects don't have to be property lists.
+
+828
+00:34:09,000 --> 00:34:11,300
+So they don't have to be array, dictionary, date,
+
+829
+00:34:11,302 --> 00:34:12,852
+whatever.
+
+830
+00:34:12,853 --> 00:34:14,403
+Because that's all we can put in NSUserDefaults, right?
+
+831
+00:34:14,405 --> 00:34:16,138
+And NSUserDefaut is for small things.
+
+832
+00:34:16,140 --> 00:34:19,240
+But if we want to store big things, bigger object graphs,
+
+833
+00:34:19,242 --> 00:34:21,109
+and we want a lot more flexibility.
+
+834
+00:34:21,111 --> 00:34:23,210
+Well, that's where we use Archiving.
+
+835
+00:34:23,212 --> 00:34:27,748
+And, Archiving can archive any tree of objects as long
+
+836
+00:34:27,750 --> 00:34:31,418
+as all of them implement these two methods,
+
+837
+00:34:31,420 --> 00:34:36,288
+encodeWithCoder and an init method that reads themselves
+
+838
+00:34:36,290 --> 00:34:38,090
+back in from a coder.
+
+839
+00:34:38,092 --> 00:34:40,759
+So encodeWithCoder basically writes them out,
+
+840
+00:34:40,761 --> 00:34:43,695
+writes themselves out, basically as a dictionary.
+
+841
+00:34:43,697 --> 00:34:46,798
+Okay, and then encode, and then init will instantiate
+
+842
+00:34:46,800 --> 00:34:48,833
+the object when it gets read back in,
+
+843
+00:34:48,835 --> 00:34:51,235
+reading that stuff from that dictionary.
+
+844
+00:34:51,237 --> 00:34:52,602
+So where is this used?
+
+845
+00:34:52,604 --> 00:34:55,372
+Your storyboard is archived.
+
+846
+00:34:55,374 --> 00:34:57,607
+So all the things in your archive,
+
+847
+00:34:57,609 --> 00:35:01,177
+all of those ui views, all those ui view controllers,
+
+848
+00:35:01,179 --> 00:35:02,811
+they are all encodable.
+
+849
+00:35:02,813 --> 00:35:05,614
+Okay, they implement this NSCoding protocol.
+
+850
+00:35:05,616 --> 00:35:07,749
+And they all get written out.
+
+851
+00:35:07,751 --> 00:35:10,918
+Basically, when the storyboard is saved, this whole object
+
+852
+00:35:10,920 --> 00:35:13,988
+graph, the entire thing, all the buttons, everything in
+
+853
+00:35:13,990 --> 00:35:16,924
+there gets written out using this Archiving mechanism.
+
+854
+00:35:16,926 --> 00:35:20,527
+And that's why we have that weird init thing with UI view
+
+855
+00:35:20,529 --> 00:35:23,763
+controller and UI view where there was always this
+
+856
+00:35:23,765 --> 00:35:25,598
+required init coder thing.
+
+857
+00:35:25,600 --> 00:35:27,600
+That's because they participate in this Archiving.
+
+858
+00:35:27,602 --> 00:35:30,135
+Now, I would not recommend to you if you had a graph of
+
+859
+00:35:30,137 --> 00:35:32,838
+objects, you know like, I want to make them persist.
+
+860
+00:35:32,840 --> 00:35:34,673
+I think I'll archive them.
+
+861
+00:35:34,675 --> 00:35:36,425
+I wouldn't do it.
+
+862
+00:35:36,426 --> 00:35:38,176
+I would use one of the other mechanisms I'm gonna talk
+
+863
+00:35:38,178 --> 00:35:39,861
+about today.
+
+864
+00:35:39,862 --> 00:35:41,545
+Okay, this is really is great for story boards and
+
+865
+00:35:41,547 --> 00:35:44,081
+it really is the right thing for story boards but
+
+866
+00:35:44,083 --> 00:35:46,166
+I'm not sure that for
+
+867
+00:35:46,167 --> 00:35:48,250
+arbitrary data storage if it really makes a lot of sense.
+
+868
+00:35:48,253 --> 00:35:50,637
+Okay.
+
+869
+00:35:50,638 --> 00:35:53,022
+All right SQL, some of you are database experts and
+
+870
+00:35:53,025 --> 00:35:55,324
+there is SQLite on the iPhone.
+
+871
+00:35:55,326 --> 00:35:58,060
+SQL is for those of you who are not database experts,
+
+872
+00:35:58,062 --> 00:36:01,063
+SQL is basically a programming language for databases.
+
+873
+00:36:01,065 --> 00:36:04,599
+Okay, for creating tables and columns and rows and
+
+874
+00:36:04,601 --> 00:36:06,067
+tables and all that.
+
+875
+00:36:06,069 --> 00:36:08,903
+And you can, if you have a bunch of code lying around
+
+876
+00:36:08,905 --> 00:36:11,072
+that you had to write to a SQL database,
+
+877
+00:36:11,074 --> 00:36:13,207
+then you could certainly use SQLite.
+
+878
+00:36:13,209 --> 00:36:15,175
+And the next thing I'm gonna talk about, or
+
+879
+00:36:15,177 --> 00:36:17,744
+the thing I'm gonna talk about the end here, Core Data,
+
+880
+00:36:17,746 --> 00:36:19,212
+it uses SQL underneath, okay.
+
+881
+00:36:19,214 --> 00:36:23,015
+It's writing all its data to an SQL database as well.
+
+882
+00:36:23,017 --> 00:36:25,117
+But probably not gonna access it directly.
+
+883
+00:36:25,119 --> 00:36:26,551
+The interface,
+
+884
+00:36:26,553 --> 00:36:30,988
+the programming interface to SQLite is like a C API.
+
+885
+00:36:30,990 --> 00:36:34,325
+It'll work in Swift cuz Swift has compatibility with C APIs.
+
+886
+00:36:34,327 --> 00:36:36,994
+But it's a little hard to use cuz it's gonna have
+
+887
+00:36:36,996 --> 00:36:40,063
+weird things like, you know, pointers into memory and
+
+888
+00:36:40,065 --> 00:36:42,732
+things like that, that Swift doesn't really,
+
+889
+00:36:42,734 --> 00:36:44,334
+it has ways to adapt to this.
+
+890
+00:36:44,336 --> 00:36:46,736
+So that you can do it, but it's not really native,
+
+891
+00:36:46,738 --> 00:36:48,971
+it's not part of Swift's way of doing things.
+
+892
+00:36:48,973 --> 00:36:52,240
+So it'll be a little odd for those of you who are used to
+
+893
+00:36:52,242 --> 00:36:55,443
+Swift, to try and program this SQL API using Swift.
+
+894
+00:36:55,445 --> 00:36:56,511
+But it can be done.
+
+895
+00:36:56,513 --> 00:36:59,180
+And I'll have to look up how to do it.
+
+896
+00:36:59,182 --> 00:37:00,348
+All right.
+
+897
+00:37:00,349 --> 00:37:01,515
+So the last two things I'm gonna talk about is
+
+898
+00:37:01,517 --> 00:37:02,549
+the File System and Core Data.
+
+899
+00:37:02,551 --> 00:37:04,684
+So the File System is very simple, okay.
+
+900
+00:37:04,686 --> 00:37:09,288
+Your device, your iOS device, has a Unix filesystem.
+
+901
+00:37:09,290 --> 00:37:13,458
+Okay, because I told you the very first day of this class,
+
+902
+00:37:13,460 --> 00:37:16,961
+basically Unix is underlying a variant of Unix,
+
+903
+00:37:16,963 --> 00:37:19,497
+BSD, Mac is underneath all of iOS,
+
+904
+00:37:19,499 --> 00:37:22,767
+it's providing the kinda core OS services.
+
+905
+00:37:22,769 --> 00:37:24,068
+So you have the Unix filesystem there.
+
+906
+00:37:24,070 --> 00:37:26,336
+And if you want to store things in the File System,
+
+907
+00:37:26,338 --> 00:37:28,405
+you just store them in this Unix filesystem.
+
+908
+00:37:28,407 --> 00:37:31,374
+Now, kinda four steps to do that.
+
+909
+00:37:31,376 --> 00:37:35,144
+One is you have to get the root path, it's true,
+
+910
+00:37:35,146 --> 00:37:38,447
+some URL, file system URL, not HTTP URL,
+
+911
+00:37:38,449 --> 00:37:42,250
+that you're going to write or read from, okay.
+
+912
+00:37:42,252 --> 00:37:45,053
+So, you basically got to start somewhere in the File System.
+
+913
+00:37:45,055 --> 00:37:47,889
+Now, it's a Unix filesystem, of course it starts at slash,
+
+914
+00:37:47,891 --> 00:37:49,290
+but you can't write in slash,
+
+915
+00:37:49,292 --> 00:37:51,258
+that's the, you know, root directory.
+
+916
+00:37:51,260 --> 00:37:53,460
+You have to write somewhere down, slash, slash something,
+
+917
+00:37:53,462 --> 00:37:54,794
+slash something, slash something,
+
+918
+00:37:54,796 --> 00:37:55,962
+that's where you get to start.
+
+919
+00:37:55,964 --> 00:37:58,431
+So finding that root path is the first step and
+
+920
+00:37:58,433 --> 00:38:00,165
+we'll show you how to do that.
+
+921
+00:38:00,167 --> 00:38:03,969
+Then you're gonna append the path components onto that URL.
+
+922
+00:38:03,971 --> 00:38:07,739
+So, if you want to create some directories in that place and
+
+923
+00:38:07,741 --> 00:38:11,042
+then some files, you're gonna be using appends and
+
+924
+00:38:11,044 --> 00:38:13,210
+NSURL has some methods to do that.
+
+925
+00:38:13,212 --> 00:38:16,714
+And then you're going to read and write files from that URL.
+
+926
+00:38:16,716 --> 00:38:18,148
+And we'll talk about how you do that.
+
+927
+00:38:18,150 --> 00:38:20,417
+And finally, you're gonna manage the filesystem.
+
+928
+00:38:20,419 --> 00:38:23,920
+You might wanna remove a file, you might wanna rename a file,
+
+929
+00:38:23,922 --> 00:38:26,922
+you might wanna see what files are in a directory, and
+
+930
+00:38:26,924 --> 00:38:29,892
+that's all done with this class, NSFileManager.
+
+931
+00:38:29,894 --> 00:38:31,226
+Okay.
+
+932
+00:38:31,228 --> 00:38:32,144
+So that's it.
+
+933
+00:38:32,145 --> 00:38:33,061
+This is how the File System works.
+
+934
+00:38:33,063 --> 00:38:35,763
+So let's look into all of these steps.
+
+935
+00:38:35,765 --> 00:38:38,432
+So you see this File System, it starts at route.
+
+936
+00:38:38,434 --> 00:38:40,768
+It's a protected file system, though, so
+
+937
+00:38:40,770 --> 00:38:43,470
+you can't see most of the stuff that's in root, or
+
+938
+00:38:43,472 --> 00:38:45,805
+any of the system directories or whatever.
+
+939
+00:38:45,807 --> 00:38:48,775
+It's not readable by you.
+
+940
+00:38:48,777 --> 00:38:52,578
+So, there is a part of the Unix filesystem there, though,
+
+941
+00:38:52,580 --> 00:38:56,582
+that is your application's own, it's called its sandbox.
+
+942
+00:38:56,584 --> 00:38:58,550
+Okay, and this is the only place you can write.
+
+943
+00:38:58,552 --> 00:39:01,453
+Some of the places in your own sandbox, you can't even write.
+
+944
+00:39:01,455 --> 00:39:03,721
+Like the place where your actual application is,
+
+945
+00:39:03,723 --> 00:39:05,640
+you can't write there.
+
+946
+00:39:05,641 --> 00:39:07,558
+So you can't modify [LAUGH] your own code by writing
+
+947
+00:39:07,560 --> 00:39:09,960
+something in that directory or something.
+
+948
+00:39:09,962 --> 00:39:12,162
+Okay, but many of the directories,
+
+949
+00:39:12,164 --> 00:39:15,298
+subdirectories of your sandbox, you can write in.
+
+950
+00:39:15,300 --> 00:39:17,633
+So this is the place where you can write, and
+
+951
+00:39:17,635 --> 00:39:19,835
+you can read everything in your sandbox.
+
+952
+00:39:19,837 --> 00:39:23,072
+Then we'll talk about how you get a URL into your sandbox in
+
+953
+00:39:23,074 --> 00:39:24,540
+a second.
+
+954
+00:39:24,541 --> 00:39:26,007
+Now, why do we do this sandboxing thing?
+
+955
+00:39:26,010 --> 00:39:27,909
+For obvious reasons, for security.
+
+956
+00:39:27,911 --> 00:39:30,511
+You don't want to be able to look into other apps and
+
+957
+00:39:30,513 --> 00:39:33,280
+see what's going on over there, and you don't want to
+
+958
+00:39:33,282 --> 00:39:35,516
+be able to access the system directories and
+
+959
+00:39:35,518 --> 00:39:36,616
+mess up that iPhone.
+
+960
+00:39:36,618 --> 00:39:39,152
+So it's completely obvious, but there's one
+
+961
+00:39:39,154 --> 00:39:41,721
+slightly non-obvious reason to this sandbox,
+
+962
+00:39:41,723 --> 00:39:44,590
+is that since everything you are ever going to write on
+
+963
+00:39:44,592 --> 00:39:46,425
+the local disk is in this sandbox.
+
+964
+00:39:46,427 --> 00:39:50,895
+If the user deletes your app you know, they go over here
+
+965
+00:39:50,897 --> 00:39:55,199
+and hold down until the thing, it's the other one.
+
+966
+00:39:55,201 --> 00:39:56,333
+Which one are we showing?
+
+967
+00:39:56,335 --> 00:39:57,100
+Yeah, this one.
+
+968
+00:39:57,102 --> 00:39:58,468
+See them wiggling there?
+
+969
+00:39:58,470 --> 00:40:01,504
+So, if they hold down wiggle, if they were to press x to
+
+970
+00:40:01,506 --> 00:40:04,273
+delete it, it would delete your entire sandbox.
+
+971
+00:40:04,275 --> 00:40:06,542
+So everything you've ever written is gone.
+
+972
+00:40:06,544 --> 00:40:07,542
+Okay?
+
+973
+00:40:07,544 --> 00:40:09,077
+Also, that's true for backup.
+
+974
+00:40:09,079 --> 00:40:12,246
+If they backup their phone to iTunes U, okay, or
+
+975
+00:40:12,248 --> 00:40:15,416
+iTunes and iTunes U, iTunes, then it would back
+
+976
+00:40:15,418 --> 00:40:19,252
+up certain directories in your Sandbox, not all of them.
+
+977
+00:40:19,254 --> 00:40:20,320
+Okay?
+
+978
+00:40:20,322 --> 00:40:22,889
+So, that's another reason to have this Sandbox.
+
+979
+00:40:22,891 --> 00:40:23,689
+So, what's in there?
+
+980
+00:40:23,691 --> 00:40:24,990
+What's in the Sandbox?
+
+981
+00:40:24,992 --> 00:40:27,726
+There's various bundles, which are directories.
+
+982
+00:40:27,728 --> 00:40:29,961
+There's the application bundle I talked about,
+
+983
+00:40:29,963 --> 00:40:31,829
+that's where your actual app is, okay?
+
+984
+00:40:31,831 --> 00:40:33,431
+And everything there is read-only.
+
+985
+00:40:33,433 --> 00:40:34,832
+All your storyboards in there.
+
+986
+00:40:34,834 --> 00:40:36,900
+If you have JPEGs that are in your image assets,
+
+987
+00:40:36,902 --> 00:40:37,967
+they're all in there.
+
+988
+00:40:37,969 --> 00:40:39,168
+They're all read-only.
+
+989
+00:40:39,170 --> 00:40:41,971
+If you put something in there you needed to edit,
+
+990
+00:40:41,973 --> 00:40:43,739
+like maybe some SQL database or
+
+991
+00:40:43,741 --> 00:40:46,341
+something you put in there or some data file.
+
+992
+00:40:46,343 --> 00:40:48,943
+You would have to copy it out of the application bundle into
+
+993
+00:40:48,945 --> 00:40:51,279
+one of these other directories in your Sandbox, and
+
+994
+00:40:51,281 --> 00:40:52,646
+then you could edit it there.
+
+995
+00:40:52,648 --> 00:40:54,565
+Okay?
+
+996
+00:40:54,566 --> 00:40:56,483
+So, you can ship your app with things you're gonna edit, but
+
+997
+00:40:56,485 --> 00:40:59,553
+you just have to copy them out of your application directory.
+
+998
+00:40:59,555 --> 00:41:01,187
+And then, there's also other directories in there.
+
+999
+00:41:01,189 --> 00:41:04,223
+The documents directory, that's where you should store
+
+1000
+00:41:04,225 --> 00:41:06,659
+what the user perceives as their data, okay?
+
+1001
+00:41:06,661 --> 00:41:09,461
+The things they're creating and editing and
+
+1002
+00:41:09,463 --> 00:41:12,531
+owning that they expect to be there all the time.
+
+1003
+00:41:12,533 --> 00:41:14,399
+Even if you don't, kind of,
+
+1004
+00:41:14,401 --> 00:41:17,735
+divide it up into a document in your UI, it's still,
+
+1005
+00:41:17,737 --> 00:41:20,671
+that's what the documents directory is for.
+
+1006
+00:41:20,673 --> 00:41:22,406
+There's also a caches directory.
+
+1007
+00:41:22,408 --> 00:41:25,442
+This is for data that you could throw away.
+
+1008
+00:41:25,444 --> 00:41:26,976
+So, it's some information you got from
+
+1009
+00:41:26,978 --> 00:41:29,112
+the Internet that you can go back to the Internet, but,
+
+1010
+00:41:29,114 --> 00:41:31,313
+it might be slow to go to the Internet, so you're going to
+
+1011
+00:41:31,315 --> 00:41:33,215
+keep a local copy, but, you could throw it away.
+
+1012
+00:41:33,217 --> 00:41:35,917
+That directory, for example, wouldn't get backed up
+
+1013
+00:41:35,919 --> 00:41:38,520
+to iTunes, okay, if someone plugged their phone in,
+
+1014
+00:41:38,522 --> 00:41:40,888
+because they figure you can recreate it, okay?
+
+1015
+00:41:40,890 --> 00:41:42,189
+And there's a bunch of others,
+
+1016
+00:41:42,191 --> 00:41:44,191
+there's about a dozen different directories.
+
+1017
+00:41:44,193 --> 00:41:47,728
+And, you find all these directories by looking
+
+1018
+00:41:47,730 --> 00:41:52,231
+in the documentation for the term NSSearchPathDirectory.
+
+1019
+00:41:52,233 --> 00:41:54,517
+Okay?
+
+1020
+00:41:54,518 --> 00:41:56,802
+And, I'll talk about that in a second as well.
+
+1021
+00:41:56,804 --> 00:42:00,772
+So, how do you get the URL to these special
+
+1022
+00:42:00,774 --> 00:42:03,742
+directories in your Sandbox?
+
+1023
+00:42:03,744 --> 00:42:05,910
+You do it with this file manager class,
+
+1024
+00:42:05,912 --> 00:42:07,178
+this NSFileManager.
+
+1025
+00:42:07,180 --> 00:42:10,481
+Now, NSFileManager, there's actually a class
+
+1026
+00:42:10,483 --> 00:42:13,283
+function called, DefaultFileManager,
+
+1027
+00:42:13,285 --> 00:42:16,419
+that will give you the default NSFileManager.
+
+1028
+00:42:16,421 --> 00:42:19,655
+The only thing to be a little careful about that one is,
+
+1029
+00:42:19,657 --> 00:42:21,557
+NSFileManager is thread safe.
+
+1030
+00:42:21,559 --> 00:42:23,792
+And a lot of times, you might want to read and
+
+1031
+00:42:23,794 --> 00:42:26,161
+write a very large file in a different thread.
+
+1032
+00:42:26,163 --> 00:42:27,946
+Okay?
+
+1033
+00:42:27,947 --> 00:42:29,730
+And NSFileManager is completely thread safe,
+
+1034
+00:42:29,733 --> 00:42:31,716
+but only for
+
+1035
+00:42:31,717 --> 00:42:33,700
+an NSFileManager instance that is created in that thread.
+
+1036
+00:42:33,703 --> 00:42:36,370
+In other words, you should never create an NSFileManager
+
+1037
+00:42:36,372 --> 00:42:38,872
+instance in one thread and then use it in another one.
+
+1038
+00:42:38,874 --> 00:42:40,440
+That's not thread safe.
+
+1039
+00:42:40,442 --> 00:42:42,008
+Okay?
+
+1040
+00:42:42,009 --> 00:42:43,575
+But, even if you're accessing the same files,
+
+1041
+00:42:43,578 --> 00:42:46,012
+trying to remove or look at the same directories,
+
+1042
+00:42:46,014 --> 00:42:47,480
+that's all perfectly fine,
+
+1043
+00:42:47,482 --> 00:42:49,948
+as long as each thread has its own NSFileManager.
+
+1044
+00:42:49,950 --> 00:42:52,551
+So the NSFileManager DefaultFileManager,
+
+1045
+00:42:52,553 --> 00:42:54,886
+you'll see that in the documentation.
+
+1046
+00:42:54,888 --> 00:42:57,822
+That one is kind of your main thread, DefaultFileManager.
+
+1047
+00:42:57,824 --> 00:43:00,224
+If you're only gonna use it on the main queue,
+
+1048
+00:43:00,226 --> 00:43:01,592
+then you can use that one.
+
+1049
+00:43:01,594 --> 00:43:02,893
+Otherwise, just create an instance.
+
+1050
+00:43:02,895 --> 00:43:05,095
+It's pretty light-weight to create an instance of
+
+1051
+00:43:05,097 --> 00:43:06,763
+NSFileManager just like this, okay,
+
+1052
+00:43:06,765 --> 00:43:08,698
+let fileManager equal NSFileManager().
+
+1053
+00:43:08,700 --> 00:43:11,700
+So, once you have a file manager, then you can send it
+
+1054
+00:43:11,702 --> 00:43:14,302
+this message, URLsForDirectory inDomain.
+
+1055
+00:43:14,304 --> 00:43:17,739
+And that will tell you, it gives you, actually,
+
+1056
+00:43:17,741 --> 00:43:20,742
+an array of all the documents directories,
+
+1057
+00:43:20,744 --> 00:43:22,810
+all the caches directories,
+
+1058
+00:43:22,812 --> 00:43:25,746
+all the application bundle directories.
+
+1059
+00:43:25,748 --> 00:43:27,314
+Now, why is this an array?
+
+1060
+00:43:27,316 --> 00:43:29,649
+Well, on iOS, it doesn't matter.
+
+1061
+00:43:29,651 --> 00:43:32,552
+There's always only one thing in this array, okay, and
+
+1062
+00:43:32,554 --> 00:43:34,787
+that's the user's documents directory,
+
+1063
+00:43:34,789 --> 00:43:36,555
+the user's cache's directory.
+
+1064
+00:43:36,557 --> 00:43:38,724
+And that's because on iPhone,
+
+1065
+00:43:38,726 --> 00:43:41,359
+you only have the user's resources.
+
+1066
+00:43:41,361 --> 00:43:44,929
+But this API works on a Mac as well, and on the Mac,
+
+1067
+00:43:44,931 --> 00:43:48,232
+you might have the user's document history or
+
+1068
+00:43:48,234 --> 00:43:49,933
+a cache's directory.
+
+1069
+00:43:49,935 --> 00:43:53,036
+You might have the computers, and then you might even have
+
+1070
+00:43:53,038 --> 00:43:55,372
+the networks, okay, the local networks.
+
+1071
+00:43:55,374 --> 00:43:57,240
+That's why you might get multiple of these.
+
+1072
+00:43:57,242 --> 00:43:59,675
+So, don't be freaked out by the fact that this returns
+
+1073
+00:43:59,677 --> 00:44:02,244
+an array of NSURLs, there's always only going to be one.
+
+1074
+00:44:02,246 --> 00:44:04,246
+You can just use the first one in there.
+
+1075
+00:44:04,248 --> 00:44:07,716
+And, that is going to be a URL that points to this kind of
+
+1076
+00:44:07,718 --> 00:44:10,585
+directory like the documents directory, or
+
+1077
+00:44:10,587 --> 00:44:13,154
+the cache's directory, or whatever.
+
+1078
+00:44:13,156 --> 00:44:16,657
+And, you specify which one you want with that first argument,
+
+1079
+00:44:16,659 --> 00:44:18,191
+NSSearchPathDirectory.
+
+1080
+00:44:18,193 --> 00:44:21,461
+And, you have to go look in the documentation and
+
+1081
+00:44:21,463 --> 00:44:24,097
+see what the special names of them are.
+
+1082
+00:44:24,099 --> 00:44:25,898
+But there's, like, NSDocumentsDirectory,
+
+1083
+00:44:25,900 --> 00:44:27,866
+NSCachesDirectory, NSDocumentationDirectory.
+
+1084
+00:44:27,868 --> 00:44:30,702
+By the way, be careful with NSDocumentationDirectory
+
+1085
+00:44:30,704 --> 00:44:32,337
+versus NSDocumentsDirector.
+
+1086
+00:44:32,339 --> 00:44:35,573
+I can't tell you how many final projects people post in
+
+1087
+00:44:35,575 --> 00:44:39,076
+Piazza, and they'll say, I've been trying to write to my
+
+1088
+00:44:39,078 --> 00:44:42,513
+NSDocumentsDirectory for days but it says not writable.
+
+1089
+00:44:42,515 --> 00:44:44,781
+And it's because they've been trying to write to
+
+1090
+00:44:44,783 --> 00:44:47,350
+the NSDocumentationDirectory, which is read-only.
+
+1091
+00:44:47,352 --> 00:44:49,619
+Okay, that's documentation that ships with your app.
+
+1092
+00:44:49,621 --> 00:44:52,221
+So be careful with the escape completion there,
+
+1093
+00:44:52,223 --> 00:44:54,123
+NSDocuments is the writeable one,
+
+1094
+00:44:54,125 --> 00:44:56,558
+okay, NSDocumentation is documentation.
+
+1095
+00:44:56,560 --> 00:44:58,193
+All right?
+
+1096
+00:44:58,195 --> 00:45:00,461
+So, now you have the URL to the root of one of these
+
+1097
+00:45:00,463 --> 00:45:02,496
+things, like the document's directory,
+
+1098
+00:45:02,498 --> 00:45:03,697
+the cache's directory.
+
+1099
+00:45:03,699 --> 00:45:05,766
+And, now you want to write some files in there.
+
+1100
+00:45:05,768 --> 00:45:09,302
+Well, you're going to use URLs, NSURLs methods,
+
+1101
+00:45:09,304 --> 00:45:11,804
+URL by appending path component, or
+
+1102
+00:45:11,806 --> 00:45:14,173
+URL by appending path extension.
+
+1103
+00:45:14,175 --> 00:45:18,810
+Some extensions like .jpg, or whatever, .doc,
+
+1104
+00:45:18,812 --> 00:45:22,313
+got some document format of some sort.
+
+1105
+00:45:22,315 --> 00:45:23,981
+And so, that's how you're gonna do that.
+
+1106
+00:45:23,983 --> 00:45:26,550
+And, by appending multiple path components,
+
+1107
+00:45:26,552 --> 00:45:29,353
+you can build things inside directories, right?
+
+1108
+00:45:29,355 --> 00:45:33,056
+So I can say a path component, today's documents.
+
+1109
+00:45:33,058 --> 00:45:37,060
+And then path component foo, and that would be a directory,
+
+1110
+00:45:37,062 --> 00:45:40,129
+today's documents, and inside foo, okay?
+
+1111
+00:45:40,131 --> 00:45:41,530
+So that's how you build up the URL.
+
+1112
+00:45:41,532 --> 00:45:44,866
+So, once you have a URL, you can find out some things,
+
+1113
+00:45:44,868 --> 00:45:47,702
+like, about it, like, is this a file URL, or
+
+1114
+00:45:47,704 --> 00:45:49,103
+is this a network URL?
+
+1115
+00:45:49,105 --> 00:45:51,772
+Sometimes, you wanna know that because you're accessing
+
+1116
+00:45:51,774 --> 00:45:54,141
+an image, and you wanna know whether it's on disk or
+
+1117
+00:45:54,143 --> 00:45:55,542
+whether it's on the network,
+
+1118
+00:45:55,544 --> 00:45:56,976
+you might put one in the thread.
+
+1119
+00:45:56,978 --> 00:45:58,862
+Cuz some people ask,
+
+1120
+00:45:58,863 --> 00:46:00,747
+should I always access my file system in the thread?
+
+1121
+00:46:00,749 --> 00:46:02,515
+And the answer is, probably for
+
+1122
+00:46:02,517 --> 00:46:06,051
+small files unless they're, you know, megabyte size files.
+
+1123
+00:46:06,053 --> 00:46:08,353
+You're probably fine to access them in the main queue.
+
+1124
+00:46:08,355 --> 00:46:10,021
+It's pretty fast, that flash memory,
+
+1125
+00:46:10,023 --> 00:46:11,956
+pretty quick at getting the information back.
+
+1126
+00:46:11,958 --> 00:46:13,924
+You probably don't need to do that.
+
+1127
+00:46:13,926 --> 00:46:16,760
+It couldn't hurt, especially, if you already have
+
+1128
+00:46:16,762 --> 00:46:19,496
+the code to deal with the fact that file might be over
+
+1129
+00:46:19,498 --> 00:46:22,599
+the network, might as well do it for the local file, too.
+
+1130
+00:46:22,601 --> 00:46:25,468
+There is also a very important method that's a little bit
+
+1131
+00:46:25,470 --> 00:46:28,604
+buried in the documentation called resourceValuesForKeys.
+
+1132
+00:46:28,606 --> 00:46:30,773
+This is how you get things like,
+
+1133
+00:46:30,775 --> 00:46:33,108
+when was this file last accessed?
+
+1134
+00:46:33,110 --> 00:46:34,443
+'Kay?
+
+1135
+00:46:34,444 --> 00:46:35,777
+How big is this file in bytes, 'kay?
+
+1136
+00:46:35,779 --> 00:46:39,681
+That's this NSURL thing, resourceValuesForKeys.
+
+1137
+00:46:39,683 --> 00:46:43,150
+When you give it the keys, like files last change date or
+
+1138
+00:46:43,152 --> 00:46:46,553
+whatever, and it's going to return in a dictionary,
+
+1139
+00:46:46,555 --> 00:46:49,756
+rather, with those keys you gave and the values for
+
+1140
+00:46:49,758 --> 00:46:51,458
+all those things, 'kay?
+
+1141
+00:46:51,460 --> 00:46:52,792
+Permissions, all that stuff.
+
+1142
+00:46:52,794 --> 00:46:56,062
+ResourceValuesForKeys.
+
+1143
+00:46:56,064 --> 00:46:58,030
+All right, now, I've got a URL,
+
+1144
+00:46:58,032 --> 00:47:00,132
+I want to to write to the file system.
+
+1145
+00:47:00,134 --> 00:47:03,801
+How do I write something to the file system given the URL?
+
+1146
+00:47:03,803 --> 00:47:05,503
+And the answer is usually,
+
+1147
+00:47:05,505 --> 00:47:07,738
+you're going to use NS data, okay?
+
+1148
+00:47:07,740 --> 00:47:10,574
+Might use the property list ones, like NSArray and
+
+1149
+00:47:10,576 --> 00:47:13,343
+NSDictionary and write a property list out to it.
+
+1150
+00:47:13,345 --> 00:47:16,412
+But you oftentimes can use NSData, cuz you have some
+
+1151
+00:47:16,414 --> 00:47:19,415
+image data or some other data you want to write out,
+
+1152
+00:47:19,417 --> 00:47:21,016
+sound files, something.
+
+1153
+00:47:21,018 --> 00:47:24,619
+And so, you do that with NSData's method writeToURL,
+
+1154
+00:47:24,621 --> 00:47:26,171
+atomically.
+
+1155
+00:47:26,172 --> 00:47:27,722
+And so, writeToURL, you just give it a URL.
+
+1156
+00:47:27,724 --> 00:47:30,157
+It will write that file out there.
+
+1157
+00:47:30,159 --> 00:47:34,061
+And the atomically means, write a temporary file,
+
+1158
+00:47:34,063 --> 00:47:36,730
+and then, remove the old file, and
+
+1159
+00:47:36,732 --> 00:47:39,866
+put the new one in an atomic transaction.
+
+1160
+00:47:39,868 --> 00:47:41,401
+Okay?
+
+1161
+00:47:41,402 --> 00:47:42,935
+That way, if something happens in the middle of writing
+
+1162
+00:47:42,937 --> 00:47:44,903
+the file, the file won't be half written.
+
+1163
+00:47:44,905 --> 00:47:46,872
+Okay?
+
+1164
+00:47:46,873 --> 00:47:48,840
+It'll be always a completely written file.
+
+1165
+00:47:48,842 --> 00:47:50,608
+And it'll return a Boolean,
+
+1166
+00:47:50,610 --> 00:47:52,744
+as to whether that was successful.
+
+1167
+00:47:52,746 --> 00:47:53,995
+Okay?
+
+1168
+00:47:53,996 --> 00:47:55,245
+So, that's the primary way you're going to write.
+
+1169
+00:47:55,248 --> 00:47:56,714
+That's how we're gonna do it in the demo.
+
+1170
+00:47:56,715 --> 00:47:58,181
+That's the number one way you're going to write.
+
+1171
+00:47:58,184 --> 00:48:00,917
+I told you that NSFileManager could do other things, too,
+
+1172
+00:48:00,919 --> 00:48:03,319
+manipulate the file system, create directories,
+
+1173
+00:48:03,321 --> 00:48:04,370
+things like that.
+
+1174
+00:48:04,371 --> 00:48:05,420
+You're gonna have to look at the documentation.
+
+1175
+00:48:05,423 --> 00:48:06,689
+There's quite a few functions in there.
+
+1176
+00:48:06,691 --> 00:48:08,190
+It also has a delegate.
+
+1177
+00:48:08,192 --> 00:48:09,958
+Where it'll let you control things.
+
+1178
+00:48:09,960 --> 00:48:12,861
+There's like, should write file at path.
+
+1179
+00:48:12,863 --> 00:48:16,997
+Something along those lines where it's basically shoulds
+
+1180
+00:48:16,999 --> 00:48:20,434
+that you can control whether something happens.
+
+1181
+00:48:20,436 --> 00:48:22,869
+And, so you can look all that up on documentations really,
+
+1182
+00:48:22,871 --> 00:48:24,971
+it doesn't make sense for me to go over it all here.
+
+1183
+00:48:24,973 --> 00:48:27,206
+>> [COUGH].
+
+1184
+00:48:27,208 --> 00:48:30,176
+>> Okay, so that's the file system, and
+
+1185
+00:48:30,178 --> 00:48:33,512
+I will be demoing that in a moment in Tracks.
+
+1186
+00:48:33,514 --> 00:48:35,547
+But first I want to talk about Core Data,
+
+1187
+00:48:35,549 --> 00:48:37,082
+the last persistence thing.
+
+1188
+00:48:37,084 --> 00:48:39,250
+How many people here are doing Core Data for
+
+1189
+00:48:39,252 --> 00:48:40,418
+their final project?
+
+1190
+00:48:40,420 --> 00:48:42,920
+Wow, okay, so half of you.
+
+1191
+00:48:42,922 --> 00:48:44,522
+That's great.
+
+1192
+00:48:44,523 --> 00:48:46,123
+I'm really, really, really happy about that,
+
+1193
+00:48:46,125 --> 00:48:48,558
+cuz I didn't teach Core Data in detail this quarter.
+
+1194
+00:48:48,560 --> 00:48:50,126
+So I was hoping a lot of you would do it as your
+
+1195
+00:48:50,128 --> 00:48:51,477
+final project.
+
+1196
+00:48:51,478 --> 00:48:52,827
+Cuz Core Data is actually an important thing to know.
+
+1197
+00:48:52,830 --> 00:48:54,630
+Not just as a way to store data but
+
+1198
+00:48:54,632 --> 00:48:57,599
+it's just conceptually understanding a little bit
+
+1199
+00:48:57,601 --> 00:49:00,335
+more about how iOS works, and things like that.
+
+1200
+00:49:00,337 --> 00:49:03,004
+Core Data, if you can figure out how to do that,
+
+1201
+00:49:03,006 --> 00:49:06,073
+then you understood a little more about how iOS works.
+
+1202
+00:49:06,075 --> 00:49:08,308
+So for those of you who are not doing Core Data, I'll go
+
+1203
+00:49:08,310 --> 00:49:10,544
+through this quickly since most of you are doing it, but
+
+1204
+00:49:10,546 --> 00:49:12,095
+what is Core Data?
+
+1205
+00:49:12,096 --> 00:49:13,645
+It's basically a way to store your data in a sequel
+
+1206
+00:49:13,648 --> 00:49:16,582
+database, basically, but in a totally object oriented way.
+
+1207
+00:49:16,584 --> 00:49:18,651
+So you don't have to issue any sequel commands or
+
+1208
+00:49:18,653 --> 00:49:20,619
+anything like that, create rows and tables.
+
+1209
+00:49:20,621 --> 00:49:22,487
+It's gonna create all that for you.
+
+1210
+00:49:22,489 --> 00:49:26,724
+It's completely object-oriented API.
+
+1211
+00:49:26,726 --> 00:49:28,492
+It's a very powerful framework in iOS.
+
+1212
+00:49:28,494 --> 00:49:29,844
+It has a lot.
+
+1213
+00:49:29,845 --> 00:49:31,195
+Most of you are getting it for your final project,
+
+1214
+00:49:31,197 --> 00:49:33,296
+even though you're only going to touch the basic thing of
+
+1215
+00:49:33,298 --> 00:49:34,964
+setting properties and creating entities.
+
+1216
+00:49:34,966 --> 00:49:37,567
+But there's a lot of really powerful querying things that.
+
+1217
+00:49:37,569 --> 00:49:40,036
+>> [COUGH]. >> Can happen in there.
+
+1218
+00:49:40,037 --> 00:49:42,504
+Most of the things you can do with SQL, you can do up in
+
+1219
+00:49:42,507 --> 00:49:46,608
+the Core Data layer, things like optimistic locking and
+
+1220
+00:49:46,610 --> 00:49:48,943
+all that stuff is all doable, so
+
+1221
+00:49:48,945 --> 00:49:51,612
+it's a pretty powerful mechanism.
+
+1222
+00:49:51,614 --> 00:49:52,646
+It is backed by SQL, but
+
+1223
+00:49:52,648 --> 00:49:54,348
+it can also be backed by other things.
+
+1224
+00:49:54,350 --> 00:49:56,983
+XML, or you could even actually get involved and
+
+1225
+00:49:56,985 --> 00:49:59,052
+store the data in your own format, but
+
+1226
+00:49:59,054 --> 00:50:01,020
+that would be very advanced usage.
+
+1227
+00:50:01,022 --> 00:50:01,887
+So how does it work?
+
+1228
+00:50:01,889 --> 00:50:03,022
+How does Core Data work,
+
+1229
+00:50:03,024 --> 00:50:05,190
+you create this visual mapping in your schema.
+
+1230
+00:50:05,192 --> 00:50:08,326
+Okay, it's not like the parse that you saw at the Friday
+
+1231
+00:50:08,328 --> 00:50:11,229
+section a couple weeks ago, that's schemaless.
+
+1232
+00:50:11,231 --> 00:50:13,698
+It's basically creating its schema on the fly, right?
+
+1233
+00:50:13,700 --> 00:50:16,734
+It creates the rows and tables as you ask for them.
+
+1234
+00:50:16,736 --> 00:50:19,169
+This one you define your scheme upfront.
+
+1235
+00:50:19,171 --> 00:50:20,737
+What are going to be your objects,
+
+1236
+00:50:20,739 --> 00:50:23,339
+and what are going to be the object's properties on those
+
+1237
+00:50:23,341 --> 00:50:25,391
+objects.
+
+1238
+00:50:25,392 --> 00:50:27,442
+And then basically tables are kind of like classes if you
+
+1239
+00:50:27,445 --> 00:50:29,278
+want to think of it that way.
+
+1240
+00:50:29,280 --> 00:50:32,848
+And then the columns and the tables are kind of like vars.
+
+1241
+00:50:32,850 --> 00:50:36,384
+Okay and then coordinator provides a way to have these
+
+1242
+00:50:36,386 --> 00:50:40,054
+@NSManaged vars, where literally you just set the var
+
+1243
+00:50:40,056 --> 00:50:43,924
+and it's gonna be go set the information in the database,
+
+1244
+00:50:43,926 --> 00:50:47,795
+and of course you can query on all this stored data as well.
+
+1245
+00:50:47,797 --> 00:50:50,163
+You create the schema with this visual map.
+
+1246
+00:50:50,165 --> 00:50:54,667
+You do new file and you create this thing data model.
+
+1247
+00:50:54,669 --> 00:50:58,070
+You're gonna get this thing, it kinda looks like this.
+
+1248
+00:50:58,072 --> 00:50:59,989
+Okay?
+
+1249
+00:50:59,990 --> 00:51:01,907
+It's a graphical, piece of graph paper looking thing, and
+
+1250
+00:51:01,909 --> 00:51:04,642
+you can actually create things that look like class like
+
+1251
+00:51:04,644 --> 00:51:06,177
+photo and photographer here.
+
+1252
+00:51:06,179 --> 00:51:08,846
+And then you can create the columns in the database, and
+
+1253
+00:51:08,848 --> 00:51:10,615
+then you can create
+
+1254
+00:51:10,616 --> 00:51:12,383
+relationships by controlled dragging between them.
+
+1255
+00:51:12,385 --> 00:51:15,452
+So you're gonna create your schema totally
+
+1256
+00:51:15,454 --> 00:51:16,953
+graphically there.
+
+1257
+00:51:16,955 --> 00:51:19,222
+Then you get this UIManagedContext.
+
+1258
+00:51:19,224 --> 00:51:22,858
+That's kind of your handle, your hook, on your database.
+
+1259
+00:51:22,860 --> 00:51:24,593
+There's a couple different ways to do that.
+
+1260
+00:51:24,595 --> 00:51:27,162
+There's some code that can be generated when you create your
+
+1261
+00:51:27,164 --> 00:51:29,431
+project, you can click on the Use Core Data button and
+
+1262
+00:51:29,433 --> 00:51:31,666
+it will create this code for you in your app delegate,
+
+1263
+00:51:31,668 --> 00:51:33,801
+and then you will have a method in your app delegate
+
+1264
+00:51:33,803 --> 00:51:35,202
+called manageObjectContext.
+
+1265
+00:51:35,204 --> 00:51:36,903
+Now you have a handle to your database and
+
+1266
+00:51:36,905 --> 00:51:38,672
+you can start creating objects in there or
+
+1267
+00:51:38,674 --> 00:51:39,972
+setting the values of things.
+
+1268
+00:51:39,974 --> 00:51:41,707
+There's also another class,
+
+1269
+00:51:41,709 --> 00:51:44,410
+an important class called UIManagedDocument,
+
+1270
+00:51:44,412 --> 00:51:47,512
+it's a way to encapsulate a Core Data database, okay?
+
+1271
+00:51:47,514 --> 00:51:50,915
+What's really cool about UIManagedDocument, if you use
+
+1272
+00:51:50,917 --> 00:51:53,851
+data approach versus the Use Core Data approach,
+
+1273
+00:51:53,853 --> 00:51:56,754
+is that the iCloud side of it becomes a lot easier.
+
+1274
+00:51:56,756 --> 00:51:59,456
+So if you wanted to have your core database work on
+
+1275
+00:51:59,458 --> 00:52:02,225
+iCloud so that I could see it on all my devices, and
+
+1276
+00:52:02,227 --> 00:52:04,627
+it would be automatically synchronized,
+
+1277
+00:52:04,629 --> 00:52:06,863
+then you wanna use UIManagedDocument.
+
+1278
+00:52:06,865 --> 00:52:08,898
+So maybe some of you.
+
+1279
+00:52:08,899 --> 00:52:10,932
+Anybody trying to use UIManagedDocument?
+
+1280
+00:52:10,935 --> 00:52:14,236
+'Kay, so that is kind of like the next step
+
+1281
+00:52:14,238 --> 00:52:17,439
+you would think about doing in Core Data.
+
+1282
+00:52:17,441 --> 00:52:19,541
+All right, so once you have this context,
+
+1283
+00:52:19,543 --> 00:52:20,742
+the handle on the deck,
+
+1284
+00:52:20,744 --> 00:52:23,144
+on this core database, you can create objects.
+
+1285
+00:52:23,146 --> 00:52:26,213
+You do that with this NSEntityDescription class
+
+1286
+00:52:26,215 --> 00:52:29,349
+method called InsertNewObjectForEntityForN-
+
+1287
+00:52:29,351 --> 00:52:32,852
+ame, and you're basically just specifying the name of
+
+1288
+00:52:32,854 --> 00:52:35,254
+the table, which is like a class, and
+
+1289
+00:52:35,256 --> 00:52:37,990
+you give it the managedObjectContext, and
+
+1290
+00:52:37,992 --> 00:52:41,893
+it will create a new instance, okay, a new row in that table,
+
+1291
+00:52:41,895 --> 00:52:44,062
+to use the database terminology.
+
+1292
+00:52:44,064 --> 00:52:47,098
+And it's gonna return to you this NSManagedObject, or
+
+1293
+00:52:47,100 --> 00:52:48,199
+subclass thereof.
+
+1294
+00:52:48,201 --> 00:52:51,235
+And it's with this NSManagedObject that you
+
+1295
+00:52:51,237 --> 00:52:54,538
+can set the columns, set the values in that row.
+
+1296
+00:52:54,540 --> 00:52:55,605
+You can also fetch,
+
+1297
+00:52:55,607 --> 00:52:58,341
+you create these things called NSFetchRequests.
+
+1298
+00:52:58,343 --> 00:53:01,911
+They basically specify what you're looking for,
+
+1299
+00:53:01,913 --> 00:53:05,414
+pretty powerful predicates in there for saying,
+
+1300
+00:53:05,416 --> 00:53:09,151
+well I want all things, all of the rows whose column is
+
+1301
+00:53:09,153 --> 00:53:11,820
+called name starts with the letter a.
+
+1302
+00:53:11,822 --> 00:53:14,822
+You can do that kind of fetch request and then you issue
+
+1303
+00:53:14,824 --> 00:53:17,692
+the fetch request and you get it back as an NS Array.
+
+1304
+00:53:17,694 --> 00:53:21,328
+This fetched object thing would be an NS array, or
+
+1305
+00:53:21,330 --> 00:53:23,764
+an array, of NS managed object.
+
+1306
+00:53:23,766 --> 00:53:25,031
+Okay?
+
+1307
+00:53:25,033 --> 00:53:28,801
+And so that's kind of what you can do with a database.
+
+1308
+00:53:28,803 --> 00:53:31,737
+Once you have these objects, these NSManaged objects,
+
+1309
+00:53:31,739 --> 00:53:34,506
+you can use these two methods, the setValueForKey and
+
+1310
+00:53:34,508 --> 00:53:36,942
+valueForKey to set and get the values in there.
+
+1311
+00:53:36,944 --> 00:53:38,977
+Or even better,
+
+1312
+00:53:38,978 --> 00:53:41,011
+you can create subclasses of NSManaged objects.
+
+1313
+00:53:41,014 --> 00:53:43,781
+That have these apps on NSManagedObject vars, and
+
+1314
+00:53:43,783 --> 00:53:45,916
+Core Data will automatically make it so
+
+1315
+00:53:45,918 --> 00:53:48,719
+that if you set that var, it sets it in the database.
+
+1316
+00:53:48,721 --> 00:53:50,954
+And if you get that var,
+
+1317
+00:53:50,956 --> 00:53:54,957
+it'll fetch it from the database, okay?
+
+1318
+00:53:54,959 --> 00:53:59,294
+So, you use normal SWF notation for that.
+
+1319
+00:53:59,296 --> 00:54:03,431
+Okay, so that's kinda what Core Data's about in its core.
+
+1320
+00:54:03,433 --> 00:54:06,334
+Pun intended, no pun intended.
+
+1321
+00:54:06,336 --> 00:54:09,470
+Core Data is also really good at hooking up to table views.
+
+1322
+00:54:09,472 --> 00:54:13,307
+Cuz you can imagine you've got these big tables of data in
+
+1323
+00:54:13,309 --> 00:54:16,976
+Core Data, and it'd be nice to have a table view that is
+
+1324
+00:54:16,978 --> 00:54:18,745
+displaying all the rows or
+
+1325
+00:54:18,747 --> 00:54:21,681
+some subset of the rows based on some query.
+
+1326
+00:54:21,683 --> 00:54:25,417
+In the table view, and so there's this class called
+
+1327
+00:54:25,419 --> 00:54:29,788
+NSFetchedResultsController in iOS, a super simple class.
+
+1328
+00:54:29,790 --> 00:54:32,390
+It basically, you give it a fetch request, and
+
+1329
+00:54:32,392 --> 00:54:35,659
+you associate it with a table view, and then that table view
+
+1330
+00:54:35,661 --> 00:54:38,662
+will always show what that fetch request would fetch,
+
+1331
+00:54:38,664 --> 00:54:41,298
+even if the database changes out from under it.
+
+1332
+00:54:41,300 --> 00:54:43,066
+'Kay, cuz you add something, and
+
+1333
+00:54:43,068 --> 00:54:45,868
+the thing you added matches that fetch request, boom,
+
+1334
+00:54:45,870 --> 00:54:48,337
+it will just automatically appear in the table.
+
+1335
+00:54:48,339 --> 00:54:51,106
+'Kay, so you don't have to be doing all, basically,
+
+1336
+00:54:51,108 --> 00:54:54,076
+the FetchedResultController will implement all of your UI
+
+1337
+00:54:54,078 --> 00:54:56,211
+table of your data source methods for you.
+
+1338
+00:54:56,213 --> 00:54:58,446
+How many rows in table, how many rows in section.
+
+1339
+00:54:58,448 --> 00:55:00,514
+Give me the self or own index path.
+
+1340
+00:55:00,516 --> 00:55:02,082
+You have to do your own self or
+
+1341
+00:55:02,084 --> 00:55:04,251
+own index path to do the UI part of it, but
+
+1342
+00:55:04,253 --> 00:55:07,387
+there's one method in the FetchResultsController that
+
+1343
+00:55:07,389 --> 00:55:10,089
+will tell you which managed object is in this row,
+
+1344
+00:55:10,091 --> 00:55:11,824
+in the table.
+
+1345
+00:55:11,825 --> 00:55:13,558
+So if you're doing Core Data for your final project and
+
+1346
+00:55:13,561 --> 00:55:14,960
+you're doing table views,
+
+1347
+00:55:14,962 --> 00:55:18,030
+you definitely want to look up NSFetchedResultsController.
+
+1348
+00:55:18,032 --> 00:55:19,798
+Okay.
+
+1349
+00:55:19,800 --> 00:55:21,899
+All right, so the demo that I'm gonna do,
+
+1350
+00:55:21,901 --> 00:55:24,735
+I'm not gonna demo Core Data, don't have time for that.
+
+1351
+00:55:24,737 --> 00:55:27,104
+So I'm just gonna demo the file system piece.
+
+1352
+00:55:27,106 --> 00:55:31,074
+And we're gonna do that by making our waypoint.
+
+1353
+00:55:31,076 --> 00:55:35,078
+Store the image that we took with the camera as a JPG in
+
+1354
+00:55:35,080 --> 00:55:36,445
+the file system.
+
+1355
+00:55:36,447 --> 00:55:38,280
+And then we'll have a URL to it,
+
+1356
+00:55:38,282 --> 00:55:39,881
+we can update the waypoint.
+
+1357
+00:55:39,883 --> 00:55:44,018
+And our new edit away points will work just like the ones
+
+1358
+00:55:44,020 --> 00:55:45,820
+that come in a GPX file.
+
+1359
+00:55:45,822 --> 00:55:50,357
+All right, so what do we need to do to do this?
+
+1360
+00:55:50,359 --> 00:55:55,261
+Really, all I'm gonna do here when I take a photo, okay,
+
+1361
+00:55:55,263 --> 00:55:59,398
+and the information comes back in the delegate,
+
+1362
+00:55:59,400 --> 00:56:03,135
+I'm just gonna say SaveImageInWaypoint.
+
+1363
+00:56:03,137 --> 00:56:07,672
+'Kay, remember that this NBC, its model.
+
+1364
+00:56:07,674 --> 00:56:10,474
+Is the waypoint that we're editing.
+
+1365
+00:56:10,476 --> 00:56:12,843
+So, I'm just gonna have a little method here,
+
+1366
+00:56:12,845 --> 00:56:14,111
+saveImageInWaypoint.
+
+1367
+00:56:14,113 --> 00:56:19,282
+So let's implement that, saveImageInWaypoint.
+
+1368
+00:56:19,284 --> 00:56:22,918
+And all we're gonna do here is we have the image,
+
+1369
+00:56:22,920 --> 00:56:26,922
+we already got it, put it here in our UI view image, so
+
+1370
+00:56:26,924 --> 00:56:29,257
+I'll just get it out of there.
+
+1371
+00:56:29,259 --> 00:56:31,859
+And we're just gonna write it in the file system and
+
+1372
+00:56:31,861 --> 00:56:34,595
+then we're gonna update the waypoint to use that URL,
+
+1373
+00:56:34,597 --> 00:56:35,462
+simple as that.
+
+1374
+00:56:35,464 --> 00:56:38,632
+So, if we can get that image, so
+
+1375
+00:56:38,634 --> 00:56:41,668
+if our imageView has an image.
+
+1376
+00:56:41,670 --> 00:56:42,402
+Okay?
+
+1377
+00:56:42,404 --> 00:56:43,903
+Because they could be nil.
+
+1378
+00:56:43,905 --> 00:56:46,972
+It might have been set to nil by some means,
+
+1379
+00:56:46,974 --> 00:56:50,142
+then I'm gonna get the image data as a JPEG.
+
+1380
+00:56:50,144 --> 00:56:54,145
+And the way you do that, there's this cool function,
+
+1381
+00:56:54,147 --> 00:56:58,516
+UIImageJPEGRepresentatio and you just give it a UIImage.
+
+1382
+00:56:58,518 --> 00:56:59,934
+Okay?
+
+1383
+00:56:59,935 --> 00:57:01,351
+And you give it a compression quality.
+
+1384
+00:57:01,354 --> 00:57:03,520
+So, I'm gonna do really high compression.
+
+1385
+00:57:03,522 --> 00:57:05,238
+Okay?
+
+1386
+00:57:05,239 --> 00:57:06,955
+So this is a quality between zero I think,
+
+1387
+00:57:06,958 --> 00:57:10,293
+which is like the most compressed you can do to one,
+
+1388
+00:57:10,295 --> 00:57:12,795
+which is like almost no compression.
+
+1389
+00:57:12,797 --> 00:57:14,096
+Okay?
+
+1390
+00:57:14,098 --> 00:57:15,597
+I think that's the direction it is,
+
+1391
+00:57:15,599 --> 00:57:17,182
+I hope that is what it is.
+
+1392
+00:57:17,183 --> 00:57:18,766
+But anyway, so you can look at the documentation for it.
+
+1393
+00:57:18,769 --> 00:57:22,036
+But we're gonna turn our image here
+
+1394
+00:57:22,038 --> 00:57:24,739
+into by doing this in NSData.
+
+1395
+00:57:24,741 --> 00:57:28,275
+So this is going to return in NSData.
+
+1396
+00:57:28,277 --> 00:57:31,678
+If we look at the up here, see that is NSData.
+
+1397
+00:57:31,680 --> 00:57:33,513
+So, it's gonna turn our image into NSData.
+
+1398
+00:57:33,515 --> 00:57:36,315
+It's kinda the opposite of NSData contents for URL,
+
+1399
+00:57:36,317 --> 00:57:38,684
+which is the opposite it would take the URL for
+
+1400
+00:57:38,686 --> 00:57:40,586
+some data and turn it into UIImage.
+
+1401
+00:57:40,588 --> 00:57:43,588
+This goes back the other way for JPG.
+
+1402
+00:57:43,590 --> 00:57:46,224
+So, if we're able to do that conversion, then I'm
+
+1403
+00:57:46,226 --> 00:57:48,860
+gonna get the fileManager here as a local variable.
+
+1404
+00:57:48,862 --> 00:57:51,962
+I could just constantly, I could use the defaultManager
+
+1405
+00:57:51,964 --> 00:57:54,732
+by defaultManager you see I'm in the main thread.
+
+1406
+00:57:54,734 --> 00:57:57,701
+But just in case I ever put this in a separate thread or
+
+1407
+00:57:57,703 --> 00:58:01,004
+something, I'll go ahead and use an instance of it here.
+
+1408
+00:58:01,006 --> 00:58:03,172
+So now I need to get the documents directory,
+
+1409
+00:58:03,174 --> 00:58:04,940
+because these waypoints, really,
+
+1410
+00:58:04,942 --> 00:58:07,276
+the user perceives them as their document data.
+
+1411
+00:58:07,278 --> 00:58:08,610
+That's where you would want to store this.
+
+1412
+00:58:08,612 --> 00:58:10,612
+It's not like a cache that we can't ever get back.
+
+1413
+00:58:10,614 --> 00:58:12,580
+We need that photo if we lose it.
+
+1414
+00:58:12,582 --> 00:58:14,949
+It's gone forever.
+
+1415
+00:58:14,950 --> 00:58:17,317
+So, and again, we might really want to be saving this in
+
+1416
+00:58:17,319 --> 00:58:18,719
+the photo library.
+
+1417
+00:58:18,721 --> 00:58:21,221
+But I'm just trying to demo here how to do the file
+
+1418
+00:58:21,223 --> 00:58:23,489
+system, so that's why we're doing that.
+
+1419
+00:58:23,491 --> 00:58:26,392
+So, I'm gonna get the documents directory and
+
+1420
+00:58:26,394 --> 00:58:28,994
+so here's a nice long line of code for you.
+
+1421
+00:58:28,996 --> 00:58:32,464
+Take the fileManager, we're gonna get the URLs for
+
+1422
+00:58:32,466 --> 00:58:33,364
+directory.
+
+1423
+00:58:33,366 --> 00:58:36,634
+Okay?
+
+1424
+00:58:36,635 --> 00:58:39,903
+The directory we want is the DocumentsDirectory and
+
+1425
+00:58:39,905 --> 00:58:45,408
+the domain always on the iPhone is the UserDomain.
+
+1426
+00:58:45,410 --> 00:58:47,543
+More space please.
+
+1427
+00:58:47,545 --> 00:58:50,279
+The UserDomainMask here.
+
+1428
+00:58:50,281 --> 00:58:51,764
+Okay?
+
+1429
+00:58:51,765 --> 00:58:53,248
+So that's gonna get this array of URLs and
+
+1430
+00:58:53,250 --> 00:58:55,650
+I'm just gonna get the first one out of there.
+
+1431
+00:58:55,652 --> 00:58:57,986
+Okay?
+
+1432
+00:58:57,987 --> 00:59:00,321
+And then I'm gonna make sure that it's cast to URL.
+
+1433
+00:59:00,323 --> 00:59:04,592
+So, if all of this succeeds, then I got
+
+1434
+00:59:04,594 --> 00:59:09,996
+the documents directory and what did I miss here?
+
+1435
+00:59:09,998 --> 00:59:14,667
+DocumentsDirectory.
+
+1436
+00:59:14,669 --> 00:59:15,568
+There we go.
+
+1437
+00:59:15,570 --> 00:59:18,304
+Okay?
+
+1438
+00:59:18,305 --> 00:59:21,039
+So this will end up being a NSURL that
+
+1439
+00:59:21,041 --> 00:59:25,677
+points to the DocumentDirectory.
+
+1440
+00:59:25,679 --> 00:59:27,145
+Okay?
+
+1441
+00:59:27,146 --> 00:59:28,612
+So now I have a DocumentDirectory,
+
+1442
+00:59:28,614 --> 00:59:31,715
+I need a unique name for this photo that I just took.
+
+1443
+00:59:31,717 --> 00:59:34,951
+So, I'm gonna create that by just saying,
+
+1444
+00:59:34,953 --> 00:59:38,655
+NSDate.TimeIntervalSinceRefer- enceDate.
+
+1445
+00:59:38,657 --> 00:59:40,590
+So this is just a certain number of seconds.
+
+1446
+00:59:40,592 --> 00:59:42,892
+This is just a unique number.
+
+1447
+00:59:42,894 --> 00:59:44,193
+It's gonna be a double.
+
+1448
+00:59:44,195 --> 00:59:47,896
+That unique identifies this photo, because it can't have
+
+1449
+00:59:47,898 --> 00:59:50,765
+two photos taken at the same instance in time.
+
+1450
+00:59:50,767 --> 00:59:52,200
+So we got that.
+
+1451
+00:59:52,202 --> 00:59:54,886
+And then so
+
+1452
+00:59:54,887 --> 00:59:57,571
+I'm gonna let the URL for my photo be the docsDir and then
+
+1453
+00:59:57,573 --> 01:00:02,642
+URLByAppendingPathComponent and then I'm just gonna create
+
+1454
+01:00:02,644 --> 01:00:07,347
+a string out of that unique and we'll say that it's a jpg.
+
+1455
+01:00:07,349 --> 01:00:08,147
+Okay?
+
+1456
+01:00:08,149 --> 01:00:10,582
+So now I've created a URL,
+
+1457
+01:00:10,584 --> 01:00:15,320
+which is just this unique string with JPG on the end.
+
+1458
+01:00:15,322 --> 01:00:17,722
+So now, if I can get the path to that URL.
+
+1459
+01:00:17,724 --> 01:00:19,557
+So this is gonna take the URL and
+
+1460
+01:00:19,559 --> 01:00:21,325
+turn it into a string, okay?
+
+1461
+01:00:21,327 --> 01:00:23,293
+Cuz URLs are in this URL objects.
+
+1462
+01:00:23,295 --> 01:00:25,562
+I want the string, you'll see why in a second here.
+
+1463
+01:00:25,564 --> 01:00:29,432
+If I can get that, then I'm gonna take that ImageData and
+
+1464
+01:00:29,434 --> 01:00:33,435
+write it out to that URL and I'm gonna do it anatomically.
+
+1465
+01:00:33,437 --> 01:00:34,386
+Okay?
+
+1466
+01:00:34,387 --> 01:00:35,336
+And if that succeeded,
+
+1467
+01:00:35,339 --> 01:00:37,605
+if I was able to successfully do that,
+
+1468
+01:00:37,607 --> 01:00:41,142
+then I can add it to the way point by saying, waypointLink.
+
+1469
+01:00:41,144 --> 01:00:44,945
+And I'm just gonna replace all of my waypoint
+
+1470
+01:00:44,947 --> 01:00:49,349
+links with a GPX.Link, which is href of that path,
+
+1471
+01:00:49,351 --> 01:00:52,152
+the string version of the NSURL.
+
+1472
+01:00:52,154 --> 01:00:57,123
+Because GPX.Link, it's a generic GPX parsing thing.
+
+1473
+01:00:57,125 --> 01:01:01,493
+It takes strings, it takes URLs as strings here.
+
+1474
+01:01:01,495 --> 01:01:02,727
+Okay?
+
+1475
+01:01:02,729 --> 01:01:05,496
+Everyone understand all this code?
+
+1476
+01:01:05,498 --> 01:01:06,931
+This is typical code for
+
+1477
+01:01:06,933 --> 01:01:09,299
+writing something out into your file.
+
+1478
+01:01:09,301 --> 01:01:11,301
+So come into your Sandbox, in this case,
+
+1479
+01:01:11,303 --> 01:01:13,103
+the DocumentDirectory of Sandbox.
+
+1480
+01:01:13,105 --> 01:01:14,404
+All right.
+
+1481
+01:01:14,405 --> 01:01:15,704
+So let's go ahead and run that.
+
+1482
+01:01:15,707 --> 01:01:20,743
+It's good being
+
+1483
+01:01:20,745 --> 01:01:26,915
+on the iPhone here.
+
+1484
+01:01:26,917 --> 01:01:29,484
+Okay.
+
+1485
+01:01:29,485 --> 01:01:32,052
+So let's drop a pin here and can see that we have our
+
+1486
+01:01:32,055 --> 01:01:35,723
+dropped there and we have no image yet, so
+
+1487
+01:01:35,725 --> 01:01:40,326
+let's click on our little eye here and get an image.
+
+1488
+01:01:40,328 --> 01:01:44,330
+So, I'm going to click the camera.
+
+1489
+01:01:44,332 --> 01:01:49,334
+Let's get a picture of our R2D2 hat here.
+
+1490
+01:01:49,336 --> 01:01:50,201
+There we go.
+
+1491
+01:01:50,203 --> 01:01:51,803
+And we'll use that photo.
+
+1492
+01:01:51,805 --> 01:01:53,304
+And now we have our image.
+
+1493
+01:01:53,306 --> 01:01:57,674
+We can even, for example,
+
+1494
+01:01:57,676 --> 01:02:05,815
+change our title here maybe to let's say, R2SF.
+
+1495
+01:02:05,817 --> 01:02:06,515
+All right?
+
+1496
+01:02:06,517 --> 01:02:08,567
+And click Done.
+
+1497
+01:02:08,568 --> 01:02:10,618
+Now, if we click on our pin, we can see that the image
+
+1498
+01:02:10,621 --> 01:02:13,488
+has been saved and we can see it there on the left.
+
+1499
+01:02:13,490 --> 01:02:17,025
+We can even click on it, scroll around on it.
+
+1500
+01:02:17,027 --> 01:02:18,025
+Okay?
+
+1501
+01:02:18,027 --> 01:02:19,727
+Or go back and edit it and
+
+1502
+01:02:19,729 --> 01:02:22,496
+take a different photo if we wanted to.
+
+1503
+01:02:22,498 --> 01:02:24,531
+[SOUND] Okay.
+
+1504
+01:02:24,533 --> 01:02:29,435
+Now by the way, to make this work I had to make a small
+
+1505
+01:02:29,437 --> 01:02:33,538
+change to the code, which is right here and
+
+1506
+01:02:33,540 --> 01:02:36,408
+didSelectAnnotationView.
+
+1507
+01:02:36,410 --> 01:02:39,510
+We just want to make sure that if we have no call out
+
+1508
+01:02:39,512 --> 01:02:43,414
+accessory, because we started without one when we drop a new
+
+1509
+01:02:43,416 --> 01:02:44,581
+pin, like this.
+
+1510
+01:02:44,583 --> 01:02:45,915
+We have no image and so,
+
+1511
+01:02:45,917 --> 01:02:49,052
+it didn't add the left call out accessory in that case.
+
+1512
+01:02:49,054 --> 01:02:51,754
+So just when the annotation's selected,
+
+1513
+01:02:51,756 --> 01:02:54,556
+we're just gonna make sure that it adds it.
+
+1514
+01:02:54,558 --> 01:02:55,190
+Okay.
+
+1515
+01:02:55,192 --> 01:03:00,061
+Back to our slides.
+
+1516
+01:03:00,063 --> 01:03:03,564
+All right.
+
+1517
+01:03:03,566 --> 01:03:05,783
+Okay.
+
+1518
+01:03:05,784 --> 01:03:08,001
+So the last thing is Embed Segue ways.
+
+1519
+01:03:08,003 --> 01:03:11,504
+So, Embed Segue ways is just taking the view,
+
+1520
+01:03:11,506 --> 01:03:14,273
+self.view, basically of an MVC and
+
+1521
+01:03:14,275 --> 01:03:16,976
+putting it in another MVC's view.
+
+1522
+01:03:16,978 --> 01:03:18,945
+Okay?
+
+1523
+01:03:18,946 --> 01:03:20,913
+So, it's basically embedding one MVC into another.
+
+1524
+01:03:20,915 --> 01:03:24,049
+It's a pretty powerful encapsulation technique.
+
+1525
+01:03:24,051 --> 01:03:25,583
+The way you do it is really easy.
+
+1526
+01:03:25,585 --> 01:03:27,519
+In the storyboard,
+
+1527
+01:03:27,520 --> 01:03:29,454
+you just drag out this thing called a container view, okay?
+
+1528
+01:03:29,456 --> 01:03:30,388
+You drag the container view out.
+
+1529
+01:03:30,390 --> 01:03:31,922
+It's gonna be a little view and
+
+1530
+01:03:31,924 --> 01:03:34,157
+it's gonna have a little MVC attached to it.
+
+1531
+01:03:34,159 --> 01:03:35,675
+All right.
+
+1532
+01:03:35,676 --> 01:03:37,192
+So, it looks like this when you drag it out.
+
+1533
+01:03:37,195 --> 01:03:39,028
+That little grey thing's the container,
+
+1534
+01:03:39,030 --> 01:03:41,330
+that's the thing I dragged out from the storyboard.
+
+1535
+01:03:41,332 --> 01:03:44,033
+And then that little arrow there moving,
+
+1536
+01:03:44,035 --> 01:03:45,701
+that's the Embed Segue.
+
+1537
+01:03:45,703 --> 01:03:48,603
+And you can see there's another MVC there and that MVC
+
+1538
+01:03:48,605 --> 01:03:51,406
+is the one who's self.view is gonna be embedded.
+
+1539
+01:03:51,408 --> 01:03:53,825
+All right?
+
+1540
+01:03:53,826 --> 01:03:56,243
+The timing of this, you've got to be a little careful on
+
+1541
+01:03:56,245 --> 01:03:59,113
+prepareForSegue, because this embed all
+
+1542
+01:03:59,115 --> 01:04:02,182
+happens before any outlets are set as usual.
+
+1543
+01:04:02,184 --> 01:04:03,850
+And so, it's happening very, very early in the game.
+
+1544
+01:04:03,852 --> 01:04:06,586
+So, usually in our Embed Segue,
+
+1545
+01:04:06,588 --> 01:04:09,422
+what we do is we grab onto that MVC.
+
+1546
+01:04:09,424 --> 01:04:12,057
+Okay, so that we have a handle to it.
+
+1547
+01:04:12,059 --> 01:04:14,426
+We can talk to it.
+
+1548
+01:04:14,427 --> 01:04:16,794
+We can prepare it, set it up, whatever want later.
+
+1549
+01:04:16,797 --> 01:04:20,198
+So this is best shown by just demonstrating it so
+
+1550
+01:04:20,200 --> 01:04:23,735
+I'm gonna demonstrate that by going to tracks.
+
+1551
+01:04:23,737 --> 01:04:29,907
+And here's our tracks UI, so tracks right here.
+
+1552
+01:04:29,909 --> 01:04:34,511
+This is our map view right here.
+
+1553
+01:04:34,513 --> 01:04:37,780
+And when we click on the left edge of a call out,
+
+1554
+01:04:37,782 --> 01:04:40,916
+it brings up this UI image view controller.
+
+1555
+01:04:40,918 --> 01:04:45,054
+Right, which is currently fully contains an image.
+
+1556
+01:04:45,056 --> 01:04:49,024
+And what I'm gonna do is I'm gonna embed in the corner,
+
+1557
+01:04:49,026 --> 01:04:53,327
+a little rectangle down here, a little square that contains
+
+1558
+01:04:53,329 --> 01:04:57,098
+a little map view, with just the pin for this image.
+
+1559
+01:04:57,100 --> 01:04:59,266
+So that when I'm look in the image,
+
+1560
+01:04:59,268 --> 01:05:02,502
+especially on the iPad where I've got a big screen,
+
+1561
+01:05:02,504 --> 01:05:05,739
+I can see some context of where this image was taken.
+
+1562
+01:05:05,741 --> 01:05:07,552
+Right?
+
+1563
+01:05:07,553 --> 01:05:09,364
+So I'll see them both on time.
+
+1564
+01:05:09,365 --> 01:05:11,176
+So I'm basically gonna embed another view controller into
+
+1565
+01:05:11,179 --> 01:05:12,545
+this guy right here.
+
+1566
+01:05:12,547 --> 01:05:14,413
+So what do we need to do that?
+
+1567
+01:05:14,415 --> 01:05:17,549
+The number one thing we need to do when we have an embedded
+
+1568
+01:05:17,551 --> 01:05:20,218
+view controller is we need to do this segue, and
+
+1569
+01:05:20,220 --> 01:05:22,820
+we need this view controller right here to have
+
+1570
+01:05:22,822 --> 01:05:24,789
+a little subclass to manage that.
+
+1571
+01:05:24,791 --> 01:05:27,491
+So right now this view controller, as you know,
+
+1572
+01:05:27,493 --> 01:05:29,126
+is an image view controller.
+
+1573
+01:05:29,128 --> 01:05:30,794
+So if we select this,
+
+1574
+01:05:30,795 --> 01:05:32,461
+you can see that its class is ImageViewController.
+
+1575
+01:05:32,464 --> 01:05:33,763
+So I need to change this.
+
+1576
+01:05:33,765 --> 01:05:37,199
+I'm gonna change this to be a waypoint image view
+
+1577
+01:05:37,201 --> 01:05:38,233
+controller.
+
+1578
+01:05:38,235 --> 01:05:39,685
+Okay?
+
+1579
+01:05:39,686 --> 01:05:41,136
+So a waypoint image view controller's gonna be
+
+1580
+01:05:41,138 --> 01:05:42,770
+a subclass of ImageViewController.
+
+1581
+01:05:42,772 --> 01:05:44,538
+So it's gonna do everything this one does.
+
+1582
+01:05:44,540 --> 01:05:48,809
+Plus it's gonna know about how to manage that embed.
+
+1583
+01:05:48,811 --> 01:05:49,509
+Okay?
+
+1584
+01:05:49,511 --> 01:05:52,111
+So let's create a new class.
+
+1585
+01:05:52,113 --> 01:05:53,746
+All right, the Cocoa Touch Class.
+
+1586
+01:05:53,748 --> 01:05:57,282
+It's gonna be a subclass of ImageViewController,
+
+1587
+01:05:57,284 --> 01:05:58,650
+one of our classes.
+
+1588
+01:05:58,652 --> 01:06:03,388
+And I'm gonna call it WaypointImageViewController.
+
+1589
+01:06:03,390 --> 01:06:04,388
+Okay.
+
+1590
+01:06:04,390 --> 01:06:06,357
+Put it in the standard place.
+
+1591
+01:06:06,359 --> 01:06:09,192
+'Kay here it is, here's our WaypointImageViewController.
+
+1592
+01:06:09,194 --> 01:06:11,861
+This WaypointImageViewController,
+
+1593
+01:06:11,863 --> 01:06:13,730
+its model is the waypoint.
+
+1594
+01:06:13,732 --> 01:06:15,215
+'Kay?
+
+1595
+01:06:15,216 --> 01:06:16,699
+This guy's model, did everyone remember what
+
+1596
+01:06:16,701 --> 01:06:18,367
+ImageViewController's model is?
+
+1597
+01:06:18,369 --> 01:06:19,968
+It's just an image URL.
+
+1598
+01:06:19,970 --> 01:06:21,853
+Right?
+
+1599
+01:06:21,854 --> 01:06:23,737
+So we need a little more powerful model here in our
+
+1600
+01:06:23,740 --> 01:06:26,107
+WaypointImageViewCcontroller, so
+
+1601
+01:06:26,109 --> 01:06:28,442
+I'm just going to have var waypoint.
+
+1602
+01:06:28,444 --> 01:06:30,310
+It's a GPX Waypoint.
+
+1603
+01:06:30,312 --> 01:06:33,046
+It'll work with the editable ones or non-editable ones.
+
+1604
+01:06:33,048 --> 01:06:35,415
+And when that waypoint is set,
+
+1605
+01:06:35,417 --> 01:06:39,418
+I want to make sure that I set my super classes model.
+
+1606
+01:06:39,420 --> 01:06:43,989
+So, I'm gonna say my imageURL equals that
+
+1607
+01:06:43,991 --> 01:06:46,691
+waypoint's imageURL.
+
+1608
+01:06:46,693 --> 01:06:47,291
+Okay?
+
+1609
+01:06:47,293 --> 01:06:50,044
+So, here,
+
+1610
+01:06:50,045 --> 01:06:52,796
+I'm basically setting my super class's URL there.
+
+1611
+01:06:52,798 --> 01:06:57,701
+And what are we getting this about here?
+
+1612
+01:06:57,703 --> 01:06:59,736
+Oh, okay, we're not there, okay.
+
+1613
+01:06:59,738 --> 01:07:03,272
+And then I'm also gonna set my title equal to the waypoint's
+
+1614
+01:07:03,274 --> 01:07:04,606
+name, might as well.
+
+1615
+01:07:04,608 --> 01:07:08,677
+And them I'm just gonna update my embedded map, okay, because
+
+1616
+01:07:08,679 --> 01:07:12,147
+the whole point of this guy is he has this embedded map.
+
+1617
+01:07:12,149 --> 01:07:16,183
+So, we'll have a function here called updateEmbeddedMap, and
+
+1618
+01:07:16,185 --> 01:07:18,185
+it's going to update that map.
+
+1619
+01:07:18,187 --> 01:07:21,088
+And we'll talk about how that's going to happen
+
+1620
+01:07:21,090 --> 01:07:22,322
+a little bit later.
+
+1621
+01:07:22,324 --> 01:07:25,792
+This isn't optional, that's why, okay.
+
+1622
+01:07:25,794 --> 01:07:27,026
+All right, so that's it.
+
+1623
+01:07:27,028 --> 01:07:29,695
+So that's our waypoint image controller,
+
+1624
+01:07:29,697 --> 01:07:31,163
+kind of its main thing.
+
+1625
+01:07:31,165 --> 01:07:33,865
+So now we need to go back to our storyboard, and
+
+1626
+01:07:33,867 --> 01:07:37,168
+I'm gonna make this image view controller right here be
+
+1627
+01:07:37,170 --> 01:07:39,270
+a waypoint image view controller.
+
+1628
+01:07:39,272 --> 01:07:41,638
+So I'm just gonna go here to its identity and
+
+1629
+01:07:41,640 --> 01:07:45,108
+go down here and say now it's a WaypointImageViewController.
+
+1630
+01:07:45,110 --> 01:07:47,444
+Also, I'm gonna fix this segue.
+
+1631
+01:07:47,446 --> 01:07:49,278
+This is a segue from our map view.
+
+1632
+01:07:49,280 --> 01:07:54,016
+I'm gonna just fix this one to prepare this guy by giving
+
+1633
+01:07:54,018 --> 01:07:55,350
+his way point.
+
+1634
+01:07:55,352 --> 01:07:59,020
+So that's over here in our GPXViewController,
+
+1635
+01:07:59,022 --> 01:08:00,721
+down here in prepare.
+
+1636
+01:08:00,723 --> 01:08:02,890
+Okay, here's where we're preparing
+
+1637
+01:08:02,892 --> 01:08:04,491
+the ImageViewController.
+
+1638
+01:08:04,493 --> 01:08:05,258
+Okay?
+
+1639
+01:08:05,260 --> 01:08:06,959
+So here I'm going to say,
+
+1640
+01:08:06,961 --> 01:08:10,363
+if I can let the waypoint image view controller equal
+
+1641
+01:08:10,365 --> 01:08:12,998
+the segue destinationVewController,
+
+1642
+01:08:13,000 --> 01:08:16,735
+contentViewController as a waypoint view controller.
+
+1643
+01:08:16,737 --> 01:08:19,771
+So in other words if it's a waypoint image controller,
+
+1644
+01:08:19,773 --> 01:08:23,107
+then I'm gonna say waypoint image view controller waypoint
+
+1645
+01:08:23,109 --> 01:08:24,275
+equals my waypoint.
+
+1646
+01:08:24,277 --> 01:08:26,010
+And actually I'll just go ahead and
+
+1647
+01:08:26,012 --> 01:08:27,978
+leave this other code in here as an else.
+
+1648
+01:08:27,980 --> 01:08:30,246
+Else if it's not a waypoint view image controller,
+
+1649
+01:08:30,248 --> 01:08:32,148
+it's just a normal image view controller,
+
+1650
+01:08:32,150 --> 01:08:33,749
+we'll still make that work as well.
+
+1651
+01:08:33,751 --> 01:08:36,552
+But we could delete this code, and it would work fine now.
+
+1652
+01:08:36,554 --> 01:08:41,489
+But I'll just leave it in there, just for reference.
+
+1653
+01:08:41,491 --> 01:08:43,791
+Okay.
+
+1654
+01:08:43,792 --> 01:08:46,092
+So now we need to go do this embedding business.
+
+1655
+01:08:46,095 --> 01:08:47,673
+Okay.
+
+1656
+01:08:47,674 --> 01:08:49,252
+We need to put this thing in here.
+
+1657
+01:08:49,253 --> 01:08:50,831
+Now one thing I'm gonna advise you to do, when you're doing
+
+1658
+01:08:50,833 --> 01:08:53,266
+embedding, and kind of be a little careful of.
+
+1659
+01:08:53,268 --> 01:08:55,802
+Is when you drag out this Container View,
+
+1660
+01:08:55,804 --> 01:08:59,472
+which is at the very bottom, by the way, it's gonna want to
+
+1661
+01:08:59,474 --> 01:09:02,508
+be a subview of the thing you're dragging it on.
+
+1662
+01:09:02,510 --> 01:09:05,444
+So it keeps trying here to be a subview of that scroll view,
+
+1663
+01:09:05,446 --> 01:09:08,046
+and I don't want it to be a subview, a scroll view,
+
+1664
+01:09:08,048 --> 01:09:09,647
+because I want it to sit on top.
+
+1665
+01:09:09,649 --> 01:09:11,049
+Okay, I want it to always be there, and
+
+1666
+01:09:11,051 --> 01:09:12,516
+the scroll view is scrolling behind it.
+
+1667
+01:09:12,518 --> 01:09:15,119
+I don't want it to be in there scrolling around.
+
+1668
+01:09:15,121 --> 01:09:17,388
+Okay?
+
+1669
+01:09:17,389 --> 01:09:19,656
+So it's really a bit of a pain to do that with this in way.
+
+1670
+01:09:19,658 --> 01:09:22,559
+So you can just take something like your scroll view, for
+
+1671
+01:09:22,561 --> 01:09:25,094
+example, and move it out of the way temporarily.
+
+1672
+01:09:25,096 --> 01:09:26,796
+So I just moved it out of the way.
+
+1673
+01:09:26,798 --> 01:09:29,298
+So now I can put my Container View in here.
+
+1674
+01:09:29,300 --> 01:09:31,833
+I can put it where I want, probably not
+
+1675
+01:09:31,835 --> 01:09:35,070
+in the very corner there, something like that.
+
+1676
+01:09:35,072 --> 01:09:41,042
+I can do all my auto layout here.
+
+1677
+01:09:41,044 --> 01:09:44,178
+Maybe we'll do this a little, do it higher, yeah,
+
+1678
+01:09:44,180 --> 01:09:46,113
+let's do that, bottom space.
+
+1679
+01:09:46,115 --> 01:09:50,983
+Probably, I want this container to be a fixed width
+
+1680
+01:09:50,985 --> 01:09:52,952
+and height, okay.
+
+1681
+01:09:52,954 --> 01:09:54,787
+I don't know what width and height I would want.
+
+1682
+01:09:54,789 --> 01:10:00,158
+Maybe like, I don't know, let's say 200
+
+1683
+01:10:00,160 --> 01:10:05,296
+by 200, sorry, double-click there.
+
+1684
+01:10:05,298 --> 01:10:06,563
+So let's make it 200 by 200.
+
+1685
+01:10:06,565 --> 01:10:10,633
+We could make it whatever size we thought was kind of most
+
+1686
+01:10:10,635 --> 01:10:12,802
+appropriate for this space.
+
+1687
+01:10:12,804 --> 01:10:15,571
+And then we could put this back, this scroll view back.
+
+1688
+01:10:15,573 --> 01:10:18,407
+By the way, if you go over here to the document outline,
+
+1689
+01:10:18,409 --> 01:10:20,676
+you can see the order in the view hierarchy.
+
+1690
+01:10:20,678 --> 01:10:23,411
+Like this would be behind, and
+
+1691
+01:10:23,413 --> 01:10:26,681
+this is in front of everything else.
+
+1692
+01:10:26,683 --> 01:10:27,548
+Okay.
+
+1693
+01:10:27,550 --> 01:10:29,516
+Scroll view the activity indicator in
+
+1694
+01:10:29,518 --> 01:10:30,717
+this Container View.
+
+1695
+01:10:30,719 --> 01:10:33,453
+Now, I dragged this in here, but if we look oh,
+
+1696
+01:10:33,455 --> 01:10:34,554
+look at down here.
+
+1697
+01:10:34,556 --> 01:10:35,621
+What's this guy?
+
+1698
+01:10:35,623 --> 01:10:36,755
+Okay.
+
+1699
+01:10:36,757 --> 01:10:41,593
+See that is the little view controller that could.
+
+1700
+01:10:41,595 --> 01:10:44,228
+This is the little view controller that is going to,
+
+1701
+01:10:44,230 --> 01:10:46,163
+whose self.view is gonna be in here.
+
+1702
+01:10:46,165 --> 01:10:48,832
+So let's do this guy right here, and we need a view
+
+1703
+01:10:48,834 --> 01:10:51,968
+controller class for this, so I'm going to create that.
+
+1704
+01:10:51,970 --> 01:10:55,171
+This is gonna be the world's simplest map view controller.
+
+1705
+01:10:55,173 --> 01:10:59,875
+I'm gonna call it, in fact, SimpleMapViewController.
+
+1706
+01:10:59,877 --> 01:11:02,111
+It's gonna be a UIViewController.
+
+1707
+01:11:02,113 --> 01:11:06,314
+And all this SimpleMapViewController is
+
+1708
+01:11:06,316 --> 01:11:11,485
+going to do is to make its map view outlet be public.
+
+1709
+01:11:11,487 --> 01:11:14,221
+So that other people can do whatever the heck they want
+
+1710
+01:11:14,223 --> 01:11:16,256
+with the map view that's inside of it.
+
+1711
+01:11:16,258 --> 01:11:18,591
+So let's put a map view inside of it.
+
+1712
+01:11:18,593 --> 01:11:19,892
+Let's go back to our storyboard.
+
+1713
+01:11:19,894 --> 01:11:22,661
+Get this little guy right here.
+
+1714
+01:11:22,663 --> 01:11:25,164
+Okay, I'm gonna, first of all I'm gonna make him be
+
+1715
+01:11:25,166 --> 01:11:27,165
+a SimpleMapViewController, like that.
+
+1716
+01:11:27,167 --> 01:11:31,069
+And then I'm going to put a map view,
+
+1717
+01:11:31,071 --> 01:11:35,005
+which is right here, inside of him.
+
+1718
+01:11:35,007 --> 01:11:36,139
+Okay?
+
+1719
+01:11:36,141 --> 01:11:37,974
+Let's go ahead and go, suggested constraints.
+
+1720
+01:11:37,976 --> 01:11:40,843
+Probably, that'll be just fine, yep,
+
+1721
+01:11:40,845 --> 01:11:42,345
+all looks good to me.
+
+1722
+01:11:42,347 --> 01:11:47,683
+And so let's just create an outlet for that.
+
+1723
+01:11:47,685 --> 01:11:51,419
+Whoops, get an outlet here,
+
+1724
+01:11:51,421 --> 01:11:55,923
+small screen, there we go, okay.
+
+1725
+01:11:55,925 --> 01:11:57,591
+Whoops, SimpleMapViewController,
+
+1726
+01:11:57,593 --> 01:11:59,760
+there it is.
+
+1727
+01:11:59,761 --> 01:12:01,928
+Let's Ctrl+drag here, mapView, 'kay?
+
+1728
+01:12:01,930 --> 01:12:03,563
+So that's it.
+
+1729
+01:12:03,564 --> 01:12:05,197
+That's the entire implementation of this class.
+
+1730
+01:12:05,200 --> 01:12:06,365
+It's just gonna do that.
+
+1731
+01:12:06,367 --> 01:12:08,133
+It does MapKit, so we have to.
+
+1732
+01:12:08,135 --> 01:12:13,304
+Import MapKit, okay, so this just is public and
+
+1733
+01:12:13,306 --> 01:12:17,575
+we can do whatever we want with this map.
+
+1734
+01:12:17,577 --> 01:12:19,610
+So, what do we want to do with this map?
+
+1735
+01:12:19,612 --> 01:12:24,214
+Well, we want this map to show our waypoint in our
+
+1736
+01:12:24,216 --> 01:12:28,151
+waypoint image view controller, okay?
+
+1737
+01:12:28,153 --> 01:12:31,787
+So, that's how we're gonna update this embedded map.
+
+1738
+01:12:31,789 --> 01:12:34,456
+We're, can access the map view directly.
+
+1739
+01:12:34,458 --> 01:12:37,626
+But, the one thing we need to do, first,
+
+1740
+01:12:37,628 --> 01:12:40,528
+is we need to do this segue right here.
+
+1741
+01:12:40,530 --> 01:12:43,031
+So, we need to give this segue an identifier.
+
+1742
+01:12:43,033 --> 01:12:47,334
+We'll call it the Embed Map segue.
+
+1743
+01:12:47,336 --> 01:12:51,237
+And we need to prepare this segue.
+
+1744
+01:12:51,239 --> 01:12:54,540
+And we prepare it here.
+
+1745
+01:12:54,542 --> 01:12:57,176
+We're going to prepare it by just by grabbing that map
+
+1746
+01:12:57,178 --> 01:12:58,210
+view, okay?
+
+1747
+01:12:58,211 --> 01:12:59,243
+Grabbing that controller, actually,
+
+1748
+01:12:59,246 --> 01:13:00,479
+than grabbing the map view out of it.
+
+1749
+01:13:00,481 --> 01:13:03,281
+So, I'm gonna prepare for segue here.
+
+1750
+01:13:03,283 --> 01:13:08,352
+I'm gonna say, if the segue's identifier equals,
+
+1751
+01:13:08,354 --> 01:13:11,889
+and we'll just, no constant here.
+
+1752
+01:13:11,891 --> 01:13:13,023
+We should do one, but we're not gonna do.
+
+1753
+01:13:13,025 --> 01:13:15,225
+So, it's the embed segue.
+
+1754
+01:13:15,227 --> 01:13:19,795
+Then, actually, I'm just gonna create a var here,
+
+1755
+01:13:19,797 --> 01:13:24,333
+which is the SMVC, the simple map view controller.
+
+1756
+01:13:24,335 --> 01:13:27,969
+Which is a SimpleMapViewController,
+
+1757
+01:13:27,971 --> 01:13:30,538
+optional.
+
+1758
+01:13:30,539 --> 01:13:33,106
+And, I'm just gonna actually set it inside this prepare for
+
+1759
+01:13:33,109 --> 01:13:35,609
+segue, so, smvc equals the segue's
+
+1760
+01:13:35,611 --> 01:13:39,779
+destinationViewController as a SimpleMapViewController.
+
+1761
+01:13:39,781 --> 01:13:41,747
+So, in the set prepare for segue,
+
+1762
+01:13:41,749 --> 01:13:45,117
+I've just grabbed onto this SimpleMapViewController.
+
+1763
+01:13:45,119 --> 01:13:48,420
+So, now that I have it, okay, let's go ahead and
+
+1764
+01:13:48,422 --> 01:13:52,090
+update our embedded map here, and let's do the code for
+
+1765
+01:13:52,092 --> 01:13:53,758
+doing the embedded map.
+
+1766
+01:13:53,760 --> 01:13:54,825
+Very simple.
+
+1767
+01:13:54,827 --> 01:13:57,094
+I'm just gonna say,
+
+1768
+01:13:57,096 --> 01:14:01,497
+if I can get that map view out of that smvc.
+
+1769
+01:14:01,499 --> 01:14:09,371
+Okay, then let's set the map view to be mapType Hybrid.
+
+1770
+01:14:09,373 --> 01:14:12,941
+And, then we want to set the map view's annotations.
+
+1771
+01:14:12,943 --> 01:14:18,479
+So, let's remove the existing annotations from the map view.
+
+1772
+01:14:18,481 --> 01:14:25,019
+And then, let's MapView.add an annotation for our way point.
+
+1773
+01:14:25,021 --> 01:14:27,688
+Okay, which remember, is an MK annotation, so we can do that.
+
+1774
+01:14:27,690 --> 01:14:29,589
+And then, let's also zoom in on those.
+
+1775
+01:14:29,591 --> 01:14:34,460
+So, showAnnotations, the map view's annotations and yes,
+
+1776
+01:14:34,462 --> 01:14:36,495
+we want it to be animated.
+
+1777
+01:14:36,497 --> 01:14:38,981
+Okay?
+
+1778
+01:14:38,982 --> 01:14:41,466
+So, that's gonna update our embedded map.
+
+1779
+01:14:41,468 --> 01:14:44,469
+Yes, Embed Map.
+
+1780
+01:14:44,471 --> 01:14:47,038
+Okay.
+
+1781
+01:14:47,039 --> 01:14:49,606
+All right, so, now that we're actually embedding the map and
+
+1782
+01:14:49,609 --> 01:14:52,142
+doing that actual prepare for segue,
+
+1783
+01:14:52,144 --> 01:14:53,977
+we should get this to work.
+
+1784
+01:14:53,979 --> 01:14:55,912
+Here we go, and sure enough, there it is.
+
+1785
+01:14:55,914 --> 01:14:58,214
+And, it's kind of hard to zoom out.
+
+1786
+01:14:58,216 --> 01:15:02,918
+Actually, I'm gonna do this on the actual device
+
+1787
+01:15:02,920 --> 01:15:06,321
+cuz it's a little easier to pinch.
+
+1788
+01:15:06,323 --> 01:15:16,397
+>> [INAUDIBLE].
+
+1789
+01:15:18,434 --> 01:15:20,701
+>> Oh, I didn't hit Play.
+
+1790
+01:15:20,703 --> 01:15:29,676
+There we
+
+1791
+01:15:29,678 --> 01:15:34,814
+go.
+
+1792
+01:15:34,816 --> 01:15:35,781
+All right.
+
+1793
+01:15:35,783 --> 01:15:38,083
+There we go.
+
+1794
+01:15:38,085 --> 01:15:40,285
+Here or there.
+
+1795
+01:15:40,287 --> 01:15:42,186
+We should have our nice image here.
+
+1796
+01:15:42,188 --> 01:15:46,623
+And inside here, this MVC is a fully operational MVC.
+
+1797
+01:15:46,625 --> 01:15:47,257
+It can be pinched.
+
+1798
+01:15:47,259 --> 01:15:48,425
+It can scroll around.
+
+1799
+01:15:48,427 --> 01:15:51,594
+It does all the things that it would normally do.
+
+1800
+01:15:51,596 --> 01:15:55,264
+So, we can actually see that we're in
+
+1801
+01:15:55,266 --> 01:16:00,168
+the Greenbush area of Greenbush Lake, all right?
+
+1802
+01:16:00,170 --> 01:16:03,038
+Okay, and if we rotate or whatever,
+
+1803
+01:16:03,040 --> 01:16:06,107
+a lot of layout works on it, et cetera.
+
+1804
+01:16:06,109 --> 01:16:07,608
+Okay?
+
+1805
+01:16:07,610 --> 01:16:08,709
+So, that's embedded segue.
+
+1806
+01:16:08,711 --> 01:16:10,177
+Sorry to run a little bit long.
+
+1807
+01:16:10,179 --> 01:16:12,278
+If you have any questions, I'll be here as usual.
+

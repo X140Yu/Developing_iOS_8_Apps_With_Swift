@@ -1511,1190 +1511,1487 @@ animations you want to animate alongside the rotation.
 304
 00:13:46,454 --> 00:13:48,253
 So I'm just telling you this now because it's part of
+所以，我现在只是在告诉你这个因为它是
 
 305
 00:13:48,255 --> 00:13:50,422
 the view controller life cycle and
+视频控制器生活循环系统的一部分
 
 306
 00:13:50,424 --> 00:13:53,291
 you should just know in your head that it exists.
+你应该在脑海中意识到它的存在
 
 307
 00:13:53,293 --> 00:13:55,460
 Okay, it's a little bit of a complicated thing to use,
+好吧，它应用起来是有点复杂的东西，
 
 308
 00:13:55,462 --> 00:13:59,563
 because when you rotate and you change bounds, really it's
+因为当你循环并且改变限度的时候，的确是
 
 309
 00:13:59,565 --> 00:14:02,433
 container views that are most concerned with that, like
+视图容器是与他联系最紧密的
 
 310
 00:14:02,435 --> 00:14:05,502
 a split view, it needs to now put both things on screen and
+就像是split view，目前它需要将两个东西一起放在屏幕上并且
 
 311
 00:14:05,504 --> 00:14:08,838
 put a line and when you switch the other way.
+在你以另一种方式打开的时候放入一行
 
 312
 00:14:08,840 --> 00:14:12,175
 It's really about container views, a little less than
+它是真正关于container view，很少一部分是关于leaf view，
 
 313
 00:14:12,177 --> 00:14:15,277
 about leaf view controllers, but leaf view controller might
+但是 leaf view controller 也许需要了解正在发生什么，好了，
 
 314
 00:14:15,279 --> 00:14:18,180
 wanna know what's going on, all right, and
+然后
 
 315
 00:14:18,182 --> 00:14:21,049
 then low memory, you get this didReceiveMemoryWarning.
+低内存，你可以用receivememorywarning
 
 316
 00:14:21,051 --> 00:14:22,684
 Here you wanna throw away anything in
+这里，你想要将任何东西扔进
 
 317
 00:14:22,686 --> 00:14:25,186
 the heap that's easy to reconstitute.
+控制堆中，那很容易重建
 
 318
 00:14:26,322 --> 00:14:28,689
 The way you throw things out of the heap, by the way,
+你将东西扔进控制堆的方式，顺便讲一句
 
 319
 00:14:28,691 --> 00:14:34,094
 is you just set all pointers that you have to them to nil,
+你刚刚设定的所有的指示器，你都不得不将它们归零
 
 320
 00:14:34,096 --> 00:14:36,329
 okay, if you're not pointing to something,
+好了，如果你没有特指某些事，
 
 321
 00:14:36,331 --> 00:14:38,664
 then it won't stay in the heap, it gets thrown out.
+它们将不用存放在控制堆中，它们会被扔掉
 
 322
 00:14:38,666 --> 00:14:40,299
 That does not include weak pointers.
+那些不包括低水平的指示器
 
 323
 00:14:40,301 --> 00:14:41,667
 If you have a weak pointer to something,
+如果你有一个低水平的指示器，
 
 324
 00:14:41,669 --> 00:14:43,435
 it still gets thrown out, 'kay?
+它们还是要被扔掉，明白吗
 
 325
 00:14:43,437 --> 00:14:46,337
 If the only pointer in the world to an image in the heap
+如果世界上只存在一个图像控制器，
 
 326
 00:14:46,339 --> 00:14:48,205
 is a weak pointer, it's gonna get pitched, and
+这个控制器又是低水平的，他将会被调试
 
 327
 00:14:48,207 --> 00:14:50,040
 that weak pointer's gonna get set to nil,
+然后那个低水平的指示器将会被设定归零
 
 328
 00:14:50,042 --> 00:14:52,976
 'kay, as we talked about when we talked about delegation,
+就像我们讨论过的代理模型
 
 329
 00:14:52,978 --> 00:14:57,580
 'kay, that's the definition of a weak pointer, okay?
+那是低水平指示器的定义
 
 330
 00:14:57,582 --> 00:15:00,449
 So, in low memory situations, you know, try to clean up.
+所以，在低内存的情形下，你知道的，试着去清理掉它
 
 331
 00:15:00,451 --> 00:15:01,550
 You'll all most never get this,
+你将几乎永远不可能明白这个，
 
 332
 00:15:01,552 --> 00:15:02,617
 you may never, ever get this.
+你可能永远不会明白
 
 333
 00:15:02,619 --> 00:15:05,153
 If your app is very highly image intensive,
+如果你的app是高清晰度的视频加强器
 
 334
 00:15:05,155 --> 00:15:06,621
 maybe it's an image processing app and
+可能它是个视频加工app并且
 
 335
 00:15:06,623 --> 00:15:09,757
 you've got a lot of images in there, then it's possible,
+你已经得到好多设想在里面，然后它是可能的
 
 336
 00:15:09,759 --> 00:15:12,192
 I suppose, but it's extremely unlikely,
+我推想，但是它是极度没有可能的，
 
 337
 00:15:12,194 --> 00:15:14,361
 'kay, there's a lot of memory in these devices.
+好的，这里有很大的内存在这些装置里
 
 338
 00:15:15,964 --> 00:15:19,032
 Okay, now I'm gonna go back to awakeFromNib, which is not
+好的，现在我将要回到awakefromnib,
 
 339
 00:15:19,034 --> 00:15:21,133
 really part of the view controller life cycle,
+他不是真正属于view controller life cycle,
 
 340
 00:15:21,135 --> 00:15:23,018
 but a view controller,
+但是属于view controller
 
 341
 00:15:23,019 --> 00:15:24,902
 just like any other NS object subclass that comes out of
+就像是来自storyboard的其他那些NS object 子集
 
 342
 00:15:24,905 --> 00:15:27,873
 a storyboard, will get awakeFromNib.
+将会得到awkeFromNib
 
 343
 00:15:27,875 --> 00:15:30,775
 And there are some students, as a class in the past,
+并且在那里有一些学生，就像过去的班级一样
 
 344
 00:15:30,777 --> 00:15:32,877
 that have kind of abused awakeFromNib and they just
+有一种 awakeFromNib的滥用并且他们
 
 345
 00:15:32,879 --> 00:15:35,579
 start trying to put everything in their initialization into
+开始尝试把所用的东西放进 awakeFromNib的初始化中
 
 346
 00:15:35,581 --> 00:15:38,215
 awakeFromNib instead of putting it into viewDidLoad or
+来取代把他们放入 viewDidLoad或者
 
 347
 00:15:38,217 --> 00:15:41,585
 viewWillAppear, or viewWillLayoutSubviews,
+viewWillAppear中，或者viewWillLayoutSubviews
 
 348
 00:15:41,587 --> 00:15:44,421
 depending on what kind of thing it is.
+取决于事情的是什么样的类型
 
 349
 00:15:44,423 --> 00:15:47,423
 And I'm just warning you here, don't abuse awakeFromNib, but
+我在这里想要警告你们，不要滥用 awakeFromNib方法
 
 350
 00:15:47,425 --> 00:15:50,026
 there are some cases where awakeFromNib is necessary.
+但是哪有一些方法是 awakeFromNib需要的
 
 351
 00:15:50,028 --> 00:15:52,561
 For example, if you want to set yourself as the delegate
+比如说，如果你想把总计设置为 delegate
 
 352
 00:15:52,563 --> 00:15:55,163
 of the split view controller you're in, awayFromNib is
+关于你所在的 split view controller中，awakeFromNib是
 
 353
 00:15:55,165 --> 00:15:57,632
 a good place to do that, because then it happens really
+一个很好地方去设置它，因为它发生的的确很早
 
 354
 00:15:57,634 --> 00:16:00,401
 early and you'll start getting those delegate methods from
+并且你可以开始得到这些 delegate 方法从
 
 355
 00:16:00,403 --> 00:16:02,937
 split view as you go through the rest of your life cycle.
+split view当你经过剩下的生命周期的时候
 
 356
 00:16:02,939 --> 00:16:05,139
 Okay?
+明白？
 
 357
 00:16:05,140 --> 00:16:07,340
 So there are some times when awakeFromNib is good.
+所以 awakeFromNib有时候还是很好用的
 
 358
 00:16:07,343 --> 00:16:10,010
 All right, so here's the summary of the life cycle.
+好的，在这里做一下关于生命周期的总结
 
 359
 00:16:10,012 --> 00:16:11,911
 You get instantiated, usually from the storyboard.
+你通常从 storyboard中得到实例化
 
 360
 00:16:11,913 --> 00:16:14,180
 You're gonna get awakeFromNib.
+你将会得到 awakeFromNib
 
 361
 00:16:14,182 --> 00:16:16,015
 Segue prep is gonna happen.
+Segue 准备发生
 
 362
 00:16:16,017 --> 00:16:18,317
 Your outlets are gonna get set by the system.
+你的 outlets将会被系统设置
 
 363
 00:16:18,319 --> 00:16:20,252
 ViewDidLoad is gonna get called.
+viewDidLoad方法将会被调用
 
 364
 00:16:20,254 --> 00:16:21,720
 View will appear and disappear.
+View将会出现并且消失
 
 365
 00:16:21,722 --> 00:16:24,589
 It's gonna happen as your controller goes on and
+这会随着你的 controller发生
 
 366
 00:16:24,591 --> 00:16:26,708
 off screen.
+和关闭屏幕
 
 367
 00:16:26,709 --> 00:16:28,826
 And as your view controller's geometry changes or
+并且随着你的视图控制器的几何变化
 
 368
 00:16:28,828 --> 00:16:31,462
 the subviews change in a way that needs to be re-laid out,
+或者 subviews的需要重新加载的方式
 
 369
 00:16:31,464 --> 00:16:33,063
 you're gonna get WillLayoutSubviews,
+你将会得到 WillLayoutSubviews
 
 370
 00:16:33,065 --> 00:16:34,931
 then autolayout, then DidLayoutSubviews.
+接下来是 autolayout，然后是 DidLayoutSubviews
 
 371
 00:16:34,933 --> 00:16:37,233
 So that could happen many times.
+所以这些可以发生很多次
 
 372
 00:16:37,235 --> 00:16:38,401
 And if you get low on memory,
+并且如果你的可用内存很小的话
 
 373
 00:16:38,403 --> 00:16:40,302
 you could have this memory warning, okay?
+你可能会得到内存警报，明白？
 
 374
 00:16:40,304 --> 00:16:42,537
 So that's the View Controller Lifecycle.
+所以这就是 视图控制器的生命周期
 
 375
 00:16:42,539 --> 00:16:44,906
 There is actually one other one in here.
+这里的确是还有另外的一个
 
 376
 00:16:44,908 --> 00:16:48,810
 It'll tell you when your size class changes.
+它将会告诉你什么时候你的 size class 发生变化
 
 377
 00:16:48,812 --> 00:16:50,845
 But I haven't talked about size class yet, so
+但是我目前为止从未探讨过 size  
 
 378
 00:16:50,847 --> 00:16:52,112
 I didn't put that in this list.
+所以我没有把它放到这个单子里
 
 379
 00:16:52,114 --> 00:16:53,413
 But there's one more, and
+但是那里还有一个或者更多
 
 380
 00:16:53,415 --> 00:16:57,017
 there will transition to traits or something like that.
+那里将会以类似的方式进行转变
 
 381
 00:16:57,019 --> 00:17:01,153
 All right, so I'm gonna do a quick demo here, super fast.
+好的，所以我准备在这里完成一个快速的demo，非常快速
 
 382
 00:17:02,957 --> 00:17:06,991
 Let me get something to drink here, okay?
+让我先喝点东西
 
 383
 00:17:06,993 --> 00:17:08,826
 So I'm gonna do a quick demo.
+所以我准备开始一个快速的 
 
 384
 00:17:08,828 --> 00:17:11,595
 And all I did is I took Psychologist from last time,
+并且所有我做的是从我上次的心理学家那里
 
 385
 00:17:11,597 --> 00:17:13,497
 and I just put a bunch of printlns in all
+并且我只是把一串 printlns在所有的
 
 386
 00:17:13,499 --> 00:17:15,832
 these View Controler Lifecycle methods, okay?
+这些 视图控制器生命周期方法中，明白？
 
 387
 00:17:15,834 --> 00:17:19,069
 So that it would just print out where it is in
+所以它将会打印出来在
 
 388
 00:17:19,071 --> 00:17:20,937
 Lifecycle all the time.
+整个生命周期的过程中
 
 389
 00:17:20,939 --> 00:17:22,204
 So, let's go do that.
+好的，让我们开始吧
 
 390
 00:17:22,206 --> 00:17:22,971
 Let's go run that.
+让我们来运行它
 
 391
 00:17:24,575 --> 00:17:28,976
 It is here in Developer, Psychologist Lecture 8.
+在开发者的这里，Psychologist Lecture 8
 
 392
 00:17:28,978 --> 00:17:30,378
 Here we go.
+开始吧
 
 393
 00:17:30,380 --> 00:17:32,713
 So you can see that in viewWillAppear() I
+所以你可以看到噪 viewWillAppear() 方法中
 
 394
 00:17:32,715 --> 00:17:35,749
 put a little log for that, disappear, all these.
+我为他放置了一些log，disappear，所有的这些
 
 395
 00:17:35,751 --> 00:17:38,185
 So I'm just making it basically
+所以我只是使他基本的
 
 396
 00:17:38,186 --> 00:17:40,620
 logging all the things that are happening, okay.
+打印出所有发生的事情，明白？
 
 397
 00:17:40,622 --> 00:17:42,689
 So lets go, I'm gonna run this on iPad.
+让我们继续，我准备在iPad上运行它
 
 398
 00:17:44,058 --> 00:17:46,158
 It's a little easier to make things happen here.
+在这里做的事是比较容易做到的
 
 399
 00:17:48,695 --> 00:17:50,561
 All right, so here's our Psychologist.
+好的，这里就是我们的 Psychologist
 
 400
 00:17:50,563 --> 00:17:52,096
 I haven't changed anything about the app.
+我没改变app中的任何东西
 
 401
 00:17:52,098 --> 00:17:55,232
 I'm gonna make the console really big so
+我准备把 console窗口调大
 
 402
 00:17:55,234 --> 00:17:58,135
 that we can see what's going on here.
+这样的话我们就可以看到在这里将会发生的事情了
 
 403
 00:17:58,137 --> 00:17:59,969
 All right, so notice we came up.
+好的，清注意我们来了
 
 404
 00:17:59,971 --> 00:18:01,337
 The detail is the only thing,
+细节是唯一的东西
 
 405
 00:18:01,339 --> 00:18:03,105
 the detail is Happiness View Controller.
+细节是 Happiness View Controller.
 
 406
 00:18:03,107 --> 00:18:04,606
 It's the only thing visible.
+这是唯一可见的东西
 
 407
 00:18:04,608 --> 00:18:06,341
 So what happened here?
+所以这里发生了什么？
 
 408
 00:18:06,342 --> 00:18:08,075
 The Psychologist got pulled out of the storyboard.
+Psychologist 被从 storyboard中拉出来了
 
 409
 00:18:08,078 --> 00:18:10,311
 The Happiness got pulled out of the storyboard.
+Happiness 被从storyboard中拉出来了
 
 410
 00:18:10,313 --> 00:18:12,380
 This zero is which instance of it.
+这个实例的值为0
 
 411
 00:18:12,382 --> 00:18:15,116
 Cuz we're gonna have multiple instances, eventually.
+所以我们准备拥有多个实例
 
 412
 00:18:15,118 --> 00:18:16,517
 Then Happiness got awakeFromNib.
+这样 Happiness 得到 awakeFromNib
 
 413
 00:18:16,519 --> 00:18:18,085
 Then Psychologist got awakeFromNib.
+Psychologist 也得到 awakeFromNib
 
 414
 00:18:18,087 --> 00:18:21,154
 The order of awakeFromNib is completely not determinable,
+awakeFromNib中的顺序是完全无法确定的
 
 415
 00:18:21,156 --> 00:18:22,321
 so you should not depend on it.
+所以你不应该依赖于它
 
 416
 00:18:23,324 --> 00:18:25,524
 Then the master got viewDidLoad.
+记下来 master得到了 viewDidLoad
 
 417
 00:18:25,526 --> 00:18:27,459
 Even though the master never appears on screen,
+即使 master从来没在屏幕上出现过
 
 418
 00:18:27,461 --> 00:18:29,461
 it still had its outlet set, and
+它仍然有它的 outlet设置
 
 419
 00:18:29,463 --> 00:18:31,362
 got viewDidLoad sent to it.
+由 viewDidLoad发送给它
 
 420
 00:18:31,364 --> 00:18:35,499
 Then interestingly, the master was asked to lay itself out,
+接下来很有趣的，master被要求把它自己撤下
 
 421
 00:18:35,501 --> 00:18:37,167
 to lay its Subviews out.
+把它的 Subviews 撤下
 
 422
 00:18:37,169 --> 00:18:38,601
 Okay again, it hasn't appeared.
+再试一次，它没有出现
 
 423
 00:18:38,603 --> 00:18:40,203
 It hasn't even gotten viewWillAppear,
+它甚至都没有得到  
 
 424
 00:18:40,205 --> 00:18:41,537
 because it's not gonna appear.
+因为它没准备出现
 
 425
 00:18:43,674 --> 00:18:46,942
 But its Subviews wanna get laid out.
+但是它的子视图想要展现出来
 
 426
 00:18:46,944 --> 00:18:47,942
 And why is this happen?
+为什么会这样呢？
 
 427
 00:18:47,944 --> 00:18:49,377
 Well, you know, the system might be
+好的，你知道的，系统也许
 
 428
 00:18:49,379 --> 00:18:52,513
 preparing to animate it onscreen or something.
+准备把它绘制在屏幕或者一些东西上
 
 429
 00:18:52,515 --> 00:18:53,313
 You just want to make sure.
+你只需要确保
 
 430
 00:18:53,315 --> 00:18:54,815
 This is not doing any drawing.
+这个没有做任何的绘制
 
 431
 00:18:54,817 --> 00:18:56,400
 This is just making sure
+这个只是确保
 
 432
 00:18:56,401 --> 00:18:57,984
 the Subviews are properly laid out.
+子视图是被合理的布局出来
 
 433
 00:18:57,986 --> 00:19:02,321
 It happens twice here, maybe a before and after animation.
+它在这里发生了两次，也许是一个之前和之后的动画
 
 434
 00:19:02,323 --> 00:19:03,489
 Who knows what's going on here,
+谁知道这里到底发生了什么？
 
 435
 00:19:03,491 --> 00:19:05,023
 it doesn't really matter.
+它根本没有起作用
 
 436
 00:19:05,025 --> 00:19:07,859
 The size didn't actually change.
+实际上尺寸并没有改变
 
 437
 00:19:07,861 --> 00:19:09,260
 Okay, the bound size didn't actually change, so
+好的，边界尺寸实际上没有发生变化
 
 438
 00:19:09,262 --> 00:19:11,595
 this second one probably did almost nothing here.
+所以这两个在这里也许什么都没有做
 
 439
 00:19:12,898 --> 00:19:15,832
 Then the detail, Happiness, it gets a videwDidLoad and then
+然后 detail，Happiness，它得到了 viewDidLoad并且
 
 440
 00:19:15,834 --> 00:19:18,501
 it gets a viewWillAppear, cuz it's gonna appear onscreen.
+它也得到了一个 viewWillAppear，所以它将要在屏幕上出现
 
 441
 00:19:18,503 --> 00:19:21,204
 The animated is false because it doesn't animate on screen.
+动画是关的因为它根本没有以动画的方式展现在屏幕上
 
 442
 00:19:21,206 --> 00:19:23,172
 It was the initial thing that shows up in screen, so
+它是最初显示在屏幕上的东西
 
 443
 00:19:23,174 --> 00:19:24,473
 boom, it just pops up there.
+所以从底部，它从这里 pop up出来
 
 444
 00:19:25,442 --> 00:19:28,343
 It gets laid out and then it gets viewDidAppear.
+它被展示出来并且得到 viewDidAppear方法
 
 445
 00:19:28,345 --> 00:19:30,445
 And here it is, okay?
+他就在这里，看到了？
 
 446
 00:19:30,447 --> 00:19:31,779
 Everyone understand that?
+每个人都理解了么？
 
 447
 00:19:31,781 --> 00:19:34,381
 Now I'm going to rotate to landscape, and
+现在我准备把屏幕旋转为横向
 
 448
 00:19:34,383 --> 00:19:36,049
 that's gonna cause the master to appear.
+这将会导致master展示出来
 
 449
 00:19:36,051 --> 00:19:37,450
 So watch this.
+所以看这里
 
 450
 00:19:37,452 --> 00:19:39,803
 So we do rotate,
+我们将它转了过来
 
 451
 00:19:39,804 --> 00:19:42,155
 all these dash, that's what happened since I rotated here.
+所有的这些，发生在我将它旋转的时候
 
 452
 00:19:42,157 --> 00:19:45,224
 And you can see Psychologist and Happiness both got
+并且你可以看到  Psychologist 和Happiness都得到了
 
 453
 00:19:45,226 --> 00:19:48,460
 informed that this transition to size is going to happen.
+即将发生旋转尺寸的告知
 
 454
 00:19:48,462 --> 00:19:50,045
 So they could have
+所以他们可以
 
 455
 00:19:50,046 --> 00:19:51,629
 participated in the animation if they want, and you're gonna
+以动画的方式进行参与，并且你将会
 
 456
 00:19:51,632 --> 00:19:54,199
 see the animation happen in a little bit down the road here.
+看到动画发生在路的这里
 
 457
 00:19:55,201 --> 00:19:58,069
 The master got another chance to lay its Subviews out in
+master得到了另外一次机会去将子视图展示出来
 
 458
 00:19:58,071 --> 00:19:59,269
 a little different size.
+以一些不同的尺寸
 
 459
 00:19:59,271 --> 00:20:02,706
 Because this size, it's only 768 high instead of
+因为这个尺寸，它的高度仅仅是768 代替了
 
 460
 00:20:02,708 --> 00:20:06,242
 the full 1024, and it's a little wider too.
+整个的1024，并且它有一点宽
 
 461
 00:20:06,244 --> 00:20:09,078
 So it got laid out, then it got viewWillAppear.
+所以它被展示出来，并且得到了 viewWillAppear
 
 462
 00:20:09,080 --> 00:20:12,715
 So this guy was told it would appear, okay?
+所以它被告知可以显示出来了，明白？
 
 463
 00:20:12,717 --> 00:20:15,517
 And this guy didn't get any viewWillAppear because it's
+同时它没有得到任何的 viewWillAppear因为它
 
 464
 00:20:15,519 --> 00:20:17,369
 already there.
+已经在这里了
 
 465
 00:20:17,370 --> 00:20:19,220
 So it's not appearing, it was already there before.
+所以它没有显示的过程，因为它在这之前已经在这里了
 
 466
 00:20:19,223 --> 00:20:22,291
 So it gets viewWillAppear.
+所以它调用了 viewWillAppear
 
 467
 00:20:22,292 --> 00:20:25,360
 Now the detail gets chance to lay its Subviews out here at
+现在 details 得到了机会将它的子视图在这里展示出来
 
 468
 00:20:25,362 --> 00:20:27,262
 a new size.
+以一个新的尺寸
 
 469
 00:20:27,263 --> 00:20:29,163
 Because it used to be the whole screen,
+因为它曾经铺满了整个屏幕
 
 470
 00:20:29,164 --> 00:20:31,064
 now it's just this part right here, so it got a new layout.
+现在它在这里仅仅是一个部分，所以它调用了一个新的 
 
 471
 00:20:31,067 --> 00:20:33,567
 And then the master was asked to layout its Subviews again.
+同时 master被再次请求展示它的 子视图
 
 472
 00:20:33,569 --> 00:20:35,635
 So you see how I'm saying this gets called a lot.
+所以你可以看到我说的它被调用了很多次
 
 473
 00:20:35,637 --> 00:20:37,504
 So you just need to
+所以你只需要
 
 474
 00:20:37,505 --> 00:20:39,372
 make sure that if you're doing anything in these two methods,
+确保你想在这两个方法中想做的事
 
 475
 00:20:39,374 --> 00:20:41,674
 that it's okay to be doing it over and over.
+它可以被被一遍一遍的做
 
 476
 00:20:41,676 --> 00:20:44,343
 Here's where the actually animation happens.
+这里是实际动画发生的地方
 
 477
 00:20:44,345 --> 00:20:46,945
 And you can see that both the Psychologist and the Happiness
+并且你可以看到 Psychologist 和 Happiness
 
 478
 00:20:46,947 --> 00:20:49,548
 have been invited to animate alongside if they wanted to.
+都被要求去展示它们的动画
 
 479
 00:20:50,484 --> 00:20:53,718
 Then the master is asked to layout one more time,
+然后 master再次被要求展示出来它的布局
 
 480
 00:20:53,720 --> 00:20:55,653
 same size.
+相同的尺寸
 
 481
 00:20:55,654 --> 00:20:57,587
 That's the third time its been asked to do that.
+这是它第三次被要求那样做
 
 482
 00:20:57,590 --> 00:21:02,092
 And then the master gets viewDataAppear, okay?
+然后 master调用了 viewDataAppear，明白？
 
 483
 00:21:02,094 --> 00:21:04,728
 Now the last thing I'm gonna do is click one of these,
+现在我准备做的最后一件事是点击其中的一个
 
 484
 00:21:04,730 --> 00:21:07,330
 which is gonna cause a segue which is gonna cause this to
+点击的那个将会引发一个 segue并且导致这个
 
 485
 00:21:07,332 --> 00:21:08,564
 be replaced.
+被替换
 
 486
 00:21:08,566 --> 00:21:10,232
 So let's do that.
+让我们开始吧
 
 487
 00:21:10,233 --> 00:21:11,899
 So we'll try the dancing tree here.
+所以我准备把 dancing tree放到这里
 
 488
 00:21:11,902 --> 00:21:12,601
 Okay?
+明白？
 
 489
 00:21:12,603 --> 00:21:13,802
 So what happened here?
+所以这里发生了什么？
 
 490
 00:21:13,804 --> 00:21:14,802
 A new Happiness.
+一个新的 H 
 
 491
 00:21:14,804 --> 00:21:18,839
 Happiness 1 got instantiated here, okay?
+Happiness 1 在这里被实例化了，明白？
 
 492
 00:21:18,841 --> 00:21:21,508
 We have Happiness 0 up here and Happiness 1.
+我们在这里有了 Happiness 0 并且 Happiness 1
 
 493
 00:21:21,510 --> 00:21:25,645
 It got prepared with Happiness of a hundred.
+它已经被 Happiness准备好了
 
 494
 00:21:25,647 --> 00:21:27,180
 Okay?
+明白？
 
 495
 00:21:27,181 --> 00:21:28,714
 Then layout Subviews of the master again.
+接下来 master又重新布局了它的子视图
 
 496
 00:21:28,716 --> 00:21:33,952
 Then the Happiness 0 got viewWillDisappear.
+然后 Happiness 0 调用了viewWillDisappear
 
 497
 00:21:33,954 --> 00:21:35,387
 Happiness 0, that old Happiness of
+Happiness 0，那个原先的 H 
 
 498
 00:21:35,389 --> 00:21:37,105
 course getting pulled out and
+课程中的被拽出来了并且
 
 499
 00:21:37,106 --> 00:21:38,822
 replaced by the new one, so it got viewWillDisappear.
+被一个新的替换掉了，所以它调用了 viewWillDisappear
 
 500
 00:21:38,825 --> 00:21:41,525
 Then the master got laid out again, and
+随后 master再一次展示出
 
 501
 00:21:41,527 --> 00:21:44,395
 then viewDidLoad happened on Happiness 1,
+然后 Happiness 1调用了 ViewDidLoad方法
 
 502
 00:21:44,397 --> 00:21:46,596
 the new happiness that's appearing.
+新的 happiness 出现了
 
 503
 00:21:46,598 --> 00:21:49,799
 Then it got viewWillAppear cuz it's going to appear.
+然后它调用了 viewWillAppear方法所以它出现了
 
 504
 00:21:49,801 --> 00:21:51,768
 Then it got a chance to be laid out.
+随后它得到了机会被展示出来
 
 505
 00:21:51,770 --> 00:21:54,236
 The old Happiness disappeared.
+原先的 Happiness 消失了
 
 506
 00:21:54,238 --> 00:21:56,972
 The new Happiness appeared and then the old
+新的 Happiness出现了并且原先的
 
 507
 00:21:56,974 --> 00:21:59,274
 Happiness got deinitialized, thrown out of the heap.
+Happiness  被销毁了并且从内存堆中扔掉
 
 508
 00:21:59,276 --> 00:22:01,476
 Because like I said, once you segue away from it,
+因为就像我说的一样，一旦你从它 segue来开
 
 509
 00:22:03,580 --> 00:22:04,312
 boom, it's gone.
+boom，它消失了
 
 510
 00:22:04,313 --> 00:22:05,045
 Okay? So that's all I
+明白？所以那是所有我
 
 511
 00:22:05,048 --> 00:22:06,413
 wanted to cover there.
+想要掩盖这里
 
 512
 00:22:06,415 --> 00:22:08,348
 Everybody cool with that?
+大家是不是觉得它相当酷？
 
 513
 00:22:08,349 --> 00:22:10,282
 Any questions about that View Controller Lifecycle?
+有任何关于视图控制器生命周期的问题么？
 
 514
 00:22:12,387 --> 00:22:14,086
 It's pretty straightforward, but you can already probably
+它是非常明确的，但是你也许已经可以
 
 515
 00:22:14,088 --> 00:22:15,821
 imagine in your head some things that you were
+在你的头脑里想象那些
 
 516
 00:22:15,823 --> 00:22:18,790
 doing in your code that's like oh, I wish I had viewDidLoad.
+你在你的代码里那么做的样子，哦，我希望我做了 viewDidLoad
 
 517
 00:22:18,792 --> 00:22:20,158
 That really could have
+那真的可以
 
 518
 00:22:20,160 --> 00:22:21,893
 initialized some stuff there a little simpler.
+使这里的一些学生变得简单
 
 519
 00:22:21,895 --> 00:22:24,562
 All right, so let's go back to our slides.
+好的，让我们回到我们的  
 
 520
 00:22:25,865 --> 00:22:29,232
 All right, so you've seen a lot of Autolayout already in
+好的，现在你可以看到很多 AutoLayout已经在
 
 521
 00:22:29,234 --> 00:22:31,017
 this class, so
+这个类中，所以
 
 522
 00:22:31,018 --> 00:22:32,801
 I'm gonna review briefly the things you should know.
+我准备短暂的去复习一下你应该知道的知识
 
 523
 00:22:32,804 --> 00:22:35,204
 One is you know about using the dashed lines.
+你知道的一个是关于使用虚线
 
 524
 00:22:36,374 --> 00:22:40,175
 Using the blue dashed lines is helping the interface builder.
+使用蓝色的虚线用来帮助 interface  
 
 525
 00:22:40,177 --> 00:22:41,810
 By the way, when I refer to interface builder,
+顺便说一下，当我涉及到 interface builder的时候
 
 526
 00:22:41,812 --> 00:22:44,579
 that means Xcode, the storyboard part of Xcode.
+那是指 Xcode，storyboard是Xcode 的一部分
 
 527
 00:22:44,581 --> 00:22:46,781
 We call that interface builder for historical reasons.
+我们叫它 interface builder是由于一些历史原因
 
 528
 00:22:48,184 --> 00:22:50,984
 So, when you're in the storyboard of Xcode,
+所以，当你在Xcode的Storyboard中的时候
 
 529
 00:22:50,986 --> 00:22:54,388
 the dashed lines are kind of telling Xcode what you want,
+虚线是Xcode想要告诉你它要做什么
 
 530
 00:22:54,390 --> 00:22:55,889
 what you intend.
+你倾向于什么
 
 531
 00:22:55,891 --> 00:22:57,824
 As best that you can, okay?
+可以达到你最想要的，明白？
 
 532
 00:22:57,826 --> 00:23:01,227
 Then you know about Ctrl-dragging between views to
+然后你知道使用Ctrl键拖拽两个视图来
 
 533
 00:23:01,229 --> 00:23:03,095
 create relationships, right?
+建立联系，是吧？
 
 534
 00:23:03,097 --> 00:23:05,864
 Like spacing, and hook this to the left edge, and
+就想间距，并且把它吸附在了左边缘
 
 535
 00:23:05,866 --> 00:23:06,898
 stuff like that.
+就像填塞一样
 
 536
 00:23:06,900 --> 00:23:09,467
 You know about those in the lower right corner,
+你可以从底部右下角来了解这些
 
 537
 00:23:09,469 --> 00:23:12,603
 the "Pin" and "Arranged" popovers down there that let
+"Pin" 和 "Arranged" popovers那里可以使
 
 538
 00:23:12,605 --> 00:23:15,839
 you do things like set all the things to equal widths, or
+你做一些类似于设置所有控件对其宽度的事情
 
 539
 00:23:15,841 --> 00:23:17,507
 create spacing between all of them, or
+或者为他们建立间距
 
 540
 00:23:17,509 --> 00:23:19,776
 line up their left edges, okay?
+或者排列他们到左边缘上，明白？
 
 541
 00:23:19,778 --> 00:23:23,346
 You know about using Reset to Suggested Constraints.
+你知道关于使用 Reset 去使用建议的限制
 
 542
 00:23:23,348 --> 00:23:24,747
 If you use the blue lines,
+如果你使用蓝色的线
 
 543
 00:23:24,749 --> 00:23:27,583
 sometimes you'll do Reset to Suggested Constraints, and
+有时候你会使用 Reset去使用建议的限制
 
 544
 00:23:27,585 --> 00:23:29,584
 it will actually figure out what you want.
+并且它会弄清楚你想要的
 
 545
 00:23:29,586 --> 00:23:30,819
 I'd say only 50 percent of the time,
+我只想说事件还有一半了
 
 546
 00:23:30,821 --> 00:23:32,420
 but it's worth a try sometimes.
+但是它有事是非常值得尝试的
 
 547
 00:23:34,557 --> 00:23:35,722
 The Document Outline,
+Document O 
 
 548
 00:23:35,724 --> 00:23:37,724
 you know that on the left in the document outline,
+你知道的这些是在 document outline的左侧的
 
 549
 00:23:37,726 --> 00:23:39,726
 all your constraints are listed there.
+你所有的 constraints 被列在那里
 
 550
 00:23:39,728 --> 00:23:41,093
 Okay. And also that's where,
+好的，并且那里也是
 
 551
 00:23:41,095 --> 00:23:44,029
 if you've got problems, you can click on the little red or
+如果你遇到了问题，你可以点击有一点红色的
 
 552
 00:23:44,031 --> 00:23:45,797
 yellow button in the upper right-hand corner of
+或者黄色的按钮在右上角的角落
 
 553
 00:23:45,799 --> 00:23:47,499
 the Document Outline and it'll tell you.
+在 Document outline中并且它会告诉你
 
 554
 00:23:47,501 --> 00:23:51,836
 It might even suggest some ways to fix things, possibly.
+它也许会给你一些建议去修复那些问题
 
 555
 00:23:51,838 --> 00:23:53,704
 And certainly will tell you if anything's misplaced.
+并且肯定会告诉你如果有什么东西放置错了的话
 
 556
 00:23:53,706 --> 00:23:56,807
 And you know from there, you can also fix your misplaced
+并且从那里你可以知道，去修复一些你放置错误的
 
 557
 00:23:56,809 --> 00:23:59,743
 views by clicking on the little triangles in there.
+视图通过点击那里的虚线
 
 558
 00:23:59,745 --> 00:24:01,577
 You know about the size inspector.
+你知道关于尺寸检查器
 
 559
 00:24:01,579 --> 00:24:03,579
 If you inspect a view in your storyboard and
+如果你在你的storyboard中检查一个 
 
 560
 00:24:03,581 --> 00:24:05,080
 you look at the size inspector,
+你可以在 size inspector中查看
 
 561
 00:24:05,082 --> 00:24:07,282
 you'll see all the constraints listed there.
+你可以看到所有的 constraints列在那里
 
 562
 00:24:07,284 --> 00:24:10,818
 In there, all the constraints are shown with their details.
+在那里，所有的 constraints将其详细信息显示出来
 
 563
 00:24:10,820 --> 00:24:13,104
 Okay?
+明白？
 
 564
 00:24:13,105 --> 00:24:15,389
 What the constants are, all that stuff, is listed there.
+constraints是什么以及其属性都被列在那里
 
 565
 00:24:17,659 --> 00:24:19,859
 And of course you can edit the constraints there.
+同样你可以在那里编辑 constraints
 
 566
 00:24:19,861 --> 00:24:22,929
 You can also, you know that you can click on a constraint.
+你同样可以点击一个 constraint
 
 567
 00:24:22,931 --> 00:24:24,363
 And bring up the attributes inspector.
+并且把它带到属性查看器中
 
 568
 00:24:24,365 --> 00:24:27,232
 And now you can inspect the constraint directly, okay?
+现在你可以直接的查看它的 constraint了，明白？
 
 569
 00:24:27,234 --> 00:24:29,234
 It will be the thing that's selected so the attributes
+它将显示你选中的控件这样属性查看器
 
 570
 00:24:29,236 --> 00:24:31,936
 inspector will let you set its attributes, okay?
+就可以让你编辑它的属性了，明白？
 
 571
 00:24:31,938 --> 00:24:34,906
 So you know a lot here about autolayout.
+所以你现在知道了很多关于 autolayout的知识了
 
 572
 00:24:34,908 --> 00:24:37,041
 And that is basically what autolayout is.
+并且那是 autolayout基础的知识
 
 573
 00:24:37,043 --> 00:24:38,409
 It's those things.
+所有的这些
 
 574
 00:24:38,411 --> 00:24:40,877
 Okay, now again, as I've said many times,
+好的，再一次，我已经说很多次了
 
 575
 00:24:40,879 --> 00:24:43,079
 mastering autolayout requires experience.
+管理 autolayout需要经验
 
 576
 00:24:43,081 --> 00:24:45,715
 You gotta know how to use all these tools,
+你将会知道怎么样使用这些工具
 
 577
 00:24:45,717 --> 00:24:47,450
 to greatest effect, okay.
+去达到最大的效率
 
 578
 00:24:47,452 --> 00:24:49,818
 You gotta familiarize yourself with what things can I
+你必须熟悉你自己通过我可以对其控件
 
 579
 00:24:49,820 --> 00:24:53,355
 align to things, what things can I pin to here and there,
+什么控件我可以将它到处布局
 
 580
 00:24:53,357 --> 00:24:56,391
 what things can I set as my constants that make sense.
+我可以根据场景来设置我的控件 constraints
 
 581
 00:24:56,393 --> 00:24:58,192
 You gotta learn all that by doing, okay.
+你通过实践来学习所有的这些，明白
 
 582
 00:24:58,194 --> 00:25:00,994
 I could spend many days going through every possible one.
+我可能话费很多天来熟悉这里的每一件工具
 
 583
 00:25:03,532 --> 00:25:05,932
 Autolayout can be done in code.
+可以在代码中实现 AutoLayout
 
 584
 00:25:05,934 --> 00:25:08,568
 There are objects, classes,
+那些是对象和类
 
 585
 00:25:08,570 --> 00:25:11,737
 in iOS that represent what's going on in autolayout.
+在iOS系统中代表着什么可以被autolayout
 
 586
 00:25:11,739 --> 00:25:14,273
 And in the demo I'm gonna actually show you an example
+并且在demo中我会实际向你们展示
 
 587
 00:25:14,275 --> 00:25:16,475
 of doing that so you can get an idea of what it looks like.
+通过完成一个例子这样你可以什么样的想法
 
 588
 00:25:16,477 --> 00:25:17,909
 But we rarely do that.
+但是我们很少这样做
 
 589
 00:25:17,911 --> 00:25:20,611
 If we can do it in the storyboard, we do it there.
+如果我们可以在 storyboard中实现，我们就在那里完成
 
 590
 00:25:20,613 --> 00:25:23,114
 We only revert to doing it in code when it's like,
+我们只需要将它恢复成代码中的样子
 
 591
 00:25:23,116 --> 00:25:26,817
 we just can't express that somehow in the storyboard,
+我们只是不知道在 storyboard中它是如何表述的
 
 592
 00:25:26,819 --> 00:25:28,418
 which is extremely rare.
+这是极其罕见的
 
 593
 00:25:28,420 --> 00:25:32,822
 But I'll show you a case where that's true, but all right.
+但是我会通过一个例子来向你们展示它真实的样子，但是好吧
 
 594
 00:25:32,824 --> 00:25:37,159
 So what about rotation?
+关于  
 
 595
 00:25:37,161 --> 00:25:39,361
 As I said, when you have rotation,
+就像我说的，当你准备  
 
 596
 00:25:39,363 --> 00:25:44,065
 you're just going to rely on your autolayout to do that.
+你只是要依靠你的autolayout去完成它
 
 597
 00:25:44,067 --> 00:25:48,935
 But occasionally when you rotate, things have changed so
+但是当你偶尔的旋转时，事情变得
 
 598
 00:25:48,937 --> 00:25:52,339
 drastically in terms of the shape that autolayout just
+很大就形状而言，autolayout就
 
 599
 00:25:52,341 --> 00:25:53,206
 can't do it.
+不能这么做了
 
 600
 00:25:53,208 --> 00:25:55,408
 It can't move a view where you want.
+它不能像你想要的一样移动视图
 
 601
 00:25:55,410 --> 00:25:57,343
@@ -4199,398 +4496,497 @@ I'm gonna make this as big as possible for us here.
 901
 00:39:12,021 --> 00:39:15,589
 That's all right, that there.
+好的
 
 902
 00:39:16,792 --> 00:39:19,926
 Lot of graphical things happening.
+许多绘图事件正在发生
 
 903
 00:39:19,928 --> 00:39:20,559
 Let's just do that.
+完成了
 
 904
 00:39:22,063 --> 00:39:25,030
 Okay, so I'm gonna start with those text fields at
+让我们从上面的 TextField 开始
 
 905
 00:39:25,032 --> 00:39:26,531
 the top, right?
+好吗？
 
 906
 00:39:26,533 --> 00:39:28,633
 I need a username and password text field.
+我需要一个用户名和密码的 TextField
 
 907
 00:39:28,635 --> 00:39:32,003
 So I'm gonna go down here and grab a text field.
+到这里拽一个 TextField
 
 908
 00:39:32,005 --> 00:39:34,471
 Okay, this is actually gonna be an editable one, so
+它是可以编辑的
 
 909
 00:39:34,473 --> 00:39:36,973
 I grab this one, text, not label, but text.
+所以要 TextField 而不是 Label
 
 910
 00:39:36,975 --> 00:39:40,377
 And I'm going to put it up in the upper corner to start.
+把它放到上面的角落
 
 911
 00:39:40,379 --> 00:39:43,112
 Grab another one, put this here.
+再拽一个，放到这里
 
 912
 00:39:43,114 --> 00:39:45,581
 Okay, now, I'm gonna use some model layout stuff you
+现在，我使用一些你们已经了解的
 
 913
 00:39:45,583 --> 00:39:46,248
 already know about.
+Autolayout 的东西
 
 914
 00:39:46,250 --> 00:39:47,582
 I'm gonna use Ctrll drag.
+按住 Ctrl 拖动
 
 915
 00:39:47,584 --> 00:39:50,919
 Let's stick this one trailing space to that edge.
+右边设置为 Trailing Space
 
 916
 00:39:50,921 --> 00:39:52,854
 Let's stick this one with this trailing space to that end.
+这个也一样
 
 917
 00:39:52,856 --> 00:39:55,256
 Let's get this one to the top.
+上面设置为 Top Space
 
 918
 00:39:55,258 --> 00:39:56,423
 Let's put a space in
+它俩之间
 
 919
 00:39:56,425 --> 00:39:58,892
 between the vertical space between them.
+设置为 Vertical Space
 
 920
 00:39:58,894 --> 00:39:59,793
 You know about.
+你们已经知道这些了
 
 921
 00:39:59,795 --> 00:40:01,394
 Doing all those kind of things.
+做一些类似的 Autolayout
 
 922
 00:40:01,396 --> 00:40:04,397
 Now one thing as I'm working with auto layout I
+当我处理 Autolayout 问题时
 
 923
 00:40:04,399 --> 00:40:07,799
 often like to click this little button right here.
+我会点击这个按钮
 
 924
 00:40:08,735 --> 00:40:10,535
 Because this will
+因为
 
 925
 00:40:10,536 --> 00:40:12,336
 give you a little summary of what's going on.
+它会总结出你所出现的问题
 
 926
 00:40:13,473 --> 00:40:16,373
 And when all it's complaining about is that frames are gonna
+当它只抱怨 Frame 在运行时可能发生变化时
 
 927
 00:40:16,375 --> 00:40:19,810
 be moved, a cool thing you can do is go down here
+你可以到这里
 
 928
 00:40:19,812 --> 00:40:21,411
 to this button.
+点击这个按钮
 
 929
 00:40:21,413 --> 00:40:24,881
 The same one where we do Reset to Suggested Constraints and
+和  Reset to Suggested Constraints 还有 Clear Constraints
 
 930
 00:40:24,883 --> 00:40:27,717
 Clear Constraints, there's this Update Frame.
+在相同位置的，Update Frame
 
 931
 00:40:27,719 --> 00:40:33,789
 And it will update all frames in your storyboard.
+这会更新 storyboard 中所有的框架结构
 
 932
 00:40:33,791 --> 00:40:35,990
 Now, it made those smaller because the text in
+现在它们变小了
 
 933
 00:40:35,992 --> 00:40:38,059
 them is small, but don't worry about that.
+因为它们中没有文字
 
 934
 00:40:38,061 --> 00:40:39,326
 We're gonna fix that later.
+不用担心，后面会修复的
 
 935
 00:40:39,328 --> 00:40:41,829
 So I did Undo right there because I wanted them to be
+我后退了一步
 
 936
 00:40:41,831 --> 00:40:44,698
 a little bigger just as I work.
+因为我想让它们在我处理的时候大一点
 
 937
 00:40:44,700 --> 00:40:45,832
 Okay? But I'll be going back to
+我回时常点击
 
 938
 00:40:45,834 --> 00:40:47,400
 look at this often.
+看看它们
 
 939
 00:40:47,402 --> 00:40:48,734
 And if I see it's just frames,
+如果其中只警告关于 frame 的内容
 
 940
 00:40:48,736 --> 00:40:50,202
 then I'll be doing Update Frames.
+我就会进行 Update Frame 操作
 
 941
 00:40:50,204 --> 00:40:51,636
 And if I don't like what it did I
+如果我不喜欢它替我做的
 
 942
 00:40:51,638 --> 00:40:52,804
 can always undo, keep going.
+我可以后退
 
 943
 00:40:52,806 --> 00:40:54,405
 All right?
+好的
 
 944
 00:40:54,407 --> 00:40:58,175
 So let's go and do our things here for
+再为 TextField 
 
 945
 00:40:58,177 --> 00:41:02,846
 the user name and password fields.
+做一些其他事
 
 946
 00:41:02,848 --> 00:41:04,914
 So I'm just going to put some text in these.
+在 Label 中输入一些文字
 
 947
 00:41:04,916 --> 00:41:05,915
 Password.
+Password
 
 948
 00:41:07,185 --> 00:41:09,351
 User name, so
+Username
 
 949
 00:41:09,353 --> 00:41:12,421
 these ones I kind of want to be on the left.
+我想把它放到左边
 
 950
 00:41:12,423 --> 00:41:13,588
 Okay, if you remember.
+如果你还记得
 
 951
 00:41:13,590 --> 00:41:15,590
 So I'm gonna do the same thing here with control drag.
+在这里还是使用 Ctrl+Drag
 
 952
 00:41:15,592 --> 00:41:18,125
 Let's set that leaning space.
+左边设置为 Leading Space
 
 953
 00:41:18,127 --> 00:41:19,993
 Let's set that leaning space.
+选择它
 
 954
 00:41:19,995 --> 00:41:21,294
 Let's set this thing to the,
+把它设置为
 
 955
 00:41:21,296 --> 00:41:22,929
 actually I'm not even gonna set this to the top.
+实际上我不想把它顶部设置为 Top Space
 
 956
 00:41:22,931 --> 00:41:24,464
 Now this is an interesting one.
+这个设置比较有趣
 
 957
 00:41:24,466 --> 00:41:26,766
 So I have these two guys right here.
+对于这两个 Label
 
 958
 00:41:26,768 --> 00:41:30,069
 Really what I want them to do is be lined up with whatever
+我想让它们与 TextField
 
 959
 00:41:30,071 --> 00:41:31,136
 the text is in here.
+在同一水平线上
 
 960
 00:41:31,138 --> 00:41:33,938
 I wanna line them up by their baselines.
+通过设置 baseline 
 
 961
 00:41:33,940 --> 00:41:37,842
 So I'm gonna control drag between the two of them and
+Ctrl+Drag 选择它
 
 962
 00:41:37,844 --> 00:41:40,310
 go down here and pick Baseline.
+选择 Baseline
 
 963
 00:41:40,312 --> 00:41:43,313
 So this is going to line up their baselines.
+这就把它们的 baseline 连在了一起
 
 964
 00:41:43,315 --> 00:41:44,314
 Okay?
+好的
 
 965
 00:41:44,316 --> 00:41:47,016
 Same thing here, drag this one.
+对于它也一样
 
 966
 00:41:47,018 --> 00:41:48,918
 And line up their baselines there.
+把它们的 baseline 连在一起
 
 967
 00:41:50,087 --> 00:41:53,155
 Now, another thing I want is that I want them to be kind
+另一件我想做的事情是
 
 968
 00:41:53,157 --> 00:41:54,989
 of, well, I want these two guys, username and
+把这两个 Label
 
 969
 00:41:54,991 --> 00:41:57,458
 password, to be the same width.
+设置成相同宽度
 
 970
 00:41:57,460 --> 00:41:59,260
 So, I'm control dragging between them and
+它俩之间 Ctrl+Drag
 
 971
 00:41:59,262 --> 00:42:01,095
 saying Equal Widths.
+选择 Equal Widths
 
 972
 00:42:01,097 --> 00:42:03,364
 You remember in the calculator we
+在 Calculator 中
 
 973
 00:42:03,365 --> 00:42:05,632
 did the equal widths down here with this thing, okay?
+我们用它设置的 Equal Widths
 
 974
 00:42:05,634 --> 00:42:07,300
 But, you can do it with control drag as well.
+但是你也可以通过 Ctrl+Drag 实现
 
 975
 00:42:08,436 --> 00:42:10,469
 And then also I want these things attached.
+我希望它俩互相依附
 
 976
 00:42:10,471 --> 00:42:13,539
 So I want that thing attached to each other so
+通过设置它们的
 
 977
 00:42:13,541 --> 00:42:15,674
 that its horizontal spacing is set.
+Horizontal Spacing
 
 978
 00:42:15,676 --> 00:42:17,509
 And I want this thing attached to this,
+它俩也一样
 
 979
 00:42:17,511 --> 00:42:18,476
 its horizontal spacing.
+设置 Horizontal Spacing
 
 980
 00:42:19,412 --> 00:42:22,179
 Now I've done all this stuff even though
+我已经做好了所有的工作
 
 981
 00:42:22,181 --> 00:42:24,648
 they're really not where I want them right now.
+即使它们还不太是我想要的
 
 982
 00:42:24,650 --> 00:42:27,650
 So usually you can kinda set things up and
+通常你设置好以后
 
 983
 00:42:27,652 --> 00:42:30,620
 then just go into the size inspector.
+打开 Size Inspector
 
 984
 00:42:30,622 --> 00:42:32,722
 And inspect all of them and
+看看 Autolayout 的数据
 
 985
 00:42:32,724 --> 00:42:35,057
 get rid of every magic number you see.
+然后去除你看到的每一个魔法数字
 
 986
 00:42:36,493 --> 00:42:38,760
 If you get rid of every magic number you see usually it's
+如果你把每一个数字都去掉了
 
 987
 00:42:38,762 --> 00:42:40,294
 gonna do exactly what you want.
+那将会是你需要的 Autolayout 了
 
 988
 00:42:40,296 --> 00:42:41,996
 So lets go here, lets start with this one.
+从这个开始
 
 989
 00:42:41,998 --> 00:42:43,030
 Lets find some magic numbers.
+寻找一下魔法数字
 
 990
 00:42:43,032 --> 00:42:44,731
 Look at this Leading Space Username.
+Leading Space Username
 
 991
 00:42:44,733 --> 00:42:46,366
 [SOUND] Magic number.
+魔法数字！
 
 992
 00:42:46,368 --> 00:42:48,735
 Okay magic number means number in here,
+魔法数字代表这里出现的数字
 
 993
 00:42:48,737 --> 00:42:51,103
 anything that's a number get rid of it.
+你看到了数字，把它去除就好了
 
 994
 00:42:51,105 --> 00:42:52,137
 So 392 I'm gonna get rid of that,
+我将要去除 392
 
 995
 00:42:52,139 --> 00:42:54,473
 I'm gonna do it by going up here.
+去到这里
 
 996
 00:42:54,475 --> 00:42:57,075
 Instead of having 392,
+我将选择 Standard Value
 
 997
 00:42:57,076 --> 00:42:59,676
 I'm going to pick Standard Value, okay?
+而不是 392
 
 998
 00:42:59,679 --> 00:43:00,878
 So now it's gone.
+392 消失了
 
 999
 00:43:00,880 --> 00:43:02,212
 So you can click on these things and
+你可以点击它
 
 1000
 00:43:02,214 --> 00:43:04,481
@@ -4610,7 +5006,7 @@ I don't like that either.
 1003
 00:43:09,453 --> 00:43:10,819
 I'm just going to go here and say zero, because
-我将要到这里并说0，因为
+我把它设置为0
 
 1004
 00:43:10,822 --> 00:43:13,956
@@ -4630,12 +5026,12 @@ Same thing, oh, did I do the right thing there?
 1007
 00:43:19,296 --> 00:43:22,364
 Leading space, username, yeah, trailing spaces, you're right.
-距离顶部的空间，用户名，好的，距离底部的空间，你是对的
+距离顶部的空间，距离底部的空间，是正确的
 
 1008
 00:43:22,366 --> 00:43:23,949
 How about this one?
-这个怎么样？
+对于它呢？
 
 1009
 00:43:23,950 --> 00:43:25,533
@@ -4675,634 +5071,792 @@ of each other so I'm gonna say zero right here.
 1016
 00:43:39,914 --> 00:43:44,249
 So I've gotten rid of all the magic numbers in here.
+我已经去掉了这里所有的魔法数字
 
 1017
 00:43:44,251 --> 00:43:46,351
 Okay now lets do it for
+再来处理一下它
 
 1018
 00:43:46,352 --> 00:43:48,452
 this one, okay this one also has a magic number here,
+它也有魔法数字
 
 1019
 00:43:48,455 --> 00:43:51,622
 lets change that to be Standard Value.
+把它设置为 Standard Value
 
 1020
 00:43:51,624 --> 00:43:53,391
 We got this one, Align Baseline.
+设置 Align Baseline
 
 1021
 00:43:53,393 --> 00:43:54,658
 We want that to be zero.
+设置为 0
 
 1022
 00:43:55,928 --> 00:43:57,060
 Okay? So we got rid of that.
+把它去掉
 
 1023
 00:43:57,062 --> 00:43:57,827
 How about this one?
+对于它呢
 
 1024
 00:43:57,829 --> 00:44:00,396
 Oh, this one's good.
+它还可以
 
 1025
 00:44:00,398 --> 00:44:01,497
 No magic value.
+没有魔法数字
 
 1026
 00:44:01,499 --> 00:44:03,165
 And this one, also good.
+它也没有
 
 1027
 00:44:03,167 --> 00:44:04,165
 Okay? All is good.
+所有的都完成了
 
 1028
 00:44:04,167 --> 00:44:05,833
 All is well with the world.
+每个都没有魔法数字了
 
 1029
 00:44:05,835 --> 00:44:07,118
 Okay?
+好的
 
 1030
 00:44:07,119 --> 00:44:08,402
 But we still have this up here.
+但是上面是有警告
 
 1031
 00:44:08,404 --> 00:44:10,237
 Frame will be different at run time, so
+在运行时，框架结构会不同
 
 1032
 00:44:10,239 --> 00:44:12,005
 I'm going to go down here.
+去到这里，选择 Update Frame
 
 1033
 00:44:12,007 --> 00:44:14,874
 And update our frames and this looks good.
+这看起来还不错
 
 1034
 00:44:14,876 --> 00:44:17,910
 Now, when I look at this I'm like that's really not what I
+我再回头看一看
 
 1035
 00:44:17,912 --> 00:44:20,946
 want, so I must have made a mistake.
+发现有个地方不是我想要的
 
 1036
 00:44:20,948 --> 00:44:23,082
 For example, I want this spacing in-between not to
+我不想让它俩之间
 
 1037
 00:44:23,084 --> 00:44:24,817
 be zero, so
+的距离是0
 
 1038
 00:44:24,818 --> 00:44:26,551
 I typed zero somewhere where I wanted a standard value.
+我想它是 Standard Value
 
 1039
 00:44:26,553 --> 00:44:29,220
 So, let's go back here and see where that is.
+回到这里，看看它是什么
 
 1040
 00:44:29,222 --> 00:44:30,588
 Okay? It looks like it's this one
+看起来是它
 
 1041
 00:44:30,590 --> 00:44:33,157
 you can tell when you mouse over these, it tells you.
+当你鼠标放上去的时候，你能看出是哪一个
 
 1042
 00:44:33,159 --> 00:44:34,692
 So here let's go back to here and
+回到这里
 
 1043
 00:44:34,694 --> 00:44:37,894
 instead of zero, let's say Standard Value, okay?
+用 Standard Value 代替 0
 
 1044
 00:44:37,896 --> 00:44:39,829
 And it moved it there for us.
+它为我们做出了修改
 
 1045
 00:44:40,999 --> 00:44:42,065
 Sometimes it moves it,
+有时它会帮我们移动
 
 1046
 00:44:42,066 --> 00:44:43,132
 sometimes you need to do update frames.
+有时你需要 Update Frames
 
 1047
 00:44:43,134 --> 00:44:44,300
 It just kind of depends on
+这只取决于
 
 1048
 00:44:44,301 --> 00:44:45,467
 the character of the change you're making.
+你做出改变的对象
 
 1049
 00:44:47,804 --> 00:44:49,103
 Okay?
+OK?
 
 1050
 00:44:49,105 --> 00:44:51,238
 Now, here's a really cool thing.
+还有一个很 cool 的事情
 
 1051
 00:44:51,240 --> 00:44:53,124
 I want to see what
+我想看看在
 
 1052
 00:44:53,125 --> 00:44:55,009
 this looks like in portrait and landscape.
+垂直和水平模式界面的样子
 
 1053
 00:44:55,011 --> 00:44:57,144
 So yeah, I could go up here and hit Run,
+我可以运行程序
 
 1054
 00:44:57,146 --> 00:45:00,380
 but there is a lot faster way, which is to open up
+但是还有更快的方式
 
 1055
 00:45:01,883 --> 00:45:05,384
 the assistant editor here and instead of showing your view
+打开 Assistant Editor
 
 1056
 00:45:05,386 --> 00:45:08,253
 controller, go up here and go down to Preview.
+选择 Preview
 
 1057
 00:45:09,589 --> 00:45:11,522
 This will preview your UI.
+这会给你预览一下 UI
 
 1058
 00:45:13,259 --> 00:45:15,726
 Okay? And you can preview it in
+你可以以
 
 1059
 00:45:16,795 --> 00:45:18,795
 either landscape or portrait.
+水平或垂直模式预览
 
 1060
 00:45:18,797 --> 00:45:21,564
 You can also preview it on other devices like
+你也可以在其他设备上预览
 
 1061
 00:45:21,566 --> 00:45:25,000
 maybe an iPhone 6 Plus, okay, which is kind of so
+iPhone 6 Plus 
 
 1062
 00:45:25,002 --> 00:45:28,303
 big that we can't barely even see it here.
+分辨率太高了，这里可能看不全
 
 1063
 00:45:28,305 --> 00:45:30,238
 Barely flip it around, okay?
+占的地方太大了
 
 1064
 00:45:31,174 --> 00:45:33,341
 Or you can even look at it on an iPad if you wanted.
+你也可以放到 iPad 上预览
 
 1065
 00:45:34,276 --> 00:45:38,111
 Okay I think four inches works best for
+4 英寸的设备
 
 1066
 00:45:38,113 --> 00:45:39,846
 this small resolution I have.
+比较适合我这个小分辨的 Mac
 
 1067
 00:45:39,848 --> 00:45:43,549
 But this is really cool, now this can only preview your UI
+这很棒，但是只能预览 Ui
 
 1068
 00:45:43,551 --> 00:45:45,651
 for things that aren't running your code.
+但是不能预览到代码对 UI 的改变
 
 1069
 00:45:45,653 --> 00:45:47,419
 Okay so if you're gonna do something that you need to
+如果你想看到运行代码才能看出的改变
 
 1070
 00:45:47,421 --> 00:45:49,587
 run your code then you need to go run it in the app.
+运行 App 就可以了
 
 1071
 00:45:49,589 --> 00:45:51,256
 But if you just want to
+但是你只想看看
 
 1072
 00:45:51,257 --> 00:45:52,924
 see how is the auto layout gonna work.
+Autolayout 的结果
 
 1073
 00:45:52,926 --> 00:45:54,876
 You can do this.
+你可以这么做
 
 1074
 00:45:54,877 --> 00:45:56,827
 Now another thing that's cool here is what's this gonna look
+还有一件很棒的事情是
 
 1075
 00:45:56,829 --> 00:45:59,596
 like when you give it off to your localization guys and
+当你做本地化工作地时候
 
 1076
 00:45:59,598 --> 00:46:03,500
 if this gets translated to German or something like that.
+如果这些文字被翻译成了德文
 
 1077
 00:46:03,502 --> 00:46:05,602
 You can do that, you can kinda make sure that you
+你可以点击它
 
 1078
 00:46:05,604 --> 00:46:07,837
 don't have any big problems by going down here,
+看看会不会出现什么大得问题
 
 1079
 00:46:07,839 --> 00:46:09,772
 see where it says English.
+现在上面是 English
 
 1080
 00:46:09,774 --> 00:46:10,739
 Sort of click on that.
+电吉他
 
 1081
 00:46:11,942 --> 00:46:14,476
 And we can go to this double length pseudo language.
+选择双倍长度的伪语言
 
 1082
 00:46:14,478 --> 00:46:17,611
 And all that does is doubles every text.
+所有的 text 变成了双倍长度
 
 1083
 00:46:19,081 --> 00:46:22,416
 Okay? So even a long translation of
+即使 Username
 
 1084
 00:46:22,418 --> 00:46:25,118
 the word Username would fit there.
+被翻译成了很长一串，也能适合这里
 
 1085
 00:46:25,120 --> 00:46:27,420
 And my auto layout is working properly.
+Autolayout 看起来没什么问题
 
 1086
 00:46:27,422 --> 00:46:29,689
 And so my translation is just going to work.
+被翻译成其他语言也没问题
 
 1087
 00:46:29,691 --> 00:46:31,824
 So Auto Layout is not just used for
+它不光可以预览
 
 1088
 00:46:31,826 --> 00:46:33,325
 landscape versus portrait or whatever.
+横屏和竖屏模式
 
 1089
 00:46:33,327 --> 00:46:35,226
 It can be used for translation as well.
+它也可以用于检查被翻译后的效果
 
 1090
 00:46:35,228 --> 00:46:36,694
 When you're localizing things,
+当你做本地化工作的时候
 
 1091
 00:46:36,696 --> 00:46:38,896
 you want auto-layout to make things fit.
+你需要用 Autolayout 调整
 
 1092
 00:46:38,898 --> 00:46:43,266
 Okay? Everyone understand that?
+每个人都理解了吗？
 
 1093
 00:46:43,268 --> 00:46:44,034
 Okay.
+OK
 
 1094
 00:46:44,036 --> 00:46:44,934
 All right, good.
+好的
 
 1095
 00:46:44,936 --> 00:46:46,602
 So we're making progress here.
+我们有些进步了
 
 1096
 00:46:46,604 --> 00:46:49,438
 By the way, you probably don't wanna have preview open as
+当你做出许多改变的时候
 
 1097
 00:46:49,440 --> 00:46:50,605
 you're doing a lot of changes here,
+最好不要打开预览模式
 
 1098
 00:46:50,607 --> 00:46:53,008
 cuz it's gonna be constantly previewing in real time.
+因为它是实时的预览
 
 1099
 00:46:53,010 --> 00:46:54,709
 So if you've got a really powerful machine,
+如果你的机器性能很强大
 
 1100
 00:46:54,711 --> 00:46:56,060
 it could keep up, but
+可能会跟上
 
 1101
 00:46:56,061 --> 00:46:57,410
 you might be asking it to do a lot of calculations.
+但是它会同时进行许多计算
 
 1102
 00:46:57,413 --> 00:46:59,947
 So I usually close that while I'm working, and
+所以我通常在编辑的时候关闭它
 
 1103
 00:46:59,949 --> 00:47:01,548
 then just bring it back whenever I wanna preview.
+在希望预览的时候再打开
 
 1104
 00:47:02,718 --> 00:47:04,417
 So let's do those two buttons.
+让我们来处理这两个按钮
 
 1105
 00:47:04,419 --> 00:47:06,452
 Remember, I had the button change security,
+我让这个按钮改变安全性
 
 1106
 00:47:06,454 --> 00:47:08,020
 which changed this to secure, and
+把它变成安全输入
 
 1107
 00:47:08,022 --> 00:47:10,255
 then I had the button login, so let's go ahead and do that.
+让这个按钮实现登陆，让我们一起实现
 
 1108
 00:47:11,258 --> 00:47:13,157
 Another trick I'm going to show you is, and
+另一个我想给你们展示的技巧是
 
 1109
 00:47:13,159 --> 00:47:16,227
 I'm always scrolling around in here trying to find things.
+我总是通过滚动寻找东西
 
 1110
 00:47:16,229 --> 00:47:18,195
 You can actually find things real quick by going down to
+你也可以在这里输入内容
 
 1111
 00:47:18,197 --> 00:47:19,763
 the bottom here and typing like button.
+实现快速查找
 
 1112
 00:47:19,765 --> 00:47:23,199
 Now it's only going to show you the buttons.
+它现在只展现给你 button
 
 1113
 00:47:23,201 --> 00:47:25,001
 Okay? We got Bar Button and
+这里有 Bar Button
 
 1114
 00:47:25,003 --> 00:47:27,503
 here's regular button, so I'm going to drag that out.
+还有普通的 Button，拽一个普通的出来
 
 1115
 00:47:27,505 --> 00:47:29,338
 Let's get a couple of those buttons.
+多拽几个
 
 1116
 00:47:29,340 --> 00:47:33,408
 We'll call this one Change security.
+把这个改为 Change Security
 
 1117
 00:47:34,444 --> 00:47:35,810
 We'll call this one log in.
+把这个叫做 Login
 
 1118
 00:47:37,313 --> 00:47:38,612
 Okay now where do these want to be?
+我要把它们放在哪里呢？
 
 1119
 00:47:38,614 --> 00:47:40,347
 They kind of
+我想把它们
 
 1120
 00:47:40,348 --> 00:47:42,081
 want to be underneath there something like that.
+放到它们下面
 
 1121
 00:47:42,084 --> 00:47:45,084
 Definitely I like their baselines lined
+当然我想让它俩
 
 1122
 00:47:45,086 --> 00:47:46,619
 up right there.
+基线对齐
 
 1123
 00:47:46,620 --> 00:47:48,153
 So let's go ahead and kind of put those in position.
+让我们把它俩放到合适的位置
 
 1124
 00:47:48,156 --> 00:47:51,490
 I'm gonna set the vertical spacing between the login and
+把这个按钮和它设置为
 
 1125
 00:47:51,492 --> 00:47:52,791
 this guy right here and
+Vertical Spacing
 
 1126
 00:47:52,793 --> 00:47:56,461
 then I'm control dragging here to set the baselines the same.
+Ctrl+Drag 把它俩的 baseline 设置为对齐
 
 1127
 00:47:56,463 --> 00:47:58,947
 Okay?
+OK?
 
 1128
 00:47:58,948 --> 00:48:01,432
 Now, that has actually set the vertical position of both of
+现在已经设置好了它俩垂直方向的位置
 
 1129
 00:48:01,434 --> 00:48:03,066
 these things, okay.
+好的
 
 1130
 00:48:03,068 --> 00:48:05,135
 Because the vertical position of these are set and so
+因为它俩的垂直位置
 
 1131
 00:48:05,137 --> 00:48:07,070
 when I tie this vertical position here and
+已经设置完毕了
 
 1132
 00:48:07,072 --> 00:48:10,306
 the baseline which is a vertical positioning here but
+但是这里有个警告
 
 1133
 00:48:10,308 --> 00:48:13,776
 if I go up here it says that the horizontal position of
+它俩的水平位置
 
 1134
 00:48:13,778 --> 00:48:16,445
 Login and Change Security is ambiguous.
+是有歧义的
 
 1135
 00:48:16,447 --> 00:48:17,712
 Which makes sense.
+这有道理
 
 1136
 00:48:17,714 --> 00:48:19,213
 I haven't really specified where these
+我还没有指定
 
 1137
 00:48:19,215 --> 00:48:19,914
 things are supposed to be.
+它俩的水平位置
 
 1138
 00:48:19,916 --> 00:48:21,799
 Just because I put them on
+我把它俩放到这里
 
 1139
 00:48:21,800 --> 00:48:23,683
 the screen doesn't mean that there's an auto layout rule.
+不代表已经有了 Autolayout 的约束
 
 1140
 00:48:23,686 --> 00:48:25,452
 Now, what do I want it to be?
+我想把它俩放到哪？
 
 1141
 00:48:25,454 --> 00:48:28,621
 Well, I kind of want them to be some reasonable distance
+我想让它俩之间有些距离
 
 1142
 00:48:28,623 --> 00:48:30,590
 apart so it doesn't look like, you know,
+这样看起来
 
 1143
 00:48:30,592 --> 00:48:32,058
 this is part of the same thing.
+就不像是在一起的一个按钮了
 
 1144
 00:48:32,060 --> 00:48:34,593
 That would look like change security log in is one thing.
+这样 Change Security Login 看起来就像是一个东西
 
 1145
 00:48:34,595 --> 00:48:37,062
 So I want them apart a little bit.
+所以我想让它俩之间有点距离
 
 1146
 00:48:37,064 --> 00:48:39,664
 But otherwise I want them centered on the screen.
+我想让它俩居中在屏幕
 
 1147
 00:48:39,666 --> 00:48:41,532
 I want the pair of them centered.
+它俩都居中
 
 1148
 00:48:41,534 --> 00:48:44,702
 Now, there's no auto layout rule that says that.
+但是没有这样的 Autolayout 约束
 
 1149
 00:48:44,704 --> 00:48:47,471
 That's too complicated, okay?
+这太复杂了
 
 1150
 00:48:47,473 --> 00:48:50,841
 But, I can easily do this with a little creativity, and
+但是我可以通过一点创意让这个事变得简单
 
 1151
 00:48:50,843 --> 00:48:51,941
 when you start doing auto layout,
+当你在做 Autolayout 的时候
 
 1152
 00:48:51,943 --> 00:48:54,243
 you start realizing, hm, how can I do that?
+你会意识到，我要怎么实现这个东西
 
 1153
 00:48:54,245 --> 00:48:56,512
 Well, I need to be creative in how I'm gonna approach this.
+其实为了实现它，需要一点创意
 
 1154
 00:48:56,514 --> 00:48:59,748
 [NOISE] And in this case what I'm gonna do is
+在这种情况
 
 1155
 00:48:59,750 --> 00:49:04,352
 I'm gonna create two little spacer views on the side here.
+我会在这两边放两个占空间的 View
 
 1156
 00:49:04,354 --> 00:49:06,354
 And I'm gonna set them to be the same width.
+把它俩设置为相同宽度
 
 1157
 00:49:06,356 --> 00:49:09,357
 Can you see how that's gonna make it so
+你能想象到这么做
 
 1158
 00:49:09,359 --> 00:49:12,126
 these two kinda get pushed into the middle?
+会把两个按钮推到中间吗？
 
 1159
 00:49:12,128 --> 00:49:14,428
 Right, by the same amount on each side.
+只要两边的距离相同
 
 1160
 00:49:14,430 --> 00:49:16,697
 So how would I do that?
+我该怎么做
 
 1161
 00:49:16,698 --> 00:49:18,965
 So I'm gonna do that by just grabbing some views,
+我可以拽进来几个 View
 
 1162
 00:49:18,967 --> 00:49:20,750
 just generic views,
+普通的 View 就可以
 
 1163
 00:49:20,751 --> 00:49:22,534
 okay, this just a generic view like the one you do to
+这就是普通的 View
 
 1164
 00:49:22,537 --> 00:49:24,337
 do your graph view or the face view or whatever.
+就像之前画图和 FaceView 的 View 一样
 
 1165
 00:49:24,339 --> 00:49:27,506
 When I'm working on it here, I'm going to give it
+我要给它俩改变一下颜色
 
 1166
 00:49:27,508 --> 00:49:31,876
 some background color so I can see the thing, okay,
+这样我就能看到它俩
 
 1167
 00:49:31,878 --> 00:49:36,013
 now when I'm actually ready to go I will turn that back off.
+一切设置完毕后，再把颜色改回来
 
 1168
 00:49:36,982 --> 00:49:40,317
 And I'm just going to put them in here somewhere, copy and
+复制粘贴一个
 
 1169
 00:49:40,319 --> 00:49:43,086
 paste another one, put it over here somewhere, and
+放到这里
 
 1170
 00:49:43,088 --> 00:49:46,756
 then I'm just gonna wire these up to how I want them,
+给它俩做些约束
 
 1171
 00:49:46,758 --> 00:49:49,158
 so I want this to kind of be on that edge,
+我想把它放在这边
 
 1172
 00:49:49,160 --> 00:49:50,859
 I want this thing to be on that edge,
+把它放到这边
 
 1173
 00:49:51,995 --> 00:49:55,063
 I want these two things to kind of be linked.
+我想让它俩有所关联
 
 1174
 00:49:55,065 --> 00:49:56,581
@@ -5311,62 +5865,77 @@ Okay.
 1175
 00:49:56,582 --> 00:49:58,098
 Let's say I'll link their horizontal spacing.
+设置 Horizontal Spacing
 
 1176
 00:49:58,101 --> 00:49:59,066
 Now here, I'm going to
+现在
 
 1177
 00:49:59,068 --> 00:50:00,768
 set multiple things between these two.
+我要给它俩设置多个约束
 
 1178
 00:50:00,770 --> 00:50:02,836
 I'm gonna set the horizontal spacing and
+设置 Horizontal Spacing 还有...
 
 1179
 00:50:02,838 --> 00:50:04,904
 then notice I'm holding down shift.
+注意这里，我按住了 shift
 
 1180
 00:50:04,906 --> 00:50:06,639
 I'm also gonna set the top and
+选中 Top 还有 Bottom
 
 1181
 00:50:06,641 --> 00:50:09,608
 bottom of this view to match the top and bottom.
+让它俩对齐
 
 1182
 00:50:09,610 --> 00:50:11,577
 Now, there's no base lines because this is not text.
+它没有文字，所以没有基线
 
 1183
 00:50:11,579 --> 00:50:12,678
 This is just a generic view.
+它只是普通的 View
 
 1184
 00:50:12,680 --> 00:50:14,512
 So I'm gonna move mine up the top and bottom.
+所以我选 Top 和 Bottom
 
 1185
 00:50:14,514 --> 00:50:16,781
 So I can do Shift+click to do that.
+我可以按住 shift 然后这样做
 
 1186
 00:50:17,850 --> 00:50:19,583
 Okay. And then same thing over here,
+对于它也是一样
 
 1187
 00:50:19,585 --> 00:50:21,752
 I'm gonna do the same thing with these two guys.
+对它俩做一样的事情
 
 1188
 00:50:21,754 --> 00:50:26,923
 I'm gonna set the top whoops, sorry, control drag.
+抱歉，Ctrl+Drag
 
 1189
 00:50:26,925 --> 00:50:30,492
 I'm gonna set the top and bottom horizontal spacing.
+选中 Top, Bottom, Horizontal Spacing
 
 1190
 00:50:32,496 --> 00:50:34,112
@@ -5375,42 +5944,52 @@ Okay.
 1191
 00:50:34,113 --> 00:50:35,729
 Then I said I wanted to make this one and
+然后，我想把它俩
 
 1192
 00:50:35,732 --> 00:50:38,733
 this one be equal widths.
+设置成相同的宽度
 
 1193
 00:50:38,735 --> 00:50:41,369
 So I can just do that with control drag as well, so
+我可以 Ctrl+Drag
 
 1194
 00:50:41,371 --> 00:50:42,603
 I've set that up.
+设置完毕
 
 1195
 00:50:42,605 --> 00:50:45,505
 I want this to be stuck to this edge, trailing space,
+我想让它挨着边缘，Training Space
 
 1196
 00:50:45,507 --> 00:50:48,975
 I want this to be stuck to this edge, leading space, and
+设置 Leading Spacing
 
 1197
 00:50:48,977 --> 00:50:52,478
 I want these two guys to have some horizontal spacing,
+设置它俩 Horizontal Spacing
 
 1198
 00:50:52,480 --> 00:50:54,213
 I'm not quite sure how much I want yet, but
+我不知道我想让它俩间距多少
 
 1199
 00:50:54,215 --> 00:50:56,448
 I want some sort of horizontal spacing.
+但是我想让它们之间有些间距
 
 1200
 00:50:56,450 --> 00:50:59,885
 Now, I've done this, and look, the yellow thing went away.
+完成了，黄色的警告消失了
 
 1201
 00:50:59,887 --> 00:51:03,254

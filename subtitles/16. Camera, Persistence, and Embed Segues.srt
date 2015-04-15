@@ -1046,331 +1046,412 @@ which is probably gonna be you
 
 211
 00:08:31,041 --> 00:08:33,508
-And you'll see in the demo, we're gonna do this, and
+And you'll see in the demo, we're gonna do this,
+你将会在 Demo 中看到，我们会做这个
 
 212
 00:08:33,510 --> 00:08:35,443
-we're just gonna call dismiss directly.
+and we're just gonna call dismiss directly.
+并且我们会直接调用 dismiss
 
 213
 00:08:35,445 --> 00:08:38,079
 We don't have to say presentingViewController.
+我们不会在前面加上 presentingViewController
 
 214
 00:08:38,081 --> 00:08:41,015
-The other delegate method you're gonna get of interest
+The other delegate method you're gonna get of interest is
+另一个你会感兴趣的委托方法是
 
 215
 00:08:41,017 --> 00:08:43,183
-is image figure controller and d cancel.
+imagePickerControllerDidCancel
+imagePickerControllerDidCancel
 
 216
 00:08:43,185 --> 00:08:44,584
 And that means they hit cancel.
+这代表用户点击了取消
 
 217
 00:08:44,586 --> 00:08:47,387
-So now you don't want to use the image that they were
+So now you don't want to use the image that they were taking
+所以现在你不想使用用户之前选择的那张图片了
 
 218
 00:08:47,389 --> 00:08:48,587
-taking, whatever.
+whatever
 
 219
 00:08:48,589 --> 00:08:51,990
 So in that case, you just need to dismiss, 'kay?
+所以在这种情况下，你只需要消失
 
 220
 00:08:51,992 --> 00:08:53,275
 So that's it.
+就是这些
 
 221
 00:08:53,276 --> 00:08:54,559
 Those are the two delegates methods you get.
+你知道了这两个委托方法
 
 222
 00:08:54,561 --> 00:08:57,162
 So let's look in that info dictionary,
+好，让我们来看看那个 info 字典
 
 223
 00:08:57,164 --> 00:08:58,629
 see what's in there.
+看看里面有什么
 
 224
 00:08:58,631 --> 00:08:59,930
 All kinds of stuff in there.
+里面有各种各样的东西
 
 225
 00:08:59,932 --> 00:09:01,498
 There is the image they took, obviously,
+里面显然有用户拍摄的影像
 
 226
 00:09:01,500 --> 00:09:02,799
 if they're taking a still image.
+如果用户拍摄的是照片
 
 227
 00:09:02,801 --> 00:09:04,167
 If you allowed editing,
+如果你允许编辑
 
 228
 00:09:04,169 --> 00:09:07,403
 then it's gonna have also the edited image like cropped,
+那里面也将会有被编辑过的照片，比如被剪裁过的，
 
 229
 00:09:07,405 --> 00:09:10,072
 right, if they picked a different space of it.
+如果用户给照片选择了一个不同的大小。
 
 230
 00:09:10,074 --> 00:09:11,407
 Also if they cropped it,
+如果用户剪裁了照片，
 
 231
 00:09:11,409 --> 00:09:14,710
 you'll get the rectangle that they chose inside the thing.
+你会在这个字典里得到用户选择的矩形。
 
 232
 00:09:14,712 --> 00:09:15,944
 If it's a video,
+如果用户拍摄的是视频，
 
 233
 00:09:15,946 --> 00:09:19,147
 then you're gonna get this media URL, okay.
+你就会得到这个叫做 MediaURL 的东西，
 
 234
 00:09:19,149 --> 00:09:21,982
-It's just gonna be URL to some file somewhere in your
+It's just gonna be URL to some file somewhere in your sandbox,
+这个东西就是一个指向你的沙盒里某处的某些文件的 URL，
 
 235
 00:09:21,984 --> 00:09:25,052
-sandbox, which I'll talk about sandbox later today.
+which I'll talk about sandbox later today.
+我今天晚点会讲到沙盒
 
 236
 00:09:25,054 --> 00:09:29,056
 It points to the video, 'kay?
+它指向用户拍摄的视频
 
 237
 00:09:29,058 --> 00:09:32,692
 When you get this image or video you might wanna save it.
+当你得到这个照片或者视频你可能会想要保存它。
 
 238
 00:09:32,694 --> 00:09:35,094
-We're gonna save it in our demo to a file in the file
+We're gonna save it in our demo to a file in the file system
+在我们的 Demo 里我们会把它保存到一个文件系统的文件里
 
 239
 00:09:35,096 --> 00:09:37,697
-system cuz I wanna show you how the file system works.
+cuz I wanna show you how the file system works.
+因为我想要给你展示文件系统是如何工作的。
 
 240
 00:09:37,699 --> 00:09:39,064
 But really, most likely,
+不过实际上，最最可能的，
 
 241
 00:09:39,066 --> 00:09:42,267
 you're gonna save it to the device's photo library, 'kay?
+你将会把它保存到设备的照片库（Photo Library），
 
 242
 00:09:42,269 --> 00:09:44,936
 That probably if someone takes a photo and you wanna save it,
+如果有人拍了一张照片，你想保存它，
 
 243
 00:09:44,938 --> 00:09:47,472
 that's likely where you would store, you might store in
+照片库可能是你愿意保存它的地方，你可能会把它存到
 
 244
 00:09:47,474 --> 00:09:49,740
 the file system but more like in the photo library,
+文件系统中不过存到照片库中是更加可能的，
 
 245
 00:09:49,742 --> 00:09:52,376
-you do all that with this, I'm not gonna for time reasons,
+you do all that with this, I'm not gonna, for time reasons, cover that,
+你使用这个 ALAssetsLibrary 来做这些事，因为时间原因我不会讲这个
 
 246
 00:09:52,378 --> 00:09:54,545
-cover that, but.
+but,
+但是
 
 247
 00:09:54,546 --> 00:09:56,713
-You an check out this class's ALAssetsLibrary, it's pretty
+You can check out this class ALAssetsLibrary,
+你可以去查看这个 ALAssetsLibrary 类，
 
 248
 00:09:56,715 --> 00:09:59,849
-straightforward how you access the assets library, and
+it's pretty straightforward how you access the assets library,
+使用它来访问 AssetsLibrary 是非常直观的，
 
 249
 00:09:59,851 --> 00:10:02,418
-you can put things in the photo library there.
+and you can put things in the photo library there.
+并且你可以用它来往照片库中放东西。
 
 250
 00:10:02,420 --> 00:10:04,070
 By the way,
+顺便说一下，
 
 251
 00:10:04,071 --> 00:10:05,721
 the UIImagePickerController is kind of an old API,
+UIImagePickerController 是一个老旧的 API，
 
 252
 00:10:05,723 --> 00:10:08,424
-it's a simple way to get things with the camera, but
+it's a simple way to get things with the camera,
+它是一个从相机获取东西的简单方法，
 
 253
 00:10:08,426 --> 00:10:10,926
-there's a whole, much more powerful API called
+but there's a whole, much more powerful API called AVCaptureDevice,
+不过有一个整得来说更强大的 API 叫做 AVCaptureDevice，
 
 254
 00:10:10,928 --> 00:10:13,995
-AVCaptureDevice, especially if you're getting video,
+especially if you're getting video,
+特别是在你获取视频的时候，
 
 255
 00:10:13,997 --> 00:10:15,763
 you might wanna check into that.
+你可能会想要看看这个东西。
 
 256
 00:10:15,765 --> 00:10:20,234
 It's kind of a more powerful way to do the stuff that
+它是一种更强大的方法来做那些
 
 257
 00:10:20,236 --> 00:10:22,669
 the UIImagePicker can do.
+UIImagePicker 能做的事。
 
 258
 00:10:22,671 --> 00:10:24,304
 So I'm not gonna cover it, but just so
+所以我将不会涉及到这个，但是
 
 259
 00:10:24,306 --> 00:10:26,423
 you know that it's there.
+你们知道有这么个东西了。
 
 260
 00:10:26,424 --> 00:10:28,541
-If you're just getting simple image, or just a simple clip
+If you're just getting simple image, or just a simple clip of video,
+如果你只是获取简单的照片，或者只是获取一段简单的视频
 
 261
 00:10:28,543 --> 00:10:31,677
-of video, you're okay with UIImagePickerController, but
+you're okay with UIImagePickerController,
+使用 UIImagePickerController 是可以的，
 
 262
 00:10:31,679 --> 00:10:34,513
-if you wanna do more with that, then AVCaptureDevice.
+but if you wanna do more with that, then AVCaptureDevice.
+不过如果你想要做的更多，使用 AVCaptureDevice。
 
 263
 00:10:34,515 --> 00:10:37,349
 The last thing about your ImagePickingController is that
+最后一件事关于 ImagePickingController 就是
 
 264
 00:10:37,351 --> 00:10:39,084
 it does support putting overlays.
+它支持放置透明层。
 
 265
 00:10:39,086 --> 00:10:40,885
-So when that camera is on screen and
+So when that camera is on screen
+所以当相机在屏幕上
 
 266
 00:10:40,887 --> 00:10:42,853
-the user's trying to take a picture,
+and the user's trying to take a picture,
+并且用户准备拍一张照片时，
 
 267
 00:10:42,855 --> 00:10:45,956
-you can have your own controls on there, your own buttons or
+you can have your own controls on there, your own buttons
+你可以有自己的控制器放在上面，你自己的按钮
 
 268
 00:10:45,958 --> 00:10:48,258
-whatever you want, using an overlay view.
+or whatever you want, using an overlay view.
+或者任何你想要的，使用一个 Overlay View。
 
 269
 00:10:48,260 --> 00:10:52,862
 The camera is always full screen, of course, so you need
+当然相机总是全屏的，所以你需要
 
 270
 00:10:52,864 --> 00:10:57,433
 to make sure that the view that you're putting overlay,
+确保你放置的透明层，
 
 271
 00:10:57,435 --> 00:11:01,569
 you know, matches up with that screen's bounds,
+你知道的，对齐屏幕的边界，
 
 272
 00:11:01,571 --> 00:11:05,906
 which you can get using the UIScreen classes bounds.
+你能使用 UIScreen 类的 bouns 来获得。
 
 273
 00:11:05,908 --> 00:11:10,143
 You might have your controls actually have the take a photo
+你可能有让你的控制器有一个拍照
 
 274
 00:11:10,145 --> 00:11:11,862
 button.
+按钮。
 
 275
 00:11:11,863 --> 00:11:13,580
 In which case you might wanna hide the Take a Photo button
+在这种情况下你可能想要隐藏本来的拍照按钮
 
 276
 00:11:13,582 --> 00:11:16,082
 that comes with the camera, and you can do that with
+你可以这么做，让
 
 277
 00:11:16,084 --> 00:11:17,950
 showsCameraControls equals false.
+showsCameraControls 等于 false。
 
 278
 00:11:17,952 --> 00:11:19,852
 And then it won't show its Take a Photo button, but
+结果就是本来的拍照按钮不会显示了
 
 279
 00:11:19,854 --> 00:11:21,420
 then you better provide one,
+不过你最好再提供一个，
 
 280
 00:11:21,421 --> 00:11:22,987
 because you won't be able to take a picture otherwise.
+否则的话你就不能拍照了。
 
 281
 00:11:22,990 --> 00:11:26,891
 And then finally, you have this cameraViewTransform.
+最后，你看到这个 cameraViewTransform。
 
 282
 00:11:26,893 --> 00:11:30,128
 Normally, the camera maybe takes a square picture, or
+通常相机也学能拍方的照片
 
 283
 00:11:30,130 --> 00:11:33,531
 it might take its picture, in any case, if the aspect ratio
+或者它可能，任何情况下，如果纵横比
 
 284
 00:11:33,533 --> 00:11:37,034
 doesn't match the aspect ratio of the screen, but you might
+和屏幕的纵横比不匹配，但是你可能
 
 285
 00:11:37,036 --> 00:11:40,437
 want it to basically take a full, you know, basically take
+想要它拍一个完整的，你知道的，就是拍
 
 286
 00:11:40,439 --> 00:11:43,540
 the piece of it that is the aspect ratio of the screen.
+一张纵横比和屏幕一样的照片。
 
 287
 00:11:43,542 --> 00:11:46,309
 And you can do that by controlling the transform of
+你可以做这个通过改变
 
 288
 00:11:46,311 --> 00:11:47,309
 the cameraView.
+相机视图。
 
 289
 00:11:47,311 --> 00:11:49,878
 So AffineTransform there, remember,
+有个 AffineTransform 在那， 记住
 
 290
 00:11:49,880 --> 00:11:52,614
 AffineTransforms are scale, rotation.
+AffineTransforms 是大小和旋转。
 
 291
 00:11:52,616 --> 00:11:54,215
 In translation, so
+在转变中，
 
 292
 00:11:54,217 --> 00:11:58,419
 you can do the scale there to scale it up if you want to.
+所以你能在那里放大它如果你想的话。
 
 293
 00:11:58,421 --> 00:12:00,487
@@ -1379,10 +1460,12 @@ Let's do that, all right.
 294
 00:12:00,489 --> 00:12:03,323
 All right, so that is the ImagePickerController,
+好的，所以这就是 ImagePickerController，
 
 295
 00:12:03,325 --> 00:12:05,959
 let's go ahead and go back to our tracked demo and
+让我们继续，回到我们的 Trax Demo
 
 296
 00:12:05,961 --> 00:12:08,494

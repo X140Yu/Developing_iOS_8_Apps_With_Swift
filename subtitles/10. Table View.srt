@@ -1,1574 +1,1967 @@
 1
 00:00:00,001 --> 00:00:07,706
 [SOUND] Stanford University.
+斯坦福大学
 
 2
 00:00:07,708 --> 00:00:08,706
 >> Okay.
+OK
 
 3
 00:00:08,708 --> 00:00:11,108
 Welcome to Lecture 10 of Stanford CS193P.
+欢迎来到 CS193P 2015 的冬季课程
 
 4
 00:00:11,110 --> 00:00:12,609
 This is Winter 2015.
+这是第十次课
 
 5
 00:00:12,611 --> 00:00:17,447
 Today, we really only have one big topic.
+今天我们会讨论一个很大的话题
 
 6
 00:00:17,449 --> 00:00:18,848
 And I've got one little small topic
+还会讨论几个
 
 7
 00:00:18,850 --> 00:00:20,683
 that I'm gonna talk about.
+比较小的话题
 
 8
 00:00:20,685 --> 00:00:22,518
 At the beginning which is text field.
+最开始讲的是 Text Field
 
 9
 00:00:22,520 --> 00:00:26,088
 But the main topic today is going to be table view, okay?
+但是今天最主要的话题是 Table View
 
 10
 00:00:26,090 --> 00:00:29,624
 And so, table view is a really powerful object is iOS, and
+在 iOS 中，Table View 是一个很强大的对象
 
 11
 00:00:29,626 --> 00:00:31,526
 it uses a lot of the things you've learned already like
+它使用了你们已经学到的，例如代理之类
 
 12
 00:00:31,528 --> 00:00:33,361
 delegation.
+的东西
 
 13
 00:00:33,362 --> 00:00:35,195
 And you'll get a chance to see how,
+你们有机会将会看到
 
 14
 00:00:35,198 --> 00:00:37,231
 once you kind of have the basic concept,
+一旦你掌握了基本的概念
 
 15
 00:00:37,233 --> 00:00:39,933
 you can build this powerful user interface features.
+就可以建造很强大 UI 特性
 
 16
 00:00:39,935 --> 00:00:42,902
 But let's take a minute or two to talk about text field,
+但是我们先花几分钟讨论一下 Text Field
 
 17
 00:00:42,904 --> 00:00:46,605
 because I actually used a text field in the last demo.
+因为我在上一个 demo 里使用了它
 
 18
 00:00:46,607 --> 00:00:49,808
 Okay. A text field,
+OK，Text Field
 
 19
 00:00:49,809 --> 00:00:53,010
 it's kind of like UI label, but it's editable.
+它有点像 Label, 但是它可以被编辑
 
 20
 00:00:53,013 --> 00:00:57,148
 Text fields are not a big deal on the iPhone because
+在 iPhone 上 Text Field 不是很重要
 
 21
 00:00:57,150 --> 00:00:59,851
 you want to try and build your UIs to not use them,
+因为在搭建 UI 的时候会尽力避免使用它们
 
 22
 00:00:59,853 --> 00:01:02,953
 because that keyboard is so small on a phone.
+在手机上，键盘太小了
 
 23
 00:01:02,955 --> 00:01:07,891
 On an iPad, a little more useful to have TextField,
+在 iPad 上，Text Field 会有一点用处
 
 24
 00:01:07,893 --> 00:01:10,293
 but even there users would rather just be click,
+但即使这样，用户还是喜欢通过点击
 
 25
 00:01:10,295 --> 00:01:11,527
 touching on things and
+触摸东西
 
 26
 00:01:11,529 --> 00:01:14,397
 things without having to, you know, hit that keyboard.
+而不是点击键盘
 
 27
 00:01:14,399 --> 00:01:18,500
 And when you're building a UI and you pull, put a TextField,
+当你在搭建 UI 的时候放入了一个 Text Field
 
 28
 00:01:18,502 --> 00:01:20,301
 it'll seem like oh, this is great.
+看起来好像还不错
 
 29
 00:01:20,303 --> 00:01:21,869
 That's because in the simulator you can use your
+因为那是在模拟器中，你可以使用
 
 30
 00:01:21,871 --> 00:01:23,037
 keyboard on your computer.
+电脑上的键盘
 
 31
 00:01:23,039 --> 00:01:25,673
 And it seems like, wow I really like this UI.
+这会给你造成一种你很喜欢这种 UI 的假象
 
 32
 00:01:25,675 --> 00:01:26,907
 But then when your users get it,
+但是当用户使用的时候
 
 33
 00:01:26,909 --> 00:01:29,175
 they're like, I hate this UI.
+他们会不讨厌这个 UI 的
 
 34
 00:01:29,177 --> 00:01:30,343
 Okay?
+OK?
 
 35
 00:01:30,345 --> 00:01:31,877
 So, be careful with UITextField.
+所以使用 Text Field 的时候慎重一点
 
 36
 00:01:31,879 --> 00:01:33,579
 But there's sometimes when you just absolutely
+但是也有时候你必须从用户那里
 
 37
 00:01:33,581 --> 00:01:37,215
 need an arbitrary string from the user and so you need it.
+接收一些字符，这时候，你就需要它了
 
 38
 00:01:38,251 --> 00:01:40,301
 Now, the keyboard,
+键盘
 
 39
 00:01:40,302 --> 00:01:42,352
 that little software keyboard appears whenever your
+当 Text Field 变成了 first responder(第一回应者)
 
 40
 00:01:42,355 --> 00:01:46,223
 text field becomes what's called the first responder.
+键盘就会弹出
 
 41
 00:01:46,225 --> 00:01:47,924
 When a text field becomes a first responder,
+当 Text Field 变成 First Responder
 
 42
 00:01:47,926 --> 00:01:50,894
 the keyboard will slide up from the bottom.
+键盘慧聪底部滑出
 
 43
 00:01:50,896 --> 00:01:51,761
 Okay.
+OK
 
 44
 00:01:51,763 --> 00:01:54,597
 You can make the keyboard appear, and
+你可以通过
 
 45
 00:01:54,599 --> 00:01:57,700
 cause the little blinking carrot to start by sending
+发送 becomeFirstResponder 消息
 
 46
 00:01:57,702 --> 00:01:59,267
 become first responder.
+给 Text Field
 
 47
 00:01:59,269 --> 00:02:03,138
 That message, to a text field.
+来让键盘显示出来
 
 48
 00:02:03,140 --> 00:02:07,808
 Or if you wanted to make the keyboard go away,
+如果你想让键盘消失
 
 49
 00:02:09,412 --> 00:02:11,878
 you can do that by saying resign first responder.
+你可以发送 resignFirstResponder 消息
 
 50
 00:02:11,880 --> 00:02:13,046
 So it's that first responder thing.
+这就是关于 first responder 的事情
 
 51
 00:02:13,048 --> 00:02:15,415
 That's what decides whether they keyboard's up, and
+它决定了键盘是否出现
 
 52
 00:02:15,417 --> 00:02:17,049
 whether the blinking caret is there.
+闪动的光标是否在那里
 
 53
 00:02:17,051 --> 00:02:17,883
 Okay, very easy.
+非常简单
 
 54
 00:02:19,286 --> 00:02:21,653
 The text field, unlike UI label,
+Text Field 不像 Label
 
 55
 00:02:21,655 --> 00:02:24,655
 does most of its communication with the UI via delegation.
+Text Field 是通过 delegate 与 UI 交流的
 
 56
 00:02:24,657 --> 00:02:26,657
 That's why I don't really
+这就是为什么
 
 57
 00:02:26,658 --> 00:02:28,658
 teach it to you until you've already learned delegation.
+我在你们学习 delegate 之后才讲它
 
 58
 00:02:30,229 --> 00:02:33,096
 One of the most important text field delegate methods is text
+Text Field 最重要的一个 delegate 方法是
 
 59
 00:02:33,098 --> 00:02:35,498
 field should return.
+textFieldShouldReturn
 
 60
 00:02:35,499 --> 00:02:37,899
 And that happens when someone on the little keyboard presses
+在用户点击键盘上的 return 键之后
 
 61
 00:02:37,902 --> 00:02:39,869
 the Return key,
+发生
 
 62
 00:02:39,870 --> 00:02:41,837
 which sometimes says search, sometimes it says go.
+那个键也有可能是 search 或 go 
 
 63
 00:02:41,839 --> 00:02:43,105
 Sometimes it says return.
+某时是 return
 
 64
 00:02:43,107 --> 00:02:46,274
 Just depends on what kind of keyboard you have configured.
+只取决于你设置的是哪种类型的键盘
 
 65
 00:02:46,276 --> 00:02:49,544
 And a lot of times in that should return, you are going
+大部分情况下都是 return
 
 66
 00:02:49,546 --> 00:02:52,513
 to resign first responder, because the users hit Return,
+你需要调用 resignFirstResponder 因为用户点击了 return
 
 67
 00:02:52,515 --> 00:02:54,281
 they want you to take the text they type in and
+用户想让你获取他们输入的内容
 
 68
 00:02:54,283 --> 00:02:55,182
 do something with it.
+然后处理它们
 
 69
 00:02:55,184 --> 00:02:56,816
 You can make the keyboard go away.
+你可以让键盘隐藏
 
 70
 00:02:59,253 --> 00:03:00,619
 This does return a Boole.
+这个方法返回一个 Bool
 
 71
 00:03:00,621 --> 00:03:02,387
 Actually, I didn't really show that on the slide there, but
+我没有在课件上展示
 
 72
 00:03:02,389 --> 00:03:03,755
 it does return a boule.
+但它确实返回一个 Bool
 
 73
 00:03:03,757 --> 00:03:05,957
 And that boule is whether it should do what it normally
+当用户点击 return 的时候
 
 74
 00:03:05,959 --> 00:03:07,858
 does when the user hits return,
+这个 bool 就会做相应的事情
 
 75
 00:03:07,860 --> 00:03:10,027
 which is usually going to be to do target action.
+通常应该是 target action
 
 76
 00:03:10,029 --> 00:03:13,497
 Because UI text field is a UI control, so
+因为 Text Field 是个 UI Control
 
 77
 00:03:13,499 --> 00:03:15,432
 it can also be set up to do target action.
+所以它可以完成 target action
 
 78
 00:03:15,434 --> 00:03:17,333
 But usually, we get involved with the delegate because we
+但通常，我们使用 delegate
 
 79
 00:03:17,335 --> 00:03:21,837
 want this resign first responder activity going on.
+因为我们想让这个 resignFirstResponder 行为发生
 
 80
 00:03:21,839 --> 00:03:24,806
 So you can find out that the editing has ended.
+所以你可以发现编辑已经结束了
 
 81
 00:03:24,808 --> 00:03:26,207
 Either by the person who didn't return,
+即使用户没有 return
 
 82
 00:03:27,377 --> 00:03:31,712
 by the text field did end editing delegate method, or
+通过 textfield 的 didEndEditing delegate 方法
 
 83
 00:03:31,714 --> 00:03:35,382
 you can also just set up target action Ctrl+drag to
+你也可以通过 Ctrl+Drag 设置 target action
 
 84
 00:03:35,384 --> 00:03:40,186
 have it in action when it ends.
+当编辑结束时让它有所动作
 
 85
 00:03:40,188 --> 00:03:42,788
 The keyboard, so the keyboard,
+对于键盘来说
 
 86
 00:03:42,790 --> 00:03:45,424
 you'd think that there would be a class like UIKeyboard or
+你们可能认为会有 UIKeyboard 类
 
 87
 00:03:45,426 --> 00:03:48,794
 something and to do things with, but really not.
+或者之类的东西，但是其实是没有的
 
 88
 00:03:48,796 --> 00:03:52,063
 The keyboard appears because as a side of effect of
+键盘出现时因为一个叫做 UITextInputTraits
 
 89
 00:03:52,065 --> 00:03:57,201
 a protocol called the UI text input traits protocol so
+协议的影响
 
 90
 00:03:57,203 --> 00:03:59,903
 objects like UA text field that implement this,
+UITextField 之类的对象需要实现它
 
 91
 00:03:59,905 --> 00:04:01,538
 they get to configure the keyboard.
+来设置键盘
 
 92
 00:04:01,540 --> 00:04:02,572
 What type it is,
+它的类型是什么
 
 93
 00:04:02,574 --> 00:04:05,475
 what auto-capitalization it's doing.
+是否自动大写
 
 94
 00:04:05,477 --> 00:04:08,244
 You know, whether it's secure text we saw.
+是否是安全输入
 
 95
 00:04:08,246 --> 00:04:12,781
 We use secure text entry when we did the demo before.
+在之前的 demo 我们使用了安全输入
 
 96
 00:04:12,783 --> 00:04:16,684
 So all these actually are not methods that are on text field
+所以这些基本不是我们
 
 97
 00:04:16,686 --> 00:04:18,102
 natively.
+在 text field 上使用的方法
 
 98
 00:04:18,103 --> 00:04:19,519
 They're actually because text field is implementing this UI
+这是因为 text field 实现了
 
 99
 00:04:19,522 --> 00:04:20,688
 text input traits.
+UITextInputTraits 协议
 
 100
 00:04:20,690 --> 00:04:23,557
 And that's how you configure the keyboard.
+它才让你设置键盘
 
 101
 00:04:23,559 --> 00:04:24,875
 All right?
+懂了吗？
 
 102
 00:04:24,876 --> 00:04:26,192
 And of course, text field implements that, and
+当然 TextField 实现这些
 
 103
 00:04:26,194 --> 00:04:29,796
 the other object it implements is UITextView, which is a very
+其他实现的是 UITextView 
 
 104
 00:04:29,798 --> 00:04:35,901
 powerful text editing object, multi-line, multi-font, etc.
+它是一个非常强大的编辑对象，多行，多种字体等等
 
 105
 00:04:35,903 --> 00:04:38,270
 The keyboard, when it comes up from the bottom,
+从底部弹出的键盘
 
 106
 00:04:38,272 --> 00:04:41,439
 it comes up on top of other views, okay?
+出现在其他 view 之上
 
 107
 00:04:41,441 --> 00:04:43,841
 So you are responsible, when that keyboard comes up,
+当键盘弹出时，你需要负责任
 
 108
 00:04:43,843 --> 00:04:46,644
 for moving anything out of the way that needs to still be
+把仍然需要显示给用户的东西
 
 109
 00:04:46,646 --> 00:04:47,411
 visible.
+提上去
 
 110
 00:04:47,413 --> 00:04:49,179
 Especially if, for
+尤其是对于
 
 111
 00:04:49,180 --> 00:04:50,946
 example, the text field the user clicked on that caused
+用户在屏幕底部点击了一个 TextField
 
 112
 00:04:50,949 --> 00:04:53,283
 the keyboard to happen is at the bottom of the screen.
+键盘从底部弹起
 
 113
 00:04:53,285 --> 00:04:55,685
 It will just get covered right up, so now the user's like,
+刚好把它盖住了，用户就会觉得
 
 114
 00:04:55,687 --> 00:04:58,020
 whoa, where's that thing that I was typing in?
+我刚才输入的地方跑哪去了？
 
 115
 00:04:58,022 --> 00:05:00,456
 So you're responsible for moving that.
+所以你应该负责移动它
 
 116
 00:05:00,458 --> 00:05:02,958
 A lot of times, you're gonna put your text fields at
+大部分情况下，你需要把 TextField 放在顶部
 
 117
 00:05:02,960 --> 00:05:05,293
 the top so that you don't have that problem.
+所以你不需要应对这个问题
 
 118
 00:05:05,295 --> 00:05:08,062
 Or your text field might be in a static table view.
+或者把 TextField 放在静态的 TableView 中
 
 119
 00:05:08,064 --> 00:05:10,898
 I'm gonna talk about table views today.
+我们今天会讨论 TableView
 
 120
 00:05:10,900 --> 00:05:12,183
 In which case,
+在这种情况下
 
 121
 00:05:12,184 --> 00:05:13,467
 TableView will automatically scroll it up out of the way.
+TableView 会自动滑上去
 
 122
 00:05:13,469 --> 00:05:15,135
 You don't have to worry about it.
+你不需要担心这个问题
 
 123
 00:05:15,137 --> 00:05:16,336
 But, if you have a UI,
+但是，如果你有这样一个 UI
 
 124
 00:05:16,338 --> 00:05:18,705
 where you have a text field down at the bottom, and
+TextField 在底部
 
 125
 00:05:18,707 --> 00:05:20,773
 the keyboard comes up, and you have to move it,
+键盘弹出来，你需要移动 TextField
 
 126
 00:05:20,775 --> 00:05:23,842
 you're gonna have to learn how to do this NSNotification
+你就需要学习一下 NSNotification 
 
 127
 00:05:23,844 --> 00:05:24,609
 business.
+的知识
 
 128
 00:05:24,611 --> 00:05:26,378
 Because the way to find out that
+你通过获取 UIKeyboardDidShowNotification
 
 129
 00:05:26,380 --> 00:05:28,980
 the keyboard appeared is you get this notification
+通知，来得知
 
 130
 00:05:28,982 --> 00:05:31,115
 called the UIKeyboardDidShowNotification.
+键盘已经弹出
 
 131
 00:05:31,117 --> 00:05:34,184
 So, not really gonna go into notifications today.
+我们今天不会谈论 notification
 
 132
 00:05:34,186 --> 00:05:36,286
 You're not gonna have to do any of this for
+你不需要在你的作业中使用这些
 
 133
 00:05:36,288 --> 00:05:38,105
 any of your homework assignments but
+所以你不需要担心
 
 134
 00:05:38,106 --> 00:05:39,923
 when you get to your final project just know that this is
+但是如果在最后的作业里，你需要处理键盘的问题
 
 135
 00:05:39,925 --> 00:05:41,290
 how you're gonna have to deal with the keyboard.
+你需要这里的知识
 
 136
 00:05:41,292 --> 00:05:43,959
 If you have a text field or some text
+如果有一个 TextField 
 
 137
 00:05:43,961 --> 00:05:46,128
 typeable thing down towards the bottom of the screen.
+在屏幕底部之类的
 
 138
 00:05:47,264 --> 00:05:47,829
 Okay?
+OK?
 
 139
 00:05:48,998 --> 00:05:52,133
 Other properties on text field I'm not gonna go into but
+我不会介绍 TextField 中的其他属性
 
 140
 00:05:52,135 --> 00:05:54,168
 we'll see a couple of them in the demo today cuz I'm gonna
+但是我们会在 demo 中见到
 
 141
 00:05:54,170 --> 00:05:55,669
 do text field again.
+我们会再做一次 TextField
 
 142
 00:05:55,671 --> 00:05:58,438
 But you can look them up in the documentation.
+但是你可以在文档中查看它们
 
 143
 00:05:58,440 --> 00:05:59,939
 Obviously just things to configure the way
+都是些很明显的属性
 
 144
 00:05:59,941 --> 00:06:02,341
 the text field inputs or displays.
+配置 TextField 输入或显示
 
 145
 00:06:03,778 --> 00:06:06,578
 Text fields also have left and right overlays for
+TextField 也有左右的小图标
 
 146
 00:06:06,580 --> 00:06:08,146
 little things like search.
+为了例如做搜索一样的工作
 
 147
 00:06:08,148 --> 00:06:10,648
 You've probably seen text fields that have a little icon
+你可能也已经看过有小图标的 TextField
 
 148
 00:06:10,650 --> 00:06:13,117
 for search that you can click on there.
+你可以点击它进行搜索
 
 149
 00:06:13,119 --> 00:06:15,185
 Or like a little icon that says whether you're doing find
+或者做一些查找替换
 
 150
 00:06:15,187 --> 00:06:17,688
 or find and replace or something like that.
+之类的工作
 
 151
 00:06:17,690 --> 00:06:19,155
 That's all in there too.
+它们都在这里
 
 152
 00:06:19,157 --> 00:06:20,223
 So it's pretty powerful.
+所以 TextField 很强大
 
 153
 00:06:20,225 --> 00:06:23,959
 The little control.
+这个小控件
 
 154
 00:06:23,961 --> 00:06:28,897
-The keyboard, it gets enhanced by this inputAccessoryView.
+The keyboard, it gets enhanced by this InputAccessoryView.
+键盘，可以通过 InputAccessoryView 得到加强
 
 155
 00:06:28,899 --> 00:06:32,200
 So that's, again, a method in the UITextfield.
+它是 UITextField 中的一个方法
 
 156
 00:06:32,202 --> 00:06:34,168
 And you set a view, the UIView.
+你设置这个 view，UIView 类型
 
 157
 00:06:34,170 --> 00:06:36,003
 And when the keyboard comes up,
+当键盘弹出的时候
 
 158
 00:06:36,005 --> 00:06:38,739
 that UIview will appear along the top of the keyboard.
+这个 view 会出现在键盘的顶部
 
 159
 00:06:38,741 --> 00:06:41,041
 So you can add extra buttons there or
+所以你可以在上面添加按钮
 
 160
 00:06:41,043 --> 00:06:42,542
 any kind of mechanism.
+或者其他东西
 
 161
 00:06:42,544 --> 00:06:43,843
 So that's how you enhance the keyboard.
+这就是你增强键盘的方式
 
 162
 00:06:45,446 --> 00:06:47,246
 All right, so that's enough text field.
+这对于 TextField 来说足够了
 
 163
 00:06:47,248 --> 00:06:48,814
 Again, I'm going to be using the demo today, so
+我一会儿会做一个 demo
 
 164
 00:06:48,816 --> 00:06:50,215
 you'll see a little bit more.
+所以你可以看到更多
 
 165
 00:06:50,217 --> 00:06:53,084
 But today mostly we're going to talk about UITableView.
+但是今天的重点是 UITableView
 
 166
 00:06:53,086 --> 00:06:56,020
 So, UITableView is very important class for
+UITableView 是为了展示数据的
 
 167
 00:06:56,022 --> 00:06:57,338
 displaying data.
+一个非常重要的类
 
 168
 00:06:57,339 --> 00:06:58,655
 Especially when you have a large amount of data
+尤其是有大量的数据
 
 169
 00:06:58,657 --> 00:06:59,756
 to display.
+需要显示
 
 170
 00:06:59,758 --> 00:07:02,425
 It's essentially a one dimensional table.
+它本质上是一个一维的表格
 
 171
 00:07:02,427 --> 00:07:05,395
 A list if you want to think of it that way, some people think
+你也可以把它想象成一个列表
 
 172
 00:07:05,397 --> 00:07:06,796
 it maybe should have been called List View,
+一些人认为它应该被叫做 ListView
 
 173
 00:07:06,798 --> 00:07:09,531
 but you'll see that Table View ends up being
+但是你会发现，TableView 
 
 174
 00:07:09,533 --> 00:07:10,499
 a pretty good name for it.
+是一个很适合它的名字
 
 175
 00:07:10,501 --> 00:07:11,666
 But it's a one dimensional list,
+但是它是一个一维的列表
 
 176
 00:07:11,668 --> 00:07:13,401
 it's a subclass of UIScrollView, so
+它是 UIScrollView 的子类
 
 177
 00:07:13,403 --> 00:07:16,837
 it has all the things that scrolling can do of course.
+所以它拥有所有 ScrollView 的功能
 
 178
 00:07:16,839 --> 00:07:19,406
 And it's very efficient with large sets of data.
+它在拥有大量数据的时候非常有效率
 
 179
 00:07:19,408 --> 00:07:22,409
 So you can imagine having a list of all the songs in
+所以你可以想象，在你手机的 iPod 中
 
 180
 00:07:22,411 --> 00:07:26,312
 the iPod part of your phone showing in an app,
+有许多歌曲
 
 181
 00:07:26,314 --> 00:07:28,981
 even if you have tens of thousands of them, okay?
+即使有上千首歌曲
 
 182
 00:07:28,983 --> 00:07:31,584
 TableView knows how to be efficient with that.
+TableView 只要如何有效率地处理它们
 
 183
 00:07:32,653 --> 00:07:34,419
 Now, what about multi-dimensional tables,
+那么多维的 Table 呢？
 
 184
 00:07:34,421 --> 00:07:36,021
 tables that have rows and columns?
+有行和列的表格
 
 185
 00:07:36,023 --> 00:07:39,023
 Well we usually do that with multiple table views inside
+我们通常把多个 TableView 嵌入
 
 186
 00:07:39,025 --> 00:07:41,325
 a navigation controller.
+NavigationController 中
 
 187
 00:07:41,327 --> 00:07:43,894
 So you'll pick something from column one and it's going
+你从第一列中选择了一个东西
 
 188
 00:07:43,896 --> 00:07:46,063
 to show you column two that matches column one and
+它展示给你了第二列，关联第一列的东西
 
 189
 00:07:46,065 --> 00:07:48,498
 you pick something there, and it's going push over,
+你在其中选择的一个
 
 190
 00:07:48,500 --> 00:07:49,532
 show you the next one.
+它展现给你下一列
 
 191
 00:07:49,534 --> 00:07:51,934
 So that's basically how you get through,
+这就是你实现的方式
 
 192
 00:07:51,936 --> 00:07:54,603
 how you build multi-dimension tables which.
+如何在电话，这个如此小的设备上
 
 193
 00:07:54,605 --> 00:07:57,139
 Kind of have to do it that way on a small device like
+搭建多维表格
 
 194
 00:07:57,141 --> 00:07:59,674
 a phone, unless the fonts going to be really tiny
+除非字体变得非常小
 
 195
 00:07:59,676 --> 00:08:03,578
 because you can't build a big actual two-dimensional table.
+因为你无法建立真正的二维表格
 
 196
 00:08:03,580 --> 00:08:05,346
 So, the combination of table view and
+所以把 TableView 和 UINavigationController
 
 197
 00:08:05,348 --> 00:08:07,247
 UINavigation Controller is pretty cool for
+结合在一起搭建多维表格
 
 198
 00:08:07,249 --> 00:08:10,050
 building multi-dimensional tables.
+是非常酷的方式
 
 199
 00:08:10,052 --> 00:08:12,452
 Now, there's different kinds of table views and
+这里有不同种类的 TableView 
 
 200
 00:08:12,454 --> 00:08:14,220
 I'm going to show you pictures of them.
+我给你们展示一下它们的图片
 
 201
 00:08:14,222 --> 00:08:18,724
 You want to configure the table view to display in a way
+你希望让 TableView 通过一种匹配你数据的方式
 
 202
 00:08:18,726 --> 00:08:20,359
 that matches your data.
+来展示数据
 
 203
 00:08:20,361 --> 00:08:23,961
 So let's take a look at some of these different
+所以我们一起来看看
 
 204
 00:08:23,963 --> 00:08:25,196
 kind of looks.
+这几种不同的显示方式
 
 205
 00:08:25,198 --> 00:08:27,865
 One is a plain style.
+第一种是 Plain Style
 
 206
 00:08:27,867 --> 00:08:29,633
 You can see that one on the left.
+左边的就是
 
 207
 00:08:29,635 --> 00:08:31,001
 And the other one is a group style.
+另一种是 Group Style
 
 208
 00:08:31,003 --> 00:08:33,703
 Now a group style you can actually see that the little
+Group Style 可以把一列的信息管理起来
 
 209
 00:08:33,705 --> 00:08:36,739
 rows are kind of grouped so like in miles,
+比如 kilometers 和 miles 
 
 210
 00:08:36,741 --> 00:08:39,375
 in kilometers is grouped into the distance as a group.
+被放进了 DISTANCE 组里面
 
 211
 00:08:39,377 --> 00:08:42,277
 And then driving and walking is grouped into the preferred
+Driving 和 Walking 被放进了
 
 212
 00:08:42,279 --> 00:08:44,379
 directions group there.
+PREFERRED DIRECTIONS 组里面
 
 213
 00:08:44,381 --> 00:08:47,949
 Whereas the plain style is just a big long list.
+但是 Plain Style 只是一个长长的列表
 
 214
 00:08:47,951 --> 00:08:50,518
 That can be divided into sections as well, but
+它们可以被分进不同的 section 中
 
 215
 00:08:50,520 --> 00:08:52,286
 it's mostly just a big long list.
+但是它仅仅是一个长长的列表
 
 216
 00:08:52,288 --> 00:08:54,721
 Usually the plain style is for
+通常 Plain Style 用于动态的数据
 
 217
 00:08:54,723 --> 00:08:58,425
 dynamic data, like all the songs coming out of your iPod.
+例如显示你 iPod 中的所有歌曲
 
 218
 00:08:58,427 --> 00:09:00,927
 The group style is more for fixed data like
+Group Style 用于固定的数据
 
 219
 00:09:00,929 --> 00:09:03,896
 the settings app, you know, in your iPhone the setting app.
+就像 iPhone 中的设置应用
 
 220
 00:09:03,898 --> 00:09:05,598
 If you look in there,
+如果你打开它看一看
 
 221
 00:09:05,599 --> 00:09:07,299
 a lot of table views in there, all with the group style,
+其中有许多 TableView 都是 Group Style
 
 222
 00:09:07,301 --> 00:09:09,434
 and what's in there is kind of fixed, more static.
+其中的都是固定的静态数据
 
 223
 00:09:11,871 --> 00:09:14,905
 So let me talk about some of the words we used to describe
+现在我们来看看 TableView 中的
 
 224
 00:09:17,410 --> 00:09:18,459
 the parts of a table view.
+一些相关词汇
 
 225
 00:09:18,460 --> 00:09:19,509
 This part at the top of the table view is called the table
+Table View 上面这个部分叫做 
 
 226
 00:09:19,511 --> 00:09:21,745
 header, it's a UIView.
+Table Header，它是个 UIView 
 
 227
 00:09:21,747 --> 00:09:23,780
 I'm going to put along the bottom here,
+我放在底部的这些是
 
 228
 00:09:23,782 --> 00:09:25,681
 is just going to be the code.
+一些代码
 
 229
 00:09:25,683 --> 00:09:27,282
 Like the name of the property or
+类似于与之相关的属性
 
 230
 00:09:27,284 --> 00:09:29,151
 the function that accesses this thing.
+或者方法名
 
 231
 00:09:29,153 --> 00:09:31,319
 But you obviously don't know any of that yet.
+但是显然你们还不知道这些
 
 232
 00:09:31,321 --> 00:09:32,771
 So this is morely for
+这些是为了你们以后翻课件的时候
 
 233
 00:09:32,772 --> 00:09:34,222
 reference when you're looking back at the slides later.
+方便查找而放置的
 
 234
 00:09:35,425 --> 00:09:36,757
 So there's the table header,
+这是 Table Header
 
 235
 00:09:36,759 --> 00:09:39,926
 it's at the top of the entire table, it's a UIView.
+它在整个 Table 的上部，是一个 UIView
 
 236
 00:09:39,928 --> 00:09:41,861
 You can put things in there like a text field if
+如果你想给 Table 添加搜索功能
 
 237
 00:09:41,863 --> 00:09:44,230
 you wanted to add searching to your table, things like that,
+你可以把 TextField 放到这里
 
 238
 00:09:44,232 --> 00:09:45,865
 we'll do that in the demo.
+我们将在 demo 里这么做
 
 239
 00:09:45,867 --> 00:09:48,934
 There's also a corresponding table footer, at the bottom,
+也有与之相关的 Table Footer，在底部
 
 240
 00:09:48,936 --> 00:09:50,936
 that's also UIView.
+也是 UIView
 
 241
 00:09:50,938 --> 00:09:52,237
 It's at the very bottom of the table.
+在 Table 的最底部
 
 242
 00:09:52,239 --> 00:09:54,939
 If you had 10,000 iPod items it'd be way down at
+如果 iPod 里有 一万首歌
 
 243
 00:09:54,941 --> 00:09:56,174
 the very bottom,
+它会在非常非常底部
 
 244
 00:09:56,175 --> 00:09:57,408
 you'd have to scroll all the way to 10,000 to get to that.
+你必须划过这个一万首歌才能看到它
 
 245
 00:09:58,444 --> 00:10:01,078
 Then, all the information is divided into up into
+所有的信息可以被分入
 
 246
 00:10:01,080 --> 00:10:02,879
 sections, okay.
+不同的 section
 
 247
 00:10:02,881 --> 00:10:05,415
 So you can have any number of sections in the table view.
+你可以在 Table View 中拥有任意数量的 section
 
 248
 00:10:05,417 --> 00:10:07,350
 And each section has a header,
+每个 section 都有一个 header
 
 249
 00:10:07,352 --> 00:10:10,119
 a section header like that, okay.
+它是这个样子的
 
 250
 00:10:10,121 --> 00:10:12,721
 And of course, each section also has a section footer.
+当然，每个 section 都有一个 footer
 
 251
 00:10:14,224 --> 00:10:16,141
 The section footer and
+Footer 和 header
 
 252
 00:10:16,142 --> 00:10:18,059
 the section header are usually just strings but there's also
+通常都是字符串，但是也有一种方式
 
 253
 00:10:18,061 --> 00:10:20,661
 a way to make them be UIViews as well, if you really wanted
+能把它们变成 UIView
 
 254
 00:10:20,663 --> 00:10:22,896
 complicated headers and footers.
+如果你想要复杂的 header 和 footer
 
 255
 00:10:23,865 --> 00:10:25,898
 And then you have what are called the table cells,
+Table View 中有 Table View Cell
 
 256
 00:10:25,900 --> 00:10:28,217
 so that's the actual data.
+那是真是数据的地方
 
 257
 00:10:28,218 --> 00:10:30,535
 This would be the actual songs in your iPod would be shown
+在每一行里展示的，都是你 iPod 中
 
 258
 00:10:30,538 --> 00:10:32,338
 here in each row.
+真实的歌曲
 
 259
 00:10:32,340 --> 00:10:34,439
 And these table cells are highly configurable to show
+这个 cell 为了在 table 中
 
 260
 00:10:34,441 --> 00:10:36,508
 all kinds of information for
+展示各种数据
 
 261
 00:10:36,510 --> 00:10:39,744
 each piece of data in your table.
+都是高度可定制的
 
 262
 00:10:39,746 --> 00:10:43,214
 Okay, so that's basically the terminology we use.
+这些就是我们使用的基本术语
 
 263
 00:10:43,216 --> 00:10:45,649
 So that's what it all looks like in plain style.
+Plain Style 是这个样子的
 
 264
 00:10:45,651 --> 00:10:48,585
 We use the exact same terminology in group style, so
+我们在 Group Style 也使用相同的术语
 
 265
 00:10:48,587 --> 00:10:50,620
 it looks like this, okay.
+它看起来是这样的
 
 266
 00:10:50,622 --> 00:10:52,655
 See the section headers are kind of the names of
+每个部分的标题，是每个 group 的
 
 267
 00:10:52,657 --> 00:10:55,408
 the groups.
+名字
 
 268
 00:10:55,409 --> 00:10:58,160
 All right, here's what a table looks like,
+Table View 长这个样子
 
 269
 00:10:58,162 --> 00:10:59,461
 I hope that shows up.
+我希望你们都看到了
 
 270
 00:10:59,463 --> 00:11:00,995
 It look a little washed out,
+右边的版本是
 
 271
 00:11:00,997 --> 00:11:04,932
 but the version on the right there has sections.
+section
 
 272
 00:11:04,934 --> 00:11:06,767
 You can see, like above the word Tokyo,
+在 Tokyo 上面
 
 273
 00:11:06,769 --> 00:11:08,568
 there's a little word there, says Japan.
+有一个叫 Japan 的小单词
 
 274
 00:11:08,570 --> 00:11:15,608
 And above Amsterdam, there's a little Netherlands there.
+在 Amsterdam 上面有 Netherlands
 
 275
 00:11:15,610 --> 00:11:17,309
 Those are the section headers.
+这些是 section 的标题
 
 276
 00:11:17,311 --> 00:11:19,128
 Those are the names of the sections.
+是 section 的名字
 
 277
 00:11:19,129 --> 00:11:20,946
 And the one on the left has no section title, so
+左边的没有标题
 
 278
 00:11:20,948 --> 00:11:25,350
 all the things are all just listed not grouped, okay.
+所有的东西仅仅被罗列出来而没有进行分组
 
 279
 00:11:25,352 --> 00:11:30,354
 Now each cell can have one of five different types, okay.
+每一个 cell 可以有五种不同的类型
 
 280
 00:11:30,356 --> 00:11:31,922
 Here's four of them right here.
+这里是其中四种
 
 281
 00:11:31,924 --> 00:11:33,523
 So you got the Subtitle type,
+有 Subtitle 类型
 
 282
 00:11:33,525 --> 00:11:36,459
 which just has some big texts and little text underneath it.
+上面有一大一小两行文字
 
 283
 00:11:36,461 --> 00:11:39,996
 You got Basic, which has no little text underneath it.
+Basic 类型，只有一行大文字
 
 284
 00:11:39,998 --> 00:11:41,931
 You've got the Right Detail and the Left Detail,
+还有 Right Detail 和 Left Detail
 
 285
 00:11:41,933 --> 00:11:43,999
 which is the big text and the little text,
+也是有一大一小两部分文字
 
 286
 00:11:44,001 --> 00:11:46,702
 just kind of arranged a little differently, okay.
+只是被安排了在不同的位置
 
 287
 00:11:46,704 --> 00:11:50,171
 So the type of cell that you choose determines how
+你选择的 cell 类型决定了
 
 288
 00:11:50,173 --> 00:11:53,274
 the big text and the little text are going to appear.
+大小文字是怎样显示的
 
 289
 00:11:53,276 --> 00:11:56,344
 There's a fifth kind of cell type, though, which is custom.
+第五种类型是 custom
 
 290
 00:11:56,346 --> 00:11:59,613
 Which allows you to build whatever you want by dragging
+你可以通过拖拽
 
 291
 00:11:59,615 --> 00:12:02,783
 in UI labels and UI text fields and image views,
+各种 UI 组件
 
 292
 00:12:02,785 --> 00:12:04,951
 whatever you want to do to build your own custom cell.
+决定 cell 的样子
 
 293
 00:12:04,953 --> 00:12:07,020
 And that's what we're going to do in the demo today.
+我们的 demo 就会这么做
 
 294
 00:12:07,989 --> 00:12:09,388
 Okay, so that's the cell type.
+这就是 cell 的类型
 
 295
 00:12:11,025 --> 00:12:12,791
 All right, so how does this whole table view
+怎样才能让 TableView 
 
 296
 00:12:12,793 --> 00:12:13,624
 business work?
+工作呢？
 
 297
 00:12:15,294 --> 00:12:19,363
 There is a class in iOS called UITableViewController,
+在 iOS 中有一个类叫做 UITableViewController
 
 298
 00:12:19,365 --> 00:12:21,698
 it's a subclass of UIViewController.
+它是 UIViewController 的子类
 
 299
 00:12:21,700 --> 00:12:24,667
 And it is kind of a prepackaged way to
+如果在你的 UI 中可以
 
 300
 00:12:24,669 --> 00:12:27,169
 use table view that I highly recommend you use if it's at
+使用它的情况下
 
 301
 00:12:27,171 --> 00:12:28,437
 all possible in your UI.
+我强烈建议你使用
 
 302
 00:12:28,439 --> 00:12:31,306
 The only real limitation of UITableViewController is that
+它唯一的短板就是
 
 303
 00:12:31,308 --> 00:12:36,711
 the entire view of the MVC, has to be a tableView.
+MVC 的全部 view 都必须得是 tableview
 
 304
 00:12:36,713 --> 00:12:38,813
 So if you had some view where you had a tableView and
+如果你的 view 中除了 tableview
 
 305
 00:12:38,815 --> 00:12:41,448
 then some other stuff around it, you would not
+还有其他 UI 组件
 
 306
 00:12:41,450 --> 00:12:44,051
 be using UITableViewController for that.
+你就不能使用 UITableViewController
 
 307
 00:12:44,053 --> 00:12:47,354
 You'd build your own viewController, and you'd just
+你得搭建自己的 ViewController
 
 308
 00:12:47,356 --> 00:12:50,523
 drag in a UITableView, which is just a UIView, okay.
+拽进一个 UITableView，它的类型是 UIView
 
 309
 00:12:51,892 --> 00:12:55,093
 You can add a UITableViewController to your
+你可以直接拽进来一个
 
 310
 00:12:55,095 --> 00:12:58,363
 app just by dragging it out of the object palette there.
+UITableViewController 加入到你的 app 中
 
 311
 00:12:58,365 --> 00:13:00,598
 You can see a TableViewController and
+这个 TableViewController
 
 312
 00:13:00,600 --> 00:13:03,901
 it'll pull the whole MVC out, okay, a UITable, MVC.
+它会是一整个 MVC
 
 313
 00:13:03,903 --> 00:13:07,671
-So, here's UITable UMVC that I've dragged out.
+So, here's UITable MVC that I've dragged out.
+这就是一整个 MVC
 
 314
 00:13:07,673 --> 00:13:10,907
 It's controller is usually a subclass of
+它的 controller 通常是 UITableViewController 的子类
 
 315
 00:13:10,909 --> 00:13:16,512
 UITableViewController, and its view is the tableView, okay.
+它的 view 是 tableview
 
 316
 00:13:16,514 --> 00:13:18,447
 Ultra simple little MVC here.
+非常简单的 MVC
 
 317
 00:13:20,718 --> 00:13:23,418
 But like any UIView controller you're probably going to want
-
+与其他 UIViewController 类似
+ 
 318
 00:13:23,420 --> 00:13:27,922
 to set the class of the controller to be some subclass
+你需要把 controller 设置为 
 
 319
 00:13:27,924 --> 00:13:30,291
 of UITableViewController.
+UITableViewController 的子类
 
 320
 00:13:30,293 --> 00:13:33,360
 So when you do new file to create your subclass make sure
+当你创建子类的时候
 
 321
 00:13:33,362 --> 00:13:37,564
 that you pick subclass of UITableViewController,
+确定你选择了 UITableViewController 的子类
 
 322
 00:13:37,566 --> 00:13:39,532
 if that's the kind of view controller you're making
+如果你使用的是 UITableViewController
 
 323
 00:13:39,534 --> 00:13:41,334
 there, okay.
+OK
 
 324
 00:13:41,336 --> 00:13:43,002
 And then once you do it,
+一旦你这样做了
 
 325
 00:13:43,004 --> 00:13:45,003
 same thing as any other view controller,
+跟其他的 viewcontroller 一样
 
 326
 00:13:45,005 --> 00:13:49,540
 you set the class in the identity inspector, okay.
+需要在 Identity Inspector 设置类
 
 327
 00:13:49,542 --> 00:13:50,274
 Everyone cool with that?
+都懂吧？
 
 328
 00:13:51,410 --> 00:13:55,445
 Now, the way that we're going to kind of connect
+我们使用代码关联 
 
 329
 00:13:55,447 --> 00:13:58,014
 our code to the UITableView
+UITableView 的方式
 
 330
 00:13:58,016 --> 00:14:00,850
 is via two delegates that the UITableView has.
+是通过两个代理
 
 331
 00:14:00,852 --> 00:14:03,719
 One's called delegate and one's called data source.
+其中一个是 data source
 
 332
 00:14:03,721 --> 00:14:06,488
 Okay, and I'm going to talk all about those later in this
+之后
 
 333
 00:14:06,490 --> 00:14:07,555
 presentation.
+我会详细介绍
 
 334
 00:14:07,557 --> 00:14:09,157
 But just know that when you drag out one of
+你需要知道，当你拽出一个
 
 335
 00:14:09,159 --> 00:14:10,858
 these UITableViewController's,
+UITableViewController 的时候
 
 336
 00:14:10,860 --> 00:14:14,528
 it's going to automatically wire up the controller itself,
+它会自动帮你把 tableview 的 delegate 和
 
 337
 00:14:14,530 --> 00:14:17,264
 as both the delegate and the dataSource.
+dataSource 连接起来
 
 338
 00:14:17,266 --> 00:14:19,133
 And in fact,
+实际上
 
 339
 00:14:19,134 --> 00:14:21,001
 if you right clicked on the TableViewController there and
+当你右键单击 TableViewController 的时候
 
 340
 00:14:21,003 --> 00:14:22,101
 you looked at it's connections,
+看其中的连接
 
 341
 00:14:22,103 --> 00:14:24,637
 you'll see dataSource and
+你会看到
 
 342
 00:14:24,638 --> 00:14:27,172
 delegate will be connected there to the TableView, okay.
+data source 和 delegate 已经连接到 TableView 上了
 
 343
 00:14:27,175 --> 00:14:29,508
 Now, if you don't use a UITableViewController,
+如果你不使用 UITableViewController
 
 344
 00:14:29,510 --> 00:14:30,676
 you just use your own ViewController and
+你使用自己的 ViewController
 
 345
 00:14:30,678 --> 00:14:32,110
 you drag out a UITableView,
+你拽进来一个 UITableView
 
 346
 00:14:32,112 --> 00:14:33,711
 you will have to wire up the dataSource and
+你需要手动连接 dataSource
 
 347
 00:14:33,713 --> 00:14:35,346
 delegate yourself.
+还有 delegate
 
 348
 00:14:35,348 --> 00:14:37,147
 Again, usually to your controller, but
+通常来说连接的是你的 controller
 
 349
 00:14:37,149 --> 00:14:40,450
 you could wire up something else but 99% of the time you
+但是你也可以连接其他东西
 
 350
 00:14:40,452 --> 00:14:42,952
 make your controller be the delegate in dataSource for
+但是 99% 的情况下，让你的 controller 成为 UI 中 view 的 delegate 和 dataSource
 
 351
 00:14:42,954 --> 00:14:45,254
 things in the view, just like you did in your calculator.
+就像你在 Calculator 中做的一样
 
 352
 00:14:46,891 --> 00:14:50,826
 Okay, so you can also edit the attributes of the table view
+你也可以编辑 tableview 的属性
 
 353
 00:14:50,828 --> 00:14:52,928
 if you just click on the table view, now,
+如果你点击 tableview
 
 354
 00:14:52,930 --> 00:14:56,931
 when you're clicking on things in a table view sometimes you
+当你点击的时候，有时你想点击 cell
 
 355
 00:14:56,933 --> 00:15:00,068
 want the cell, sometimes you want the table view,
+有时想点击 table view
 
 356
 00:15:00,070 --> 00:15:01,669
 sometimes you want the controller.
+又是你想点 controller
 
 357
 00:15:01,671 --> 00:15:04,638
 So you want to remember that trick I was telling you about,
+所以你需要记住我之前告诉你的小技巧
 
 358
 00:15:04,640 --> 00:15:07,541
 Ctrl + shift and left-click will let you pick something
+Ctrl + shift 然后左键单击，可以让你选择某个东西
 
 359
 00:15:07,543 --> 00:15:10,310
 under the mouse, multi-layers deep, okay.
+在其他层 UI 元素也可以选择
 
 360
 00:15:10,312 --> 00:15:11,844
 I'll show you again in the demo.
+在 demo 中我会再次展示
 
 361
 00:15:13,448 --> 00:15:15,180
 But you want to remember that trick when you're working
+当你在使用 table view 的时候
 
 362
 00:15:15,182 --> 00:15:16,799
 with table views.
+你需要记住这个技巧
 
 363
 00:15:16,800 --> 00:15:18,417
 So, if you click on the table view, not the cells,
+如果你点击 tableview, 而不是 cell
 
 364
 00:15:18,419 --> 00:15:20,169
 not the controller, but
+和 controller
 
 365
 00:15:20,170 --> 00:15:21,920
 the actual table view, then you can obviously inspect it.
+你就可以检查它的属性
 
 366
 00:15:21,922 --> 00:15:23,421
 And so, you can look in there and
+你可以看到
 
 367
 00:15:23,423 --> 00:15:25,956
 see all the various things that you can inspect
+对于 table view 来说
 
 368
 00:15:25,958 --> 00:15:28,158
 about the table view.
+各种不同的属性
 
 369
 00:15:28,160 --> 00:15:29,826
 One thing that's important to set about the table view
+其中之一需要设置的是 tableview 的类型
 
 370
 00:15:29,828 --> 00:15:31,828
 is whether it's plain or grouped.
+是 plain 还是 grouped
 
 371
 00:15:31,830 --> 00:15:34,230
 Okay, so this one that you're seeing is plain.
+现在你们看到的是 plain
 
 372
 00:15:34,232 --> 00:15:36,032
 Here I'm going to switch it over to be grouped.
+在这里我把它变成 grouped
 
 373
 00:15:36,034 --> 00:15:37,367
 Now it's grouped,
+现在它变了
 
 374
 00:15:37,368 --> 00:15:38,701
 you can see in the storyboard it will look grouped,
+在 storyboard 中，它看起来就是 grouped
 
 375
 00:15:38,703 --> 00:15:40,068
 all right.
+好的
 
 376
 00:15:40,070 --> 00:15:43,071
 Another really important thing you can set about the table
+另一个重要的东西可以设置的是
 
 377
 00:15:43,073 --> 00:15:48,242
 view is whether the cells in it are static, or dynamic.
+它 cell 的类型是 static 还是 dynamic 的
 
 378
 00:15:48,244 --> 00:15:49,343
 So let's talk about static first.
+我们先来探讨一下 static
 
 379
 00:15:49,345 --> 00:15:51,044
 So here I'm going to switch to static.
+现在我把它变成 static
 
 380
 00:15:51,046 --> 00:15:55,114
 Static means that these cells in here are determined in
+static 表示，这些 cell 的显示是在
 
 381
 00:15:55,116 --> 00:15:56,449
 the story board.
+stroybard 中设置的
 
 382
 00:15:56,451 --> 00:15:58,517
 So you can drag in buttons, and labels,
+所以你可以拽进来 buttons, labels
 
 383
 00:15:58,519 --> 00:15:59,985
 whatever you want in there.
+你需要的任何
 
 384
 00:15:59,987 --> 00:16:03,388
 Just like, almost like it's just an open area view.
+就像是一个开放区域的 view
 
 385
 00:16:03,390 --> 00:16:04,555
 You can just drag them in there,
+你可以拖拽
 
 386
 00:16:04,557 --> 00:16:07,391
 the table will help group them for you.
+table 将会帮你将它们分组
 
 387
 00:16:07,393 --> 00:16:10,494
 But you can then set outlets to your controller from them.
+随后你可以给它们设置 outlets
 
 388
 00:16:10,496 --> 00:16:13,196
 It's really almost just like it's partitioning the space
+这就好像 table 在为你
 
 389
 00:16:13,198 --> 00:16:14,030
 for you, okay?
+分割区域
 
 390
 00:16:14,032 --> 00:16:16,699
 So that's the static table view.
+这就是 static
 
 391
 00:16:16,701 --> 00:16:18,901
 And so whatever cells you see here in story board,
+你在 storyboard 中看到的
 
 392
 00:16:18,903 --> 00:16:20,369
 that's what you're going to see in your UI,
+就是你在 app 启动以后看到的
 
 393
 00:16:20,371 --> 00:16:22,437
 no more cells than that because it's static.
+不会有变化，因为它是 static 的
 
 394
 00:16:22,439 --> 00:16:23,889
@@ -1577,46 +1970,57 @@ Okay?
 395
 00:16:23,890 --> 00:16:25,340
 So it's almost just a way of grouping things.
+所以这只是一种给东西分组的方式
 
 396
 00:16:25,342 --> 00:16:27,075
 So again, this is like the settings app.
+这就像是在设置 app 中
 
 397
 00:16:27,077 --> 00:16:28,610
 In the settings app,
+在这里
 
 398
 00:16:28,611 --> 00:16:30,144
 pretty much it's always the same thing in the UI,
+它总是这同一种类型的 UI
 
 399
 00:16:30,146 --> 00:16:32,446
 that's not, you know dynamic.
+这不是 dynamic 的
 
 400
 00:16:32,448 --> 00:16:35,282
 It can be that some settings let you set.
+设置总是一样的
 
 401
 00:16:35,284 --> 00:16:36,416
 Does things for different apps.
+为不同的 app 处理事情
 
 402
 00:16:36,418 --> 00:16:37,984
 And so maybe the list of apps can grow.
+也许 app 的列表会增长
 
 403
 00:16:37,986 --> 00:16:40,686
 So that may be a combination of the things going
+所以这里会是一系列 app
 
 404
 00:16:40,688 --> 00:16:41,920
 on in there.
+的集合
 
 405
 00:16:41,922 --> 00:16:44,656
 But usually static table view is static.
+但通常来说 static table view 是静态的
 
 406
 00:16:44,658 --> 00:16:46,608
@@ -1625,38 +2029,47 @@ Okay?
 407
 00:16:46,609 --> 00:16:48,559
 Now, the other side is dynamic table view.
+另一方面是 dynamic table view
 
 408
 00:16:48,562 --> 00:16:52,530
 Now in a dynamic table view, these cells that you see.
+在 dynamic table view 中
 
 409
 00:16:52,532 --> 00:16:55,633
 Oh by the way, we almost always use dynamic in plane.
+我们使用
 
 410
 00:16:55,635 --> 00:16:57,468
 In the plain style.
+ plain style
 
 411
 00:16:58,904 --> 00:17:02,972
 These rows that you see are not, what you build in
+你们看到的这些行不是在
 
 412
 00:17:02,974 --> 00:17:06,109
 the storyboard is not what's gonna appear in that one row.
+storyboard 中建立的
 
 413
 00:17:06,111 --> 00:17:09,278
 You're actually building a template or a prototype.
+你只需要搭建一个模板，或者一个原型
 
 414
 00:17:09,280 --> 00:17:12,481
 And if it needs 10,000 rows to show your iPod things,
+如果它需要用 10000 行来显示你 iPod 中的歌曲
 
 415
 00:17:12,483 --> 00:17:14,316
 it's gonna make that row 10,000 times.
+它会创建那个行 10000 次
 
 416
 00:17:15,619 --> 00:17:17,085
@@ -1665,58 +2078,72 @@ Okay?
 417
 00:17:17,086 --> 00:17:18,552
 You see what I mean by you making a template out of it.
+你可以创建一个模板
 
 418
 00:17:18,555 --> 00:17:20,921
 You're making a prototype that's gonna be
+你制作的原型会被
 
 419
 00:17:20,923 --> 00:17:22,456
 replicated, okay?
+一遍又一遍地复制
 
 420
 00:17:22,458 --> 00:17:24,725
 So that's a very big difference there,
+Dynamic 模式的原型与 static 的
 
 421
 00:17:24,727 --> 00:17:29,662
 between static and these prototypes, the dynamic mode.
+情况是非常不同的
 
 422
 00:17:30,698 --> 00:17:34,233
 In either case, the cells themselves can be selected.
+在每种情况下，cell 本身都是可以选中的
 
 423
 00:17:34,235 --> 00:17:35,867
 You click on those.
+你只需要单击它
 
 424
 00:17:35,869 --> 00:17:37,235
 And you can see that cell's selected.
+你可以看到它被选中了
 
 425
 00:17:37,237 --> 00:17:40,004
 You can barely tell because it only has the small little
+你很难看出它被选中了，因为它只有一个
 
 426
 00:17:40,006 --> 00:17:40,705
 square there.
+小方块在那里
 
 427
 00:17:42,008 --> 00:17:44,241
 Resizing square that chose this selected.
+一个改变大小的方块
 
 428
 00:17:44,243 --> 00:17:46,242
 But when you select the cell, you can choose its type.
+但是当你选中 cell 的时候，你可以选择它的类型
 
 429
 00:17:46,244 --> 00:17:49,579
 Like here I'll change this cell to be subtitle type.
+在这里我把它改成 subtitle
 
 430
 00:17:49,581 --> 00:17:52,214
 So now it's that subtitle style.
+现在就是 subtitle 类型了
 
 431
 00:17:52,216 --> 00:17:54,383
@@ -1725,258 +2152,322 @@ Okay?
 432
 00:17:54,384 --> 00:17:56,551
 You can also change the little symbol that appears on
+你也可以修改在每行右边显示的
 
 433
 00:17:56,554 --> 00:17:59,021
 the right side of the row.
+符号
 
 434
 00:17:59,023 --> 00:18:00,221
 Here's a very special one called
+这一个非常特殊
 
 435
 00:18:00,223 --> 00:18:01,856
 the Detail Disclosure symbol.
+叫做 Detail Disclosure
 
 436
 00:18:01,858 --> 00:18:03,491
 Okay? There's also,
+在这
 
 437
 00:18:03,492 --> 00:18:05,125
 you can put check marks over there and other things.
+也可以放置 check mark 或者其他东西
 
 438
 00:18:05,128 --> 00:18:08,362
 We'll talk about Detail Disclosure a little bit later
+在这时候我会介绍 Detail Disclosure 
 
 439
 00:18:08,364 --> 00:18:11,231
 because it's one that, if you click on, it can actually do
+因为在这一行你点击它和点击这行的其他部分
 
 440
 00:18:11,233 --> 00:18:13,933
 a different thing than if you click on the rest of the row.
+产生的效果是不同
 
 441
 00:18:13,935 --> 00:18:17,003
 So it's kind of, add a little ancillary UI to that row.
+这对于那一行来说是一种辅助的 UI
 
 442
 00:18:18,205 --> 00:18:22,173
 So I'm gonna go back to non detail disclosure there.
+我现在把 Detail Disclosure 取消
 
 443
 00:18:23,276 --> 00:18:26,510
 Now we talked about the cell style, subtitle,
+现在我来介绍 Cell 的类型，subtitle
 
 444
 00:18:26,512 --> 00:18:27,728
 and all those.
+还有其他的类型
 
 445
 00:18:27,729 --> 00:18:28,945
 But let's talk about this custom style.
+我们先来看看这个 custom 类型
 
 446
 00:18:28,948 --> 00:18:31,381
 What if I wanna build a custom prototype that's gonna be
+如果我想制作自定义的原型
 
 447
 00:18:31,383 --> 00:18:35,351
 replicated for my entire table view?
+让我的整个 table view 复制它，该怎么做
 
 448
 00:18:35,353 --> 00:18:38,621
 And you select the style to be custom.
+把 cell 的类型变成 custom
 
 449
 00:18:38,623 --> 00:18:40,255
 See up there in the upper right?
+在右上角
 
 450
 00:18:40,257 --> 00:18:44,026
 And now it can just resize this cell to whatever size I
+现在我就可以把它变成我任意想修改的大小
 
 451
 00:18:44,028 --> 00:18:48,063
 want and I can go grab, you know, I don't know,
+我可以拽一个 label 出来
 
 452
 00:18:48,065 --> 00:18:51,632
 a label let's say and pull it out, drop it in there.
+把它放到这里
 
 453
 00:18:51,634 --> 00:18:56,036
 You definitely want to use auto layout here because I'm
+你当然想使用 Auto Layout
 
 454
 00:18:56,038 --> 00:18:59,239
 gonna talk about how you can make the height of the cell
+我也会告诉你，怎样使得 cell 的高度适应
 
 455
 00:18:59,241 --> 00:19:02,442
 adjust to whatever content is in there, but if you don't
+里面的内容
 
 456
 00:19:02,444 --> 00:19:05,011
 set up the outer layout constraints, it's not gonna
+但是如果你不设置好 Auto Layout
 
 457
 00:19:05,013 --> 00:19:08,781
 know what it can squish down and what it can't, et cetera.
+它不会知道它自己应该被压缩到什么程度（高度是多少）
 
 458
 00:19:08,783 --> 00:19:11,783
 So you drag it out there and,
+现在
 
 459
 00:19:11,785 --> 00:19:14,319
 now you have the UI that you want.
+你已经得到了想要的 UI
 
 460
 00:19:14,321 --> 00:19:15,787
 And you can have multiple labels,
+你也可以放置多个 label
 
 461
 00:19:15,789 --> 00:19:16,654
 whatever you want in here.
+放置什么都可以
 
 462
 00:19:16,656 --> 00:19:18,222
 Text fields.
+Text Field
 
 463
 00:19:18,223 --> 00:19:19,789
 Anything you can put in your view you can put here.
+所有你能放进 view 的你都可以放到这里
 
 464
 00:19:20,859 --> 00:19:24,127
 But when it comes to wiring up the outlets,
+但是到了连接 outlet 的时候
 
 465
 00:19:24,129 --> 00:19:26,963
 you can see that I can't wire up an outlet or action
+你可以看到，我不能在 controller 中设置 outlet 或者 action
 
 466
 00:19:26,965 --> 00:19:31,433
 to my controller, because I might have 10,000 cells.
+因为我可能有 10000 个 cell
 
 467
 00:19:31,435 --> 00:19:34,269
 Okay, so the way that that works is you actually create
+所以你需要给这个 cell
 
 468
 00:19:34,271 --> 00:19:37,038
 a custom subclass of this cell.
+创建一个自定义的子类
 
 469
 00:19:37,040 --> 00:19:39,407
-So this cell is a UI table of U cell.
+So this cell is a UITableViewCell.
+这个 cell 的类型是 UITableViewCell
 
 470
 00:19:39,409 --> 00:19:42,543
-UI table of U cell is just a special subclass of UI view.
+UITableViewCell is just a special subclass of UI view.
+UITableViewCell 是 UIView 的子类
 
 471
 00:19:42,545 --> 00:19:45,346
 Okay, that's what the cell is, and so if you want to have
+如果你想要对于每个 cell
 
 472
 00:19:45,348 --> 00:19:48,048
 outlets and actions per cell, you're going to create
+建立 outlet 和 action
 
 473
 00:19:48,050 --> 00:19:50,650
-a custom sub class of this UI table view cell and
+a custom sub class of this UITableViewCell and
+你需要创建 UITableViewCell 的子类
 
 474
 00:19:50,652 --> 00:19:53,052
 that's where the outlets and actions are going to be.
+这个子类就是 outlet 和 action 放置的位置
 
 475
 00:19:53,054 --> 00:19:55,187
 Okay and then for every row that's visible,
+对于每一个可见的行
 
 476
 00:19:55,189 --> 00:19:57,173
-you're gonna have this UI.
+you're gonna have this
+你都会有这个 UITableViewCell
 
 477
 00:19:57,174 --> 00:19:59,158
-Table view cell and you'll be able to get actions
+UITableViewCell and you'll be able to get actions
+你可以从这里的按钮获取动作
 
 478
 00:19:59,160 --> 00:20:03,228
 from buttons in there, or have outlets to set things.
+或者设置 outlet
 
 479
 00:20:03,230 --> 00:20:06,297
 So, you do that with the identity inspector just like
+所以，在 identity inspector 做的事情
 
 480
 00:20:06,299 --> 00:20:07,865
 you set the class of something else, right?
+就像你给其他东西设置类一样
 
 481
 00:20:07,867 --> 00:20:10,434
-I select a cell and I go over to identity sector.
+I select a cell and I go over to identity inspector.
+我选中一个 cell，去到 identity inspector
 
 482
 00:20:10,436 --> 00:20:13,103
-I need to create a UITableView cell subclass.
+I need to create a UITableViewCell subclass.
+我需要创建一个 UITableViewCell 的子类
 
 483
 00:20:13,105 --> 00:20:16,506
 So I go to new file, and here I want the subclass
+所以，我创建一个新文件
 
 484
 00:20:16,508 --> 00:20:20,176
-of to say UITableView cell, not UITableView controller.
+of to say UITableViewCell, not UITableView controller.
+选择 UITableViewCell 的子类，而不是 UITableViewController
 
 485
 00:20:20,178 --> 00:20:23,079
 Okay so I create a subclass of UITableViewCell.
+我创建了 UITableViewCell 的子类
 
 486
 00:20:23,081 --> 00:20:26,015
 I set it at in the identity inspector to be my table view
+在 identity inspector 中，设置为 Cell 的类
 
 487
 00:20:26,017 --> 00:20:29,418
 cell and now I can wire up these outlets and
+现在，我就能在我自定义的类中
 
 488
 00:20:29,420 --> 00:20:31,386
 actions in here two outlets and
+设置 outlet 
 
 489
 00:20:31,388 --> 00:20:34,889
 actions in my custom subclass of UITableViewCell.
+还有 action 了
 
 490
 00:20:34,891 --> 00:20:36,374
 Okay.
+OKay.
 
 491
 00:20:36,375 --> 00:20:37,858
 And so I just bring them up side by side and
+打开 Assistant Editor，让它们并排显示
 
 492
 00:20:37,860 --> 00:20:41,328
 assistant editor just control drag over to them.
+CTRL-drag 设置出口
 
 493
 00:20:41,330 --> 00:20:43,630
 Sometimes it's a bit of a pain to get the table of U cells
+有些时候，右边不会自动
 
 494
 00:20:43,632 --> 00:20:46,366
 subclass in the right-hand side of the assistant editor.
+显示 UITableViewCell 的子类
 
 495
 00:20:46,368 --> 00:20:49,535
 Automatic, seems like it eventually figures it out and
+这次貌似是起了作用
 
 496
 00:20:49,537 --> 00:20:50,770
@@ -1985,286 +2476,356 @@ starts working.
 497
 00:20:50,772 --> 00:20:52,071
 But a lot of times it won't.
+但是大部分时间，它不会正常工作
 
 498
 00:20:52,073 --> 00:20:55,507
 So you have to do manual to get that cell on the right.
+你需要手动设置右边显示的类
 
 499
 00:20:55,509 --> 00:20:57,976
 This is where you bring up your.
+这就是你创建的
 
 500
 00:20:57,978 --> 00:20:58,943
 Subclass code.
+子类的代码
 
 501
 00:20:58,945 --> 00:21:01,045
 Then you can just control drag to create,
+然后，你可以 ctrl-drag
 
 502
 00:21:01,047 --> 00:21:03,514
 for example here, an outlet to this label.
+创建这个 label 的 outlet
 
 503
 00:21:03,516 --> 00:21:05,449
 And again, remember that you're doing this for
+记住，这是 cell 的雏形
 
 504
 00:21:05,451 --> 00:21:07,150
 a prototype here, these are dynamic.
+这些是动态显示的
 
 505
 00:21:07,152 --> 00:21:08,868
 And so this whole thing,
+所以 cell 的所有东西
 
 506
 00:21:08,869 --> 00:21:10,585
 it's going to be replicated over and over for every row.
+都会被每一行所复制
 
 507
 00:21:11,756 --> 00:21:13,439
 Okay? Each row is
+每一行
 
 508
 00:21:13,440 --> 00:21:15,123
 going to have it's own UI table U cell instance.
+都会有它自己的 UITableViewCell 实例
 
 509
 00:21:15,126 --> 00:21:16,725
 And thus its own outlets.
+它自己的 outlet
 
 510
 00:21:16,727 --> 00:21:18,293
 And when it sends an action,
+当它发送 action 的时候
 
 511
 00:21:18,294 --> 00:21:19,860
 it's gonna send an action just to its instance.'
+会发送到自己的实例那里
 
 512
 00:21:19,863 --> 00:21:22,063
 Okay, now you might be freaking out a little bit
+你可能现在被吓到了
 
 513
 00:21:23,132 --> 00:21:27,134
 about that, thinking well I've got this UITableViewCell,
+如果我有 10000 个
 
 514
 00:21:27,136 --> 00:21:30,303
 it's a UIView, what if I have 10,000 of them?
+UITableViewCell 会发生什么？
 
 515
 00:21:30,305 --> 00:21:32,072
 That's gonna be a problem.
+这可能是个问题
 
 516
 00:21:32,074 --> 00:21:34,040
 But we're gonna talk about how that's
+但是我一会儿会告诉你，为什么在 UITableView 中
 
 517
 00:21:34,042 --> 00:21:35,775
 not a problem in the UITableView in a minute here.
+这不是个问题
 
 518
 00:21:37,445 --> 00:21:40,879
 So how do we hook up to this stuff in code?
+我怎么通过代码关联这些东西
 
 519
 00:21:40,881 --> 00:21:43,314
 How do we load those cells up?
+我怎样载入这些 cell
 
 520
 00:21:43,316 --> 00:21:46,818
 How do we tell it how many iPod songs I've got?
+我怎样通知 cell，我 iPod 中有多少首歌曲？
 
 521
 00:21:46,820 --> 00:21:49,086
 And you do all that with this data source and
+你们可以通过 Data Source 和 Delegate 
 
 522
 00:21:49,088 --> 00:21:50,738
 delegates, okay?
+来解决这些问题
 
 523
 00:21:50,739 --> 00:21:52,389
 The data source is the one that's responsible for
+Data Source 为 cell 
 
 524
 00:21:52,391 --> 00:21:53,423
 the data.
+的数据负责
 
 525
 00:21:53,425 --> 00:21:55,191
 In other words, what's in the cells.
+换句话说，cell 中有什么
 
 526
 00:21:55,193 --> 00:21:56,893
 And the delegate is really responsible for
+Delegate 为 cell 如何显示
 
 527
 00:21:56,895 --> 00:21:58,260
 how it's all displayed,
+而负责
 
 528
 00:21:58,262 --> 00:22:00,229
 the configuration of the table, et cetera.
+Table 的 形状之类的
 
 529
 00:22:01,999 --> 00:22:04,933
 UITableViewController also, as I said,
+UITableViewController 把它自己设置为
 
 530
 00:22:04,935 --> 00:22:07,001
 it sets itself as the data source and delegate.
+data source 和 delegate
 
 531
 00:22:07,003 --> 00:22:10,371
 It also has a property called TableView,
+它也有一个 tableview 的属性
 
 532
 00:22:10,373 --> 00:22:13,140
 which is the table view inside itself.
+就是它内部的 tableview
 
 533
 00:22:13,142 --> 00:22:16,810
 So you can, at any time inside your controller
+所以你可以在任何时候
 
 534
 00:22:16,812 --> 00:22:19,312
 get at the TableView with tis TableView thing.
+在 controller 中获取 tableview
 
 535
 00:22:19,314 --> 00:22:23,082
 Okay? [COUGH] All right, so what do
+所以
 
 536
 00:22:23,084 --> 00:22:26,285
 we need to do in implementing this data source protocol?
+为了实现 data source 协议，我么需要做什么？
 
 537
 00:22:26,287 --> 00:22:28,320
 Well this data source protocol you're gonna implement
+在 table 是动态的时候，你需要
 
 538
 00:22:28,322 --> 00:22:31,323
 any time the table is dynamic, okay?
+实现 data source 协议
 
 539
 00:22:31,325 --> 00:22:34,492
 And there's three really important questions that
+在这个协议中，你需要实现
 
 540
 00:22:34,494 --> 00:22:36,094
 are answered by this protocol.
+三个很重要的方法
 
 541
 00:22:36,096 --> 00:22:38,863
 One is, how many sections are in the table?
+table 分为几个 section？
 
 542
 00:22:38,865 --> 00:22:41,198
 The next is, how many rows are in a given section?
+第二个是，在指定的 section 中，有几行？
 
 543
 00:22:41,200 --> 00:22:44,768
 And the third thing is, give me a UITableViewCell, or
+第三个是，给它一个 UITableViewCell 或者它的子类
 
 544
 00:22:44,770 --> 00:22:48,438
 subclass thereof, to display this row.
+来显示这一行
 
 545
 00:22:49,507 --> 00:22:50,873
 Okay those are the three main things.
+这是三个主要的问题
 
 546
 00:22:50,875 --> 00:22:52,407
 There's other things in the data sort of protocol but
+在 data source 协议中还有其他方法
 
 547
 00:22:52,409 --> 00:22:54,376
 these are the three main ones, It makes sense, right?
+但是这三个是最主要的方法
 
 548
 00:22:54,378 --> 00:22:56,077
 That we're trying to load up our table.
+通过它们可以向 table 载入数据
 
 549
 00:22:56,079 --> 00:22:57,645
 Data sources providing the data
+Data source 提供数据
 
 550
 00:22:57,647 --> 00:22:58,912
 that's the way it does it.
+这就是它的方式
 
 551
 00:22:58,914 --> 00:23:01,248
 So, the first two are exactly what you would think, so
+前两个很容易想也很容易实现
 
 552
 00:23:01,250 --> 00:23:03,817
 those are easy, so let's talk about how do I give
+我们来看看如何给 tableview 一个 UITableViewCell
 
 553
 00:23:04,853 --> 00:23:09,154
 the table view a UITableViewCell to draw.
+进行绘制
 
 554
 00:23:09,156 --> 00:23:10,288
 A given row.
+对于一个给定的行
 
 555
 00:23:10,290 --> 00:23:13,358
 And you do that with this method.
+通过这个方法
 
 556
 00:23:13,360 --> 00:23:17,161
 I was telling before, 10,000 rows, don't worry.
+对于 10000 个行的情况，不必担心
 
 557
 00:23:17,163 --> 00:23:20,097
 The UITableViewCells, the reason 10,000 is going to work
+UITableViewCell 对于这 10000 个行也能很好地工作
 
 558
 00:23:20,099 --> 00:23:22,733
 is because we're only going to create UITableViewCells for
+因为它为可见的行
 
 559
 00:23:22,735 --> 00:23:23,900
 the visible rows.
+创建 UITableViewCell
 
 560
 00:23:23,902 --> 00:23:28,204
 If I've 10,000 iPod songs, I can only see seven or
+如果我有 10000 首歌曲
 
 561
 00:23:28,206 --> 00:23:29,472
 eight of them on screen at a time,
+在屏幕上，一次只能看到7，8首
 
 562
 00:23:29,474 --> 00:23:32,474
 I'm only gonna have seven UITableViewCell instances.
+那我只会有7个 UITableViewCell 的实例
 
 563
 00:23:32,476 --> 00:23:35,243
 But what that means is they're getting reused.
+这就意味着，这些 cell 是可以复用的
 
 564
 00:23:35,245 --> 00:23:38,013
 As you scroll down, they're getting, the ones that
+当你向下滑动的时候，滑出屏幕的 cell
 
 565
 00:23:38,015 --> 00:23:40,748
 are scrolling off the screen are getting put into a reuse
+会被放入一个重复使用的 cell 队列中
 
 566
 00:23:40,750 --> 00:23:41,949
-cue basically.
+queue basically.
 
 567
 00:23:41,951 --> 00:23:44,852
 And when a new one comes on screen, it reuses it.
+当一个新的出现在屏幕中时，就复用它
 
 568
 00:23:44,854 --> 00:23:46,587
@@ -2273,1390 +2834,1737 @@ Okay?
 569
 00:23:46,588 --> 00:23:48,321
 It either eases it or creates a new one by copying that
+它通过拷贝 storyboard 中的原型
 
 570
 00:23:48,323 --> 00:23:50,390
 prototype in your storyboard, okay?
+或者释放或者创建 cell
 
 571
 00:23:50,392 --> 00:23:51,858
 But it's not gonna make 10,000.
+但是它不会创建 10000 个
 
 572
 00:23:51,860 --> 00:23:55,394
 It's only gonna make enough for the visible rows.
+它只会创建能看到的那么多
 
 573
 00:23:55,396 --> 00:23:59,498
 Now that has ramifications for multi-threadedness.
+对于多线程来说	
 
 574
 00:23:59,500 --> 00:24:02,334
 Because if you have a row, and it appears, and
+比如你有一行，它出现了
 
 575
 00:24:02,336 --> 00:24:04,836
 you need to go fetch something on the network to draw it,
+需要一些网络资源来绘制
 
 576
 00:24:04,838 --> 00:24:08,172
 and you start to fetch, and then the user scrolls away,
+你开始获取资源，但是用户把它滑走了
 
 577
 00:24:08,174 --> 00:24:10,574
 when that fetch comes back, that you're no longer,
+当资源获取到以后
 
 578
 00:24:10,576 --> 00:24:15,412
 that row no longer wants that thing, cuz that row is gonna
+那一行不在需要这些资源了
 
 579
 00:24:15,414 --> 00:24:19,348
 be reused to display something else, understand?
+因为那一行需要展示其他内容了
 
 580
 00:24:19,350 --> 00:24:20,883
 So be careful with multi-threadedness
+所以在使用多线程的时候小心一点
 
 581
 00:24:20,885 --> 00:24:23,819
 in TableViews because those rows, the UITableViewCells,
+在 UITableView 中
 
 582
 00:24:23,821 --> 00:24:27,655
 are being constantly reused.
+这些 UITableViewCell 都是被重复使用的
 
 583
 00:24:27,657 --> 00:24:29,974
 All right, so
 
+
 584
 00:24:29,975 --> 00:24:32,292
 here is the method that the UITableView is going to send,
+这是 UITableView 发送消息的方法
 
 585
 00:24:32,295 --> 00:24:36,496
 it's UITableViewDataSource implementing protocol object,
+它发送给 UITableViewDataSource 协议的对象
 
 586
 00:24:36,498 --> 00:24:38,832
 which is gonna be your controller,
+就是你的 controller
 
 587
 00:24:38,834 --> 00:24:41,034
 to say give me UITableViewCell.
+用于给它提供 UITableViewCell
 
 588
 00:24:41,036 --> 00:24:45,437
 It's called TableViewCell for row at index path, okay?
+它的方法名是 cellForRowAtIndexPath:
 
 589
 00:24:45,439 --> 00:24:47,305
-And you can see it returned to UI table use cell.
+And you can see it returned to UITableViewCell.
+它的返回值是一个 UITableViewCell
 
 590
 00:24:47,307 --> 00:24:51,176
 Obviously, it could return a custom subclass thereof.
+当然也可以返回自定义的 UITableViewCell 子类
 
 591
 00:24:51,178 --> 00:24:53,644
 And the argument there, index path, and
+参数是 indexPath
 
 592
 00:24:53,646 --> 00:24:56,213
 in this index path, it's just a simple little container
+它只是一个和简单的小容器
 
 593
 00:24:56,215 --> 00:24:58,015
 that contains the section and
+里面放 tableView 需要 cell 的
 
 594
 00:24:58,017 --> 00:25:03,019
 row that it wants the table view cell for, 'kay?
+section 和 row
 
 595
 00:25:03,021 --> 00:25:04,954
 So you're gonna use that information like this.
+你可以这样使用这个参数
 
 596
 00:25:04,956 --> 00:25:08,324
 You have some internal data structure that's arranged
+你有一些内置的数据对象
 
 597
 00:25:08,326 --> 00:25:10,325
 by the sections and rows, 'kay.
+通过段和行来划分
 
 598
 00:25:10,327 --> 00:25:13,161
 I don't know what it looks like, but you're just going to
+为了显示这一行
 
 599
 00:25:13,163 --> 00:25:17,198
 get the data for this row by accessing that internal data
+你需要获取内部的数据
 
 600
 00:25:17,200 --> 00:25:19,100
 structure, might not be as simple as this,
+可能不会像我写得这么简单
 
 601
 00:25:19,102 --> 00:25:22,469
 this is like an array of arrays, sections and rows
+我这里使用的是二维数组
 
 602
 00:25:22,471 --> 00:25:24,805
 although the demo I'm gonna do is gonna do it that way, but
+虽然我 demo 也是这么写的
 
 603
 00:25:24,807 --> 00:25:26,840
 it could be anything that lets you get your data.
+但是你怎样获取数据都可以
 
 604
 00:25:27,809 --> 00:25:31,610
 Once you have your data, then you're going to get a cell,
+一旦你获取完数据，你需要获取一个 cell
 
 605
 00:25:31,612 --> 00:25:34,880
 a UITableViewCell or subclass there of and you're gonna load
+UITableViewCell 或者它的子类
 
 606
 00:25:34,882 --> 00:25:39,484
 it up with that data and it's gonna display, make sense?
+为了显示，你需要把数据载入其中
 
 607
 00:25:39,486 --> 00:25:41,552
 So let's talk about how you get that cell.
+我来告诉你如何得到 cell
 
 608
 00:25:41,554 --> 00:25:44,622
 'Kay how am I get that cell that I wanna load up with my
+我如何获得在那个 indexPath.row
 
 609
 00:25:44,624 --> 00:25:47,958
 data at that indexPath.row.
+可以载入数据的 cell 呢？
 
 610
 00:25:47,960 --> 00:25:50,327
 So to do this I'm gonna bring the UI back but
+为了实现，我需要回到 UI
 
 611
 00:25:50,329 --> 00:25:52,128
 I'm gonna keep this code there too.
+但我也需要把代码放到这里显示
 
 612
 00:25:52,130 --> 00:25:56,666
 Okay, so let's have both the code and the UI on screen
+所以我让代码和 UI 同时显示
 
 613
 00:25:56,668 --> 00:25:59,268
 at the same time here so you can see what's going on.
+你们就能知道发生了什么
 
 614
 00:25:59,270 --> 00:26:01,737
 So, the way I get a cell
+我获取 cell 的方式
 
 615
 00:26:01,739 --> 00:26:04,239
 is I'm gonna call this function in table view, called
+是在 tableView 调用一个函数
 
 616
 00:26:04,241 --> 00:26:08,076
 dequeueReusableCellWithIdenti- fier, 'kay?
+叫做 dequeueReusableCellWithIdentifier:
 
 617
 00:26:08,078 --> 00:26:10,745
 Now, this is going to reuse the cell if possible, or
+如果可能，它会复用 cell
 
 618
 00:26:10,747 --> 00:26:14,014
 if not, it's gonna create one by using your prototype
+如果不行，它通过 storyboard 中的原型
 
 619
 00:26:14,016 --> 00:26:15,482
 in the storyboard.
+创建一个
 
 620
 00:26:15,484 --> 00:26:18,351
 Now you tell it which prototype to use, because your
+现在你是告诉它使用哪个原型
 
 621
 00:26:18,353 --> 00:26:21,087
 table view can actually have multiple prototypes.
+因为你的 tableview 可能会有多种原型
 
 622
 00:26:21,089 --> 00:26:23,422
 So you tell it by using the argument there,
+你通过这个参数
 
 623
 00:26:23,424 --> 00:26:26,191
 the first argument the identifier, which you also
+这个 identifier 参数
 
 624
 00:26:26,193 --> 00:26:28,860
 need to fill out in the UI, in the storyboard.
+你也需要把它填入 storyboard 中
 
 625
 00:26:28,862 --> 00:26:30,895
 And you just inspect the cell, and
+检查 cell
 
 626
 00:26:30,897 --> 00:26:33,598
 there'll be a field there called identifier.
+有一个区域是 identifier
 
 627
 00:26:33,600 --> 00:26:35,533
 And you just fill in that identifier and
+向其中填入内容
 
 628
 00:26:35,535 --> 00:26:36,767
 that's what's using your code so
+在代码中也要填入相同的内容
 
 629
 00:26:36,769 --> 00:26:39,603
 this is what links your code to which prototype
+它能使你的代码和 storyboard 中 cell 的原型相关联
 
 630
 00:26:39,605 --> 00:26:42,372
 cell your going to make a copy of to use,
+你就可以得到 cell 的拷贝，来使用它了
 
 631
 00:26:42,374 --> 00:26:45,808
 'kay, but it's only going to make a new copy if it can't
+但是它在找不到跳出屏幕可复用 cell 的时候
 
 632
 00:26:45,810 --> 00:26:48,044
 find one to reuse that went off screen.
+就会创建一份新的拷贝
 
 633
 00:26:49,246 --> 00:26:51,279
 Everyone make sense there, good?
+懂了吗？
 
 634
 00:26:52,249 --> 00:26:55,550
 Okay, so that's how I get the cell that I wanna use.
+这就是如何得到我想要的 cell 的方法
 
 635
 00:26:55,552 --> 00:27:00,454
 Notice that that cell comes back as any object, 'kay, even
+注意，返回 cell 的类型是 AnyObject
 
 636
 00:27:00,456 --> 00:27:03,256
 though it's a UITableViewCell, it's historical reasons it
+虽然它应该返回一个 UITableViewCell
 
 637
 00:27:03,258 --> 00:27:05,458
 really should come back as a UITableViewCell.
+但是出于某些历史原因，它没有
 
 638
 00:27:05,460 --> 00:27:09,328
 But you're gonna have to cast it to a UITableViewCell, or
+你需要把它转型成 UITableViewCell
 
 639
 00:27:09,330 --> 00:27:10,696
 subclass thereof.
+或者它的子类
 
 640
 00:27:10,698 --> 00:27:16,101
 So, for example, if this prototype cell was,
+如果原型 cell 类型是
 
 641
 00:27:16,103 --> 00:27:19,604
 you know, like, subtitle or basic or something like that,
+basic 或者 subtitle 之类的
 
 642
 00:27:19,606 --> 00:27:22,640
 it wasn't a custom one, then I'm gonna dequeue it
+它不是自定的
 
 643
 00:27:22,642 --> 00:27:26,243
 as a UITableViewCell, and then I am gonna use the API of
+我就可以把它按照 UITableViewCell 类型给取出来
 
 644
 00:27:26,245 --> 00:27:29,780
 UITableViewCell to load it up, and if you look at
+通过 UITableViewCell 给它载入
 
 645
 00:27:29,782 --> 00:27:32,349
 the UITableViewCell doesn't have a lot in it.
+其实 UITableViewCell 类内部没有很多东西
 
 646
 00:27:32,351 --> 00:27:34,817
 It has a text label, which is the big text, and
+它有一个 textLabel，就是比较大的标题
 
 647
 00:27:34,819 --> 00:27:37,620
 a detailed text label which is the little text.
+detailedTextLabel 是比较小的文字
 
 648
 00:27:37,622 --> 00:27:39,855
 It also actually will let you put in an image there,
+它也允许你向其中载入图片
 
 649
 00:27:39,857 --> 00:27:42,457
 it has image view property, and
+它有一个 imageView 的属性
 
 650
 00:27:42,459 --> 00:27:44,493
 you could just load this up.
+可以通过它载入
 
 651
 00:27:44,494 --> 00:27:46,528
 So here I've loaded up the big text with the word title and
+在这里，我把大点的文字设置成了 "title"
 
 652
 00:27:46,530 --> 00:27:48,229
 the little text with the word subtitle.
+小点得文字设置成 "subtitle"
 
 653
 00:27:48,231 --> 00:27:50,297
 That would happen in every single row, but
+每一行都会这样
 
 654
 00:27:50,299 --> 00:27:53,233
 usually I would put my data in there, 'kay?
+通常我会把数据放到那里
 
 655
 00:27:53,235 --> 00:27:56,937
 From my internal data structure there.
+从我内部的数据结构中
 
 656
 00:27:56,939 --> 00:27:58,438
 Now what if I have a custom cell?
+如果我的 cell 是自定义的呢？
 
 657
 00:27:58,440 --> 00:28:02,442
 Well if I have a custom cell, then that dequeue thing,
+如果是这样，那这个 dequeued
 
 658
 00:28:02,444 --> 00:28:06,345
 okay, here I'm hooking up the custom cell there with
+在这里
 
 659
 00:28:06,347 --> 00:28:09,748
 the identifier, the dequeue thing would be my
+我把两个 identifier 关联起来
 
 660
 00:28:09,750 --> 00:28:13,185
 UITableViewCell subclass, right?
+我应该把 dequeued 转型成 UITableViewCell 的子类
 
 661
 00:28:13,187 --> 00:28:16,888
 And instead of doing cell dot text label dot whatever,
+在这里我不会 .textLabel
 
 662
 00:28:16,890 --> 00:28:21,625
 I would call the public API of my UITable of UText, UTable,
+我会调用我 UITableViewCell 子类
 
 663
 00:28:21,627 --> 00:28:23,627
 UCell subclass, right?
+的公共 API
 
 664
 00:28:23,629 --> 00:28:26,863
 It has some public API to set its, whatever,
+它会有一些公共 API 
 
 665
 00:28:26,865 --> 00:28:30,900
 it's displaying and you would call that, make sense?
+来设置它自己，懂了吗？
 
 666
 00:28:30,902 --> 00:28:33,969
 Question about that?
+有问题吗？
 
 667
 00:28:33,971 --> 00:28:39,775
 Okay, so, that's how you get the cell.
+这就是你获取 cell 的方法
 
 668
 00:28:39,777 --> 00:28:43,811
 How does the data source report how many sections and
+data source 怎样报告
 
 669
 00:28:43,813 --> 00:28:45,496
 rows to use?
+有多少段，多少行呢？
 
 670
 00:28:45,497 --> 00:28:47,180
 Really simple, these two data source methods number of
+非常简单，只需要实现 data source 的两个方法
 
 671
 00:28:47,183 --> 00:28:50,284
 sections in TableView and number of rows and
+numberOfSectionsInTableView 还有
 
 672
 00:28:50,286 --> 00:28:53,186
 section, so you just implement those methods, and
+numberOfRowsInSection
 
 673
 00:28:53,188 --> 00:28:57,190
 you return the value, the appropriate value there.
+返回适当的值就可以了
 
 674
 00:28:57,192 --> 00:29:00,192
 The number of sections by default is 1, so
+如果你不实现
 
 675
 00:29:00,194 --> 00:29:02,761
 if you don't implement the number of sections in table
+numberOfSectionsInTableView
 
 676
 00:29:02,763 --> 00:29:05,430
 view you'll get 1 section, and
+默认会得到 1 段
 
 677
 00:29:05,432 --> 00:29:07,799
 1 big section with as many rows as you want.
+一个很大段，里面有多少行都可以
 
 678
 00:29:07,801 --> 00:29:09,534
 However, there's no default for
+然而 numberOfRowsInSection 
 
 679
 00:29:09,536 --> 00:29:10,935
 the method number of rows in section.
+没有默认值
 
 680
 00:29:10,937 --> 00:29:12,770
 This is the required method in this protocol,
+在这个协议中
 
 681
 00:29:12,772 --> 00:29:13,704
 you have to implement it.
+这个方法必须实现
 
 682
 00:29:13,706 --> 00:29:16,156
 Obviously, the table,
+显然
 
 683
 00:29:16,157 --> 00:29:18,607
 you have to know how many rows are in each section, 'kay?
+table 必须知道在每一段里有多少行
 
 684
 00:29:18,610 --> 00:29:21,110
 Cell for row in the next path also is required for
+对于动态的 table，
 
 685
 00:29:21,112 --> 00:29:22,378
 dynamic tables.
+cellForRowAtIndexPath 也是必须要实现的方法
 
 686
 00:29:22,380 --> 00:29:23,812
 If you have a static table,
+如果是静态的 table 就不需要实现
 
 687
 00:29:23,814 --> 00:29:26,415
 you don't have to implement any of these cuz a static
+它知道有多少段
 
 688
 00:29:26,417 --> 00:29:28,016
 table it knows how many rows and
+多少行
 
 689
 00:29:28,018 --> 00:29:30,251
 sections there are, cuz you set it up in the storyboard.
+因为你已经在 storyboard 中设置好了
 
 690
 00:29:30,253 --> 00:29:32,386
 It doesn't need the cell for row in the next path,
+它不需要实现 cellForRowAtIndexPath
 
 691
 00:29:32,388 --> 00:29:34,722
 because it can get it right out of the storyboard and
+因为它可以从 storyboard 获取
 
 692
 00:29:34,724 --> 00:29:35,989
-there's now reuse happening or
+there's no reuse happening or
+对于静态 table 来说
 
 693
 00:29:35,991 --> 00:29:38,591
 any of that stuff in a static table, okay?
+也没有复用之类的事情发生
 
 694
 00:29:38,593 --> 00:29:44,497
 All right, so, in summary, the way you load up a UITableView
+所以总得来说，载入 UITableView 的方式
 
 695
 00:29:44,499 --> 00:29:47,299
 is you implement the data source, almost always in your
+是实现 data source，几乎都在 controller 中
 
 696
 00:29:47,301 --> 00:29:50,035
 controller, you just say how many sections there are, and
+你需要告诉它，有多少段
 
 697
 00:29:50,037 --> 00:29:51,469
 how many rows in each section.
+每一段有多少行
 
 698
 00:29:51,471 --> 00:29:54,455
 Then, you implement cell row and
+接着实现 cellForRowAtIndexPath
 
 699
 00:29:54,456 --> 00:29:57,440
 index path by dequeuing cells, loading them up with the data
+把 cell 取出队列
 
 700
 00:29:57,443 --> 00:30:01,411
 at that section and row and returning it, that's it.
+把它们装入数据然后返回，就是这样
 
 701
 00:30:01,413 --> 00:30:02,345
 That's how table view works.
+table view 就是这样实现的
 
 702
 00:30:02,347 --> 00:30:04,213
 It's pretty straightforward.
+这很容易理解
 
 703
 00:30:04,215 --> 00:30:06,582
 But you can see the power of this simple protocol
+但是，你可以看到这简单代理协议 API 
 
 704
 00:30:06,584 --> 00:30:10,085
 delegation based API allows you to handle 10,000
+可以让你处理 10000 个 cell 的威力
 
 705
 00:30:10,087 --> 00:30:12,954
 cells because you've got that reuse going on,
+因为你可以复用这些 cell
 
 706
 00:30:12,956 --> 00:30:15,824
 without a lot of work from you, the programmer.
+不需要程序编写者来做很多工作
 
 707
 00:30:15,826 --> 00:30:18,159
 'Kay, all your work is really just manage your model,
+你的工作只要管理好 model 就可以了
 
 708
 00:30:18,161 --> 00:30:20,695
 get your data ready so that when the section row is asked
+当某一段的某一行需要数据时
 
 709
 00:30:20,697 --> 00:30:22,129
 for you can load up the cell.
+为它的载入做好准备
 
 710
 00:30:23,799 --> 00:30:27,600
 Okay, section titles, you know, like when I showed you
+段的标题，就像我刚才展示给你的 
 
 711
 00:30:27,602 --> 00:30:30,970
 the one that had Japan and the Netherlands, those titles
+Japan 和 Netherlands
 
 712
 00:30:30,972 --> 00:30:33,539
 are considered part of the table views data and so
+这些标题是 table view 的 data 部分
 
 713
 00:30:33,541 --> 00:30:36,108
 it is the data source that provides them by implementing
+data source 提供这些内容
 
 714
 00:30:36,110 --> 00:30:39,778
 table view title for header in section or title for foot or
+通过 tableView:titleForHeaderInSection: 或者 tableView:titleForFooterInSection:
 
 715
 00:30:39,780 --> 00:30:43,415
 in section, and it just returns a string.
+它们返回 String
 
 716
 00:30:43,417 --> 00:30:46,351
 If a string is not sufficient to show your title you can
+如果 String 也不能满足展示标题的需求
 
 717
 00:30:46,353 --> 00:30:48,586
 delegate involved then, not the data source, but
+你也可以实现 UITableView 的代理方法
 
 718
 00:30:48,588 --> 00:30:51,488
 the delegate, and it can provide a UI view.
+它可以提供一个 UIView
 
 719
 00:30:51,490 --> 00:30:54,291
 Even if it provides UI view probably you're gonna use your
+即使它提供了 UIView
 
 720
 00:30:54,293 --> 00:30:58,494
 data sources as your model to load up that UI view anyway,
+你也需要使用 data source 作为 model 来载入那个 UIView
 
 721
 00:30:58,496 --> 00:31:02,264
 so since the data source and delegate are pretty much
+data souce 和 delegate 非常类似
 
 722
 00:31:02,266 --> 00:31:04,400
 the same thing, it's a fine distinction there,
+这里是一个很好的区分
 
 723
 00:31:04,402 --> 00:31:06,768
 but you should be clear about it in your mind.
+你脑海中应该清楚这些
 
 724
 00:31:06,770 --> 00:31:09,704
 So, there are a bunch of other methods in the protocol,
+在协议中也有其他方法
 
 725
 00:31:09,706 --> 00:31:12,073
 most of them are about deleting rows or
+它们大部分都是关于删除行
 
 726
 00:31:12,075 --> 00:31:14,241
 inserting rows, or moving rows.
+插入行，或者移动行
 
 727
 00:31:14,243 --> 00:31:16,677
 Now, why would the data source be involved in those things?
+为什么 data source 需要包含这些东西？
 
 728
 00:31:16,679 --> 00:31:18,645
 Well, if I delete a row,
+如果我删除了某一行
 
 729
 00:31:18,647 --> 00:31:22,115
 I have to delete that data in the model right?
+我也需要删除 model 中的那个 data
 
 730
 00:31:22,117 --> 00:31:23,983
 If I move the rows around and
+如果我移动某一行
 
 731
 00:31:23,985 --> 00:31:27,620
 the order of the rows is reflecting something in
+移动完成后，也会对 model 中的数据造成影响
 
 732
 00:31:27,622 --> 00:31:32,157
 the model, then I need to move it in the model as well, 'kay?
+我也需要移动 model 中的数据
 
 733
 00:31:32,159 --> 00:31:33,858
 So that's why the data source gets involved there,
+这就是 data source 有这些方法的原因
 
 734
 00:31:33,860 --> 00:31:36,861
 and you can look that up in the documentation there.
+你可以查看一下这部分的文档
 
 735
 00:31:38,130 --> 00:31:39,496
 All right, how about segueing?
+那么 segue 怎么解决？
 
 736
 00:31:39,498 --> 00:31:41,364
 What happens when someone touches on a row?
+当用户点击了一行会发生什么？
 
 737
 00:31:41,366 --> 00:31:44,834
 Well, if I'm in a navigation controller especially,
+如果在 navigation controller 中
 
 738
 00:31:44,836 --> 00:31:48,371
 I'd like to segue way off to some other view controller,
+你想跳转到其他 view controller 中
 
 739
 00:31:48,373 --> 00:31:51,106
 and you do that just by control-dragging.
+你只需要 Ctrl+drag 就可以了
 
 740
 00:31:51,108 --> 00:31:53,842
 So you just Ctrl+drag from the prototype, or
+你从原型 Ctrl+drag
 
 741
 00:31:53,844 --> 00:31:57,212
 in a static thing, you can control from a static one, but
+静态 cell 也可以
 
 742
 00:31:57,214 --> 00:32:00,081
 you Ctrl+drag from the prototype, and then you
+如果你从原型 cell Ctrl+drag
 
 743
 00:32:00,083 --> 00:32:03,684
 just set the segue type, show, or show detail, whatever.
+设置一下 segue 的类型，show 或者 show detail 之类的
 
 744
 00:32:03,686 --> 00:32:07,388
 [COUGH] And then you, oh, yes, if you have that little detail
+如果你添加了 detail disclosure
 
 745
 00:32:07,390 --> 00:32:10,490
 disclosure I told you about, that special little
+那个右边的小图标
 
 746
 00:32:10,492 --> 00:32:14,227
 right-handed icon, you can Ctrl+drag from it, as well,
+你也可以从它 Ctrl+drag
 
 747
 00:32:14,229 --> 00:32:17,830
 and you'll see that you can choose the accessory action.
+你可以选择 accessory action
 
 748
 00:32:17,832 --> 00:32:20,399
 So each row can actually send two different segues.
+每一行可以发起两种不同的 segue
 
 749
 00:32:20,401 --> 00:32:22,735
 One if you click on the row, itself, and
+一种是点击行本身
 
 750
 00:32:22,737 --> 00:32:26,104
 then one if you click on that little round circle, 'kay?
+另一种是点击右侧的小圆圈
 
 751
 00:32:26,106 --> 00:32:29,140
 [COUGH] Either way, you just set the identifier of
+不管哪一种，你设置 segue 的 identifier
 
 752
 00:32:29,142 --> 00:32:32,910
 the segue as usual, and then implement prepareForSegue.
+然后实现 prepareForSegue
 
 753
 00:32:32,912 --> 00:32:35,780
 But let's think about as we prepareForSegue, cuz I've got
+在实现 prepareForSegue 的时候
 
 754
 00:32:35,782 --> 00:32:38,415
 this prototype row and I've got 10,000 of them,
+我是在原型 cell 中，我有 10000 行
 
 755
 00:32:38,417 --> 00:32:41,151
 when I segue I've got to know which row caused that segue,
+我不知道哪一行引发了 segue
 
 756
 00:32:41,153 --> 00:32:43,653
 which of the 10,000 rows, so how do I do that?
+我该怎么判断？
 
 757
 00:32:43,655 --> 00:32:44,987
 So let's look at prepareForSegue.
+让我们一起看看 prepareForSegue 方法
 
 758
 00:32:44,989 --> 00:32:48,224
 This is a typical prepareForSegue in
+在 table view controller 中
 
 759
 00:32:48,226 --> 00:32:51,794
 a table view controller, [COUGH] and it looks,
+这是一个典型的 prepareForSegue 方法
 
 760
 00:32:51,796 --> 00:32:54,696
 all the stuff in green is all the same as any other one, so
+绿色的代码跟其他 prepareForSegue 是一样的
 
 761
 00:32:54,698 --> 00:32:56,865
 you don't even really have to look at that code.
+你不需要看那部分
 
 762
 00:32:56,867 --> 00:32:59,300
 But the yellow there, the sender
+但是黄色的代码
 
 763
 00:32:59,302 --> 00:33:02,370
 is the first time we've used the sender in prepareForSegue,
+我们第一次在 prepareForSegue 使用 sender
 
 764
 00:33:02,372 --> 00:33:07,240
 and that sender is going to be the UITableViewCell of the row
+sender 将是你从哪行
 
 765
 00:33:07,242 --> 00:33:09,442
 that you're segueing from, 'kay?
+segue 而来的 UITableViewCell
 
 766
 00:33:09,444 --> 00:33:11,144
 That's the magic.
+这就是神奇的地方
 
 767
 00:33:11,146 --> 00:33:13,079
 Now it's any object, so
+现在它是 AnyObject
 
 768
 00:33:13,081 --> 00:33:16,982
 you're going to want to cast it using as to be either
+你需要用 as 把它转型成
 
 769
 00:33:16,984 --> 00:33:19,785
 UITableViewCell or your subclass thereof, right?
+UITableViewCell 或者你自定义的子类
 
 770
 00:33:19,787 --> 00:33:22,921
 So now you've got the cell that you're segueing from.
+现在你获取了 cell
 
 771
 00:33:22,923 --> 00:33:25,690
 Now a lot of times you'll want to get the index path
+大部分情况，你想要获取 cell 所在的 indexPath
 
 772
 00:33:25,692 --> 00:33:27,758
 of it now, the NSIndexPath to section and
+NSIndexPath 中的 section 和 row
 
 773
 00:33:27,760 --> 00:33:30,627
 row because your data, your model is going to be
+因为你的 model 会根据 section 和 row 
 
 774
 00:33:30,629 --> 00:33:32,629
 indexed usually by section and row.
+而建立索引
 
 775
 00:33:32,631 --> 00:33:33,830
 So you're gonna use this method,
+所以你需要使用这个方法
 
 776
 00:33:33,832 --> 00:33:36,532
 indexPathForCell, which you pass the cell to, but
+indexPathForCell 传入一个 cell
 
 777
 00:33:36,534 --> 00:33:39,235
 you have to cast it first, you can't pass it as any object,
+你需要先将它转型，你不能传入 AnyObject
 
 778
 00:33:39,237 --> 00:33:41,170
 you have to pass it as a UITableView cell.
+需要是 UITableViewCell 类型的
 
 779
 00:33:41,172 --> 00:33:45,473
 And now, once you have that thing, you can do your normal
+一旦你得到了它，就可以做正常的 segue
 
 780
 00:33:45,475 --> 00:33:48,242
 segueing, so, you're gonna get the destinationViewController
+你需要获取 destinationViewController
 
 781
 00:33:48,244 --> 00:33:52,346
 that you're segueing to, as whatever class it is.
+不管它是什么类
 
 782
 00:33:52,348 --> 00:33:54,982
-Then you're gonna use the publicAPI of that scene you're
+Then you're gonna use the public API of that scene you're
+接着你要使用那个场景的公开 API
 
 783
 00:33:54,984 --> 00:33:58,752
 segueing to, to set it up using the data at this section
+在这个 section 和 row 使用数据
 
 784
 00:33:58,754 --> 00:34:02,088
 and row of the cell that was clicked on, right?
+为 segue 做好准备
 
 785
 00:34:02,090 --> 00:34:06,659
 Okie-doke, all right, so
+好的
 
 786
 00:34:06,661 --> 00:34:09,728
 that's all the UITableView data source, that's getting
+这就是 UITableView 的 data source
 
 787
 00:34:09,730 --> 00:34:12,497
 the data into the table, segueing, all that business.
+把数据载入 table，segue 之类的工作
 
 788
 00:34:13,567 --> 00:34:16,467
 Let's talk about the UITableViewDelegate, okay?
+现在我们看一下 UITableViewDelegate
 
 789
 00:34:16,469 --> 00:34:19,303
 So UITableViewDelegate controls how the thing is
+UITableViewDelegate 控制
 
 790
 00:34:19,305 --> 00:34:21,805
 displayed, not the data but how it's displayed, so
+table 如何显示
 
 791
 00:34:21,807 --> 00:34:23,040
 obviously common for
+它们也是 table view
 
 792
 00:34:23,042 --> 00:34:26,343
 them to both be the controller of the table view.
+的控制器
 
 793
 00:34:26,345 --> 00:34:29,112
 The delegate lets you observe what's going on inside
+delegate 可以让你监视
 
 794
 00:34:29,114 --> 00:34:30,513
 the table.
+table 内部发生了什么
 
 795
 00:34:30,515 --> 00:34:33,449
 For example, you could find out when a row was clicked
+例如，当一行被点击的时候
 
 796
 00:34:33,451 --> 00:34:35,067
 on with the delegate.
+你可以获取到通知
 
 797
 00:34:35,068 --> 00:34:36,684
 When a row is clicked on, you could segue or
+当一行被点击的时候
 
 798
 00:34:36,687 --> 00:34:39,587
 you can just find out from the delegate tableView,
+你可以 segue 到其他 view
 
 799
 00:34:39,589 --> 00:34:41,456
 didSelectRowAtIndexPath, and
+你也可以在 didSelectRowAtIndexPath 获取到
 
 800
 00:34:41,458 --> 00:34:43,858
 it's gonna tell you the section and row.
+它会告诉你 section 和 row
 
 801
 00:34:43,860 --> 00:34:45,225
 Index paths give you section and row,
+indexPath 会给你点击 cell 的
 
 802
 00:34:45,227 --> 00:34:47,127
 remember, of what you clicked on.
+section 和 row
 
 803
 00:34:47,129 --> 00:34:49,796
 You can do whatever you want at that point, 'kay?
+在那一刻你想怎么做都可以
 
 804
 00:34:49,798 --> 00:34:52,265
 You could manually segue in code here, for example, or
+你也可以用代码手动 segue
 
 805
 00:34:52,267 --> 00:34:55,267
 you could do something else.
+或者做一些其它东西
 
 806
 00:34:56,270 --> 00:34:57,802
 That little detail disclosure thing,
+那个小的 detail disclosure
 
 807
 00:34:57,804 --> 00:35:00,772
 you can segue from it, or the delegate will get a message,
+你可以从它 segue，你也会获取到
 
 808
 00:35:00,774 --> 00:35:04,342
 accessoryButtonTappedForRowWi- thIndexPath, and
+accessoryButtonTappedForRowWithIndexPath: 消息
 
 809
 00:35:04,344 --> 00:35:06,777
 you can find out about it that way too.
+这种方式也可以获取到
 
 810
 00:35:06,779 --> 00:35:08,345
 Okay, so clicking on rows whether you click on
+点击 row 或
 
 811
 00:35:08,347 --> 00:35:10,413
 the little detail thing or the row itself, you can just
+点击 detail disclosure 
 
 812
 00:35:10,415 --> 00:35:13,249
 find out about if you don't want to segue directly.
+如果你不想直接 segue 也可以获取到
 
 813
 00:35:14,985 --> 00:35:17,285
 Tons of other stuff in the tableViewDelegate,
+在 tableViewDelegate 有很多东西
 
 814
 00:35:17,287 --> 00:35:19,454
 you can just look in the documentation.
+直接看文档就可以了
 
 815
 00:35:19,456 --> 00:35:22,590
 It also can be involved in the editing part,
+delegate 也包含编辑的部分
 
 816
 00:35:22,592 --> 00:35:24,892
 especially the re-display part of editing.
+尤其是编辑后重新显示
 
 817
 00:35:26,095 --> 00:35:28,528
 So you can take a look at that.
+你也可以看一看
 
 818
 00:35:28,530 --> 00:35:31,031
 All right, back to UITableView itself,
+回到 UITableView 它本身
 
 819
 00:35:31,033 --> 00:35:32,732
 what if your model changes?
+如果你的 model 发生变化了呢？
 
 820
 00:35:32,734 --> 00:35:35,768
 You've done all the stuff to implement the data source, you
+你实现了 data source 的所有方法
 
 821
 00:35:35,770 --> 00:35:39,004
 loaded up your 10,000 cells, what happens if new songs got
+载入了 10000 个 cell，如果向曲库中添加了新的歌曲
 
 822
 00:35:39,006 --> 00:35:41,807
 added to your iPod library and you need to re-display?
+需要刷新显示该怎么做？
 
 823
 00:35:41,809 --> 00:35:44,576
 Well, you can send a message to your table view,
+你可以向 table view 发送一个消息
 
 824
 00:35:44,578 --> 00:35:46,595
 reloadData.
+reloadData
 
 825
 00:35:46,596 --> 00:35:48,613
 And it will go and send numberOfSectionsInTableView
+它会发送 numberOfSectionsInTableView
 
 826
 00:35:48,615 --> 00:35:51,549
 and numberOfRowsInSection for each section and
+numberOfRowsInSection
 
 827
 00:35:51,551 --> 00:35:55,052
 call cellForRowAtIndexPath for all the visible cells and
+并且对每一个可见的 cell 调用 cellForRowAtIndexPath
 
 828
 00:35:55,054 --> 00:35:57,087
 reload up all your data, 'kay?
+重新载入所有的数据
 
 829
 00:35:57,089 --> 00:36:00,724
 Now that might be a lot of work for 10,000 iPod things so
+对于 10000 条数据这工作量可能有点大
 
 830
 00:36:00,726 --> 00:36:04,093
 you might wanna just reload a small part of it if you can,
+所以你也许会只想载入一小部分
 
 831
 00:36:04,095 --> 00:36:07,697
 and then you can use things like reloadRowsAtIndexPaths.
+你可以使用 reloadRowsAtIndexPaths 方法
 
 832
 00:36:07,699 --> 00:36:10,099
 You just give it an array of index paths and
+传递给它 indexPath 的一个数组
 
 833
 00:36:10,101 --> 00:36:12,501
 it'll only reload those cells, 'kay?
+它只会重新载入这些 cell
 
 834
 00:36:12,503 --> 00:36:14,736
 So that's what happens when your model changes.
+当 model 改变时
 
 835
 00:36:15,905 --> 00:36:17,705
 What about the height of rows?
+row 的高度该怎么办？
 
 836
 00:36:17,707 --> 00:36:20,040
 So the height of rows, the rows are gonna be the height
+row 的高度会是你在 storyboard 中设定的高度
 
 837
 00:36:20,042 --> 00:36:24,111
 they are in the story board unless, in your code,
+除非在你的代码中
 
 838
 00:36:24,113 --> 00:36:28,348
 you change the height to be UITableViewAutomaticDimension.
+把高度设置为 UITableViewAutomaticDimension
 
 839
 00:36:28,350 --> 00:36:31,317
 If you do that, then it's gonna use the autolayout to
+如果这么做，它会使用 autolayout
 
 840
 00:36:31,319 --> 00:36:33,218
 figure out how high each row is, so
+调整每一行的高度
 
 841
 00:36:33,220 --> 00:36:35,420
 every row could be a different height.
+每一行都可能是不同的高度
 
 842
 00:36:35,422 --> 00:36:38,456
 'Kay, if you use that automatic dimension,
+如果你设置了 AutomaticDimension
 
 843
 00:36:38,458 --> 00:36:41,726
 you're gonna wanna set an estimatedRowHeight,
+你也需要设置 estimatedRowHeight
 
 844
 00:36:41,728 --> 00:36:44,595
 because the table view is a scroll view, and
+因为 table view 是 scroll view
 
 845
 00:36:44,597 --> 00:36:48,432
 it kinda wants to know how big its content size is, right?
+所以它需要知道
 
 846
 00:36:48,434 --> 00:36:49,733
 'Kay, remember, from scroll view,
+它内容的尺寸是多少
 
 847
 00:36:49,735 --> 00:36:51,501
 the content size, so, it kinda wants to know that.
+它需要知道这些
 
 848
 00:36:51,503 --> 00:36:54,070
 So it really helps to have an estimatedRowHeight so
+所以 estimatedRowHeight 是很有帮助的
 
 849
 00:36:54,072 --> 00:36:56,005
 it can kinda guess at what the size is and
+它可以获取 size 的大小
 
 850
 00:36:56,007 --> 00:36:58,674
 then as you start scrolling down, it'll adjust it.
+当你滑动的时候，它会调整高度
 
 851
 00:36:58,676 --> 00:37:02,877
 It's very good at doing that.
+它非常擅长做这些
 
 852
 00:37:02,879 --> 00:37:04,912
 So if you ever use automatic dimension,
+如果你曾经使用过 AutomaticDimension
 
 853
 00:37:04,914 --> 00:37:06,747
 use estimatedRowHeight, 'kay?
+记得使用 estimatedRowHeight
 
 854
 00:37:06,749 --> 00:37:09,483
 Now you can also have your delegate report,
+你可以让 delegate 
 
 855
 00:37:09,485 --> 00:37:12,152
 calculate and report the height of each row
+计算每一行的高度
 
 856
 00:37:12,154 --> 00:37:15,922
 using heightForRowAtIndexPath, 'kay, or there's also
+使用 heightForRowAtIndexPath
 
 857
 00:37:15,924 --> 00:37:18,457
 estimatedHeightForRowAtIndexP- ath.
+也可以用 estimatedHeightForRowAtIndexPath
 
 858
 00:37:18,459 --> 00:37:19,892
 You can implement either of those.
+实现其中之一
 
 859
 00:37:19,894 --> 00:37:22,861
 And that's a way that maybe you can calculate the row
+这种方式你可以计算 row 的高度
 
 860
 00:37:22,863 --> 00:37:25,730
 height without having to do the full auto-layout
+而不需要做完整的
 
 861
 00:37:25,732 --> 00:37:27,365
 calculation or something.
+autolayout 计算之类的
 
 862
 00:37:27,367 --> 00:37:30,968
 Or you can estimate it better than just a fixed estimated,
+你可以先估计而不是使用固定的值
 
 863
 00:37:30,970 --> 00:37:34,805
 your delegate might be smarter than that, so you can do that.
+delegate 比较有效，你可以这么做
 
 864
 00:37:34,807 --> 00:37:39,109
 Okay, so, dozens of other methods in UITableView itself,
+UITableView 还有许多方法
 
 865
 00:37:39,111 --> 00:37:41,377
 things like scrolling to a row,
+例如，滑动到某一行
 
 866
 00:37:41,379 --> 00:37:45,247
 you wanna scroll right down to a row or you want to manage
+你也许想要滑动到某一行，或者
 
 867
 00:37:45,249 --> 00:37:49,218
 whether multiple rows can be selected at the same time.
+是否允许多行被同时选中
 
 868
 00:37:49,220 --> 00:37:53,388
 Those kind of things are all controllable by methods in
+这些方法都被 UITableView 自己控制着
 
 869
 00:37:53,390 --> 00:37:57,859
 UITableView itself, not in the delegate or data source.
+不是在 delegate 或 data source 中
 
 870
 00:37:57,861 --> 00:38:00,995
 Okay, so that's it.
+就是这样
 
 871
 00:38:00,997 --> 00:38:04,131
 As usual, a demo's worth 1,000 words, so
+一个 demo 胜千言
 
 872
 00:38:04,133 --> 00:38:06,867
 let's do a little UITableView demo here.
+我们一起来做一个 UITableView 的例子
 
 873
 00:38:06,869 --> 00:38:09,269
 What we're gonna do is we're gonna build an app
+我们做的是搭建一个 app
 
 874
 00:38:09,271 --> 00:38:11,838
 that searches for something in Twitter and
+可以搜索 Twitter 中的文字
 
 875
 00:38:11,840 --> 00:38:16,342
 shows us all the tweets that match, 'kay?
+并且展示给我们所有匹配的 tweets
 
 876
 00:38:16,344 --> 00:38:17,109
 Should be easy.
+应该会很简单
 
 877
 00:38:18,211 --> 00:38:19,477
 Let's see if there's
+一起来看看
 
 878
 00:38:19,478 --> 00:38:20,744
 anything else here to talk about coming up.
+近期的安排
 
 879
 00:38:21,781 --> 00:38:25,816
 Oh, yeah, your Assignment 4 is gonna go out,
+Assignment 4 快要截止了
 
 880
 00:38:25,818 --> 00:38:28,719
 might post it right after lecture today, probably, but
+也许在下课之后发布
 
 881
 00:38:28,721 --> 00:38:30,520
 you have until next Wednesday on that one.
+下周三之前你需要交上来
 
 882
 00:38:30,522 --> 00:38:32,321
 It's gonna be a table view-based thing.
+会是一个有关 tableview 的东西
 
 883
 00:38:33,358 --> 00:38:36,025
 On Wednesday of this week, I'm gonna go over the requirements
+这周三，我会告诉大家
 
 884
 00:38:36,027 --> 00:38:37,626
 for your final project.
+你们最后的项目需要做点什么
 
 885
 00:38:37,628 --> 00:38:39,094
 And then also, I'm gonna cover a whole bunch of other
+在这之后，我也会讲些内容
 
 886
 00:38:39,096 --> 00:38:42,697
 things like alerts, unwind segues, timers and if I have
+关于 alerts，unwind segues, timers
 
 887
 00:38:42,699 --> 00:38:44,865
 time on Wednesday, I'll actually start on animation,
+如果还有时间，我会开始讲 animation
 
 888
 00:38:44,867 --> 00:38:47,167
 which is gonna be our next major topic.
+我们下一步的主要话题
 
 889
 00:38:47,169 --> 00:38:51,571
 Friday's section is an awesome one for
+周五的部分是很赞的
 
 890
 00:38:51,573 --> 00:38:53,239
 this week which is UICollectionView.
+UICollectionView
 
 891
 00:38:53,241 --> 00:38:56,308
 So UICollectionView is kind of like a tableView, except for
+UICollectionView 很像 tableview
 
 892
 00:38:56,310 --> 00:38:58,777
 instead of them being in a strict list,
+它不会是一个严格的 list
 
 893
 00:38:58,779 --> 00:39:01,380
 it can be kind of arranged how you want on screen,
+而是让屏幕的内容怎样被安排
 
 894
 00:39:01,382 --> 00:39:04,382
 'kay, could be two-dimensional grid or whatever.
+可以是二维的格子之类的
 
 895
 00:39:04,384 --> 00:39:08,086
 So it's a much more flexible version of UITableView.
+它是 UITableView 更灵活的一个版本
 
 896
 00:39:08,088 --> 00:39:11,255
 And then next Monday, remember, no lecture,
+下周一，没课
 
 897
 00:39:11,257 --> 00:39:12,022
 we have a holiday.
+是假期
 
 898
 00:39:13,692 --> 00:39:16,559
 Okay, so let's go to building new apps,
+好的，开始写新 app
 
 899
 00:39:16,561 --> 00:39:19,062
 I'm gonna say create new project.
+新建一个项目
 
 900
 00:39:20,031 --> 00:39:24,499
 Single view, I'm gonna call this Smashtag, 'kay?
+单视图，起名为 Smashtag
 
 901
 00:39:26,336 --> 00:39:27,902
 Put it in our normal place here.
+放到往常的位置
 
 902
 00:39:29,038 --> 00:39:32,039
 I'm gonna move this stuff out of the way as I always do,
+把这些放到其它地方
 
 903
 00:39:32,041 --> 00:39:36,176
 we're not gonna work on any of that today, okay?
+今天我们不会涉及这些文件
 
 904
 00:39:36,178 --> 00:39:38,511
 So I just have my storyboard here.
+打开 storyboard
 
 905
 00:39:38,513 --> 00:39:40,112
 It's got this one controller and
+有一个 controller
 
 906
 00:39:40,114 --> 00:39:42,348
 I'm actually gonna delete this controller.
+实际上我要把它删掉
 
 907
 00:39:42,350 --> 00:39:43,999
 All right, so
+好的
 
 908
 00:39:44,000 --> 00:39:45,649
 now we have a completely empty storyboard, and
+现在我们有一个空白的 storyboard
 
 909
 00:39:45,652 --> 00:39:48,820
 I'm gonna start by dragging in a UITableViewController.
+拽进来一个 
 
 910
 00:39:48,822 --> 00:39:51,089
 So let's go grab a UITableViewController.
+UITableViewController
 
 911
 00:39:51,091 --> 00:39:52,456
 It's right near the top.
+在控件栏里
 
 912
 00:39:52,458 --> 00:39:54,692
 Of our object palette here.
+它在上面的位置
 
 913
 00:39:54,694 --> 00:39:55,992
 So I'm gonna drag this out.
+把它拽出来
 
 914
 00:39:55,994 --> 00:39:57,861
 There it is. I'm also gonna embed
+我把它放入
 
 915
 00:39:57,863 --> 00:40:00,029
 it in a Navigation Controller.
+Navigation Controller
 
 916
 00:40:00,031 --> 00:40:01,964
@@ -3665,114 +4573,142 @@ Okay?
 917
 00:40:01,966 --> 00:40:05,167
 Because someday I might want to click on my tweets in here
+因为也许以后我会点击某一条 tweet
 
 918
 00:40:05,169 --> 00:40:06,568
 and have it show more information,
+然后需要它展示给我更多信息
 
 919
 00:40:06,570 --> 00:40:08,803
 like maybe in your assignment four, perhaps.
+也许在你们的第四次作业里
 
 920
 00:40:10,407 --> 00:40:11,939
 All right, so we have this table, your controller.
+所以我们有了这个 table，你的 controller
 
 921
 00:40:11,941 --> 00:40:14,008
 It really doesn't make sense to have a controller without
+如果 controller 没有一个自定义的子类
 
 922
 00:40:14,010 --> 00:40:17,177
 a custom view controller subclass, of course,
+会显得很没有意义
 
 923
 00:40:17,179 --> 00:40:19,746
 as you well know from all your assignments so far.
+到目前为止我们都没有自己定义
 
 924
 00:40:19,748 --> 00:40:24,750
 So let's go ahead and create a custom subclass here.
+现在我们创建一个吧
 
 925
 00:40:24,752 --> 00:40:25,951
 So we'll do File > New.
+File > New
 
 926
 00:40:28,422 --> 00:40:30,889
 And hit iOS > Source > Cocoa Touch Class.
+选择 iOS > Source > Cocoa Touch Class
 
 927
 00:40:30,891 --> 00:40:32,790
 Here I'm gonna be very careful to say I want
+在这，我小心点
 
 928
 00:40:32,792 --> 00:40:34,325
 a UITableViewController.
+选中 UITableViewController
 
 929
 00:40:34,327 --> 00:40:37,394
 And I'm gonna call this TweetTableViewController.
+起名为 TweetTableViewController
 
 930
 00:40:37,396 --> 00:40:38,161
 Cuz that's what's gonna show.
+因为它会显示这些内容
 
 931
 00:40:38,163 --> 00:40:39,195
 It's gonna show tweets.
+会显示 tweets
 
 932
 00:40:40,131 --> 00:40:41,497
 Okay? And we'll put it in
+把它放到以往
 
 933
 00:40:41,499 --> 00:40:45,000
 the normal place where you put everything.
+放置的地方
 
 934
 00:40:45,002 --> 00:40:46,167
 Here it is.
+这就是它
 
 935
 00:40:46,169 --> 00:40:48,036
 I'll actually leave the code in here,
+实际上我会把这些代码留在这里
 
 936
 00:40:48,038 --> 00:40:49,870
 all this commented out stuff.
+这些注释掉的代码
 
 937
 00:40:49,872 --> 00:40:52,439
 Because some of this stuff is kinda interesting, for
+因为有一些还是挺有意思的
 
 938
 00:40:52,441 --> 00:40:55,409
 you to learn about how to do things like deleting rows, and
+你们可以学到
 
 939
 00:40:55,411 --> 00:40:56,609
 stuff like that, in the table view.
+如何删除 row 之类的东西
 
 940
 00:40:56,611 --> 00:40:59,946
 So, in here is the data source methods and
+这里是 data source 方法
 
 941
 00:40:59,948 --> 00:41:00,880
 we're gonna go implement those.
+我们将要实现这些
 
 942
 00:41:00,882 --> 00:41:02,448
 So I'll leave this stuff in here.
+我把这些都留着
 
 943
 00:41:02,450 --> 00:41:04,349
 I'm just gonna get rid of didReceiveMemoryWarning,
+只删除 didReceiveMemoryWarning
 
 944
 00:41:04,351 --> 00:41:06,484
 because we're not gonna deal with that.
+因为我们不会处理这些
 
 945
 00:41:06,486 --> 00:41:07,618
@@ -3781,282 +4717,352 @@ Okay?
 946
 00:41:07,620 --> 00:41:11,889
 So here we go, here's our code right here.
+这就是我们的代码
 
 947
 00:41:13,292 --> 00:41:16,159
 Let's talk about the model of our, oh,
+我们先来探讨一下 model 
 
 948
 00:41:16,161 --> 00:41:18,161
 sorry, one more thing before we do that.
+抱歉，在这之前
 
 949
 00:41:18,163 --> 00:41:20,996
 Let's go back to our storyboard and
+先回到 storyboard
 
 950
 00:41:20,998 --> 00:41:27,669
 make sure we set this to be a TweetTableViewController.
+确认我们把类设置为 TweetTableViewController
 
 951
 00:41:27,671 --> 00:41:30,105
 Okay, so I'm just in the identity inspector here.
+在 identity inspector
 
 952
 00:41:30,107 --> 00:41:31,639
 That's a common thing to forget to do.
+忘记做这件事情很正常
 
 953
 00:41:31,641 --> 00:41:33,607
 You'll notice immediately when you start trying to
+在连接 outlet 的时候
 
 954
 00:41:33,609 --> 00:41:34,541
 wire things up.
+你就会发现了
 
 955
 00:41:34,543 --> 00:41:36,576
 Oh, that's not gonna work.
+咦？怎么不起作用？
 
 956
 00:41:36,578 --> 00:41:38,478
 But anyway, common thing to forget there.
+总的来说这挺容易忘记的
 
 957
 00:41:38,480 --> 00:41:40,897
 All right, so
+好的
 
 958
 00:41:40,898 --> 00:41:43,315
 let's talk about the model of this table view controller.
+讨论一下这个 table view controller 的 model
 
 959
 00:41:43,318 --> 00:41:45,017
 And what it's gonna be is,
+实际上 model
 
 960
 00:41:45,019 --> 00:41:48,754
 it's actually gonna be an array of tweets.
+应该是一个 tweets 的数组
 
 961
 00:41:48,756 --> 00:41:53,458
 But it's really gonna be an array of array of tweets.
+但它应该是一个 tweets 的二维数组
 
 962
 00:41:54,828 --> 00:41:57,595
 Okay, why am I gonna make this an array of an array?
+为什么我要把它设置为二维数组
 
 963
 00:41:57,597 --> 00:42:00,364
 Okay, it's because I'm gonna have multiple sections.
+因为我会有多个 section
 
 964
 00:42:00,366 --> 00:42:01,798
 Each section in my table view,
+在 table 中的每一个 section
 
 965
 00:42:01,800 --> 00:42:03,933
 they're not gonna have headers or anything.
+它们不会有标题之类的
 
 966
 00:42:03,935 --> 00:42:08,404
 Each section is just gonna be a new batch of tweets, okay?
+每一个 section 只是会一组新的 tweets
 
 967
 00:42:08,406 --> 00:42:10,005
 So, every time I get a new batch of tweets,
+每一次我获取一组新 tweets
 
 968
 00:42:10,007 --> 00:42:11,239
 because you know how Twitter is,
+因为你们知道
 
 969
 00:42:11,241 --> 00:42:12,807
 things are always happening on Twitter,
+Twitter 上总会时刻产生
 
 970
 00:42:12,809 --> 00:42:14,909
 there's always new tweets being put on there.
+新的推文
 
 971
 00:42:14,911 --> 00:42:16,477
 You want to be able to constantly be seeing
+你想不断地看到
 
 972
 00:42:16,479 --> 00:42:17,945
 the latest ones, and so
+最新的
 
 973
 00:42:17,947 --> 00:42:20,180
 I'm going to be fetching them every once in a while and
+我会时不时地获取它们
 
 974
 00:42:20,182 --> 00:42:24,817
 I'll just throw them in to my array of array of tweets.
+把它们放入 tweets 的二维数组里
 
 975
 00:42:24,819 --> 00:42:26,585
 That's why I'm making an array of arrays.
+这就是二维数组的原因
 
 976
 00:42:26,587 --> 00:42:28,387
 Everyone understand that, why I'm doing that?
+都懂了吧？
 
 977
 00:42:29,423 --> 00:42:32,524
 So each array inside is a different section
+所以其中的每一个数组
 
 978
 00:42:32,526 --> 00:42:33,157
 in the table view.
+都是 tableview 中不同的 section
 
 979
 00:42:34,260 --> 00:42:35,793
 Now what's a tweet?
+什么是一条 tweet
 
 980
 00:42:35,795 --> 00:42:37,127
 'Kay, I got this thing tweet here.
+这里有一个 tweet
 
 981
 00:42:37,129 --> 00:42:38,345
 What is that?
+它是什么
 
 982
 00:42:38,346 --> 00:42:39,562
 Well, I'm gonna give you the code to do that.
+在这里我会给你代码
 
 983
 00:42:39,564 --> 00:42:42,131
 I'm gonna give you these Twitter files right here so
+我会给你这些 Twitter 文件
 
 984
 00:42:42,133 --> 00:42:45,768
 you can just drag them in to your project here.
+你可以直接拖拽到工程里
 
 985
 00:42:46,937 --> 00:42:48,870
 And, what do these things look like?
+代码是什么样的？
 
 986
 00:42:48,872 --> 00:42:50,605
 Let's take a look at them.
+我们看一眼
 
 987
 00:42:50,607 --> 00:42:52,907
 So there's these four classes in here.
+这里有四个类
 
 988
 00:42:52,909 --> 00:42:56,510
 TwitterRequest is the class you use to actually request
+TwitterRequest 是你从 Twitter
 
 989
 00:42:56,512 --> 00:42:57,977
 tweets from Twitter.
+请求 tweets 的类
 
 990
 00:42:57,979 --> 00:43:00,380
 And I'm gonna show you how to use that in this demo.
+我会告诉你们怎样在 demo 中使用
 
 991
 00:43:00,382 --> 00:43:03,549
 Tweet is the things that come back.
+Tweet 是请求后返回的东西
 
 992
 00:43:03,551 --> 00:43:05,368
 So, Twitter
+TwitterRequest
 
 993
 00:43:05,369 --> 00:43:07,186
 requests are gonna give you an array of tweets, basically.
+会返回给你一组 tweets
 
 994
 00:43:07,188 --> 00:43:08,787
 You're gonna tell it what to search for,
+你告诉它你想搜索什么
 
 995
 00:43:08,789 --> 00:43:09,821
 it's gonna give you an array of tweets.
+它会返回给你一组 tweets
 
 996
 00:43:09,823 --> 00:43:10,722
 It could not be simpler.
+很简单
 
 997
 00:43:11,691 --> 00:43:14,425
 Tweets have some, you know,
+Tweets 内部有
 
 998
 00:43:14,427 --> 00:43:17,160
 things like the text of the tweet, when it was created.
+发布时候的文字
 
 999
 00:43:17,162 --> 00:43:21,031
 It also has things like, the hashtags and URLs and
+也有 # 和 URL
 
 1000
 00:43:21,033 --> 00:43:25,001
 users that were mentioned inside the tweet, okay?
+tweet 中提及的用户
 
 1001
 00:43:25,003 --> 00:43:27,336
 So things like the user has its own little class here,
+User 有它自己的类
 
 1002
 00:43:27,338 --> 00:43:29,738
 User, that just has screen name, et cetera.
+内部有 screen name 等成员
 
 1003
 00:43:29,740 --> 00:43:31,540
 So these classes, you don't really
+对于这些类
 
 1004
 00:43:31,542 --> 00:43:33,508
 need to call any methods in any of them except for
+你只需要调用 
 
 1005
 00:43:33,510 --> 00:43:35,977
 TwitterRequest to actually do the search.
+TwitterRequest 的方法就可以搜索了
 
 1006
 00:43:35,979 --> 00:43:37,778
 The other ones are just like bags of
+其他的那些只是装数据的容器
 
 1007
 00:43:37,780 --> 00:43:39,947
 things that are holding things like about the users,
+就像 User 中的
 
 1008
 00:43:39,949 --> 00:43:41,682
 user name, things like that.
+userName 之类的
 
 1009
 00:43:41,684 --> 00:43:44,417
 Okay, so it's pretty easy to use this little thing.
+使用它们非常简单
 
 1010
 00:43:44,419 --> 00:43:47,587
 So, now we have tweets in here so this makes sense.
+现在我们已经有 tweets 了
 
 1011
 00:43:47,589 --> 00:43:49,455
 We've got our nice model.
+我们有了个不错的 model
 
 1012
 00:43:51,125 --> 00:43:53,625
 So, let's go ahead and make a request.
+现在我们做一次请求
 
 1013
 00:43:53,627 --> 00:43:56,194
 Let's see what the code looks like to make a request to
+一起来看看如何向 Twitter 
 
 1014
 00:43:56,196 --> 00:43:57,662
 Twitter.
+提交一次请求
 
 1015
 00:43:57,663 --> 00:43:59,129
 And I'm going to do that here in my viewDidLoad.
+我会在 viewDidLoad 中处理
 
 1016
 00:43:59,132 --> 00:44:01,566
@@ -4065,26 +5071,32 @@ Okay?
 1017
 00:44:01,567 --> 00:44:04,001
 Let's go ahead and leave the rest of the comments in there.
+把这些注释留在这里
 
 1018
 00:44:04,003 --> 00:44:08,005
 And, so all I need to do, to do this is create a request.
+我需要做的就是提出一次请求
 
 1019
 00:44:08,007 --> 00:44:11,708
 So I'm gonna let a request equal TwitterRequest.
+let request = TwitterRequest
 
 1020
 00:44:11,710 --> 00:44:15,345
 So I'm gonna have to use one of TwitterRequest's
+使用 TwitterRequest 中的
 
 1021
 00:44:15,347 --> 00:44:16,779
 constructors here.
+一个构造函数
 
 1022
 00:44:16,781 --> 00:44:20,782
 And I'm gonna use the one that lets me specify a search.
+我使用能够让我搜索的那个
 
 1023
 00:44:20,784 --> 00:44:22,167
@@ -4093,34 +5105,42 @@ Okay?
 1024
 00:44:22,168 --> 00:44:23,551
 So, I'm gonna search, let's say,
+我将进行一次搜索
 
 1025
 00:44:23,553 --> 00:44:26,387
 we'll start out just searching for #Stanford.
+先从 #Stanford 开始
 
 1026
 00:44:26,389 --> 00:44:28,522
 That's a good one to start with.
+不错的开始
 
 1027
 00:44:28,524 --> 00:44:32,059
 And, a count is how many tweets I want to get
+我要搜索多少条
 
 1028
 00:44:32,061 --> 00:44:34,127
 in this request, so I'm gonna just do 100.
+在这里填 100
 
 1029
 00:44:34,129 --> 00:44:36,529
 And these other things are optional, so
+其它的东西都不是必须的
 
 1030
 00:44:36,531 --> 00:44:37,497
 I won't even specify them.
+所以我不需要填
 
 1031
 00:44:37,499 --> 00:44:38,831
 Whatever they are is what they are.
+它们是什么就是什么吧
 
 1032
 00:44:40,101 --> 00:44:41,267
@@ -4129,186 +5149,232 @@ Okay?
 1033
 00:44:41,268 --> 00:44:42,434
 So now I've got my Twitter request.
+现在我有了一个 request
 
 1034
 00:44:42,436 --> 00:44:43,868
 I'm just gonna execute it.
+我直接执行它
 
 1035
 00:44:43,870 --> 00:44:46,404
 I do that by calling this method in the Twitter request
+我通过它的一个方法
 
 1036
 00:44:46,406 --> 00:44:48,272
 called fetchTweets.
+fetchTweets 来执行
 
 1037
 00:44:48,274 --> 00:44:53,443
 Now fetchTweets takes one argument which is a handler.
+fetchTweets 需要一个 handler 的参数
 
 1038
 00:44:53,445 --> 00:44:54,878
 Okay? A closure basically,
+实际上是一个闭包
 
 1039
 00:44:54,880 --> 00:44:57,180
 we're gonna specify here, okay?
+在这里指定的
 
 1040
 00:44:57,182 --> 00:45:00,182
 That gives back the array of tweets.
+它返回一组 tweets
 
 1041
 00:45:00,184 --> 00:45:01,517
 You see how it's giving the array of
+你们看到它给一组 tweets
 
 1042
 00:45:01,519 --> 00:45:02,918
 tweets as the argument?
+做为参数了吧
 
 1043
 00:45:02,919 --> 00:45:04,318
 So that's going to be the argument in a handler.
+它将会是 handler 的参数
 
 1044
 00:45:04,321 --> 00:45:08,723
 So, I'm actually gonna use the trailing closure notation here
+为了完成，在这里
 
 1045
 00:45:08,725 --> 00:45:09,790
 to do this.
+我使用尾随闭包
 
 1046
 00:45:09,792 --> 00:45:12,826
 And so, this is asking me, what do you want,
+这里问我，你需要什么
 
 1047
 00:45:12,828 --> 00:45:15,128
 I just double-clicked on that by the way, it's asking me,
+刚才我双击了这里
 
 1048
 00:45:15,130 --> 00:45:16,663
 what do you want to call this variable?
+它问我，你想叫这个变量什么
 
 1049
 00:45:16,665 --> 00:45:19,866
 So this is my new tweets that are coming back.
+返回的是新推文，所以起名为 newTweets
 
 1050
 00:45:19,868 --> 00:45:21,567
 Okay? And so, inside here I can
+在内部
 
 1051
 00:45:21,569 --> 00:45:23,202
 just do whatever I want with my new tweets.
+我可以对 newTweets 做任何我想做的事情
 
 1052
 00:45:23,204 --> 00:45:25,671
 Well, what I want to do is very easy.
+我想做的事情很简单
 
 1053
 00:45:25,673 --> 00:45:28,073
 If there are any of these new tweets,
+如果有 newTweets
 
 1054
 00:45:28,075 --> 00:45:31,909
 because maybe it couldn't find any, but if there are any,
+因为它可能搜索不到
 
 1055
 00:45:31,911 --> 00:45:34,712
 then I'm just going to say self.tweets.
+如果有的话，self.tweets
 
 1056
 00:45:34,714 --> 00:45:37,381
 Now I have to say, if I don't say self, you know it's gonna
+我必须加 self，因为它在闭包内部
 
 1057
 00:45:37,383 --> 00:45:39,716
 complain because this is inside a closure.
+不加会出错
 
 1058
 00:45:39,718 --> 00:45:46,356
 I'm going to say tweets.insert the new tweets atIndex 0.
+tweets.insert(newTweets, atIndex: 0)
 
 1059
 00:45:46,358 --> 00:45:48,324
 So I'm going to put it as the first section
+所以我把它放入 tableview 的
 
 1060
 00:45:48,326 --> 00:45:49,525
 in my table view.
+第一个 section 中
 
 1061
 00:45:49,527 --> 00:45:50,959
 Okay? Remember, Tweets is
+记住，Tweets 是二维数组
 
 1062
 00:45:50,961 --> 00:45:53,862
 an array of arrays, and each one is a section.
+每一个数组是一个 section
 
 1063
 00:45:53,864 --> 00:45:55,530
 So I'm going to put it in section zero
+所以我把它放入了
 
 1064
 00:45:56,799 --> 00:45:58,265
 of my tweets right there.
+第 0 个 section
 
 1065
 00:45:58,266 --> 00:45:59,732
 You can see it's complaining because this is
+你可以看到这里出错了
 
 1066
 00:45:59,735 --> 00:46:02,803
 inside a closure, and it wants me to put self in front so
+因为这是在闭包内部
 
 1067
 00:46:02,805 --> 00:46:06,039
 that I'm clear about the fact that I'm capturing self.
+我清楚的知道我在捕获 self
 
 1068
 00:46:06,041 --> 00:46:08,007
 Now that's not gonna be a problem in this case, but
+在这种情况之下，这不是问题
 
 1069
 00:46:08,009 --> 00:46:10,309
 it's always something you should think about, as whether
+但是你需要思考这些问题
 
 1070
 00:46:10,311 --> 00:46:13,245
 you're capturing something that points back to it.
+你是否需要捕获指向它自己的变量
 
 1071
 00:46:13,247 --> 00:46:15,714
 Then I'm gonna reload my table view, okay?
+接着，我会重新载入 tableView
 
 1072
 00:46:15,716 --> 00:46:18,249
 So I'm just gonna say, tableView.reloadData and
+tableView.reloadData
 
 1073
 00:46:18,251 --> 00:46:20,785
 that's gonna cause my whole table to get reloaded.
+这会让我的整个 table 重新载入
 
 1074
 00:46:21,821 --> 00:46:24,655
 Now again, I could try and just reload this one section,
+我可以只载入这个 section 的部分
 
 1075
 00:46:24,657 --> 00:46:26,423
 section zero, that probably would be better but
+第 0 个 section，这样也许会好一些
 
 1076
 00:46:26,425 --> 00:46:27,590
 I'm just doing a demo here so
+但是我是在做 demo
 
 1077
 00:46:27,592 --> 00:46:29,142
 I'm gonna reload my whole table.
+我只重载我的整个 table 就好了
 
 1078
 00:46:29,143 --> 00:46:30,693
 Its not that expensive to reload my table anyway.
+但是重载我的整个 table 不会开销很大
 
 1079
 00:46:32,063 --> 00:46:33,095
@@ -4317,390 +5383,487 @@ Okay?
 1080
 00:46:33,096 --> 00:46:34,128
 It's that simple.
+就是这么简单
 
 1081
 00:46:34,131 --> 00:46:35,330
 That's all that's necessary.
+需要做的只有这些
 
 1082
 00:46:35,332 --> 00:46:41,068
 Now, can anyone see what might be a problem with this,
+你们能看到这其中的问题吗？
 
 1083
 00:46:41,070 --> 00:46:42,836
 conceptually?
+概念性的
 
 1084
 00:46:42,838 --> 00:46:44,771
 When do you think this is called?
+你们认为这部分什么时候被调用
 
 1085
 00:46:47,442 --> 00:46:50,009
 Sometime later, right?
+隔一段时间以后，对吧
 
 1086
 00:46:50,011 --> 00:46:53,946
 I'm requesting tweets, I don't want to block my main queue.
+我在请求推文，我不想阻塞主线程
 
 1087
 00:46:53,948 --> 00:46:57,949
 So fetchTweets goes off and fetches it on the network and
+fetchTweets 需要依靠网络执行
 
 1088
 00:46:57,951 --> 00:47:00,585
 when they come back, it calls you back later.
+当数据返回的呃时候，它会在之后调用这些
 
 1089
 00:47:03,589 --> 00:47:05,322
 Not on the main queue, okay?
+不是在主线程中
 
 1090
 00:47:05,323 --> 00:47:07,056
 So, we cannot actually execute this code like this
+所以我们不能像这样执行这部分代码
 
 1091
 00:47:07,059 --> 00:47:10,827
 because this is UI code and so
+因为这是 UI 代码
 
 1092
 00:47:10,829 --> 00:47:12,629
 it can't be done off the main queue.
+必须在主线程执行
 
 1093
 00:47:12,631 --> 00:47:17,166
 So, here we have to dispatch this back to the main queue.
+所以我们需要回到主线程
 
 1094
 00:47:20,438 --> 00:47:23,472
 Okay, I may do the same thing here.
+在这里也使用
 
 1095
 00:47:23,474 --> 00:47:27,376
 My trailing closure notation.
+尾随闭包
 
 1096
 00:47:27,378 --> 00:47:35,583
 Like this, so I'm gonna put this inside here, like that.
+我把这些放到这里面
 
 1097
 00:47:36,719 --> 00:47:39,553
 Okay, everyone understand why I had to dispatch this back to
+每个人都明白为何我需要回到
 
 1098
 00:47:39,555 --> 00:47:40,754
 the main queue?
+主线程了吗？
 
 1099
 00:47:40,756 --> 00:47:42,956
 Because this is an asynchronous API.
+因为这是异步的 API
 
 1100
 00:47:42,958 --> 00:47:45,058
 FetchTweets is an asynchronous API, and
+FetchTweets 是异步的 API
 
 1101
 00:47:45,060 --> 00:47:47,727
 you're gonna see APIs in iOS that are like this one.
+你们也会在 iOS 中看到类似的 API
 
 1102
 00:47:47,729 --> 00:47:49,395
 This is an API I wrote, but.
+这是我写的
 
 1103
 00:47:49,397 --> 00:47:52,264
-IOS is going to have them too, where you're going to give it
+iOS is going to have them too, where you're going to give it
+但是 iOS 也会有类似这种
 
 1104
 00:47:52,266 --> 00:47:54,833
 a handler and it's going to call that handler back off
+一个 handler，在之后被调用
 
 1105
 00:47:54,835 --> 00:47:57,135
 the main queue, sometime in the future.
+在主线程之外
 
 1106
 00:47:57,137 --> 00:48:00,071
 Okay? So this is a multi-threaded API.
+这是多线程的 API
 
 1107
 00:48:00,073 --> 00:48:01,805
 Okay, but that's all I need to do.
+但是这就是我需要做的
 
 1108
 00:48:01,807 --> 00:48:02,472
 Simple as that.
+就是这么简单
 
 1109
 00:48:02,474 --> 00:48:04,241
 When it comes back,
+当它返回的时候
 
 1110
 00:48:04,242 --> 00:48:06,009
 I'm just going to dispatch it back to the main queue and
+我只需要回到主线程
 
 1111
 00:48:06,011 --> 00:48:06,709
 reload my data.
+重新载入数据就可以了
 
 1112
 00:48:06,711 --> 00:48:08,211
 Question? >> Sorry,
+有问题吗？
 
 1113
 00:48:08,212 --> 00:48:09,712
 what would happen if you didn't have the [INAUDIBLE]?
+「学生提问」
 
 1114
 00:48:09,714 --> 00:48:11,480
 >> Yes, so the question, what if I didn't put this in here?
+问题是，如果我没有回到主线程会发生什么？
 
 1115
 00:48:11,482 --> 00:48:14,449
 And the answer is strange things.
+答案是，奇怪的事情会发生
 
 1116
 00:48:14,451 --> 00:48:18,086
 Your UI would draw weird, things would get out of sync,
+UI 可能会变得很奇怪，东西可能不会同步
 
 1117
 00:48:18,088 --> 00:48:22,556
 probably your app might crash, lots of bad things, okay?
+也许你的 app 会崩溃，很多奇怪的事情
 
 1118
 00:48:22,558 --> 00:48:24,124
 So don't ever do it, it's bad.
+所以别这么做，很不好
 
 1119
 00:48:26,228 --> 00:48:31,798
 Okay, so now, we have our data loaded up into our model.
+好，我们的数据已经载入 model 中了
 
 1120
 00:48:31,800 --> 00:48:35,234
 Okay, in view did load we loaded up our model with some
+在 viewDidLoad 中，我们载入了
 
 1121
 00:48:35,236 --> 00:48:37,736
 data from a search, #Stanford here.
+搜索 #Stanford 的数据
 
 1122
 00:48:37,738 --> 00:48:39,738
 How did we get our model into the table?
+我们怎样把 model 载入 table 中呢？
 
 1123
 00:48:39,740 --> 00:48:42,741
 Where we're going to go down to this UI table view data
+来到 UITableViewDataSource
 
 1124
 00:48:42,743 --> 00:48:43,541
 source here.
+这里
 
 1125
 00:48:43,543 --> 00:48:45,393
 By the way,
+顺便说一句
 
 1126
 00:48:45,394 --> 00:48:47,244
 I'm going to change this to UITableViewDataSource.
+我要把这里换成 UITableViewDataSource
 
 1127
 00:48:47,246 --> 00:48:49,880
 I like doing that.
+我喜欢这么做
 
 1128
 00:48:49,881 --> 00:48:52,515
 I don't think I've shown you this comment, // MARK:.
+我应该没有给你展示 "// MARK": 这种注释
 
 1129
 00:48:52,518 --> 00:48:53,783
 Have I showed you that?
+我给你们展示过了吗？
 
 1130
 00:48:53,785 --> 00:48:56,786
 Okay, if you put a // MARK:, then up here,
+如果你在这里放 // MARK:
 
 1131
 00:48:56,788 --> 00:48:59,855
 see where it says TweetTableViewController?
+在这里 TweetTableViewController
 
 1132
 00:48:59,857 --> 00:49:03,158
 If you click on this, it will show you all your methods and
+如果你点击它，它会帮你把这些方法
 
 1133
 00:49:03,160 --> 00:49:05,427
 it will arrange them into groups.
+分成组
 
 1134
 00:49:05,429 --> 00:49:06,561
 See this?
+看到了吗?
 
 1135
 00:49:06,563 --> 00:49:08,896
 This is this word right here.
+在这里是这个词
 
 1136
 00:49:08,898 --> 00:49:11,415
 Okay? So it's a really great
+使用它来组织你的代码
 
 1137
 00:49:11,416 --> 00:49:13,933
 way to kind of organize your code using these marks.
+是一种很棒的方式
 
 1138
 00:49:13,936 --> 00:49:16,420
 So like, for example,
+例如这里
 
 1139
 00:49:16,421 --> 00:49:18,905
 I've put another mark up here, this is a common one I do.
+我再放一个 // MARK:
 
 1140
 00:49:18,907 --> 00:49:24,544
 Which is, View Controller Lifecycle.
+注释 View Controller Lifecycle
 
 1141
 00:49:25,580 --> 00:49:27,646
 Okay now, when I click in here, see?
+当我点击这里
 
 1142
 00:49:27,648 --> 00:49:29,348
 I got View Controller Lifecycle.
+我可以看到 View Controller Lifecycle
 
 1143
 00:49:29,350 --> 00:49:30,348
 I got my data source.
+也能看到 data source
 
 1144
 00:49:30,350 --> 00:49:32,984
 Pretty cool, huh?
+很酷，是吧？
 
 1145
 00:49:32,986 --> 00:49:34,185
 All right. So
+好的
 
 1146
 00:49:34,186 --> 00:49:35,385
 here's my data source methods.
+这是我的 data source 方法
 
 1147
 00:49:35,388 --> 00:49:37,154
 Here's number of sections.
+这个是 numberOfSections
 
 1148
 00:49:37,156 --> 00:49:39,823
 So how many sections do we have?
+我们有多少个 section？
 
 1149
 00:49:39,825 --> 00:49:45,795
 Okay, number of sections is tweets.count.
+section 的数量是 tweets.count
 
 1150
 00:49:45,797 --> 00:49:48,597
 Because tweets is an array of arrays, right?
+因为 tweets 是二维数组
 
 1151
 00:49:48,599 --> 00:49:50,933
 In each array in there is this different section.
+其中每一个数组都是一个不同的 section
 
 1152
 00:49:50,935 --> 00:49:52,134
 So how many sections are there?
+这里有多少个 section 呢？
 
 1153
 00:49:52,136 --> 00:49:53,735
 However many things are in the tweets,
+就看我 tweets 有几个
 
 1154
 00:49:53,737 --> 00:49:55,203
 my tweets model up here.
+我上面的 tweets model
 
 1155
 00:49:56,205 --> 00:49:57,438
 Okay? So that's easy.
+这很容易
 
 1156
 00:49:57,440 --> 00:49:58,656
 How about this?
+这个怎么办？
 
 1157
 00:49:58,657 --> 00:49:59,873
 How many rows are in each section?
+在每一个 section 有多少 row 呢？
 
 1158
 00:49:59,875 --> 00:50:04,444
 Okay, well that's just tweets[indexPath.section].
+tweets[indexPath.section]
 
 1159
 00:50:04,446 --> 00:50:07,146
 Actually not even indexPath,
+实际上不是 indexPath
 
 1160
 00:50:07,147 --> 00:50:09,847
 they just put maybe the section, [section].count.
+而是 [section].count
 
 1161
 00:50:09,850 --> 00:50:10,816
 All right, so it's asking me, for
+这个方法问我
 
 1162
 00:50:10,818 --> 00:50:13,018
 this section, how many rows are there?
+对于这个 section，它内部有多少 row 呢
 
 1163
 00:50:13,020 --> 00:50:14,752
 Well, I'm just going to get the tweets
+我获取到那个 section 的 tweets
 
 1164
 00:50:14,754 --> 00:50:17,088
 that are in that section, and tell you how many there are.
+然后返回其中的数量
 
 1165
 00:50:18,090 --> 00:50:19,623
 Okay, so far this UI table,
+到目前为止
 
 1166
 00:50:19,625 --> 00:50:21,124
 it's pretty easy to implement, huh?
+还是很容易实现的
 
 1167
 00:50:21,126 --> 00:50:22,825
 Okay. How about this one,
+但是这个方法呢？
 
 1168
 00:50:22,827 --> 00:50:25,261
 cellForRowAtIndexPath.
 
+
 1169
 00:50:25,263 --> 00:50:27,529
 So we've got to do this dequeue reusable cell,
+我们需要先从队列取出一个可以复用的 cell
 
 1170
 00:50:27,531 --> 00:50:29,297
 it automatically puts it in there.
+代码自动生成了
 
 1171
 00:50:29,299 --> 00:50:31,266
 We need a reuseIdentifier here.
+我们需要一个 reuseIdentifier
 
 1172
 00:50:31,268 --> 00:50:35,436
 I'm going to be a good coder and
+我有很好的编程习惯
 
 1173
 00:50:35,438 --> 00:50:40,574
 say private struct Storyboard static
+private struct Storyboard
 
 1174
 00:50:40,576 --> 00:50:45,545
 let CellReuseIdentifier equals and
+static let CellReuseIdentifier = 
 
 1175
 00:50:45,547 --> 00:50:48,847
 we'll say "Tweet".
+"Tweet"
 
 1176
 00:50:50,050 --> 00:50:51,983
 And then I'm going to put that here instead of this thing.
+然后把它放到这里
 
 1177
 00:50:51,985 --> 00:50:56,387
@@ -4709,194 +5872,242 @@ Storyboard.CellResuseIdentif- ier.
 1178
 00:50:56,389 --> 00:50:59,990
 Okay so, but we have to put this string in the storyboard
+我们也需要把这个 string 放到 storyboard 
 
 1179
 00:50:59,992 --> 00:51:03,393
 for the prototype we want to use to build this cell.
+中的 cell 原型里
 
 1180
 00:51:03,395 --> 00:51:05,628
 So let's do that, let's go back to our storyboard here.
+回到 storyboard
 
 1181
 00:51:06,664 --> 00:51:07,963
 Okay. Here's our table view.
+这是我们的 tableView
 
 1182
 00:51:07,965 --> 00:51:11,233
 I'm going to click to select this row and again,
+点击它，选中这一行
 
 1183
 00:51:11,235 --> 00:51:15,337
 I can use control shift and click to pick the controller,
+我可以 Ctrl+shift+click 选择 controller 中的
 
 1184
 00:51:15,339 --> 00:51:18,506
 the table view, the cell, or even the views inside.
+table view, cell, 或者是其中的 view
 
 1185
 00:51:18,508 --> 00:51:21,275
 So I want this cell here, so I have this cell selected.
+我想选择这个 cell
 
 1186
 00:51:21,277 --> 00:51:23,044
 I'm just going to inspect this, and
+检查它的属性
 
 1187
 00:51:23,046 --> 00:51:24,211
 right here you see identifier.
+在这里有 identifier
 
 1188
 00:51:24,213 --> 00:51:25,912
 I'm going to say tweet.
+把它设置为 Tweet
 
 1189
 00:51:25,914 --> 00:51:29,582
 And that says whenever I dequeue a reusable cell's
+这的意思就是
 
 1190
 00:51:29,584 --> 00:51:32,952
 tweet, this is the kind of cell I mean, okay?
+每一次我从队列取 cell 的时候，我想要的是它
 
 1191
 00:51:32,954 --> 00:51:34,420
 We'll configure that in a second.
+稍后再设置一下
 
 1192
 00:51:35,723 --> 00:51:40,558
 So here we have the cell that's been
+在这里我们已经有了
 
 1193
 00:51:40,560 --> 00:51:43,094
 reused or pulled out of there.
+取出来的 cell
 
 1194
 00:51:43,096 --> 00:51:44,128
 Now we just need to configure it.
+现在我们需要设置一下它
 
 1195
 00:51:44,130 --> 00:51:46,964
 And since this is currently a normal cell,
+因为它现在是一个普通的 cell
 
 1196
 00:51:46,966 --> 00:51:49,366
 just a regular cell not a subclass.
+而不是子类
 
 1197
 00:51:49,368 --> 00:51:53,202
 I'm going to use those things textLabel.text to set
+我把 textLabel.text 
 
 1198
 00:51:53,204 --> 00:51:55,705
 the title.
+当做 title
 
 1199
 00:51:55,706 --> 00:51:58,207
 Let's set the title to the actual tweet, okay?
+我们把 title 设置为 tweet
 
 1200
 00:51:58,209 --> 00:51:59,941
 So we'll have the big text be the tweet.
+把大点的标题设置为 tweet
 
 1201
 00:51:59,943 --> 00:52:01,076
 We'll have the little text.
+我也会使用小点的标题
 
 1202
 00:52:01,078 --> 00:52:04,278
 Let's go back, let's go back to our storyboard.
+回到 storyboard
 
 1203
 00:52:05,448 --> 00:52:08,782
 This cell, let's make this cell's type be subtitle.
+把 cell 的类型
 
 1204
 00:52:10,985 --> 00:52:13,586
 Let's make this be a subtitle style, right?
+设置为 subtitle
 
 1205
 00:52:13,588 --> 00:52:16,021
 Where you got the big text and the little text.
+这样就可以获得大标题的小标题
 
 1206
 00:52:16,023 --> 00:52:18,023
 So I'm going to make the big text be the text of the tweet,
+大标题设置为推文
 
 1207
 00:52:18,025 --> 00:52:20,258
 and the little text be the user who tweeted it.
+小标题设置为作者
 
 1208
 00:52:20,260 --> 00:52:21,659
 It's not very good UI,
+虽然不是很好的 UI
 
 1209
 00:52:21,661 --> 00:52:23,294
 but we'll make it better in a minute.
+但是之后我会把它调整好的
 
 1210
 00:52:25,064 --> 00:52:28,465
 All right, so probably want to do question mark here in case
+在这里我需要放一个问号以防它是 nil
 
 1211
 00:52:28,467 --> 00:52:30,100
 that's nil because it's optional.
+因为它是 Optional
 
 1212
 00:52:31,269 --> 00:52:34,437
 So, I need to basically have find the tweet
+我现在需要找到这一行的 tweet
 
 1213
 00:52:34,439 --> 00:52:39,307
 that's in this row, and then just specify the tweet's text.
+然后获取它的 text
 
 1214
 00:52:39,309 --> 00:52:41,910
 So, how do I get the tweet that's in this row,
+我怎样获取这一行的 tweet 呢
 
 1215
 00:52:41,912 --> 00:52:43,678
 let tweet equal something?
+let tweet = 
 
 1216
 00:52:43,680 --> 00:52:50,417
 Well, that's just going to be my tweets[indexPath.section]
+让它等于 
 
 1217
 00:52:50,419 --> 00:52:53,787
 [indexPath.row].
+tweets[indexPath.section][indexPath.row]
 
 1218
 00:52:53,789 --> 00:52:56,122
 Okay, this is my model and
+这是我的 model
 
 1219
 00:52:56,124 --> 00:52:58,858
 I'm just indexing into it by section and row.
+我通过 section 和 row 找到 tweet
 
 1220
 00:52:58,860 --> 00:53:02,161
 Right, this is the index path that I was asked right here to
+这里就是我为了得到指定 row 的 cell 的
 
 1221
 00:53:02,163 --> 00:53:04,296
 get the cell for row in next path.
+indexPath
 
 1222
 00:53:04,298 --> 00:53:07,249
 So now I've got the tweet.
+现在我得到了 tweet
 
 1223
 00:53:07,250 --> 00:53:10,201
 So make its text, and now I'll say detailTextLabel?.text is
+让 detailTextLabel?.text = 
 
 1224
 00:53:10,203 --> 00:53:12,837
 the tweet.user.screenname, or
+tweet.user.screenname
 
 1225
 00:53:12,839 --> 00:53:16,640
 that's actually their real name, what the heck.
+它实际上是用户的真名
 
 1226
 00:53:16,642 --> 00:53:18,709
@@ -4905,26 +6116,32 @@ Okay?
 1227
 00:53:18,711 --> 00:53:21,177
 Everybody understand what I'm doing here in
+在 cellForRowAtIndexPath 做的事情
 
 1228
 00:53:21,179 --> 00:53:22,712
 cellForRowAtIndexPath?
+大家都明白了吗
 
 1229
 00:53:22,714 --> 00:53:25,314
 Just return a UI table U cell that's
+返回一个为了显示在 cell 里的
 
 1230
 00:53:25,316 --> 00:53:27,983
 going to use to draw that row.
+UITableViewCell 就可以了
 
 1231
 00:53:27,985 --> 00:53:29,351
 So that's all we need to do.
+这就是我们需要做的
 
 1232
 00:53:29,353 --> 00:53:33,254
 So let's go ahead and run, and hopefully this will work.
+运行一下程序，希望能吸作用
 
 1233
 00:53:33,256 --> 00:53:34,188
@@ -4933,22 +6150,27 @@ Oh, okay.
 1234
 00:53:34,190 --> 00:53:36,590
 So here is the unreachable
+出现的问题是
 
 1235
 00:53:36,592 --> 00:53:39,259
 entry point in your storyboard, okay?
+storyboard 没有入口
 
 1236
 00:53:39,261 --> 00:53:44,630
 That's because we need to have the entry point come in here,
+因为我们需要设置起始点
 
 1237
 00:53:44,632 --> 00:53:47,366
 so I'm going to select this navigation controller and
+选择 navigation controller
 
 1238
 00:53:47,368 --> 00:53:48,667
 go over here to.
+来到这里
 
 1239
 00:53:50,404 --> 00:53:50,969
@@ -4957,78 +6179,97 @@ Sorry.
 1240
 00:53:52,038 --> 00:53:55,306
 Select it as the initial view controller,
+把它设置为初始的 View Controller
 
 1241
 00:53:55,308 --> 00:53:57,091
 put that little arrow there.
+这里放了一个小箭头
 
 1242
 00:53:57,092 --> 00:53:58,875
 Okay, now it will probably work a lot better.
+现在应该没什么问题了
 
 1243
 00:54:01,079 --> 00:54:03,346
 All right here, so it wants to access my Twitter account,
+它需要接入我的 Twitter 账户
 
 1244
 00:54:03,348 --> 00:54:04,714
 sure, go for it.
+当然，选择 OK
 
 1245
 00:54:04,716 --> 00:54:05,965
 There it is.
+好了
 
 1246
 00:54:05,966 --> 00:54:07,215
 Wow, that was super easy.
+非常简单
 
 1247
 00:54:07,218 --> 00:54:08,850
 We got all our tweets there now.
+我们已经获取了全部的 tweets
 
 1248
 00:54:08,852 --> 00:54:10,385
 This is a pretty bad UI.
+这 UI 很差
 
 1249
 00:54:10,387 --> 00:54:12,253
 I mean, Twitter's already pretty limited,
+Twitter 已经限制字数为
 
 1250
 00:54:12,255 --> 00:54:13,354
 140 characters.
+140 个了
 
 1251
 00:54:13,356 --> 00:54:15,422
 This is not even that many, okay, so
+这不算多
 
 1252
 00:54:15,424 --> 00:54:16,423
 these are all cut off.
+但是我们这里还是不够显示的
 
 1253
 00:54:16,425 --> 00:54:18,625
 So this is really not a good UI.
+所以这 UI 很不好
 
 1254
 00:54:18,627 --> 00:54:21,394
 What we really want is to be able to build a nice,
+我们想要为每一个 tweet
 
 1255
 00:54:21,396 --> 00:54:26,131
 custom UI in here for every tweet to show the screen name,
+搭建一个自定义的 UI，可以显示昵称
 
 1256
 00:54:26,133 --> 00:54:28,767
 maybe the image of the person who posted it,
+也可以显示作者的头像
 
 1257
 00:54:28,769 --> 00:54:30,769
 that kind of stuff in here.
+之类的东西
 
 1258
 00:54:30,771 --> 00:54:33,471
 So let's go enhance our UI to do that.
+我们来丰富一下我们的 UI
 
 1259
 00:54:33,473 --> 00:54:36,140
@@ -5037,134 +6278,167 @@ So let's go enhance our UI to do that.
 1260
 00:54:36,142 --> 00:54:37,107
 Now, how do we do that?
+该怎么做呢？
 
 1261
 00:54:38,544 --> 00:54:43,212
 Well, this cell right here needs to.
+这边的这个 cell 需要...
 
 1262
 00:54:43,214 --> 00:54:47,049
 Actually, you know, it's time?
+呃？
 
 1263
 00:54:47,051 --> 00:54:48,984
 I'm going to do one other thing first.
+我先做另外一件事
 
 1264
 00:54:48,986 --> 00:54:51,586
 Right now, it's only searching for #Stanford.
+现在它只能搜索 #Stanford
 
 1265
 00:54:51,588 --> 00:54:53,488
 Let's make it so
+给它添加一个
 
 1266
 00:54:53,490 --> 00:54:56,758
 we can type in what it's searching for, okay?
+输入搜索的功能
 
 1267
 00:54:56,760 --> 00:54:58,959
 Setup is always looking for #Stanford,
+目前只能搜索 #Stanford
 
 1268
 00:54:58,961 --> 00:55:01,395
 let's go put a search field in here.
+在这里放一个搜索区域
 
 1269
 00:55:01,397 --> 00:55:04,598
 So, I'm going to put that search field as the table
+把它作为 table view 的 标题
 
 1270
 00:55:04,600 --> 00:55:07,200
 view's header, remember I said the table view had a header?
+记得我说过 table view 有标题吗？
 
 1271
 00:55:07,202 --> 00:55:09,452
 So I'm going to put that there.
+所以我要把它放到那里
 
 1272
 00:55:09,453 --> 00:55:11,703
 So I'm just going to go grab a text field, typeable
+我拽进来一个
 
 1273
 00:55:11,706 --> 00:55:13,973
 in text field like we've talked about, here it is.
+text field
 
 1274
 00:55:13,975 --> 00:55:15,507
 I'm just going to drag it right
+把它放到 table view 的
 
 1275
 00:55:15,509 --> 00:55:17,709
 up here at the top of the table view.
+顶部
 
 1276
 00:55:17,711 --> 00:55:19,294
 Okay, here it is right here.
+现在它在这里
 
 1277
 00:55:19,295 --> 00:55:20,878
 I'm going to make the font a little bigger,
+把字体调大一些
 
 1278
 00:55:20,881 --> 00:55:24,382
 20 point font right there.
+设置为 20
 
 1279
 00:55:24,384 --> 00:55:27,051
 I can also do things like put a placeholder text in here, so
+我也可以在其中放入占空的文字
 
 1280
 00:55:27,053 --> 00:55:29,186
 when it's empty it kind of tells people what to do.
+所以用户就知道它是用来做什么的了
 
 1281
 00:55:29,188 --> 00:55:34,024
-So this is a Twitter search query, right there.
+So this is a Twitter search query right there.
+设置为 Twitter search query
 
 1282
 00:55:34,026 --> 00:55:36,192
 So they know what to do.
+所以用户就知道该怎么做了
 
 1283
 00:55:36,194 --> 00:55:39,528
 And, then I can just wire up to this header view using
+现在我可以把这个 header view 
 
 1284
 00:55:39,530 --> 00:55:41,730
 normal outlets.
+设置 outlet
 
 1285
 00:55:41,731 --> 00:55:43,931
 So let's go ahead and wire this up to our table view.
+现在把它们连接起来
 
 1286
 00:55:43,934 --> 00:55:48,003
 I'll just control drag to probably a little.
+Ctrl+drag
 
 1287
 00:55:48,005 --> 00:55:48,770
 Higher up here.
+高一点
 
 1288
 00:55:48,772 --> 00:55:50,037
 Yeah, right in there.
+就是这
 
 1289
 00:55:50,039 --> 00:55:54,441
 This outlet, I'm going to call it my searchTextField.
+这个 outlet，起名为 searchTextField
 
 1290
 00:55:55,444 --> 00:55:56,209
 Okay? There it is.
+好了
 
 1291
 00:55:56,211 --> 00:55:57,243
 My searchTextField.
+searchTextField
 
 1292
 00:55:57,245 --> 00:56:02,280
 Let's go back here.
+回到这里
 
 1293
 00:56:02,282 --> 00:56:03,648
@@ -5173,66 +6447,82 @@ All right.
 1294
 00:56:03,650 --> 00:56:05,416
 So here's our searchTextField right here.
+这里是 searchTextField
 
 1295
 00:56:07,186 --> 00:56:10,821
 Now, when this searchTextField is set by IOS, I'm gonna set
+当这个 searchTextField 被系统设置好以后
 
 1296
 00:56:10,823 --> 00:56:14,024
 myself as its delegate so I can start doing some of those
+我要把自己设置为它的 delegate
 
 1297
 00:56:14,026 --> 00:56:16,826
 UITextField delegate things we talked about.
+所以我就可以进行一些之前讲到的 UITextField delegate 操作
 
 1298
 00:56:16,828 --> 00:56:19,362
 So I'm going to say here,
+在这里
 
 1299
 00:56:19,364 --> 00:56:23,966
 searchTextField dot delegate equals self.
+searchTextField.delegate = self
 
 1300
 00:56:23,968 --> 00:56:25,834
 Okay. Now it's gonna complain
+现在它开始抱怨
 
 1301
 00:56:25,836 --> 00:56:30,071
 because I don't implement the UITextField delegate protocol.
+因为我还没有实现 UITextField 的代理协议
 
 1302
 00:56:30,073 --> 00:56:36,010
 So I'm gonna say, okay, sure, UITextFieldDelegate.
+所以在这里添加 UITextFieldDelegate
 
 1303
 00:56:36,012 --> 00:56:37,678
 So now I'm the UITextFieldDelegate, so
+现在我是 UITextField 的 delegate
 
 1304
 00:56:37,680 --> 00:56:41,481
 now I can implement some of those UITextFieldDelegate
+我现在可以实现 UITextFieldDelegate
 
 1305
 00:56:41,483 --> 00:56:42,214
 things.
+的某些方法了
 
 1306
 00:56:42,216 --> 00:56:43,449
 What's this one?
+这个问题是？
 
 1307
 00:56:43,451 --> 00:56:45,117
 Oh, sorry, yes.
+抱歉
 
 1308
 00:56:45,119 --> 00:56:48,620
 We want this in the did set.
+它应该在 didSet 里
 
 1309
 00:56:48,622 --> 00:56:50,688
 I was trying to make that a computed property.
+我想把它设置为计算属性
 
 1310
 00:56:50,690 --> 00:56:51,489
@@ -5241,6 +6531,7 @@ Okay.
 1311
 00:56:51,491 --> 00:56:52,923
 So that's the did set.
+这就是 didSet
 
 1312
 00:56:52,925 --> 00:56:53,890
@@ -5249,22 +6540,27 @@ All right.
 1313
 00:56:53,892 --> 00:56:57,761
 So inside there we want to do something.
+在这里我需要做点什么
 
 1314
 00:56:57,763 --> 00:57:02,198
 Right now our search is hard wired here to be #Stanford, so
+现在我们的搜索内容是固定的 #Stanford
 
 1315
 00:57:02,200 --> 00:57:04,600
 let's make it so it's not hard wired anymore.
+把它不设置为固定的内容
 
 1316
 00:57:04,602 --> 00:57:06,068
 Okay? Let's have it search for
+让它搜索
 
 1317
 00:57:06,070 --> 00:57:08,103
 some search text.
+searchText
 
 1318
 00:57:08,105 --> 00:57:10,188
@@ -5273,18 +6569,22 @@ Okay?
 1319
 00:57:10,189 --> 00:57:12,272
 So I'm going to make a var up here, searchText,
+定义一个变量 searchText
 
 1320
 00:57:12,275 --> 00:57:15,009
 which is gonna be a String.
+String 类型的
 
 1321
 00:57:15,011 --> 00:57:16,610
 We'll make it optional so
+设置为 optional
 
 1322
 00:57:16,612 --> 00:57:19,046
 you don't have to set the string here.
+你不需要在这里先设置好
 
 1323
 00:57:19,048 --> 00:57:20,647
@@ -5293,42 +6593,52 @@ Okay.
 1324
 00:57:20,649 --> 00:57:22,648
 I get into that quite a bit, don't I?
+我被缠住了
 
 1325
 00:57:22,650 --> 00:57:26,252
 It's because I got sticky keys on, and it gets stick.
+因为我开启了粘滞键
 
 1326
 00:57:26,254 --> 00:57:29,021
 Okay, and we'll still have the default be Stanford.
+默认的搜索内容仍然是 Stanford
 
 1327
 00:57:30,824 --> 00:57:33,524
 Okay, and we're gonna need some didset in here.
+在这里需要 didSet
 
 1328
 00:57:33,526 --> 00:57:34,925
 So here's our searchText.
+这就是 searchText
 
 1329
 00:57:34,927 --> 00:57:36,627
 And down here since it can be an optional,
+既然它是 optional
 
 1330
 00:57:36,629 --> 00:57:40,830
 I'm gonna say if the searchText does not equal nil
+我就需要判断它是不是 nil
 
 1331
 00:57:40,832 --> 00:57:42,732
 because I don't want to search for nil.
+因为我不想什么搜索 nil
 
 1332
 00:57:42,734 --> 00:57:43,833
 That makes no sense.
+这很有道理
 
 1333
 00:57:49,273 --> 00:57:52,340
 Okay. And this I'm gonna unwrap.
+在这里，解包
 
 1334
 00:57:52,342 --> 00:57:54,843
@@ -5337,10 +6647,12 @@ All right. So
 1335
 00:57:54,844 --> 00:57:57,345
 now I've got the searchText, and we can search for it.
+获取了 searchText，我们可以进行搜素了
 
 1336
 00:57:57,347 --> 00:58:00,348
 All right, we'll wait to do that in a second here.
+等会再处理这个
 
 1337
 00:58:00,350 --> 00:58:04,584
@@ -5349,34 +6661,42 @@ All right, we'll wait to do that in a second here.
 1338
 00:58:04,586 --> 00:58:05,952
 Okay, so I got a searchText.
+现在我有了 searchText
 
 1339
 00:58:05,954 --> 00:58:08,354
 Now let's go back down to our searchTextField right here.
+回到 searchTextField
 
 1340
 00:58:08,356 --> 00:58:10,322
 When that searchTextField is first connected,
+当 searchTextField 第一次连接好以后
 
 1341
 00:58:10,324 --> 00:58:11,790
 I'm gonna set myself the delegate.
+把我自己设置为它的 delegate
 
 1342
 00:58:11,792 --> 00:58:16,061
 I'm also going to set my searchTextField's text
+我也需要把 searchTextField 的文字
 
 1343
 00:58:16,063 --> 00:58:17,462
 equal to my searchText.
+设置为 searchText
 
 1344
 00:58:18,765 --> 00:58:20,898
 Okay, so just in case someone set my searchText,
+以防其他人设置了我的 searchText
 
 1345
 00:58:20,900 --> 00:58:23,767
 because I left searchText public.
+因为我把 searchText 定为公有的
 
 1346
 00:58:23,769 --> 00:58:24,935
@@ -5385,22 +6705,27 @@ Okay?
 1347
 00:58:24,936 --> 00:58:26,102
 Okay? So if someone set it before my
+以防某人在 outlet 设置好之前
 
 1348
 00:58:26,104 --> 00:58:27,937
 outlets got set this would pick it up later,
+设置了 searchText
 
 1349
 00:58:27,939 --> 00:58:28,537
 so that's good.
+还不错
 
 1350
 00:58:29,807 --> 00:58:31,673
 Now let's implement this delegate method.
+现在，让我们实现这个代理方法
 
 1351
 00:58:31,675 --> 00:58:33,742
 So, the one I'm going to implement is this
+我将要实现的是 
 
 1352
 00:58:33,744 --> 00:58:35,209
@@ -5409,42 +6734,52 @@ textFieldShouldReturn.
 1353
 00:58:35,211 --> 00:58:38,112
 You can see there's quite a few textField things here.
+你可以看到这里有好几个 textField 相关的
 
 1354
 00:58:38,114 --> 00:58:40,481
 So I'm gonna do this one, textFieldShouldReturn.
+我处理这个，textFieldShouldReturn
 
 1355
 00:58:40,483 --> 00:58:43,383
 And, so this happens when someone clicks on the return
+在点击了 textField 的 return 键之后
 
 1356
 00:58:43,385 --> 00:58:45,652
 key of my text field.
+这个方法被调用
 
 1357
 00:58:45,654 --> 00:58:48,321
 So what is the return key of my text field going to be?
+textField 的 retrun 键应该是什么呢？
 
 1358
 00:58:48,323 --> 00:58:49,622
 That's configurable so
+这是可以设置的
 
 1359
 00:58:49,624 --> 00:58:52,624
 if I edit this, if I inspect this text field,
+我检查 textField 属性
 
 1360
 00:58:52,626 --> 00:58:56,128
 I can actually control a lot about the keyboard right here.
+我可以设置不同种键盘的类型
 
 1361
 00:58:56,130 --> 00:58:59,731
 So I'm gonna make this keyboard type be Twitter.
+我把这个键盘类型设置为 Twitter
 
 1362
 00:58:59,733 --> 00:59:02,066
 There's actually one for entering Twitter searches.
+这是为了输入 Twitter 搜索使用的
 
 1363
 00:59:02,068 --> 00:59:03,334
@@ -5457,34 +6792,42 @@ All right?
 1365
 00:59:05,304 --> 00:59:10,073
 So now somebody clicked the go button or
+某人点击了 go 按钮
 
 1366
 00:59:10,075 --> 00:59:12,675
 the search or whatever that's gonna be in that keyboard.
+不论是键盘中哪种类型的 return 键
 
 1367
 00:59:12,677 --> 00:59:14,010
 What am I gonna do about that?
+我们应该怎么做
 
 1368
 00:59:15,079 --> 00:59:19,180
 Well for one thing I want to resign first responders.
+首先，我要不做第一响应者
 
 1369
 00:59:19,182 --> 00:59:22,650
 So if this textField that's sending this to me
+如果发送给我这个消息的 textField 是
 
 1370
 00:59:22,652 --> 00:59:25,519
 is my searchTextField, which it should be,
+searchTextField，也应该是
 
 1371
 00:59:25,521 --> 00:59:27,621
 cuz that's the only one I have.
+因为我只有这一个
 
 1372
 00:59:27,623 --> 00:59:30,223
 Then I'm going to have my textField
+接着我就会让 textField 
 
 1373
 00:59:30,225 --> 00:59:31,491
@@ -5493,26 +6836,32 @@ resignFirstResponder.
 1374
 00:59:31,493 --> 00:59:34,260
 That means dismiss the keyboard.
+这意味着，隐藏键盘
 
 1375
 00:59:34,262 --> 00:59:37,263
 If you don't do this, it will send this.
+如果你不这么做，它会发送这个
 
 1376
 00:59:37,265 --> 00:59:39,732
 But it's gonna leave that keyboard up assuming that
+但是键盘不会被隐藏
 
 1377
 00:59:39,734 --> 00:59:41,433
 maybe they wanna type another search right away.
+也许用户还想输入其他搜索
 
 1378
 00:59:41,435 --> 00:59:42,767
 But here, I want it to go away so
+但是在这，我想把键盘隐藏起来
 
 1379
 00:59:42,769 --> 00:59:45,970
 they can see the results underneath it.
+用户就可以看到下面的结果了
 
 1380
 00:59:45,972 --> 00:59:47,038
@@ -5521,14 +6870,17 @@ M'kay?
 1381
 00:59:47,040 --> 00:59:50,207
 So, what else do we need to do in here?
+在这里我们还需要做什么？
 
 1382
 00:59:50,209 --> 00:59:53,543
 Well, then we just need to set our searchText
+接着，把 searchText 设置为
 
 1383
 00:59:53,545 --> 00:59:55,712
 equal to the text that's in the textField.
+textField 中的 text
 
 1384
 00:59:57,982 --> 00:59:59,632
@@ -5537,222 +6889,277 @@ Okay?
 1385
 00:59:59,633 --> 01:00:01,283
 So someone hits search, I'm gonna set my search text up
+用户点击了 search，我把 search text 设置好
 
 1386
 01:00:01,285 --> 01:00:03,852
 here equal to the thing is in there.
+等于搜索框中的内容
 
 1387
 01:00:03,854 --> 01:00:06,654
 And then I have to return true or false, whether or
+我需要 return true 或者 false
 
 1388
 01:00:06,656 --> 01:00:09,323
 not I want to let this return key do what it normally does,
+我是否让 return 键
 
 1389
 01:00:09,325 --> 01:00:10,257
 which is fine.
+做它往常做的事情
 
 1390
 01:00:10,259 --> 01:00:11,558
 I don't have target action set up so
+我没有建立 target action
 
 1391
 01:00:11,560 --> 01:00:13,226
 it's not going to do anything anyway, but
+所以它不会做任何事
 
 1392
 01:00:13,228 --> 01:00:14,327
 we'll go ahead and say true.
+我们在这里返回 true 就好了
 
 1393
 01:00:16,231 --> 01:00:19,899
 Okay, now when my searchText gets set here,
+当 searchText 设置好了以后
 
 1394
 01:00:19,901 --> 01:00:24,136
 I need to react to that by doing a new search.
+我需要有所回应，做一次搜索
 
 1395
 01:00:24,138 --> 01:00:26,971
 So I'm going to go here in my searchText.
+去到 searchText
 
 1396
 01:00:26,973 --> 01:00:30,174
 And whenever my searchText is set,
+无论何时 searchText 被设定
 
 1397
 01:00:30,176 --> 01:00:35,646
 I'm going to basically clear out my table and then refresh.
+我需要清空 table，然后刷新
 
 1398
 01:00:35,648 --> 01:00:40,483
 So, let's go ahead and say tweets, removeAll.
+tweets.removeAll
 
 1399
 01:00:40,485 --> 01:00:43,186
 Okay, so I'm gonna remove all my tweets that I have because
+我要删除所有的 tweets
 
 1400
 01:00:43,188 --> 01:00:44,887
 I'm dong a new search.
+因为我执行了一次新的搜索
 
 1401
 01:00:44,889 --> 01:00:47,790
 Then I'm gonna reload the tableView here,
+接着我需要重新载入 tableView
 
 1402
 01:00:47,792 --> 01:00:49,991
 reloadData in the tableView.
+在 tableView 中重新载入
 
 1403
 01:00:49,993 --> 01:00:51,993
 That's gonna blank out the tableView,
+这会让我的 tableView 变成空白
 
 1404
 01:00:51,995 --> 01:00:55,029
 cuz I just set all my tweets to nothing.
+因为我把 tweets 都删掉了
 
 1405
 01:00:55,031 --> 01:00:56,964
 Removed them all, and then I'm reloading, so it's gonna clear
+然后重新载入数据，这样会把 table 清空
 
 1406
 01:00:56,966 --> 01:00:58,732
 out my table view while I'm doing my search.
+当我执行搜索的时候
 
 1407
 01:00:58,734 --> 01:01:02,669
 Remember my search might take a minute if I'm on cellular.
+记得，如果我用流量的时候，搜索可能持续一分钟
 
 1408
 01:01:02,671 --> 01:01:04,504
 So I don't want to be sitting there with the old results,
+所以我不想留着上次的结果
 
 1409
 01:01:04,506 --> 01:01:06,506
 that'd be confusing, so I'm just gonna clear out my table.
+这会让用户疑惑，所以我需要清空 table
 
 1410
 01:01:07,608 --> 01:01:09,475
 And then I got to refresh my data.
+然后我需要刷新数据
 
 1411
 01:01:09,477 --> 01:01:13,378
 So I'm going to call refresh and
+我会调用 refresh
 
 1412
 01:01:13,380 --> 01:01:18,850
 take this code out of here and put it in another
+然后把这些代码放入
 
 1413
 01:01:18,852 --> 01:01:23,854
 method called refresh, func refresh.
+refresh 方法里
 
 1414
 01:01:25,124 --> 01:01:27,257
 Okay, I'm gonna do the same thing I was doing before.
+像以前一样做得一样
 
 1415
 01:01:27,259 --> 01:01:30,393
 I'm just gonna call it both in viewDidLoad when I start up
+在 viewDidLoad 里调用
 
 1416
 01:01:30,395 --> 01:01:33,329
 and also anytime someone changes my searchText.
+还有当某人改变了 searchText 的时候
 
 1417
 01:01:33,331 --> 01:01:34,963
 In my searchText also,
+在 searchText 里
 
 1418
 01:01:34,965 --> 01:01:38,767
 if someone sets my searchText externally, I'm going
+如果某人在外部改变了 searchText
 
 1419
 01:01:38,769 --> 01:01:42,470
 to update my searchTextField also if it's around.
+我也会更新 searchTextField
 
 1420
 01:01:45,041 --> 01:01:47,374
 Okay, so that way if someone's using my public API and
+如果有人调用我的公共 API
 
 1421
 01:01:47,376 --> 01:01:49,776
 sets my search field, it'll appear in the text field.
+并且设置了 searchText
 
 1422
 01:01:49,778 --> 01:01:51,411
 I want it to show up in that searchTextField.
+我希望它显示在 searchTextField 里
 
 1423
 01:01:51,413 --> 01:01:54,814
 All right, let's see if I got everything here.
+看看是否一切正常
 
 1424
 01:01:54,816 --> 01:01:55,748
 This works.
+好用了
 
 1425
 01:01:55,750 --> 01:01:57,016
 All right, here we have a #stanford.
+这里显示了 #stanford
 
 1426
 01:01:57,018 --> 01:01:57,683
 That worked.
+起作用了
 
 1427
 01:01:57,685 --> 01:01:59,184
 We searched here.
+我们在这里搜索了
 
 1428
 01:01:59,186 --> 01:02:04,422
 So maybe we could search for, I don't know, #grammys?
+我们也可以搜索一下  #grammys
 
 1429
 01:02:04,424 --> 01:02:05,689
 And there, we got stuff about the Grammys.
+我们得到了有关格莱美的推文
 
 1430
 01:02:07,026 --> 01:02:09,159
 Okay? So that's good.
+还不错
 
 1431
 01:02:09,161 --> 01:02:10,760
 We got searching going.
+search 已经完成了
 
 1432
 01:02:10,762 --> 01:02:12,528
 So now, let's go back to do what I was gonna do,
+我们回到我刚才想做的事情
 
 1433
 01:02:12,530 --> 01:02:15,931
 which is let's make that row be a lot better than just
+完善 cell 的 UI
 
 1434
 01:02:15,933 --> 01:02:20,301
 the tweet cut off and then the person who did the tweet.
+以显示完整推文还有用户
 
 1435
 01:02:20,303 --> 01:02:22,036
 Let's make it a much better UI.
+一起制作一个更精良的 UI
 
 1436
 01:02:22,038 --> 01:02:23,804
 So we're gonna do that with custom cells.
+我们会使用自定义的 cell
 
 1437
 01:02:23,806 --> 01:02:27,775
 So I'm just going to select this cell right here, okay,
+我选择这里的 cell
 
 1438
 01:02:27,777 --> 01:02:30,811
 and change it from being a Subtitle cell to being
+把它从 Subtitle 改成
 
 1439
 01:02:30,813 --> 01:02:31,644
 a Custom cell.
+Custom
 
 1440
 01:02:33,248 --> 01:02:34,113
@@ -5761,22 +7168,27 @@ Okay?
 1441
 01:02:34,115 --> 01:02:36,081
 And then inside this Custom cell,
+在这个 cell 内部
 
 1442
 01:02:36,083 --> 01:02:38,150
 I'm gonna build whatever UI I want.
+我就可以制作想要的 UI 了
 
 1443
 01:02:38,152 --> 01:02:40,985
 And I'm gonna be able to wire up its outlets and
+我也可以通过 UITableViewCell 的子类
 
 1444
 01:02:40,987 --> 01:02:43,688
 actions to a subclass of UITableViewCell.
+设置 outlet 还有 action
 
 1445
 01:02:43,690 --> 01:02:46,423
 So let's create that subclass of UITableViewCell.
+新建一个 UITableViewCell 子类
 
 1446
 01:02:48,360 --> 01:02:50,127
@@ -5785,46 +7197,57 @@ All right? Again,
 1447
 01:02:50,128 --> 01:02:51,895
 iOS source Cocoa Touch class, this time we don't want
+iOS - source - Cocoa Touch Class
 
 1448
 01:02:51,897 --> 01:02:55,465
 Controller, we want UITableViewCell.
+这次我们选择 UITableViewCell
 
 1449
 01:02:55,467 --> 01:02:58,367
 I'm gonna call this a TweetTableViewCell,
+命名为 TweetTableViewCell
 
 1450
 01:02:58,369 --> 01:03:01,103
 because it shows a tweet, 'kay?
+因为它显示 tweet
 
 1451
 01:03:01,105 --> 01:03:02,838
 Put it in the same place I always put everything.
+把文件放到一贯放的位置
 
 1452
 01:03:02,840 --> 01:03:04,906
 [COUGH] Here's what it looks like.
+它内部是这样的
 
 1453
 01:03:04,908 --> 01:03:07,041
 I'm gonna delete these, 'kay?
+把这些删去
 
 1454
 01:03:08,144 --> 01:03:11,912
 So inside here is where I'm going to put all the code that
+在这里，就是为了更新这个自定义 UI
 
 1455
 01:03:11,914 --> 01:03:16,750
 updates this custom UI that I'm gonna build over here.
+放置代码的地方
 
 1456
 01:03:16,752 --> 01:03:18,584
 Here's gonna be our custom cell.
+这是我们的自定义 cell
 
 1457
 01:03:18,586 --> 01:03:22,054
 Here's gonna be the code for it, 'kay, our UITableViewCell.
+这里是它的代码
 
 1458
 01:03:22,056 --> 01:03:23,088
@@ -5837,142 +7260,177 @@ All right.
 1460
 01:03:24,557 --> 01:03:26,023
 So let's set this cells right here,
+先设置一下这个 cell
 
 1461
 01:03:26,026 --> 01:03:30,428
 the identifier of this cell to be our TweetTableViewCell.
+把它的类设置为 TweetTableViewCell
 
 1462
 01:03:31,464 --> 01:03:34,297
 Ok, if you forget this step then obviously you won't be
+如果你忘记了这一步
 
 1463
 01:03:34,299 --> 01:03:36,333
 able to control drag between these two.
+在这两个地方你就不能 Ctrl+drag 了
 
 1464
 01:03:36,335 --> 01:03:38,034
 And then lets go ahead and build this UI,
+现在来建立 UI
 
 1465
 01:03:38,036 --> 01:03:40,336
 actually we'll go ahead and get full screen for that.
+让它占据整个屏幕
 
 1466
 01:03:40,338 --> 01:03:41,270
 I'm gonna build this UI.
+现在来搭建 UI
 
 1467
 01:03:41,272 --> 01:03:43,538
 What do I want this UI to look like?
+我想让它变成什么样子呢
 
 1468
 01:03:43,540 --> 01:03:46,641
 Okay well, I want it to have.
+我需要它有几个 label
 
 1469
 01:03:46,643 --> 01:03:50,378
 Some labels, obviously, for like the person who,
+用于显示发推的用户
 
 1470
 01:03:50,380 --> 01:03:53,047
 sent the tweet and the tweet itself and
+还有推文本身
 
 1471
 01:03:53,049 --> 01:03:57,317
 I'd also like to have an image of the person who tweeted it.
+我也想要一个图片来显示发推用户的头像
 
 1472
 01:03:57,319 --> 01:03:59,586
 So I want an image view, there as well.
+所以我需要一个 imageView
 
 1473
 01:03:59,588 --> 01:04:03,789
 And I'm going to arrange all this, this ImageView,
+安排一下它们的布局
 
 1474
 01:04:03,791 --> 01:04:05,691
 I want it to always be a fixed size.
+这个 ImageView 我希望它是固定的大小
 
 1475
 01:04:05,693 --> 01:04:09,194
 I'm gonna have it be 48 by 48, that's big enough to kinda see
+48 * 48，足够看清楚了
 
 1476
 01:04:09,196 --> 01:04:11,329
 it, but not big enough that it's dominating the space.
+但是没有太占据这部分的空火箭
 
 1477
 01:04:11,331 --> 01:04:12,463
 Because this is going to be,
+因为
 
 1478
 01:04:12,465 --> 01:04:13,998
 each row each row is going to be a tweet,
+每一行都是一条推文
 
 1479
 01:04:14,000 --> 01:04:17,534
 I want to get as many of them on screen as I can.
+我希望一次在屏幕上多看到一些推特
 
 1480
 01:04:17,536 --> 01:04:19,803
 So, I'm gonna set this thing to be 48 by 48.
+所以我把它设置为 48 * 48
 
 1481
 01:04:19,805 --> 01:04:22,872
 I could use the dimensions inspector here to do that.
+我可以使用 dimensions inspector 来设置
 
 1482
 01:04:22,874 --> 01:04:23,673
 48 by 48.
+48 * 48
 
 1483
 01:04:23,675 --> 01:04:25,241
 There it is.
+好了
 
 1484
 01:04:26,210 --> 01:04:28,276
 I'm gonna put this in the upper corner here.
+把它放到左上角
 
 1485
 01:04:28,278 --> 01:04:30,979
 I'm gonna do the auto layout for this really fast.
+快速进行 Auto Layout
 
 1486
 01:04:30,981 --> 01:04:32,780
 Okay? Because you're hopefully guys
+我希望你们已经
 
 1487
 01:04:32,782 --> 01:04:34,281
 are getting familiar with that.
+熟悉了
 
 1488
 01:04:34,283 --> 01:04:36,116
 And also we've got time constraints here so
+而且我们也没多少时间了
 
 1489
 01:04:36,118 --> 01:04:38,418
 I'm gonna put this thing in the upper corner.
+把它放到左上角
 
 1490
 01:04:38,420 --> 01:04:39,419
 Top space.
+设置 Top Space
 
 1491
 01:04:40,622 --> 01:04:42,388
 And leading space over there.
+Leading Space
 
 1492
 01:04:42,390 --> 01:04:45,524
 I'm also going to fix its width and height.
+固定它的宽度和高度
 
 1493
 01:04:45,526 --> 01:04:48,160
 You can drag something onto itself and
+你可以拽向它自己
 
 1494
 01:04:48,162 --> 01:04:51,763
 then set things like aspect ratio or width and height.
+然后设置宽高比，宽度高度之类的
 
 1495
 01:04:51,765 --> 01:04:52,797
@@ -5981,22 +7439,27 @@ Okay?
 1496
 01:04:52,798 --> 01:04:53,830
 So I've set its width and height so that's good.
+我设置好了它的高度和宽度，还不错
 
 1497
 01:04:53,833 --> 01:04:55,065
 That guy seems to be happy there.
+对它的设置已经完成了
 
 1498
 01:04:55,067 --> 01:04:56,867
 I don't see any yellow.
+我没有看到黄线
 
 1499
 01:04:56,869 --> 01:05:00,053
 Let's put this guy.
+来放置它
 
 1500
 01:05:00,054 --> 01:05:03,238
 This is going to be the name of the person who is tweeting.
+它显示推文的作者
 
 1501
 01:05:03,241 --> 01:05:04,857
@@ -6005,222 +7468,277 @@ Okay.
 1502
 01:05:04,858 --> 01:05:06,474
 So I want that to be the whole width, right here,
+我希望它占据整个宽度
 
 1503
 01:05:06,477 --> 01:05:10,245
 and let's go ahead and hook that up so
+来设置它的 
 
 1504
 01:05:10,247 --> 01:05:11,947
 that it's hooked up to this thing.
+Auto Layout
 
 1505
 01:05:11,949 --> 01:05:15,350
 I'm going to hook up just the horizontal spacing there.
+设置与 imageView 的 horizontal spacing
 
 1506
 01:05:16,319 --> 01:05:17,718
 Let's also hook this up to the top,
+把它连接到顶部
 
 1507
 01:05:17,720 --> 01:05:21,488
 and let's hook this over to the right.
+右边连接到尾部
 
 1508
 01:05:21,490 --> 01:05:22,622
 Okay, so we've got that one hooked up.
+它已经设置完毕了
 
 1509
 01:05:22,624 --> 01:05:23,923
 That one seems happy.
+没有黄线，很好
 
 1510
 01:05:23,925 --> 01:05:26,625
 Okay, this one is going to be the actual tweet.
+这个 label 用来显示推文
 
 1511
 01:05:26,627 --> 01:05:29,028
 Now, this one I want to be kinda big, okay,
+我想让这个大一点
 
 1512
 01:05:29,030 --> 01:05:31,930
 I want it to use a lot of space here.
+我想让它占据这里的大部分空间
 
 1513
 01:05:31,932 --> 01:05:35,933
 And, normally in a label, if you have more than one line,
+通常对于一个 Label 来说，如果内容超出一行
 
 1514
 01:05:35,935 --> 01:05:38,169
 it just draws one line and dot dot dot.
+它只显示一行，后面的内容省略掉
 
 1515
 01:05:38,171 --> 01:05:40,170
 Have you noticed that?
+你们注意到了吗
 
 1516
 01:05:40,172 --> 01:05:41,672
 So, there is actually a way in label,
+在 label 的
 
 1517
 01:05:41,674 --> 01:05:44,107
 if you inspect label, to say wrap.
+属性里
 
 1518
 01:05:44,109 --> 01:05:46,776
 And the way you do that is by saying how many lines you
+你可以声明你需要它显示多少行
 
 1519
 01:05:46,778 --> 01:05:51,380
 want, and if you specify zero as the lines you want,
+如果是 0 的话
 
 1520
 01:05:51,382 --> 01:05:53,982
 it'll use as many lines as it needs.
+就显示它需要显示的行数
 
 1521
 01:05:53,984 --> 01:05:57,552
 So it's kind of a cute way of doing that.
+这种解决方式还是挺可爱的
 
 1522
 01:05:57,554 --> 01:06:00,655
 Another thing about these labels is they are currently
+当前的另一个问题是
 
 1523
 01:06:00,657 --> 01:06:02,089
 the system font.
+这些 label 使用的是系统字体
 
 1524
 01:06:02,091 --> 01:06:04,024
 That is bad.
+这很不好
 
 1525
 01:06:04,026 --> 01:06:06,593
 Why is it bad that those are the system font?
+为什么使用系统字体很不好
 
 1526
 01:06:06,595 --> 01:06:09,863
 Because the system font is not for the user's content.
+因为系统字体不能适用 user's content
 
 1527
 01:06:09,865 --> 01:06:11,931
 Okay, I talked about this in one of the lectures.
+我在之前讲过
 
 1528
 01:06:11,933 --> 01:06:15,568
 User's content, you want to use the preferred font, which
+你需要使用首选的字体
 
 1529
 01:06:15,570 --> 01:06:19,404
 you can get to by picking this little typeface here and
+选择这个小字形图标
 
 1530
 01:06:19,406 --> 01:06:21,439
 going down to text styles.
+去到 text styles
 
 1531
 01:06:21,441 --> 01:06:23,374
 So this is the tweet itself so
+这是推文，类似于正文
 
 1532
 01:06:23,376 --> 01:06:26,744
 that's kind of the body of the user's information here.
+所以应该使用 body
 
 1533
 01:06:26,746 --> 01:06:31,081
 And this one which is the user who tweeted it.
+对于这个，发推的用户
 
 1534
 01:06:31,083 --> 01:06:33,516
 That's kind of like a header or a caption or
+它类似于标题
 
 1535
 01:06:33,518 --> 01:06:35,285
 header at the top.
+顶部的标题
 
 1536
 01:06:35,286 --> 01:06:37,053
 So I'm gonna pick Headline Style for that.
+所以我选择 Headline
 
 1537
 01:06:37,055 --> 01:06:40,056
 So these fonts are going to be picked by the system
+这些字体会被系统选择
 
 1538
 01:06:40,058 --> 01:06:41,123
 to look nice.
+以较好地方式呈现
 
 1539
 01:06:41,125 --> 01:06:43,492
 Also if the user goes into Settings.
+当用户在设置中
 
 1540
 01:06:43,494 --> 01:06:46,761
 And changes their preferred font size,
+改变了首选字体的大小
 
 1541
 01:06:46,763 --> 01:06:48,029
 these will get bigger.
+这些也会相应变大
 
 1542
 01:06:48,031 --> 01:06:50,364
 And since I'm gonna build my UI to be flexible,
+我为了让 UI 更有适应性
 
 1543
 01:06:50,366 --> 01:06:53,834
 my cells will just get bigger in that case, or smaller.
+cell 在那种情况下会变大或者变小
 
 1544
 01:06:53,836 --> 01:06:55,302
 So it's all gonna happen automatically.
+这些都是自动发生的
 
 1545
 01:06:55,304 --> 01:06:57,871
 I don't have to actually do anything to make that happen,
+我实际上不需要做什么事情
 
 1546
 01:06:57,873 --> 01:07:00,340
 except for do my auto layout right.
+我做好 Auto Layout 就足够了
 
 1547
 01:07:01,409 --> 01:07:02,708
 Okay, so I got that one.
+它已经放好了
 
 1548
 01:07:02,710 --> 01:07:06,144
 Let's go ahead and Control + drag this one up to here.
+Ctrl+drag 设置它的 layout
 
 1549
 01:07:06,146 --> 01:07:08,413
 Here I'm going to set both the vertical spacing.
+在这里选择 vertical spacing
 
 1550
 01:07:08,415 --> 01:07:11,315
 I'm also going to line up these left edges.
+还有，我希望它们的左边
 
 1551
 01:07:11,317 --> 01:07:14,752
 Make sure the left edges of these two line up together.
+是对齐的
 
 1552
 01:07:15,721 --> 01:07:18,288
 I want this edge to be here.
+右边在这儿
 
 1553
 01:07:18,290 --> 01:07:20,423
 I want this one to be, oops.
+这里，喔
 
 1554
 01:07:22,626 --> 01:07:25,761
 Down to the bottom here.
+去到底部
 
 1555
 01:07:25,763 --> 01:07:26,628
 I think that's probably good.
+我认为看起来还不错
 
 1556
 01:07:26,630 --> 01:07:27,729
 Let's see if I forgot anything.
+看看我是否忘记了什么
 
 1557
 01:07:27,731 --> 01:07:29,280
@@ -6229,18 +7747,22 @@ Oh yeah.
 1558
 01:07:29,281 --> 01:07:30,830
 Two views are vertically ambiguous.
+两个 view 在垂直方向有歧义
 
 1559
 01:07:30,833 --> 01:07:31,832
 Okay? These two views
+这两个 view
 
 1560
 01:07:31,834 --> 01:07:33,533
 it says are vertically ambiguous.
+在垂直方向引发歧义
 
 1561
 01:07:33,535 --> 01:07:35,835
 That's again, our friend, the hugging.
+再一次，需要我们的好朋友，hugging
 
 1562
 01:07:35,837 --> 01:07:37,387
@@ -6249,130 +7771,162 @@ Okay?
 1563
 01:07:37,388 --> 01:07:38,938
 One of these two, these are both labels.
+它俩都是 label
 
 1564
 01:07:38,940 --> 01:07:41,574
 They both want to hug exactly the same amount.
+它们 hug 的数值都是相同的
 
 1565
 01:07:41,576 --> 01:07:44,443
 If I look at them, you can see they both have a hugging
+它们垂直方向的 Hug 优先级
 
 1566
 01:07:44,445 --> 01:07:45,677
 priority vertically of 251, 251 and 251.
+都是 251
 
 1567
 01:07:45,679 --> 01:07:50,648
 So I have to pick one of these that's not gonna hug.
+所以我选择其中一个让它 hug 优先级没那么高
 
 1568
 01:07:50,650 --> 01:07:51,882
 Now it's not gonna matter here,
+在这里不是问题
 
 1569
 01:07:51,884 --> 01:07:55,419
 actually, because my whole row is going to hug, so
+因为我们整个 row 都会 hug
 
 1570
 01:07:55,421 --> 01:07:57,187
 there both going to get to hug.
+所以这俩 label 也都会 hug
 
 1571
 01:07:57,189 --> 01:08:00,457
 But, I still have to pick one that has priority for hugging,
+但是我仍然需要调整其中一个的 hug 优先级
 
 1572
 01:08:00,459 --> 01:08:04,493
 so I'm gonna make the big one here be less likely to hug.
+把这个大一点的 hug 优先级调小一点
 
 1573
 01:08:04,495 --> 01:08:05,994
 So as soon as I change that,
+我更改完成后
 
 1574
 01:08:05,996 --> 01:08:09,131
 now you can see only frames are the problem.
+只有 frame 是问题了
 
 1575
 01:08:09,133 --> 01:08:10,899
 So let's go here and update our frames.
+所以我们更新一下 frame
 
 1576
 01:08:14,404 --> 01:08:17,838
 Okay, so it looks good, it's all looking good in there.
+看起来还不错
 
 1577
 01:08:17,840 --> 01:08:19,807
 I actually was going to also put a little thing
+我也想在这里放个 Label
 
 1578
 01:08:19,809 --> 01:08:21,241
 here that says the time of the Tweet but
+显示 tweet 的时间
 
 1579
 01:08:21,243 --> 01:08:23,176
 I'm going to skip that for time.
+但是时间已经不够了，我就不做了
 
 1580
 01:08:23,178 --> 01:08:26,079
 I'll do it in the code I post, I'll put it in there though.
+我会放到发布的代码里
 
 1581
 01:08:26,081 --> 01:08:28,948
 All right, so we've got this UI kind of looking the way we
+我们已经得到了
 
 1582
 01:08:28,950 --> 01:08:31,150
 want it to look.
+想要的 UI
 
 1583
 01:08:31,152 --> 01:08:34,152
 How are we going to hook it up to our table view cell?
+我们怎么把它们和 tableViewCell 连接起来呢
 
 1584
 01:08:34,154 --> 01:08:36,888
 Well, we're gonna do just like we do anything else.
+就像之前做的一样
 
 1585
 01:08:36,890 --> 01:08:38,523
 Control dragging.
+Ctrl+drag
 
 1586
 01:08:38,525 --> 01:08:40,524
 All right, so we've got our UI here.
+所以我们得到了 UI
 
 1587
 01:08:40,526 --> 01:08:42,659
 Let's hook up let's say our image view, so
+把 imageView 连接起来
 
 1588
 01:08:42,661 --> 01:08:44,594
 I'm gonna drag this in here.
+把它拽过来
 
 1589
 01:08:44,596 --> 01:08:47,530
 This is going to be called my TweetImageView.
+命名为 tweetImageView
 
 1590
 01:08:47,532 --> 01:08:48,965
 Going to show that.
+显示出来了
 
 1591
 01:08:48,967 --> 01:08:52,735
 And then, I'm going to drag this one, which is going to be
+接着把它拽过来
 
 1592
 01:08:52,737 --> 01:08:58,106
 my tweetScreenName, I think I called that.
+命名为 tweetScreenName
 
 1593
 01:08:58,108 --> 01:09:01,576
 And this is going to be the actual tweet text.
+这个作为显示推文的
 
 1594
 01:09:01,578 --> 01:09:05,679
 tweetTextLabel.
+起名为 tweetTextLabel
 
 1595
 01:09:05,681 --> 01:09:07,131
@@ -6381,82 +7935,102 @@ Okay.
 1596
 01:09:07,132 --> 01:09:08,582
 So I got my outlets in here, and so
+我已经设置好了 outlet
 
 1597
 01:09:08,584 --> 01:09:12,819
 now I just need the code that makes all these outlets get
+现在我需要通过代码，当某人设置了 tweet
 
 1598
 01:09:12,821 --> 01:09:15,221
 updated when someone sets the tweet.
+我需要更新 UI
 
 1599
 01:09:15,223 --> 01:09:17,823
 So I need some public API, which is going to be a tweet.
+所以我需要一些公共 API，一个 tweet 变量
 
 1600
 01:09:17,825 --> 01:09:19,891
 Okay. This is going to be the public
+它是我 TweetTableViewCell
 
 1601
 01:09:19,893 --> 01:09:22,060
 API of my TweetTableViewCell,
+的公共 API
 
 1602
 01:09:22,062 --> 01:09:26,330
 it's what I'm going to use in my self erode index path.
+我需要在 cellForRowAtIndexPath 调用
 
 1603
 01:09:26,332 --> 01:09:27,931
 To set that up.
+把它设置好
 
 1604
 01:09:27,933 --> 01:09:29,633
 So when the tweet is set,
+当 tweet 被设置的时候
 
 1605
 01:09:29,635 --> 01:09:32,969
 let's do a didSet right here and update our UI.
+这里加个 didSet 更新 UI
 
 1606
 01:09:32,971 --> 01:09:36,806
 Okay, and in updateUI,
+在 updateUI 中
 
 1607
 01:09:36,808 --> 01:09:41,610
 then I'm going to do all this.
+我会做这些
 
 1608
 01:09:43,480 --> 01:09:45,613
 So that's what I'm going to do.
+我会做这些事情
 
 1609
 01:09:45,615 --> 01:09:48,215
 Tweet created a label I decided we're going to save
+为了节省时间
 
 1610
 01:09:48,217 --> 01:09:50,468
 some time and not do that but
+tweetCreatedLabel 就不做了
 
 1611
 01:09:50,469 --> 01:09:52,720
 I'll uncomment this out and put that in when I post this.
+当我发布代码的时候不会注释这些
 
 1612
 01:09:52,722 --> 01:09:56,223
 But all this does here is just sets the tweet's label
+这里做的，就是设置好 tweetLabel
 
 1613
 01:09:56,225 --> 01:09:58,191
 text label to the tweet's text.
+设置为 tweet 的 text
 
 1614
 01:09:58,193 --> 01:10:00,426
 It sets to screen name to the user and
+把 tweetScrrenName 设置为 user
 
 1615
 01:10:00,428 --> 01:10:04,463
 it sets the profile image to the users profile image here.
+设置 profileImage 为用户的 头像
 
 1616
 01:10:04,465 --> 01:10:06,599
@@ -6465,130 +8039,162 @@ Okay?
 1617
 01:10:06,600 --> 01:10:08,734
 Now, notice this one right here, blocks the main thread.
+注意这里，阻塞了主线程
 
 1618
 01:10:09,703 --> 01:10:11,936
 So, in your homework, one of the required tasks is,
+在你们的作业中，必须要完成的任务是
 
 1619
 01:10:11,938 --> 01:10:13,170
 you can't block the main threads, so
+不能阻塞主线程
 
 1620
 01:10:13,172 --> 01:10:15,806
 you better fix this, okay?
+所以你最好修复这个问题
 
 1621
 01:10:15,808 --> 01:10:18,141
 I'm not gonna fix it, but you, you had better.
+我不会修改它，但是你们必须得修改
 
 1622
 01:10:18,143 --> 01:10:20,010
 And anywhere else you block the main thread,
+所有阻塞主线程的地方
 
 1623
 01:10:20,012 --> 01:10:21,878
 you're gonna fix, okay?
+你都得修复
 
 1624
 01:10:24,015 --> 01:10:27,416
 All right, so now, all we need to do is go back to our
+现在回到 controller 里
 
 1625
 01:10:27,418 --> 01:10:31,253
 controller right here and now our self erode index path is
+cellForRowAtIndexPath 方法会有一点不同
 
 1626
 01:10:31,255 --> 01:10:34,823
 going to be a little bit different because our thing is
+因为 cell 不再是 UITableViewCell
 
 1627
 01:10:34,825 --> 01:10:39,193
 not a UITableViewCell anymore, it's a TweetTableViewCell.
+而是 TweetTableViewCell
 
 1628
 01:10:40,463 --> 01:10:42,295
 And we're not going to do these things right here,
+我们不会在这里做这些
 
 1629
 01:10:42,297 --> 01:10:44,364
 the detail label and the text label.
+detail label 还有 text label
 
 1630
 01:10:44,366 --> 01:10:46,599
 Instead we're going to set that public API.
+而是调用公共 API
 
 1631
 01:10:46,601 --> 01:10:53,105
 Which is cell.tweet = the tweet, which is actually this.
+也就是 cell.tweet = tweet
 
 1632
 01:10:53,107 --> 01:10:55,741
 So actually, I'll make my code look nice and go like that,
+我让我的代码看起来整洁一些
 
 1633
 01:10:55,743 --> 01:10:58,910
 get rid of that, get rid of that.
+去掉这些，这些
 
 1634
 01:10:58,912 --> 01:11:00,745
 So actually our code got simpler here,
+实际上代码在这里变得更干净了
 
 1635
 01:11:00,747 --> 01:11:02,580
 because we transfer a lot of the responsibility
+因为我们把大量的显示 cell 的工作
 
 1636
 01:11:02,582 --> 01:11:06,450
 to display the thing into our tweetTableView cell,
+放到了 tweetTableViewCell 中
 
 1637
 01:11:06,452 --> 01:11:08,485
 which is over here, all right?
+也就是在这里
 
 1638
 01:11:08,487 --> 01:11:11,721
 Everyone understand we're configuring this cell by using
+我们通过公共 API
 
 1639
 01:11:11,723 --> 01:11:13,489
 this public API.
+来配置这个 cell
 
 1640
 01:11:13,491 --> 01:11:14,390
 It's gonna update its UI,
+它会更新它的 UI
 
 1641
 01:11:14,392 --> 01:11:17,059
 which is gonna set all these outlets.
+把所有的 outlet 设置好
 
 1642
 01:11:17,061 --> 01:11:17,959
 Everyone cool with that?
+都懂了吧？
 
 1643
 01:11:19,362 --> 01:11:21,095
 All right, let's see if I forgot anything.
+让我们看看我又没有往后急什么
 
 1644
 01:11:23,732 --> 01:11:25,198
 All right, look at this.
+看
 
 1645
 01:11:25,200 --> 01:11:27,000
 Okay, this is looking a little better.
+看起来好多了
 
 1646
 01:11:27,002 --> 01:11:28,434
 It's still not quite right.
+但还是不太对
 
 1647
 01:11:28,436 --> 01:11:31,670
 Because look, all these rows are the same height.
+因为所有的 row 都是相同的高度
 
 1648
 01:11:31,672 --> 01:11:33,772
 Even if the tweet inside is small.
+即使其中的推文很短
 
 1649
 01:11:33,774 --> 01:11:35,240
@@ -6597,82 +8203,102 @@ Okay?
 1650
 01:11:35,242 --> 01:11:36,441
 So why is that happening?
+为什么会这样呢
 
 1651
 01:11:36,443 --> 01:11:40,244
 Well that's been happening because by default,
+因为默认的情况
 
 1652
 01:11:40,246 --> 01:11:43,113
 if you look in the storyboard, okay,
+打开 storyboard
 
 1653
 01:11:43,115 --> 01:11:46,016
 if you take a particular cell here,.
+点击这个 cell
 
 1654
 01:11:46,018 --> 01:11:48,952
 Okay, Ctrl+Shift, pick the cell, and
+Ctrl+Shift 选择 cell
 
 1655
 01:11:48,954 --> 01:11:53,289
 you inspect right here, you'll see its row height is fixed,
+在右侧，你可以看到它的高度是固定的
 
 1656
 01:11:53,291 --> 01:11:55,924
 okay, fixed to 162 points high.
+162 高
 
 1657
 01:11:55,926 --> 01:11:57,225
 And I don't want that.
+我不想要这样
 
 1658
 01:11:57,227 --> 01:11:59,561
 I want this basically to be the estimate,
+这个 162 
 
 1659
 01:11:59,563 --> 01:12:02,130
 this 162 I want to be an estimate, but I want
+是估计的值
 
 1660
 01:12:02,132 --> 01:12:05,166
 it to actually calculate it using the auto-layout.
+但是我想通过 auto layout 计算它的高度
 
 1661
 01:12:05,168 --> 01:12:09,236
 So I'm going to fix that in here.
+所以我在这里修复这个问题
 
 1662
 01:12:09,238 --> 01:12:10,470
 I'll do it in viewDidLoad.
+在 viewDidLoad 中
 
 1663
 01:12:10,472 --> 01:12:11,871
 Where's my viewDidLoad?
+跑哪去了
 
 1664
 01:12:11,873 --> 01:12:13,372
 Up here.
+在这里
 
 1665
 01:12:13,374 --> 01:12:20,345
 I'm going to say that my tableView's estimatedRowHeight
+tableView.estimatedRowHeight
 
 1666
 01:12:20,347 --> 01:12:24,816
 equals the tableView's rowHeight.
+ = tableView.rowHeight
 
 1667
 01:12:24,818 --> 01:12:27,685
 So that's the height it has coming out of the storyboard.
+这是 storyboard 中出现的高度
 
 1668
 01:12:27,687 --> 01:12:31,955
 And then I'll reset the tableView's rowHeight,
+接着我重新设置 tableView.rowHeigth
 
 1669
 01:12:31,957 --> 01:12:35,258
 to UITableViewAutomaticDimension.
+ = UITableViewAutomaticDimension
 
 1670
 01:12:35,260 --> 01:12:37,160
@@ -6681,34 +8307,42 @@ Okay?
 1671
 01:12:37,161 --> 01:12:39,061
 So when you set the rowHeight to this automatic dimension,
+当你设置为这个值的时候
 
 1672
 01:12:39,064 --> 01:12:40,629
 that means calculate the size.
+这意味着计算它的尺寸
 
 1673
 01:12:40,631 --> 01:12:44,033
 But it's gonna use whatever rowHeight is in the storyboard
+但是它会把 storyboard 的值
 
 1674
 01:12:44,035 --> 01:12:44,966
 as an estimate.
+当做估计值
 
 1675
 01:12:44,968 --> 01:12:46,701
 Okay. So, see if that works.
+一起看看好用了槑
 
 1676
 01:12:46,703 --> 01:12:49,437
 Now, if I got my, yeah, it looks like it works fine.
+看起来不错
 
 1677
 01:12:49,439 --> 01:12:51,272
 You see, this one's nice and small.
+这个看起来很小很不错
 
 1678
 01:12:51,274 --> 01:12:52,072
 This one's larger.
+这个大一些
 
 1679
 01:12:52,074 --> 01:12:54,641
@@ -6721,22 +8355,27 @@ Okay.
 1681
 01:12:55,944 --> 01:12:57,477
 Was there something there I'm going to have to bleep
+这里有需要在 iTunes U 
 
 1682
 01:12:57,479 --> 01:12:58,944
 out on iTunes U or something?
+中打码的内容吗？
 
 1683
 01:12:58,946 --> 01:12:59,812
 I don't know.
+我不知道
 
 1684
 01:12:59,814 --> 01:13:00,579
 Be careful there.
+还是注意点
 
 1685
 01:13:01,615 --> 01:13:05,049
 Oh, look at this, let's see, look at that.
+看这个
 
 1686
 01:13:05,051 --> 01:13:05,849
@@ -6749,42 +8388,52 @@ Nice, okay.
 1688
 01:13:09,871 --> 01:13:13,890
 >> Now, your homework, your homework, Jessie,
+你们的作业，Jessie~
 
 1689
 01:13:13,892 --> 01:13:18,961
 is going to be a couple of things.
+有几项内容
 
 1690
 01:13:18,963 --> 01:13:20,996
 One, to highlight all these mentions.
+一，高亮这些 @
 
 1691
 01:13:20,998 --> 01:13:24,232
 The hashtags, users, etc.
+# 等等
 
 1692
 01:13:24,234 --> 01:13:25,967
 And also, when you click on one,
+当你点击其中一条推文的时候
 
 1693
 01:13:25,969 --> 01:13:29,003
 you're going to segue to a new table view you're going to
+你需要跳转到一个新的 tableView
 
 1694
 01:13:29,005 --> 01:13:32,106
 write that's going to show all the images that are attached
+显示推文附带的所有图片
 
 1695
 01:13:32,108 --> 01:13:33,774
 and all those hashtags, etc.
+所有 #
 
 1696
 01:13:33,776 --> 01:13:36,810
 And then you'll be able to click on those again to keep
+然后你可以点击这些
 
 1697
 01:13:36,812 --> 01:13:37,644
 navigating.
+继续跳转
 
 1698
 01:13:37,646 --> 01:13:39,629
@@ -6793,6 +8442,7 @@ Okay?
 1699
 01:13:39,630 --> 01:13:41,613
 That's the base of your assignment.
+这是你们作业的基本要求
 
 1700
 01:13:41,616 --> 01:13:43,482
@@ -6801,282 +8451,352 @@ Okay?
 1701
 01:13:43,484 --> 01:13:46,118
 Now, the last thing I'm going to show here is
+最后一件事
 
 1702
 01:13:46,120 --> 01:13:48,754
 how to basically refresh this table, because tweets
+是如何刷新 table
 
 1703
 01:13:48,756 --> 01:13:52,290
 are always happening as we notice right here from Jessie.
+因为人们时刻发送推文，就像 Jessie
 
 1704
 01:13:52,292 --> 01:13:54,359
 Maybe Jessie's still tweeting, I don't know.
+也许 Jessie 还在发推，我不知道
 
 1705
 01:13:54,361 --> 01:13:57,194
 We can't see the rest of her things without quitting our
+如果不退出重新进入 app
 
 1706
 01:13:57,196 --> 01:13:59,280
 app and restarting.
+就看不到她新发的推
 
 1707
 01:13:59,281 --> 01:14:01,365
 So what I want to be able to do is pull down on my table
+我希望做的，就是下拉刷新
 
 1708
 01:14:01,367 --> 01:14:04,568
 view and have a little spinner come up up here.
+上面会有一个旋转的指针
 
 1709
 01:14:04,570 --> 01:14:06,102
 And have it fetch again.
+让它继续获取推文
 
 1710
 01:14:06,104 --> 01:14:09,806
 And when it's done, add that to my list.
+当完成的时候，添加到我的 model 中
 
 1711
 01:14:09,808 --> 01:14:11,941
 So that's what we're gonna do right here.
+我们需要做这些
 
 1712
 01:14:11,943 --> 01:14:13,909
 First of all, how do you get that spinner?
+首先，怎样能获得等待的圆圈
 
 1713
 01:14:13,911 --> 01:14:15,143
 Okay? Real easy.
+很简单
 
 1714
 01:14:15,145 --> 01:14:16,578
 You go to your storyboard.
+打开 storyboard
 
 1715
 01:14:16,580 --> 01:14:18,312
 You click your table view.
+点击 tableview
 
 1716
 01:14:18,314 --> 01:14:19,580
 Okay? You go over here
+打开这里
 
 1717
 01:14:19,582 --> 01:14:20,614
 to inspect it.
+检查它
 
 1718
 01:14:21,950 --> 01:14:23,416
 All right. And then the inspector,
+在这其中
 
 1719
 01:14:23,418 --> 01:14:26,085
 actually you inspect the controller.
+实际上你在检查 controller
 
 1720
 01:14:26,087 --> 01:14:27,653
 You look right here, it says, refreshing.
+看这里，写着 refreshing
 
 1721
 01:14:27,655 --> 01:14:29,555
 See, it says, refreshing disabled.
+现在是关闭的
 
 1722
 01:14:29,557 --> 01:14:31,690
 That means refreshing is not allowed in this table, so
+这意味着这个 table 不能下拉刷新
 
 1723
 01:14:31,692 --> 01:14:33,258
 I'm going to enable that.
+把这个功能开启
 
 1724
 01:14:33,260 --> 01:14:34,759
 Now, nothing appears to have happened.
+表面上什么也没发生
 
 1725
 01:14:34,761 --> 01:14:36,127
 You don't see the little spinner
+你没看到小圆圈
 
 1726
 01:14:36,129 --> 01:14:38,395
 appear here on the storyboard.
+出现在 storyboard 中
 
 1727
 01:14:38,397 --> 01:14:39,830
 The place it actually appears
+它出现的位置是在 
 
 1728
 01:14:39,832 --> 01:14:41,931
 is over here on the document outline.
+这里的 document outline
 
 1729
 01:14:41,933 --> 01:14:43,132
 There it is right there.
+在这里
 
 1730
 01:14:43,134 --> 01:14:44,233
 Okay? That's the refresh control.
+它是 refresh control
 
 1731
 01:14:44,235 --> 01:14:46,669
 Now, that refresh control is a normal control.
+现在这个 refresh control 是一个普通的 control
 
 1732
 01:14:46,671 --> 01:14:50,372
 You can Ctrl+drag from it to create an action,
+你可以 Ctrl+drag 创建一个 action
 
 1733
 01:14:50,374 --> 01:14:51,573
 which is exactly what I'm going to do.
+我也会这么做
 
 1734
 01:14:51,575 --> 01:14:57,978
 I'm going to put that action right in my controller.
+把它放到 controller 中
 
 1735
 01:14:57,980 --> 01:14:58,812
 So here's my controller.
+打开 controller
 
 1736
 01:14:58,814 --> 01:15:00,380
 Let's put it,
+把它放到
 
 1737
 01:15:00,382 --> 01:15:02,882
 we're going to put it up towards the top here.
+上面这里
 
 1738
 01:15:02,884 --> 01:15:04,217
 Maybe right here.
+这里
 
 1739
 01:15:04,219 --> 01:15:06,118
 Okay. So I'm going to Ctrl+drag
+Ctrl+drag
 
 1740
 01:15:06,120 --> 01:15:09,688
 from the document outline, okay, over here.
+从 document outline 拖动
 
 1741
 01:15:09,690 --> 01:15:10,756
 And it's going to be an action.
+新建一个 action
 
 1742
 01:15:10,758 --> 01:15:13,525
 I'm going to call it refresh.
+起名为 refresh
 
 1743
 01:15:13,527 --> 01:15:16,327
 It's going to have an argument which is this refresh control
+参数是这个 refresh control
 
 1744
 01:15:16,329 --> 01:15:18,446
 itself.
+它本身
 
 1745
 01:15:18,447 --> 01:15:20,564
 You can also get this refresh control by calling the method
+你可以通过调用 refresh 
 
 1746
 01:15:20,566 --> 01:15:22,499
 refresh, or the property refresh control,
+获取 refresh control
 
 1747
 01:15:22,501 --> 01:15:24,601
 in UITableViewController.
+在 UITableViewController 中
 
 1748
 01:15:24,603 --> 01:15:26,520
 So here it is,
+在这里
 
 1749
 01:15:26,521 --> 01:15:28,438
 this is what's going to get called every time we refresh.
+我们每次刷新，这里都会被调用
 
 1750
 01:15:28,440 --> 01:15:30,540
 So just to show you what refreshing looks like
+让你们看看刷新在 UI 中
 
 1751
 01:15:30,542 --> 01:15:31,958
 in the UI.
+是什么效果
 
 1752
 01:15:31,959 --> 01:15:33,375
 It looks like this.
+它看起来是这样
 
 1753
 01:15:33,378 --> 01:15:34,777
 So here it is, I want to refresh.
+我想刷新
 
 1754
 01:15:34,779 --> 01:15:35,944
 See that little spinner?
+看到小圆圈了吗
 
 1755
 01:15:35,946 --> 01:15:37,312
 And I let go, and it's spinning.
+松手，它开始转动
 
 1756
 01:15:37,314 --> 01:15:40,014
 Now, it never stops spinning here because
+它永远不会停止
 
 1757
 01:15:40,016 --> 01:15:41,349
 I don't do anything.
+因为我没有做任何事
 
 1758
 01:15:41,351 --> 01:15:43,017
 So it doesn't know when I'm done.
+所以我完成以后它并不知道
 
 1759
 01:15:43,019 --> 01:15:46,119
 So what do we want to do when this refresh happens?
+所以当刷新动作发生的时候，我们该做什么
 
 1760
 01:15:46,121 --> 01:15:50,656
 Well, actually, we want to take that search, whatever
+实际上我们需要再搜索一次
 
 1761
 01:15:50,658 --> 01:15:55,060
 the last search we did here for tweets, and we wanna get
+我们上次一搜索的 tweet
 
 1762
 01:15:55,062 --> 01:15:58,030
 a follow on search that says, give me more of those.
+我们想根据上次搜索，再进行一次
 
 1763
 01:15:58,032 --> 01:16:00,265
 Well, TwitterRequest that I provided for
+在 TwitterRequest 中我提供了一个
 
 1764
 01:16:00,267 --> 01:16:03,134
 you has a nice property that if you give it a request that
+不错的属性
 
 1765
 01:16:03,136 --> 01:16:04,602
 you've already successfully made,
+如果你再次搜索已经搜索过的
 
 1766
 01:16:04,604 --> 01:16:06,770
 it'll give you a request to get more.
+它会再给你一个 request 获得更多 tweets
 
 1767
 01:16:06,772 --> 01:16:08,338
 Okay? So that's exactly what we're
+我们也会
 
 1768
 01:16:08,340 --> 01:16:09,740
 gonna do.
+这么做
 
 1769
 01:16:09,741 --> 01:16:11,141
 I'm gonna add a couple of new properties.
+添加几个属性
 
 1770
 01:16:11,143 --> 01:16:17,179
 One is called my lastSuccessfulRequest.
+一个叫做 lastSuccessfulRequest
 
 1771
 01:16:17,181 --> 01:16:19,415
@@ -7085,114 +8805,142 @@ Okay?
 1772
 01:16:19,416 --> 01:16:21,650
 Which is gonna be a TwitterRequest.
+类型是 TwitterRequest
 
 1773
 01:16:22,686 --> 01:16:26,320
 'Kay, so that's gonna be the last one I successfully did,
+就是我上次成功执行的请求
 
 1774
 01:16:26,322 --> 01:16:27,321
 and I'm gonna have another one,
+再添加另外一个
 
 1775
 01:16:27,323 --> 01:16:29,957
 which is my nextRequestToAttempt,
+起名为 
 
 1776
 01:16:29,959 --> 01:16:31,275
 that's what I called it.
+nextRequestToAttempt
 
 1777
 01:16:31,276 --> 01:16:32,592
 That's also gonna be a TwitterRequest.
+类型也是 TwitterRequest
 
 1778
 01:16:34,663 --> 01:16:37,497
 And this one is actually gonna be a calculated property,
+它会是一个计算属性
 
 1779
 01:16:37,499 --> 01:16:39,665
 because I'm gonna be able to calculate the next one
+因为我会根据上一次的请求
 
 1780
 01:16:39,667 --> 01:16:40,933
 based on the last one.
+计算下一次的请求
 
 1781
 01:16:40,935 --> 01:16:44,836
 So that's simple, I say if I had a last successful request,
+很简单，如果上一次请求不是 nil
 
 1782
 01:16:44,838 --> 01:16:47,972
 okay, that's, oh, sorry, let's say if I don't have one.
+抱歉，如果上一次成功请求是 nil
 
 1783
 01:16:47,974 --> 01:16:49,941
 If I don't have a last successful request,
+也就是没有上一次成功请求
 
 1784
 01:16:49,943 --> 01:16:51,142
 then let's make one.
+然后我会执行一次
 
 1785
 01:16:51,144 --> 01:16:52,543
 We have that right here,
+这里有
 
 1786
 01:16:52,545 --> 01:16:55,612
 so I'm going to put this line right here.
+把它放到这里
 
 1787
 01:16:55,614 --> 01:16:58,648
 So this TwitterRequest right here, this search,
+如果 searchText 不是 nil
 
 1788
 01:16:58,650 --> 01:17:04,653
 I'm going to make that be my
+我们就把它当做
 
 1789
 01:17:04,655 --> 01:17:08,090
 request if the search text is not nil.
+下一次的请求
 
 1790
 01:17:08,092 --> 01:17:13,728
 Then I'm going to return that as my next request to attempt.
+把它返回
 
 1791
 01:17:13,730 --> 01:17:15,830
 And here I'm just going to do request,
+在这，令 request = 
 
 1792
 01:17:15,832 --> 01:17:17,665
 next RequestToAttempt.
+nextRequestToAttempt
 
 1793
 01:17:17,667 --> 01:17:19,366
 So this place where I was fetching before,
+这是我之前获取的位置
 
 1794
 01:17:19,368 --> 01:17:22,602
 instead of always fetching the search text, instead I'm going
+我们会执行 nextRequestAttempt 而不是根据
 
 1795
 01:17:22,604 --> 01:17:25,205
 to do nextRequestAttempt, which, if we've never had
+seartchText 而进行搜索
 
 1796
 01:17:25,207 --> 01:17:28,207
 a successful request, is going to be that same search.
+如果没有上一次成功的搜索，那这一次新的搜索
 
 1797
 01:17:28,209 --> 01:17:32,178
 But if we have successfully requested something,
+如果上一次成功了
 
 1798
 01:17:32,180 --> 01:17:36,615
 then I'm going to return our last successful request's
+我们就返回 
 
 1799
 01:17:36,617 --> 01:17:38,183
 requestForNewer.
+lastSuccessfulRequest?.requestForNewer
 
 1800
 01:17:38,185 --> 01:17:39,584
@@ -7201,26 +8949,31 @@ Okay?
 1801
 01:17:39,586 --> 01:17:41,552
 And this exclamation point,
+这里应该是感叹号
 
 1802
 01:17:41,554 --> 01:17:45,389
 because I already checked that to make sure it's not nil.
+因为我已经检查过确保它不是 nil
 
 1803
 01:17:45,391 --> 01:17:48,324
 Okay, everyone got that?
+每个人都懂了吗
 
 1804
 01:17:48,326 --> 01:17:50,626
 What's the problem here?
+这里有什么问题
 
 1805
 01:17:50,628 --> 01:17:55,964
-lastSuccessfulRequest!.reques- tForNewer.
+lastSuccessfulRequest!.requestForNewer.
 
 1806
 01:17:55,966 --> 01:17:58,300
 Oh, yeah, let's make this be an optional right here.
+把它变成 optional
 
 1807
 01:17:59,336 --> 01:18:00,335
@@ -7229,58 +8982,72 @@ Okay? So
 1808
 01:18:00,336 --> 01:18:01,335
 that can be an optional too.
+它也可以是 optional 的
 
 1809
 01:18:01,338 --> 01:18:02,670
 And since that can be an optional,
+既然它可以是 optional
 
 1810
 01:18:02,672 --> 01:18:04,839
 we'd better check it here.
+我们最好在这里检查一下
 
 1811
 01:18:04,840 --> 01:18:07,007
 If we can find a request, then we'll do this.
+如果 request 不是 nil，执行下面这些
 
 1812
 01:18:12,681 --> 01:18:14,447
 Well, you pay the price if you press the wrong key.
+你必须为按错键付出代价
 
 1813
 01:18:14,449 --> 01:18:16,382
 Okay, luckily, we have undo.
+还好我们有取消
 
 1814
 01:18:16,384 --> 01:18:18,550
 Okay, so there we go.
+好了
 
 1815
 01:18:18,552 --> 01:18:19,551
 So that's it.
+就是这样
 
 1816
 01:18:19,552 --> 01:18:20,551
 So now we are also doing it.
+有一点点
 
 1817
 01:18:20,554 --> 01:18:24,355
 Now, the only thing here is,
+小问题
 
 1818
 01:18:24,357 --> 01:18:28,359
 otherwise we'll return nil.
+否则，返回 nil
 
 1819
 01:18:28,361 --> 01:18:30,427
 The only thing here that we need to do is,
+我们还有一件事需要做
 
 1820
 01:18:30,429 --> 01:18:33,730
 every time our search changes, we need to set our
+每一次搜索改变了以后，需要把
 
 1821
 01:18:33,732 --> 01:18:37,533
 lastSuccessfulRequest equal to nil.
+lastSuccessfulRequest 设置为 nil
 
 1822
 01:18:37,535 --> 01:18:38,868
@@ -7289,30 +9056,37 @@ Okay?
 1823
 01:18:38,869 --> 01:18:40,202
 Cuz we, as soon as we're searching something new,
+因为当我们搜索新的内容的时候
 
 1824
 01:18:40,204 --> 01:18:41,903
 now our last request doesn't matter, so
+lastSuccessfulRequest 就不重要了
 
 1825
 01:18:41,905 --> 01:18:43,271
 we're gonna set it to nil.
+所以设置为 nil
 
 1826
 01:18:43,273 --> 01:18:46,074
 And that's gonna cause this next request to make
+这就会引发 request
 
 1827
 01:18:46,076 --> 01:18:47,208
 a new search.
+执行一次新的搜索
 
 1828
 01:18:48,711 --> 01:18:50,477
 Okay? And then the last thing we
+最后一件事儿
 
 1829
 01:18:50,479 --> 01:18:52,979
 need to do is turn off that little spinner.
+就是停止小圆圈
 
 1830
 01:18:52,981 --> 01:18:54,114
@@ -7321,106 +9095,132 @@ Okay?
 1831
 01:18:54,115 --> 01:18:55,248
 So where are we gonna turn off the spinner?
+我们在哪里关闭 spinner
 
 1832
 01:18:55,250 --> 01:18:59,818
 Well, if we go off to do some searching, then when we
+如果我们执行了一些搜索，结果返回了
 
 1833
 01:18:59,820 --> 01:19:03,689
 come back, we can have our refresh control turn off.
+我们就可以把 refresh control 关闭
 
 1834
 01:19:03,691 --> 01:19:07,759
 I'm gonna move this right down here into that target action,
+把这些挪到 target action 中
 
 1835
 01:19:08,761 --> 01:19:10,327
 okay, because I'll have my refresh control then.
+因为这里有 refresh control
 
 1836
 01:19:10,329 --> 01:19:13,296
 So I'm gonna say sender?.endRefreshing.
+这里，sender?.endRefreshing
 
 1837
 01:19:13,298 --> 01:19:15,598
 Is that what it's called?
+是这么写的吗？
 
 1838
 01:19:15,600 --> 01:19:17,400
 Oh, yeah, endRefreshing.
+哦，是
 
 1839
 01:19:17,402 --> 01:19:19,201
 Let's go ahead and make this an optional.
+把它变成 optional
 
 1840
 01:19:19,203 --> 01:19:21,337
 Which you're allowed to do for a target action argument,
+target action 的参数允许你这么做
 
 1841
 01:19:21,339 --> 01:19:22,237
 make that an optional.
+把它变成 optional
 
 1842
 01:19:23,240 --> 01:19:24,489
 I'm gonna say that.
+我会这样写
 
 1843
 01:19:24,490 --> 01:19:25,739
 The reason I'm gonna do that is because I still want
+我这样做的原因是
 
 1844
 01:19:25,742 --> 01:19:27,008
 refresh to work.
+我仍然想让 refresh 工作
 
 1845
 01:19:27,010 --> 01:19:29,677
 When we call refresh from code, I still want that to
+从代码中调用 refresh 的时候，仍然想让它工作
 
 1846
 01:19:29,679 --> 01:19:33,380
 work, and I'm gonna do that by calling this refresh here
+我可以在 refresh 里调用 refresh
 
 1847
 01:19:33,382 --> 01:19:36,049
 with my refreshControl as an argument.
+把 refreshControl 作为参数
 
 1848
 01:19:36,051 --> 01:19:37,717
 So I'm just calling this one.
+调用它
 
 1849
 01:19:37,719 --> 01:19:39,385
 You see the little organization I did there?
+看到我在这里对代码的组织了吗
 
 1850
 01:19:40,554 --> 01:19:42,821
 And in fact, if we call from code,
+实际上，如果通过代码调用的时候
 
 1851
 01:19:42,823 --> 01:19:44,989
 I want that spinner to start spinning.
+我希望 spinner 开始旋转
 
 1852
 01:19:44,991 --> 01:19:49,027
 So I'm gonna say, if my refresh control is not nil,
+如果 refreshControl 不是 nil
 
 1853
 01:19:49,029 --> 01:19:51,595
 in other words, unless someone's calling refresh
+换句话说，如果某人调用了 refresh
 
 1854
 01:19:51,597 --> 01:19:53,864
 before my outlets are even hooked up,
+在 outlet 连接好之前
 
 1855
 01:19:53,866 --> 01:19:58,835
 then I'm going to start my thing spinning.
+我就让 spinning 开始旋转
 
 1856
 01:19:58,837 --> 01:20:02,972
 So I'm gonna say refreshControl?.beginRefresh-
+refreshControl?.beginRefreshing
 
 1857
 01:20:02,974 --> 01:20:03,505
@@ -7433,94 +9233,117 @@ Okay?
 1859
 01:20:05,275 --> 01:20:07,776
 So here I'm beginning it refreshing in code.
+在这里，我通过代码调用 refresh
 
 1860
 01:20:07,778 --> 01:20:09,911
 Okay, here it's being sent target action.
+这里调用 target action
 
 1861
 01:20:09,913 --> 01:20:11,278
 So it's beginning by itself.
+让它自己刷新
 
 1862
 01:20:11,280 --> 01:20:12,613
 And either way, I'm ending it.
+每一种方式，我都结束它的旋转
 
 1863
 01:20:12,615 --> 01:20:15,148
 Now, what if their search text is nil?
+如果 searchText 是 nil 怎么办
 
 1864
 01:20:15,150 --> 01:20:17,684
 Then I also want to end refreshing.
+我也想结束刷新
 
 1865
 01:20:19,087 --> 01:20:20,719
 Because I can't actually search.
+因为我不能执行搜索
 
 1866
 01:20:22,656 --> 01:20:23,722
 And everyone understands that
+每个人都明白吧
 
 1867
 01:20:23,724 --> 01:20:25,857
 this is not gonna get called and this, right?
+这里不会被调用
 
 1868
 01:20:25,859 --> 01:20:28,092
 Because this is being called,
+因为这是在另外一个线程
 
 1869
 01:20:28,094 --> 01:20:31,495
 dispatched from another thread, okay?
+被调用的
 
 1870
 01:20:33,265 --> 01:20:34,430
 This needs to be else.
+这里需要添加 else
 
 1871
 01:20:37,468 --> 01:20:40,202
 Okay, so this is only going to get called if this is not
+只有在它不是 nil 的时候
 
 1872
 01:20:40,204 --> 01:20:42,771
 nil, okay?
+它才会被调用
 
 1873
 01:20:43,840 --> 01:20:45,139
 All right, let's see if this all works.
+让我们看看这些会不会有效
 
 1874
 01:20:47,343 --> 01:20:48,592
 All right, so that worked.
+它工作了！
 
 1875
 01:20:48,593 --> 01:20:49,842
 Did you see that little thing spinning when I
+你发现了第一次启动时的那个
 
 1876
 01:20:49,845 --> 01:20:51,512
 first launched?
+转动的 spinning 了吗？
 
 1877
 01:20:51,513 --> 01:20:53,180
 So it worked to call it from code, that's cool.
+所以从代码调用它是没问题的，酷
 
 1878
 01:20:53,182 --> 01:20:54,164
 Oh, look at that.
+看！
 
 1879
 01:20:54,165 --> 01:20:55,147
 Now, I hope you guys will be nice to me,
+我希望你们对我好一点~
 
 1880
 01:20:55,150 --> 01:20:56,549
 you're not putting something.
+不放某些东西上去
 
 1881
 01:20:56,551 --> 01:20:58,551
 There we go, we're getting more stuff.
+我们获得了更多推文
 
 1882
 01:20:58,553 --> 01:20:59,118
@@ -7529,42 +9352,52 @@ Okay?
 1883
 01:21:00,554 --> 01:21:02,153
 Now, just to be careful here, keep refreshing.
+持续刷新
 
 1884
 01:21:02,155 --> 01:21:03,688
 In fact, let's try something else.
+实际上，试一些其他关键字
 
 1885
 01:21:04,824 --> 01:21:05,956
 Let's try grammys again.
+再试试 grammys
 
 1886
 01:21:05,958 --> 01:21:07,824
 Maybe people are still tweeting about the Grammys.
+也许人们还在发布关于格莱美的推文
 
 1887
 01:21:07,826 --> 01:21:08,725
 Okay, so here we go.
+好的
 
 1888
 01:21:09,828 --> 01:21:11,694
 There we go.
+没问题
 
 1889
 01:21:11,695 --> 01:21:13,561
 See how we're getting newer ones each time we refresh?
+每一次刷新我们都会得新的推文
 
 1890
 01:21:13,564 --> 01:21:16,498
 Or maybe we could do gswhoops.
+我们可以试试 gswhoops
 
 1891
 01:21:16,500 --> 01:21:18,066
 I think the Warriors are playing right now.
+可能 Warriors 正在打比赛
 
 1892
 01:21:19,736 --> 01:21:21,569
 There we go.
+好的
 
 1893
 01:21:21,571 --> 01:21:22,720
@@ -7573,34 +9406,42 @@ Okay?
 1894
 01:21:22,721 --> 01:21:23,870
 Well, nobody's too excited about it, though,
+看来大家对它不怎么感冒
 
 1895
 01:21:23,873 --> 01:21:24,805
 cuz they're not tweeting.
+因为他们没在发推
 
 1896
 01:21:24,807 --> 01:21:27,374
 All right, so that's it.
+好的，就是这样
 
 1897
 01:21:27,376 --> 01:21:28,441
 That's all I wanted to do.
+这就是我想做的
 
 1898
 01:21:28,443 --> 01:21:30,243
 So you will get to start with this code
+在完成作业时候
 
 1899
 01:21:30,245 --> 01:21:32,111
 when you do your assignment.
+你需要接着我的代码写
 
 1900
 01:21:32,113 --> 01:21:33,979
 Sorry for going a little long.
+可能有点拖堂了
 
 1901
 01:21:33,981 --> 01:21:35,213
 I'm here if you have questions.
+如果你们有问题，来这里找我
 
 1902
 01:21:36,249 --> 01:21:36,280

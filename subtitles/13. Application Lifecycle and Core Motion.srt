@@ -9,154 +9,191 @@ Stanford University.
 3
 00:00:04,938 --> 00:00:10,341
 >> All right, well, welcome to Lecture 13 of CS193P,
-
+欢迎来到 CS193P 13课
 4
 00:00:10,343 --> 00:00:12,976
 Winter 2015.
+2015冬季
 
 5
 00:00:12,978 --> 00:00:15,311
 Today, we have three major topics.
+今天，我们有三个主题
 
 6
 00:00:15,313 --> 00:00:18,047
 One which is the Application Lifecycle, which is all about
+一个是应用生命周期，这讲的全部都是关于
 
 7
 00:00:18,049 --> 00:00:20,783
 we talked about the View Controller Lifecycle.
+View Controller 生命周期
 
 8
 00:00:21,852 --> 00:00:24,286
 Where your view controller kinda is born,
+在你的视图控制器生成的地方
 
 9
 00:00:24,288 --> 00:00:26,121
 does a bunch of things and then, dies.
+同时有许多东西产生，然后消亡
 
 10
 00:00:26,123 --> 00:00:28,690
 Well, the same things happen for the whole application.
+在整个应用程序中也发生同样的事情
 
 11
 00:00:28,692 --> 00:00:30,257
 So we'll talk about that.
+因此我们将讨论这个
 
 12
 00:00:30,259 --> 00:00:32,860
 And then, I'm going to talk about Core Motion,
+然后，我们将讲 Core Motion
 
 13
 00:00:32,862 --> 00:00:35,562
 which is figuring out what the device is doing.
+这个是找出设备在做什么
 
 14
 00:00:35,564 --> 00:00:39,532
 Gyro, and accelerometer, magnetometers,
+陀螺仪，加速器，地磁仪
 
 15
 00:00:39,534 --> 00:00:40,666
 all that business.
+类似那样的东西
 
 16
 00:00:40,668 --> 00:00:43,535
 And then, I'm going to talk about persistence,
+然后，我将要讲解持久化
 
 17
 00:00:43,537 --> 00:00:46,571
 which is making things be stored on the internal hard
+就是把数据存储在你的设备中的
 
 18
 00:00:46,573 --> 00:00:47,806
 disk of your device.
+内置硬盘
 
 19
 00:00:47,808 --> 00:00:50,241
 Of course, it's flash memory, but
+当然，这是闪存，但
 
 20
 00:00:50,243 --> 00:00:53,911
 basically it acts a hard disk, a Unix file system even.
+基本上它扮演了硬盘的角色，设置一个 Unix 文件系统
 
 21
 00:00:53,913 --> 00:00:57,114
 So we talk about how we do that.
+因此，我们将讲解我们如何实现这些
 
 22
 00:00:57,116 --> 00:00:58,382
 All right, so let's jump right
+让我们从应用生命周期
 
 23
 00:00:58,384 --> 00:00:59,849
 into the application life cycle.
+开始
 
 24
 00:00:59,851 --> 00:01:02,485
 But we first, I need to give you a little side
+但首先，我需要给你们一小点
 
 25
 00:01:03,921 --> 00:01:06,288
 lecture here on NSNotification.
+关于 NSNotification 方面的课程
 
 26
 00:01:06,290 --> 00:01:08,723
 And we actually saw this briefly
+实际上，当我讲解键盘时我们看到
 
 27
 00:01:08,725 --> 00:01:10,825
 when I was talking about the keyboards.
+过这个
 
 28
 00:01:10,827 --> 00:01:13,427
 And you get this notification when the keyboards show up.
+当键盘出现时你们得到这个通知
 
 29
 00:01:13,429 --> 00:01:15,929
 But I decided I'm going to take a couple of slides here
+但我决定将带几个幻灯片
 
 30
 00:01:15,931 --> 00:01:17,698
 and just talk about NSNotification and
+然后只讲 NSNotification
 
 31
 00:01:17,700 --> 00:01:19,299
 how it works.
+还有它怎么运作
 
 32
 00:01:19,300 --> 00:01:20,899
 Because it's actually a fairly important part.
+因为它真的是很重要的一部分
 
 33
 00:01:20,902 --> 00:01:22,519
 Not fairly important,
+不是很重要
 
 34
 00:01:22,520 --> 00:01:24,137
 somewhat important part of the MVC model.
+MVC 模式中比较重要的一部分
 
 35
 00:01:24,139 --> 00:01:26,505
 So if you remember back to our MVC slides.
+因此如果你们回忆起我们的 MVC 幻灯片
 
 36
 00:01:26,507 --> 00:01:29,074
 I had a little kinda thing that looked like a radio
+我有一个小东西，它看起来像一个
 
 37
 00:01:29,076 --> 00:01:30,459
 station.
+电台
 
 38
 00:01:30,460 --> 00:01:31,843
 It was broadcasting from the model.
+它被从模型中发送出去
 
 39
 00:01:31,845 --> 00:01:34,045
 And then the controller would tune into that radio station
+然后控制器将调频到电台
 
 40
 00:01:34,047 --> 00:01:36,814
 to find out that changes were happening in the model.
+找出在模型中所发生的变化
 
 41
 00:01:36,816 --> 00:01:38,115
@@ -165,94 +202,117 @@ Well that's,
 42
 00:01:38,117 --> 00:01:41,352
 one of the things that make that happen is NSNotification.
+让这些事情发生的其中之一是 NSNotification
 
 43
 00:01:41,354 --> 00:01:43,387
 And so, it's the radio station or
+它是电台或者
 
 44
 00:01:43,389 --> 00:01:47,023
 one of the ways of doing the radio station in MVC.
+在 MVC 中执行电台的途径之一
 
 45
 00:01:47,025 --> 00:01:51,627
 And it's really for model to controller communication or
+这实际是模型到控制器的通讯或者
 
 46
 00:01:51,629 --> 00:01:54,363
 sometimes global to controller.
+有时是全局对控制器
 
 47
 00:01:54,365 --> 00:01:57,232
 Cuz sometimes things happen globally in your entire
+因为有时事情发生你的整个应用的全局
 
 48
 00:01:57,234 --> 00:01:59,701
 application, as we're gonna see in the demo today.
+正如我们今天要看到的 demo
 
 49
 00:01:59,703 --> 00:02:01,669
 And you need to kinda broadcast that this global
+你需要广播这个全局的
 
 50
 00:02:01,671 --> 00:02:02,920
 thing is happening.
+事情正在发生
 
 51
 00:02:02,921 --> 00:02:04,170
 And then particular view controllers might
+然后特殊的视图控制器可能
 
 52
 00:02:04,173 --> 00:02:05,305
 be interested in that.
+对这有兴趣
 
 53
 00:02:05,307 --> 00:02:07,074
 They'll sign up to listen to that radio station and
+他们将注册来监听电台然后
 
 54
 00:02:07,076 --> 00:02:10,410
 they'll find out that global thing has happened.
+他们讲发现所发生的全局的事情
 
 55
 00:02:10,412 --> 00:02:11,978
 So how does it work?
+这是如何工作的？
 
 56
 00:02:11,980 --> 00:02:13,446
 It's super simple.
+它超级简单
 
 57
 00:02:13,448 --> 00:02:16,048
 There is a class called NSNotificationCenter
+这里有一个类叫做 NSNotificationCenter
 
 58
 00:02:16,050 --> 00:02:18,483
 it has a class function called defaultCenter.
+它有一个类函数叫做 defaultCenter
 
 59
 00:02:18,485 --> 00:02:20,268
 You get that,
+你们得到这个
 
 60
 00:02:20,269 --> 00:02:22,052
 that's this kinda shared notification center.
+它类似共享消息中心
 
 61
 00:02:22,055 --> 00:02:24,989
 And you just send a message to it called addObserver
+你只需发送一个消息给它，它叫做 
 
 62
 00:02:24,991 --> 00:02:26,157
 for name.
+addObserverForName
 
 63
 00:02:26,159 --> 00:02:28,692
 And you specify the name of the radio station you
+然后你指定你想收听的
 
 64
 00:02:28,694 --> 00:02:30,027
 wanna listen to.
+电台的名字
 
 65
 00:02:30,029 --> 00:02:31,545
@@ -261,546 +321,682 @@ Okay.
 66
 00:02:31,546 --> 00:02:33,062
 It has a couple other arguments which are,
+它有其他几个参数，这些是
 
 67
 00:02:33,065 --> 00:02:34,965
 is object.
+对象
 
 68
 00:02:34,966 --> 00:02:36,866
 Object is who's the broadcaster.
+Object 就是发送广播者
 
 69
 00:02:36,868 --> 00:02:40,102
 Who are you interested in broadcasts on this
+你们谁对这个电台发送的
 
 70
 00:02:40,104 --> 00:02:41,721
 radio station from?
+广播感兴趣
 
 71
 00:02:41,722 --> 00:02:43,339
 And you can just put nil there if you're interested
+你可以置 nil 值，如果你对该电台
 
 72
 00:02:43,341 --> 00:02:46,174
 when anybody broadcasts on that radio station.
+中任何人发送的广播都感兴趣的话
 
 73
 00:02:46,176 --> 00:02:48,176
 But sometimes you'll specify I'm only interested if
+但有时，你要指定我只对这个
 
 74
 00:02:48,178 --> 00:02:50,745
 this guy broadcasts on this radio station.
+电台中的这个广播感兴趣
 
 75
 00:02:50,747 --> 00:02:53,647
 And then, notice that there's a queue.
+然后，注意这里有一个队列
 
 76
 00:02:53,649 --> 00:02:55,849
 And then a closure right after it.
+然后它后面有一个闭包
 
 77
 00:02:55,851 --> 00:02:56,850
 Okay. Queue and a closure.
+队列是一个闭包
 
 78
 00:02:56,852 --> 00:02:58,084
 So the queue is just saying
+因此这个队列只是讲
 
 79
 00:02:58,086 --> 00:03:00,987
 what queue you want after this closure to be executed on.
+这个闭包执行之后你想要哪个队列
 
 80
 00:03:00,989 --> 00:03:03,489
 I think if you put nil there you get I think
+我想如果你在这个放 nil，你将得到
 
 81
 00:03:03,491 --> 00:03:04,823
 the main queue.
+主队列
 
 82
 00:03:04,825 --> 00:03:07,359
 Possibly the current queue, but maybe the main queue.
+也可能是当前队列，或者主队列
 
 83
 00:03:07,361 --> 00:03:09,094
 But might as well just put it in there.
+但可能也只是把它放在那里
 
 84
 00:03:09,096 --> 00:03:10,895
 Now notice NSOperationQueue,
+现在注意 NSOperationQueue
 
 85
 00:03:10,897 --> 00:03:13,931
 I briefly mentioned that earlier in the quarter too.
+我刚才简要提到了这个
 
 86
 00:03:13,933 --> 00:03:18,869
 You're used to dispatch_queue_t, that thing.
+你们熟悉 dispatch_queue_t
 
 87
 00:03:18,871 --> 00:03:23,539
 NSOperationQueue is just kinda an object oriented API on top
+NSOperationQueue 类似一个在分发工作中
 
 88
 00:03:23,541 --> 00:03:26,375
 of the whole dispatching business.
+顶端的面向对象的 API
 
 89
 00:03:26,377 --> 00:03:28,577
 GCD, Grand Central Dispatch.
+GCD，Grand Central Dispatch
 
 90
 00:03:28,579 --> 00:03:32,881
 So, it's very thin layer looks almost exactly the same.
+因此，它是非常轻的一层，看起来几乎是一样的
 
 91
 00:03:32,883 --> 00:03:35,450
 But object oriented APIs usually will ask for
+但面向对象的 API 们通常会请求
 
 92
 00:03:35,452 --> 00:03:37,518
 a NSOperationQueue.
+NSOperationQueue
 
 93
 00:03:37,520 --> 00:03:40,754
 That has a couple of class functions like main queue,
+有许多类函数，比如主队列
 
 94
 00:03:40,756 --> 00:03:42,789
 where you can get the main queue.
+在那里你可以获取主队列
 
 95
 00:03:42,791 --> 00:03:44,891
 And you can create your own queues by just saying
+你可以创建你自己的队列
 
 96
 00:03:44,893 --> 00:03:46,492
 NSOperationQueue open parentheses
+NSOperationQueue 左括号
 
 97
 00:03:46,494 --> 00:03:48,961
 close parentheses to initialize it.
+右括号进行初始化
 
 98
 00:03:48,963 --> 00:03:50,262
 So anyway, specify the queue you want.
+不管怎样，指定你想要的队列
 
 99
 00:03:50,264 --> 00:03:52,330
 And then, what's gonna happen is,
+然后，将要发生的是
 
 100
 00:03:52,332 --> 00:03:54,866
 if anyone broadcasts on that radio station,
+如果有人在那个电台上发送广播
 
 101
 00:03:54,868 --> 00:03:58,136
 the following closure is going to be executed.
+下面的这个闭包将被执行
 
 102
 00:03:58,138 --> 00:03:59,937
 And that closure only has one argument there,
+这个闭包只有一个参数
 
 103
 00:03:59,939 --> 00:04:02,473
 which is an NSNotification.
+即 NSNotification
 
 104
 00:04:02,475 --> 00:04:04,808
 That NSNotification has a few fields in it.
+NSNotification 里面有几个字段
 
 105
 00:04:04,810 --> 00:04:06,910
 But the really only interesting field is
+但真正有趣的字段是
 
 106
 00:04:06,912 --> 00:04:09,612
 the field called userInfo.
+userInfo
 
 107
 00:04:09,614 --> 00:04:11,313
 And the userInfo is just a dictionary.
+userInfo 是一个字典
 
 108
 00:04:11,315 --> 00:04:14,850
 The dictionary of kinda old style, Objective-C dictionary
+这个字典有点老的风格，Objective-C 字典
 
 109
 00:04:14,852 --> 00:04:18,720
 with NSObject as the keys, AnyObject as the values.
+keys 是 NSObject， values 是 AnyObject
 
 110
 00:04:18,722 --> 00:04:22,123
 And every radio station it broadcasts
+任何一个它广播的电台
 
 111
 00:04:22,125 --> 00:04:24,525
 is going to have kinda different userInfo.
+都有点不一样的 userInfo
 
 112
 00:04:24,527 --> 00:04:26,827
 And when you go and look at the documentation for
+当你开始，查找关于电台的
 
 113
 00:04:26,829 --> 00:04:27,861
 that radio station.
+文档
 
 114
 00:04:27,863 --> 00:04:29,529
 Which is going to tell you the name,
+这将告诉你名字
 
 115
 00:04:29,531 --> 00:04:31,664
 that you're going to addObserver for name.
+就是你将调用的 addObserverForName 中的名字.
 
 116
 00:04:31,666 --> 00:04:34,233
 It's also going to tell you what it provides you in
+它也将告诉你 userInfo 中
 
 117
 00:04:34,235 --> 00:04:35,701
 it's userInfo.
+提供了哪些信息
 
 118
 00:04:35,703 --> 00:04:38,404
 Okay, so let's look at an example of doing this.
+让我们看一个例子来做这个
 
 119
 00:04:38,406 --> 00:04:40,872
 So you can kinda make it more concrete.
+你们可以将这个变得更具体化
 
 120
 00:04:40,874 --> 00:04:45,743
 Which is finding out when the user changes their text size.
+这个将发现用户改变他们的文本大小
 
 121
 00:04:45,745 --> 00:04:48,913
 So in Settings, here I'm just in Settings on a phone.
+在设置里，这里我只是在一个手机中的设置中
 
 122
 00:04:48,915 --> 00:04:52,549
 If I go to General Settings right here and
+如果我到通用设置
 
 123
 00:04:52,551 --> 00:04:58,021
 I go down to Accessibility, then I go down to Larger Text.
+然后我到下层的 Accessibility，然后我到下一层的更大文本
 
 124
 00:04:58,023 --> 00:05:00,857
 You can see there's this slider here, which I can
+你们可以看到这里的滑动条，通过这个我可以
 
 125
 00:05:00,859 --> 00:05:04,960
 use to set the size of the text that I want in my apps.
+设置我的应用里面的文本大小
 
 126
 00:05:04,962 --> 00:05:08,230
 Well, if you have an app that has text in it, or
+如果你们有一个有文本的应用，或者
 
 127
 00:05:08,232 --> 00:05:12,266
 that is sized depending on the setting of this,
+它的大小依赖于这个设置
 
 128
 00:05:12,268 --> 00:05:14,268
 you might want to react to that.
+你可能要采取相应的措施
 
 129
 00:05:14,270 --> 00:05:17,805
 Well the way you get notified of that is you get
+你得到这个通知的方式是你
 
 130
 00:05:17,807 --> 00:05:19,740
 a broadcast on a radio station.
+在一个电台收到广播
 
 131
 00:05:19,742 --> 00:05:22,942
 The radio station is called the UI content size category
+这个电台叫做 UI content size 类别
 
 132
 00:05:22,944 --> 00:05:25,845
 did change notification radio station, 'kay?
+确实改变了电台的通知，对吧？
 
 133
 00:05:25,847 --> 00:05:27,213
 That's the name of it.
+这是它的名字
 
 134
 00:05:27,215 --> 00:05:29,481
 Radio station is just something I use.
+电台就是我使用的东西
 
 135
 00:05:29,483 --> 00:05:31,450
 It's not really called radio station, okay?
+实际上它不叫电台
 
 136
 00:05:31,452 --> 00:05:33,485
 So, that's the name of it, and
+因此，这是它的名字
 
 137
 00:05:33,487 --> 00:05:36,354
 it's sent out by the UIApplication object.
+它是通过 UIApplication 对象发送的
 
 138
 00:05:36,356 --> 00:05:38,189
 Of which there's this one shared application,
+这是一个共享的应用
 
 139
 00:05:38,191 --> 00:05:40,057
 which you get by calling that method right there,
+你通过调用那个方法来获得
 
 140
 00:05:40,059 --> 00:05:41,358
 sharedApplication.
+共享应用
 
 141
 00:05:41,360 --> 00:05:44,961
 And I wanna hear about this on the main queue, okay?
+我想在主队列中收到这个？
 
 142
 00:05:44,963 --> 00:05:46,529
 So I have my block.
+所以我有自己的 block
 
 143
 00:05:46,531 --> 00:05:47,896
 It gets this notification argument.
+它取得这个通知的参数
 
 144
 00:05:47,898 --> 00:05:50,432
 Inside the notification argument there's the userInfo.
+在通知参数中，这是 userInfo
 
 145
 00:05:50,434 --> 00:05:54,535
 And it turns out this radio station, when it broadcasts,
+结果是这个电台，当它广播时
 
 146
 00:05:54,537 --> 00:05:56,370
 the userInfo contains the
+userInfo 包含
 
 147
 00:05:56,372 --> 00:05:59,206
 UIContentSizeCategoryNewValue- Key.
+UIContentSizeCategoryNewValue 键
 
 148
 00:05:59,208 --> 00:06:01,775
 And if I get that key out of the dictionary,
+如果我从字典中取出这个键
 
 149
 00:06:01,777 --> 00:06:03,410
 the value I get is the size.
+我得到的值便是（文本）大小
 
 150
 00:06:03,412 --> 00:06:06,746
 And there's a bunch of enums or strings for
+还有很多枚举或者字符串
 
 151
 00:06:06,748 --> 00:06:09,882
 it like UIContentSizeCategorySmall or
+比如 UIContentSizeCategorySmall 或者
 
 152
 00:06:09,884 --> 00:06:13,185
 UIContentSizeExtraLarge or whatever.
+UIContentSizeExtraLarge 或任何其它的
 
 153
 00:06:13,187 --> 00:06:15,354
 So that's how you get it.
+这就是你怎么得到它
 
 154
 00:06:15,356 --> 00:06:18,056
 And so this could come at anytime because the user could
+这个可能随时都会广播，因为用户
 
 155
 00:06:18,058 --> 00:06:20,558
 go to settings and set this at anytime.
+可能在任何时候在设置中设置这个值
 
 156
 00:06:20,560 --> 00:06:23,127
 And you'll just get this closure executed.
+然后这个闭包将被执行
 
 157
 00:06:23,129 --> 00:06:25,863
 And it can be executed multiple times once you
+一旦你注册这个，它可能
 
 158
 00:06:25,865 --> 00:06:28,766
 register this.
+被执行很多次
 
 159
 00:06:28,767 --> 00:06:31,668
 Then it's going to get called whenever that thing changes.
+当文本大小改变时这个都会被调用
 
 160
 00:06:31,670 --> 00:06:32,902
 That make sense?
+有道理吧？
 
 161
 00:06:32,904 --> 00:06:36,805
 So there's a lot of radio stations in iOS.
+在 iOS 中有很多电台
 
 162
 00:06:36,807 --> 00:06:38,407
 We're going to talk about Core Data,
+我们将谈谈 Core Data
 
 163
 00:06:38,409 --> 00:06:40,275
 object-oriented database for example.
+举个例子，面向对象的数据库
 
 164
 00:06:40,277 --> 00:06:42,510
 That got some very important notifications where it tells
+当你的数据库中有数据改变时
 
 165
 00:06:42,512 --> 00:06:44,145
 you that things have changed in the database.
+你会收到一些非常重要的通知
 
 166
 00:06:44,147 --> 00:06:45,846
 That's the classic model.
+这是经典的模型
 
 167
 00:06:45,848 --> 00:06:47,180
 Communicating to the controllers.
+和控制器通讯
 
 168
 00:06:47,182 --> 00:06:49,082
 And I'm going to do a little demo where we're gonna
+我要做个小例子，当我们
 
 169
 00:06:49,084 --> 00:06:51,317
 broadcast on our own radio station.
+在我们的电台中广播
 
 170
 00:06:51,319 --> 00:06:53,185
 And I'm missing a slide in here,
+这里我少了一个幻灯片
 
 171
 00:06:53,187 --> 00:06:55,721
 I noticed, which is how to broadcast.
+我注意到了，就是怎样广播
 
 172
 00:06:55,723 --> 00:06:57,456
 But broadcasting is very easy,
+但广播是非常简单的
 
 173
 00:06:57,458 --> 00:07:00,458
 you just create one of these NSNotification objects.
+你只需要创建这些 NSNotification 对象中的一个
 
 174
 00:07:00,460 --> 00:07:02,493
 And then, you ask the defaultCenter,
+然后，你询问 defaultCenter
 
 175
 00:07:02,495 --> 00:07:03,627
 postNotification.
+defaultCenter
 
 176
 00:07:03,629 --> 00:07:05,496
 So it's a method in the defaultCenter called
+这个是 defaultCenter 中一个叫做 
 
 177
 00:07:05,498 --> 00:07:07,431
 postNotification, you just give it a notification,
+postNotification 的方法，你只需给它一个通知
 
 178
 00:07:07,433 --> 00:07:09,966
 it'll broadcast it, simple as that.
+它将广播它，就这样简单
 
 179
 00:07:09,968 --> 00:07:12,568
 So we'll see that in the demo as well.
+我们也会在例子中看到这个
 
 180
 00:07:12,570 --> 00:07:14,303
 Okay, so that's notifications.
+这就是通知
 
 181
 00:07:14,305 --> 00:07:15,804
 And they're important in the application
+他们在应用的生命周期中
 
 182
 00:07:15,806 --> 00:07:17,105
 life cycle as you're going to see.
+很重要，马上你们就会看到了
 
 183
 00:07:17,107 --> 00:07:20,475
 So let's talk about the application life cycle.
+让我们谈谈应用生命周期
 
 184
 00:07:20,477 --> 00:07:23,277
 Really your application gets launched.
+当你的应用启动时
 
 185
 00:07:23,279 --> 00:07:24,712
 The user is using it.
+用户就在使用它
 
 186
 00:07:24,714 --> 00:07:26,814
 Then the user clicks to go to a different app.
+然后用户切换到另一个不同应用
 
 187
 00:07:26,816 --> 00:07:29,049
 And they come back to your app.
+然后他们再返回到你的应用
 
 188
 00:07:29,051 --> 00:07:31,918
 Maybe, your app starts using a lot of memory.
+也许，你的应用启动时使用了很多内存
 
 189
 00:07:31,920 --> 00:07:34,454
 Or does something else, that the system doesn't like.
+或者做了其他系统不喜欢的事情
 
 190
 00:07:34,456 --> 00:07:37,723
 Or the phone runs out of power.
+或者手机没电了
 
 191
 00:07:37,725 --> 00:07:40,025
 And you get killed, okay?
+你的应用被杀掉了
 
 192
 00:07:40,027 --> 00:07:42,060
 And so, that's kinda the life cycle.
+这就是生命周期
 
 193
 00:07:42,062 --> 00:07:43,295
 And you go back and
+然后你的应用在前台
 
 194
 00:07:43,296 --> 00:07:44,529
 forth between being in the foreground,
+来回使用
 
 195
 00:07:44,531 --> 00:07:45,697
 which means the user's using you.
+也就是用户在使用你的应用
 
 196
 00:07:45,699 --> 00:07:46,964
 And being in the background,
+然后在后台
 
 197
 00:07:46,966 --> 00:07:48,932
 which means the user's using something else.
+这意味中用户在使用其他的应用
 
 198
 00:07:48,934 --> 00:07:51,301
 That's the green versus blue in this picture.
+这就是这张图中绿色与蓝色部分
 
 199
 00:07:51,303 --> 00:07:53,870
 But you transition from these states in a very orderly
+但你在这些状态中以一个非常有序的方式
 
 200
 00:07:53,872 --> 00:07:54,888
 fashion.
+过渡
 
 201
 00:07:54,889 --> 00:07:55,905
 And we're going to talk about that transition.
+我们将谈谈这个转变
 
 202
 00:07:55,907 --> 00:07:56,605
@@ -809,62 +1005,77 @@ So.
 203
 00:07:56,607 --> 00:07:58,073
 In the green area, so
+在绿色区域
 
 204
 00:07:58,074 --> 00:07:59,540
 you start out not running, that's at the top.
+开始应用没有运行，这就是顶部
 
 205
 00:07:59,543 --> 00:08:01,443
 Obviously, your app is not even running at all.
+显然，你的应用甚至都没有运行
 
 206
 00:08:01,445 --> 00:08:03,011
 Okay? Then you move to this
+然后你移到这个
 
 207
 00:08:03,013 --> 00:08:06,747
 foreground state where you're, you start out inactive,
+前台状态，你开始活跃
 
 208
 00:08:06,749 --> 00:08:08,716
 which means you're running.
+这意味着你开始运心
 
 209
 00:08:08,718 --> 00:08:10,083
 Your code is running, but
+你的代码正在运行，但是
 
 210
 00:08:10,085 --> 00:08:12,018
 you're not getting any UI events.
+你并没有得到任何 UI 事件
 
 211
 00:08:12,020 --> 00:08:13,486
 Okay. You're not really displayed
+实际上你没有在屏幕上
 
 212
 00:08:13,488 --> 00:08:14,920
 onscreen and getting touch events yet.
+显示，也没有得到触摸事件
 
 213
 00:08:14,922 --> 00:08:16,855
 But you started up, you started running.
+但你启动了，你开始运行
 
 214
 00:08:16,857 --> 00:08:19,458
 Then you move to this state where you're active,
+然后你移到这个状态，在这里你是活跃的
 
 215
 00:08:19,460 --> 00:08:21,726
 which is your view controller is on screen,
+这里你的控制器将在屏幕上显示
 
 216
 00:08:21,728 --> 00:08:23,261
 it's getting touch events.
+你得到了触摸事件
 
 217
 00:08:23,263 --> 00:08:24,695
 This is normal mode.
+这是正常的模式
 
 218
 00:08:24,697 --> 00:08:26,319
@@ -873,62 +1084,77 @@ Okay?
 219
 00:08:26,320 --> 00:08:27,942
 This is what you're used to.
+这就是你已经习惯的
 
 220
 00:08:27,943 --> 00:08:29,565
 This is where you are most of the time that your code
+当你的代码运行时，这就是你大部分时候所在
 
 221
 00:08:29,568 --> 00:08:31,268
 is running.
+的地方
 
 222
 00:08:31,269 --> 00:08:32,969
 But if the user clicks on another app,
+但当用户点击另一个应用
 
 223
 00:08:32,971 --> 00:08:36,439
 then you can move to this state called the background
+你可以移到这个叫做后台的状态
 
 224
 00:08:36,441 --> 00:08:39,275
 where you'll run for a very brief period.
+在这里你运行很短的时间
 
 225
 00:08:39,277 --> 00:08:41,243
 I could be incredibly brief and
+我可以难以执行的简单
 
 226
 00:08:41,245 --> 00:08:43,479
 then your code just stops running.
+然后你的代码将停止运行
 
 227
 00:08:43,481 --> 00:08:46,048
 Now you're not, you haven't been killed, but
+现在你没有，你的应用还没被杀掉
 
 228
 00:08:46,050 --> 00:08:47,449
 your code is not running.
+但你的代码没有运行
 
 229
 00:08:47,451 --> 00:08:49,050
 So there's nothing you can do in this state.
+在这个状态下你什么也做不了
 
 230
 00:08:49,052 --> 00:08:51,118
 Now when you transition to this background,
+当你切换到后台时
 
 231
 00:08:51,120 --> 00:08:52,686
 you can ask for a little more time.
+你可以请求多一点的时间
 
 232
 00:08:52,688 --> 00:08:55,188
 But if you don't, you kinda quickly go to the state
+但如果你没有，你将很快转换到
 
 233
 00:08:55,190 --> 00:08:56,623
 where you're not running.
+你没运行的状态
 
 234
 00:08:56,625 --> 00:08:58,175
@@ -937,42 +1163,52 @@ Okay.
 235
 00:08:58,176 --> 00:08:59,726
 That's the suspended state down at the bottom.
+这是在底部的挂起状态
 
 236
 00:08:59,728 --> 00:09:02,395
 So you stay in this blue area for a short amount of time,
+因此你在蓝色区域停留很短的时间
 
 237
 00:09:02,397 --> 00:09:03,629
 this background state.
+这个后台状态
 
 238
 00:09:03,631 --> 00:09:06,565
 Now you can be put into this blue area other times too.
+你可能在其他时候被放置在这个蓝色区域
 
 239
 00:09:06,567 --> 00:09:08,767
 Like there's a way to tell the system, hey,
+比如有种方式告诉系统
 
 240
 00:09:08,769 --> 00:09:10,702
 I want to wake up every once in a while and
+我想要隔断时间就唤醒
 
 241
 00:09:10,704 --> 00:09:12,837
 go and fetch something from the internet.
+去从网络中请求一些数据
 
 242
 00:09:12,839 --> 00:09:14,772
 So that when the user does launch my app or
+因此当用户启动我的应用或者
 
 243
 00:09:14,774 --> 00:09:16,173
 bring it to the foreground,
+把它带到前台时
 
 244
 00:09:16,175 --> 00:09:18,308
 I have got the latest information for them.
+我已经为他们获取了最新的信息
 
 245
 00:09:18,310 --> 00:09:19,826
@@ -981,14 +1217,17 @@ Okay?
 246
 00:09:19,827 --> 00:09:21,343
 So the system can wake you up in the background.
+系统可以在后台唤醒你
 
 247
 00:09:21,346 --> 00:09:24,180
 You'll run for a very short amount of time while you go do
+你可以运行非常短的时间，当你
 
 248
 00:09:24,182 --> 00:09:27,149
 this little fetch and then you go back to suspended state.
+需要获取一些数据，然后你回到挂起状态
 
 249
 00:09:27,151 --> 00:09:29,151
@@ -997,30 +1236,37 @@ Okay?
 250
 00:09:29,152 --> 00:09:31,152
 Now, while you're in the suspended state, okay?
+当你在挂起状态时
 
 251
 00:09:31,155 --> 00:09:34,522
 Down here and your code is not running at all.
+在下面的这里，你的代码根本没有运行
 
 252
 00:09:34,524 --> 00:09:37,025
 None of your code is being executed and
+你的代码并没有被执行
 
 253
 00:09:37,027 --> 00:09:39,026
 you could be killed from here.
+你的应用可能在这里被杀死
 
 254
 00:09:39,028 --> 00:09:42,162
 So you wanna be careful when you move from the background
+因此你需要小心，当你从后台状态转换到
 
 255
 00:09:42,164 --> 00:09:45,198
 state to the suspended state to clean everything up and
+挂起状态，保证清理了所有东西并且
 
 256
 00:09:45,200 --> 00:09:47,334
 get everything ready for your death.
+做好应用挂掉的准备
 
 257
 00:09:47,336 --> 00:09:48,101
@@ -1029,10 +1275,12 @@ Okay?
 258
 00:09:48,103 --> 00:09:49,268
 Cuz you might get killed.
+因为你的应用可能被杀死
 
 259
 00:09:49,270 --> 00:09:51,837
 That's rare to get killed, but you could.
+应用很少会被杀死，但却是可能的
 
 260
 00:09:51,839 --> 00:09:53,289
@@ -1041,22 +1289,27 @@ Okay?
 261
 00:09:53,290 --> 00:09:54,740
 So you have to think of being in suspended state as
+所以你要考虑到在挂起状态，当
 
 262
 00:09:54,742 --> 00:09:56,975
 I'm suspended and I could be killed at any moment.
+我的应用挂起时，它随时可能被杀死
 
 263
 00:09:56,977 --> 00:09:59,277
 So [LAUGH] you can't run any code when you're gonna be
+当你的应用被杀死时，你不能运行任何代码
 
 264
 00:09:59,279 --> 00:10:01,746
 killed, so you better clean that up when you're passing
+所以你最好清理应用，当你在后台
 
 265
 00:10:01,748 --> 00:10:04,048
 through the back, creating through a background.
+时，在后台创建一些东西
 
 266
 00:10:04,050 --> 00:10:05,383
@@ -1065,14 +1318,17 @@ Okay.
 267
 00:10:05,384 --> 00:10:06,717
 So let's talk about how you find out,
+让我们谈谈你如何发现
 
 268
 00:10:06,719 --> 00:10:09,552
 as you move through and you can only pass along the orange
+当你转换状态，你只能沿着这些桔色的线
 
 269
 00:10:09,554 --> 00:10:11,187
 lines to get from these states.
+转换到这些状态
 
 270
 00:10:11,189 --> 00:10:12,572
@@ -1081,10 +1337,12 @@ Okay? So
 271
 00:10:12,573 --> 00:10:13,956
 when you come out of the background,
+当你从后台返回时
 
 272
 00:10:13,958 --> 00:10:16,959
 you briefly will be inactive and then go to active.
+你从短暂的非活跃状态转换到活跃状态
 
 273
 00:10:16,961 --> 00:10:18,694
@@ -1093,34 +1351,42 @@ Right?
 274
 00:10:18,695 --> 00:10:20,428
 So let's talk about how we pass through.
+让我们谈谈如何做这种转换
 
 275
 00:10:20,431 --> 00:10:23,999
 So launching is just a matter of moving into the foreground,
+启动只是转换到前台的事情
 
 276
 00:10:24,001 --> 00:10:26,567
 briefly inactive and then you're active.
+短暂的不活跃，然后你的应用变成活跃状态
 
 277
 00:10:26,569 --> 00:10:28,936
 That's your application being launched.
+这样你的应用被启动了
 
 278
 00:10:28,938 --> 00:10:32,806
 Switching to another app is you started out active,
+切换到另一个应用，你不再活跃
 
 279
 00:10:32,808 --> 00:10:35,008
 you go inactive for a moment.
+一会你就变成不活跃
 
 280
 00:10:35,010 --> 00:10:38,077
 You come around, you're in background for a moment and
+你的应用苏醒过来，当其他的应用在运行时
 
 281
 00:10:38,079 --> 00:10:41,047
 then you go suspended while the other app gets to run.
+一会你就在后台然后转换到挂起状态
 
 282
 00:10:41,049 --> 00:10:43,266
@@ -1129,6 +1395,7 @@ Okay?
 283
 00:10:43,267 --> 00:10:45,484
 So that's the flow of switching to another app.
+这就是切换到另一个应用的过程
 
 284
 00:10:45,486 --> 00:10:47,853
@@ -1137,166 +1404,207 @@ Okay?
 285
 00:10:47,854 --> 00:10:50,221
 Now every time you make a transition along these orange
+每次你沿着这些桔色的线做
 
 286
 00:10:50,223 --> 00:10:52,190
 lines, you get notified.
+转换，你都会收到通知
 
 287
 00:10:52,192 --> 00:10:55,526
 So let's talk about, for example, own's,
+让我们谈谈，比如，我们自己的应用
 
 288
 00:10:55,528 --> 00:10:56,894
 of course killed.
+当然被杀掉
 
 289
 00:10:56,896 --> 00:10:58,362
 You can be killed, your code won't run.
+你可能被杀掉，你的代码不会运行
 
 290
 00:10:58,364 --> 00:11:01,865
 Be careful, be ready.
+准备好，小心点
 
 291
 00:11:01,867 --> 00:11:02,799
 All right. So let's talk about
+让我们谈谈
 
 292
 00:11:02,801 --> 00:11:04,768
 these transitions.
+这些转换
 
 293
 00:11:04,769 --> 00:11:06,736
 So right there, the little yellow circle is talking about
+在那里，这个小黄圆圈
 
 294
 00:11:06,738 --> 00:11:09,705
 moving into this inactive state from not running.
+从未运行转换到这个不活跃的状态
 
 295
 00:11:09,707 --> 00:11:11,006
 Okay? When that happens,
+当这发生时
 
 296
 00:11:11,008 --> 00:11:13,541
 you get sent this message to your application delegate.
+你发送这个消息给你的应用代理
 
 297
 00:11:13,543 --> 00:11:16,944
 You remember that AppDelegate file that I always drag out of
+你们记得这个 AppDelegate 文件吗？每次在我的例子开始时
 
 298
 00:11:16,946 --> 00:11:20,081
 the way every single time at the beginning of my demos?
+我经常把它拖拽到其他地方
 
 299
 00:11:20,083 --> 00:11:22,883
 Well, that file is an interesting file.
+这个文件是个有趣的文件
 
 300
 00:11:22,885 --> 00:11:25,118
 It actually has a class in it called your AppDelegate.
+实际上它有一个类，叫做 AppDelegate
 
 301
 00:11:25,120 --> 00:11:28,154
 Your AppDelegate is the delegate of your UI
+你的 AppDelegate 是你的 UI 应用对象的
 
 302
 00:11:28,156 --> 00:11:31,924
 application object and the UI application object,
+代理，是 UI 应用对象
 
 303
 00:11:31,926 --> 00:11:33,625
 you never subclass it.
+你从不继承它
 
 304
 00:11:33,627 --> 00:11:36,094
 If you want to customize its behavior, you do so
+如果你需要定制它的行为，你在 AppDelegate
 
 305
 00:11:36,096 --> 00:11:38,563
 by implementing methods in the AppDelegate.
+中实现方法
 
 306
 00:11:38,565 --> 00:11:40,631
 So one of the methods you can get sent,
+其中一个方法，你可以发送
 
 307
 00:11:40,633 --> 00:11:43,701
 one of the delegate protocol methods for an application
+应用代理其中一个代理协议方法是
 
 308
 00:11:43,703 --> 00:11:47,104
 delegate is application did finish launching with options.
+application didFinishLaunchingWithOptions
 
 309
 00:11:47,106 --> 00:11:48,939
 And that gives you a dictionary,
+这个方法给你一个字典
 
 310
 00:11:48,941 --> 00:11:50,974
 which we'll talk about in a second.
+一会我们将谈到这个
 
 311
 00:11:50,976 --> 00:11:52,241
 And so that, so
+因此
 
 312
 00:11:52,243 --> 00:11:56,879
 you're always gonna know the first time you startup from
+你总是第一时间知道你的应用
 
 313
 00:11:56,881 --> 00:12:01,549
 not being running at all to being in this inactive state.
+从未运行转换到这个不活跃状态
 
 314
 00:12:01,551 --> 00:12:03,951
 Now what's in the [INAUDIBLE] by the way,
+是什么，顺便说下
 
 315
 00:12:03,953 --> 00:12:06,587
 you get all these messages sent to you to your
+你在你的 AppDelegate 中获得所有
 
 316
 00:12:06,589 --> 00:12:09,590
 AppDelegate, but you also a get a notification.
+这些信息，但你也得到一个通知
 
 317
 00:12:09,592 --> 00:12:11,224
 That we were talking about in previous slide.
+就是我们在上个幻灯片中谈到的
 
 318
 00:12:11,226 --> 00:12:13,093
 So you can sign up to listen to the radio station.
+你可以注册收听这个电台
 
 319
 00:12:13,095 --> 00:12:15,628
 UI application did finish launching notification and
+UIApplicationDidFinishLauningNotification 然后
 
 320
 00:12:15,630 --> 00:12:18,531
 when you launch, you'll get a message on the radio station.
+当你启动时，你将在电台中得到一个消息
 
 321
 00:12:18,533 --> 00:12:20,666
 Now that's only gonna happen once per launching of your
+显然，这只会在你每次启动应用时
 
 322
 00:12:20,668 --> 00:12:22,201
 app, obviously.
+发生
 
 323
 00:12:22,202 --> 00:12:23,735
 And the user info in that notification,
+在通知中的 userInfo
 
 324
 00:12:23,737 --> 00:12:27,271
 of course contains the same dictionary that's being passed
+当然包含了它在这个方法中将被传递的
 
 325
 00:12:27,273 --> 00:12:28,239
 to this method.
+字典
 
 326
 00:12:28,241 --> 00:12:29,840
@@ -1305,34 +1613,42 @@ Okay?
 327
 00:12:29,842 --> 00:12:32,009
 So what's the difference between these two?
+这两个有什么区别？
 
 328
 00:12:32,011 --> 00:12:35,879
 Well, you know, if you put the code in your AppDelegate to
+你们知道的，当你在 AppDelegate 中写代码
 
 329
 00:12:35,881 --> 00:12:39,148
 find out that you've been launched, you know,
+来判断你是否被启动了，你们知道的
 
 330
 00:12:39,150 --> 00:12:41,217
 it kinda has to be global code.
+这类似于全局代码
 
 331
 00:12:41,219 --> 00:12:43,236
 Right? Because you're just,
+对吧？因为你刚刚
 
 332
 00:12:43,237 --> 00:12:45,254
 it's in you AppDelegate, it's kind of in this global place.
+在你的 AppDelegate 中，在这个全局的地方
 
 333
 00:12:45,256 --> 00:12:48,623
 Whereas if a particular view controller wanted to find out,
+如果有一个特别的视图控制器需要被发现
 
 334
 00:12:48,625 --> 00:12:49,891
 oh, I just launched.
+我（控制器）刚刚启动
 
 335
 00:12:49,893 --> 00:12:51,276
@@ -1341,10 +1657,12 @@ Okay?
 336
 00:12:51,277 --> 00:12:52,660
 It can have its code in itself, so
+它内部可以有自己的代码
 
 337
 00:12:52,662 --> 00:12:54,695
 it can be more object oriented.
+#它可以更
 
 338
 00:12:54,697 --> 00:12:56,313
@@ -1353,30 +1671,37 @@ Right?
 339
 00:12:56,314 --> 00:12:57,930
 It can have its reaction to launching be just in itself,
+它可以在内部对启动做出反应
 
 340
 00:12:57,933 --> 00:13:00,133
 it doesn't have to be talking to some global thing
+它不需要和全局的东西进行通信
 
 341
 00:13:00,135 --> 00:13:02,235
 like the AppDelegate.
+比如 AppDelegate
 
 342
 00:13:02,236 --> 00:13:04,336
 And in general, you wanna be careful about the AppDelegate,
+一般的，使用 AppDelegate 时你需要小心点
 
 343
 00:13:04,339 --> 00:13:05,805
 cuz it is a global resource.
+因为它是全局资源
 
 344
 00:13:05,807 --> 00:13:08,040
 And as you know, from all your computer science training.
+你们知道的，在你们的计算机科学知识中
 
 345
 00:13:08,042 --> 00:13:09,742
 Globals can be bad.
+全局是不好的
 
 346
 00:13:09,744 --> 00:13:11,293
@@ -1385,10 +1710,12 @@ Okay?
 347
 00:13:11,294 --> 00:13:12,843
 Globals are generally not the way you wanna communicate
+全局通常不是你想交流信息的方式
 
 348
 00:13:12,846 --> 00:13:14,879
 information, but some things are global.
+当有些东西是全局的
 
 349
 00:13:14,881 --> 00:13:16,314
@@ -1397,18 +1724,22 @@ Okay?
 350
 00:13:16,315 --> 00:13:17,748
 Like when we talk about core motion and the phone,
+比如当我们谈论 core motion 和手机
 
 351
 00:13:17,751 --> 00:13:20,418
 there's only one gyro, there's only one accelerometer.
+只有一个 gyro，只有一个 accelerometer
 
 352
 00:13:20,420 --> 00:13:21,885
 That is global, okay?
+这就是全局
 
 353
 00:13:21,887 --> 00:13:25,989
 To your entire device, certainly to your entire app.
+你的整个设备，当然，你的整个应用
 
 354
 00:13:25,991 --> 00:13:27,057
@@ -1417,14 +1748,17 @@ Okay.
 355
 00:13:27,058 --> 00:13:28,124
 So some things are global, but
+因此有些东西是全局的
 
 356
 00:13:28,126 --> 00:13:30,726
 don't use global variables basically through your
+但别使用全局变量，在你的 
 
 357
 00:13:30,728 --> 00:13:32,461
 AppDelegate to circumvent that.
+AppDelegate 中别使用
 
 358
 00:13:32,463 --> 00:13:33,462
@@ -1433,14 +1767,17 @@ All right.
 359
 00:13:33,463 --> 00:13:34,462
 So what's in this past dictionary,
+在这个传递的字典中有什么
 
 360
 00:13:34,465 --> 00:13:35,630
 this dictionary that you get?
+你获取的这个字典？
 
 361
 00:13:35,632 --> 00:13:37,865
 It's basically gonna tell you why you were launched.
+基本上它会公诉你你为什么被启动了
 
 362
 00:13:37,867 --> 00:13:38,966
@@ -1449,50 +1786,62 @@ Okay?
 363
 00:13:38,968 --> 00:13:41,835
 Cuz you can get launched for a lot of reasons.
+因为你可能由于很多原因被启动
 
 364
 00:13:41,837 --> 00:13:43,904
 The user might have just clicked on you, okay?
+用户可能只是点击了你的应用
 
 365
 00:13:43,906 --> 00:13:45,505
 And launch you, but
+然后启动了应用
 
 366
 00:13:45,507 --> 00:13:49,975
 it might be a situation where someone air dropped a file of
+但也可能是这种情况，有人通过 AirDrop 传送了一个
 
 367
 00:13:49,977 --> 00:13:53,145
 a certain type that you know how to open.
+你知道怎么打开的文件
 
 368
 00:13:53,147 --> 00:13:56,381
 And the system will launch you to open that file,
+因此系统将启动你来打开这个文件
 
 369
 00:13:56,383 --> 00:13:57,782
 which is kinda cool.
+这非常酷
 
 370
 00:13:57,784 --> 00:13:59,951
 We're gonna hopefully do air drop in our demo today.
+我们将在今天的例子中讲解 AirDrop
 
 371
 00:13:59,953 --> 00:14:03,154
 You might have setup some boundaries, and
+你们可能创建了一些边界
 
 372
 00:14:03,156 --> 00:14:06,523
 your phone moved into that part of the world.
+当你们的手机移动到这个世界的那个部分
 
 373
 00:14:06,525 --> 00:14:10,027
 So, it's possible to actually setup s big region and say,
+实际上，有可能创建一个很大的区域
 
 374
 00:14:10,029 --> 00:14:13,029
 when this device comes in this region, run my app.
+当这个设备到达这个区域时，运行我的应用
 
 375
 00:14:13,031 --> 00:14:14,297
@@ -1501,6 +1850,7 @@ Okay?
 376
 00:14:14,299 --> 00:14:17,466
 And if your app is not running, it will get launched.
+如果你的应用没有运行，它将被启动
 
 377
 00:14:17,468 --> 00:14:19,668
@@ -1509,26 +1859,32 @@ Okay?
 378
 00:14:19,669 --> 00:14:21,869
 To go deal with the fact that you just moved near the dry
+处理这些情况，当你移动到干洗机附近时
 
 379
 00:14:21,872 --> 00:14:23,989
 cleaners or
+或者
 
 380
 00:14:23,990 --> 00:14:26,107
 whatever you put in there as one of your regions.
+你的区域中的任何一个地方
 
 381
 00:14:26,110 --> 00:14:29,277
 In iOS8, you can start an activity like editing a file
+在 iOS 8，你可以开始一个活动，在一个设备中
 
 382
 00:14:29,279 --> 00:14:32,580
 on one device, like your Mac and then walk out the door and
+编辑一个文件，比如你的 Mac，然后走出门
 
 383
 00:14:32,582 --> 00:14:34,949
 pull out your phone and keep editing it.
+然后取出你的手机，继续编辑这个文件
 
 384
 00:14:34,951 --> 00:14:36,484
@@ -1537,46 +1893,57 @@ Okay? So,
 385
 00:14:36,485 --> 00:14:38,018
 it's kind of like you can continue activities, so
+这优点类似于你的活动可以持续性的进行
 
 386
 00:14:38,020 --> 00:14:40,320
 you might get launched to continue an activity.
+你可能由于继续一个活动2而被启动
 
 387
 00:14:40,322 --> 00:14:42,522
 Okay? You could get launched,
+你可能被启动
 
 388
 00:14:42,524 --> 00:14:45,224
 because a push notification arrives.
+由于一个推送通知到达
 
 389
 00:14:45,226 --> 00:14:46,859
 Do you know what a push notification is?
+你们知道什么是推送通知吗？
 
 390
 00:14:46,861 --> 00:14:50,662
 Basically, this service where third parties can send you
+基本上，使用这个服务第三方可以给你
 
 391
 00:14:50,664 --> 00:14:51,863
 notifications.
+发送通知
 
 392
 00:14:51,865 --> 00:14:54,832
 So for example, if you're playing a game,
+比如，如果你在玩一个游戏
 
 393
 00:14:54,834 --> 00:14:57,902
 maybe its a turn based game and its your turn.
+它可能是一个轮流制的游戏，现在轮到你的
 
 394
 00:14:57,904 --> 00:15:00,070
 You can go to push notification and
+你可以在推送通知
 
 395
 00:15:00,072 --> 00:15:02,806
 it might launch the game to take your turn.
+它可能启动这个游戏开始
 
 396
 00:15:02,808 --> 00:15:04,040
@@ -1585,10 +1952,12 @@ Okay?
 397
 00:15:04,042 --> 00:15:05,742
 So a lot of reasoning could be launched and
+有很多原因都可以启动应用
 
 398
 00:15:05,744 --> 00:15:08,210
 that dictionary is going to contain information about why.
+这个字典将包含为何启动的信息
 
 399
 00:15:08,212 --> 00:15:09,578
@@ -1597,26 +1966,32 @@ All right?
 400
 00:15:09,580 --> 00:15:13,181
 Now, it used to be that an application didn't finish
+它习惯于应用启动并没有带
 
 401
 00:15:13,183 --> 00:15:16,651
 launching with options, you would build your UI.
+options，你可以创建你的 UI
 
 402
 00:15:16,653 --> 00:15:18,119
 So you'd instantiate a split view,
+你要初始化一个 split 视图
 
 403
 00:15:18,121 --> 00:15:19,987
 you'd instantiate a navigation controller.
+你必须初始化一个 navigation controller
 
 404
 00:15:19,989 --> 00:15:21,121
 You'd put in there with a master.
+你要在里面放一个 master
 
 405
 00:15:21,123 --> 00:15:22,556
 You'd put to create your view controller.
+你需要在其中创建你的视图控制器
 
 406
 00:15:22,558 --> 00:15:23,624
@@ -1625,42 +2000,52 @@ Okay.
 407
 00:15:23,625 --> 00:15:24,691
 We don't do any of that anymore and
+我们不要再做任何更多的事情
 
 408
 00:15:24,693 --> 00:15:27,493
 when you're searching on the internet for how to do things,
+当你在网上搜索如何实现一些东西时
 
 409
 00:15:27,495 --> 00:15:30,029
 you're probably gonna find some old stuff that says,
+你很有可能找到一些旧的说法
 
 410
 00:15:30,031 --> 00:15:32,831
 put this in application did finish launching with options.
+把这些放在 ApplicationDidFinishLaunchingWithOptions
 
 411
 00:15:32,833 --> 00:15:34,833
 I'm generally a fan of not putting that kind
+基本上我不会把这类代码放在
 
 412
 00:15:34,835 --> 00:15:37,569
 of code in application did finish launching with options.
+ApplicationDidFinishLaunchingWithOptions
 
 413
 00:15:37,571 --> 00:15:39,003
 It's really not what it's for.
+它不是为了做这些事情
 
 414
 00:15:39,005 --> 00:15:40,772
 It's more for
+它是为了
 
 415
 00:15:40,773 --> 00:15:42,540
 handling all these other kind of global events,
+处理所以这些另外的全局事件
 
 416
 00:15:42,542 --> 00:15:45,409
 like somebody wants you to open a file or whatever.
+比如有人希望你打开一个文件或者其他的任何东西
 
 417
 00:15:45,411 --> 00:15:46,521
@@ -1669,14 +2054,17 @@ Okay?
 418
 00:15:46,522 --> 00:15:47,632
 It's not where you build your UI.
+你不应该在这里创建你的 UI
 
 419
 00:15:47,633 --> 00:15:48,743
 You build your UI in your storyboard as much
+你尽可能在你的 storyboard 中
 
 420
 00:15:48,747 --> 00:15:49,379
 as possible.
+创建 UI
 
 421
 00:15:49,381 --> 00:15:50,913
@@ -1689,54 +2077,67 @@ Okay.
 423
 00:15:52,950 --> 00:15:58,220
 So now you are moving, so you've been active.
+现在你移动了，你已经处于活跃状态
 
 424
 00:15:58,222 --> 00:15:59,754
 Okay? We haven't talked about this
+我们还没谈到这个变成
 
 425
 00:15:59,756 --> 00:16:00,588
 getting too active.
+活跃状态了
 
 426
 00:16:00,590 --> 00:16:02,423
 But let's say you are active now.
+但让我们说现在你是活跃的
 
 427
 00:16:02,425 --> 00:16:04,825
 And someone clicks on another app.
+然后有人点击了另一个应用
 
 428
 00:16:04,827 --> 00:16:06,560
 And you go to this inactive state.
+然后你到了这个不活跃的状态
 
 429
 00:16:06,562 --> 00:16:08,895
 You go from active to inactive.
+你从活跃变成不活跃
 
 430
 00:16:08,897 --> 00:16:10,029
 You're going to get application will
+你将取得 applicationWillResignActive
 
 431
 00:16:10,031 --> 00:16:11,731
 resign active.
 
+
 432
 00:16:11,732 --> 00:16:13,432
 Now, what do you want to do in this method,
+在这个方法中，你想要做什么
 
 433
 00:16:13,434 --> 00:16:15,501
 or when you get this notification?
+或者什么时候你会收到这个通知？
 
 434
 00:16:15,503 --> 00:16:18,070
 This is mostly where you want to pause your UI.
+大部分时候是在你需要暂停你的 UI
 
 435
 00:16:18,072 --> 00:16:20,939
 Because you've just gone inactive.
+因为你将变成不活跃
 
 436
 00:16:20,941 --> 00:16:22,474
@@ -1745,10 +2146,12 @@ Okay?
 437
 00:16:22,475 --> 00:16:24,008
 It might be that someone's going to come right back to
+有可能有人返回你的应用
 
 438
 00:16:24,010 --> 00:16:25,409
 you and you want to continue.
+你需要继续
 
 439
 00:16:25,411 --> 00:16:26,994
@@ -1757,10 +2160,12 @@ Okay?
 440
 00:16:26,995 --> 00:16:28,578
 So in resign active, you want to pause.
+在 ResignActivie 时，你需要暂停
 
 441
 00:16:28,581 --> 00:16:31,548
 This is I think of as the pause method.
+这就是我认为的暂停方法
 
 442
 00:16:31,550 --> 00:16:32,349
@@ -1769,142 +2174,177 @@ Okay?
 443
 00:16:32,351 --> 00:16:34,685
 You're going from active,
+你将从活跃
 
 444
 00:16:34,686 --> 00:16:37,020
 where the user is using your to this inactive state, pause.
+也就是用户在使用你的应用变成这个不活跃状态，暂停
 
 445
 00:16:37,022 --> 00:16:38,421
 Okay? Now you might be on your way
+你可能在你转变进入
 
 446
 00:16:38,423 --> 00:16:40,089
 to going to into the background, but
+后台的过程中，但
 
 447
 00:16:40,091 --> 00:16:41,540
 you might not be.
+也可能不是
 
 448
 00:16:41,541 --> 00:16:42,990
 It might just be that a phone call came in.
+有可能有个电话进来了
 
 449
 00:16:42,993 --> 00:16:45,160
 When a phone call comes in, kind of the current
+当一个电话进来时，类似当前应用
 
 450
 00:16:45,162 --> 00:16:46,861
 application gets put in the inactive state,
+变成不活跃状态
 
 451
 00:16:46,863 --> 00:16:48,095
 you answer the call, and
+你接了电话
 
 452
 00:16:48,097 --> 00:16:50,230
 when you're done it goes back to being active again.
+当你接完电话，返回到活跃状态
 
 453
 00:16:51,200 --> 00:16:53,733
 Okay, so you want to pause there.
+所以你需要在那里暂停
 
 454
 00:16:53,735 --> 00:16:55,535
 Now, what about going back to active?
+返回到活跃状态会怎样？
 
 455
 00:16:55,537 --> 00:16:57,136
 So you were paused and
+你被暂停了
 
 456
 00:16:57,138 --> 00:17:00,239
 you transitioned to active, or you were launched and
+然后你转变到活跃状态，或者你被启动了
 
 457
 00:17:00,241 --> 00:17:02,040
 you transitioned all the way to active.
+你转变到活跃状态
 
 458
 00:17:02,042 --> 00:17:04,342
 This is where you want to, kind of, unpause.
+这里你想要不暂停
 
 459
 00:17:04,344 --> 00:17:05,877
 So this is where you
+在这里你
 
 460
 00:17:05,879 --> 00:17:08,412
 would undo whatever you did in Resign.
+将撤销你在 Resign 中做的事情
 
 461
 00:17:08,414 --> 00:17:11,348
 So Resign and BecomeActive obviously are paired.
+所以 Resign 和 BecomeActive 显然是一对的
 
 462
 00:17:11,350 --> 00:17:14,117
 Resign, you can kinda think as pause my state.
+Resign，你可以认为暂停我的状态
 
 463
 00:17:14,119 --> 00:17:16,853
 And BecomeActive, you can think of as resume my state.
+而 BecomeActive，你可以认为重新开始我的状态
 
 464
 00:17:16,855 --> 00:17:18,054
 Now, of course, when you're launching for
+当然，当你第一次启动时
 
 465
 00:17:18,056 --> 00:17:20,923
 the first time, you go through the Inactive state.
+你会经历不活跃状态
 
 466
 00:17:20,925 --> 00:17:23,659
 You never resigned Active, so you never paused.
+你从不 resignedActive，所以你从不暂停
 
 467
 00:17:23,661 --> 00:17:25,627
 So there's never, no reason to resume.
+这里永不，也没有理由重新开始
 
 468
 00:17:25,629 --> 00:17:27,162
 Okay? You still might do some
+你仍需要做在那种情况下
 
 469
 00:17:27,164 --> 00:17:29,597
 of the things you do to resume in that case.
+重新开始的一些事情
 
 470
 00:17:29,599 --> 00:17:32,266
 But obviously that combination can happen.
+但显然，这种组合可能发生
 
 471
 00:17:33,269 --> 00:17:34,468
 All right. So what about this state?
+这种状态下会怎样？
 
 472
 00:17:34,470 --> 00:17:37,537
 So now you've gone to background.
+现在你进入后台
 
 473
 00:17:37,539 --> 00:17:39,205
 So if they clicked on some other app,
+如果他们点击其他的应用
 
 474
 00:17:39,207 --> 00:17:40,139
 you go into the background.
+你将进入后台
 
 475
 00:17:40,141 --> 00:17:42,341
 Remember, you only go in here briefly.
+记住，你只短暂地在这里
 
 476
 00:17:42,343 --> 00:17:43,575
 Okay? This is where you wanna
+在这里你需要做好应对危机的
 
 477
 00:17:43,577 --> 00:17:46,344
 batten down the hatches and prepare for your death.
+准备，为你（应用）的死亡做好准备
 
 478
 00:17:46,346 --> 00:17:47,479
@@ -1913,26 +2353,32 @@ Okay?
 479
 00:17:47,480 --> 00:17:48,613
 Because you could sit in background for
+因为你可能在后台停留了
 
 480
 00:17:48,615 --> 00:17:52,216
 just a few fractions of a second, go into suspended, and
+一秒钟的一点碎片，便进入挂起状态
 
 481
 00:17:52,218 --> 00:17:53,584
 then you could be killed.
+然后你（应用）被杀死了
 
 482
 00:17:53,586 --> 00:17:54,818
 Okay? Without ever getting chance
+甚至没有机会再次
 
 483
 00:17:54,820 --> 00:17:56,987
 to run again.
+运行
 
 484
 00:17:56,988 --> 00:17:59,155
 So going into the background stage application did enter
+所以进入后台状态，applicationDidEnterBackground
 
 485
 00:17:59,157 --> 00:18:00,140
@@ -1941,62 +2387,77 @@ background.
 486
 00:18:00,141 --> 00:18:01,124
 That's where you want to batten down the hatches,
+在这里你需要做好应对危机的准备
 
 487
 00:18:01,126 --> 00:18:03,093
 prepare for your own death.
+为你（应用）自己的死去做好准备
 
 488
 00:18:03,094 --> 00:18:05,061
 Save any unsaved information although you should probably
+保存任何为保存的信息，即使你很可能
 
 489
 00:18:05,063 --> 00:18:05,627
 be saving that.
+正在保存
 
 490
 00:18:05,629 --> 00:18:07,379
 Most of you don't.
+大部分时候你没有
 
 491
 00:18:07,380 --> 00:18:09,130
 Most of the things like here if you start off threads to go
+这里的大部分事情，如果你开启线程做一些事情
 
 492
 00:18:09,133 --> 00:18:11,266
 do things like you have a background thread that does
+比如你有一个后台进程正在保存
 
 493
 00:18:11,268 --> 00:18:13,935
 some saving, make sure that thread is finished.
+数据，确保这个进程结束了
 
 494
 00:18:13,937 --> 00:18:16,937
 And it is possible in DidEnterBackground to ask for
+在 DidEnterBackground 中是可能请求
 
 495
 00:18:16,939 --> 00:18:18,238
 more time.
+多一些时间
 
 496
 00:18:18,240 --> 00:18:19,906
 Okay? UI application has a method
+UIApplication 有一个方法
 
 497
 00:18:19,908 --> 00:18:22,142
 which I'm not gonna talk about, but you can basically
+这个方法我还没讲到，但你基本上可以
 
 498
 00:18:22,144 --> 00:18:25,812
 start up a background task and get some more time to run in
+启动一个后台任务，然后在你进入挂起状态前
 
 499
 00:18:25,814 --> 00:18:27,980
 this background stage before you go to suspended.
+得到一些更多的时间在后台运行
 
 500
 00:18:27,982 --> 00:18:30,182
 If you abuse that.
+如果你滥用这个方法
 
 501
 00:18:30,184 --> 00:18:32,518
@@ -2005,622 +2466,777 @@ OKay?
 502
 00:18:32,519 --> 00:18:34,853
 Like you try to stay active forever, or for many minutes,
+例如你试图永远留在活跃状态，或者停留很多分钟
 
 503
 00:18:34,855 --> 00:18:37,422
 the system will stop granting you that.
+系统将阻止让你这么做
 
 504
 00:18:37,424 --> 00:18:38,823
 Okay? So don't do that.
+所以别做这个
 
 505
 00:18:38,825 --> 00:18:40,858
 System expects you, if you as for more time,
+系统期待你，如果你请求多些时间
 
 506
 00:18:40,860 --> 00:18:42,793
 to quickly get that done with.
+快速完成事情
 
 507
 00:18:42,795 --> 00:18:44,828
 Or to time out whatever you're doing, do something.
+或者暂停任何你正在做的事情，做些事情
 
 508
 00:18:44,830 --> 00:18:46,830
 Because when you go to the background it really wants you
+因为当你在后台时，实际上它希望你
 
 509
 00:18:46,832 --> 00:18:48,364
 to shut up, okay?
+停止
 
 510
 00:18:48,366 --> 00:18:50,933
 Be quite, because some other app is running right now.
+保持安静，饮用有些其他的应用正在运行
 
 511
 00:18:52,136 --> 00:18:55,137
 Okay, so that did DidEnterBackground.
+因此 DidEnterBackground
 
 512
 00:18:55,139 --> 00:18:58,006
 When you get activated again from the background
+当你再次从后台中变成活跃状态
 
 513
 00:18:58,008 --> 00:19:00,808
 because someone clicked back on you, this is where you can
+因为有人点击了你，在这里你可以
 
 514
 00:19:00,810 --> 00:19:02,176
 un-batten down the hatches, right?
+不用为危机做准备
 
 515
 00:19:02,178 --> 00:19:03,410
 This is where you can open things back.
+在这里你可以打开一些东西
 
 516
 00:19:03,412 --> 00:19:04,762
 Back up a bit.
+备份许多
 
 517
 00:19:04,763 --> 00:19:06,113
 You're back in the foreground, okay?
+你返回到前台
 
 518
 00:19:06,115 --> 00:19:07,847
 Maybe if you had something saved or
+也许如果你有些东西在保存或者
 
 519
 00:19:07,849 --> 00:19:09,982
 you threw away something from the heap,
+你从堆中扔掉一些东西
 
 520
 00:19:09,984 --> 00:19:11,550
 you can load it back up, et cetera.
+你可以把它加载回来，等等
 
 521
 00:19:11,552 --> 00:19:14,453
 So, this is kind of getting yourself back to life
+这类似于在应对危机之后返回到
 
 522
 00:19:14,455 --> 00:19:16,922
 after battening down the hatches, okay?
+生存状态
 
 523
 00:19:16,924 --> 00:19:17,689
 So, that's it.
+这就是全部了
 
 524
 00:19:17,691 --> 00:19:18,322
 That's the cycle.
+这就是生命周期
 
 525
 00:19:18,324 --> 00:19:19,357
 That's how it goes.
+这就是如何运作
 
 526
 00:19:19,359 --> 00:19:23,360
 The AppDelegate does a lot more things than just that
+AppDelegate 处理了很多事情不仅仅是
 
 527
 00:19:23,362 --> 00:19:24,094
 cycle.
+这个周期
 
 528
 00:19:25,063 --> 00:19:26,696
 It handles notifications.
+它处理通知
 
 529
 00:19:27,632 --> 00:19:30,933
 It can do this whole thing, a state restoration.
+它可以处理全部事情，一个状态存储
 
 530
 00:19:30,935 --> 00:19:33,869
 So there's a way, kind of a mechanism I will say,
+这是一种方式，我将会讲的一种机制
 
 531
 00:19:33,871 --> 00:19:36,237
 which I don't have time to talk to you about,
+我没有时间跟你们说更多这个
 
 532
 00:19:36,239 --> 00:19:38,973
 where you can essentially, save the state of your UI, so
+在这里你大体上可以保存你的 UI 的状态
 
 533
 00:19:38,975 --> 00:19:41,108
 that if you do get killed while you're suspended,
+因此如果你在挂起时被杀死了
 
 534
 00:19:41,110 --> 00:19:42,643
 and you start up again,
+然后你再次启动了
 
 535
 00:19:42,645 --> 00:19:45,245
 you'll start up in exactly the same place you were
+你将从你上次在的地方重启
 
 536
 00:19:45,247 --> 00:19:47,614
 instead of starting up like a fresh app launch.
+而不是全新启动一个应用
 
 537
 00:19:48,717 --> 00:19:50,916
 So the AppDelegate is how you do all of that.
+通过 AppDelegate 你可以做这些
 
 538
 00:19:50,918 --> 00:19:51,984
 Look that up.
+看这上面的
 
 539
 00:19:51,986 --> 00:19:52,951
 Data protection.
+数据保护
 
 540
 00:19:52,953 --> 00:19:55,604
 There's a mechanism for
+这里有一个机制
 
 541
 00:19:55,605 --> 00:19:58,256
 saying, hey, the data that my app accesses should be
+在手机锁定之后，我的应用访问的数据
 
 542
 00:19:58,258 --> 00:20:02,926
 encrypted whenever the phone is locked.
+需要加密
 
 543
 00:20:02,928 --> 00:20:05,062
 That's great because if someone steals your phone or
+这非常棒，因为有人偷了你的手机或者
 
 544
 00:20:05,064 --> 00:20:07,464
 tries to break into it, all of the data's encrypted.
+试图进入系统，所有数据加密了
 
 545
 00:20:07,466 --> 00:20:08,698
 They can't see your data anyway,
+他们不可能看到任何数据
 
 546
 00:20:08,700 --> 00:20:10,399
 even if they hack into it.
+即使他们攻击进入系统
 
 547
 00:20:10,401 --> 00:20:14,503
 But you need to find out in your AppDelegate when that
+但你需要在你的 AppDelegate 检查什么时候
 
 548
 00:20:14,505 --> 00:20:17,773
 gets turned off and back on, so you can find that out.
+它关闭和打开了，所以可以找出它们
 
 549
 00:20:17,775 --> 00:20:20,608
 Obviously, opening and closing files, right?
+显然，打开和关闭文件
 
 550
 00:20:20,610 --> 00:20:23,594
 Not opening and closing,
+不是打开和关闭
 
 551
 00:20:23,595 --> 00:20:26,579
 opening files yourself, files that you know how to open.
+你自己打开文件，你知道怎么打开的文件
 
 552
 00:20:26,582 --> 00:20:28,682
 The Delegate gets sent a message saying,
+代理发送了一条消息，说
 
 553
 00:20:28,684 --> 00:20:29,950
 please open this URL.
+请打开这个 URL
 
 554
 00:20:29,952 --> 00:20:31,618
 You have to register with the system for
+你需要注册系统，什么样
 
 555
 00:20:31,620 --> 00:20:33,453
 what kind of files you know how to do, and
+的文件你知道如何打开
 
 556
 00:20:33,455 --> 00:20:35,721
 we'll do that in the demo here.
+我们要在例子中做这个
 
 557
 00:20:35,723 --> 00:20:38,791
 But then this application delegate method is going
+但这个应用代理方法将请求
 
 558
 00:20:38,793 --> 00:20:40,025
 to ask you to open it.
+你打开它
 
 559
 00:20:40,027 --> 00:20:42,560
 And then I mentioned background fetching where you
+我提到的，在后台获取中
 
 560
 00:20:42,562 --> 00:20:45,430
 can, essentially, tell the system you want to wake up
+大体上，告诉系统你想要隔断时间
 
 561
 00:20:45,432 --> 00:20:48,632
 every once in a while and do some work in the background.
+就被唤醒，然后在后台做些工作
 
 562
 00:20:48,634 --> 00:20:49,767
 And that's pretty cool.
+这非常酷
 
 563
 00:20:49,769 --> 00:20:51,602
 Again, you don't want to abuse it, or
+再次，你不要想滥用这个方法
 
 564
 00:20:51,603 --> 00:20:53,436
 the system will start saying, wow, that guy's really a pig.
+或者系统将开始抱怨，这个家伙真是只猪
 
 565
 00:20:53,439 --> 00:20:55,205
 Every time I wake him up to run in the background,
+每次我在后台唤醒它去运行
 
 566
 00:20:55,207 --> 00:20:57,507
 he uses all kinds of battery, so
+它使用了所有电量
 
 567
 00:20:57,509 --> 00:20:59,575
 I'm going to stop waking him up so much.
+因此我将停止这么多次唤醒它
 
 568
 00:21:01,412 --> 00:21:01,943
 But it can do that.
+但它能做这戏
 
 569
 00:21:01,945 --> 00:21:02,643
 So AppDelegate.
+因此 AppDelegate
 
 570
 00:21:02,645 --> 00:21:03,928
 A lot of stuff in there.
+那里有很多事情
 
 571
 00:21:03,929 --> 00:21:05,212
 You can just go look at the documentation for it and
+你可以只是查阅文档
 
 572
 00:21:05,214 --> 00:21:06,780
 see all the things it can do.
+看它都能做些什么事情
 
 573
 00:21:06,782 --> 00:21:08,648
 Now in addition, question?
+还有问题吗？
 
 574
 00:21:08,650 --> 00:21:12,218
 >> Yeah. I was just wondering,
+我刚在想
 
 575
 00:21:12,220 --> 00:21:15,288
 I had an app once which had music, and
+我有一个应用有音乐
 
 576
 00:21:15,290 --> 00:21:17,256
 when I pressed the home button or even locked the phone,
+当我按下 home 键时，或者锁定了手机
 
 577
 00:21:17,258 --> 00:21:19,525
 it would still keep playing.
+它还可以继续
 
 578
 00:21:19,527 --> 00:21:21,026
 Shouldn't it be like turning that off?
+难道你不应该被关闭吗？
 
 579
 00:21:21,028 --> 00:21:23,628
 >> Yes, the question is, what if I have a music app and
+问题是，如果我有一个音乐应用
 
 580
 00:21:23,630 --> 00:21:25,096
 I'm playing music and
+然后我正在播放音乐
 
 581
 00:21:25,098 --> 00:21:28,165
 I switch to another app, how does it keep playing?
+然后我切换到另一个应用，它是怎么做到继续播放的？
 
 582
 00:21:28,167 --> 00:21:30,534
 Well, that's one of the cases where you are allowed to be
+这是你被允许在后台运行的
 
 583
 00:21:30,536 --> 00:21:31,601
 running in the background.
+一个例子
 
 584
 00:21:31,603 --> 00:21:33,470
 So that app is running in the background.
+因此这个应用在后台运行
 
 585
 00:21:33,472 --> 00:21:37,073
 And you have to sign up and kind of requisition your app.
+你需要注册，你的应用的要求
 
 586
 00:21:37,075 --> 00:21:39,608
 You have to set a capability to do that.
+你需要设置一个能力来实现这个
 
 587
 00:21:39,610 --> 00:21:41,410
 But you can do it.
+但你可以做到这个
 
 588
 00:21:41,412 --> 00:21:43,679
 And, you know, if your app is a bad citizen and
+你知道的，如果你的应用是个不良公民
 
 589
 00:21:43,681 --> 00:21:45,046
 says it's a music playing app but
+它是一个音乐播放应用，但
 
 590
 00:21:45,048 --> 00:21:46,748
 it's doing other things in the background.
+它在后台做了其他事情
 
 591
 00:21:46,750 --> 00:21:48,849
 Again, if it starts using a lot of battery,
+再次，如果它使用了太多的电量
 
 592
 00:21:48,851 --> 00:21:50,017
 it's gonna get killed.
+它将被杀死
 
 593
 00:21:50,019 --> 00:21:52,152
 Or it's not gonna be given an opportunity.
+或者它不会给这样一个机会
 
 594
 00:21:52,154 --> 00:21:54,754
 You might make it to the app store at the beginning.
+你可能在开始的时候在应用商店做到了
 
 595
 00:21:54,756 --> 00:21:57,056
 But eventually they'll pull you if you are abusing
+但最后他们会下架你的应用，如果你滥用
 
 596
 00:21:57,058 --> 00:21:58,457
 the backgrounding mechanisms.
+后台机制
 
 597
 00:21:58,459 --> 00:22:00,726
 Because there are other ways you can, you know.
+因为有其他方式你可以，你知道的
 
 598
 00:22:00,728 --> 00:22:03,195
 Voip apps need to be able to stay in the background,
+贵宾应用需要能够留在后台
 
 599
 00:22:03,197 --> 00:22:04,830
 you're on a phone call.
+你在接一个电话
 
 600
 00:22:04,831 --> 00:22:06,464
 There are reasons to stay live in the background.
+他们有理由留在后台
 
 601
 00:22:06,466 --> 00:22:09,467
 Some people think, IOS not really multi-tasking.
+有人认为，iOS 不是真正的多任务
 
 602
 00:22:09,469 --> 00:22:11,235
 It absolutely is multi-tasking, but
+它绝对是多任务，但
 
 603
 00:22:11,237 --> 00:22:13,971
 it has a philosophy which is the app
+它有一个哲学，也就是用户当前
 
 604
 00:22:13,973 --> 00:22:16,540
 that the user is currently interacting with should get
+交互的应用应该得到
 
 605
 00:22:16,542 --> 00:22:18,742
 almost all of the attention of the device.
+设备的绝大部分资源
 
 606
 00:22:18,744 --> 00:22:20,043
 That's just its philosophy,
+这就是它的哲学
 
 607
 00:22:20,045 --> 00:22:21,811
 which I think is a good philosophy.
+我认为这是个好的哲学
 
 608
 00:22:21,813 --> 00:22:23,045
 So anything that runs in the background,
+因此所有在后台运行的东西
 
 609
 00:22:23,047 --> 00:22:24,279
 has to really keep it quiet.
+需要保持安静
 
 610
 00:22:25,282 --> 00:22:29,383
 But music is one where it can play in the background.
+但音乐是个可以在后台播放的应用
 
 611
 00:22:29,385 --> 00:22:31,151
 So in addition to the Application Delegate,
+另外，应用代理
 
 612
 00:22:31,153 --> 00:22:32,953
 there's the UI application object itself,
+这是 UIApplication 对象
 
 613
 00:22:32,955 --> 00:22:35,722
 which is the shared thing you call this class function
+就是你在这个函数 sharedApplication 
 
 614
 00:22:35,724 --> 00:22:37,357
 shared application to get it.
+中获取的共享对象
 
 615
 00:22:37,359 --> 00:22:40,659
 And it manages all the global behavior in your app.
+你管理你应用中的所有全局行为
 
 616
 00:22:40,661 --> 00:22:42,961
 You don't subclass it.
+你不用继承这个类
 
 617
 00:22:42,963 --> 00:22:45,630
 But you can send it a lot of messages to do various
+但你可以发送很多信息来做各种
 
 618
 00:22:45,632 --> 00:22:48,733
 things like open a URL in another app.
+事情，比如在另一个应用中打开一个 URL
 
 619
 00:22:48,735 --> 00:22:51,235
 So we talked about how the delegate is used
+我门谈论使用代理在你的应用中
 
 620
 00:22:51,237 --> 00:22:53,337
 to open a URL in your own app.
+打开一个 URL
 
 621
 00:22:53,339 --> 00:22:56,607
 You can call this method open URL in application,
+你可以调用这个方法在应用中打开 URL
 
 622
 00:22:56,609 --> 00:22:58,709
 and you did that in your last assignment.
+你在你们上次作用中做了这个
 
 623
 00:23:00,045 --> 00:23:02,145
 So you can open URL, and
+你可以打开 URL
 
 624
 00:23:02,146 --> 00:23:04,246
 it will figure out what apps on your device handle that.
+然后它将找出你设备上的哪个应用可以处理这个
 
 625
 00:23:04,249 --> 00:23:06,482
 And it will open that URL up.
+然后它将打开这个 URL
 
 626
 00:23:06,484 --> 00:23:09,885
 You can also register for
+你也可以注册推送通知
 
 627
 00:23:09,887 --> 00:23:14,556
 push notifications or you can schedule local notifications.
+或者你可以安排本地通知
 
 628
 00:23:14,558 --> 00:23:16,124
 So local notifications are just
+本地通知是类似于
 
 629
 00:23:16,126 --> 00:23:17,992
 notifications kind of like push notifications, but
+推送通知，但
 
 630
 00:23:17,994 --> 00:23:20,461
 they're totally local and they're timed.
+它们完全是本地的，它们被计时
 
 631
 00:23:20,463 --> 00:23:23,030
 So you say, send this notification to the user at
+你会说，在这个时候发送这个通知给用户
 
 632
 00:23:23,032 --> 00:23:25,331
 this time and it sends it to them.
+然后它发送通知给他们了
 
 633
 00:23:25,333 --> 00:23:27,900
 And then push notifications, as we've talked about before,
+然后推送通知，就是我们之前谈过的
 
 634
 00:23:27,902 --> 00:23:29,602
 are these things that come over the network when it's
+通过网络发送的东西，当你
 
 635
 00:23:29,604 --> 00:23:31,704
 your turn to play your game, or whatever.
+继续玩你的游戏，或者其他任何事情
 
 636
 00:23:31,706 --> 00:23:34,373
 So you can register to receive those in scheduled
+因此你可以通过 UIApplication 注册接受一些本地
 
 637
 00:23:34,375 --> 00:23:37,342
 notifications locally using UIApplication.
+计划性的通知
 
 638
 00:23:37,344 --> 00:23:40,712
 If you're doing this background fetching thing,
+如果你做这个后台获取工作
 
 639
 00:23:40,714 --> 00:23:43,414
 there's a very important function called
+有一个非常重要的方法叫做
 
 640
 00:23:43,416 --> 00:23:45,783
 setMinimumBackgroundFetchInte- rval.
+setMinimumBackgroundFetchInterval
 
 641
 00:23:45,785 --> 00:23:48,518
 That by default is never.
+这个默认值是 never
 
 642
 00:23:48,520 --> 00:23:51,321
 So you might go to all this trouble to say yeah, I want to
+但你可能到所有这些麻烦，说，我想要
 
 643
 00:23:51,323 --> 00:23:54,290
 do background fetching and all this stuff, and then if you
+在后台获取数据，所有这些事情，然后如果你
 
 644
 00:23:54,292 --> 00:23:57,126
 don't call this method to set your fetching interval to
+没有调用这个方法来设置你的获取间隔为
 
 645
 00:23:57,128 --> 00:23:59,995
 something besides never, you'll never get woken up.
+某个值而非 never，你永远不会被唤醒
 
 646
 00:23:59,997 --> 00:24:03,865
 Usually you set it to minimum, this interval minimum,
+通知你设置它为 minimum，这个间隔 minimum
 
 647
 00:24:03,867 --> 00:24:06,901
 which is like, wake me up as much as you can.
+就是尽可能多的唤醒我
 
 648
 00:24:06,903 --> 00:24:09,904
 The system is kinda cool for this background fetching.
+对于这个后台获取，系统是相当酷的
 
 649
 00:24:09,906 --> 00:24:12,139
 It kinda watches when the user uses your app, and
+它检测到，当用户使用你的应用时，
 
 650
 00:24:12,141 --> 00:24:13,640
 the more the user uses your app,
+越多用户使用你的应用
 
 651
 00:24:13,642 --> 00:24:16,343
 the more it's gonna let the background fetching happen,
+它越有可能让后台获取发生
 
 652
 00:24:16,345 --> 00:24:18,378
 because it's gonna figure the more it use.
+因为它需要计算它使用越多
 
 653
 00:24:18,380 --> 00:24:20,346
 It'll even kinda look at times of day.
+它甚至一天检查几次
 
 654
 00:24:20,348 --> 00:24:23,015
 This person runs this app every morning at 9:00,
+这个用户每天早上 9:30 运行这个应用
 
 655
 00:24:23,017 --> 00:24:24,783
 between 9:00 and 9:15, so
+在 9:00 和 9:15 之间，因此
 
 656
 00:24:24,785 --> 00:24:27,686
 we're gonna let this background fetch run at 8:30.
+我们需要让后台获取发生在 8:30
 
 657
 00:24:27,688 --> 00:24:30,138
@@ -2629,106 +3245,132 @@ we're gonna let this background fetch run at 8:30.
 658
 00:24:30,139 --> 00:24:32,589
 So it's pretty smart system for that.
+对于这个，它是个非常聪明的系统
 
 659
 00:24:32,592 --> 00:24:34,425
 I told you could ask for more time when you get
+我告诉过你们，当你在后台时你可以
 
 660
 00:24:34,427 --> 00:24:36,260
 backgrounded, you do that with this method
+请求更多的时间，你通过这个方法
 
 661
 00:24:36,262 --> 00:24:38,162
 backgroundTaskWithExpirationH- andler.
+backgroundTaskWithExpirationHanler 来实现
 
 662
 00:24:39,231 --> 00:24:41,431
 And so you get this background task.
+因此你得到这个后台任务
 
 663
 00:24:41,433 --> 00:24:44,334
 You get to stay alive then until you call end
+你可以保持运行，知道你调用
 
 664
 00:24:44,336 --> 00:24:45,668
 background task.
+endBackgroundTask
 
 665
 00:24:45,670 --> 00:24:49,304
 If you don't call end background task pretty quickly
+如果你在调用 backgroundTaskWithExpirationHandler
 
 666
 00:24:49,306 --> 00:24:52,674
 after you call backgroundTaskWithExpirationH-
+后没有很快调用 endBackgroundTask
 
 667
 00:24:52,676 --> 00:24:56,611
 andler, it's going to say I give up on you, and kill you.
+系统会表示我放弃你了，然后杀死你
 
 668
 00:24:56,613 --> 00:24:58,346
 And also the next time you ask for
+然后下次你请求后台任务
 
 669
 00:24:58,348 --> 00:25:01,181
 a background task with expiration it's gonna say,
+超时时，它将
 
 670
 00:25:01,183 --> 00:25:04,084
 no I don't give that guy ones, he doesn't end his.
+不会给你时间，因为你没有结束这个
 
 671
 00:25:04,086 --> 00:25:08,354
 So you gotta really be sure you call end background task
+所以你实际需要保证你调用 endBackgroundTask
 
 672
 00:25:08,356 --> 00:25:10,890
 when you do this other thing.
+当你用这个做其他事情
 
 673
 00:25:10,892 --> 00:25:16,194
 There's a little spinner if you look at device well,
+这里有个小的 spinner，如果你看设备
 
 674
 00:25:16,196 --> 00:25:21,532
 maybe we can see it in, I don't know, Safari maybe?
+你可以在里面看到这个，我不知道，可能 Safari？
 
 675
 00:25:21,534 --> 00:25:23,034
 You see the little spinner up there?
+你们看到上面的这个 spinner 了吗？
 
 676
 00:25:23,036 --> 00:25:25,836
 Right by the AT&T whatever,
+在 AT&T 旁边
 
 677
 00:25:25,838 --> 00:25:30,907
 wireless thing there was a little spinner that spun.
+无线的东西，这里有一个小的 spinner 在转动
 
 678
 00:25:30,909 --> 00:25:32,709
 That, you can control as well.
+这个，你也可以控制
 
 679
 00:25:32,711 --> 00:25:33,676
 You can turn that on and
+你可以打开或者关闭
 
 680
 00:25:33,678 --> 00:25:35,377
 off if your app accesses the network.
+如果你的应用访问网络
 
 681
 00:25:35,379 --> 00:25:37,979
 Unfortunately, it's a boolean, so if you have multiple
+不幸的，它是布尔值，因此如果在
 
 682
 00:25:37,981 --> 00:25:40,615
 places in your app that were accessing the network you have
+你的应用中有许多地方访问网络，你需要
 
 683
 00:25:40,617 --> 00:25:43,017
 to figure out how to turn it on and off appropriately.
+知道怎样正确关闭和打开这个
 
 684
 00:25:43,019 --> 00:25:44,085
@@ -2737,6 +3379,7 @@ Yeah?
 685
 00:25:44,086 --> 00:25:45,152
 >> I don't think your phone is plugged in.
+我不认为你的手机插进去了
 
 686
 00:25:45,154 --> 00:25:46,086
@@ -2745,26 +3388,32 @@ Yeah?
 687
 00:25:46,088 --> 00:25:47,854
 Yeah. Let's see here.
+让我们看看这里
 
 688
 00:25:47,856 --> 00:25:50,457
 It's plugged in, it just disconnects every time it goes
+它插进去了，只是每次它进入
 
 689
 00:25:50,459 --> 00:25:53,025
 into sleep mode here.
+睡眠状态它就断开连接了
 
 690
 00:25:54,729 --> 00:25:57,429
 So, I don't know, let's search for something.
+我不知道，让我们搜索一些东西
 
 691
 00:25:57,431 --> 00:26:00,565
 Okay, watch the status bar at the top there.
+看看顶部的状态栏
 
 692
 00:26:00,567 --> 00:26:03,401
 You see how there's that little spinner spinning?
+你们看这个小小的 spinner 如何旋转？
 
 693
 00:26:03,403 --> 00:26:04,168
@@ -2773,6 +3422,7 @@ Okay?
 694
 00:26:04,170 --> 00:26:05,269
 You can turn that on and off.
+你们可以打开和关闭这个
 
 695
 00:26:06,605 --> 00:26:08,622
@@ -2781,146 +3431,182 @@ You can turn that on and off.
 696
 00:26:08,623 --> 00:26:10,640
 And yeah keep reminding me if I refer to this and
+如果我提到这个而它没有在上面
 
 697
 00:26:10,642 --> 00:26:13,343
 it's not up there.
+记得提醒我
 
 698
 00:26:13,345 --> 00:26:15,644
 You can also find out about things like,
+你们也可以发现一些东西，比如
 
 699
 00:26:15,646 --> 00:26:18,714
 that preferred content size category notification,
+#preferredContentSizeCategoryNotification
 
 700
 00:26:18,716 --> 00:26:21,683
 well you can also just ask UI application what that is
+你也可以请求 UIApplication 任何你
 
 701
 00:26:21,685 --> 00:26:22,751
 any time you want.
+在任何时候想要的东西
 
 702
 00:26:22,753 --> 00:26:24,385
 And you can find out what state you're in,
+你可以找出你处于哪个状态
 
 703
 00:26:24,387 --> 00:26:26,253
 are you in the foreground, or in the background,
+你是在前台，还是在后台
 
 704
 00:26:26,255 --> 00:26:27,321
 are you active, inactive?
+你是活跃的，还是不活跃的？
 
 705
 00:26:27,323 --> 00:26:29,723
 You can find all that out as well.
+你可以知道所有这些
 
 706
 00:26:29,725 --> 00:26:34,594
 So U application has a lot of cool stuff in it as well.
+因此 UIApplication 自己也有许多很酷的东西
 
 707
 00:26:34,596 --> 00:26:39,932
 So there's another interesting thing called Info.plist.
+这里有另外一个有趣的东西叫做 Info.plist
 
 708
 00:26:39,934 --> 00:26:41,900
 Dot plist because it's a property list.
+.plist，因为它是个属性列表
 
 709
 00:26:41,902 --> 00:26:44,436
 You remember a property list is any combination of
+你们记得一个属性列表是字典、数组
 
 710
 00:26:44,438 --> 00:26:47,905
 dictionaries and arrays and strings and dates, in datas.
+字符串、日期的任何组合
 
 711
 00:26:47,907 --> 00:26:51,942
 And Info.plist contains a lot of settings in your app.
+Info.plist 包含很多你应用的设置
 
 712
 00:26:51,944 --> 00:26:54,144
 And you can actually click on it directly.
+实际上你可以直接点击它
 
 713
 00:26:54,146 --> 00:26:57,714
 It's in that supporting files area and you'll see it.
+它在这个 supporting files 区域，你可以看到
 
 714
 00:26:57,716 --> 00:27:00,917
 What you're seeing up here is the x code's property list
+你在这里看到的东西是 Xcode 的属性列表
 
 715
 00:27:00,919 --> 00:27:03,953
 editor, which lets you edit an arbitrary property list as
+编辑器，它让你编辑你看到的
 
 716
 00:27:03,955 --> 00:27:05,087
 you can see there.
+任意属性列表
 
 717
 00:27:05,089 --> 00:27:06,822
 And it'll show you all the kinda setting,
+你可以看到所有的设置
 
 718
 00:27:06,824 --> 00:27:08,189
 some of the settings of your app.
+一些你应用的设置
 
 719
 00:27:08,191 --> 00:27:10,191
 You can even look at this in XML format.
+你甚至可以以 XML 格式查看它
 
 720
 00:27:10,193 --> 00:27:11,726
 If you right click on it and
+如果你右击这个，然后
 
 721
 00:27:11,728 --> 00:27:14,495
 switch to source code mode you can see it in XML.
+切换到源代码模式，你可以以 XML 格式查看它
 
 722
 00:27:14,497 --> 00:27:20,934
 So this is that exact same property list in XML, raw XML.
+因此这个是 XML 格式的完全一样的属性列表，裸 XML
 
 723
 00:27:20,936 --> 00:27:23,202
 But you usually edit the Info.plist things in
+但通常地你在 Info.plist 中编辑属性
 
 724
 00:27:23,204 --> 00:27:25,738
 the project settings, which you get by clicking on
+设置，你通过点击导航栏的左上角
 
 725
 00:27:25,740 --> 00:27:28,107
 the project in the upper left of the navigator.
+的 project 来做设置
 
 726
 00:27:28,109 --> 00:27:29,808
 You see I've clicked on it there.
+你们看已经点击了它
 
 727
 00:27:29,810 --> 00:27:32,010
 And then you can see there's General Settings.
+你们可以看到这里是 General 设置
 
 728
 00:27:32,012 --> 00:27:35,213
 So, for example, things like what device orientations you
+比如，比如你的应用支持的设备方向
 
 729
 00:27:35,215 --> 00:27:38,716
 support, portrait or portrait upside-down, or landscape left
+垂直或者垂直上下，或者水平左
 
 730
 00:27:38,718 --> 00:27:41,518
 and right, which you can see there's a UI for there,
+和右，这里是 UI
 
 731
 00:27:41,520 --> 00:27:44,054
 that's gonna set things in your Info.plist.
+这会设置你的 Info.plist 里的东西
 
 732
 00:27:44,056 --> 00:27:45,105
@@ -2929,106 +3615,132 @@ that's gonna set things in your Info.plist.
 733
 00:27:45,106 --> 00:27:46,155
 Now I'm gonna do a demo today and
+今天我要开始做一个例子
 
 734
 00:27:46,158 --> 00:27:49,092
 in the demo I'm gonna add some stuff to make my application
+在例子中，我将添加一些东西让我的应用
 
 735
 00:27:49,094 --> 00:27:51,193
 know about a certain document type.
+知道怎么打开某种类型的文档
 
 736
 00:27:51,195 --> 00:27:53,929
 I'm actually gonna do it by editing the Info.plist
+实际上，我直接编辑 Info.plist 来实现
 
 737
 00:27:53,931 --> 00:27:56,832
 directly, because it's a lot faster and, you know,
+这个，因为这会很快，你们知道的
 
 738
 00:27:56,834 --> 00:27:58,967
 we're gonna be time constrained here.
+我们这里有时间限制
 
 739
 00:27:58,969 --> 00:28:01,686
 But you usually wouldn't do that.
+但通常你们不这么做
 
 740
 00:28:01,687 --> 00:28:04,404
 Usually you would be clicking settings here in your project
+通常，你们会点击你们项目的设置 UI 来
 
 741
 00:28:04,407 --> 00:28:05,957
 settings UI.
+里的设置来实现
 
 742
 00:28:05,958 --> 00:28:07,508
 So the Info.plist you can kinda look through and
+所以 Info.plist 你们可以看看
 
 743
 00:28:07,510 --> 00:28:08,442
 see what's in there.
+它里面都有什么
 
 744
 00:28:08,444 --> 00:28:10,710
 A lot of that stuff's kind of arcane,
+有许多东西比较晦涩难懂
 
 745
 00:28:10,712 --> 00:28:13,913
 you don't really even, hardly even know what it is.
+你们甚至不知道它是什么
 
 746
 00:28:13,915 --> 00:28:14,914
 It's just for the application.
+它只是为了应用
 
 747
 00:28:14,916 --> 00:28:17,416
 But there are some things in there that
+但有些东西是
 
 748
 00:28:17,418 --> 00:28:19,084
 are pretty important, pretty obvious,
+非常重要，非常明显的
 
 749
 00:28:19,086 --> 00:28:24,122
 like what document types do I recognize, things like that.
+比如我认识的 document types，类似这类的
 
 750
 00:28:24,124 --> 00:28:26,491
 Okay, capabilities.
+capabilities
 
 751
 00:28:26,492 --> 00:28:28,859
 So, some features in your app, quite a few actually,
+你的应用的一些特征，实际上有很多
 
 752
 00:28:28,861 --> 00:28:30,260
 require enabling.
+要求 enabling
 
 753
 00:28:30,262 --> 00:28:31,845
 In other words,
+换句话说
 
 754
 00:28:31,846 --> 00:28:33,429
 you can't use them in your app until you enable them.
+你在应用中不能使用它们直到你 enable 它们
 
 755
 00:28:33,432 --> 00:28:37,100
 Now, most of these are server features like iCloud or
+它们大部分是服务特征比如 iCloud 或者
 
 756
 00:28:37,102 --> 00:28:40,269
 Game Center, or they're interoperability features,
+Game Center，或他们是互用性特征
 
 757
 00:28:40,271 --> 00:28:42,037
 where you're gonna be inter-operating with other
+你将和系统的其他部分做内部交互
 
 758
 00:28:42,039 --> 00:28:44,740
 parts of the system like the Passbook or things like that.
+比如 Passbook 或者类似的东西
 
 759
 00:28:44,742 --> 00:28:46,425
@@ -3037,78 +3749,97 @@ Okay?
 760
 00:28:46,426 --> 00:28:48,109
 So you turn these on in Project Settings under
+所以你在 Project Settings 中的 Capabilities
 
 761
 00:28:48,111 --> 00:28:48,910
 Capabilities.
+下把这些功能打开
 
 762
 00:28:48,912 --> 00:28:50,478
 You get this list right here.
+你有这个列表
 
 763
 00:28:50,480 --> 00:28:54,815
 This is the current list as of the time I took the screen
+这个是我几天前屏幕截图的
 
 764
 00:28:54,817 --> 00:28:56,449
 shot a few days ago.
+列表
 
 765
 00:28:56,451 --> 00:28:59,485
 And you just switch those little switches,
+你们可以改变这些 switches
 
 766
 00:28:59,487 --> 00:29:03,022
 the on off switches, on or off to enable this.
+开关 switches，开或关来 enable 这个
 
 767
 00:29:03,024 --> 00:29:05,958
 Kind of a little bit of a warning about here is that
+这里有一个小小的警告，
 
 768
 00:29:05,960 --> 00:29:09,194
 some of these things, the server based technologies
+这些东西中的一些，基于服务的技术
 
 769
 00:29:09,196 --> 00:29:11,496
 require a normal developer program.
+要求一个正常的开发者程序
 
 770
 00:29:11,498 --> 00:29:14,699
 The free University program that some of you are on,
+你们中友协免费的通用程序
 
 771
 00:29:14,701 --> 00:29:16,701
 doesn't really support that.
+实际上并不支持这个
 
 772
 00:29:16,703 --> 00:29:19,169
 So if you wanted to do some of these things for
+所以如果你吗想在你们的期末项目中
 
 773
 00:29:19,171 --> 00:29:20,370
 your final project,
+做这些设置
 
 774
 00:29:20,372 --> 00:29:23,373
 you might have to join the actual developer program.
+你们可能需要加入实际的开发者程序
 
 775
 00:29:23,375 --> 00:29:25,575
 'Kay, so this is an FYI there.
+这是 FYI
 
 776
 00:29:27,245 --> 00:29:29,278
 If you click on the little triangle to the left of any of
+如果你们点击这些东西的左边的
 
 777
 00:29:29,280 --> 00:29:30,846
 these things, it'll actually give you
+三角形，实际上它会给你一个
 
 778
 00:29:30,848 --> 00:29:33,581
 a little description of what the heck this thing is.
+小小的描述，告诉你这个东西到底是什么玩意
 
 779
 00:29:33,583 --> 00:29:35,583
@@ -3117,38 +3848,47 @@ a little description of what the heck this thing is.
 780
 00:29:35,584 --> 00:29:37,584
 So you can click on maybe In-App purchases and
+你可以点击也许是应用内购买
 
 781
 00:29:37,587 --> 00:29:41,855
 it'll tell you, oh, this is what enables you to, the user
+它会告诉你，这个能够让你做什么，用户
 
 782
 00:29:41,857 --> 00:29:45,559
 to buy things to extend your app internally, etc.
+在你应用内可以买东西
 
 783
 00:29:45,561 --> 00:29:48,161
 So I encourage you to look through all these things and
+我建议你们浏览所有这些东西
 
 784
 00:29:48,163 --> 00:29:49,362
 see what's available.
+看他们都能做什么
 
 785
 00:29:49,364 --> 00:29:51,197
 It kinda gives you a feeling for
+这有点像给你一种感觉
 
 786
 00:29:51,199 --> 00:29:54,566
 how much stuff there is in iOS and how little we can really
+在 iOS 中有许多东西，但在这门课程的
 
 787
 00:29:54,568 --> 00:29:58,070
 cover in just basically nine weeks of this course.
+九周里我们只能涉及很少一部分
 
 788
 00:29:58,072 --> 00:30:01,706
 But, it's still kind of fun to look at what's in here.
+但依然有趣来看看这里有什么
 
 789
 00:30:01,708 --> 00:30:03,007
@@ -3157,86 +3897,107 @@ Okay?
 790
 00:30:03,009 --> 00:30:05,809
 And these capabilities, sorry, question back there.
+这些 capabilities，抱歉，有问题？
 
 791
 00:30:05,811 --> 00:30:08,779
 >> So for the app [INAUDIBLE] map to run your app,
+对于你应用中的应用地图
 
 792
 00:30:08,781 --> 00:30:11,181
 would that be supported in this, or
+它能否支持这个，或
 
 793
 00:30:11,183 --> 00:30:15,017
 do you have to do a different thing to create another map?
+你需要创建另一个应用来做不一样的事情？
 
 794
 00:30:15,019 --> 00:30:17,119
 >> So you're talking about maps?
+你在问地图？
 
 795
 00:30:17,121 --> 00:30:20,989
 So the question is, if I want to use a third party map
+问题是，如果我使用第三方的地图
 
 796
 00:30:20,991 --> 00:30:25,293
 API or something, do I need to enable this or something?
+API 或者其他的，我是否需要打开这个或者其他？
 
 797
 00:30:25,295 --> 00:30:26,761
 No. This is just enabling what
+不，这只是使你的应用
 
 798
 00:30:26,763 --> 00:30:29,129
 your app can do, what it's capabilities are.
+能够做一些事情，它的 capabilities 是什么
 
 799
 00:30:29,131 --> 00:30:32,466
 So for example if you're a map providing app, you would go
+比如，如果你是个提供地图的应用，你就要在
 
 800
 00:30:32,468 --> 00:30:35,769
 here and enable your, you know, turn it on and all that.
+这里打开功能，还有所有这些
 
 801
 00:30:35,771 --> 00:30:38,271
 You see what I'm saying?
+你明白我所说的吗？
 
 802
 00:30:38,272 --> 00:30:40,772
 The end-user, they benefit from whatever capabilities
+最终用户，他们从这些应用创建时注册的
 
 803
 00:30:40,775 --> 00:30:43,275
 these apps have signed up for when they were built.
+任何 capabilities 中受益
 
 804
 00:30:43,277 --> 00:30:45,044
 Right? So this is a build setting
+这是个 build 设置
 
 805
 00:30:45,046 --> 00:30:47,213
 essentially.
+很重要
 
 806
 00:30:47,214 --> 00:30:49,381
 And it has a little bit to do with the coordination of your
+这和你的 bundle identifier 的协调性有点相关
 
 807
 00:30:49,383 --> 00:30:53,017
 bundle identifier with what's going on at Apple servers and
+在苹果服务器做了什么还有
 
 808
 00:30:53,019 --> 00:30:54,385
 all that stuff.
+所有这些东西
 
 809
 00:30:54,387 --> 00:30:57,221
 So it's more than just turning it on, there's sometimes,
+这不仅仅是打开它，有时候
 
 810
 00:30:57,223 --> 00:31:00,623
 there's some payload that has to be kind of arranged.
+有些负荷需要被管理
 
 811
 00:31:02,193 --> 00:31:04,677
@@ -3245,70 +4006,86 @@ All right?
 812
 00:31:04,678 --> 00:31:07,162
 So the demo I'm gonna do here is kinda setting us up for
+所以这里我要做的例子，是为了周三
 
 813
 00:31:07,164 --> 00:31:09,214
 Wednesday.
+创建的
 
 814
 00:31:09,215 --> 00:31:11,265
 I'm gonna show you how to do AirDrop to drop something into
+我将给你演示如何使用 AirDrop 从 Mac
 
 815
 00:31:11,268 --> 00:31:13,401
 your app, 'kay, from the Mac.
+拖一些东西到你们的应用，
 
 816
 00:31:13,403 --> 00:31:15,186
 Which is really kinda cool,
+这非常酷
 
 817
 00:31:15,187 --> 00:31:16,970
 because you got this iPhone and let's say you wanna import
+因为你们有这个 iPhone，让我们假设你想要导入
 
 818
 00:31:16,973 --> 00:31:19,073
 something, you know, an image or,
-
+一些东西，你们知道的，一张图片或
 819
 00:31:19,075 --> 00:31:23,143
 you know, any kind of file, a pdf file even, whatever.
+你们知道的，任何文件，pdf 文件，甚至任何其它的
 
 820
 00:31:23,145 --> 00:31:25,379
 You'd like to be able to just basically drag it, drag and
+你们想要能够拖拽它，腿拽然后
 
 821
 00:31:25,381 --> 00:31:27,514
 drop it from your desktop.
+从你的桌面上扔掉它
 
 822
 00:31:27,516 --> 00:31:30,750
 So the example I'm gonna do here is on Wednesday,
+这里这个例子，我将在周三做
 
 823
 00:31:30,752 --> 00:31:34,053
 I'm gonna build an app that if you go on vacation, and,
+我要创建一个应用，如果你们在度假
 
 824
 00:31:34,055 --> 00:31:36,455
 let's say, you take a bunch of photos that are,
+你们拍了很多照片
 
 825
 00:31:36,457 --> 00:31:40,525
 have GPS tags on them, and maybe you even go hiking,
+这些照片有 GPS 标签，甚至也许你们去滑雪
 
 826
 00:31:40,527 --> 00:31:43,061
 and you have a little GPS monitor,
+你们有一个小的 GPS 显示器
 
 827
 00:31:43,063 --> 00:31:45,730
 or let the iPhone keep track of where you go, and
+让 iPhone 追踪你的足迹
 
 828
 00:31:45,732 --> 00:31:49,499
 you wanna draw the track of where you hiked, or whatever.
+你想要画出你滑雪的轨迹，或其它任何东西
 
 829
 00:31:49,501 --> 00:31:50,801
@@ -3317,18 +4094,22 @@ Okay?
 830
 00:31:50,802 --> 00:31:52,102
 So we're gonna build an app on Wednesday that does both of
+我们将在周三创建一个应用，能够做
 
 831
 00:31:52,104 --> 00:31:54,321
 those things.
+这两种事情
 
 832
 00:31:54,322 --> 00:31:56,539
 Let's you take some information about photos and
+你们获取了照片的一些信息
 
 833
 00:31:56,541 --> 00:32:00,209
 their location or a track and draw them on a map.
+它们的地点或轨迹，然后在地图上画出
 
 834
 00:32:00,211 --> 00:32:01,143
@@ -3337,34 +4118,41 @@ Okay?
 835
 00:32:01,145 --> 00:32:02,444
 Now to do that app,
+现在开始做这个应用
 
 836
 00:32:02,446 --> 00:32:05,546
 we need to import that vacation information.
+我们需要导入度假信息
 
 837
 00:32:05,548 --> 00:32:06,814
 Okay? I went on vacation,
+我在度假中
 
 838
 00:32:06,816 --> 00:32:08,299
 I need the info.
+我需要这个信息
 
 839
 00:32:08,300 --> 00:32:09,783
 And we're gonna do that with AirDrop and
+我们通过 AirDrop 来实现
 
 840
 00:32:09,785 --> 00:32:12,352
 we're gonna to do it, air dropping GPX files.
+我们要做这个，空中拖拽 GPX 文件
 
 841
 00:32:12,354 --> 00:32:16,289
 A GPX file is a file that just has a list of GPS coordinate
-
+一个 GPX 文件是这样的文件，它有 GPS 坐标相关信息的列表
 842
 00:32:16,291 --> 00:32:20,192
 related information, like waypoints that you were at
+比如你停下拍照的地点
 
 843
 00:32:20,194 --> 00:32:22,394
@@ -3373,26 +4161,32 @@ where you maybe took a photo and
 844
 00:32:22,396 --> 00:32:25,330
 the track if you took a hike or whatever.
+或你滑雪的轨迹，或任何其它的
 
 845
 00:32:25,332 --> 00:32:27,599
 So that's called a GPX file,
+这叫做 GPX 文件
 
 846
 00:32:27,601 --> 00:32:30,702
 it's just kind of a public file format.
+这只是一个公共文件格式
 
 847
 00:32:30,704 --> 00:32:35,472
 It's XML, but it's XML with a certain extension, GPX.
+它是 XML，但是 XML 带了点扩展，GPX
 
 848
 00:32:35,474 --> 00:32:38,875
 And I'm gonna show you how you can make it, so you can just
+我将演示你们可以做到的，你们可以
 
 849
 00:32:38,877 --> 00:32:41,878
 drag a GPX file into your iPhone app from your Mac.
+从 Mac 电脑从拖一个 GPX 文件到你们的 iPhone 应用中
 
 850
 00:32:41,880 --> 00:32:43,913
@@ -3401,14 +4195,17 @@ Okay?
 851
 00:32:43,914 --> 00:32:45,947
 So let's first talk about how that's gonna work here.
+首先，让我说说这是如何工作的
 
 852
 00:32:45,950 --> 00:32:49,785
 So on the Mac, you just go here to AirDrop.
+在 Mac 上，你只需要到这里 AirDrop
 
 853
 00:32:49,787 --> 00:32:53,422
 You've probably, how many people have used AirDrop for
+你们可能，许多人已经使用过 AirDrop？
 
 854
 00:32:53,424 --> 00:32:54,189
@@ -3417,70 +4214,87 @@ anything?
 855
 00:32:54,191 --> 00:32:54,989
 About only by half, okay.
+只用了一半
 
 856
 00:32:54,991 --> 00:32:55,957
 Interesting.
+很有趣
 
 857
 00:32:55,958 --> 00:32:56,924
 So AirDrop's really cool.
+AirDrop 相当酷
 
 858
 00:32:56,926 --> 00:32:59,526
 So we got a lot of people here with various devices.
+这里我们有许多人有不同的设备
 
 859
 00:32:59,528 --> 00:33:02,896
 And here, I'm gonna turn this guy on and you're
+这里，我要把这个家伙打开，你们
 
 860
 00:33:02,898 --> 00:33:07,233
 gonna see that he shows up right here, CS192p iPhone6+.
+将看到他在这里出现，CS192p iPhone6+
 
 861
 00:33:07,235 --> 00:33:09,652
 Can you see that?
+你们可以看到吗？
 
 862
 00:33:09,653 --> 00:33:12,070
 And so if I have a file, like my Vacation.gpx right here,
+如果我有一个文件，比如我的 Vacation.gpx
 
 863
 00:33:12,073 --> 00:33:13,772
 you see this is a GPX file.
+你们可以看到这是个 GPX 文件
 
 864
 00:33:13,774 --> 00:33:17,776
 I can actually just drag and drop it onto here.
+实际上我可以拖拽，然后扔到这上面去
 
 865
 00:33:17,778 --> 00:33:20,445
 Okay. To transfer it to my Mac or
+把它从我们的 Mac 传输到
 
 866
 00:33:20,447 --> 00:33:21,746
 to my iPhone.
+我的 iPhone上
 
 867
 00:33:21,748 --> 00:33:25,649
 But when I do that, sorry.
+但当我做这个时，抱歉
 
 868
 00:33:25,651 --> 00:33:27,450
 Cancel.
+取消
 
 869
 00:33:27,452 --> 00:33:30,420
 Its too bad this drops all the time,
+一直这样空掷很糟糕
 
 870
 00:33:30,422 --> 00:33:32,688
 its a little bit annoying.
+有点恼人
 
 871
 00:33:32,690 --> 00:33:36,058
 So, I'm gonna drag it again.
+我再次拖拽
 
 872
 00:33:36,060 --> 00:33:37,459
@@ -3489,90 +4303,112 @@ Okay.
 873
 00:33:37,461 --> 00:33:38,526
 Drag it on here.
+从这里拖拽
 
 874
 00:33:38,528 --> 00:33:41,128
 So what happens right now is it says, oh,
+现在发生了什么，它说
 
 875
 00:33:41,130 --> 00:33:44,832
 AirDrop someone wants to drag this GPX file to your Mac, but
+AirDrop 有人想要拖这个 GPX 文件到你的 Mac 上，但
 
 876
 00:33:44,834 --> 00:33:47,134
 you have no app that can handle this.
+你没有一个应用可以处理这个
 
 877
 00:33:47,136 --> 00:33:48,335
 So it's saying,
+所以它表示
 
 878
 00:33:48,337 --> 00:33:51,437
 do you want to go to the App Store to get an app?
+你想要到应用商店下一个应用？
 
 879
 00:33:51,439 --> 00:33:53,339
 Which I don't want to go to the App Store,
+但我不想到应用商店
 
 880
 00:33:53,341 --> 00:33:55,607
 I want to write my own app that handles GPX files.
+我想要编写我自己的应用来处理这 GPX 文件
 
 881
 00:33:55,609 --> 00:33:56,942
 So that's what we're gonna do.
+这就是我们将要做的
 
 882
 00:33:56,944 --> 00:34:01,813
 We're gonna write our own app here to handle GPX files.
+这里我们要写我们自己的应用来处理这个 GPX 文件
 
 883
 00:34:01,815 --> 00:34:05,116
 All right. So let's go to Xcode.
+好吧，我们打开 Xcode
 
 884
 00:34:05,118 --> 00:34:08,018
 So we're gonna create a new project here.
+这里我们要创建一个新的项目
 
 885
 00:34:08,020 --> 00:34:09,953
 Now this project is going to show you how to do
+这个项目要向你们演示如何处理
 
 886
 00:34:09,955 --> 00:34:11,655
 the AirDrop.
+AirDrop
 
 887
 00:34:11,656 --> 00:34:13,356
 I'm also gonna show you how to do notifications.
+我会向你们演示如何处理通知
 
 888
 00:34:13,358 --> 00:34:14,857
 Okay? Cuz that's an important thing
+明白如何做也是很重要
 
 889
 00:34:14,859 --> 00:34:16,225
 to understand how to do as well.
+的事情
 
 890
 00:34:16,227 --> 00:34:20,429
 So, I'm gonna call this app Tracks, because it keeps track
+我称这个我为 Tracks 应用，因为你保持纪录
 
 891
 00:34:20,431 --> 00:34:22,797
 of where you go on your vacations or
+你度假中的路径或
 
 892
 00:34:22,799 --> 00:34:24,532
 whatever with GPX file.
+任何 GPX 文件
 
 893
 00:34:24,534 --> 00:34:27,301
 So we call we're gonna put it in the place we always put
+我们要把它放在我们经常放
 
 894
 00:34:27,303 --> 00:34:27,968
 everything.
+的地方
 
 895
 00:34:27,970 --> 00:34:28,969
@@ -3581,10 +4417,12 @@ Okay.
 896
 00:34:28,971 --> 00:34:31,304
 Here it is, right here.
+这就是了，这里
 
 897
 00:34:31,306 --> 00:34:34,207
 I am not going to move the AppDelegate out of the way
+这次我不移动 AppDelegate
 
 898
 00:34:34,209 --> 00:34:35,308
@@ -3593,26 +4431,32 @@ this time.
 899
 00:34:35,309 --> 00:34:36,408
 Okay? So the first time, yehey.
+第一次，
 
 900
 00:34:36,411 --> 00:34:37,943
 We get to actually do something with
+我们实际在我们的 AppDelegate
 
 901
 00:34:37,945 --> 00:34:38,944
 our AppDelegate, but
+做些事情，但
 
 902
 00:34:38,946 --> 00:34:40,845
 I'm gonna move those things out of the way.
+我要把这些东西移出
 
 903
 00:34:40,847 --> 00:34:43,981
 But we're gonna sneak in there and look at info.plist, so
+但我们溜到这里，看看 info.plist
 
 904
 00:34:43,983 --> 00:34:45,750
 kind of get both of those things.
+有这两者
 
 905
 00:34:45,752 --> 00:34:47,335
@@ -3621,22 +4465,27 @@ All right.
 906
 00:34:47,336 --> 00:34:48,919
 So here's our ViewController.
+这是我们的 ViewController
 
 907
 00:34:48,921 --> 00:34:51,622
 How do we want to do this?
+我们要怎么处理这个？
 
 908
 00:34:51,623 --> 00:34:54,324
 Well, the most important thing we need to do to make our app
+要让我们的应用可以处理 GPX 文件最重要的事情是
 
 909
 00:34:54,326 --> 00:34:58,928
 be air droppable for GPX is to register with our app that we
+我们需要注册我们的应用
 
 910
 00:34:58,930 --> 00:35:00,863
 know what a GPX file is.
+我们知道 GPX 文件是什么
 
 911
 00:35:00,865 --> 00:35:02,898
@@ -3645,106 +4494,132 @@ Okay?
 912
 00:35:02,899 --> 00:35:04,932
 And we can do this in our project settings over here
+我们可以在 Info 中做这个
 
 913
 00:35:04,935 --> 00:35:06,685
 in Info.
+设置
 
 914
 00:35:06,686 --> 00:35:08,436
 You see down here at the bottom of Projects and
+你们看项目的底部
 
 915
 00:35:08,439 --> 00:35:10,038
 Info is Document Types.
+Info 是一个文档类型
 
 916
 00:35:10,040 --> 00:35:12,440
 So these are all the types of documents I know about.
+这些是我知道的所有文档类型
 
 917
 00:35:12,442 --> 00:35:14,642
 And then also Imported UTIs.
+你们也有导入的 UTIs
 
 918
 00:35:14,644 --> 00:35:19,046
 These are all the basically URL like descriptions of
+它们基本上是类似文件描述的
 
 919
 00:35:19,048 --> 00:35:20,147
 a file.
+URL
 
 920
 00:35:20,148 --> 00:35:21,247
 So I kind of need to do both of those things.
+我要处理这两个
 
 921
 00:35:21,249 --> 00:35:24,550
 I need to describe what a GPX file is.
+我需要描述 GPX 文件是什么
 
 922
 00:35:24,552 --> 00:35:27,119
 And then I just say, yes, that's a type I support.
+我设置，这是我支持的文件类型
 
 923
 00:35:27,121 --> 00:35:30,122
 Now, I can do all this by clicking the plus sign
+我点击这里的加号
 
 924
 00:35:30,124 --> 00:35:31,123
 here and here.
+来做这个设置
 
 925
 00:35:31,125 --> 00:35:32,924
 But I want to show you another demo.
+我想演示另一个例子
 
 926
 00:35:32,926 --> 00:35:35,259
 So, I'm gonna do this is kind of fast mode,
+这个我要快一点演示
 
 927
 00:35:35,261 --> 00:35:38,329
 which I'm just gonna go to the Info.plist, because this
+我打开 Info.plist，因为这个
 
 928
 00:35:38,331 --> 00:35:41,131
 information's going to be put in the Info.plist.
+信息要放在 Info.plist
 
 929
 00:35:41,133 --> 00:35:44,368
 And I'm gonna edit it in source mode.
+我要以源码形式编辑它
 
 930
 00:35:44,370 --> 00:35:45,735
 So I'm just going here and saying,
+我在这里，
 
 931
 00:35:45,737 --> 00:35:47,554
 edit it as Source Code.
+以源码形式编辑
 
 932
 00:35:47,555 --> 00:35:49,372
 Now you can see it's an XML file here.
+你们可以看到这是个 XML 文件
 
 933
 00:35:49,374 --> 00:35:53,475
 And I actually prepped all of the stuff necessary here,
+实际上，我布置了作业，所有这里需要的东西
 
 934
 00:35:53,477 --> 00:35:57,179
 which you can look through later at your leisure.
+你们有空的时候可以浏览下
 
 935
 00:35:57,181 --> 00:35:59,948
 Wait, for GPX files, but you can see
+等等，对于 GPX 文件，但你们可以看到
 
 936
 00:35:59,950 --> 00:36:04,385
 it's basically that I say that it's got file name extent,
+它基本上，扩展了文件名
 
 937
 00:36:04,387 --> 00:36:07,954
 file extensions GPX, but that it is a XML file.
+文件扩展 GPX，但它是一个 XML 文件
 
 938
 00:36:07,956 --> 00:36:09,823
@@ -3753,30 +4628,37 @@ All right.
 939
 00:36:09,824 --> 00:36:11,691
 And then up here, I'm saying, the documents I support.
+这上面，我支持的文档
 
 940
 00:36:11,693 --> 00:36:16,295
 I support this, which is my own private GPX type and
+我支持这个，这是我自己的私人 GPX 类型
 
 941
 00:36:16,297 --> 00:36:20,199
 then that's linked to the type down here.
+它关联到下面这个类型
 
 942
 00:36:20,201 --> 00:36:24,969
 So, I'm just gonna copy this and go over here.
+我要拷贝这个，然后到上面这里
 
 943
 00:36:24,971 --> 00:36:26,504
 And actually,
+实际上
 
 944
 00:36:26,506 --> 00:36:31,575
 just paste it right at the bottom of this down here.
+在这下面底部粘贴
 
 945
 00:36:31,577 --> 00:36:32,642
 Paste.
+粘贴
 
 946
 00:36:32,644 --> 00:36:34,211
@@ -3785,14 +4667,17 @@ Okay.
 947
 00:36:34,212 --> 00:36:35,779
 So, I basically put that stuff in there.
+我基本上把这个东西放到这里了
 
 948
 00:36:35,781 --> 00:36:38,648
 I can even go back to Property List mode and
+我甚至可以回到属性列表模式
 
 949
 00:36:38,650 --> 00:36:41,851
 you can see that it added it here at the bottom.
+你们可以看到，它在底部添加了这个
 
 950
 00:36:41,853 --> 00:36:42,484
@@ -3801,34 +4686,42 @@ Okay.
 951
 00:36:42,486 --> 00:36:45,487
 So here's my types.
+这是我的类型
 
 952
 00:36:45,489 --> 00:36:47,222
 And if I go back to my Project Settings,
+如果我回到我的项目设置
 
 953
 00:36:47,224 --> 00:36:48,423
 I can see them here as well.
+我也可以在这里看到
 
 954
 00:36:48,425 --> 00:36:51,125
 I can see now I have one document type,
+我可以看到现在我有一个文档类型
 
 955
 00:36:51,127 --> 00:36:53,794
 it's a GPX file and I can import GPX.
+它是一个 GPX 文件，我可以导入 GPX
 
 956
 00:36:53,796 --> 00:36:56,930
 So that's the key thing you need to do to make AirDrop
+这是你让 AirDrop 工作需要做的关键的事情
 
 957
 00:36:56,932 --> 00:36:59,733
 work, it's just define the document type you
+它定义了你愿意被 dropped 的
 
 958
 00:36:59,735 --> 00:37:01,901
 are willing to have dropped on you.
+文档类型
 
 959
 00:37:01,903 --> 00:37:03,836
@@ -3837,42 +4730,52 @@ Okay?
 960
 00:37:03,837 --> 00:37:05,770
 Now, once you've defined that, now the system,
+一旦你定义了，现在系统
 
 961
 00:37:05,773 --> 00:37:08,374
 any time someone wants to open a GPX file,
+任何时候有人想打开 GPX 文件
 
 962
 00:37:08,376 --> 00:37:11,243
 they're gonna ask me if I can do it in my app and
+他们会询问我是否能在我的应用中处理这个
 
 963
 00:37:11,245 --> 00:37:13,678
 they do that here in the AppDelegate.
+他们在 AppDlegate 中做这个事情
 
 964
 00:37:13,680 --> 00:37:16,014
 Now you can see the AppDelegate kind of gives you
+现在你们可以看到 AppDelegate 给你
 
 965
 00:37:16,016 --> 00:37:18,315
 stubs for didFinishLaunchingWithOptions,
+didFinishLaunchingWithOptions 的东西
 
 966
 00:37:18,317 --> 00:37:21,552
 ResignActive, EnterBackground, Foreground, even gives you
+ResignActive，EnterBackground，Foreground，甚至给你
 
 967
 00:37:21,554 --> 00:37:24,554
 a little explanation of when you're supposed to use those.
+一个什么时候你应用使用这些的小解释
 
 968
 00:37:24,556 --> 00:37:26,289
 We're not going to use any of those, so
+我们不使用这里的任何东西
 
 969
 00:37:26,291 --> 00:37:27,390
 I'm gonna delete that.
+我要删除这些
 
 970
 00:37:27,392 --> 00:37:29,542
@@ -3881,50 +4784,62 @@ Okay?
 971
 00:37:29,543 --> 00:37:31,693
 So you can go look at that in any app that you build,
+你可以在任何你创建的应用中看看这个
 
 972
 00:37:31,696 --> 00:37:36,098
 it's always going to put that, oops, those in there, so
+它总是把这些放在这里
 
 973
 00:37:36,100 --> 00:37:38,433
 that you can find out about it.
+你们可以找出它们
 
 974
 00:37:38,435 --> 00:37:40,468
 Don't ever delete this thing, though.
+永远不要删除这个
 
 975
 00:37:40,470 --> 00:37:42,303
 [LAUGH] Var window.
+Var window
 
 976
 00:37:42,305 --> 00:37:46,406
 The AppDelegate has a pointer to the window where all your
+这个 AppDelegate 有个指针指向你的所有
 
 977
 00:37:46,408 --> 00:37:47,407
 UI is.
+UI 所在的 window
 
 978
 00:37:47,408 --> 00:37:48,407
 And it needs to have that.
+它需要有这个
 
 979
 00:37:48,410 --> 00:37:50,910
 It gets set when the storyboard gets loaded.
+当 storyboard 加载时，这个 window 被设置
 
 980
 00:37:50,912 --> 00:37:54,347
 It is possible to reach into your UI here through this
+通过这个访问你的 UI 是可能的
 
 981
 00:37:54,349 --> 00:37:57,683
 thing and start talking to your ViewControllers.
+然后开始和你的 ViewControllers 通讯
 
 982
 00:37:57,685 --> 00:37:59,685
 I recommend against that.
+我不建议这么做
 
 983
 00:37:59,687 --> 00:38:01,036
@@ -3933,114 +4848,142 @@ Okay?
 984
 00:38:01,037 --> 00:38:02,386
 You do not want to be reaching down into there,
+你不会想在这里做这些
 
 985
 00:38:02,389 --> 00:38:04,422
 because if you ever went into your storyboard and
+因为如果你曾在你的 storyboard
 
 986
 00:38:04,424 --> 00:38:06,390
 changed whether something was in a split view or
+改变任何在 split view 或
 
 987
 00:38:06,392 --> 00:38:08,959
 in navigation controller, now this code's going to break,
+navigation controller 的任何东西，现在这些代码就被破坏了
 
 988
 00:38:08,961 --> 00:38:10,293
 it's not going to work.
+它不会工作
 
 989
 00:38:10,295 --> 00:38:13,963
 And it also is not very object orientated in that MVCs should
+这一点都不面向对象， MVC 应该
 
 990
 00:38:13,965 --> 00:38:15,264
 be their own thing and
+做它们自己的事情
 
 991
 00:38:15,266 --> 00:38:17,599
 they should kind of work on their own.
+它们应该只做它们自己的事情
 
 992
 00:38:17,601 --> 00:38:20,836
 They shouldn't need some outside intervention to be
+它们不应该有外部打断
 
 993
 00:38:20,838 --> 00:38:24,105
 coming in and talking to them to make them work, okay?
+进来然后告诉它们让它们工作
 
 994
 00:38:24,107 --> 00:38:26,507
 You want to think of MVCs as these objects,
+这些对象你们要想想 MVC
 
 995
 00:38:26,509 --> 00:38:28,509
 essentially kind of meta objects,
+元对象非常重要
 
 996
 00:38:28,511 --> 00:38:31,445
 even though they're made up swift objects inside.
+即使他们在内部创建 swift 对象
 
 997
 00:38:31,447 --> 00:38:34,648
 But they have an API and they work on their own.
+但它们有一个 API，它们自己可以工作
 
 998
 00:38:34,650 --> 00:38:35,448
 They're independent.
+它们是独立的
 
 999
 00:38:35,450 --> 00:38:36,949
 They do what they do,
+它们做自己可以做的
 
 1000
 00:38:36,951 --> 00:38:40,953
 just like any other well designed object oriented API.
+就像任何其他涉及良好的面向对象 API
 
 1001
 00:38:40,955 --> 00:38:43,021
 All right. So the method that we want to
+我们在 AppDelegate 中要实现的方法
 
 1002
 00:38:43,023 --> 00:38:46,458
 implement in our AppDelegate to open a URL is called
+是打开一个 URL，叫做 application: handleOpenURL
 
 1003
 00:38:46,460 --> 00:38:50,061
 application handle OpenURL, you see it right here.
+这里你们可以看到
 
 1004
 00:38:50,063 --> 00:38:51,629
 There's a lot of other things you can see.
+你们可以看到很多东西
 
 1005
 00:38:51,631 --> 00:38:53,330
 There's, look at all these things.
+这里，看这所有东西
 
 1006
 00:38:53,332 --> 00:38:56,633
 Many, many things we can do here.
+我们可以在这里做很多事情
 
 1007
 00:38:56,635 --> 00:38:59,135
 But we want handle open URL.
+但我们想要 handleOpenURL
 
 1008
 00:38:59,137 --> 00:39:01,571
 And all we need to do and handle OpenURL,
+所有我需要做的事 handleOpenURL
 
 1009
 00:39:01,573 --> 00:39:03,639
 we got this URL is go deal with it.
+我们获得这个需要处理的 URL
 
 1010
 00:39:03,641 --> 00:39:06,508
 So right now, I'm just going to print it out.
+现在，我只是把它输出
 
 1011
 00:39:06,510 --> 00:39:11,513
 So I'm gonna say, url equals url.
+我要说， url 等于 url
 
 1012
 00:39:11,515 --> 00:39:12,931
@@ -4049,22 +4992,27 @@ Okay? Just so
 1013
 00:39:12,932 --> 00:39:14,348
 we can see that our AirDrop is working.
+我们可以看到我们的 AirDrop 工作了
 
 1014
 00:39:14,351 --> 00:39:17,618
 And then you return true or false, whether you handled it.
+然后你 return true 或 false，你是否处理了它
 
 1015
 00:39:17,620 --> 00:39:19,219
 So since all I'm going to do is print it out,
+既然我要输出这个
 
 1016
 00:39:19,221 --> 00:39:20,120
 I'm gonna say, true.
+我要返回 true
 
 1017
 00:39:20,122 --> 00:39:21,721
 Yes, I handled it.
+是的，我处理了它
 
 1018
 00:39:21,723 --> 00:39:22,889
@@ -4073,158 +5021,197 @@ Okay?
 1019
 00:39:22,891 --> 00:39:24,323
 So that's all I'm gonna do first here.
+这是所有我首先要处理的
 
 1020
 00:39:24,325 --> 00:39:27,092
 We're gonna run just that and then I'm gonna do another
+我要运行这个，一会我需要处理一些
 
 1021
 00:39:27,094 --> 00:39:29,261
 thing with notifications in a second here.
+通知 
 
 1022
 00:39:29,263 --> 00:39:31,429
 So here's called tracks.
+这个叫做 tracks
 
 1023
 00:39:31,431 --> 00:39:36,500
 I'm running it on the device here, as you can see.
+我在设备上运行这个，你们可以看到
 
 1024
 00:39:36,502 --> 00:39:39,903
 Now the first time my app is installed where it is saying,
+第一次我的应用安装了，它说
 
 1025
 00:39:39,905 --> 00:39:43,073
 it can handle these new types, the system's going to
+它可以处理这些新的类型，系统将会
 
 1026
 00:39:43,075 --> 00:39:45,508
 recognize, oh, this guy handles GPX.
+识别，这个家伙可以处理 GPX
 
 1027
 00:39:45,510 --> 00:39:46,676
 Okay? So here's my app,
+这就是我的应用
 
 1028
 00:39:46,678 --> 00:39:49,045
 it didn't do anything, but it did register itself.
+它没有做任何事情，但它注册了它自己
 
 1029
 00:39:49,047 --> 00:39:53,815
 So now, I'm gonna go over here to my AirDrop again and
+现在，我在这里，我的 AirDrop
 
 1030
 00:39:53,817 --> 00:39:56,885
 going to, hope this guy shows up.
+希望这个家伙会出现
 
 1031
 00:39:56,887 --> 00:39:58,886
 So let's go back to our app here.
+让我们回到我们的应用
 
 1032
 00:39:58,888 --> 00:40:02,356
 We're gonna run our app.
+我们要运行我们的应用
 
 1033
 00:40:02,358 --> 00:40:04,091
 It's registered itself.
+它注册了它自己
 
 1034
 00:40:04,093 --> 00:40:06,526
 It says, oh yes, I handle GPX files.
+他说，我可以处理 GPX 文件
 
 1035
 00:40:06,528 --> 00:40:10,230
 So now, if I take a GPX file here, like this, and
+现在，我放了一个 GPX 文件，比如这个
 
 1036
 00:40:10,232 --> 00:40:14,467
 drag it on, okay, does the same thing, it transferred
+然后拖拽它，做同样的事情，它传输了
 
 1037
 00:40:14,469 --> 00:40:17,936
 over, but notice the difference this time.
+但注意这次的不同
 
 1038
 00:40:17,938 --> 00:40:21,573
 Okay, this time it doesn't say get app, it says, do you
+这次它没有说要下载一个应该，它说，你要在
 
 1039
 00:40:21,575 --> 00:40:25,543
 accept it in tracks, because I'm running tracks right now.
+tracks 中接受它？因为我现在正运行着 tracks
 
 1040
 00:40:25,545 --> 00:40:27,278
 So I'll say, yeah, I accept it.
+我说，是的，我接受它
 
 1041
 00:40:27,280 --> 00:40:30,948
 And when I do, we're going to watch our console here
+当我这么做时，我们要观察我们的 console
 
 1042
 00:40:30,950 --> 00:40:33,617
 and its going to say at the bottom, its going to print out
+它在底部，在它被传输之后
 
 1043
 00:40:33,619 --> 00:40:36,553
 the URL of the file after its been transferred.
+它输出了这个文件的URL
 
 1044
 00:40:36,555 --> 00:40:40,690
 So I hit accept and sure enough, right here, you see,
+因此我点击接受，非常确定的，这里，你们看到
 
 1045
 00:40:40,692 --> 00:40:42,758
 it's created this URL.
+它输出了这个 URL
 
 1046
 00:40:42,760 --> 00:40:46,695
 So it's put it in this place in my sandbox called documents
+它把这个文件放在我的沙盒中，叫做
 
 1047
 00:40:46,697 --> 00:40:49,798
 inbox vacation.gpx which we're going to talk about,
+Documents/inbox/vacation.gpx，这个我们将要谈谈
 
 1048
 00:40:49,800 --> 00:40:53,401
 the file system, a little later in this demo.
+系统文件，一会在这个例子中
 
 1049
 00:40:53,403 --> 00:40:55,936
 So, this file, GPX, was transferred over,
+这个文件，GPX，被传输了
 
 1050
 00:40:55,938 --> 00:41:01,475
 put on the local hard disk, flash drive of our phone,
+放在本地的硬盘上，我们手机的闪存上
 
 1051
 00:41:01,477 --> 00:41:03,243
 and made available to this app.
+在这个应用中可用了
 
 1052
 00:41:03,245 --> 00:41:05,945
 So now, I can open this URL up and do whatever I want.
+现在，我可以打开这个 URL，做任何我想做的
 
 1053
 00:41:05,947 --> 00:41:09,982
 So that's it, super simple to do AirDrop, it's just a matter
+这就是了，AirDrop 超级简单，它只是
 
 1054
 00:41:09,984 --> 00:41:12,084
 of registering those document types.
+要注册这些文档类型的的事情
 
 1055
 00:41:12,086 --> 00:41:14,419
 But, in real world here now,
+但在现实世界中
 
 1056
 00:41:14,421 --> 00:41:17,855
 if I had dragged the GPX file on my document, I really need
+如果我已经拖拽了 GPX 文件，我实际需要
 
 1057
 00:41:17,857 --> 00:41:22,159
 an NVC somewhere that can display this GPX file.
+一个某处的 NVC 能够显示这个 GPX 文件
 
 1058
 00:41:22,161 --> 00:41:24,428
@@ -4233,86 +5220,107 @@ Okay?
 1059
 00:41:24,429 --> 00:41:26,696
 Now, I guess I could go look at my window, and try and
+我觉得我可以看看我的 window，尝试
 
 1060
 00:41:26,699 --> 00:41:28,832
 look in a split view inside a navigation controller, and
+在 navigation controller 中的 split view
 
 1061
 00:41:28,834 --> 00:41:31,734
 find a view controller that can handle this GPX file, but
+找一个视图控制器来处理这个 GPX 文件
 
 1062
 00:41:31,736 --> 00:41:33,369
 that would be really, really bad.
+但这非常非常糟糕
 
 1063
 00:41:33,371 --> 00:41:35,904
 Really what I want to do is just have a radio station
+实际上我需要的是有一个电台
 
 1064
 00:41:35,906 --> 00:41:39,274
 that says, anybody who wants to find out when a GPX file
+任何人想要知道什么时候一个 GPX 文件
 
 1065
 00:41:39,276 --> 00:41:42,177
 has been loaded into this app, listen to this radio station.
+已被加载到这个应用中，收听这个电台
 
 1066
 00:41:42,179 --> 00:41:44,345
 And then we're going to send a message on the radio station
+现在我们要在这个电台中发送一条消息
 
 1067
 00:41:44,347 --> 00:41:45,680
 saying, up, one arrived.
+有一个（文件）到达了
 
 1068
 00:41:46,716 --> 00:41:48,749
 Okay, so that's how we're going to do this.
+这就是我们如何处理这个
 
 1069
 00:41:49,918 --> 00:41:52,285
 So let's start with the posting side,
+让我们从发布消息开始
 
 1070
 00:41:52,287 --> 00:41:55,254
 where we're going to post on the radio station.
+这里我们将要在电台中发布
 
 1071
 00:41:55,256 --> 00:41:58,457
 Now, when you have a radio station,
+当你有一个电台时
 
 1072
 00:41:58,459 --> 00:42:02,494
 you need to have a name for that radio station.
+你需要给这个电台一个名字
 
 1073
 00:42:02,496 --> 00:42:06,064
 I'm just going to create that as this kind of global struct.
+我以全局结构体来创建这个
 
 1074
 00:42:06,066 --> 00:42:09,434
 I'm going to call it static let.
+我称这个为 static let
 
 1075
 00:42:09,436 --> 00:42:11,802
 I'll call this GPXURL.
+我叫它为 GPXURL
 
 1076
 00:42:11,804 --> 00:42:14,071
 Actually, we'll call it notification.
+实际上，我们称它为通知
 
 1077
 00:42:15,407 --> 00:42:17,607
 So this is just a string which is the name of the radio
+所以这只是这个电台名字的字符串
 
 1078
 00:42:17,609 --> 00:42:21,544
 station, which we'll call the GPXURL Radio Station or
+我们称之为 GPXURL 电台或者
 
 1079
 00:42:21,546 --> 00:42:23,145
 something like that.
+类似的东西
 
 1080
 00:42:23,147 --> 00:42:25,681
@@ -4321,94 +5329,117 @@ Okay?
 1081
 00:42:25,682 --> 00:42:28,216
 And so, all I need to do to post on this radio station,
+我所需要的是在这个电台中发布
 
 1082
 00:42:28,218 --> 00:42:30,651
 whatever, is to get that center,
+任何，它获取 center
 
 1083
 00:42:30,653 --> 00:42:36,123
 the NS notification center, default center.
+NSNotificationCenter.defaultCenter
 
 1084
 00:42:36,125 --> 00:42:37,691
 So now I have the center, because I have to have
+现在我有这个 center，因为我有这个
 
 1085
 00:42:37,693 --> 00:42:40,527
 the notification center to either post or receive.
+通知中心发送或接受消息
 
 1086
 00:42:40,529 --> 00:42:45,398
 And then, I just need to create a notification,
+然后，我只需要创建一个通知
 
 1087
 00:42:45,400 --> 00:42:47,199
 which I do by saying NS notification.
+我要说 NSNotification
 
 1088
 00:42:47,201 --> 00:42:49,401
 And if you look at the creation of it,
+如果你看这个通知的创建方法
 
 1089
 00:42:50,704 --> 00:42:53,271
 you can create it with user info or not.
+你可以带 userInfo 或不带来创建它
 
 1090
 00:42:53,273 --> 00:42:55,439
 And I do want user info because,
+我需要 userInfo，因为
 
 1091
 00:42:55,441 --> 00:42:58,442
 when I send out on my radio station, I'm going to send
+当我在我的电台发送消息时，我将在我的
 
 1092
 00:42:58,444 --> 00:43:03,580
 the URL along as part of my user info, okay?
+userInfo 中发送 URL
 
 1093
 00:43:03,582 --> 00:43:05,348
 So I want this one, and
+我需要这个
 
 1094
 00:43:05,350 --> 00:43:09,685
 the name of it is GPXURL.notification.
+它的名字是 GPXURL.notification
 
 1095
 00:43:09,687 --> 00:43:14,089
 The object is myself, I'm the one sending on this station.
+这个对象是我自己，我自己在这个电台发送消息
 
 1096
 00:43:14,091 --> 00:43:16,357
 And user info is going to be.
+userInfo 是
 
 1097
 00:43:16,359 --> 00:43:20,127
 Well I need the key, GPXURL.key.
+我需要这个键，GPXURL.key
 
 1098
 00:43:20,129 --> 00:43:21,895
 We'll have to define that.
+我们需要定义这个
 
 1099
 00:43:21,897 --> 00:43:24,731
 And the value is this URL that was just passed through.
+这个 URL 的值会被传递
 
 1100
 00:43:25,867 --> 00:43:27,966
 There's no space here.
+这里没有空间
 
 1101
 00:43:27,968 --> 00:43:30,402
 Maybe we'll go to a larger font here.
+也许我们需要更大的字体
 
 1102
 00:43:30,404 --> 00:43:33,405
 How about this?
+这样如何？
 
 1103
 00:43:33,407 --> 00:43:35,773
 That better?
+好一点了？
 
 1104
 00:43:35,775 --> 00:43:36,607
@@ -4417,98 +5448,122 @@ Okay.
 1105
 00:43:36,609 --> 00:43:38,375
 So I need to define this key, so
+我需要定义这个 key
 
 1106
 00:43:38,377 --> 00:43:40,944
 I'll put that up here as well.
+我也把它放在这上面
 
 1107
 00:43:40,945 --> 00:43:43,512
 Static let the Key and this is just a key in that dictionary,
+static let key，这只是这个字典中的一个键
 
 1108
 00:43:43,515 --> 00:43:48,117
 that user info dictionary, so I'll call this GPXURL URL
+这个 userInfo 字典，我称之为 GPXURL URL Key
 
 1109
 00:43:48,119 --> 00:43:49,852
 key or something, I can call it whatever I want,
+或其他的，我可以命名它为任何我想要的
 
 1110
 00:43:49,854 --> 00:43:54,322
 it just has to be a unique key inside this user info thing.
+你只需要在 userInfo 中有一个唯一的键
 
 1111
 00:43:54,324 --> 00:43:57,459
 Okay, so, I've created the notification,
+因此，我已经创建了这个通知
 
 1112
 00:43:57,461 --> 00:44:00,962
 now I just tell the center post that notification.
+现在我要告诉 center，发送这个通知 
 
 1113
 00:44:00,964 --> 00:44:02,830
 Okay, notification, and
+通知，然后
 
 1114
 00:44:02,832 --> 00:44:06,333
 that's going to broadcast on that radio station.
+它会在电台中广播
 
 1115
 00:44:06,335 --> 00:44:09,803
 So, anyone who's listening is going to find out when a URL
+任何在收听的人都会发现一个 URL
 
 1116
 00:44:09,805 --> 00:44:12,472
 gets dropped into this app.
+已经被载入这个应用中
 
 1117
 00:44:12,474 --> 00:44:14,207
 So now, how do we listen to the radio station?
+现在，我们如何收听这个电台？
 
 1118
 00:44:14,209 --> 00:44:15,708
 Well, who wants to listen?
+谁想收听？
 
 1119
 00:44:15,710 --> 00:44:19,178
 It's going to be this view controller over here.
+这会是这里的视图控制器
 
 1120
 00:44:19,180 --> 00:44:22,514
 So, I've got my storyboard right here and let's put
+这里有我的 storyboard，让我们在
 
 1121
 00:44:22,516 --> 00:44:26,017
 something in our storyboard like, how about a text view.
+里面放一些东西，比如 text view
 
 1122
 00:44:26,019 --> 00:44:27,318
 Where's the text view?
+text view 在哪里？
 
 1123
 00:44:28,321 --> 00:44:29,953
 Here it is. So I'm going to drag this text
+这里，我将要把这个 text view
 
 1124
 00:44:29,955 --> 00:44:35,825
 view in here, put this somewhere, maybe right there.
+拖到这里，也许这里
 
 1125
 00:44:35,827 --> 00:44:41,197
 Okay, let's make sure we do our constraints, sorry, set
+让我们确保我们的 constraints，抱歉，设置
 
 1126
 00:44:41,199 --> 00:44:47,669
 the constraints, let's take a look at these constraints.
+constraints，让我看看这里的 constraints
 
 1127
 00:44:47,671 --> 00:44:50,638
 Actually, I'm going to have the top space be
+实际上，我想要顶部的空间为
 
 1128
 00:44:50,640 --> 00:44:53,174
 the standard value away.
+标准值
 
 1129
 00:44:53,176 --> 00:44:53,774
@@ -4517,30 +5572,37 @@ Okay?
 1130
 00:44:53,776 --> 00:44:55,275
 So I've got this text.
+我有了这个 text view
 
 1131
 00:44:55,277 --> 00:44:56,710
 Let's get that out of there.
+我们把这个拿出来
 
 1132
 00:44:56,712 --> 00:44:57,811
 I've got this nice text field.
+我有这个很好的 text field
 
 1133
 00:44:57,813 --> 00:44:59,112
 Let's go ahead and create an outlet for
+让我们继续，创建一个 outlet
 
 1134
 00:44:59,114 --> 00:45:03,315
 that into our view controllers, control drag.
+到我们的视图控制器，control 拖拽
 
 1135
 00:45:03,317 --> 00:45:05,817
 I'll call that textview, okay?
+我命名这个 textview
 
 1136
 00:45:05,819 --> 00:45:07,251
 We don't need any of this.
+我不需要这些
 
 1137
 00:45:10,023 --> 00:45:11,021
@@ -4549,138 +5611,172 @@ Okay?
 1138
 00:45:11,023 --> 00:45:12,122
 So, that's that.
+这就是了
 
 1139
 00:45:12,124 --> 00:45:14,357
 So, we've got our text view outlet right here.
+这里我们有我们的 textview outlet
 
 1140
 00:45:14,359 --> 00:45:17,360
 Now, all I'm going to do is when that radio station
+现在我们要做的是，当电台发送广播时
 
 1141
 00:45:17,362 --> 00:45:21,397
 broadcasts, I'm going to put the URL into that text view.
+我要把这个 URL 放到这个 textview 中
 
 1142
 00:45:21,399 --> 00:45:23,465
 Okay now, on Wednesday, we'll do much more.
+现在，周三，我们会做更多
 
 1143
 00:45:23,467 --> 00:45:25,133
 We'll put a map and we'll draw all this stuff, but here,
+我们会放一个地图，我们将在这里把所有东西都画出
 
 1144
 00:45:25,135 --> 00:45:27,185
 that's all I'm going to do.
+这是我所有要做到
 
 1145
 00:45:27,186 --> 00:45:29,236
 So, I'm going to put this in viewDidLoad,
+我要把这个放在 viewDidLoad
 
 1146
 00:45:29,239 --> 00:45:31,005
 super.viewDidLoad.
+super.viewDidLoad
 
 1147
 00:45:31,007 --> 00:45:32,006
 Don't forget, by the way,
+不要忘记，顺便提下
 
 1148
 00:45:32,008 --> 00:45:33,707
 in your view controller life cycle methods,
+在你们的视图控制器的生命周期方法中
 
 1149
 00:45:33,709 --> 00:45:34,741
 you need to call super.
+你需要调用 super
 
 1150
 00:45:34,743 --> 00:45:38,077
 I noticed a few of you not doing that.
+我注意到你们中有些人没有这么做
 
 1151
 00:45:38,079 --> 00:45:42,948
 So, to make this work, I'm just going to get my center,
+为了让这个工作，我只是获取我的 center
 
 1152
 00:45:42,950 --> 00:45:47,252
 NSNotificationCenter, default center.
+NSNotificationCenter.defaultCenter
 
 1153
 00:45:47,254 --> 00:45:49,887
 [SOUND] Default center.
+ DefaultCenter
 
 1154
 00:45:49,889 --> 00:45:51,322
 Okay, I've got the center.
+我获取了这个 center
 
 1155
 00:45:51,324 --> 00:45:54,658
 You remember that I need a cue to put it on.
+你们记得我需要一个线程来放置这个
 
 1156
 00:45:54,660 --> 00:45:56,660
 So I'm going to do it on the main cue.
+我要在主线程中做这个
 
 1157
 00:45:56,662 --> 00:46:02,165
 So, I'm going to do NSOperationQueue.mainQueue.
+我要处理 NSOperationQueue.mainQueue
 
 1158
 00:46:02,167 --> 00:46:05,601
 And, I'm looking for this URL broadcast
+我从 appDelegate 寻找 URL 广播
 
 1159
 00:46:05,603 --> 00:46:09,204
 from the app delegate, which I can get by saying
+通过 UIApplication.sharedApplication().delegate 来
 
 1160
 00:46:09,206 --> 00:46:14,075
 UIApplication.sharedApplicati- on().delegate, because the app
+获取代理，因为 AppDelegate 只是一个
 
 1161
 00:46:14,077 --> 00:46:16,444
 delegate is just the delegate of UI applications.
+UIApplication 的代理
 
 1162
 00:46:16,446 --> 00:46:20,014
 So, now I have all the information I need to do this.
+现在我有需要的所有信息
 
 1163
 00:46:20,016 --> 00:46:21,648
 I'll make this even wider.
+我要把这个变宽一些
 
 1164
 00:46:21,650 --> 00:46:25,385
 And I'm just going to center, add observer for name.
+我要在 center，addObserverForName
 
 1165
 00:46:25,387 --> 00:46:27,821
 So here's the add observer for the name, right here.
+这是 addObserverForName， 这里
 
 1166
 00:46:27,823 --> 00:46:31,024
 Just the one we want, the one that has a block at the end.
+这就是我们想要的，这个在结尾有一个 block
 
 1167
 00:46:31,026 --> 00:46:34,860
 The one we want is GPXURL.Notification.
+我们要的是 GPXURL.Notification
 
 1168
 00:46:34,862 --> 00:46:37,863
 We're interested when the app delegate sends it.
+我们感兴趣的事 appDelegate 发送这个通知
 
 1169
 00:46:37,865 --> 00:46:40,032
 We want the queue to be that main queue.
+我们想要的队列是主队列
 
 1170
 00:46:40,034 --> 00:46:45,770
 And we're going to use our nice swift thing
+我们要使用我们好用的 swift 的东西
 
 1171
 00:46:45,772 --> 00:46:51,542
 where we can put a closure after a method like this.
+这里，我们可以像这样在一个方法后放一个闭包
 
 1172
 00:46:51,544 --> 00:46:52,342
@@ -4689,78 +5785,97 @@ Okay?
 1173
 00:46:52,344 --> 00:46:54,310
 Here's the notification, right?
+这是 notification
 
 1174
 00:46:54,312 --> 00:46:56,012
 So we'll just say notification,
+所以我们就写 notification
 
 1175
 00:46:56,014 --> 00:46:58,514
 actually don't even need to put this
+实际上我们甚至不需要把这个
 
 1176
 00:46:58,516 --> 00:47:00,616
 void business in there.
+空的东西放在这里
 
 1177
 00:47:00,618 --> 00:47:01,983
 So there's the notification.
+这是 notification
 
 1178
 00:47:01,985 --> 00:47:05,153
 So inside here, this is going to be called every time that
+在这里面，每次电台发送广播时
 
 1179
 00:47:05,155 --> 00:47:06,220
 radio station broadcasts,
+这个都会被调用
 
 1180
 00:47:06,222 --> 00:47:09,023
 in other words every time a URL is dropped in.
+换句话说，每次一个 URL 被放入时
 
 1181
 00:47:09,025 --> 00:47:11,125
 And so, all I"m going to do here is I'm going to say,
+这里我所要做的是，我要说
 
 1182
 00:47:12,261 --> 00:47:19,699
 if let the URL equal the notification?.userInfo and
+if let url = notification?.userInfo，然后
 
 1183
 00:47:19,701 --> 00:47:22,702
 we'll look up in there the GPXURL.key, and
+我们在这里检查 GPXURL.Key，然后
 
 1184
 00:47:22,704 --> 00:47:24,269
 notice I had to put some question marks in there
+注意这里我写了几个问号
 
 1185
 00:47:24,271 --> 00:47:26,371
 because some of these are optionals.
+因为他们中的一些是 optionals（类型）
 
 1186
 00:47:26,373 --> 00:47:29,074
 Okay, this is probably not actually an optional.
+这个很可能不是 optional
 
 1187
 00:47:29,076 --> 00:47:33,744
 But, and then, that is an NSURL because, remember,
+但，然后，这是一个 NSURL，因为记住
 
 1188
 00:47:33,746 --> 00:47:38,148
 that this user info dictionary, the values are any
+这个 userInfo 字典，它的值是任何
 
 1189
 00:47:38,150 --> 00:47:43,219
 object, so I have to cast it to what I actually want.
+对象，所以我需要把它转换成我实际需要的
 
 1190
 00:47:43,221 --> 00:47:46,455
 And now, I'm just going to say
+现在，我要说
 
 1191
 00:47:46,457 --> 00:47:51,827
 self.textView.text equals Received this URL.
+self.textView.text = "Receive \(url)"
 
 1192
 00:47:51,829 --> 00:47:55,030
@@ -4769,86 +5884,107 @@ Okay?
 1193
 00:47:55,032 --> 00:47:56,831
 Any questions about that?
+这里有问题吗？
 
 1194
 00:47:56,833 --> 00:48:02,169
 So now, when I run this Trax,.
+现在，当我运行这个 Trax
 
 1195
 00:48:02,171 --> 00:48:04,871
 Instead of it putting it on the console,
+不是把它（URL）输出在 console，而是
 
 1196
 00:48:04,873 --> 00:48:07,807
 it's gonna actually put it in the content,
+输出在 content 上
 
 1197
 00:48:07,809 --> 00:48:09,475
 that text view of track.
+track 的 textView 上
 
 1198
 00:48:09,477 --> 00:48:11,811
 So let's go over here again.
+让我们再到这里
 
 1199
 00:48:11,813 --> 00:48:13,412
 Luckily this time it's showing.
+幸运地，这次它出现了
 
 1200
 00:48:13,414 --> 00:48:14,312
 There we go.
+开始了
 
 1201
 00:48:14,314 --> 00:48:15,347
 So let's go over here.
+让我们到这里
 
 1202
 00:48:15,348 --> 00:48:16,381
 I'm just going to drag it on here.
+我要把它拖拽到这里
 
 1203
 00:48:17,884 --> 00:48:19,784
 Okay, it's asking me if I want to accept it again.
+它又问我是否要接受它
 
 1204
 00:48:19,786 --> 00:48:21,118
 I'm gonna say Accept.
+我接受了
 
 1205
 00:48:21,120 --> 00:48:21,685
 And there it is.
+这就是了
 
 1206
 00:48:21,687 --> 00:48:23,553
 It puts it on there.
+它把它（URL）输出在这里了
 
 1207
 00:48:24,723 --> 00:48:28,991
 Okay, now interesting see it says it's Vacation-1.gpx
+看，有趣的是，这是它输出 Vacation-1.gpx
 
 1208
 00:48:28,993 --> 00:48:31,226
 this time, where it was just vacation before.
+之前它只是 vacation
 
 1209
 00:48:31,228 --> 00:48:35,963
 And if I drag it on again, it's gonna be Vacation-2.
+如果我再次拖拽，它将会是 Vacation-2
 
 1210
 00:48:35,965 --> 00:48:38,199
 Okay, so it's collecting these things.
+所以它在收集这些东西
 
 1211
 00:48:38,201 --> 00:48:39,367
 See Vacation-2?
+看，Vacation－2？
 
 1212
 00:48:39,368 --> 00:48:40,534
 So now I actually have three of these things that
+实际上，现在我有三个这样的文件
 
 1213
 00:48:40,536 --> 00:48:41,768
 I've dragged in three times.
+我拖拽三次的文件
 
 1214
 00:48:43,071 --> 00:48:45,038
@@ -4857,26 +5993,32 @@ Okay?
 1215
 00:48:45,039 --> 00:48:47,006
 So you can see now how this ViewController right here
+现在你们可以看到这里的 ViewController
 
 1216
 00:48:47,008 --> 00:48:50,242
 in an object-oriented way is very self-contained.
+以一种面向对象的方式，非常独立的
 
 1217
 00:48:50,244 --> 00:48:53,846
 It displays GPX files somehow, and all it does is sign up to
+它以某种方式显示 GPX 文件，它所做的是注册
 
 1218
 00:48:53,848 --> 00:48:56,581
 the radio station that says I received one.
+电台，它在收听这个文件
 
 1219
 00:48:56,583 --> 00:48:58,049
 And then it goes and does what it does.
+然后它走了，做它该做的
 
 1220
 00:48:58,051 --> 00:49:00,551
 And again on Wednesday we'll actually draw the map.
+周三，我们会绘制这个地图
 
 1221
 00:49:01,854 --> 00:49:03,220
@@ -4885,198 +6027,247 @@ Okay?
 1222
 00:49:03,222 --> 00:49:04,054
 Any question about that?
+这里有问题吗？
 
 1223
 00:49:06,191 --> 00:49:07,356
 All righty, that is it.
+好吧，这就是了
 
 1224
 00:49:07,358 --> 00:49:08,891
 Back to our slides.
+回到我们的幻灯片
 
 1225
 00:49:10,828 --> 00:49:14,262
 Where's my slides here?
+我的幻灯片在哪里，这里？
 
 1226
 00:49:14,264 --> 00:49:18,933
 Slides, okay, all right.
+幻灯片，好的
 
 1227
 00:49:18,935 --> 00:49:22,036
 So the next thing we'll talk about is core motion.
+接下来我们要谈论的是 core motion
 
 1228
 00:49:22,038 --> 00:49:26,406
 So core motion is what's happening with the hardware.
+core motion 是硬件在做什么
 
 1229
 00:49:26,408 --> 00:49:30,176
 And the primary inputs to that are the accelerometer,
+最主要的输入是，加速计
 
 1230
 00:49:30,178 --> 00:49:32,278
 the gyro, and the magnetometer.
+陀螺仪，磁力计
 
 1231
 00:49:32,280 --> 00:49:34,046
 Not all devices have all those things.
+不是所有的设备都有这三样东西
 
 1232
 00:49:34,048 --> 00:49:35,647
 Newer devices have them all.
+新的设备都有这三个
 
 1233
 00:49:35,649 --> 00:49:39,718
 But older devices, some of them don't have it.
+但老设备，有一些是没有这些的
 
 1234
 00:49:39,720 --> 00:49:42,186
 The class that you use to get all the information about this
+你们使用的获取这些信息的类
 
 1235
 00:49:42,188 --> 00:49:45,690
 is called CMMotionManager, so CM is core motion.
+叫做 CMMotionManager，所以 CM 是 core motion
 
 1236
 00:49:45,692 --> 00:49:48,992
 That's the name of the framework this is all in.
+这是这个框架的名字，所有东西都在这里面
 
 1237
 00:49:48,994 --> 00:49:52,529
 And so the motion manager, you really only want to have
+所以 motion manager，在每个应用中你实际
 
 1238
 00:49:52,531 --> 00:49:56,632
 one of these per app, because you only have one gyro, okay,
+只需要它们中的一个，因为你只有一个陀螺仪
 
 1239
 00:49:56,634 --> 00:49:59,435
 and one accelerometer, one magnetometer.
+一个加速计，一个磁力计
 
 1240
 00:49:59,437 --> 00:50:01,003
 So you really want one of these.
+所以你实际要它们中的一个
 
 1241
 00:50:01,004 --> 00:50:02,570
 So you want to put it in some global space and share it,
+如果你想要把它放在一些全局空间并分享它
 
 1242
 00:50:02,573 --> 00:50:05,240
 like maybe your app delegate would be a good place.
+也许你的 appDelegate 是一个好的地方
 
 1243
 00:50:05,242 --> 00:50:06,641
 The way you use the motion manager,
+你使用 motion manager 的方式
 
 1244
 00:50:06,643 --> 00:50:08,042
 there's really two ways to do it.
+实际上有两种方式使用它
 
 1245
 00:50:08,044 --> 00:50:11,312
 Polling, which is, you create one of these motion managers.
+Polling，这个是，你创建这些 motion manager 中的一个
 
 1246
 00:50:11,314 --> 00:50:13,547
 You check to see what hardware is available like,
+你检查哪个硬件可以使用
 
 1247
 00:50:13,549 --> 00:50:15,749
 is accelerometer available, gyro, or whatever.
+比如加速计可用，还是陀螺仪，还是其他任何的
 
 1248
 00:50:15,751 --> 00:50:19,085
 And then you just start asking for the value over and over.
+然后你开始不停的询问这个值
 
 1249
 00:50:19,087 --> 00:50:20,820
 Usually, we don't do it that way.
+一般的，我们不这么用
 
 1250
 00:50:20,822 --> 00:50:21,887
 We do it the second way,
+我们使用第二种方式
 
 1251
 00:50:21,889 --> 00:50:24,690
 which is, we check to see what's available.
+也就是，我们检查哪个可用
 
 1252
 00:50:24,692 --> 00:50:27,559
 And then if it's available, we say how often we want to
+然后如果它可用，我们会说我们想要多久
 
 1253
 00:50:27,561 --> 00:50:30,962
 receive an update, 'kay, how often we want to get
+收到一个更新，比如我们想要加速计
 
 1254
 00:50:30,964 --> 00:50:33,331
 the acceleration from the accelerometer for example.
+加速多频繁
 
 1255
 00:50:33,333 --> 00:50:36,033
 And then you register a closure, 'kay,
+然后，你注册一个闭包
 
 1256
 00:50:36,035 --> 00:50:39,169
 a block of code, that will get called each time.
+一个代码块，它每次都会被调用
 
 1257
 00:50:39,171 --> 00:50:41,772
 'Kay, so that's a much more sensible way to do this than
+这种方式要比 polling 来得明智些
 
 1258
 00:50:41,774 --> 00:50:44,440
 polling, and so that's the way we're going to do this.
+这就是我们要使用的方式
 
 1259
 00:50:45,843 --> 00:50:47,343
 Notice that I had mentioned checking
+注意，我提到了检查它的
 
 1260
 00:50:47,345 --> 00:50:49,378
 the availability of it.
+可用性
 
 1261
 00:50:49,379 --> 00:50:51,412
 Well, because some devices don't have a gyro, for
+因为有些设备并没有一个陀螺仪
 
 1262
 00:50:51,415 --> 00:50:52,614
 example, you have to check.
+你必须检查
 
 1263
 00:50:52,616 --> 00:50:55,550
 And you do that by just asking the motion manager,
+你只需要询问 motion manager 
 
 1264
 00:50:55,552 --> 00:50:57,551
 accelerometer Available?
+加速计是否可用？
 
 1265
 00:50:57,553 --> 00:51:00,054
 And that will return true if it's available and
+然后如果可用它会返回真
 
 1266
 00:51:00,056 --> 00:51:01,455
 false if it's not.
+否则返回假
 
 1267
 00:51:01,457 --> 00:51:05,091
 Okay, you can do that for all the different hardware things.
+所有不同的硬件你都可以使用这种方式
 
 1268
 00:51:05,093 --> 00:51:10,329
 Then you start the motion manager reporting to you.
+然后 motion manager 开始向你发送报告
 
 1269
 00:51:10,331 --> 00:51:14,833
 Now, again, if you're polling, you can just say start update.
+再次，如果你使用 polling，你只需要开始更新
 
 1270
 00:51:14,835 --> 00:51:17,002
 And then it will start updating it, and
+
 
 1271
 00:51:17,004 --> 00:51:19,504

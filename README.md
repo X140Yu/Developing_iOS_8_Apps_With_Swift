@@ -17,7 +17,7 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 6. Protocols and Delegation, Gestures | 完成 | 完成 5/6
 7. Multiple MVCs | 完成 | 完成
 8. View Controller Lifecycle, Autolayout | 完成 | 未开始
-9. Scroll View and Multithreading | 完成 5/6 | 未开始
+9. Scroll View and Multithreading | 完成 | 未开始
 10. Table View| 完成 | 未开始
 11. Unwind Segues, Alerts, Timers, View Animation | 进行中 | N/A
 12. Dynamic Animation | 进行中 | N/A

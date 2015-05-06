@@ -2,7146 +2,8932 @@
 ﻿1
 00:00:00,001 --> 00:00:04,536
 [MUSIC]
+欢迎收看斯坦福大学公开课
 
 2
 00:00:04,538 --> 00:00:07,672
 Stanford University.
+本字幕由志愿者义务贡献
 
 3
 00:00:07,674 --> 00:00:12,409
 >> Okay, well, welcome to Lecture 15 of
+欢迎参加斯坦福大学 2015 年冬季学期的 
 
 4
 00:00:12,411 --> 00:00:18,114
 Stanford CS193P Winter of 2015.
+CS193P 课程的第15讲。
 
 5
 00:00:18,116 --> 00:00:21,951
 So my topic slide today, I actually have topics for
+这是今天的幻灯片，实际上这些内容是我们这一周两节课
 
 6
 00:00:21,953 --> 00:00:24,353
 this whole week, the two days.
+所要讲的内容。
 
 7
 00:00:24,355 --> 00:00:29,691
 This is going to be kinda one continuous demonstration.
+接着将继续一个 deom 演示
 
 8
 00:00:29,693 --> 00:00:31,459
 Where I'm going to go back to the demonstration,
+deom 演示完成之后，我会在来讲幻灯片上的内容,
 
 9
 00:00:31,461 --> 00:00:33,561
 back to the slides, back to the demonstration.
+然后在再返回继续 deom 演示。
 
 10
 00:00:33,563 --> 00:00:35,263
 Although today,
+至于今天，
 
 11
 00:00:35,264 --> 00:00:36,964
 I'm probably only going to cover that first slide point.
+我估计只能讲完幻灯片上第一部分，
 
 12
 00:00:36,966 --> 00:00:39,733
 And then, I have a demo pretty much the rest of the way.
+接着，剩余的大部分时间我会现场做一个 demo 演示。
 
 13
 00:00:39,735 --> 00:00:42,035
 If I have time left, which hopefully I do,
+如果还有时间剩余，我希望会是这样的，
 
 14
 00:00:42,037 --> 00:00:43,936
 I will do the slides for the camera.
+我会继续讲关于摄像头的部分。
 
 15
 00:00:43,938 --> 00:00:46,906
 And then, we can start off on Wednesday with the camera part
+这样的话，我们周三就可以直接开始摄像头的 demo 演示，
 
 16
 00:00:46,908 --> 00:00:50,309
 of the demo and then move on to the rest of the stuff.
+然后再接着讲下面的内容。
 
 17
 00:00:50,311 --> 00:00:51,977
 But, it's pretty action-packed.
+嗯，是挺令人激动的。
 
 18
 00:00:51,979 --> 00:00:53,144
 I have a lot of stuff to cover,
+我有很多东西需要讲，
 
 19
 00:00:53,146 --> 00:00:55,213
 especially in today's demo.
+特别是今天的 demo 。
 
 20
 00:00:55,215 --> 00:00:57,314
 It's gonna be a lot more even than just modal and
+将包括很多内容，不仅仅是 model segue (模态segue)
 
 21
 00:00:57,316 --> 00:00:59,450
 popover segues.
+和 popover segue（弹出框segue）。
 
 22
 00:00:59,451 --> 00:01:01,585
 I'm gonna talk a little bit more about notifications and
+我也会加一些 notification 和 adaptations 
 
 23
 00:01:01,587 --> 00:01:03,553
 adaptations, things like that.
+方面的内容。
 
 24
 00:01:03,555 --> 00:01:05,221
 So there's a lot to cover.
+对，有很多内容呢。
 
 25
 00:01:05,223 --> 00:01:08,624
 All right so I'm going to dive in here though with modal
+我将从 modal view controllers 开始，
 
 26
 00:01:08,626 --> 00:01:11,427
 view controllers and I intentionally put off
+我是故意将 modal segue（模态segue） 
 
 27
 00:01:11,429 --> 00:01:15,264
 the modal segues until towards the end of the quarter.
+放到了这个学期的最后才讲。
 
 28
 00:01:15,266 --> 00:01:17,366
 Because when people see it early, they're like, oh, wow,
+因为如果你早知道了它，你就会，哇
 
 29
 00:01:17,368 --> 00:01:18,867
 I'm just gonna put everything up modally.
+我可以在任何地方都用它来搞定。
 
 30
 00:01:18,869 --> 00:01:21,069
 It's just so easy to do a modal segue.
+modal segue（模态segue）用起来非常简单。
 
 31
 00:01:21,071 --> 00:01:22,636
 And it is easy to do a modal segue.
+对的，modal segue用起来非常方便。
 
 32
 00:01:22,638 --> 00:01:26,239
 But it actually has to be used with care because since it
+但是实际上用起来要非常小心，如果用的时候一旦锁住屏幕，
 
 33
 00:01:26,241 --> 00:01:27,874
 locks up, you're out,
+你就完了，
 
 34
 00:01:27,876 --> 00:01:31,411
 basically until they deal with what's on-screen.
+基本上，modal segue（模态segue）主要是用来处理屏幕上的内容。
 
 35
 00:01:31,413 --> 00:01:34,847
 The users can kinda be a little bit disturbed by modal.
+用户有时反而会被它给弄迷糊了。
 
 36
 00:01:37,184 --> 00:01:39,984
 Generally users prefer more free flowing thing where they
+一般来说，用户更愿意见到的情况是
 
 37
 00:01:39,986 --> 00:01:42,253
 can click on something and then move back and
+点击一个地方，就能返回。
 
 38
 00:01:42,255 --> 00:01:44,388
 things you know, flow a little better.
+这样会更好。
 
 39
 00:01:44,390 --> 00:01:47,191
 But there are sometimes when it just doesn't make sense for
+但是有时候，你的APP不允许这样，
 
 40
 00:01:47,193 --> 00:01:49,793
 your app to proceed without stopping the user and
+必须要求用户回答一个问题之后，
 
 41
 00:01:49,795 --> 00:01:52,429
 making them answer a question.
+才能正常跳转。
 
 42
 00:01:52,431 --> 00:01:55,565
 So modal view controllers is what that's good for.
+这时，modal view controller 就是派这个用场的。
 
 43
 00:01:55,567 --> 00:01:58,668
 We've already seen modal view controllers, actually.
+实际上，我们已经见过 modal view  controller 了。
 
 44
 00:01:58,670 --> 00:02:01,570
 The alerts, the whole alert and action sheet thing.
+alert ，整个 alert 和 action sheet 包括在一起。
 
 45
 00:02:01,572 --> 00:02:03,538
 That's nothing more than a UIViewController
+它们就是一个 UIViewController 。
 
 46
 00:02:03,540 --> 00:02:05,507
 that we put up modally.
+我们将其设置为模态化。
 
 47
 00:02:05,508 --> 00:02:07,475
 Notice that it took over the screen, didn't let us do
+注意到，它在屏幕上之后，除非我们点击了之后，
 
 48
 00:02:07,477 --> 00:02:11,145
 anything until we responded to the alert of the action seat.
+否则我们不能操作其它任何东西。
 
 49
 00:02:11,147 --> 00:02:13,748
 And modal view controllers are just creating your own
+modal view controller 就是创建了你自己创建的 View Controller
 
 50
 00:02:13,750 --> 00:02:15,249
 things that pop up and
+并且弹出的屏幕上，
 
 51
 00:02:15,251 --> 00:02:17,050
 don't let the user proceed until you deal with it.
+它要求用户必须响应，否则不允许进行其他任何的操作。
 
 52
 00:02:17,052 --> 00:02:20,754
 So here's an example of a modal view controller.
+这里有一个 modal view controller 的例子。
 
 53
 00:02:20,756 --> 00:02:23,122
 Here, I'm in the contacts app.
+这里，我在联系人的 app 里。
 
 54
 00:02:23,124 --> 00:02:26,659
 And if I tap on that little plus in the corner,
+如果你点击右上角的的加号，
 
 55
 00:02:26,661 --> 00:02:29,228
 it's gonna put up a modal MVC.
+这里就会出现一个模态的 MVC.
 
 56
 00:02:29,230 --> 00:02:32,397
 So I'll tap on it, then modal MVC slides up from the bottom.
+接着我点击一下，这个模态的 MVC就从底部滑动出来。
 
 57
 00:02:32,399 --> 00:02:36,501
 This is an MVC that lets you add a new contact.
+这个 MVC 让你增加一个新的联系人。
 
 58
 00:02:36,503 --> 00:02:38,970
 And so that's something that you wanna kinda get it all
+这样，你就可以继续
 
 59
 00:02:38,972 --> 00:02:39,770
 the way you want.
+你想做的。
 
 60
 00:02:39,772 --> 00:02:41,238
 And say, okay, add it,
+就是说，好，加一个，
 
 61
 00:02:41,240 --> 00:02:44,574
 rather than it being kinda partially added all the time.
+我们是不会一直都需要增加新的联系人。
 
 62
 00:02:44,576 --> 00:02:45,942
 So that's why they use modal here.
+所以我们这里用模态对话框。
 
 63
 00:02:45,944 --> 00:02:47,710
 Although, you could probably even think of a way to do this
+尽管，你也可以想到不用模态对话框
 
 64
 00:02:47,712 --> 00:02:48,310
 non-modally.
+的方法。
 
 65
 00:02:48,312 --> 00:02:49,745
 But it's not bad.
+但是，这个方法其实不错呀。
 
 66
 00:02:49,747 --> 00:02:52,781
 Now notice that there's no back button per se.
+注意下，这里是没有返回按钮的。
 
 67
 00:02:52,783 --> 00:02:54,082
 But a lot of times where the back
+但是大多数时候，我们
 
 68
 00:02:54,084 --> 00:02:56,684
 button usually would be is a cancel button, okay.
+看到的返回按钮就是取消按钮，
 
 69
 00:02:56,686 --> 00:02:57,852
 Which will take them back,
+一样可以让我们回去，对的！
 
 70
 00:02:57,854 --> 00:03:00,220
 but it will cancel whatever they're doing in this
+这样的话，在模态对话框里，你所做的操作，
 
 71
 00:03:00,222 --> 00:03:01,889
 modal view controller.
+都不会被保存。
 
 72
 00:03:01,890 --> 00:03:03,557
 And then, often, in the upper right, there is a button,
+嗯，一般情况下，在右上角，这里都会有一个按钮，
 
 73
 00:03:03,559 --> 00:03:06,359
 a done button, or save button, or something like.
+done，或是 save ，或是什么其他名字的。
 
 74
 00:03:06,361 --> 00:03:09,562
 That will usually commit the changes in the modal
+用来提交我们的内容，
 
 75
 00:03:10,498 --> 00:03:13,065
 view controller, and then dismiss it, okay.
+然后将当前视图从当前的显示中移除。
 
 76
 00:03:13,067 --> 00:03:15,500
 Now, this particular modal view controller actually
+现在，一个单独的 modal view controller 也是可以
 
 77
 00:03:15,502 --> 00:03:18,169
 can put another modal view controller up.
+被放在另一个 modal view controller 的上面。
 
 78
 00:03:18,171 --> 00:03:19,270
 If you look at this button here,
+大家看下这个按钮，
 
 79
 00:03:19,272 --> 00:03:20,904
 add photo, if you click on it,
+add photo，你点击一下它，
 
 80
 00:03:20,906 --> 00:03:23,106
 it's going to put another modal view controller up.
+将会出现另外一个 modal view controller 。
 
 81
 00:03:23,108 --> 00:03:25,108
 It slides up from the bottom,
+从底部滑出来。
 
 82
 00:03:25,110 --> 00:03:27,677
 asking you to pick a photo from your photo library here.
+让你从你的相册种选择一张照片，
 
 83
 00:03:27,679 --> 00:03:29,879
 I don't have any photos so I couldn't do it.
+我现在没有照片，所以没法选。
 
 84
 00:03:29,881 --> 00:03:32,648
 There's no back button here because you
+这里是没有返回按钮的，因为你必须选择一张照片，
 
 85
 00:03:32,650 --> 00:03:34,516
 either pick a photo or you cancel.
+或是你不选。
 
 86
 00:03:34,518 --> 00:03:35,650
 Okay, so you don't need a dumb button.
+对吧，你不需要一个没用的按钮。
 
 87
 00:03:35,652 --> 00:03:38,186
 I would have argued that that cancel button,
+我认为过这里的取消按钮，
 
 88
 00:03:38,188 --> 00:03:39,887
 I kind of feel like should be on the left.
+应该是在左边的。
 
 89
 00:03:39,889 --> 00:03:42,723
 This is an Apple app, so I guess I'm wrong.
+不过这是苹果的官方 App ，所以我想应该是我错了。
 
 90
 00:03:42,725 --> 00:03:44,324
 But to me I'm always,
+但对于我来说，
 
 91
 00:03:44,326 --> 00:03:47,460
 kinda looking to the upper left for get me out of here,
+我一直认为左上角应该有一个按钮，让我离开，
 
 92
 00:03:47,462 --> 00:03:50,496
 get me back to what I was before, but anyway.
+返回到我之前的页面。
 
 93
 00:03:50,498 --> 00:03:54,200
 So if we do hit that cancel button you can see that this
+这里，我点击取消按钮，你可以看到
 
 94
 00:03:54,202 --> 00:03:57,369
 modal view controller then will dismiss, and
+modal view controller 就会被移除了，然后就可以看到
 
 95
 00:03:57,371 --> 00:03:58,570
 the other one comes back.
+之前的 View Controller。
 
 96
 00:03:58,572 --> 00:03:59,871
 And same thing here.
+同样的，
 
 97
 00:03:59,873 --> 00:04:02,874
 Once we're done in here let's say we Cancel or we hit Done,
+一旦我们点击了 done ，结果也是
 
 98
 00:04:02,876 --> 00:04:03,741
 either way.
+一样的。
 
 99
 00:04:03,743 --> 00:04:05,109
 And then, this one will dismiss and
+也是，当前的内容会被移除，返回
 
 100
 00:04:05,111 --> 00:04:06,394
 it goes back to where you were.
+之前的页面。
 
 101
 00:04:06,395 --> 00:04:07,678
 So that's the way modal view controllers work.
+这就是 modal view controoler 的工作方式。
 
 102
 00:04:07,680 --> 00:04:10,146
 They just take over the screen, you do something and
+它们出现在屏幕上，你进行了一些操作之后，它们
 
 103
 00:04:10,148 --> 00:04:11,781
 then when they're done they dismiss.
+就会被移除。
 
 104
 00:04:11,783 --> 00:04:13,149
 Now there's a lot of different ways for
+modal view controller有很多种
 
 105
 00:04:13,151 --> 00:04:16,785
 modal view controllers to appear on the screen visually.
+不同展现在屏幕上的方式。
 
 106
 00:04:16,787 --> 00:04:18,820
 And we will talk about that.
+后面我们会谈到。
 
 107
 00:04:20,123 --> 00:04:22,890
 So as I said, you want to be careful with these.
+不过我要说，你必须要小心使用它们。
 
 108
 00:04:22,892 --> 00:04:25,059
 They do block your UI,
+它们会阻止你的 UI 响应，
 
 109
 00:04:25,061 --> 00:04:28,796
 it will be completely only doing this one thing.
+你只能完成modal view controller 的处理之后，才能继续。
 
 110
 00:04:28,798 --> 00:04:30,781
 Again, sometimes that's what you want.
+当然，有些时候，这就是你想要的。
 
 111
 00:04:30,782 --> 00:04:32,765
-But don't jump to modal view controllers as your a1 first
+But don't jump to modal view controllers as your at first
+但是，当你需要将你的 MVC 展示到屏幕上时，不要将modal view controller
 
 112
 00:04:32,768 --> 00:04:35,535
 solution to every time you want to put an MVC on screen.
+作为你的第一选择。
 
 113
 00:04:35,537 --> 00:04:37,570
 You got navigation controllers,
+你可以使用 navigation controller，
 
 114
 00:04:37,572 --> 00:04:40,873
 you got split views, you got tab bars, stuff like that,
+你可以使用 split view ，你可以使用 tab bar 这些方法，
 
 115
 00:04:40,875 --> 00:04:43,842
 those are usually better solutions if possible.
+通常，这些都是更好的解决方案。
 
 116
 00:04:44,911 --> 00:04:47,545
 All right, so how do we set up a modal segue?
+好吧，那我们如何设置一个 modal segue ？
 
 117
 00:04:47,547 --> 00:04:48,880
 Very, very simple.
+非常非常简单。
 
 118
 00:04:48,881 --> 00:04:50,214
 You've got your storyboard, well,
+你已经有了 storyboard ，
 
 119
 00:04:50,216 --> 00:04:53,050
 sometimes you'll get a MVC, like the alert MVC in code,
+你有一个 MVC , 比如一个 Alert MVC ，
 
 120
 00:04:53,052 --> 00:04:55,652
 and you put it up with that present view controller.
+你想把它放到你当前展示的 View Controller 上面。
 
 121
 00:04:55,654 --> 00:04:57,020
 And I'll talk about that here in a second.
+我下面马上就会讲到这个。
 
 122
 00:04:57,022 --> 00:04:58,755
 But if you're doing your own MVC,
+但如果你需要处理的是你自己创建的 MVC ,
 
 123
 00:04:58,757 --> 00:05:01,290
 usually it's in your storyboard, you've built
+通常是在你的 storyboard 里的 MVC ,
 
 124
 00:05:01,292 --> 00:05:04,059
 the MVC that you want to put up modally in there.
+你会希望以模态的形式展示。
 
 125
 00:05:04,061 --> 00:05:06,294
 And then you just Ctrl + drag to it.
+这样你只需要按住Ctrl通过拖拽就可以完成。
 
 126
 00:05:06,296 --> 00:05:09,197
 But instead of saying, show or show detail,
+不过这次不选择 show 或者 show detail，
 
 127
 00:05:09,199 --> 00:05:11,332
 you say present modally, okay?
+而是选择 present modally ，懂了吗？
 
 128
 00:05:11,334 --> 00:05:14,935
 And that's just gonna make your MVC appear on screen and
+这就可以让你的 MVC 以模态的形式展现屏幕上，
 
 129
 00:05:14,937 --> 00:05:17,437
 take over and it's as simple as that.
+就这么简单。
 
 130
 00:05:18,774 --> 00:05:21,040
 You can inspect the segue.
+你可以检查一下这个 segue 。
 
 131
 00:05:21,042 --> 00:05:25,344
 Anytime you make a segue you can always inspect it
+你任何时候都可以检查 segue，
 
 132
 00:05:25,346 --> 00:05:28,980
 to set the style of segue modal,
+并且将它的类型设置为 modal 
 
 133
 00:05:28,982 --> 00:05:32,450
 or push, or you know, the shows, or whatever.
+或是 push ，或是其他的，比如 show 之类的。
 
 134
 00:05:32,452 --> 00:05:35,353
 And you can also inspect the style or presentation of
+同时你也可以看到 modal 下的不同展示样式
 
 135
 00:05:35,355 --> 00:05:38,155
 modal, which we'll show you in a second as well.
+我后面也会展示给你们看的。
 
 136
 00:05:39,558 --> 00:05:42,359
 So, if you need to present a modal view controller,
+好了，如果你需要展示一个 modal view controller ，
 
 137
 00:05:42,361 --> 00:05:45,595
 not from a button, so you want some other action.
+但不是通过一个按钮 ， 你希望通过其他的 action ，
 
 138
 00:05:45,597 --> 00:05:47,897
 Like, for example, you had a map view and
+举个例子，你有一个 map view 然后，
 
 139
 00:05:47,899 --> 00:05:50,566
 you wanted a call-out button to do a modal thing,
+你希望有一个 Call-out（呼出）按钮，实现模态的对话框，
 
 140
 00:05:50,568 --> 00:05:52,734
 which is what we're gonna do today.
+顺便说下，这就是我们今后后面需要做的，
 
 141
 00:05:52,736 --> 00:05:55,070
 Then you can perform segue from code.
+然后你可以在代码里直接调用 segue 。
 
 142
 00:05:55,072 --> 00:05:57,405
 You already know how to do that.
+你应该已经知道怎么做了，
 
 143
 00:05:57,407 --> 00:06:00,374
 Or if you actually have the view controller in your hand,
+或是你已经有了一个 view controller,
 
 144
 00:06:00,376 --> 00:06:02,643
 you got it cuz it's an alert view controller.
+比如你已经有了一个 alert view controller。
 
 145
 00:06:02,645 --> 00:06:05,045
 Or when we do the camera we're gonna understand that
+或是一个摄像头的 view controller ，后面我们会讲到关于摄像头的使用，
 
 146
 00:06:05,047 --> 00:06:07,347
 the camera thing gives us a view controller.
+它其实返回给我们的也是一个 view controller 。
 
 147
 00:06:07,349 --> 00:06:09,615
 We can actually present the view controller using present
+我们都可以将这些 View Controller 
 
 148
 00:06:09,617 --> 00:06:10,817
 view controller.
+直接展示出来。
 
 149
 00:06:10,818 --> 00:06:12,018
 Same way that we did alerts.
+和我们处理 alert 的方式是一样的。
 
 150
 00:06:12,020 --> 00:06:13,986
 And that's just going to present it.
+接着我们就要把它展示出来。
 
 151
 00:06:15,055 --> 00:06:18,523
 How it's presented is actually determined by a property
+具体如何展示实际上时取决于当前已经在展示的 view controller
 
 152
 00:06:18,525 --> 00:06:21,292
 on the view controller that's being presented.
+上属性设置。
 
 153
 00:06:21,294 --> 00:06:23,427
 So a view controllers gets to say,
+所以这个view controller 会被告诉说，
 
 154
 00:06:23,429 --> 00:06:26,730
 here's how I want to be presented modally, okay.
+我是希望用这种样式的以模态的形式展示出来。
 
 155
 00:06:26,732 --> 00:06:29,733
 And that property is called modalPresentationStyle and
+这里我们把这个属性叫做 modalPresentationStyle ，同时，它是
 
 156
 00:06:29,735 --> 00:06:31,167
 it's an enumerated type.
+一个枚举类型。
 
 157
 00:06:31,169 --> 00:06:33,803
-And here are some of the examples here, .FullScreen,
+And here are some of the examples here, FullScreen,
+这里有一些例子，比如 FullScreen（全屏），
 
 158
 00:06:33,805 --> 00:06:34,870
 which is the default,
+它是默认值，
 
 159
 00:06:34,872 --> 00:06:37,606
 where it just comes up over the entire screen.
+意思是出现的时候是占满整个屏幕的。
 
 160
 00:06:37,608 --> 00:06:39,941
-There's .OverFullScreen, which is full screen, but
+There's OverFullScreen, which is full screen, but
+这里还有一个 OverFullScreen ，也是占满整个屏幕，
 
 161
 00:06:39,943 --> 00:06:42,744
 it doesn't block out what's underneath.
+但它并不阻止下面的屏幕互动。
 
 162
 00:06:42,746 --> 00:06:44,445
 Okay, so things show through,
+好的，通过这样的操作，
 
 163
 00:06:44,447 --> 00:06:46,647
 the thing that is coming up on top of shows through.
+现在将内容在最上方展示出来了，
 
 164
 00:06:46,649 --> 00:06:49,249
 Now you can't interact with those things behind cause
+而你不能和它下面的元素进行交互的原因是，
 
 165
 00:06:49,251 --> 00:06:51,284
 you're modal but they do show through.
+因为你是一个模态的。
 
 166
 00:06:51,286 --> 00:06:53,586
 And then of course a .Popover is essentially,
+接着，还有一个是 popover 。
 
 167
 00:06:53,588 --> 00:06:56,489
 a modal presentation style cause a popover takes over
+这种模式态的展示样式，是一个在屏幕上弹出一个
 
 168
 00:06:56,491 --> 00:06:58,091
 the screen also.
+窗口。
 
 169
 00:06:58,092 --> 00:06:59,692
-It just dims out the rest, you're working in your popover
+It just dimis out the rest, you're working in your popover
+它刚好盖住了原来的内容，你只能在你弹出的区域内进行交互。
 
 170
 00:06:59,694 --> 00:07:02,528
 if you click anywhere else it makes the popover go away.
+如果你点击其他地方，弹出出来的页面就会被移除。
 
 171
 00:07:02,530 --> 00:07:04,129
 There's some other ones, like form sheet,
+这里还有一些其他的，比如 sheet ，
 
 172
 00:07:04,131 --> 00:07:07,298
 which I'll show you in the demo today for on the iPad.
+今天我们会在 iPad 上演示这个 demo 。
 
 173
 00:07:07,300 --> 00:07:08,633
 Sometimes you want to present something but
+有时，你想展示一些内容，
 
 174
 00:07:08,635 --> 00:07:09,967
 you don't want it to be gigantic,
+但你又不希望它们太大，
 
 175
 00:07:09,969 --> 00:07:10,968
 filling the whole screen,
+以至于占据整个屏幕，
 
 176
 00:07:10,970 --> 00:07:12,135
 you want it to be a little smaller.
+你希望它能够小一点儿。
 
 177
 00:07:12,137 --> 00:07:13,737
 So we'll show you how to do that.
+我会告诉你怎么做到的。
 
 178
 00:07:14,839 --> 00:07:18,040
 You prepare for a modal segue exactly like any other segue.
+你需要准备一个 modal segue ，和其他的 segue 一样就可以。
 
 179
 00:07:18,042 --> 00:07:21,143
 I didn't even put in any yellow on this slide,
+我并没有在幻灯片上做什么特别的标记。
 
 180
 00:07:21,145 --> 00:07:25,413
 it's just normal code, there's nothing special there.
+都是一些很平常的代码，没有什么特别的。
 
 181
 00:07:25,415 --> 00:07:27,215
 Some people ask the question a lot,
+有一个问题被问了很多次，
 
 182
 00:07:27,217 --> 00:07:32,119
-well how do i hear back from my modally segued to MVC.
+well how do I hear back from my modally segued to MVC.
+就是我怎么样才能通过 modally segued 返回到 MVC 。
 
 183
 00:07:32,121 --> 00:07:36,189
 So like, in the contacts for example, I added a contact.
+就像在联系人这个例子中，我增加了一个联系人。
 
 184
 00:07:36,191 --> 00:07:37,824
 Well when the contact is added,
+当联系人增加了之后，
 
 185
 00:07:37,826 --> 00:07:40,793
 how does it communicate back to me, here's the contact.
+是如何返回给我，这是一个联系人。
 
 186
 00:07:40,795 --> 00:07:45,464
 Well, actually the MVC that put that contact adding thing
+好吧，实际上， MVC 增加一个联系人的时候，
 
 187
 00:07:45,466 --> 00:07:49,767
 up, is probably sharing a model with the other one.
+是与其他的“部件”共享了一个模型（model），
 
 188
 00:07:49,769 --> 00:07:51,635
 Which is to say, the database of contact.
+比如，就是一个联系人的数据库。
 
 189
 00:07:51,637 --> 00:07:53,337
 So when you hit, add contact and you hit done,
+所以当你点击，增加一个联系人之后，点击done（保存），
 
 190
 00:07:53,339 --> 00:07:55,172
 it probably just puts it in the database, okay.
+其实只是将这个内容存到数据库了，理解？
 
 191
 00:07:55,174 --> 00:07:57,540
 So it doesn't really need to communicate back.
+所以这里并不需要一个反馈。
 
 192
 00:07:57,542 --> 00:07:59,575
 But if it did need to communicate back,
+但如果你确实需要一个反馈，
 
 193
 00:07:59,577 --> 00:08:01,410
 the way you would do that is Unwind.
+你需要通过 Unwind 这种方式来获得。
 
 194
 00:08:01,412 --> 00:08:02,461
 Okay.
+好了。
 
 195
 00:08:02,462 --> 00:08:03,511
 Remember the unwinding segues?
+还记得 unwinding segue ？
 
 196
 00:08:03,514 --> 00:08:06,748
 You would just make the done button or whatever in your
+在你的模态对话框里加了一个done（保存）按钮之类的
 
 197
 00:08:06,750 --> 00:08:10,585
-modal thing, Ctr+drag it up to that little exit button.
+modal thing, Ctrl+drag it up to that little exit button.
+然后按住Ctrl后将这个按钮拖动到这个exit（退出）按钮上面。
 
 198
 00:08:10,587 --> 00:08:13,988
 You define the special storyboard ID action thing and
+给这个Action定义一个storyboard ID，然后你就
 
 199
 00:08:13,990 --> 00:08:15,773
 you would unwind.
+可以 unwind（返回）。
 
 200
 00:08:15,774 --> 00:08:17,557
 And that's how you would communicate back.
+这样你就可以实现得到反馈了。
 
 201
 00:08:17,560 --> 00:08:19,993
 A lot of times though modally presented view controllers
+大多数情况下，以模态展示的View Controller，
 
 202
 00:08:19,995 --> 00:08:22,295
 they do what they do and then you just dismiss them.
+完成了他们的“工作”之后，它们就会移除自己。
 
 203
 00:08:22,297 --> 00:08:24,998
 Because either they're editing this stuff in real time or
+这是因为它们都是在实时的修改模型（Model）的内容或是
 
 204
 00:08:25,000 --> 00:08:26,699
 they are sharing the model so
+其他共享的模型（model）
 
 205
 00:08:26,701 --> 00:08:28,968
 they can edit the model directly.
+所以，它们是可以直接编辑模型（model）。
 
 206
 00:08:28,970 --> 00:08:30,803
 So then they'll just dismiss themselves.
+然后它们可以直接移除自己。
 
 207
 00:08:30,805 --> 00:08:33,905
 So dismissing without doing anything or
+在移除的时候不需要任何反馈（回）
 
 208
 00:08:33,907 --> 00:08:37,975
 unwinding is pretty much the way that Modally segued to
+大多数情况下，模态的segue都是这样
 
 209
 00:08:37,977 --> 00:08:40,511
 controllers come off screen.
+来移除自己的。
 
 210
 00:08:40,513 --> 00:08:41,945
 So how do you dismiss it?
+那怎样移除呢？
 
 211
 00:08:41,947 --> 00:08:44,448
 Well if you unwind it automatically dismisses.
+如果你使用unwind的话，就会自动移除，
 
 212
 00:08:44,450 --> 00:08:46,183
 As you know,
+这个你已经知道了。
 
 213
 00:08:46,184 --> 00:08:47,917
 unwind always includes a dismissal of whatever
+unwind 通常是将当前的内容移除之后，
 
 214
 00:08:47,919 --> 00:08:49,218
 your controller is being unwound from.
+然后返回到指定的Controller上。
 
 215
 00:08:49,220 --> 00:08:51,887
 But if you're not unwinding, then you're going to call
+但如果你不用使用 unwind 的话，你就需要主动调用 
 
 216
 00:08:51,889 --> 00:08:55,124
-dismiss view controller animated which takes
+dismissViewControllerAnimated which takes
+dismissViewControllerAnimated这个方法了，
 
 217
 00:08:55,126 --> 00:08:57,259
 the boolean whether you're gonna animate the dismissal,
+你可以设置在移除的时候是否需要动画效果。
 
 218
 00:08:57,261 --> 00:08:59,427
 which you're always gonna do, pretty much.
+多数情况下，你都会选择有动画效果的。
 
 219
 00:08:59,429 --> 00:09:04,131
 And this is sent to the presenting view controller.
+接着就返回到原来的 View Controller（弹出MVC的MVC)。
 
 220
 00:09:04,133 --> 00:09:05,799
 The view controller that presents you.
+你就可以看到l。
 
 221
 00:09:05,801 --> 00:09:07,000
 'Kay? That is the thing
+懂了吗？这就是说
 
 222
 00:09:07,002 --> 00:09:09,336
 that is responsible for dismissing you.
+你要负责手动移除了。
 
 223
 00:09:09,338 --> 00:09:12,605
 Now if you accidentally send this to the presented
+如果你将它设置为被展示的 View Controller，
 
 224
 00:09:12,607 --> 00:09:15,307
 view controller it's gonna forward it on to its
+它就会展示在你当前的 View Controller
 
 225
 00:09:15,309 --> 00:09:16,942
 presenting view controller.
+上面。
 
 226
 00:09:16,944 --> 00:09:18,744
 Although it can be a little confusing if
+这里可能会有点疑惑的地方，
 
 227
 00:09:18,746 --> 00:09:21,279
 you have a presented view controller that, itself, has
+如果你当前正在展示着一个 view Controller ，然后它上面还有
 
 228
 00:09:21,281 --> 00:09:24,682
 presented another one and you say dismiss view controller.
+另一个被展示的，而你这时移除 View Controller。
 
 229
 00:09:24,684 --> 00:09:27,351
 Well, do you mean to dismiss the thing it presented?
+那你是想移除被展示的
 
 230
 00:09:27,353 --> 00:09:29,687
 Or dismiss from the thing it was presenting?
+还是弹出展示的？
 
 231
 00:09:29,689 --> 00:09:32,956
 So that's why with the rule is, the presenting
+对此，有一个规则，移除视图只针对
 
 232
 00:09:32,958 --> 00:09:35,158
 view controller is the one you should send this dismiss to.
+当前正在展示的（用户可以看到的）View Controller 。
 
 233
 00:09:35,160 --> 00:09:37,827
 So I, personally, think it's wrong code for
+而我个人觉得，如果你对一个不在展示状态的 view controller 
 
 234
 00:09:37,829 --> 00:09:40,696
 you to send dismiss view controller to the presented
+进行移除的话，本身就是不对的。
 
 235
 00:09:40,698 --> 00:09:43,098
 view controller expecting it to dismiss itself.
+除非是它自己移除它自己。
 
 236
 00:09:43,100 --> 00:09:44,132
 'Kay?
+懂了吗？
 
 237
 00:09:44,134 --> 00:09:46,701
 The presented view controller can get its
+一个被弹出View Controller 在任何时候都可以有方法得到
 
 238
 00:09:46,703 --> 00:09:49,337
 presenting view controller at any time with the method, or
+当初“弹出”它的View Controller 。或通过得到这个“弹出”它的
 
 239
 00:09:49,339 --> 00:09:52,073
 the variable, presenting view controller.
+view controller 这个变量。
 
 240
 00:09:52,075 --> 00:09:53,874
 Okay, every view controller that's being presented
+也就是输，任何一个被“弹出”的view controller 都是知道
 
 241
 00:09:53,876 --> 00:09:55,809
 knows it's presenting view controller and
+是谁“弹出”自己的这个view controller，
 
 242
 00:09:55,811 --> 00:09:57,344
 then it can just send this message to it.
+然后也是可以给它发送消息的。
 
 243
 00:09:57,346 --> 00:10:00,079
 So we'll see that in the code of the demo as well.
+我们后面的 demo 中也有这部分的代码。
 
 244
 00:10:01,549 --> 00:10:04,249
 So how does the modal view controller appear onscreen?
+如何将一个模态的view controller 展示到屏幕上？
 
 245
 00:10:04,251 --> 00:10:06,718
 You've seen it slide up from the bottom, right?
+你已经看到它是从下面滑动上来的，对吧？
 
 246
 00:10:06,720 --> 00:10:09,120
 That's the default modal transition style,
+这是默认的模态式的过渡效果，
 
 247
 00:10:09,122 --> 00:10:10,554
 which is called cover vertical.
+我们称之为 "cover vertical"。
 
 248
 00:10:10,556 --> 00:10:14,291
 And you, again, the view controller that's being
+接着，这个View Controller被“弹”出屏幕上，
 
 249
 00:10:14,293 --> 00:10:17,494
 presented gets to say how it wants to appear on screen.
+就像你所希望的那样。
 
 250
 00:10:17,496 --> 00:10:22,331
 And so this is different than, you know, the modal style,
+至于区别，在模态的样式上
 
 251
 00:10:22,333 --> 00:10:24,000
 like form sheet or something like that.
+比如需要提交的表单或是其他。
 
 252
 00:10:24,002 --> 00:10:26,335
 This is how the animation happens, 'kay?
+这里就可以通过动画效果，
 
 253
 00:10:26,337 --> 00:10:28,236
 How the actual transmission happens.
+完成实际的过渡。
 
 254
 00:10:28,238 --> 00:10:29,571
 And so, again,
+另外，
 
 255
 00:10:29,573 --> 00:10:31,673
 there's another property in the view controller that's
+在view controller 里还有另外一个属性，
 
 256
 00:10:31,675 --> 00:10:34,442
 being presented called Modal Transition Style.
+叫做 Modal Transition Style 。（出现或离开的样式）
 
 257
 00:10:34,444 --> 00:10:36,076
 And cover vertical's the default,
+默认值是 Cover Vertical ，
 
 258
 00:10:36,078 --> 00:10:38,228
 means slide up from the bottom.
+就是说从屏幕到底部滑上来。
 
 259
 00:10:38,229 --> 00:10:40,379
 There's also flip horizontal, which will just flip over.
+另外还有 flip horizontal ，翻转的效果。
 
 260
 00:10:40,382 --> 00:10:43,516
 Okay, take from the old, the view that's presenting view
+好的，一个弹出的view controller 和
 
 261
 00:10:43,518 --> 00:10:45,318
 controller and the presented view controller,
+一个被弹出的 view controller 。
 
 262
 00:10:45,320 --> 00:10:47,853
 we'll flip over and exchange places.
+我们将会通过翻转的形式来交换他们的位置，完成过渡转换。
 
 263
 00:10:47,855 --> 00:10:50,889
 There's also cross dissolve where they'll fade out and
+这里还有 Corss dissolve ，意思是一个淡出，
 
 264
 00:10:50,891 --> 00:10:52,925
 the other one will fade in.
+另外一个淡入。
 
 265
 00:10:52,926 --> 00:10:54,960
 There's even partial curl where the bottom corner
+这里还有一个 Partial curl ，意思是从底下一个角
 
 266
 00:10:54,962 --> 00:10:59,997
 will kind of curl up and show the new view controller.
+翻起来，然后展示出一个新的 View Controller 。
 
 267
 00:10:59,999 --> 00:11:02,566
 That one's a little interesting there because
+这里有个很有意思的事情，
 
 268
 00:11:02,568 --> 00:11:04,702
 once you've done that one, you can't do any more
+就是你可以选择任意一种样式，
 
 269
 00:11:04,704 --> 00:11:06,436
 modal transitions because it would make no sense.
+因为实际上它们的意义时相同的。（只是样式不同而已）
 
 270
 00:11:06,438 --> 00:11:09,572
 You've got this curled up kind of look and then you
+你可以看到前面一个View Controller 被卷起，
 
 271
 00:11:09,574 --> 00:11:12,208
 plant something on top of it, that just breaks the illusion
+然后在上面展示内容，就好像
 
 272
 00:11:12,210 --> 00:11:14,810
 of this being just a little piece of curled thing that
+将内容卷起来了一些
 
 273
 00:11:14,812 --> 00:11:17,279
 lifts up to show you this modally presented thing.
+以模态（式）的形式展示给你内容，
 
 274
 00:11:17,281 --> 00:11:20,182
 Obviously the partial curls gonna be small view
+很明显，这种形式更适合那种比较小（面积）的
 
 275
 00:11:20,184 --> 00:11:21,750
 controllers showing.
+view controller的展示。
 
 276
 00:11:21,752 --> 00:11:24,719
 It's kind of a fun one though sometimes like in the Maps app
+这个很有意思，比如在 地图 APP 里，
 
 277
 00:11:24,721 --> 00:11:26,754
 if you want to set some setting, so
+如果你想做一些设置，
 
 278
 00:11:26,756 --> 00:11:29,757
 turn traffic on, it'll just curl up the map a little bit,
+比如打开交通状况，就会在地图的下面卷起一个小角，
 
 279
 00:11:29,759 --> 00:11:31,925
 you set your settings, and it curls it back down.
+你设置完了之后，就会再“压”回去。
 
 280
 00:11:31,927 --> 00:11:32,709
 Okay?
+对吧？
 
 281
 00:11:32,710 --> 00:11:33,492
 So kind of fun though.
+挺有意思的。
 
 282
 00:11:35,030 --> 00:11:37,797
 All right, so the demo I'm gonna do today it's gonna show
+好了，今天我要做的 demo ，将包括前面所有的内容，
 
 283
 00:11:37,799 --> 00:11:40,499
 you all this stuff, modals, segues, all this stuff.
+包括， modals 、 segues 等等。
 
 284
 00:11:40,501 --> 00:11:43,068
 It's probably gonna take us most of the rest of
+我估计我们后面大部分时间都是在
 
 285
 00:11:43,070 --> 00:11:44,769
 the time here.
+做这个 demo。
 
 286
 00:11:44,771 --> 00:11:48,272
 And I'll try to cover a lot of other things along the way.
+我会尽量覆盖我们今天所有学到的内容，
 
 287
 00:11:48,274 --> 00:11:52,109
 I'm gonna start out by doing some draggable MK annotations.
+我们先从做一个可以拖动的 MK  annotations（注释）开始。
 
 288
 00:11:52,111 --> 00:11:54,778
 I'm also gonna talk much more about notifications cuz,
+我也会讲不少关于通知（notifications）的内容。
 
 289
 00:11:54,780 --> 00:11:56,246
 really, the only notification we did so
+是的，我们现在才开始考虑到
 
 290
 00:11:56,248 --> 00:11:58,481
 far was where we notified ourself.
+通知（notification）这个内容。
 
 291
 00:11:58,483 --> 00:12:01,217
 So I'm gonna show you
+我还会给你展示
 
 292
 00:12:01,218 --> 00:12:03,952
 a little more sophisticated notification where system,
+一些复杂一点的
 
 293
 00:12:03,955 --> 00:12:06,789
 another object is notifying us.
+系统通知，
 
 294
 00:12:06,791 --> 00:12:12,527
 Then I'm gonna go back and cover pop-overs some more.
+然后我们再继续 pop-over 这些内容。
 
 295
 00:12:12,529 --> 00:12:15,963
 We covered a little bit back, way back when, in psychologist
+我们会讲各种返回，在psychologist 这个项目里。
 
 296
 00:12:15,965 --> 00:12:18,866
 but we're gonna do a little more sophisticated popovers.
+但我们会做一些更复杂的 popovers 。
 
 297
 00:12:18,868 --> 00:12:21,702
 We're also going to talk more about adaptive behavior,
+我们也会继续讲一些关于设备的适配。
 
 298
 00:12:21,704 --> 00:12:26,039
-which is to say when you have a modal segway happening,
+which is to say when you have a modal segue happening,
+也就是说当你有一个 modal segue,
 
 299
 00:12:27,108 --> 00:12:29,408
 what if it's on an iPhone versus an iPad?
+它分别在iPhone 和 iPad 上各自是怎么展现的？
 
 300
 00:12:29,410 --> 00:12:31,377
 It doesn't always wanna look exactly the same.
+有些时候是会有不同的展现方式的。
 
 301
 00:12:31,379 --> 00:12:34,479
 And so we're actually gonna get involved in making it look
+所有这些内容我们都会讲到，了解他们是如何
 
 302
 00:12:34,481 --> 00:12:36,081
 how we want.
+实现的。
 
 303
 00:12:36,082 --> 00:12:37,682
 And as part of that I'm going to show you another thing that
+另外，我还有内容要你们讲一下，
 
 304
 00:12:37,684 --> 00:12:40,918
 I don't have any slides on but it's very easy to use called,
+因为它比较简单，所以我就没写到幻灯片上，
 
 305
 00:12:40,920 --> 00:12:43,087
 which is visual effects.
+这个内容就是 visual effects （视觉效果）。
 
 306
 00:12:43,089 --> 00:12:44,488
 So there's a way to get visual effects,
+有很多种不同的 visual effects （视觉效果）
 
 307
 00:12:44,490 --> 00:12:47,591
 like blurs and vibrancy, things like that.
+比如 blurs 和 vibrancy ，类似这些的。
 
 308
 00:12:47,593 --> 00:12:49,610
 So I'll show you that.
+我也会给你们展示。
 
 309
 00:12:49,611 --> 00:12:51,628
 So you can see, a lot of stuff to go through here.
+今天你会看到有很多内容。
 
 310
 00:12:51,630 --> 00:12:52,879
 And if we have time,
+如果我们还有时间，
 
 311
 00:12:52,880 --> 00:12:54,129
 we'll get back and do through the slides and the camera.
+我们还会来继续看有关摄像头这部分的幻灯片。
 
 312
 00:12:55,466 --> 00:12:57,633
-All right so we're gonna go back to Trax and
+All right so we're gonna go back to Tracks and
+好，我们现在回到 Tracks 这个项目上来，
 
 313
 00:12:57,635 --> 00:13:00,402
 what we're gonna do here in Trax is we are going to make
+我们看下，如果我们准备 Tracks 增加一个自己定义的 Waypoints的话，
 
 314
 00:13:00,404 --> 00:13:02,771
 it so we can add our own Waypoints.
+我们该怎么做。
 
 315
 00:13:02,773 --> 00:13:05,206
 Right now, Tracks just opens up the GPS file and
+现在，Tracks 只是打看一个 GPS 文件，然后 
 
 316
 00:13:05,208 --> 00:13:07,808
 shows you the Waypoints.
+将waypoints展示给你。
 
 317
 00:13:07,810 --> 00:13:09,810
 And I'll show you,
+我要给你展示的是，
 
 318
 00:13:09,812 --> 00:13:12,512
 remind us what that looks like in case we've forgotten.
+先给大家看下这个项目吧，以免你们有人忘了它的样子。
 
 319
 00:13:13,682 --> 00:13:15,548
 All right. Here's our Tracks.
+好的，这就是 Tracks 。
 
 320
 00:13:15,550 --> 00:13:18,951
 And it shows us these nice waypoints down here.
+它上面标志了一些 waypoints（航点）。
 
 321
 00:13:18,953 --> 00:13:23,154
 And we have a nice image over here, and we have this little
+在上面还有一些图片，并且有一些按钮
 
 322
 00:13:23,156 --> 00:13:27,258
 button, disclosure button, which will show us the image
+disclosure 按钮，点击这个按钮后，我们可以到
 
 323
 00:13:27,260 --> 00:13:28,759
 in more detail where we can scroll around.
+进一步的详细内容。
 
 324
 00:13:28,761 --> 00:13:30,761
 Well, what we're gonna do now is make it so
+现在，如果我们长按的话，
 
 325
 00:13:30,763 --> 00:13:33,463
 that if we long press, in other words, we press and
+长按的意思就是按住，然后保持不放开，
 
 326
 00:13:33,465 --> 00:13:36,666
 hold, it's gonna drop a pin there for us.
+这样，会有一个小的标志“钉”我们的放的位置
 
 327
 00:13:36,668 --> 00:13:37,700
 And then we're going to be able to set
+我们将给这个小东西加一个名称，
 
 328
 00:13:37,702 --> 00:13:39,935
 the little thing like Valley Floor there,
+比如Valley Floor,或是
 
 329
 00:13:39,937 --> 00:13:41,937
 or the views are spectacular even from here.
+一些美景之类的。
 
 330
 00:13:41,939 --> 00:13:43,838
 We'll be able to set that for our thing.
+我们能够自己设置这些内容。
 
 331
 00:13:43,840 --> 00:13:45,840
 And we'll even be able to set an image once we learn
+在我们后面学了有关摄像头的内容之后，
 
 332
 00:13:45,842 --> 00:13:48,376
 about how to do the camera next time.
+我们还可以设置图片。
 
 333
 00:13:49,345 --> 00:13:52,346
 But in order to make this work I'm actually gonna change our
+但为了让我们能做到，我实际上稍微做了一点改动，
 
 334
 00:13:52,348 --> 00:13:56,082
 track slightly, which is right now to see this image in more
+现在只有点击进入详情之后才可以看到图片，
 
 335
 00:13:56,084 --> 00:14:00,419
 detail, I press on this little detail disclosure button.
+点击这个小小的展示详情按钮（Detail disclosure button）才能。
 
 336
 00:14:00,421 --> 00:14:04,589
 I'm gonna change it so that you click on the image itself.
+我会改成你点击这个图片自己，就能看到
 
 337
 00:14:04,591 --> 00:14:08,293
 To see the image in more detail so that I can free this
+更多的详细内容，这样我就很方便了，
 
 338
 00:14:08,295 --> 00:14:11,662
 up to be our, we just added a user waypoint and
+可以直接加一个航点（waypoint） ，
 
 339
 00:14:11,664 --> 00:14:13,064
 now we want to edit it, button.
+如果想编辑它，需要一个编辑按钮。
 
 340
 00:14:13,066 --> 00:14:14,631
 'Kay? So this is gonna be our
+懂了？这将是一个可以被编辑的 waypoint，
 
 341
 00:14:14,633 --> 00:14:17,601
 editable user waypoint editing button.
+通过这个编辑按钮。
 
 342
 00:14:17,603 --> 00:14:19,636
 So I'm gonna make that change real quick.
+接着我会先快点的把这个需求完成，
 
 343
 00:14:19,638 --> 00:14:21,388
 So let's go ahead and do that.
+好了，我们开始吧。
 
 344
 00:14:21,389 --> 00:14:23,139
 That's really easy to do, it turns out.
+这个其实很容易做的，打开项目。
 
 345
 00:14:23,141 --> 00:14:29,778
 Right now when we build our callout view right here.
+现在我们先创建一个这里需要被调出的 View 。
 
 346
 00:14:29,780 --> 00:14:32,347
 'Kay? Here's a view for annotation?
+对吧？这是一个注释的 View 。
 
 347
 00:14:32,349 --> 00:14:33,648
 Okay? Here's where we
+好了，这就是我们需要
 
 348
 00:14:33,649 --> 00:14:34,948
 build our callout accessory views.
+创建的被调用的详细 View（视图）。 
 
 349
 00:14:34,951 --> 00:14:37,552
-Instead of using a UI image view to build it,
+Instead of using a UIImage view to build it,
+之前我们是用一个 UIImage View 实现的，这次我们
 
 350
 00:14:37,554 --> 00:14:40,321
-I'm just gonna make it be a UI button.
+I'm just gonna make it be a UIButton.
+使用 UIButton 来实现。
 
 351
 00:14:40,323 --> 00:14:42,373
 'Kay?
+懂了？
 
 352
 00:14:42,374 --> 00:14:44,424
-Now, of course, once I make it a UI button, I also have to
+Now, of course, once I make it a UIButton, I also have to
+当然，一旦我用了 UIButton ，我也不得不
 
 353
 00:14:44,427 --> 00:14:47,661
-make sure that I load this UI button up properly, so
+make sure that I load this UIButton up properly, so
+确保这个 UIButton 可以被正确的加载，
 
 354
 00:14:47,663 --> 00:14:49,996
 I'm gonna go down here to div select annotation view,
+所以我觉得决定先听一下去选择一个 注释的视图，
 
 355
 00:14:49,998 --> 00:14:52,999
 which is where we currently load up that left callout
+这个注释视图在被弹出之后，就是会被
 
 356
 00:14:53,001 --> 00:14:54,934
 access review.
+展示的。
 
 357
 00:14:54,935 --> 00:14:56,868
 I'm gonna change this from being a thumbnail image view
+我这里会先把这个缩略图（Image View）改成一个 缩略图的
 
 358
 00:14:56,871 --> 00:15:01,573
 to calling it the thumbnail ImageButton
+图片式按钮（Image Button）。
 
 359
 00:15:01,575 --> 00:15:03,641
 because it's an image button now instead of an image view.
+将 Image View 替换成了 Image Button 。
 
 360
 00:15:03,643 --> 00:15:08,012
-And of course it's not a UI image here, it's a UI button.
+And of course it's not a UIImageView here, it's a UIButton.
+当然了，这里就不是一个UIImageView，而是一个 UIButton 。
 
 361
 00:15:08,014 --> 00:15:10,581
 And then the only other thing is you don't set a buttons
+这里还有一件事事情你需要做，这样就能让你的按钮看起来
 
 362
 00:15:10,583 --> 00:15:13,750
 image by saying dot image equals image.
+和图片是一样似的。
 
 363
 00:15:13,752 --> 00:15:16,419
 You call a method actually called SetImage.
+你需要调用一个方法叫做 SetImage 。
 
 364
 00:15:17,522 --> 00:15:19,522
 Image.
+Image 。
 
 365
 00:15:19,523 --> 00:15:21,523
 And it has, for state, because the button has various states,
+因为按钮有很多种不同的状态，所以这里需要指定状态（state），
 
 366
 00:15:21,525 --> 00:15:24,626
 highlighted states, other kind of states, but we're just
+聚焦状态（highlighted states），以及一些其他的状态，但我们
 
 367
 00:15:24,628 --> 00:15:27,095
 gonna set it for the normal state of the button.
+这里只要设置一个正常的状态（Normal state）就可以了。
 
 368
 00:15:27,097 --> 00:15:29,731
 So that's the only change I need to make
+这里我重要做这一个改变就
 
 369
 00:15:29,733 --> 00:15:30,598
 to make this work.
+可以了。
 
 370
 00:15:30,599 --> 00:15:31,464
 So let's go take a look at this and
+然后我们再过来看下这个能够展示
 
 371
 00:15:31,467 --> 00:15:34,568
 here we can comment out now our little
+详细内容的这个
 
 372
 00:15:34,570 --> 00:15:36,303
 right callout detail thing.
+展示详情按钮。
 
 373
 00:15:36,305 --> 00:15:37,404
 We don't need that.
+我们已经不需要了。
 
 374
 00:15:37,406 --> 00:15:38,638
 Bring it back in second here.
+直接把它们放到后面就好。
 
 375
 00:15:39,674 --> 00:15:41,507
 But here's our things.
+但这里还有件问题。
 
 376
 00:15:41,509 --> 00:15:43,508
 And so now here when we click it notice we don't have
+就是我们现在点击之后，没有了按钮之后
 
 377
 00:15:43,510 --> 00:15:46,611
 the detailed disclosure on there anymore cuz I commented
+我们也无法从右面“呼唤”出
 
 378
 00:15:46,613 --> 00:15:47,745
 that out right here.
+详细的页面。
 
 379
 00:15:47,747 --> 00:15:49,847
 But this is now a button so
+不过现在它已经是一个按钮了，
 
 380
 00:15:49,849 --> 00:15:53,517
 if I click it now I get to see my image, okay?
+所以当我点击的话，我就应该可以看到我们的图片了，对吧？
 
 381
 00:15:53,519 --> 00:15:55,919
 So I haven't changed the functionality of my app at
+到现在我们还有在APP里改过代码，
 
 382
 00:15:55,921 --> 00:15:58,188
 all, I just kind of moved it to be click on here as
+我们只是移动了之后，让它变成可以被点击
 
 383
 00:15:58,190 --> 00:16:00,323
 opposed to having the detailed disclosure.
+取代了原来的展示详情按钮。
 
 384
 00:16:00,325 --> 00:16:01,524
 Okay, everybody cool?
+好了，对这个内容，
 
 385
 00:16:01,526 --> 00:16:03,092
 With that.
+大家都理解了？
 
 386
 00:16:03,094 --> 00:16:04,793
 All right.
+好的。
 
 387
 00:16:04,795 --> 00:16:06,261
 So, now we've done that.
+我们现在已经做好了。
 
 388
 00:16:06,263 --> 00:16:09,464
 Now let's make it so that if I long press,
+接着让我们来处理“长按”的问题。
 
 389
 00:16:09,466 --> 00:16:13,701
 which means press and hold, it drops a new pin, okay.
+也就是说点击后，然后保持，这里将会“钉”住一个小标志。
 
 390
 00:16:13,703 --> 00:16:15,669
 So how do I do that?
+我们该怎么做？
 
 391
 00:16:15,670 --> 00:16:17,636
 I'm just going to go to my storyboard here.
+我们先回到 storyboard 。
 
 392
 00:16:17,639 --> 00:16:19,239
 And in my storyboard,
+在我的 storyboard 里，
 
 393
 00:16:19,241 --> 00:16:24,110
 I'm going to add a long press gesture to my map view, here.
+我将在我的map view里增加一个长按的手势。
 
 394
 00:16:24,112 --> 00:16:27,713
 So let's go down here, pull this up.
+好了，让我们来看，把这个拉上去。
 
 395
 00:16:27,715 --> 00:16:30,649
 I'm gonna search for, long press.
+我来搜一下 long press 。
 
 396
 00:16:30,651 --> 00:16:32,518
 There it is, right there.
+找到了，就在那里。
 
 397
 00:16:32,519 --> 00:16:34,386
 So I'm just going to drag this gesture out onto my map
+我讲把这个手势直接拖到我的
 
 398
 00:16:34,388 --> 00:16:35,386
 view, okay.
+map view 上。
 
 399
 00:16:35,388 --> 00:16:37,088
 You can see that it appears over here in my
+你能在大纲视图下看到我们刚刚增加的
 
 400
 00:16:37,090 --> 00:16:38,856
 document outline.
+手势
 
 401
 00:16:38,858 --> 00:16:39,990
 Now let's bring up the code.
+然后，让我们来看下代码怎么处理。
 
 402
 00:16:39,992 --> 00:16:43,159
 Okay, I'll put this right here in the waypoints
+好的，我们先找到 waypoints（航点） 的对应的部分，
 
 403
 00:16:43,161 --> 00:16:44,527
 section right here.
+对，就是这里。
 
 404
 00:16:44,529 --> 00:16:48,731
 So I'm going to control drag from this long press gesture
+让我要从长按这个手势上 按住 ctrl 拖到
 
 405
 00:16:48,733 --> 00:16:49,998
 into here.
+这里。
 
 406
 00:16:50,000 --> 00:16:52,133
 It's going to be gesture.
+拖过来的将是一个手势。
 
 407
 00:16:52,135 --> 00:16:54,102
 I'm going to call it addWaypoint.
+我给它命名为 addwaypoint 。
 
 408
 00:16:54,104 --> 00:16:55,936
 It's what it does.
+就是这么做的。
 
 409
 00:16:55,938 --> 00:16:59,306
 It's got the long press gesture as the argument here.
+这里有一个参数是 长按的手势。
 
 410
 00:16:59,308 --> 00:17:01,041
 All right, so there's that.
+对的，就是这样。
 
 411
 00:17:01,043 --> 00:17:02,676
 Let's go back here.
+然后我们回到 stroyboard 。
 
 412
 00:17:02,678 --> 00:17:05,244
 Let's go up to here, okay.
+对，我们继续，可以吧。
 
 413
 00:17:05,246 --> 00:17:09,114
 So here is, where is that?
+这是，在哪里？
 
 414
 00:17:09,116 --> 00:17:09,998
 Here it is.
+在这里。
 
 415
 00:17:09,999 --> 00:17:10,881
 This is the thing I just added,
+这就是我刚才加的。
 
 416
 00:17:10,884 --> 00:17:12,484
 this LongPressGesture right here.
+这个长按的手势就在这里。
 
 417
 00:17:13,753 --> 00:17:15,519
 So what do we need to do inside
+那我们需要在这个 LongPressGesture 方法
 
 418
 00:17:15,521 --> 00:17:17,421
 of this LongPressGesture?
+里写些什么呢？
 
 419
 00:17:17,423 --> 00:17:19,556
 Really not a whole lot to do.
+其实没有太多的要写的。
 
 420
 00:17:19,558 --> 00:17:23,760
 I'm gonna say if the sender.state,
+我这里要写 if sender.state 就可以了。
 
 421
 00:17:23,762 --> 00:17:27,329
 that's the state of the gesture, basically.
+这个状态是指手势的状态。
 
 422
 00:17:27,331 --> 00:17:31,900
-If that equals UIGestureRecognizerState.be-
+If that equals UIGestureRecognizerState.began, 
+如果等于 UIGestureRecognizeState.began
 
 423
 00:17:31,902 --> 00:17:36,337
-gan, now I could do this when this long press starts,
+now I could do this when this long press starts,
+就是长按时间开始，
 
 424
 00:17:36,339 --> 00:17:38,322
 which is, I'm doing.
+也就是，我正在长按。
 
 425
 00:17:38,323 --> 00:17:40,306
 Or I could do it when the long press ends.
+或是我也可以等长按结束之后来处理。
 
 426
 00:17:40,309 --> 00:17:42,976
 And long pressed by the way, you'll get changed, also,
+同时，在长按事件中，如果你保持长按的时候向下移动
 
 427
 00:17:42,978 --> 00:17:46,279
 as you hold it down, you'll get a change happening.
+也会有一个change的事件。
 
 428
 00:17:46,281 --> 00:17:48,181
 But I like to do it when I began,
+不过我愿意当一发生的时候就处理，
 
 429
 00:17:48,183 --> 00:17:49,716
 because I want instant feedback.
+因为我想要及时的反馈。
 
 430
 00:17:49,718 --> 00:17:51,183
 The user holds the long press,
+用户长按的时候，
 
 431
 00:17:51,185 --> 00:17:54,520
 as soon as it's recognized as a long press and begins, boom,
+刚刚长按的时候，就能被识别，很快，
 
 432
 00:17:54,522 --> 00:17:56,355
 we're gonna drop that pin down there.
+我就准备在这里“钉”一个小的标志。
 
 433
 00:17:56,357 --> 00:17:58,890
 So they don't have to hold their finger any longer and
+他们并不需要将手指长按的状态保持太长时间，
 
 434
 00:17:58,892 --> 00:17:59,924
 they don't have to hold it down and
+也不需要在保持长按的时候下移一下
 
 435
 00:17:59,926 --> 00:18:01,992
 say, hm, where's that, nothings happening.
+然后说，看，什么都没有嘛。
 
 436
 00:18:01,994 --> 00:18:05,529
 Okay, so that's why I decided to do it on began here.
+这样，我决定在一开始的就处理。
 
 437
 00:18:06,565 --> 00:18:10,466
 And to create one we need the coordinates that they clicked
+然后根据在他们点击的位置，我们创建一个坐标
 
 438
 00:18:10,468 --> 00:18:13,402
 on, right, or that they long pressed, they held down.
+对，就是他们长按的地方。
 
 439
 00:18:13,404 --> 00:18:17,306
 We need to find out the CL location coordinate 2D.
+我们需要得到这个坐标。
 
 440
 00:18:17,308 --> 00:18:20,175
 Where in the world they just did that.
+在真实的世界中，他们的坐标。
 
 441
 00:18:20,177 --> 00:18:23,745
 And to do that we're going to use this method in map view
+然后我将用Map View里的一个叫 converPoint的方法，这个方法
 
 442
 00:18:23,747 --> 00:18:26,881
 called convertPoint, which takes a point, so
+可以传入一个 Point 对象，然后
 
 443
 00:18:26,883 --> 00:18:30,551
 let's get the location of the gesture in the map view's
+可以让我们得到用户在屏幕上点击的坐标，对应在 Map View 里的坐标系
 
 444
 00:18:30,553 --> 00:18:33,320
 coordinate systems, okay.
+中对应的坐标。
 
 445
 00:18:33,322 --> 00:18:35,789
 And it converts it to the coordinate system of any view
+这个方法可以帮助你在任何视图中转化坐标系。
 
 446
 00:18:35,791 --> 00:18:37,441
 you want.
+这个方法可以帮助你在任何视图中转化成你想要的坐标系。
 
 447
 00:18:37,442 --> 00:18:39,092
 Which we're going to actually convert it the mapView's
+在这里我们实际是希望将其转为地图视图的
 
 448
 00:18:39,094 --> 00:18:43,429
 coordinate system which is not much of a conversion, okay.
+坐标系下，这是一个的转换。
 
 449
 00:18:43,431 --> 00:18:45,497
 So that creates a view.
+接着我们创建一个视图。
 
 450
 00:18:45,499 --> 00:18:50,702
 So we've converted this gesture to this coordinate
+因为我们已经将手势的坐标转换为地图视图下的坐标，
 
 451
 00:18:50,704 --> 00:18:54,505
 in the mapView, so now we have a CL location coordinate 2D,
+所以我们现在得到了2D坐标系下的 CL 位置。
 
 452
 00:18:54,507 --> 00:18:56,040
 here I'll click on this so
+这里我点击一下，可以看到这是
 
 453
 00:18:56,041 --> 00:18:57,574
 you can see that's a CLLocationCoordinate2D,
+CLLocationCoordinate2D 。
 
 454
 00:18:57,576 --> 00:18:59,509
 that's where the person pressed down.
+也就是在用户按下的位置，
 
 455
 00:18:59,511 --> 00:19:03,813
 So now I'm just gonna create the waypoint, and we can
+我可以直接创建一个 waypoint ，然后我们
 
 456
 00:19:03,815 --> 00:19:08,283
 create the waypoint using GPX waypoint, it only has one
+就可以使用GPX的waypoint类来创建了，它只有一个构造方法，
 
 457
 00:19:08,285 --> 00:19:12,687
 constructor which is the latitude and the longitude.
+需要传入经度和纬度。
 
 458
 00:19:12,689 --> 00:19:14,689
 Okay, so now we've created a waypoint.
+好了，现在我们已经创建了一个 waypoint 。
 
 459
 00:19:14,691 --> 00:19:17,524
 Maybe we'll set some things in the waypoint, like the name.
+我们也可以设置其他的一些信息，比如名称。
 
 460
 00:19:17,526 --> 00:19:18,725
 We just dropped this, so
+我们就是要放在这里的，因此
 
 461
 00:19:18,727 --> 00:19:21,828
 I'm going to call this the waypoint dropped, okay.
+因此这个 waypoint 叫做 dropped 。
 
 462
 00:19:21,830 --> 00:19:26,432
 And then let's just add this annotation
+接着，我们给这个 map view 加上
 
 463
 00:19:26,434 --> 00:19:28,934
 to the map view, okay.
+annotation  。
 
 464
 00:19:28,936 --> 00:19:31,269
 So that's all we need to do to drop something on there.
+所以我们需要做的就是在这里放一些内容，
 
 465
 00:19:31,271 --> 00:19:32,203
 So let's go take a look at that.
+那让我们先看一下。
 
 466
 00:19:36,509 --> 00:19:38,559
 All right, so here's all our points.
+对的，这里是我们所有的标志点。
 
 467
 00:19:38,560 --> 00:19:40,610
 And I'm just gonna long press, you see it dropped one there.
+然后当我长按之后，你就会看到这里会增加一个。
 
 468
 00:19:40,613 --> 00:19:42,579
 And if I click on it, it says, dropped.
+然后当我点击的时候，看到这里写着，dropped 。
 
 469
 00:19:42,581 --> 00:19:44,247
 Now, I don't have any image associated with.
+现在，我们还没有与之关联的图片。
 
 470
 00:19:44,249 --> 00:19:47,650
 I don't have any little sub-information info
+在这里也没有任何相关的内容。
 
 471
 00:19:47,652 --> 00:19:49,585
 field on here.
+在这里也没有任何相关的内容。
 
 472
 00:19:49,586 --> 00:19:51,519
 So, we need to make it so that it does that.
+我们需要增加这些内容。
 
 473
 00:19:51,522 --> 00:19:52,688
 But first, I'm going to make it so
+不过，首先我们需要让它
 
 474
 00:19:52,690 --> 00:19:54,356
 that this can be dragged.
+变成可以拖拽的。
 
 475
 00:19:54,358 --> 00:19:56,224
 Because what if I dropped it here, and
+因为当你在这里放置之后，
 
 476
 00:19:56,226 --> 00:19:59,127
 then I looked in here closer and I was like,
+我可以把地图放大，可以看的更清楚一些。
 
 477
 00:19:59,129 --> 00:20:02,063
 oh no I wanted to drop it on the other side of that road.
+哦，我想把它拖到这条路的另外一边，
 
 478
 00:20:02,065 --> 00:20:03,497
 Okay, I can't pick it up.
+但我现在不能拖动。
 
 479
 00:20:03,499 --> 00:20:06,833
 So I'd like to be able to pick this thing up and move it.
+所以我想可以能让它在地图拖动，
 
 480
 00:20:06,835 --> 00:20:08,435
 So what do we need to do that?
+我们要怎么样才能做到呢？
 
 481
 00:20:08,437 --> 00:20:12,338
 That's very simple as well, we just need to make,
+这个也非常简单，我们只需要回到这里，
 
 482
 00:20:12,340 --> 00:20:16,275
 back here remember, here's our extension to GPX waypoint that
+记得吗，这时我们的 GPX 的 Waypoint 的 extension ，
 
 483
 00:20:16,277 --> 00:20:19,778
 we extended so that it would be an MK annotation.
+我们为让他可以作为 MK annotation 而进行的扩展（继承）。
 
 484
 00:20:19,780 --> 00:20:21,813
 We just need to make this note be a get only,
+我们当时将它设置为只读。
 
 485
 00:20:21,815 --> 00:20:23,448
 it needs to be set and get.
+现在需要设置为可以读也可以写。
 
 486
 00:20:23,450 --> 00:20:25,149
 That's really the only thing you need to do to make
+只需要这么做，它就可以变成
 
 487
 00:20:26,652 --> 00:20:28,118
 something be draggable.
+可以拖动的了。
 
 488
 00:20:28,120 --> 00:20:30,387
 Now, I'm gonna do that in a separate subclass here.
+这里，我将会在写一个单独的子类，
 
 489
 00:20:30,389 --> 00:20:34,190
 I'm gonna call it EditableWaypoint, okay,
+我给它起名为 Editablepoint ，
 
 490
 00:20:34,192 --> 00:20:36,793
 it's a subclass of GPX.Waypoint.
+它是 GPX.Waypoint 的子类。
 
 491
 00:20:36,795 --> 00:20:42,531
 And all it's going to do is override that var coordinate,
+我们就是为了重载变量 coordinate 。
 
 492
 00:20:42,533 --> 00:20:46,601
 and it's perfectly fine to override a var
+在子类里重载一个var型的变量是完全没有问题的，
 
 493
 00:20:46,603 --> 00:20:50,138
 in a subclass to turn it into set and get.
+然后可以将其设置为可以读也可以写。
 
 494
 00:20:50,140 --> 00:20:54,441
 So the get is just gonna return supers version of this,
+这里get的方法直接返回super的就可以。
 
 495
 00:20:54,443 --> 00:20:56,777
 okay.
+好了。
 
 496
 00:20:56,779 --> 00:21:01,014
 And our set, all I'm gonna do on my set, is I'm going to set
+至于set方法，我们将实现自己的set方法，我将设置
 
 497
 00:21:01,016 --> 00:21:04,917
 my latitude equal to the new values latitude.
+原来的维度为 newValue 的维度值。
 
 498
 00:21:04,919 --> 00:21:07,419
 And I'm gonna set my longitude,
+同时我们也设置原来的经度值等于
 
 499
 00:21:07,421 --> 00:21:09,387
 equal to the new values longitude.
+newValue 的 经度值
 
 500
 00:21:09,389 --> 00:21:12,957
 Okay, and remember that latitude and longitude,
+好了，记住这里维度值和经度值，
 
 501
 00:21:12,959 --> 00:21:16,493
 these are just properties in GPX waypoints, okay.
+它们是作为 GPX waypoints 类的属性。
 
 502
 00:21:17,696 --> 00:21:19,429
 Well it has links, you know,
+其他还有比如 links，
 
 503
 00:21:19,431 --> 00:21:22,131
 to our thumbnail images and all that stuff.
+缩略图和其他一些内容。
 
 504
 00:21:22,133 --> 00:21:23,532
 But really, the main thing about
+但实际上， GPX waypoint 最重要的
 
 505
 00:21:23,534 --> 00:21:25,434
 GPX waypoint is just the latitude and longitude.
+属性还是经度值和纬度值。
 
 506
 00:21:25,436 --> 00:21:28,937
 So now we've made this new class, EditableWaypoint, which
+所以我们写了一个新类， EditableWaypoint ，
 
 507
 00:21:28,939 --> 00:21:34,475
 is a GPX waypoint, but it has a settable coordinate, okay.
+在原本的基础上，增加了可以设置的坐标。
 
 508
 00:21:34,477 --> 00:21:37,545
 So down here, instead of creating a GPX waypoint,
+然后在这里，当我们长按的时候，我们将创建一个 EditableWaypoint ，
 
 509
 00:21:37,547 --> 00:21:42,949
 when we long press we're gonna create an editable waypoint,
+替换掉原来创建GPX waypoint的方法，
 
 510
 00:21:42,951 --> 00:21:44,284
 okay.
+好了。
 
 511
 00:21:44,286 --> 00:21:45,785
 One other thing you need to do though,
+另外还有一件你需要做的事情就是
 
 512
 00:21:45,787 --> 00:21:49,155
 is that pin annotation, okay, the little
+“钉”住一个小的标志，
 
 513
 00:21:49,157 --> 00:21:52,224
 pin, we need to say that it's draggable, so I'm gonna say
+我们需要设置小标志的视图是可以拖动的，我们通过设置 view.draggable 就可以
 
 514
 00:21:52,226 --> 00:21:55,627
 view.draggable to set this thing to be draggable.
+让它能够拖动了。
 
 515
 00:21:55,629 --> 00:21:58,697
 But I'm only going to do that if the annotation
+但只有当它是一个 EditableWaypoint 时， 
 
 516
 00:21:58,699 --> 00:22:00,898
 is an editable way point.
+我才会把它设置为可拖动的。
 
 517
 00:22:02,902 --> 00:22:05,502
 Okay, remember is is kind of like as, but
+好的，记住这一点，我们后面需要测试
 
 518
 00:22:05,504 --> 00:22:08,204
 you're just testing it to see if it is,
+到底是不是这样的。
 
 519
 00:22:08,206 --> 00:22:11,374
 rather than casting it to be something else, okay.
+还是其他什么情况。
 
 520
 00:22:11,376 --> 00:22:12,808
 So that's it.
+好了，就这样。
 
 521
 00:22:12,810 --> 00:22:14,243
 So, let's go back.
+然后让我们回来看下效果。
 
 522
 00:22:14,245 --> 00:22:16,678
 Now our user waypoints should be draggable.
+现在我们的用户加的 waypoints 应该是可以拖动的了。
 
 523
 00:22:16,680 --> 00:22:18,747
 All right, we'll drop one here.
+好的，我在这里有一个“钉”住的 。
 
 524
 00:22:18,749 --> 00:22:21,683
 And I can pick it up here and move it over onto the other
+ 我再选中它，将它挪到这条河的另外一边，
 
 525
 00:22:21,685 --> 00:22:24,285
 side of the river there, okay, anywhere I want.
+或是任意的什么地方。
 
 526
 00:22:24,287 --> 00:22:27,688
 Notice that these ones down here are not draggable.
+注意啊，其他的这些都是不可以拖动的。
 
 527
 00:22:27,690 --> 00:22:30,590
 Can't drag them because they're not of class
+不能拖动的原因就是因为它们不是 EditableWaypoint 类的对象
 
 528
 00:22:30,592 --> 00:22:35,228
 EditableWaypoint, they're just GPX.waypoint, okay?
+它们只是 GPX.waypoint ，对吧？
 
 529
 00:22:35,230 --> 00:22:38,564
 So draggable is really easy to do.
+所以拖动实现起来很容易。
 
 530
 00:22:38,566 --> 00:22:43,101
 So now I freed up that right detail disclosure call-out,
+现在，我们接着处理展示右侧详细内容的，
 
 531
 00:22:43,103 --> 00:22:46,871
 and we're going to turn that into our edit uneditable
+我准备把它加在我们这个 editable Waypoint上，
 
 532
 00:22:46,873 --> 00:22:48,005
 waypoint, right?
+对吧？
 
 533
 00:22:48,007 --> 00:22:50,507
 Change the name field, change the info field,
+需要修改名称的文本框，信息的文本框，
 
 534
 00:22:50,509 --> 00:22:53,010
 add an image to it, all that stuff.
+然后加上一张图片，就这些了。
 
 535
 00:22:53,012 --> 00:22:55,679
 That's what we're gonna make that be.
+这就是我们需要做的了。
 
 536
 00:22:55,681 --> 00:22:57,513
 So let's go back down here.
+所以我们回来继续。
 
 537
 00:22:57,515 --> 00:22:58,814
 Here's the old code we had for
+这时我们之前为 rightCalloutAccessoryView
 
 538
 00:22:58,816 --> 00:23:01,583
 that rightCalloutAccessoryView, and
+写的代码，这里的大部分代码
 
 539
 00:23:01,585 --> 00:23:03,485
 I want most of that.
+都是需要的。
 
 540
 00:23:03,486 --> 00:23:05,386
 But instead of adding that little detailed disclosure
+原来这个当 waypoint 上有图片时，我们就会增加一个
 
 541
 00:23:05,389 --> 00:23:06,654
 when the waypoint has an image,
+查看详细的小按钮。
 
 542
 00:23:06,656 --> 00:23:13,294
 I'm gonna do it whenever the annotation is an editable one.
+现在我们要改成，如果这是一个可以编辑的航点的注释，就放置这个小按钮。
 
 543
 00:23:13,296 --> 00:23:15,997
 So if it's editable,
+也就是，如果它是可以编辑的，
 
 544
 00:23:15,998 --> 00:23:18,699
 I'm gonna put that little detail disclosure there, okay.
+我就在这里放一个查看详细的按钮。
 
 545
 00:23:18,701 --> 00:23:25,905
 So now, we have to modally segue because this new MVC,
+好，我们对这个新的MVC必须使用模态的 Segue，
 
 546
 00:23:25,907 --> 00:23:28,874
 we're gonna need a new MVC that lets us edit the name and
+这个新的MVC可以让用户为这个 waypoint
 
 547
 00:23:28,876 --> 00:23:31,010
-the image of a wavepoint.
+the image of a waypoint.
+编辑名称和图片。
 
 548
 00:23:31,012 --> 00:23:32,744
 We're going to do that modally.
+我们将用模态的方法。
 
 549
 00:23:32,746 --> 00:23:33,945
 We're gonna do a modal segue.
+我们需要通过 modal segue 。
 
 550
 00:23:33,947 --> 00:23:35,346
 We just learned about modal segues.
+刚刚学过的 modal segue 。
 
 551
 00:23:35,348 --> 00:23:36,580
 How are we gonna do that?
+我们该怎么做呢？
 
 552
 00:23:36,582 --> 00:23:39,149
 Well this is the rightCalloutAccessoryView
+这是 rightCalloutAccessoryView ，
 
 553
 00:23:39,151 --> 00:23:42,719
 here, so I'm gonna go down to where the CalloutAccessoryView
+当 CalloutAccessoryView 被点击了，
 
 554
 00:23:42,721 --> 00:23:45,722
 is tapped, and right now it just always does the show
+就会展示一个图片，
 
 555
 00:23:45,724 --> 00:23:48,958
 image segue way, which I still want it to do if we tapped on
+我希望是能点击它，然后出现
 
 556
 00:23:48,960 --> 00:23:50,926
 the leftCalloutAccessoryView,
+leftCalloutAccessoryView ，
 
 557
 00:23:50,928 --> 00:23:53,996
 but if we tapped on the right one, I want it to edit it.
+如果我点击右边的，就可以直接编辑。
 
 558
 00:23:53,998 --> 00:23:55,964
 So I'm gonna put a little if-then in here to
+所以你这里我就需要写一个 if－then 来达到
 
 559
 00:23:55,966 --> 00:23:58,033
 that effect.
+这个效果。
 
 560
 00:23:58,034 --> 00:24:00,101
 So I'm actually gonna say, if the control that we tapped on.
+这里我就是要写，如果我点击了
 
 561
 00:24:00,103 --> 00:24:03,471
 As a button which they both should be buttons okay, but
+这个按钮，实际它们都应该是按钮，这里我只是
 
 562
 00:24:03,473 --> 00:24:05,973
 I'm just gonna make sure here.
+我需要确认一下。
 
 563
 00:24:05,975 --> 00:24:11,244
 If the button type equals UI button type detail
+接着判断 这个按钮的类型是不是  Detail Disclosures ，
 
 564
 00:24:11,246 --> 00:24:13,947
 disclosures, so if it's the detail disclosure button, then
+如果这是一个 Detail Disclosure button，
 
 565
 00:24:13,949 --> 00:24:20,519
 I'm going to do my modal segue to edit my waypoint, okay.
+我就使用我的 modal Segue 到编辑我的 waypoint ，
 
 566
 00:24:20,521 --> 00:24:25,023
 Otherwise, I'm going to do a little more of a check here.
+否则，我就在这里做一个检查。
 
 567
 00:24:25,025 --> 00:24:28,026
 I'm going to say, if the waypoint equals the views
+意思就是，如果这个 waypoint 的视图
 
 568
 00:24:28,028 --> 00:24:31,963
 annotation as a GPX.Waypoint,
+对象的类型是 GPX.Waypoint ，
 
 569
 00:24:31,965 --> 00:24:35,866
 which it should because the only kind of.
+现在是现在我们
 
 570
 00:24:37,670 --> 00:24:39,302
 An annotation that I even have,
+只有一种类型，
 
 571
 00:24:39,304 --> 00:24:40,970
 aur GPX Waypoint annotations.
+GPX Waypoint annotations 。
 
 572
 00:24:40,972 --> 00:24:43,873
 But in the future, what if I added something else in there?
+但如果在后面，我们增加一些新的类型会怎么样呢？
 
 573
 00:24:43,875 --> 00:24:45,674
 So I'm just being a little careful.
+所以我这里要小心点，多做点事情。
 
 574
 00:24:45,676 --> 00:24:50,545
 I'm also gonna say, if the Waypoint.imageURL does
+我会说，如果 Waypoint.imageURL 不等于 nil ，
 
 575
 00:24:50,547 --> 00:24:54,415
 not equal nil, cuz if there's no URL in the Waypoint,
+也就是是这里 waypoint 没有 URL 这个属性，
 
 576
 00:24:54,417 --> 00:24:58,519
 then I don't want to segue to that image showing
+我就不会把图片展示到
 
 577
 00:24:58,521 --> 00:25:00,354
 the image view controller, right?
+image view controller 上，对吧？
 
 578
 00:25:00,356 --> 00:25:03,256
 So, I'm just protecting myself a little bit here to make sure
+这样我是为了保护我的程序，
 
-579
 00:25:03,258 --> 00:25:04,123
 that I actually have it.
+确认它确实有这个属性。
 
 580
 00:25:04,125 --> 00:25:05,391
 Cuz I might have a thumbnail but
+因为我可能有一个缩略图，
 
 581
 00:25:05,393 --> 00:25:08,227
 I don't have the image, possibly, unlikely.
+但我并没有图片，这是有可能的。
 
 582
 00:25:08,229 --> 00:25:09,995
 All right. So, how about edit waypoint?
+好了，那如果是 edit waypoint 该怎么样呢？
 
 583
 00:25:09,997 --> 00:25:12,163
 What are we going to do in edit waypoint?
+我们后面该怎么做呢？
 
 584
 00:25:12,165 --> 00:25:14,799
 Well, we're just going to segue.
+我需要调用 segue 。
 
 585
 00:25:14,801 --> 00:25:19,870
 So I'm going to perform a segue with identifier.
+我们将会写 performSsegueWithIdentifier。
 
 586
 00:25:19,872 --> 00:25:22,305
 I need a new identifier because I'm not segueing to
+我需要一个给这个 segue 设定新的名字，因为原来是“跳转”到
 
 587
 00:25:22,307 --> 00:25:25,575
 the image thing, I'm segueing to an editing waypoint thing.
+一张图片 ，现在是跳转到一个可以编辑 waypoint 的视图。
 
 588
 00:25:25,577 --> 00:25:27,377
 So I have a constant for that,
+我这里设置一个常量，
 
 589
 00:25:27,379 --> 00:25:31,180
 actually, called EditWaypointSegue.
+叫做 EditWaypointSegue 。
 
 590
 00:25:31,182 --> 00:25:33,399
 Okay.
+好的
 
 591
 00:25:33,400 --> 00:25:35,617
 So EditWaypointSegue is down in my constants sections here.
+现在 EditWaypointSegue 就写在了我们的常量里面了，
 
 592
 00:25:35,619 --> 00:25:36,751
 It's Edit Waypoint.
+就是 Edit Waypoint 。 
 
 593
 00:25:36,753 --> 00:25:39,220
 Okay, so this is what we're going to have to make sure
+好的，这就是保证我们调用的 segue 是我们在storyboad 
 
 594
 00:25:39,222 --> 00:25:41,555
 we put in our storyboard for that segue.
+里面增加的那个。
 
 595
 00:25:41,557 --> 00:25:43,223
 Just like we put this in our storyboard for
+这个就像我们之前在 storyboard 里增加的 
 
 596
 00:25:43,225 --> 00:25:43,824
 the image segue.
+image segue 一样。
 
 597
 00:25:43,826 --> 00:25:45,358
 All right.
+好的。
 
 598
 00:25:45,360 --> 00:25:46,526
 So it's at a waypoint.
+这就是在 waypoint 要做的事情。
 
 599
 00:25:46,528 --> 00:25:50,229
 And sender, again, we'll have the sender be the view.
+接着，sender，我们需要把这个 send 转换为 视图（view）。
 
 600
 00:25:50,231 --> 00:25:52,231
 Okay, the annotation view.
+对的，应该是一个注释的视图（annotation view）。
 
 601
 00:25:52,232 --> 00:25:54,232
 Cuz that's really who's kind of causing this to happen,
+这就是我们想要的效果，
 
 602
 00:25:54,234 --> 00:25:56,968
 cuz we're in its call out so it's the calling it out.
+我们“叫“它出来，它就出来。
 
 603
 00:25:56,970 --> 00:25:58,369
 Now the other thing I'm going to do here is I'm
+接下来我们要做的事情就是
 
 604
 00:25:58,371 --> 00:26:02,506
 actually going to deselect this annotation.
+当我们不取消选中时，
 
 605
 00:26:02,508 --> 00:26:04,908
 Probably I would want to unwind,
+我们需要“返回”到前一个页面
 
 606
 00:26:04,910 --> 00:26:06,209
 come back and reselect it.
+并移除它。
 
 607
 00:26:06,211 --> 00:26:09,278
 But I want it to be deselected because it's currently showing
+并且我希望它变成不非选中状态，因为我想换掉
 
 608
 00:26:09,280 --> 00:26:13,549
 the current state of the annotation,
+当前正在展示详细信息的
 
 609
 00:26:13,551 --> 00:26:17,452
 of the waypoint, and I'm going to be changing that.
+这个waypoint，对，我想换一个waypoint看看。
 
 610
 00:26:17,454 --> 00:26:20,121
 So when I come back, I don't want it to be there.
+所以当我返回时，我希望是这样的。
 
 611
 00:26:20,123 --> 00:26:24,292
 Okay, it's showing the old data I wanted to be,
+嗯，它把之前的数据展示给我了，
 
 612
 00:26:24,294 --> 00:26:26,861
 I either want you to have to force you to redisplay it or
+我这里必须强制把内容给更新了，
 
 613
 00:26:26,863 --> 00:26:28,829
 maybe, if I were going to add more code,
+为此，我们将多写一点代码。
 
 614
 00:26:28,831 --> 00:26:30,497
 I could make it so that it redisplayed.
+来让它重新展示一次数据。
 
 615
 00:26:30,499 --> 00:26:33,800
 But, in any case, I definitely want this annotation to be
+但其实，我真是希望当我要编辑这个注释点时候，它其实是
 
 616
 00:26:33,802 --> 00:26:40,139
 deselected when I segue it to go edit it.
+非选中状态的。
 
 617
 00:26:41,976 --> 00:26:42,675
 Okay?
+可以理解？
 
 618
 00:26:42,676 --> 00:26:43,375
 All right, so that's it.
+好了，就这样。
 
 619
 00:26:43,377 --> 00:26:45,010
 That's all we need to do here.
+我们就需要在这里。
 
 620
 00:26:45,012 --> 00:26:47,111
 We just need to go to our storyboard now and
+我们先需要去到 Stroyboard 然后创建一个新的MVC，
 
 621
 00:26:47,113 --> 00:26:51,315
-create that new MBC that edits this thing and add this segue.
+create that new MVC that edits this thing and add this segue.
+来用来编辑这些内容，并且加上一个Segue。
 
 622
 00:26:51,317 --> 00:26:52,249
 So let's do that.
+好，我们开始吧。
 
 623
 00:26:52,251 --> 00:26:55,118
 Let's go to our storyboard, and
+先到我们的 Stroyboard ,
 
 624
 00:26:55,120 --> 00:26:57,887
 we're gonna be segueing from our map view again.
+我们还是会从我们的 Map View 开始创建一个 Segue，
 
 625
 00:26:57,889 --> 00:27:00,089
 Inside one of the call-outs we're going to be segueing.
+我们需要链接到被呼唤出的视图中的一个。
 
 626
 00:27:00,091 --> 00:27:02,324
 So just like we have this segue right here,
+嗯，对，我们就是要连接到这里，
 
 627
 00:27:02,326 --> 00:27:05,894
 that came from this little thing.
+连接到这个小东西上。
 
 628
 00:27:05,896 --> 00:27:08,430
 Our new one's gonna come from this little guy, too.
+我们新的连接讲从这里个小东西开始。
 
 629
 00:27:08,432 --> 00:27:10,264
 So let's go ahead and get one.
+好，让我们继续来做。
 
 630
 00:27:10,266 --> 00:27:13,534
 Let's go down here and add a new view controller.
+我要再加一个  View Controller 。
 
 631
 00:27:13,536 --> 00:27:15,135
 So I'm creating a brand new view controller.
+这里我是创建来一个新的空白的 View Controller 。
 
 632
 00:27:15,137 --> 00:27:17,504
 We'll pop it up here.
+我把它先放到这里。
 
 633
 00:27:17,506 --> 00:27:18,304
 Okay? Move it out of
+可以？然后把它往外
 
 634
 00:27:18,306 --> 00:27:19,272
 the way a little.
+稍微挪一下。
 
 635
 00:27:19,274 --> 00:27:20,439
 And I'm gonna segue,
+接着我就开始创建 Segue ，
 
 636
 00:27:20,441 --> 00:27:22,608
 just the way I did before, from this thing.
+可以之前做的一样，从这个小东西开始，
 
 637
 00:27:22,610 --> 00:27:24,276
 Control drag.
+按住 Ctrl ，然后拖动，
 
 638
 00:27:24,278 --> 00:27:26,077
 Okay, to segue to this.
+好了，连接到这里。
 
 639
 00:27:26,079 --> 00:27:28,212
 But this time I'm going to do present modally.
+但这次我们希望是以模态的方式。
 
 640
 00:27:28,214 --> 00:27:30,981
 Last time we did show, we were in a navigation controller
+上次因为我们是在  Navigation Controller 里面，
 
 641
 00:27:30,983 --> 00:27:32,666
 down there, but we said show.
+所以我们可以直接设置为 show 。
 
 642
 00:27:32,667 --> 00:27:34,350
 So this time even though I'm in navigation controller,
+而这次尽管我们也是在 Navigation Controller 里面，
 
 643
 00:27:34,353 --> 00:27:36,153
 I'm still going to say present modally,
+我们也还是会设置为模态展示，
 
 644
 00:27:36,155 --> 00:27:38,788
 which is going to cause this new view controller to come up
+这样我们就可以让新的 View Controller 出现时
 
 645
 00:27:38,790 --> 00:27:39,922
 over the whole screen.
+占据整个屏幕。
 
 646
 00:27:39,924 --> 00:27:40,956
 Question? >> If you worked in
+有问题吗？ >>  你现在是  
 
 647
 00:27:40,958 --> 00:27:42,991
 a navigation controller letter and if not,
+Naviation Controller 里面，那如果不是的话，
 
 648
 00:27:42,993 --> 00:27:44,659
 which one would you suggest using?
+我该怎么做呢？
 
 649
 00:27:44,661 --> 00:27:46,027
 >> Yeah, so the question was,
+>> 好的，这个问题是，
 
 650
 00:27:46,028 --> 00:27:47,394
 if I wasn't in a navigation controller.
+如果我不是在 Navgation Controller ，
 
 651
 00:27:47,397 --> 00:27:48,796
 If you look here.
+如果是在这里，
 
 652
 00:27:48,798 --> 00:27:50,598
 See this guy right here?
+看到这个位置了？
 
 653
 00:27:50,599 --> 00:27:52,399
 He's in this navigation controller right here.
+它是在 Navigation Controller 的旁边。
 
 654
 00:27:52,402 --> 00:27:54,968
 If I weren't in a navigation controller, would it make any
+如果我现在不是在 Naviation Controller 里的话，我设置一个
 
 655
 00:27:54,970 --> 00:27:57,170
 difference to this modal segue and the answer is no.
+modal segue 有什么区别吗？答案是没有区别。
 
 656
 00:27:57,172 --> 00:27:59,039
 Modal segues don't care where you are.
+Modal segue 不会管你在哪里。
 
 657
 00:27:59,041 --> 00:28:02,208
 They're going to take over the screen and show themselves.
+它们只是在直接在当前的屏幕上把内容展示出来，仅此而已。
 
 658
 00:28:02,210 --> 00:28:04,177
 Okay.
+好了。
 
 659
 00:28:04,178 --> 00:28:06,145
 And the question of is it better to be or not to be,
+这个问题就是做好呢，还是不做好呢？
 
 660
 00:28:06,147 --> 00:28:08,380
 if you're presenting modal it really doesn't matter.
+如果你用模态的方式，不是非常必须的。
 
 661
 00:28:08,382 --> 00:28:10,349
 But if you're in a navigation controller it's nice because
+如果你还时在 Navigation Controller 里，那就还好，因为你还有
 
 662
 00:28:10,351 --> 00:28:13,852
 you can have this kind of segue which is pushing, okay.
+一个 Push 的 segue 可以使用。
 
 663
 00:28:13,854 --> 00:28:16,421
 And you could argue this whole editing of the waypoint,
+你这里可能也会有疑惑，我们编辑 waypoint 的地方
 
 664
 00:28:16,423 --> 00:28:17,988
 maybe that should be a push.
+也应该是使用 Push 的呀。
 
 665
 00:28:17,990 --> 00:28:20,758
 And you go push to a place where you edit it, and then
+以 Push 形式的方式展示需要编辑的视图，
 
 666
 00:28:20,760 --> 00:28:24,261
 you hit save or done, but it's kind of ambiguous then unless.
+然后可以点击保存，但这里有一点可能是不明确的。
 
 667
 00:28:24,263 --> 00:28:26,329
 When you edit it, you're going to change it live,
+当你想想要编辑它时，你就先需要把它激活，
 
 668
 00:28:26,331 --> 00:28:28,348
 like we're going to do our modal one.
+就像我们将要处理我们的模型（modal）。
 
 669
 00:28:28,349 --> 00:28:30,366
 So, I'm showing you this to show you modal segues, but
+这里，我们是为来给你展示 Modal segue ，但实际上
 
 670
 00:28:30,368 --> 00:28:32,368
 I actually, if I were really writing an app,
+如果是我自己写APP，
 
 671
 00:28:32,370 --> 00:28:34,603
 I'd probably push to this and
+我会选择用 Push 的方式
 
 672
 00:28:34,605 --> 00:28:36,905
 have it be live editing, where if I change something,
+并且保持它可以实时编辑，当我修改了什么地方，
 
 673
 00:28:36,907 --> 00:28:39,607
 it's changing that thing in real time.
+这里的内容也跟着实时进行改动。
 
 674
 00:28:39,609 --> 00:28:41,943
 Cuz that's how I'm going to do this modal anyway.
+这里我要执行处理这个模态对话框的话，
 
 675
 00:28:41,945 --> 00:28:44,779
 The modals, actually, may be better when you are presenting
+实际上，当你展示完成之后，再允许它们变成可编辑的，
 
 676
 00:28:44,781 --> 00:28:46,513
 something that you're going to allow them to edit, and
+这样会更好，然后再处理
 
 677
 00:28:46,515 --> 00:28:48,882
 then hit cancel, 'kay?
+点击取消，
 
 678
 00:28:48,884 --> 00:28:50,283
 Versus Save.
+和保存。
 
 679
 00:28:50,285 --> 00:28:51,684
 That modal might be better for that, but
+这样处理会更好点，
 
 680
 00:28:51,686 --> 00:28:54,320
 here I'm just trying to show you the mechanics of modal.
+但现在我将给你们展示的是 模态的机制。
 
 681
 00:28:54,322 --> 00:28:56,255
 So here's out modal segue right here.
+这里是一个 modal segue ，
 
 682
 00:28:56,257 --> 00:28:58,223
 We gotta make sure we put its identifier,
+我先给它取一个名字，
 
 683
 00:28:58,225 --> 00:29:00,525
 Edit Waypoint, we're gonna call it.
+叫Edit Waypoint，我们就这么叫它。
 
 684
 00:29:00,527 --> 00:29:02,660
-You can see that segue says modal.
+You can see that segue 写的是 modal.
+你可以看到这个 Segue 的类型是 modal。
 
 685
 00:29:02,662 --> 00:29:05,262
 And I told you here that you can control things like
+我也和你们说过，你可以修改一些信息，比如展示类型
 
 686
 00:29:05,264 --> 00:29:07,564
 the presentation style of it.
+presentation style 等等
 
 687
 00:29:07,566 --> 00:29:09,099
 And I'm going to show you that when we
+等下我还会给你们展示如果是在iPad 上的话，
 
 688
 00:29:09,101 --> 00:29:12,268
 go look at this on an iPad in a moment here.
+会是什么样子。
 
 689
 00:29:12,270 --> 00:29:14,170
 But for an iPhone it doesn't really matter because it's
+但在iPhone上没有什么变化，出现方式
 
 690
 00:29:14,172 --> 00:29:15,671
 always going to slide up from the bottom.
+一直都是从底部滑上来的。
 
 691
 00:29:15,673 --> 00:29:20,142
 That's the way iPhones present modal segues by default.
+这个就是 iPhone 的 Modal segues 的默认（展示方式）。
 
 692
 00:29:21,445 --> 00:29:23,578
 Okay, so we have this nice thing, so let's go ahead and
+好了，我们已经做完了，让我们运行一下
 
 693
 00:29:23,580 --> 00:29:24,545
 run this and see what this.
+看看效果如何。
 
 694
 00:29:25,514 --> 00:29:27,147
 What we made happen here.
+运行的效果将会是什么样的。
 
 695
 00:29:27,149 --> 00:29:32,118
 All right, so now I'm going to add a new thing here.
+哦好的，我还要加一个东西呢。
 
 696
 00:29:32,120 --> 00:29:33,552
 It's dragable, right?
+它应该是可以被拖动的，对吧？
 
 697
 00:29:33,554 --> 00:29:35,421
 I can pick it up, put it somewhere else.
+我可以选中它，然后把它拖到其他的地方去。
 
 698
 00:29:35,423 --> 00:29:37,156
 It's here. It says dropped.
+就是这这里，叫做 dropped 。
 
 699
 00:29:37,157 --> 00:29:38,890
 And now, when I click on this, notice that these guys,
+现在，当我点击这，注意一些内容，
 
 700
 00:29:38,892 --> 00:29:42,494
 by the way, don't have the editable thing.
+它们是不能被编辑的。
 
 701
 00:29:42,496 --> 00:29:44,495
 They still have their image, okay?
+它们还是用的自己的图片，对吧？
 
 702
 00:29:44,497 --> 00:29:46,530
 But they don't have, they're editable.
+但这些不是多，它们是可以被编辑的。
 
 703
 00:29:46,532 --> 00:29:47,998
 But this one has this whole editable, so
+这个事可以被编辑的，所以
 
 704
 00:29:48,000 --> 00:29:50,634
 I'm going to click on this and we'll see what happens.
+我点击一下，看看会发生什么。
 
 705
 00:29:50,636 --> 00:29:51,869
 Okay?
+对吧？
 
 706
 00:29:51,870 --> 00:29:53,103
 Perfect. Slides up from the bottom.
+完美，从底部滑上来的。
 
 707
 00:29:53,105 --> 00:29:55,405
 I'm this modal MVC where I can edit the waypoint.
+我现在是在模态的MVC里，我可以直接 waypoint 。
 
 708
 00:29:55,407 --> 00:29:59,808
 Now we have a built-in UI to do that, but, here we are.
+现在我有内置的 UI 做这些工作，就是它们。
 
 709
 00:29:59,810 --> 00:30:01,076
 Kay?
+对吧？
 
 710
 00:30:01,078 --> 00:30:04,479
 So, now we're going to put our UI in here to edit this.
+所以我们现在就要在这里放一些控件作为可以编辑的，
 
 711
 00:30:04,481 --> 00:30:06,447
 So let's do that.
+让我们开始吧。
 
 712
 00:30:06,449 --> 00:30:08,199
 That's right here.
+就在这里。
 
 713
 00:30:08,200 --> 00:30:09,950
 It's going to be a pretty simple UI,
+这是一个非常简单的 UI 。
 
 714
 00:30:09,952 --> 00:30:13,286
 I'm just going to get a couple of text fields out here.
+我只需要放一些 Text Field （文本框）就好了。
 
 715
 00:30:14,389 --> 00:30:16,622
 Okay, a text field for the name, a text field for
+一个保存名称的文本框，
 
 716
 00:30:16,624 --> 00:30:18,491
 that little info field.
+一个保存信息的文本框
 
 717
 00:30:18,493 --> 00:30:20,392
 A label for each of those.
+然后在前面都为他们加上一个 Label 。
 
 718
 00:30:20,394 --> 00:30:22,494
 That's pretty much my entire UI.
+这就是我们要的 UI 了。
 
 719
 00:30:22,496 --> 00:30:24,629
 One label is called Name.
+一个 Label 叫做 Name 。
 
 720
 00:30:24,631 --> 00:30:26,864
 I'm gonna add those, it will be my line.
+它们应该排在同一行。
 
 721
 00:30:26,866 --> 00:30:28,799
 The other one is called, let's call it Info.
+另一个我们就叫做 Info 。
 
 722
 00:30:28,801 --> 00:30:31,368
 Have that be right aligned.
+让它们都对齐好。
 
 723
 00:30:31,370 --> 00:30:33,036
 We'll put this up in the corner here and
+我们可以点击这个地方，会自动为我们加上
 
 724
 00:30:33,038 --> 00:30:37,440
 do all of our auto-layout constraints.
+auto-layout 的限制值。
 
 725
 00:30:37,442 --> 00:30:38,864
 We'll put that there,
+我们这样来放，
 
 726
 00:30:38,865 --> 00:30:40,287
 we'll put this one up in this corner.
+我将把其中一个放在这个角。
 
 727
 00:30:40,288 --> 00:30:41,710
 Actually we'll have them align their baselines right there,
+实际上我们是让它们都和这 baselines 刚好对齐，
 
 728
 00:30:41,713 --> 00:30:43,212
 it's a good idea.
+这是一个好办法。
 
 729
 00:30:43,214 --> 00:30:44,413
 This guy.
+这些，
 
 730
 00:30:44,415 --> 00:30:45,080
 Try and align.
+也一样对齐。
 
 731
 00:30:45,082 --> 00:30:45,980
 Whoops.
+哦。
 
 732
 00:30:45,982 --> 00:30:47,548
 Align his baseline if we can.
+也和它的 baseline 对齐。
 
 733
 00:30:47,550 --> 00:30:49,016
 Yeah, there he is.
+对，就是这样。
 
 734
 00:30:49,018 --> 00:30:50,951
 Yeah, there we go.
+好的，我们继续。
 
 735
 00:30:50,953 --> 00:30:52,686
 There and align the baseline.
+这里有一条可以对齐的 baseline。
 
 736
 00:30:52,688 --> 00:30:55,288
 Let's drag this all the way over here like this.
+让我们把其他的内容也拖拽成这样。
 
 737
 00:30:56,624 --> 00:30:59,024
 This one over here, we'll try to line these up.
+我会让它们可以排成一行。
 
 738
 00:30:59,026 --> 00:31:04,429
 Okay, one thing that I want to do here is.
+好的，我想这个是这样的。
 
 739
 00:31:04,431 --> 00:31:06,898
 So let's just set all our constraints here at all once.
+然后让我们一次性的生成我们的限制值（constraints）吧。
 
 740
 00:31:06,900 --> 00:31:08,332
 I'm going to do it really quickly.
+我下面会很快的把这些做好。
 
 741
 00:31:08,334 --> 00:31:09,784
 Again, you've seen so
+你们已经看多了很多关于
 
 742
 00:31:09,785 --> 00:31:11,235
 many how to layout demos you don't see a little more,
+布局的例子，但你们没有看到过，这次
 
 743
 00:31:11,237 --> 00:31:13,870
 but I'm going to left this guy to the trailing edge.
+我让这个东西和下面的边缘“联系”起来。
 
 744
 00:31:13,872 --> 00:31:16,106
 I'm going to hook this guy to the trailing edge.
+我将把它们进行“关联”。
 
 745
 00:31:16,108 --> 00:31:17,874
 I'm gonna hook this guy to the top.
+然后我会把这个东西和顶部进行“关联”。
 
 746
 00:31:17,876 --> 00:31:20,710
 I'm gonna hook this guy to the bottom, but
+我将把这个东西到关联到底部，
 
 747
 00:31:20,712 --> 00:31:23,912
 this is kind of an interesting one because I'm going to hook
+但有意思的地方是，这个关联后的值是
 
 748
 00:31:23,914 --> 00:31:26,381
 him to the bottom with greater than or equal.
+大于或等于。
 
 749
 00:31:26,383 --> 00:31:29,084
 Because I really just want to make sure that he's
+因为我只是想让这个距离的值是从这个值
 
 750
 00:31:29,086 --> 00:31:32,286
 the standard value distance away from the bottom or
+到底部边缘或是更多一点
 
 751
 00:31:32,288 --> 00:31:33,220
 more, okay.
+都可以。
 
 752
 00:31:33,222 --> 00:31:34,621
 I don't really care,
+我并不太在意这个，
 
 753
 00:31:34,623 --> 00:31:37,324
 I just never want him to smash into the bottom.
+我只是希望它能够和底部边缘有一定的距离。
 
 754
 00:31:37,326 --> 00:31:38,725
 So we'll do that.
+所以我才这么做。
 
 755
 00:31:38,726 --> 00:31:40,125
 Let's go ahead and put this one here.
+让我们继续，来处理这个
 
 756
 00:31:40,128 --> 00:31:41,761
 Leading space.
+Leading space。
 
 757
 00:31:41,763 --> 00:31:44,296
 This one also, leading.
+这个头部的。
 
 758
 00:31:44,298 --> 00:31:47,566
 Let's put these two separated by a vertical space.
+我们先在垂直距离方向放上两个间隔。
 
 759
 00:31:47,568 --> 00:31:49,368
 Let's separate these.
+让我们把他们间隔开。
 
 760
 00:31:49,370 --> 00:31:50,902
 Let's separate this.
+然后把这个也分开。
 
 761
 00:31:50,904 --> 00:31:55,573
 I want this one and this one, sorry, this one and this one,
+我想把这个和这个，哦，不对，是这个和这个，
 
 762
 00:31:55,575 --> 00:31:58,676
 to always be lined up their left edges.
+一直和他们的左边缘靠齐。
 
 763
 00:31:58,678 --> 00:32:01,511
 Right, I don't want this to be ragged edged,
+对的，我不想他们和边缘的距离参差不齐的，
 
 764
 00:32:01,513 --> 00:32:04,814
 so I'm gonna line their left edges up as well.
+所以我想也让他们在左侧边缘进行对齐。
 
 765
 00:32:04,816 --> 00:32:08,184
 So it looks like we got all of our things except for
+这样看起来我们把事情搞定了，处理
 
 766
 00:32:08,186 --> 00:32:09,485
 vertical position for name.
+这个名字的垂直位置。
 
 767
 00:32:09,487 --> 00:32:10,786
 Okay, that's because,
+对对，这是因为，
 
 768
 00:32:10,788 --> 00:32:16,124
 let's line up these baselines, baseline here, baseline here.
+我们把他们根据这些 baseline 排成一行后，选择 baseline here ， baseline here 。
 
 769
 00:32:16,126 --> 00:32:18,860
 All right, so all gone, everything's lined up, okay.
+好的，所有的内容都排版好了。
 
 770
 00:32:18,862 --> 00:32:20,928
 Wow we didn't even need to update our frames,
+我现在只需要更新一下展示就好了，
 
 771
 00:32:20,930 --> 00:32:23,263
 we have this perfect looking UI here, okay.
+我们这个 UI 看起来真是不错呀。
 
 772
 00:32:24,766 --> 00:32:27,166
 Sound good?
+是不错吧？
 
 773
 00:32:27,168 --> 00:32:29,802
 All right, now let's wire these text fields up.
+好的，然后让我们把这些文本框和代码“链接”起来吧。
 
 774
 00:32:29,804 --> 00:32:31,170
 So to wire these text field up,
+好，我们现在就开始“链接”。
 
 775
 00:32:31,172 --> 00:32:35,640
 we need a custom subclass of UIViewController.
+我们先是需要一个 UIViewController 的子类。
 
 776
 00:32:35,642 --> 00:32:37,475
 Right, cuz now this is just a generic,
+好的，因为现在它还是一个可以通用的，
 
 777
 00:32:37,477 --> 00:32:38,876
 if we look at its identity inspector,
+如果我们在 Inspector 的 Identity 栏目来中看，
 
 778
 00:32:38,878 --> 00:32:42,246
 it's a generic UIViewController, so
+它还是一个通用的 UIViewController，
 
 779
 00:32:42,248 --> 00:32:44,915
 we need a custom subclass, no problem.
+所以我们需要自己定义一个子类，
 
 780
 00:32:44,917 --> 00:32:46,549
 We'll do that, we know how to do that.
+这个我们是知道怎么做的。
 
 781
 00:32:47,619 --> 00:32:49,485
 Okay, we're gonna call this our
+好的，我们就叫它
 
 782
 00:32:49,487 --> 00:32:53,088
 EditWaypointViewController, cuz that's what it does.
+EditWaypointViewController ，因为它的功能就是这个
 
 783
 00:32:53,090 --> 00:32:55,724
 This MVC that we're putting up, it edits waypoints so
+我们现在做的这个 MVC 就是用来编辑 waypoint ，
 
 784
 00:32:55,726 --> 00:32:57,492
 we'll call it EditWaypointViewController.
+我们就叫它 EditWaypointViewController 。
 
 785
 00:32:58,661 --> 00:32:59,727
 Here it is.
+这样就好了。
 
 786
 00:32:59,729 --> 00:33:02,062
 Let's go back to our storyboard here.
+然后我们回到我们的 storyboard 。
 
 787
 00:33:02,064 --> 00:33:05,832
 I'm gonna change this guy's identity to be
+我们把它对应的 Identity 改为
 
 788
 00:33:05,834 --> 00:33:08,101
 EditWaypointViewController, okay.
+EditWaypointViewController，没问题吧。
 
 789
 00:33:08,103 --> 00:33:11,771
 So it's on automatic mode here so, we got our thing here.
+这里我们得到了一些自动生成的代码。
 
 790
 00:33:11,773 --> 00:33:15,341
 I'm going to delete all but viewDidLoad, okay.
+我只留下 viewDidLoad ，其他的都删掉。
 
 791
 00:33:16,777 --> 00:33:20,078
 Let's go and hook these two things up, these text fields.
+然后让我们把按钮和代码直接“关联”起来。
 
 792
 00:33:20,080 --> 00:33:21,546
 So, I'm gonna Control-Drag here,
+我将按住 Ctrl 然后拖到这里，
 
 793
 00:33:21,548 --> 00:33:23,047
 we'll call this the nameTextField.
+我们就叫它 nameTextField 。
 
 794
 00:33:24,450 --> 00:33:28,985
-And we'll drag this one, we'll call it the info TextField,
+And we'll drag this one, we'll call it the infoTextField,
+我们还会把这个也拖过来，我们就叫它 infoTextField 。
 
 795
 00:33:28,987 --> 00:33:30,920
 okay, so there is our UI.
+好的，这就是我们的 UI 。
 
 796
 00:33:30,922 --> 00:33:34,590
 Now, we need to think a little bit at what's the model for
+现在，我们要想一下我们 EditWaypointViewController 的对应的
 
 797
 00:33:34,592 --> 00:33:36,225
 our EditWaypointViewController.
+模型（Model）的情况。
 
 798
 00:33:36,227 --> 00:33:38,393
 Can anyone think of what the model for
+你们有谁能可以想到这个用来编辑 waypoint 的 MVC 
 
 799
 00:33:38,395 --> 00:33:41,663
 an MVC that edits a waypoint, what would be its model?
+对应的模型应该是什么？
 
 800
 00:33:46,035 --> 00:33:47,968
 What does it do?
+它是用来做什么的呢？
 
 801
 00:33:47,970 --> 00:33:49,202
 Edits a waypoint, right?
+编辑 waypoint ，对吧？
 
 802
 00:33:50,372 --> 00:33:54,240
 So its model might be a waypoint?
+所以这个模型就应该是一个 waypoint ，对吧？
 
 803
 00:33:55,242 --> 00:33:56,975
 Yes.
+是的。
 
 804
 00:33:56,976 --> 00:33:58,709
 Let's make it be the waypoint to edit, okay?
+我们现在就做一个可以编辑的 waypoint。
 
 805
 00:33:58,712 --> 00:34:00,311
 So it's going to be an editable waypoint.
+它就将作为一个可以编辑的 waypoint。
 
 806
 00:34:00,313 --> 00:34:04,515
 It's gonna be the model for this viewController.
+也就是这个视图控制器的模型。
 
 807
 00:34:04,517 --> 00:34:06,383
 Anytime you're trying to determine, hm,
+在任何时候你想确定你的
 
 808
 00:34:06,385 --> 00:34:07,551
 what's my model?
+模型是什么？
 
 809
 00:34:07,553 --> 00:34:09,303
 You always want to think,
+你可以这样想，
 
 810
 00:34:09,304 --> 00:34:11,054
 what does this thing do, what does it operate on?
+（这个视图控制器）是做什么的，它要操作什么？
 
 811
 00:34:11,056 --> 00:34:12,588
 That's usually gonna be its model.
+那么它通常就是模型。
 
 812
 00:34:12,590 --> 00:34:15,725
 Okay, either how it functions or what it operates on,
+对的，如果去对它进行操作或处理的，
 
 813
 00:34:15,727 --> 00:34:18,293
 that's usually gonna be the model, all right.
+那么这个就是模型。
 
 814
 00:34:18,295 --> 00:34:19,628
 So this thing edits a waypoint, so
+我们现在就是要编辑一个 waypoint，
 
 815
 00:34:19,630 --> 00:34:24,899
 that's going to be its model.
+所以它就是模型。
 
 816
 00:34:24,901 --> 00:34:28,736
 So now, let's get some more space here.
+现在，我们先把调整一下窗口的位置。
 
 817
 00:34:28,738 --> 00:34:32,773
 Let's keep our view and model in sync, okay.
+同时可以看到我们的视图和我们模型，好的。
 
 818
 00:34:32,775 --> 00:34:34,808
 One of the first things we want to do actually when we
+我们首先想要做的是，当我们把模型放到视图里面，希望
 
 819
 00:34:34,810 --> 00:34:37,344
 put a model in or add view is keep them in sync, so
+保持两者的同步，也就是说
 
 820
 00:34:37,346 --> 00:34:40,346
 that they're always reflecting each other.
+他们之间的事保持相互“联系”的。
 
 821
 00:34:40,348 --> 00:34:45,117
 So let's do that by having here, a div set
+所以我们在这里这么来做，
 
 822
 00:34:45,119 --> 00:34:50,221
 on the model that calls some update UI thing, okay.
+在模型上调用更新 UI 的方法。
 
 823
 00:34:50,223 --> 00:34:54,258
 And we'll do the exact same thing down here, as well.
+我们将在这里也做同样的事情。
 
 824
 00:34:54,260 --> 00:34:56,927
 So if you set either text field,
+所以如果你在text field里修改了内容，
 
 825
 00:34:56,929 --> 00:35:00,664
 we're going to update the model.
+我们也将会更新模型。
 
 826
 00:35:00,666 --> 00:35:03,967
 What did I do wrong here, oh I don't have updateUI.
+我们做错了什么吗？我没有 updateUI 这个方法。
 
 827
 00:35:03,969 --> 00:35:09,672
 Okay, so let's go ahead and, func updateUI.
+好的，让我们先来写 func updateUI 。
 
 828
 00:35:09,674 --> 00:35:13,108
 So we've got an updateUI, what do we need to do in updateUI?
+好，现在我们有了 updateUI 这个方法了，那我们这个方法要做些什么呢？
 
 829
 00:35:13,110 --> 00:35:15,677
 Really, we just need to update our text fields from our
+实际上，我们只是需要把我们的waypoint的值更新到
 
 830
 00:35:15,679 --> 00:35:17,996
 waypoints.
+textfield 上就可以了。
 
 831
 00:35:17,997 --> 00:35:20,314
 So I'm gonna say, nameTextField.text
+所以就应该是， nameTextField.txt
 
 832
 00:35:20,316 --> 00:35:24,685
 = waypointToEdit.name, and
+= waypointToEdit.name ，和
 
 833
 00:35:24,687 --> 00:35:32,359
 the infoTextField.text = waypointToEdit.info.
+infoTextField.text = waypointToEdit.info。
 
 834
 00:35:32,361 --> 00:35:33,993
 Okay, so that's it.
+好来，就这样。
 
 835
 00:35:33,995 --> 00:35:38,064
 Let's also update our UI in viewDidLoad, that way,
+然后我们在 viewDidLoad 这个方法里也调用一次 updateUI 这个方法。
 
 836
 00:35:38,066 --> 00:35:41,633
 if our model got set before our outlets were loaded,
+以防止模型在我们的 UI 加载之后被更新过，
 
 837
 00:35:41,635 --> 00:35:44,803
 this will catch them up to speed, okay.
+这样现在就能够保持两者同步了。
 
 838
 00:35:44,805 --> 00:35:48,273
 So it's a very common pattern, here, to updateUI
+这是一个非常常用的“模式”，当你的模型发生变化的时候，更新你的UI
 
 839
 00:35:48,275 --> 00:35:51,209
 when your model changes and also update in viewDidLoad.
+同时在 viewDidLoad 方法里也更新一次 UI。
 
 840
 00:35:51,211 --> 00:35:55,146
 Okay, because remember outlets are not set, unfortunately,
+好的，有的时候当我们在为 segue 准备 MVC 的时候， outlets 可能
 
 841
 00:35:55,148 --> 00:35:58,382
 sometimes during prepare for segue, for example.
+还没有被加载完成，这个会比较麻烦，我们来看下例子。
 
 842
 00:35:58,384 --> 00:36:01,685
 okay, so let's see what this looks like.
+让我们看到到底会是什么样。
 
 843
 00:36:01,687 --> 00:36:04,320
 I'm actually gonna run this one on
+因为我要为你展示一下这个特别的
 
 844
 00:36:04,322 --> 00:36:06,823
 the phone because I wanna show you
+UI 问题，所以我会让程序运行在
 
 845
 00:36:06,825 --> 00:36:10,626
 a particular problem we have with this UI so far.
+真实的设备上。
 
 846
 00:36:15,432 --> 00:36:17,098
 Okay, let me put this on the screen here.
+好，让我们把这个放到屏幕上来看。
 
 847
 00:36:24,207 --> 00:36:27,841
 Okay, so here's our UI, I'm gonna just tap and
+好，这是我们的 UI ，我来把它拖到
 
 848
 00:36:27,843 --> 00:36:32,612
 hold to drop here, okay, and now I'm gonna click on it.
+这里，让我点击一下它。
 
 849
 00:36:32,614 --> 00:36:35,515
 I'm gonna press our new editing button and
+我将要点击我们新的这个编辑按钮，然后就可以看到
 
 850
 00:36:35,517 --> 00:36:37,016
 here we have our UI.
+我们的新的 UI 。
 
 851
 00:36:37,018 --> 00:36:38,584
 That's good our UI's appearing.
+看，我们的 UI 展示出来了，很好！
 
 852
 00:36:38,586 --> 00:36:42,220
 A couple of problems here, one, no keyboard.
+但这里也有不少问题，首先，没有键盘。
 
 853
 00:36:42,222 --> 00:36:43,955
 Okay, our UI has appeared here, but
+是的，我们的 UI 展示在这里了，
 
 854
 00:36:43,957 --> 00:36:45,957
 if there's not keyboard that's not so good, but
+但如果这里没有键盘不能输入，肯定是不可以的，
 
 855
 00:36:45,959 --> 00:36:49,093
 if I touch on a text field it appears.
+但如果我一旦点击了 text field 之后，键盘就会出现了。
 
 856
 00:36:49,095 --> 00:36:50,494
 Okay, that's kind of good except for
+好吧，而比较好的用户体验应该是
 
 857
 00:36:50,496 --> 00:36:53,296
 when my the thing first comes up I probably want it to
+UI 展示的同时，就能看到
 
 858
 00:36:53,298 --> 00:36:55,465
 have a keyboard.
+键盘。
 
 859
 00:36:55,466 --> 00:36:57,633
 So we're going to put in some code to become first responder
+所以我们需要加一点代码，让我们的 text field 作为第一个响应者
 
 860
 00:36:57,636 --> 00:36:59,635
 on one of those text fields, okay.
+（first responser）。
 
 861
 00:36:59,637 --> 00:37:01,003
 Right off the bat.
+除了这个问题。
 
 862
 00:37:01,005 --> 00:37:02,204
 Another problem is,
+另外一个问题是，
 
 863
 00:37:02,206 --> 00:37:04,673
 I can never make this keyboard go away, okay.
+键盘没有办法消失。
 
 864
 00:37:04,675 --> 00:37:07,442
 No matter what I press, I press return, click on
+无论我按什么，我按过 return 键，
 
 865
 00:37:07,444 --> 00:37:10,411
 [INAUDIBLE], and I can't make it go away, that's a problem.
+我也不能让键盘消失，这是一个问题。
 
 866
 00:37:10,413 --> 00:37:14,081
 Now, I don't have anything down at the bottom right now,
+现在我在右下角没有任何东西。
 
 867
 00:37:14,083 --> 00:37:17,184
 but when we start having an image in our waypoint editor,
+但当我们在 waypoint 的编辑（器）里增加了一张图片的话，
 
 868
 00:37:17,186 --> 00:37:18,952
 then it's gonna cover up that image.
+这里也将现实这张图片。
 
 869
 00:37:18,954 --> 00:37:20,553
 We need a way for
+我需要有一个解决方案，
 
 870
 00:37:20,555 --> 00:37:23,690
 the return key on the keyboard that I'm pressing down here,
+当我点击 return 键之后，
 
 871
 00:37:23,692 --> 00:37:26,759
-to make these things resign first responder, okay.
+to make these things  first responder, okay.
+可以放弃第一响应者（first responder）。
 
 872
 00:37:26,761 --> 00:37:32,564
 Let's fix those things really quickly, they're easy to fix.
+我们可以很快的把这些问题解决掉，解决它们很容易。
 
 873
 00:37:33,867 --> 00:37:36,167
 Become first responder, we can just do in viewDidLoad.
+成为第一响应者（first responder），我们需要在 viewDidLoad 方法里，
 
 874
 00:37:36,169 --> 00:37:39,737
 I'm just gonna say, name text field become first responder,
+我只需要写上 nameTextField.becomeFirst responder 就可以了
 
 875
 00:37:39,739 --> 00:37:42,573
 so as soon as this thing is created it's gonna immediately
+也就是说当这个内容刚刚被创建出来，就把 text field 作为
 
 876
 00:37:42,575 --> 00:37:46,309
 make that text field be the first responder, okay?
+第一响应者 （first responder）。
 
 877
 00:37:46,311 --> 00:37:47,844
 So that's easy.
+很容易的。
 
 878
 00:37:47,846 --> 00:37:52,648
 Making the return key resign first responder requires us
+然后让点击 return 键 可以取消当前的第一响应者 （first responder）的话，
 
 879
 00:37:52,650 --> 00:37:57,452
 to, if you remember from last time, become UI text field
+你们是否还记得上一次，增加 UITextField 的 delegates 然后实现了
 
 880
 00:37:57,454 --> 00:38:02,456
 delegates, and implement this method, text field should
+其中这个方法 textFieldShouldEndEditingOrShouldEndReturn。
 
 881
 00:38:02,458 --> 00:38:07,494
 end editing or should end return, here it is, okay.
+对，就是它。
 
 882
 00:38:07,496 --> 00:38:08,962
 So here,
+在这里，
 
 883
 00:38:08,964 --> 00:38:12,565
 when a text field hits the return key, I'm going to say
+当一个 text field “监测”到点击了 return 键，我就会写
 
 884
 00:38:12,567 --> 00:38:14,867
-textField.resignFirstRespon- der.
+textField.resignFirstResponder.
+textField.resignFirstResponder。
 
 885
 00:38:16,203 --> 00:38:20,138
 And then we'll let it do whatever it normally does.
+这就是我们通常情况下的做法。
 
 886
 00:38:20,140 --> 00:38:22,307
 Okay, so that solves both of those problems.
+好了，这样就把两个问题都解决了。
 
 887
 00:38:23,343 --> 00:38:25,676
 Oh, whoops, one quick thing we need to do before
+好的，在我们“验证“之前，我们还有一件
 
 888
 00:38:25,678 --> 00:38:27,411
 we do that is,
+事情需要做。
 
 889
 00:38:27,413 --> 00:38:30,747
 if we're gonna have this text field delegate method called,
+如果调用了这个代理的方法
 
 890
 00:38:30,749 --> 00:38:35,351
 we need to obviously make, oh, I did this totally wrong.
+我们需要显式的做。。。我做错了。
 
 891
 00:38:35,353 --> 00:38:36,652
 Sorry.
+抱歉。
 
 892
 00:38:36,653 --> 00:38:37,952
 This should be, nobody caught me on this, but
+这里应该是，没有回调用我，担
 
 893
 00:38:37,955 --> 00:38:39,788
 this should be on the model, okay.
+它应该是发生在模型上。（模型需要调用的意思）
 
 894
 00:38:39,790 --> 00:38:41,857
 Add those on the text fields.
+这些是在 text field。
 
 895
 00:38:41,859 --> 00:38:43,391
 All right, it's the model that wants
+对的，应该是模型希望能够更新 UI，
 
 896
 00:38:43,393 --> 00:38:46,227
 to update the UI not the text fields, okay?
+并不是 text field 要更新UI，对吧?
 
 897
 00:38:46,229 --> 00:38:49,130
 What the text fields want when they're didSet
+在设置 textField的的时候，需要设置他的
 
 898
 00:38:49,132 --> 00:38:54,668
 is they want to set their delegates equal to self.
+deletaget 等于  self 。
 
 899
 00:38:54,670 --> 00:38:58,438
 That's what they wanna do, okay.
+这就是我们要做的。
 
 900
 00:38:58,440 --> 00:38:59,839
 Guys, pay attention.
+大家，注意一下。
 
 901
 00:38:59,841 --> 00:39:02,508
 I count on you guys to catch me doing these things.
+我希望你们看懂了我刚才做的。
 
 902
 00:39:02,510 --> 00:39:04,042
 Okay, everyone understand that?
+好的，每个人都懂了吗？
 
 903
 00:39:04,044 --> 00:39:07,078
 The model setting that wants to update the UI, the text
+是这个模型希望可以更新 UI ，这个textfield 只是
 
 904
 00:39:07,080 --> 00:39:10,281
 field, just want to set themselves as the delegate.
+把他们设置为自己的代理（delegate）。
 
 905
 00:39:10,283 --> 00:39:12,383
 See, you let me do another thing here.
+看，你让我做另外一件事的意思。
 
 906
 00:39:13,352 --> 00:39:15,185
 Okay, there we go.
+好，那让我们继续。
 
 907
 00:39:15,186 --> 00:39:17,019
 So now both text fields have self as their delegate, so
+现在两个 text field 都有了他们各自的代理，所以他们
 
 908
 00:39:17,022 --> 00:39:20,290
 they're both going to call ShouldReturn, okay.
+可以调用 ShouldReturn...这个方法。
 
 909
 00:39:20,292 --> 00:39:22,258
 So let's try that.
+让我们试试看那就。
 
 910
 00:39:29,367 --> 00:39:32,801
 Are we still up there, yes.
+我们还是在这里，对对。
 
 911
 00:39:32,803 --> 00:39:35,337
 Okay. Again, here I'm gonna add one.
+好，我们再增加一个。
 
 912
 00:39:35,339 --> 00:39:36,505
 Click here.
+点击这里。
 
 913
 00:39:36,506 --> 00:39:37,672
 Let's bring up our new MVC.
+然后我们到我们新的 MVC 。
 
 914
 00:39:37,674 --> 00:39:38,890
-Here is is.
+Here it is.
+就是这里。
 
 915
 00:39:38,891 --> 00:39:40,107
 Keyboard comes up, excellent.
+键盘出现了，很好！
 
 916
 00:39:40,109 --> 00:39:42,476
 And if I hit Return, keyboard goes away.
+如果我点击 return 键， 键盘消失了。
 
 917
 00:39:42,478 --> 00:39:44,011
 And if I go to Back, it comes back.
+如果我点击返回，它就返回来。
 
 918
 00:39:44,013 --> 00:39:45,478
 So that's much more control.
+这里需要更多的控制。
 
 919
 00:39:45,480 --> 00:39:48,014
 And if you're doing this in the simulator, it seems like,
+如果你是在模拟器里运行，这个可能看起来
 
 920
 00:39:48,016 --> 00:39:49,566
 oh, this is all great.
+完全没有问题。
 
 921
 00:39:49,567 --> 00:39:51,117
 But then when you run it on the device, you're like, oh,
+但如果你是在真机上运行，你就会发现，
 
 922
 00:39:51,119 --> 00:39:52,551
 well that's not very useable, okay.
+好像不是那么好用的。
 
 923
 00:39:52,553 --> 00:39:55,487
 So you've got to be careful to make sure things actually
+这里你要特别注意，确保你的 App 可以在真机上
 
 924
 00:39:55,489 --> 00:39:56,888
 are useable on the device.
+正确运行。
 
 925
 00:39:56,890 --> 00:39:58,589
 All right.
+好的。
 
 926
 00:39:58,591 --> 00:40:02,893
 That's that, so now we've kind of set up our UI.
+就是这样了，我们已经把我们的 UI 部分完成了。
 
 927
 00:40:02,895 --> 00:40:04,928
 But actually, there's one other problem with this.
+不过实际上，这里还有另外一个问题。
 
 928
 00:40:04,930 --> 00:40:07,230
 Let's go ahead and take a look at this other problem we got.
+让我们去看看下另外这个问题，
 
 929
 00:40:11,469 --> 00:40:15,404
 Which is when I add a thing here is I might type in
+当我想增加一个内容的时候，我会输入它的名字，
 
 930
 00:40:15,406 --> 00:40:19,974
 the name, like I think I put that pin on the golf course
+比如我想“钉”在这个地方点点叫做 “glof course”
 
 931
 00:40:19,976 --> 00:40:21,843
 there or something.
+之类的。
 
 932
 00:40:21,845 --> 00:40:23,577
 Right?
+可以吧？
 
 933
 00:40:23,579 --> 00:40:31,218
 Golf course, okay, snowed, whatever.
+“Golf course”，好的，随便什么名字吧。
 
 934
 00:40:31,220 --> 00:40:33,186
 But now there's no way for me to get back.
+但这里我却没办法回去了。
 
 935
 00:40:33,188 --> 00:40:34,554
 [LAUGH].
+［笑］
 
 936
 00:40:34,556 --> 00:40:35,321
 You see?
+看到了？
 
 937
 00:40:35,323 --> 00:40:37,340
 How can I get back?
+我怎么才能回去？
 
 938
 00:40:37,341 --> 00:40:39,358
 I've changed the things I want, now I want to get back,
+我已经把我需要修改的内容改好了，我想返回，
 
 939
 00:40:39,360 --> 00:40:40,792
 I want to dismiss this thing and
+我想把当前的移除，然后
 
 940
 00:40:40,794 --> 00:40:45,830
 get back, so we need some user interface here to get back.
+回到前一个界面，所以我们需要增加一个新的 UI 控件让我能够返回。
 
 941
 00:40:45,832 --> 00:40:48,799
 The other thing is, when we make changes in these text
+另一个问题时，当我在text fields 里面修改了内容之后，
 
 942
 00:40:48,801 --> 00:40:52,536
 fields, it's not actually changing the waypoint, okay?
+并没有在体现在 waypoint 上，对吧？
 
 943
 00:40:52,538 --> 00:40:54,805
 So we need you to fix both those things.
+所以我们需要修改这两个问题。
 
 944
 00:40:54,807 --> 00:40:57,140
 So let's fix the changing in the way point.
+让我们先修改这个编辑 waypoint 的这个问题。
 
 945
 00:40:57,142 --> 00:40:59,742
 Now, this one I'm gonna use notifications for.
+这里，我会使用 Notification 来实现。
 
 946
 00:40:59,744 --> 00:41:01,177
 Because I want to show you a little bit more
+因为我想给你们多展示一下 Notification 的用法。
 
 947
 00:41:01,179 --> 00:41:03,345
 about notifications that we really didn't cover
+我们上次没有机会
 
 948
 00:41:03,347 --> 00:41:05,681
 when we did the notifications last time.
+实际使用 Notification 。
 
 949
 00:41:05,683 --> 00:41:09,851
 So, text fields it turns out, they have a notification.
+这里，当text fields 一出现，这里会一个 Notification 。
 
 950
 00:41:09,853 --> 00:41:11,986
 Okay, in fact they have a couple of notifications.
+好吧，实际上它时有一组 Notification。
 
 951
 00:41:11,988 --> 00:41:13,687
 Three notifications, I think, even.
+我记得可能是 三个 Notification
 
 952
 00:41:13,689 --> 00:41:16,757
 But one of them is ui text field,
+其中有一个是 
 
 953
 00:41:16,759 --> 00:41:19,325
 text did change notification.
+UITextfieldTextDidChangeNotification 。
 
 954
 00:41:19,327 --> 00:41:22,095
 So you can sign up to hear from a text field whenever its
+这样这个 textfield 里的值发生任何变化，你都可以监听。
 
 955
 00:41:22,097 --> 00:41:23,462
 text changes.
+这样这个 textfield 里的值发生任何变化，你都可以监听。
 
 956
 00:41:23,464 --> 00:41:25,130
 Now, that's gonna be really valuable for us, here.
+现在有这个 Notification 对我们来说就很有用了。
 
 957
 00:41:25,132 --> 00:41:27,532
 Because whenever the text field's text changes,
+因为任何时候 text field 里的值发生变化，
 
 958
 00:41:27,534 --> 00:41:29,734
 we can update our wave point.
+我们就可以更新我们的 waypoint 的值
 
 959
 00:41:29,736 --> 00:41:30,435
 Right?
+对吧？
 
 960
 00:41:30,437 --> 00:41:31,936
 So, how do we do that?
+好，那我们该怎么做？
 
 961
 00:41:31,938 --> 00:41:34,438
 How do we make that work?
+我们怎么来实现这个？
 
 962
 00:41:34,439 --> 00:41:36,939
 Well, turns out we want to put this in viewDidappear, so
+嗯，这里我们会在 viewDidAppear 方法里来写，
 
 963
 00:41:36,942 --> 00:41:40,677
 in viewDidappear, okay, super.viewDidappear.
+在 viewDidAppear ，对，先要调用 super.viewDidAppear 。
 
 964
 00:41:42,881 --> 00:41:45,214
 I'm just gonna call a method here,
+让我在这里要调用一个方法，
 
 965
 00:41:45,216 --> 00:41:48,116
-called observe text fields.
+called observeTextFields.
+这个方法就叫做 observeTextfield  吧。
 
 966
 00:41:49,353 --> 00:41:51,803
 Okay?
+可以？
 
 967
 00:41:51,804 --> 00:41:54,254
-In an observed text fields, I am going to set myself up
+In an ovserveTextfield, I am going to set myself up
+在这个 ovserveTextfield 方法里，我将把我自己
 
 968
 00:41:54,257 --> 00:41:59,660
 to observe changes made in those text fields.
+设置为“监听”这些 textField 的变化的代理对象。
 
 969
 00:41:59,662 --> 00:42:01,512
 All right?
+对吧？
 
 970
 00:42:01,513 --> 00:42:03,363
 And, so I'm gonna do that with the notification center, so
+所以我要通过 NotificationCenter ，得到center
 
 971
 00:42:03,365 --> 00:42:06,399
 I'm gonna get my center, which is NS Notification center.
+类型是为  NSNotificationCenter 
 
 972
 00:42:06,401 --> 00:42:08,234
 Default center.
+Default center 。
 
 973
 00:42:08,236 --> 00:42:11,437
 I'm also going to specify the queue I want this on which is,
+我还要指明在这个“通知”队列里我们需要的的是哪个，
 
 974
 00:42:11,439 --> 00:42:14,606
 of course, the main queue, so I'm gonna say, main queue.
+这个“队列”就是指主队列。
 
 975
 00:42:15,642 --> 00:42:18,610
 And them I'm just gonna say, use that thing we had before,
+接着我来写，我们之前也这么做过的，
 
 976
 00:42:18,612 --> 00:42:22,347
 Center Add Observer, for name which is this.
+Center add Observer 参数的名字是
 
 977
 00:42:22,349 --> 00:42:26,183
 And the name of this notification is UI Text Field.
+这个名字就是 UITextField 的 notification  的这个
 
 978
 00:42:26,185 --> 00:42:32,622
 TextDidChangeNotification.
+TextDidChangeNotification 方法。
 
 979
 00:42:32,624 --> 00:42:34,858
 'Kay?
+对吧？
 
 980
 00:42:34,859 --> 00:42:37,093
 So, so far, this notification is nothing new to you.
+到现在为止，关于 Notification 还没有什么新的内容。
 
 981
 00:42:37,095 --> 00:42:40,196
 Object is the object I care about if it changes,
+这个Object 就是我们需要的被改变内容的对象，
 
 982
 00:42:40,198 --> 00:42:43,499
 which is, let's say, the name text field, in this case.
+也就是说，这里就应该是 nameTextField ，
 
 983
 00:42:43,501 --> 00:42:46,101
 'Kay?
+对吧？
 
 984
 00:42:46,102 --> 00:42:48,702
 Queue is the queue, and the block, okay, I'm gonna do the.
+在队列和 block，对的，就是这里
 
 985
 00:42:48,705 --> 00:42:50,104
 Our magic trick here of
+我将会用一个有点神奇的方法
 
 986
 00:42:50,106 --> 00:42:53,274
 closing off the end of that, I'll get rid of that.
+关掉这个，我可以来删掉掉这些。
 
 987
 00:42:53,276 --> 00:42:55,476
 And then put our block on the end here.
+然后把我们的 block 放在这里的最后。
 
 988
 00:42:55,478 --> 00:42:59,379
 So here are the argument, I'll just call it notification.
+这是参数，我直接调用 notification.
 
 989
 00:42:59,381 --> 00:43:01,981
 That's the notification that cames back, coming back.
+这个notification的返回值。
 
 990
 00:43:01,983 --> 00:43:06,085
 And all I wanna do here is if I can let waypoint,
+然后我这里就是让 let waypoint 等于
 
 991
 00:43:06,087 --> 00:43:09,855
-equal our waypoint to edit.
+equal our waypointToEdit.
+我们的 waypointToEdit 。
 
 992
 00:43:09,857 --> 00:43:12,591
 Okay, so we can get our waypoint.
+这样我们就能得到我们的 waypoint 。
 
 993
 00:43:12,593 --> 00:43:16,794
 Then, I'm just going to set the waypoint's name
+接着我们就只需要nameTextfield的值赋给
 
 994
 00:43:16,796 --> 00:43:21,031
 equal to the name text field's text.
+waypoint的name就可以了。
 
 995
 00:43:21,033 --> 00:43:24,901
 So every time the name text field changes here,
+所以每次name text field的值发生了变化，
 
 996
 00:43:24,903 --> 00:43:26,770
 I'm just going to update the name of our waypoint.
+我都会更新我们的 waypoint 的名称属性。
 
 997
 00:43:26,772 --> 00:43:28,538
 And exactly the same for the info.
+保持内容一直是同步的。
 
 998
 00:43:30,141 --> 00:43:32,708
 So all we have to change here is
+接着我们也必须对这个info text fields
 
 999
 00:43:32,710 --> 00:43:34,676
 info text fields coming in here.
+也进行相应的修改。
 
 1000
 00:43:34,678 --> 00:43:36,644
 And this is going to be updated to info.
+这里是要更新 info。
 
 1001
 00:43:36,646 --> 00:43:38,913
 And this is the info.
+这个是 info。
 
 1002
 00:43:40,349 --> 00:43:41,715
 Now so far, so good.
+到目前为止，都很好。
 
 1003
 00:43:41,717 --> 00:43:43,616
 You're probably like oh, okay it makes sense.
+你可能会想，嗯，这个很合理的。
 
 1004
 00:43:43,618 --> 00:43:45,718
 You haven't taught us anything new about notification.
+关于 notificaton 你已经没有什么可学的了。
 
 1005
 00:43:45,720 --> 00:43:47,420
 But there's a very important piece of this
+但这里有一个特别重要的地方，
 
 1006
 00:43:47,422 --> 00:43:48,987
 puzzle right here.
+容易出错的地方。
 
 1007
 00:43:48,989 --> 00:43:52,691
 What happens when this MBC gets dismissed?
+如果一旦 MBC 被移除了，会发生什么？
 
 1008
 00:43:53,927 --> 00:43:57,328
 These observers are still trying to observe
+这些观察者（observers）还在尝试监听
 
 1009
 00:43:57,330 --> 00:43:59,363
 those text fields.
+这些 text fields 。
 
 1010
 00:43:59,364 --> 00:44:01,397
 Even those text fields could be have gone away,
+甚至这些 text field 可能已经被移除了。
 
 1011
 00:44:01,400 --> 00:44:03,200
 they won't because these closures are gonna keep
+这是因为这些 text field 可能还被
 
 1012
 00:44:03,202 --> 00:44:04,801
 those text fields in memory.
+保存在内存中。
 
 1013
 00:44:04,803 --> 00:44:06,402
 And also, self can never go away because
+也是这样的，他们自己是永远无法把自己删除的，
 
 1014
 00:44:06,404 --> 00:44:08,704
 these closures are gonna be keep self in memory.
+因为这些“闭包”函数将会一直将它们保存在内存里。
 
 1015
 00:44:08,706 --> 00:44:12,241
 So this is a problem, so when you add an observer like this
+所以这是一个问题，所以当你在这样的情况下增加一个 观察器（observer）
 
 1016
 00:44:12,243 --> 00:44:14,509
-and your NVCs ever going to go away,
+and your MVCs ever going to go away,
+同时你的 MVC 将会被移除掉，
 
 1017
 00:44:14,511 --> 00:44:18,780
-which our last NVC never went away, it was the root NVC so
+which our last MVC never went away, it was the root MVC so
+而我们最后的这个 MVC 却一直不会被移除，它是一个根视图控制器(MVC)
 
 1018
 00:44:18,782 --> 00:44:20,581
 we added that observer for a name.
+所以我们这个增加的 observer ，
 
 1019
 00:44:20,583 --> 00:44:22,616
 We probably could just leave it there forever,
+我们只能一直将它留在那里了，
 
 1020
 00:44:22,618 --> 00:44:23,850
 because it's never going to go away.
+因为它也是不会移除的。
 
 1021
 00:44:23,852 --> 00:44:25,552
 Although good design,
+尽管一个好的设计来看，
 
 1022
 00:44:25,553 --> 00:44:27,253
 maybe even that one would know how to go away.
+可能它自己是知道如何将自己移除的。
 
 1023
 00:44:27,255 --> 00:44:28,755
 But how do we go away?
+但该怎么做呢？
 
 1024
 00:44:28,757 --> 00:44:33,692
 And the answer is that this returns a little cookie, okay?
+方法就是，返回一小段 cookie ，对吧？
 
 1025
 00:44:33,694 --> 00:44:34,726
 So it returns a cookie.
+它是返回一段 cookie 的话。
 
 1026
 00:44:34,728 --> 00:44:36,661
 I'm gonna make storage for these two cookies.
+我将会讲这些 cookies 保存起来。
 
 1027
 00:44:36,663 --> 00:44:40,931
 One I'm gonna call it the name text field observer, and
+我讲会调用 nameTextfieldObserver ,
 
 1028
 00:44:40,933 --> 00:44:44,001
 it's a type NSObjectProtocol.
+这个对象的（协议）类型是 NSObject Protcol 。
 
 1029
 00:44:44,003 --> 00:44:46,870
 So NSObjectProtocol just means it's something
+这里 NSObjectProtocol 的意思是，这个对象在“过去”的
 
 1030
 00:44:46,872 --> 00:44:49,305
 that used to be an NS object in the old world.
+的世界里是被当作 NSObject 对象来看待的。
 
 1031
 00:44:49,307 --> 00:44:50,807
 Okay, in the old, objective C world.
+这个过去的意思是 ，Objective C 世界的意思。
 
 1032
 00:44:50,809 --> 00:44:52,475
 That's all that means for an NS object protocol.
+这些具体有关 NSObject Protocol 的具体内容，
 
 1033
 00:44:52,477 --> 00:44:53,943
 We don't even know,
+我们不了解，
 
 1034
 00:44:53,944 --> 00:44:55,410
 we don't care what's in the NS object protocol for
+这里我们也不需要懂，
 
 1035
 00:44:55,413 --> 00:44:59,247
 the purposes of this, because really, this is just a cookie.
+因为实际上，这就是一段 cookie 。
 
 1036
 00:44:59,249 --> 00:45:02,417
 It's just something that it gives us that we can give back
+这恰好就是我们当我们“沟通”的时候，
 
 1037
 00:45:02,419 --> 00:45:05,353
 to it when we wanna talk about this thing.
+所需要的内容。
 
 1038
 00:45:05,355 --> 00:45:06,887
 So, here's this observer,
+这个是 观察器 （oberver），
 
 1039
 00:45:06,889 --> 00:45:11,725
-and I'm gonna say here NTF observer equals that.
+and I'm gonna say here ntfObserver equals that.
+我这里让 ntfObserver 等于这个。
 
 1040
 00:45:11,727 --> 00:45:15,662
-I'm gonna say ITF observer equals that.
+I'm gonna say itfObserver equals that.
+然后让 itfObserver 等于它。
 
 1041
 00:45:15,664 --> 00:45:18,698
 So I've added these observers and I got this cookie back.
+我已经增加了这些 observer 同时我也可以获得它返回的 cookie 。
 
 1042
 00:45:18,700 --> 00:45:21,033
 Now, when I'm done observing,
+一旦当我完成了观察。
 
 1043
 00:45:21,035 --> 00:45:24,636
 I need to remove this cookie from the notification center.
+我就需要把这段 cookie 从 notificaton cenert 中删除。
 
 1044
 00:45:24,638 --> 00:45:28,640
 So I'm gonna do that in view will disappear.
+我将在 viewWillDisappear 这个方法里来做这件事。
 
 1045
 00:45:29,576 --> 00:45:33,310
 Okay, so, when my view will disappear, okay?
+是的，当我们的视图将要消失的时候，对吧？
 
 1046
 00:45:33,312 --> 00:45:36,146
 I don't need to look at those text fields anymore after I've
+我已经不需要在“监控”这些text field了，因为它们马上就不会出现在
 
 1047
 00:45:36,148 --> 00:45:38,048
 gone off screen.
+屏幕上了。
 
 1048
 00:45:38,049 --> 00:45:39,949
 They can't be changing because I'm not even on screen
+就是因为我在屏幕上都不会看到它们了，所以它们肯定也不会被
 
 1049
 00:45:39,952 --> 00:45:41,084
 right now.
+修改了。
 
 1050
 00:45:41,086 --> 00:45:42,786
 I'm just gonna say
+我只要这些来写，
 
 1051
 00:45:42,787 --> 00:45:44,487
-NS Notification Center default Center.
+NSNotificationCenter.defaultCenter.
+NSNotificationCenter.defaultCenter
 
 1052
 00:45:44,489 --> 00:45:47,523
-Actually, let's check and make sure they're not nill because
+Actually, let's check and make sure they're not nil because
+这里我们还是要检查下它们是不是nil ，因为这里我设置的这些字段内容
 
 1053
 00:45:47,525 --> 00:45:50,125
 see I made these fields optional, so we'll say if.
+是 optional 的，所以我要写 if
 
 1054
 00:45:50,127 --> 00:45:54,262
 Observer if let, let observer equal
+Observer if let ，let observer 等于
 
 1055
 00:45:54,264 --> 00:45:58,232
 the mean text field observer, than notification center.
+这个 text fileld observer ，然后在notification center
 
 1056
 00:46:02,371 --> 00:46:03,771
 Remove that observer.
+中删除这个 observer。
 
 1057
 00:46:03,772 --> 00:46:05,172
 So you can see how I've never had to actually look inside
+这里你可以看到，我根本没有去看内部发生了什么，或是里面是什么内容，
 
 1058
 00:46:05,174 --> 00:46:08,208
 and see what this thing is, I don't send it any messages,
+我也没有发送任何消息，
 
 1059
 00:46:08,210 --> 00:46:11,778
 I just get the cookie here and then I pass it along in here.
+我只是得到 cookie 然后直接传递到这里。
 
 1060
 00:46:11,780 --> 00:46:14,046
 Except for this is observer, because I've lighted it.
+除了它是 observer，因为我已经专门“处理”过它。
 
 1061
 00:46:14,048 --> 00:46:16,315
 Okay, so that's all we had to do.
+好了，这就是全部我们需要做的。
 
 1062
 00:46:16,317 --> 00:46:17,766
 Same thing here.
+同样的思路。
 
 1063
 00:46:17,767 --> 00:46:19,216
 We'll do the same thing with the other cookie.
+我们也需要对其他的cookie也做同样的处理。
 
 1064
 00:46:19,219 --> 00:46:23,455
 This is the ITF observer, info text field.
+这是 ITFObserber ，针对 info text field 。
 
 1065
 00:46:23,457 --> 00:46:28,559
 So this pattern by the way, of starting to observe something
+顺便说下这种模式，启动一个 observer 都是在 viewDidAppear 方法里调用，
 
 1066
 00:46:28,561 --> 00:46:31,495
 in view did appear, and then stopping observing from it in
+然后停止 观察（observer）都是在 viewWillDisappear 
 
 1067
 00:46:31,497 --> 00:46:33,730
 view will disappear is a very common way to do this.
+方法里处理，这是一个比较通用的处理方式。
 
 1068
 00:46:34,900 --> 00:46:38,001
 Okay, because usually, any notifications like keyboard
+这是因为，通常，任何一个 notification ，比如 键盘的修改，
 
 1069
 00:46:38,003 --> 00:46:40,870
 will change, or something like that, there's keyboard will
+或是其他类似的，这里有一个 keyboardwillAppear 的，
 
 1070
 00:46:40,872 --> 00:46:42,971
 appear, you don't care about that if you're not on screen.
+你是不需要考虑他们是不是已经出现在屏幕上。
 
 1071
 00:46:42,973 --> 00:46:45,273
 So there's a perfect place to add and remove this.
+所以这是一个非常好的位置用来增加或删除。
 
 1072
 00:46:45,275 --> 00:46:49,010
 Does everyone understand what's going on here?
+是不是每个人都明白了发生了什么事情吧？
 
 1073
 00:46:49,012 --> 00:46:50,445
 You add to these notifications so
+你增加了这些 notifications ，所以任何时候
 
 1074
 00:46:50,447 --> 00:46:51,846
 every time it checks changes,
+它有修改的话，
 
 1075
 00:46:51,848 --> 00:46:53,280
 it's gonna update our way point, but
+都会直接更新我们的 waypoint，
 
 1076
 00:46:53,282 --> 00:46:55,749
 we don't wanna be doing that when we're not on screen.
+但我们不希望当我们的内容已经不在屏幕上，它们还继续监控。
 
 1077
 00:46:55,751 --> 00:46:57,917
 And we don't wanna have these closures,
+我们不需要这些"闭包"程序,
 
 1078
 00:46:57,919 --> 00:47:00,687
 this closure right here, and this closure right here.
+这个“闭包”这里，就是这里。
 
 1079
 00:47:00,689 --> 00:47:04,690
 We don't want them keeping self, and this text field
+我们不希望他们继续持有当前对象，
 
 1080
 00:47:04,692 --> 00:47:07,793
 through self, we don't want them keeping them in heap.
+我们不希望在堆上还继续保存着它们。
 
 1081
 00:47:07,795 --> 00:47:09,194
-When we, when our NBC goes away,
+When we, when our MVC goes away,
+当我们的 MVC 消失了之后，
 
 1082
 00:47:09,196 --> 00:47:11,396
 we want it to go completely away, out of the heap.
+我们希望是全部消失，完全从堆上移除。
 
 1083
 00:47:13,066 --> 00:47:14,832
 All right. So that's notification.
+好的，那就是 notification。
 
 1084
 00:47:14,834 --> 00:47:16,633
 That's your little DL notification code.
+那是有关 notification 的一段代码。
 
 1085
 00:47:16,635 --> 00:47:18,568
 Now let's fix that other problem,
+好，下面让我们来改另外一个问题。
 
 1086
 00:47:18,570 --> 00:47:21,637
 the problem where there's no way to dismiss the thing.
+这个问题是我们没有办法移除内容。
 
 1087
 00:47:21,639 --> 00:47:23,572
 It comes up and we can't dismiss it.
+它出现之后，我们没办法移除掉它。
 
 1088
 00:47:23,574 --> 00:47:25,007
 And there's a number of ways we could do that.
+事实上这里有好几个方法可以解决这个问题。
 
 1089
 00:47:25,009 --> 00:47:28,043
 We could put a little Done button down in the middle
+我们可以在界面中间放一个
 
 1090
 00:47:28,045 --> 00:47:29,778
 somewhere of that UI.
+Done 按钮。
 
 1091
 00:47:29,780 --> 00:47:34,982
 But actually, I'm going to do it by putting this
+但这次，我是会把我们的UI 放到 Navigation Controller 里。
 
 1092
 00:47:34,984 --> 00:47:39,219
 user interface in an navigation controller.
+但这次，我是会把我们的UI 放到 Navigation Controller 里。
 
 1093
 00:47:39,221 --> 00:47:41,354
 Now, why am I gonna put it in navigation controller?
+那我为什么要这么做呢？
 
 1094
 00:47:41,356 --> 00:47:43,106
 Two reasons.
+两个理由。
 
 1095
 00:47:43,107 --> 00:47:44,857
 One, users are used to the look of navigation controllers
+一、在 Navigation Controller 控制器下，用户可以在顶部看到一个
 
 1096
 00:47:44,859 --> 00:47:47,827
 being the title bars and maybe there are buttons up there, so
+标题条，然后旁边的位置特别适合放一个
 
 1097
 00:47:47,829 --> 00:47:49,728
 it's a good place to put a Done button.
+Done 的按钮。
 
 1098
 00:47:49,730 --> 00:47:52,164
 Also, it gives me a title, okay?
+同时我还可以设置一个标题，对吧？
 
 1099
 00:47:52,166 --> 00:47:53,632
 When this thing came up and
+当它一出现，只是一个空白的屏幕
 
 1100
 00:47:53,633 --> 00:47:55,099
 it was just a blank screen with these two fields,
+上有两个文本框，
 
 1101
 00:47:55,102 --> 00:47:56,367
 it's a little disconcerting.
+看起来有点“囧”呀。
 
 1102
 00:47:56,369 --> 00:47:58,219
 What's happening?
+会怎么样呢？
 
 1103
 00:47:58,220 --> 00:48:00,070
 Whereas, if I have a title on top, like, Edit Waypoint,
+这里，如果有一个标题在顶部，比如 Edit Waypoint
 
 1104
 00:48:00,073 --> 00:48:02,306
 it'll be clear what the heck is going on.
+将会明确很多。
 
 1105
 00:48:02,308 --> 00:48:05,142
 So I'm just gonna select this, right here, and
+所以我会选择这个方案，点击这里的
 
 1106
 00:48:05,144 --> 00:48:09,012
 do Embed In Navigation Controller.
+Embed In Navigation Controller
 
 1107
 00:48:09,014 --> 00:48:10,246
 'Kay? So
+对吧
 
 1108
 00:48:10,247 --> 00:48:11,479
 it puts a Navigation Controller.
+这里我们放入了一个 Navigation Controller。
 
 1109
 00:48:11,482 --> 00:48:15,617
 Now, I can, for example, put a title, Edit Waypoint, in here.
+现在，举个例子来说，可以加一个标题， Edit Waypoint ，在这里。
 
 1110
 00:48:15,619 --> 00:48:17,886
 And, also, I can have a Done button here.
+然后我还可以增加一个 Done 按钮。
 
 1111
 00:48:17,888 --> 00:48:21,822
 So let's go ahead and put a Done button in there.
+好，那我们现在就在这里加一个 Done 按钮。
 
 1112
 00:48:21,824 --> 00:48:24,591
 Down here to Bar Button Item.
+往下找， 叫 Bar Button Item 。
 
 1113
 00:48:24,593 --> 00:48:26,326
 Here's a Bar Button Item.
+就这这里了， Bar Button Item 。
 
 1114
 00:48:26,328 --> 00:48:27,861
 We'll put it right here.
+我们把它拖到这里。
 
 1115
 00:48:27,863 --> 00:48:29,095
 We'll call it Done.
+给它命名为 Done 。
 
 1116
 00:48:29,097 --> 00:48:32,898
 And then let's go ahead and wire that Done button up.
+然后让我们继续把这个按钮和代码连接在一起。
 
 1117
 00:48:32,900 --> 00:48:34,433
 Okay. We'll wire it
+好的，我想我们还是把它
 
 1118
 00:48:34,435 --> 00:48:36,334
 up at the top here, I guess.
+链接到代码的最上面这里。
 
 1119
 00:48:36,336 --> 00:48:40,171
 Just Ctrl+drag from this right in here.
+就是按住 Ctrl 然后拖到这里就好。
 
 1120
 00:48:40,173 --> 00:48:43,607
 And, so when we hit Done, all we're going to do is dismiss.
+现在我们需要能做到当我们点击了 Done ， 我们就能把它移除了。
 
 1121
 00:48:43,609 --> 00:48:45,743
 So this is just going to be an action,
+所以这个是需要一个 Action 。
 
 1122
 00:48:45,745 --> 00:48:48,845
 bar button item action, we'll call it done.
+bar button item action ，我们就给它命名为 done 。
 
 1123
 00:48:48,847 --> 00:48:51,014
 And, inside this Done, right here.
+然后在这个方法里，就是这里。
 
 1124
 00:48:51,016 --> 00:48:53,482
 Sorry, we're going to go back to wide.
+不好意思，我们要先把屏幕弄宽点。
 
 1125
 00:48:54,652 --> 00:48:56,368
 Okay?
+可以？
 
 1126
 00:48:56,369 --> 00:48:58,085
 Inside this done action when the done button is pressed,
+当 done 按钮被按下的时候，我们只需要在 done 
 
 1127
 00:48:58,088 --> 00:49:00,555
 I'm just going to say presenting
+这个action 方法里，只需要写
 
 1128
 00:49:00,557 --> 00:49:02,590
 view controller.dismiss.
+viewController.dismiss 。
 
 1129
 00:49:02,592 --> 00:49:04,291
 Okay? So, dismiss,
+懂了？所以，直接移除，
 
 1130
 00:49:06,228 --> 00:49:10,430
 I'm asking the presenting view controller who presented me,
+我们问当前展示的的视图控制器，谁展示的我。
 
 1131
 00:49:10,432 --> 00:49:12,665
 please dismiss whoever you just presented.
+然后移除掉当前正在展示的。
 
 1132
 00:49:12,667 --> 00:49:16,335
 And, in fact, if my presenting view controller has presented
+然后，实际上，如果展示我的视图控制器已经展示了我之后，
 
 1133
 00:49:16,337 --> 00:49:18,904
 me and I've presented someone else, when I do this dismiss,
+然后我又展示里其他的，当我移除了之后，
 
 1134
 00:49:18,906 --> 00:49:20,238
 it's going to dismiss all of us.
+就会将所有内容都移除掉。
 
 1135
 00:49:21,241 --> 00:49:21,806
 Okay?
+懂了？
 
 1136
 00:49:23,042 --> 00:49:25,142
 So, yes, we do want to animate it and, no,
+是的，这里我还是需要一个动画效果，
 
 1137
 00:49:25,144 --> 00:49:28,912
 we don't want to find out when the dismiss happens, okay?
+当移除了之后，我们就不想看到它了，对吧？
 
 1138
 00:49:30,949 --> 00:49:32,332
 Okay. So that's it.
+好，就是这样了。
 
 1139
 00:49:32,333 --> 00:49:33,716
 So that done button will allow us to dismiss.
+这里这个 done 按钮就是能够实现移除。
 
 1140
 00:49:35,219 --> 00:49:36,184
 All right. So, let's take a look,
+好的，这样让我们来看下。
 
 1141
 00:49:37,187 --> 00:49:38,919
 see if we fixed those two problems.
+看下这两个问题是否被修复了。
 
 1142
 00:49:41,757 --> 00:49:44,391
 And we only have one more piece to go to wire this up
+我们在这之后已经有了一小部分。
 
 1143
 00:49:44,393 --> 00:49:45,025
 after this.
+我们在这之后已经有了一小部分。
 
 1144
 00:49:47,429 --> 00:49:48,945
 All right.
+好的。
 
 1145
 00:49:48,946 --> 00:49:50,462
 So, we're going to add, along with the long press,
+好，我们先长按，然后增加一个。
 
 1146
 00:49:50,465 --> 00:49:52,464
 I'm gonna click, I'm gonna edit it.
+我会先点击，然后编辑一下。
 
 1147
 00:49:52,466 --> 00:49:54,383
 Here it is.
+在这里。
 
 1148
 00:49:54,384 --> 00:49:56,301
 Notice now I have this nice title, Edit Waypoint.
+就可以看到，我们已经一个标题， Edit Waypoint 。
 
 1149
 00:49:56,303 --> 00:50:00,138
 I can set this to be again, golf or something.
+我可以重新设置这些内容，golf 或是其他什么内容。
 
 1150
 00:50:00,140 --> 00:50:02,840
 I'm not gonna type too much because it's not gonna work
+这里我们准备多输入些，因为这样程序是会有问题无法正确进行的，
 
 1151
 00:50:02,842 --> 00:50:05,009
 and you're going to see why in a moment.
+你们马上就会看到了。
 
 1152
 00:50:05,011 --> 00:50:06,176
 But here it is.
+但现在在这里，
 
 1153
 00:50:06,178 --> 00:50:07,511
 Okay. We have this, we can return.
+好的，我们已经了这个，我们可以返回了。
 
 1154
 00:50:07,513 --> 00:50:08,946
 This is great.
+这个太好了。
 
 1155
 00:50:08,947 --> 00:50:10,380
 Our NBC's exactly what we want.
+我们的 NBC 很好帮我们实现了我们想要的。
 
 1156
 00:50:10,382 --> 00:50:11,681
 Now, I'm gonna hit Done.
+现在，我点击 Done 按钮。
 
 1157
 00:50:11,683 --> 00:50:13,049
 It dismisses it.
+它已经被移除（消失）了。
 
 1158
 00:50:13,051 --> 00:50:16,718
 Now, let's look and oh, it still says Dropped.
+现在，让我们再看下，它始终还是被选装的状态。
 
 1159
 00:50:16,720 --> 00:50:18,153
 Okay? Why is that?
+嗯？为什么会这样？
 
 1160
 00:50:18,155 --> 00:50:21,255
 That's because we didn't prepare that segue.
+这是因为我们没有为这个 segue 准备好。
 
 1161
 00:50:21,257 --> 00:50:22,390
 Okay?
+对吧？
 
 1162
 00:50:22,391 --> 00:50:23,524
 And modal segue is like any other segue,
+modal seggue 和其他的 segue 一样的，
 
 1163
 00:50:23,526 --> 00:50:25,309
 if you don't prepare it,
+如果你不预先做设置的话，
 
 1164
 00:50:25,310 --> 00:50:27,093
 it's going to not going to know what it's working on.
+它就不知道它该如何工作。
 
 1165
 00:50:27,096 --> 00:50:30,263
 So we need to set each modal, which is the waypoint to edit
+所以我们需要为这个编辑 waypoint 的模态对话看进行
 
 1166
 00:50:30,265 --> 00:50:33,166
 and we do that in prepare for segue.
+准备和设置。
 
 1167
 00:50:33,168 --> 00:50:34,300
 We already have a prepare for
+我们之前已经对 GPXViewConrtoller 的 segue
 
 1168
 00:50:34,302 --> 00:50:37,069
 segue in our GPX view controller right here.
+进行了提前的准备和设置。
 
 1169
 00:50:37,071 --> 00:50:40,439
 Prepares for the image viewing 1, so
+包括对于图片的浏览的准备，这里
 
 1170
 00:50:40,441 --> 00:50:44,509
 we just need to put another else if the segue's
+我们是需要另外一个 else if ，来根据segue 的标识符
 
 1171
 00:50:44,511 --> 00:50:48,913
 identifier equals our new EditWaypointSegue.
+进行判断，看是不是我们的 EditWaypointSegue 。
 
 1172
 00:50:50,316 --> 00:50:51,632
 Okay?
+对吧？
 
 1173
 00:50:51,633 --> 00:50:52,949
 And in here, what do we need to do?
+在这里，我们该怎么做呢？
 
 1174
 00:50:52,951 --> 00:50:56,786
 Again, just like any other one, we need to get the thing
+是的，就是想另外的一个，我们需要对当前我指的这个
 
 1175
 00:50:56,788 --> 00:50:59,956
 we're pointing to, that we're segueing to and set it up.
+我们需要跳转过去，然后做设置。
 
 1176
 00:50:59,958 --> 00:51:05,828
 So we're going to say if the, I'll go, what did I call it,
+所以这里我将会这么写，我想下该叫它什么呢，
 
 1177
 00:51:05,830 --> 00:51:08,296
 EWVC, okay, EditWaypointViewController.
+EWVC ，对的，EditWaypointViewController。
 
 1178
 00:51:08,298 --> 00:51:12,400
 If we can let the EditWaypointViewController
+如果我们能让 EditWaypointViewController
 
 1179
 00:51:12,402 --> 00:51:15,770
 equal the segue's destination as and
+等于 segue 的跳转过去的目标是
 
 1180
 00:51:15,772 --> 00:51:18,772
 EditWaypointViewController.
+EditWaypointViewController。
 
 1181
 00:51:20,709 --> 00:51:24,677
 Okay, then now we've got this Edit Way View Controller.
+这样，我们就能得到这个 EditWaypointViewController ，
 
 1182
 00:51:24,679 --> 00:51:27,880
 We can set the EditWaypointViewControllers,
+我就可以设置 EditWaypointViewController 的 wayPoint 属性
 
 1183
 00:51:27,882 --> 00:51:30,549
 way point to edit equal to a way point.
+等于当前的 waypoint 。
 
 1184
 00:51:30,551 --> 00:51:32,484
 So, we need to get our waypoint,
+这里我们需要得到我们的 waypoint ，
 
 1185
 00:51:32,486 --> 00:51:34,152
 which I'm actually gonna steal from right here,
+就是我们想从这里传递过去的那个 waypoint ，
 
 1186
 00:51:34,154 --> 00:51:36,354
 because we already have a nice line of code that does that.
+因为我们已经写过一行很不错的代码，可以做到这个。
 
 1187
 00:51:40,726 --> 00:51:41,408
 Okay.
+好的。
 
 1188
 00:51:41,409 --> 00:51:42,091
 So there's our waypoint.
+现在已经有了我们的航点（waypoint）。
 
 1189
 00:51:43,461 --> 00:51:47,162
 Now this, oh, sorry, this also.
+不是这个，哦，抱歉，是这个。
 
 1190
 00:51:47,164 --> 00:51:48,764
 Notice this is complaining.
+注意这里已经报错了。
 
 1191
 00:51:48,766 --> 00:51:50,949
 See, this says error.
+看，这里报错的。
 
 1192
 00:51:50,950 --> 00:51:53,133
 I'm trying to set the waypoint to edit to waypoint and
+我试着把这个waypoint 设置为可以编辑的 waypoint，
 
 1193
 00:51:53,136 --> 00:51:57,638
 it's saying GPX waypoint is not an editable waypoint.
+然后它说 GPX waypoint 不是 editable waypoint 。
 
 1194
 00:51:57,640 --> 00:51:59,340
 Ah-hah.
+原来是这样啊。
 
 1195
 00:51:59,342 --> 00:52:01,775
 Because we declared Waypoint Edit to be an editable
+因为我们定义 waypoint edit 的类型为 editableWaypoint ，
 
 1196
 00:52:01,777 --> 00:52:03,910
 waypoint, which is good, because it edits it, so
+这个是没问题点，因为我们需要对它进行编辑，所以用这个类型
 
 1197
 00:52:03,912 --> 00:52:06,096
 it better be.
+更为贴切。
 
 1198
 00:52:06,097 --> 00:52:08,281
 And this is a GPX Waypoint, cuz I copied this line of code
+这个是GPXWaypoint ，因为我是从这里把代码拷贝过来的，
 
 1199
 00:52:08,283 --> 00:52:11,417
 from up here, where we're looking at the image URL.
+这个就是我们之前查看的图像URL部分的，
 
 1200
 00:52:11,419 --> 00:52:13,419
 So really easy fix, though,
+所以这个很好修复的。
 
 1201
 00:52:13,421 --> 00:52:17,922
 we'll just set this to be an editable waypoint.
+我们这里把它设置为一个可以编辑的航点。
 
 1202
 00:52:17,924 --> 00:52:19,257
 'Kay?
+可以把。
 
 1203
 00:52:19,259 --> 00:52:21,058
 Now, this code will not work.
+现在这个代码有报错。
 
 1204
 00:52:22,194 --> 00:52:25,228
 Any sharp-eyed people know why this won't work.
+你们眼尖的同学肯定一眼就能看出问题在哪。
 
 1205
 00:52:25,230 --> 00:52:27,930
 It's a problem we've had in other prepare for segues.
+这个问题就是我们实际上时给另外一个 seguge 做准备工作的。
 
 1206
 00:52:29,967 --> 00:52:31,167
 >> Navigation.
+>> Navigation。（导航视图控制器）
 
 1207
 00:52:31,168 --> 00:52:32,368
 >> Bingo. Bonus points over there.
+>> 正确，加10分！
 
 1208
 00:52:32,370 --> 00:52:35,704
-If I wereAron, I'd be throwing candy at you at this point.
+If I were Aron, I'd be throwing candy at you at this point.
+如果我是 Aron , 我肯定会奖励给一块糖的。
 
 1209
 00:52:35,706 --> 00:52:37,289
 Yes.
+没错。
 
 1210
 00:52:37,290 --> 00:52:38,873
 That editable waypoint view controller is
+EditableWayViewController是在
 
 1211
 00:52:38,875 --> 00:52:40,741
 inside a navigation controller.
+NavigationController 的内部的。
 
 1212
 00:52:40,743 --> 00:52:43,277
 So the destination view controller is gonna be
+所以这个跳转过去的目标视图控制器应该是
 
 1213
 00:52:43,279 --> 00:52:44,711
 that navigation controller.
+NavigationController 。
 
 1214
 00:52:44,713 --> 00:52:47,447
 So this is not gonna work, cuz this is gonna fail,
+所以这段代码不能正确工作，
 
 1215
 00:52:47,449 --> 00:52:48,748
 this as Waypoint finish.
+是以传递 waypoint 结束的。
 
 1216
 00:52:48,750 --> 00:52:50,816
 Now, we've dealt with this in the past,
+现在我们知道，之前我们已经遇到过这样的问题，
 
 1217
 00:52:50,818 --> 00:52:53,052
 by putting a little if here, whatever.
+只要写一小段代码就好了，
 
 1218
 00:52:53,054 --> 00:52:55,387
 It's so common to want to do that,
+这是一个非常常见的情况，
 
 1219
 00:52:55,389 --> 00:52:59,357
 that actually I usually add an extension
+实际上我通常都会扩展（继承） UIViewController 
 
 1220
 00:52:59,359 --> 00:53:02,393
 to UIViewController that does that.
+来解决这个问题。
 
 1221
 00:53:02,395 --> 00:53:04,461
 I call it content view controller, and
+我就叫它 ContentViewControler ，然后
 
 1222
 00:53:04,463 --> 00:53:07,964
 all it says is if I'm a navigation controller,
+它会记录我们是不是在 Navigation Controller 里面，
 
 1223
 00:53:07,966 --> 00:53:10,400
 then return my visible view controller.
+如果在的话，就返回实际展示的视图控制器。
 
 1224
 00:53:10,402 --> 00:53:11,834
 Otherwise return myself.
+如果不在的话，就返回自己。
 
 1225
 00:53:13,237 --> 00:53:14,236
 Okay.
+好的。
 
 1226
 00:53:14,238 --> 00:53:15,604
 So this is a nice little trick.
+所以这是一个很方便的小技巧。
 
 1227
 00:53:15,606 --> 00:53:18,073
 You can now, I can send to any view controller,
+现在就可以，给我任何的一个View Controller ，
 
 1228
 00:53:18,075 --> 00:53:20,174
 give me the content view controller.
+都能返回给我实际内容的 View Controller 。
 
 1229
 00:53:20,176 --> 00:53:21,542
 If you are the content view controller,
+如果你就是实际内容的 View Controller ，
 
 1230
 00:53:21,544 --> 00:53:22,810
 you just give me yourself.
+你就给我你自己。
 
 1231
 00:53:22,812 --> 00:53:23,910
 If you're a navigation controller,
+如果你是一个 Navigation Controller ，
 
 1232
 00:53:23,912 --> 00:53:26,146
 then you give me the visible view controller.
+你就给我当前正在展示的 View Controller 。
 
 1233
 00:53:26,148 --> 00:53:28,648
 So this is a really nice little extension to throw in
+在你的 APP 开发中，你用了这个小的扩展（继承）之后，在处理
 
 1234
 00:53:28,650 --> 00:53:32,351
 all your apps that are segueing to things that might
+segue 跳转的时候，能非常方便的获取实际内容的 ViewController ，
 
 1235
 00:53:32,353 --> 00:53:34,887
 or might not be in navigation controllers.
+不用在意它是否在 Navigation Controller 里了。
 
 1236
 00:53:34,889 --> 00:53:39,557
 So I use this by saying destinationViewController.con-
+这里我就写上 destinationViewController.con-
 
 1237
 00:53:39,559 --> 00:53:41,626
 tentViewController.
+tentViewController ，就可以了。
 
 1238
 00:53:41,628 --> 00:53:43,127
 'Kay?
+对吧？
 
 1239
 00:53:43,128 --> 00:53:44,627
 Cuz I added this var to all view controllers.
+因为我已经给所有的 View Controller 加上了 var 关键字。
 
 1240
 00:53:44,630 --> 00:53:46,063
 In fact, I can do the same thing up here.
+事实上，我是对于这个，我们的图片在这里
 
 1241
 00:53:47,166 --> 00:53:49,065
 With this one, okay, our image one.
+做同样的处理的。
 
 1242
 00:53:49,067 --> 00:53:53,536
 So, if we ever put our image, if we were ever transitioning
+如果你之前已经放了我们的图片，或是之前之前我们已经改变过图片的显示，
 
 1243
 00:53:53,538 --> 00:53:56,105
 to show the image and it wrapped in a view controller,
+它就已经包括在了 View Controller ，
 
 1244
 00:53:56,107 --> 00:53:57,639
 we could do that as well.
+我们也可以这样做。
 
 1245
 00:53:57,641 --> 00:54:00,442
 So I almost put this in all of my
+所以我把它放到了我所有跳转目标的
 
 1246
 00:54:00,444 --> 00:54:01,976
 destination view controller segues.
+View Controller 的 segue。
 
 1247
 00:54:01,978 --> 00:54:03,844
 Why not? Doesn't hurt, okay.
+为什么这么做？不会有什么不好的事情，对的。
 
 1248
 00:54:05,214 --> 00:54:05,946
 All right.
+没问题。
 
 1249
 00:54:05,948 --> 00:54:07,113
 So now this will work.
+好，现在它应该是可以正常运行的了。
 
 1250
 00:54:07,115 --> 00:54:08,381
 Let's go ahead and run.
+让我们运行试试看。
 
 1251
 00:54:19,026 --> 00:54:24,963
 Okay, we add, we click, we edit, we go here.
+好的，我增加一个，点击，然后编辑，我们到这里了。
 
 1252
 00:54:24,965 --> 00:54:27,365
 Oh, notice now it says dropped.
+看下，它说它现在写的是 “dropped”。
 
 1253
 00:54:27,367 --> 00:54:29,533
 Because we prepared it, so
+因为我们已经提前为它设置好了，
 
 1254
 00:54:29,535 --> 00:54:31,602
 it knows that it's the one that said drop.
+所以它知道它自己应该写上 “dropped” 状态。
 
 1255
 00:54:31,604 --> 00:54:33,036
 So I'm going to change this.
+所以我要修改下这个。
 
 1256
 00:54:33,038 --> 00:54:35,305
 Now we'll put back in Golf Course.
+然后我现在回到了 Golf Couse 。
 
 1257
 00:54:35,307 --> 00:54:37,974
 It's worse typing it in now that it's going to work.
+如果可以继续运行的话，我前面的输入是有问题的。
 
 1258
 00:54:37,976 --> 00:54:38,741
 Course.
+Coures。
 
 1259
 00:54:39,744 --> 00:54:41,009
 Okay. And then we could say it's
+现在我可以继续输入，
 
 1260
 00:54:41,011 --> 00:54:46,147
-under the snow, which it was when.
+“under the snow, which it was when”
+“under the snow, which it was when“
 
 1261
 00:54:46,149 --> 00:54:47,415
-From this trip.
+“from this trip.”
+”from this trip.”
 
 1262
 00:54:47,417 --> 00:54:49,016
 Okay, so here we are.
+好的，现在我们在这里。
 
 1263
 00:54:49,018 --> 00:54:50,650
 We've got this, and we hit done.
+我们已经编辑好了，然后点击 done 按钮。
 
 1264
 00:54:50,652 --> 00:54:54,220
 And now when we look at our waypoint, it's edited it.'
+现在当我们再看我们的航带你，它已经是编辑好了的。
 
 1265
 00:54:54,222 --> 00:54:55,221
 Kay?
+对吧？
 
 1266
 00:54:55,223 --> 00:54:57,890
 All right.
+非常好。
 
 1267
 00:54:57,892 --> 00:55:00,258
 Now, let's look at something else.
+然后我们再看看其他的。
 
 1268
 00:55:00,260 --> 00:55:03,328
 What's this gonna look like on an iPad?
+在iPad上看起来怎么样？
 
 1269
 00:55:03,330 --> 00:55:06,097
 It looks great on iPhone, really nice, okay.
+在 iPhone 上看起来真是不错。
 
 1270
 00:55:06,099 --> 00:55:08,466
 But, let's take a look at iPad.
+那么，让我们看看在 iPad 上
 
 1271
 00:55:08,468 --> 00:55:09,667
 See what that looks like.
+效果是怎么样的吧。
 
 1272
 00:55:09,669 --> 00:55:11,601
 So I have an iPad here.
+这里我有一个 iPad 。
 
 1273
 00:55:11,603 --> 00:55:12,936
 It's going to run on that.
+在上面直接运行。
 
 1274
 00:55:22,880 --> 00:55:23,979
 All right.
+好的。
 
 1275
 00:55:23,981 --> 00:55:24,880
 There we go. There's an iPad.
+我们看下，在这个iPad 。
 
 1276
 00:55:24,882 --> 00:55:26,832
 Here's Trax.
+这是我们的 APP Trax。
 
 1277
 00:55:26,833 --> 00:55:28,783
 Now Trax is incredible on the iPad because
+现在 Trax 看起来在 iPad 上的样子有点“出乎意料”，
 
 1278
 00:55:29,952 --> 00:55:31,618
 it's got such a big screen,
+因为它的屏幕太大了。
 
 1279
 00:55:31,620 --> 00:55:34,654
 we can really see all of our stuff very clearly.
+我可以清楚的看到所有的内容。
 
 1280
 00:55:34,656 --> 00:55:38,291
 And especially if we click and want to look at an image.
+特别是当我点击这里，想看下这个图片，
 
 1281
 00:55:38,293 --> 00:55:41,361
 Wow, we got this really nice screen loading it up here,
+哇，这个展示效果真是不错呀，
 
 1282
 00:55:41,363 --> 00:55:42,261
 but, whoa, look at that.
+但，哦，看看那里。
 
 1283
 00:55:42,263 --> 00:55:43,596
 So it's a gray.
+是灰色的。
 
 1284
 00:55:43,597 --> 00:55:44,930
 So it's actually quite great.
+实际上看起来还是不错的。
 
 1285
 00:55:44,932 --> 00:55:48,833
 This is quite a great thing on the iPad.
+在 iPad 上看起来效果还是挺不错的。
 
 1286
 00:55:48,835 --> 00:55:51,436
 But there's a problem with the iPad.
+但在 iPad 上有一个问题。
 
 1287
 00:55:51,438 --> 00:55:52,303
 Watch this.
+看这里。
 
 1288
 00:55:52,305 --> 00:55:53,671
 Let's add.
+我们增加一个。
 
 1289
 00:55:53,673 --> 00:55:54,338
 Okay.
+好的。
 
 1290
 00:55:54,340 --> 00:55:57,540
 Click on Dropped > Edit.
+点击这个然后编辑。
 
 1291
 00:55:57,542 --> 00:56:01,711
 And we've got this humongous thing.
+我们会看到一个很搞笑大事情。
 
 1292
 00:56:01,713 --> 00:56:05,314
 I mean there's no way we would ever use that much screen real
+我的意思是，我们根本没有办法在这个屏幕分辨率上使用
 
 1293
 00:56:05,316 --> 00:56:06,782
 estate, okay?
+它，对吧？
 
 1294
 00:56:06,784 --> 00:56:09,718
 So that's really not an appropriate UI.
+所以这不是一个合适 UI 。
 
 1295
 00:56:09,720 --> 00:56:10,885
 Listen to me carefully.
+这里注意一下我说的话。
 
 1296
 00:56:10,887 --> 00:56:13,954
 That's not an appropriate UI for an iPad, okay?
+这不是一个适应于 iPad 的UI，对吧？
 
 1297
 00:56:13,956 --> 00:56:16,523
 And I know that some of you, who were putting on your final
+我知道你们有些人，在准备最后的大作业的时候，
 
 1298
 00:56:16,525 --> 00:56:19,426
 project, oh yeah for breadth, I'm supporting the iPad.
+也会考虑到，正在支持 iPad 的展示。
 
 1299
 00:56:19,428 --> 00:56:21,327
 And all you're doing is doing it on iPhone and
+现在你现在做的这些，在 iPhone 上看起来都很好，
 
 1300
 00:56:21,329 --> 00:56:22,628
 then hoping that this is okay.
+然后希望它在 iPad 上也是好的。
 
 1301
 00:56:22,630 --> 00:56:23,996
 But this is not okay.
+但事实上不是这样的。
 
 1302
 00:56:23,998 --> 00:56:25,998
 Okay? This does not look
+对吧？这个看起来在 iPad 上展示的
 
 1303
 00:56:26,000 --> 00:56:27,633
 on the iPad.
+不合适。
 
 1304
 00:56:27,634 --> 00:56:29,267
 So if you're gonna say I support the iPad, don't try
+所以如果你写这个 APP 支持 iPad ，可是“忽悠”不了我们，
 
 1305
 00:56:29,269 --> 00:56:31,703
 and swing this one by us, cuz we're just not gonna buy it.
+我们是不会买单的。
 
 1306
 00:56:31,705 --> 00:56:34,706
 Okay, we're gonna write down, doesn't really support iPad.
+好吧，我们只是准备这样做，但实际上我们现在还不能支持 iPad 。
 
 1307
 00:56:34,708 --> 00:56:38,208
 All right, so how could we make this UI look more
+好吧，那我们想让我们的 UI 能够支持 iPad 该
 
 1308
 00:56:38,210 --> 00:56:39,476
 iPad-esque?
+怎么做呢？
 
 1309
 00:56:39,478 --> 00:56:40,844
 Well, there's a couple things we can do.
+我们还是要好几件事情。
 
 1310
 00:56:40,846 --> 00:56:44,347
 One is, we could go back to our storyboard and
+首先，我们要回到我们的 storyboard 
 
 1311
 00:56:44,349 --> 00:56:47,383
 we can change the transition style,
+然后改变一下转换的方式。
 
 1312
 00:56:47,385 --> 00:56:50,786
 'kay, of this particular segue way that we have down here.
+好的，我们需要这个特殊的 segue 。
 
 1313
 00:56:50,788 --> 00:56:52,287
 Where is it?
+在哪里呢？
 
 1314
 00:56:52,289 --> 00:56:54,756
 It's over here.
+在这里。
 
 1315
 00:56:54,758 --> 00:56:55,390
 Here it is.
+就是它。
 
 1316
 00:56:55,392 --> 00:56:59,093
 If, we can change, it's still modal, but we can change this
+这里我们还是把它设置为 modal ，但我们可以改变它的展示样式，
 
 1317
 00:56:59,095 --> 00:57:01,862
 presentation, for example, to be form sheet.
+举个例子，改为 form sheet 。
 
 1318
 00:57:01,864 --> 00:57:04,131
 So form sheet, it's iPad only.
+这个是只有 iPad 才有的。
 
 1319
 00:57:04,133 --> 00:57:07,434
 This will be ignored if you set this on an iPhone.
+如果你在 iPhone 上设置的话，将会被直接忽略。
 
 1320
 00:57:07,436 --> 00:57:10,703
-The form sheet looks like this, and
+The Form sheet looks like this, and
+Form sheet 看起来是这个样子的，
 
 1321
 00:57:10,705 --> 00:57:11,437
 it's a little better.
+看起来好多了。
 
 1322
 00:57:12,807 --> 00:57:13,905
-It's not enough better for
+It's not enough better for your final project,
+你最后的大作业应该要比这个好，
 
 1323
 00:57:13,907 --> 00:57:16,341
-your final project, but it's a little better.
+but it's a little better.
+不过现在这个效果在这里。
 
 1324
 00:57:16,343 --> 00:57:18,743
 So here's what it looks like.
+看起来是这样的。
 
 1325
 00:57:23,683 --> 00:57:25,849
 All right, so I'm gonna add one here.
+我们会在这里加上一个。
 
 1326
 00:57:25,851 --> 00:57:26,883
 Click on it, edit it.
+点击这里，编辑它。
 
 1327
 00:57:26,885 --> 00:57:30,920
-See the form sheet, at least it's smaller, okay?
+See the Form sheet, at least it's smaller, okay?
+看下这个 Form sheet ，它会更小一点，对吧？
 
 1328
 00:57:30,922 --> 00:57:32,388
 So it's a little better.
+这样会更好点。
 
 1329
 00:57:32,390 --> 00:57:33,655
 It doesn't look too bad.
+看起来还不错。
 
 1330
 00:57:33,657 --> 00:57:35,757
 It's almost good enough.
+已经够好的了。
 
 1331
 00:57:35,759 --> 00:57:38,960
 But really what the iPad wants is for
+但实际上，iPad 上我们一般都是使用
 
 1332
 00:57:38,962 --> 00:57:41,963
 that to be in a popover, right?
+popover（弹出） 的，对吧？
 
 1333
 00:57:41,965 --> 00:57:43,898
 I wanna be able to go here.
+我想这里也可以这样做。
 
 1334
 00:57:43,899 --> 00:57:45,832
 And when I click this little thing, I want a small little
+当我点击这里时，我想有一个小一点的 popover 出来，
 
 1335
 00:57:45,835 --> 00:57:48,802
 popover that just has the name and info field.
+里面包括名字和信息的文本框。
 
 1336
 00:57:48,804 --> 00:57:51,104
 And if I have an image, make space for an image.
+如果我有图片的话，就给图片多“留”些地方。
 
 1337
 00:57:51,106 --> 00:57:53,440
 That's the perfect thing for an iPad, okay?
+这样在 iPad 上看起来就完美了，对吧？
 
 1338
 00:57:53,442 --> 00:57:56,676
 So let's turn this baby into a popover.
+好，然后让我们把它放到 popover 里。
 
 1339
 00:57:56,678 --> 00:57:59,011
 And that's gonna break the heck out of our iPhone one,
+这样会让我们在 iPhone 上无法返回。
 
 1340
 00:57:59,013 --> 00:58:01,647
 but we're gonna go back and fix that too, okay?
+我们这样要回过头来修复这个问题，可以？
 
 1341
 00:58:01,649 --> 00:58:04,349
 But, first things first, let's make this into a popover.
+不过，我们现在最需要的是先把这个改为 popover 。
 
 1342
 00:58:04,351 --> 00:58:06,017
 So, how do we make this into a popover?
+那我该怎么做呢？
 
 1343
 00:58:06,019 --> 00:58:08,286
 Well, I'm gonna get rid of this modal segue.
+这里我将准备不使用 modal segue 。
 
 1344
 00:58:08,288 --> 00:58:09,520
 So here's the modal segue.
+好，这里是 modal segue 。
 
 1345
 00:58:09,522 --> 00:58:11,288
 Let me zoom out so you can see it.
+我缩小一点，你们就能看清楚了。
 
 1346
 00:58:11,290 --> 00:58:14,024
 This is the modal segue that segues through this navigation
+这个 modal segue 将从 navigation controller 
 
 1347
 00:58:14,026 --> 00:58:15,525
 controller over to here.
+跳转到这里。
 
 1348
 00:58:16,628 --> 00:58:20,662
 So I'm just going to delete that by hitting delete.
+这里我就先选中它，然后删掉。
 
 1349
 00:58:20,664 --> 00:58:23,432
 I'm gonna have to move these over
+因为我的屏幕不够大，
 
 1350
 00:58:23,434 --> 00:58:25,734
 closer because I have such a small screen here.
+所以这里我不得不先把他们挪得靠近一些。
 
 1351
 00:58:25,736 --> 00:58:28,236
 Then I'm gonna zoom in and then I'm just gonna make a new
+然后我把它放大，然后就给可以从这里
 
 1352
 00:58:28,238 --> 00:58:31,272
 segue from here directly to here.
+创建一个新的 segue 。
 
 1353
 00:58:31,274 --> 00:58:33,440
 I'm not gonna go through the navigation controller because
+这里我是不经过 navigation controller 的，因为我不想
 
 1354
 00:58:33,442 --> 00:58:34,374
 I don't want my popover to
+我的 popover 里面的内容有一个
 
 1355
 00:58:34,376 --> 00:58:35,875
 have a navigation controller title bar.
+navigation controller 的标题栏。
 
 1356
 00:58:35,877 --> 00:58:37,010
 Totally unnecessary.
+因为完全没必要。
 
 1357
 00:58:37,012 --> 00:58:39,578
 It's gonna be nice, sleek, little popover.
+这样就好了，漂亮，一个小的 popover 。
 
 1358
 00:58:39,580 --> 00:58:41,113
 So I'm just gonna go directly to here and
+我这里直接就跳转到这里，然后以模态的方式
 
 1359
 00:58:41,115 --> 00:58:42,247
 instead of present modally,
+直接替换当前展示的内容。
 
 1360
 00:58:42,249 --> 00:58:45,283
 I'm going to do popover presentation here.
+我这里是以 popover 的方式进行展示的。
 
 1361
 00:58:45,285 --> 00:58:47,168
 Okay?
+懂了吗？
 
 1362
 00:58:47,169 --> 00:58:49,052
 Now when you do a popover, you notice I got an error here.
+现在，当我打开 popover ，你会发现这里报错了。
 
 1363
 00:58:49,055 --> 00:58:50,287
 Okay?
+对吧？
 
 1364
 00:58:50,289 --> 00:58:53,357
 If I click on this and see what this error is, it says,
+我们点开这里看下具体是什么错误，它说
 
 1365
 00:58:53,359 --> 00:58:56,093
 'Popover segue with no anchor'.
+“Popover segue with no anchor”
 
 1366
 00:58:56,095 --> 00:58:57,327
 Okay? I've got some frames to
+嗯？我已经调整了框架（frame）
 
 1367
 00:58:57,329 --> 00:58:58,394
 adjust here.
+在这里
 
 1368
 00:58:58,396 --> 00:58:59,695
 And we have this unreachable scene,
+因为这个 navigation controller，所以
 
 1369
 00:58:59,697 --> 00:59:02,197
 because of this navigation controller, but that's okay.
+这里是不能操作的区域，但那里是可以的。
 
 1370
 00:59:02,199 --> 00:59:04,266
 It's this popover error with no anchor.
+因为没有指定的锚点，所以无法 popover 。
 
 1371
 00:59:04,268 --> 00:59:05,500
 So, what does that mean?
+这是什么意思呢？
 
 1372
 00:59:05,502 --> 00:59:08,469
 Well, when you do a popover, the little arrow on
+当你要 popover 的时候，这个在popover上的小箭头
 
 1373
 00:59:08,471 --> 00:59:11,772
 the popover has gotta know where to point, okay?
+就应该已经知道在哪里展示，对吧？
 
 1374
 00:59:11,774 --> 00:59:13,774
 Sometimes, it points to a bar button.
+有些时候，它是指向 bar button 。
 
 1375
 00:59:13,776 --> 00:59:16,843
 And here, I'm gonna have it point to the map view.
+这里我们是希望它能指向我们的 map view。
 
 1376
 00:59:16,845 --> 00:59:18,395
 More specifically,
+更进一步说，
 
 1377
 00:59:18,396 --> 00:59:19,946
 I'm gonna have it point to the little pin.
+我是希望它能够指向这个小的标识。
 
 1378
 00:59:19,948 --> 00:59:21,748
 Okay?
+对吧？
 
 1379
 00:59:21,749 --> 00:59:23,549
 So if we don't specify that then a popover can't work.
+这里如果我们没有指明的话，就无法正常进行popover。
 
 1380
 00:59:23,551 --> 00:59:26,435
 So how do we specify that?
+那我们该怎么指明呢？
 
 1381
 00:59:26,436 --> 00:59:29,320
 How do we specify where, when this popover wants to popover
+当从这个 view controller 要 popover 的时候，该怎么
 
 1382
 00:59:29,323 --> 00:59:32,290
 from this view controller, it shows up?
+指明是从哪里？
 
 1383
 00:59:32,292 --> 00:59:34,526
 Well, one part of it we can do with dragging.
+对的，我们需要先通过拖动的方法来完成。
 
 1384
 00:59:34,528 --> 00:59:36,060
 You see right here, in the inspector,
+看下这里， 在 inspector（检查器）。
 
 1385
 00:59:36,062 --> 00:59:39,030
 I've inspected this segue right here.
+我已经在这里设置过这个 segue 。
 
 1386
 00:59:39,032 --> 00:59:40,431
 I clicked right on here.
+我在这里点击。
 
 1387
 00:59:40,433 --> 00:59:42,366
 You can see that it says anchor.
+你就能看到这里有一个 anchor （锚点）。
 
 1388
 00:59:42,368 --> 00:59:44,434
 It says drag to select an anchor.
+然后就直接拖到这个锚点。
 
 1389
 00:59:44,436 --> 00:59:48,037
 Okay, well, I'm just gonna drag over to my map view,
+对对，我从我们的 map view 拖过去的。
 
 1390
 00:59:48,039 --> 00:59:50,406
 oops, except for I need to zoom in.
+哦，我想我需要放大一些。
 
 1391
 00:59:50,408 --> 00:59:51,641
 Okay? So,
+好吧，
 
 1392
 00:59:51,642 --> 00:59:52,875
 I'm just going to select the segue.
+现在我们选中了这个 segue 。
 
 1393
 00:59:52,877 --> 00:59:55,644
 I'm gonna drag to my map view.
+拖到我的 map view。
 
 1394
 00:59:55,646 --> 00:59:57,212
 And it says, okay, map view.
+对，是的，map view。
 
 1395
 00:59:57,214 --> 00:59:57,912
 Great.
+好极了。
 
 1396
 00:59:57,914 --> 00:59:59,147
 You're good to go.
+现在就可以了。
 
 1397
 00:59:59,148 --> 01:00:00,381
 And it game me no more error.
+已经没有报错信息了。
 
 1398
 01:00:00,383 --> 01:00:02,516
 Except for this is not gonna work either because
+不过还是不能正常工作，
 
 1399
 01:00:02,518 --> 01:00:06,453
 I have to say where in the map view I want this to work from.
+因为我没有设置从 map view 的哪个位置展示 popover的内容。
 
 1400
 01:00:06,455 --> 01:00:08,321
 If I don't say where, it's gonna try and
+如果我不写是哪里，它就会从
 
 1401
 01:00:08,323 --> 01:00:10,390
 point it to the edge of the map view itself,
+map view 的边缘开始。
 
 1402
 01:00:10,392 --> 01:00:12,658
 which is gonna be off screen, which is useless.
+这样就到屏幕的外面了，看不到，也就没用了。
 
 1403
 01:00:12,660 --> 01:00:14,960
 I need to specify a little rectangle inside.
+我需要在里面指定一个小些的区域。
 
 1404
 01:00:14,962 --> 01:00:16,194
 So how do I do that?
+那我该怎么做呢？
 
 1405
 01:00:16,196 --> 01:00:19,064
 Where do I specify that little rectangle?
+我在哪里指定这个小些的区域（矩形）？
 
 1406
 01:00:19,066 --> 01:00:21,766
 And the answer is it's exactly where we specify
+我们必须要配置 popover 的具体
 
 1407
 01:00:21,768 --> 01:00:24,869
 anything having to do with configuring a popover.
+在哪个位置。
 
 1408
 01:00:24,871 --> 01:00:26,670
 Okay and we have already done this in this class but
+好的，我们已经把代码写完了，但我们还是忘了些事情
 
 1409
 01:00:26,672 --> 01:00:28,138
 you have probably forgotten, but for
+我想你们大多数人在最后的大作业中都会
 
 1410
 01:00:28,140 --> 01:00:30,573
 your final project many of you are gonna do popovers.
+用到 popovers 吧，这里就是提醒一下你们
 
 1411
 01:00:30,575 --> 01:00:34,177
 So here is something to remember where you
+这些地方不要忘了，
 
 1412
 01:00:34,179 --> 01:00:35,478
 set things for popover, and
+你需要对 popover 进行设置。
 
 1413
 01:00:35,480 --> 01:00:40,282
 that is in the prepare for segue for that popover segue.
+也就是需要对 popover segue 进行预先的设置。
 
 1414
 01:00:40,284 --> 01:00:43,318
 Okay, specifically I'm gonna do it right down here, and
+好的，这里我就准备在这里写了，
 
 1415
 01:00:43,320 --> 01:00:47,421
 you wanna get the popovers presentation controller.
+我们是希望得到一个 popover presentation controller 。
 
 1416
 01:00:47,423 --> 01:00:48,889
 Okay? And you get the proper
+对吧？然后想得到
 
 1417
 01:00:48,891 --> 01:00:51,491
 presentation controller just by asking the,
+这个 controller 是需要通过名称，
 
 1418
 01:00:51,493 --> 01:00:55,528
 make sure is it the right name for
+这里我们给它命名为 PPC，
 
 1419
 01:00:55,530 --> 01:00:59,699
 these things that I call that PPC, I think I did yeah.
+这样就可以了。
 
 1420
 01:00:59,701 --> 01:01:04,336
 You just ask the thing that you're presenting,
+你只需要问需要展示的控制器，
 
 1421
 01:01:04,338 --> 01:01:07,472
 give me your popover presentation controller.
+让它给你 popover presentation controller 就可以了。
 
 1422
 01:01:07,474 --> 01:01:10,275
 Okay?
+对吧？
 
 1423
 01:01:10,276 --> 01:01:13,077
 But you probably want to if let this, because you want
+但你可能会想到，如果我不是 popover 的话，
 
 1424
 01:01:13,079 --> 01:01:15,779
 your code to work even if it's not in a popover.
+我也希望我的代码能够正常工作。
 
 1425
 01:01:15,781 --> 01:01:17,647
 If we change this back to be modal,
+这里如果我把它改为 modal 方式的返回，
 
 1426
 01:01:17,649 --> 01:01:19,349
 we'd still want it to work.
+它就应该也能正常工作了。
 
 1427
 01:01:19,351 --> 01:01:21,050
 If you're not in a popover presentation this
+如果你不是 pop presentation 的话，这里就会返回
 
 1428
 01:01:21,052 --> 01:01:23,919
 will return nil, so you won't be doing the code in here.
+nil，所以这里你就需要写一些代码来处理。
 
 1429
 01:01:23,921 --> 01:01:26,588
 So this code is only going to happen if this segue is
+这些代码时针对这个 segue 是跳转到 popover controller的才
 
 1430
 01:01:26,590 --> 01:01:29,124
 popover controlled.
+有用。
 
 1431
 01:01:29,126 --> 01:01:32,961
 So popover presentation controller, okay, if you look
+至于这个 popover presentation controller ，如果你看过
 
 1432
 01:01:32,963 --> 01:01:37,031
 at it in the documentation you can see that it's got, oops,
+文档的话 ，哦，
 
 1433
 01:01:37,033 --> 01:01:39,933
 that's not a very good link to that is it?
+这个链接有问题？
 
 1434
 01:01:40,936 --> 01:01:42,635
 Oh, maybe it doesn't return that.
+可能它不能返回了。
 
 1435
 01:01:44,205 --> 01:01:46,105
 Wait a minute. [INAUDIBLE] Okay,
+等一下，好了，是这个
 
 1436
 01:01:46,107 --> 01:01:47,305
 PopoverPresentationController.
+PopoverPresentationController。
 
 1437
 01:01:47,307 --> 01:01:50,241
 You can see it's got some things here like that source
+你可以看到，相关内容的这些
 
 1438
 01:01:50,243 --> 01:01:51,909
 view that we wired up.
+介绍的。
 
 1439
 01:01:51,911 --> 01:01:54,045
 Okay, it's also got sourceRect.
+这里还有 getSourceRect。
 
 1440
 01:01:54,047 --> 01:01:56,413
 That's the rectangle inside the source view.
+是指可以获取内部 source view 的显示区域。
 
 1441
 01:01:56,415 --> 01:01:57,748
 Or you can have a bar button item.
+或是你也可以在这增加一个 bar button item 。
 
 1442
 01:01:57,750 --> 01:02:00,050
 If you have a bar button item, you don't need both of these.
+如果你已经有了 bar button item ，你就不需要。
 
 1443
 01:02:00,052 --> 01:02:02,251
 We've, so it's kind of either/or.
+这是一个可以选择的。
 
 1444
 01:02:02,253 --> 01:02:05,054
 And also, it's got a delegate, which we're gonna use to
+另外，我们还看到有一个 delegate ，我们可以
 
 1445
 01:02:05,056 --> 01:02:08,757
 control our adaptive behavior and a few other things.
+使用它来做一些事情。
 
 1446
 01:02:08,759 --> 01:02:10,792
 But, so that's what you can configure in
+这些就是我们可以在 popoverPresentationController
 
 1447
 01:02:10,794 --> 01:02:12,360
 the popoverPresentationController.
+可以设置的内容。
 
 1448
 01:02:12,362 --> 01:02:14,295
 So let's do that sourceRect.
+好，让我们先来设置一下 sourceRect 。
 
 1449
 01:02:14,297 --> 01:02:15,563
 Okay.
+好。
 
 1450
 01:02:15,564 --> 01:02:16,830
 So the sourceRect equals.
+让这个 sourceRect 等于
 
 1451
 01:02:16,833 --> 01:02:18,732
 We want this, basically a rectangle for
+这个 annotation view 的类型是
 
 1452
 01:02:18,734 --> 01:02:22,702
 that annotation view so I'm going to say here,
+MK annotation view，
 
 1453
 01:02:22,704 --> 01:02:26,406
 the sender as an MK annotation view.
+这里我们的显示区域就是针对这个 view 的。
 
 1454
 01:02:26,408 --> 01:02:30,909
 Okay, so sender, remember is this sender to the prepare for
+好的，这里是否还记得这个 sender 就是 我们传递给 annotation view 
 
 1455
 01:02:30,911 --> 01:02:35,880
 segue which we passed the annotation view as the sender.
+用来设置 seguge 的那个。
 
 1456
 01:02:35,882 --> 01:02:37,665
-Okay? So
+Okay? 
+对吧？
 
 1457
 01:02:37,666 --> 01:02:39,449
-the sender is the pin that's causing all this trouble.
+So the sender is the pin that's causing all this trouble.
+所以这个 sender 就是那个小的标识，也是它造成了这一切的麻烦。
 
 1458
 01:02:40,553 --> 01:02:44,888
 And I added a nice method to that called popover SourceRect
+这里我准备增加一个方法，命名叫。
 
 1459
 01:02:44,890 --> 01:02:46,189
 for coordinate point.
+popoverSourceRectForCoordinatePoint
 
 1460
 01:02:46,191 --> 01:02:50,426
 And you just give it a point, coordinate point.
+这里你给定坐标上的点。
 
 1461
 01:02:50,428 --> 01:02:52,795
 And so let's calculate that point.
+然后我们来计算这个点。
 
 1462
 01:02:52,797 --> 01:02:54,396
 I'll show you that method in a second.
+我下面就会来给具体写这个方法。
 
 1463
 01:02:54,398 --> 01:02:56,331
 So we're going to let the coordinate point.
+我们首先让这个坐标下的点。
 
 1464
 01:02:56,333 --> 01:02:59,167
 We're going to calculate the coordinate point by getting
+我们会通过计算得到这个点的坐标转换为
 
 1465
 01:02:59,169 --> 01:03:01,035
 the annotations coordinate and
+在注释视图上的坐标，我们是通过
 
 1466
 01:03:01,037 --> 01:03:02,269
 using the map view to convert it.
+map view 来完成这个转换。
 
 1467
 01:03:02,271 --> 01:03:08,475
-So map view, convert coordinate,
+So mapView.convertCoordinate,
+所以就写 mapView.convertCoordinate，
 
 1468
 01:03:08,477 --> 01:03:10,777
 and the coordinate is the way points coordinate.
+然后这个坐标就是 way point 的坐标。
 
 1469
 01:03:12,146 --> 01:03:16,148
 And we're going to convert it to a point in the map view.
+我们将会把这个点在 map view 里进行转换。
 
 1470
 01:03:16,150 --> 01:03:19,117
 Alright, so here I'm just getting the point of our pin,
+好的，这里我们是可以得到我们的这个小标志的坐标，
 
 1471
 01:03:19,119 --> 01:03:20,719
 where our pin is on the map, and
+那我们的坐标在地图的哪里？
 
 1472
 01:03:20,721 --> 01:03:23,388
 then I'm asking the notation view, please give me
+然后我需要问 notation view， 请给我一个区域，在你的坐标系
 
 1473
 01:03:23,390 --> 01:03:26,891
 a rectangle that would be good for a popover to point at.
+要能刚好可以放下
 
 1474
 01:03:26,893 --> 01:03:28,826
 At that coordinate point.
+我的 popover 的视图。
 
 1475
 01:03:28,828 --> 01:03:31,928
 And this code, this popover thing, is right here.
+这段代码，在这个 popover ，在这里。
 
 1476
 01:03:31,930 --> 01:03:33,563
 And it's really simple, really.
+要做的是非常简单，真的。
 
 1477
 01:03:33,565 --> 01:03:36,466
 It just gets the width and height of our frame,
+只是需要得到我们的 frame 的宽度和高度。
 
 1478
 01:03:36,468 --> 01:03:38,100
 our little pin views frame.
+是我们这个小的标识的 frame 。
 
 1479
 01:03:38,102 --> 01:03:40,402
 And then it offsets it by the calloutOffset and
+然后设置通过 calloutOffset和 centerOffset 设置
 
 1480
 01:03:40,404 --> 01:03:41,870
 the centerOffset.
+偏移量。
 
 1481
 01:03:41,872 --> 01:03:43,271
 Don't worry too much about those.
+不用担心太多。
 
 1482
 01:03:43,273 --> 01:03:44,505
 But that's all it does.
+这样就可以了。
 
 1483
 01:03:44,507 --> 01:03:47,208
 So it's basically just putting a frame around itself so
+只需要最基本的设置一个 frame，然后我们就
 
 1484
 01:03:47,210 --> 01:03:48,642
 that we can have the popover.
+可以看到 popover。
 
 1485
 01:03:48,644 --> 01:03:50,911
 I just didn't wanna put that code in here and
+我是不想把这些代码放到这里，怕影响你们的理解，
 
 1486
 01:03:50,913 --> 01:03:53,179
 mess it up for you, but that's all it does.
+但这样其实就好了。
 
 1487
 01:03:53,181 --> 01:03:56,549
 Now, we have this popover source rec.
+现在我们已经有了 popover source rect 。（展示区域）
 
 1488
 01:03:56,551 --> 01:03:57,850
 Let's see what this looks like.
+让我们看看效果。
 
 1489
 01:03:57,852 --> 01:04:00,652
 This is not gonna quite be what we want, but
+这看起来不完全是我们希望的，但我们已经可以看到
 
 1490
 01:04:00,654 --> 01:04:02,254
 we're getting there.
+它们了。
 
 1491
 01:04:09,996 --> 01:04:15,366
 All right, [SOUND] Here we go,' kay?
+好的，接着，怎么？
 
 1492
 01:04:15,368 --> 01:04:17,668
 I'm gonna long press to drop.
+我们长按后然后松开。
 
 1493
 01:04:17,670 --> 01:04:18,535
 We're gonna edit it.
+我们要编辑它。
 
 1494
 01:04:19,904 --> 01:04:20,836
 And we got a crash.
+哦，我们的程序崩溃了。
 
 1495
 01:04:20,838 --> 01:04:23,439
 Okay. And, so why does this crash?
+好吧，为什么它会崩溃？
 
 1496
 01:04:23,441 --> 01:04:26,274
 It's because we forgot to set our segue identifier for
+这是因为我们忘了把我们的segue的标识符设置为
 
 1497
 01:04:26,276 --> 01:04:28,810
 the popover to edit waypoints, okay?
+popover to edit waypoints，对吧？
 
 1498
 01:04:28,812 --> 01:04:30,111
 Probably you've all seen this.
+你们已经可以看到这个报错。
 
 1499
 01:04:31,781 --> 01:04:34,248
 No segue with identifier error.
+No segue with identifier error。
 
 1500
 01:04:34,250 --> 01:04:35,415
 That's easy to fix.
+这个很好被修复。
 
 1501
 01:04:35,417 --> 01:04:37,484
 Let's go back to our storyboard.
+让我们回到我们的 storyboard 。
 
 1502
 01:04:38,453 --> 01:04:41,187
 Get our segue inspected.
+然后看下我们的 segue 的检查器
 
 1503
 01:04:41,189 --> 01:04:42,221
 And sure enough, look at that.
+确定了，看这里。
 
 1504
 01:04:42,223 --> 01:04:46,224
 Edit Wavepoint.
+Edit Wavepoint。
 
 1505
 01:04:46,226 --> 01:04:49,361
 All right, sometimes it's good when I forget to do
+对的，有些时候看起来是没有问题的，我们忘了做一些事情
 
 1506
 01:04:49,363 --> 01:04:52,697
 things like that because you get to see common things.
+这是因为我们已经把一些基本的设置完成了。
 
 1507
 01:04:52,699 --> 01:04:54,532
 That's a common thing to do, is to forget.
+做完这些基本的设置，会忘记的。
 
 1508
 01:04:54,534 --> 01:04:56,400
 Either to have the name be different or
+比如应该设置不同的名字，或是
 
 1509
 01:04:56,402 --> 01:04:58,168
 you forget to put it in entirely.
+忘了把它全部修改好。
 
 1510
 01:05:00,038 --> 01:05:06,575
 All right, so now, here we go, like that, and Edit.
+好，现在，让我们在看看效果，这里，编辑。
 
 1511
 01:05:07,545 --> 01:05:08,443
 And we've got a popover.
+好，我们可以看到 popover 了。
 
 1512
 01:05:08,445 --> 01:05:09,961
 Whoo!
+哎！
 
 1513
 01:05:09,962 --> 01:05:11,478
 It doesn't look very good, though.
+看起来还是不太对。
 
 1514
 01:05:11,481 --> 01:05:14,115
 Okay.
+好吧。
 
 1515
 01:05:14,116 --> 01:05:16,750
 So, it's kind of close, but it's gigantic still, and
+已经很接近老，但它实在是太大了，
 
 1516
 01:05:16,753 --> 01:05:18,719
 the whole point of this is to not use so
+这个（弹出框）并没有合理的
 
 1517
 01:05:18,721 --> 01:05:21,054
 much darn screen real estate.
+使用屏幕（没有显示合适的大小）。
 
 1518
 01:05:21,056 --> 01:05:22,222
 So why is that happening?
+为什么会这样？
 
 1519
 01:05:22,224 --> 01:05:25,892
 Well, that's because we do nothing to tell the system
+好吧，这是因为我们没有告诉
 
 1520
 01:05:25,894 --> 01:05:28,294
 what we would like the content size to be here.
+我们内容的大小。
 
 1521
 01:05:28,296 --> 01:05:30,629
 And if you remember, the last time we did popovers,
+如果你还记得，我们最后设置 did popovers 的地方，
 
 1522
 01:05:30,631 --> 01:05:32,397
 we actually overrode the.
+我实际是重写（overrode）
 
 1523
 01:05:32,399 --> 01:05:34,699
 Property preferred content size and
+preferred content size 这个属性，然后是返回
 
 1524
 01:05:34,701 --> 01:05:36,801
 return calculated content size.
+计算后的 content size 。
 
 1525
 01:05:36,803 --> 01:05:37,902
 Here I'm going to do it a different way.
+这里，我准备用另外一种方法。
 
 1526
 01:05:37,904 --> 01:05:40,270
 I'm gonna actually set the preferred content size.
+我会直接设置好这个 preferred conten size。
 
 1527
 01:05:40,272 --> 01:05:41,638
 So I'm doing the same thing.
+好，我们来做吧。
 
 1528
 01:05:41,639 --> 01:05:43,005
 I'm just gonna set it, because it's a var.
+我要来设置它，因为它是一个 var 。
 
 1529
 01:05:43,008 --> 01:05:44,307
 I can set it, it's a settable var.
+我可以直接设置它，
 
 1530
 01:05:44,309 --> 01:05:45,875
 I don't have to override it.
+我不需要直接重写（override）他。
 
 1531
 01:05:45,877 --> 01:05:48,244
 So I'm just gonna set it to a size.
+所以我会直接设置它的大小。
 
 1532
 01:05:48,246 --> 01:05:51,447
 And so, what kind of size would be good there?
+那么，这里应该设置多大的会比较合适？
 
 1533
 01:05:51,449 --> 01:05:54,116
 Let me make some more space.
+让我们先多空出一些位置。
 
 1534
 01:05:54,118 --> 01:05:58,820
 We're still doing all this inside this popover-specific
+我们来在popover的对应的代码来处理
 
 1535
 01:05:58,822 --> 01:06:00,555
 code.
+这件事。
 
 1536
 01:06:00,556 --> 01:06:02,289
 A good size for that would be, height-wise,
+我们需要这样一个合适的大小，高度时自动适应的，
 
 1537
 01:06:02,291 --> 01:06:05,225
 it would be if I just let the auto layout do it.
+这个部分可以通过 auto layout 实现。
 
 1538
 01:06:05,227 --> 01:06:07,060
 Wouldn't it be cool if I could just find out what
+如果我们能通过 auto layout 之后最小的 size 的话
 
 1539
 01:06:07,062 --> 01:06:09,729
 the auto layout thought the smallest size was?
+那就最好不过了。
 
 1540
 01:06:09,731 --> 01:06:10,830
 Turns out, you can do that.
+那么事实是，这是可以做到的。
 
 1541
 01:06:10,832 --> 01:06:15,501
 Watch this, let minimum size equal
+看这里，let minimum size 等于
 
 1542
 01:06:15,503 --> 01:06:19,571
 the view controller's view.
+这个视图控制的视图。
 
 1543
 01:06:19,573 --> 01:06:22,907
 I'm just gonna smash down the view controller view as much
+我就准备尽量把这个视图控制器下的视图
 
 1544
 01:06:22,909 --> 01:06:24,075
 as possible.
+压缩到最小。
 
 1545
 01:06:24,077 --> 01:06:25,009
 The name of the method is called
+这个方法的名字就叫做
 
 1546
 01:06:25,011 --> 01:06:28,245
 systemLayoutFittingSize.
+systemLayoutFittingSize。
 
 1547
 01:06:28,247 --> 01:06:30,313
 And it takes a size, and
+传入的是一个 size ，
 
 1548
 01:06:30,315 --> 01:06:32,615
 that size is the size it's gonna try to fit into.
+这个 size 就是我们准备调整的。
 
 1549
 01:06:32,617 --> 01:06:34,384
 And there's really two choices here.
+这里有两个选择可以考虑。
 
 1550
 01:06:34,386 --> 01:06:37,687
-One is, fit it into as small a space as possible, or
+One is, fit it into as small a space as possible, 
+一个是，调整到一个尽量小多区域里，
 
 1551
 01:06:37,689 --> 01:06:40,556
-fit it into as big a space as possible, okay?
+or fit it into as big a space as possible, okay?
+或是调整到一个尽量大的区域里，对吧？
 
 1552
 01:06:40,558 --> 01:06:41,957
 So I'm gonna go for small as possible,
+这里我是准备要一个尽量小的区域，
 
 1553
 01:06:41,959 --> 01:06:43,158
 cuz I want this thing to be small.
+因为我想需要内容能够紧凑些。
 
 1554
 01:06:43,160 --> 01:06:46,361
-So that UI layout, fitting size, compress.
+So that UILayoutFittingSizeCompress.
+所以这里：UILayoutFittingSizeCompress 。
 
 1555
 01:06:46,363 --> 01:06:48,596
 See, there's expanded and compressed.
+看这里有 expanded（扩展） 和 compressed（压缩）。
 
 1556
 01:06:48,598 --> 01:06:50,130
 So I want the compressed size.
+我需要一个压缩后的大小。
 
 1557
 01:06:50,132 --> 01:06:54,334
 So this is gonna give me the minimum size that that
+它就返回给我一个最小的size， 然后视图控制器也是可以
 
 1558
 01:06:54,336 --> 01:06:56,636
 view controller can be by using Auto Layout.
+通过 Auto Layout 进行布局。
 
 1559
 01:06:57,605 --> 01:06:59,104
 Okay, which is really awesome.
+好吧，这个简直太棒了。
 
 1560
 01:06:59,106 --> 01:07:01,873
 This is what the table U cells are using to size,
+这就是我们在表格的单元格里自动获得内容
 
 1561
 01:07:01,875 --> 01:07:04,476
 get the heights automatically with a layout.
+高度的方法。
 
 1562
 01:07:04,478 --> 01:07:06,445
 It's a really, really great feature.
+这真是一个非常非常好的特性。
 
 1563
 01:07:06,446 --> 01:07:08,413
 Now, I don't actually want it to be the minimum size in
+现在，我并不需要在宽度方面
 
 1564
 01:07:08,415 --> 01:07:09,613
 width, though.
+也是最小的。
 
 1565
 01:07:09,615 --> 01:07:11,281
 Because I wanna have some room for
+因为我需要多预留出一部分位置，让用户可以
 
 1566
 01:07:11,283 --> 01:07:14,718
 the person to type in the name and the info that they want.
+输入名字和相关的内容。
 
 1567
 01:07:14,720 --> 01:07:16,353
 So I'm going to pick a size.
+我下面来设置这个 size 。
 
 1568
 01:07:16,355 --> 01:07:18,488
 It's going to be a constant in my app.
+在我的APP里我将定一个常量。
 
 1569
 01:07:18,490 --> 01:07:23,258
 So, I'm going to set my preferred content size,
+我先设置我的 preferred content size ,
 
 1570
 01:07:23,260 --> 01:07:24,860
-equal BCGSize.
+equal CGSize.
+等于 CGSize。
 
 1571
 01:07:24,862 --> 01:07:29,163
 And the width I want is going to be this constant,
+然后我希望宽度是一个常量。
 
 1572
 01:07:29,165 --> 01:07:34,234
 constants, whoops, width, constants dot, what did I
+常量，哦，宽度，直接用 constants 点（出来）
 
 1573
 01:07:34,236 --> 01:07:40,407
 call it here, yeah, edit waypoint pop-over width, okay?
+可以看到提示，对，edit waypoint pop-over width ，对吧？
 
 1574
 01:07:40,409 --> 01:07:42,675
-And that the height is gonna be the minimum size.
+And that the height is gonna be the minimumSize.
+然后高度就是 minimumSize.height ，对吧？
 
 1575
 01:07:42,677 --> 01:07:44,343
 The height, okay?
+然后高度就是 minimumSize.height ，对吧？
 
 1576
 01:07:44,345 --> 01:07:46,311
-So I'm using the minimum size for the height, but
+So I'm using the minimumSize for the height, but
+我这里用minimumSize的高度，同时
 
 1577
 01:07:46,313 --> 01:07:50,382
 I'm picking this, which I've set to be 320, which
+我处理的时候，它的宽度已经被设置为320，这是一个默认值。
 
 1578
 01:07:50,384 --> 01:07:52,917
 is pretty standard width, and a pretty good width.
+这个宽度非常好。
 
 1579
 01:07:52,919 --> 01:07:55,453
 That's probably about the width of that is now.
+因为这恰好就是我们当前的宽度。
 
 1580
 01:07:56,556 --> 01:07:58,622
 But by setting preferred content size,
+但是在设置首选内容区域的大小时，
 
 1581
 01:07:58,624 --> 01:08:01,191
 that tells the pop-over machinery
+就可以自动计算和
 
 1582
 01:08:01,193 --> 01:08:04,361
 to make the pop-over be this size if possible.
+设置 pop－over 的区域大小。
 
 1583
 01:08:04,363 --> 01:08:06,829
 It's only preferred, it might not be possible,
+这只是优先，但不是必须的。
 
 1584
 01:08:06,831 --> 01:08:09,065
 cuz the geometry of other views might get in the way,
+因为其他的视图可能会相互有影响，
 
 1585
 01:08:09,067 --> 01:08:10,199
 can't do it, but this is,
+可能就无法设置，这种情况下，
 
 1586
 01:08:10,201 --> 01:08:12,234
 it's going to try to make it this if it can't.
+就会继续尝试设置，
 
 1587
 01:08:12,236 --> 01:08:13,268
 And usually, it can't.
+一般情况下，它是不能的 。
 
 1588
 01:08:13,270 --> 01:08:15,403
 So, let's go see how this works.
+那就让我们看下效果到底如何。
 
 1589
 01:08:28,884 --> 01:08:30,250
 Okay, here we go.
+好，来，我们看看。
 
 1590
 01:08:30,252 --> 01:08:31,418
 Long press.
+长按。
 
 1591
 01:08:31,420 --> 01:08:32,418
 Top.
+上面。
 
 1592
 01:08:32,420 --> 01:08:35,538
 Edit.
+编辑。
 
 1593
 01:08:35,539 --> 01:08:38,657
 Oh awesome okay, and now we can edit this right into
+哦，太好来，现在我们就可以刚好在这里进行编辑
 
 1594
 01:08:38,659 --> 01:08:43,028
 place here, golf course,
+golf course，
 
 1595
 01:08:43,030 --> 01:08:46,964
 you know, foo.
+你们知道的 ，foo。
 
 1596
 01:08:46,966 --> 01:08:49,467
 Okay, and it's editing it on the fly, editing as do, so
+好的，现在可以直接进行编辑，
 
 1597
 01:08:49,469 --> 01:08:51,035
 if I click away and
+如果我点击离开，然后
 
 1598
 01:08:51,037 --> 01:08:54,204
 then click back, I get golf course still, okay?
+点击返回，我这里看到的还是 golf course ，对吧？
 
 1599
 01:08:54,206 --> 01:08:56,272
 And, again, I can always go back, edit it again.
+然后，我再回来继续编辑。
 
 1600
 01:08:57,375 --> 01:08:59,542
 So this is really looking good.
+看起来非常好。
 
 1601
 01:08:59,544 --> 01:09:01,377
 It's not quite perfect.
+但还不是特别完美。
 
 1602
 01:09:01,379 --> 01:09:05,047
 It's kind of, if you look at the arrow that points down,
+这里，你看箭头指向的这里，
 
 1603
 01:09:05,049 --> 01:09:07,215
 it looks like it's kind of see-through,
+这里应该能够透过去看到下面，
 
 1604
 01:09:07,217 --> 01:09:09,283
 but the thing is white.
+但现在这里是白的。
 
 1605
 01:09:09,285 --> 01:09:10,951
 So, there's no reason that
+这是因为 pop-over 需要这里
 
 1606
 01:09:10,953 --> 01:09:12,720
 this pop-over needs to be white.
+是白色的。
 
 1607
 01:09:12,722 --> 01:09:14,988
 It'd be really cool if it kind of, you could see back,
+如果我们可以透过这里看到后面的内容，
 
 1608
 01:09:14,990 --> 01:09:17,924
 see-through it a little bit to what's behind.
+这样的话一定很酷。
 
 1609
 01:09:17,926 --> 01:09:22,228
 Wouldn't that be kind of more iPhone-ish and kind of iOS-y.
+这样的话看起来更想 iOS 自带的程序。
 
 1610
 01:09:22,230 --> 01:09:22,961
 So let's do that.
+好，我们继续来做。
 
 1611
 01:09:22,963 --> 01:09:24,963
 That's trivial to do that.
+这些都是些常用的做法。
 
 1612
 01:09:24,965 --> 01:09:27,365
 Let's just go into our storyboard and
+我们先去到我们的 storyboard ，然后到
 
 1613
 01:09:27,367 --> 01:09:30,768
 have our view up here, our little.
+我们的视图这里，我们这个
 
 1614
 01:09:31,837 --> 01:09:34,037
-Wavepoint editing view be transparent.
+Waypoint editing view be transparent.
+waypoint 编辑视图是透明的。
 
 1615
 01:09:34,039 --> 01:09:36,506
 So I'm just going to select this thing.
+我们先选中它，
 
 1616
 01:09:36,508 --> 01:09:38,875
 Instead of its background being white right here,
+然后你可以看到它的背景色变为了白色。
 
 1617
 01:09:38,877 --> 01:09:42,745
 I'm going to set it to be clear, okay?
+我将把它设置为 clear ，可以？
 
 1618
 01:09:42,747 --> 01:09:44,046
 So that's going to fix that.
+这样就可以修复我们前面的问题了。
 
 1619
 01:09:44,048 --> 01:09:45,447
 So let's go see what that looks like.
+好，那让我们看下效果如何。
 
 1620
 01:10:00,129 --> 01:10:05,265
 All right, and click Edit, okay?
+好的，点击编辑，怎么样？
 
 1621
 01:10:05,267 --> 01:10:06,656
 So you can see,
+看到了吧，
 
 1622
 01:10:06,657 --> 01:10:08,046
 I don't know how well you can see it in that.
+我想你们之前肯定没有见过这么好的吧。
 
 1623
 01:10:08,047 --> 01:10:09,436
 It might be washed out there, but I can, actually, see,
+这里可以看到背后的，是的，你看
 
 1624
 01:10:09,438 --> 01:10:15,274
 kind of, a blurred mountains there, scenery behind, okay?
+一座山在这里，在这个风景点后面，对吧？
 
 1625
 01:10:15,276 --> 01:10:17,209
 And it, also, just kinda looks better,
+是的，这样看起更好点，
 
 1626
 01:10:17,211 --> 01:10:19,811
 the text fields stand out a little more.
+这样 text field 也显得明显了。
 
 1627
 01:10:19,813 --> 01:10:21,946
 It's all, just looks a lot better.
+这样就看起来更好了。
 
 1628
 01:10:21,948 --> 01:10:26,083
 Okay, now, there's only problem with all of this,
+好，现在就只剩下一个问题了，
 
 1629
 01:10:26,085 --> 01:10:28,352
 which is the iPhone.
+就是在 iPhone 下的展示效果。
 
 1630
 01:10:28,354 --> 01:10:29,903
 Okay?
+对吧？
 
 1631
 01:10:29,904 --> 01:10:31,453
 Let's see what this looks like on iPhone.
+让我们看看在 iPhone 下效果到底如何。
 
 1632
 01:10:33,324 --> 01:10:34,724
 Here it is.
+这里，
 
 1633
 01:10:34,726 --> 01:10:36,358
 Nice. Drop one.
+好的，选这个。
 
 1634
 01:10:36,360 --> 01:10:37,726
 Ooh, yeah, edit.
+哦，好的，编辑。
 
 1635
 01:10:37,728 --> 01:10:39,160
 Look, yeah.
+看！
 
 1636
 01:10:39,162 --> 01:10:40,345
 Okay.
+好的。
 
 1637
 01:10:40,346 --> 01:10:41,529
 So that looked absolutely terrible.
+这个看起来是太糟糕了。
 
 1638
 01:10:41,531 --> 01:10:44,331
 We lost our done button because we took it out of that
+因为我们把我们的 done 按钮移出了 navigation controller，
 
 1639
 01:10:44,333 --> 01:10:45,833
 navigation controller.
+我们没有看到我们的 done 按钮。
 
 1640
 01:10:45,835 --> 01:10:47,868
 And it's got this background,
+所以只看到了是背景，
 
 1641
 01:10:47,870 --> 01:10:49,969
 just black, there's nothing there.
+就是一个黑色的，然后没有任何东西。
 
 1642
 01:10:49,971 --> 01:10:51,804
 What's going on here?
+那我们下面该怎么做？
 
 1643
 01:10:51,805 --> 01:10:53,638
 Well, let's try to fix this iPhone thing.
+好，让我们来继续修复这个问题。
 
 1644
 01:10:53,641 --> 01:10:57,376
 One thing we can fix is that black.
+首先，我们得修复这个只看到黑色背景这个问题。
 
 1645
 01:10:57,378 --> 01:10:59,411
 The reason that that's coming black,
+出现这个问题的原因是，默认的 modal 展示的样式
 
 1646
 01:10:59,413 --> 01:11:02,681
 is because the default modal presentation style
+都是全屏，也就是说，
 
 1647
 01:11:02,683 --> 01:11:06,818
 is full screen, which means, take over the whole screen.
+会占据整个屏幕的显示区域。
 
 1648
 01:11:06,820 --> 01:11:09,754
 And it expects you to draw in the whole screen.
+也就是说它希望你以全屏幕作为显示区域。
 
 1649
 01:11:09,756 --> 01:11:11,555
 So it's just leaving that area black,
+所以这里只保留了一个黑色区域。
 
 1650
 01:11:11,557 --> 01:11:13,590
 it's expecting you're gonna draw in that.
+它就是希望你可以在这里进行绘图。
 
 1651
 01:11:13,592 --> 01:11:17,027
 There's another kind of style which is over full-screen,
+这里还有另外一个样式叫做 over full-screen 。
 
 1652
 01:11:17,029 --> 01:11:21,597
 which just means draw on top of whatever is behind.
+意思就是在背景层的上面进行绘图。
 
 1653
 01:11:21,599 --> 01:11:22,998
 So anything that shows through,
+所以当前显示的任何东西，你都会看到
 
 1654
 01:11:23,000 --> 01:11:24,700
 you'll see what's behind.
+它们被显示到下面。
 
 1655
 01:11:24,701 --> 01:11:26,401
 And this is what alerts are using, things like that.
+这种方式是 alert 用的方式，
 
 1656
 01:11:26,403 --> 01:11:29,237
 Even the pop-over was using that, it was blurring it, but
+如果 pop-over 用这种方式，就会模糊掉下面的内容，但是
 
 1657
 01:11:29,239 --> 01:11:30,238
 it was still doing that.
+它也会把内容置于下层。
 
 1658
 01:11:30,240 --> 01:11:32,606
 So how do we get that to happen?
+那我们该如何做呢？
 
 1659
 01:11:32,608 --> 01:11:33,874
 Okay, well, to do that,
+好，我们是可以这样做，
 
 1660
 01:11:33,876 --> 01:11:36,343
 we actually need to use the pop-over's delegate,
+我们需要使用 pop-over 的 delegate ,
 
 1661
 01:11:36,345 --> 01:11:37,377
 which we did before.
+我们之前也过的。
 
 1662
 01:11:37,379 --> 01:11:40,046
 So I'm going to set the pop-over
+我们这里把 pop-over controller的 delegate
 
 1663
 01:11:40,048 --> 01:11:44,183
 controller's delegate here to be myself, okay?
+设置为我们的自己，对吧？
 
 1664
 01:11:44,185 --> 01:11:49,388
 That means I need to go up here, and say, that I am a,.
+这就意味着，我们需要在这里写上，
 
 1665
 01:11:49,390 --> 01:11:52,790
+UI PopoverPresentationController-
 UI PopoverPresentationController-
 
 1666
 01:11:52,792 --> 01:11:54,759
 Delegate.
+Delegate 。
 
 1667
 01:11:54,760 --> 01:11:56,727
 Be careful here not to say, UIPopover Controller Delegate,
+注意这里，不是写 UIPopover Controller Delegate
 
 1668
 01:11:56,729 --> 01:11:58,429
 It's PresentationController.
+这里是 PresentationController。
 
 1669
 01:11:58,431 --> 01:11:59,730
 That thing is old, okay?
+之前那个已经是旧的了。
 
 1670
 01:11:59,732 --> 01:12:01,564
 It's deprecated even.
+已经被标记为过期了。
 
 1671
 01:12:01,566 --> 01:12:02,932
 So, it's this one you want, the long one,
+所以这里你就需要用这个长的，
 
 1672
 01:12:02,934 --> 01:12:05,401
 PopoverPresentationController- Delegate.
+PopoverPresentationController- Delegate。
 
 1673
 01:12:05,403 --> 01:12:06,869
 And once I'm the delegate,
+一旦我是作为 delegate 。
 
 1674
 01:12:06,871 --> 01:12:11,439
 now I can control that adaptation behavior.
+我就可以控制这个 adaptation 的行为。
 
 1675
 01:12:11,441 --> 01:12:14,042
 So why is that thing showing up
+这就是当它目前显示的方式是modal，
 
 1676
 01:12:14,044 --> 01:12:16,644
 modal like that when we have it to be a popover?
+而需要展示为popover的时候，
 
 1677
 01:12:16,646 --> 01:12:18,045
 Okay, we changed it to be a popover,
+我们就可以直接通过 delegate 把它改为 popover 的原因。
 
 1678
 01:12:18,047 --> 01:12:19,346
 why the heck is it showing up modal?
+为什么就可以展示为 modal ？
 
 1679
 01:12:19,348 --> 01:12:21,614
 Well, that's because of this adaptation,
+对，就是因为这个 adaptation ，
 
 1680
 01:12:21,616 --> 01:12:24,417
 okay, where the system is adapting to the fact that you
+好吧，就是这里系统可以根据实际的情况进行适配，你在 iPhone 不应该用
 
 1681
 01:12:24,419 --> 01:12:27,787
 don't usually show popovers on the phone.
+popovers 进行展示。
 
 1682
 01:12:27,789 --> 01:12:29,121
 You show things full-screen modal.
+你应该使用全屏幕的 modal 方式展示。
 
 1683
 01:12:29,123 --> 01:12:30,288
 So it's adapting.
+这就是适配。
 
 1684
 01:12:30,290 --> 01:12:32,724
 So now that we're the delegate, let's go ahead and
+现在我们是 delegate ，我们就可以为展示的这个 controller
 
 1685
 01:12:32,726 --> 01:12:35,126
 implement the adaptive presentations style for
+实现这个适配的展示样式
 
 1686
 01:12:35,128 --> 01:12:37,695
 presentation controller, delegate method.
+的代理方法。
 
 1687
 01:12:37,697 --> 01:12:40,297
 Thank God for escape completion there.
+谢天谢地，我们总算快做完了。
 
 1688
 01:12:40,299 --> 01:12:43,166
 And all we need to do here is return the style, so
+我们只是需要在这里返回 style，这里我们将要
 
 1689
 01:12:43,168 --> 01:12:46,169
 the modal presentation style I'm gonna return,
+返回 modal presentation style 。
 
 1690
 01:12:46,171 --> 01:12:49,105
 instead of fullscreen, is, overFullscreen.
+将 fullscreen 替换为 overFullscreen。
 
 1691
 01:12:49,107 --> 01:12:55,144
 Oops, not over [INAUDIBLE] overFullscreen.
+哦，不对， 不是 overFullscreen 。
 
 1692
 01:12:55,146 --> 01:12:59,014
 Okay, so let's see what that did.
+好的，让我们看下我们的成果。
 
 1693
 01:12:59,016 --> 01:13:01,149
 It's going to make it a little better, not a lot better,
+将会有一点改进，不过不是很大的改进。
 
 1694
 01:13:01,151 --> 01:13:02,283
 but a little better, okay?
+总是有点改进，对吧？
 
 1695
 01:13:03,453 --> 01:13:04,451
 Here we go. Now,
+好，我们继续，现在
 
 1696
 01:13:04,453 --> 01:13:07,621
 at least we don't have the black, okay?
+至少我们看到的不是一片黑了，对吧？
 
 1697
 01:13:07,623 --> 01:13:10,990
 So we can see through, still not so hot.
+我们能看到，还不是我们想看到的。
 
 1698
 01:13:12,093 --> 01:13:14,093
 We need that done button back for one thing,
+我们需要的一个 done 按钮，可以返回，
 
 1699
 01:13:14,095 --> 01:13:16,428
 without that done button we're done, okay?
+没有这个 done 按钮，我们就没法返回了，对吧？
 
 1700
 01:13:16,430 --> 01:13:17,929
 So let's get that done button back.
+好，现在让我们把这个 done 按钮“弄”回来。
 
 1701
 01:13:17,931 --> 01:13:21,232
 And I'm going to do that by implementing another pop over
+我会通过实现另外一个 pop over 的代理方法
 
 1702
 01:13:21,234 --> 01:13:24,835
 delegate method here which is called, I don't remember what
+我现在具体记不得它的名字
 
 1703
 01:13:24,837 --> 01:13:27,904
 the thing is even called, oh yes, presentation.
+哦，对对，presentation.
 
 1704
 01:13:29,541 --> 01:13:31,841
 It's this one right here,
+就是这个，
 
 1705
 01:13:31,843 --> 01:13:36,245
-viewControllerForAdapterPrese- ntationStyle, okay?
+viewControllerForAdapterPresentationStyle, okay?
+viewControllerForAdapterPresentationStyle。
 
 1706
 01:13:36,247 --> 01:13:39,881
 So this one right here is saying give me a view
+这就是我们的视图控制器需要对视图进行
 
 1707
 01:13:39,883 --> 01:13:46,254
 controller to display this thing when I adapt, okay?
+适配所需要的方法，对吧？
 
 1708
 01:13:46,256 --> 01:13:47,588
 So what I'm going to do is,
+这里我就需要，
 
 1709
 01:13:47,590 --> 01:13:50,391
 I'm going to give it a navigation controller, and
+给它一个 navigation controller ，然后说用
 
 1710
 01:13:50,393 --> 01:13:51,825
 tell it to use that instead.
+这个来替换
 
 1711
 01:13:51,827 --> 01:13:56,129
 So I'm just gonna say return UINavigationController.
+所以这里是要写返回 UINavigationController。
 
 1712
 01:13:56,131 --> 01:13:58,531
 The root view of the navigation controller wants to
+这个 navigation controller 的 根视图（root view）
 
 1713
 01:13:58,533 --> 01:14:01,600
 be the thing I'm presenting, which I can get from
+就是要展示的控制器，我们可以通过传给我们的参数
 
 1714
 01:14:01,602 --> 01:14:04,670
 this presentation controller argument that's passed to me.
+presentation controller 来获得。
 
 1715
 01:14:04,672 --> 01:14:08,039
 That's just controller.presentedViewContr-
+只要写 controller.presentedViewController
 
 1716
 01:14:08,041 --> 01:14:08,639
 oller.
+就可以来
 
 1717
 01:14:08,641 --> 01:14:12,876
 ViewController, okay?
+对吧？
 
 1718
 01:14:12,878 --> 01:14:14,310
 So that's it.
+这样就好了。
 
 1719
 01:14:14,312 --> 01:14:20,883
 So let's see what happens now.
+让我们看看现在的情况如何。
 
 1720
 01:14:20,885 --> 01:14:24,219
 All right, we're here, we go here, we go here,
+好，我们在这里，然后继续，
 
 1721
 01:14:24,221 --> 01:14:26,071
 oh much better.
+哦，比之前好多了。
 
 1722
 01:14:26,072 --> 01:14:27,922
 Now we have done, it still kind of looks terrible, but
+现在我们有了 done 按钮，但看起来样子不太好，但至少我们
 
 1723
 01:14:27,925 --> 01:14:29,641
 we have done.
+已经有了。
 
 1724
 01:14:29,642 --> 01:14:31,358
 So we can say done, oh, excellent, okay.
+我们可以说搞定了，太好了。
 
 1725
 01:14:31,361 --> 01:14:34,762
 So now, what are we gonna do to fix this see-through thing?
+那么接下来，我们该怎么实现可以透过 pop－over 看到下面内容？
 
 1726
 01:14:34,764 --> 01:14:37,465
 Well, I could just make it white again,
+好，我们可以先让它变成白色先，
 
 1727
 01:14:37,467 --> 01:14:40,901
 because now I'm returning the thing here, that view for
+因为这里我们返回的内容，这个视图时
 
 1728
 01:14:40,903 --> 01:14:42,235
 controller for adapter present thing.
+适配后的控制器的视图。
 
 1729
 01:14:42,237 --> 01:14:44,004
 I'm returning the whole thing, I can do anything I want.
+我将返回全部内容，这样我就可以做任何我想做的。
 
 1730
 01:14:44,006 --> 01:14:45,738
 But what I'm gonna use this to take advantage of is use
+这里我准备先利用下这个机会给你们展示一下
 
 1731
 01:14:45,740 --> 01:14:49,141
 this chance to show you visual effects like blur.
+各种视觉效果的使用，比如 blur 效果。
 
 1732
 01:14:49,143 --> 01:14:51,710
 Because we want really the same thing we had on the iPad,
+因为这里我们也有一个刚刚在 iPad 上实现的效果模糊效果，
 
 1733
 01:14:51,712 --> 01:14:54,980
 where the pop-over comes up and it's kind of, you can see
+就是当 pop-over 出来之后，
 
 1734
 01:14:54,982 --> 01:14:56,715
 the background through, but it's a little blurred.
+你可以看到它下面的内容，但是稍微有点模糊的
 
 1735
 01:14:56,717 --> 01:14:59,017
 We're going to do the same thing here, okay?
+这里其实我们是做的同样一件事，对吧？
 
 1736
 01:14:59,019 --> 01:15:01,419
 It's going to come up, it's going to be white, but
+当它出现的时候，它会变成白色，
 
 1737
 01:15:01,421 --> 01:15:03,854
 a little blur we can see what's in the background.
+但我们可以看到它的背景是稍微有点模糊。
+
 
 1738
 01:15:04,990 --> 01:15:06,856
 So how do we do that?
+我们该怎么做呢？
 
 1739
 01:15:06,858 --> 01:15:08,691
 To do that, we, okay,
+这么做，来吧。
 
 1740
 01:15:08,693 --> 01:15:12,028
 the way the visual effects work is very simple.
+设置 visual effects 的方法非常简单。
 
 1741
 01:15:12,030 --> 01:15:14,863
 It's just a view, okay, a visual effect view,
+只需要这里，对一个 view ， 对 ，visual effect view
 
 1742
 01:15:14,865 --> 01:15:19,434
 and that view looks what's behinds it, what's behind it,
+然后这个视图就看起来是放在后面的，看起来
 
 1743
 01:15:19,436 --> 01:15:23,104
 looks at what is behind it, and blurs it, and
+像在后面的，然后是模糊的，
 
 1744
 01:15:23,106 --> 01:15:25,739
 then draws that as itself.
+它也是自己负责绘制自己的。
 
 1745
 01:15:25,741 --> 01:15:27,941
 It's as simple as that, okay?
+这个够简单了吧，对吧？
 
 1746
 01:15:27,943 --> 01:15:31,344
 It's just, looks what behind you in the view hierarchy,
+这里，可以看到在你的 view hierarchy 来看到在后面的，
 
 1747
 01:15:31,346 --> 01:15:34,047
 even if that's other views, or I don't care what it is,
+甚至是有其他视图，都不需要在乎它们，
 
 1748
 01:15:34,049 --> 01:15:37,983
 it looks at it, creates white or even a dark color and
+只是需要设置为白色或是黑色，然后模糊掉，
 
 1749
 01:15:37,985 --> 01:15:40,586
 then blurs it, and now that's what it draws.
+现在它们就可以自己绘制自己了。
 
 1750
 01:15:40,588 --> 01:15:43,221
 So all we need to do to make this blur happen is
+所以我们需要在 navigation controller 的 view hierarchy
 
 1751
 01:15:43,223 --> 01:15:47,058
 put a visual effects view right at the top
+后面的内容都绘制好之后，然后最顶层的
 
 1752
 01:15:47,060 --> 01:15:50,228
 of the navigation controller's view hierarchy
+地方增加这个 visual effects ，将显示区域
 
 1753
 01:15:50,230 --> 01:15:52,430
 behind everything that it draws.
+模糊化。
 
 1754
 01:15:52,432 --> 01:15:53,664
 Okay, right at the top.
+好，在最顶部。
 
 1755
 01:15:53,666 --> 01:15:55,265
 And we know how to insert something at the top of
+我们是知道我们在 view hierarchy 中是从顶部插入
 
 1756
 01:15:55,267 --> 01:15:56,466
 the view hierarchy, right?
+内容的，对吧？
 
 1757
 01:15:56,468 --> 01:15:59,769
 We just put it at index zero in the subviews list.
+我只需要在 subviews 列表中的索引为0的地方处理就可以了。
 
 1758
 01:15:59,771 --> 01:16:01,937
 It'll be right in the back.
+就刚好是最后面的。
 
 1759
 01:16:01,939 --> 01:16:03,639
 Okay, and everything else will be in front.
+然后其他内容都是在前面的。
 
 1760
 01:16:03,641 --> 01:16:05,474
 Now, if I put it right in the back of the navigation
+然后我把它放回到 navigation controller 里面，
 
 1761
 01:16:05,476 --> 01:16:08,309
 control, the thing that's behind the visual effect view
+在它后面显示 visual effect 的视图
 
 1762
 01:16:08,311 --> 01:16:10,311
 is gonna be that map view.
+就是 map view 。
 
 1763
 01:16:10,313 --> 01:16:11,779
 Because it's clear and so,
+因为这个很清楚，
 
 1764
 01:16:11,781 --> 01:16:13,681
 we look back and whoa, there's map view there.
+我们看下一下，这里有一个 map view 。
 
 1765
 01:16:13,683 --> 01:16:16,483
 So it's gonna blur that, that's exactly what we want.
+它会被模糊化，这就是我们希望的。
 
 1766
 01:16:16,485 --> 01:16:21,354
 All right, so to do this we just need to say I'm gonna
+所以，这里我们就是需要
 
 1767
 01:16:21,356 --> 01:16:24,156
 let nav con equal this.
+让 nav con 等于这里。
 
 1768
 01:16:25,459 --> 01:16:27,692
 Okay, so there's your navigation controller.
+这里已经有了 navigation controller 。
 
 1769
 01:16:27,694 --> 01:16:32,596
 And then I'm gonna say let a visualEffectView equal
+这里我接着让 visualEffectView 等于
 
 1770
 01:16:32,598 --> 01:16:34,898
 UIVisualEffectView.
+UIVisualEffectView。
 
 1771
 01:16:34,900 --> 01:16:38,001
 Okay, that's this view that does what I was talking about.
+这个 view 就是我们前面刚刚说过的。
 
 1772
 01:16:38,003 --> 01:16:40,070
 And it wants to know what effect you wanna apply.
+它需要知道你要让它实现什么样的效果。
 
 1773
 01:16:40,072 --> 01:16:43,839
 There's a couple of effects, vibrancy and blur.
+这里有很多效果，比如 vibrancy 和 blur。
 
 1774
 01:16:43,841 --> 01:16:45,207
 So we're gonna do blur.
+这里我们需要的是 blur 。
 
 1775
 01:16:45,209 --> 01:16:46,708
 So I want the blur effect.
+我们要的是 blur effect 。
 
 1776
 01:16:48,445 --> 01:16:53,114
 And the blur effect I want is with style, extra light.
+对于blur effect 这个style ，我们还希望有 extra light。
 
 1777
 01:16:53,116 --> 01:16:56,483
 So, extra light is a very light colored thing,
+extra light 是一个指一个浅的颜色，
 
 1778
 01:16:56,485 --> 01:16:58,285
 almost white, with the blur in there.
+和blur在一起，接近白色。
 
 1779
 01:16:58,287 --> 01:17:01,888
 There's also dark and just light.
+这里也有浅黑色的。
 
 1780
 01:17:01,890 --> 01:17:05,525
 Then I'm going to set the visual effect views frame
+我这里准备把 visual effect views的框架设置为
 
 1781
 01:17:05,527 --> 01:17:09,362
 equal to the navCon's view.bounds.
+navCon的视图的bounds（显示区域）。
 
 1782
 01:17:09,364 --> 01:17:13,899
 So I want to totally fill the top level of the navigation
+这是因为我想能够完全覆盖住整个 navigation
 
 1783
 01:17:13,901 --> 01:17:15,133
 controller.
+controller 。
 
 1784
 01:17:15,135 --> 01:17:18,302
 And then I'm just going to add this
+然后我就把它加入到我的 navigation controller
 
 1785
 01:17:18,304 --> 01:17:21,872
 thing to the view hierarchy of my navigation controller.
+这里的 view hierarchy 。
 
 1786
 01:17:21,874 --> 01:17:26,743
 VisualEffectView, and I'm gonna put it at index zero.
+我准备把这个 VisualEffectView 放倒索引值为0的位置。
 
 1787
 01:17:26,745 --> 01:17:29,612
@@ -7150,159 +8936,199 @@ Okay which means it's in the back of absolutely everything.
 1788
 01:17:29,614 --> 01:17:31,947
 And then I'm going to return the navigation controller.
+然后我就可以返回 navigation controller 。
 
 1789
 01:17:34,685 --> 01:17:40,355
 Okay, here we go, all right.
+好，让我们看下效果吧。
 
 1790
 01:17:40,357 --> 01:17:41,289
 Click.
+点击
 
 1791
 01:17:41,291 --> 01:17:42,223
 Boom.
+咚
 
 1792
 01:17:42,225 --> 01:17:43,357
 Edit.
+编辑。
 
 1793
 01:17:43,359 --> 01:17:43,957
 Blur.
+模糊的。
 
 1794
 01:17:45,327 --> 01:17:46,860
 So this looks pretty good.
+看起来非常好。
 
 1795
 01:17:46,861 --> 01:17:48,394
 This actually looks slightly better than being all white,
+这里看起来比全都是白色的效果要好些了。
 
 1796
 01:17:48,396 --> 01:17:51,330
 it kind of gives users a little bit of context to where
+至少能够给用户一点信息就是他现在哪里。
 
 1797
 01:17:51,332 --> 01:17:52,598
 they were.
+至少能够给用户一点信息就是他现在哪里。
 
 1798
 01:17:52,600 --> 01:17:54,266
 Still works perfectly fine here.
+到现在我们做的都很好。
 
 1799
 01:17:54,268 --> 01:18:01,606
 Our favorite golf course, it's under the snow, okay?
+我最喜欢的 golf course ，it's under the snow ，对吧？
 
 1800
 01:18:01,608 --> 01:18:04,508
 Hit done, go here.
+点击 done ，继续。
 
 1801
 01:18:04,510 --> 01:18:05,743
 It's working.
+运行的很好。
 
 1802
 01:18:05,745 --> 01:18:08,211
 And just to make sure that we didn't break anything on
+这里我们还需要确认我们在 iPad 上也还是像以前一样，
 
 1803
 01:18:08,213 --> 01:18:10,847
 the iPad, let's go run it over there one more time.
+没有被影响到什么，那我就让我们再运行一次。
 
 1804
 01:18:12,150 --> 01:18:13,849
 Now, we can't possibly have broken anything here,
+好的，我们没有破坏任何东西。
 
 1805
 01:18:13,851 --> 01:18:15,951
 because, famous last words, but [LAUGH] we can't,
+有名的最后一句话，但是我们没有（幽默的的说法），
 
 1806
 01:18:15,953 --> 01:18:19,187
 because all we changed was the adaptive stuff.
+因为我们所有的修改都是在适配后的内容上。
 
 1807
 01:18:19,189 --> 01:18:20,789
 And on the iPad, it doesn't adapt,
+而在 iPad 上，我们没有进行适配，
 
 1808
 01:18:20,791 --> 01:18:23,324
 because the iPad is regular in both width and
+因为 iPad 是一个规则的宽度和高度，
 
 1809
 01:18:23,326 --> 01:18:28,162
 height, it never has to adapt to being in a compact space.
+就不需要在对应压缩显示区域后的适配问题。
 
 1810
 01:18:28,164 --> 01:18:29,329
 So here we go.
+好，我们继续。
 
 1811
 01:18:29,331 --> 01:18:29,963
 Click on here.
+点击这里。
 
 1812
 01:18:31,433 --> 01:18:32,598
 Bingo.
+太棒了。
 
 1813
 01:18:32,600 --> 01:18:34,400
 Okay, so that's it.
+好的，就是这样。
 
 1814
 01:18:34,402 --> 01:18:35,400
 Perfect timing.
+时间刚刚好。
 
 1815
 01:18:35,402 --> 01:18:36,801
 Almost.
+差不多吧。
 
 1816
 01:18:36,803 --> 01:18:39,537
 Next time, we will pick up with slides that tell you how
+下次，我们将先通过幻灯片讲一些关于
 
 1817
 01:18:39,539 --> 01:18:41,606
 to do the camera.
+摄像头的内容。
 
 1818
 01:18:41,607 --> 01:18:43,674
 And then we'll enhance our editor here to let you take
+然后我们会继续增强我们编辑器的功能，让你能够通过
 
 1819
 01:18:43,676 --> 01:18:45,176
 a picture.
+它拍一张照片。
 
 1820
 01:18:45,177 --> 01:18:46,677
 And we'll enhance our popover right here,
+同时，我们也会增强我们的 popover 的功能。
 
 1821
 01:18:46,679 --> 01:18:48,979
 to show the picture right in the pop-over, okay?
+能够支持直接显示图片。
 
 1822
 01:18:48,981 --> 01:18:50,647
 And then after that we'll talk a little bit about
+在这之后，我们会再谈一些关于持久化的内容，
 
 1823
 01:18:50,649 --> 01:18:53,850
 persistence, and we'll save the image in the file system.
+我们将会把图片保存我们的文件系统里。
 
 1824
 01:18:53,852 --> 01:18:55,184
 Show you how to do that.
+然后你们会知道该如何做到的。
 
 1825
 01:18:55,186 --> 01:18:56,752
 Okay, thank you very much.
+好的，非常感谢。
 
 1826
 01:18:56,754 --> 01:18:58,520
 I'm here if you have any questions as usual.
+和平时一样，如果你们有问题可以来问我。
 
 1827
 01:19:00,023 --> 01:19:00,054
 >> For more, please visit us at stanford.edu.
+想了解更多，请访问 standford.edu 。

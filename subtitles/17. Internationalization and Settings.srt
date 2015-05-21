@@ -1,6302 +1,7884 @@
-﻿1
+1
 00:00:00,001 --> 00:00:04,769
 [MUSIC]
+音乐
 
 2
 00:00:04,771 --> 00:00:08,773
 Stanford University.
+斯坦福大学
 
 3
 00:00:08,775 --> 00:00:11,709
 >> Okay. Well, welcome to lecture 17,
+好的，欢迎来到第 17 课
 
 4
 00:00:11,711 --> 00:00:15,178
 Stanford CS193P, winter 2015.
+斯坦福 CS193p 2015
 
 5
 00:00:15,180 --> 00:00:17,947
 Today, our topics are Internationalization and
+今天，我们的课题是国际化和
 
 6
 00:00:17,949 --> 00:00:19,349
 Localization.
+本地化
 
 7
 00:00:19,351 --> 00:00:20,750
 That's making your application so
+这可以让你的应用
 
 8
 00:00:20,752 --> 00:00:23,552
 you can ship it all around the world in different languages.
+使用不同的语言在全世界进行推广
 
 9
 00:00:23,554 --> 00:00:26,188
 And then also, kind of a minor topic,
+另外还有一个比较小的课题
 
 10
 00:00:26,190 --> 00:00:29,824
 settings which is a way that you can add a little bit of
+设置，以一种方式添加一些
 
 11
 00:00:29,826 --> 00:00:34,428
 UI to the general settings application on the phone.
+用户界面在手机上常规的设置
 
 12
 00:00:34,430 --> 00:00:36,897
 And I have demos for both of these things.
+等下我会有关于这些课题的演示
 
 13
 00:00:38,133 --> 00:00:39,483
 All right. So let's talk about
+好的，让我们开始讨论
 
 14
 00:00:39,484 --> 00:00:40,834
 internationalization and localization.
+国际化和本地化
 
 15
 00:00:40,836 --> 00:00:42,568
 Those are actually two different things.
+这是事实上两个不同的事物
 
 16
 00:00:42,570 --> 00:00:43,703
 Okay? Internationalization,
+接下来，国际化
 
 17
 00:00:43,705 --> 00:00:44,937
 sometimes called I18N.
+有时被称为 I18N
 
 18
 00:00:46,373 --> 00:00:49,174
 Because of 18 letters in there between I and the N.
+因为这个单词在 I 和 U 之间有18个单词
 
 19
 00:00:49,176 --> 00:00:53,544
 That's the process of making your application localizable.
+这是一种方式让你的应用本地化
 
 20
 00:00:53,546 --> 00:00:56,313
 And then, localization is the process of actually
+然后，本地化是
 
 21
 00:00:56,315 --> 00:00:58,382
 translating it to another language.
+翻译它成为另外一种语言的过程
 
 22
 00:00:58,384 --> 00:01:00,116
 So internationalization.
+国际化
 
 23
 00:01:00,118 --> 00:01:01,984
 That's work that you do as the developer.
+这些工作是你作为开发时所需要做的
 
 24
 00:01:01,986 --> 00:01:03,452
 Okay?
+接下来
 
 25
 00:01:03,453 --> 00:01:04,919
 You have to take your app and do some things to it.
+你应该开始你的应用并且本地化
 
 26
 00:01:04,922 --> 00:01:07,556
 Not a lot, but some little bit of things.
+不需要很多, 但是需要一些东西
 
 27
 00:01:07,558 --> 00:01:10,525
 To make all the strings that you have in there be pulled
+让你应用里所有的字符串
 
 28
 00:01:10,527 --> 00:01:13,395
 out or pullable out of there so
+处于被剥离的状态
 
 29
 00:01:13,397 --> 00:01:15,596
 that our translator can translate all of them.
+以使翻译者可以翻译它们
 
 30
 00:01:15,598 --> 00:01:17,798
 And then there's a little bit of formatting as well.
+然后它也有一些格式
 
 31
 00:01:17,800 --> 00:01:19,433
 Certain things, numbers, dates,
+一些东西，数字，数据
 
 32
 00:01:19,435 --> 00:01:22,069
 et cetera, look different in different languages so
+还有其他的，看起来在不同语言不一样的
 
 33
 00:01:22,071 --> 00:01:23,903
 you have to be able to do that.
+你们都需要注意一下的
 
 34
 00:01:23,905 --> 00:01:26,539
 And then localization is a process that.
+本地化就是这样一个过程
 
 35
 00:01:26,541 --> 00:01:28,240
 A localization company usually does.
+一个本地化公司经常需要做这些
 
 36
 00:01:28,242 --> 00:01:29,375
 Someone else does that.
+有些其他的公司也会做
 
 37
 00:01:29,377 --> 00:01:31,343
 Someone who's fluent in both languages.
+有些人精通两种语言
 
 38
 00:01:32,679 --> 00:01:34,178
 Maybe even someone who has a little bit of
+甚至有些人会一些你应用
 
 39
 00:01:34,180 --> 00:01:36,814
 domain knowledge about what your application does.
+所需领域的知识
 
 40
 00:01:36,816 --> 00:01:38,248
 So if it's a social networking app,
+因此如果这是一个社交网络应用
 
 41
 00:01:38,250 --> 00:01:40,650
 they're familiar with other social networking apps, so
+它们将类似其他社交网络应用，因此
 
 42
 00:01:40,652 --> 00:01:43,253
 they kind of know what various words and phrases.
+他们了解多种单词与短语
 
 43
 00:01:43,255 --> 00:01:46,322
 Would be in a UI like that.
+像这所示应用在用户界面上
 
 44
 00:01:46,324 --> 00:01:48,257
 And so this is kind of a two step process, and
+这是一个两步过程，
 
 45
 00:01:48,259 --> 00:01:51,193
 so, you're always working on adding new features and
+然后你将添加新的特性
 
 46
 00:01:51,195 --> 00:01:52,961
 internationalizing those features, and
+国际化特性
 
 47
 00:01:52,963 --> 00:01:56,464
 the localizer is pretty much kind of always getting a dump
+localizer 是一种很好的方式从你那里获得
 
 48
 00:01:56,466 --> 00:01:58,132
 of the latest strings from you, and
+最新的字符串
 
 49
 00:01:58,134 --> 00:02:00,668
 they are translating them and sending back to you and
+他们翻译它们并且发送回给你
 
 50
 00:02:00,670 --> 00:02:02,369
 you're checking to see if it looks okay in UI.
+你将检查并且判断它们在用户界面上是否可行
 
 51
 00:02:02,371 --> 00:02:03,837
 You're going back and forth, so
+你将来回做这些检查
 
 52
 00:02:03,839 --> 00:02:06,439
 it's an iterative process back and forth between you
+重复检查的过程往返于
 
 53
 00:02:06,441 --> 00:02:09,575
 as the internationalizer and the localizer,
+internationalizer 和 localizer 之间
 
 54
 00:02:09,577 --> 00:02:11,177
 which is usually some third-party company.
+这个通常是一些第三方的公司
 
 55
 00:02:11,179 --> 00:02:15,047
 There's plenty of companies out there that do it.
+有大量公司在那里做这些工作
+
 
 56
 00:02:15,049 --> 00:02:17,215
 So, let's talk about your side of it first,
+因此让我们讨论你首先要做什么
 
 57
 00:02:17,217 --> 00:02:19,084
 the internationalization part.
+国际化的部分
 
 58
 00:02:19,086 --> 00:02:23,421
 And there's really two places that you have strings
+那有两个地方的字符串
 
 59
 00:02:23,423 --> 00:02:25,723
 in your code,
+在你的代码里
 
 60
 00:02:25,724 --> 00:02:28,024
 strings meaning text that is going to appear in the UI.
+字符串意味着它将在用户界面显示
 
 61
 00:02:28,027 --> 00:02:29,760
 One is in your storyboard.
+有一个在你的 storyboard
 
 62
 00:02:29,762 --> 00:02:33,096
 A lot of strings in there, labels and all that stuff.
+一大堆的字符串在那里，标签和大量填充物
 
 63
 00:02:33,098 --> 00:02:35,431
 And for storyboards, the way we do internationalization
+为了 storyborads，用这个方式做国际化
 
 64
 00:02:35,433 --> 00:02:37,233
 there is we.
+这是我们
 
 65
 00:02:38,336 --> 00:02:40,135
 Xcode knows how to reach in there and
+Xcode 知道如何到达那里
 
 66
 00:02:40,137 --> 00:02:42,137
 grab all those strings and
+并且抓取所有那里的字符串
 
 67
 00:02:42,138 --> 00:02:44,138
 pull them out in a way that you can give to a localizer.
+将它们放置在你所给予的定位器上
 
 68
 00:02:44,141 --> 00:02:46,374
 And then we use Autolayout,
+然后我们用 Autolayout
 
 69
 00:02:46,376 --> 00:02:49,076
 to make sure everything looks nice when these strings
+去确认所有看起来良好的，当那些字符串
 
 70
 00:02:49,078 --> 00:02:51,912
 come back cuz these strings might be shorter or longer.
+返回时，因为这些字符串可能很短或很长
 
 71
 00:02:51,914 --> 00:02:55,715
 And so Autolayout is an extremely important part of
+Autolayout 是极其重要的部分
 
 72
 00:02:55,717 --> 00:02:57,150
 internationalization.
+在国际化这方面
 
 73
 00:02:57,152 --> 00:02:57,950
 Okay. It's just one word,
+当然。它只是一个词
 
 74
 00:02:57,952 --> 00:02:59,935
 Autolayout, but
+Autolayout，但是
 
 75
 00:02:59,936 --> 00:03:01,919
 it encompasses a lot of the work that you have to do.
+它包办了很多你不得不做的工作
 
 76
 00:03:01,922 --> 00:03:03,455
 Cuz you have to build your UI to be able to
+因为你不得不建立你的用户界面使其
 
 77
 00:03:03,457 --> 00:03:05,023
 deal with these different length strings.
+处理这些不同长度的字符串
 
 78
 00:03:05,025 --> 00:03:06,891
 So that's the first part.
+这是第一部分
 
 79
 00:03:06,893 --> 00:03:10,828
 Now the way you get these strings out of the storyboard,
+现在用这个方式你从 storyboard 这里得到这些字符串
 
 80
 00:03:10,830 --> 00:03:13,564
 the very first thing you need to do before you do
+这是第一件你需要做的事
 
 81
 00:03:13,566 --> 00:03:16,066
 any internationalization is register
+然后你就用国际化去注册
 
 82
 00:03:16,068 --> 00:03:17,767
 localizable languages.
+本地化语言
 
 83
 00:03:17,769 --> 00:03:20,269
 Languages that you want your app to be able to ship in.
+多语言，你想要你的应用发布在什么地方
 
 84
 00:03:20,271 --> 00:03:21,570
 Now. This isn't something you have
+现在，这不是你一些你得前期做的
 
 85
 00:03:21,572 --> 00:03:23,539
 to do upfront and pick them all when you're done, this,
+并且当你完成所有工作时也要回过来看的事
 
 86
 00:03:23,541 --> 00:03:25,974
 you can always add a new language along the way.
+用这种方式你可以一直添加一个新的语言
 
 87
 00:03:25,976 --> 00:03:28,576
 But, when you add a new language it's automatically,
+但是当你添加一种新語言，它自动地
 
 88
 00:03:28,578 --> 00:03:30,178
 the first time you add a new language it's
+在你第一次添加一种新語言，它
 
 89
 00:03:30,180 --> 00:03:32,213
 automatically going to make your story boards, so
+自动地去做你的 storyboard
 
 90
 00:03:32,215 --> 00:03:34,481
 that their strings can be pulled out.
+因此这些字符串会被剥离出来
 
 91
 00:03:34,483 --> 00:03:35,382
 Okay.
+好的
 
 92
 00:03:35,383 --> 00:03:36,282
 This is super easy to do.
+这是一个超级简单的方式
 
 93
 00:03:36,285 --> 00:03:38,752
 You're just going to click on your project.
+你将在你的项目里点击它
 
 94
 00:03:38,754 --> 00:03:40,654
 And when you click on your project,
+当你在你的项目里点击它
 
 95
 00:03:40,655 --> 00:03:42,555
 you're actually gonna want the project, not the target.
+你想要这个 project，不是 target
 
 96
 00:03:42,557 --> 00:03:44,623
 Sometimes when you click on the project in the very upper
+有时当你想点击这个 project，可是有点偏左上方
 
 97
 00:03:44,625 --> 00:03:47,126
 left of the navigator, it's gonna be selecting the target,
+就会选到 target
 
 98
 00:03:47,128 --> 00:03:49,728
 which is that thing that says autolayout
+这是一个写着 autolayout 的东西
 
 99
 00:03:49,730 --> 00:03:51,763
 in the second column, the second autolayout down.
+在第二列上，第二个自动布局下
 
 100
 00:03:51,765 --> 00:03:54,499
 So you want the top one, which is your actual project, and
+所以你想的顶部这一个，你当前的项目
 
 101
 00:03:54,501 --> 00:03:56,500
 when you do, you're gonna have two tabs across the top,
+当你开始做，你将有两个标签横穿顶部
 
 102
 00:03:56,502 --> 00:03:58,936
 info and build settings, you see those?
+info 和 build settings，你可以看到这些
 
 103
 00:03:58,938 --> 00:04:00,570
 And you want to be in the info tab and
+你想在这个 info 标签和
 
 104
 00:04:00,572 --> 00:04:04,007
 you'll see about halfway down towards the bottom there.
+你将看到中间那里往下到底部的那个
 
 105
 00:04:04,009 --> 00:04:05,475
 It says localizations and
+它是 localizations
 
 106
 00:04:05,477 --> 00:04:08,711
 there's actually just a list there of languages.
+这个实际上是一个语言的列表
 
 107
 00:04:08,713 --> 00:04:13,515
 So here my app is going to be localizable into Chinese,
+所以这里我的应用将的本地化翻译为
 
 108
 00:04:13,517 --> 00:04:14,949
 simplified and traditional.
+简体和繁体
 
 109
 00:04:14,951 --> 00:04:17,318
 Also into French and Japanese.
+也可以翻译为法语和日语
 
 110
 00:04:17,320 --> 00:04:18,219
 Okay. So you just keep
+好的。因此你只要
 
 111
 00:04:18,221 --> 00:04:19,987
 hitting plus button there.
+那里的加号键
 
 112
 00:04:19,988 --> 00:04:21,754
 It's just gonna ask what language you wanna add and
+它会问你想要加什么语言然后帮你
 
 113
 00:04:21,757 --> 00:04:22,622
 you add them.
+添加他们
 
 114
 00:04:22,624 --> 00:04:24,574
 Okay.
+好的
 
 115
 00:04:24,575 --> 00:04:26,525
 Now, you're gonna see why this is important later.
+现在，你之后将看到为什么这个这么重要
 
 116
 00:04:28,696 --> 00:04:31,330
 Now once you do this, the storyboards,
+现在只要你做这个，这个 storyboards
 
 117
 00:04:31,332 --> 00:04:33,131
 if you look in the Navigator in your storyboard,
+如果你在 storyboard 的导航条上
 
 118
 00:04:33,133 --> 00:04:36,167
 it's gonna show all these localizations, right?
+它将显示所有的本地化信息
 
 119
 00:04:36,169 --> 00:04:38,569
 It's gonna have a list of all the localizations.
+它将有所有的本地化信息列表
 
 120
 00:04:38,571 --> 00:04:40,738
 If you expand the little storyboard.
+如果你扩展这些 storybard
 
 121
 00:04:40,740 --> 00:04:43,306
 And also if you inspect the storyboard
+并且如果你检测这个 storybard
 
 122
 00:04:44,343 --> 00:04:46,159
 in the file inspector.
+在文件检测器这里
 
 123
 00:04:46,160 --> 00:04:47,976
 Which is the left most tab in the utilities column there.
+在实用列那里最左边的标签
 
 124
 00:04:48,913 --> 00:04:50,479
 If you have a storyboard inspected,
+如果你有一个 storyboard 的检测器
 
 125
 00:04:50,481 --> 00:04:52,948
 it's gonna show you the localizations there too.
+它也将向你显示本地化功能
 
 126
 00:04:52,950 --> 00:04:54,849
 And so that's a good way to just double check.
+当然这是一个很好的方式去仔细检查
 
 127
 00:04:54,851 --> 00:04:57,051
 Oh yeah, yeah, I've got all the localizations for
+好的好的，我将得到所有这些语言的
 
 128
 00:04:57,053 --> 00:04:57,718
 all these languages.
+本地化信息
 
 129
 00:04:57,720 --> 00:04:58,986
 It's what I expect.
+这就是我所期望的
 
 130
 00:04:58,988 --> 00:05:00,620
 Usually you don't have to manipulate.
+你也不需要去操作
 
 131
 00:05:00,622 --> 00:05:02,789
 These two things in any way.
+这两个事物任何情况
 
 132
 00:05:02,791 --> 00:05:03,656
 It's just there.
+它就在那里
 
 133
 00:05:03,658 --> 00:05:05,491
 Usually you'll have it closed up.
+你也可以将它关闭
 
 134
 00:05:05,493 --> 00:05:06,992
 You'll have the little triangle pressed
+你有一个三角形按键
 
 135
 00:05:06,994 --> 00:05:07,993
 there by the storyboard.
+在那个 storyboard 那里
 
 136
 00:05:07,995 --> 00:05:09,861
 You won't even see these things.
+你将不会再看到这些
 
 137
 00:05:09,863 --> 00:05:12,530
 But that's just to show you what's happening
+但是这只是当你想做这个时
 
 138
 00:05:12,532 --> 00:05:15,433
 when you do that.
+将发生的事
 
 139
 00:05:15,435 --> 00:05:17,034
 So there are other strings in your app, though,
+那里还有你应用的其他的字符串
 
 140
 00:05:17,036 --> 00:05:18,835
 besides those storyboard things.
+在这里 storyboard 之间
 
 141
 00:05:18,837 --> 00:05:20,236
 Things in labels and stuff.
+在填充物和标签这里
 
 142
 00:05:20,238 --> 00:05:21,270
 There are literal strings.
+它们是字面上的字符串
 
 143
 00:05:21,272 --> 00:05:24,340
 Strings that in your code you put into the UI.
+你代码里的字符串你把它们放到用户界面里
 
 144
 00:05:24,342 --> 00:05:27,543
 And the way you localize those is by calling this function
+你本地化这些的方式是用一个
 
 145
 00:05:27,545 --> 00:05:29,544
 NSLocalizedString, okay?
+NSLocalizedString 函数
 
 146
 00:05:29,546 --> 00:05:31,312
 Very, very important function.
+非常非常重要的函数
 
 147
 00:05:31,314 --> 00:05:34,215
 Every single literal string that's ever gonna appear in UI
+每一个单一的字符将会显示在用户界面
 
 148
 00:05:34,217 --> 00:05:37,685
 needs to be wrapped in a call to NSLocalizedString.
+用这个封装的方法 NSLocalizedString
 
 149
 00:05:37,687 --> 00:05:38,919
 So the arguments to this thing are,
+这里的参数是
 
 150
 00:05:38,921 --> 00:05:41,054
 the first thing is the key.
+第一个是 key
 
 151
 00:05:41,056 --> 00:05:43,957
 Basically this is the thing that uniquely identifies this
+基本上这是唯一方式去验证
 
 152
 00:05:43,959 --> 00:05:45,391
 string.
+字符
 
 153
 00:05:45,393 --> 00:05:47,927
 Okay?
+好的
 
 154
 00:05:47,928 --> 00:05:50,462
 And this is usually the thing that you want to put on screen
+这个通常你想要放到屏幕上的
 
 155
 00:05:50,465 --> 00:05:52,331
 in the language of the developer.
+开发者语言
 
 156
 00:05:52,333 --> 00:05:55,233
 Okay, if English is your language,
+当然如果英语是你选中的语言
 
 157
 00:05:55,235 --> 00:05:56,735
 then this would be in English.
+这将是英语
 
 158
 00:05:56,737 --> 00:06:00,204
 If you're, you know, developing an application in.
+如果你知道的开发一个应用
 
 159
 00:06:00,206 --> 00:06:02,740
 Czechoslovakia and Czech is your language then this string
+捷克和捷克语是你选定语言，这里的字符将会是
 
 160
 00:06:02,742 --> 00:06:04,241
 would be in Czech, okay?
+捷克语
 
 161
 00:06:04,243 --> 00:06:06,176
 Or whatever, is that a language, Czech?
+无论如何，那是一种语言，捷克语
 
 162
 00:06:06,178 --> 00:06:06,743
 I think so.
+我认为
 
 163
 00:06:07,712 --> 00:06:09,345
 So that's what usually this is.
+这就是它通常的情况
 
 164
 00:06:09,347 --> 00:06:10,646
 But it wouldn't necessarily be that,
+但是它并不是必要的
 
 165
 00:06:10,648 --> 00:06:14,349
 because you might have the same word appear two places in
+因为你可能想要在两个位置用相同的翻译
 
 166
 00:06:14,351 --> 00:06:17,085
 the UI and actually, possibly have different translations.
+在这个用户界面上或事实上，可能有不同的翻译
 
 167
 00:06:17,087 --> 00:06:19,587
 Because they might mean slightly different things.
+因为他们可能意味着些许不同
 
 168
 00:06:19,589 --> 00:06:21,989
 So this key might not necessarily.
+因此这个 key 并不是必要的
 
 169
 00:06:21,991 --> 00:06:24,058
 Be that.
+在那里
 
 170
 00:06:24,059 --> 00:06:26,126
 If it's not, then the value option, okay?
+如果不是，这个值的选择，可否如此
 
 171
 00:06:26,128 --> 00:06:29,529
 See the third one or actually fourth one there value, that's
+看这第三部分或者事实上第四部分那里的值
 
 172
 00:06:29,531 --> 00:06:32,565
 the thing that it will use if it can't find this thing.
+那是一个它将使用如果它不能找到这个
 
 173
 00:06:32,567 --> 00:06:36,035
 A translator doesn't translate this key.
+一个翻译者并不能翻译这些 key
 
 174
 00:06:36,037 --> 00:06:37,236
 Okay?
+好吧
 
 175
 00:06:37,237 --> 00:06:38,436
 Now the table name in the bundle,
+现在这个在 bundle 里的表名
 
 176
 00:06:38,439 --> 00:06:41,239
 that's a way of kind of organizing these localized
+这是一种方式去组织这些译文
 
 177
 00:06:41,241 --> 00:06:42,107
 strings into groups.
+字符串到这个组里
 
 178
 00:06:42,109 --> 00:06:44,275
 You can put them in little tables.
+你可以把他们放到这些表里
 
 179
 00:06:44,277 --> 00:06:45,776
 The bundle thing is more for
+这个 bundle 有更多的 对于
 
 180
 00:06:45,778 --> 00:06:49,013
 if you're localizing maybe a framework versus your app.
+如果你局部化你的框架或者应用
 
 181
 00:06:49,015 --> 00:06:53,516
 We'll talk about those two arguments in a second here.
+我们等会将讨论这两个参数
 
 182
 00:06:53,518 --> 00:06:56,552
 And then the last argument, comment, super important.
+这个最后的参数，comment，非常重要
 
 183
 00:06:56,554 --> 00:06:59,588
 This is a comment that goes to the translator.
+这个 comment 将会发到翻译者那里
 
 184
 00:06:59,590 --> 00:07:02,591
 So this tells the translator, this is the context of this.
+这个将告诉翻译者，这些是内容
 
 185
 00:07:02,593 --> 00:07:05,193
 Now the translator when they're doing the storyboard,
+现在这个翻译者当他们在 storyboard 里翻译
 
 186
 00:07:05,195 --> 00:07:07,262
 they see your storyboard cuz you're gonna send them your
+他们查看你的 storyboard 因为你将发送他们
 
 187
 00:07:07,264 --> 00:07:08,129
 storyboard as well.
+到 storyboard
 
 188
 00:07:08,131 --> 00:07:09,864
 So they're gonna see the context.
+他们将看到内容
 
 189
 00:07:09,866 --> 00:07:12,566
 Oh, this is a label for a field, I get it.
+这是 field 的标签，我所得到的
 
 190
 00:07:12,568 --> 00:07:15,469
 But here these strings are in your code, and so
+但是这里的这些在你的代码里字符串
 
 191
 00:07:15,471 --> 00:07:17,637
 they have no idea where this thing's gonna pop in the UI.
+他们没有办法在你的用户界面上显示
 
 192
 00:07:17,639 --> 00:07:20,139
 So you need to give very good comments here
+因此你需要给非常好的注释
 
 193
 00:07:20,141 --> 00:07:21,808
 to localize, you know.
+去本地化，你懂的
 
 194
 00:07:21,809 --> 00:07:23,476
 This is the title I'm gonna work that comes up.
+这是一个我等下要将的题目
 
 195
 00:07:23,478 --> 00:07:26,278
 When this bad thing happens because the user did this or
+当有什么坏事发生，因为用户做这些或者
 
 196
 00:07:26,280 --> 00:07:28,747
 whatever, so that they know what the best
+任何事，因此他们知道最好的
 
 197
 00:07:28,749 --> 00:07:31,316
 translation of that word to put up is.
+被提出的翻译
 
 198
 00:07:32,285 --> 00:07:34,085
 So in this localized string, you pass these arguments and
+因此在这个本地化字符里，你通过这些参数
 
 199
 00:07:34,087 --> 00:07:35,185
 it gives you back a string,
+然后它给你特定的字符
 
 200
 00:07:35,187 --> 00:07:37,688
 and the string it gives you back will either be,
+这个它给回你的将不可或缺
 
 201
 00:07:37,690 --> 00:07:40,557
 if there's no translation, the value there, or
+如果没有这些翻译，这个值
 
 202
 00:07:40,559 --> 00:07:42,658
 the key itself if there's no value.
+或者这个 key 没有值
 
 203
 00:07:42,660 --> 00:07:44,660
 Or it's gonna be the translated string that came
+或者它已经被翻译了
 
 204
 00:07:44,662 --> 00:07:46,895
 back from the localizer, okay?
+它将回到这个 localizer
 
 205
 00:07:46,897 --> 00:07:48,163
 And then you're gonna use that string.
+然后你就可以用这些字符
 
 206
 00:07:48,165 --> 00:07:49,581
 You can put it in the UI.
+你可以将他们放在用户界面上
 
 207
 00:07:49,582 --> 00:07:50,998
 So you wanna wrap every literal string in this.
+你想要包裹的每一个字符
 
 208
 00:07:51,001 --> 00:07:54,268
 Now most of the time, the table name and
+现在大部分的时间，这个 tablename 和
 
 209
 00:07:54,270 --> 00:07:56,270
 bundle are defaulted.
+bundle 是默认的
 
 210
 00:07:56,272 --> 00:07:59,206
 The table name is just gonna be Localizable.
+这个表名需要本地化
 
 211
 00:07:59,208 --> 00:08:01,942
 Which is where mostly you put all your strings actually in
+这是一个你放你所有字符串的地方
 
 212
 00:08:01,944 --> 00:08:03,576
 a table called localizable, and
+这个表叫做 localizable
 
 213
 00:08:03,578 --> 00:08:05,578
 the bundle's gonna be your main bundle.
+这个 bundle 将作为你主要的 bundle
 
 214
 00:08:05,580 --> 00:08:07,513
 That means your app, okay?
+这意味着你的应用
 
 215
 00:08:07,515 --> 00:08:09,915
 Now we haven't talked too much about bundles, but
+现在我们不能讨论太多关于 bundle，但是
 
 216
 00:08:09,917 --> 00:08:11,316
 when you have frameworks and other things,
+当你有框架或者其他的东西时
 
 217
 00:08:11,318 --> 00:08:14,185
 you can have other bundles of code in your app.
+你的应用可以有其他的 bundle
 
 218
 00:08:14,187 --> 00:08:16,621
 And they might have their own bundles of strings, but
+他们可以有他们自己的字符串 bundle
 
 219
 00:08:16,623 --> 00:08:19,523
 I'm not gonna really talk about that.
+但是我确实不打算现在讨论这个
 
 220
 00:08:19,525 --> 00:08:21,258
 I'm just going to say that most of the time you're
+我将讲一下大部分时间你将
 
 221
 00:08:21,260 --> 00:08:23,627
 just gonna call this version of NSLocalizedString that
+使用的 NSLocalizedString 的版本
 
 222
 00:08:23,629 --> 00:08:27,063
 only has the key and a comment.
+这个是只有 key 和 comment
 
 223
 00:08:27,065 --> 00:08:28,181
 Okay?
+好的
 
 224
 00:08:28,182 --> 00:08:29,298
 Because it's gonna use the key as the value
+因为它将用这个 key 作为值
 
 225
 00:08:29,300 --> 00:08:30,799
 if there's no translation, and
+如果他们没有翻译
 
 226
 00:08:30,801 --> 00:08:33,902
 you've gotta have that comment to the translator, okay?
+你将得到翻译者的注释
 
 227
 00:08:33,904 --> 00:08:36,771
 So that 90% of the time you just skip it.
+90% 的时间你将略过它
 
 228
 00:08:36,773 --> 00:08:39,374
 No NS localized string comma colon around your
+不是 NSLocalizedString 注释你的
 
 229
 00:08:39,376 --> 00:08:40,274
 literal strings.
+字符串
 
 230
 00:08:40,276 --> 00:08:41,792
 And that's it.
+就酱
 
 231
 00:08:41,793 --> 00:08:43,309
 That's all you need to do to get all those little strings
+这些所有你所需要的字符串将会被
 
 232
 00:08:43,312 --> 00:08:44,344
 to be translatable.
+翻译
 
 233
 00:08:44,346 --> 00:08:46,713
 All right?
+好的
 
 234
 00:08:46,715 --> 00:08:49,515
 Now, if you use a format string.
+现在如果你使用这个组织好的字符
 
 235
 00:08:49,517 --> 00:08:51,150
 So this format string,
+这些组织好的字符
 
 236
 00:08:51,152 --> 00:08:55,253
 the result is %g or the result is %d, okay?
+这个结果是 %g 或者 %d
 
 237
 00:08:55,255 --> 00:08:56,821
 So you're using a format string.
+你将用这些组织好的字符
 
 238
 00:08:56,823 --> 00:09:00,391
 You're gonna wanna use this string, class method called
+你将想要使用这些字符
 
 239
 00:09:00,393 --> 00:09:03,894
 localized string with format to create a string from it.
+在被称为 localizedStringWithFormat 的方法里创建字符
 
 240
 00:09:03,896 --> 00:09:07,964
 So it takes var args at the end for
+它用 var 参数在所有
 
 241
 00:09:07,966 --> 00:09:11,768
 all the %ds or %gs or whatever in the string.
+%d 或者 %g 末尾或者任何字符里
 
 242
 00:09:11,770 --> 00:09:15,004
 And you would want that format string to also be
+你想组织好的字符
 
 243
 00:09:15,006 --> 00:09:17,006
 NS localized string.
+NSLocalizedString
 
 244
 00:09:17,008 --> 00:09:20,175
 Okay because the words in there, the result is,
+因为这个单词在那里，结果在那里
 
 245
 00:09:20,177 --> 00:09:22,010
 those need to be translated as well.
+这些也需要被翻译
 
 246
 00:09:22,012 --> 00:09:25,080
 But the reason you wanna use this localizedStringWithFormat
+你想要使用 LocalizedStringWithFormat 的方法的原因是
 
 247
 00:09:25,082 --> 00:09:27,648
 is because numbers are not always displayed the same
+数字在
 
 248
 00:09:27,650 --> 00:09:28,949
 in different languages.
+不同语言里显示不一定一样
 
 249
 00:09:28,951 --> 00:09:32,753
 So you wanna give the system a chance to display any %gs or
+因此你想让这个系统选择显示 %g 或者
 
 250
 00:09:32,755 --> 00:09:34,921
 %ds properly in there.
+%d 的那些
 
 251
 00:09:34,923 --> 00:09:36,222
 You're actually not even gonna
+你完全不想
 
 252
 00:09:36,224 --> 00:09:37,723
 use this that much because you are gonna
+使用这个因为你想
 
 253
 00:09:37,725 --> 00:09:40,325
 use a number formatter which I'm gonna talk about.
+使用我所说的 number formatter
 
 254
 00:09:40,327 --> 00:09:42,361
 In a second, and the number formatter does an even more
+等一下这个 number formatter 做一个
 
 255
 00:09:42,363 --> 00:09:44,562
 powerful job of making sure the number looks good.
+很强大的事去确保数字看起来不错
 
 256
 00:09:45,732 --> 00:09:48,799
 If you have multiple percent things in there, %d, %g,
+如果你有多个 % 的东西在那里，比如 %d，%g
 
 257
 00:09:48,801 --> 00:09:52,636
 a lot of them, the localizer is able to specify the order.
+有很多这些，这个 localizer 将会给他们排序
 
 258
 00:09:52,638 --> 00:09:54,771
 Because, as you can imagine, as some languages,
+因为，正如你可以想象的，一些语言
 
 259
 00:09:54,773 --> 00:09:57,007
 the words might come in a little different order,
+这个单词将在不同的序列里出现
 
 260
 00:09:57,009 --> 00:09:59,242
 just because of the way phrasing works in a language.
+只是因为语言的分词
 
 261
 00:09:59,244 --> 00:10:01,310
 And they are able to do that when they translate, so
+他们将做这些当他们在翻译的时候
 
 262
 00:10:01,312 --> 00:10:02,378
 no worries.
+没有什么好担忧的
 
 263
 00:10:02,380 --> 00:10:02,944
 There.
+在 那里
 
 264
 00:10:04,314 --> 00:10:05,646
 All right. So that's strings,
+当然，这些字符串
 
 265
 00:10:05,648 --> 00:10:08,115
 strings in your storybook, little strings in your code.
+在你的 storybook 里的字符串，在你代码里的字符串
 
 266
 00:10:08,117 --> 00:10:10,851
 Now, let's talk about formatters.
+好，让我讨论一下 formatters
 
 267
 00:10:10,853 --> 00:10:13,320
 So, formatters work based on a locale.
+formatters 是基于本地的
 
 268
 00:10:13,322 --> 00:10:16,389
 So there's really two parts of what makes something
+这里有两个部分使他们
 
 269
 00:10:16,391 --> 00:10:18,725
 localized.
+本地化
 
 270
 00:10:18,726 --> 00:10:21,060
 One is the language, Japanese or French or whatever.
+一个是语言，比如日语法语或者其他的
 
 271
 00:10:21,062 --> 00:10:23,596
 But the other is locale.
+另外一个是位置
 
 272
 00:10:23,598 --> 00:10:26,398
 And the locale is where in the world you are essentially.
+位置是你在这个世界上实质上的位置
 
 273
 00:10:26,400 --> 00:10:29,134
 So your language might be Spanish but
+你的语言可能是西班牙语
 
 274
 00:10:29,136 --> 00:10:31,836
 maybe you're in Mexico or maybe you're in Spain or
+但是你在墨西哥或者你在西班牙或者
 
 275
 00:10:31,838 --> 00:10:33,438
 some other part of the world that speaks Spanish.
+一些其他使用西班牙语的地方
 
 276
 00:10:33,440 --> 00:10:34,989
 Okay.
+好的
 
 277
 00:10:34,990 --> 00:10:36,539
 So you would have a different locale, Mexico or
+因此你将有不同的位置，墨西哥
 
 278
 00:10:36,542 --> 00:10:39,309
 Spain, than your language which might be Spanish.
+或者西班牙，然后你的语言将可能是西班牙语
 
 279
 00:10:39,311 --> 00:10:40,844
 Okay? So
+好的
 
 280
 00:10:40,845 --> 00:10:42,378
 the formatters are gonna format things, numbers and
+formatters 将会组织这些东西，数字
 
 281
 00:10:42,381 --> 00:10:43,580
 dates and stuff.
+数据和材料
 
 282
 00:10:43,582 --> 00:10:45,481
 Currencies, based on your locale.
+货币基于你的位置
 
 283
 00:10:46,751 --> 00:10:48,217
 Okay?
+好的
 
 284
 00:10:48,218 --> 00:10:49,684
 And so what kind of formatters are there?
+那里有哪种排版方式
 
 285
 00:10:49,687 --> 00:10:51,720
 Well we've already seen number formatter,
+好的我们已经看过 number formatter
 
 286
 00:10:51,722 --> 00:10:53,788
 actually we saw it the very first day of this class.
+事实上我们在很早的第一天的课上说过
 
 287
 00:10:53,790 --> 00:10:55,923
 Number formatter knows how to take a number and
+number formatter 知道怎样排版数字
 
 288
 00:10:55,925 --> 00:10:57,558
 turn it into a string.
+到字符里
 
 289
 00:10:57,560 --> 00:11:01,862
 And we didn't really worry about locale when we
+我们不关心位置，当我们
 
 290
 00:11:01,864 --> 00:11:03,430
 used it early in the quarter.
+在现在使用它的时候
 
 291
 00:11:03,432 --> 00:11:05,765
 It was a little advanced topic at that time.
+因为现在将这个课题有点高级
 
 292
 00:11:05,767 --> 00:11:08,367
 But it was using the locale even though we weren't
+但是它会被使用，我们不用担心它
 
 293
 00:11:08,369 --> 00:11:10,402
 worrying about it, it was using it.
+它会被用
 
 294
 00:11:10,404 --> 00:11:12,204
 This number of format will also be used for
+这个用来排版数字的也会用来
 
 295
 00:11:12,206 --> 00:11:13,872
 formatting currencies.
+排版货币
 
 296
 00:11:13,874 --> 00:11:16,541
 Okay, your local currencies.
+当然你本地的货币
 
 297
 00:11:16,543 --> 00:11:18,776
 And then dates is another one.
+数据是另一回事
 
 298
 00:11:18,778 --> 00:11:21,679
 Dates are displayed myriad different ways across
+日期在不同的地方有不同的
 
 299
 00:11:21,681 --> 00:11:22,963
 the globe.
+排版
 
 300
 00:11:22,964 --> 00:11:24,246
 So you definitely need to use a date formatter if you're
+所以你需要使用这个 date formatter 如果
 
 301
 00:11:24,249 --> 00:11:26,616
 gonna put any kind of date in your UI.
+你将放一些日期到你的用户界面上
 
 302
 00:11:26,618 --> 00:11:28,718
 There's also date components formatter, so
+那里也有一下日期组件的 formatter
 
 303
 00:11:28,720 --> 00:11:32,188
 date components are like the day of the week, the month.
+日期组件就像周天，月天
 
 304
 00:11:32,190 --> 00:11:36,325
 Okay, those also are displayed differently across the world.
+当然，这些在世界各地有不同的显示方式
 
 305
 00:11:36,327 --> 00:11:39,461
 And there's even kind of some fringe formatters you wouldn't
+还有一下临界的 formatter 你不需要考虑的
 
 306
 00:11:39,463 --> 00:11:42,764
 think but you need to like byte count formatters, okay?
+但是你需要知道像这种 count formatter
 
 307
 00:11:42,766 --> 00:11:47,401
 So if you wanna say 350 kilobytes left of 2 gigabytes.
+如果你想说 350 千字节 左边的 2 千兆字节
 
 308
 00:11:47,403 --> 00:11:50,237
 Okay, those numbers look a little different in different
+好的，那些数字看起来不一样在不同
 
 309
 00:11:50,239 --> 00:11:51,305
 languages.
+语言里
 
 310
 00:11:51,306 --> 00:11:52,372
 You can't just put the number in there and
+你不能只是把数字放在那
 
 311
 00:11:52,374 --> 00:11:55,275
 put kb after it and expect that to be kilobytes.
+放 kb 在那之后和期望那个是千字节
 
 312
 00:11:55,277 --> 00:11:57,243
 It's not necessarily gonna be right.
+它并不一定是对的
 
 313
 00:11:57,245 --> 00:11:59,712
 So the byte count format I can help you with that, and
+因此字节计数的 formatter 我可以帮你到这
 
 314
 00:11:59,714 --> 00:12:01,847
 then in map kit there's the distance formatter.
+然后是地图套件的排版
 
 315
 00:12:01,849 --> 00:12:04,216
 So you can specify here's the distance between two places
+你可以特定这两个位置的距离
 
 316
 00:12:04,218 --> 00:12:06,885
 because that also needs to be localized.
+因为它也可以定位
 
 317
 00:12:06,887 --> 00:12:08,753
 Health kit also has a number of things.
+健康组件也有数字
 
 318
 00:12:08,755 --> 00:12:11,288
 Like energy, calories used.
+像能量，卡路里
 
 319
 00:12:11,290 --> 00:12:13,157
 Those kinds of things.
+这些东西
 
 320
 00:12:13,159 --> 00:12:16,159
 Some of those are different in different locales.
+这些东西在不同位置是不一样的
 
 321
 00:12:16,161 --> 00:12:19,229
 So any time you're gonna put a number or
+任何时间你将放一个数字或者
 
 322
 00:12:19,231 --> 00:12:22,565
 a date on screen, you're gonna wanna see if there's a proper
+日期在屏幕上，你想看它是否
 
 323
 00:12:22,567 --> 00:12:25,434
 formatter to format this thing, okay?
+排版合适
 
 324
 00:12:25,436 --> 00:12:26,535
 So how do formatters work?
+所以要怎么处理这些格式
 
 325
 00:12:26,537 --> 00:12:27,536
 Let's look at a couple of them.
+让我们看这一组
 
 326
 00:12:27,538 --> 00:12:28,937
 Let's look at NS Number Formatter.
+让我们看 NSNumberFormatter 方法
 
 327
 00:12:28,939 --> 00:12:30,405
 Now NS Number Formatter.
+现在是 NSNumberFormatter
 
 328
 00:12:30,407 --> 00:12:31,856
 A lot of API there.
+有很多的 API
 
 329
 00:12:31,857 --> 00:12:33,306
 You're really gonna wanna check out the documentation.
+你可以去查看一下文档
 
 330
 00:12:33,309 --> 00:12:35,943
 But I'm gonna look at the two most basic cases.
+但是我想要提一下两个最基础的案例
 
 331
 00:12:35,945 --> 00:12:37,778
 One is just displaying a number.
+一个是只显示数字
 
 332
 00:12:37,780 --> 00:12:39,846
 So you create an NSNumberFormatter
+你创建一个 NSNumberFormatter
 
 333
 00:12:39,848 --> 00:12:41,447
 like we did in the calculator.
+正如我们在计算器那里所做的
 
 334
 00:12:41,449 --> 00:12:43,883
 Then you set the style of the number.
+然后你设置一下数字的类型
 
 335
 00:12:43,885 --> 00:12:47,519
 So for example, decimal style or currency style.
+比如，十进制或者货币类型
 
 336
 00:12:47,521 --> 00:12:50,288
 There's also a style even spell out style that will
+这个也有拼写类型
 
 337
 00:12:50,290 --> 00:12:53,458
 spell the number out, 3,000, T-H-R-E-E T-H-O-U-S-A-N-D,
+拼写这个数字，3000， 3 千
 
 338
 00:12:53,460 --> 00:12:57,261
 right it'll set it out as words in the local language.
+它会设置它的词作为本地语言
 
 339
 00:12:57,263 --> 00:12:58,929
 So there's a few styles in there.
+因此那里有一些类型
 
 340
 00:13:00,066 --> 00:13:02,165
 Then you can set other things about the formatter,
+你可以设置其他的东西关于排版
 
 341
 00:13:02,167 --> 00:13:03,933
 how many digits you want before and
+你想有多少数字在十进制点的前后，
 
 342
 00:13:03,935 --> 00:13:06,969
 after the decimal point, how you want rounding to happen,
+你想怎么四舍五入
 
 343
 00:13:06,971 --> 00:13:08,104
 all that kind of stuff.
+所有这些材料
 
 344
 00:13:08,106 --> 00:13:09,938
 Set that all up and
+设置这些所有的
 
 345
 00:13:09,940 --> 00:13:15,110
 then you just call formatter string from number.
+然后你只是从数字这里排版这些字符
 
 346
 00:13:15,112 --> 00:13:18,012
 You give it the number you want and it will return to you
+你给它数字，它返回你
 
 347
 00:13:18,014 --> 00:13:21,115
 a string that uses all those attributes that you set up and
+字符，使用所有这些属性设置和适应
 
 348
 00:13:21,117 --> 00:13:23,150
 be proper for the locale you're in.
+你的位置
 
 349
 00:13:23,152 --> 00:13:25,986
 Okay?
+好的
 
 350
 00:13:25,988 --> 00:13:27,137
 So that's that way.
+就是这种方式
 
 351
 00:13:27,138 --> 00:13:28,287
 And of course, think about the other way.
+当然，可以考虑其他方式
 
 352
 00:13:28,290 --> 00:13:29,689
 If you're gonna ask the user for
+如果你想要问用户
 
 353
 00:13:29,691 --> 00:13:33,526
 a number then, you better use a number formatter to parse
+一个数字，你最好用数字 formatter 去解析
 
 354
 00:13:33,528 --> 00:13:36,295
 that number into a number from a string.
+数字，从字符转为数字
 
 355
 00:13:36,297 --> 00:13:38,864
 And, that's because, as you know, some parts of the world,
+因为你知道，世界上有些国家
 
 356
 00:13:38,866 --> 00:13:41,266
 the decimal separator's actually a comma.
+十进制里有个逗号
 
 357
 00:13:41,268 --> 00:13:43,434
 So if they type three comma two,.
+所以如果他们打印三逗号二
 
 358
 00:13:43,436 --> 00:13:45,036
 And you don't use a formatter,
+然后你不想用这个排版
 
 359
 00:13:45,038 --> 00:13:46,170
 you're gonna look at that and say, oh.
+你看着然后说，哦
 
 360
 00:13:46,172 --> 00:13:47,804
 They want, what do they want, three?
+他们想，他们想什么，三个
 
 361
 00:13:47,806 --> 00:13:49,806
 Or that's just not even a valid number, right?
+或者这甚至不是一个有效的数字，对不对
 
 362
 00:13:49,808 --> 00:13:52,508
 But if they type three comma two and they're locale is some
+但是如果他们输入 3，2 而然后他们定位是一些
 
 363
 00:13:52,510 --> 00:13:54,143
 place where that's the way numbers are expressed,
+位置，这些位置是数字表达的方式
 
 364
 00:13:54,145 --> 00:13:57,846
 then that's gonna give you 3.2 back out of it, okay?
+然后它将给你 3.2，对不对
 
 365
 00:13:57,848 --> 00:14:01,449
 So displaying of parsing numbers main job event is for
+显示一个解析的数字是主要的事件
 
 366
 00:14:01,451 --> 00:14:02,595
 number formatter.
+对于这个数字解释器来说
 
 367
 00:14:02,596 --> 00:14:03,740
 But there's a lot more in there.
+但是那里还有更多的东西
 
 368
 00:14:03,741 --> 00:14:04,885
 So you definitely wanna familiarize yourself with
+因此你一定想要熟悉一下
 
 369
 00:14:04,888 --> 00:14:05,619
 that class.
+这些类
 
 370
 00:14:06,789 --> 00:14:07,821
 On the date side.
+在这个日期这一边
 
 371
 00:14:07,823 --> 00:14:10,824
 Okay, formatting dates, very complicated.
+当然，排版好这些日期非常复杂
 
 372
 00:14:10,826 --> 00:14:13,593
 Okay, how we as humans represent dates,
+作为人类，如何表示日期
 
 373
 00:14:13,595 --> 00:14:16,195
 we don't do it in a simple way, unfortunately.
+不幸的是我们不能用一种简单的方式
 
 374
 00:14:16,197 --> 00:14:20,966
 Luckily there's some built in, pretty simple styles for
+幸运的是有一些建立的简单的类型
 
 375
 00:14:20,968 --> 00:14:22,500
 showing numbers.
+去显示数字
 
 376
 00:14:22,502 --> 00:14:26,070
 Short style, medium style, long style, full style.
+Short 类型，medium 类型，long 类型，full 类型
 
 377
 00:14:26,072 --> 00:14:28,939
 And hopefully those will do what you want.
+希望这有你想要的
 
 378
 00:14:28,941 --> 00:14:31,108
 Cuz if you can use one of those, then the way to
+因为如果你用这些的其中一种
 
 379
 00:14:31,110 --> 00:14:33,643
 do it is you just create an NS Date Formatter,
+这是一种你创建的日期格式的方式
 
 380
 00:14:33,645 --> 00:14:36,913
 you set the time style and the date style to be one of these
+你设置这个时间类型和日期类型作为这一个的
 
 381
 00:14:36,915 --> 00:14:41,150
 kind of styles, and then you just get you string from date.
+类型，然后你只要拿到你日期的字符
 
 382
 00:14:41,152 --> 00:14:43,886
 And now you'll have a string that you can put in the UI
+现在你将有一个字符，你把它放到用户界面里
 
 383
 00:14:43,888 --> 00:14:46,688
 that will be fully localized in the local language and
+这将用当地语言完全本地化
 
 384
 00:14:46,690 --> 00:14:47,822
 in the right locale.
+在一个正确的位置
 
 385
 00:14:47,824 --> 00:14:50,091
 Okay?
+好的
 
 386
 00:14:50,093 --> 00:14:52,259
-EY image, how about images?
+UIImage, how about images?
+UIImage，图片怎么样
 
 387
 00:14:52,261 --> 00:14:56,063
 Because some street signs or other things like that might
+因为有有些街道标志或者其他一些
 
 388
 00:14:56,065 --> 00:14:58,265
 look different in other language.
+在其他语言看起来可能不一样的
 
 389
 00:14:58,267 --> 00:15:00,633
 And there's a couple of ways to do that.
+这里有一系列方式去做到这一点
 
 390
 00:15:00,635 --> 00:15:04,771
 If you put the JPEGs or the PNGs directly in your project,
+如果你放 JPEG 或者 PNG 的图片到你的项目里
 
 391
 00:15:04,773 --> 00:15:07,940
 in other words you don't put them in the images.xcassets
+换句话说你不想把他们放到 images.xcassets
 
 392
 00:15:07,942 --> 00:15:09,642
 thing.
+这里
 
 393
 00:15:09,643 --> 00:15:11,343
 Then actually those can become localizable files.
+事实上这些可以变成本地文件
 
 394
 00:15:11,345 --> 00:15:13,979
 And you just click on them, go to the file inspector, and
+你只要点击他们，进入文件检查器
 
 395
 00:15:13,981 --> 00:15:15,413
 say make this localizable.
+把这个变成本地化
 
 396
 00:15:15,415 --> 00:15:16,714
 And you can have a different version for
+你可以有不同的版本
 
 397
 00:15:16,716 --> 00:15:21,051
 every language that you want.
+作为你想要的不同语言
 
 398
 00:15:21,053 --> 00:15:24,221
 But maybe a better way to do it is put them in your
+但是可能一个很好的方式去解决就是把他们放到
 
 399
 00:15:24,223 --> 00:15:26,106
 xcassets.
+xcassets 这里
 
 400
 00:15:26,107 --> 00:15:27,990
 Put all the images from all the languages.
+所有语言的图片文件都放这
 
 401
 00:15:27,993 --> 00:15:30,560
 And give them names
+给他们命名
 
 402
 00:15:30,562 --> 00:15:34,329
 that you can then look up using NSLocalizedString.
+你可以用 NSLocalizedString 查阅
 
 403
 00:15:34,331 --> 00:15:36,198
 Okay? Okay.
+好不好？好
 
 404
 00:15:36,199 --> 00:15:38,066
 And then your translators can translate the name of stop
+你的 translators 可以翻译这些名称，停止标志被
 
 405
 00:15:38,068 --> 00:15:41,903
 sign to French stop sign, or something like that.
+翻译成法语版本或者其他的语言
 
 406
 00:15:41,905 --> 00:15:44,305
 And then that'll be the name in the image.scs.
+这些名字会在 images.xcassets 这里
 
 407
 00:15:44,307 --> 00:15:46,340
 And then you can use some naming convention to group
+然后你可以用这些命名规范去
 
 408
 00:15:46,342 --> 00:15:47,574
 them, or whatever you wanna do.
+组织他们或者做任何你想做的事
 
 409
 00:15:47,576 --> 00:15:50,177
 But that's probably a little bit better way to do it,
+这可能有一点好的方式去做它
 
 410
 00:15:50,179 --> 00:15:52,445
 because then your translator has a little more
+因为你的 translator 能够
 
 411
 00:15:52,447 --> 00:15:53,947
 control of it.
+控制它
 
 412
 00:15:53,948 --> 00:15:55,448
 Now you'll have to coordinate with your translator to
+现在你将不得不协调你的翻译器去
 
 413
 00:15:55,450 --> 00:15:57,817
 make sure you name the images in your xcassets to match what
+确保你的图片名称在你的 xcassets 里匹配
 
 414
 00:15:57,819 --> 00:15:59,084
 they've translated them to.
+他们的译文
 
 415
 00:15:59,086 --> 00:16:02,254
 But still a pretty straight forward way of doing that.
+但是这样做仍然是一个非常直接的方式
 
 416
 00:16:02,256 --> 00:16:06,224
 Okay, so congratulations.
+好的，祝福你
 
 417
 00:16:06,226 --> 00:16:07,792
 You've done all those things, right?
+你将完成这些，对吧
 
 418
 00:16:07,794 --> 00:16:11,295
 You did the story boards, you added the languages,
+你在 storyboards 处理，你添加语言
 
 419
 00:16:11,297 --> 00:16:15,865
 you used NS localize string, you
+你使用 NSLocalizeString 方法
 
 420
 00:16:15,867 --> 00:16:18,334
 put the formatters in there, now your app is localizable.
+你放这些组排版的在那里，现在你的应用是本地化的
 
 421
 00:16:18,336 --> 00:16:19,869
 And now you wanna localize it.
+现在你想本地化它
 
 422
 00:16:19,871 --> 00:16:21,637
 'Kay, how do you do that?
+好的，你想怎么做
 
 423
 00:16:21,639 --> 00:16:23,005
 Could not be simpler.
+这可不简单
 
 424
 00:16:23,007 --> 00:16:25,073
 You just go to the project again,
+你只是想再次到项目里
 
 425
 00:16:25,075 --> 00:16:27,175
 the same place that you added the languages, and
+你添加语言到相同的位置
 
 426
 00:16:27,177 --> 00:16:30,544
 from the Editor menu, you just say Export for Localization.
+从编辑菜单那里，你只是说导出本地
 
 427
 00:16:30,546 --> 00:16:33,313
 And it will export all the languages.
+它将导出所有语言
 
 428
 00:16:33,315 --> 00:16:35,048
 You can actually select which ones you want,
+你事实上选择那个你想要的
 
 429
 00:16:35,050 --> 00:16:38,151
 but it'll export all your languages in a format called
+但是它将导出所有语言到
 
 430
 00:16:38,153 --> 00:16:42,221
 .xliff, 'kay, which is this international file format for
+.xliff 文件里，好，这个是国际化文件
 
 431
 00:16:42,223 --> 00:16:43,722
 translators, 'kay?
+这个翻译器，对吧
 
 432
 00:16:43,724 --> 00:16:46,825
 They have tools, translators have tools that read .xliff
+他们有工具，translators 有工具去读 .xliff 文件
 
 433
 00:16:46,827 --> 00:16:49,494
 files and let them translate, and
+让他们翻译
 
 434
 00:16:49,496 --> 00:16:53,498
 then they press, you know, send or whatever.
+然后点击，你知道到，发送或者其他
 
 435
 00:16:53,500 --> 00:16:55,933
 It generates an .xliff with the translations in it.
+通常一个 .xliff 文件和译文在那里
 
 436
 00:16:55,935 --> 00:16:57,101
 So this is kind of the,
+这是一种方式
 
 437
 00:16:57,103 --> 00:16:59,903
 you know, industry standard communication mechanism
+你懂的，工业标准与机制的通信
 
 438
 00:16:59,905 --> 00:17:02,739
 between developers and translators.
+在开发者和翻译者之间
 
 439
 00:17:02,741 --> 00:17:06,476
 And so Xcode localization will generate them all.
+然后 Xcode 本地化将使他们运作
 
 440
 00:17:06,478 --> 00:17:09,545
 And then your translator will use their tool, translate it,
+然后你的翻译器将使用这些工具，翻译它
 
 441
 00:17:09,547 --> 00:17:12,548
 give you an .xliff file back, and you will then,
+返回一个 .xliff 文件
 
 442
 00:17:12,550 --> 00:17:16,751
 in that same place, say Import Localizations, 'kay?
+在一个相同的位置，写着 Import Localizations
 
 443
 00:17:16,753 --> 00:17:19,153
 You can only import one .xliff at a time.
+这个时候你可以导入 .xliff 文件
 
 444
 00:17:19,155 --> 00:17:21,655
 A single .xliff can have multiple translations for
+一个 .xliff 文件可以多个译文
 
 445
 00:17:21,657 --> 00:17:24,892
 multiple languages, by the way, and your translator,
+针对多语言，顺便说一下，你的翻译器
 
 446
 00:17:24,894 --> 00:17:26,693
 if they're doing ten languages for you, they might give
+如果他们将翻译 10 种语言，他们可能
 
 447
 00:17:26,695 --> 00:17:28,595
 you one .xliff with all the languages in there.
+也就给你一个所有语言的 .xliff 文件
 
 448
 00:17:28,597 --> 00:17:30,997
 But anyway, you do import localizations, and
+不管咋样，你导入这个文件
 
 449
 00:17:30,999 --> 00:17:33,265
 it will import it into your project.
+它将导入它到你的项目里
 
 450
 00:17:33,267 --> 00:17:34,600
 And what's really cool then,
+这真的很酷
 
 451
 00:17:34,602 --> 00:17:38,036
 is if you then change some things and export again,
+如果你改变这些东西然后再次导出
 
 452
 00:17:38,038 --> 00:17:41,973
 all of their translations will get exported, so that you
+所有这些译文将被导出
 
 453
 00:17:41,975 --> 00:17:44,342
 can just keep going back and forth, import, export, import,
+你可以来回切换，导入，导出，导入
 
 454
 00:17:44,344 --> 00:17:46,911
 export, and the translators doing the opposite.
+导出，translators 可以做这些对立的事
 
 455
 00:17:46,913 --> 00:17:49,279
 They're importing what you send, they translate it,
+他们将导入你发送的，他们翻译它
 
 456
 00:17:49,281 --> 00:17:51,198
 they send it out.
+他们再发送
 
 457
 00:17:51,199 --> 00:17:53,116
 When you send something new it has all the old work they did,
+当你发送一些新的它却还有旧的工作未完成
 
 458
 00:17:53,118 --> 00:17:55,719
 becaus export keeps that.
+因为它还在做导出的事
 
 459
 00:17:55,721 --> 00:17:56,987
 Okay?
+对吧
 
 460
 00:17:56,988 --> 00:17:58,254
 So it's really super simple system.
+这是一个真的超级简单的系统
 
 461
 00:17:58,256 --> 00:18:00,907
 It's totally built for
+它完全建立在
 
 462
 00:18:00,908 --> 00:18:03,559
 that iterative process, really well designed.
+迭代过程里，一个非常好的设计
 
 463
 00:18:03,561 --> 00:18:08,129
 This is new for iOS 8, they did a great job with this.
+这是 iOS 8 的一个新特性，他们做一个非常好的工作
 
 464
 00:18:08,131 --> 00:18:09,531
 Okay? So it's just import,
+对吧，它只是导入
 
 465
 00:18:09,532 --> 00:18:10,932
 export, and that's all it takes, 'kay?
+导出，这就得到所有要的结果，对吧
 
 466
 00:18:12,068 --> 00:18:16,269
 Once you have a localization back
+一旦你返回了一个 localization
 
 467
 00:18:16,271 --> 00:18:18,638
 you can preview it in really two different places.
+你可以预览它在这两个不同的位置
 
 468
 00:18:18,640 --> 00:18:20,907
 One, you can preview it in Xcode, and
+一处是在 Xcode
 
 469
 00:18:20,909 --> 00:18:23,342
 I actually showed you this earlier in the quarter.
+我前一刻给你展示的
 
 470
 00:18:23,344 --> 00:18:27,279
 There's that little preview pane on the right and
+这里右边有预览面板
 
 471
 00:18:27,281 --> 00:18:29,815
 you can preview it, and in the lower right hand corner of
+你可以预览它，在右下角
 
 472
 00:18:29,817 --> 00:18:32,617
 the preview pane, it actually has all the languages that you
+预览处，它有你可以翻译的
 
 473
 00:18:32,619 --> 00:18:33,618
 have translations for.
+所有语言
 
 474
 00:18:33,620 --> 00:18:34,819
 You just pick it and boom,
+你只要拿起来
 
 475
 00:18:34,821 --> 00:18:36,387
 right there in Xcode it'll show you.
+它将给你演示在 Xcode 那里
 
 476
 00:18:36,389 --> 00:18:38,655
 Now that's only gonna show your static story board
+现在那里只展示静态的 storyboard
 
 477
 00:18:38,657 --> 00:18:40,357
 though, it's not showing your app running.
+它不会演示你应用运行的状况
 
 478
 00:18:40,359 --> 00:18:43,292
 You're not gonna see any of your NS localized strings
+你不能看所有 NSLocalized 的字符串
 
 479
 00:18:43,294 --> 00:18:44,627
 in there.
+在那里
 
 480
 00:18:44,628 --> 00:18:45,961
 You're only going to see the translations that were made to
+你只能看这个译文
 
 481
 00:18:45,963 --> 00:18:47,096
 something in a story board.
+由那个 storyboard 制作的译文
 
 482
 00:18:48,432 --> 00:18:50,799
 And yeah, notice there's that nice little double length
+通知那个双倍长度的
 
 483
 00:18:50,801 --> 00:18:52,551
 pseudo language.
+伪语言
 
 484
 00:18:52,552 --> 00:18:54,302
 That's a good way to make everything really long and
+这是一个好的方式去使得每一个事物真实长度和
 
 485
 00:18:54,304 --> 00:18:55,403
 make sure everything's fitting.
+确保每一件事都合适
 
 486
 00:18:55,405 --> 00:18:57,004
 Maybe there's places you're out of layout,
+可能那里有那一层外面的位置
 
 487
 00:18:57,006 --> 00:18:59,406
 you need to make more room, something like that.
+你需要更多的房间，像那些
 
 488
 00:18:59,408 --> 00:19:01,141
 So that's kind of a cool, it's not real language,
+那种酷，它不是真实的语言
 
 489
 00:19:01,143 --> 00:19:03,309
 just doubles the length of every string, but
+只是每个字符双倍长度，但是
 
 490
 00:19:03,311 --> 00:19:04,643
 it's kinda cool.
+它很酷
 
 491
 00:19:04,645 --> 00:19:08,113
 The other way, and this is mostly the way you're gonna
+另一方面，这是一种方式你将
 
 492
 00:19:08,115 --> 00:19:11,917
 test your app is you want to run it using the translations.
+测试你的应用并使用你的译文运行它
 
 493
 00:19:11,919 --> 00:19:14,285
 Now, it would be a pain in the neck,
+现在它将会是一个烦恼
 
 494
 00:19:14,287 --> 00:19:16,721
 if every time you wanted to run in Arabic
+如果每一次你想运行在阿拉伯语环境下
 
 495
 00:19:16,723 --> 00:19:19,890
 you had to go on your device or your simulator.
+你不得不继续你的设备或者你的模拟器
 
 496
 00:19:19,892 --> 00:19:23,493
 Go over here to, actually, here, let's put this up here,
+复习一下，事实上，这里，让我们把这些放这里
 
 497
 00:19:23,495 --> 00:19:24,794
 and I'll show you.
+然后我将给你演示
 
 498
 00:19:28,466 --> 00:19:29,665
 Okay, so here's my device.
+好的，这是我的设备
 
 499
 00:19:29,667 --> 00:19:32,634
 So if I had to go to Settings and go to,
+如果我进入设置然后继续
 
 500
 00:19:32,636 --> 00:19:35,437
 I think it's under General.
+我想它在通常情况下
 
 501
 00:19:35,439 --> 00:19:39,140
 And then go to, where is it.
+然后继续，这里
 
 502
 00:19:39,142 --> 00:19:40,274
 Language and region.
+语言和地区
 
 503
 00:19:40,276 --> 00:19:43,010
 And then go over here to my iPhone language,
+找一下我们的 iPhone language
 
 504
 00:19:43,012 --> 00:19:44,611
 go find Arabic in here.
+找到阿拉伯语
 
 505
 00:19:44,613 --> 00:19:47,146
 If had to do that for all of the ten languages,
+如果对所有十种语言做这些
 
 506
 00:19:47,148 --> 00:19:50,116
 I would just be going crazy doing that.
+我将继续疯狂地做
 
 507
 00:19:50,118 --> 00:19:52,351
 So luckily, you don't have to do any of that.
+幸运的是，你不得不做这些
 
 508
 00:19:52,353 --> 00:19:54,920
 All you have to do is create a scheme.
+所有你创建 scheme
 
 509
 00:19:54,922 --> 00:19:56,688
 'Kay? A run scheme for
+对不对，运行的 scheme
 
 510
 00:19:56,690 --> 00:19:58,923
 your app that sets the language.
+给你的应用设置语言
 
 511
 00:19:58,925 --> 00:20:00,558
 So the way you create a scheme.
+你创建 scheme 的方式
 
 512
 00:20:00,560 --> 00:20:04,028
 In the upper left hand corner of Xcode where you click run.
+在 Xcode 的左下角，你点击运行的位置
 
 513
 00:20:04,030 --> 00:20:07,397
 Right now you only ever see it say the name of your app.
+现在你只看到你应用的名称
 
 514
 00:20:07,399 --> 00:20:09,833
 But you can actually hold down on that, and
+但是你事实上可以保有这些
 
 515
 00:20:09,835 --> 00:20:12,735
 there'll be a little menu, and you can say edit scheme.
+这里有一些菜单，你可以编辑 scheme
 
 516
 00:20:12,737 --> 00:20:15,671
 And edit scheme will bring up this thing that you see there,
+编辑 scheme 将带给你这些你可以看到的这些
 
 517
 00:20:15,673 --> 00:20:19,842
 the big window, and it's going to say what are the settings
+这个大窗口,它将显示这些设置
 
 518
 00:20:19,844 --> 00:20:22,978
 you want when you build, when you run, when you test, when
+你想的当你创建，当你运行，当你测试，当
 
 519
 00:20:22,980 --> 00:20:27,348
 you profile this app, when you're stack analyzing, etc.
+你描述这些应用，当你分析它们等
 
 520
 00:20:27,350 --> 00:20:29,116
 And in the build, in the run section,
+在这个建设里，在这个运行状态
 
 521
 00:20:29,118 --> 00:20:31,752
 there you can see that there's application language and
+你可以看这些应用语言
 
 522
 00:20:31,754 --> 00:20:34,905
 application regions.
+应用地区
 
 523
 00:20:34,906 --> 00:20:38,057
 So you can set those to French or maybe Spanish and Mexico,
+因此你可以设置，这些法语或者可能西班牙与和墨西哥语
 
 524
 00:20:38,060 --> 00:20:40,360
 if you wanted a locale.
+如果你想本地化
 
 525
 00:20:40,362 --> 00:20:43,596
 And then, it will make a new entry, okay?
+然后你可以创建一个新的条目，对不对
 
 526
 00:20:43,598 --> 00:20:45,998
 Sorry, first of all, you duplicate an existing scheme.
+对不起，首先，你可以复制这些存在的 scheme
 
 527
 00:20:46,000 --> 00:20:46,999
 You see that, lower left?
+你看这些，左下那里
 
 528
 00:20:47,001 --> 00:20:49,034
 Duplicate an existing scheme.
+复制一个存在的 scheme
 
 529
 00:20:49,036 --> 00:20:51,069
 Then you set all these things, and save it, and
+然后你设置所有的这些，保存它
 
 530
 00:20:51,071 --> 00:20:52,536
 now you have two schemes.
+现在你可以有两个 scheme
 
 531
 00:20:52,538 --> 00:20:54,972
 The original one, that doesn't have a language set, and
+这个原始的，不能有语言设置
 
 532
 00:20:54,974 --> 00:20:56,173
 the duplicated one.
+还有一个复制的
 
 533
 00:20:56,175 --> 00:20:57,874
 'Kay, that you've set the language in.
+好的，你设置这个语言
 
 534
 00:20:57,876 --> 00:20:59,876
 Now if you wanna run in that other language,
+现在如果你想运行其他语言
 
 535
 00:20:59,878 --> 00:21:04,546
 like French, you just hit that pop-up, pick French, hit run.
+像法语，你只要点击 pop-up，点击法语，点击运行
 
 536
 00:21:04,548 --> 00:21:06,314
 Okay? And it's gonna run using that
+对不对，它将运行
 
 537
 00:21:06,316 --> 00:21:08,550
 language and locale.
+语言和本地化
 
 538
 00:21:08,552 --> 00:21:10,318
 It's really cool, fast way.
+它很酷，很快
 
 539
 00:21:10,320 --> 00:21:12,553
 You can check ten languages really quick.
+你可以检查十种语言
 
 540
 00:21:12,555 --> 00:21:15,022
 You add in a new feature or a new translation came back,
+你添加一个新的特性或者返回新的译文
 
 541
 00:21:15,024 --> 00:21:18,091
 you just click run, check it out, okay.
+你可以点击运行，检查它，对不对
 
 542
 00:21:18,093 --> 00:21:19,159
 Click run.
+点击运行
 
 543
 00:21:19,161 --> 00:21:20,927
 Checking out, back and forth, okay?
+来回检查，对吧
 
 544
 00:21:21,963 --> 00:21:25,697
 So that's how you preview a localization at runtime, 'kay?
+那是运行时你怎样预览一个本地化方式，对不对
 
 545
 00:21:25,699 --> 00:21:29,834
 And I'll show that in a demo.
+我将演示一个 Demo
 
 546
 00:21:29,836 --> 00:21:32,537
 There's also this little localization debugging switch
+那个也是一点本地化测试
 
 547
 00:21:32,539 --> 00:21:34,171
 you see in there, and
+你在那看到的
 
 548
 00:21:34,173 --> 00:21:35,739
 that's going to do a couple of things.
+那里有一对东西
 
 549
 00:21:35,741 --> 00:21:38,709
 One thing is on localize strings from your story boards
+一个是从你的 storyboard 取的本地化字符串
 
 550
 00:21:38,711 --> 00:21:42,945
 will show up in all caps in your UI, so that's nice.
+显示在你的用户界面上，非常好
 
 551
 00:21:42,947 --> 00:21:45,781
 Also things that were not localized,
+这个他们没有本地化
 
 552
 00:21:45,783 --> 00:21:48,283
 will spit something out on the console,
+将在控制台吐出一些东西
 
 553
 00:21:48,285 --> 00:21:49,985
 saying this string on localized, okay?
+表示这是本地化数据，对不对
 
 554
 00:21:51,021 --> 00:21:52,820
 So when you're getting something back from
+因此当你得到一些什么
 
 555
 00:21:52,822 --> 00:21:55,122
 the localizer you wanna make sure they didn't make any
+本地化你要确保他们没有
 
 556
 00:21:55,124 --> 00:21:57,825
 mistakes, although the import is gonna find mistakes,
+错误，虽然导入将会找到错误
 
 557
 00:21:57,827 --> 00:21:59,292
 I'll show you that too in the demo.
+我将再次给你演示
 
 558
 00:21:59,294 --> 00:22:01,895
 But if there's something else in there, you'll be able to
+但是如果那里有一些其他的，你将
 
 559
 00:22:01,897 --> 00:22:06,899
 see it with this localization debugging on, 'kay?
+看到本地化调试，对不对
 
 560
 00:22:06,901 --> 00:22:08,667
 And that's it, 'kay?
+就这样，对不对
 
 561
 00:22:08,669 --> 00:22:12,971
 So all you gotta do is autolayout, get your localized
+所有你做的都是用自动布局，得到你的
 
 562
 00:22:12,973 --> 00:22:16,207
 strings in there, use formatters properly, and
+本地化字符串，使用适当美化
 
 563
 00:22:16,209 --> 00:22:17,441
 you'll be internationalizeable.
+你就做到国际化的
 
 564
 00:22:17,443 --> 00:22:19,910
 And then it's just question, go hire your localizer.
+还有一个问题，你要有个好的翻译工具
 
 565
 00:22:21,080 --> 00:22:23,646
 Back and forth with the .xliffs, all right?
+来回切换 .xliffs 文件，对不对
 
 566
 00:22:23,648 --> 00:22:25,548
 So let me show you what this looks like.
+让我给你演示一下是怎样的
 
 567
 00:22:28,720 --> 00:22:33,789
 Here, we're going to localize autolayout, okay?
+这里，我们定位自动布局，对不对
 
 568
 00:22:33,791 --> 00:22:37,092
 Do you remember this app back when we were doing autolayout,
+记住这个应用在你做自动布局时返回什么
 
 569
 00:22:37,094 --> 00:22:38,659
 looks like this?
+像这些
 
 570
 00:22:38,661 --> 00:22:41,862
 So we're going to localize this to a number of different
+我们将定位这一系列不同的
 
 571
 00:22:41,864 --> 00:22:42,896
 languages.
+语言
 
 572
 00:22:42,898 --> 00:22:44,931
 And I added one feature to this, actually,
+然后我将添加一些特性到这里去
 
 573
 00:22:44,933 --> 00:22:47,434
 which is this little guy right here Last Login.
+就是这小家伙最后登录的位置
 
 574
 00:22:47,436 --> 00:22:50,303
 So I just made it when you log in it puts a last log in
+放最后登录的日期
 
 575
 00:22:50,305 --> 00:22:51,888
 date in here,
+在这里
 
 576
 00:22:51,889 --> 00:22:53,472
 because it's gonna let us talk about date formatters and
+因为我们将讨论这个 date formatter
 
 577
 00:22:53,474 --> 00:22:57,576
 number formatters, things like that, in here.
+number formatter 的问题，就像这样
 
 578
 00:22:57,578 --> 00:23:01,279
 But otherwise it works exactly the same as it always is.
+但是另外它像它之前运作的方式运作
 
 579
 00:23:01,281 --> 00:23:03,148
 We type the username and password, we hit log in,
+我们输入用户名和密码，我们点击登录
 
 580
 00:23:03,150 --> 00:23:04,549
 we can do change security and
+我们可以改变安全性
 
 581
 00:23:04,551 --> 00:23:07,151
 it'll change this word right here.
+它会在这更改一些词
 
 582
 00:23:07,153 --> 00:23:09,019
 And that's it.
+就酱
 
 583
 00:23:09,021 --> 00:23:13,423
 So, what do we need to do
+所以，这就是我们所需要的
 
 584
 00:23:13,425 --> 00:23:15,491
 if we want to make this localizable?
+如果我们想要这个本地化
 
 585
 00:23:15,493 --> 00:23:16,926
 Well the first thing we wanna do
+首先我们就要做
 
 586
 00:23:16,928 --> 00:23:19,294
 is go up to our project up here.
+去到我们项目的这个地方
 
 587
 00:23:19,296 --> 00:23:21,163
 And again, you want to be careful here
+然后，你将会关心这个地方
 
 588
 00:23:21,165 --> 00:23:22,630
 not to have the target selected,
+不是这里的 target 选项
 
 589
 00:23:22,632 --> 00:23:24,866
 you actually want the project selected, okay.
+你想是这个 project 的选项，对吧
 
 590
 00:23:24,868 --> 00:23:26,701
 Target, project.
+Target，project
 
 591
 00:23:26,703 --> 00:23:29,370
 In the project selection you're gonna have info and
+项目的选项里，你将有 info
 
 592
 00:23:29,372 --> 00:23:31,104
 build settings.
+和 build settings
 
 593
 00:23:31,106 --> 00:23:33,740
 And, so let's create some localizations,
+让我们创建本地化吧
 
 594
 00:23:33,742 --> 00:23:35,108
 you see it down here localizations?
+你会看到下边这个 localizations
 
 595
 00:23:35,110 --> 00:23:37,476
 We don't have any currently, it just says English.
+我们没有任何当前的语言，它只有英语
 
 596
 00:23:37,478 --> 00:23:39,411
 So I'm gonna create some, you know, let's do French.
+我将创建一些，你知道的，让我们先用法语
 
 597
 00:23:39,413 --> 00:23:41,029
 That's a good one.
+这个语言挺好
 
 598
 00:23:41,030 --> 00:23:42,646
 And it's saying here, what do you wanna make localizable?
+在这里选择，你有什么想做本地化
 
 599
 00:23:42,649 --> 00:23:45,650
 And, yes, my storyboard, and also that launch screen, which
+对的，我的 storyboard，还有这个启动画面
 
 600
 00:23:45,652 --> 00:23:48,052
 we really haven't [LAUGH] talked about in this class.
+我们还没有在我们课堂上讨论这个呢
 
 601
 00:23:48,054 --> 00:23:49,286
 The launch screen, by the way,
+启动画面，顺便说一下
 
 602
 00:23:49,288 --> 00:23:51,855
 is just this thing that pops up briefly while your app is
+你的应用启动将要运行时
 
 603
 00:23:51,857 --> 00:23:52,756
 getting up and running.
+短暂显示的东西
 
 604
 00:23:52,758 --> 00:23:54,374
 You've probably seen that.
+你可能会看到这些
 
 605
 00:23:54,375 --> 00:23:55,991
 You can edit it and create, put an image there or
+你编辑它创建它，放一张图片在这里
 
 606
 00:23:55,994 --> 00:23:57,260
 something like that.
+或者其他等
 
 607
 00:23:57,262 --> 00:23:59,895
 But that's something you might wanna be localize both,
+但是有些是你将本地化的
 
 608
 00:23:59,897 --> 00:24:01,296
 it has text or something on it.
+它有文本或者其他的东西
 
 609
 00:24:01,298 --> 00:24:02,931
 So we gonna leave that.
+我们将离开这里
 
 610
 00:24:02,933 --> 00:24:03,898
 So there's French.
+这是法语
 
 611
 00:24:03,900 --> 00:24:07,635
 Let's do, yeah let's do Chinese.
+好的，让我们试一下中文
 
 612
 00:24:07,637 --> 00:24:09,737
 Let's do traditional also.
+试一下这个繁体中文
 
 613
 00:24:09,739 --> 00:24:13,407
 Let's do, I don't know.
+试一下，我不知道
 
 614
 00:24:13,409 --> 00:24:19,278
 How about something Arabic, how about is a good one.
+试一下阿拉伯语，试一下其他的怎么样
 
 615
 00:24:20,281 --> 00:24:22,247
 How about Japanese?
+日语如何
 
 616
 00:24:22,249 --> 00:24:23,482
 Yeah, there's Japanese.
+好的就日语吧
 
 617
 00:24:23,484 --> 00:24:27,185
 So I'm adding a bunch of languages here, and
+我将添加一系列语言在这里
 
 618
 00:24:28,254 --> 00:24:32,556
 when I now go here to this Editor menu and
+当你到这里去编辑菜单
 
 619
 00:24:32,558 --> 00:24:35,091
 say Export For Localization.
+导出本地化信息
 
 620
 00:24:35,093 --> 00:24:37,393
 It's gonna say, where do you wanna put them?
+怎么说，你想要放他们到哪里
 
 621
 00:24:37,395 --> 00:24:43,132
 I have a directory here called my L10N, my localization one.
+我有一个目录叫做 L10N, 我有一个在这
 
 622
 00:24:43,134 --> 00:24:45,934
 And, I have this folder called To Localizer.
+我有一个文件夹叫做 Localizer
 
 623
 00:24:45,936 --> 00:24:48,936
 I don't have anything in there right now.
+我现在那里什么都没有
 
 624
 00:24:50,273 --> 00:24:52,306
 We're gonna put our auto layout stuff in here.
+我们将放我们的自动布局的材料在这里
 
 625
 00:24:52,308 --> 00:24:54,374
 Here, you see, it's asking what languages you wanna
+这里，你看到的，你想要放的
 
 626
 00:24:54,376 --> 00:24:56,276
 generate these .xliffs for.
+.xliffs 的语言在这里
 
 627
 00:24:56,278 --> 00:24:57,477
 So I'm going to hit save.
+我要点击保存了
 
 628
 00:24:57,479 --> 00:24:59,412
 And it's going to generate .xliffs,
+然后它生成 .xliffs 文件
 
 629
 00:24:59,414 --> 00:25:02,214
 which we're going to go look at for all of these things.
+这个是我们将要查看的所有的这些信息的文件
 
 630
 00:25:02,216 --> 00:25:03,565
 Okay? So
+对不对
 
 631
 00:25:03,566 --> 00:25:04,915
 here's all the files that are going to my localizer.
+这里的所有的文件都要放到我的本地化工具那里
 
 632
 00:25:04,918 --> 00:25:07,118
 I'm going to send these to my localizer so
+我将发送这些到我的 localizer 那
 
 633
 00:25:07,120 --> 00:25:08,269
 let's look at one.
+让我们看一下这一个
 
 634
 00:25:08,270 --> 00:25:09,419
 It really doesn't matter because nothing's been
+没问题，因为还没有东西
 
 635
 00:25:09,422 --> 00:25:10,588
 localized yet.
+被本地化
 
 636
 00:25:10,590 --> 00:25:12,190
 But here we go,
+但是现在我们要开始做了
 
 637
 00:25:12,191 --> 00:25:13,791
 see storyboard, here's all this strings.
+看 storyboard，这里所有的字符串
 
 638
 00:25:13,793 --> 00:25:15,058
 You recognize these strings?
+你认识这些字符串
 
 639
 00:25:15,060 --> 00:25:19,062
 Company, last log in, the log in button, user name.
+公司，最后的登录，登录按键，用户名
 
 640
 00:25:19,064 --> 00:25:21,864
 Name, password, the change security button.
+名称，密码，修改安全信息按键
 
 641
 00:25:21,866 --> 00:25:24,366
 Those are all the strings that it extracted
+这些都是它提取的字符串
 
 642
 00:25:24,368 --> 00:25:26,268
 from the storyboard.
+从 storyboard 那里提取的
 
 643
 00:25:26,270 --> 00:25:31,305
 I send these off to my localizer,
+我发送这些到我的本地化工具那
 
 644
 00:25:31,307 --> 00:25:35,342
 and they go work on them, and then we get some back.
+然后他们一起运作，然后给我们返回信息
 
 645
 00:25:35,344 --> 00:25:37,261
 So, okay.
+好的
 
 646
 00:25:37,262 --> 00:25:39,179
 Look, they just came back from the localizer, here they are.
+看，他们只是从 localizer 里返回信息，在这里
 
 647
 00:25:39,181 --> 00:25:42,849
 So let's go ahead and take a look at the Japanese one.
+让我们继续，看一下日语是咋样的
 
 648
 00:25:42,851 --> 00:25:44,751
 So here's the Japanese one right here,
+这里是日语
 
 649
 00:25:44,753 --> 00:25:46,819
 what does this look like?
+他们看起来像什么
 
 650
 00:25:46,821 --> 00:25:51,056
 So the localizer has put localizations for
+localizer 把每一个本地化的
 
 651
 00:25:51,058 --> 00:25:53,491
 each of these things into this X-look.
+这些东西变成这样子
 
 652
 00:25:53,493 --> 00:25:56,227
 Now they didn't edit it here in text edit [LAUGH],
+现在他们不能在文本编辑框编辑它
 
 653
 00:25:56,229 --> 00:25:59,397
 they have a tool that lets them do that.
+有一个工具可以编辑
 
 654
 00:25:59,399 --> 00:26:01,231
 And so let's go ahead and import that.
+让我们做下一步，导入这些
 
 655
 00:26:01,233 --> 00:26:02,416
 So we go here, and
+到这里
 
 656
 00:26:02,417 --> 00:26:03,600
 we're going to import this localization for
+我们将从本地化工具这导入
 
 657
 00:26:03,602 --> 00:26:07,236
 Japanese from the localizer.
+关于日语的本地化
 
 658
 00:26:07,238 --> 00:26:08,304
 Japanese.
+日语
 
 659
 00:26:08,306 --> 00:26:08,904
 Okay.
+好的
 
 660
 00:26:08,906 --> 00:26:10,238
 Oh, there's a problem.
+有个问题
 
 661
 00:26:10,240 --> 00:26:13,208
 Okay, now if there's no problem, this just loads up.
+好的，没有这个问题，这只是加载中
 
 662
 00:26:13,210 --> 00:26:14,342
 And you're good to go.
+你会擅长做这些
 
 663
 00:26:14,344 --> 00:26:16,110
 But here there's a problem.
+但是这里还是有问题
 
 664
 00:26:16,111 --> 00:26:17,877
 And when there's a problem it shows you in detail
+当这个问题给你显示这个细节
 
 665
 00:26:17,880 --> 00:26:19,046
 what the problems are.
+这个问题是什么
 
 666
 00:26:19,048 --> 00:26:23,049
 So here it says there's incoming translation for
+这里有一个引进的翻译
 
 667
 00:26:23,051 --> 00:26:26,152
 one of the things in IB that was not done.
+在 IB 这里的还没完成的
 
 668
 00:26:26,154 --> 00:26:27,987
 And you can see it right here, no translation.
+你可以在这看到这些，没有翻译
 
 669
 00:26:27,989 --> 00:26:30,255
 So they didn't translate the word company.
+他们不想翻译这个词 company
 
 670
 00:26:30,257 --> 00:26:33,692
 Now luckily, company never actually appears in our UI.
+幸运的是，company 不会显示在我们的用户界面上
 
 671
 00:26:33,694 --> 00:26:35,493
 That's just like the little thing like where you know,
+这就像小东西一个，你知道的
 
 672
 00:26:35,495 --> 00:26:36,627
 Madison Bumgarner, and
+Madison Bumgarner
+
 
 673
 00:26:36,629 --> 00:26:38,562
 it was were old champion San Fransisco Giants.
+它是旧金山巨人队的老冠军
 
 674
 00:26:38,564 --> 00:26:40,664
 So company always gets replaced with whatever
+公司经常被其他用户的公司
 
 675
 00:26:40,666 --> 00:26:41,965
 the logged in user's company is.
+替代
 
 676
 00:26:41,967 --> 00:26:43,633
 So, whew, we're okay.
+好的
 
 677
 00:26:43,635 --> 00:26:46,436
 But you can see it's showing all the other translations.
+你可以看到所有其他的翻译
 
 678
 00:26:46,438 --> 00:26:47,370
 And those look good, right?
+这些看起来很好，对不对
 
 679
 00:26:47,372 --> 00:26:49,271
 So this one, this one, this one.
+这一个，这一个和这一个
 
 680
 00:26:49,273 --> 00:26:50,605
 It's showing the translations.
+它展现这些翻译
 
 681
 00:26:50,607 --> 00:26:54,376
 So this will only appear if you've got something where
+这个将出现一下如果你得到一个位置
 
 682
 00:26:54,378 --> 00:26:57,945
 your translation company failed in their translation.
+你翻译公司翻译出错的地方
 
 683
 00:26:57,947 --> 00:26:59,564
 In this case, it's okay.
+在这种情况下，好的
 
 684
 00:26:59,565 --> 00:27:01,182
 So I'm gonna accept this and import it.
+我将接受这个设定然后导入它
 
 685
 00:27:01,184 --> 00:27:02,416
 Okay?
+对不对
 
 686
 00:27:02,417 --> 00:27:03,649
 Now I can actually go to my storyboard here and
+现在我可以去到我的 storyboard
 
 687
 00:27:03,652 --> 00:27:06,987
 without even running my app I can make a second
+不用运行我的应用，我可以创建第二个
 
 688
 00:27:06,989 --> 00:27:09,556
 window here and go down to Preview.
+窗口然后预览一下
 
 689
 00:27:09,558 --> 00:27:11,457
 So let's preview what our main storyboard's going to
+让我们预览我们主要的 storyboard
 
 690
 00:27:11,459 --> 00:27:12,725
 look like.
+看它会是咋样
 
 691
 00:27:12,727 --> 00:27:14,493
 Of course, our S is cut off because,
+当然，我们的 S 被切开
 
 692
 00:27:14,495 --> 00:27:17,429
 if you'll remember from auto layout demo,
+如果你记得自动布局那个 Demo
 
 693
 00:27:17,431 --> 00:27:19,798
 we put that in code.
+我们把那部分代码放到这了
 
 694
 00:27:19,800 --> 00:27:21,616
 We put a constraint for
+我们添加这些约束
 
 695
 00:27:21,617 --> 00:27:23,433
 the aspect ratio so that's in code so that's not here.
+长宽比，这个代码里没有的
 
 696
 00:27:24,370 --> 00:27:27,638
 So here's what it looks like in English, right down here.
+这个在英语里看起来像什么
 
 697
 00:27:27,640 --> 00:27:29,240
 If I go up here and say,
+如果我们到这里
 
 698
 00:27:29,241 --> 00:27:30,841
 well tell me what this looks like in Japanese,
+好的告诉我在日语里它像什么
 
 699
 00:27:30,843 --> 00:27:35,445
 then it will use those translations for Japanese.
+当日语环境下时它会用这些翻译
 
 700
 00:27:35,447 --> 00:27:37,246
 Now notice company is in all caps,
+现在注意这个全部大写的公司
 
 701
 00:27:37,248 --> 00:27:39,448
 that's because that was not translated.
+因为它没有被翻译
 
 702
 00:27:39,450 --> 00:27:43,385
 Notice that they translated the word name to be the same.
+注意他们翻译的词
 
 703
 00:27:43,387 --> 00:27:44,919
 If we look at the Japanese translation,
+如果我们看这个日语翻译
 
 704
 00:27:44,921 --> 00:27:49,289
 and we look at what they did for name, which is right here.
+我们看这个他们对名称所做的位置
 
 705
 00:27:49,291 --> 00:27:52,192
 They said, oh well, there's just no word in Japanese for
+他们说，好的，这个只是日语没这个词
 
 706
 00:27:52,194 --> 00:27:53,693
 that part of the UI so
+在我们的用户界面这部分
 
 707
 00:27:53,695 --> 00:27:55,628
 we're just going to leave it in English.
+我们只要在英语环境下保留
 
 708
 00:27:55,630 --> 00:27:56,929
 Okay? They have that
+对不对，他们有
 
 709
 00:27:56,931 --> 00:27:58,264
 option to do that.
+选择这么做
 
 710
 00:27:58,265 --> 00:27:59,598
 But you might say, I don't want that and so
+但是你可以说，我不想这样
 
 711
 00:27:59,600 --> 00:28:01,299
 you can easily see that here.
+你可以很容易看到这里
 
 712
 00:28:01,301 --> 00:28:03,702
 Especially with a language like Japanese.
+尤其是像日语这种语言
 
 713
 00:28:03,704 --> 00:28:06,404
 Versus some western script language like English,
+对比西方的一些语言比如说英语
 
 714
 00:28:06,406 --> 00:28:07,972
 you can see quickly, oh, whoa, whoops.
+你可以很快地看，哦，哇哦
 
 715
 00:28:07,974 --> 00:28:09,039
 It's not there.
+它不存在
 
 716
 00:28:09,041 --> 00:28:10,474
 Okay. So that's great.
+好的，挺好
 
 717
 00:28:10,476 --> 00:28:12,175
 And if we run our app,
+如果我们运行我们的应用
 
 718
 00:28:12,177 --> 00:28:13,810
 we could run it in Japanese as well.
+我们也可以在日语环境下运行
 
 719
 00:28:13,812 --> 00:28:14,961
 And so let's do that.
+让我们试一下这样
 
 720
 00:28:14,962 --> 00:28:16,111
 Let's do this edit scheme thing.
+让我们编辑一下 scheme
 
 721
 00:28:16,114 --> 00:28:18,981
 So you see, I'm just taking this thing up here that
+你看，我们只是正常地把这个东西放这
 
 722
 00:28:18,983 --> 00:28:20,482
 normally is always saying autolayout.
+然后自动布局
 
 723
 00:28:20,484 --> 00:28:22,350
 And I'm gonna say Edit Scheme.
+然后编辑 scheme
 
 724
 00:28:22,352 --> 00:28:24,619
 And when I edit its scheme, I can edit scheme for
+当我们编辑这个 scheme，我可以编辑
 
 725
 00:28:24,621 --> 00:28:26,387
 lots of different things, building, et cetera.
+很多不同的东西，building 或者其他
 
 726
 00:28:26,389 --> 00:28:27,788
 But I want it for running.
+但是我想它运行
 
 727
 00:28:27,790 --> 00:28:29,322
 I wanna edit the scheme for running.
+我想编辑这个运行的 scheme
 
 728
 00:28:29,324 --> 00:28:32,025
 And I'm gonna duplicate this scheme, okay, and
+我将先复制这个 scheme，好的
 
 729
 00:28:32,027 --> 00:28:36,228
 I'm gonna call this my Japanese scheme right here.
+我将写我的日语 scheme 在这里
 
 730
 00:28:36,230 --> 00:28:40,232
 And I'm gonna change the Japanese scheme so that.
+我将改变这个日语的 scheme
 
 731
 00:28:40,234 --> 00:28:42,000
 It is Japanese.
+日语
 
 732
 00:28:42,002 --> 00:28:44,135
 And it's, Japan here.
+Japan 在这
 
 733
 00:28:44,137 --> 00:28:46,504
 But if we, if it wasn't there,
+但是如果我们，如果它不在那
 
 734
 00:28:46,506 --> 00:28:47,671
 we could go look for it up here.
+我们可以去这边看看
 
 735
 00:28:47,673 --> 00:28:49,506
 But here's Japanese.
+但是这里是日语
 
 736
 00:28:49,508 --> 00:28:52,208
 And so now this is my locale.
+现在这算我的场景
 
 737
 00:28:52,210 --> 00:28:54,877
 And this is my language, okay?
+这是我的语言，对不对
 
 738
 00:28:54,879 --> 00:28:56,612
 So now, if I ever wanna run in Japanese,
+现在，如果我们想在日语环境下运行
 
 739
 00:28:56,614 --> 00:28:57,946
 now that I have this scheme,
+现在我有这个 scheme
 
 740
 00:28:57,948 --> 00:28:59,715
 you see that I have two schemes now.
+你看我现在有两个
 
 741
 00:28:59,717 --> 00:29:02,817
 Now that I have this Japanese scheme, I can just hit Run
+现在我有日语的 scheme，我可以点击运行
 
 742
 00:29:02,819 --> 00:29:05,953
 with this scheme selected and it's gonna run in Japanese.
+选择 scheme，它将用日语运行
 
 743
 00:29:05,955 --> 00:29:11,125
 Let's go ahead and make this smaller.
+让我们做下一步，让它变小
 
 744
 00:29:11,127 --> 00:29:11,925
 Even smaller.
+更小
 
 745
 00:29:11,927 --> 00:29:12,792
 Okay.
+好的
 
 746
 00:29:12,794 --> 00:29:14,827
 So here's our app in Japanese.
+这是我们的应用运行在日语环境下
 
 747
 00:29:14,829 --> 00:29:17,963
 And maybe we type, oh, and so I'm trying to start to type.
+我们输入，哦，我将尝试开始输入
 
 748
 00:29:17,965 --> 00:29:19,865
 Notice that in my locale it's even bringing up
+注意我的场景
 
 749
 00:29:19,867 --> 00:29:21,066
 a Japanese keyboard.
+操作这个日语键盘
 
 750
 00:29:21,068 --> 00:29:24,336
 I believe I can get an English keyboard here somehow.
+我相信我可以用一个英语键盘
 
 751
 00:29:24,338 --> 00:29:26,170
 There we go.
+来接下来
 
 752
 00:29:26,172 --> 00:29:30,808
 So, let's go madbomb and log in.
+madbomb 然后登录
 
 753
 00:29:30,810 --> 00:29:32,676
 Here it is.
+这里
 
 754
 00:29:32,677 --> 00:29:34,543
 Notice this is not translated at all.
+注意这里没有全部被翻译
 
 755
 00:29:34,546 --> 00:29:36,846
 Notice this is not translated.
+没有被翻译
 
 756
 00:29:36,848 --> 00:29:39,315
 Okay because we put those in our code.
+好的因为我们放这些到我们的代码里
 
 757
 00:29:39,317 --> 00:29:42,218
 Those are not in our storyboard anyway.
+这些没有在我们的 storyboard 里
 
 758
 00:29:42,220 --> 00:29:45,020
 So we're part of the ways down making this
+用这个方式去
 
 759
 00:29:45,022 --> 00:29:45,887
 internationalizeable.
+国际化
 
 760
 00:29:45,889 --> 00:29:47,689
 We've got our storyboard.
+得到我们的 storyboard
 
 761
 00:29:47,691 --> 00:29:51,225
 So let's take the next step which is those strings,
+让哦我们做下一步工作关于这些字符串的
 
 762
 00:29:51,227 --> 00:29:54,595
 like the passwords, secure password and oh,
+比如密码、安全密码等
 
 763
 00:29:54,597 --> 00:29:57,631
 I added one other feature to this app I'll show you.
+我添加一个其他的特性到这个应用里，我会给你们演示的
 
 764
 00:29:59,034 --> 00:30:00,299
 Try and just make this wide cuz it makes it
+试着让这些广泛的因为这个使
 
 765
 00:30:00,301 --> 00:30:01,567
 a little bigger for you.
+它更大
 
 766
 00:30:01,569 --> 00:30:03,369
 It's this. Is if you type a bad user name
+这个。如果你输入一个错误的用户名
 
 767
 00:30:03,371 --> 00:30:06,071
 and password, it says, Login Error Invalid user name or
+和密码，它会说，登录错误无效的用户名或
 
 768
 00:30:06,073 --> 00:30:07,272
 password Try Again.
+密码请重试
 
 769
 00:30:07,274 --> 00:30:11,208
 So this also needs to be localized to Japanese.
+这个也需要本地化为日语
 
 770
 00:30:11,210 --> 00:30:12,693
 Okay? So
+对不对
 
 771
 00:30:12,694 --> 00:30:14,177
 we got some strings here to work on, so
+我们得到一下字符串去进行下一步
 
 772
 00:30:14,180 --> 00:30:16,913
 let's go work on this string and that alert string.
+让我们用这些字符和警告信息
 
 773
 00:30:18,183 --> 00:30:21,217
 You haven't seen this code in a while but
+你没有看到这些代码一段时间了但是
 
 774
 00:30:21,219 --> 00:30:22,985
 here's what it looks like.
+这就是它所示的那样
 
 775
 00:30:22,987 --> 00:30:25,520
 I'll show you all of the code I added, very simple.
+我会给你们显示所有的我添加的代码，非常简单
+
 
 776
 00:30:25,522 --> 00:30:29,957
 I just added this which is doing that last log in thing
+我只是添加这些，这些最后登录的
 
 777
 00:30:29,959 --> 00:30:32,093
 and I added this.
+我添加的
 
 778
 00:30:32,095 --> 00:30:33,961
 If the logged in user couldn't be found
+如果登录用户找不到
 
 779
 00:30:33,963 --> 00:30:35,629
 then I'm gonna put up an alert.
+我就会放一个警告
 
 780
 00:30:35,631 --> 00:30:36,396
 Okay. Now that you know what
+好的，现在你知道的
 
 781
 00:30:36,398 --> 00:30:37,614
 alerts are.
+会有警告
 
 782
 00:30:37,615 --> 00:30:38,831
 You didn't know what alerts were at the time that
+你不知道这个时候警告是怎样的
 
 783
 00:30:38,833 --> 00:30:40,032
 we wrote this, so I can put it in.
+我们写的，我放在那的
 
 784
 00:30:40,034 --> 00:30:42,167
 But, now, you certainly do.
+但是，现在你可以知道
 
 785
 00:30:42,169 --> 00:30:44,119
 Okay?
+对不对
 
 786
 00:30:44,120 --> 00:30:46,070
 And then, here's where we do that secured password thing.
+然后，这里是我们操作安全密码的位置
 
 787
 00:30:46,073 --> 00:30:48,540
 This has not changed, from our last demo.
+这么没变，和之前的 Demo 一样
 
 788
 00:30:48,542 --> 00:30:49,941
 So let's fix this one first.
+让我们修复这个先
 
 789
 00:30:49,943 --> 00:30:51,108
 This is a pretty simple thing.
+这算一个很简单的东西
 
 790
 00:30:51,110 --> 00:30:52,910
 We got these two literal strings here, and
+我们得到两个字面上的字符串
 
 791
 00:30:52,912 --> 00:30:54,678
 we need them to be localizable.
+我们需要他们本地化
 
 792
 00:30:54,680 --> 00:30:58,848
 So I'm just going to create a little local here,
+因此我将创建一个小的本地化的
 
 793
 00:30:58,850 --> 00:31:02,851
 which I'm going to use NS localized string for, and
+我将用 NSLocalizedString 方法
 
 794
 00:31:02,853 --> 00:31:05,153
 you can see here's that long version of it.
+你可以看到这里一个长的译文
 
 795
 00:31:05,155 --> 00:31:07,489
 And first let's do password.
+首先让我们开始做密码的翻译
 
 796
 00:31:07,491 --> 00:31:09,857
 So I'm just going to take my literal string and
+我将把这个字面上的字符
 
 797
 00:31:09,859 --> 00:31:11,425
 plop it right in here.
+放那
 
 798
 00:31:11,427 --> 00:31:14,261
 I don't need the table or bundle or value.
+我不需要表格或者 bundle 或者值
 
 799
 00:31:14,263 --> 00:31:16,413
 Okay?
+对不对
 
 800
 00:31:16,414 --> 00:31:18,564
 And this is going to be a comment to the localizer, this
+这个将是翻译器的 comment
 
 801
 00:31:18,567 --> 00:31:23,503
 is something like, this is a prompt for the users password
+像这样，prompt for the users password
 
 802
 00:31:25,073 --> 00:31:29,274
 when it is not secure i.e.
+when it is not secure (i.e.
 
 803
 00:31:29,276 --> 00:31:31,676
 plain text.
+plain text)
 
 804
 00:31:31,678 --> 00:31:34,512
 Okay, so I'm trying to give the localizer as much
+好的，现在我将尝试给一个本地化的内容
 
 805
 00:31:35,748 --> 00:31:36,980
 context there, as I can.
+在这里，正如我可以的
 
 806
 00:31:36,982 --> 00:31:39,549
 May, I might even put a much longer comment, there.
+可能我会放一个很长的 comment 在那里
 
 807
 00:31:39,551 --> 00:31:42,952
 You really can't go wrong with nice long comments.
+你不能弄错用这个长的 comment
 
 808
 00:31:42,954 --> 00:31:45,955
 And then, the secure password.
+然后，安全密码
 
 809
 00:31:45,957 --> 00:31:48,557
 We will just do another NS localized string, here.
+我们做这些用 NSLocalizedString 方法
 
 810
 00:31:48,559 --> 00:31:53,595
 We'll take this secured password thing out of here,
+我们把这个安全密码从这里
 
 811
 00:31:53,597 --> 00:31:54,829
 put it here.
+剪切到这里
 
 812
 00:31:54,831 --> 00:31:57,832
 Get rid of all this.
+做完这些
 
 813
 00:31:57,834 --> 00:32:01,935
 And we'll say, a Prompt for.
+写 a Prompt for
 
 814
 00:32:01,937 --> 00:32:09,709
 An obscured (not plain text) password.
+An obscured (not plain text) password
 
 815
 00:32:09,711 --> 00:32:11,177
 Okay?
+对不对
 
 816
 00:32:11,179 --> 00:32:12,344
 So that's it. So now,
+就酱
 
 817
 00:32:12,346 --> 00:32:14,680
 these two locals here are just strings.
+这里的本地化只是字符串
 
 818
 00:32:14,682 --> 00:32:17,315
 If we look at their type, they're just a string.
+如果我们看他们的输入，他们只是字符
 
 819
 00:32:17,317 --> 00:32:20,451
 But they've had a chance to be localized by a translator.
+但是他们有机会通过翻译进行本地化
 
 820
 00:32:20,453 --> 00:32:22,019
 So now I can say, if it's secure,
+所以现在我说，如果它是安全的
 
 821
 00:32:22,021 --> 00:32:23,487
-return the obscure password.
+return the secured password.
+返回安全密码
 
 822
 00:32:23,489 --> 00:32:25,689
 If it's not secure, then do the password.
+如果它不安全，那就用密码
 
 823
 00:32:27,125 --> 00:32:28,357
 Okay, simple as that.
+好的，很简单
 
 824
 00:32:28,359 --> 00:32:31,160
 And, you can put these things right in line, right here,
+你可以放这些东西在这
 
 825
 00:32:31,162 --> 00:32:31,727
 if you want.
+如果你想
 
 826
 00:32:31,729 --> 00:32:33,028
 Okay?
+对不对
 
 827
 00:32:33,030 --> 00:32:35,530
 We could have even put this, obviously,
+显然我们甚至可以放这里
 
 828
 00:32:35,532 --> 00:32:38,833
 right here without even having this local, or I guess,
+这里不用本地，我猜
 
 829
 00:32:38,835 --> 00:32:41,802
 this right here, without having this local, but
+在这里，不用本地
 
 830
 00:32:41,804 --> 00:32:44,171
 it's kind of nicer to put them in here.
+但是它好多放这里
 
 831
 00:32:44,173 --> 00:32:45,905
 It starts getting a little hard to read
+开始有点难去理解
 
 832
 00:32:45,907 --> 00:32:48,441
 if we had all that stuff here, a humongous line of code.
+如果文明有所有的这些材料，大量代码
 
 833
 00:32:48,443 --> 00:32:50,576
 But, it's perfectly legal.
+但是，它是完全合法的
 
 834
 00:32:50,578 --> 00:32:52,077
 One thing about these localized strings,
+有一件事这些本地字符串
 
 835
 00:32:52,079 --> 00:32:54,680
 these do need to be literals, okay?
+这些确实需要是常量，对不对
 
 836
 00:32:54,682 --> 00:32:56,348
 This and this, they need to be literals.
+这个，这个，他们需要是常量
 
 837
 00:32:56,350 --> 00:33:00,518
 They can't be themselves variables, okay?
+他们不能是变量
 
 838
 00:33:00,520 --> 00:33:02,320
 Because, obviously,
+因为，显然
 
 839
 00:33:02,321 --> 00:33:04,121
 the code is being scanned to extract this out of here.
+代码被扫描，提取出去
 
 840
 00:33:04,123 --> 00:33:05,689
 All right?
+好
 
 841
 00:33:05,691 --> 00:33:07,490
 How about our alert down here?
+我们的警告怎么样了
 
 842
 00:33:07,492 --> 00:33:09,625
 Well, I'm gonna do this a little differently.
+我要做一点小小的不同
 
 843
 00:33:09,627 --> 00:33:14,830
 I'm going to put the strings into a little constant,
+我将放这些字符串到那个 constants
 
 844
 00:33:14,832 --> 00:33:17,566
 okay, a struct that's kind of like constants.
+好的，这个结构像 constants
 
 845
 00:33:17,568 --> 00:33:19,300
 So, I have my struct alert strings.
+因此我有我的结构 AlertStrings
 
 846
 00:33:19,302 --> 00:33:21,002
 Actually, I have a little struct inside of it called
+事实上，我有一个结构在这里叫
 
 847
 00:33:21,004 --> 00:33:23,137
 the alert strings for
+AlertStrings
 
 848
 00:33:23,138 --> 00:33:25,271
 the login error alert, cuz I might have multiple alerts.
+给登录错误警告，因为我想有多个警告
 
 849
 00:33:25,274 --> 00:33:27,207
 And, so then I have a localized string for
+然后我有 NSLocalizedString
 
 850
 00:33:27,209 --> 00:33:29,509
 the title of the alert, a localized string for
+警告的标题，警告的信息里的 NSLocalizedString
 
 851
 00:33:29,511 --> 00:33:31,845
 the message in the alert, and a localized string for
+警告的取消按键的
 
 852
 00:33:31,847 --> 00:33:33,880
 the dismiss button of the alert, right?
+NSLocalizedString，对不对
 
 853
 00:33:33,882 --> 00:33:37,016
 Login error, invalid username, try again.
+登录错误，无效的用户名，重试
 
 854
 00:33:37,018 --> 00:33:40,052
 And again, I've put nice, long description here, so that
+然后我放这个放好了，这里详细的描述
 
 855
 00:33:40,054 --> 00:33:42,954
 the translator can figure out what the context of this is.
+翻译器可以计算出文本的内容
 
 856
 00:33:42,956 --> 00:33:46,524
 And then down here, I need to replace these literal
+然后放置在这，我需要替换这些文字
 
 857
 00:33:46,526 --> 00:33:49,327
 strings with the things from my struct.
+根据我的结构上的东西
 
 858
 00:33:49,329 --> 00:33:53,997
 So this is the title, this is the message right here.
+这是标题，这是信息
 
 859
 00:33:53,999 --> 00:33:56,933
 Strings.loginerror.message.
+AlertStrings.loginerror.message
+
 
 860
 00:33:56,935 --> 00:33:59,336
 And here is our dismiss button.
+这是我们的取消按键
 
 861
 00:34:03,941 --> 00:34:06,608
 Okay, so I replace that.
+好的，我替换它
 
 862
 00:34:06,610 --> 00:34:07,910
 Okay? So now,
+好的，现在
 
 863
 00:34:07,911 --> 00:34:09,211
 I basically got all my strings, except for
+我得到所有我的字符串，除了
 
 864
 00:34:09,213 --> 00:34:10,211
 this last login thing,
+最后登录的那个
 
 865
 00:34:10,213 --> 00:34:12,280
 which we're gonna do in a second here.
+我将等下去处理
 
 866
 00:34:12,282 --> 00:34:15,616
 I pulled all my strings out into NSLocalizedString.
+我放所有我的字符串到 NSLocalizedString
 
 867
 00:34:15,618 --> 00:34:18,819
 I don't have any other literal strings other than this
+我没有其他文本信息
 
 868
 00:34:18,821 --> 00:34:20,821
 in my app that appear in the UI.
+这些在我应用里的是出现在用户界面上
 
 869
 00:34:20,823 --> 00:34:26,526
 So, again, I'm gonna go back to my project, right here.
+我将再次回到我的项目，这里
 
 870
 00:34:26,528 --> 00:34:30,262
 And, this time I'm going to send
+这时候我要再次发送它们
 
 871
 00:34:30,264 --> 00:34:32,197
 out to my localizers again.
+我的 localizers 目录
 
 872
 00:34:32,199 --> 00:34:33,698
 Now, this time when I send out,
+现在这个时候当我发过去
 
 873
 00:34:33,700 --> 00:34:35,667
 so this is going to the localizer again.
+再次到这个 localizers 这里
 
 874
 00:34:35,669 --> 00:34:38,836
 So I'm gonna send it out, I can replace these.
+我将发送它，我可以替换这些
 
 875
 00:34:38,838 --> 00:34:42,239
 If we look at what I sent this time to the localizer,
+如果我们看这些我这时候发送到 localizers 里的
 
 876
 00:34:42,241 --> 00:34:45,308
 let's look at Japanese, you can see that, look,
+看这个日语，你可以发现
 
 877
 00:34:45,310 --> 00:34:48,144
 the old things that that localizer did are in there.
+旧的在这
 
 878
 00:34:48,146 --> 00:34:51,481
 So, that localizer hasn't lost any work.
+localizer 没有全部丢失
 
 879
 00:34:51,483 --> 00:34:55,818
 But, down here is all the new things that we just added.
+但是，所有这些新的东西我们添加的放这
 
 880
 00:34:55,820 --> 00:34:59,121
 Invalid username and password, login error, password.
+无效的用户名和密码，登录错误，密码
 
 881
 00:34:59,123 --> 00:35:01,790
 And, here's my nice comments to tell them what it is.
+这里是我写的注释告诉他们那是啥
 
 882
 00:35:01,792 --> 00:35:03,091
 So, they'll bring this up in their tool and
+因此他们将用工具带这些过来
 
 883
 00:35:03,093 --> 00:35:05,192
 they'll translate it, okay?
+然后他们将翻译它，对不对
 
 884
 00:35:05,194 --> 00:35:06,527
 So, you can how, what I mean by,
+你可以怎样，我的意思是
 
 885
 00:35:06,529 --> 00:35:08,662
 if we can go back and forth and back and forth?
+如果我们可以回去然后过来，然后来回
 
 886
 00:35:08,664 --> 00:35:11,164
 So, they translate it and it comes back.
+他们翻译它然后返回
 
 887
 00:35:11,166 --> 00:35:13,199
 So, here we are from the translator.
+这里是从翻译器过来的
 
 888
 00:35:15,036 --> 00:35:17,369
 We'll say we did all of our languages.
+我们将翻译所有的语言
 
 889
 00:35:17,371 --> 00:35:19,471
 So, let's go to a different language here.
+让我们去到不同的语言那里
 
 890
 00:35:19,473 --> 00:35:22,507
 Let's do Chinese, let's say.
+到中文这里
 
 891
 00:35:22,509 --> 00:35:25,677
 Let's do traditional Chinese.
+繁体中文这
 
 892
 00:35:25,679 --> 00:35:28,446
 Okay, so here's what Chinese looks like here.
+这里是中文显示的地方
 
 893
 00:35:28,448 --> 00:35:30,247
 There's the storyboard.
+这算 storyboard
 
 894
 00:35:30,249 --> 00:35:33,350
 And here, all the literal strings have been
+还有这里，所有的文字
 
 895
 00:35:33,352 --> 00:35:35,051
 translated, okay?
+被翻译的，对不对
 
 896
 00:35:35,053 --> 00:35:36,185
 So, let's import that.
+让我们导入这些
 
 897
 00:35:36,187 --> 00:35:39,755
 So, I'm gonna go here, Import Localizations.
+我将到这里，导入 Localizations
 
 898
 00:35:39,757 --> 00:35:40,989
 From the localizer.
+从 localizer 这里
 
 899
 00:35:40,991 --> 00:35:43,224
 Want this one.
+想这样
 
 900
 00:35:43,226 --> 00:35:44,192
 Traditional.
+繁体的
 
 901
 00:35:44,194 --> 00:35:45,760
 There it is.
+像这样
 
 902
 00:35:45,761 --> 00:35:47,327
 Again, I'll make another scheme here, okay?
+我将再弄一个 scheme 在这里
 
 903
 00:35:47,330 --> 00:35:50,997
 This one, I'm gonna call, Chinese Traditional.
+这一个，繁体中文
 
 904
 00:35:52,167 --> 00:35:54,100
 Let's go ahead in the Run.
+在 Run 这里做下一步工作
 
 905
 00:35:54,102 --> 00:35:56,335
 We'll change this to Chinese.
+我们要把这个改成 Chinese
 
 906
 00:35:56,337 --> 00:35:59,972
 And, we'll set our location to be China, our locale.
+我们要设置我们的位置为 China
 
 907
 00:35:59,974 --> 00:36:01,640
 Okay? So, now we have one for
+好的，现在我们有一个
 
 908
 00:36:01,642 --> 00:36:03,008
 Japan and one for China.
+给日本用的，一个给中国用的
 
 909
 00:36:03,010 --> 00:36:04,676
 Okay?
+对不对
 
 910
 00:36:04,677 --> 00:36:06,343
 So, let's do this and let's just run.
+所以让我们做好这一步，然后运行
 
 911
 00:36:09,682 --> 00:36:11,181
 Okay? Gonna make this wider.
+好的，让这个更宽
 
 912
 00:36:11,183 --> 00:36:13,016
 So, this is, here we have in Chinese now.
+现在我们在中文环境下
 
 913
 00:36:13,018 --> 00:36:15,352
 Notice that this is working.
+注意这个在工作
 
 914
 00:36:15,353 --> 00:36:17,687
 Notice the auto-layout is adjusting just like it did in
+注意这个自动布局会使它自适应
 
 915
 00:36:17,689 --> 00:36:19,706
 English.
+就像在英文一样
 
 916
 00:36:19,707 --> 00:36:21,724
 If we try to log in, we get our error right here.
+如果我们尝试登录，我们在这里就会得到错误提示
 
 917
 00:36:23,293 --> 00:36:24,659
 Some of you probably speak Chinese, so
+你们当中有的人是说中文的
 
 918
 00:36:24,661 --> 00:36:26,294
 hopefully these translations are good.
+希望这里的翻译都不错
 
 919
 00:36:26,296 --> 00:36:27,495
 I take full responsibility.
+我要承担全部责任
 
 920
 00:36:27,497 --> 00:36:28,962
 I don't know any Chinese.
+我不会中文
 
 921
 00:36:28,964 --> 00:36:30,797
 So, I'll take responsibility if they're wrong even though
+我要负责如果他们出错了
 
 922
 00:36:30,799 --> 00:36:32,132
 I didn't do the translations.
+我又不懂得翻译
 
 923
 00:36:32,134 --> 00:36:34,334
 But anyway, there's that.
+但是无论如何，就酱
 
 924
 00:36:34,336 --> 00:36:38,470
 Now if I log in, so let's log in here.
+现在如果我登录，所以我们登录到这
 
 925
 00:36:38,472 --> 00:36:40,406
 That's MadBum.
+这个 MadBum
 
 926
 00:36:40,407 --> 00:36:42,341
 Okay, I still don't have this thing translated, and
+好的，我仍然没有翻译的这个东西
 
 927
 00:36:42,343 --> 00:36:43,775
 this is obviously content,
+这显然是原来的内容
 
 928
 00:36:43,777 --> 00:36:46,277
 so that we're not going to translate Madison Bumgarner.
+我们不翻译 Madison Bumgarner
 
 929
 00:36:46,279 --> 00:36:47,895
 Okay?
+对不对
 
 930
 00:36:47,896 --> 00:36:49,512
 Although we could I suppose, but we're not going to.
+虽然我们可以，但是我们不这么做
 
 931
 00:36:49,515 --> 00:36:51,548
 So, this is content just coming out of our database,
+这就是从我们的数据库得到的内容
 
 932
 00:36:51,550 --> 00:36:52,549
 or whatever.
+或者任意其他
 
 933
 00:36:52,551 --> 00:36:54,117
 So, this is the last thing we need to do.
+这是我们需要做的最后的一件事
 
 934
 00:36:54,119 --> 00:36:55,885
 Now, let's look at this last login.
+现在让我们看这个最后的登录
 
 935
 00:36:55,887 --> 00:36:57,186
 It's pretty bad.
+这是非常糟糕的
 
 936
 00:36:57,188 --> 00:36:58,520
 Okay? This is bad even in
+对不对，这个很糟
 
 937
 00:36:58,522 --> 00:36:59,788
 English, okay?
+甚至在英语环境下，对不对
 
 938
 00:36:59,790 --> 00:37:03,024
 This is really ugly looking time and date.
+这实在是难看的时间和日期
 
 939
 00:37:03,026 --> 00:37:04,459
 I want this to be much nicer.
+我想这个好一点
 
 940
 00:37:04,461 --> 00:37:07,478
 I'm gonna have it be,
+我想它要这样
 
 941
 00:37:07,479 --> 00:37:10,496
 last logged in certain number of days ago at this time.
+last logged 显示这个时候的若干天前
 
 942
 00:37:10,499 --> 00:37:12,416
 Okay? 12 and
+对不对，12
 
 943
 00:37:12,417 --> 00:37:14,334
 a half days ago at 4:15 or something like that.
+4:15 半天前或者其他
 
 944
 00:37:14,336 --> 00:37:16,703
 So, if I do that, I need two things.
+如果我这么做，我需要两个东西
 
 945
 00:37:16,705 --> 00:37:19,439
 I need to format that time, the time you logged in and
+我需要美化一下时间，
 
 946
 00:37:19,441 --> 00:37:21,140
 I also need to format the number,
+我也需要美化一下数字
 
 947
 00:37:21,142 --> 00:37:22,675
 how many days ago you logged in.
+你登录了多少天
 
 948
 00:37:22,677 --> 00:37:24,309
 So, I'm gonna use a number formatter and
+我将用 number formatter 工具和
 
 949
 00:37:24,311 --> 00:37:26,511
 a date formatter to make that work.
+一个 date formatter 工具去做这些事
 
 950
 00:37:26,513 --> 00:37:28,012
 Okay? And then I'm also then gonna
+好的，然后我也将
 
 951
 00:37:28,014 --> 00:37:31,148
 use a format string, you know, something with percent this
+用这个去美化字符，你知道的，有些有百分号的
 
 952
 00:37:31,150 --> 00:37:33,417
 and then present that in there, to do that.
+需要做这些
 
 953
 00:37:33,419 --> 00:37:34,852
 And, that string,
+这些字符
 
 954
 00:37:34,853 --> 00:37:36,286
 of course, as a whole, is gonna be localizable.
+当然，总的来说，都会本地化
 
 955
 00:37:36,288 --> 00:37:38,455
 So, a lot going on to localize this here, but
+因此，很多将要在这里本地化
 
 956
 00:37:38,457 --> 00:37:40,957
 you're gonna see the code's not too bad to do that.
+但是你将会看到做这些不会太糟糕的代码
 
 957
 00:37:40,959 --> 00:37:42,792
 So let's go, whoops.
+好的，开始吧
 
 958
 00:37:42,794 --> 00:37:46,028
 Let's go back to our controller.
+让我们回到我们的控制器
 
 959
 00:37:46,030 --> 00:37:48,964
 Here's where that nasty, offending,
+这里就是令人讨厌的
 
 960
 00:37:48,966 --> 00:37:52,300
 non-internationalized code is right here.
+没有国际化的代码
 
 961
 00:37:52,302 --> 00:37:55,970
 So, here, this is where I get the last login.
+这里就是最后登录的位置
 
 962
 00:37:55,972 --> 00:37:57,338
 So this is an NS Date.
+这里是 NS 数据
 
 963
 00:37:57,340 --> 00:37:58,605
 Right? This last login is
+对不对，最后登录
 
 964
 00:37:58,607 --> 00:38:01,574
 an NS Date of the last time this guy logged in.
+是一个 NS 数据，关于最后登录时间
 
 965
 00:38:01,576 --> 00:38:08,114
 And so, I don't really want this badness in here,
+所以我真不希望这种不好的东西在这
 
 966
 00:38:08,116 --> 00:38:12,984
 so I really wanna say something like,
+我想做一些事
 
 967
 00:38:12,986 --> 00:38:17,689
+Last Login %@ days ago at %@.
 Last Login %@ days ago at %@.
 
 968
 00:38:17,691 --> 00:38:19,890
 So, I'd really like to say something like that.
+我想要这样做
 
 969
 00:38:19,892 --> 00:38:21,458
 And, you know,
+你知道的
 
 970
 00:38:21,460 --> 00:38:24,428
 to do the format, I wanna make sure that I'm doing
+为了做这样的格式，我要确保我正在做的
 
 971
 00:38:24,430 --> 00:38:27,831
 String.localizedStringWithFor- mat, okay?
+String.localizedStringWithFormat 这个方法，对不对
 
 972
 00:38:27,833 --> 00:38:29,532
 So, put this format string in here.
+放这些格式好的字符在这里
 
 973
 00:38:34,071 --> 00:38:35,404
 Okay? And, we need the arguments
+好的，我们需要参数
 
 974
 00:38:35,406 --> 00:38:39,073
 here that correspond, so we'll call that daysAgo and time.
+这里要对应的，我们称它为 daysAgo 还有 time
 
 975
 00:38:40,143 --> 00:38:42,142
 Those are the two arguments that are correspond to
+这里是两个参数对应着
 
 976
 00:38:42,144 --> 00:38:44,778
 here and here.
+这里和这里
 
 977
 00:38:44,779 --> 00:38:47,413
 But, of course, this needs to, itself, be localized.
+但是，当然，这些需要的，它自己，本地化
 
 978
 00:38:47,416 --> 00:38:50,817
 Okay? So,
+对不对
 
 979
 00:38:50,818 --> 00:38:54,219
 I'm gonna call this lastLoginFormatString.
+我将称他们 lastLoginFormatString
 
 980
 00:38:54,222 --> 00:38:55,521
 And we will put here let
+然后我们将让 lastLoginFormatString = NSLocalizedString
 
 981
 00:38:58,826 --> 00:39:03,094
 lastLoginFormatString equal NSLocalizedString.
+放这里
 
 982
 00:39:03,096 --> 00:39:04,895
 And then, I'll put that format string in there.
+然后，我将在那里格式化这个字符
 
 983
 00:39:04,897 --> 00:39:08,799
 Again, I don't use this.
+再次声明，我不想用这个
 
 984
 00:39:08,801 --> 00:39:12,936
 In the comment here, we'll say something like,
+在 comment 这里，我们会填这些
 
 985
 00:39:12,938 --> 00:39:17,607
+Reports the number of days ago and time that the user last
 Reports the number of days ago and time that the user last
 
 986
 00:39:17,609 --> 00:39:21,744
 logged in, or something along those lines to make
+logged in，或者其他确保
 
 987
 00:39:21,746 --> 00:39:26,481
 sure that the localizer understands what's going on.
+本地化器可以理解的
 
 988
 00:39:27,851 --> 00:39:28,616
 Okay, so that's it.
+好的，就这样
 
 989
 00:39:28,618 --> 00:39:30,501
 We've localized that.
+我们要本地化啦
 
 990
 00:39:30,502 --> 00:39:32,385
 All we have to now is the daysAgo and time.
+所有我们现在有的是 daysAgo 和 time
 
 991
 00:39:32,388 --> 00:39:34,588
 And, these are both going to be strings.
+这些都是字符串
 
 992
 00:39:34,590 --> 00:39:37,757
 And, we're gonna get each of them by using a formatter.
+我们将使用 formatter 得到每一个字符
 
 993
 00:39:37,759 --> 00:39:40,259
 So, let's start with the date.
+所以，让我们从日期开始
 
 994
 00:39:40,261 --> 00:39:42,161
 So, I'm gonna create a date formatter.
+我将创建一个 date formatter
 
 995
 00:39:43,531 --> 00:39:45,063
 NSDateFormatter, okay?
+NSDateFormatter 对不对
 
 996
 00:39:45,065 --> 00:39:48,033
 If you just create one, no arguments or whatever.
+如果你只是创建一个，没有参数或者其他
 
 997
 00:39:48,035 --> 00:39:50,535
 And, now we're gonna configure this date formatter to
+现在我们将设置这个 date formatter
 
 998
 00:39:50,537 --> 00:39:51,535
 present the date.
+显示日期
 
 999
 00:39:51,537 --> 00:39:53,003
 So, I'm gonna say,
+我将要说
 
 1000
 00:39:53,005 --> 00:39:56,907
 set the timeStyle of the thing to be kind of a short time.
+设置短时间类型的 timeStyle
 
 1001
 00:39:56,909 --> 00:39:59,075
 Okay, this is just saying when you last log in,
+好的，这就是最后你登录的东西
 
 1002
 00:39:59,077 --> 00:40:01,110
 I don't need the seconds and the time zone.
+我不需要秒还有时区
 
 1003
 00:40:01,112 --> 00:40:04,480
 I just need, basically, the time is a short time, so
+我只是需要，基本上，这个时间是短时间
 
 1004
 00:40:04,482 --> 00:40:05,981
 I'm gonna say NSDate.
+我要写作 NSDate
 
 1005
 00:40:05,983 --> 00:40:09,884
+FormatterSTyle.ShortStyle.
 FormatterSTyle.ShortStyle.
 
 1006
 00:40:09,886 --> 00:40:11,386
 So you can see here's the styles.
+你可以看到这里的类型
 
 1007
 00:40:11,388 --> 00:40:12,019
+Full style.
 Full style.
 
 1008
 00:40:12,021 --> 00:40:12,619
 Long style.
+Long style.
 
 1009
 00:40:12,621 --> 00:40:13,286
+Medium style.
 Medium style.
 
 1010
 00:40:13,288 --> 00:40:15,388
 I'm gonna go short style.
+我要选择 short style
 
 1011
 00:40:15,390 --> 00:40:16,689
 Now, I only want the time.
+现在我只是想要时间
 
 1012
 00:40:16,691 --> 00:40:18,491
 I don't want the date portion at all.
+我不想要日期部分
 
 1013
 00:40:18,493 --> 00:40:22,794
 So I'm gonna say dateFormatter.dateStyle equals
+然后我要写 dateFormatter.dateStyle =
 
 1014
 00:40:22,796 --> 00:40:26,397
 NSDateFOrmatterStyle.NoStyle.
+NSDateFOrmatterStyle.NoStyle
 
 1015
 00:40:26,399 --> 00:40:27,799
 Okay, that means,
+好的，这意味着
 
 1016
 00:40:27,800 --> 00:40:29,200
 don't give me the date portion, I just want the time.
+不要给我日期部分。我只要时间
 
 1017
 00:40:30,503 --> 00:40:31,735
 Okay?
+对不对
 
 1018
 00:40:31,737 --> 00:40:33,937
 So now that I've kind of configured this date
+现在我只要配置这个
 
 1019
 00:40:33,939 --> 00:40:37,807
 formatter, I can let that time string, this thing right here
+date formatter，我可以让这个时间字符，在这里的东西
 
 1020
 00:40:37,809 --> 00:40:42,311
 that I want this percent at sign to correspond to.
+我想要这个百分号与之对应
 
 1021
 00:40:42,313 --> 00:40:45,981
 I can say dateFormatter.dateFromString.
+我可以写为 dateFormatter.dateFromString
 
 1022
 00:40:45,983 --> 00:40:47,182
 That's all right, other way around.
+就酱，或者其他
 
 1023
 00:40:47,184 --> 00:40:52,720
 StringFromDate the lastLogin.
+StringFromDate(lastLogin)
 
 1024
 00:40:52,722 --> 00:40:54,221
 Okay? And that's it.
+对不对，就是这样
 
 1025
 00:40:54,223 --> 00:40:56,440
 So I've just use the date former.
+我只是使用 date formatter
 
 1026
 00:40:56,441 --> 00:40:58,658
 Now, not only is this going to put this is a nice format for
+不只是要放这个 formatter 在这里
 
 1027
 00:40:58,660 --> 00:41:01,528
 me for English, it's also going to work in the local
+他也在本地化语言里运作
 
 1028
 00:41:01,530 --> 00:41:03,029
 language, as you're going to see.
+就像你所看见的
 
 1029
 00:41:03,998 --> 00:41:05,564
 All right.
+好的
 
 1030
 00:41:05,565 --> 00:41:07,131
 How about the number, how many days ago?
+数字怎么样，多少天之前
 
 1031
 00:41:07,134 --> 00:41:09,334
 I said I only want it to be like 3.5.
+我说我只是想它看起来像 3.5
 
 1032
 00:41:09,336 --> 00:41:13,304
 I don't want it to be logged in 3.5876 days ago.
+我不想这个是 3.5876 天之前
 
 1033
 00:41:13,306 --> 00:41:15,073
 Okay?
+对不对
 
 1034
 00:41:15,074 --> 00:41:16,841
 I could maybe just go for three days ago, but
+我可以让它是 3 天之前
 
 1035
 00:41:16,843 --> 00:41:20,010
 I'm gonna say 3 point one decimal digit just to show you
+但是我想写 3 点 加十进制的数字去给你们
 
 1036
 00:41:20,012 --> 00:41:21,211
 how to do that.
+现在它是咋样的
 
 1037
 00:41:21,213 --> 00:41:23,279
 So, let's create a number formatter.
+好的，让我们创建一个 number formatter
 
 1038
 00:41:26,451 --> 00:41:29,919
 And again, we already did this back in the calculator days.
+我们已经在计算器那个课里面讲过这个东西了
 
 1039
 00:41:29,921 --> 00:41:31,253
 So we create this number formatter.
+我们创建这个 number formatter
 
 1040
 00:41:31,255 --> 00:41:34,156
 Then we're gonna configure it, and the only thing I'm gonna
+然后我们将配置它，我所写的就一个
 
 1041
 00:41:34,158 --> 00:41:36,891
 say is that I want the maximum number of fraction digits
+我想最大的小数部分的数字
 
 1042
 00:41:36,893 --> 00:41:37,458
 to be one.
+只有一个
 
 1043
 00:41:37,460 --> 00:41:38,526
 Okay?
+对不对
 
 1044
 00:41:38,528 --> 00:41:41,628
 3.5, not 3.5267, okay, just one digit.
+3.5，不是 3.5267，好的，就一个数字
 
 1045
 00:41:41,630 --> 00:41:45,432
 Then I'm gonna let that daysAgo thing equal
+然后我想让 daysAgo =
 
 1046
 00:41:45,434 --> 00:41:47,567
 the numberFormatter.
+numberFormatter
 
 1047
 00:41:47,569 --> 00:41:50,436
 A string from number.
+从数字过来的字符
 
 1048
 00:41:50,438 --> 00:41:53,772
 And so, now I just need to take this login date and
+现在我只是需要把这个登录日期
 
 1049
 00:41:53,774 --> 00:41:55,474
 turn it into the number of days ago.
+放到几天前的数字那里
 
 1050
 00:41:55,476 --> 00:41:57,326
 Which I can do with
+那个我可以处理
 
 1051
 00:41:57,327 --> 00:41:59,177
 lastLogin.timeIntervalSince- Now.
+lastLogin.timeIntervalSinceNow
 
 1052
 00:41:59,179 --> 00:42:02,046
 Of course that's negative, okay?
+当然这是负数，对不对
 
 1053
 00:42:02,048 --> 00:42:04,915
 Cuz that's gonna be in the past.
+因为这个是过去的
 
 1054
 00:42:04,917 --> 00:42:08,952
 And we'll just divide that times 60, times 60, times 24.
+我们也要它除以(60*60*24)
 
 1055
 00:42:08,954 --> 00:42:10,954
 Which is the number of seconds in a day.
+这个代表一天的秒数
 
 1056
 00:42:10,956 --> 00:42:13,156
 Because the time intervals are seconds.
+因为这个时间间隔是基于秒的
 
 1057
 00:42:13,158 --> 00:42:14,290
 Okay?
+好吧
 
 1058
 00:42:14,292 --> 00:42:16,859
 Make sense?
+讲得通
 
 1059
 00:42:16,861 --> 00:42:19,127
 All right.
+好的
 
 1060
 00:42:19,129 --> 00:42:20,762
 What do we got here.
+我们到这
 
 1061
 00:42:20,764 --> 00:42:22,230
 Oh, exclamation point, yeah.
+加一个断点
 
 1062
 00:42:22,232 --> 00:42:25,032
 So string from number [INAUDIBLE] is an optional.
+数字字符是一个 optional 类型
 
 1063
 00:42:25,034 --> 00:42:29,036
 It returns an optional string and you might say why would
+它会返回一个 optional 字符，然后你可以说
 
 1064
 00:42:29,038 --> 00:42:32,005
 you ever do that because this argument if it's a double,
+为什么要这么做因为这个参数可能是双精度类型的
 
 1065
 00:42:32,007 --> 00:42:35,175
 it's always gonna be turned into a string.
+它一直转为字符
 
 1066
 00:42:35,177 --> 00:42:38,277
 But string from number also knows how to deal with
+但是数字转为字符的也知道如果处理
 
 1067
 00:42:38,279 --> 00:42:39,612
 things such as Booleans and
+比如说布尔类型
 
 1068
 00:42:39,614 --> 00:42:41,947
 things like that from the old objective C days.
+或者其他的旧 Objective C 的类型
 
 1069
 00:42:41,949 --> 00:42:43,766
 So that's why.
+所以这就是为什么
 
 1070
 00:42:43,767 --> 00:42:45,584
 Just so you're pretty safe to always go ahead and
+你可以安全地一直往下做
 
 1071
 00:42:45,586 --> 00:42:48,186
 unwrap the optional if that gets back if what you're
+打开 optional 类型如果它返回如果你通过
 
 1072
 00:42:48,188 --> 00:42:51,189
 passing in here is a double or an int.
+这个双精度或者数字类型
 
 1073
 00:42:51,191 --> 00:42:52,323
 Okay? Or some number.
+对不对，或者一些数字
 
 1074
 00:42:53,292 --> 00:42:54,558
 Okay? You could do if let if you're
+好的，你可以这样做如果你有
 
 1075
 00:42:54,560 --> 00:42:55,792
 a little worried about it.
+一点担心这个的话
 
 1076
 00:42:55,794 --> 00:42:57,260
 But I didn't do that.
+但我不会这么做
 
 1077
 00:42:57,262 --> 00:42:58,678
 Okay?
+好的
 
 1078
 00:42:58,679 --> 00:43:00,095
 So there we go. Now we've got the date and
+我们继续。现在我们拿到这个日期
 
 1079
 00:43:00,098 --> 00:43:00,696
 the time.
+和时间
 
 1080
 00:43:00,698 --> 00:43:02,631
 And again, like you say,
+再次就像你写的哪有
 
 1081
 00:43:02,632 --> 00:43:04,565
 localizers won't be able to change the order of these two
+localizers 不会改变这两个东西的顺序
 
 1082
 00:43:04,568 --> 00:43:06,935
 things if they're a sentence in a different language.
+如果他们是一个在不同语言里的句子
 
 1083
 00:43:07,937 --> 00:43:09,837
 Makes sense to do that.
+做这个有意义
 
 1084
 00:43:09,839 --> 00:43:12,306
 All right?
+好的
 
 1085
 00:43:12,307 --> 00:43:14,774
 Let's go back to our project again.
+让我们回到我们的项目
 
 1086
 00:43:15,744 --> 00:43:17,710
 Let's go ahead and export this.
+继续导出这个
 
 1087
 00:43:17,712 --> 00:43:19,745
 Okay?
+好的
 
 1088
 00:43:19,747 --> 00:43:22,447
 So I export this to localizer.
+我导出这个到 localizer
 
 1089
 00:43:24,818 --> 00:43:26,351
 Replace all that.
+替换这里所有的
 
 1090
 00:43:26,353 --> 00:43:27,852
 All right. We've sent them out there.
+好的，我们把他们发到那里
 
 1091
 00:43:27,854 --> 00:43:30,554
 Let's go take a quick look at what that looks like.
+让我们快速看一下它变成咋样
 
 1092
 00:43:30,556 --> 00:43:34,657
 We'll look at oh, yeah, let's look at French.
+看一下，好的，让我们看一下法语
 
 1093
 00:43:34,659 --> 00:43:35,958
 Okay, so here's French.
+好的，这是法语
 
 1094
 00:43:35,960 --> 00:43:37,960
 If we go down, here's the last log in.
+向下，这里是最后登录
 
 1095
 00:43:37,962 --> 00:43:40,396
 Notice here's the dollar one and dollar two.
+注意这个 $1 和 $2
 
 1096
 00:43:40,398 --> 00:43:44,532
 That's how they can control which one is which and so
+这就是他们怎样控制这个，这个
 
 1097
 00:43:44,534 --> 00:43:47,268
 they need to translate though, this into French.
+他们需要翻译的，翻译成法语的方式
 
 1098
 00:43:47,270 --> 00:43:48,803
 Okay? So
+好的
 
 1099
 00:43:48,804 --> 00:43:50,337
 let's go ahead and have that happen.
+让我们继续看会发生什么
 
 1100
 00:43:50,340 --> 00:43:51,238
 Okay.
+好的
 
 1101
 00:43:51,240 --> 00:43:52,072
 It happened.
+它发生了
 
 1102
 00:43:52,074 --> 00:43:54,607
 Okay. Now let's load it in.
+现在加载它
 
 1103
 00:43:54,609 --> 00:43:57,443
 Okay. Import localizations
+好的，从我们的 localizer
 
 1104
 00:43:57,445 --> 00:43:58,844
 from our localizer.
+导入 localizations
 
 1105
 00:43:59,947 --> 00:44:01,713
 Let's go ahead and let's do French.
+让我们继续看这个法语
 
 1106
 00:44:02,649 --> 00:44:03,214
 Okay?
+好的
 
 1107
 00:44:04,450 --> 00:44:06,583
 So let's edit a scheme here for French.
+让我们给这个法语编辑 scheme
 
 1108
 00:44:06,585 --> 00:44:09,553
 I always like to do the edit schemes because
+我一直喜欢编辑 scheme 因为
 
 1109
 00:44:09,555 --> 00:44:11,354
 you're always gonna come back to it.
+你总是会回到这
 
 1110
 00:44:11,356 --> 00:44:13,856
 It's not like oh, you're only ever gonna run French once.
+它不像 oh，你只会运行法语一次
 
 1111
 00:44:13,858 --> 00:44:15,057
 You're gonna run it multiple times.
+你会运行它很多次
 
 1112
 00:44:15,059 --> 00:44:18,560
 So here's French, and we'll make it in France.
+这里是法语，我们把它设置为法国
 
 1113
 00:44:18,562 --> 00:44:19,160
 Okay.
+好的
 
 1114
 00:44:19,162 --> 00:44:19,894
 So let's run.
+运行一下
 
 1115
 00:44:20,863 --> 00:44:22,463
 See if we got this right.
+看我们会得到什么
 
 1116
 00:44:22,465 --> 00:44:23,430
 Oops.
+哦
 
 1117
 00:44:23,432 --> 00:44:26,966
 All right, so this all looks like French.
+好的，看起来像法语
 
 1118
 00:44:26,968 --> 00:44:29,535
 Okay? That looks like in French.
+好的，看起来像法语
 
 1119
 00:44:29,537 --> 00:44:30,787
 Yeah, there's some French.
+好的，这是法语
 
 1120
 00:44:30,788 --> 00:44:32,038
 I don't know if it's right French but
+我不知道它是否是准确，但是
 
 1121
 00:44:32,040 --> 00:44:34,973
 oh, again my keyboard is French.
+哦，我的键盘是法语的
 
 1122
 00:44:34,975 --> 00:44:37,876
 So let's go ahead and bring up our keyboard so
+让我们接下来打开我们的键盘
 
 1123
 00:44:37,878 --> 00:44:38,777
 we can see that.
+然后你就可以看到这样的
 
 1124
 00:44:40,113 --> 00:44:41,496
 Okay? Yeah,
+好的
 
 1125
 00:44:41,497 --> 00:44:42,880
 we got our French keyboard here.
+我们拿到了我们的法语键盘
 
 1126
 00:44:42,882 --> 00:44:44,648
 So, I'll type it here.
+我会输入点东西
 
 1127
 00:44:44,650 --> 00:44:47,084
 Mad, madbum.
+Mad，madbum
 
 1128
 00:44:47,086 --> 00:44:49,252
 Oops.
+哦
 
 1129
 00:44:49,254 --> 00:44:51,454
 Madbum.
+Madbum
 
 1130
 00:44:51,456 --> 00:44:52,621
 How do I back up?
+我要怎么回退
 
 1131
 00:44:52,623 --> 00:44:53,956
 There we go.
+就这样
 
 1132
 00:44:53,957 --> 00:44:55,290
 [LAUGH] Madbum and here we go.
+Madbum 我们开始吧
 
 1133
 00:44:55,292 --> 00:44:56,925
 Foo. Hopefully, I typed that right,
+希望我输入的是对的
 
 1134
 00:44:56,927 --> 00:44:58,860
 but there we go.
+继续
 
 1135
 00:44:58,862 --> 00:44:59,794
 All right. So there's madbum.
+好的，这是 madbum
 
 1136
 00:44:59,796 --> 00:45:07,201
 And you can see [FOREIGN].
+你可以看到 [外语]
 
 1137
 00:45:07,203 --> 00:45:08,135
 Whatever.
+不管咋样
 
 1138
 00:45:08,137 --> 00:45:08,968
 Okay? [LAUGH] So
+好的
 
 1139
 00:45:08,970 --> 00:45:10,470
 there's the time and date and
+这是时间和日期
 
 1140
 00:45:10,472 --> 00:45:12,271
 you can see it's put a comma there.
+你可以看到这个逗号
 
 1141
 00:45:12,273 --> 00:45:15,341
 Okay? Not 10.7, but 10, 7.
+好的，不是 10.7，是10，7
 
 1142
 00:45:15,343 --> 00:45:18,143
 It's like those French have a different word for everything,
+这意味着法语没个词都不一样
 
 1143
 00:45:18,145 --> 00:45:19,944
 but they also have a different way to put the number there.
+但是他们也有不同的方式把这个数字放那里
 
 1144
 00:45:21,581 --> 00:45:22,880
 Okay? So there's French.
+好的，这是法语
 
 1145
 00:45:22,882 --> 00:45:25,382
 Now I'm gonna show you one other language which is kind
+现在我将给你显示一个其他有趣的语言
 
 1146
 00:45:25,384 --> 00:45:28,085
 of a fun, different, interesting language,
+不一样的，有趣的语言
 
 1147
 00:45:28,087 --> 00:45:29,519
 which is Arabic.
+阿拉伯语
 
 1148
 00:45:29,521 --> 00:45:31,654
 So let's go ahead and import Arabic.
+让我们接下来导入阿拉伯语
 
 1149
 00:45:31,656 --> 00:45:34,590
 Those of you who know anything about
+你们谁知道语言的
 
 1150
 00:45:34,592 --> 00:45:39,561
 languages will know why this is an interesting language.
+应该知道为啥它很有趣
 
 1151
 00:45:39,563 --> 00:45:41,296
 So let's duplicate it.
+让我们复制它
 
 1152
 00:45:41,298 --> 00:45:43,731
 Arabic.
+阿拉伯语
 
 1153
 00:45:43,733 --> 00:45:45,900
 And okay, it's Arabic.
+好的，阿拉伯语
 
 1154
 00:45:45,902 --> 00:45:46,667
 We'll have a country.
+我们选一个国家
 
 1155
 00:45:46,669 --> 00:45:47,701
 We'll have it be Egypt.
+选埃及
 
 1156
 00:45:47,703 --> 00:45:50,637
 They speak Arabic in Egypt.
+他们说阿拉伯语
 
 1157
 00:45:50,639 --> 00:45:51,755
 All those okay.
+好的
 
 1158
 00:45:51,756 --> 00:45:52,872
 So now, let's run this in Arabic.
+现在让我们运行一下阿拉伯语
 
 1159
 00:45:55,609 --> 00:45:59,111
 And, whoa, it broke my UI.
+哇，它打破了我们的用户界面
 
 1160
 00:45:59,113 --> 00:46:02,080
 Look at that, it put those things over on the right side.
+看那里，它放了什么东西在右边
 
 1161
 00:46:03,049 --> 00:46:03,981
 And, what's going on here?
+怎么回事
 
 1162
 00:46:04,917 --> 00:46:06,716
 This changed securities on the wrong side.
+这个改变安全性的错误的一边
 
 1163
 00:46:06,718 --> 00:46:08,384
 This was supposed to be over.
+这被认为是结束了
 
 1164
 00:46:08,386 --> 00:46:11,554
 So, Arabic is a right to left language, right?
+因此阿拉伯语从右到左的语言，对吧
 
 1165
 00:46:11,556 --> 00:46:14,790
 The text flows from the right hand side of the page to
+文本信息从右
 
 1166
 00:46:14,792 --> 00:46:15,457
 the left.
+到左
 
 1167
 00:46:15,459 --> 00:46:17,559
 Not from left to right.
+不是从左到右
 
 1168
 00:46:17,560 --> 00:46:19,660
 So, not only does that mean the text needs to flow right
+所以不只是文本从右到左
 
 1169
 00:46:19,663 --> 00:46:22,630
 to left, but my whole UI needs to flow right to left.
+我的整个用户界面都从右到左
 
 1170
 00:46:22,632 --> 00:46:24,866
 Okay?
+对吧
 
 1171
 00:46:24,867 --> 00:46:27,101
 So labels need to be on the right with the text going to
+标签需要在右边，文本将
 
 1172
 00:46:27,103 --> 00:46:28,235
 the left.
+在左边
 
 1173
 00:46:28,237 --> 00:46:29,870
 Same thing with these buttons.
+这些按钮也是同样的道理
 
 1174
 00:46:29,872 --> 00:46:30,737
 Okay? They need to go
+好的，他们需要
 
 1175
 00:46:30,739 --> 00:46:31,371
 for right and left.
+从右到左
 
 1176
 00:46:31,373 --> 00:46:32,972
 So, this is in here.
+在这里
 
 1177
 00:46:32,974 --> 00:46:34,073
 I have an English keyboard so
+我有一个英语键盘
 
 1178
 00:46:34,075 --> 00:46:36,008
 it's gonna be left to right typing here.
+它从左到右输入
 
 1179
 00:46:36,010 --> 00:46:37,108
 But if I had an Arabic keyboard,
+但是如果我有一个阿拉伯键盘
 
 1180
 00:46:37,110 --> 00:46:39,243
 it would be typing right to left.
+它会从右到左输入
 
 1181
 00:46:39,245 --> 00:46:40,644
 So let's go ahead and log in.
+接下来登录
 
 1182
 00:46:40,646 --> 00:46:41,378
 That's [LAUGH] this one.
+就是这个
 
 1183
 00:46:41,380 --> 00:46:42,746
 Not this one.
+不是装一个
 
 1184
 00:46:42,748 --> 00:46:43,613
 There it is.
+这一个
 
 1185
 00:46:43,615 --> 00:46:45,982
 And here's our last log in.
+这里是我们最后登录时间
 
 1186
 00:46:45,984 --> 00:46:49,551
 Whatever that is in Arabic and here's the time in Arabic.
+不管那个阿拉伯语是什么，这里是阿拉伯语的时间
 
 1187
 00:46:50,487 --> 00:46:53,788
 Okay, from right to left, so it's all right to left.
+好的，从右到左，所有的都从右到左
 
 1188
 00:46:53,790 --> 00:46:55,390
 Okay.
+好的
 
 1189
 00:46:55,391 --> 00:46:56,991
 Even this got made right to left.
+甚至这个也是从右到左
 
 1190
 00:46:58,260 --> 00:46:59,159
 Okay.
+好的
 
 1191
 00:46:59,161 --> 00:47:01,294
 And, that happened automatically.
+这些都是自然发生的
 
 1192
 00:47:01,296 --> 00:47:04,964
 Notice I didn't absolutely nothing whatsoever
+注意我完全没有想这么做
 
 1193
 00:47:04,966 --> 00:47:07,733
 in my entire storyboard to make that happen.
+在我整个 storyboard 里，它自己发生的
 
 1194
 00:47:07,735 --> 00:47:09,601
 But if we look at our constraints,
+但是如果我们查看我们的约束
 
 1195
 00:47:09,603 --> 00:47:12,170
 like we look at this constraint right here.
+我们查看这里的约束
 
 1196
 00:47:12,172 --> 00:47:13,405
 This guy.
+这家伙
 
 1197
 00:47:13,407 --> 00:47:15,073
 Let's look at his constraints.
+让我们看一下他的约束
 
 1198
 00:47:15,075 --> 00:47:18,075
 You see it's trailing space to super view.
+你们看到这个 trailing space to super view
 
 1199
 00:47:18,077 --> 00:47:18,909
 Trailing space.
+Trailing space
 
 1200
 00:47:18,911 --> 00:47:21,378
 Not right edge to super view.
+不是有边缘到 super view
 
 1201
 00:47:21,380 --> 00:47:22,746
 Trailing space.
+Trailing space
 
 1202
 00:47:22,748 --> 00:47:24,765
 Okay? So that's just
+好的，那只是
 
 1203
 00:47:24,766 --> 00:47:26,783
 saying that we wanna be attached to the trailing edge.
+说我们想接近后边缘
+
 
 1204
 00:47:26,785 --> 00:47:28,751
 And if we're in a right to left language,
+如果我们是从右到左的语言
 
 1205
 00:47:28,753 --> 00:47:30,853
 that means the other side.
+在意味着另一方面
 
 1206
 00:47:30,855 --> 00:47:32,954
 So, this auto layout did the right thing.
+这个自动布局做正确的事
 
 1207
 00:47:32,956 --> 00:47:35,857
 It attached this edge over to here.
+它接近边缘从那里到这里
 
 1208
 00:47:35,859 --> 00:47:37,291
 Because this is the trailing edge.
+因为这是后边缘
 
 1209
 00:47:37,293 --> 00:47:39,393
 Everyone understand that?
+每个人都懂吗
 
 1210
 00:47:40,662 --> 00:47:42,579
 Okay?
+好的
 
 1211
 00:47:42,580 --> 00:47:44,497
 So when you go and do a right to left language, probably
+所以当你使用从右到左的语言，可能
 
 1212
 00:47:44,499 --> 00:47:47,867
 when you run it's not gonna work as nice as this one was.
+当你运行它，它不能很好的运作就像这个一样
 
 1213
 00:47:47,869 --> 00:47:49,301
 I was actually very.
+我实际上上非常确定
 
 1214
 00:47:49,303 --> 00:47:51,236
 Pleased that it just worked, okay?
+它只是运行了，对吧
 
 1215
 00:47:51,238 --> 00:47:53,438
 But sometimes it'll be like oh, oops,
+但是有时候它看起来，额
 
 1216
 00:47:53,440 --> 00:47:56,141
 I made an assumption there that was also going to be
+我做一个假设，它也将
 
 1217
 00:47:56,143 --> 00:47:59,043
 left to right, something smashing into each other,
+从左到右，互相交错在一起
 
 1218
 00:47:59,045 --> 00:48:01,545
 so I really always strongly recommend doing at
+因此我一直强烈推荐
 
 1219
 00:48:01,547 --> 00:48:04,448
 least one right to left language, Hebrew or Arabic or
+至少一个是从右到左的语言，希伯来语或者阿拉伯语或者
 
 1220
 00:48:04,450 --> 00:48:07,718
 something that tests out that part of your user interface.
+一些你用户界面部分的测试语言
 
 1221
 00:48:07,720 --> 00:48:08,718
 Okay?
+好吧
 
 1222
 00:48:08,720 --> 00:48:10,219
 So that's it for localization.
+这就是本地化
 
 1223
 00:48:10,221 --> 00:48:12,688
 Pretty powerful system.
+非常强大的系统
 
 1224
 00:48:12,690 --> 00:48:14,456
 Pretty easy, really, for you.
+非常简单，当然，对你们来说
 
 1225
 00:48:15,426 --> 00:48:17,826
 Apple's made it actually quite easy for you.
+苹果公司把它弄得相当简单对你们来说
 
 1226
 00:48:17,828 --> 00:48:21,462
 For the translators, depends, sometimes it's easy for them,
+对翻译者，第三方，有时候其他方面都很简单
 
 1227
 00:48:21,464 --> 00:48:23,330
 sometimes it's a pain in the neck trying to figure out what
+有时它又相当痛苦因为要试图找出
 
 1228
 00:48:23,332 --> 00:48:24,832
 it is you're actually trying to
+你事实上想要找出的
 
 1229
 00:48:24,834 --> 00:48:27,034
 say to them about where this word appears.
+在这个单词上显示的
 
 1230
 00:48:27,036 --> 00:48:29,135
 You'll get some funny translation back sometimes
+你会得到一些有趣的翻译结果
 
 1231
 00:48:29,137 --> 00:48:31,070
 when they don't really understand
+当他们不能理解
 
 1232
 00:48:31,072 --> 00:48:32,204
 what it is you're saying.
+你所说的
 
 1233
 00:48:34,875 --> 00:48:36,875
 But these underlying system is pretty easy to
+但是这些潜在的系统很容易
 
 1234
 00:48:36,877 --> 00:48:37,575
 iterate with them.
+重复他们
 
 1235
 00:48:38,545 --> 00:48:39,276
 Okay. Any questions
+对的，任何问题
 
 1236
 00:48:39,278 --> 00:48:42,246
 about localization?
+关于 localization
 
 1237
 00:48:42,248 --> 00:48:43,213
 Okay.
+好的
 
 1238
 00:48:43,215 --> 00:48:47,550
 Let's go back to our slide.
+让我们回到我们的 slide
 
 1239
 00:48:47,552 --> 00:48:48,617
 Oops.
+哦
 
 1240
 00:48:48,619 --> 00:48:50,819
 Slides are here. All right.
+Slides 在这里，好的
 
 1241
 00:48:53,056 --> 00:48:54,088
 Okay.
+好的
 
 1242
 00:48:54,090 --> 00:48:57,458
 So, the next topic is Settings, all right?
+下一个课题是设置，对吧
 
 1243
 00:48:57,460 --> 00:48:59,993
 So the settings is a.
+设置是一个
 
 1244
 00:48:59,995 --> 00:49:04,230
 Let's go back here, and let's show this on here.
+让我们回到这里，让我们在这里显示
 
 1245
 00:49:07,135 --> 00:49:10,269
 Okay, so the settings app, every device has a settings
+好的，这个设置应用，每一个设备有一个设置
 
 1246
 00:49:10,271 --> 00:49:13,238
 app, it's this little icon right here.
+应用，这个小的图标在这里
 
 1247
 00:49:13,240 --> 00:49:14,706
 Okay? See that icon right there?
+好的，看这个图标
 
 1248
 00:49:14,708 --> 00:49:16,941
 So, I'm gonna click on that and this gives settings for
+我将点开它然后它会给我整个设备的
 
 1249
 00:49:16,943 --> 00:49:18,576
 the whole device.
+设置
 
 1250
 00:49:18,578 --> 00:49:20,712
 Okay? We were earlier,
+好的，我们很快
 
 1251
 00:49:20,713 --> 00:49:22,847
 we were looking for example, inside General so that we
+我们要看到这个例子，General 里面的
 
 1252
 00:49:22,849 --> 00:49:26,450
 could find the Language & Region and all that.
+我们可以看到 Language & Region 还有别的
 
 1253
 00:49:26,452 --> 00:49:28,885
 But there's more than General settings here.
+但是不只是常规设置在这里
 
 1254
 00:49:28,887 --> 00:49:31,121
 There's also application specific settings.
+这里也有应用的特殊设置
 
 1255
 00:49:31,123 --> 00:49:32,355
 You see them right here?
+你可以在这看到
 
 1256
 00:49:32,356 --> 00:49:33,588
 Mail, Notes, Reminders, Phone.
+邮件，便签，备忘，手机
 
 1257
 00:49:33,591 --> 00:49:35,791
 Those are settings for those apps.
+这些设置对应着这些应用
 
 1258
 00:49:35,793 --> 00:49:37,493
 Okay?
+对吧
 
 1259
 00:49:37,494 --> 00:49:39,194
 And even all the way down at the bottom here, okay?
+甚至一路下来都是，对吧
 
 1260
 00:49:39,196 --> 00:49:41,463
 There's one of our apps that has setting.
+这里有我们应用之一的设置
 
 1261
 00:49:41,465 --> 00:49:42,981
 Trax?
+Trax
 
 1262
 00:49:42,982 --> 00:49:44,498
 I don't have, remember doing a settings for Trax.
+我没有印象对 Trax 做过设置
 
 1263
 00:49:44,501 --> 00:49:47,735
 But that's because Trax used photos library,
+但是那个因为 Trax 使用了相片的 library
 
 1264
 00:49:47,737 --> 00:49:49,203
 used the Camera, etc.
+使用照相机等
 
 1265
 00:49:49,205 --> 00:49:51,088
 And so
+然后
 
 1266
 00:49:51,089 --> 00:49:52,972
 it has some settings that were automatically built into it.
+它有一些设置自动建立这些
 
 1267
 00:49:52,975 --> 00:49:54,758
 Okay?
+对吧
 
 1268
 00:49:54,759 --> 00:49:56,542
 But what we're gonna do today is add settings,
+但是我们将做什么今天去添加设置
 
 1269
 00:49:56,545 --> 00:50:00,080
 specific to our app that would have, you know, some setting,
+我们应用里特殊的设置，你知道的，一些设置
 
 1270
 00:50:00,082 --> 00:50:03,049
 that's just only our app has that setting.
+那个只是我们应用有这个设置
 
 1271
 00:50:03,051 --> 00:50:05,584
 How do we put the UI in this
+我们怎样放这个用户界面到这里
 
 1272
 00:50:05,586 --> 00:50:07,653
 general settings app right here?
+常规设置应用这里
 
 1273
 00:50:07,655 --> 00:50:09,822
 Okay?
+好的
 
 1274
 00:50:09,823 --> 00:50:11,990
 So in the slide here you can see some examples of some app
+在 slide 这里，你可以看到一些应用设置的例子
 
 1275
 00:50:11,992 --> 00:50:17,061
 settings, Maps and Safari have lots of settings, et cetera.
+地图还有 Safari 有很多设置等
 
 1276
 00:50:17,063 --> 00:50:19,864
 You're gonna build this UI using something like
+你也可以建立这个用户界面通过
 
 1277
 00:50:19,866 --> 00:50:20,764
 Info.plist.
+Info.plist 文件
 
 1278
 00:50:20,766 --> 00:50:22,165
 okay? [LAUGH] So
+好的
 
 1279
 00:50:22,167 --> 00:50:25,001
 it's not exactly gonna build this in your storyboard.
+不正是在你的 storyboard 上面搭建
 
 1280
 00:50:25,003 --> 00:50:26,936
 Okay? Very restricted,
+好的，非常多的限制
 
 1281
 00:50:26,938 --> 00:50:30,673
 can only do a few things but you can
+可以做到一些东西但是你可以
 
 1282
 00:50:30,675 --> 00:50:33,876
 build surprisingly a lot of stuff here with switches and
+建立惊人地很多东西，这些东西关于开关
 
 1283
 00:50:33,878 --> 00:50:35,711
 sliders and text fields.
+滑动还有文本输入框
 
 1284
 00:50:35,713 --> 00:50:39,580
 But anything that's set in this UI is communicated
+但是所有的设置这个用户界面的通过 NSUserDefaults
 
 1285
 00:50:39,582 --> 00:50:42,483
 to your app via NSUserDefaults.
+去与你的应用交流
 
 1286
 00:50:42,485 --> 00:50:44,335
 Okay? So
+好的
 
 1287
 00:50:44,336 --> 00:50:46,186
 basically, this UI in the settings app is just setting
+基本地，设置的用户界面只是设置
 
 1288
 00:50:46,188 --> 00:50:48,121
 NSUserDefault in your app.
+你应用的 NSUserDefault
 
 1289
 00:50:48,123 --> 00:50:48,922
 That's what it's doing.
+这就是它运作的机理
 
 1290
 00:50:50,091 --> 00:50:51,124
 Okay?
+好的
 
 1291
 00:50:51,125 --> 00:50:52,158
 So let's look to see how it works.
+让我们看看它怎么工作
 
 1292
 00:50:52,160 --> 00:50:56,428
 You add a little settings bundle to your app.
+你添加一些 Settings bundle 到你的应用里
 
 1293
 00:50:56,430 --> 00:50:58,930
 That's how you get it to display some UI.
+你怎样得到它然后显示在用户界面上
 
 1294
 00:50:58,932 --> 00:51:00,698
 And you do that by saying New File and
+你做这些通过新文件还有
 
 1295
 00:51:00,700 --> 00:51:03,034
 you go to this place here, iOS, Resource, and
+你到这个地方，iOS，资源还有
 
 1296
 00:51:03,036 --> 00:51:05,836
 inside there you'll see, Settings Bundle.
+在这里，你将看到，Settings Bundle
 
 1297
 00:51:05,838 --> 00:51:08,038
 'Kay? You pick Settings Bundle and
+好的，你打开 Settings Bundle
 
 1298
 00:51:08,040 --> 00:51:10,173
 you're gonna get a sample Settings Bundle.
+你将得到一个简单的 Settings Bundle
 
 1299
 00:51:10,175 --> 00:51:11,541
 This is the best thing, for
+这是最好的东西，对于
 
 1300
 00:51:11,543 --> 00:51:14,043
 something that's barely supported it seems like,
+有些东西，它勉强可以支持
 
 1301
 00:51:14,045 --> 00:51:15,878
 in some ways, this was the best thing they did.
+在一些方式里，这是它做的最好的东西
 
 1302
 00:51:15,880 --> 00:51:17,979
 Is they just gave you a sample one, okay?
+它只是给你一个例子，对吧
 
 1303
 00:51:17,981 --> 00:51:22,750
 And the sample one, at least as of this lecture, that they
+然后这个例子，至少在这个课程里，他们
 
 1304
 00:51:22,752 --> 00:51:26,320
 give you has a little grouping there with the text field.
+给了你一些组包含文本域的
 
 1305
 00:51:26,322 --> 00:51:28,722
 A little switch, and a slider.
+一个开关，还有滑动器
 
 1306
 00:51:28,724 --> 00:51:32,693
 And if you open up the, inside the settings bundle
+如果你打开它，进入到 settings bundle
 
 1307
 00:51:32,695 --> 00:51:35,628
 there's this little file in there called, root.plist,
+这里有个文件叫做 root.plist,
 
 1308
 00:51:35,630 --> 00:51:37,363
 as you'll see.
+你看到的
 
 1309
 00:51:37,365 --> 00:51:40,866
 And it's just a bunch of property list and
+这是一系列属性列表
 
 1310
 00:51:40,868 --> 00:51:43,268
 that's describing what's in there.
+描述那里有什么的
 
 1311
 00:51:43,270 --> 00:51:46,938
 So, let's look at this thing on the right, the UI, and
+让我们看一下右边这些东西，用户界面
 
 1312
 00:51:46,940 --> 00:51:48,273
 what's corresponding on the left.
+左边所对应的东西
 
 1313
 00:51:48,275 --> 00:51:51,542
 So look at on the left where it says Item 0 Group
+看一下左边这里，它上面写着
 
 1314
 00:51:51,544 --> 00:51:52,510
 at the top.
+Item 0 Group
 
 1315
 00:51:52,512 --> 00:51:54,511
 See that's making that little group.
+看这是什么创建这些组的
 
 1316
 00:51:54,513 --> 00:51:56,179
 The gray group thing.
+灰色的组
 
 1317
 00:51:56,181 --> 00:51:58,281
 It's just basically a static table view.
+它只是基本的静态表格视图
 
 1318
 00:51:58,283 --> 00:52:02,284
 And, that is basically causing a static table view
+这是基本的要创建的静态表视图
 
 1319
 00:52:02,286 --> 00:52:03,719
 section to be created.
+部分
 
 1320
 00:52:03,721 --> 00:52:05,053
 And, that's the title of it, Group.
+这里有个标题
 
 1321
 00:52:05,055 --> 00:52:07,455
 And then, see item 1, Text field, name?
+然后看这个条目 1，文本域，名称
 
 1322
 00:52:07,457 --> 00:52:08,589
 That's got
+这个得到
 
 1323
 00:52:08,591 --> 00:52:10,524
 things that describe what that text field is.
+这个关于文本域是什么的东西
 
 1324
 00:52:10,526 --> 00:52:14,128
 It's not just the title of the text field, which is name.
+它不只是文本域的标题，它还是名称
 
 1325
 00:52:14,130 --> 00:52:17,130
 But it's also things like, what's the default value, and
+但是它也有东西像这样，默认值
 
 1326
 00:52:17,132 --> 00:52:20,400
 what kind of keyboard should I bring up, a URL keyboard, or,
+我会打开的哪种键盘，URL 键盘或者
 
 1327
 00:52:20,402 --> 00:52:23,536
 you know, just a normal alphabetic keyboard,
+你知道的，只是一个普通的字母键盘
 
 1328
 00:52:23,538 --> 00:52:25,438
 or whatever.
+或者其他
 
 1329
 00:52:25,439 --> 00:52:27,339
 Then you see item two, toggle switch, all right?
+然后你看看这个 item 2，开关，对吧
 
 1330
 00:52:27,342 --> 00:52:28,674
 It's got the toggle switch there.
+这里有个开关
 
 1331
 00:52:28,676 --> 00:52:30,809
 Item three, is the slider, you've got the slider.
+item 3 是一个滑动器，你会得到这个滑动器
 
 1332
 00:52:30,811 --> 00:52:32,210
 Slider very limited.
+滑动范围非常有限
 
 1333
 00:52:32,212 --> 00:52:34,545
 You can specify an image on the left, and
+你可以滑动到左边
 
 1334
 00:52:34,547 --> 00:52:35,880
 an image on the right.
+也可以滑动到右边
 
 1335
 00:52:35,882 --> 00:52:37,448
 Okay? That's the only thing you
+好的，这只是一种
 
 1336
 00:52:37,450 --> 00:52:39,516
 can kind of customize about the slider.
+你可以自定义的滑动器
 
 1337
 00:52:39,518 --> 00:52:40,617
 So if you add a minimum,
+如果你添加最小值
 
 1338
 00:52:40,619 --> 00:52:43,086
 maximum value you have to do it with images.
+最大值
 
 1339
 00:52:43,088 --> 00:52:44,120
 It is localizable.
+当然它是本地化的
 
 1340
 00:52:44,122 --> 00:52:45,821
 I'll talk about that in a second.
+我马上会讲这一个
 
 1341
 00:52:47,024 --> 00:52:50,492
 And if you lookin all of them see number one, two and three,
+如果你查看所有的数字1，2，3
 
 1342
 00:52:50,494 --> 00:52:52,460
 they have a line there, identifier.
+它们有一条线，标识符
 
 1343
 00:52:52,462 --> 00:52:54,995
 You see in item one it's called name preference.
+你看在 item 1 这里，它叫做 Name Preference
 
 1344
 00:52:54,997 --> 00:52:57,965
 In item two it's called Enable Preference
+在 item 2， 它叫做 Enabled Preference
+
 
 1345
 00:52:57,967 --> 00:53:00,067
 in line three is called Slider Preference.
+在 item 3，它叫做 Slider Preference
 
 1346
 00:53:00,069 --> 00:53:03,336
 That is the name of the NSUserDefault
+这是 NSUserDefault 的名称
 
 1347
 00:53:03,338 --> 00:53:05,371
 that this is going to be set to, okay?
+这个将要被设置，对吧
 
 1348
 00:53:05,373 --> 00:53:07,740
 So every time that slider moves it's going to update
+每次滑动器移动，它就会更新
 
 1349
 00:53:07,742 --> 00:53:10,743
 the slider under bar preference NSUserDefault in
+应用里在 bar preference 下面的这个滑动器
 
 1350
 00:53:10,745 --> 00:53:13,211
 this app, okay?
+对吧
 
 1351
 00:53:13,213 --> 00:53:17,348
 So, pretty straight forward and simple actually.
+简单粗暴
 
 1352
 00:53:17,350 --> 00:53:20,884
 Localization is a pain in the neck for settings.
+本地化对设置来说是个难题
 
 1353
 00:53:20,886 --> 00:53:21,852
 Okay? Because
+对吧，因为
 
 1354
 00:53:21,854 --> 00:53:24,688
 the X lift stuff doesn't work with it.
+X lift 这个东西不能很好的工作
 
 1355
 00:53:24,690 --> 00:53:26,356
 You have to do it all manually.
+你不得不手动去做这个事
 
 1356
 00:53:26,358 --> 00:53:30,159
 You essentially create these directories inside the setting
+你需要在 setting bunlde 里创建三个目录
 
 1357
 00:53:30,161 --> 00:53:35,797
 bundle called a two letter code for the language, .lproj.
+叫做面向语言的两个字母代码 .lproj 文件
 
 1358
 00:53:35,799 --> 00:53:39,434
 And inside there you're gonna put a strings file for
+在这里面你将放字符串文件
 
 1359
 00:53:39,436 --> 00:53:42,770
 each page of your settings UI.
+到每一个你的设置界面里
 
 1360
 00:53:42,772 --> 00:53:45,373
 Now in the previous one, we just saw one page.
+在预览这里，我们只是看到一个页面
 
 1361
 00:53:45,375 --> 00:53:47,708
 But it's actually possible to click and
+但是事实上它可能去点击
 
 1362
 00:53:47,710 --> 00:53:50,277
 transition into another page of settings, okay?
+去翻译设置的其他页面，对吧
 
 1363
 00:53:50,279 --> 00:53:51,611
 You see this in a lot of settings.
+你可以看到这个在很多设置里面
 
 1364
 00:53:51,613 --> 00:53:53,746
 That's where they're kind of going down multiple levels.
+那个多层级的
 
 1365
 00:53:53,748 --> 00:53:55,198
 So you can do that.
+你可以看到这样
 
 1366
 00:53:55,199 --> 00:53:56,649
 And so for every level you've gotta have a strings file.
+对于每一个层级，你可以看到一个字符串文件
 
 1367
 00:53:56,651 --> 00:53:58,817
 The strings file looks like this.
+这个字符串文件看起来像这样
 
 1368
 00:53:58,819 --> 00:54:01,119
 And you have to send these off to your translator and
+你应该发送这些到你的 translator 那里
 
 1369
 00:54:01,121 --> 00:54:02,921
 they have to translate them as well,
+他们也会翻译好它
 
 1370
 00:54:02,923 --> 00:54:04,422
 in addition to the x-lifts.
+添加一个 x-lifts 文件
 
 1371
 00:54:04,424 --> 00:54:06,524
 So this is a pain.
+只是一个难题
 
 1372
 00:54:06,526 --> 00:54:08,292
 I'm sure Apple eventually will
+我确定 Apple 最终会
 
 1373
 00:54:08,294 --> 00:54:09,659
 integrate into the x-lifts system.
+集成到 x-lifts 系统里去
 
 1374
 00:54:09,661 --> 00:54:13,029
 However, it's a little bit showing you that settings is
+然而，显示给你们看的设置
 
 1375
 00:54:13,031 --> 00:54:15,531
 not a primary user interface for your app.
+并不是你们应用的主要用户界面
 
 1376
 00:54:15,533 --> 00:54:17,433
 You really wanna use it sparingly.
+你真的应当谨慎使用
 
 1377
 00:54:17,435 --> 00:54:20,069
 You don't want people to have to go to Settings unless
+你不想别人使用设置除非
 
 1378
 00:54:20,071 --> 00:54:23,071
 you know, there's setting something that's really gonna
+你知道，有些设置只设置
 
 1379
 00:54:23,073 --> 00:54:25,173
 be set once and maybe never changed again.
+一次，可能再也不会改变
 
 1380
 00:54:25,175 --> 00:54:26,507
 Okay?
+好的
 
 1381
 00:54:26,509 --> 00:54:28,576
 Or, something that they set and then,
+有些东西被设置了
 
 1382
 00:54:28,578 --> 00:54:31,378
 it only changes in the future because something big happens.
+在未来它只会改变因为发生什么大件事
 
 1383
 00:54:31,380 --> 00:54:34,915
 Like, in mail, you set your accounts up once.
+就像你的邮件，你设置帐号一次
 
 1384
 00:54:34,917 --> 00:54:36,550
 And they only change if you decide
+它们只有当你不想
 
 1385
 00:54:36,551 --> 00:54:38,184
 not to use that email account or you change your password.
+使用这个帐号或者你改变密码的时候需要设置
 
 1386
 00:54:38,186 --> 00:54:39,552
 Maybe you have to go back in there.
+可能你还会回到这
 
 1387
 00:54:39,554 --> 00:54:40,553
 That makes sense for
+这样对于不是
 
 1388
 00:54:40,554 --> 00:54:41,553
 that to not be in the main user interface.
+主要的用户界面才有意义
 
 1389
 00:54:41,556 --> 00:54:44,156
 It may be off in settings.
+它在设置之外
 
 1390
 00:54:44,158 --> 00:54:46,025
 Okay?
+对吧
 
 1391
 00:54:46,026 --> 00:54:47,893
 But you do not want to have the normal use of your app
+但是你不想正常使用你的应用
 
 1392
 00:54:47,895 --> 00:54:50,795
 require them to be going to settings all of the time.
+都需要去设置什么
 
 1393
 00:54:50,797 --> 00:54:51,963
 Okay? If you have a setting that
+对吧，如果你设置
 
 1394
 00:54:51,965 --> 00:54:54,165
 people are setting
+别人也会不断设置
 
 1395
 00:54:54,166 --> 00:54:56,366
 constantly you should have UI in your normal app for it.
+那你就应该在正常使用应用状态下配置好它
 
 1396
 00:54:56,369 --> 00:54:57,801
 'Kay?
+对吧
 
 1397
 00:54:57,803 --> 00:55:00,437
 This is just UI that you want to kind of get out of the way
+这只是用户界面你想要从你的
 
 1398
 00:55:00,439 --> 00:55:03,673
 of your main UI because people aren't going there very much.
+主要用户界面里剥离开，因为别人不想经常去配置它
 
 1399
 00:55:04,742 --> 00:55:05,607
 All right? So that's what
+对吧，这就是
 
 1400
 00:55:05,609 --> 00:55:06,742
 setting's about.
+设置
 
 1401
 00:55:06,744 --> 00:55:08,643
 So I'm going to do a demo with settings,
+我将给你演示这个设置
 
 1402
 00:55:08,645 --> 00:55:11,579
 but since I won't come back to the slides,
+回到 slides 之前
 
 1403
 00:55:11,581 --> 00:55:13,347
 let's talk about what's coming up here.
+让我们讲一下它怎么发生
 
 1404
 00:55:13,349 --> 00:55:15,949
 Wednesday is the alternate final as you know
+周三是 alternate final，你们知道的
 
 1405
 00:55:15,951 --> 00:55:18,452
 I need your slides today if you want to present at
+如果你们想要 alternate final 演示
 
 1406
 00:55:18,454 --> 00:55:20,020
 that alternate final.
+今天你们要给我 slides
 
 1407
 00:55:20,022 --> 00:55:25,024
 No section on Friday but your final project is due 11:59 and
+周五没课，你们的 final project 的期限是 11:59:59
 
 1408
 00:55:25,026 --> 00:55:27,426
 59 seconds on Friday night.
+周五晚
 
 1409
 00:55:27,428 --> 00:55:28,293
 Okay? Pacific time.
+好的，美国西部标准时间
 
 1410
 00:55:29,329 --> 00:55:32,330
 Saturday your slides are due by midnight.
+周六半夜是你们 slides 的期限
 
 1411
 00:55:32,332 --> 00:55:33,297
 Okay?
+好的
 
 1412
 00:55:33,299 --> 00:55:34,765
 Please make your slides 1280 by 720.
+请确保你们的 slides 是 1280x720 的
 
 1413
 00:55:34,767 --> 00:55:36,166
 Okay?
+对吧
 
 1414
 00:55:36,168 --> 00:55:37,867
 In other words widescreen format.
+换句话说宽屏格式
 
 1415
 00:55:37,869 --> 00:55:43,105
 Do not give me those 1024 by 768s or 640 [LAUGH] by 480.
+不要给我 1024x768 或者 640x480
 
 1416
 00:55:43,107 --> 00:55:44,390
 Okay?
+对吧
 
 1417
 00:55:44,391 --> 00:55:45,674
 Widescreen just like this, like you see right here
+宽度就是这样，就像你们看的的这个
 
 1418
 00:55:45,676 --> 00:55:48,643
 because it can be projected right here just like this.
+因为它在这的投影刚好
 
 1419
 00:55:48,645 --> 00:55:49,210
 Okay?
+好的
 
 1420
 00:55:49,212 --> 00:55:50,411
 I prefer Keynote.
+我用 Keynote
 
 1421
 00:55:50,413 --> 00:55:53,481
 If you can do Keynote, please do Keynote because
+如果你们用 Keynote，那就用 Keynote 因为
 
 1422
 00:55:53,483 --> 00:55:56,283
 what you see in Keynote is what I'm gonna get, and
+你在 Keynote 所做的
 
 1423
 00:55:56,285 --> 00:55:58,685
 what everyone's gonna get when I put it on screen.
+这里就怎么显示
 
 1424
 00:55:58,687 --> 00:55:59,919
 If you send me a PowerPoint,
+如果你发给我 PowerPoint
 
 1425
 00:55:59,921 --> 00:56:02,255
 Keynote is really good at opening up PowerPoints, but
+Keynote 可以很好兼容 PowerPoint
 
 1426
 00:56:02,257 --> 00:56:03,689
 if you have a weird font in there,
+但是有可能会有怪异的字体问题
 
 1427
 00:56:03,691 --> 00:56:05,858
 it might get turned into Helvetica or something.
+它可能会变成 Helvetica 或其他字体
 
 1428
 00:56:05,860 --> 00:56:07,726
 And then it's gonna looks like a mess.
+然后看起来有点混乱
 
 1429
 00:56:07,728 --> 00:56:09,039
 Okay?
+好的
 
 1430
 00:56:09,040 --> 00:56:10,351
 So if you can do Keynote, please do,
+如果你用 Keynote，好好使用
 
 1431
 00:56:10,352 --> 00:56:11,663
 I understand not everyone has a Mac with Keynote.
+我理解并不是每一个人的 Mac 都有 Keynote
 
 1432
 00:56:11,665 --> 00:56:12,830
 Totally understandable.
+完全理解
 
 1433
 00:56:12,832 --> 00:56:15,866
 So PowerPoint I will accept.
+因此 PowerPoint 我也接受
 
 1434
 00:56:15,868 --> 00:56:18,335
 But please, if you can do Keynote.
+但是，如果可以请用 Keynote
 
 1435
 00:56:18,337 --> 00:56:20,971
 And then, next week normal exam period.
+然后下一周是正常的考试期间
 
 1436
 00:56:20,973 --> 00:56:24,874
 I believe it's Thursday of finals week, 12:15 to 3:15.
+最后一周的周四 12:15 到 3:15
 
 1437
 00:56:24,876 --> 00:56:27,110
 If that's, anyone correct me if I'm wrong, but
+如果这样，如果我错了，大家记得纠正我
 
 1438
 00:56:27,112 --> 00:56:27,977
 I think that's when it is.
+应该没有错吧
 
 1439
 00:56:28,946 --> 00:56:30,879
 Then we will do the presentations.
+我们那天做展示
 
 1440
 00:56:30,881 --> 00:56:32,731
 There's so many of you,
+你们这么多人
 
 1441
 00:56:32,732 --> 00:56:34,582
 this is the largest enrollment we've ever had, so
+这是历年以来最多上这个课的人
 
 1442
 00:56:34,584 --> 00:56:36,751
 you'll only get 90 seconds each.
+所以你们每个人有 90 秒
 
 1443
 00:56:36,753 --> 00:56:39,253
 I know that sounds tight.
+我知道这听起来时间很紧
 
 1444
 00:56:39,255 --> 00:56:41,155
 If we have a lot of people going Wednesday,
+如果我们周三有很多人
 
 1445
 00:56:41,157 --> 00:56:43,790
 maybe I'll try and give you an extra ten seconds or
+我可以试着给你们额外的 10 秒或者
 
 1446
 00:56:43,792 --> 00:56:45,025
 something like that.
+什么
 
 1447
 00:56:45,027 --> 00:56:47,226
 But if you just do the math, a hundred people,
+如果你们都一起上，100多号人
 
 1448
 00:56:47,228 --> 00:56:50,596
 three hours, especially with the time to transition,
+三个小时，还有交换时间
 
 1449
 00:56:50,598 --> 00:56:53,499
 walk up and down and technical problems.
+走路和技术问题
 
 1450
 00:56:53,501 --> 00:56:55,800
 We really can't give you more than that, unfortunately.
+不幸的是我们不能给你们那么多时间
 
 1451
 00:56:57,837 --> 00:56:59,337
 Any questions before I do this last demo?
+有没有问题
 
 1452
 00:56:59,339 --> 00:57:02,006
 And then we'll be done for today.
+今天我们就要结束了
 
 1453
 00:57:02,008 --> 00:57:03,240
 Okay.
+好的
 
 1454
 00:57:03,242 --> 00:57:05,408
 So, the way I'm gonna do the Settings bundle,
+这是去到我们 Settings bundle 的方式
 
 1455
 00:57:05,410 --> 00:57:08,378
 is I'm gonna add a setting to Bouncer.
+我需要设置一个 Bouncer
 
 1456
 00:57:08,380 --> 00:57:09,512
 Remember Bouncer?
+记得 Bouncer 吗
 
 1457
 00:57:09,514 --> 00:57:12,114
 Thing bouncing, the square, bouncing around?
+Thing bouncing，正方形的，活跃的
 
 1458
 00:57:12,116 --> 00:57:13,448
 I'm going to make it so
+我将要做那个
 
 1459
 00:57:13,450 --> 00:57:18,519
 that bouncer, we can set its elasticity in settings.
+bouncer，我们可以把它放在设置里
 
 1460
 00:57:18,521 --> 00:57:20,021
 Now, elasticity,
+现在，灵活性
 
 1461
 00:57:20,022 --> 00:57:21,522
 you're probably going to be setting a lot in Bouncer.
+你可能会被设置很多在 Bouncer 这里
 
 1462
 00:57:21,524 --> 00:57:24,792
 You want to set it to the way you like Bouncer to happen and
+你想要设置为你希望的方式
 
 1463
 00:57:24,794 --> 00:57:25,859
 you're just going to leave it.
+你只要离开它
 
 1464
 00:57:25,861 --> 00:57:26,660
 Okay? So
+对吧
 
 1465
 00:57:26,661 --> 00:57:27,460
 that's what we're going to do.
+我们要怎么做
 
 1466
 00:57:27,462 --> 00:57:29,328
 So let's go back to Bouncer.
+让我们回到 Bouncer
 
 1467
 00:57:29,330 --> 00:57:30,830
 Here's Bouncer.
+这是 Bouncer
 
 1468
 00:57:30,832 --> 00:57:32,431
 That's where we left it off last time.
+这是我们上次留下的
 
 1469
 00:57:32,433 --> 00:57:34,499
 I'm gonna run Bouncer here just so
+我将运行这个 Bouncer
 
 1470
 00:57:34,501 --> 00:57:39,203
 that we can remind ourselves what it looks like.
+来看看它是什么样
 
 1471
 00:57:40,840 --> 00:57:41,972
 All right. So Bouncer,
+好的，Bouncer
 
 1472
 00:57:41,974 --> 00:57:43,707
 remember this thing just bounces off the walls.
+记住这个东西只是在墙里的 Bounce
 
 1473
 00:57:43,709 --> 00:57:46,376
 And it's pretty bouncy.
+它是相当有弹性的
 
 1474
 00:57:46,378 --> 00:57:47,910
 It's not super bouncy.
+这是不是超级有弹性
 
 1475
 00:57:47,912 --> 00:57:52,081
 But if I take it up to the top and I just let it fall down.
+如果我想要它到顶部，我只要让它掉下来
 
 1476
 00:57:52,083 --> 00:57:55,417
 You know, it bounces about half way back up, okay?
+你知道的，bounce 大约有一半退减，对吧
 
 1477
 00:57:55,419 --> 00:57:57,118
 Slowly bouncing less and less.
+跳的越来越慢
 
 1478
 00:57:57,120 --> 00:58:00,154
 And that's because we set the elasticity in Bouncer
+这是因为我们设置的
 
 1479
 00:58:00,156 --> 00:58:02,089
 over here to be 0.85.
+弹性在这里是 0.85
+
 
 1480
 00:58:02,091 --> 00:58:04,458
 So it's not full bouncing, okay?
+这不是满弹性，对吧
 
 1481
 00:58:04,460 --> 00:58:07,294
 It's 85% bouncing.
+85% 的弹性
 
 1482
 00:58:07,296 --> 00:58:09,195
 So it's losing energy with each collision,
+所以它每次碰撞都减小能量
 
 1483
 00:58:09,197 --> 00:58:10,863
 but not too bad.
+这没什么不好
 
 1484
 00:58:10,865 --> 00:58:13,632
 So this is the thing that we're going to have
+这就是我们在这里的
 
 1485
 00:58:13,634 --> 00:58:15,184
 set in settings.
+设置
 
 1486
 00:58:15,185 --> 00:58:16,735
 Instead of being point 85 all the time we're going to set it
+替换为 85%，我们要把它设置在
 
 1487
 00:58:16,737 --> 00:58:17,302
 in settings.
+这个设置里
 
 1488
 00:58:18,438 --> 00:58:21,072
 So let's just add a settings bundle to our app.
+让我们添加一个 settings bundle
 
 1489
 00:58:21,074 --> 00:58:24,508
-So we go new file, we go IoS resource,
+So we go new file, we go iOS resource,
+一个新文件，iOS 资源
 
 1490
 00:58:24,510 --> 00:58:25,909
 here's settings bundle right here.
+这里是 settings bundle
 
 1491
 00:58:26,879 --> 00:58:29,145
 Just double click, what do you want to call it?
+只是双击，你要怎么称呼它
 
 1492
 00:58:29,147 --> 00:58:30,413
 We'll call it settings,
+我们叫它设置
 
 1493
 00:58:30,415 --> 00:58:33,249
 that what people usually call their settings bundles.
+通常人们称它为 settings bundles
 
 1494
 00:58:33,251 --> 00:58:35,351
 And here it is, our settings bundle right here.
+这就是，我们的 settings bundle
 
 1495
 00:58:35,353 --> 00:58:36,618
 If you click on the bundle itself,
+如果你在 bundle 里点击
 
 1496
 00:58:36,620 --> 00:58:39,187
 you just get this little lego brick.
+你刚刚只是得到这个小小的乐高砖
 
 1497
 00:58:39,189 --> 00:58:43,358
 But if you go down here to root.plist, you will see
+如果你到这个 root.plist 文件这里，你会看到
 
 1498
 00:58:43,360 --> 00:58:47,661
 here is that default one I was showing you in the slide,
+这里的默认设置，我在 slide 会给你们展示的
 
 1499
 00:58:47,663 --> 00:58:50,030
 that it gives you.
+这里直接就有
 
 1500
 00:58:50,031 --> 00:58:52,398
 And here is the strings that go along with this plist.
+这里就是这个 plist 文件的字符
 
 1501
 00:58:52,401 --> 00:58:54,934
 This is what you would send off to your localizer right
+这是你将要发送给你的 localizer
 
 1502
 00:58:54,936 --> 00:58:57,603
 here for this particular plist file.
+特殊 plist 文件
 
 1503
 00:58:57,605 --> 00:59:03,375
 So we're gonna Run just to see this UI, which has got
+我们将要运行它，看这个用户界面
 
 1504
 00:59:03,377 --> 00:59:07,712
 a group with a text field and a toggle switch and a slider.
+一组文本框还有一个开关和滑动器
 
 1505
 00:59:07,714 --> 00:59:10,181
 We're gonna see that in our Settings app.
+我们来看我们的设置应用
 
 1506
 00:59:10,183 --> 00:59:12,383
 So let's just Run.
+让它运行
 
 1507
 00:59:12,384 --> 00:59:14,584
 Now, every time you Run, it installs the Settings
+现在每一次你运行它，它安装这个 Settings bundle
 
 1508
 00:59:14,587 --> 00:59:18,689
 bundle into your system.
+到你的系统里
 
 1509
 00:59:18,691 --> 00:59:20,591
 So here we go.
+看下一个
 
 1510
 00:59:20,592 --> 00:59:22,492
 We have this thing, it's 0.85, so let's go over to settings.
+我们有这个东西，它是 0.85，让我们回到设置
 
 1511
 00:59:24,095 --> 00:59:26,495
 Actually, let's make our slide a little easier here,
+事实上，让我们的 slide 简单一点
 
 1512
 00:59:26,497 --> 00:59:27,529
 a little less swapping around.
+少互相交换
 
 1513
 00:59:27,531 --> 00:59:29,031
 Let's put Bouncer on this page.
+放这个 bouncer 到这个页面
 
 1514
 00:59:29,033 --> 00:59:32,300
 Okay? So let's go to settings and
+去到设置上
 
 1515
 00:59:32,302 --> 00:59:34,602
 now, when we go down to settings, see we got Bouncer.
+现在，当我们回到设置这里，看我们的 Bouncer
 
 1516
 00:59:34,604 --> 00:59:36,037
 Okay, it added things for bouncer and
+好的，它为 bouncer 添加了什么
 
 1517
 00:59:36,039 --> 00:59:37,438
 if we click on Bouncer.
+如果我们点击 bouncer
 
 1518
 00:59:37,440 --> 00:59:38,405
 There it is.
+像这样
 
 1519
 00:59:38,407 --> 00:59:40,507
 That name field right here.
+在这个文本输入框这里
 
 1520
 00:59:40,509 --> 00:59:42,241
 And Enabled in this slider.
+激活这个滑动器
 
 1521
 00:59:43,611 --> 00:59:45,678
 Okay? So that's a good start.
+这是很好的开始
 
 1522
 00:59:45,680 --> 00:59:49,114
 Now, let's change this UI right here to be what we want,
+让我们改变这个用户界面，让它变成我们想要的样子
 
 1523
 00:59:49,116 --> 00:59:51,983
 which is we just really want a slider for elasticity.
+我们只是想这个滑动器对应弹性
 
 1524
 00:59:51,985 --> 00:59:55,153
 I'm going to keep this group at the top, but instead of
+我将把这一组放在顶部
 
 1525
 00:59:55,155 --> 00:59:58,122
 calling it group, I'm going to call it Elasticity.
+把这个组的名称替换为弹性
 
 1526
 00:59:59,191 --> 01:00:01,458
 Elasticity, okay?
+弹性，好的
 
 1527
 01:00:01,460 --> 01:00:03,326
 And I don't need a text field.
+我不想要这个文本框
 
 1528
 01:00:03,328 --> 01:00:04,527
 We're not typing a text field.
+我们不用输入到文本框里
 
 1529
 01:00:04,529 --> 01:00:06,328
 So you can delete things by just hitting
+你们可以删除这个东西通过
 
 1530
 01:00:06,330 --> 01:00:07,596
 Backspace to delete.
+点击 Backspace 这个键
 
 1531
 01:00:07,598 --> 01:00:08,897
 Same thing, toggle switch.
+同理，开关
 
 1532
 01:00:08,899 --> 01:00:10,365
 Delete, I don't want that.
+删掉，我不想要这个
 
 1533
 01:00:10,367 --> 01:00:11,999
 But I do want the slider.
+但是我想要这个滑动器
 
 1534
 01:00:12,001 --> 01:00:14,668
 I'm gonna have the default value be the 0.85
+我想要这个默认值是 0.85
 
 1535
 01:00:14,670 --> 01:00:16,803
 that we have now.
+我们所知道的
 
 1536
 01:00:16,805 --> 01:00:19,639
 Let's say the maximum is about 1.1.
+让我们写这个最大值 1.1
 
 1537
 01:00:19,641 --> 01:00:21,541
 If we start getting to more than 1.1,
+如果我们超过 1.1
 
 1538
 01:00:21,543 --> 01:00:24,143
 in other words when it bounces off it gains energy,
+换句话说，这个 bounce 一直获得能量
 
 1539
 01:00:24,145 --> 01:00:27,279
 that thing is going to be ripping around so fast.
+它会越来越快
 
 1540
 01:00:27,281 --> 01:00:29,514
 So that's the maximum we want to allow.
+所以这是我们想要的最大值
 
 1541
 01:00:29,516 --> 01:00:31,583
 The minimum, we don't really want zero,
+最小值，我不想是 0
 
 1542
 01:00:31,585 --> 01:00:33,551
 that would be just death.
+因为那样它直接就死掉了
 
 1543
 01:00:33,553 --> 01:00:37,755
 So let's make it like 0.5, which is pretty dampened.
+所以让我们设置为 0.5，衰减型
 
 1544
 01:00:37,757 --> 01:00:41,291
 But not complete death when it hits something, okay?
+它不会一碰到东西就停止
 
 1545
 01:00:41,293 --> 01:00:45,561
 And then I don't really like this as my NS user default
+我不想这个作为我的 NS 用户默认
 
 1546
 01:00:45,563 --> 01:00:48,214
 name.
+名称
 
 1547
 01:00:48,215 --> 01:00:50,866
 I'm gonna call it, how about BouncerBehavior, since that's
+我想要叫它，BouncerBehavior 怎么样
 
 1548
 01:00:50,868 --> 01:00:54,603
 the class that we're gonna be setting this in, .Elasticity.
+正好把它作为 class 名称，.Elasticity
 
 1549
 01:00:54,605 --> 01:00:58,240
 Okay? It's kind of decent name.
+好的，就这个相当好的名称
 
 1550
 01:00:58,242 --> 01:01:01,376
 Okay? Comma name spaced name.
+好的，停顿名称空格名称
 
 1551
 01:01:01,378 --> 01:01:04,579
 So now, we're gonna get a slider
+现在，我们将得到滑动器
 
 1552
 01:01:04,581 --> 01:01:06,347
 with elasticity as the name of the group.
+它有一个组叫作弹性
 
 1553
 01:01:06,349 --> 01:01:07,314
 So let's take a look at that.
+让我们看一下这个
 
 1554
 01:01:11,787 --> 01:01:12,452
 All right. So we go
+好的
 
 1555
 01:01:12,454 --> 01:01:13,619
 back here to Settings.
+回到设置
 
 1556
 01:01:14,789 --> 01:01:15,687
 And we look at Bouncer.
+我们看这个 Bouncer
 
 1557
 01:01:15,689 --> 01:01:16,621
 Here it is. Elasticity.
+这里，弹性
 
 1558
 01:01:16,623 --> 01:01:17,755
 And we've got this on sliders.
+我们会在滑动器得到这个
 
 1559
 01:01:17,757 --> 01:01:20,825
 Now as I move this slider, it is changing that
+现在我移动这个滑动器，它改变了
 
 1560
 01:01:20,827 --> 01:01:24,528
 ns user default from 1.1 all the way down to 0.5.
+NS 用户默认值从 0.5 到 1.1
 
 1561
 01:01:24,530 --> 01:01:26,496
 Okay? 1.1, 0.5,
+好的，1.1，0.5
 
 1562
 01:01:26,498 --> 01:01:28,264
 and everywhere in between.
+在这之间
 
 1563
 01:01:28,266 --> 01:01:29,816
 Okay?
+好的
 
 1564
 01:01:29,817 --> 01:01:31,367
 Now, it's only setting the NS user default at this point.
+这只是设置 NS 用户默认值
 
 1565
 01:01:31,369 --> 01:01:33,535
 We're not actually looking at the value.
+我们没有真正看它的值
 
 1566
 01:01:33,537 --> 01:01:35,637
 So when we go back.
+当我回过去
 
 1567
 01:01:35,639 --> 01:01:38,540
 Sorry. When we go back here to
+抱歉，当我们回到这里
 
 1568
 01:01:38,542 --> 01:01:40,742
 Bouncer, it's still bouncing along at 0.85,
+Bouncer 这里，它仍然是 0.85
 
 1569
 01:01:40,744 --> 01:01:43,778
 no matter what I set that to, okay?
+无论我怎么设置这个，对吧
 
 1570
 01:01:43,780 --> 01:01:47,247
 So now, we need to look at the NS user default and
+好，现在我们需要查看 NS user default
 
 1571
 01:01:47,249 --> 01:01:49,716
 have it change the elasticity.
+还有这个改变的弹性
 
 1572
 01:01:49,718 --> 01:01:50,917
 We can do that right here.
+我们可以在这里做
 
 1573
 01:01:51,920 --> 01:01:53,386
 Nice and wide.
+好又宽
 
 1574
 01:01:53,388 --> 01:01:54,186
 I set a 0.85.
+我设置 0.85
 
 1575
 01:01:54,188 --> 01:01:57,639
 I'm gonna say,
+我将会写
 
 1576
 01:01:57,640 --> 01:02:01,091
@@ -6305,158 +7887,197 @@ NSUserDefaults.standardUserDe- faults().doubleForKey.
 1577
 01:02:01,094 --> 01:02:02,393
 And, we called it Bouncer.
+我们称它为 Bouncer
 
 1578
 01:02:02,395 --> 01:02:05,663
 I should probably have a nice constant for this,
+我应该可能会得到一个不变的值
 
 1579
 01:02:05,665 --> 01:02:08,432
 but we'll type it in for speed here.
+但是我们要输入它的速率
 
 1580
 01:02:09,634 --> 01:02:11,134
 To behavior, that elasticity.
+行为，弹性
 
 1581
 01:02:11,136 --> 01:02:12,435
 Now, this is a double.
+现在，这是双倍的
 
 1582
 01:02:12,437 --> 01:02:15,671
 And elasticity here is a CGFloat.
+还有弹性这里 CGFloat 类型
 
 1583
 01:02:15,673 --> 01:02:18,039
 So we need to put that in CGFloat.
+我们需要放这个到 CGFloat
 
 1584
 01:02:20,543 --> 01:02:21,475
 Okay?
+好的
 
 1585
 01:02:21,477 --> 01:02:22,643
 And so, that's good.
+相当好
 
 1586
 01:02:22,645 --> 01:02:24,444
 So let's go ahead and now see what happens.
+让我们继续看会发生什么
 
 1587
 01:02:29,017 --> 01:02:29,982
 Okay. So
+好的
 
 1588
 01:02:29,984 --> 01:02:33,152
 it looks like we have low elasticity.
+看起来我们有一个很低的弹性
 
 1589
 01:02:33,154 --> 01:02:35,420
 See how it's barely bouncing?
+看它是咋样的弹性
 
 1590
 01:02:35,422 --> 01:02:36,788
 'Kay?
+好的
 
 1591
 01:02:36,790 --> 01:02:39,190
 And so let's go look and see what our elasticity is set to.
+回过头看我们的弹性
 
 1592
 01:02:40,226 --> 01:02:42,526
 Bouncer, we have it right in the middle.
+Bouncer，我们把它放在中间
 
 1593
 01:02:42,528 --> 01:02:44,928
 So let's set it to high elasticity.
+让我们设置一个高点的弹性
 
 1594
 01:02:44,930 --> 01:02:46,730
 And go back and see if that'll work.
+回去看它运作状况
 
 1595
 01:02:46,732 --> 01:02:47,530
 So we go up to Bouncer.
+看回这个 Bouncer
 
 1596
 01:02:47,532 --> 01:02:49,965
 And, oh. It's still low.
+它仍然很慢
 
 1597
 01:02:49,967 --> 01:02:51,533
 Well, what's going on?
+怎么回事
 
 1598
 01:02:51,535 --> 01:02:53,969
 Okay? Why didn't that pick that up?
+为什么没有弹起来
 
 1599
 01:02:53,971 --> 01:02:59,607
 That's because we only call this once when our app starts.
+这是因为我们只是在应用启动时才启用这个设置
 
 1600
 01:02:59,609 --> 01:03:02,610
 So whatever the elasticity was in the settings
+所以不管它的弹性设置是什么
 
 1601
 01:03:02,612 --> 01:03:05,012
 at the time our app launched, that's what we get.
+当我们的应用运行，它就是那个弹性
 
 1602
 01:03:05,014 --> 01:03:06,447
 And if the user goes and
+如果用户回去
 
 1603
 01:03:06,448 --> 01:03:07,881
 changes it, it makes no difference.
+改变它，它不会有变化
 
 1604
 01:03:07,883 --> 01:03:10,483
 So, how do we make it so that the user can go to settings,
+所以，要怎么修改，让用户回到修改设置后
 
 1605
 01:03:10,485 --> 01:03:11,751
 change the elasticity and come back.
+会生效
 
 1606
 01:03:11,753 --> 01:03:14,520
 And it will be different in Bouncer without quitting and
+Bouncer 不需要退出
 
 1607
 01:03:14,522 --> 01:03:16,588
 restarting Bouncer and all that stuff?
+然后重启
 
 1608
 01:03:16,590 --> 01:03:20,325
 Well, the answer to that is Notifications.
+它需要的是通知
 
 1609
 01:03:20,327 --> 01:03:23,595
 There's an NS notification you get every time your NS user
+这个 NS 通知，你每次用你的
 
 1610
 01:03:23,597 --> 01:03:24,562
 defaults change.
+NS user defaults 就会改变
 
 1611
 01:03:25,498 --> 01:03:27,131
 Okay? That's pretty cool.
+很酷
 
 1612
 01:03:27,133 --> 01:03:31,634
 So, let's go NS Notification Center, Default Center,
+输入 NSNotificationCenter.defaultCenter
 
 1613
 01:03:31,636 --> 01:03:34,537
 add Observer for name.
+addObserverForName.
 
 1614
 01:03:34,539 --> 01:03:38,574
 The name is NSUserDefaultDidChange,
+这个叫 NSUserDefaultDidChange 的方法
 
 1615
 01:03:38,576 --> 01:03:39,975
 as you might imagine.
+你可以想象
 
 1616
 01:03:39,977 --> 01:03:41,743
@@ -6465,46 +8086,57 @@ okay?
 1617
 01:03:41,744 --> 01:03:43,510
 The object is I don't care, anybody can send me that.
+这个对象我不关心，每个人都可以发给我那个
 
 1618
 01:03:43,513 --> 01:03:46,381
 The queue, we'll just do the main queue, and using
+queue，我们就用 main queue
 
 1619
 01:03:46,383 --> 01:03:49,316
 block this is what's gonna happen when things change.
+usingBlock 有些变化
 
 1620
 01:03:49,318 --> 01:03:51,485
 And I'm actually going to do our closing,
+事实上回到我们的
 
 1621
 01:03:51,487 --> 01:03:56,056
 trailing, closure notation here.
+之前通知这里
 
 1622
 01:03:56,058 --> 01:03:58,391
 So here's the notification, this getting passed to me,
+这个 notification，通过这里
 
 1623
 01:03:58,393 --> 01:04:01,193
 I actually don't even need to look at that.
+我事实上不需要看到这个
 
 1624
 01:04:01,195 --> 01:04:02,961
 And inside here I'm just gonna do this.
+在这里我只是做这个
 
 1625
 01:04:05,399 --> 01:04:07,082
 Okay.
+好的
 
 1626
 01:04:07,083 --> 01:04:08,766
-So every time my NS user default change,
+So every time my NSUserDefault change,
+每次我们的 NSUserDefault 改变
 
 1627
 01:04:08,768 --> 01:04:11,568
 I'm just going to update the elasticity.
+我就更新这个弹性
 
 1628
 01:04:13,706 --> 01:04:14,704
@@ -6513,178 +8145,222 @@ Okay.
 1629
 01:04:14,706 --> 01:04:16,973
 Now really, to be a good citizen here,
+作为一个好公民
 
 1630
 01:04:16,975 --> 01:04:19,475
 I should be doing, let observer equals.
+我应该这样做，让这个 observer 等于
 
 1631
 01:04:19,477 --> 01:04:21,043
 And somewhere else, I should be doing
+其他什么的，我写这个
 
 1632
 01:04:21,045 --> 01:04:25,080
 NSNotificationDefaultCenter remove observer, this thing.
+NSNotificationDefaultCenter 移除 observer 这个东西
 
 1633
 01:04:25,082 --> 01:04:28,683
 But the way our app is right now, pretty much Bouncer
+但是我们应用现在这个方式，
 
 1634
 01:04:28,685 --> 01:04:31,386
 comes up, takes over the screen and never leaves.
+发生，接管屏幕还有从不离开
 
 1635
 01:04:31,388 --> 01:04:33,921
 So it's probably okay to not be doing that here.
+所以在这里它可能还没有做好
 
 1636
 01:04:33,923 --> 01:04:36,156
 Besides, it's a demo so we're not going to do it.
+此外，我们还有一个演示
 
 1637
 01:04:36,158 --> 01:04:37,924
 But generally, when you add an observer,
+通常来说，当你们添加一个观察器
 
 1638
 01:04:37,926 --> 01:04:39,926
 you want to get that observer cookie back and
+你想要得到观察器的 cookie
 
 1639
 01:04:39,928 --> 01:04:41,728
 you want to remove it somewhere sensible.
+你想要删除其他敏感信息
 
 1640
 01:04:42,964 --> 01:04:44,363
 All right? So let's see if this works.
+好的，让我们看看它怎么工作
 
 1641
 01:04:46,666 --> 01:04:48,683
 Okay? Now,
+好的现在
 
 1642
 01:04:48,684 --> 01:04:50,701
 last time we changed the elasticity to 1.1, I think.
+最后一次我们改变这个弹性为 1.1
 
 1643
 01:04:50,704 --> 01:04:52,070
 Right. See? So look,
+看
 
 1644
 01:04:52,071 --> 01:04:53,437
 this guy's gonna go pretty wild, okay?
+这家伙看起来有点野
 
 1645
 01:04:53,439 --> 01:04:55,839
 He's gaining speed with every bounce.
+它每次碰撞都获得新的速度
 
 1646
 01:04:55,841 --> 01:04:57,074
 So let's slow him down.
+所以，让它慢下来
 
 1647
 01:04:57,076 --> 01:04:58,241
 Let's go over into Settings.
+让我们回到设置
 
 1648
 01:05:00,211 --> 01:05:01,811
 Notice that every time you install it,
+注意你安装它的每一次
 
 1649
 01:05:01,813 --> 01:05:03,979
 it's gonna install it here.
+它会在这里安装
 
 1650
 01:05:03,981 --> 01:05:07,449
 So let's change our elasticity from 1.1 down to really slow.
+让我们改变这个弹性从 1.1 到实际的慢速度
 
 1651
 01:05:08,585 --> 01:05:09,751
 Okay?
+好的
 
 1652
 01:05:09,752 --> 01:05:10,918
 Now, we can go back to Bouncer and
+让我们回到 Bouncer
 
 1653
 01:05:10,920 --> 01:05:14,287
 the next time Bouncer hits, it slows down, okay?
+下一次 Bouncer 碰撞，它减速
 
 1654
 01:05:15,223 --> 01:05:16,422
 See that? Almost dead.
+看没，快要死了
 
 1655
 01:05:17,458 --> 01:05:18,641
 Very little bounce.
+非常小的弹力
 
 1656
 01:05:18,642 --> 01:05:19,825
 Let's go back and change it again.
+让我们回去再改一下
 
 1657
 01:05:20,761 --> 01:05:22,460
 Go all the way back up to.
+一路回升
 
 1658
 01:05:22,462 --> 01:05:23,161
 Whoops.
+哇
 
 1659
 01:05:23,163 --> 01:05:25,129
 Up to high speed.
+最高速度
 
 1660
 01:05:27,866 --> 01:05:30,266
 And the next hit gaining energy.
+每一次撞击都获得能量
 
 1661
 01:05:30,268 --> 01:05:31,568
 Oh, yeah.
+好的
 
 1662
 01:05:31,569 --> 01:05:32,869
 Gaining more and more speed with every bounce.
+获得越来越快的速度
 
 1663
 01:05:32,871 --> 01:05:34,203
 Okay?
+好的
 
 1664
 01:05:34,205 --> 01:05:36,605
 There we go.
+接下来
 
 1665
 01:05:36,607 --> 01:05:39,074
 I don't even need to look.
+我甚至都不需要看
 
 1666
 01:05:39,076 --> 01:05:41,326
 Okay.
+好的
 
 1667
 01:05:41,327 --> 01:05:43,577
 [LAUGH] And it just bounced off and just disappeared.
+它一直反弹然后消失了
 
 1668
 01:05:43,580 --> 01:05:45,513
 Went into some ether.
+来看一些其他的
 
 1669
 01:05:45,515 --> 01:05:47,748
 Okay. [SOUND] That is it.
+好的，就是这个
 
 1670
 01:05:47,750 --> 01:05:51,251
 I finished early for once today, so thank you all for
+我今天提早结束了，非常感谢
 
 1671
 01:05:51,253 --> 01:05:52,252
 coming.
+你们的到来
 
 1672
 01:05:52,254 --> 01:05:53,886
 And I'll be here if you have any questions.
+我会在这如果你们有什么问题
 
 1673
 01:05:55,256 --> 01:05:55,287

@@ -22,12 +22,12 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 11. Unwind Segues, Alerts, Timers, View Animation | 进行中 | N/A
 12. Dynamic Animation | 进行中 | N/A
 13. Application Lifecycle and Core Motion | 完成 | 未开始
-14. Core Location and MapKit | 进行中 | N/A
+14. Core Location and MapKit | 完成 | 未开始
 15. Modal Segues | 完成 | 未开始
 16. Camera, Persistence, and Embed Segues | 进行中 | N/A
 17. Internationalization and Settings | 完成 | 未开始
 
-注：更新时间：北京时间 2015 年 05 月 4 日 17 时 37 分
+注：更新时间：北京时间 2015 年 05 月 26 日
 
 ### 校对规则
 

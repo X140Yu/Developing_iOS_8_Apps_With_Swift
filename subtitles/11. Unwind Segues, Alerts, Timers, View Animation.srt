@@ -4554,230 +4554,287 @@ Okay, next topic.
 00:35:29,218 --> 00:35:31,552
 Alerts and Action Sheets, okay?
 Alerts 和 Action Sheets
+Alerts 和 Action Sheets
 
 917
 00:35:31,554 --> 00:35:34,388
 So there are two kinds of "pop up and
+在 iOS 中可以使用两种用来
 
 918
 00:35:34,390 --> 00:35:37,657
 ask the user something" mechanisms in iOS.
+请求用户选择的弹出框
 
 919
 00:35:37,659 --> 00:35:40,426
 One is called an alert, and one is called an action sheet.
+一种叫做 Alert，另一种叫 Action sheet
 
 920
 00:35:40,428 --> 00:35:44,596
 And they use, actually, exactly the same API.
+而他们两的使用方法，基本上相同
 
 921
 00:35:44,598 --> 00:35:47,132
 You set them up in exactly the same way and
+你通过同样的方式来设置他们
 
 922
 00:35:47,134 --> 00:35:48,933
 I'm gonna show you how that works.
+我马上会向你演示如何操作
 
 923
 00:35:48,935 --> 00:35:50,468
 What's the difference between the two?
+那么这两个东西之间有什么区别呢？
 
 924
 00:35:50,470 --> 00:35:51,769
 Okay. Alerts, first of all,
+好，Alerts，但首先
 
 925
 00:35:51,771 --> 00:35:52,870
 they pop in the middle of the screen.
+它们都会直接弹出出现在屏幕的中央
 
 926
 00:35:52,872 --> 00:35:54,188
 They're both modal.
+他们都是 modal 的形式
 
 927
 00:35:54,189 --> 00:35:55,505
 Okay? They're both basically modal
+他们基本上就是最基础的 modal 
 
 928
 00:35:55,507 --> 00:35:56,806
 view controllers.
+view controller
 
 929
 00:35:56,808 --> 00:35:59,075
 Okay? They're just kind of
+他们只是有另一种显示的样式
 
 930
 00:35:59,077 --> 00:36:01,143
 drawn in a certain way, but they're really just a modal
+但其实他们就是
 
 931
 00:36:01,145 --> 00:36:03,178
 view controller because they both take over the screen.
+view controller，因为他们两都会掌管屏幕
 
 932
 00:36:04,548 --> 00:36:06,614
 But the alerts takes over the screen and
+但 alerts 会接管屏幕并且
 
 933
 00:36:06,616 --> 00:36:09,083
 comes up right in the middle.
+直接出现在中央
 
 934
 00:36:09,085 --> 00:36:11,819
 And usually alert is gonna ask you a question,
+而且通常 Alert 会向你问一些问题
 
 935
 00:36:11,821 --> 00:36:15,355
 ask the user a question where there is only, kind of, one or
+向用户询问那些只有一到两个
 
 936
 00:36:15,357 --> 00:36:16,189
 two answers.
+答案的问题
 
 937
 00:36:16,191 --> 00:36:18,858
 Like yes no, or do this cancel, or
+比如是或者否，或者要么取消
 
 938
 00:36:18,860 --> 00:36:20,659
 something like that.
+要么做那个
 
 939
 00:36:20,661 --> 00:36:23,462
 An alert also, by the way, can also have a text field, so
+同时，一个 alert 会有一个文本输入框
 
 940
 00:36:23,464 --> 00:36:24,996
 it could be like log in and
+可以是登录
 
 941
 00:36:24,998 --> 00:36:26,931
 you have to type your password in there.
+然后你可以在那输入你的密码
 
 942
 00:36:26,933 --> 00:36:29,267
 Okay or maybe even user name and password.
+甚至用户名和密码
 
 943
 00:36:29,269 --> 00:36:30,968
 So it can collect text.
+所以它可以可以收集文本
 
 944
 00:36:30,970 --> 00:36:32,770
 Action sheet cannot collect text from the user,
+Action sheet 就不能从用户那收集文本
 
 945
 00:36:32,772 --> 00:36:34,771
 only the alert can do that.
+只有 Alert 可以这样做
 
 946
 00:36:34,773 --> 00:36:37,407
 But if you had a question that had more than two answers to
+但如果你有超过两个答案的问题
 
 947
 00:36:37,409 --> 00:36:40,710
 it you're probably going to use an action sheet.
+那么你最好选择使用 Action sheet
 
 948
 00:36:40,712 --> 00:36:43,212
 Okay, so an action sheet.
+好，Action sheet
 
 949
 00:36:43,214 --> 00:36:45,014
 It presents on screen a little differently.
+它在屏幕上的样子稍微有点不同
 
 950
 00:36:45,016 --> 00:36:46,348
 It doesn't come up in the middle of the screen
+它不会像 Alert 那样出现在
 
 951
 00:36:46,350 --> 00:36:48,100
 like an alert.
+屏幕的正中间
 
 952
 00:36:48,101 --> 00:36:49,851
 It usually slides up from the bottom on an iPhone.
+它同样从 iPhone 的底部滑出
 
 953
 00:36:49,853 --> 00:36:53,254
 On an IPad we usually put it up in a popover and
+在 iPad 上我们通常会把它作为 popover 的形式出现
 
 954
 00:36:53,256 --> 00:36:56,023
 I'm going to show you how we do that in a moment.
+我待会会向你展示是怎么做的
 
 955
 00:36:56,025 --> 00:36:59,493
 An action sheet is sometimes referred to as a branching
+一个 Action Sheet 就是某种集结了一堆选项
 
 956
 00:36:59,495 --> 00:37:01,995
 decision sheet, so where you're basically making
+的表单，也就是说你可以在用户需要在三到四个选项中
 
 957
 00:37:01,997 --> 00:37:04,531
 a branching decision where the user wants to
+选择其中一件的时候
 
 958
 00:37:04,533 --> 00:37:07,600
 do one of three or four things and you're kind of picking
+你可以通过它列出这一堆选项
 
 959
 00:37:07,602 --> 00:37:10,436
 which one you're going to do, and you're gonna head down
+你可以把这个操作
 
 960
 00:37:10,438 --> 00:37:11,770
 that direction inside your app, okay?
+内置在你的应用中
 
 961
 00:37:12,806 --> 00:37:16,041
 So I think by example
+我想通过例子
 
 962
 00:37:16,043 --> 00:37:18,076
 is the easiest way to kind of see the difference here.
+才是看出区别的最简单的方式
 
 963
 00:37:18,078 --> 00:37:21,679
 So, I took our Cassini out that we wrote, and I added a
+在这里可以看到我们之前画的 Cassini 飞船，然后我在右上角
 
 964
 00:37:21,681 --> 00:37:25,082
 little button on the top that actually controls Cassini.
+添加了一个小按钮来控制 Cassini
 
 965
 00:37:25,084 --> 00:37:29,586
 Okay, it'll redeploy Cassini off to different places, okay,
+它可以重新部署 Cassini 飞到其他的地方
 
 966
 00:37:29,588 --> 00:37:31,954
 Saturn or can send it off to Titan or
+土星或者泰坦
 
 967
 00:37:31,956 --> 00:37:34,990
 send it towards the sun, or whatever.
+或者让它朝着太阳飞等等
 
 968
 00:37:34,992 --> 00:37:36,658
 Okay so I added that little redeploy button.
+好了我添加的这个小小的重新部署按钮
 
 969
 00:37:36,660 --> 00:37:38,493
 You see it up in the right hand corner there?
+你可以在右上角看到它吧
 
 970
 00:37:38,495 --> 00:37:39,861
 It says redeploy.
+上面写着重新部署
 
 971
 00:37:39,863 --> 00:37:43,464
 So part of my implementation of allowing the scene to be
+所以我的实现想法是通过 Action sheet 和 Alert 
 
 972
 00:37:43,466 --> 00:37:46,200
 redeployed, I use an action sheet and an alert.
+来重新部署场景
 
 973
 00:37:46,202 --> 00:37:47,785
@@ -4786,78 +4843,97 @@ Okay?
 974
 00:37:47,786 --> 00:37:49,369
 So here's the action sheet I used.
+这里是一个 Action sheet
 
 975
 00:37:49,372 --> 00:37:51,772
 When you click that redeploy button, it's gonna put up an
+当你点击那个重新部署按钮，它会弹出一个
 
 976
 00:37:51,774 --> 00:37:54,874
 action sheet that says where do you wanna send Cassini to?
+Action sheet 问你你想让 Cassini 去哪里？
 
 977
 00:37:54,876 --> 00:37:56,776
 I'm sure the Cassini guys have an app just like this,
+我敢肯定控制 Cassini 的家伙肯定也有一个像这样的 App
 
 978
 00:37:56,778 --> 00:37:58,611
 it's how Cassini is controlled.
+这一定就是 Cassini 被控制的方式
 
 979
 00:37:58,613 --> 00:38:02,381
 But, our app only lets them send it to Saturn, or
+但，我们的应用只允许我们让它去土星或者
 
 980
 00:38:02,383 --> 00:38:06,985
 Titan, moon of, is that a moon of Jupiter, I guess?
+泰坦，卫星，那是木星的卫星吗？我猜的
 
 981
 00:38:06,987 --> 00:38:09,854
 Or they can go take a closeup of the sun,
+或者它可以到离太阳很近的地方
 
 982
 00:38:09,856 --> 00:38:11,689
 which is going to destroy Cassini.
+这样做会摧毁掉 Cassini
 
 983
 00:38:11,691 --> 00:38:13,757
 Okay? Because it's too hot there.
+因为那里太热了
 
 984
 00:38:13,759 --> 00:38:15,592
 Or they can cancel.
+或者他们可以取消
 
 985
 00:38:15,593 --> 00:38:17,426
 So that's the action sheet that I invented.
+这就是我创建的  Action sheet
 
 986
 00:38:17,429 --> 00:38:20,663
 And then if you decide you want to go somewhere,
+如果你决定好了你想要去哪里
 
 987
 00:38:20,665 --> 00:38:23,633
 then I put up an alert that says oh, if you want to send
+那么我就会弹出一个 Alert 问你，嘿，如果你想要让
 
 988
 00:38:23,635 --> 00:38:27,670
 Cassini to Titan, you need to login and give your guidance
+Cassini 去泰坦，那么你需要登录并且交出
 
 989
 00:38:27,672 --> 00:38:30,539
 system control password or something, okay?
+你的导航系统密码或随便什么
 
 990
 00:38:30,541 --> 00:38:32,540
 So this is my alert, okay?
+所以这就是我的 Alert
 
 991
 00:38:32,542 --> 00:38:34,042
 So we're going to look at the code,
+我们将要看一下代码
 
 992
 00:38:34,044 --> 00:38:37,711
 how I did this action sheet and alert.
+我是怎么实现这个 Action sheet 和 Alert 的
 
 993
 00:38:37,713 --> 00:38:39,697
@@ -4866,330 +4942,412 @@ Okay? So
 994
 00:38:39,698 --> 00:38:41,682
 let's start with the action sheet.
+让我们从 Action sheet 开始
 
 995
 00:38:41,684 --> 00:38:44,317
 Now the code for both looks incredibly similar, so
+这两个东西的代码看起来惊人地相似
 
 996
 00:38:44,319 --> 00:38:45,852
 what I'm teaching you here about action sheet,
+所以我现在教你的 action sheeet
 
 997
 00:38:45,854 --> 00:38:48,254
 almost can be 100% applying to the alert.
+几乎完全可以用在 alert 上
 
 998
 00:38:48,256 --> 00:38:49,455
 But basically in either case,
+对于两种方案来说
 
 999
 00:38:49,457 --> 00:38:52,257
 you create an instance of a UIAlertController.
+你都是在创建一个 UIAlertController 的实例
 
 1000
 00:38:52,259 --> 00:38:54,659
 This is just a UI view controller, okay.
+这就是一个 UIViewController
 
 1001
 00:38:54,661 --> 00:38:58,162
 It's a sub class of a UI view controller [SOUND] that,
+它是 UIViewController 的子类
 
 1002
 00:38:58,164 --> 00:39:00,598
 you know, gets presented modally.
+你懂的，
 
 1003
 00:39:00,600 --> 00:39:01,732
 And that's basically it.
+基本上就是这样
 
 1004
 00:39:01,734 --> 00:39:03,700
 Okay, alerts and actions are basically a sub class of
+Alerts 和 Actions 基本上就是 UIViewController
 
 1005
 00:39:03,702 --> 00:39:05,268
 UI view controllers that get presented modally.
+被以 modal 的形式展示了出来
 
 1006
 00:39:05,270 --> 00:39:08,137
 They just happen to draw on these particular ways.
+他们只是被某种特殊的实行画了出来
 
 1007
 00:39:08,139 --> 00:39:09,939
 When you create your view control, you're going to give
+当你创建 view controller 的时候，你需要给出一个
 
 1008
 00:39:09,941 --> 00:39:12,875
 the title that you can see where the title Redeploy
+标题，你可以在 action sheet 的最上面
 
 1009
 00:39:12,877 --> 00:39:16,544
 Cassini appears there in my action sheet right at the top.
+看到有个标题 "Redeploy Cassini"
 
 1010
 00:39:16,546 --> 00:39:18,580
 And then the message,
+然后是信息
 
 1011
 00:39:18,581 --> 00:39:20,615
 which will appear right below it in non bold.
+会在标题下面以非粗体的形式展示
 
 1012
 00:39:20,617 --> 00:39:22,550
 That's actually probably using preferred fonts.
+这是可能就是使用的 preferred fonts
 
 1013
 00:39:22,552 --> 00:39:24,585
 So that's probably actually like a headline font and
+这可能就是大标题粗体
 
 1014
 00:39:24,587 --> 00:39:27,187
 a body font I'm guessing.
+字号，我猜
 
 1015
 00:39:27,189 --> 00:39:29,222
 And then you specify the preferred style.
+但后你需要指定一个样式
 
 1016
 00:39:29,224 --> 00:39:31,224
 So this is how you decide whether it's an action sheet
+这里就是你决定显示为 action sheet
 
 1017
 00:39:31,226 --> 00:39:32,291
 or an alert.
+还是 alert
 
 1018
 00:39:32,293 --> 00:39:33,525
 So here I'm doing action sheet so
+那么我将选择 action sheet
 
 1019
 00:39:33,527 --> 00:39:35,927
 I say UIAlertController style action sheet.
+我填上 UIAlertController 样式 Action sheet
 
 1020
 00:39:35,929 --> 00:39:37,462
 So that means I'm making an action sheet.
+这就以为着我要制作一个 Action sheet
 
 1021
 00:39:37,464 --> 00:39:38,647
 So that's it.
+就是这样
 
 1022
 00:39:38,648 --> 00:39:39,831
 I create my view controller.
+我创建了我自己的 View Controller
 
 1023
 00:39:39,833 --> 00:39:45,035
 Now I need to add some items into there like orbit Saturn,
+现在我需要添加一些选项，比如土星轨道
 
 1024
 00:39:45,037 --> 00:39:48,505
 explore Titan, close up of Sun, cancel.
+勘探泰坦，靠近太阳，取消
 
 1025
 00:39:48,507 --> 00:39:50,190
 How do I do that?
+我要怎么做呢？
 
 1026
 00:39:50,191 --> 00:39:51,874
 I do that by calling the method addAction on the alert
+我通过 alert 来调用方法 addAction 
 
 1027
 00:39:51,877 --> 00:39:54,043
 on this view controller I just created.
+在这个我刚刚创建的 view controller 上
 
 1028
 00:39:54,045 --> 00:39:56,345
 And the argument to that is a UIAlertAction,
+参数就是 UIAlertAction
 
 1029
 00:39:56,347 --> 00:39:59,214
 which is another class that I'm going to create, which
+这就是另一个我将要创建的类
 
 1030
 00:39:59,216 --> 00:40:02,117
 really just kind of collects all of the information about
+这基本上就是专门为了收集信息
 
 1031
 00:40:02,119 --> 00:40:03,284
 a particular action.
+的一个类
 
 1032
 00:40:03,286 --> 00:40:05,887
 So here is how UIAlertAction looks like.
+好了，这就是 UIAlertAction 的样子
 
 1033
 00:40:05,889 --> 00:40:07,088
 It's got a title.
+它需要一个标题
 
 1034
 00:40:07,090 --> 00:40:09,890
 That's like Orbit Saturn there or Explore Titan,
+比如土星轨道或这探索泰坦
 
 1035
 00:40:09,892 --> 00:40:11,324
 that's the title.
+这就是标题
 
 1036
 00:40:11,326 --> 00:40:12,292
 It's got a style.
+它需要样式
 
 1037
 00:40:12,294 --> 00:40:13,526
 We'll talk about that in a second.
+我们待会再来讲这个
 
 1038
 00:40:13,528 --> 00:40:15,928
 And then it's got a handler, okay?
+它还需要一个 handler
 
 1039
 00:40:15,930 --> 00:40:17,763
 So here, you're starting to see closures again in
+这里，你又会看到闭包出现在
 
 1040
 00:40:17,765 --> 00:40:18,864
 the iOS API.
+iOS API 中
 
 1041
 00:40:18,866 --> 00:40:20,965
 This handler is just a closure, okay?
+这个 handler 就是闭包
 
 1042
 00:40:20,967 --> 00:40:23,801
 The argument is gonna be this action itself, so
+这个参数就是这个 action 本身
 
 1043
 00:40:23,803 --> 00:40:25,369
 it's basically like sender.
+基本上就像 sender 一样
 
 1044
 00:40:25,371 --> 00:40:28,238
 And inside this closure, you can do whatever you wanna do
+在这个闭包里面，当点击这个 action 的时候
 
 1045
 00:40:28,240 --> 00:40:30,340
 when they click on that particular action,
+你可以做任何你想要做的事情
 
 1046
 00:40:30,342 --> 00:40:31,608
 like Orbit Saturn.
+比如土星轨道
 
 1047
 00:40:31,610 --> 00:40:33,776
 So the code in there would probably go off and
+在代码里面可能会是
 
 1048
 00:40:33,778 --> 00:40:38,013
 send Cassini instructions to go Orbit Saturn, okay?
+给 Cassini 发送命令，去土星轨道
 
 1049
 00:40:38,015 --> 00:40:39,581
 So let's look at an example of one of these.
+我们来看一个例子
 
 1050
 00:40:39,583 --> 00:40:40,982
 Let's look at Orbit Saturn.
+来看看土星轨道
 
 1051
 00:40:40,984 --> 00:40:44,652
 The title is Orbit Saturn, the style is default, okay?
+标题就是土星轨道，样式为默认
 
 1052
 00:40:44,654 --> 00:40:46,587
 We'll talk about some other styles in a second here, but
+等一下我们会讲到其他的样式
 
 1053
 00:40:46,589 --> 00:40:48,522
 default is just the default line,
+但现在就填默认样式
 
 1054
 00:40:48,524 --> 00:40:50,957
 this blue colored text right there, like Orbit Saturn,
+像土星轨道，探索泰坦这样，这种蓝色的文字，
 
 1055
 00:40:50,959 --> 00:40:53,793
 Explore Titan, they're both that.
+他们两就属于默认样式
 
 1056
 00:40:53,795 --> 00:40:55,445
 And then the closure I'm
+然后是闭包
 
 1057
 00:40:55,446 --> 00:40:57,096
 gonna put is just to go into orbit around Saturn.
+我将会直接进入土星环形轨道
 
 1058
 00:40:57,098 --> 00:40:59,932
 And similarly, Explore Titan would look exactly the same,
+同样的，探索泰坦也使用
 
 1059
 00:40:59,934 --> 00:41:02,134
 also default style.
+完全相同的默认样式
 
 1060
 00:41:02,136 --> 00:41:05,904
 And maybe Cassini's mission was I think to orbit Saturn or
+我想的 Cassini 的任务是
 
 1061
 00:41:05,906 --> 00:41:07,172
 go to Saturn.
+去土星
 
 1062
 00:41:07,173 --> 00:41:08,439
 So maybe if you're gonna switch it over to going to
+或许你可以修改为去
 
 1063
 00:41:08,441 --> 00:41:11,709
 Titan then you have to log in and do your guidance password.
+泰坦，然后你需要登录并且输入你的导航密码
 
 1064
 00:41:11,711 --> 00:41:13,677
 Otherwise, you can always send Cassini back to
+除此之外，你也可以让 Cassini 回去或者去
 
 1065
 00:41:13,679 --> 00:41:15,145
 Saturn, I guess.
+土星，我猜
 
 1066
 00:41:15,147 --> 00:41:16,279
 Okay.
+好了
 
 1067
 00:41:16,281 --> 00:41:19,082
 So there's the example of the default actions.
+这就是默认 actions 的例子
 
 1068
 00:41:19,084 --> 00:41:21,484
 So let's look at the next one, that Closeup of Sun.
+让我们来看看下一个，靠近太阳
 
 1069
 00:41:21,486 --> 00:41:24,820
 So the Closeup of Sun is almost exactly the same except
+靠近太阳也几乎与刚才一样
 
 1070
 00:41:24,822 --> 00:41:28,223
 for its style is not default, it's .Destructive.
+除了它的样式不是默认，而是 .Destructive
 
 1071
 00:41:29,225 --> 00:41:31,025
 Okay?
+好吗
 
 1072
 00:41:31,026 --> 00:41:32,826
 So .Destructive makes it show up in red.
+.Destructive 会让文字变成红色
 
 1073
 00:41:32,829 --> 00:41:34,995
 So anything that's gonna really damage something,
+所以任何会造成损害的事情
 
 1074
 00:41:34,997 --> 00:41:38,465
 like delete this entry, or something like that,
+比如删除这个实例，或者其他的东西
 
 1075
 00:41:38,467 --> 00:41:41,868
 you can make it .Destructive and it will show up in red.
+你就可以使用 .Destructive 然后它就会显示为红色
 
 1076
 00:41:41,870 --> 00:41:43,486
@@ -5198,262 +5356,327 @@ Okay.
 1077
 00:41:43,487 --> 00:41:45,103
 Otherwise, it's exactly the same as the other ones.
+除此之外还有另一个样式
 
 1078
 00:41:45,106 --> 00:41:48,707
 And then the Cancel one also has a special thing, .Cancel.
+对于取消来说，也有一个特殊的东西 .Cancel
 
 1079
 00:41:48,709 --> 00:41:49,541
 All right?
+好吧
 
 1080
 00:41:49,543 --> 00:41:52,343
 And you can see that Cancel is
+你可以看到取消
 
 1081
 00:41:52,345 --> 00:41:54,412
 kinda separated from the rest of em?
+是与其他选项分开的
 
 1082
 00:41:54,414 --> 00:41:56,747
 It's down at the bottom, it's got a little extra space.
+它在最下面，并且有额外的一点空间
 
 1083
 00:41:56,749 --> 00:41:58,849
 That's pretty much the only difference between Cancel,
+这基本上就是取消样式的唯一区别了
 
 1084
 00:41:58,851 --> 00:42:01,484
 cuz you still get a closure there you get to execute,
+因为你仍然可以在点击它的时候
 
 1085
 00:42:01,486 --> 00:42:02,485
 when it's clicked on.
+执行一个闭包
 
 1086
 00:42:04,222 --> 00:42:06,022
 Okay, so that's it.
+好了，就是这样
 
 1087
 00:42:06,023 --> 00:42:07,823
 So, alerts couldn't be any simpler to create, okay?
+Alerts 已经不能更简单了
 
 1088
 00:42:07,825 --> 00:42:10,258
 So that's how you create this view controller and
+这就是你怎么创建这个 view controller 并且
 
 1089
 00:42:10,260 --> 00:42:11,960
 configure it with its actions.
+配置它的行为
 
 1090
 00:42:11,962 --> 00:42:13,594
 Now, how do we put this thing on screen?
+现在，我们应该怎么把它放在屏幕上呢
 
 1091
 00:42:13,596 --> 00:42:15,529
 How do we get this alert to actually slide up
+我们怎么才能让这个 alert 从
 
 1092
 00:42:15,531 --> 00:42:16,614
 from the bottom?
+底部滑上去呢
 
 1093
 00:42:16,615 --> 00:42:17,698
 Well, it's just a UIViewController,
+它其实就是 UIViewController
 
 1094
 00:42:17,700 --> 00:42:19,066
 we're gonna present it modally.
+我们只要通过 modal 的方式来 present 
 
 1095
 00:42:19,068 --> 00:42:21,801
 So, there's a method in UIViewController called
+好，在 UIViewController 中有一个方法叫做
 
 1096
 00:42:21,803 --> 00:42:23,102
 presentViewController.
+presentViewConroller
 
 1097
 00:42:23,104 --> 00:42:24,437
 I haven't really talked about it cause
+我还没有怎么说过它
 
 1098
 00:42:24,439 --> 00:42:26,505
 we haven't talked about modal presentation.
+因为我们还没有谈过 model 的展示方式
 
 1099
 00:42:26,507 --> 00:42:28,407
 But all presentViewController is,
+但 presentViewController 的作用就是这个
 
 1100
 00:42:28,409 --> 00:42:31,276
 it presents a view controller on screen.
+让一个 view controller 展示在屏幕上
 
 1101
 00:42:31,278 --> 00:42:33,444
 And if it's a modal view controller like alerts are,
+而且如果它是一个 modal view controller 比如 alert
 
 1102
 00:42:33,446 --> 00:42:34,545
 it'll appear modally.
+它就会 modal 的方式出现
 
 1103
 00:42:35,648 --> 00:42:37,314
 Okay? It only has three arguments
+懂了吗，它只有三个参数
 
 1104
 00:42:37,316 --> 00:42:40,684
 which is the UIViewController to present,
+展示哪个 UIViewController
 
 1105
 00:42:40,686 --> 00:42:44,687
 whether to animate it so in the case of the action sheet,
+是否执行动画，我们这里是 action sheet
 
 1106
 00:42:44,689 --> 00:42:46,655
 it slides up from the bottom.
+所以它会从底部划上去
 
 1107
 00:42:46,657 --> 00:42:48,557
 And then you also get a closure there,
+然后你会得到一个闭包
 
 1108
 00:42:48,559 --> 00:42:52,327
 completion, which will get called, this is closure,
+completion，它会被调用，这是个闭包
 
 1109
 00:42:52,329 --> 00:42:53,928
 it takes no arguments, returns nothing.
+没有参数，也不需要返回任何东西
 
 1110
 00:42:53,930 --> 00:42:55,396
 It'll have when it's done.
+执行完成就完了
 
 1111
 00:42:55,398 --> 00:42:58,565
 So when that thing has been finally presented on screen
+当某个东西最终被展示到了屏幕上
 
 1112
 00:42:58,567 --> 00:43:00,000
 and done its animation, boom,
+完成了它的动画， BOOM
 
 1113
 00:43:00,002 --> 00:43:01,801
 you'll get your completion called.
+你的 completion 会被调用
 
 1114
 00:43:01,803 --> 00:43:03,770
 You almost never do anything there.
+你几乎不会在这里做任何事
 
 1115
 00:43:03,772 --> 00:43:05,338
 It's really, doesn't make a lot of sense.
+这也确实没有什么道理
 
 1116
 00:43:05,340 --> 00:43:07,740
 The things already up, it's doing its business.
+东西已经被展示出来了，那么就已经完成了工作
 
 1117
 00:43:07,742 --> 00:43:09,941
 There's really no business for you, as its presenter,
+作为它的展示者，在这个时刻
 
 1118
 00:43:09,943 --> 00:43:12,544
 to be doing at that point, but you could, okay?
+这里已经没有事情需要你来做了，但你有这个选项
 
 1119
 00:43:13,813 --> 00:43:16,747
 So that's it, UIAlerts are just UIViewController.
+好了，就是这样， UIAlerts 就是 UIViewController
 
 1120
 00:43:16,749 --> 00:43:19,750
 Just add actions to them, then you present them.
+只是添加一些动作，然后你展示他们
 
 1121
 00:43:19,752 --> 00:43:24,821
 Now, what about this action sheet thing though on an iPad?
+现在要说的是，这个 Action sheet 在 iPad 上是怎么作用的呢？
 
 1122
 00:43:25,824 --> 00:43:28,357
 Okay? So here's same app in iPad and
+在 iPad 上有这么一个相同的应用
 
 1123
 00:43:28,359 --> 00:43:30,492
 I got that redeploy button up there in the right.
+右上角仍然有一个重新部署按钮
 
 1124
 00:43:30,494 --> 00:43:32,861
 Now look what happens when I do redeploy in the iPad.
+来看看当我在 iPad 上按下重新部署
 
 1125
 00:43:34,030 --> 00:43:35,396
 Same thing.
+同样的
 
 1126
 00:43:35,398 --> 00:43:37,865
 But it shows up in a popover.
+但它展示为弹出框
 
 1127
 00:43:38,834 --> 00:43:39,733
 Okay? It doesn't
+它没有
 
 1128
 00:43:39,735 --> 00:43:41,268
 slide up from the bottom.
+从底部滑上来
 
 1129
 00:43:41,269 --> 00:43:42,802
 It wouldn't look very good if it slid up from the bottom.
+从底部滑上来也不会很好看
 
 1130
 00:43:42,804 --> 00:43:45,938
 It would either be kinda silly narrow, or
+这样会有点狭窄样子
 
 1131
 00:43:45,940 --> 00:43:48,907
 it would be so fat and wide it would look ridiculous.
+或者会看起来很宽很胖，看起来很荒谬
 
 1132
 00:43:48,909 --> 00:43:51,443
 It makes much more sense to put it in a popover like that.
+作为弹出框的形式来出来要合理得多
 
 1133
 00:43:51,445 --> 00:43:54,879
 Notice that the popover is different in one big way.
+从另一个方面来说弹出框也是不同的
 
 1134
 00:43:54,881 --> 00:43:57,015
 No cancel button, okay?
+没有取消按钮
 
 1135
 00:43:57,017 --> 00:43:58,983
 And that's because you don't need a cancel button to
+你也不需要一个取消按钮
 
 1136
 00:43:58,985 --> 00:44:00,250
 cancel a popover.
+来取消弹出框
 
 1137
 00:44:00,252 --> 00:44:03,086
 A popover is modal, and if you click anywhere else in your
+一个弹出框是 modal 的形式，如果你在应用的任何一个地方点击了
 
 1138
 00:44:03,088 --> 00:44:05,488
 app, boom, it's gonna cancel that popover.
+BOOM，它就会取消这个弹出框
 
 1139
 00:44:05,490 --> 00:44:09,092
 But if you have a cancel action, like this one does,
+但如果你有一个取消的 action，就像这个一样
 
 1140
 00:44:09,094 --> 00:44:11,394
 its actions still will be called,
+那么 action 仍然会被调用
 
 1141
 00:44:11,396 --> 00:44:13,862
 even in the popover cancel case.
+即使是弹出框取消这样的情况
 
 1142
 00:44:13,864 --> 00:44:15,614
@@ -5462,234 +5685,292 @@ Okay?
 1143
 00:44:15,615 --> 00:44:17,365
 So that cancel thing is kind of still in play,
+所以取消操作仍然会存在
 
 1144
 00:44:17,368 --> 00:44:18,733
 it's just that you access it differently.
+只是另一种方式
 
 1145
 00:44:18,735 --> 00:44:20,668
 Instead of hitting the Cancel button like the bottom of
+不是像 iPhone 应用那样点击底部的取消按钮
 
 1146
 00:44:20,670 --> 00:44:22,937
 the iPhone version, you just click somewhere else and
+而是点击其他的地方
 
 1147
 00:44:22,939 --> 00:44:23,771
 make the popover go away.
+来让弹出框消失
 
 1148
 00:44:25,107 --> 00:44:26,172
 Everyone understand that?
+大家明白了吗？
 
 1149
 00:44:26,174 --> 00:44:27,907
 All right, but how do we make this work?
+好了，但现在我们要怎么让这个运行呢？
 
 1150
 00:44:27,909 --> 00:44:31,677
 Because this is not quite enough information
+因为目前来看没有足够的信息
 
 1151
 00:44:31,679 --> 00:44:34,112
 to present that popover, okay?
+来展示这个弹出框，对吧
 
 1152
 00:44:34,114 --> 00:44:36,247
 That popover needs one really important piece of
+这个弹出框需要一个非常重要的信息
 
 1153
 00:44:36,249 --> 00:44:39,183
 information, which is who is popping me up?
+那就是，谁让我弹出的？
 
 1154
 00:44:39,185 --> 00:44:40,985
 Because you see it has that little white triangle
+因为你看这里顶部有一个白色的小三角形
 
 1155
 00:44:40,987 --> 00:44:43,320
 at the top that's pointing to redeploy?
+指着重新部署按钮对吧
 
 1156
 00:44:43,322 --> 00:44:46,189
 So nowhere here are we saying, oh, Mr.
+那就是我们在某个地方说，弹出框先生
 
 1157
 00:44:46,191 --> 00:44:49,759
 Popover, point to that redeploy button, okay?
+指着那个重新部署按钮吧
 
 1158
 00:44:49,761 --> 00:44:51,294
 So we need to say that.
+所以我们需要这样说
 
 1159
 00:44:51,296 --> 00:44:55,131
 So that means when we put any action sheet up and it's
+这也意味着当我们把一个弹出框
 
 1160
 00:44:55,133 --> 00:44:59,134
 gonna happen on an iPad where there might be a popover.
+放在 iPad 上时，我们需要告诉它在哪里弹出
 
 1161
 00:44:59,136 --> 00:45:00,869
 We need to get a hold of the popover
+我们需要获取到这个悬浮
 
 1162
 00:45:00,871 --> 00:45:02,403
 presentation controller.
+展示的 controller
 
 1163
 00:45:02,405 --> 00:45:05,473
 The same one we got ahold of, back when we were doing
+与在之前那个应用中同样的获取方式
 
 1164
 00:45:05,475 --> 00:45:09,509
 the popover in the previous app, the psychologist app.
+那个心理学应用
 
 1165
 00:45:09,511 --> 00:45:11,478
 Same popover presentation controller.
+同样的弹出弹出框
 
 1166
 00:45:11,480 --> 00:45:13,379
 We need to get it and we just need to tell it,
+我们需要获取它，并且我们要告诉它
 
 1167
 00:45:13,381 --> 00:45:15,014
 here's the button that's presenting you, so
+这里有个按钮，就是它要弹出你
 
 1168
 00:45:15,016 --> 00:45:16,615
 you can point to it.
+所以你可以指着它
 
 1169
 00:45:16,617 --> 00:45:17,315
 Okay?
+对吧
 
 1170
 00:45:17,317 --> 00:45:18,416
 So we do that like this.
+我们就这么做
 
 1171
 00:45:19,686 --> 00:45:21,736
 First of all,
+首先
 
 1172
 00:45:21,737 --> 00:45:23,787
 just have to say that the alerts presentation style,
+告诉 alert 的展示样式
 
 1173
 00:45:23,790 --> 00:45:27,558
 its modal presentation style, is popover presentation style.
+是 modal 展示样式，这就是弹出框展示样式
 
 1174
 00:45:27,560 --> 00:45:30,360
 If we don't tell it that, then it will never make a popover
+如果我们不告诉它，那么它也永远不会成为一个
 
 1175
 00:45:30,362 --> 00:45:31,695
 presentation controller.
+悬浮展示控制器
 
 1176
 00:45:31,697 --> 00:45:34,797
 So we can't tell it anything cause it won't exist.
+由于其不存在那么我们就什么都不能做
 
 1177
 00:45:34,799 --> 00:45:37,667
 But once we say that this UIViewController
+一旦我们说，这是一个 UIViewController
 
 1178
 00:45:37,669 --> 00:45:40,536
 modalPresentationStyle is a popover, now we can say okay,
+modalPresentationStyle 就是弹出框，那么就可以了
 
 1179
 00:45:40,538 --> 00:45:43,105
 well give me the popover presentation controller.
+它就会给我们一个悬浮展示 controller
 
 1180
 00:45:43,107 --> 00:45:45,073
 And the BarButtonItem,
+还有 BarButtonItem
 
 1181
 00:45:45,075 --> 00:45:48,509
 which is that redeploy up there is this.
+这就是重新部署按钮
 
 1182
 00:45:48,511 --> 00:45:51,812
 And so I point it to the redeployBarButtonItem, and
+所以我填写 redeployBarButtonItem
 
 1183
 00:45:51,814 --> 00:45:55,682
 now when it pops over, when it gets presented modally here,
+当它被以 modal 的方式展示时，就会从那里弹出 
 
 1184
 00:45:55,684 --> 00:45:57,717
 using a popover presentation,
+使用 popover presentation
 
 1185
 00:45:57,719 --> 00:46:00,653
 it will point to the redeployButton, okay?
+它会指着重新部署按钮
 
 1186
 00:46:02,556 --> 00:46:05,991
 The cool thing is because of adaptive UIs,
+这也是非常酷的一个东西，因为它的 UI 是自适应的
 
 1187
 00:46:05,993 --> 00:46:07,726
 which we talked about back then,
+我们之前谈到过
 
 1188
 00:46:07,728 --> 00:46:10,828
 is that this code works exactly the same on iPhone.
+这段代码同样可以在 iPhone 上使用
 
 1189
 00:46:12,098 --> 00:46:14,898
 So if you put in those three lines to make the popover
+你添加的这三行让弹出框运行的代码
 
 1190
 00:46:14,900 --> 00:46:17,000
 work, it won't effect the iPhone at all.
+完全不会影响到 iPhone
 
 1191
 00:46:17,002 --> 00:46:21,470
 Because the iPhone already adapts popovers to present
+因为 iPhone 已经自适应了弹出框
 
 1192
 00:46:21,472 --> 00:46:23,172
 over the whole screen, remember?
+为整个屏幕，记得吗
 
 1193
 00:46:23,174 --> 00:46:25,807
 And in fact, we had to go do some work in psychologists
+事实上我们在心理学应用中做了一些额外的工作
 
 1194
 00:46:25,809 --> 00:46:29,377
 to stop it from doing that adapting.
+来让它不要自适应
 
 1195
 00:46:29,379 --> 00:46:31,612
 So that it would show up in a little popover on the phone.
+所以这样会展示一个弹出框在手机上
 
 1196
 00:46:31,614 --> 00:46:33,047
 But if you don't do any of that work,
+但如果你什么也不做
 
 1197
 00:46:33,049 --> 00:46:35,883
 then by default it shows just like this.
+默认它就会这样显示
 
 1198
 00:46:35,885 --> 00:46:37,751
 Until it takes over the whole screen on the iPhone.
+直到它掌控整个 iPhone 屏幕
 
 1199
 00:46:37,753 --> 00:46:40,620
 So that's why setting the modal presentation style to
+所以，自适应，这就是为什么我们设置了 modal presentation 样式
 
 1200
 00:46:40,622 --> 00:46:43,723
 popover still works on the iPhone because it adapts.
+但在 iPhone 上仍然起效的原因
 
 1201
 00:46:45,226 --> 00:46:46,291
@@ -5698,22 +5979,27 @@ Okay?
 1202
 00:46:46,293 --> 00:46:47,258
 Any questions about that?
+有任何问题吗？
 
 1203
 00:46:47,260 --> 00:46:48,726
 So that's how you do an action sheet.
+这就是你使用 Action Sheet 的方式
 
 1204
 00:46:48,728 --> 00:46:51,595
 You're gonna do the same body of code you see right there
+在你所有的 Action sheet 中你都需要使用
 
 1205
 00:46:51,597 --> 00:46:53,030
 for every action sheet you ever do.
+这些同样的代码
 
 1206
 00:46:54,466 --> 00:46:56,566
 All right, now, let's go talk about the alert.
+好了， 现在让我们来谈谈 Alert
 
 1207
 00:46:56,568 --> 00:46:57,767
@@ -5722,154 +6008,192 @@ Okay.
 1208
 00:46:57,768 --> 00:46:58,967
 The only difference in creating the view controller
+唯一的不同就是，当你在创建 view controller 的时候
 
 1209
 00:46:58,970 --> 00:47:01,771
 is you say that its style is alert instead of action sheet.
+你需要设置它的样式为 alert 而不是 action sheet
 
 1210
 00:47:01,773 --> 00:47:03,472
 Otherwise, it's exactly the same.
+除此之外，其他的都一模一样
 
 1211
 00:47:03,474 --> 00:47:05,474
 Okay, iPad different text here,
+好了，iPad 有一点不同的文本
 
 1212
 00:47:05,476 --> 00:47:07,709
 obviously login required and please enter your Cassini
+很明显当你在进入  Cassini 的导航系统时
 
 1213
 00:47:07,711 --> 00:47:10,745
 guidance system password instead of the other things.
+你需要登录输入密码
 
 1214
 00:47:10,747 --> 00:47:12,580
 But, otherwise I'm just changing
+但除此之外就只需要修改
 
 1215
 00:47:12,582 --> 00:47:14,181
 the style to be alert.
+样式为 alert
 
 1216
 00:47:14,183 --> 00:47:15,782
 I do the same thing with adding actions.
+添加 action 也是同样的方式
 
 1217
 00:47:15,784 --> 00:47:18,118
 So, here I'm gonna add the Cancel button.
+这里我们要添加一个取消按钮
 
 1218
 00:47:18,120 --> 00:47:21,020
 Okay, I'm gonna add the Login button.
+好的，我还要添加一个登录按钮
 
 1219
 00:47:21,022 --> 00:47:23,689
 Now the interesting thing about the Login button is when
+有趣的部分来了，当我点击这个登录按钮的时候
 
 1220
 00:47:23,691 --> 00:47:27,325
 I login I wanna get the text out of that text field
+我想要一个文本输入框弹出来
 
 1221
 00:47:28,362 --> 00:47:31,595
 to use as a password for my guidance system, okay?
+问我要登录导航系统的密码
 
 1222
 00:47:32,898 --> 00:47:35,232
 So how am I gonna do that, okay.
+这就是我要做的
 
 1223
 00:47:35,234 --> 00:47:36,633
 Well first of all we're gonna ask,
+首先我们需要问的是
 
 1224
 00:47:36,635 --> 00:47:38,668
 how do I put that text field there?
+我怎么才能在这里放一个文本输入框？
 
 1225
 00:47:38,670 --> 00:47:40,336
 Okay, I've gotta put that text field in my alert.
+好了已经放了一个文本输入框在我的 Alert 里
 
 1226
 00:47:40,338 --> 00:47:42,638
 So here's how we put a text field in alert.
+这就是我们如何把输入框放在 Alert 中
 
 1227
 00:47:42,640 --> 00:47:45,440
 Use simple method addTextFieldWithConfiguration-
+使用了一个很简单的方法 addTextFieldWithConfigurationHandler 
 
 1228
 00:47:45,442 --> 00:47:47,709
 Handler, okay?
+对吧
 
 1229
 00:47:47,710 --> 00:47:49,977
 When you call that, it adds the text field to the alert
+当你调用它时，它就会给 Alert 添加一个输入框
 
 1230
 00:47:49,980 --> 00:47:52,380
 and it calls this closure so
+然后它会调用这个闭包函数
 
 1231
 00:47:52,382 --> 00:47:54,715
 that you can configure the text field however you want.
+这样你才能配置这个输入框为你想要的样式
 
 1232
 00:47:54,717 --> 00:47:55,816
 So here my text field,
+这就是我的输入框
 
 1233
 00:47:55,818 --> 00:47:58,151
 I configured it to say Guidance System Password
+我配置它显示"导航系统密码"
 
 1234
 00:47:58,153 --> 00:48:00,587
 as the place holder text there in the background.
+在这里作为文字占位符
 
 1235
 00:48:00,589 --> 00:48:02,155
 Remember in the smash tag,
+记得这个标签
 
 1236
 00:48:02,157 --> 00:48:04,890
 I had my search field say Twitter Search Query.
+之前有一个搜索输入框显示搜索 Twitter
 
 1237
 00:48:04,892 --> 00:48:06,442
 Well, here I'm having
+在之类我们需要显示
 
 1238
 00:48:06,443 --> 00:48:07,993
 this one say Guidance System Password in the background.
+导航系统密码
 
 1239
 00:48:07,995 --> 00:48:09,645
 And that's it.
+就是这样
 
 1240
 00:48:09,646 --> 00:48:11,296
 So I could do other things to set the font or
+我也可以做一些其他的事，比如设置字体
 
 1241
 00:48:11,298 --> 00:48:14,332
 whatever I want of the text field there.
+或者其他我可以对输入框做的事
 
 1242
 00:48:14,334 --> 00:48:15,767
 And you can call
+你可以调用
 
 1243
 00:48:15,768 --> 00:48:17,201
 addTextFieldWithConfiguration- Handler more than once and
+addTextFieldWithConfiguration 多次来添加
 
 1244
 00:48:17,203 --> 00:48:18,736
 then you'll get more than one text field.
+不止一个输入框
 
 1245
 00:48:18,738 --> 00:48:22,973
 So you could have a login and a password field.
+这样你就可以有登录和密码输入框
 
 1246
 00:48:22,975 --> 00:48:24,308
@@ -5878,150 +6202,187 @@ Now.
 1247
 00:48:24,309 --> 00:48:25,642
 This is great, I've got the text field in there.
+很棒，我们有一个输入框了
 
 1248
 00:48:25,644 --> 00:48:28,211
 When I click log in inside the action for
+当我在 action 中点击了 login
 
 1249
 00:48:28,213 --> 00:48:31,714
 log in, how do I get the text out of that text field, okay?
+我应该怎么获取这些文字呢
 
 1250
 00:48:31,716 --> 00:48:34,350
 Well, that looks slightly more complicated than you might
+这会看起来比你想像的稍微复杂一点
 
 1251
 00:48:34,352 --> 00:48:35,484
 like, it looks like this.
+看起来像这样
 
 1252
 00:48:35,486 --> 00:48:39,320
 I'm going to let TF, which is going to be a pointer to that
+我需要使用 let tf，这会指向刚才那个
 
 1253
 00:48:39,322 --> 00:48:43,958
 text field equal alert.text fields.
+输入框，= alert.textfields
 
 1254
 00:48:43,960 --> 00:48:47,227
 Which is an array of any object
+这会是一个可能为任何元素在里面的
 
 1255
 00:48:47,229 --> 00:48:50,230
 in its optional array, okay?
+optionanl 数组
 
 1256
 00:48:50,232 --> 00:48:53,166
 So, since it's an array, since it's optional,
+由于它是一个数组，由于它是可选的
 
 1257
 00:48:53,168 --> 00:48:54,834
 I'm gonna put a question mark there so
+我需要在这里加上一个 ?
 
 1258
 00:48:54,836 --> 00:48:57,603
 that I can do this optional chaining and just fail.
+这样我才能使用这个 optional chaininng，而且可能失败
 
 1259
 00:48:57,605 --> 00:49:00,506
 So TF, let TF, that could be nil,
+因为 let tf 可能为 nil
 
 1260
 00:49:00,508 --> 00:49:03,175
 that could end up being nil.
+这个可能为 nil
 
 1261
 00:49:03,177 --> 00:49:05,110
 That's a question mark, and then I'm gonna say .first.
+这是一个 ? 然后我要加上 .first
 
 1262
 00:49:05,112 --> 00:49:07,562
 If you remember an array,
+如果你记得 array 中的这个方法
 
 1263
 00:49:07,563 --> 00:49:10,013
 the method .first returns the first thing in the array
+.first 返回数组中第一个元素
 
 1264
 00:49:10,016 --> 00:49:11,615
 if the array has anything in it.
+如果数组中有东西的话
 
 1265
 00:49:11,617 --> 00:49:12,683
 If not, it returns nil.
+如果没有返回 nil
 
 1266
 00:49:13,619 --> 00:49:14,751
 So that's a great way to get something,
+这就是一个很好的办法来获取元素
 
 1267
 00:49:14,753 --> 00:49:16,652
 the first thing out of an array and
+在不检查数组中是否有东西的情况下
 
 1268
 00:49:16,654 --> 00:49:18,721
 not have to check to see if anything's in the array.
+获取数组中的第一个元素
 
 1269
 00:49:18,723 --> 00:49:20,889
 And it'll just return nil if there's nothing in the array.
+如果没有东西的话，就会返回 nil
 
 1270
 00:49:22,059 --> 00:49:24,626
 And then I've got to cast it to a text field because I told
+然后我需要转换为 text field 因为
 
 1271
 00:49:24,628 --> 00:49:26,594
 you it was an array of any object.
+我之前说过这是一个 anyObject 泛型的数组
 
 1272
 00:49:26,596 --> 00:49:28,396
 Why is it an array of any object?
+为什么泛型为 anyObject？
 
 1273
 00:49:28,398 --> 00:49:30,364
 Don't ask, historical reasons.
+别在意，历史原因
 
 1274
 00:49:30,366 --> 00:49:32,566
 It's a way objective C cat does things,
+这是之前 Objective-C 中遗留的东西
 
 1275
 00:49:32,568 --> 00:49:35,035
 it's not quite as expressive as Swift.
+它没有 Swift 这样丰富的表现力
 
 1276
 00:49:35,037 --> 00:49:36,636
 But, anyway, too bad.
+但，也不糟糕
 
 1277
 00:49:36,638 --> 00:49:37,570
 So you do this as ?,
+所以你使用的这个 as ?
 
 1278
 00:49:37,572 --> 00:49:39,539
 so that also could return nil.
+它仍然可能返回 nil
 
 1279
 00:49:39,540 --> 00:49:41,507
 So, it's three different things that could return nil,
+所以这里有三个东西可能返回 nil
 
 1280
 00:49:41,509 --> 00:49:44,076
 but if they don't, then I'm gonna get text field back.
+但如果它们没有，我就会得到输入框
 
 1281
 00:49:44,078 --> 00:49:45,961
 And if I get a text field back,
+当我获取到这个输入框的时候
 
 1282
 00:49:45,962 --> 00:49:47,845
 then I can just take the text out of the text field and
+我就可以把文本从输入框中取出
 
 1283
 00:49:47,848 --> 00:49:50,281
 log in.
+然后登录
 
 1284
 00:49:50,283 --> 00:49:50,848
@@ -6030,14 +6391,17 @@ Okay?
 1285
 00:49:52,251 --> 00:49:53,784
 Any questions about that?
+有人有问题吗？
 
 1286
 00:49:53,786 --> 00:49:55,118
 I know it's a little convoluted getting
+我知道取出输入框
 
 1287
 00:49:55,120 --> 00:49:56,019
 that text field out of there.
+这里有点绕
 
 1288
 00:49:56,021 --> 00:49:57,787
@@ -6046,34 +6410,42 @@ All right?
 1289
 00:49:57,789 --> 00:50:01,557
 So that's it for alerts.
+好，这就是 Alert
 
 1290
 00:50:01,559 --> 00:50:04,926
 Then you just present view controller exactly the same
+然后你需要像之前那样 presentViewController
 
 1291
 00:50:04,928 --> 00:50:09,364
 as we did for action sheet or any other modal view.
+就像我们对 Action sheet 和其他的 modal view 做得那样
 
 1292
 00:50:09,366 --> 00:50:11,465
 And how about an iPad?
+那 iPad 上呢？
 
 1293
 00:50:11,467 --> 00:50:12,867
 An iPad?
+一个 iPad？
 
 1294
 00:50:12,868 --> 00:50:14,268
 It looks exactly the same.
+它看起来一模一样
 
 1295
 00:50:14,270 --> 00:50:15,502
 Takes over the whole screen.
+接管整个屏幕
 
 1296
 00:50:15,504 --> 00:50:19,972
 No need to do any popover business with alerts on iPad.
+在 iPad 上 Alert 不需要做额外的操作
 
 1297
 00:50:19,974 --> 00:50:22,008
@@ -6082,22 +6454,27 @@ Okay.
 1298
 00:50:22,009 --> 00:50:24,043
 So that's alerts and action sheets.
+这就是 Alerts 和 Action sheets
 
 1299
 00:50:24,045 --> 00:50:25,978
 Just UIV controls that you're presenting modally
+就是你 modal 地展示一个 UIViewController 
 
 1300
 00:50:25,980 --> 00:50:26,645
 that's all they are.
+这就是全部了
 
 1301
 00:50:26,647 --> 00:50:28,680
 All right.
+好了
 
 1302
 00:50:28,682 --> 00:50:33,351
 Next topic, NSTimer.
+下一个话题，NSTimer
 
 1303
 00:50:33,353 --> 00:50:35,853

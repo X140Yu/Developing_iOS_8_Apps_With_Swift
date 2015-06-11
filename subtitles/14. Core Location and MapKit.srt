@@ -2,114 +2,143 @@
 ﻿1
 00:00:00,001 --> 00:00:04,602
 [MUSIC]
+[音乐]
 
 2
 00:00:04,604 --> 00:00:06,971
 Stanford University.
+斯坦福大学
+
 
 3
 00:00:13,579 --> 00:00:16,080
 >> Okay, well,
 
+
 4
 00:00:16,081 --> 00:00:18,582
 welcome to lecture number 14 of Stanford CS193p.
+欢迎来到斯坦福大学 CS193P 第14课。
 
 5
 00:00:18,584 --> 00:00:23,252
 It's winter of 2015 and today we're gonna talk
+2015冬季学期，今天我们要讨论手机
 
 6
 00:00:23,254 --> 00:00:26,589
 about how your phone can find out where it is,
+定位的问题，
 
 7
 00:00:26,591 --> 00:00:30,325
 where it is in the world or where it is on the planet.
+手机如何得知在这个星球上的位置。
 
 8
 00:00:30,327 --> 00:00:33,095
 And there's really two parts to that: Core Location which
+这个技术由两部分组成：CoreLocation框架和
 
 9
 00:00:33,097 --> 00:00:34,029
 is one framework and
 
+
 10
 00:00:34,031 --> 00:00:35,963
 then MapKit which is another framework.
+MapKit框架。
 
 11
 00:00:35,965 --> 00:00:39,100
 And so Core Location is the kind of the guts of it,
+CoreLocation是这个技术的底层，是一个没有UI部分
 
 12
 00:00:39,102 --> 00:00:42,870
 the non-UI underlying part of it and then MapKit is the user
+的框架，而MapKit是UI层面的框架，
 
 13
 00:00:42,872 --> 00:00:45,806
 interface, how we're gonna present.
+用于把地图上的信息
 
 14
 00:00:45,808 --> 00:00:49,476
 This information about where we are on a map to the user.
+展现给用户。
 
 15
 00:00:49,478 --> 00:00:52,111
 And so I'm gonna try and blast through these slides as
+我会尽快讲完课件，之后我们会一起
 
 16
 00:00:52,113 --> 00:00:54,814
 quickly as I can so I can get to a demo.
+做一个demo。
 
 17
 00:00:54,816 --> 00:00:56,815
 Because you learn a lot from the demo, I think,
+我觉得你们会从demo学到更多的东西，
 
 18
 00:00:56,817 --> 00:00:58,350
 seeing it in practice.
+从实际操作中学到更多。
 
 19
 00:00:58,352 --> 00:01:03,054
 And in my demo, I'm gonna show a map, obviously, and
+在这个demo里，我们要展示一个地图，然后
 
 20
 00:01:03,056 --> 00:01:06,357
 then I'm gonna put some waypoints on it, and we'll
+在地图上放置一些路径点，然后我们会学到如何从地图界面
 
 21
 00:01:06,359 --> 00:01:10,827
 learn how we can segue from a map to show more information.
+跳转出去以看到更多的信息。
 
 22
 00:01:10,829 --> 00:01:14,497
 And then if I have time, we will show how to do overlays,
+如果还有时间的话，我们会做一些覆盖层，
 
 23
 00:01:14,499 --> 00:01:16,899
 which is something that sits on top of the map, and
+实际上就是一些覆盖在地图上面的图层，当地图
 
 24
 00:01:16,901 --> 00:01:18,434
 as the map zooms in and moves around,
+缩放或者移动的时候，
 
 25
 00:01:18,436 --> 00:01:19,568
 the overlay stays with it.
+覆盖层会跟着一起动。
 
 26
 00:01:19,570 --> 00:01:22,437
 So it might be your route through traffic, or
+比如沿着交通道路的路线，在我们的demo里
 
 27
 00:01:22,439 --> 00:01:25,507
 in our case we're going to have a vacation, and
+我们会计划我们的假期，
 
 28
 00:01:25,509 --> 00:01:28,576
 we're gonna say where we went on our vacation.
+制定假期要去的地方。
 
 29
 00:01:28,578 --> 00:01:30,011
@@ -118,90 +147,112 @@ All right?
 30
 00:01:30,013 --> 00:01:32,246
 All right, so let's talk about Core Location,
+好，下边我们来讲CoreLocation。
 
 31
 00:01:32,248 --> 00:01:33,980
 this underlying part.
+底层的部分。
 
 32
 00:01:33,982 --> 00:01:36,516
 It's just a framework for managing your location and
+这是一个管理你位置和方向
 
 33
 00:01:36,518 --> 00:01:37,684
 your heading, okay?
+的框架。
 
 34
 00:01:37,686 --> 00:01:41,620
 What direction you're pointing and where you are.
+你朝着哪个方向以及你在哪。
 
 35
 00:01:41,622 --> 00:01:44,156
 And it has no user interface in Core Location, okay?
+在CoreLocation里并没有UI的部分。
 
 36
 00:01:44,158 --> 00:01:47,159
 This is all purely managing the location themselves.
+只是单纯的管理位置的信息而已。
 
 37
 00:01:47,161 --> 00:01:50,462
 And the basic object that represents a location is
+用于代表位置的基本对象叫做
 
 38
 00:01:50,464 --> 00:01:52,330
 called the CLLocation, right?
+CLLocation。
 
 39
 00:01:52,332 --> 00:01:53,898
 CL for Core Location.
+CL就是CoreLocation的意思。
 
 40
 00:01:53,900 --> 00:01:56,000
 And then location because it's the location.
+叫location因为它代表一个位置。
 
 41
 00:01:56,002 --> 00:01:58,235
 And it has the properties you would imagine.
+它有你能想象到的所有属性，比如
 
 42
 00:01:58,237 --> 00:02:01,438
 Coordinate, altitude, horizontal and
+关于这个位置的坐标，高度，
 
 43
 00:02:01,440 --> 00:02:04,774
 vertical accuracy of the measurement of this location.
+水平或者垂直的精度，
 
 44
 00:02:04,776 --> 00:02:07,143
 Time stamp, speed.
+时间戳，速度
 
 45
 00:02:07,145 --> 00:02:08,544
 Course, where you're headed.
+当然，还有你的方向。
 
 46
 00:02:08,546 --> 00:02:09,544
 Those kind of things.
+所有的这些东西。
 
 47
 00:02:11,148 --> 00:02:14,515
 And the main thing about the location, of course,
+当然对于位置来说最重要的
 
 48
 00:02:14,517 --> 00:02:16,317
 is a latitude and longitude.
+属性就是经纬度。
 
 49
 00:02:16,319 --> 00:02:18,018
 And it gives you a latitude and longitude.
+它会给你一个经纬度信息。
 
 50
 00:02:18,020 --> 00:02:19,853
 But you notice,
+但是要注意，
 
 51
 00:02:19,854 --> 00:02:21,687
 I say, where, approximately, is this location?
+这只是一个近似的信息。
 
 52
 00:02:21,690 --> 00:02:23,523
@@ -210,10 +261,12 @@ Because.
 53
 00:02:23,524 --> 00:02:25,357
 No location object is necessarily gonna be
+因为目前并没有定位的设备可以告诉你现在
 
 54
 00:02:25,360 --> 00:02:27,727
 right exactly where you are because we don't have any
+所处的准确位置，所以
 
 55
 00:02:27,729 --> 00:02:28,894
@@ -222,90 +275,112 @@ location measuring
 56
 00:02:28,896 --> 00:02:31,363
 hardware that can tell you exactly where you are.
+位置的对象不会是完全准确的。
 
 57
 00:02:31,365 --> 00:02:33,965
 I mean GPS is pretty darn good, very close.
+我的意思是说GPS非常好，已经很接近正确的位置了。
 
 58
 00:02:33,967 --> 00:02:35,667
 But there are other ways which we're gonna talk about,
+但是我们要讨论的是另外的方式，
 
 59
 00:02:35,669 --> 00:02:38,036
 about measuring where you are that are much less accurate.
+用一个相对低的精确度去计算位置。
 
 60
 00:02:38,038 --> 00:02:41,072
-So a CLLocation coordinate 2-D.
+So a CLLocationCoordinate2D.
+这个属性CLLocationCoordinate2D，
 
 61
 00:02:41,074 --> 00:02:43,307
 2-D meaning it's on the ground,
+2D意思是在地上的位置，
 
 62
 00:02:43,309 --> 00:02:44,641
 not including your altitude.
+不包括高度。
 
 63
 00:02:45,944 --> 00:02:48,344
 Is an approximate latitude and longitude.
+是一个近似的经纬度。
 
 64
 00:02:48,346 --> 00:02:50,112
 And we'll talk a little bit about that accuracy and
+之后我们会说一点关于精确度以及
 
 65
 00:02:50,114 --> 00:02:51,547
 how we know what it is.
+如果获取精确度的问题。
 
 66
 00:02:51,549 --> 00:02:58,186
 And then your altitude is a separate variable, altitude.
+高度是另外一个变量，altitude。
 
 67
 00:02:58,188 --> 00:03:01,155
 And so the accuracy
+精确度
 
 68
 00:03:01,157 --> 00:03:04,291
 is measured in both horizontal and vertical space, right, for
+是用来同时衡量水平和垂直空间的，
 
 69
 00:03:04,293 --> 00:03:07,261
 altitude and for your horizontal position.
+也就是水平的位置以及垂直的高度。
 
 70
 00:03:07,263 --> 00:03:10,597
 And, it's not like your accuracy is a percent
+精确度并不是一个百分比的数值或者类似
 
 71
 00:03:10,599 --> 00:03:11,931
 accuracy, or something like that.
+的东西。
 
 72
 00:03:11,933 --> 00:03:15,902
 It's really just one of these key pre-defined terms up here.
+它实际上是一组预定义好的信息。
 
 73
 00:03:15,904 --> 00:03:19,372
 So, the most accurate is called best for navigation,
+最高的精度叫做 BestForNavigation。
 
 74
 00:03:19,374 --> 00:03:22,608
 and that's certainly gonna use GPS to find that, and
+这个精度肯定需要使用GPS，它的意思是
 
 75
 00:03:22,610 --> 00:03:25,010
 that's the kind of thing where you're driving in your car,
+当你开车用导航的时候，你肯定
 
 76
 00:03:25,012 --> 00:03:26,211
 and you don't wanna miss a turn.
+不希望错过转弯的路口。
 
 77
 00:03:26,213 --> 00:03:30,147
 So that's. Really accurate location
+所以，需要非常高的精度
 
 78
 00:03:30,149 --> 00:03:31,248
@@ -314,170 +389,212 @@ finding.
 79
 00:03:31,250 --> 00:03:32,582
 To get this,
+去达到这个目的。
 
 80
 00:03:32,584 --> 00:03:34,818
 you're gonna wanna have your phone plugged in, okay?
+在这个精度，你需要让你的手机保持充电状态。
 
 81
 00:03:34,820 --> 00:03:38,154
 Because more accuracy takes more power.
+因为精度越高越费电。
 
 82
 00:03:38,156 --> 00:03:39,655
 Talk about that in a second.
+一会儿会详细说这个。
 
 83
 00:03:39,657 --> 00:03:40,956
 Then there's just best,
+这个最高的精度
 
 84
 00:03:40,958 --> 00:03:42,657
 which is kind of probably gonna use GPS.
+要用到GPS，
 
 85
 00:03:42,659 --> 00:03:44,826
 And then there's nearest ten meters.
+这个10米附近的精度。
 
 86
 00:03:44,828 --> 00:03:47,595
 Probably a mix, of maybe GPS and WiFi.
+可能是GPS和wifi混用的，
 
 87
 00:03:47,597 --> 00:03:49,497
 Then there is hundred meters is probably mostly
+这个百米附近的精度可能只用到
 
 88
 00:03:49,499 --> 00:03:51,131
 gonna be using WiFi.
+wifi。
 
 89
 00:03:51,133 --> 00:03:54,101
 Then there's kilometers and three kilometers, that's gonna
+一公里以内和三公里以内的精度，会用到
 
 90
 00:03:54,103 --> 00:03:57,470
 be using cell towers to find out where you are.
+基站来确定你的位置。
 
 91
 00:03:57,472 --> 00:03:59,639
 Okay? This is kind of the groups or
+明白了吗？精度实际上是一个
 
 92
 00:03:59,641 --> 00:04:02,341
 the categories of accuracy.
+预定义好的组。
 
 93
 00:04:02,343 --> 00:04:05,144
 More accuracy means more power.
+更高的精度就更费电。
 
 94
 00:04:05,146 --> 00:04:09,514
 Because the communication with cell towers is pretty low.
+跟基站通讯耗电非常低，
 
 95
 00:04:09,516 --> 00:04:11,382
 Your phone's doing it all the time anyway.
+手机会一直跟基站通讯。
 
 96
 00:04:11,384 --> 00:04:13,617
 And so it's a pretty low power activity.
+这是一个耗电很低的活动。
 
 97
 00:04:13,619 --> 00:04:15,586
 WiFi is pretty good.
+wifi就有点费电了，
 
 98
 00:04:15,588 --> 00:04:18,221
 It's got a big database of all the WiFi nodes or
+全世界所有的wifi节点以及wifi区域
 
 99
 00:04:18,223 --> 00:04:21,057
 many of the WiFi zones in the world.
+是一个非常大的数据库。
 
 100
 00:04:21,059 --> 00:04:23,726
 And so if it sees you close to some of them,
+如果你靠近它们，
 
 101
 00:04:23,728 --> 00:04:27,697
 it can triangulate your location pretty accurately.
+它们可以通过三角定位以一个很高的精度确定你的位置。
 
 102
 00:04:27,699 --> 00:04:29,331
 Like at a place like Stanford where there's
+比如在斯坦福大学这个有无数个wifi
 
 103
 00:04:29,333 --> 00:04:31,767
 just billions of WiFi nodes everywhere.
+节点的地方。
 
 104
 00:04:31,769 --> 00:04:35,036
 It's pretty darn accurate, and kind of pretty low power,
+地位会非常准确而且不是很耗电，
 
 105
 00:04:35,038 --> 00:04:36,471
 not super low power.
+但也不是最省电的。
 
 106
 00:04:36,473 --> 00:04:37,738
 And then there's GPS.
+最后是GPS，
 
 107
 00:04:37,740 --> 00:04:39,707
 Obviously super accurate.
+这个是最精确的。
 
 108
 00:04:39,709 --> 00:04:41,475
 It doesn't work everywhere.
+但不是在哪都能用。
 
 109
 00:04:41,477 --> 00:04:45,278
 If you're underground or in a well-shielded building,
+如果你在地下或者在屏蔽非常好的建筑物里，
 
 110
 00:04:45,280 --> 00:04:47,413
 you're not gonna get GPS, of course.
+GPS就不能用了。
 
 111
 00:04:47,415 --> 00:04:48,881
 But where it does work,
+但是在能用的时候，
 
 112
 00:04:48,883 --> 00:04:51,483
 it's very accurate, but it uses a lot of power.
+定位会非常精确，同时也会非常费电。
 
 113
 00:04:51,485 --> 00:04:53,185
 Okay, it's gonna drain your battery.
+电池很快就会被耗干。
 
 114
 00:04:53,187 --> 00:04:55,587
 And when you talk about any kind of location app,
+当我们谈到关于位置的app时，
 
 115
 00:04:55,589 --> 00:04:57,288
 you're talking about the battery, okay?
+实际上我们在谈的是电池。
 
 116
 00:04:57,290 --> 00:05:00,324
 Because if your app does a lot of location stuff and
+如果你的app做了跟多定位的事儿，但是你没仔细的
 
 117
 00:05:00,326 --> 00:05:01,658
 you're not careful with it,
+设计的话，
 
 118
 00:05:01,660 --> 00:05:03,360
 people are gonna run your app for a few weeks and
+用户很可能在用了你的app几周以后说：
 
 119
 00:05:03,362 --> 00:05:05,161
 they're gonna say, oh, I had to delete that app.
+”哦，我得删了这个app，电池用的
 
 120
 00:05:05,163 --> 00:05:07,864
 My battery would just run down right away.
+太快了。“
 
 121
 00:05:07,866 --> 00:05:09,616
@@ -486,50 +603,62 @@ Okay?
 122
 00:05:09,617 --> 00:05:11,367
 So you have to be careful with doing location
+所以做定位功能的时候要特别小心，
 
 123
 00:05:11,369 --> 00:05:13,235
 vis-a-vis power.
+能耗的问题。
 
 124
 00:05:13,237 --> 00:05:16,405
 And we'll talk a little bit about that down the road here.
+我们一会儿会再讲一些这个问题。
 
 125
 00:05:16,407 --> 00:05:19,341
 So speed, the speed is your instantaneous speed.
+下面说速度，速度指的是你的瞬时速度。
 
 126
 00:05:19,343 --> 00:05:20,509
 It's not like your average
+并不是在一段时间内
 
 127
 00:05:20,510 --> 00:05:21,676
 speed over the last however long.
+你的平均速度。
 
 128
 00:05:21,678 --> 00:05:23,711
 It's like you know,
 
+
 129
 00:05:23,712 --> 00:05:25,745
 it's between last measurements it's telling you your speed.
+大意就是在两次取值之间的速度。
 
 130
 00:05:25,748 --> 00:05:27,881
 So it's kind of good for driving,
+在开车的时候会
 
 131
 00:05:27,883 --> 00:05:29,816
 like you're driving around, it wouldn't be that great for
+非常有用，但是在走路的时候就
 
 132
 00:05:29,818 --> 00:05:32,018
 walking around, that kind of thing.
+不是那么有意义了。
 
 133
 00:05:32,020 --> 00:05:33,453
 Course is just going to be.
+course代表方向，
 
 134
 00:05:33,455 --> 00:05:35,355
@@ -538,166 +667,207 @@ It's probably.
 135
 00:05:35,356 --> 00:05:37,256
 I think you can use some magnetometers, so
+这可能是磁力计的术语，来表示 
 
 136
 00:05:37,258 --> 00:05:38,957
 it's actually kind of an idea of where you're headed.
+你面朝哪个方向。
 
 137
 00:05:38,959 --> 00:05:41,259
 But it's also mostly just looking at your track.
+但是可能它更倾向于你运动轨迹的方向。
 
 138
 00:05:41,261 --> 00:05:42,627
 Right? Measuring your locations and
+测量你的位置然后判断
 
 139
 00:05:42,629 --> 00:05:45,163
 seeing, well, you're generally headed in this direction.
+你前进的大致方向。
 
 140
 00:05:45,165 --> 00:05:46,664
 And then time stamps, obviously,.
+下边是时间戳，
 
 141
 00:05:46,666 --> 00:05:49,500
 Time stamps are more important than you think because
+时间戳这个属性比你想象的要重要因为当你
 
 142
 00:05:49,502 --> 00:05:51,385
 as you ask for
+想要得到你的位置
 
 143
 00:05:51,386 --> 00:05:53,269
 location you're not gonna get location instantaneously.
+的时候，这个操作不是瞬间完成的。
 
 144
 00:05:53,272 --> 00:05:54,504
 Okay, it might take a little delay.
+可能会有一些延迟。
 
 145
 00:05:54,506 --> 00:05:57,473
 You walk under something that blocks you from GPS and
+你可能会走到一些东西的下边阻塞了GPS，过一会儿才会开始获取
 
 146
 00:05:57,475 --> 00:05:59,675
 it comes back, or you walk between WiFi nodes.
+位置，或者你穿行于不同的wifi节点，
 
 147
 00:05:59,677 --> 00:06:01,810
 It picked up one, drops another.
+系统识别出一个，又弃掉了另一个。
 
 148
 00:06:01,812 --> 00:06:06,181
 So these locations can come in not in a nice even stream.
+所以获取位置可能不是一个实时的操作。
 
 149
 00:06:06,183 --> 00:06:08,449
 So you sometimes have to look at the time stamp to see well
+你可能需要查看时间戳检查这个位置信息是什么时候获取的，
 
 150
 00:06:08,451 --> 00:06:11,318
 how old is this location, is this you know, a minute ago?
+一分钟以前还是
 
 151
 00:06:11,320 --> 00:06:12,720
 Or is this just like a second ago?
+一秒之前？
 
 152
 00:06:14,023 --> 00:06:17,524
 So how do you get one of these CLLocation objects?
+那么我们如何得到CLLocation对象呢？
 
 153
 00:06:17,526 --> 00:06:20,626
 You get them from a CLLocationManager, okay?
+通过 CLLocationManager。
 
 154
 00:06:20,628 --> 00:06:23,228
 Now a CLLocationManager kind of like.
+CLLocationManager 就好像是，
 
 155
 00:06:24,865 --> 00:06:27,399
 Core motions manager in a way.
+在某种程度上类似CoreMotion manager。
 
 156
 00:06:27,401 --> 00:06:32,103
 You know, there's really only one GPS in the system.
+系统里只有一个GPS，
 
 157
 00:06:32,105 --> 00:06:35,272
 But we don't usually do the same thing where we share this
+但是我们不像CoreMotion那样之用一个
 
 158
 00:06:35,274 --> 00:06:38,709
 one core motion manager.
+manager。
 
 159
 00:06:38,711 --> 00:06:42,278
 You can have different core location managers.
+我们可以用多个 CLLocationManager 。
 
 160
 00:06:42,280 --> 00:06:44,914
 But there are things you're gonna set on it that are gonna
+但是设置它的时候可能会改变
 
 161
 00:06:44,916 --> 00:06:46,882
 effect a little bit about how the hardware works.
+一点硬件的工作方式。
 
 162
 00:06:46,884 --> 00:06:49,184
 And you'll see how that goes a little bit.
+你会看到是怎么改变的。
 
 163
 00:06:49,186 --> 00:06:51,319
 One thing that's cool about CoreLocationmanager
+CLLocationManager 有一个很棒的功能就是它可以
 
 164
 00:06:51,321 --> 00:06:53,221
 is you can simulate from Xcode.
+在Xcode里模拟位置。
 
 165
 00:06:53,223 --> 00:06:55,390
 If you go down to the bottom bar of Xcode there,
+在Xcode下边的状态条这里，
 
 166
 00:06:55,392 --> 00:06:57,425
 you'll see there's like a little arrow thing.
+有一个小箭头。
 
 167
 00:06:57,427 --> 00:06:58,325
 And if you click on that,
+点这个小箭头，
 
 168
 00:06:58,327 --> 00:07:02,929
 it gives you a menu of GPX entries.
+会有一些GPX入口。
 
 169
 00:07:02,931 --> 00:07:05,531
 GPX, the same kind of GPX that we're doing with tracks.
+GPX就是我们在做轨迹的时候的GPX。
 
 170
 00:07:06,601 --> 00:07:07,966
 Which are just locations on the planet and
+是一些地球上的位置，
 
 171
 00:07:07,968 --> 00:07:10,035
 you pick one and
+你选其中的一个
 
 172
 00:07:10,036 --> 00:07:12,103
 it'll make your phone seem like it's in Mumbai and so
+模拟你的手机在孟买，
 
 173
 00:07:12,106 --> 00:07:14,906
 you can see if your app works when it thinks it's in Mumbai.
+所以你可以测试你的app是不是能正确的显示位置在孟买。
 
 174
 00:07:14,908 --> 00:07:19,443
 So that's kind of a fun part of it.
+这个功能挺有趣的。
 
 175
 00:07:19,445 --> 00:07:22,279
 The CLLocationManager works a lot like the Core motion
+CLLocationManager 运作方式非常像 CoreMotionManager。
 
 176
 00:07:22,281 --> 00:07:23,647
@@ -706,54 +876,67 @@ manager.
 177
 00:07:23,649 --> 00:07:25,682
 You check to see if the hardware exists first
+先检查是不是有相应的硬件，
 
 178
 00:07:25,684 --> 00:07:27,250
 because not all phones have
+因为不是所有的手机
 
 179
 00:07:27,252 --> 00:07:30,052
 all kinds of updating that you would want.
+都有定位的硬件。
 
 180
 00:07:30,054 --> 00:07:32,254
 Then you're gonna create an instance and
+然后就想往常一下创建一个实例并且设置
 
 181
 00:07:32,256 --> 00:07:35,457
 set a delegate, usually, okay.
+代理。
 
 182
 00:07:35,459 --> 00:07:38,193
 Then you configure it to what you want, and
+然后你就可以按需求设置它，然后
 
 183
 00:07:38,195 --> 00:07:40,561
 then it's gonna start sending you delegate messages.
+它就开始发送代理信息。
 
 184
 00:07:40,563 --> 00:07:41,729
 So it's a little different than Core Motion.
+有一点和CoreMotion不一样。
 
 185
 00:07:41,731 --> 00:07:43,931
 You don't use a block-based thing.
+没有block。
 
 186
 00:07:43,933 --> 00:07:46,199
 You have a delegate, and it's gonna be just sending you
+它只是通过代理给你发送
 
 187
 00:07:46,201 --> 00:07:48,668
 delegate messages, saying, hey, here's some locations
+代理信息，告诉你：嘿，给你这些从上次通讯到现在
 
 188
 00:07:48,670 --> 00:07:50,436
 I've gathered since last I talked to you.
+的位置信息
 
 189
 00:07:50,438 --> 00:07:53,772
 And it is gonna send those to you in kind of a steady
+它会通过一个稳定的流向你发送信息。
 
 190
 00:07:53,774 --> 00:07:55,274
@@ -762,150 +945,187 @@ stream.
 191
 00:07:55,275 --> 00:07:56,775
 Now, you want to monitor your location, but
+如果你希望监控你的位置，有几种
 
 192
 00:07:56,777 --> 00:08:00,278
 there's different ways to monitor your location.
+不同的方式。
 
 193
 00:08:00,280 --> 00:08:02,297
 There's, kind of,
+首先是
 
 194
 00:08:02,298 --> 00:08:04,315
 continual updates where, based on a certain accuracy like,
+基于一个特定的精确度，提供持续的更新，
 
 195
 00:08:04,317 --> 00:08:07,251
 I want to know exactly where I am all the time, okay?
+我希望一直得到我的精确位置。
 
 196
 00:08:07,253 --> 00:08:09,086
 It'll be constantly looking at the GPS and
+它会持续的通过GPS获取位置
 
 197
 00:08:09,088 --> 00:08:10,187
 trying to get your location and
+并且尽快
 
 198
 00:08:10,189 --> 00:08:13,490
 sending them to you as fast as you can.
+发送给你。
 
 199
 00:08:13,492 --> 00:08:15,275
 Or you might say, well,
+或者你只是希望我在
 
 200
 00:08:15,276 --> 00:08:17,059
 I wanna know where I am within a kilometer.
+一公里之内的大概位置。
 
 201
 00:08:17,062 --> 00:08:19,195
 I just wanna have the general region I'm in.
+只是希望知道我是不是在一个区域里。
 
 202
 00:08:19,197 --> 00:08:21,296
 Well then, you know, as you switch cell towers or
+然后它会切换到基站，
 
 203
 00:08:21,298 --> 00:08:23,331
 something like that, it might send you an update saying, oh,
+并且通知你和之前你所处的
 
 204
 00:08:23,333 --> 00:08:25,667
 you're a little different place than you were before.
+位置不同。
 
 205
 00:08:25,669 --> 00:08:27,969
 So, you set the accuracy you want and
+也就是说，设置好精确度，它
 
 206
 00:08:27,971 --> 00:08:29,103
 then it'll start giving you updates.
+就是持续的更新。
 
 207
 00:08:29,105 --> 00:08:30,738
 So, that's one way.
+这是一种方式。
 
 208
 00:08:30,740 --> 00:08:33,774
 There's also a really cool way to say, only tell me when
+还有一种更酷的方式，只是在我的位置有
 
 209
 00:08:33,776 --> 00:08:36,376
 a significant change in location happened.
+显著的改变时通知我。
 
 210
 00:08:36,378 --> 00:08:38,411
 And we'll talk about what significant means.
+一会儿我们会说这个“显著”是什么意思。
 
 211
 00:08:38,413 --> 00:08:40,112
 You can also set regions.
+你还可以设置区域。
 
 212
 00:08:40,114 --> 00:08:42,648
 Like, here's a circular area on the planet.
+就是地球上的一个圆形。
 
 213
 00:08:42,650 --> 00:08:44,349
 When I go into this area, or
+当我走进这个圆形或者走出
 
 214
 00:08:44,351 --> 00:08:46,584
 out of this area, send me an update.
+的时候，发送给我一个更新。
 
 215
 00:08:46,586 --> 00:08:48,353
 So, that's kind of cool.
+这个是非常酷的。
 
 216
 00:08:48,354 --> 00:08:50,121
 So, if you had an app that's, like, reminder app, and
+如果你有一个类似提醒的app，
 
 217
 00:08:50,123 --> 00:08:52,223
 it was gonna remind you to pick up the dry cleaning.
+它会提醒你取干洗的衣服。
 
 218
 00:08:52,225 --> 00:08:54,091
 Well, if you drove through the circle where the,
+当你开到干洗店附近的区域时，
 
 219
 00:08:54,093 --> 00:08:56,727
 around the dry cleaner, maybe it would give you an alert.
+它就会给你一个提醒。
 
 220
 00:08:56,729 --> 00:08:59,229
 Oh, don't forget to pick up the dry cleaning, okay?
+别忘了取干洗的衣服。
 
 221
 00:08:59,231 --> 00:09:00,863
 So, you can do that with regions.
+你可以通过划定区域来实现这个功能。
 
 222
 00:09:00,865 --> 00:09:04,767
 And then, you can also monitor your heading.
+你也可以监控你的方向。
 
 223
 00:09:04,769 --> 00:09:07,803
 Maybe just to make sure you're turned the right way if you're
+可以用来确定走路的时候
 
 224
 00:09:07,805 --> 00:09:09,738
 walking or something, I don't know.
+是不是拐了正确的弯
 
 225
 00:09:09,740 --> 00:09:16,477
 Okay, the part where you have to, is that better?
+在获取硬件。。。。。现在声音好点了吗？
 
 226
 00:09:16,479 --> 00:09:19,380
 The part where you have to ask what hardware you have,
+在获取硬件信息的时候，
 
 227
 00:09:19,382 --> 00:09:22,416
 there's a lot of class functions in CLLocationManager
+有很多CLLocationManager的类方法要用到。
 
 228
 00:09:22,418 --> 00:09:23,750
@@ -914,50 +1134,62 @@ that you're gonna use.
 229
 00:09:23,752 --> 00:09:25,485
 I'm not gonna go into all of them in detail.
+我不会把它们都讲一遍。
 
 230
 00:09:25,487 --> 00:09:28,755
 But, the various kinds of monitoring you'll wanna do,
+这里会有不同的监控方式选择，
 
 231
 00:09:28,757 --> 00:09:31,290
 like, significant change monitoring, or
+比如，显著位置变更监控或者
 
 232
 00:09:31,292 --> 00:09:34,760
 region monitoring, or just location services in general.
+地区监控，或者只是普通的位置服务。
 
 233
 00:09:34,762 --> 00:09:37,496
 Because the user might be a little paranoid about your
+用户可能对于你获取他们的位置信息
 
 234
 00:09:37,498 --> 00:09:39,497
 getting their location.
+不舒服。
 
 235
 00:09:39,499 --> 00:09:40,765
 And so, they could turn that off.
+所以他们可能会关掉这个服务。
 
 236
 00:09:40,767 --> 00:09:42,933
 So, you have to call this, like thing, like,
+你需要调用 locationServicesEnabled来查看
 
 237
 00:09:42,935 --> 00:09:46,236
 locationServicesEnabled to find out, is it enabled?
+位置服务是不是开启了。
 
 238
 00:09:46,238 --> 00:09:48,038
 All right, can I even do it?
+看我是不是允许获取位置。
 
 239
 00:09:48,040 --> 00:09:50,674
 And, there's also an authorizationStatus, too.
+还有这个authorizationStatus方法。
 
 240
 00:09:50,676 --> 00:09:52,442
 Be careful of the authorizationStatus,
+注意它的Restricted选项。
 
 241
 00:09:52,444 --> 00:09:54,344
@@ -966,78 +1198,97 @@ Restricted.
 242
 00:09:54,345 --> 00:09:56,245
 Okay, Restricted basically means Denied but, it's denied
+Restricted基本上等同于拒绝，它通过用户不能
 
 243
 00:09:56,247 --> 00:09:59,214
 in a way where there's nothing the user can do about it.
+改变的方式拒绝定位服务。
 
 244
 00:09:59,216 --> 00:10:02,284
 So, either parental controls or blocking it, or
+比如有上级的控制或者阻塞，又比如当你
 
 245
 00:10:02,286 --> 00:10:03,551
 maybe you're in an enterprise,
+在一个企业里，
 
 246
 00:10:03,553 --> 00:10:06,854
 a company that blocks it, okay, on your phone.
+公司屏蔽了位置服务，
 
 247
 00:10:06,856 --> 00:10:07,922
 So, in that case,
+在这种情况下，
 
 248
 00:10:07,924 --> 00:10:09,556
 you don't want to put up an alert that says,
+你不希望弹出一个警告说，
 
 249
 00:10:09,558 --> 00:10:11,658
 you're blocking me from getting location,
+“你不允许我获取位置，请开启服务“
 
 250
 00:10:11,660 --> 00:10:13,059
 please enable it, because they can't,
+因为他们做不到，
 
 251
 00:10:13,061 --> 00:10:16,029
 there's nothing they can do, that's different than Denied.
+他们什么都做不了，这就是跟拒绝服务的区别。
 
 252
 00:10:16,031 --> 00:10:17,797
 Okay? And that's true,
+所以，
 
 253
 00:10:17,798 --> 00:10:19,564
 not just in location services but in general, watch out for
+不只是位置服务，大部分的服务都要注意
 
 254
 00:10:19,567 --> 00:10:22,968
 the authorization status of Restricted versus Denied.
+Restricted 和 Denied的区别。
 
 255
 00:10:25,272 --> 00:10:28,840
 So, to get the information, you can just ask it, okay?
+我们发出请求之后就可以获取信息。
 
 256
 00:10:28,842 --> 00:10:31,776
 What's my current, to the best of your knowledge,
+我目前的位置信息是
 
 257
 00:10:31,778 --> 00:10:33,711
 information about my location?
+什么样的？
 
 258
 00:10:33,713 --> 00:10:35,345
 So it'll give you a CL location.
+它会返回一个CLLocation。
 
 259
 00:10:35,347 --> 00:10:36,579
 It's like, this is where you are.
+表示你所处的位置。
 
 260
 00:10:36,581 --> 00:10:38,147
 And it'll be time stamped, you can check it,
+是带有时间戳的。
 
 261
 00:10:38,149 --> 00:10:40,716
@@ -1046,70 +1297,88 @@ things like that.
 262
 00:10:40,717 --> 00:10:43,284
 But, before we can do any of this, get any information out
+但是在我们从CLLocationManager获取信息之前，
 
 263
 00:10:43,287 --> 00:10:47,256
 of the locationManager, we have to get authorization from
+我们需要得到系统，实际上是
 
 264
 00:10:47,258 --> 00:10:49,958
 the system, really from the user to do that.
+用户的授权。
 
 265
 00:10:49,960 --> 00:10:52,594
 And, you can do that in one or two different ways.
+你可以通过两种方式获取授权。
 
 266
 00:10:52,596 --> 00:10:53,761
 One, is you can
+第一种是
 
 267
 00:10:53,763 --> 00:10:57,465
 request authorization to only access the location info
+仅在你的app是当前活动的app时候启动
 
 268
 00:10:57,467 --> 00:10:59,900
 while your application is the active app, that's
+定位服务，这就是
 
 269
 00:10:59,902 --> 00:11:02,302
-requestWhenInUseAuthorizatio- n().
+requestWhenInUseAuthorization().
+requestWhenInUseAuthorization()方法。
 
 270
 00:11:02,304 --> 00:11:05,305
 Or you can request to be able to access the user location
+或者你可以申请在任何时候都获取位置，
 
 271
 00:11:05,307 --> 00:11:07,807
 at anytime, even if you're running in the background.
+即使你的app在后台的时候。
 
 272
 00:11:07,809 --> 00:11:10,976
 If you're using some of the significant change monitoring
+当你使用显著位置变更监控的时候，
+
 
 273
 00:11:10,978 --> 00:11:14,346
 that we're gonna talk about in a few slides,
+我们后边的幻灯片会讲这个。
 
 274
 00:11:14,348 --> 00:11:16,848
 then you'll need this kind of authorization.
+这时就需要这种授权。
 
 275
 00:11:16,850 --> 00:11:18,316
 So, this authorization,
+使用上边这两种方法
 
 276
 00:11:18,317 --> 00:11:19,783
 when you request it with one of these methods,
+获得授权的操作都是
 
 277
 00:11:19,786 --> 00:11:21,652
 happens asynchronously.
+异步的。
 
 278
 00:11:21,654 --> 00:11:23,487
 That's because it's probably gonna put up a panel to
+因为可能会给用户展示一个界面。
 
 279
 00:11:23,489 --> 00:11:25,673
@@ -1118,22 +1387,27 @@ the user saying,
 280
 00:11:25,674 --> 00:11:27,858
 this application wants to look at your device's location.
+比如“这个程序想要使用你设备的位置，
 
 281
 00:11:27,860 --> 00:11:29,626
 Is that okay?
+可以吗？”
 
 282
 00:11:29,628 --> 00:11:33,496
 And so, you're gonna find out about this authorization via
+你可以通过一个代理方法查看你的
 
 283
 00:11:33,498 --> 00:11:34,997
 a delegate method.
+权限状态。
 
 284
 00:11:34,999 --> 00:11:37,132
 And we'll talk about the locationManager's delegate
+我们一会儿会具体讨论 CLLocationManager 的代理。
 
 285
 00:11:37,134 --> 00:11:38,500
@@ -1142,266 +1416,332 @@ in a moment.
 286
 00:11:38,501 --> 00:11:39,867
 But, you can look up in the documentation,
+你可以去官方文档查看
 
 287
 00:11:39,870 --> 00:11:41,553
 the name of the method.
+方法的名字。
 
 288
 00:11:41,554 --> 00:11:43,237
 It's basically gonna tell you what your authorization status
+它会在你权限发生变化的时候
 
 289
 00:11:43,240 --> 00:11:45,640
 when your authorization status changes.
+通知你权限的状态。
 
 290
 00:11:45,642 --> 00:11:49,210
 Now, until that authorization is granted by the user,
+在用户给你授权之前，
 
 291
 00:11:49,212 --> 00:11:51,078
 your authorizationStatus,
+你的授权状态
 
 292
 00:11:51,080 --> 00:11:52,979
 which is a method we talked about in the previous slide,
+就是前边我们看到的那个方法
 
 293
 00:11:52,981 --> 00:11:56,049
 there, will be in this NotDetermined state.
+会返回 NotDetermined 状态。
 
 294
 00:11:56,051 --> 00:11:57,283
 And if you're in the NotDetermined state,
+如果你在这个状态下，
 
 295
 00:11:57,285 --> 00:11:59,852
 then you won't be able to get
+你不允许获取任何关于
 
 296
 00:11:59,854 --> 00:12:01,887
 any information about the user's location.
+用户位置的信息。
 
 297
 00:12:03,090 --> 00:12:05,757
 Now, for any of this requesting authorization to
+要使授权申请生效，你需要
 
 298
 00:12:05,759 --> 00:12:09,894
 work, you need to add a key, one of these two keys,
+在Info.plist文件里加入一个键，在这两个键
 
 299
 00:12:09,896 --> 00:12:13,664
 to your Info.plist file.
+里二选一。
 
 300
 00:12:13,666 --> 00:12:16,466
 So, just the one of these keys just has to exist.
+这两个键必须得有一个。
 
 301
 00:12:16,468 --> 00:12:17,751
 If neither of them exist,
+如果都没有，
 
 302
 00:12:17,752 --> 00:12:19,035
 then you won't be able to get any locations.
+就不能获取位置信息。
 
 303
 00:12:19,037 --> 00:12:20,670
 So, it just has to exist.
+所以，必须得有一个才行。
 
 304
 00:12:20,672 --> 00:12:22,104
 It doesn't have have certain value.
+不需要有一个特定的值，
 
 305
 00:12:22,106 --> 00:12:24,340
 Just the key has to be there.
+只要键在那就行了。
 
 306
 00:12:24,342 --> 00:12:27,542
 To add a key to your Info.plist, you can just click
+要在Info.plist里加一个键，需要点击
 
 307
 00:12:27,544 --> 00:12:30,178
 on your Info.plist in your navigator and
+这个文件，然后
 
 308
 00:12:30,180 --> 00:12:33,381
 then right-click in an open in the Info.plist and
+在打开的文件里右键点击，在弹出的
 
 309
 00:12:33,383 --> 00:12:37,651
 choose Add Row from the little context menu that appears.
+菜单里选“添加行”。
 
 310
 00:12:37,653 --> 00:12:39,069
 And so obviously,
+显然你需要
 
 311
 00:12:39,070 --> 00:12:40,486
 you want to put the key here that matches up with the kind
+添加与你之前通过代码获得的授权
 
 312
 00:12:40,489 --> 00:12:43,556
 of authorization that you're gonna request in your code.
+相匹配的键。
 
 313
 00:12:43,558 --> 00:12:47,326
 And so, once you've done that and once you have gotten
+当你成功向用户申请到
 
 314
 00:12:47,328 --> 00:12:51,730
 the authorization from user, then you'll be able to, for
+权限以后，你可以，比如说，要求
 
 315
 00:12:51,732 --> 00:12:54,800
 example, ask the locationManager for
+CLLocationManager 通过location 提供
 
 316
 00:12:54,802 --> 00:12:58,570
 the current location using the location property.
+目前的位置。
 
 317
 00:12:58,572 --> 00:13:00,405
 But we usually don't pull like that.
+但是实际上我们不这么做。
 
 318
 00:13:00,407 --> 00:13:01,505
 Just like in current motion.
+在CoreMotion里才会这么做。
 
 319
 00:13:01,507 --> 00:13:03,474
 It's kind of bad programming to pull.
+这是一种不太好的方式。
 
 320
 00:13:03,476 --> 00:13:06,076
 We want it to tell us when it has something interesting.
+我们只希望在它得到我们想要的信息的时候通知我们。
 
 321
 00:13:06,078 --> 00:13:10,013
 So we set the desiredAccuracy with this CLLocationManager
+所以我们需要在 CLLocationManager 里设置 desiredAccuracy
 
 322
 00:13:10,015 --> 00:13:12,081
 property, desiredAccuracy, and you just set it.
+属性。
 
 323
 00:13:12,083 --> 00:13:13,849
 It's one of those things I talked about before,
+这个就是我们之前谈到的精确度属性，
 
 324
 00:13:13,851 --> 00:13:16,418
 kilometer or BestForNavigation or whatever.
+BestForNavigation或者在几公里之内等等。
 
 325
 00:13:16,420 --> 00:13:19,321
 You can also take a distance filter which is,
+你还可以设置 distanceFilter，
 
 326
 00:13:19,323 --> 00:13:22,057
 don't tell me about location changes unless I move more
+在我移动了这些距离的时候给我
 
 327
 00:13:22,059 --> 00:13:23,725
 than a certain amount, okay?
+更新位置。
 
 328
 00:13:23,727 --> 00:13:27,628
 A meter, ten meters, 100 meters, a kilometer, whatever.
+一米，10米，100米，1公里什么的。
 
 329
 00:13:27,630 --> 00:13:30,297
 So, you set those two things up and
+设置好这两个属性，然后
 
 330
 00:13:30,299 --> 00:13:32,799
 then you just say, okay, start updating my location.
+你可以让它开始更新我的位置。
 
 331
 00:13:33,902 --> 00:13:36,869
 And it's gonna start sending you delegate messages
+它就会开始发送位置的
 
 332
 00:13:36,871 --> 00:13:38,504
 with your location.
+代理信息。
 
 333
 00:13:38,506 --> 00:13:41,039
 And the delegate message method looks like this,
+代理信息的方法就像这样，
 
 334
 00:13:41,041 --> 00:13:43,074
 locationManager CLLocationManager,
+locationManager CLLocationManager
 
 335
 00:13:43,076 --> 00:13:45,376
 that's the sender, didUpdateLocations.
+这个是发送人，didUpdateLocations。
 
 336
 00:13:45,378 --> 00:13:48,346
 Now, notice that that's an array of locations.
+注意看，返回的是位置的数组。
 
 337
 00:13:48,348 --> 00:13:49,880
 That's not just a single location.
+并不是一个单独的位置。
 
 338
 00:13:49,882 --> 00:13:51,314
 Hey, your location changed.
+在你位置发生改变的时候返回数组，
 
 339
 00:13:51,316 --> 00:13:52,182
 Why does that happen?
+为什么会这样？
 
 340
 00:13:52,184 --> 00:13:55,451
 Well, the new phone hardware
+这是因为最新的
 
 341
 00:13:55,453 --> 00:13:59,255
 is incredible when it comes to measuring your location.
+定位硬件非常先进。
 
 342
 00:13:59,257 --> 00:14:01,323
 And it can, even when it's off, okay,
+在你的手机关闭，或者屏幕不亮，
 
 343
 00:14:01,325 --> 00:14:03,892
 when the thing powers, the screen powers down, and it's
+或者电量不足，
 
 344
 00:14:03,894 --> 00:14:08,162
 kind of in a low power state, it's essentially sleeping.
+实际上也就是在休眠的状态下。
 
 345
 00:14:08,164 --> 00:14:10,898
 The GPS thing could still be recording your location.
+GPS依然可以记录你的位置信息。
 
 346
 00:14:10,900 --> 00:14:13,500
 So, you go for a hike, put your phone in your pocket.
+比如你正在远足，手机在你的口袋里。
 
 347
 00:14:13,502 --> 00:14:15,168
 You're walking for miles.
+你走了挺远的路。
 
 348
 00:14:15,170 --> 00:14:18,171
 You don't want your phone awake and using battery, okay?
+这时候你不希望你的手机一直是激活状态消耗电量，对吧？
 
 349
 00:14:18,173 --> 00:14:19,472
 You want it to sleep but
+你希望它处于休眠状态
 
 350
 00:14:19,474 --> 00:14:21,674
 you still want to record where you went.
+但是依然可以记录你的位置。
 
 351
 00:14:21,676 --> 00:14:24,209
 Okay, cuz you're, you know, fitness tracking or
+就像健身记录什么的。
 
 352
 00:14:24,211 --> 00:14:25,243
@@ -1410,98 +1750,122 @@ something like that.
 353
 00:14:25,245 --> 00:14:26,828
 And it can do that.
+手机可以做到这一点。
 
 354
 00:14:26,829 --> 00:14:28,412
 So fitness tracking apps will use that mechanism.
+所以健身类的app会用到这个机制。
 
 355
 00:14:28,415 --> 00:14:30,682
 So, what happens here is,
+用这个机制，
 
 356
 00:14:30,684 --> 00:14:33,284
 the fitness tracking app can basically set itself up.
+这个健身app就可以自动的做好配置。
 
 357
 00:14:33,286 --> 00:14:35,552
 It says okay, well after the person has moved a certain
+当用户移动特定的距离或者间隔
 
 358
 00:14:35,554 --> 00:14:38,488
 amount or a certain amount of time happens,
+特定的时间时，
 
 359
 00:14:38,490 --> 00:14:39,789
 please tell me where they've been.
+更新位置。
 
 360
 00:14:39,791 --> 00:14:41,324
 And you'll get this update and
+然后你就可以拿到这些更新，
 
 361
 00:14:41,326 --> 00:14:43,659
 it'll have a bunch of locations in there.
+这就是为什么会有很多位置更新给你。
 
 362
 00:14:43,661 --> 00:14:45,361
 Right, again, all time stamped, all telling you.
+而且都加上了时间戳。
 
 363
 00:14:45,363 --> 00:14:49,131
 So, these things are building up in the chip, the GPS chip.
+这个机制是定制在GPS芯片里的。
 
 364
 00:14:49,133 --> 00:14:51,399
 And then the chip reports them in mass.
+定制好以后芯片就可以批量更新。
 
 365
 00:14:51,401 --> 00:14:53,434
 It's really a pretty amazing technology for
+这确实是个非常赞的技术，既省电还
 
 366
 00:14:53,436 --> 00:14:57,004
 keeping your battery alive and still being able to record.
+可以持续的记录位置信息。
 
 367
 00:14:57,006 --> 00:14:59,340
 And this is similar kind of stuff for heading.
+记录方向也差不多。
 
 368
 00:14:59,342 --> 00:15:02,676
 You can get reports from the locationManager,
+你可以从location manager那得到更新。
 
 369
 00:15:02,678 --> 00:15:06,546
 tell me what my heading is, it's changing, tell me.
+告诉我现在的方向，如果方向改变，再通知我。
 
 370
 00:15:06,548 --> 00:15:08,948
 Errors can happen, okay?
+错误是经常出现的。
 
 371
 00:15:08,950 --> 00:15:11,016
 And this is a case, you know, you notice in demos,
+你会注意到在demo里，我没什么时间写代码去
 
 372
 00:15:11,018 --> 00:15:13,018
 I don't have time to write code to check errors.
+做错误检查。
 
 373
 00:15:13,020 --> 00:15:14,019
 Sometimes errors are more
+很多时候检查错误是
 
 374
 00:15:14,021 --> 00:15:15,520
 important to check than others.
+非常重要的。
 
 375
 00:15:15,522 --> 00:15:18,489
 With location, it's pretty important to check, because,
+尤其是在位置服务里，因为有可能发生这种情况，比如
 
 376
 00:15:18,491 --> 00:15:20,891
 things can happen, like, you're using the app and
+你在使用一个可以报告位置的app。
 
 377
 00:15:20,893 --> 00:15:21,925
@@ -1510,62 +1874,77 @@ it's reporting a location.
 378
 00:15:21,927 --> 00:15:23,577
 And then, all of a sudden,
+然后，突然用户觉得：
 
 379
 00:15:23,578 --> 00:15:25,228
 the user says, I don't like this app knowing where I am.
+我不希望这个app能知道我在哪。
 
 380
 00:15:25,230 --> 00:15:26,662
 And he goes and turns it off.
+他就关了这个功能。
 
 381
 00:15:26,664 --> 00:15:29,999
 Okay, it turns off the location authorization.
+他在app寻找位置的时候
 
 382
 00:15:30,001 --> 00:15:31,684
 So, right in the middle,
+就取消了这个app的位置权限。
 
 383
 00:15:31,685 --> 00:15:33,368
 you can get something, ErrorDenied.
+你就会得到一个ErrorDenied错误。
 
 384
 00:15:33,371 --> 00:15:35,037
 Okay, you can get yourself denied.
+用户可以自己关掉它。
 
 385
 00:15:35,039 --> 00:15:37,372
 You can also get HeadingFailures if your
+在磁力计被干扰的时候，
 
 386
 00:15:37,374 --> 00:15:41,108
 magnetometer's being interfered with, obviously.
+你也有可能会得到一个HeadingFailures
 
 387
 00:15:41,110 --> 00:15:42,676
-You can get LocationUnknown,
+You can get LocationUnknown，
+在什么都找不到的时候，也许会得到
 
 388
 00:15:42,678 --> 00:15:45,345
 where it just hasn't been able to see anything yet,
+一个LocationUnknown错误，
 
 389
 00:15:45,347 --> 00:15:48,114
 it's trying but it wants to let you know it's trying.
+系统在尝试但是它希望你能知道它在尝试。
 
 390
 00:15:48,116 --> 00:15:50,116
 So after a certain amount of time with it not being able
+所以当过了一段时间它没找到的时候，
 
 391
 00:15:50,118 --> 00:15:51,384
 to get it, it'll send you that.
+它会给你发送这个错误信息。
 
 392
 00:15:51,386 --> 00:15:54,886
 So, you want to pay attention to the errors there.
+你们应该警惕这些错误。
 
 393
 00:15:54,888 --> 00:15:57,222
@@ -1574,198 +1953,247 @@ All right.
 394
 00:15:57,224 --> 00:16:00,058
 So, when your app is in the background,
+继续，当你的app在后台的时候，
 
 395
 00:16:00,060 --> 00:16:02,793
 you can actually still get updates.
+你依然可以得到更新。
 
 396
 00:16:02,795 --> 00:16:04,395
 This is one of the few times when your
+这是为数不多的app可以在后台可以
 
 397
 00:16:04,397 --> 00:16:06,697
 app gets to do things in the background.
+做的事。
 
 398
 00:16:06,699 --> 00:16:10,133
 You have to turn a capability on, in that capabilities thing
+你可以把它打开，就是打开上次说到的
 
 399
 00:16:10,135 --> 00:16:14,704
 I talked about last time to do this.
+那个功能。
 
 400
 00:16:15,773 --> 00:16:16,938
 And there's a way to basically say,
+还有一种方式就是把app从后台
 
 401
 00:16:16,940 --> 00:16:18,073
 just wake me up in the background and
+唤醒然后查看
 
 402
 00:16:18,075 --> 00:16:20,442
 tell me what's going on.
+更新。
 
 403
 00:16:20,443 --> 00:16:22,810
 But really, there's two good ways, kind of bigger-ranged
+实际上有两种更好的得到更新的办法，
 
 404
 00:16:22,812 --> 00:16:25,646
 ways, to get notified of things happening.
+他们的范围更广一些。
 
 405
 00:16:25,648 --> 00:16:28,882
 And that's the significant thing and the region thing.
+这就是“显著”和区域这两个东西。
 
 406
 00:16:28,884 --> 00:16:31,118
 So, the significant changes one, you just say,
+第一个是显著变更的，你只需要告诉系统，
 
 407
 00:16:31,120 --> 00:16:32,819
 start monitoring significant changes.
+开始监控显著的位置变更。
 
 408
 00:16:32,821 --> 00:16:34,821
 Now, when you say that.
+当你这么通知app的时候
 
 409
 00:16:34,823 --> 00:16:37,290
 Okay? It's going to
+它会开始监控
 
 410
 00:16:37,291 --> 00:16:39,758
 start monitoring it for you forever until you say stop.
+如果你不喊停它就不停下来。
 
 411
 00:16:39,761 --> 00:16:43,162
 And this is gonna work even if your app is not launched,
+甚至在app没启动的时候它也在监控。
 
 412
 00:16:43,164 --> 00:16:45,063
 let alone if it's in the background.
+不管它是不是在后台。
 
 413
 00:16:45,065 --> 00:16:47,299
 Okay? And so when significant
+也就是说，当有显著的位置变化
 
 414
 00:16:47,300 --> 00:16:49,534
 changes occur, your app will be launched in the background.
+发生的时候，你的app会在后台启动。
 
 415
 00:16:49,536 --> 00:16:51,736
 And you'll have a little bit of time to chew on the fact
+系统会需要一点时间来启动并获取
 
 416
 00:16:51,738 --> 00:16:53,270
 that the significant change.
+显著的位置变更，
 
 417
 00:16:53,272 --> 00:16:55,406
 Or if your app is running, but in the background,
+或者你的app正运行在后台，
 
 418
 00:16:55,408 --> 00:16:58,508
 it will still get notified of these signficant changes.
+它依然会收集这些变更。
 
 419
 00:16:58,510 --> 00:17:01,111
-Okay, now the only this is, you clearly didn't
+Okay, now the only thing is, you clearly
+不过，在你不打算让你的app
 
 420
 00:17:01,113 --> 00:17:03,746
 want to turn this off if your app is not actually gonna
+对这些变更做处理的时候，显然你希望
 
 421
 00:17:03,748 --> 00:17:06,315
 do anything when these significant changes come in.
+关掉这个功能。
 
 422
 00:17:06,317 --> 00:17:07,783
 But it's a pretty cool system.
+但是这确实是个非常酷的系统。
 
 423
 00:17:07,785 --> 00:17:08,984
 And it's very low power.
+而且非常省电。
 
 424
 00:17:08,986 --> 00:17:11,753
 It's basically only large changes kind of the change
+因为基本上只有很大的位置改变导致你切换
 
 425
 00:17:11,755 --> 00:17:13,321
 where you move to a different cell tower,
+了一个基站的时候才会发送消息，
 
 426
 00:17:13,323 --> 00:17:14,989
 those kind of low power,
+我们知道通过基站来定位是
 
 427
 00:17:14,991 --> 00:17:16,690
 measuring your location things.
+非常省电的。
 
 428
 00:17:16,692 --> 00:17:19,626
 But it can be really a cool thing to wake up every once in
+它也可以每隔一段时间唤醒app然后
 
 429
 00:17:19,628 --> 00:17:20,827
 a while and say, okay, where am I?
+报告位置。
 
 430
 00:17:20,829 --> 00:17:22,562
 If my app is location-based so
+如果我的app是基于位置设计的，
 
 431
 00:17:22,564 --> 00:17:26,665
 I'm gonna check something out, it's quite interesting.
+我就可以根据位置进行响应，非常好的系统。
 
 432
 00:17:26,667 --> 00:17:28,667
 And you get notified by the delegate when these
+当位置变更时，Location Manager的代理会
 
 433
 00:17:28,669 --> 00:17:30,735
 significant changes happen.
+给你发送消息。
 
 434
 00:17:30,737 --> 00:17:32,170
 And if you get launched,
+在app启动的时候，
 
 435
 00:17:32,172 --> 00:17:34,805
 then your didFinishLaunchingWithOptions.
+会调用 didFinishLaunchingWithOptions方法。
 
 436
 00:17:34,807 --> 00:17:37,341
 That little dictionary that we talked about is gonna have
+这个方法里有一个字典的参数，这个字典会有
 
 437
 00:17:37,343 --> 00:17:38,475
 a key in there.
+一个键。
 
 438
 00:17:38,477 --> 00:17:41,544
 That'll tell you UIApplicationLaunchOptionsLoc-
+就是 UIApplicationLaunchOptionsLocactionKey，
 
 439
 00:17:41,546 --> 00:17:43,980
 ationKey, saying you got launched because
+这个说明你的app启动时由于一个显著位置
 
 440
 00:17:43,982 --> 00:17:47,016
 a significant, you know, a location event happened, so
+变更导致的，你需要去
 
 441
 00:17:47,018 --> 00:17:48,584
 you should go check your location,
+查看当前的位置然后
 
 442
 00:17:48,586 --> 00:17:50,085
 go do something right now.
+做出响应。
 
 443
 00:17:50,087 --> 00:17:50,652
@@ -1774,174 +2202,217 @@ Okay?
 444
 00:17:51,688 --> 00:17:52,586
 Make sense?
+明白了吗？
 
 445
 00:17:52,588 --> 00:17:53,954
 So that's a pretty cool system.
+非常酷的系统。
 
 446
 00:17:53,956 --> 00:17:56,089
 And the very similar one is the region one,
+区域也是非常类似的。
 
 447
 00:17:56,091 --> 00:17:58,792
 like the dry cleaner example I was telling you about.
+我们刚才提到过干洗店app的例子。
 
 448
 00:17:58,794 --> 00:18:00,827
 And you can create regions.
+你可以建立一个区域。
 
 449
 00:18:00,829 --> 00:18:03,596
 Really there's only two, I think there's only two regions
+目前系统可用的区域类型应该是
 
 450
 00:18:03,598 --> 00:18:04,830
 in the system currently.
+只有两种。
 
 451
 00:18:04,832 --> 00:18:06,198
 Circular region,
+一种是圆形区域。
 
 452
 00:18:06,200 --> 00:18:09,267
 which is a circle around some latitude and longitude.
+就是一个地图上的圆圈。
 
 453
 00:18:09,269 --> 00:18:10,802
 And then a beacon region.
+然后是灯塔区域。
 
 454
 00:18:10,804 --> 00:18:14,138
 So a circular region, you define like this right here.
+在圆形区域里，你可以这样定义。
 
 455
 00:18:14,140 --> 00:18:16,173
 We just say the center and the radius, and
+定义它的中心和半径，然后定义
 
 456
 00:18:16,175 --> 00:18:17,274
 you give it an identifier.
+一个标识。
 
 457
 00:18:17,276 --> 00:18:18,842
 Now you want the identifier.
+标识是必要的，
 
 458
 00:18:18,844 --> 00:18:20,677
 Because, again,
+因为
 
 459
 00:18:20,678 --> 00:18:22,511
 this is gonna work when your app's not running, okay?
+你需要在你的app没启动或者在后台
 
 460
 00:18:22,514 --> 00:18:23,646
 Or when your app's in the background.
+的时候也能监控区域。
 
 461
 00:18:23,648 --> 00:18:24,913
 So you're gonna get woken up.
+你需要特定的时候唤醒app。
 
 462
 00:18:24,915 --> 00:18:26,815
 And when it wakes up, it needs to say,
+app被唤醒的时候就会通知你，
 
 463
 00:18:26,817 --> 00:18:29,084
 oh, this is the region that you walked into.
+你刚刚走进了你预设的区域。
 
 464
 00:18:29,086 --> 00:18:30,518
 The significant change is only when
+显著位置变化的通知只会在位置变化的
 
 465
 00:18:30,520 --> 00:18:31,752
 a significant change happen.
+时候发送。
 
 466
 00:18:31,754 --> 00:18:33,270
 But, here, you,
+但是在这里。
 
 467
 00:18:33,271 --> 00:18:34,787
 it's gonna tell you which region you walked in or
+系统会通知你走进或走出了
 
 468
 00:18:34,790 --> 00:18:36,189
 out of.
+哪一个区域。
 
 469
 00:18:36,191 --> 00:18:41,427
 A beacon region is when you are near another iOS device.
+灯塔区域指的是你是否靠近另外一台iOS设备。
 
 470
 00:18:41,429 --> 00:18:43,496
 That is giving off a beacon.
+这台设备就是所谓的灯塔。
 
 471
 00:18:43,498 --> 00:18:45,998
 Now I'm not gonna talk about how you can make your iOS
+在这里我不打算讲如何让你的iOS设备实现
 
 472
 00:18:46,000 --> 00:18:47,800
 device do that.
+这一点。
 
 473
 00:18:47,801 --> 00:18:49,601
 It's pretty cool, requires a little bit of Bluetooth and
+这个非常赞，需要一些蓝牙技术，但是有点
 
 474
 00:18:49,603 --> 00:18:52,404
 stuff like that, so beyond the scope of this course.
+超出我们这个课程的范围。
 
 475
 00:18:52,406 --> 00:18:55,273
 But the way you monitor for whether you've come in
+但是判断你是否进入了一个灯塔的范围，用的就是
 
 476
 00:18:55,275 --> 00:19:00,444
 range of a beacon is using this region monitoring system.
+咱们说的这个区域监控系统。
 
 477
 00:19:00,446 --> 00:19:03,580
 And so, when you go into a region or out of a region,
+当你走进或者走出区域的时候，
 
 478
 00:19:03,582 --> 00:19:06,049
 you get exit or enter or exit region.
+相应的代理方法就会被调用。
 
 479
 00:19:06,051 --> 00:19:09,385
 And when you go into a beacon area, whether it's a beacon
+无论是灯塔区域还是圆形区域，
 
 480
 00:19:09,387 --> 00:19:12,755
 area or a circular region, you'll get this same thing.
+都会调用同样的方法。
 
 481
 00:19:12,757 --> 00:19:16,225
 And you can also get fail, you know, errors, and so
+有时候也会失败，会得到错误，要记得在代码里
 
 482
 00:19:16,227 --> 00:19:19,127
 you wanna make sure you check those as well.
+检查错误。
 
 483
 00:19:19,129 --> 00:19:23,297
 And since these regions that you're monitoring can work
+因为在你的app不运行的时候也可以监控
 
 484
 00:19:23,299 --> 00:19:26,634
 when you're not running, they have names.
+区域，所以它们都有名字。
 
 485
 00:19:26,636 --> 00:19:29,903
 And you can find out all the regions you're currently
+你可以在CLLocationManager的monitoredRegions属性里找到
 
 486
 00:19:29,905 --> 00:19:33,573
 monitoring by calling this CLLocationManager property,
+所有你目前正在监控的区域。
 
 487
 00:19:33,575 --> 00:19:34,874
@@ -1950,34 +2421,42 @@ monitoredRegions.
 488
 00:19:34,876 --> 00:19:36,008
 Now, that's an NSSet.
+这是一个NSSet类型的属性。
 
 489
 00:19:36,010 --> 00:19:38,243
 We haven't really talked about NSSet.
+我们之前没讲过NSSet。
 
 490
 00:19:38,245 --> 00:19:41,813
 But an NSSet, kind of like an unordered array.
+NSSet类似是一种无序的数组。
 
 491
 00:19:41,815 --> 00:19:44,382
 The items in there are uniqued.
+里边的元素都是唯一的。
 
 492
 00:19:44,384 --> 00:19:47,752
 It's a set, basically, in terms of mathematical sense,
+在数学上讲，这是一个集合。
 
 493
 00:19:47,754 --> 00:19:49,070
 kind of a set.
+类似集合的东西。
 
 494
 00:19:49,071 --> 00:19:50,387
 And so you just look in there and find out what these
+你只需要查看这个属性就可以知道你目前正在
 
 495
 00:19:50,390 --> 00:19:51,955
 regions are that you're currently monitoring.
+监控哪些区域。
 
 496
 00:19:52,891 --> 00:19:54,357
@@ -1986,170 +2465,212 @@ Okay? And
 497
 00:19:54,358 --> 00:19:55,824
 you can stop monitoring certain regions or
+你也可以停止监控某一个区域或者添加更多的
 
 498
 00:19:55,827 --> 00:19:57,327
 add more regions or whatever.
+监控区域。
 
 499
 00:19:57,328 --> 00:19:58,828
 There is a limit to the number of regions you can monitor.
+可以监控区域的数量是有限制的，
 
 500
 00:19:58,830 --> 00:19:59,729
 It's big, though.
+尽管这个数量很大。
 
 501
 00:19:59,731 --> 00:20:01,363
-Yeah? >> When you have a beacon,
+Yeah? >> When you have a beacon
+提问：可以监控一个正在
 
 502
 00:20:01,365 --> 00:20:03,899
 can you find our where the beacon is cycling?
+移动的灯塔吗？
 
 503
 00:20:03,901 --> 00:20:07,435
 >> Yeah, so the question is, if I'm in a beacon region,
+好，问题是，当我在灯塔区域的时候，
 
 504
 00:20:07,437 --> 00:20:09,771
 I think, do I have a slide on that?
+我想想是不是有个幻灯片讲这个
 
 505
 00:20:10,840 --> 00:20:14,408
 I'll get to the beacons in a second.
+我们一会儿马上就讲灯塔了。
 
 506
 00:20:14,410 --> 00:20:18,578
 So the region monitoring distance.
+监控区域的大小也是有限制的。
 
 507
 00:20:20,415 --> 00:20:22,948
 This is a gettable var, a read-only var.
+这里有一个只读的变量。
 
 508
 00:20:22,950 --> 00:20:25,784
 It'll tell you what is the biggest area you can monitor,
+这个变量告诉你可以监控距离的最大范围，
 
 509
 00:20:25,786 --> 00:20:28,754
 so you can't really say, tell me when I'm at Stanford, and
+所以你不能说，监控我是不是在斯坦福大学里，因为
 
 510
 00:20:28,756 --> 00:20:30,121
 have this gigantic region.
+这个区域太大了。
 
 511
 00:20:30,123 --> 00:20:34,592
 Okay, there is a limit, and this will tell you what it is.
+大小是有限制的，可以通过这个变量知道这个限制。
 
 512
 00:20:35,728 --> 00:20:37,127
 So the beacons,
+下边说灯塔，
 
 513
 00:20:37,129 --> 00:20:40,697
 they can detect the range from the beacon.
+系统可以检测到与灯塔之间的距离。
 
 514
 00:20:40,699 --> 00:20:42,165
 So it's just kind of what you're asking for.
+就跟你刚才问的差不多。
 
 515
 00:20:42,167 --> 00:20:44,100
 As you move around, you can tell.
+你只要一动，系统就会告诉你
 
 516
 00:20:44,101 --> 00:20:46,034
 Are you kind of intensely close to the beacon or kind of
+现在是离灯塔很近还是中等距离还是
 
 517
 00:20:46,037 --> 00:20:48,771
 a medium or are you kind of far away from the beacon?
+离的很远。
 
 518
 00:20:48,773 --> 00:20:50,972
 And so you just say startRanging this
+你需要调用这个方法。
 
 519
 00:20:50,974 --> 00:20:52,207
 BeaconsInRegion.
+startRangingBeaconInRegion.
 
 520
 00:20:52,209 --> 00:20:55,009
 And you'll get this didRangeBeacons in region.
+然后你就会收到didRangeBeacons这个代理方法发送的信息。
 
 521
 00:20:55,011 --> 00:20:57,878
 And it will tell you whether you're immediate, near, or
+这个方法会告诉你距离灯塔是近，中等距离
 
 522
 00:20:57,880 --> 00:20:59,713
 far to the range.
+还是远。
 
 523
 00:20:59,714 --> 00:21:01,547
 So it's not really telling you like, direction but it's
+但是它不会告诉你方向，但是会告诉你
 
 524
 00:21:01,550 --> 00:21:04,551
 telling you, you know, close, near, far so that's good.
+距离，应该够用了。
 
 525
 00:21:04,553 --> 00:21:08,554
 Like I said being a beacon requires you to do some stuff
+我刚才说了，要成为一个灯塔需要用到
 
 526
 00:21:08,556 --> 00:21:11,123
 in the Core Bluetooth Framework.
+Core Bluetooth框架的技术。
 
 527
 00:21:11,125 --> 00:21:12,725
 We're not going to talk about that.
+我们这个课上不会讲。
 
 528
 00:21:12,727 --> 00:21:16,028
 You'd have to have this globally unique ID for
+你必须给你的灯塔一个全局唯一
 
 529
 00:21:16,030 --> 00:21:17,179
 your beacon.
+的ID。
 
 530
 00:21:17,180 --> 00:21:18,329
 You have to register with Apple basically.
+你需要去苹果注册这个ID。
 
 531
 00:21:18,331 --> 00:21:19,530
 This is your beacon.
+这就是你的灯塔。
 
 532
 00:21:19,532 --> 00:21:22,633
 It's not just something you just turn it on,
+不是说打开设备就可以
 
 533
 00:21:22,635 --> 00:21:24,134
 start sending out a beacon.
+当作一个灯塔了。
 
 534
 00:21:24,136 --> 00:21:26,870
 You kind of have to identify your beacon.
+你需要注册你的灯塔。
 
 535
 00:21:26,872 --> 00:21:28,872
 So that's it for core location.
+前边讲的就是Core Location的内容。
 
 536
 00:21:28,874 --> 00:21:30,306
 That's the underpinnings.
+底层的东西。
 
 537
 00:21:30,308 --> 00:21:32,842
 And now we're gonna talk about the UI side of this,
+现在我们讲UI层面的东西，
 
 538
 00:21:32,844 --> 00:21:34,743
 which is called MapKit.
+也就是MapKit。
 
 539
 00:21:34,745 --> 00:21:36,712
@@ -2158,6 +2679,7 @@ Okay?
 540
 00:21:36,713 --> 00:21:38,680
 And MapKit, fundamentally, displays a map.
+MapKit简单来说，就是展示地图。
 
 541
 00:21:38,682 --> 00:21:39,414
@@ -2166,30 +2688,37 @@ Okay?
 542
 00:21:39,416 --> 00:21:41,115
 It's basically a UIView,
+它是一个UIView。
 
 543
 00:21:41,117 --> 00:21:43,517
 MKMapview is a UIView subclass.
+MKMapView是UIView的子类。
 
 544
 00:21:43,519 --> 00:21:46,920
 And it displays a map of wherever you are on Earth.
+它会展示你在地球上的位置。
 
 545
 00:21:46,922 --> 00:21:48,822
 Okay? And it's using this Apple Maps
+它用的是苹果地图的技术
 
 546
 00:21:48,824 --> 00:21:53,593
 technology to display either a satellite image like this or
+来显示卫星图片或者街道名，
 
 547
 00:21:53,595 --> 00:21:57,129
 just streets and roads, or an overlap, like this one is,
+路名，或者一个像这样的覆盖层，可以显示卫星图片和街道名字
 
 548
 00:21:57,131 --> 00:21:59,732
 of satellite image and the names of roads, et cetera.
+什么的。
 
 549
 00:21:59,734 --> 00:22:02,301
@@ -2198,18 +2727,22 @@ Okay?
 550
 00:22:02,302 --> 00:22:04,869
 Now, on this map it has what are called annotations.
+地图上会有一些注释点。
 
 551
 00:22:04,871 --> 00:22:06,337
 That's what makes a pin on the app.
+就是app里的大头针。
 
 552
 00:22:06,339 --> 00:22:09,273
 This is a very important term to understand, an annotation.
+注释点是一个非常重要的概念。
 
 553
 00:22:09,275 --> 00:22:11,875
 An annotation is a point on the map.
+注释点就是地图上的一个点。
 
 554
 00:22:11,877 --> 00:22:12,709
@@ -2218,38 +2751,47 @@ Okay?
 555
 00:22:12,711 --> 00:22:14,411
 Now, an annotation is simple.
+注释点很简单。
 
 556
 00:22:14,413 --> 00:22:17,080
 It's just a protocol, and it has three things in it.
+只是一个协议而已，需要实现三个属性。
 
 557
 00:22:17,082 --> 00:22:19,615
 Coordinate, which is the latitude and longitude, so
+第一个是坐标，也就是经纬度，
 
 558
 00:22:19,617 --> 00:22:22,584
 that CLLocationCoordinate2D thing we saw earlier, and
+也就是我们之前看到的CLLocationCoordinate2D类型，然后
 
 559
 00:22:22,586 --> 00:22:23,752
 then title and subtitle.
+就是标题和副标题。
 
 560
 00:22:23,754 --> 00:22:26,087
 So, here this one you're seeing here,
+现在你看见的这个注释点，
 
 561
 00:22:26,089 --> 00:22:29,123
 the title is Venice, Italy, and it has no subtitle.
+标题是“意大利，威尼斯”，没有副标题。
 
 562
 00:22:29,125 --> 00:22:31,859
 The subtitle would appear as a little smaller
+副标题就是在标题下边小一点的字，
 
 563
 00:22:31,861 --> 00:22:34,995
 text underneath, so it has no subtitle there.
+在这里没有副标题。
 
 564
 00:22:34,997 --> 00:22:35,863
@@ -2258,14 +2800,17 @@ Okay?
 565
 00:22:35,864 --> 00:22:36,730
 Now you have these annotations,
+现在你有了这些注释点，
 
 566
 00:22:36,732 --> 00:22:38,164
 you need to display them.
+你需要把它们显示在地图上。
 
 567
 00:22:38,166 --> 00:22:42,635
 Now they're displayed with MKAnnotationView subclasses.
+它们是通过MKAnnotationView的子类来显示的。
 
 568
 00:22:42,637 --> 00:22:43,235
@@ -2274,154 +2819,192 @@ Okay?
 569
 00:22:43,237 --> 00:22:44,970
 Make sense?
+明白吗？
 
 570
 00:22:44,971 --> 00:22:46,704
 MKAnnotations being displayed with MKAnnotationViews.
+MKAnnotations需要通过 MKAnnotationViews显示。
 
 571
 00:22:46,707 --> 00:22:49,541
 And MKPinAnnotationView, which is what you see here,
+MKPinAnnotationView，就像你刚才看见的那样，像
 
 572
 00:22:49,543 --> 00:22:50,375
 looks like a pin.
+个大头针。
 
 573
 00:22:50,377 --> 00:22:54,345
 Now you can write your own MKAnnotationView subclasses
+你可以自己写MKAnnotationView的子类，这样就可以在某个位置
 
 574
 00:22:54,347 --> 00:22:56,747
 and draw whatever you want at that location.
+上画任何你想要的效果。
 
 575
 00:22:56,749 --> 00:22:59,383
 But most times people are using the MKPinAnnotationView
+但是大多数的时候人们都会用MKPinAnnotationView，因为
 
 576
 00:22:59,385 --> 00:23:01,518
 so it's showing up as pins.
+它长的像大头针。
 
 577
 00:23:01,520 --> 00:23:05,488
 Now when you click on the pin, another view comes up,
+当你点大头针的时候，另外一个视图就会跳出来，
 
 578
 00:23:05,490 --> 00:23:09,592
 this white view right here called the pin's callout.
+这个白色的视图叫做大头针的标注。
 
 579
 00:23:09,594 --> 00:23:12,761
 Okay, now don't get confused between the MKAnnotationView
+不要把它跟大头针也就是MKAnnotationView
 
 580
 00:23:12,763 --> 00:23:14,363
 which is the pin.
+弄混了。
 
 581
 00:23:14,365 --> 00:23:15,797
 That's what the MKAnnotationView,
+这个是MKAnnotationView，
 
 582
 00:23:15,799 --> 00:23:16,597
 it draws a pin.
+它在地图上绘制一个大头针。
 
 583
 00:23:17,834 --> 00:23:21,001
 This is a different thing called a callout.
+标注是完全不同的东西。
 
 584
 00:23:21,003 --> 00:23:22,669
 People get confused between the two because there's
+大家经常把这两个东西搞混，因为不能直接访问这个
 
 585
 00:23:22,671 --> 00:23:25,105
 really no pointer to that callout view, you don't,
+标注视图，
 
 586
 00:23:25,107 --> 00:23:29,008
 you know, interact with that callout view directly.
+我们不能直接与标注视图进行交互。
 
 587
 00:23:29,010 --> 00:23:32,578
 Instead what you're able to do is set the left and
+但是我们可以设置左右两个
 
 588
 00:23:32,580 --> 00:23:34,380
 right accessory views.
+辅助视图。
 
 589
 00:23:34,382 --> 00:23:36,114
 So here we got a left accessory view,
+这里是一个左辅助视图。
 
 590
 00:23:36,116 --> 00:23:37,315
 which is a little image, and
+是一个小图片，右辅助视图是一个
 
 591
 00:23:37,317 --> 00:23:39,417
 the right accessory view is a little button.
+小按钮。
 
 592
 00:23:39,419 --> 00:23:40,651
 You can set those.
+你可以设置它们。
 
 593
 00:23:40,653 --> 00:23:42,486
 But you don't interact with the view.
+但是你不能与这个视图交互。
 
 594
 00:23:42,488 --> 00:23:44,354
 So, but that's a callout view, and
+这个标注视图只会在
 
 595
 00:23:44,356 --> 00:23:46,322
 it only shows when you click on the pin.
+你点大头针的时候才会弹出来。
 
 596
 00:23:46,324 --> 00:23:48,124
 If you click on the pin, it shows the callout view.
+如果你点击大头针，标注视图就出来了。
 
 597
 00:23:48,126 --> 00:23:50,443
 Now again,
+再说一次，
 
 598
 00:23:50,444 --> 00:23:52,761
 if you're doing your own MKAnnotationView subclass.
+如果你自己实现MKAnnotationView的子类。
 
 599
 00:23:52,764 --> 00:23:54,430
 Doesn't draw a pin, it draws something else.
+你不打算绘制一个大头针而是别的什么。
 
 600
 00:23:54,432 --> 00:23:55,997
 You could have your own callout,
+你可以设计自己的标注，
 
 601
 00:23:55,999 --> 00:23:57,332
 you can put your own view up,
+你可以把自己设计的视图放上去。
 
 602
 00:23:57,334 --> 00:23:59,133
 whatever you feel like you need to do.
+你自己喜欢的。
 
 603
 00:23:59,135 --> 00:24:01,302
 But if you're using the pin-based one,
+但是如果你用一个大头针，
 
 604
 00:24:01,304 --> 00:24:04,138
 this is the flexibility you have, is to do that left and
+你就只能设置这些东西，左右两个
 
 605
 00:24:04,140 --> 00:24:06,139
 right callout accessory.
+辅助视图。
 
 606
 00:24:06,141 --> 00:24:08,541
 Okay, that's what you're allowed to do.
+这是你唯一能做的。
 
 607
 00:24:08,543 --> 00:24:10,760
@@ -2430,50 +3013,62 @@ Okay, that's what you're allowed to do.
 608
 00:24:10,761 --> 00:24:12,978
 in the demo, I'm going to show all of this ability here.
+一会儿在demo里，我会给你们演示都能做什么。
 
 609
 00:24:13,914 --> 00:24:17,949
 So you create a MKMapView just by,
+你能从故事板里直接拖一个
 
 610
 00:24:17,951 --> 00:24:21,386
 usually by dragging it out in storyboard of course.
+MKMapView出来。
 
 611
 00:24:21,388 --> 00:24:22,620
 Just like you create, you know,
+就跟你拖文字视图或者图片视图
 
 612
 00:24:22,622 --> 00:24:24,305
 a text view or an image view,
+一样。
 
 613
 00:24:24,306 --> 00:24:25,989
 just drag it on out and size it to where you want.
+拖进来然后设置大小。
 
 614
 00:24:25,992 --> 00:24:29,659
 But you can say MKMapView parenthesis, parenthesis and
+你也可以通过 MKMapView() 来
 
 615
 00:24:29,661 --> 00:24:30,994
 initialize one.
+初始化。
 
 616
 00:24:30,996 --> 00:24:34,497
 You can say MKMapView frame colon whatever cuz it's
+你也可以写 MKMapView(frame:)，因为它就是一个UIView
 
 617
 00:24:34,499 --> 00:24:35,898
 a UIView.
+而已。
 
 618
 00:24:35,899 --> 00:24:37,298
 One thing that's important about using MapKit,
+要使用MapKit最重要的就是别忘了导入
 
 619
 00:24:37,301 --> 00:24:38,500
 you have to import MapKit.
+MapKit。
 
 620
 00:24:39,503 --> 00:24:41,253
@@ -2482,70 +3077,87 @@ Okay?
 621
 00:24:41,254 --> 00:24:43,004
 If you don't import MapKit, you're not gonna see any of
+如果不导入，这些东西你就都
 
 622
 00:24:43,006 --> 00:24:44,905
 the symbols so don't forget that piece.
+不能用，千万别忘了。
 
 623
 00:24:44,907 --> 00:24:46,473
 It'll be pretty obvious when you start typing,
+你自己写代码的时候应该能挺容易就发现，
 
 624
 00:24:46,475 --> 00:24:48,809
 it's like woah, MKMap it won't escape complete.
+因为你写MKMap的时候没有自动补全。
 
 625
 00:24:48,811 --> 00:24:50,576
 Well, it's because you didn't import MapKit.
+这时你就知道是忘了导入。
 
 626
 00:24:52,780 --> 00:24:55,114
 The annotations that are on there,
+地图上的注释点，
 
 627
 00:24:55,116 --> 00:24:57,783
 all the places where the pins are, that's just an array,
+也就是那些大头针，实际上是一个数组。
 
 628
 00:24:57,785 --> 00:25:01,086
 okay, an array of MKAnnotation.
+一个MKAnnotation的数组。
 
 629
 00:25:01,088 --> 00:25:03,821
 Now, I'm putting them in these slides as
+在幻灯片里我写的是MKAnnotation
 
 630
 00:25:03,823 --> 00:25:05,156
 array of MKAnnotation.
+的数组。
 
 631
 00:25:05,158 --> 00:25:06,990
 It's actually, as you might guess,
+事实上，你可能已经猜到了，
 
 632
 00:25:06,992 --> 00:25:10,126
 an array of any object, okay, for historical reasons.
+它是AnyObject的数组，因为各种历史原因。
 
 633
 00:25:11,229 --> 00:25:13,562
 But you cannot pass anything except for
+但是你不能把MKAnnotation以外的东西
 
 634
 00:25:13,564 --> 00:25:15,764
 an MKAnnotation into these things.
+存进这个数组。
 
 635
 00:25:15,766 --> 00:25:19,668
 So I've changed the code on my slides to just be
+所以我在幻灯片里改成了MKAnnotation
 
 636
 00:25:19,670 --> 00:25:20,868
 array of MKAnnotation.
+的数组。
 
 637
 00:25:20,870 --> 00:25:24,071
 Cuz that's what it is, it's an array of MKAnnotation.
+因为它本来就是MKAnnotation的数组。
 
 638
 00:25:24,073 --> 00:25:24,638
@@ -2554,66 +3166,82 @@ Okay?
 639
 00:25:25,808 --> 00:25:29,576
 Now notice that that's get only.
+你注意到了这个属性是只读的。
 
 640
 00:25:29,578 --> 00:25:31,728
 So we'll talk about how you set
+一会儿我们会讲如何设置注释点，
 
 641
 00:25:31,729 --> 00:25:33,879
 the annotations in a second, but that's how you get them.
+但是在这你只能读取，
 
 642
 00:25:33,882 --> 00:25:36,515
 The protocol, as I talked about, coordinate, title, and
+前边我说的协议，就是坐标，标题，
 
 643
 00:25:36,517 --> 00:25:37,466
 subtitle.
+副标题那个东西。
 
 644
 00:25:37,467 --> 00:25:38,416
 Notice that the title and
+注意看标题和副标题
 
 645
 00:25:38,419 --> 00:25:40,952
 subtitle are optional strings, okay.
+都是可选的字符串。
 
 646
 00:25:40,954 --> 00:25:42,587
 But you really wanna set that title.
+但是你必须得设置一个标题，
 
 647
 00:25:42,589 --> 00:25:44,155
 If you don't set the title,
+如果不设，
 
 648
 00:25:44,157 --> 00:25:45,589
 pretty much everything's gonna be messed up.
+就全乱套了。
 
 649
 00:25:45,591 --> 00:25:47,791
 So don't let that title be nil.
+所以千万不要让标题为空。
 
 650
 00:25:47,793 --> 00:25:49,226
 Okay? The subtitle can be nil, but
+副标题可以为空，但是标题
 
 651
 00:25:49,228 --> 00:25:50,126
 don't let the title be nil.
+不可以。
 
 652
 00:25:51,529 --> 00:25:54,063
 And then CLLocationCoordinate2D you
+CLLocationCoordinate2D，这个之前你们
 
 653
 00:25:54,065 --> 00:25:55,798
 know what that is from earlier slides,
+已经看到过了，
 
 654
 00:25:55,800 --> 00:25:57,332
 that's just the latitude and longitude.
+就是经纬度而已。
 
 655
 00:25:58,435 --> 00:26:00,368
@@ -2622,18 +3250,22 @@ Okay, so
 656
 00:26:00,369 --> 00:26:02,302
 how do we add annotations since that thing is read-only?
+既然注释点是只读的，那我们怎么添加呢？
 
 657
 00:26:02,305 --> 00:26:04,638
 Well, with methods like addAnnotation and
+可以通过addAnnotation和addAnnotations方法，
 
 658
 00:26:04,640 --> 00:26:07,041
 addAnnotations, and removeAnnotation and
+通过removeAnnotation和removeAnnotations
 
 659
 00:26:07,043 --> 00:26:08,241
 removeAnnotations.
+删除。
 
 660
 00:26:08,243 --> 00:26:10,093
@@ -2642,14 +3274,17 @@ Okay?
 661
 00:26:10,094 --> 00:26:11,944
 And the reason it does that that way is it just wants to
+这样做的原因是系统就可以知道你加了
 
 662
 00:26:11,947 --> 00:26:13,379
 know when you add an annotation, so
+新的注释点以便于它
 
 663
 00:26:13,381 --> 00:26:14,914
 it can update the map.
+更新地图。
 
 664
 00:26:14,916 --> 00:26:15,614
@@ -2658,34 +3293,42 @@ Okay.
 665
 00:26:15,616 --> 00:26:16,281
 Simple as that.
+很简单。
 
 666
 00:26:17,584 --> 00:26:20,618
 It is generally a good idea, if you know what all your
+如果设计时你就知道你所有的注释点，你最好提前就把它们
 
 667
 00:26:20,620 --> 00:26:23,487
 annotations are, to add them up front.
+都添加了。
 
 668
 00:26:23,489 --> 00:26:25,289
 Okay? As opposed to kind of trying
+这个好像跟用户现在在哪个位置，
 
 669
 00:26:25,291 --> 00:26:27,124
 to watch where the user is on the map, and
+然后在地图上插一个大头针
 
 670
 00:26:27,126 --> 00:26:28,525
 add them as you go.
+有点相悖。
 
 671
 00:26:28,527 --> 00:26:31,227
 Because you're gonna find that the map
+这么做是因为地图视图跟表格视图一样
 
 672
 00:26:31,229 --> 00:26:35,130
 view is smart like table view, and it reuses those pins.
+聪明，它们可以复用大头针。
 
 673
 00:26:35,132 --> 00:26:36,849
@@ -2694,46 +3337,57 @@ Okay? So,
 674
 00:26:36,850 --> 00:26:38,567
 if you have a thousand annotations,
+如果你有一千个注释点，
 
 675
 00:26:38,569 --> 00:26:41,569
 annotations are small, the views are big and
+注释点很小，但是它的视图很大很耗能，
 
 676
 00:26:41,571 --> 00:26:46,007
 expensive, but map view is going to manage that for you.
+但是地图视图会帮你管理它们。
 
 677
 00:26:46,009 --> 00:26:47,508
 Okay? So unless you
+除非你在一个
 
 678
 00:26:47,510 --> 00:26:50,744
 have a ton of annotations in a very small space and somehow,
+非常小的区域有非常多的注释点，
 
 679
 00:26:50,746 --> 00:26:53,813
 you filter them to show the user only some of them,
+你应该过滤掉一些，给用户展示一部分，
 
 680
 00:26:53,815 --> 00:26:55,381
 you might as well put all your annotations in there.
+不过也有可能你想把它们都展示给客户。
 
 681
 00:26:55,383 --> 00:26:57,983
 And let the map view be smart about showing which pins
+地图视图会很聪明的知道在现在的地图上
 
 682
 00:26:57,985 --> 00:27:00,119
 are are visible at the, where the map is showing.
+展示哪些大头针，
 
 683
 00:27:00,121 --> 00:27:01,553
 And then, as it scrolls around,
+如果用户滚动地图，
 
 684
 00:27:01,555 --> 00:27:05,790
 it'll reuse the pins and be efficient about it.
+它就会复用大头针以提高效率。
 
 685
 00:27:05,792 --> 00:27:06,957
@@ -2742,22 +3396,27 @@ Okay?
 686
 00:27:06,959 --> 00:27:11,661
 When you have an annotation,
+当你有一个注释点，
 
 687
 00:27:11,663 --> 00:27:12,929
 what does it look like on the map?
+它在地图上是什么样的呢？
 
 688
 00:27:12,931 --> 00:27:14,831
 Well, that depends on the MKAnnotationView
+这个取决于用来显示它的
 
 689
 00:27:14,833 --> 00:27:16,065
 that's displaying it.
+MKAnnotationView
 
 690
 00:27:16,067 --> 00:27:18,334
 But again, the pins are usually how we do it, and
+但是，通常我们都用大头针，
 
 691
 00:27:18,336 --> 00:27:19,634
@@ -2766,6 +3425,7 @@ it looks like a pin.
 692
 00:27:19,636 --> 00:27:22,671
 You can set the color, it can be purple or blue or red,
+你可以设置它的颜色，紫色蓝色或者红色，
 
 693
 00:27:22,673 --> 00:27:24,272
@@ -2774,46 +3434,57 @@ I think.
 694
 00:27:24,273 --> 00:27:25,872
 And you can even set the image of that pin if you don't want
+你甚至可以把大头针的图片换掉如果你不希望它看起来
 
 695
 00:27:25,875 --> 00:27:27,825
 it to look like a pin, but
+像个大头针，但是你希望
 
 696
 00:27:27,826 --> 00:27:29,776
 you still want all the rest of behavior of the pin annotation
+其他的特性都跟大头针注释点一样，
 
 697
 00:27:29,779 --> 00:27:30,978
 view like that callout.
+比如标注视图。
 
 698
 00:27:30,980 --> 00:27:33,364
 Then you can change,
+你可以换图片，
 
 699
 00:27:33,365 --> 00:27:35,749
 there's a property in there, you can change the image.
+有一个属性，可以换图片。
 
 700
 00:27:35,751 --> 00:27:39,886
 When you touch on a pin, what happens?
+如果你点击一个大头针会发生什么呢？
 
 701
 00:27:39,888 --> 00:27:41,120
 'Kay? Well one thing is,
+首先就是，
 
 702
 00:27:41,122 --> 00:27:44,056
 if it's a pin annotation view, and as long as showing
+如果这是一个大头针注释点，有一个canShowCallout属性让你确定
 
 703
 00:27:44,058 --> 00:27:47,192
 callouts is allowed, there's a can show callout property.
+是不是允许弹出标注视图。
 
 704
 00:27:47,194 --> 00:27:49,260
 Then it's gonna put that callout up.
+如果允许，标注视图就弹出来。
 
 705
 00:27:49,262 --> 00:27:50,428
@@ -2822,34 +3493,42 @@ Okay?
 706
 00:27:50,430 --> 00:27:52,196
 So that's one thing that happens.
+这是首先会发生的事儿。
 
 707
 00:27:52,198 --> 00:27:54,131
 The other thing that happens when you touch it is that
+另外一个点击时会发生的事情就是调用
 
 708
 00:27:54,133 --> 00:27:55,599
 your map view's delegate
+地图视图的代理方法。
 
 709
 00:27:55,601 --> 00:27:58,768
 gets sent the message didSelectAnnotationView.
+didSelectAnnotationView
 
 710
 00:27:58,770 --> 00:28:00,136
 So you get told oh,
+在这里系统就会知道
 
 711
 00:28:00,138 --> 00:28:03,339
 this person clicked on this annotation view.
+有人点击了注释点视图，
 
 712
 00:28:03,341 --> 00:28:05,374
 And you can find out from the annotation view
+你可以从这个方法的注释视图参数得知是哪个
 
 713
 00:28:05,376 --> 00:28:07,075
 which annotation that represents.
+注释点被点击了。
 
 714
 00:28:09,179 --> 00:28:10,411
@@ -2858,190 +3537,237 @@ Okay?
 715
 00:28:10,413 --> 00:28:13,914
 Remember that the callout is built
+要记住标注视图在大头针生成的时候就已经
 
 716
 00:28:13,916 --> 00:28:17,351
 at the time that the pin is built, that view hierarchy.
+通过视图继承关系生成了。
 
 717
 00:28:17,353 --> 00:28:20,320
 But you wouldn't want to do something expensive there,
+所以在这个时候不要做非常消耗性能的事。
 
 718
 00:28:20,322 --> 00:28:21,821
 like for example, fetch that image,
+比如抓取图片什么的，
 
 719
 00:28:21,823 --> 00:28:23,923
 that little picture of Venice there.
+那个威尼斯的小图片。
 
 720
 00:28:23,925 --> 00:28:25,624
 I wouldn't want to fetch that from the network or
+我希望这个图片只在注释点被点击的时候
 
 721
 00:28:25,626 --> 00:28:27,959
 something until it actually got clicked on.
+才会开始从网络抓取。
 
 722
 00:28:27,961 --> 00:28:30,795
 Because that callout
+因为如果没人点注释点的话，有可能
 
 723
 00:28:30,797 --> 00:28:32,597
-may never be shown if no on ever clicks on it.
+may never be shown if no one ever clicks on it.
+标注视图永远都不会弹出来。
 
 724
 00:28:32,599 --> 00:28:36,233
 So, what a waste to fetch that image before then.
+所以在那之前就抓取图片非常浪费。
 
 725
 00:28:36,235 --> 00:28:37,985
 Okay? But you're still gonna wanna
+但是标注视图的左辅助视图
 
 726
 00:28:37,986 --> 00:28:39,736
 put the UIImageView as the left call out accessory.
+依然是一个图片视图，
 
 727
 00:28:39,739 --> 00:28:40,704
 You're just not gonna put any
+你只是在注释点被点击之前不
 
 728
 00:28:40,706 --> 00:28:42,839
 image in it till someone clicks on it.
+加载图片而已。
 
 729
 00:28:44,376 --> 00:28:47,243
 So, how are these MKAnnotationViews created and
+这些MKAnnotationViews是怎么加载而且跟你的注释点
 
 730
 00:28:47,245 --> 00:28:49,445
 associated with annotation?
+数组联系起来的呢？
 
 731
 00:28:49,447 --> 00:28:52,981
 'Kay, it's very similar to table view, so this is a lot
+跟表格视图非常类似，尤其是跟表格视图的
 
 732
 00:28:52,983 --> 00:28:56,217
 like table view's self or row in index path.
+self或者indexPath的行很类似。
 
 733
 00:28:56,219 --> 00:28:59,187
 Okay, it's called viewForAnnotation, so it's
+我们调用viewForAnnotation方法，
 
 734
 00:28:59,189 --> 00:29:01,689
 gonna give you an annotation and say create me a view.
+它会在参数里给你提供一个注释点然后你需要为它建一个视图。
 
 735
 00:29:01,691 --> 00:29:03,824
 The first thing you're gonna try to do is dequeue
+首先你需要尝试把一个复用的视图从队列
 
 736
 00:29:03,826 --> 00:29:05,792
 a reusable one.
+取出。
 
 737
 00:29:05,794 --> 00:29:07,994
 So that's like you do in table view.
+跟你在表格视图里做的一样。
 
 738
 00:29:07,996 --> 00:29:09,062
 And, but this time,
+但是这次
 
 739
 00:29:09,064 --> 00:29:11,197
 if you can't find one, which is possible,
+如果找不到，这是有可能的，
 
 740
 00:29:11,199 --> 00:29:14,166
 because there's no prototypes like there is in table view.
+因为跟表格视图不同的是这里是没有原型的。
 
 741
 00:29:14,168 --> 00:29:16,034
 There's nothing in the storyboard that's
+我们没有从故事板里加载一个
 
 742
 00:29:16,036 --> 00:29:17,402
 gonna make it create one.
+进来。
 
 743
 00:29:17,404 --> 00:29:20,405
 So you have to check to see if view does equal nil,
+所以你必须要检查视图是不是为空，
 
 744
 00:29:20,407 --> 00:29:22,239
 then you're gonna have to create a pin annotation view.
+然后就要新建一个大头针视图。
 
 745
 00:29:22,241 --> 00:29:23,540
 But when you create it,
+新建的时候，
 
 746
 00:29:23,542 --> 00:29:26,043
 there's two arguments to its initialize there.
+它的初始化器有两个参数。
 
 747
 00:29:26,045 --> 00:29:27,677
 One is the annotation, but
+第一个是注释点，第二个
 
 748
 00:29:27,679 --> 00:29:30,046
 another one is that reuse identifier.
+是复用标识。
 
 749
 00:29:30,048 --> 00:29:33,149
 And that makes it so the next time you come around that pin
+这样可以使这个视图在屏幕外的时候
 
 750
 00:29:33,151 --> 00:29:35,751
 might be reused if it went off screen.
+可以被复用。
 
 751
 00:29:35,753 --> 00:29:36,852
 So this is how this works.
+在没有原型的时候我们
 
 752
 00:29:36,854 --> 00:29:38,319
 There's no prototypes,
+都是这么做的。
 
 753
 00:29:38,321 --> 00:29:41,622
 you have to kind of create the prototypes in code here if you
+如果你不能从复用队列中取到一个的话，你就要用代码新建一个
 
 754
 00:29:41,624 --> 00:29:43,758
 can't get a dequeued reusable one.
+原型。
 
 755
 00:29:44,860 --> 00:29:46,660
 And then you're usually gonna say whether
+然后下面就需要设置是不是允许
 
 756
 00:29:46,662 --> 00:29:47,761
 you can show a callout.
+弹出标识视图。
 
 757
 00:29:47,763 --> 00:29:49,128
 If you're using a pin annotation view,
+如果你用的是大头针视图，
 
 758
 00:29:49,130 --> 00:29:52,198
 you're gonna say yes or no on the canShowCallout.
+你需要设置canShowCallout的值。
 
 759
 00:29:52,200 --> 00:29:55,768
 And then, now you've got ahold of an MKAnnotationView.
+这是你就持有了一个MKAnnotationView
 
 760
 00:29:55,770 --> 00:29:59,237
 You're going to get it ready to display,
+下边要准备让它显示在屏幕上，
 
 761
 00:29:59,239 --> 00:30:01,706
 mostly by setting the annotation.
+最重要的肯定是设置它的注释点。
 
 762
 00:30:01,708 --> 00:30:03,108
@@ -3050,82 +3776,102 @@ Okay?
 763
 00:30:03,109 --> 00:30:04,509
 But also, you might set up those left and
+你也有可能需要设置它标识视图的左右
 
 764
 00:30:04,511 --> 00:30:07,178
 right callout accessory views.
+辅助视图。
 
 765
 00:30:07,180 --> 00:30:09,380
 So that's basically it, okay?
+然后就差不多了。
 
 766
 00:30:09,382 --> 00:30:10,814
 And then you just return the MKAnnotationView.
+然后就返回这个 MKAnnotationView。
 
 767
 00:30:10,816 --> 00:30:14,851
 So it looks a lot like self or row in index path.
+非常类似于indexPath的行。
 
 768
 00:30:14,853 --> 00:30:17,086
 MKAnnotationView has some interesting properties.
+MKAnnotationView有一些有趣的属性，
 
 769
 00:30:17,088 --> 00:30:20,256
 Like I said, you can set the image, that is the pin.
+你可以给它设置图片，默认是个大头针。
 
 770
 00:30:20,258 --> 00:30:22,074
 You've got this left and
+你也可以设置标识视图的
 
 771
 00:30:22,075 --> 00:30:23,891
 rightCalloutAccessoryView that you can set to an image view,
+左右辅助视图，图片视图或者
 
 772
 00:30:23,894 --> 00:30:25,327
 button, whatever you want.
+一个按钮，什么都行。
 
 773
 00:30:25,329 --> 00:30:27,128
 You can enable and disable it.
+你可以激活或者隐藏它。
 
 774
 00:30:27,130 --> 00:30:30,565
-You can have a sender offset, because with the pin, people
+You can have a center offset, because with the pin, people
+你还可以设置中心偏移量，因为人们一般习惯于点击
 
 775
 00:30:30,567 --> 00:30:33,200
 are gonna be clicking on the head of the pin, but the pin
+大头针的头部，而大头针在地图上的点实际上是它的底部，
 
 776
 00:30:33,202 --> 00:30:36,503
 is actually pointed into the earth at a different spot.
+跟头部并不是一个点，
 
 777
 00:30:36,505 --> 00:30:38,138
 So there's a little offset there.
+是有一些偏移的。
 
 778
 00:30:38,140 --> 00:30:39,706
 And you can even have draggable pins.
+你还可以设置可拖拽的大头针。
 
 779
 00:30:39,708 --> 00:30:43,209
 But if you have a draggable pin, then your MKAnnotations
+但是如果你的大头针可以拖拽，那么你就需要实现注释点
 
 780
 00:30:43,211 --> 00:30:46,746
 need to also implement to the setter for coordinate.
+坐标的setter方法。
 
 781
 00:30:46,748 --> 00:30:48,047
 Not just the getter for coordinate, but
+不能只有getter，也需要
 
 782
 00:30:48,049 --> 00:30:49,114
 the setter as well.
+setter。
 
 783
 00:30:51,484 --> 00:30:52,883
@@ -3134,34 +3880,42 @@ Okay?
 784
 00:30:52,885 --> 00:30:57,054
 So, it's kind of a cool feature if one of the callout
+有个很酷的特性就是如果你的标识视图的辅助视图，无论
 
 785
 00:30:57,056 --> 00:30:58,788
 accessory views, either the left or
+左右，是一个UIControl，
 
 786
 00:30:58,790 --> 00:31:03,092
 right is a UI Control, like a UIButton usually.
+通常是按钮。
 
 787
 00:31:03,094 --> 00:31:06,528
 Then, when it's touched, when the callout is touched, you'll
+当它被点击的时候，地图视图的代理方法
 
 788
 00:31:06,530 --> 00:31:10,666
 get this mapView method, calloutAccessoryControlTapped.
+calloutAccessoryControlTapped就会被调用。
 
 789
 00:31:10,668 --> 00:31:13,501
 So that's a really cool way to basically do target action
+这是一个非常好的处理目标动作的方式。
 
 790
 00:31:13,503 --> 00:31:16,471
 like thing, when someone clicks on the callout.
+就是当有人点击标识视图的时候，
 
 791
 00:31:16,473 --> 00:31:17,638
 Okay? Not on the pin, but
+并不是大头针，
 
 792
 00:31:17,640 --> 00:31:18,923
@@ -3170,114 +3924,142 @@ on the callout code.
 793
 00:31:18,924 --> 00:31:20,207
 They click on the pin first, the callout comes out.
+如果先点击大头针，标识视图才会出来。
 
 794
 00:31:20,209 --> 00:31:21,942
 Now if you click on the callout,
+现在如果你再点击标识视图，
 
 795
 00:31:21,944 --> 00:31:23,743
 if you put a UI control in there,
+如果那上边有一个UIControl，
 
 796
 00:31:23,745 --> 00:31:25,311
 you'll get this message.
+就会调用这个方法。
 
 797
 00:31:25,312 --> 00:31:26,878
 And then you can go do something, like segue.
+在这个方法里你就可以做一些类似于跳转的操作。
 
 798
 00:31:26,881 --> 00:31:28,814
 Which is what we're gonna do in our demo.
+一会儿我们的demo里就会这么做。
 
 799
 00:31:28,816 --> 00:31:33,685
 Okay, so, I said that in didSelectAnnotationView,
+我前边说过在didSelectAnnotationView方法里，
 
 800
 00:31:33,687 --> 00:31:35,420
 which it gets called when the pin gets clicked on,
+当大头针被点击的时候会调用，
 
 801
 00:31:35,422 --> 00:31:37,288
 this is where you might wanna load up an image.
+你需要在这里加载图片。
 
 802
 00:31:37,290 --> 00:31:39,957
 So here's what an example of that might look like.
+这里就是一个例子。
 
 803
 00:31:39,959 --> 00:31:42,593
 I'm here in didSelectAnnotationView.
+我在didSelectAnnotationView方法里。
 
 804
 00:31:42,595 --> 00:31:45,295
 I'm saying, is the leftCalloutAccessoryView
+我先检查标识视图的左辅助视图是否是
 
 805
 00:31:45,297 --> 00:31:47,547
 a UIImageView?
+一个图片视图？
 
 806
 00:31:47,548 --> 00:31:49,798
 If it is, then I'm gonna set its image to something, and
+如果是的话，我要设置它的图片，在这里
 
 807
 00:31:49,801 --> 00:31:53,002
 I might probably start a download in another thread
+我可能要在另外一个线程开始下载。
 
 808
 00:31:53,004 --> 00:31:54,236
 here, okay?
 
+
 809
 00:31:54,238 --> 00:31:56,605
 In my demo of course, as you, as I'm famous for,
+在我的demo里，你们应该知道，
 
 810
 00:31:56,607 --> 00:31:58,641
 I'm just gonna.
+我肯定会先
 
 811
 00:31:58,642 --> 00:32:00,676
 Block the main thread and make a call, but you don't need to
+阻塞住主线程，但是你不需要再看这种代码了，
 
 812
 00:32:00,678 --> 00:32:03,812
 see that code, you've done it yourself numerous times,
+你自己肯定已经做过很多次这种
 
 813
 00:32:03,814 --> 00:32:05,297
 to go do a fetch.
+抓取操作了。
 
 814
 00:32:05,298 --> 00:32:06,781
 Now, If you do a fetch in another thread,
+如果你在另外的线程里下载图片，
 
 815
 00:32:06,783 --> 00:32:08,082
 when it comes back,
+当它回调的时候，
 
 816
 00:32:08,084 --> 00:32:11,285
 make sure that this annotation view is still associated with
+要确定这个注释点视图依然关联着这个注释点，
 
 817
 00:32:11,287 --> 00:32:13,754
 that annotation, because it gets reused.
+因为它有可能被复用。
 
 818
 00:32:14,956 --> 00:32:16,356
 'Kay, everybody understand that?
+大家都明白这个问题吗？
 
 819
 00:32:16,358 --> 00:32:17,857
 Raise your hand if you understand
+如果明白我刚才说的复用的
 
 820
 00:32:17,859 --> 00:32:19,825
 what I'm talking about with this reuse.
+问题的话就举手。
 
 821
 00:32:21,461 --> 00:32:23,278
@@ -3286,70 +4068,87 @@ Okay?
 822
 00:32:23,279 --> 00:32:25,096
 How many people understood that in table views,
+有多少人理解表格视图里
 
 823
 00:32:25,098 --> 00:32:26,297
 the cells got reused?
+单元格的复用？
 
 824
 00:32:27,666 --> 00:32:29,750
 'Kay, 100% of the people.
+好，所有人都明白。
 
 825
 00:32:29,751 --> 00:32:31,835
 So in a table view, if you went off and fetched an image,
+在表格视图里，如果你去另外一个线程下载图片，
 
 826
 00:32:31,837 --> 00:32:34,771
 and it came back, isn't it possible that image would no
+当他回调的时候，这个图片可能就不是加载在刚才的
 
 827
 00:32:34,773 --> 00:32:37,206
 longer be associated with that cell?
+那个单元格里了。
 
 828
 00:32:37,208 --> 00:32:40,009
 Okay, everyone, raise your hand if you understand that?
+如果能理解就举手。
 
 829
 00:32:40,011 --> 00:32:41,210
 Okay, everybody understands that.
+好，大家都理解了。
 
 830
 00:32:41,212 --> 00:32:42,711
 Same thing here, okay?
+这里也是一样的，
 
 831
 00:32:42,713 --> 00:32:47,315
 If you click on a map pin, and the callout comes up, and
+如果你点了一个大头针，标识视图出来了，
 
 832
 00:32:47,317 --> 00:32:50,217
 you start a download for that little callout, and
+然后你开始为标识视图下载图片，可能会用
 
 833
 00:32:50,219 --> 00:32:51,518
 then it takes a long time, and
+很长的时间，
 
 834
 00:32:51,520 --> 00:32:53,020
 meanwhile they click on another pin and
+这时你又点了另外一个大头针，然后地图
 
 835
 00:32:53,022 --> 00:32:54,821
 scroll us to another place on the map,
+滚动到了另外一个位置，
 
 836
 00:32:54,823 --> 00:32:55,988
 that thing might be reused.
+前边的那个大头针可能被复用了。
 
 837
 00:32:55,990 --> 00:32:57,223
 And now the image comes back, and
+这时图片下载好了，
 
 838
 00:32:57,225 --> 00:32:59,091
 it's no longer applicable there.
+那么图片显示在这就是错的了。
 
 839
 00:32:59,093 --> 00:32:59,991
@@ -3358,10 +4157,12 @@ Okay?
 840
 00:32:59,993 --> 00:33:01,693
 So now we all understand, okay.
+大家都明白了，对吧？
 
 841
 00:33:01,695 --> 00:33:04,262
 [LAUGH] I'm glad I went through that.
+我很高兴我把这部分讲明白了。
 
 842
 00:33:04,264 --> 00:33:05,296
@@ -3370,154 +4171,192 @@ All right.
 843
 00:33:05,298 --> 00:33:06,948
 The map view.
+好了，继续讲地图视图。
 
 844
 00:33:06,949 --> 00:33:08,599
 How do you configure the map view's display with map type?
+怎么配置地图的类型呢？
 
 845
 00:33:08,601 --> 00:33:10,634
 You just say whether it's satellite, a hybrid view, or
+它是卫星视图，混合视图还是
 
 846
 00:33:10,636 --> 00:33:12,102
 the standard street view.
+标准的街道视图呢？
 
 847
 00:33:13,304 --> 00:33:15,538
 You can show things like the user current location.
+你可以展示用户当前位置。
 
 848
 00:33:15,540 --> 00:33:18,440
 If you say showUserCurrentLocation true,
+如果你把showUserCurrentLocation设置为true，
 
 849
 00:33:18,442 --> 00:33:21,243
 then it's gonna put a little pin on there that always shows
+就会有一个小个的大头针显示你当前的位置，
 
 850
 00:33:21,245 --> 00:33:23,211
 where you are, the user of the phone.
+手机用户的位置。
 
 851
 00:33:23,213 --> 00:33:25,180
 Okay, which is kinda fun.
+很挺有趣的。
 
 852
 00:33:25,181 --> 00:33:27,148
 And you can find out whether that's currently showing and
+你可以设置当前位置是不是在地图上，以及
 
 853
 00:33:27,150 --> 00:33:28,582
 what the user's location is.
+用户的位置信息。
 
 854
 00:33:28,584 --> 00:33:32,819
 The user's location comes back as an MKUserLocation, which
+用户的位置信息返回类型是MKUserLocation，这是一个
 
 855
 00:33:32,821 --> 00:33:36,589
 is an MK annotation so it has coordinate and all that.
+MKAnnotation，所以它有坐标和别的。
 
 856
 00:33:37,725 --> 00:33:40,759
 It's just for the user, so you know it's for the user.
+这是给用户用的。
 
 857
 00:33:40,761 --> 00:33:44,096
 You can also restrict the interaction with the map.
+你还可以限制地图的交互。
 
 858
 00:33:44,098 --> 00:33:46,498
 You might not want the person scrolling or
+你可能不希望用户滚动地图或者
 
 859
 00:33:46,500 --> 00:33:48,166
 going out of a certain area.
+离开一个特定的区域。
 
 860
 00:33:48,168 --> 00:33:50,034
 And you can control that by turning on and
+你可以控制这些行为通过开关
 
 861
 00:33:50,036 --> 00:33:51,602
 off the scrolling and zooming.
+滚动和缩放。
 
 862
 00:33:51,604 --> 00:33:54,137
 You can also turn off the pitching.
+你还可以关掉拉伸手势。
 
 863
 00:33:54,139 --> 00:33:55,472
 The Apple maps is a 3D.
+苹果的地图是3D的，
 
 864
 00:33:55,474 --> 00:33:57,173
 Kind of a pseudo 3D thing, right?
+其实是一种伪3D。
 
 865
 00:33:57,175 --> 00:33:58,774
 Where you can tilt your camera up so
+你可以把视角调高，这样就可以
 
 866
 00:33:58,776 --> 00:34:00,275
 that you're looking down.
+往下看。
 
 867
 00:34:00,277 --> 00:34:02,494
 You can see the buildings.
+可以看见建筑。
 
 868
 00:34:02,495 --> 00:34:04,712
 You've probably all seen that, so you can control whether
+你可能以前见过，所以你可以控制是不是允许用户这样做，或者
 
 869
 00:34:04,715 --> 00:34:07,082
 that's allowed or whether it's gonna be a 2D map only.
+只是显示一个2D的地图而已。
 
 870
 00:34:07,084 --> 00:34:10,118
 And same thing rotation, do you always want north up or
+转动也是一样的，你可能希望北面一直是朝上的，或者
 
 871
 00:34:10,120 --> 00:34:12,420
 do you want to allow the user to turn north off to the side.
+你允许用户调整方向。
 
 872
 00:34:12,422 --> 00:34:16,723
 For that 3D thing, that kind of pseudo 3D, you can control
+在3D的地图里，其实就是伪3D，你可以控制
 
 873
 00:34:16,725 --> 00:34:20,860
 the camera which is like where the camera, how high it is,
+视角的高度，
 
 874
 00:34:20,862 --> 00:34:24,897
 how steep it's looking, down that kind of stuff.
+向下看的角度等等。
 
 875
 00:34:24,899 --> 00:34:28,100
 Using an MKMapCamera you can just specify
+用MKMapCamera你可以调整
 
 876
 00:34:28,102 --> 00:34:30,468
 the coordinates of the camera.
+视角的坐标。
 
 877
 00:34:30,470 --> 00:34:33,604
 And the altitude is eyeAltitude, okay,
+高度就是眼睛的高度。
 
 878
 00:34:33,606 --> 00:34:35,206
 where it's looking from.
+是从哪里往下看的。
 
 879
 00:34:35,208 --> 00:34:37,608
 So, that's kinda cool.
+这个非常酷。
 
 880
 00:34:37,610 --> 00:34:40,310
 You can also control what part of the map is showing with
+你还可以通过MKCoordinateRegion控制显示地图的哪个部分。
 
 881
 00:34:40,312 --> 00:34:42,212
@@ -3526,118 +4365,147 @@ the MKCoordinateRegion.
 882
 00:34:42,214 --> 00:34:45,682
 So an MKCoordinateRegion is just a CLLocationCoordinate2D,
+MKCoordinateRegion就是一个CLLocationCoordinate2D
 
 883
 00:34:45,684 --> 00:34:46,982
 that's a spot on the map.
+地图上的一个点。
 
 884
 00:34:46,984 --> 00:34:49,885
 And then an MKCoordinateSpan which is latitude and
+MKCoordinateSpan是围绕这个点的经纬度
 
 885
 00:34:49,887 --> 00:34:52,454
 longitude distance around that, okay?
+距离。
 
 886
 00:34:52,456 --> 00:34:54,656
 And that's what it's gonna use to show the map.
+这个就是我们需要显示在地图上的部分。
 
 887
 00:34:54,658 --> 00:34:57,325
 Of course the map has a certain aspect ratio which
+当然我们还需要维护一个高宽比
 
 888
 00:34:57,327 --> 00:34:58,459
 it's going to maintain.
+的值。
 
 889
 00:34:58,461 --> 00:34:59,644
 So it's gonna try and
+设置好以后，它会按照这个值尽可能
 
 890
 00:34:59,645 --> 00:35:00,828
 show this region as best as possible,
+的展示这个区域。
 
 891
 00:35:00,830 --> 00:35:02,796
 I think it shows the entire region, so
+我认为它会展示整个区域。
 
 892
 00:35:02,798 --> 00:35:05,865
 there might be a little extra stuff depending on the aspect
+可能会有一些多余的部分，这个取决于你屏幕或者
 
 893
 00:35:05,867 --> 00:35:09,502
 ration of your screen or the view, versus the aspect ratio
+视图的高宽比对比你需要显示区域
 
 894
 00:35:09,504 --> 00:35:10,970
 that you're requesting in the region.
+的高宽比。
 
 895
 00:35:12,406 --> 00:35:14,539
 You can also just set the center coordinate.
+你也可以直接设置区域中心的坐标。
 
 896
 00:35:14,541 --> 00:35:15,940
 Like where do you want the center of the map is.
+类似于你希望地图的中心的位置。
 
 897
 00:35:15,942 --> 00:35:17,308
 If you don't care if it's size,
+如果你不关心地图的大小，
 
 898
 00:35:17,310 --> 00:35:19,443
 you just want to zoom it to a certain spot, you can do that.
+你可以让地图缩放到展示一个特定的点。
 
 899
 00:35:19,445 --> 00:35:21,045
 It could be animated.
+这个动作可以是动画形式的。
 
 900
 00:35:21,047 --> 00:35:22,479
 You can also show annotation.
+你还可以展示注释点。
 
 901
 00:35:22,481 --> 00:35:25,949
 So you can say, make sure these five annotations are all
+你可以让5个注释点都显示在屏幕上，
 
 902
 00:35:25,951 --> 00:35:29,686
 on screen and it'll figure out a region to collect them.
+系统会定义一个区域包含他们。
 
 903
 00:35:29,688 --> 00:35:32,588
 So, pretty cool way to control all that.
+非常酷。
 
 904
 00:35:32,590 --> 00:35:35,858
 There's lots of kind of functions and
+这里还有很多方法和函数可以用来
 
 905
 00:35:35,860 --> 00:35:39,594
 methods to convert from various coordinate spaces,
+转换不同的坐标空间，
 
 906
 00:35:39,596 --> 00:35:43,264
 like the map has a coordinate system, okay?
+比如地图有一个坐标系统。
 
 907
 00:35:43,266 --> 00:35:47,868
 The world has a latitude and longitude coordinate system.
+我们的地球也有一个经纬度的坐标系统。
 
 908
 00:35:47,870 --> 00:35:49,803
 The view has a, you know,
+在视图边界的内部，也有
 
 909
 00:35:49,805 --> 00:35:51,872
 inside this bounds coordinate system.
+坐标系统。
 
 910
 00:35:51,874 --> 00:35:53,573
 And those three things are different.
+很明显这三个系统是完全不同的。
 
 911
 00:35:53,575 --> 00:35:56,126
@@ -3646,118 +4514,147 @@ Obviously.
 912
 00:35:56,127 --> 00:35:58,678
 And so you can translate between those things.
+你可以在他们三者之间转换。
 
 913
 00:35:58,680 --> 00:36:02,014
 You understand why the world, the map is different because
+你们知道为什么地球和地图的坐标系统不同吗？
 
 914
 00:36:02,016 --> 00:36:04,917
 the map is a projection, right, of the earth.
+地图是地球在平面上的投射，而地球
 
 915
 00:36:04,919 --> 00:36:06,885
 The earth is a big sphere.
+是一个巨大的球体。
 
 916
 00:36:06,887 --> 00:36:08,353
 In case you didn't know it's round.
+不是圆形的。
 
 917
 00:36:08,355 --> 00:36:11,422
 And so when you flatten it out into a flat screen it kind of,
+所以当它被平铺在一个屏幕上的时候，它就会被
 
 918
 00:36:11,424 --> 00:36:12,423
 you know, bends out.
+弯曲。
 
 919
 00:36:12,425 --> 00:36:16,226
 So you need to map that ,and so those,
+所以需要建立它们的对应关系。
 
 920
 00:36:16,228 --> 00:36:18,161
 that's why the coordinate system's not exactly the same
+这就是为什么我们说起视图内坐标系统的时候
 
 921
 00:36:19,231 --> 00:36:21,597
 as if you're talking about the view coordinate system.
+会有不同的系统。
 
 922
 00:36:21,599 --> 00:36:25,568
 So go look through the documentation there's probably
+如果你去看文档的话，会发现大概有25个函数以及
 
 923
 00:36:25,570 --> 00:36:28,937
 25 different functions, and probably another dozen or so
+10几个函数
 
 924
 00:36:28,939 --> 00:36:30,439
 methods that will convert back and
+用来来回转换这些
 
 925
 00:36:30,441 --> 00:36:34,909
 forth between all these things.
+坐标系统。
 
 926
 00:36:34,911 --> 00:36:37,812
 Another map view delegate method
+地图视图的另外一个非常有趣的
 
 927
 00:36:37,814 --> 00:36:41,315
 which is kind of interesting is didChangeRegionAnimated.
+代理方法是didChangeRegionAnimated。
 
 928
 00:36:41,317 --> 00:36:44,751
 So, this is telling you that the region that it's showing
+它会告诉你现在显示在地图里的区域变化了
 
 929
 00:36:44,753 --> 00:36:48,221
 in the map changed and I've finished animating it.
+而且我已经完成了切换动画。
 
 930
 00:36:48,223 --> 00:36:49,856
 Now why do you want to know that?
+为什么我们需要知道这个呢？
 
 931
 00:36:49,858 --> 00:36:51,157
 Well because sometimes you wanna
+因为有些时候你需要
 
 932
 00:36:51,159 --> 00:36:54,293
 do what's called animation chaining in the map view.
+调用地图视图的动画链。
 
 933
 00:36:54,295 --> 00:36:56,328
 So let's say you're looking at New York City, and
+举个例子，如果你的地图现在显示的是纽约市，
 
 934
 00:36:56,330 --> 00:36:59,597
 you wanna switch the user over to looking at San Francisco.
+你想切换到旧金山，
 
 935
 00:36:59,599 --> 00:37:02,467
 Well you could just say set region San Francisco.
+你可以把当前区域设置成旧金山。
 
 936
 00:37:02,469 --> 00:37:05,002
 And it would [SOUND] zoom over there really fast.
+这样地图就会呼的一下快速的平移过去。
 
 937
 00:37:05,004 --> 00:37:07,104
 So fast that you wouldn't see anything in between.
+快的你根本看不清中间的东西。
 
 938
 00:37:07,106 --> 00:37:10,173
 You wouldn't see Kansas or anything on the way, okay?
+比如你不会看见中间的堪萨斯。
 
 939
 00:37:10,175 --> 00:37:13,143
 But a better way to do it would be to zoom out to show
+一个更好的办法就是先把地图放大，展示整个美国，
 
 940
 00:37:13,145 --> 00:37:16,879
 the whole United States and then zoom in to San Francisco.
+然后再缩小到旧金山。
 
 941
 00:37:16,881 --> 00:37:17,980
@@ -3766,222 +4663,277 @@ Right?
 942
 00:37:17,982 --> 00:37:19,247
 See how that would look better?
+这样会更好一些对吧？
 
 943
 00:37:19,249 --> 00:37:21,616
 You're up in New York, up to the United States and
+现在是纽约，放大到整个美国，在
 
 944
 00:37:21,618 --> 00:37:23,351
 down to San Francisco.
+缩小到旧金山。
 
 945
 00:37:23,352 --> 00:37:25,085
 Well the way to do that is you set your region to be
+这么做的方法就是把你的区域设置成整个美国，
 
 946
 00:37:25,088 --> 00:37:26,887
 the entire United States, and
+然后动画完成的时候这个
 
 947
 00:37:26,889 --> 00:37:29,189
 when that animation finishes you'll get this.
+方法就会调用。
 
 948
 00:37:29,191 --> 00:37:30,924
 And now you set your region to be San Francisco.
+这时你把区域再设置成旧金山。
 
 949
 00:37:30,926 --> 00:37:32,926
 Simple chaining.
+简单的动画链。
 
 950
 00:37:32,928 --> 00:37:35,862
 Okay?
+明白了吧？
 
 951
 00:37:35,864 --> 00:37:39,131
 Searching for places in the world by name.
+还可以用名字搜索世界上的地点。
 
 952
 00:37:39,133 --> 00:37:40,899
 So this is a really cool feature,
+这个非常酷。
 
 953
 00:37:40,901 --> 00:37:43,201
 where you can actually look things up by name.
+因为可以通过名字来找地方。
 
 954
 00:37:43,203 --> 00:37:45,537
 So you could, for example, have a query like,
+你可以做一个查询，比如这样，
 
 955
 00:37:45,539 --> 00:37:48,706
 show me Ike's, which, I guess, is not gonna work any more.
+我搜索 "Ike"，我估计应该找不到什么地方。
 
 956
 00:37:48,708 --> 00:37:52,176
 But you should say show me Ike's and
+你可以用"Ike"建立一个
 
 957
 00:37:52,178 --> 00:37:54,411
 you create this query that has an n there and
+查询然后再建立一个
 
 958
 00:37:54,413 --> 00:37:57,180
 then you create an MKLocalSearch.
+MKLocalSearch
 
 959
 00:37:57,182 --> 00:37:59,282
 And you give it that request and
+你把查询赋给它，然后它就会
 
 960
 00:37:59,284 --> 00:38:02,685
 it will fire off a thread to go out on the network,
+在另外一个线程开始使用网络查询。
 
 961
 00:38:02,687 --> 00:38:05,788
 look up Ike's somewhere in some database, and
+在数据库里查询 Ike，然后返回
 
 962
 00:38:05,790 --> 00:38:09,158
 return information about where it is to you, and
+相关的信息，
 
 963
 00:38:09,160 --> 00:38:11,727
 it'll return to you on this other thread.
+同样也会在另外一个线程返回给你。
 
 964
 00:38:11,729 --> 00:38:14,462
 I believe the, all right, I'm sorry, in this closure.
+我相信，哦对不起，在闭包里返回给你。
 
 965
 00:38:14,464 --> 00:38:16,731
 And I believe this closure executes on the main queue,
+我相信这个闭包是在主线程执行的，
 
 966
 00:38:16,733 --> 00:38:20,001
 because this is all UI stuff so that closure you don't have
+因为我们这个框架都是关于UI的，所以这个闭包你不需要担心
 
 967
 00:38:20,003 --> 00:38:21,769
 to worry about it being on a different queue.
+它是在另外一个线程执行的。
 
 968
 00:38:21,771 --> 00:38:24,838
 So it can execute this closure with the response it got and
+这个闭包会返回查询结果然后
 
 969
 00:38:24,840 --> 00:38:26,373
 then you can put it on your map.
+你就可以把它们放到地图上了。
 
 970
 00:38:26,375 --> 00:38:29,075
 It gives you an MKPlacemark, it actually gives you
+它会返回一个MKPlacemark ，实际上是一个MKMapItem包含一个
 
 971
 00:38:29,077 --> 00:38:32,178
 an MKMapItem and inside that there's an MKPlacemark.
+MKPlacemark
 
 972
 00:38:32,180 --> 00:38:33,445
 An MKPlacemark
+MKPlacemark里面包含
 
 973
 00:38:33,447 --> 00:38:35,647
 gives you more than just the latitude and longitude.
+经纬度，
 
 974
 00:38:35,649 --> 00:38:38,249
 It gives you the name of the location, Ike's, and
+位置的名字，邮编
 
 975
 00:38:38,251 --> 00:38:40,952
 the postal code, the region it's in, and all that stuff.
+它所在的区域等等，
 
 976
 00:38:40,954 --> 00:38:44,755
 So, it's kind of a super location thing.
+就好像是一个超级的位置信息。
 
 977
 00:38:44,757 --> 00:38:48,559
 And, if you have a map item, and you're not showing maps in
+如果你有一个 MKMapItem，但是在你的app里没有显示地图
 
 978
 00:38:48,561 --> 00:38:50,761
 your app, you can actually open it up in the maps app by
+的功能，那么你可以通过调用 openInMapsWithLaunchOptions 方法
 
 979
 00:38:50,763 --> 00:38:53,763
 saying openInMapsWithLaunchOptions.
+来在一个地图app里打开它。
 
 980
 00:38:53,765 --> 00:38:55,732
 And you give these various options like,
+你可以传递很多的选项，比如
 
 981
 00:38:55,734 --> 00:38:57,784
 do you want to show traffic?
+你是否希望现实交通，
 
 982
 00:38:57,785 --> 00:38:59,835
 Okay, this is a, some kind of driving thing, you want to
+这是与驾驶有关的， 你可以显示交通或者别的什么，
 
 983
 00:38:59,837 --> 00:39:01,603
 show traffic or whatever, you put the options in there.
+把你需要的选项传递过去就好了。
 
 984
 00:39:01,605 --> 00:39:07,108
 And the map item will display on the maps app, okay?
+然后这个item就会显示在地图app里。
 
 985
 00:39:07,110 --> 00:39:08,843
 So that's local searching.
+这个是位置搜索。
 
 986
 00:39:08,845 --> 00:39:11,412
 You can also get a similar thing for directions,
+关于方向，也有一些类似的东西。
 
 987
 00:39:11,414 --> 00:39:15,816
 you wanna go from one place to another and
+你希望从一个地方去到另外一个地方，
 
 988
 00:39:15,818 --> 00:39:18,585
 it will send you back some routes that you can get there.
+它会返回给你路线。
 
 989
 00:39:18,587 --> 00:39:21,554
 One, two, three routes maybe, and
+可能是一条两条三条路线，
 
 990
 00:39:21,556 --> 00:39:24,023
 it'll also even give you a drawing.
+而且会画在地图上。
 
 991
 00:39:24,025 --> 00:39:25,491
 A thing called an MKPolyline
+这种路线叫做MKPolyline。
 
 992
 00:39:25,493 --> 00:39:27,459
 which I'm gonna talk about in a second.
+我一会儿会讲到这个。
 
 993
 00:39:27,461 --> 00:39:30,028
 That you can overlay onto the map to show the route.
+你可以在地图上绘制路线了。
 
 994
 00:39:30,030 --> 00:39:31,429
 So that's kinda cool.
+非常酷。
 
 995
 00:39:31,431 --> 00:39:33,964
 'Kay and this also asynchronous just like
+这个跟刚才讲的位置搜索一样都是
 
 996
 00:39:33,966 --> 00:39:38,368
 the last local search was.
+异步的。
 
 997
 00:39:38,370 --> 00:39:40,020
@@ -3990,50 +4942,62 @@ Okay.
 998
 00:39:40,021 --> 00:39:41,671
 So let's talk about those overlays, like MKPolyline,
+下面我们来讲覆盖层，比如MKPolyline，
 
 999
 00:39:41,673 --> 00:39:42,505
 that shows the root.
+那个显示路线的东西。
 
 1000
 00:39:42,507 --> 00:39:43,873
 How do you do overlays?
+我们怎么去绘制覆盖层？
 
 1001
 00:39:43,875 --> 00:39:46,308
 Overlays look very much like annotations.
+覆盖层跟注释点很像。
 
 1002
 00:39:46,310 --> 00:39:51,613
 In fact, the MKOverlay protocol is a subclass,
+实际上，MKOverlay 是 MKAnnotation 的子类，
 
 1003
 00:39:51,615 --> 00:39:55,750
 or sub protocol of the MKAnnotation.
+或者说子协议。
 
 1004
 00:39:55,752 --> 00:39:58,852
 So, an MKOverlay has everything MKAnotation has,
+所以 MKAnnotation 有 MKAnotation 所有的元素，
 
 1005
 00:39:58,854 --> 00:39:59,753
 coordinates.
+比如坐标。
 
 1006
 00:39:59,755 --> 00:40:02,255
 Which is the center of the overlay.
+坐标就是覆盖层的中心。
 
 1007
 00:40:02,257 --> 00:40:03,990
 And then the title and a subtitle.
+然后就是标题和副标题。
 
 1008
 00:40:03,992 --> 00:40:06,525
 And it also adds boundingMapRect.
+还有boundingMapRect属性。
 
 1009
 00:40:06,527 --> 00:40:09,161
 So that's the rectangle that contains this overlay.
+这是包含整个覆盖层的矩形。
 
 1010
 00:40:09,163 --> 00:40:11,080
@@ -4042,54 +5006,67 @@ So that's the rectangle that contains this overlay.
 1011
 00:40:11,081 --> 00:40:12,998
 So, if you're driving from San Francisco to San Jose.
+如果你开车从旧金山到圣何塞。
 
 1012
 00:40:13,000 --> 00:40:14,399
 It contains that.
+那这个矩形就应该包括它们。
 
 1013
 00:40:14,401 --> 00:40:17,602
 It also has a method that you can ask it,
+这里还有一个方法你可以知道是否与
 
 1014
 00:40:17,604 --> 00:40:20,404
 do you intersect this other Rect.
+传入矩形有交叉。
 
 1015
 00:40:20,406 --> 00:40:23,674
 Now if you don't implement that method in your MKOverlay
+如果你不在MKOverlay协议里实现这个方法，
 
 1016
 00:40:23,676 --> 00:40:26,710
 protocol, it'll just use the boundingMapRect, and
+那么它就只会用boundingMapRect，然后检查是不是
 
 1017
 00:40:26,712 --> 00:40:28,411
 see if you intersect that.
+跟这个矩形有交叉。
 
 1018
 00:40:28,413 --> 00:40:29,645
 But you can actually have so if your,
+但是如果你想要知道你的路线是不是
 
 1019
 00:40:29,647 --> 00:40:32,548
 if you wanna see if the actual root intersects it,
+经过某一区域，那么你就可以实现这个方法。
 
 1020
 00:40:32,550 --> 00:40:35,984
 then you can actually see if it intersects, as opposed to
+然后你就可以检查它是不是跟某个矩形有交叉，而不是去检查它是不是被
 
 1021
 00:40:35,986 --> 00:40:38,954
 wether the rectangle contains it, which is kind of a gross
+包含在某一个矩形里，那样只是很粗略的
 
 1022
 00:40:38,956 --> 00:40:41,489
 estimate of whether it intersects.
+估计。
 
 1023
 00:40:41,491 --> 00:40:44,158
 So, just like with an annotation, you have view for
+跟注释点一样，注释点可以自定义视图。
 
 1024
 00:40:44,160 --> 00:40:45,810
@@ -4098,22 +5075,27 @@ annotation.
 1025
 00:40:45,811 --> 00:40:47,461
 You have the same thing, for overlays.
+覆盖层也是一样的。
 
 1026
 00:40:47,463 --> 00:40:49,129
 You can actually have view for overlay.
+你也可以给覆盖层自定义视图。
 
 1027
 00:40:49,131 --> 00:40:52,265
 But usually, what we do is use renderer for overlay.
+但是通常我们都会重新渲染覆盖层。
 
 1028
 00:40:52,267 --> 00:40:54,200
 So an MKOverlayRenderer,
+这里就会用到 MKOverlayRenderer 。
 
 1029
 00:40:54,202 --> 00:40:58,204
 is something that knows how to draw an overlay on the map.
+它可以知道如何在地图上绘制覆盖层。
 
 1030
 00:40:58,206 --> 00:40:59,304
@@ -4122,94 +5104,117 @@ Okay?
 1031
 00:40:59,306 --> 00:41:01,473
 And so usually you have to render for
+通常我们需要返回一个渲染用来渲染
 
 1032
 00:41:01,475 --> 00:41:03,241
 overlay and we're gonna return to renderer.
+覆盖层。
 
 1033
 00:41:03,243 --> 00:41:05,076
 Now we could write our own renderers.
+我们可以实现自己的渲染，
 
 1034
 00:41:05,078 --> 00:41:07,878
 It's just a sub-class of MKOverlayRenderer but
+通过实现 MKOverlayRenderer 的子类，但是一般我们
 
 1035
 00:41:07,880 --> 00:41:11,548
 usually we're gonna be using a overlay that's built in like
+我们都会用系统自带的渲染，比如MKPolyLineRenderer
 
 1036
 00:41:11,550 --> 00:41:14,818
 MKPolyLineRenderer which is for drawing that route along
+是用来画路线的。
 
 1037
 00:41:14,820 --> 00:41:18,355
 the roads or MKCircleRenderer which renders circles.
+MKCircleRenderer 用来渲染圆形。
 
 1038
 00:41:18,357 --> 00:41:20,990
 Or MKPolylineRenderer.
+或者 MKPolylineRenderer
 
 1039
 00:41:20,992 --> 00:41:23,159
 Which, PolygonRenderer, rather.
+不对，是 PolygonRenderer
 
 1040
 00:41:23,161 --> 00:41:25,260
 Which is going to render some polygon.
+用来渲染多边形。
 
 1041
 00:41:25,262 --> 00:41:27,729
 Arbitrary Bezier polygon.
+用贝塞尔曲线绘制的任意多边形。
 
 1042
 00:41:27,731 --> 00:41:29,964
 Or even the MKTileOverlayRenderer.
+甚至是MKTileOverlayRenderer，
 
 1043
 00:41:29,966 --> 00:41:32,767
 Which will render tiled images.
+可以渲染平铺的图片。
 
 1044
 00:41:32,769 --> 00:41:35,970
 And you can use the last one there to replace the Apple
+你们可以用这个把苹果的地图替换成
 
 1045
 00:41:35,972 --> 00:41:37,438
 maps with your own map.
+自己的地图。
 
 1046
 00:41:37,440 --> 00:41:38,839
 So people have done some pretty cool apps.
+有人做了一些很酷的app。
 
 1047
 00:41:38,841 --> 00:41:42,242
 We've had ancient maps, some ancient mariner maps.
+他们做了一些古地图，古代的航海图。
 
 1048
 00:41:42,244 --> 00:41:43,944
 You know and
+你现在知道了
 
 1049
 00:41:43,945 --> 00:41:45,645
 they would actually over, you know use the tower renderer to
+他们实际上是用最后的这种方式渲染，从而达到用自己的地图代替苹果
 
 1050
 00:41:45,647 --> 00:41:47,346
 put that in the place of Apple maps.
+自带地图的目的。
 
 1051
 00:41:47,348 --> 00:41:49,248
 So they're still getting all the same feature of the Apple
+所以这些地图都有跟苹果地图完全一样的特性比如
 
 1052
 00:41:49,250 --> 00:41:51,750
 maps where they can zoom around, set the region, but
+缩放，设置区域，但是它们的背景
 
 1053
 00:41:51,752 --> 00:41:54,352
 they're using these kind of cool ancient maps
+用的是非常酷的古代地图。
 
 1054
 00:41:54,354 --> 00:41:56,521
@@ -4218,46 +5223,57 @@ as the the background.
 1055
 00:41:56,523 --> 00:41:59,490
 And they showed things like people who sail around
+这样他们的app就可以记录人们的路线，
 
 1056
 00:41:59,492 --> 00:42:01,191
 the world and they showed their track but
+但是这些路线确显示在古代的地图上，
 
 1057
 00:42:01,193 --> 00:42:03,493
 overlayed on these ancient maps which is kinda cool.
+非常酷对吧。
 
 1058
 00:42:03,495 --> 00:42:05,295
 So you can do all of that.
+这个就可以通过渲染实现。
 
 1059
 00:42:05,297 --> 00:42:07,630
 So all of these things, circles,
+所有这些圆形，线型，
 
 1060
 00:42:07,632 --> 00:42:11,167
 polylines, polygons they have their own renderers.
+多边形，它们都有自带的渲染。
 
 1061
 00:42:11,169 --> 00:42:12,501
 You don't have to write your own renderer.
+你不需要写自己的渲染。
 
 1062
 00:42:12,503 --> 00:42:15,303
 You just have to create an MKPolyline which we're maybe
+我们一会儿可能会在demo里就会建立一个
 
 1063
 00:42:15,305 --> 00:42:16,822
 gonna do on the demo.
+MKPolyline 渲染。
 
 1064
 00:42:16,823 --> 00:42:18,340
 I don't think we'll have time for that but we might.
+也许没时间做这个了不过也是有可能的。
 
 1065
 00:42:19,642 --> 00:42:21,475
 And the, then you just use this as the renderer.
+你只需要调用这些自带的渲染就可以了。
 
 1066
 00:42:22,445 --> 00:42:23,944
@@ -4266,74 +5282,92 @@ And that's it.
 1067
 00:42:23,946 --> 00:42:25,879
 All right. So it's time for the demo.
+好了，开始今天的demo。
 
 1068
 00:42:25,881 --> 00:42:31,884
 So what I'm gonna do is I'm going to load up a GPX file.
+今天我们要做的就是加载一个GPX文件。
 
 1069
 00:42:31,886 --> 00:42:33,552
 I have a parser, a GPX parser,
+我有一个GPX解析器。
 
 1070
 00:42:33,554 --> 00:42:36,254
 that I've written that just parses the GPX file.
+是我以前写的用来解析GPX文件的东西。
 
 1071
 00:42:36,256 --> 00:42:38,023
 And really it just returns two things.
+它实际上返回两个东西。
 
 1072
 00:42:38,025 --> 00:42:41,526
 Waypoints, which are just, you know, latitude and
+一个是路点，你懂得，就是经纬度，
 
 1073
 00:42:41,528 --> 00:42:45,262
 longitude, with possibly some hyperlinks to images or
+还有可能有图片的链接或者别的什么。
 
 1074
 00:42:45,264 --> 00:42:46,129
 other things like that.
+比如
 
 1075
 00:42:46,131 --> 00:42:47,697
 Timestamp.
+时间戳。
 
 1076
 00:42:47,699 --> 00:42:49,799
 And then it also returns what are called Trax.
+还会返回我们叫做 Trax 的东西。
 
 1077
 00:42:49,801 --> 00:42:54,069
 And a track is just a bunch of fixes, a bunch of waypoints
+实际上就是很多带有时间戳的路点。
 
 1078
 00:42:54,071 --> 00:42:56,672
 with timestamps that show when you went on a trax.
+用来显示我们运动的轨迹。
 
 1079
 00:42:56,674 --> 00:42:58,039
 So that's it.
+就是这些。
 
 1080
 00:42:58,041 --> 00:42:59,307
 The overlays, if we had time for
+覆盖层，如果有时间的话我们可能
 
 1081
 00:42:59,309 --> 00:43:01,342
 if which I don't think we're going to.
+会做一下，不过很可能没时间。
 
 1082
 00:43:01,344 --> 00:43:03,711
 We might would be the trax.
+我们会做一下trax。
 
 1083
 00:43:03,713 --> 00:43:06,013
 And then these pins would be the waypoints,
+地图上的大头针就是路点，
 
 1084
 00:43:06,015 --> 00:43:07,380
 just these waypoints.
+我们刚才说到的路点。
 
 1085
 00:43:07,382 --> 00:43:08,815
@@ -4342,22 +5376,27 @@ Okay?
 1086
 00:43:08,817 --> 00:43:11,817
 So the waypoints inside the trax, we can't fix this.
+在trax里的路点我们叫做 fix。
 
 1087
 00:43:11,819 --> 00:43:13,986
 Just so we're not confused about the difference.
+这样就不会有名称上的混淆。
 
 1088
 00:43:13,988 --> 00:43:15,654
 So waypoint is a stand alone waypoint,
+路点就指的是单独的路点。
 
 1089
 00:43:15,656 --> 00:43:16,654
 that's gonna be a pin.
+就是地图上的大头针。
 
 1090
 00:43:16,656 --> 00:43:18,823
 The fixes are inside the track.
+fix 就是trax内部的路点。
 
 1091
 00:43:18,825 --> 00:43:21,209
@@ -4366,30 +5405,37 @@ Okay?
 1092
 00:43:21,210 --> 00:43:23,594
 And so, because I won't get back the slides, Friday,
+今天我们不会再回到幻灯片了，周五会有
 
 1093
 00:43:23,596 --> 00:43:25,495
-section, Apple Watch.
+section, Apple Watch
+Apple Watch的内容。
 
 1094
 00:43:25,497 --> 00:43:28,598
 And then next week, all kinds of topics I'm gonna cover
+下周，我会谈到包括持久性存储在内的幻灯片上的
 
 1095
 00:43:28,600 --> 00:43:29,999
 next week including persistence,
+话题。
 
 1096
 00:43:30,001 --> 00:43:31,834
 which I didn't get to on Monday.
+应该周一讲的但是没讲。
 
 1097
 00:43:31,836 --> 00:43:35,537
 But on other things not even on this list I'll probably
+不过在这里边没有的东西可能也会
 
 1098
 00:43:35,539 --> 00:43:36,671
 ment, get into.
+涉及。
 
 1099
 00:43:36,673 --> 00:43:38,306
@@ -4398,22 +5444,27 @@ All right.
 1100
 00:43:38,308 --> 00:43:41,975
 So, we actually have Trax started so
+我们前边已经开始做 Trax 了，
 
 1101
 00:43:41,977 --> 00:43:43,844
 let's go back to Trax.
+所以我们回来继续。
 
 1102
 00:43:43,846 --> 00:43:45,512
 This was pretty much where we left off.
+现在这里跟我们上次留下的差不多。
 
 1103
 00:43:45,514 --> 00:43:48,314
 The only thing I changed about this is I renamed my view
+唯一变的东西应该就是我把原来简单的 viewController 重命名成了
 
 1104
 00:43:48,316 --> 00:43:51,050
 controller to be GPXviewcontroller instead of
+GPXviewcontroller 。
 
 1105
 00:43:51,052 --> 00:43:52,851
@@ -4422,22 +5473,27 @@ just plain viewcontroller.
 1106
 00:43:52,853 --> 00:43:55,420
 And I also put the GPX parser code in here,
+我还把我写的GPX的解析器相关代码放了进来。
 
 1107
 00:43:55,422 --> 00:43:57,489
 which I'm gonna show you in a second.
+一会儿就给你们看。
 
 1108
 00:43:57,491 --> 00:43:59,457
 Otherwise you can see we still have this app delegate.
+这里你看到的是 app delegate。
 
 1109
 00:43:59,459 --> 00:44:02,393
 We're posting this notification here.
+我们在这里发布了一个通知。
 
 1110
 00:44:02,395 --> 00:44:04,862
 And now here's my GPXController.swift.
+这里是我们的 GPXController.swift 。
 
 1111
 00:44:04,864 --> 00:44:06,063
@@ -4446,66 +5502,82 @@ And I'm getting,
 1112
 00:44:06,065 --> 00:44:08,164
 I took out the little text view that was in here.
+我把之前加过的文本视图去掉了。
 
 1113
 00:44:09,100 --> 00:44:11,400
 And so here I'm adding the observer and
+在这里我加了一个观察者来监听
 
 1114
 00:44:11,402 --> 00:44:12,735
 I'm getting notified.
+这个通知。
 
 1115
 00:44:12,737 --> 00:44:17,439
 So in here we are going to just have to take this URL,
+这里我们可以取到一个URL。
 
 1116
 00:44:17,441 --> 00:44:18,940
 it's a URL for a GPX file.
+这是GPX文件的URL 。
 
 1117
 00:44:18,942 --> 00:44:20,641
 So we're gonna use this GPX parser that I
+这里我们要用到我之前说过的
 
 1118
 00:44:20,643 --> 00:44:22,143
 was talking about.
+GPX解析器。
 
 1119
 00:44:22,144 --> 00:44:23,644
 To parse it, get the waypoints out of there.
+来解析，得到路点的信息。
 
 1120
 00:44:23,646 --> 00:44:25,178
 Then we're gonna put those waypoints on the map.
+然后我们就可以把路点放到地图上了。
 
 1121
 00:44:25,180 --> 00:44:26,312
 That's the first thing we're gonna do.
+这是我们首先要做的事儿。
 
 1122
 00:44:26,314 --> 00:44:27,914
 And if we have time, which we won't,
+如果我们还有时间，不过应该是没有，
 
 1123
 00:44:27,916 --> 00:44:30,883
 we're gonna get the trax out and make an overlay of that.
+我们要把trax取出来，然后在地图上做一个覆盖层。
 
 1124
 00:44:30,885 --> 00:44:33,052
 But let's focus on the waypoints.
+现在，我们先来做路点。
 
 1125
 00:44:33,054 --> 00:44:35,721
 So, how are we gonna do this?
+我们要怎么做呢？
 
 1126
 00:44:35,723 --> 00:44:37,856
 First of all, I'm actually take a timeout and
+首先我们要先把路点放下，做一些
 
 1127
 00:44:37,858 --> 00:44:40,491
 write my, do my user interface for this.
+UI方面的工作。
 
 1128
 00:44:40,493 --> 00:44:42,310
@@ -4514,66 +5586,82 @@ Okay?
 1129
 00:44:42,311 --> 00:44:44,128
 So let's go over to our storyboard, over here,
+切换到我们的故事板。
 
 1130
 00:44:44,130 --> 00:44:48,865
 and in my storyboard I've already changed this to be
+在故事板里我已经把这个视图控制器从 ViewController 改成了
 
 1131
 00:44:48,867 --> 00:44:51,668
-a GPX CiewController, instead of a U controller.
+a GPX ViewController, instead of a view controller.
+GPXViewController。
 
 1132
 00:44:51,670 --> 00:44:54,804
 And I'm just gonna drag a map out, so I'm gonna go down here
+我现在要拖出一个地图，找到下边的对象栏，
 
 1133
 00:44:54,806 --> 00:44:59,074
 to my object palette here, I'm gonna search for map.
+搜索地图。
 
 1134
 00:45:00,544 --> 00:45:02,094
 There it is.
+在这。
 
 1135
 00:45:02,095 --> 00:45:03,645
 I'm gonna drag a map out and I'm just gonna put it in here.
+把地图拖出来放在这。
 
 1136
 00:45:03,647 --> 00:45:07,448
 Let's go ahead and put it in the right spot.
+放到正确的位置上。
 
 1137
 00:45:07,450 --> 00:45:09,950
 We'll put it right filling in the whole screen.
+让它填满整个屏幕。
 
 1138
 00:45:09,952 --> 00:45:12,386
 Let's do our constraints.
+现在开始加约束。
 
 1139
 00:45:12,388 --> 00:45:14,921
 Let's double check that our constraints look good.
+再来复查一下约束是不是OK了。
 
 1140
 00:45:16,091 --> 00:45:17,356
 Yeah. No magic numbers.
+好的，没有魔法数字。
 
 1141
 00:45:17,358 --> 00:45:18,557
 That all looks good to me.
+看起来没什么问题了。
 
 1142
 00:45:19,526 --> 00:45:21,292
 Let's create an outlet to it, so
+然后建一个outlet。
 
 1143
 00:45:21,294 --> 00:45:24,062
 I'm just gonna control drag into my controller here.
+把地图 ctrl + 拖拽到我的视图控制器。
 
 1144
 00:45:24,064 --> 00:45:25,396
 I'm gonna call this my mapView.
+起名叫 mapView.
 
 1145
 00:45:25,398 --> 00:45:27,197
@@ -4582,26 +5670,32 @@ All right?
 1146
 00:45:27,199 --> 00:45:30,500
 So now we're nice and hooked up to our user interface.
+现在UI都正确的连接起来了。
 
 1147
 00:45:30,502 --> 00:45:32,869
 And notice that we have an error here right away.
+不过我们这里有一个错误。
 
 1148
 00:45:32,871 --> 00:45:35,071
 That's because I have to.
+那是因为我还没导入
 
 1149
 00:45:35,073 --> 00:45:37,373
 Import MapKit.
+MapKit。
 
 1150
 00:45:37,375 --> 00:45:41,743
 Okay, if I don't import MapKit I don't get any of that
+如果我不导入MapKit的话，我就不能得到这些字符。
 
 1151
 00:45:41,745 --> 00:45:45,146
 symbology, the map, map, MapKit symbols.
+地图相关的字符。
 
 1152
 00:45:45,148 --> 00:45:46,247
@@ -4610,38 +5704,47 @@ Okay? Now
 1153
 00:45:46,249 --> 00:45:48,182
 when the mapView outlet gets set,
+当我们地图视图的outlet连接好，
 
 1154
 00:45:48,184 --> 00:45:50,617
 that's a good time to actually configure our mapView.
+这是一个配置地图视图很好的时机。
 
 1155
 00:45:50,619 --> 00:45:53,086
 And what do we need to configure that mapView?
+我们要怎么配置呢？
 
 1156
 00:45:53,088 --> 00:45:56,823
 Not much, I'm just gonna say that I want the map type.
+没有太多东西，我只需要定义地图的类型为
 
 1157
 00:45:56,825 --> 00:45:58,057
 To be the satellite.
+卫星。
 
 1158
 00:45:59,794 --> 00:46:03,095
 And I'm also going to set the map views delegate
+然后把它的代理设置为self。
 
 1159
 00:46:03,097 --> 00:46:06,498
 to be myself because as you saw in the slides
+因为从幻灯片你们知道有很多东西需要
 
 1160
 00:46:06,500 --> 00:46:09,667
 a lot of things we need to do with the map views delegate.
+地图视图的代理去做。
 
 1161
 00:46:09,669 --> 00:46:13,904
 So I have to say I'm an MKMapViewDelegate.
+在这里加上 MKMapViewDelegate 。
 
 1162
 00:46:13,906 --> 00:46:14,938
@@ -4650,6 +5753,7 @@ Okay?
 1163
 00:46:14,940 --> 00:46:16,573
 Let's make our screen bigger.
+把屏幕弄大一点。
 
 1164
 00:46:20,044 --> 00:46:20,743
@@ -4658,338 +5762,422 @@ Okay.
 1165
 00:46:20,745 --> 00:46:21,710
 What else we've got.
+这又是什么错误。
 
 1166
 00:46:21,712 --> 00:46:22,977
 Oh yes, all right.
+哦，对了，
 
 1167
 00:46:22,979 --> 00:46:26,380
 This is in the didSet of this.
+配置应该在didSet里。
 
 1168
 00:46:29,051 --> 00:46:30,601
 All right.
+好了。
 
 1169
 00:46:30,602 --> 00:46:32,152
 So as soon as that outlet is set, we're gonna make our
+当我们的outlet连接好以后，地图就会被设置成
 
 1170
 00:46:32,154 --> 00:46:34,821
 mapView satellite only, [INAUDIBLE] no roads over it.
+卫星模式，看不到路名什么的。
 
 1171
 00:46:34,823 --> 00:46:35,922
 And we're [INAUDIBLE].
+然后我们［听不清］。
 
 1172
 00:46:35,924 --> 00:46:37,723
 Now this is something probably we'd wanna
+在地图模式这里我们后边可能会需要加一个
 
 1173
 00:46:37,725 --> 00:46:39,458
 set with a segmented control maybe,
+选择控制器。
 
 1174
 00:46:39,460 --> 00:46:42,294
 because it has three options of some like that.
+因为事实上应该有3个选项。
 
 1175
 00:46:42,296 --> 00:46:45,096
 But here, I'm just gonna have the satellite only.
+但是这里就设置成卫星。
 
 1176
 00:46:46,232 --> 00:46:49,433
 Now, the next thing that I need is my public API,
+下边我需要设置我的公共API。
 
 1177
 00:46:49,435 --> 00:46:52,503
-basically, for my GPX to controller, and I'm gonna have
+basically, for my GPX viewcontroller, and I'm gonna have
+对于我的GPX视图控制器来说，我的公共API就是
 
 1178
 00:46:52,505 --> 00:46:57,707
 my public API be that you can set a GPX URL on me.
+GPX文件的URL。
 
 1179
 00:46:58,877 --> 00:47:02,111
 And if you set GPX URL, I'm gonna load it up and
+如果这个URL设置了，我就要把它加载进来以显示
 
 1180
 00:47:02,113 --> 00:47:04,279
 show you the waypoints and trax.
+路点和路径。
 
 1181
 00:47:04,281 --> 00:47:06,348
 Okay? That's basically the way
+明白了吗？基本上就是这么
 
 1182
 00:47:06,350 --> 00:47:07,549
 my thing works.
+做的。
 
 1183
 00:47:07,551 --> 00:47:09,083
 So what is this gonna look like?
+那我要具体怎么做呢？
 
 1184
 00:47:09,085 --> 00:47:10,918
 Well, let's do the didSet in here, so
+我们在didSet这里做，每次
 
 1185
 00:47:10,920 --> 00:47:14,955
 anytime someone sets the URL, we need to load it up.
+有人设置这个URL的时候，我就要加载这个文件。
 
 1186
 00:47:14,957 --> 00:47:19,959
 So I'm gonna say if the URL that they gave me is not nil,.
+这里我要写如果给我的URL不为空。
 
 1187
 00:47:21,096 --> 00:47:24,263
 Then I'm going to parse it, so I'm gonna use this new,
+我就要解析它，这里我用到了新的GPX类，
 
 1188
 00:47:24,265 --> 00:47:26,865
 this class, GPX, which I'll show you in a second.
+一会儿我会给你们看这个类。
 
 1189
 00:47:26,867 --> 00:47:28,834
 And it has a method called parse, and
+它里面有一个parse方法，
 
 1190
 00:47:28,836 --> 00:47:30,535
 you can see that parse takes a URL,
+接受一个url的参数，和一个
 
 1191
 00:47:30,537 --> 00:47:32,003
 and then a completion handler.
+完成的回调。
 
 1192
 00:47:32,005 --> 00:47:35,506
 Because parsing that GPX, it does need another thread.
+因为解析GPX文件需要在另外一个进程进行。
 
 1193
 00:47:35,508 --> 00:47:37,474
 Okay. And then when it's done,
+当它完成解析的时候，
 
 1194
 00:47:37,476 --> 00:47:39,242
 it calls the completion handler here.
+这个回调就会执行。
 
 1195
 00:47:39,244 --> 00:47:41,111
 So I'll pass the URL.
+把我们的URL传进去。
 
 1196
 00:47:41,113 --> 00:47:43,479
 And we'll do the completion handler.
+现在写回调。
 
 1197
 00:47:43,481 --> 00:47:45,147
 And I don't even need any of this.
+参数这里我都不需要了。
 
 1198
 00:47:45,149 --> 00:47:47,649
 I'll use dollar zero instead of this.
+我要用$0来表示。
 
 1199
 00:47:47,651 --> 00:47:49,151
 I haven't been doing that in the demos but
+以前在demo里我没这么做过，不过在这
 
 1200
 00:47:49,153 --> 00:47:50,085
 I'm going to do it here.
+要这么写。
 
 1201
 00:47:50,087 --> 00:47:52,086
 So dollar zero is the GPX so
+$0是GPX类型的。
 
 1202
 00:47:52,088 --> 00:47:55,289
 it creates an instance of this GPX class.
+这个方法会创建一个GPX类的实例。
 
 1203
 00:47:55,291 --> 00:47:59,259
 So let's go take a look at that GPX class over here.
+现在我们来看一下GPX这个类。
 
 1204
 00:47:59,261 --> 00:48:01,461
 Put it in Supporting Files, here it is.
+应该在supporting files里，在这。
 
 1205
 00:48:01,463 --> 00:48:04,230
 It's a simple class, GPX.
+这是个很简单的类，GPS。
 
 1206
 00:48:04,232 --> 00:48:07,867
 It has waypoints, an array of waypoints, an array of tracks.
+它有一个路点的数组，轨迹的数组，
 
 1207
 00:48:07,869 --> 00:48:09,134
 Routes are just like tracks,
+路径跟轨迹很像，
 
 1208
 00:48:09,136 --> 00:48:11,603
 but they're more like a driving route kind of thing.
+不过路径更像是给开车的人用的。
 
 1209
 00:48:11,605 --> 00:48:13,672
 So we're not gonna do anything with this.
+这里我们不会用到。
 
 1210
 00:48:13,674 --> 00:48:14,872
 So it's just waypoints and tracks.
+只用到路点和轨迹。
 
 1211
 00:48:14,874 --> 00:48:16,207
 We're gonna put these with pins, and
+我们要把路点用大头针显示在地图上，把轨迹
 
 1212
 00:48:16,209 --> 00:48:18,709
 we're gonna do this with overlays, time permitting.
+用覆盖层显示在地图上，如果有时间的话。
 
 1213
 00:48:18,711 --> 00:48:20,277
 Okay, and mostly it's just a parser.
+总体来说这就是一个解析器。
 
 1214
 00:48:20,279 --> 00:48:21,578
 It's an HTML parser, see,
+HTML的解析器，看到了没？
 
 1215
 00:48:21,580 --> 00:48:25,548
 it's parsing various HTML hoo-hahs here.
+可以解析各种HTML。
 
 1216
 00:48:25,550 --> 00:48:27,650
 Here's the track that it return, which you can see is
+这里是返回的轨迹，你能看到实际上就是一个
 
 1217
 00:48:27,652 --> 00:48:30,986
 basically just an array of waypoints, okay.
+路点的数组。
 
 1218
 00:48:30,988 --> 00:48:33,522
 Column fixes, but it's an array of waypoints.
+名字叫fixes，实际上是路点的数组。
 
 1219
 00:48:33,524 --> 00:48:34,656
 Here's a Waypoint.
+这里就是路点。
 
 1220
 00:48:34,658 --> 00:48:37,125
 Waypoint is just the latitude and longitude.
+路点里有经纬度。
 
 1221
 00:48:37,127 --> 00:48:39,427
 Also, it has info about that point,
+还有关于这个点的信息。
 
 1222
 00:48:39,429 --> 00:48:41,261
 just kind of interesting info.
+就是一些有意思的信息。
 
 1223
 00:48:41,263 --> 00:48:43,196
 It inherits from this class Entry,
+它是从Entry类继承来的。
 
 1224
 00:48:43,198 --> 00:48:45,131
 which is a basic entry which has the name.
+这是一个含有名字属性的基本入口。
 
 1225
 00:48:45,133 --> 00:48:48,501
 So the waypoints also have names as well.
+所以路点也有名字。
 
 1226
 00:48:48,503 --> 00:48:50,503
 And also, waypoints can have links.
+另外，路点也可以包含链接。
 
 1227
 00:48:50,505 --> 00:48:55,073
 So links are just, you know, URL references, basically.
+链接就是URL的信息。
 
 1228
 00:48:55,075 --> 00:48:57,442
 And you can get the URL, and
+你可以得到URL以及
 
 1229
 00:48:57,444 --> 00:49:00,812
 you can also get the type of thing it is.
+URL内容的类型。
 
 1230
 00:49:00,814 --> 00:49:03,948
 And so we're gonna use that to get thumbnails versus regular.
+我们可以用它得到缩略图或者常规的图片。
 
 1231
 00:49:03,950 --> 00:49:06,450
 All right, so back to our code here.
+好了，回到我们的代码。
 
 1232
 00:49:07,552 --> 00:49:08,518
 We've parsed this URL.
+我们解析了这个URL。
 
 1233
 00:49:08,520 --> 00:49:10,286
 And we've got the completion handler.
+我们也有了这个回调。
 
 1234
 00:49:10,288 --> 00:49:14,690
 By the way, I always like to user our nice Swift
+这里我非常喜欢用swift语法里
 
 1235
 00:49:16,560 --> 00:49:19,961
 closure as the last argument thing.
+尾闭包。
 
 1236
 00:49:19,963 --> 00:49:22,764
 So I'm parsing it, and
+这里，我解析了，
 
 1237
 00:49:22,765 --> 00:49:25,566
 I'm just gonna say, if I was able to successfully parse it.
+如果解析成功。
 
 1238
 00:49:25,568 --> 00:49:29,769
 So the thing that was passed to me, this $0.
+这个GPX就会传递给我。这个$0。
 
 1239
 00:49:29,771 --> 00:49:33,806
 Okay? And that was not nil, okay.
+如果不为空。
 
 1240
 00:49:33,808 --> 00:49:36,942
 Then I'm going to work on it.
+我就要处理它。
 
 1241
 00:49:36,944 --> 00:49:38,744
 And what am I gonna do to work on it?
+我要怎么处理它呢？
 
 1242
 00:49:38,746 --> 00:49:40,645
 Well, let's do the waypoints first.
+我们现在处理路点。
 
 1243
 00:49:40,647 --> 00:49:43,214
 I'm just gonna call a method handleWaypoints.
+这里我会调用一个 handleWaypoints 方法。
 
 1244
 00:49:43,216 --> 00:49:46,283
 So I'm gonna handle the GPX's waypoints.
+用来处理GPX的路点。
 
 1245
 00:49:46,285 --> 00:49:49,319
 Remember, that's just an array of that Waypoint class.
+还记得他们就是路点的数组吧。
 
 1246
 00:49:49,321 --> 00:49:51,221
 That's all it is.
+就这样。
 
 1247
 00:49:51,223 --> 00:49:54,524
 Also, by the way, when someone sets a new URL on me,
+当然，如果有新的URL传进来，
 
 1248
 00:49:54,526 --> 00:49:58,260
 I'm gonna clear all my existing waypoints off my map.
+我要清理掉所有在地图上存在的路点。
 
 1249
 00:49:59,764 --> 00:50:01,330
@@ -4998,86 +6186,107 @@ Okay?
 1250
 00:50:01,331 --> 00:50:02,897
 So I just need to implement these two methods,
+我现在需要实现这两个方法。
 
 1251
 00:50:02,900 --> 00:50:04,899
 clearWaypoints and handleWaypoints.
+clearWaypoints 和 handleWaypoints。
 
 1252
 00:50:04,901 --> 00:50:06,534
 What do I need to do that?
+我要怎么做呢？
 
 1253
 00:50:06,536 --> 00:50:08,969
 Let's do clearWaypoints first.
+咱们先来实现 clearWaypoints。
 
 1254
 00:50:08,971 --> 00:50:11,538
 Really easy, clearWaypoints.
+非常容易。
 
 1255
 00:50:13,175 --> 00:50:15,141
 I just need, this is private.
+这个是私有的。
 
 1256
 00:50:15,143 --> 00:50:18,644
 I'll try to do the privates today or remember to do that.
+我今天试着把私有都注明。
 
 1257
 00:50:18,646 --> 00:50:21,080
 So clearWaypoints, I'm just going to,
+clearWaypoints，我只需要，
 
 1258
 00:50:21,082 --> 00:50:25,717
 if my mapView has any annotations, because remember,
+如果我的地图视图有注释点的话，你们应该记得，注释点这个属性是
 
 1259
 00:50:25,719 --> 00:50:28,453
 annotations is the array of annotations.
+注释点的数组。
 
 1260
 00:50:28,455 --> 00:50:33,357
 If that's not nil, then I'm going to, oops, I typed then.
+如果不为空，我就要，哦。我居然打了then。
 
 1261
 00:50:33,359 --> 00:50:36,059
 [LAUGH] mapView.annotation.
+mapView.annotation
 
 1262
 00:50:36,061 --> 00:50:37,627
 Oh, sorry, remove annotations.
+啊，不好意思，移除注释点。
 
 1263
 00:50:37,629 --> 00:50:41,164
 I'm just gonna remove all the annotations in that case.
+我这里要删掉所有的注释点。
 
 1264
 00:50:41,166 --> 00:50:43,432
+mapView.annotations.
 mapView.annotations.
 
 1265
 00:50:43,434 --> 00:50:45,100
 And here's an interesting thing,
+这里有个有趣的东西，
 
 1266
 00:50:45,102 --> 00:50:47,703
 okay, I want to remove those annotations.
+我想要删除这些注释点。
 
 1267
 00:50:47,705 --> 00:50:50,071
 And we've got a lot of any object going in here.
+我这里得到的是很多的anyObject。
 
 1268
 00:50:50,073 --> 00:50:54,075
 So I'm gonna make this annotations as MKAnnotation.
+所以这里我需要类型转换成MKAnnotation。
 
 1269
 00:50:54,077 --> 00:50:57,678
 Just so you remember that these annotations are always
+所以要记住这里注释点的类型永远
 
 1270
 00:50:57,680 --> 00:50:59,813
 arrays of MKAnnotation there.
+都是MKAnnotation。
 
 1271
 00:50:59,815 --> 00:51:00,647
@@ -5086,26 +6295,32 @@ Okay?
 1272
 00:51:00,649 --> 00:51:01,981
 So that's clearing them,
+好，这里就是清除它们，
 
 1273
 00:51:01,983 --> 00:51:04,317
 nothing necessary besides that to clear them.
+除了清除啥也不用做。
 
 1274
 00:51:04,319 --> 00:51:05,851
 How about handling them?
+那么如何处理它们呢？
 
 1275
 00:51:05,853 --> 00:51:07,753
 Well, this is gonna be pretty amazing.
+好吧，处理的时候非常酷炫。
 
 1276
 00:51:07,755 --> 00:51:10,622
 But handling them is almost just as easy.
+但是也是非常简单的。
 
 1277
 00:51:10,624 --> 00:51:15,460
 So handleWaypoints is going to be this array of waypoints,
+参数就是路点的数组。
 
 1278
 00:51:15,462 --> 00:51:17,962
@@ -5114,102 +6329,127 @@ take an of waypoints.
 1279
 00:51:17,964 --> 00:51:21,398
 So these waypoints are GPX.Waypoint.
+类型是 GPX.Waypoint。
 
 1280
 00:51:21,400 --> 00:51:26,469
 That's the type of thing that this GPX object returns.
+这个是GPX解析器返回的类型。
 
 1281
 00:51:26,471 --> 00:51:29,739
 And we are just going to say,
+这里我们写
 
 1282
 00:51:29,741 --> 00:51:35,044
 mapView.addAnnotations, the waypoints.
+mapView.addAnnotations，那些路点。
 
 1283
 00:51:35,046 --> 00:51:37,913
 And, we're also gonna say, mapView,
+然后展示这些
 
 1284
 00:51:37,915 --> 00:51:41,049
 show the annotations of these waypoints.
+路点。
 
 1285
 00:51:42,151 --> 00:51:43,717
 And do that in an animated fashion.
+用动画的形式。
 
 1286
 00:51:43,719 --> 00:51:46,520
 Now, this, you're gonna look at this and
+你现在看见这个肯定会问，
 
 1287
 00:51:46,522 --> 00:51:47,987
 say, can it be this simple?
+就这么简单吗？
 
 1288
 00:51:47,989 --> 00:51:50,156
 And in fact, it can be this simple.
+事实上就是这么简单。
 
 1289
 00:51:50,158 --> 00:51:52,992
 Let's make this is self.
+在这加上self。
 
 1290
 00:51:52,994 --> 00:51:57,696
 It can be this simple, as long as this is an MKAnnotation.
+因为这是一个 MKAnnotation，所以简单。
 
 1291
 00:51:57,698 --> 00:52:00,282
 Do you see?
+看见没？
 
 1292
 00:52:00,283 --> 00:52:02,867
 I'm passing to addAnnotations this array, so these things
+我在addAnnotations方法里传入了这个数组，所以数组里的元素应该
 
 1293
 00:52:02,869 --> 00:52:06,270
 better be MKAnnotations, which they are not.
+是MKAnnotations，但事实上它们不是。
 
 1294
 00:52:06,272 --> 00:52:08,305
 Because they just come from this GPX parser,
+因为它们来自GPX解析器。
 
 1295
 00:52:08,307 --> 00:52:10,107
 it doesn't know anything about MK.
+解析器不会知道MK的东西。
 
 1296
 00:52:10,109 --> 00:52:12,576
 It's a generic GPX parser, it doesn't,
+它只是一个泛型的GPX解析器。
 
 1297
 00:52:12,578 --> 00:52:14,944
 it's not a MapKit parser or anything, it's just generic.
+它不是为MapKit或者其他什么东西做解析的，它只是泛型的解析器。
 
 1298
 00:52:14,946 --> 00:52:17,714
 So we have to some how make this
+所以我们需要给它实现
 
 1299
 00:52:17,716 --> 00:52:19,882
 implement the MKAnnotation protocol.
+MKAnnotation协议。
 
 1300
 00:52:19,884 --> 00:52:23,252
 And we talked about how we can use an extension
+我们之前讲过如何用扩展使得一个类
 
 1301
 00:52:23,254 --> 00:52:26,188
 to make a class implement a protocol, and
+遵守某个协议，这就是
 
 1302
 00:52:26,190 --> 00:52:27,655
 that's exactly what we're gonna do.
+我们现在要做的。
 
 1303
 00:52:27,657 --> 00:52:29,657
 So I'm gonna create a new file here.
+这里我们新建一个文件。
 
 1304
 00:52:30,860 --> 00:52:33,394
@@ -5218,118 +6458,147 @@ Okay?
 1305
 00:52:33,395 --> 00:52:35,929
 I'm gonna call it MKGPX, cuz it's gonna have all the things
+起名字叫MKGPX，因为我需要扩展所有的
 
 1306
 00:52:35,931 --> 00:52:38,532
 I want to extend these GPX classes so
+GXP类，让它们遵守协议，使它们可以
 
 1307
 00:52:38,534 --> 00:52:41,534
 they work with MapKit, MK, all right.
+与MapKit兼容。
 
 1308
 00:52:41,536 --> 00:52:43,503
 So MKGPX, here it is.
+建好了。
 
 1309
 00:52:43,505 --> 00:52:44,670
 Instead of importing Foundation,
+这里不再导入Foundation了。
 
 1310
 00:52:44,672 --> 00:52:46,605
 I'm gonna import MapKit,
+而是导入MapKit。
 
 1311
 00:52:46,606 --> 00:52:48,539
 because these are all going to be things about MapKit.
+因为我们要做的事儿都是跟MapKit相关的。
 
 1312
 00:52:48,542 --> 00:52:54,245
 And so I'm just gonna have an extension of GPX.Waypoint,
+这里我写一个GPX.Waypoint的扩展。
 
 1313
 00:52:54,247 --> 00:52:56,881
 and that extension is going to implement
+让这个扩展实现
 
 1314
 00:52:56,883 --> 00:52:58,582
 MKAnnotation protocol.
+MKAnnotation协议。
 
 1315
 00:53:00,353 --> 00:53:01,718
 Okay? So this is what I was talking
+这就是我以前讲过的
 
 1316
 00:53:01,720 --> 00:53:03,720
 about before where you can do this.
+如何去实现协议。
 
 1317
 00:53:03,722 --> 00:53:06,289
 This really makes your code simple
+这让你给一个对象实现协议的时候
 
 1318
 00:53:06,291 --> 00:53:08,557
 to be able to make an object implement another protocol,
+的代码非常易懂。
 
 1319
 00:53:08,559 --> 00:53:10,726
 as long as you can do it without any storage,
+因为这都是跟存储无关的事。
 
 1320
 00:53:10,728 --> 00:53:12,527
 because of course, extensions can't have any storage.
+当然，扩展也不能做存储相关的事儿。
 
 1321
 00:53:12,529 --> 00:53:14,295
 But here we can easily do that.
+后边就很容易了。
 
 1322
 00:53:14,297 --> 00:53:17,999
 So, the three things, remember, are coordinate,
+我们要实现3个属性，首先是坐标，
 
 1323
 00:53:18,001 --> 00:53:20,768
 which is a CLLocationCoordinate2D.
+也就是一个CLLocationCoordinate2D。
 
 1324
 00:53:20,770 --> 00:53:23,270
 And title, which is a optional string, but
+然后是标题，一个可选的字符串，
 
 1325
 00:53:23,272 --> 00:53:25,605
 we never want that to be non-optional.
+我们从来不想让它变成非可选的。
 
 1326
 00:53:25,607 --> 00:53:28,108
 And subtitle, which is also an optional string.
+副标题也是一个可选的字符串。
 
 1327
 00:53:28,110 --> 00:53:29,976
 So these are the three things we have to implement
+如果我们希望这个东西变成MKAnnotation，就要实现
 
 1328
 00:53:29,978 --> 00:53:33,912
 if we want this thing to be an MKAnnotation.
+这三个属性。
 
 1329
 00:53:33,914 --> 00:53:35,814
 So let's do that, super simple.
+咱们开始吧，超级简单。
 
 1330
 00:53:35,816 --> 00:53:39,284
 Here we're just gonna return a CLLocationCoordinate2D,
+这里我们会返回一个 CLLocationCoordinate2D
 
 1331
 00:53:39,286 --> 00:53:41,886
 with the latitude being our latitude.
+经度就是我们类里自己的经度。
 
 1332
 00:53:41,888 --> 00:53:44,689
 Okay? This is just a property in
+这只是类里的一个属性而已。
 
 1333
 00:53:44,691 --> 00:53:50,494
 this, the latitude, and longitude being the longitude.
+纬度就是用类里面的纬度。
 
 1334
 00:53:50,496 --> 00:53:51,395
@@ -5338,66 +6607,82 @@ Okay?
 1335
 00:53:51,396 --> 00:53:52,295
 So I just created a new one of these.
+我这里新建了一个对象，
 
 1336
 00:53:52,297 --> 00:53:54,430
 This is just calling its initializer.
+调用了它的初始化器。
 
 1337
 00:53:54,432 --> 00:53:56,432
 And I just pass my own latitude and longitude,
+传入了我自己的经纬度。
 
 1338
 00:53:56,434 --> 00:53:58,100
 could not be any simpler.
+非常简单。
 
 1339
 00:53:58,102 --> 00:54:00,736
 The title is also just as simple.
+标题也很简单。
 
 1340
 00:54:00,738 --> 00:54:03,304
 I'm gonna return my own name.
+我只需要返回我自己的name属性。
 
 1341
 00:54:04,407 --> 00:54:05,840
 I showed you in the code there,
+我刚才给你们看代码了。
 
 1342
 00:54:05,842 --> 00:54:09,576
 that GPX.Waypoints, they know their name, okay?
+GPX.Waypoints有名字的属性。
 
 1343
 00:54:09,578 --> 00:54:11,244
 We call it title in MKAnnotation,
+我们把它当做MKAnnotation里的标题。
 
 1344
 00:54:11,246 --> 00:54:12,345
 they call it name.
+在类里我们叫名字。
 
 1345
 00:54:12,347 --> 00:54:14,781
 And similarly here, there's return info,
+副标题也差不多，我们返回info。
 
 1346
 00:54:14,783 --> 00:54:18,283
 which is just the information about this waypoint.
+就是关于这个路点的信息。
 
 1347
 00:54:19,253 --> 00:54:24,622
 Back here, in our GPXViewController,
+现在回到我们的GPXViewController
 
 1348
 00:54:24,624 --> 00:54:28,892
 we have to, when we get the URL,
+当我们拿到URL的时候，
 
 1349
 00:54:28,894 --> 00:54:33,463
 we forgot to set our model here to be
+哦，我们忘了在这设置我们的模型了，
 
 1350
 00:54:33,465 --> 00:54:37,500
 this URL here, that's all.
+设置一下就好了。
 
 1351
 00:54:48,746 --> 00:54:50,996
@@ -5406,18 +6691,22 @@ Okay.
 1352
 00:54:50,997 --> 00:54:53,247
 So here's Stanford, we'll drag, this,
+这是斯坦福大学，我们拖到这，
 
 1353
 00:54:53,250 --> 00:54:58,753
 this is just a GPX file with some, hello, there we go.
+这就是一个GPX文件，哦，这里，
 
 1354
 00:54:58,755 --> 00:55:00,688
 Accept. With some Stanford locations.
+点接受，包含一些斯坦福大学的地点。
 
 1355
 00:55:00,690 --> 00:55:03,390
 And you can see, they just put them on there as pins.
+你可以看到，放置了一些大头针。
 
 1356
 00:55:03,392 --> 00:55:04,257
@@ -5426,34 +6715,42 @@ Okay?
 1357
 00:55:04,259 --> 00:55:05,992
 And I can even click on them.
+我能点击它们。
 
 1358
 00:55:05,994 --> 00:55:09,662
 If I tap them, I get the callout, and it has the name.
+如果我点击他们，标识视图就弹出来了，看到了名字。
 
 1359
 00:55:09,664 --> 00:55:10,830
 Okay? Some of them even have
+有一些大头针还有
 
 1360
 00:55:10,832 --> 00:55:12,564
 a little info.
+详细一点的信息。
 
 1361
 00:55:12,566 --> 00:55:13,532
 Okay. Green Library,
+Green Library,
 
 1362
 00:55:13,534 --> 00:55:14,599
 get your study on.
+信息是get your study on
 
 1363
 00:55:14,601 --> 00:55:15,833
 Or here's Meyer.
+这是Meyer
 
 1364
 00:55:15,835 --> 00:55:17,034
 Meyer Library, rest in peace.
+Meyer图书馆，在平静中安息。
 
 1365
 00:55:17,036 --> 00:55:18,802
@@ -5466,42 +6763,52 @@ Meyer Library, rest in peace.
 1367
 00:55:20,172 --> 00:55:21,204
 Let's drag a different one out,
+我们拖另外一个文件进来。
 
 1368
 00:55:21,206 --> 00:55:22,405
 let's get our vacation here.
+我们开始度假了。
 
 1369
 00:55:22,407 --> 00:55:25,007
 So this one's got a lot more stuff.
+这个东西会多一些。
 
 1370
 00:55:25,009 --> 00:55:25,574
 We see that.
+看看这个。
 
 1371
 00:55:25,576 --> 00:55:27,993
 We accept that one.
+我们接受一下这个。
 
 1372
 00:55:27,994 --> 00:55:30,411
 It clears out our old pins, loads up this new GPX file,
+它清理了我们以前的大头针，加载了新的GPX文件。
 
 1373
 00:55:30,414 --> 00:55:33,181
 and shows us a whole bunch of pins on here.
+给我们加了一些新的大头针。
 
 1374
 00:55:33,183 --> 00:55:34,882
 So let's see where the heck we are in the world.
+看看到底是哪。
 
 1375
 00:55:34,884 --> 00:55:36,250
 So I'm gonna zoom out.
+缩小一点看看。
 
 1376
 00:55:36,252 --> 00:55:37,551
 All right. Somewhere in the middle of
+把它们居中。
 
 1377
 00:55:37,553 --> 00:55:38,819
@@ -5510,18 +6817,22 @@ nowhere here.
 1378
 00:55:38,821 --> 00:55:40,153
 What the heck, where are we?
+哦，这是哪。
 
 1379
 00:55:40,155 --> 00:55:42,955
 Oh, we're not even in the United States,
+我们貌似不在美国了，
 
 1380
 00:55:42,957 --> 00:55:44,390
 we're in Canada somewhere.
+好像是加拿大的什么地方。
 
 1381
 00:55:44,392 --> 00:55:45,791
 Okay, so we're up there in Canada.
+我们现在在加拿大。
 
 1382
 00:55:45,793 --> 00:55:47,576
@@ -5530,26 +6841,32 @@ All right,
 1383
 00:55:47,577 --> 00:55:49,360
 I'm just pinching to zoom here right on the map app.
+我缩放一下，
 
 1384
 00:55:49,363 --> 00:55:50,995
 And we've got all these pins.
+这样能看到所有的大头针了。
 
 1385
 00:55:50,997 --> 00:55:53,598
 And these pins we can click on, and
+我们可以点击这些大头针，
 
 1386
 00:55:53,600 --> 00:55:56,667
 some of them have titles and subtitles.
+有一些有标题和副标题。
 
 1387
 00:55:56,669 --> 00:55:58,068
 But this is kind of cool.
+很酷。
 
 1388
 00:55:58,070 --> 00:56:02,272
 This looks like a pretty incredible country here in.
+这好像是个很不错的地方
 
 1389
 00:56:02,274 --> 00:56:04,007
@@ -5558,178 +6875,223 @@ Canada and it's referring to things like,
 1390
 00:56:04,009 --> 00:56:06,142
 look at this, views are spectacular even from here.
+看这，还挺壮观的。
 
 1391
 00:56:06,144 --> 00:56:08,844
 It'll be awfully cool if we could see those views with
+要是我们能看到这些地方的照片就
 
 1392
 00:56:08,846 --> 00:56:10,062
 some photos.
+更酷了。
 
 1393
 00:56:10,063 --> 00:56:11,279
 And so that's what we're going to do next.
+这就是我们下边要做的事儿。
 
 1394
 00:56:11,281 --> 00:56:14,982
 So, on these call outs, I'm going to add a left accessory
+在这些弹出的标识视图里，我要加一个左辅助视图，
 
 1395
 00:56:14,984 --> 00:56:16,717
 view, which is a UI image.
+也就是一个图片视图。
 
 1396
 00:56:16,719 --> 00:56:20,688
 Which is gonna have a thumbnail of the photo that is
+给它加上在GPX文件里，某个路点自己的链接以
 
 1397
 00:56:20,690 --> 00:56:26,059
 in the GPX file that's linked to this particular waypoint.
+显示图片。
 
 1398
 00:56:26,061 --> 00:56:28,828
 Notice that we're getting these pins and this callout,
+注意我们现在能看到这些大头针和标识视图，
 
 1399
 00:56:28,830 --> 00:56:30,429
 and I haven't implemented that method,
+但是我还没实现mapView.viewForAnnotation方法，
 
 1400
 00:56:30,431 --> 00:56:33,132
 mapView.viewForAnnotation, remember that?
+记得吗？
 
 1401
 00:56:33,134 --> 00:56:35,100
 So if you don't implement that method at all,
+如果你不实现这个方法，
 
 1402
 00:56:35,102 --> 00:56:38,503
 all you get is pins, red pins, and
+那么你能用的就是大头针，红色的大头针和
 
 1403
 00:56:38,505 --> 00:56:41,406
 all you get is a callout with the title and subtitle.
+带有标题和副标题的标识视图。
 
 1404
 00:56:41,408 --> 00:56:42,506
 That's all you get.
+你只能得到这些默认的组件。
 
 1405
 00:56:42,508 --> 00:56:43,974
 So if you want anything more,
+如果你还需要更多东西，
 
 1406
 00:56:43,976 --> 00:56:46,877
 like a thumbnail, you have to do that yourself.
+比如缩略图，那么你就要自己实现。
 
 1407
 00:56:46,879 --> 00:56:49,813
 So we're gonna do that ourselves by implementing that
+我们现在要自己来实现这个方法。
 
 1408
 00:56:49,815 --> 00:56:52,915
 method, so let's put that right down here.
+现在开始。
 
 1409
 00:56:52,917 --> 00:56:54,750
 And it's called mapView viewForAnnotation.
+我写mapView的时候，你会看到
 
 1410
 00:56:54,752 --> 00:56:57,920
 You can see that mapView has a lot, a lot,
+有很多很多的
 
 1411
 00:56:57,922 --> 00:56:59,888
 lot of delegate methods.
+代理方法。
 
 1412
 00:56:59,890 --> 00:57:02,223
 It can do an enormous amount of things here,
+它们可以做各种事。
 
 1413
 00:57:02,225 --> 00:57:05,026
 from the overlays, and all that stuff the animation
+覆盖层，动画，
 
 1414
 00:57:05,028 --> 00:57:07,995
 other things, the regions coming, going, all that.
+区域，等等等等。
 
 1415
 00:57:07,997 --> 00:57:11,231
 So we want, if we can find it here,
+我们需要找到viewForAnnotation方法，
 
 1416
 00:57:11,233 --> 00:57:14,401
 viewForAnnotation, there it is.
+在这呢。
+
 
 1417
 00:57:14,403 --> 00:57:16,536
 Okay, mapView, viewForAnnotation,
+mapView，viewForAnnotation
 
 1418
 00:57:16,538 --> 00:57:18,755
 here it is right here.
+找到了，在这呢。
 
 1419
 00:57:18,756 --> 00:57:20,973
 All we have to do is what we talked about in the slides.
+现在我们要做的就是我刚才幻灯片里讲到的。
 
 1420
 00:57:20,975 --> 00:57:28,447
 Frst of all, I'll say var view equals mapView.dequeue.
+首先，我们写 var view = mapView.dequeue.
 
 1421
 00:57:28,449 --> 00:57:29,314
 So I'm gonna dequeue.
+这里需要重用。
 
 1422
 00:57:29,316 --> 00:57:31,416
 Now, I need an identifier here?
+我需要一个标识。
 
 1423
 00:57:31,418 --> 00:57:33,951
 I actually think I have a bunch of constants.
+啊，我之前应该写了很多常量。
 
 1424
 00:57:35,154 --> 00:57:36,586
 Yeah, I did do that.
+啊，在这呢。
 
 1425
 00:57:36,588 --> 00:57:38,822
 Okay, so here's a bunch of constants,
+这里是一些常量。
 
 1426
 00:57:38,824 --> 00:57:41,958
 don't worry about most of them, we're not gonna get to
+大多数我们都不需要去管，按照计划，
 
 1427
 00:57:41,960 --> 00:57:45,027
 most of this stuff today, which is kind of planned.
+今天我们只用到很少的一部分，
 
 1428
 00:57:45,029 --> 00:57:48,630
 But I do have this annotation reuse identifier.
+这里有注释点的重用标识。
 
 1429
 00:57:48,632 --> 00:57:49,397
 So I'm gonna use that.
+我要用它。
 
 1430
 00:57:49,399 --> 00:57:52,567
 Constants dot annotation.
+Constants.annotation
 
 1431
 00:57:52,569 --> 00:57:55,202
 Hey, by the way, one thing I'm seeing some of you do.
+哦，对了，这里顺便说一下，我看到你们有些人会那么做。
 
 1432
 00:57:55,204 --> 00:57:59,306
 Constants, you all know that all types
+在Swift里，所有的类型和常量都需要以
 
 1433
 00:57:59,308 --> 00:58:01,708
 need to be capitalized in Swift.
+大写开头。
 
 1434
 00:58:01,710 --> 00:58:02,776
@@ -5738,22 +7100,27 @@ Right?
 1435
 00:58:02,777 --> 00:58:03,843
 So class is structs.
+类啊，结构体什么的。
 
 1436
 00:58:03,845 --> 00:58:06,912
 You should really capitalize constants as well.
+常量也是需要大写的。
 
 1437
 00:58:06,914 --> 00:58:09,098
 I'm seeing a lot of you do lowercase.
+我看到你们有些人小写了。
 
 1438
 00:58:09,099 --> 00:58:11,283
 It's kinda confusing to people when they see a lowercase they
+人们如果见到小写会误认为这是属性，他们
 
 1439
 00:58:11,285 --> 00:58:14,119
 think it's a property and they're wondering, oh,
+就会好奇它是不是有setter和getter。
 
 1440
 00:58:14,121 --> 00:58:15,754
@@ -5762,10 +7129,12 @@ is this settable, gettable?
 1441
 00:58:15,756 --> 00:58:17,555
 Or if you capitalize it, they're gonna say,
+如果你首字母大写了，他们就明白
 
 1442
 00:58:17,557 --> 00:58:19,590
 oh, all right, this is must be a constant or to type or
+这可能是个常量或者类型什么的。
 
 1443
 00:58:19,592 --> 00:58:20,758
@@ -5774,138 +7143,172 @@ something.
 1444
 00:58:20,760 --> 00:58:23,694
 So please, you know, capital letter for
+所以，要注意，首字母大写
 
 1445
 00:58:23,696 --> 00:58:26,295
 things that represent constants.
+表示常量。
 
 1446
 00:58:27,432 --> 00:58:28,864
 All right, so I get this view.
+继续，我现在得到了这个视图。
 
 1447
 00:58:28,866 --> 00:58:31,199
 Now if there's no de-queues-able,
+如果不是重用得到的，
 
 1448
 00:58:31,201 --> 00:58:34,202
 if you can't de-queue a annotation
+如果不能重用，我就要
 
 1449
 00:58:34,204 --> 00:58:36,004
 view then I have to create it myself.
+自己建一个。
 
 1450
 00:58:36,006 --> 00:58:39,073
 So if this view is nil, then I have to create it.
+所以这里写，如果视图为空，我就要新建一个。
 
 1451
 00:58:39,075 --> 00:58:42,809
 And I'm just gonna create it by saying MKPinAnnotationView.
+这里写MKPinAnnotationView。
 
 1452
 00:58:42,811 --> 00:58:44,978
 I'm gonna create one of those.
+我要新建一个MKPinAnnotationView。
 
 1453
 00:58:44,980 --> 00:58:48,147
 I'm gonna use this constructor, annotation.
+我要用这个构造器，传入注释点。
 
 1454
 00:58:48,149 --> 00:58:51,350
 The reuse identifier is the Constants.Annotation.
+重用标识是Constants.Annotation
 
 1455
 00:58:51,352 --> 00:58:54,420
-Since I'm using the same reduce identifier as here,
+Since I'm using the same reuse identifier as here,
+这里我用了同样的标识。
 
 1456
 00:58:54,422 --> 00:58:58,089
 then in the future this view could get reused.
+所以之后这个视图就可以被重用了。
 
 1457
 00:58:59,125 --> 00:59:00,624
 I want this to show call out so
+这里我需要它能弹出标识视图，
 
 1458
 00:59:00,626 --> 00:59:02,693
 I'm gonna have canShowCallout equals true.
+所以写canShowCallout = true。
 
 1459
 00:59:03,729 --> 00:59:05,195
 Okay? It's good.
 
+
 1460
 00:59:05,197 --> 00:59:07,697
 Now let's set the annotation equal to annotation.
+现在我们设置它的注释点。
 
 1461
 00:59:07,699 --> 00:59:10,233
 Now you might say, oh,
+这里你可能会说，哦，
 
 1462
 00:59:10,234 --> 00:59:12,768
 well look when I constructed this, I already did this.
+在我新建这个视图的时候我就已经传入注释点了。
 
 1463
 00:59:12,770 --> 00:59:14,920
 So that's true.
+没错。
 
 1464
 00:59:14,921 --> 00:59:17,071
 We could for example put this in an else, if you want that.
+我们也可以把它写在else里，如果你想的话。
 
 1465
 00:59:17,074 --> 00:59:19,674
 It's a little different than a slide.
+这么写跟幻灯片有点不一样。
 
 1466
 00:59:19,676 --> 00:59:22,210
 But if we dequeued we wanna make sure we set
+但是我们重用的时候肯定希望可以正确的
 
 1467
 00:59:22,212 --> 00:59:26,480
 the annotation to this annotation that was passed in.
+传递注释点。
 
 1468
 00:59:26,482 --> 00:59:28,248
 Because we're reusing this thing, okay?
+因为我们需要重用。
 
 1469
 00:59:28,250 --> 00:59:29,683
 So that's an important thing.
+这个很重要。
 
 1470
 00:59:29,684 --> 00:59:31,117
 Sometimes people forget this and they're like, hm,
+有些人忘了设置，所以他们会
 
 1471
 00:59:31,119 --> 00:59:32,485
 my annotations, when they get reused,
+发现当他们的视图重用的时候，
 
 1472
 00:59:32,487 --> 00:59:33,786
 they keep showing the old annotation.
+它还在显示之前的注释点。
 
 1473
 00:59:33,788 --> 00:59:36,989
 Well, now you know why.
+现在你知道为什么会犯这种错误了。
 
 1474
 00:59:36,991 --> 00:59:38,824
 And then we can just return this view.
+到这里我们可以直接返回这个视图了。
 
 1475
 00:59:39,860 --> 00:59:42,593
 So this code that we have right here
+我们在这刚刚写的代码，实际上
 
 1476
 00:59:42,595 --> 00:59:44,328
 is essentially what you get for free.
+我们是可以不写的。
 
 1477
 00:59:44,330 --> 00:59:47,398
 If you don't implement this method, this is what you get.
+如果我们不实现这个方法，系统就会自动为你写这些代码。
 
 1478
 00:59:47,400 --> 00:59:48,432
@@ -5914,30 +7317,37 @@ Okay?
 1479
 00:59:48,434 --> 00:59:51,001
 And actually, I'm gonna put something here.
+所以实际上，我还需要加更多东西。
 
 1480
 00:59:51,003 --> 00:59:52,703
 I'm gonna make it so
+啊，我觉得
 
 1481
 00:59:52,704 --> 00:59:54,404
 we don't have to do the airdrop all the time.
+我们不必一直开着 airDrop。
 
 1482
 00:59:54,406 --> 00:59:55,571
 Okay. In viewDidLoad,
+好了，在viewDidLoad里。
 
 1483
 00:59:55,573 --> 00:59:57,539
 I'm going to load up the URL.
+我要加载URL。
 
 1484
 00:59:57,541 --> 01:00:05,347
 I'm gonna say, gpxURL equals NSURL string.
+这里我写 gxpURL = NSURL(String:)。
 
 1485
 01:00:05,349 --> 01:00:11,652
 I'm gonna do http://www.stanford.edu/vacat-
+http://www.stanford.edu/vacation.gpx.
 
 1486
 01:00:11,654 --> 01:00:12,986
@@ -5946,26 +7356,32 @@ ion.gpx.
 1487
 01:00:12,988 --> 01:00:14,888
 So we'll just load it out of there.
+我们在通知外直接加载它。
 
 1488
 01:00:14,890 --> 01:00:17,691
 That way we can actually run it on here, so
+我在这选一下模拟器，我们就能
 
 1489
 01:00:17,693 --> 01:00:20,593
 that we can keep it all on screen.
+一直让它在屏幕上了。
 
 1490
 01:00:20,595 --> 01:00:22,528
 Okay, where was I?
+我讲到哪了?
 
 1491
 01:00:22,530 --> 01:00:24,847
 I was in here.
+啊，讲到这了。
 
 1492
 01:00:24,848 --> 01:00:27,165
 Okay, so now we basically got the same thing we had
+还是原来的大头针。
 
 1493
 01:00:27,167 --> 01:00:28,083
@@ -5974,42 +7390,52 @@ with a pin.
 1494
 01:00:28,084 --> 01:00:29,000
 So if we run this now.
+如果我们现在运行一下，
 
 1495
 01:00:33,272 --> 01:00:34,738
 And we get the exact same thing here, right?
+我们得到了一样的东西。
 
 1496
 01:00:34,740 --> 01:00:36,940
 We can still click, we've got the panorama.
+点一下，我们看到了panorama。
 
 1497
 01:00:36,942 --> 01:00:40,243
 So now we wanna add this little left call out.
+我们需要给它左边加一个图片。
 
 1498
 01:00:40,245 --> 01:00:44,013
 So we build this UI, this leftCalloutAccessoryView UI,
+我们要构建这个左辅助视图的UI。
 
 1499
 01:00:44,015 --> 01:00:46,649
 in this viewForAnnotation right here.
+在viewForAnnotation方法里。
 
 1500
 01:00:46,651 --> 01:00:47,850
 And it's very simple to do.
+非常简单。
 
 1501
 01:00:47,852 --> 01:00:50,069
 We're just gonna say.
+只需要写。
 
 1502
 01:00:50,070 --> 01:00:52,287
 First of all, we need to only do this for annotations that
+首先，我们只需要给是路点类型的注释点加
 
 1503
 01:00:52,289 --> 01:00:54,789
 are waypoints because we could have our map have a mix
+图片，因为我们可能会有GPX里的其他类型。
 
 1504
 01:00:54,791 --> 01:00:57,859
@@ -6018,10 +7444,12 @@ of these GPX.Waypoints and other things.
 1505
 01:00:57,861 --> 01:01:02,696
 So, I'm gonna say, if I can let waypoint
+这里写，if let wayPoint = 
 
 1506
 01:01:02,698 --> 01:01:08,168
 equal this annotation, as a GPX.Waypoint.
+annotation，是一个GPX.Waypoint。
 
 1507
 01:01:08,170 --> 01:01:09,903
@@ -6030,110 +7458,137 @@ Okay.
 1508
 01:01:09,904 --> 01:01:11,637
 So if the annotation is a waypoint, then I'm gonna
+如果注释点是一个路点，下边我就要
 
 1509
 01:01:11,639 --> 01:01:14,940
 check and see if the waypoint has a thumbnailURL, we're
+检查它是否包含一个缩略图的URL。
 
 1510
 01:01:14,942 --> 01:01:17,743
 gonna have to implement that property in a second here.
+我们一会儿要实现这个属性。
 
 1511
 01:01:17,745 --> 01:01:21,179
 So if that's not nil, then I'm going to say that the views,
+如果URL不为空，那么我的视图，
 
 1512
 01:01:21,181 --> 01:01:23,715
 annotation leftCalloutAccessoryView
+我的注释点的左辅助视图，
 
 1513
 01:01:23,717 --> 01:01:25,316
 equals a UIImageView.
+是一个图片视图。
 
 1514
 01:01:26,552 --> 01:01:29,453
 And I'm actually going to give it a default frame which I
+我要给它一个默认的大小，我这里正好
 
 1515
 01:01:29,455 --> 01:01:30,654
 have a constant for.
+有一个常量。
 
 1516
 01:01:32,724 --> 01:01:34,824
 No matter what size of the image is,
+不管尺寸多大，
 
 1517
 01:01:34,826 --> 01:01:38,660
 I want the actual size of the imageView to be fixed.
+我只是希望图片视图的大小是固定的。
 
 1518
 01:01:38,662 --> 01:01:39,961
 And by the way,
+如果
 
 1519
 01:01:39,963 --> 01:01:43,932
 if this waypoint doesn't have a thumbnail, okay?
+这个路点没有缩略图呢？
 
 1520
 01:01:43,934 --> 01:01:50,338
 And in fact, also if it's not a GPX.Waypoint then I want
+或者如果它根本不是一个GPX.Waypoint呢？那么我就希望
 
 1521
 01:01:50,340 --> 01:01:52,906
 the leftCallOutAccessoryView to be nil.
+它的左辅助视图为空。
 
 1522
 01:01:52,908 --> 01:01:55,042
 So, again, you have to think about reuse.
+我们还要考虑到重用。
 
 1523
 01:01:55,044 --> 01:01:58,178
 Some waypoints are gonna have thumbnail URLs, some not.
+有些路点有缩略图的URL有些没有。
 
 1524
 01:01:58,180 --> 01:02:01,280
 If you wanna set this to nil, and then only set to an image
+所以我们需要把它设为空，只有当有URL的时候，才
 
 1525
 01:02:01,282 --> 01:02:03,683
 view, if it actually has a URL.
+设置为一个图片视图。
 
 1526
 01:02:03,685 --> 01:02:05,751
 So we have to implement this thumbnail URL.
+现在我们来实现缩略图的URL。
 
 1527
 01:02:05,753 --> 01:02:07,319
 That's pretty easy to do, as well.
+这个特别简单。
 
 1528
 01:02:07,321 --> 01:02:09,454
 We're gonna do that same little extension here,
+我们在刚才那个实现协议的
 
 1529
 01:02:09,456 --> 01:02:10,288
 where we put this.
+扩展里做。
 
 1530
 01:02:11,691 --> 01:02:15,726
 I'm going to have a little kinda helper function here
+这里我要写一个辅助方法，叫做
 
 1531
 01:02:15,728 --> 01:02:19,729
 which I'm gonna call getImageURLofType.
+getImageURLofType
 
 1532
 01:02:19,731 --> 01:02:21,497
 And it's gonna get a certain type.
+参数是一个类型。
 
 1533
 01:02:21,499 --> 01:02:25,267
 So, this type is gonna be thumbnail or large image or
+类型可以是缩略图或者大图
 
 1534
 01:02:25,269 --> 01:02:27,803
 whatever it comes subverted the type
+或者别的什么。
 
 1535
 01:02:27,805 --> 01:02:30,171
@@ -6142,30 +7597,37 @@ thing to be thumbnails or images.
 1536
 01:02:30,173 --> 01:02:33,508
 And here I'm just gonna go through the links
+然后我遍历一下GPX.Waypoint里的
 
 1537
 01:02:33,510 --> 01:02:35,476
 that are in this GPX.Waypoint.
+链接。
 
 1538
 01:02:35,478 --> 01:02:38,712
 So this is an array in GPX.Waypoint which is of these
+这是GPX.Waypoint里一个链接的数组，我们之前
 
 1539
 01:02:38,714 --> 01:02:40,280
 link thing we did.
+看到过。
 
 1540
 01:02:40,282 --> 01:02:44,684
 And if the link's type equals the type that I want,
+如果链接的类型是我们想要的，
 
 1541
 01:02:44,686 --> 01:02:46,786
 thumbnail or
+缩略图或者
 
 1542
 01:02:46,787 --> 01:02:48,887
 whatever, then I'm gonna return that link's URL.
+别的什么，我就返回这个URL。
 
 1543
 01:02:48,890 --> 01:02:51,824
@@ -6174,10 +7636,12 @@ Okay? So
 1544
 01:02:51,825 --> 01:02:54,759
 this a way that I can get the URL, so,
+这就是得到URL的方法。
 
 1545
 01:02:54,762 --> 01:02:59,931
 yes, so this needs to return NSURL.
+啊，对，这里需要返回NSURL类型。
 
 1546
 01:02:59,933 --> 01:03:01,098
@@ -6186,38 +7650,47 @@ Okay?
 1547
 01:03:01,100 --> 01:03:02,900
 And if I can't find it, then I'll return nil,
+如果找不到，就返回空。
 
 1548
 01:03:02,902 --> 01:03:05,202
 so then it doesn't have an imageURL.
+也就是没有合适的URL。
 
 1549
 01:03:05,204 --> 01:03:12,809
 So, to implement thumbnail URL, okay, which is the NSURL.
+要实现缩略图URL属性 ，这是一个NSURL类型。
 
 1550
 01:03:12,811 --> 01:03:14,744
 That's really easy.
+这个非常容易。
 
 1551
 01:03:14,745 --> 01:03:16,678
 We're just gonna return the get image of type thumbnail.
+我们只需要返回getImageURLofType("thumbnail")
 
 1552
 01:03:18,716 --> 01:03:20,248
 Okay? And we're also gonna have
+还有一个图片URL的属性，
 
 1553
 01:03:20,250 --> 01:03:22,917
 a var for imageURL, which is the actual image,
+这是一个真正的图片，
 
 1554
 01:03:22,919 --> 01:03:25,619
 not the thumbnail, but the actual image.
+不是缩略图。
 
 1555
 01:03:25,621 --> 01:03:31,158
 And now, we're gonna return getImageURL large image.
+这里返回getImageURLofType("large")
 
 1556
 01:03:33,128 --> 01:03:34,678
@@ -6226,6 +7699,7 @@ Okay?
 1557
 01:03:34,679 --> 01:03:36,229
 So people understanding what I'm doing here?
+大家明白我是怎么做的了吗？
 
 1558
 01:03:36,231 --> 01:03:37,881
@@ -6234,86 +7708,107 @@ Okay, this links
 1559
 01:03:37,882 --> 01:03:39,532
 is just something that's in a waypoint that tells you all
+这些链接就是包含在路点里的一些
 
 1560
 01:03:39,534 --> 01:03:42,101
 the HTTP links that are attached to this waypoint.
+关于这个路点的HTTP链接
 
 1561
 01:03:42,103 --> 01:03:44,169
 And I'm just looking through them to find either one
+我遍历了它们找到我需要的类型，
 
 1562
 01:03:44,171 --> 01:03:46,170
 that's type thumbnail or one that's type large.
+缩略图或者大图。
 
 1563
 01:03:48,107 --> 01:03:49,273
 Okay?
+明白了吗？
 
 1564
 01:03:49,275 --> 01:03:51,375
 So now this is working right here.
+现在这里也没问题了。
 
 1565
 01:03:51,377 --> 01:03:53,610
 So this is the left callout accessory.
+这就是左辅助视图。
 
 1566
 01:03:53,611 --> 01:03:55,844
 Now, I could actually load that image up right here.
+我现在可以在这加载图片了。
 
 1567
 01:03:55,847 --> 01:03:58,514
 I could set this accessory views image right here, but
+在这加载辅助视图的图片，但是我们
 
 1568
 01:03:58,516 --> 01:04:00,433
 we talked about.
+讲过，
 
 1569
 01:04:00,434 --> 01:04:02,351
 We don't wanna do that because right now,
+我们不能怎么做因为在这个时候，
 
 1570
 01:04:02,353 --> 01:04:05,154
 this callout has not been put onscreen.
+标识视图还没有显示在屏幕上。
 
 1571
 01:04:05,156 --> 01:04:07,322
 This is just the pin being created.
+这里只是用来建立大头针的。
 
 1572
 01:04:07,324 --> 01:04:09,157
 Okay, I'm creating this left callout exception review, but
+这时标识视图还没有生成，所以
 
 1573
 01:04:09,159 --> 01:04:10,925
 the actual callout is not being created,
+我不能在这设置辅助视图。
 
 1574
 01:04:10,927 --> 01:04:13,394
 not being shown, so I don't wanna go fetching things.
+所以不能在这个时候抓取图片。
 
 1575
 01:04:13,396 --> 01:04:16,030
 But I do actually, want that thing to be fetched, and so
+但是我确实希望抓取图片，那么我就要
 
 1576
 01:04:16,032 --> 01:04:18,665
 I'm gonna do that in another mapView delegate,
+在didSelectAnnotationView这个
 
 1577
 01:04:18,667 --> 01:04:20,667
 which is the didSelectAnnotationView.
+代理方法里做。
 
 1578
 01:04:21,736 --> 01:04:24,570
 Which is somewhere here.
+在哪呢？
 
 1579
 01:04:24,572 --> 01:04:26,839
 There it is, okay.
+在这，好
 
 1580
 01:04:26,841 --> 01:04:28,707
@@ -6322,50 +7817,62 @@ So this is,
 1581
 01:04:28,708 --> 01:04:30,574
 if the AnnotationView actually gets selected.
+这个方法会在注释点被点击时调用。
 
 1582
 01:04:30,577 --> 01:04:33,111
 So, now the callout is gonna go on there.
+这个时候标识视图应该在屏幕上了。
 
 1583
 01:04:33,113 --> 01:04:33,978
 And I wanna do that.
+希望是。
 
 1584
 01:04:33,980 --> 01:04:35,513
 So, what do I need to do in here?
+那我现在做什么呢？
 
 1585
 01:04:35,515 --> 01:04:37,081
 Well, again, I need to check and
+还要再检查注释点
 
 1586
 01:04:37,083 --> 01:04:39,383
 see if this annotation is a waypoint.
+是不是一个路点。
 
 1587
 01:04:39,385 --> 01:04:40,850
 So I'm gonna say,
+这里写，
 
 1588
 01:04:40,852 --> 01:04:44,520
-if the views.annotation is a GPX.Waypoint.
+if the views.annotation is a GPX.Waypoint。
+如果views.annotation是一个GPX.Waypoint。
 
 1589
 01:04:44,522 --> 01:04:47,757
 Cause otherwise it's, there's nothing for me to do here.
+如果不是，我就什么都不需要做了。
 
 1590
 01:04:47,759 --> 01:04:51,993
 I'm also going to get that ImageView out of there.
+我现在还需要取到图片视图，
 
 1591
 01:04:51,995 --> 01:04:55,196
 So if the thumbnailImageView equals
+所以这里写如果thumbnailImageView等于
 
 1592
 01:04:55,198 --> 01:05:00,634
 the views.leftCalloutAccessory view, as a UIImageView.
+视图的左辅助视图，类型是图片视图。
 
 1593
 01:05:02,238 --> 01:05:03,554
@@ -6374,14 +7881,17 @@ Okay? So
 1594
 01:05:03,555 --> 01:05:04,871
 I was able to get that leftCalloutAccessoryView, and
+我就拿到了左辅助视图，现在是一个
 
 1595
 01:05:04,873 --> 01:05:06,806
 it turned out to be an ImageView, so that's good.
+图片视图，非常好。
 
 1596
 01:05:06,808 --> 01:05:07,974
 That should be a question mark.
+这里应该是问号。
 
 1597
 01:05:09,344 --> 01:05:10,342
@@ -6390,18 +7900,22 @@ Okay?
 1598
 01:05:10,344 --> 01:05:12,878
 So now I have the ImageView, so now,
+我现在有了图片视图。
 
 1599
 01:05:12,880 --> 01:05:16,348
 if I can let the imageData equal an NSData, okay,
+然后写if let imageData = NSData
 
 1600
 01:05:16,350 --> 01:05:21,118
-I'm gonna block domains right here, contentsOfURL.
+I'm gonna block main thread right here, contentsOfURL.
+这里我要阻塞主线程了，contentsOfURL
 
 1601
 01:05:21,120 --> 01:05:23,954
 And this is the waypoints thumbnailURL.
+这里是waypoints.thumbnailURL
 
 1602
 01:05:23,956 --> 01:05:25,622
@@ -6410,22 +7924,27 @@ Okay?
 1603
 01:05:25,624 --> 01:05:28,858
 This is blocks main thread!
+阻塞了主线程。
 
 1604
 01:05:28,860 --> 01:05:31,027
 Yikes, fix that someday.
+一会儿再修复它。
 
 1605
 01:05:31,029 --> 01:05:35,497
 If let image equals the UIImage with that data.
+如果image等于这个data转换的UIImage。
 
 1606
 01:05:35,499 --> 01:05:40,101
 So if I get all the way down here, then I can say that
+到最下边，我可以写
 
 1607
 01:05:40,103 --> 01:05:45,172
 the thumbnailImageViews.image equals that image.
+thumbnailImageViews.image = image。
 
 1608
 01:05:45,174 --> 01:05:48,275
@@ -6434,30 +7953,37 @@ Okay?
 1609
 01:05:48,277 --> 01:05:50,277
 All right, does every one understands all these
+大家都明白这一大堆if let
 
 1610
 01:05:50,279 --> 01:05:51,745
 if lets here, to get down there.
+了吗？
 
 1611
 01:05:53,314 --> 01:05:55,881
 And what do we have to initiate here with contentsURL
+contentsURL这里出了
 
 1612
 01:05:55,883 --> 01:05:57,950
 waypoint.thumbnailURL, oh, sorry.
+什么错误？
 
 1613
 01:05:57,952 --> 01:06:01,353
 [INAUDIBLE] Exclamation point, now I can unwrap this here,
+感叹号，现在我可以解包这个可选值了。
 
 1614
 01:06:01,355 --> 01:06:04,723
 because I wouldn't even be in this situation of having this
+因为如果我没检查缩略图的URL是否存在，我就没
 
 1615
 01:06:04,725 --> 01:06:07,258
 leftCalloutAccessory if I hadn't checked
+必要去建立这个左辅助视图了。
 
 1616
 01:06:07,260 --> 01:06:08,693
@@ -6470,154 +7996,192 @@ Okay?
 1618
 01:06:11,363 --> 01:06:13,763
 All right, so, let's give it a go here.
+咱们来跑一下，
 
 1619
 01:06:13,765 --> 01:06:20,136
 Now, let's run this.
+运行一下看看。
 
 1620
 01:06:20,138 --> 01:06:21,970
 >> [COUGH]. >> See if this is working.
+看看能不能行。
 
 1621
 01:06:21,972 --> 01:06:25,307
 There's our pins here, so let's try this,
+这是我们的大头针，试着点一下，
 
 1622
 01:06:25,309 --> 01:06:28,976
 and sure enough, now we have this little Image View for
+现在我们可以看见那个小的
 
 1623
 01:06:28,978 --> 01:06:30,444
 all of these things.
+图片视图了。
 
 1624
 01:06:30,446 --> 01:06:35,349
 Now, this in some ways, has kind of made us
+因为可以看见图片，这让我们在某种程度上感到
 
 1625
 01:06:35,351 --> 01:06:38,051
 happy because we can see this image, but in some ways,
+满意，但是从另一个方面来讲，可能体验会更差，
 
 1626
 01:06:38,053 --> 01:06:42,121
 it's made it worse because we got these cool images here,
+因为我们在这看见了这些非常酷的图片，这让我们更
 
 1627
 01:06:42,123 --> 01:06:46,092
 and we'd really love to see them bigger, right?
+希望看见大图。
 
 1628
 01:06:46,094 --> 01:06:47,426
 So, what we really wanna be able to do is
+所以我们现在特别想做的事儿就是可以点击
 
 1629
 01:06:47,428 --> 01:06:49,194
 click on this Callout View and
+标识视图，然后跳转到一个
 
 1630
 01:06:49,196 --> 01:06:53,331
 segue to an Image View that's gonna show us these images
+图片视图去展示这些图片的放大版。
 
 1631
 01:06:53,333 --> 01:06:56,501
 much larger, so we can scroll around and zoom in on them.
+这样我们就可以拖动缩放大图了。
 
 1632
 01:06:56,503 --> 01:06:59,770
 We're going to put a little button right here, okay.
+我们希望在这放置一个小按钮。
 
 1633
 01:06:59,772 --> 01:07:02,172
 It's gonna be a detail disclosure button.
+一个显示详细信息的按钮。
 
 1634
 01:07:02,174 --> 01:07:04,708
 And we're gonna use that map view delegate method that
+当我们点击一个带有按钮的标识视图的时候，一个地图视图的
 
 1635
 01:07:04,710 --> 01:07:08,178
 gets called when you tap on a Callout that has a button in
+代理方法就会被调用，
 
 1636
 01:07:08,180 --> 01:07:11,948
 there, and it's going to segue, so let's do that.
+然后做一个跳转，我们现在做这个。
 
 1637
 01:07:11,950 --> 01:07:14,550
 First we gotta add that little button, so we do that the same
+首先我们要先加一个按钮，就写在我们刚才
 
 1638
 01:07:14,552 --> 01:07:17,252
 place up here where we did the leftCalloutAccessory.
+初始化左辅助视图的地方。
 
 1639
 01:07:17,254 --> 01:07:18,954
 We're gonna
+这里先写
 
 1640
 01:07:18,955 --> 01:07:20,655
 do rightCalloutAccessoryView equals nil.
+右辅助视图为空。
 
 1641
 01:07:20,657 --> 01:07:24,159
 And if we can let, oh, sorry, we can do,
+然后if let，对不起
 
 1642
 01:07:24,161 --> 01:07:28,362
 we'll use that if twice so let's put it up there.
+我们要用这个if两次所以先放在这。
 
 1643
 01:07:28,364 --> 01:07:34,301
 So here we're also gonna say if the waypoints.imageURL
+如果 waypoints.imageURL不为空，
 
 1644
 01:07:34,303 --> 01:07:40,373
 is not nil then we will let the rightCalloutAccessoryView
+那么我们就把右辅助视图设置为
 
 1645
 01:07:40,375 --> 01:07:44,209
 equal UIButton.buttonWithType,
+UIButton.buttonWithType
 
 1646
 01:07:44,211 --> 01:07:48,179
 UIButtonType.DetailDisclosure.
+按钮类型是UIButtonType.DetailDisclosure。
 
 1647
 01:07:48,181 --> 01:07:50,048
 And you're not gonna believe this,
+你可能不相信，
 
 1648
 01:07:50,050 --> 01:07:53,517
 but you're gonna have to say here, as UIButton.
+但是这里需要写as UIButton。
 
 1649
 01:07:53,519 --> 01:07:56,353
 And that's because inexplicably,
+由于很难理解的原因，
 
 1650
 01:07:56,355 --> 01:07:59,623
 this method returns any object, okay?
+这个方法会返回anyObject。
 
 1651
 01:07:59,625 --> 01:08:02,625
 Don't ask me how that got in there.
+不要问我为什么，
 
 1652
 01:08:02,627 --> 01:08:05,795
 But UIButton.buttonWithType returns any object.
+UIButton.buttonWithType 确实返回 anyObject。
 
 1653
 01:08:05,797 --> 01:08:08,364
 So we have to cast it to a UIButton.
+我们需要转换成 UIButton。
 
 1654
 01:08:08,366 --> 01:08:10,733
 Otherwise, it won't even look like it's a UIView so,
+不然的话，它可能看起来就不像是一个视图。
 
 1655
 01:08:10,735 --> 01:08:12,267
 it's kinda bad but, there you go.
+这个比较奇怪，但是没办法。
 
 1656
 01:08:13,303 --> 01:08:14,653
@@ -6626,30 +8190,37 @@ And so now,
 1657
 01:08:14,654 --> 01:08:16,004
 let's do that method I was talking about before.
+现在咱们来实现我们前边说过的代理方法，
 
 1658
 01:08:16,006 --> 01:08:18,439
 The mapView method or the callout is called,
+辅助视图点击就会触发的方法。
 
 1659
 01:08:18,441 --> 01:08:21,008
 that is right here, the very top one.
+在这，找到了，最上面。
 
 1660
 01:08:21,010 --> 01:08:23,243
 CalloutAccessoryControlTapped.
+CalloutAccessoryControlTapped
 
 1661
 01:08:23,245 --> 01:08:25,945
 Okay, so this gets called whenever that callout gets
+这个方法会在标识视图被点击
 
 1662
 01:08:25,947 --> 01:08:27,980
 tapped on with that thing in there.
+的时候调用。
 
 1663
 01:08:27,982 --> 01:08:32,484
 And inside here, we need to essentially segue.
+在这个方法里，我们需要跳转。
 
 1664
 01:08:32,486 --> 01:08:33,418
@@ -6658,34 +8229,42 @@ Right?
 1665
 01:08:33,420 --> 01:08:35,520
 And so how are we gonna segue?
+要怎么做这个跳转呢？
 
 1666
 01:08:35,522 --> 01:08:38,523
 Really, I should be checking here to make sure this is
+我们需要在这检查跳转到的我们
 
 1667
 01:08:38,525 --> 01:08:39,657
 really the one we want.
+需要的地方。
 
 1668
 01:08:39,658 --> 01:08:40,790
 But I'm just, in the interest of time,
+由于我们只有三分钟了，
 
 1669
 01:08:40,793 --> 01:08:42,226
 since we have three minutes left.
+我们就直接写吧。
 
 1670
 01:08:42,228 --> 01:08:44,161
 I'm just gonna show you how we would do the segue.
+直接给你们看我是怎么写这个跳转的。
 
 1671
 01:08:44,163 --> 01:08:46,696
 And we just say, performSegueWithIdentifier.
+我调用performSegueWithIdentifier方法。
 
 1672
 01:08:46,698 --> 01:08:49,399
 And we haven't talked too much about seguing from code.
+我们之前没怎么说过如何用代码做跳转。
 
 1673
 01:08:49,401 --> 01:08:50,934
@@ -6694,74 +8273,92 @@ Some of you
 1674
 01:08:50,935 --> 01:08:52,468
 did it in the extra credits of the assignments.
+我看到你们有些人在作业里这么写。
 
 1675
 01:08:52,470 --> 01:08:55,938
 And you might be doing it in your final project.
+你们可能需要在期末项目里用到这个。
 
 1676
 01:08:55,940 --> 01:08:58,106
 Which you just say, performSegueWithIdentifier.
+只需要调用performSegueWithIdentifier 。
 
 1677
 01:08:58,108 --> 01:09:01,376
 And you need to have the identifier that's gonna show
+这里需要一个跟你故事板里匹配
 
 1678
 01:09:01,378 --> 01:09:05,680
 up in the storyboard, which I'm gonna call ShowImage.
+的标识，这里我有一个常量ShowImage。
 
 1679
 01:09:06,682 --> 01:09:08,982
 And the sender here can be anything you want.
+发送者传什么都行。
 
 1680
 01:09:08,984 --> 01:09:11,051
 But you really want it to kind of be the thing that is
+但是你需要传一个可以让跳转
 
 1681
 01:09:11,053 --> 01:09:12,885
 causing this segue to happen.
+正确发生的对象。
 
 1682
 01:09:12,887 --> 01:09:15,554
 Which here really the AnnotationView.
+在这里应该是注释点视图。
 
 1683
 01:09:15,556 --> 01:09:17,389
 So I'm gonna pass this AnnotationView,
+所以我这里传进来注释点视图。
 
 1684
 01:09:17,391 --> 01:09:18,557
 right here as the sender.
+作为发送者。
 
 1685
 01:09:19,526 --> 01:09:21,926
 Now, that's great.
+很好。
 
 1686
 01:09:21,928 --> 01:09:24,729
 Do that segue by name, but
+通过名字来跳转，
 
 1687
 01:09:24,731 --> 01:09:26,630
 where does the segue actually get created?
+但是我们这个跳转是在哪建立的呢？
 
 1688
 01:09:26,632 --> 01:09:28,598
 What's the source and destination?
+源头和目标是什么呢？
 
 1689
 01:09:28,600 --> 01:09:31,034
 And that, we still do in our storyboard.
+我们依然会在故事板里建。
 
 1690
 01:09:31,036 --> 01:09:33,836
 So if I go here to my storyboard.
+打开故事板。
 
 1691
 01:09:34,772 --> 01:09:38,007
 I still create the segue by Ctrl+dragging.
+我还是用ctrl + 拖拽来建立跳转。
 
 1692
 01:09:38,009 --> 01:09:38,908
@@ -6770,26 +8367,32 @@ Okay?
 1693
 01:09:38,909 --> 01:09:39,808
 So let's get imageView.
+我们需要一个图片视图。
 
 1694
 01:09:39,810 --> 01:09:41,109
 I'm gonna steal it from Cassini.
+我要从Cassini里偷一个。
 
 1695
 01:09:41,111 --> 01:09:43,444
 Let's go back over to Cassini here.
+咱们回来找 Cassini 。
 
 1696
 01:09:44,647 --> 01:09:46,947
 We'll go, open up Cassini.
+在这，打开 Cassini。
 
 1697
 01:09:46,949 --> 01:09:48,782
 Let's grab its ImageView first,
+让我们先把图片视图拷贝过来。
 
 1698
 01:09:48,784 --> 01:09:50,450
 it's imageViewController.
+这是图片视图控制器。
 
 1699
 01:09:50,452 --> 01:09:51,718
@@ -6798,50 +8401,62 @@ All right.
 1700
 01:09:51,720 --> 01:09:55,388
 Let's get this showing its navigator too.
+打开文件导航。
 
 1701
 01:09:55,390 --> 01:09:58,157
 All right, so I'm gonna grab the ImageViewController and
+我现在把图片视图控制器拖
 
 1702
 01:09:58,159 --> 01:09:59,175
 bring that in.
+过来。
 
 1703
 01:09:59,176 --> 01:10:00,192
 It's kind of a supporting file.
+放到我们的supporting file里。
 
 1704
 01:10:00,194 --> 01:10:01,993
 Copy that in.
+拷贝进来。
 
 1705
 01:10:01,995 --> 01:10:06,297
 I'm also gonna open up Cassini storyboard and
+我还需要打开 Cassini的故事板找到
 
 1706
 01:10:06,299 --> 01:10:09,199
 find everything, here it is.
+它，在这呢。
 
 1707
 01:10:09,201 --> 01:10:12,302
 I'm gonna take this UIViewController, right here.
+我需要这个视图控制器。
 
 1708
 01:10:12,304 --> 01:10:14,237
 And I'm actually going to copy and
+我现在要把它复制粘贴到
 
 1709
 01:10:14,239 --> 01:10:16,472
 paste it into my storyboard.
+我的故事板里。
 
 1710
 01:10:17,809 --> 01:10:18,640
 Where is my storyboard?
+我的故事板呢？
 
 1711
 01:10:18,642 --> 01:10:21,576
 I threw a board down here.
+记得在这。
 
 1712
 01:10:21,578 --> 01:10:23,078
@@ -6850,126 +8465,157 @@ Okay?
 1713
 01:10:23,079 --> 01:10:24,579
 So I go in here and paste it.
+粘贴进来。
 
 1714
 01:10:24,581 --> 01:10:25,646
 Let's see if we can find it.
+缩小一下看能不能找到。
 
 1715
 01:10:26,683 --> 01:10:28,415
 There it is, okay?
+在这，找到了。
 
 1716
 01:10:28,417 --> 01:10:31,151
 Now remember, copying and pasting between storyboard is
+在不同的故事板之前复制粘贴完全没问题，
 
 1717
 01:10:31,153 --> 01:10:33,153
 works because it's all done by name,
+因为它们都是通过名字记录的。
 
 1718
 01:10:33,155 --> 01:10:35,922
 the names of the classes, the names of the outlets,
+类的名字，outlet的名字。
 
 1719
 01:10:35,924 --> 01:10:36,989
 the name of all that stuff.
+所有东西的名字。
 
 1720
 01:10:36,991 --> 01:10:38,290
 So that will all work fine here.
+所以粘贴过来也可以正常工作。
 
 1721
 01:10:39,460 --> 01:10:41,993
 So now we just need to create the segue from this
+现在我只需要建一个从这里到
 
 1722
 01:10:41,995 --> 01:10:43,628
 ViewController to this one.
+这里的跳转。
 
 1723
 01:10:43,630 --> 01:10:46,664
 And we're executing it in code, so we don't have to
+然后通过代码触发跳转，所以我们就不必从一个
 
 1724
 01:10:46,666 --> 01:10:49,600
 Ctrl+drag from a button or something like that.
+按钮或者别的什么东西开始拖，
 
 1725
 01:10:49,602 --> 01:10:51,335
 We're gonna actually Ctrl+drag
+我们只需要从视图控制器这里
 
 1726
 01:10:51,337 --> 01:10:53,069
 from the ViewController itself.
+拖拽就可以了。
 
 1727
 01:10:53,071 --> 01:10:56,005
 So, I'm gonna Ctrl+drag from this button, right here,
+在这个按钮这ctrl + 拖拽，
 
 1728
 01:10:56,007 --> 01:10:58,641
 to this ViewController, and create a segue, okay?
+到这个视图控制器，建立一个跳转。
 
 1729
 01:10:58,643 --> 01:11:00,642
 It's a show segue.
+类型是show。
 
 1730
 01:11:00,644 --> 01:11:01,910
 I'm gonna inspect it,
+在检视器里找到它，
 
 1731
 01:11:01,912 --> 01:11:05,346
 and set its Identifier here to be Show Image.
+把标识设成Show Image。
 
 1732
 01:11:06,482 --> 01:11:10,417
 Which is the thing that I used over here in my code.
+就是我刚才在代码里用到的标志。
 
 1733
 01:11:10,419 --> 01:11:11,951
 Right? That's my Constant here,
+是我的一个常量。
 
 1734
 01:11:11,953 --> 01:11:13,052
 Show Image.
+Show Image
 
 1735
 01:11:13,054 --> 01:11:15,755
 So that's how you do a segue from code.
+这样就实现了用代码跳转。
 
 1736
 01:11:15,757 --> 01:11:20,058
 And there was no way for us to do it any other way, because
+事实上我们也没有别的办法，因为
 
 1737
 01:11:20,060 --> 01:11:23,561
 the little callouts aren't there in the storyboard, so
+标识视图不在我们的故事板里，我们不能
 
 1738
 01:11:23,563 --> 01:11:25,029
 I can't Ctrl+drag from them.
+从它们开始ctrl +  拖拽。
 
 1739
 01:11:25,031 --> 01:11:27,198
 So I have to drag from the whole View Controller, and
+所以我只能从整个视图控制器开始拖，
 
 1740
 01:11:27,200 --> 01:11:30,300
 then I use this perform segue with identifier
+然后我调用 performSegueWithIdentifier 这个方法
 
 1741
 01:11:30,302 --> 01:11:31,768
 to cause it to be fired off.
+触发跳转。
 
 1742
 01:11:31,770 --> 01:11:33,536
 Now this is a normal segue.
+这只是正常的跳转，
 
 1743
 01:11:33,538 --> 01:11:34,871
 We still have prepareForSegue.
+我们依然需要实现 prepareForSegue。
 
 1744
 01:11:34,873 --> 01:11:36,356
@@ -6978,70 +8624,87 @@ Okay?
 1745
 01:11:36,357 --> 01:11:37,840
 We still have to prepare for this segue.
+我们依然需要准备这个跳转。
 
 1746
 01:11:37,842 --> 01:11:39,475
 And so I'm gonna do that.
+我准备实现这个方法。
 
 1747
 01:11:39,477 --> 01:11:43,545
 I'm gonna say if the segue's identifier equals
+先要写，如果跳转的标识等于
 
 1748
 01:11:43,547 --> 01:11:46,314
 Constants.ShowImageSegue.
+Constants.ShowImageSegue
 
 1749
 01:11:47,350 --> 01:11:51,385
 Then if we can get a waypoint out of that view's annotation
+现在就要判断注释点是不是一个路点，
 
 1750
 01:11:51,387 --> 01:11:53,319
 so this watch this okay.
+注意看这里。
 
 1751
 01:11:53,321 --> 01:11:57,290
+Sender as MKAnnotationView.
 Sender as MKAnnotationView.
 
 1752
 01:11:57,292 --> 01:11:59,425
 So first, we've gotta see if this sender, right here,
+首先我们要检查这个发送者是不是一个
 
 1753
 01:11:59,427 --> 01:12:01,960
 is the MKAnnotationView, which it should be.
+MKAnnotationView，它应该是。
 
 1754
 01:12:01,962 --> 01:12:08,433
 If it is, question mark, annotation as a GPX.Waypoint.
+如果它是，加问号，as GPX.Waypoint。
 
 1755
 01:12:08,435 --> 01:12:10,001
 Okay? So we can do all that.
+可以一起做检查。
 
 1756
 01:12:10,003 --> 01:12:11,986
 Then we've got the waypoint.
+这里我们就得到了路点。
 
 1757
 01:12:11,987 --> 01:12:13,970
 So here you can see how this optional chaining.
+看到这些可选值是如何链接到一起的了吗？
 
 1758
 01:12:13,973 --> 01:12:16,040
 Starts with something you've got to be, learned to do.
+你应该开始学着这么去做，
 
 1759
 01:12:16,042 --> 01:12:17,107
 Otherwise, you have so
+要不然你就会写
 
 1760
 01:12:17,109 --> 01:12:19,476
 many if, lets all the time it's ridiculous.
+很多很多的if let，这样代码就比较丑。
 
 1761
 01:12:19,478 --> 01:12:22,078
 So you gotta be able to do this kind of thing.
+你们应该学着这么写。
 
 1762
 01:12:22,080 --> 01:12:23,780
@@ -7050,14 +8713,17 @@ And so
 1763
 01:12:23,781 --> 01:12:25,481
 waypoint here won't be nil if all that makes it through.
+这里路点不为空，后边我们就一直往下写。
 
 1764
 01:12:25,483 --> 01:12:29,118
 So I'm gonna then, if I can let my ivc equal
+if let ivc等于跳转的目标，
 
 1765
 01:12:29,120 --> 01:12:33,555
 Segue.destination as an ImageViewController.
+它应该是一个图片视图控制器。
 
 1766
 01:12:35,825 --> 01:12:37,008
@@ -7066,22 +8732,27 @@ Okay?
 1767
 01:12:37,009 --> 01:12:38,192
 Then, I'm going to just prepare it.
+那我们就准备它。
 
 1768
 01:12:38,194 --> 01:12:40,694
 So I'm gonna set its ivc.imageURL equal to
+把它的imageURL设置成
 
 1769
 01:12:40,696 --> 01:12:42,329
 the waypoints.imageURL.
+路点的imageURL 。
 
 1770
 01:12:42,331 --> 01:12:45,365
 And I'm also gonna set the image's title to be
+还要把图片的标题设置成
 
 1771
 01:12:45,367 --> 01:12:47,333
 the waypoint's title name.
+路点的标题，名字。
 
 1772
 01:12:47,335 --> 01:12:48,317
@@ -7090,38 +8761,47 @@ the waypoint's title name.
 1773
 01:12:48,318 --> 01:12:49,300
 So this is just normal prepare for
+就是很正常的跳转准备，
 
 1774
 01:12:49,303 --> 01:12:50,669
 segue here, nothing special.
+没有特殊的东西。
 
 1775
 01:12:52,306 --> 01:12:53,204
 Everyone understand that?
+大家都明白了吗？
 
 1776
 01:12:54,274 --> 01:12:56,841
 And the last thing I'm gonna do in the storyboard
+租后，我要在故事板里
 
 1777
 01:12:56,843 --> 01:12:58,742
 here is I'm gonna put all of this stuff
+把这些东西都放到
 
 1778
 01:12:58,744 --> 01:13:00,777
 in a Navigation Controller.
+导航控制器里。
 
 1779
 01:13:00,779 --> 01:13:03,313
 So, I'm gonna embed in Navigation Controller.
+把它们嵌入导航控制器。
 
 1780
 01:13:03,315 --> 01:13:05,882
 All right, so this is what our storyboard looks like,
+好了，现在我们的故事板就是这个样子的。
 
 1781
 01:13:05,884 --> 01:13:07,383
 right here.
+在这。
 
 1782
 01:13:07,385 --> 01:13:09,402
@@ -7130,78 +8810,97 @@ Okay?
 1783
 01:13:09,403 --> 01:13:11,420
 So, now when we click on those little Callouts,
+现在如果我们点击标识视图，
 
 1784
 01:13:11,422 --> 01:13:13,121
 it's going to do this segue, and
+就应该触发这个跳转，
 
 1785
 01:13:13,123 --> 01:13:16,725
 cause Image View to come up with the waypoint's image.
+图片视图就会弹出来显示路点的图片。
 
 1786
 01:13:16,727 --> 01:13:17,892
 So, let's take a look at that.
+咱们来试试。
 
 1787
 01:13:21,564 --> 01:13:22,863
 All right, here we go.
+运行一下。
 
 1788
 01:13:22,865 --> 01:13:26,065
 So, let's go find a nice interesting image here.
+现在找一张图片。
 
 1789
 01:13:27,435 --> 01:13:29,435
 Maybe this guy, right here.
+这个吧，就这个。
 
 1790
 01:13:29,437 --> 01:13:30,469
 Okay, nice tracks.
+nice tracks
 
 1791
 01:13:30,471 --> 01:13:32,070
 So, I'm just gonna click on here.
+我点这里，
 
 1792
 01:13:32,072 --> 01:13:34,138
 You actually don't even have to click right on here.
+实际上不用点这个按钮，
 
 1793
 01:13:34,140 --> 01:13:35,840
 I think if you click anywhere in the Callout,
+点标识视图哪里都可以。
 
 1794
 01:13:35,842 --> 01:13:37,492
 it tends to work.
+就应该可以跳转。
 
 1795
 01:13:37,493 --> 01:13:39,143
 And you can see that it has segue,
+看到了吗？它跳转了。
 
 1796
 01:13:39,145 --> 01:13:41,745
 not your Image Views are much nicer than mine.
+你自己的图片视图应该比我的好看。
 
 1797
 01:13:41,747 --> 01:13:44,481
 Okay, you get rid of the white space and all that stuff.
+我这里白边太多了。
 
 1798
 01:13:44,483 --> 01:13:45,581
 But it looks like that.
+大概就是这样。
 
 1799
 01:13:45,583 --> 01:13:50,119
 We could go, let's go out to this one or
+我们再找一个，
 
 1800
 01:13:50,121 --> 01:13:51,720
 maybe, what's a better one?
+这个怎么样？
 
 1801
 01:13:51,722 --> 01:13:54,055
 How about, I think this is a good one.
+我觉得这个应该不错。
 
 1802
 01:13:54,057 --> 01:13:56,408
@@ -7210,27 +8909,34 @@ Yeah.
 1803
 01:13:56,409 --> 01:13:58,760
 So this trip was a helicopter skiing trip.
+直升机滑雪旅行。
 
 1804
 01:13:58,762 --> 01:13:59,860
 There's the helicopter coming in.
+看到直升机了。
 
 1805
 01:14:01,497 --> 01:14:02,963
 So that's it.
+就是这样。
 
 1806
 01:14:02,965 --> 01:14:07,200
 Does everyone make sense there, what's going on?
+大家都理解这些内容了吗？
 
 1807
 01:14:07,202 --> 01:14:08,868
 All right, that's it for Maps.
+好，以上就是关于地图的内容。
 
 1808
 01:14:08,870 --> 01:14:11,570
 See you next week.
+下周见。
 
 1809
 01:14:11,572 --> 01:14:11,603
 >> For more, please visit us at stanford.edu
+更多信息请访问 stanford.edu

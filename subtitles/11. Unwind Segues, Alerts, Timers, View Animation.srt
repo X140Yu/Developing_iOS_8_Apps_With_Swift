@@ -6479,150 +6479,187 @@ Next topic, NSTimer.
 1303
 00:50:33,353 --> 00:50:35,853
 So NSTimer is a way to set up a timer
+NSTimer 是一种设置定时器的东西
 
 1304
 00:50:35,855 --> 00:50:40,090
 that will call a method periodically, okay?
+可以周期性地调用一个方法
 
 1305
 00:50:40,092 --> 00:50:42,358
 Now, it uses technology called RunLoop,
+它使用的技术叫做 RunLoop
 
 1306
 00:50:42,360 --> 00:50:43,859
 which we're not going to talk about.
+我们不会讲这个东西
 
 1307
 00:50:43,861 --> 00:50:47,196
 So suffice it to say, for you, in this course,
+在这个课堂中，对于你们来说只要知道
 
 1308
 00:50:47,198 --> 00:50:50,432
 you always have to use timers on the main queue, okay?
+永远在主队列中使用定时器就行了
 
 1309
 00:50:50,434 --> 00:50:52,334
 Because the main queue has a run loop.
+因为主队列有 run loop
 
 1310
 00:50:52,336 --> 00:50:54,268
 You can actually have run loops on other queues,
+你其实可以在其他队列使用 run loop
 
 1311
 00:50:54,270 --> 00:50:56,737
 other threads, but we're not gonna talk about that.
+在其他线程，但我们不会讲这个东西
 
 1312
 00:50:56,739 --> 00:51:01,308
 So, main queue for you, NSTimer main queue.
+所以主队列，NSTimer 主队列
 
 1313
 00:51:01,310 --> 00:51:06,379
 And, so this timer, it's not really a real-time timer.
+而且，这个定时器，其实并不是实时的计时器
 
 1314
 00:51:06,381 --> 00:51:08,748
 If you say go off every two seconds,
+你写每两秒启动一次
 
 1315
 00:51:08,750 --> 00:51:12,250
 it's not going to go off every 2.00000 seconds.
+它其实并不会每2.00000秒执行一次
 
 1316
 00:51:12,252 --> 00:51:13,284
 And why is that?
+这是为什么呢？
 
 1317
 00:51:13,286 --> 00:51:16,154
 Because basically it's just putting things,
+因为它只是放置事件
 
 1318
 00:51:16,156 --> 00:51:19,056
 it's kind of like it's putting things on the main queue but
+就像它放置一些事件在主队列中，
 
 1319
 00:51:19,058 --> 00:51:20,958
 not, not quite the same.
+不，也不完全一样
 
 1320
 00:51:20,960 --> 00:51:23,827
 The runloop helps process things that are happening,
+runloop 会帮助执行让事件发生
 
 1321
 00:51:23,829 --> 00:51:27,864
 like interrupts or data that becomes available or whatever.
+就像打断或者数据有效或者其他
 
 1322
 00:51:27,866 --> 00:51:29,765
 And it can't run in real-time,
+但它不能实时执行
 
 1323
 00:51:29,767 --> 00:51:32,501
 because other things are on the main queue running.
+因为其他的事件也在主队列中执行
 
 1324
 00:51:32,503 --> 00:51:33,852
 Okay? Other
+其他的代码
 
 1325
 00:51:33,853 --> 00:51:35,202
 blocks of code and stuff.
+或者什么东西
 
 1326
 00:51:35,205 --> 00:51:36,838
 So we can't quite guarantee it.
+所以我们不能保证
 
 1327
 00:51:36,840 --> 00:51:38,072
 But it has a high priority, so,
+但它确实有很高的优先级，所以
 
 1328
 00:51:38,074 --> 00:51:40,741
 as soon as the main queue becomes available, after
+只要主队列空闲下来了
 
 1329
 00:51:40,743 --> 00:51:44,178
 2.0000 seconds has happened, it's gonna call your method.
+在2.000000秒之后，它就会调用你的方法
 
 1330
 00:51:44,180 --> 00:51:46,413
 Okay, but it's not a real time programming thing.
+但这确实不是实时编码的
 
 1331
 00:51:46,415 --> 00:51:49,015
 I mentioned that for those of you who are like systems
+我提起这个是为了那些喜欢研究系统的并且
 
 1332
 00:51:49,017 --> 00:51:51,651
 OS people and you're used to real time API.
+熟悉实时 API 的人
 
 1333
 00:51:51,653 --> 00:51:53,386
 This is not real time but it's really, really,
+这不是实时的，但它确实非常非常
 
 1334
 00:51:53,388 --> 00:51:55,188
 really close to real time.
+非常接近实时
 
 1335
 00:51:55,189 --> 00:51:56,989
 As long as you don't have any big things on your main queue
+不要在你的主队列中处理一些笨重的
 
 1336
 00:51:56,991 --> 00:52:00,058
 that are blocking it up which you shouldn't have any
+会阻塞线程的事件，这样就没有
 
 1337
 00:52:00,060 --> 00:52:00,792
 way, right?
+什么办法了
 
 1338
 00:52:00,794 --> 00:52:03,594
 Never block your main queue.
+永远不要阻塞你的主线程
 
 1339
 00:52:03,596 --> 00:52:06,330
 Then your timer's pretty much gonna run when you want.
+那么你的定时器基本上就会按照你期待的方式运行
 
 1340
 00:52:06,332 --> 00:52:07,965
@@ -6631,74 +6668,92 @@ Okay?
 1341
 00:52:07,966 --> 00:52:09,599
 Now this is not used for animation.
+这也并不是用来制作动画的
 
 1342
 00:52:09,602 --> 00:52:12,602
 We're going to talk all about animation later today and
+我们待会以及下周一整周
 
 1343
 00:52:12,604 --> 00:52:13,603
 all of next week.
+都会讲动画
 
 1344
 00:52:13,605 --> 00:52:15,238
 And your assignment five is
+而且你的第五个任务也完全是
 
 1345
 00:52:15,240 --> 00:52:16,939
 going to be all about animation.
+与动画相关的
 
 1346
 00:52:16,941 --> 00:52:19,775
 Timer is more like a complement to animation.
+但定时器对于动画来说更像一个补充的东西
 
 1347
 00:52:19,777 --> 00:52:21,843
 Because when you're animating things sometimes you do want
+当你在执行动画的时候，你想要
 
 1348
 00:52:21,845 --> 00:52:23,395
 to do things.
+做一些其他的事情
 
 1349
 00:52:23,396 --> 00:52:24,946
 Something every second or every two seconds.
+一些每秒或每两秒执行的事
 
 1350
 00:52:24,948 --> 00:52:26,080
 You're really not going to be, like,
+但你不会
 
 1351
 00:52:26,082 --> 00:52:28,282
 doing something every 60th of a second.
+每六十分之一秒做一次
 
 1352
 00:52:28,284 --> 00:52:29,049
 Okay? 60 frames per
+六十帧每秒
 
 1353
 00:52:29,051 --> 00:52:30,901
 second animation,
+的动画
 
 1354
 00:52:30,902 --> 00:52:32,752
 you'd never do that with a timer, it's not for that.
+你永远也不要通过定时器来做这个，它并不是用来做这个的
 
 1355
 00:52:32,755 --> 00:52:33,871
 Okay?
+好吗
 
 1356
 00:52:33,872 --> 00:52:34,988
 It's just for things like, maybe,
+它只是用来，比如
 
 1357
 00:52:34,990 --> 00:52:38,524
 you have something where you have a score in a game and
+你在游戏中有一个什么比分
 
 1358
 00:52:38,526 --> 00:52:40,593
 you update the score every second.
+你需要每秒更新一次
 
 1359
 00:52:40,595 --> 00:52:42,061
@@ -6707,82 +6762,102 @@ Okay?
 1360
 00:52:42,062 --> 00:52:43,528
 So that you're not constantly changing it,
+这样不需要自己频繁地去改变
 
 1361
 00:52:43,531 --> 00:52:44,763
 something like that.
+类似这样
 
 1362
 00:52:44,765 --> 00:52:46,631
 It's that kind of thing.
+这种事
 
 1363
 00:52:46,633 --> 00:52:47,965
 It's used for that kinda thing.
+它是用来做这种事的
 
 1364
 00:52:47,967 --> 00:52:50,067
 So run loops we're not going to talk about that.
+所以我们不会讲到 run loop
 
 1365
 00:52:50,069 --> 00:52:52,336
 Okay so how do you fire off one of these timers?
+你怎么知道如何启动其中一个定时器呢
 
 1366
 00:52:52,338 --> 00:52:54,738
 How do you make it work?
+你怎么才能让它生效？
 
 1367
 00:52:54,739 --> 00:52:57,139
 Well you do it with a class function in NSTimer.
+你只需要调用 NSTimer 的一个类方法
 
 1368
 00:52:57,142 --> 00:53:00,710
 It's called a scheduled timer with time interval.
+叫做 scheduledTimerWithTimeInterval
 
 1369
 00:53:00,712 --> 00:53:02,695
 Now be careful.
+注意
 
 1370
 00:53:02,696 --> 00:53:04,679
 There are four methods in NSTime but it looked very,
+在 NSTimer 中有四个方法，但它们长得
 
 1371
 00:53:04,682 --> 00:53:05,914
 very similar to this.
+和这个很像
 
 1372
 00:53:05,916 --> 00:53:08,033
 Okay? But
+但
 
 1373
 00:53:08,034 --> 00:53:10,151
 this is the one you want with this set of arguments [SOUND].
+这才是你需要的
 
 1374
 00:53:10,154 --> 00:53:11,986
 And the arguments are just,
+它的参数就是
 
 1375
 00:53:11,988 --> 00:53:15,323
 the first one is how many seconds between firings?
+第一个就是启动的间隔时间
 
 1376
 00:53:15,325 --> 00:53:18,159
 How many seconds do you want to wait each time before you
+你希望它在调用了一次方法之后，等待多少秒
 
 1377
 00:53:18,161 --> 00:53:19,893
 call this method again?
+再调用这个方法
 
 1378
 00:53:19,895 --> 00:53:22,462
 The target is, who you gonna send the message to?
+target 是，你希望向谁发送消息
 
 1379
 00:53:22,464 --> 00:53:24,831
 It can be any object.
+它可以是任何对象
 
 1380
 00:53:24,833 --> 00:53:27,867
@@ -6791,202 +6866,252 @@ Okay?
 1381
 00:53:27,868 --> 00:53:30,902
 Remember, any object is not a struct or an enum.
+记住，任何对象不是指 struct 或者 enum
 
 1382
 00:53:30,905 --> 00:53:36,008
 Although, things like string and number, those are.
+虽然像 string 和 number 这种他们是
 
 1383
 00:53:36,010 --> 00:53:38,209
 You're not gonna solve puzzles anyway but
+但你不能这样做
 
 1384
 00:53:38,211 --> 00:53:40,878
 those are essentially any object because they're
+它们本质上是 anyObject 这是由于它们与 NSString
 
 1385
 00:53:40,880 --> 00:53:42,346
 bridging over to NS String.
+有桥接
 
 1386
 00:53:42,348 --> 00:53:44,715
 But anyway, any object, okay, is any object,
+除此之外，任何对象，anyObject
 
 1387
 00:53:44,717 --> 00:53:47,984
 any class basically, and then selector is just
+基本上任何类，然后 selector 是
 
 1388
 00:53:47,986 --> 00:53:52,255
 the method to call when the timer goes off.
+你需要定时器执行的方法
 
 1389
 00:53:52,257 --> 00:53:54,924
 User info is just like a cookie that you can
+userInfo 就类似于 cookie，你可以
 
 1390
 00:53:54,926 --> 00:53:57,493
 hand off here and then every time it fires you'll be giving
+在这里存入，然后每次调用的时候，你都可以
 
 1391
 00:53:57,495 --> 00:53:58,860
 that thing back.
+把它取回来
 
 1392
 00:53:58,862 --> 00:54:01,429
 So, it's just kind of a way of passing this argument off
+这样就可以传递参数
 
 1393
 00:54:01,431 --> 00:54:04,332
 to your, so you don't have to keep it in a class,
+你不需要把它保存在类中
 
 1394
 00:54:04,334 --> 00:54:06,100
 in a variable in your class or anything like that.
+以变量的形式存在你的类中，或者其他的方法
 
 1395
 00:54:06,102 --> 00:54:07,334
 You can just hand it off.
+你可以只是存进去
 
 1396
 00:54:07,336 --> 00:54:09,703
 It's like context for the timer.
+就像定时器的上下文
 
 1397
 00:54:09,705 --> 00:54:13,239
 And then repeat is whether this thing just does it once,
+然后 repeat 就是这个定时器是否只执行一次
 
 1398
 00:54:13,241 --> 00:54:16,442
 or it keeps doing it every however many seconds.
+还是每隔几秒执行一次
 
 1399
 00:54:16,444 --> 00:54:19,111
 Is it a repeating timer, or is it just a one time
+它是重复执行的定时器还是只在未来执行
 
 1400
 00:54:19,113 --> 00:54:22,348
 do something in the future, and I showed you a way to do
+一次任务，上次我用 dispatch 向你展示了一种
 
 1401
 00:54:22,350 --> 00:54:25,450
 one time thing in the future with dispatch last time, so
+在未来只执行一次任务的的方法
 
 1402
 00:54:25,452 --> 00:54:27,552
 this will be another way to do something once.
+这是另一个在未来执行的方法
 
 1403
 00:54:29,389 --> 00:54:30,788
 Here's an example of calling it.
+这里有一个使用的例子
 
 1404
 00:54:30,790 --> 00:54:32,289
 So here I have a timer.
+我有一个定时器
 
 1405
 00:54:32,291 --> 00:54:34,157
 It's gonna go off every two seconds.
+它会每隔两秒调用一次
 
 1406
 00:54:34,159 --> 00:54:37,126
 It's gonna send this message to myself called fire.
+它会每隔两秒向自身发送一次消息
 
 1407
 00:54:37,128 --> 00:54:40,296
 Notice that, that method can be any name you want,
+注意，这个方法可以是任何你想要的方法
 
 1408
 00:54:40,298 --> 00:54:42,197
 except it has to have a colon there,
+除了，你必须在这里加上一个冒号
 
 1409
 00:54:42,199 --> 00:54:44,499
 because it's going to have an argument.
+因为它需要一个参数
 
 1410
 00:54:44,501 --> 00:54:46,434
 I told you that when you're specifying the name of
+之前我有提到过，当你需要指定一个方法的时候
 
 1411
 00:54:46,436 --> 00:54:48,936
 a method, if it has an argument,
+如果它有参数
 
 1412
 00:54:48,938 --> 00:54:50,237
 you have to put a colon on the end.
+那么你就必须添加一个冒号在最后
 
 1413
 00:54:51,407 --> 00:54:52,773
 OK. Otherwise it
+否则
 
 1414
 00:54:52,775 --> 00:54:56,609
 thinks it's the method fire without an argument.
+它会去执行没有参数的方法
 
 1415
 00:54:56,611 --> 00:54:58,678
 And then userInfo on passing nil.
+那么 userInfo 就不会被传递
 
 1416
 00:54:58,680 --> 00:55:00,713
 I don't really want any information,
+我确实不需要什么信息
 
 1417
 00:55:00,715 --> 00:55:03,682
 I could pass anything, any object I wanted there.
+我可以传入任何我想要的参数，任何对象
 
 1418
 00:55:03,684 --> 00:55:05,583
 And then repeats equals true means it's going to fire
+repeats = true 意思是它会每隔
 
 1419
 00:55:05,585 --> 00:55:06,918
 every two seconds.
+两秒执行一次
 
 1420
 00:55:06,919 --> 00:55:08,252
 It's going to fire in two seconds from now, and
+它会从现在开始两秒执行一次
 
 1421
 00:55:08,254 --> 00:55:10,054
 two seconds after that, and two seconds after that.
+两秒后再执行一次，过两秒再执行
 
 1422
 00:55:11,290 --> 00:55:14,658
 Repeat it forever until I invalidate it, okay?
+一直不断重复直到我销毁了它
 
 1423
 00:55:14,660 --> 00:55:17,627
 So let's look now at the fire timer thing.
+让我们来看看执行定时器的东西
 
 1424
 00:55:17,629 --> 00:55:19,162
 It looks like this.
+它看起来像这样
 
 1425
 00:55:19,164 --> 00:55:22,665
 You can basically do whatever you want in there.
+你可以在里面做任何事情
 
 1426
 00:55:22,667 --> 00:55:24,033
 You're on the main queue so
+你在主队列，所以
 
 1427
 00:55:24,035 --> 00:55:26,368
 you can do UI in here or whatever.
+你可以设置 UI 或者其他的事
 
 1428
 00:55:26,370 --> 00:55:28,436
 If you pass some user info, you can get it
+如果你传入了 userInfo，那么你可以通过
 
 1429
 00:55:28,438 --> 00:55:32,006
 out of the timer by saying the timer.userinfo.
+定时器得到，使用 timer.userInfo
 
 1430
 00:55:32,008 --> 00:55:35,309
 Now you've got that info.
+现在你就获得了那个信息
 
 1431
 00:55:35,311 --> 00:55:36,811
@@ -6995,22 +7120,27 @@ Okay?
 1432
 00:55:36,812 --> 00:55:38,312
 Super simple to use these timers.
+使用定时器非常简单
 
 1433
 00:55:38,314 --> 00:55:40,480
 If you wanna stop a timer that's repeating,
+如果你想要让定时器停止重复
 
 1434
 00:55:40,482 --> 00:55:42,215
 it's going off every two seconds and you wanna stop it,
+它会每隔两秒执行一次，而你想要停止
 
 1435
 00:55:42,217 --> 00:55:43,850
 you just send it the message, invalidate.
+你只需要向它发送一个消息，销毁
 
 1436
 00:55:43,852 --> 00:55:47,119
 If you say timer.invalidate, it will stop.
+如果你调用 timer.invalidate 它就会停止
 
 1437
 00:55:48,822 --> 00:55:49,387
@@ -7019,18 +7149,22 @@ Okay?
 1438
 00:55:49,389 --> 00:55:52,924
 Another thing you can do to make your system perform
+你还可以通过使用 tolerance 来让系统性能
 
 1439
 00:55:52,926 --> 00:55:54,692
 better is put a tolerance in there.
+更好一些
 
 1440
 00:55:54,694 --> 00:55:57,394
 What a tolerance says, is if my two, if I'm
+tolerance 的作用是，比如我
 
 1441
 00:55:57,396 --> 00:56:00,997
 setting something to go off every two minutes let's say.
+设置了一个定时器它会每两分钟执行一次
 
 1442
 00:56:00,999 --> 00:56:02,832
@@ -7039,118 +7173,147 @@ Okay?
 1443
 00:56:02,833 --> 00:56:04,666
 When the two minutes is up do I have to do it right away?
+当两分钟到了它会立刻执行对吧？
 
 1444
 00:56:04,669 --> 00:56:07,103
 Or can I wait five or ten seconds?
+或者我可以等待五或者十秒
 
 1445
 00:56:07,105 --> 00:56:08,871
 If you let the system wait five or
+如果你让系统等待五或者十秒
 
 1446
 00:56:08,873 --> 00:56:12,007
 ten seconds, it could pick an optimal time to call your,
+它会选择一个时间来调用你
 
 1447
 00:56:12,009 --> 00:56:15,276
 a more optimal time, anyway, to call your timer.
+在一个更合适的时间，来执行你的定时器
 
 1448
 00:56:15,278 --> 00:56:18,846
 So, my strong recommendation is, try to give a tolerance.
+所以我的建议是使用 tolerance
 
 1449
 00:56:18,848 --> 00:56:20,815
 A tolerance is just a number of seconds that you're
+tolerance 只是设置一个以秒为单位的时间
 
 1450
 00:56:20,817 --> 00:56:22,850
 willing to wait after it would normally fire.
+在执行事件之前的等待
 
 1451
 00:56:22,852 --> 00:56:26,920
 Try to give a tolerance of like maybe 10% of your timer.
+尝试给 tolerance 比如定时器十分之一的时间
 
 1452
 00:56:26,922 --> 00:56:28,354
 So if you have a two second timer,
+比如你有一个2秒的定时器
 
 1453
 00:56:28,356 --> 00:56:29,855
 give it a tolerance of 0.2 seconds or
+给它的 tolerance 0.2 秒或者
 
 1454
 00:56:29,857 --> 00:56:32,741
 something like that.
+类似的值
 
 1455
 00:56:32,742 --> 00:56:35,626
 It'll let the system pick a more efficient time to run.
+这样会让系统选择一个更为高效的时间来执行
 
 1456
 00:56:35,629 --> 00:56:40,298
 Like, for example, if your app, we didn't
+举个例子，如果你的应用
 
 1457
 00:56:40,300 --> 00:56:43,801
 really explain how this works, but your device can kind of
+我们没有解释到底这个是怎么工作的
 
 1458
 00:56:43,803 --> 00:56:46,270
 go to sleep a little bit when nothing's happening.
+但如果你的应用可以在没有事情的时候闲置一下
 
 1459
 00:56:46,272 --> 00:56:49,139
 Nothing's drawing on screen, no network activity.
+没有在屏幕上画图，没有发送网络请求
 
 1460
 00:56:49,141 --> 00:56:51,941
 So it can kind of go into a little lower power state, and
+这样系统就可以进入一个短暂的低功耗状态
 
 1461
 00:56:51,943 --> 00:56:54,410
 then it comes back awake every once in awhile.
+然后它每隔一会就会恢复
 
 1462
 00:56:54,412 --> 00:56:56,545
 Well, if you give it a little tolerant,
+所以如果你设置了一会 tolerant
 
 1463
 00:56:56,547 --> 00:56:59,148
 it might be able to kind of go into that low power state and
+系统就可以进入低功耗状态
 
 1464
 00:56:59,150 --> 00:57:01,883
 then come back up in that little window.
+然后再回来
 
 1465
 00:57:01,885 --> 00:57:03,969
 But if you don't give it a tolerance,
+如果你不设置 tolerance
 
 1466
 00:57:03,970 --> 00:57:06,054
 it might have to stay awake to make sure it hits that timer,
+那么它就会一直保持唤醒的状态，以确保定时器的触发
 
 1467
 00:57:06,056 --> 00:57:06,754
 the one you wanted.
+就像你想的那样
 
 1468
 00:57:06,756 --> 00:57:08,222
 You see?
+你明白了吗？
 
 1469
 00:57:08,223 --> 00:57:09,689
 So the tolerance is exactly what it sounds like.
+所以 tolerance 就是听上去的那个意思，容忍误差
 
 1470
 00:57:09,692 --> 00:57:12,760
 A little bit of tolerance, give the system a little
+一点点误差可以让系统更好地
 
 1471
 00:57:12,762 --> 00:57:15,862
 better chance to manage your battery and all that.
+管理你的系统及其他
 
 1472
 00:57:15,864 --> 00:57:17,964
@@ -7159,170 +7322,212 @@ Okay?
 1473
 00:57:17,966 --> 00:57:20,633
 If you give it tolerance, it's not going to drift.
+如果设置了 tolerance，它也并不会滞后
 
 1474
 00:57:20,635 --> 00:57:23,302
 In other words, if you give a tolerance 2 minute timer and
+换句话说，如果你设置了两分钟的定时器
 
 1475
 00:57:23,304 --> 00:57:24,970
 you let it go an extra 10 seconds and
+然后你让它执行了十秒
 
 1476
 00:57:24,972 --> 00:57:27,539
 it waits an extra 8 seconds, the next one is not going to
+然后等待八秒，下一次定时器触发并不会
 
 1477
 00:57:27,541 --> 00:57:29,874
 be 2 minutes after that 2 minutes and 8 seconds.
+是在两分钟加两分钟加八分钟之后
 
 1478
 00:57:29,876 --> 00:57:31,776
 It's still going to be 2 minutes after the first
+它仍然会在第一次执行之后的的两分钟
 
 1479
 00:57:31,778 --> 00:57:32,677
 2 minutes.
+再次触发
 
 1480
 00:57:32,678 --> 00:57:33,577
 Do you see what I'm saying?
+你明白我的意思了吗
 
 1481
 00:57:33,579 --> 00:57:35,596
 Within the tolerance.
+在容忍误差的情况下
 
 1482
 00:57:35,597 --> 00:57:37,614
 So it's going to stay on a schedule of every two minutes,
+它仍然会保持两分钟的计划
 
 1483
 00:57:37,616 --> 00:57:40,183
 even if it waits a little bit on one or two or three.
+即使它会等待一两秒
 
 1484
 00:57:40,185 --> 00:57:40,884
 It doesn't drift.
+但它不会延后
 
 1485
 00:57:43,088 --> 00:57:43,819
 Okay, that's timer.
+好了，这就是定时器
 
 1486
 00:57:45,256 --> 00:57:46,822
 Okay. Any questions about that?
+有人有相关的问题吗？
 
 1487
 00:57:46,824 --> 00:57:49,791
 It's a pretty cool little guy.
+这是个非常有趣的东西
 
 1488
 00:57:49,793 --> 00:57:50,425
 All right.
+好了
 
 1489
 00:57:50,427 --> 00:57:52,177
 Animation.
+动画
 
 1490
 00:57:52,178 --> 00:57:53,928
 So, this is kind of Intro to Animation,
+这堂课最后的十分钟将
 
 1491
 00:57:53,930 --> 00:57:55,796
 this last ten minutes of today's lecture.
+只是介绍一下动画
 
 1492
 00:57:57,599 --> 00:58:01,367
 So, let me talk a little bit about the kinds of animation
+让我们来聊一下到底有哪几种动画
 
 1493
 00:58:01,369 --> 00:58:02,902
 that you can do in iOS.
+你可以在 iOS 中使用
 
 1494
 00:58:02,904 --> 00:58:06,271
 One is to animate the properties of a view.
+一个是使 view 的属性执行动画
 
 1495
 00:58:06,273 --> 00:58:08,573
 And that's what we're going to talk about today.
+这也是我们今天将会谈到的
 
 1496
 00:58:08,575 --> 00:58:09,941
 So that's one kind of animation.
+这是一种动画
 
 1497
 00:58:10,977 --> 00:58:14,378
 Another one is animation of view controller transitions,
+另一种是 view controller 转场
 
 1498
 00:58:14,380 --> 00:58:16,246
 like in a navigation controller,
+比如在 navigation controller
 
 1499
 00:58:16,248 --> 00:58:19,449
 when you transition to the next card on the stack or
+当你从栈中转场到另一张卡
 
 1500
 00:58:19,451 --> 00:58:20,767
 something like that.
+类似于这样
 
 1501
 00:58:20,768 --> 00:58:22,084
 Or even a modal view controller like the UI alert,
+或者说 modal view controller 比如 UIAlert
 
 1502
 00:58:22,087 --> 00:58:24,620
 or the action sheet that slides up from the bottom.
+或 Action sheet 从底部滑出
 
 1503
 00:58:24,622 --> 00:58:26,856
 Okay, that's another kind of animation, obviously.
+明显这又是另一种动画
 
 1504
 00:58:26,858 --> 00:58:29,158
 Okay we're not going to talk about view controller
+我们不会在这节课中讲到 view controller 
 
 1505
 00:58:29,160 --> 00:58:30,859
 transition animation in this class.
+转场动画
 
 1506
 00:58:30,861 --> 00:58:33,028
 It's not really that terribly difficult, but
+这也不是很难，只是
 
 1507
 00:58:33,030 --> 00:58:35,363
 it's just like I got to pick things to talk about and
+我总要选择一些东西来讲，但这个东西没有
 
 1508
 00:58:35,365 --> 00:58:37,665
 that one, we're not going to talk about, okay?
+被选中，所以我们不会讲这个东西
 
 1509
 00:58:37,667 --> 00:58:41,068
 But there is infrastructure for doing that.
+这有基础设置用来完成
 
 1510
 00:58:41,070 --> 00:58:43,670
 There's also something called Core Animation.
+还有另一种动画叫做 Core Animation
 
 1511
 00:58:43,672 --> 00:58:46,773
 Okay, Core Animation is this incredibly powerful animation
+Core Animation 是在 UIView Core Animation 动画
 
 1512
 00:58:46,775 --> 00:58:49,375
 engine that underlies
+底层的一种
 
 1513
 00:58:49,377 --> 00:58:52,144
 all of this UIView animation that's going on.
+非常强大的动画引擎
 
 1514
 00:58:53,214 --> 00:58:56,915
 And Core Animation can animate arbitrary properties
+而且 Core Animation 可以操纵大量属性执行动画
 
 1515
 00:58:56,917 --> 00:58:57,749
@@ -7331,38 +7536,47 @@ over time.
 1516
 00:58:57,751 --> 00:59:00,117
 And it knows how to juggle them and
+而且它知道应该在何时
 
 1517
 00:59:00,119 --> 00:59:03,454
 knows how to present them on screen over time.
+展示在屏幕上
 
 1518
 00:59:03,456 --> 00:59:04,888
 It's really super powerful.
+它真的非常强大
 
 1519
 00:59:04,890 --> 00:59:06,222
 Unfortunately, I can't talk about that either.
+但不幸的是，同样我也不会讲这个
 
 1520
 00:59:06,224 --> 00:59:08,224
 Okay. Don't have time for that.
+没有这么多时间
 
 1521
 00:59:08,226 --> 00:59:10,826
 But if you're going to do something serious animation
+但如果你想要在视图中创造一些真正的动画
 
 1522
 00:59:10,828 --> 00:59:13,796
 inside views and you're not going to use the next kind I'm
+那么你不会想要使用我接下来将要将的
 
 1523
 00:59:13,798 --> 00:59:16,365
 going to talk about, Core Animation, know that it's
+动画。Core Animation
 
 1524
 00:59:16,367 --> 00:59:19,367
 there because you will eventually have to learn it.
+这个东西你最终还是要学的
 
 1525
 00:59:19,369 --> 00:59:19,934
@@ -7371,22 +7585,27 @@ Okay.
 1526
 00:59:20,970 --> 00:59:23,504
 And the last one's called dynamic animation.
+好了，最后一种动画叫做力学动画
 
 1527
 00:59:23,506 --> 00:59:26,039
 That's physics-based animation.
+这是基于物理引擎的动画
 
 1528
 00:59:26,041 --> 00:59:30,643
 So that's giving views gravity and collision boundaries and
+它会赋予视图重力和碰撞
 
 1529
 00:59:30,645 --> 00:59:34,279
 other behaviors like friction and density, and
+还有其他的行为比如摩擦力和密度
 
 1530
 00:59:34,281 --> 00:59:35,714
 then saying, go.
+然后执行
 
 1531
 00:59:35,716 --> 00:59:36,965
@@ -7395,34 +7614,42 @@ Okay? And
 1532
 00:59:36,966 --> 00:59:38,215
 then they'll just behave, okay.
+它们就会运转
 
 1533
 00:59:38,218 --> 00:59:41,252
 So that's dynamic behavior based animation, and
+所以这就是力学表现动画
 
 1534
 00:59:41,254 --> 00:59:43,320
 that's what we're going to talk about on Wednesday.
+我们将会在周三的时候讲到
 
 1535
 00:59:43,322 --> 00:59:44,621
 And that's what your assignment five is
+这也是你任务五
 
 1536
 00:59:44,623 --> 00:59:45,689
 mostly going to be about.
+大部分要使用的东西
 
 1537
 00:59:45,691 --> 00:59:47,524
 Assignment five's going to do a little bit of
+任务五会有一些视图动画，我会在
 
 1538
 00:59:47,526 --> 00:59:49,959
 view animation, which I'm going to talk about today, and
+这周讲一些
 
 1539
 00:59:49,961 --> 00:59:51,360
 then a lot of dynamic animation.
+然后很多的力学动画
 
 1540
 00:59:51,362 --> 00:59:52,578
@@ -7431,130 +7658,162 @@ Okay?
 1541
 00:59:52,579 --> 00:59:53,795
 And why do we have dynamic animation?
+什么我们需要力学动画？
 
 1542
 00:59:53,798 --> 00:59:55,597
 Why do we have this physics thing?
+为什么我们需要这个物理的东西
 
 1543
 00:59:55,599 --> 00:59:59,867
 If you ever watch an iPhone app, you know,
+如果你曾经使用过 iPhone 应用
 
 1544
 00:59:59,869 --> 01:00:04,238
 if you flip things up and let them drop down.
+如果你拨动了某个东西然后让它们坠落
 
 1545
 01:00:04,240 --> 01:00:06,873
 Don't do it now, but if you get your iPhones out and
+不要现在做啦，但你如果你已经把 iPhone 拿出来了
 
 1546
 01:00:06,875 --> 01:00:09,509
 you go to the very front, even if it's locked, and
+你在解锁界面，即使它是锁住的
 
 1547
 01:00:09,511 --> 01:00:12,145
 you pull down your notifications, you'll notice
+然后你下拉你的通知窗口，你可以发现
 
 1548
 01:00:12,147 --> 01:00:15,681
 they will kind of hit the bottom and bounce a little.
+它们会撞击底部然后弹起来一点
 
 1549
 01:00:15,683 --> 01:00:16,949
 Okay?
+对吧
 
 1550
 01:00:16,950 --> 01:00:18,216
 It won't just kind of pull it down and
+它不会只是下拉
 
 1551
 01:00:18,218 --> 01:00:20,118
 it won't just go clunk, it goes boom.
+不会只是哐当到底部
 
 1552
 01:00:20,120 --> 01:00:20,918
 Okay? It kind of gives
+它展示一个
 
 1553
 01:00:20,920 --> 01:00:21,919
 a soft landing.
+柔软地着落
 
 1554
 01:00:21,921 --> 01:00:23,520
 And that kind of animation turns out to
+这种动画效果
 
 1555
 01:00:23,522 --> 01:00:25,756
 be surprisingly important for the user experience.
+对于用户体验来说非常重要
 
 1556
 01:00:25,758 --> 01:00:28,224
 It makes the user feel a little more like oh, yeah,
+这会让用户感觉，就像
 
 1557
 01:00:28,226 --> 01:00:30,927
 it's kind of giving a constant warm fuzzy feeling about
+它会给你一种非常温暖毛茸茸的感觉
 
 1558
 01:00:30,929 --> 01:00:33,863
 what's going on, as opposed to feeling like a computer that
+而不是感觉就像机器
 
 1559
 01:00:33,865 --> 01:00:36,398
 is slamming things around, okay.
+在直接碰地执行
 
 1560
 01:00:36,400 --> 01:00:38,500
 So, dynamic animation is really important for
+所以力学动画是非常重要的
 
 1561
 01:00:38,502 --> 01:00:42,770
 giving that really kind of homey feel to your UI.
+可以让你的 UI 有一种熟悉的感觉
 
 1562
 01:00:42,772 --> 01:00:44,071
 Warm feel, okay?
+温暖的感觉
 
 1563
 01:00:44,073 --> 01:00:46,840
 So that's why we spend a lecture on it next time.
+这就是为什么我们下一节课会讲这个
 
 1564
 01:00:47,810 --> 01:00:50,343
 All right, so let's talk about animating view properties.
+让了让我们来讲讲视图属性的动画
 
 1565
 01:00:50,345 --> 01:00:54,080
 Only certain properties can be animated at the UIView level.
+视图只有部分属性可以用来执行动画
 
 1566
 01:00:54,082 --> 01:00:55,915
 If you go down to Core Animation, you can do more,
+如果你用 Core Animation，那么可以使用更多
 
 1567
 01:00:55,917 --> 01:00:57,349
 but at UIView level,
+但在 UIView 这个层次
 
 1568
 01:00:57,351 --> 01:01:00,686
 you can really, the three that are most important to animate
+你只能操作三种最主要的动画
 
 1569
 01:01:00,688 --> 01:01:04,322
 are the frame, that means moving your view around.
+frame，这意味这你可以让你的视图到处移动
 
 1570
 01:01:04,324 --> 01:01:07,558
 The transform, that means rotating your view or
+transform，这意味着你可以旋转你的视图
 
 1571
 01:01:07,560 --> 01:01:10,127
 scaling it in and out.
+或者让它变大变小
 
 1572
 01:01:10,129 --> 01:01:12,529
 And the opacity, the alpha.
+然后是透明度，alpha
 
 1573
 01:01:12,531 --> 01:01:14,298
@@ -7563,70 +7822,87 @@ Okay.
 1574
 01:01:14,299 --> 01:01:16,066
 So you can use this kind of animation to
+你可以使用这种动画
 
 1575
 01:01:16,068 --> 01:01:20,803
 fade things out using the alpha or to move around,
+来让东西淡出或者让它到处移动
 
 1576
 01:01:20,805 --> 01:01:22,938
 although they won't move with this nice physics base.
+虽然它们并不会移动那么真实
 
 1577
 01:01:22,940 --> 01:01:25,207
 So I kind of recommend the dynamic animation for
+所以我推荐使用力学动画来操作
 
 1578
 01:01:25,209 --> 01:01:27,242
 moving things.
+移动
 
 1579
 01:01:27,243 --> 01:01:29,276
 But it's really nice for alpha for fading things around, or
+但这个用来执行渐隐渐现的动画还是很不错的
 
 1580
 01:01:29,279 --> 01:01:30,812
 if you're going to have rotating views,
+以及如果你需要旋转视图
 
 1581
 01:01:30,814 --> 01:01:31,813
 views that rotate.
+视图被旋转
 
 1582
 01:01:33,783 --> 01:01:37,484
 So how do we do this animation with these properties?
+那么我们应该怎么操作属性呢？
 
 1583
 01:01:37,486 --> 01:01:42,322
 It's done with class methods on UIView and closures, okay?
+它使用 UIView 带有闭包函数的方法
 
 1584
 01:01:42,324 --> 01:01:43,456
 So you have this class method.
+你可以看到这个类方法
 
 1585
 01:01:43,458 --> 01:01:46,559
 You basically say what kind of animation you want,
+你基本上就是调用你想要的动画
 
 1586
 01:01:46,561 --> 01:01:48,360
 how long you want it to take, things like that.
+你想要它执行多久，类似于这样
 
 1587
 01:01:48,362 --> 01:01:49,995
 And then you just provide a closure, and
+然后你可以得到一个闭包
 
 1588
 01:01:49,997 --> 01:01:52,464
 inside that closure you change these properties, frame,
+在这个闭包中你可以修改这些属性，frame
 
 1589
 01:01:52,466 --> 01:01:53,731
 transform, alpha.
+transform，alpha
 
 1590
 01:01:53,733 --> 01:01:55,066
 Just change them.
+修改它们
 
 1591
 01:01:55,068 --> 01:01:55,766
@@ -7635,18 +7911,22 @@ Okay?
 1592
 01:01:55,768 --> 01:01:56,800
 And then the system
+然后系统会
 
 1593
 01:01:56,802 --> 01:01:59,002
 will animate those changes over time.
+在指定时间内对它们执行动画
 
 1594
 01:01:59,004 --> 01:02:00,203
 Simple as that.
+就这么简单
 
 1595
 01:02:00,205 --> 01:02:01,570
 So here's what the method looks like.
+这就是一个方法的样子
 
 1596
 01:02:01,572 --> 01:02:02,871
@@ -7659,318 +7939,397 @@ There's a few different kinds of it, but
 1598
 01:02:04,441 --> 01:02:05,740
 this is the basic one.
+这是最基础的
 
 1599
 01:02:05,742 --> 01:02:07,008
 You can see that it takes a duration.
+你可以看到它接受一个 duration
 
 1600
 01:02:07,010 --> 01:02:08,809
 That's how long the animation is going to take.
+这就是动画会执行的时长
 
 1601
 01:02:08,811 --> 01:02:09,943
 A delay is wait.
+delay 是等待
 
 1602
 01:02:09,945 --> 01:02:12,079
 Should I wait to start this animation?
+比如我是否应该等会执行这个动画
 
 1603
 01:02:12,081 --> 01:02:14,080
 Options, we'll talk about those later.
+Optinos，待会我们会说到这个
 
 1604
 01:02:14,082 --> 01:02:16,516
 Then the block, okay?
+然后是 block
 
 1605
 01:02:16,518 --> 01:02:19,518
 Takes no arguments, returns no arguments there, that closure.
+这个闭包没有参数，也不返回参数
 
 1606
 01:02:19,520 --> 01:02:23,022
 That's where you're going to change those view properties.
+这里就是你修改这些视图属性的地方
 
 1607
 01:02:23,024 --> 01:02:25,257
 And it also has a completion closure.
+然后它也有一个代表完成的闭包
 
 1608
 01:02:25,259 --> 01:02:27,525
 When it's done animating, the animation actually completed,
+当动画执行完成的时候，动画完全执行完毕
 
 1609
 01:02:27,527 --> 01:02:29,260
 it will call this and it'll let you know whether
+它就会调用这个，它会让你知道
 
 1610
 01:02:29,262 --> 01:02:31,562
 the animation finished or whether it was interrupted by
+动画是否执行完成了，还是被另一个
 
 1611
 01:02:31,564 --> 01:02:34,965
 another animation that tried to change that same property.
+尝试着修改同样属性的动画给中断了
 
 1612
 01:02:34,967 --> 01:02:38,268
 Okay, because you can have multiple animations going off
+因为你可以同时执行多个
 
 1613
 01:02:38,270 --> 01:02:39,269
 at the same time.
+动画
 
 1614
 01:02:39,271 --> 01:02:40,303
 All right? So what does it look like to
+这就是如何使用
 
 1615
 01:02:40,305 --> 01:02:41,137
 call this?
+调用这个
 
 1616
 01:02:41,139 --> 01:02:42,338
 Here's an example.
+这里是一个例子
 
 1617
 01:02:42,340 --> 01:02:45,841
 So this is going to, two seconds from now,
+它会从现在开始执行两秒
 
 1618
 01:02:45,843 --> 01:02:48,710
 start fading my view out over three seconds.
+从三秒钟淡出我的视图开始
 
 1619
 01:02:48,712 --> 01:02:50,345
 And when it's done fading out,
+当它完成淡出之后
 
 1620
 01:02:50,347 --> 01:02:52,079
 it's going to remove it from the super view.
+它就会把视图从父视图中移除
 
 1621
 01:02:53,382 --> 01:02:54,748
 Okay? That's what this one
+就只是这一行
 
 1622
 01:02:54,750 --> 01:02:56,683
 line of code does, okay?
+代码的作用
 
 1623
 01:02:56,685 --> 01:02:58,551
 It's got, I guess it's more than one of code,
+它有，好吧我猜不止一行代码
 
 1624
 01:02:58,553 --> 01:02:59,652
 cuz you've got the closures in there.
+因为这里有个闭包
 
 1625
 01:02:59,654 --> 01:03:02,421
 But it's what it does, okay?
+但它就是这样
 
 1626
 01:03:02,423 --> 01:03:06,024
 So you can see here that I say I want three seconds, for
+你可看到我写了我想要执行三秒
 
 1627
 01:03:06,026 --> 01:03:06,958
 it to take three seconds, but
+它就会执行三秒
 
 1628
 01:03:06,960 --> 01:03:08,159
 I want it to start in two seconds, so
+但我想要它在两秒钟后开始
 
 1629
 01:03:08,161 --> 01:03:09,527
 you're going to take five seconds total.
+所以这里一共是五秒
 
 1630
 01:03:09,529 --> 01:03:11,962
 Okay, it's not going to do anything for the first two.
+它在开头的两秒什么都不会做
 
 1631
 01:03:11,964 --> 01:03:13,764
 And then in my block, I just change my alpha.
+然后在 block 里面我修改了 alpha
 
 1632
 01:03:14,866 --> 01:03:16,766
 Right? From 1, which it started out,
+对吧，从1开始，
 
 1633
 01:03:16,768 --> 01:03:20,502
 I have an if that says only do this if I'm fully opaque.
+我需要它完全消失
 
 1634
 01:03:20,504 --> 01:03:21,470
 So I just set it to zero.
+所以我设置为0
 
 1635
 01:03:21,472 --> 01:03:23,388
 That's all I have to do.
+这就是全部了
 
 1636
 01:03:23,389 --> 01:03:25,305
 And then in my completion block, if I finished,
+然后在 completion block 里
 
 1637
 01:03:25,308 --> 01:03:28,209
 that's the if $0, that's the finish thing.
+如果完成了动画，if $0 这就是是否完成
 
 1638
 01:03:28,211 --> 01:03:29,360
 If I finish,
+如果完成了
 
 1639
 01:03:29,361 --> 01:03:30,510
 then I'm going to remove myself from the super view.
+那么从父视图中移除自己
 
 1640
 01:03:30,513 --> 01:03:33,580
 But if someone else animated alpha in between,
+但如果在某个地方有另一个操作 alpha 的动画
 
 1641
 01:03:33,582 --> 01:03:35,248
 then I'm not going to remove myself from super view.
+那么我就不应该移除自己了
 
 1642
 01:03:35,250 --> 01:03:36,616
 Which makes sense, right?
+很合理对吧
 
 1643
 01:03:36,617 --> 01:03:37,983
 Because they probably changed the alpha to something
+因为它们可能把 alpha 修改为
 
 1644
 01:03:37,986 --> 01:03:40,253
 nonzero, okay?
+非0的值了
 
 1645
 01:03:40,255 --> 01:03:42,922
 Now, a very important thing to understand about animation,
+现在，理解动画非常重要的是
 
 1646
 01:03:42,924 --> 01:03:46,258
 all animation that's going on, is when you make changes,
+所有的动画，当你修改的属性的时候
 
 1647
 01:03:46,260 --> 01:03:48,460
 they happen immediately.
+它们都是立即生效的
 
 1648
 01:03:48,462 --> 01:03:52,296
 The animation is just showing it to the user over time.
+动画只是用来给用户展示的
 
 1649
 01:03:52,298 --> 01:03:54,031
 Okay? So in this code,
+所以在这里代码里
 
 1650
 01:03:54,033 --> 01:03:58,402
 when I print myView.alpha equals myView.alpha,
+当我输出 myView.alpha 等于 myView.alpha
 
 1651
 01:03:58,404 --> 01:04:03,239
 that is going to print zero, because that closure changed
+它会打印0，因为在闭包中已经修改为
 
 1652
 01:04:03,241 --> 01:04:06,242
 it to zero and it does it right away.
+0了，所以它会立刻生效
 
 1653
 01:04:06,244 --> 01:04:07,976
 Okay. Even though the user doesn't
+即使用户还没有在屏幕上
 
 1654
 01:04:07,978 --> 01:04:09,711
 get to see it on screen for five seconds,
+看到五秒的动画
 
 1655
 01:04:09,713 --> 01:04:11,380
 that's irrelevant.
+这也并不重要
 
 1656
 01:04:11,381 --> 01:04:13,048
 The fact is, I just changed my alpha to zero.
+事实就是，我已经修改了 alpha 为 0 
 
 1657
 01:04:14,451 --> 01:04:16,317
 Okay. It's very important to
+这对于理解来说非常重要
 
 1658
 01:04:16,318 --> 01:04:18,184
 understand and it will take some wrapping your head around
+可能会困扰你
 
 1659
 01:04:18,187 --> 01:04:20,187
 until you really understand and work with it.
+知道你完全明白它到底是怎么运作的了
 
 1660
 01:04:20,189 --> 01:04:22,989
 But it's a little bit like multithreaded programming to
+这就有点像多线程编程
 
 1661
 01:04:22,991 --> 01:04:23,690
 understand.
+明白了吗
 
 1662
 01:04:23,692 --> 01:04:25,759
 But really,
+但事实上
 
 1663
 01:04:25,760 --> 01:04:27,827
 all animation is presenting it to the user over time.
+所有的动画呈现给用户的时间
 
 1664
 01:04:27,829 --> 01:04:29,128
 It's not changing it over time.
+并不是真正修改其值的时间
 
 1665
 01:04:30,598 --> 01:04:33,732
 Okay? All right.
+好了
 
 1666
 01:04:33,734 --> 01:04:34,566
 So that's it.
+就是这样
 
 1667
 01:04:34,568 --> 01:04:36,567
 That's how view animation works.
+这就是视图动画的使用方法
 
 1668
 01:04:36,569 --> 01:04:37,435
 Here's all the options.
+现在来说说 options
 
 1669
 01:04:37,437 --> 01:04:38,702
 There's billions of them here.
+这里有数十亿个选项
 
 1670
 01:04:39,738 --> 01:04:41,071
 You can change the curve.
+你可以修改曲线
 
 1671
 01:04:41,073 --> 01:04:44,807
 So CurseEaseInEaseOut means that it starts slowly and
+比如 CurseEaseInEaseOut 的意思是一开始慢速
 
 1672
 01:04:44,809 --> 01:04:47,510
 then speeds up to normal and then slows back down again.
+然后加速到正常速度，最后又慢下来
 
 1673
 01:04:47,512 --> 01:04:48,811
 So my fade, that's the way it worked.
+比如我的淡出，它就会这样
 
 1674
 01:04:48,813 --> 01:04:50,412
 It would start fading out slowly and
+它会先淡出得很慢
 
 1675
 01:04:50,414 --> 01:04:53,048
 then normal speed and then at the very end when it's fading
+然后正常速度，然后在最后
 
 1676
 01:04:53,050 --> 01:04:54,549
 out, fade out a little slower.
+又淡出得慢一点
 
 1677
 01:04:54,551 --> 01:04:56,050
@@ -7979,106 +8338,132 @@ Okay?
 1678
 01:04:56,052 --> 01:04:57,351
 You can also,
+你也可以自己试
 
 1679
 01:04:57,352 --> 01:04:58,651
 I don't have time to show you all these things, but
+我没有时间来向你展示全部的效果
 
 1680
 01:04:58,654 --> 01:05:00,387
 you can look at all these things.
+但你可以自己试试
 
 1681
 01:05:00,388 --> 01:05:02,121
 BeginFromCurrentState is an interesting one because I just
+BeginFromCurrentState 是一个很有意思的东西
 
 1682
 01:05:02,124 --> 01:05:05,458
 told you that the change happens immediately.
+我刚才告诉你们，属性会立刻发生
 
 1683
 01:05:05,460 --> 01:05:08,361
 But if you issued another animation that changed
+但如果你又另一个动画也在改变
 
 1684
 01:05:08,363 --> 01:05:11,464
 the alpha and you had this BeginFromCurrentState on,
+alpha 然后你设置了 BeginFromCurrentState
 
 1685
 01:05:11,466 --> 01:05:14,966
 then that animation would pick up wherever any other
+那么动画会从你当前动画
 
 1686
 01:05:14,968 --> 01:05:16,067
 animation is.
+开始执行
 
 1687
 01:05:16,069 --> 01:05:18,202
 So that other animation might be partway
+所以其他的动画或许
 
 1688
 01:05:18,204 --> 01:05:19,604
 through doing the alpha.
+直接变化透明度
 
 1689
 01:05:19,605 --> 01:05:21,005
 And then I do another animation with this
+然后我使用另一个设置了 BeginFromCurrentState
 
 1690
 01:05:21,007 --> 01:05:23,307
 BeginFromCurrentState and it's not going to start with it
+它并不会从0开始变化
 
 1691
 01:05:23,309 --> 01:05:25,442
 at zero, which is what alpha is now.
+虽然现在属性的值就是0
 
 1692
 01:05:25,444 --> 01:05:28,645
 It's going to pick up the partial, okay?
+它会从当前部分开始
 
 1693
 01:05:28,647 --> 01:05:31,381
 So that's one way where you can actually kind of over time
+这也是一个你可以获取到当前值的方法
 
 1694
 01:05:31,383 --> 01:05:33,282
 get the value, by issuing another animation.
+通过另一个动画
 
 1695
 01:05:35,286 --> 01:05:37,285
 Remember, all these animations are happening in another
+记住，所有的动画都发生在另一个线程的
 
 1696
 01:05:37,287 --> 01:05:38,720
 thread off the main queue.
+而不是主队列
 
 1697
 01:05:38,722 --> 01:05:42,656
 They're all happening out of time for you, okay?
+执行的时间并不取决于你
 
 1698
 01:05:42,658 --> 01:05:44,892
 When you send that last line of code,
+当你执行到最后一行代码的时候
 
 1699
 01:05:44,894 --> 01:05:47,127
 alpha immediately went to zero and you're on your way.
+alpha 会立刻变为 0 
 
 1700
 01:05:47,129 --> 01:05:48,996
 Your code is still going.
+你的代码也继续执行
 
 1701
 01:05:48,997 --> 01:05:50,864
 The fact that things are happening on screen over time,
+在屏幕上发生的一切会随着时间推移
 
 1702
 01:05:50,866 --> 01:05:53,933
 it's kind of not relevant to you.
+这和你没有什么关系
 
 1703
 01:05:53,935 --> 01:05:55,167
 It's relevant to your user though.
+这和你的用户有关系
 
 1704
 01:05:56,337 --> 01:05:56,902
@@ -8087,178 +8472,222 @@ Okay?
 1705
 01:05:58,605 --> 01:06:01,406
 Sometimes you want to change an entire view and
+有时你想要改变整个视图
 
 1706
 01:06:01,408 --> 01:06:03,674
 you can do that as well.
+你可以可以
 
 1707
 01:06:03,676 --> 01:06:07,144
 I'll give you an example here of a playing card.
+我们会给你一个例子展示如果改变 card
 
 1708
 01:06:07,146 --> 01:06:09,346
 So if I had a playing card that has a back and a front.
+如果我有前后两张卡
 
 1709
 01:06:09,348 --> 01:06:11,781
 I might want to flip that card over.
+我或许会想要反转卡牌
 
 1710
 01:06:11,783 --> 01:06:13,416
 Okay, so I wanna change everything in the view.
+所以我想要在视图中改变这一切
 
 1711
 01:06:13,418 --> 01:06:15,351
 I wanna redraw the view basically, but
+我想要重画这个视图
 
 1712
 01:06:15,353 --> 01:06:16,385
 I want it to flip over.
+我想要它翻转
 
 1713
 01:06:16,387 --> 01:06:18,320
 I don't want it to just boop change,
+我不想要它只是 BOOM 一下改变
 
 1714
 01:06:18,322 --> 01:06:21,489
 I want it to have an animation where it flips over.
+我想要有一个动画它可以翻转过来
 
 1715
 01:06:21,491 --> 01:06:24,392
 So you can do flips over and curls up and dissolves, okay,
+所以你可以翻转，卷曲和溶解
 
 1716
 01:06:24,394 --> 01:06:26,294
 you can do all those.
+你可以做这些操作
 
 1717
 01:06:26,295 --> 01:06:28,195
 The way you do that is with a different UIView class
+要做到这些你需要使用 UIView 的另一个类方法
 
 1718
 01:06:28,197 --> 01:06:30,297
 method called transitionWithView.
+叫做 transitionWithView
 
 1719
 01:06:30,299 --> 01:06:32,966
 You just give it the view, the playing card view or whatever.
+你给它一个视图，一张卡片或者其他的东西
 
 1720
 01:06:32,968 --> 01:06:35,068
 You tell how long you want the animation to take.
+你需要告诉它动画执行多久
 
 1721
 01:06:35,070 --> 01:06:37,470
 What kind of thing you want like flipping or
+你要想什么样的动画，是翻转还是
 
 1722
 01:06:37,472 --> 01:06:38,804
 dissolving or whatever.
+溶解还是其他什么
 
 1723
 01:06:38,806 --> 01:06:39,905
 You give it the animation.
+你可以让它执行动画
 
 1724
 01:06:39,907 --> 01:06:42,507
 Inside that animation you're changing your view,
+在动画中你要改变你的视图
 
 1725
 01:06:42,509 --> 01:06:44,109
 changing the attributes in your view.
+改变你视图的参数
 
 1726
 01:06:44,111 --> 01:06:45,810
 Like, if you had your calculator and
+比如你有你的计算器
 
 1727
 01:06:45,812 --> 01:06:49,647
 you wanted to change from one graph to another.
+你想要从一个图表修改为另一种
 
 1728
 01:06:49,649 --> 01:06:51,181
 In here you would change the graph.
+在这里你修改图表
 
 1729
 01:06:51,183 --> 01:06:53,817
 Okay, you would change it so when it draws the next time,
+好了，这样下一次它会绘图
 
 1730
 01:06:53,819 --> 01:06:55,285
 we draw something different.
+我们画一点不同的东西
 
 1731
 01:06:55,287 --> 01:06:58,788
 And then it would animate it, dissolve it, or whatever and
+然后它会执行动画，溶解或者其他的
 
 1732
 01:06:58,790 --> 01:07:00,589
 show the new version.
+然后展示新的样式
 
 1733
 01:07:00,591 --> 01:07:02,491
 In this closure you're changing anything you want
+在闭包中你要可以修改任何东西
 
 1734
 01:07:02,493 --> 01:07:05,494
 about the view, any attributes, any properties.
+关于视图的，任何属性，任何参数
 
 1735
 01:07:05,496 --> 01:07:08,363
 So the next time it draws, it will draw differently and
+这样下一次绘制的时候，它就会绘制另一种样子
 
 1736
 01:07:08,365 --> 01:07:11,632
 then this animation will kind of interpolate between those
+然后动画也会插入这两种状态
 
 1737
 01:07:11,634 --> 01:07:14,502
 two states, doing a flip or dissolve or whatever.
+比如翻转或者溶解或者其他
 
 1738
 01:07:14,504 --> 01:07:15,969
 So that's another kind of thing.
+这又是另一个东西了
 
 1739
 01:07:15,971 --> 01:07:17,204
 Now this one you're probably going to be
+这个你可能只有在家庭作业的
 
 1740
 01:07:17,206 --> 01:07:18,772
 doing in your homework.
+时候来做了
 
 1741
 01:07:18,774 --> 01:07:21,607
 Okay, I think I asked you explicitly to do some sort of
+我想我会让你明确地做一种
 
 1742
 01:07:21,609 --> 01:07:23,075
 animation like this.
+这样的动画效果
 
 1743
 01:07:24,512 --> 01:07:26,845
 Either this one or the last one, either one.
+这个或者上一个，两者之一
 
 1744
 01:07:26,847 --> 01:07:28,480
 So yeah, here's the playing card example.
+好了，这就是卡片动画的例子
 
 1745
 01:07:28,482 --> 01:07:31,282
 You can see in the closure I'm just changing the card to
+你可以看到闭包我
 
 1746
 01:07:31,284 --> 01:07:32,166
 be face up.
+连接了两张卡
 
 1747
 01:07:32,167 --> 01:07:33,049
 And so the next time it draws,
+这样下一次它开始绘制
 
 1748
 01:07:33,052 --> 01:07:34,184
 it's going to draw differently.
+它就会绘制另一种样式
 
 1749
 01:07:35,187 --> 01:07:36,219
@@ -8267,50 +8696,62 @@ Okay?
 1750
 01:07:36,220 --> 01:07:37,252
 And again, this happens immediately.
+再说一次，这个会立刻发生
 
 1751
 01:07:37,255 --> 01:07:39,856
 That card is face up equals not card is face up.
+面朝上的卡片等于没有面朝上的卡片
 
 1752
 01:07:39,858 --> 01:07:40,756
 That happens instantly,
+因为变化会立刻发生
 
 1753
 01:07:40,758 --> 01:07:42,858
 as soon as I call this method, okay?
+只要我调用了这个方法
 
 1754
 01:07:42,860 --> 01:07:45,494
 It's just that over time, on screen, it will happen.
+它会随着时间改变显示
 
 1755
 01:07:46,430 --> 01:07:47,695
 But it happened immediately, right there.
+但它是的变化是即刻的
 
 1756
 01:07:47,697 --> 01:07:49,797
 If the next line, I say if card is face up,
+如果下一行我写卡面朝上
 
 1757
 01:07:49,799 --> 01:07:52,333
 it's going to be the changed value, okay?
+它也会修改值
 
 1758
 01:07:52,335 --> 01:07:54,601
 These transitionWithView methods,
+这些 transitionWithViewAnimatedWithDuration
 
 1759
 01:07:54,603 --> 01:07:56,970
 animated with duration, they return immediately.
+它们是立刻返回的
 
 1760
 01:07:56,972 --> 01:07:58,104
 They do what's in the enclosure and
+它们执行闭包中的东西
 
 1761
 01:07:58,106 --> 01:07:58,804
 return immediately.
+并且立刻返回
 
 1762
 01:08:01,709 --> 01:08:02,273
@@ -8319,70 +8760,87 @@ Okay?
 1763
 01:08:03,810 --> 01:08:05,943
 If you're animating changes to the view hierarchy,
+如果想要你在视图层级中有任何动画的改变
 
 1764
 01:08:05,945 --> 01:08:07,344
 like you're hiding views or
+比如隐藏视图或者
 
 1765
 01:08:07,346 --> 01:08:09,546
 removing them from super view and that's all you're doing,
+从父类那里移除视图都可以
 
 1766
 01:08:09,548 --> 01:08:11,214
 and you want them to flip over and
+你想要翻转
 
 1767
 01:08:11,216 --> 01:08:14,650
 go away, then you can use this transitionFromView to view.
+然后离开，你可以用 transitionFromViewToView
 
 1768
 01:08:14,652 --> 01:08:15,451
 Okay? Otherwise it's
+除此之外
 
 1769
 01:08:15,453 --> 01:08:17,270
 exactly the same.
+其他都是一样的
 
 1770
 01:08:17,271 --> 01:08:19,088
 It's just for things that change the view hierarchy but
+它只是改变视图层级
 
 1771
 01:08:19,090 --> 01:08:20,589
 it's basically the same.
+但其他的都是一样的
 
 1772
 01:08:20,591 --> 01:08:22,257
 So there's no closure there because
+所以这里没有闭包
 
 1773
 01:08:22,259 --> 01:08:24,192
 the change you're making is change in the view hierarchy.
+是由于你改变的是视图层级
 
 1774
 01:08:24,194 --> 01:08:25,526
 You're not changing card that's face up,
+你不是在改变卡片是否面朝上
 
 1775
 01:08:25,528 --> 01:08:27,428
 you're actually changing whether the view is
+你在改变的是视图是否
 
 1776
 01:08:27,430 --> 01:08:28,695
 in the hierarchy anymore.
+仍然在层级中
 
 1777
 01:08:30,365 --> 01:08:32,965
 Yeah. >> I'm just wondering, so.
+>> 学生提问
 
 1778
 01:08:32,967 --> 01:08:35,935
 If you want to specify several of the [INAUDIBLE].
+>> 学生提问
 
 1779
 01:08:35,937 --> 01:08:37,469
 >> Yeah.
+好
 
 1780
 01:08:37,471 --> 01:08:39,371
@@ -8399,26 +8857,32 @@ If you want to specify several of the [INAUDIBLE].
 1783
 01:08:46,346 --> 01:08:48,779
 That's a good question in this particular API.
+对于这个特殊的 API 来说是个好问题
 
 1784
 01:08:48,781 --> 01:08:51,281
 Ask me on Piazza and I'll try and
+待会在走廊上来问我
 
 1785
 01:08:51,283 --> 01:08:55,351
 some APIs you specify as an array, some APIs different.
+我会试着用一些 API，一些 API 不同
 
 1786
 01:08:55,353 --> 01:08:57,720
 It depends but most times, Swift is an eNom,
+根据情况而定，但 Swift 是 enum
 
 1787
 01:08:57,722 --> 01:09:01,123
 so you are doing something like that or combining them,
+你可以这样做或者把它们结合起来
 
 1788
 01:09:01,125 --> 01:09:03,625
 so ask me on Piazza.
+待会下来问我
 
 1789
 01:09:03,627 --> 01:09:04,292
@@ -8427,43 +8891,54 @@ Okay.
 1790
 01:09:04,294 --> 01:09:05,426
 So that's it for today.
+这就是今天的全部内容
 
 1791
 01:09:05,428 --> 01:09:07,078
 On Friday,
+在周五
 
 1792
 01:09:07,079 --> 01:09:08,729
 we have a great section which is UICollectionView.
+我们会有一个很棒的部分关于 UICollectionView
 
 1793
 01:09:08,731 --> 01:09:11,398
 It's great because UICollectionView is very
+很棒是因为 UICollectionView 非常
 
 1794
 01:09:11,400 --> 01:09:12,599
 similar to UITableView.
+类似与 UITableView
 
 1795
 01:09:12,601 --> 01:09:15,101
 You'll really understand UITableView
+你会理解 UITableView 的
 
 1796
 01:09:15,103 --> 01:09:18,004
 if you go do look at this UICollectionView one.
+如果你看了这个 UICollectionView
 
 1797
 01:09:18,006 --> 01:09:20,172
 Monday's a holiday and the next week I'm going to start
+周一是节日，然后下周我会开始讲
 
 1798
 01:09:20,174 --> 01:09:21,674
 on that physics-based animation.
+基于物理的动画
 
 1799
 01:09:21,676 --> 01:09:24,409
 >> [COUGH] >> Thank you very much.
+>> 谢谢大家
 
 1800
 01:09:27,313 --> 01:09:27,344
 >> For more, please visit us at stanford.edu.
+>> 想了解更多，请登录 stanford.edu

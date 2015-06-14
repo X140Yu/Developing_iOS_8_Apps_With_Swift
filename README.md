@@ -19,7 +19,7 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 8. View Controller Lifecycle, Autolayout | 完成 | 未开始
 9. Scroll View and Multithreading | 完成 | 未开始
 10. Table View| 完成 | 未开始
-11. Unwind Segues, Alerts, Timers, View Animation | 进行中 | N/A
+11. Unwind Segues, Alerts, Timers, View Animation | 完成 | 未开始
 12. Dynamic Animation | 进行中 | N/A
 13. Application Lifecycle and Core Motion | 完成 | 未开始
 14. Core Location and MapKit | 完成 | 未开始
@@ -27,7 +27,7 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 16. Camera, Persistence, and Embed Segues | 进行中 | N/A
 17. Internationalization and Settings | 完成 | 未开始
 
-注：更新时间：北京时间 2015 年 05 月 26 日
+注：更新时间：北京时间 2015 年 06 月 12 日
 
 ### 校对规则
 

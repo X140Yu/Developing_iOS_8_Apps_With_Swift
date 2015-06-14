@@ -1351,7 +1351,7 @@ you know, matches up with that screen's bounds,
 272
 00:11:01,571 --> 00:11:05,906
 which you can get using the UIScreen classes bounds.
-你能使用 UIScreen 类的 bouns 来获得。
+你能使用 UIScreen 类的 bounds 来获得。
 
 273
 00:11:05,908 --> 00:11:10,143
@@ -4665,152 +4665,188 @@ So let's look into all of these steps.
 
 935
 00:38:35,765 --> 00:38:38,432
-So you see this File System, it starts at route.
-
+So you see this File System, it starts at root.
+我们来看这个文件系统， 它以根目录(/)开始
 
 936
 00:38:38,434 --> 00:38:40,768
 It's a protected file system, though, so
+它是一个被保护的文件系统，所以
 
 937
 00:38:40,770 --> 00:38:43,470
 you can't see most of the stuff that's in root, or
+在根目录下的大部分东西你看不到，
 
 938
 00:38:43,472 --> 00:38:45,805
 any of the system directories or whatever.
+包括系统目录以及一些别的。
 
 939
 00:38:45,807 --> 00:38:48,775
 It's not readable by you.
+你无法读取。
 
 940
 00:38:48,777 --> 00:38:52,578
 So, there is a part of the Unix filesystem there, though,
+但是有一部分 Unix 文件系统，
 
 941
 00:38:52,580 --> 00:38:56,582
 that is your application's own, it's called its sandbox.
+是你的应用拥有的，叫做它的沙盒(sandbox)
 
 942
 00:38:56,584 --> 00:38:58,550
 Okay, and this is the only place you can write.
+好了，这就是你唯一可以写入的地方。
 
 943
 00:38:58,552 --> 00:39:01,453
 Some of the places in your own sandbox, you can't even write.
+即使是在沙盒里面，有些位置你也不允许写入。
 
 944
 00:39:01,455 --> 00:39:03,721
 Like the place where your actual application is,
+比如存放应用自身的地方。
 
 945
 00:39:03,723 --> 00:39:05,640
 you can't write there.
+那里你无法写入。
 
 946
 00:39:05,641 --> 00:39:07,558
 So you can't modify [LAUGH] your own code by writing
+所以你无法通过修改应用存放的目录
 
 947
 00:39:07,560 --> 00:39:09,960
 something in that directory or something.
+来改动你的(二进制)代码
 
 948
 00:39:09,962 --> 00:39:12,162
 Okay, but many of the directories,
+Okay，但是沙盒里的很多目录，
 
 949
 00:39:12,164 --> 00:39:15,298
 subdirectories of your sandbox, you can write in.
+子目录，都允许写入。
 
 950
 00:39:15,300 --> 00:39:17,633
 So this is the place where you can write, and
+这就是你可以写入的地方，
 
 951
 00:39:17,635 --> 00:39:19,835
 you can read everything in your sandbox.
+而且你可以读取沙盒里面的所有内容。
 
 952
 00:39:19,837 --> 00:39:23,072
 Then we'll talk about how you get a URL into your sandbox in
+后面我们讨论如何拿到连接到沙盒内部的一个 URL ，
 
 953
 00:39:23,074 --> 00:39:24,540
 a second.
+稍等一下。
 
 954
 00:39:24,541 --> 00:39:26,007
 Now, why do we do this sandboxing thing?
+现在，为什么我们要做这样的沙盒模型呢？
 
 955
 00:39:26,010 --> 00:39:27,909
 For obvious reasons, for security.
+明显的理由是为了安全。
 
 956
 00:39:27,911 --> 00:39:30,511
 You don't want to be able to look into other apps and
+你不想能够看到别人的 App，
 
 957
 00:39:30,513 --> 00:39:33,280
 see what's going on over there, and you don't want to
+能够看到那里发生了什么；你不想能够
 
 958
 00:39:33,282 --> 00:39:35,516
 be able to access the system directories and
+访问系统目录并且
 
 959
 00:39:35,518 --> 00:39:36,616
 mess up that iPhone.
+把 iPhone 搞崩溃。
 
 960
 00:39:36,618 --> 00:39:39,152
 So it's completely obvious, but there's one
+这显而易见，但沙盒还存在
 
 961
 00:39:39,154 --> 00:39:41,721
 slightly non-obvious reason to this sandbox,
+一个不那么显而易见的理由，
 
 962
 00:39:41,723 --> 00:39:44,590
 is that since everything you are ever going to write on
+既然你能写入的位置
 
 963
 00:39:44,592 --> 00:39:46,425
 the local disk is in this sandbox.
+被限制在本地存储的沙盒里，
 
 964
 00:39:46,427 --> 00:39:50,895
 If the user deletes your app you know, they go over here
+那么如果用户删除了你的应用，他们来这
 
 965
 00:39:50,897 --> 00:39:55,199
 and hold down until the thing, it's the other one.
+长摁直到发生一件事。
 
 966
 00:39:55,201 --> 00:39:56,333
 Which one are we showing?
+我们显示的是什么(切换投影显示iPad)
 
 967
 00:39:56,335 --> 00:39:57,100
 Yeah, this one.
+嗯，这个。
 
 968
 00:39:57,102 --> 00:39:58,468
 See them wiggling there?
+看到它们左右摇晃没？
 
 969
 00:39:58,470 --> 00:40:01,504
 So, if they hold down wiggle, if they were to press x to
+所以应用图标长摁开始摇晃后，如果点击叉叉
 
 970
 00:40:01,506 --> 00:40:04,273
 delete it, it would delete your entire sandbox.
+删掉它，这将会删除整个沙盒。
 
 971
 00:40:04,275 --> 00:40:06,542
 So everything you've ever written is gone.
+于是你写入的所有东西都没了。
 
 972
 00:40:06,544 --> 00:40:07,542
@@ -4819,18 +4855,22 @@ Okay?
 973
 00:40:07,544 --> 00:40:09,077
 Also, that's true for backup.
+这对于备份也是一样。
 
 974
 00:40:09,079 --> 00:40:12,246
 If they backup their phone to iTunes U, okay, or
+如果用户把他们的手机备份到 iTunes U (口误)
 
 975
 00:40:12,248 --> 00:40:15,416
 iTunes and iTunes U, iTunes, then it would back
+备份到 iTunes， 那将会
 
 976
 00:40:15,418 --> 00:40:19,252
 up certain directories in your Sandbox, not all of them.
+把沙盒里面的特定目录备份，不是所有的目录。
 
 977
 00:40:19,254 --> 00:40:20,320
@@ -4839,70 +4879,87 @@ Okay?
 978
 00:40:20,322 --> 00:40:22,889
 So, that's another reason to have this Sandbox.
+所以，这就是使用沙盒的另一个原因。
 
 979
 00:40:22,891 --> 00:40:23,689
 So, what's in there?
+那么，那里有什么？
 
 980
 00:40:23,691 --> 00:40:24,990
 What's in the Sandbox?
+沙盒里有什么？
 
 981
 00:40:24,992 --> 00:40:27,726
 There's various bundles, which are directories.
+那里有各种包 (bundle)，以目录形式存在。
 
 982
 00:40:27,728 --> 00:40:29,961
 There's the application bundle I talked about,
+有我刚提到的应用包，
 
 983
 00:40:29,963 --> 00:40:31,829
 that's where your actual app is, okay?
+它就是你的应用的实体，okay？
 
 984
 00:40:31,831 --> 00:40:33,431
 And everything there is read-only.
+里面所有的内容都是只读的。
 
 985
 00:40:33,433 --> 00:40:34,832
 All your storyboards in there.
+你所有的 storyboard 都在里面。
 
 986
 00:40:34,834 --> 00:40:36,900
 If you have JPEGs that are in your image assets,
+你的 image assets 里的 jpg 文件，
 
 987
 00:40:36,902 --> 00:40:37,967
 they're all in there.
+也在里面。
 
 988
 00:40:37,969 --> 00:40:39,168
 They're all read-only.
+统统只读。
 
 989
 00:40:39,170 --> 00:40:41,971
 If you put something in there you needed to edit,
+如果你想要在里面放置一些需要编辑的东西，
 
 990
 00:40:41,973 --> 00:40:43,739
 like maybe some SQL database or
+比如数据库文件或者
 
 991
 00:40:43,741 --> 00:40:46,341
 something you put in there or some data file.
+别的数据文件，
 
 992
 00:40:46,343 --> 00:40:48,943
 You would have to copy it out of the application bundle into
+你必须把它从应用包里面复制出来，
 
 993
 00:40:48,945 --> 00:40:51,279
 one of these other directories in your Sandbox, and
+放到沙盒里的一个子目录里面，
 
 994
 00:40:51,281 --> 00:40:52,646
 then you could edit it there.
+然后再去编辑它。
 
 995
 00:40:52,648 --> 00:40:54,565
@@ -4911,94 +4968,117 @@ Okay?
 996
 00:40:54,566 --> 00:40:56,483
 So, you can ship your app with things you're gonna edit, but
+这样你就带着你的 App 和将要修改的部分一同发布了，
 
 997
 00:40:56,485 --> 00:40:59,553
 you just have to copy them out of your application directory.
+但是你必须把它复制到应用目录外面去。
 
 998
 00:40:59,555 --> 00:41:01,187
 And then, there's also other directories in there.
+当然，那里还存在别的目录。
 
 999
 00:41:01,189 --> 00:41:04,223
 The documents directory, that's where you should store
+Documents 目录，这里是存放
 
 1000
 00:41:04,225 --> 00:41:06,659
 what the user perceives as their data, okay?
+用户数据的地方。
 
 1001
 00:41:06,661 --> 00:41:09,461
 The things they're creating and editing and
+用户创建编辑并且拥有的数据，
 
 1002
 00:41:09,463 --> 00:41:12,531
 owning that they expect to be there all the time.
+最好一直都在这个目录下。
 
 1003
 00:41:12,533 --> 00:41:14,399
 Even if you don't, kind of,
+即使你没有，
 
 1004
 00:41:14,401 --> 00:41:17,735
 divide it up into a document in your UI, it's still,
+从你的 UI 里分离出一个文档，它依然存在。
 
 1005
 00:41:17,737 --> 00:41:20,671
 that's what the documents directory is for.
+这就是 Documents 目录的作用。
 
 1006
 00:41:20,673 --> 00:41:22,406
 There's also a caches directory.
+缓存目录。
 
 1007
 00:41:22,408 --> 00:41:25,442
 This is for data that you could throw away.
+这是存放那些可以被丢弃的数据的地方。
 
 1008
 00:41:25,444 --> 00:41:26,976
 So, it's some information you got from
+假设你从互联网上下载了一些数据，
 
 1009
 00:41:26,978 --> 00:41:29,112
 the Internet that you can go back to the Internet, but,
+你可以再次访问互联网去下载，但是，
 
 1010
 00:41:29,114 --> 00:41:31,313
 it might be slow to go to the Internet, so you're going to
+再次联网可能会比较慢，所以你希望
 
 1011
 00:41:31,315 --> 00:41:33,215
 keep a local copy, but, you could throw it away.
+保留一个本地副本，但是，你可以把它丢弃掉。
 
 1012
 00:41:33,217 --> 00:41:35,917
 That directory, for example, wouldn't get backed up
+这个目录， 不会被备份到
 
 1013
 00:41:35,919 --> 00:41:38,520
 to iTunes, okay, if someone plugged their phone in,
+iTunes， 在用户接入了他的 iPhone 去备份的时候。
 
 1014
 00:41:38,522 --> 00:41:40,888
 because they figure you can recreate it, okay?
+因为他们认为你可以重新创建它。
 
 1015
 00:41:40,890 --> 00:41:42,189
 And there's a bunch of others,
+还有一些别的东西
 
 1016
 00:41:42,191 --> 00:41:44,191
 there's about a dozen different directories.
+各种不同的目录。
 
 1017
 00:41:44,193 --> 00:41:47,728
 And, you find all these directories by looking
+你可以在文档中查到所有的目录，
 
 1018
 00:41:47,730 --> 00:41:52,231
 in the documentation for the term NSSearchPathDirectory.
+搜索术语 NSSearchPathDirectory 就行。
 
 1019
 00:41:52,233 --> 00:41:54,517
@@ -5007,50 +5087,62 @@ Okay?
 1020
 00:41:54,518 --> 00:41:56,802
 And, I'll talk about that in a second as well.
+我过一会儿再讨论这个。
 
 1021
 00:41:56,804 --> 00:42:00,772
 So, how do you get the URL to these special
+那么，你怎样获得一个指向
 
 1022
 00:42:00,774 --> 00:42:03,742
 directories in your Sandbox?
+沙盒里的特定目录的 URL ？
 
 1023
 00:42:03,744 --> 00:42:05,910
 You do it with this file manager class,
+你可以使用文件管理的类，
 
 1024
 00:42:05,912 --> 00:42:07,178
 this NSFileManager.
+也就是 NSFileManager.
 
 1025
 00:42:07,180 --> 00:42:10,481
 Now, NSFileManager, there's actually a class
+现在， NSFileManager 有个类方法
 
 1026
 00:42:10,483 --> 00:42:13,283
 function called, DefaultFileManager,
+DefaultFileManager， 
 
 1027
 00:42:13,285 --> 00:42:16,419
 that will give you the default NSFileManager.
+返回默认的 NSFileManager 实例。
 
 1028
 00:42:16,421 --> 00:42:19,655
 The only thing to be a little careful about that one is,
+唯一需要稍微注意的是，
 
 1029
 00:42:19,657 --> 00:42:21,557
 NSFileManager is thread safe.
+NSFileManager 是线程安全的。
 
 1030
 00:42:21,559 --> 00:42:23,792
 And a lot of times, you might want to read and
+许多情况下，你可能会
 
 1031
 00:42:23,794 --> 00:42:26,161
 write a very large file in a different thread.
+在不同的线程里读写同一个大文件。
 
 1032
 00:42:26,163 --> 00:42:27,946
@@ -5059,26 +5151,32 @@ Okay?
 1033
 00:42:27,947 --> 00:42:29,730
 And NSFileManager is completely thread safe,
+NSFileManager 是完全线程安全的，
 
 1034
 00:42:29,733 --> 00:42:31,716
 but only for
+条件是
 
 1035
 00:42:31,717 --> 00:42:33,700
 an NSFileManager instance that is created in that thread.
+一个 NSFileManager 实例只在创建它的线程里使用。
 
 1036
 00:42:33,703 --> 00:42:36,370
 In other words, you should never create an NSFileManager
+换句话说，你不应该在一个线程里创建 NSFileManager 实例，
 
 1037
 00:42:36,372 --> 00:42:38,872
 instance in one thread and then use it in another one.
+然后在另一个线程里使用它。
 
 1038
 00:42:38,874 --> 00:42:40,440
 That's not thread safe.
+这就不再线程安全了。
 
 1039
 00:42:40,442 --> 00:42:42,008
@@ -5087,222 +5185,277 @@ Okay?
 1040
 00:42:42,009 --> 00:42:43,575
 But, even if you're accessing the same files,
+但是，即使你访问同样的文件，
 
 1041
 00:42:43,578 --> 00:42:46,012
 trying to remove or look at the same directories,
+删除或者查看同样的目录，
 
 1042
 00:42:46,014 --> 00:42:47,480
 that's all perfectly fine,
+这都是没问题的，
 
 1043
 00:42:47,482 --> 00:42:49,948
 as long as each thread has its own NSFileManager.
+只要每个线程使用它自己的 NSFileManager。
 
 1044
 00:42:49,950 --> 00:42:52,551
 So the NSFileManager DefaultFileManager,
+所以 NSFileManager 跟 DefaultFileManager，
 
 1045
 00:42:52,553 --> 00:42:54,886
 you'll see that in the documentation.
+你可以查看相关文档。
 
 1046
 00:42:54,888 --> 00:42:57,822
 That one is kind of your main thread, DefaultFileManager.
+DefaultFileManager 在主线程。
 
 1047
 00:42:57,824 --> 00:43:00,224
 If you're only gonna use it on the main queue,
+如果你是在 main queue 里使用，
 
 1048
 00:43:00,226 --> 00:43:01,592
 then you can use that one.
+你可以使用 DefaultFileManager。
 
 1049
 00:43:01,594 --> 00:43:02,893
 Otherwise, just create an instance.
+否则，创建一个实例。
 
 1050
 00:43:02,895 --> 00:43:05,095
 It's pretty light-weight to create an instance of
+新建 NSFileManager 实例很轻量级，
 
 1051
 00:43:05,097 --> 00:43:06,763
 NSFileManager just like this, okay,
+就像这样。
 
 1052
 00:43:06,765 --> 00:43:08,698
 let fileManager equal NSFileManager().
+let fileManager = NSFileManager()
 
 1053
 00:43:08,700 --> 00:43:11,700
 So, once you have a file manager, then you can send it
+一旦你有了一个 fileManager, 你可以给他发送这个消息，
 
 1054
 00:43:11,702 --> 00:43:14,302
 this message, URLsForDirectory inDomain.
+URLsFOrDirectory(:, inDomain:)
 
 1055
 00:43:14,304 --> 00:43:17,739
 And that will tell you, it gives you, actually,
+这会告诉你，返回
 
 1056
 00:43:17,741 --> 00:43:20,742
 an array of all the documents directories,
+一个 array，里面包含所有的文档目录，
 
 1057
 00:43:20,744 --> 00:43:22,810
 all the caches directories,
+跟缓存目录，
 
 1058
 00:43:22,812 --> 00:43:25,746
 all the application bundle directories.
+以及所有的应用包目录。
 
 1059
 00:43:25,748 --> 00:43:27,314
 Now, why is this an array?
+为什么这是个 array？
 
 1060
 00:43:27,316 --> 00:43:29,649
 Well, on iOS, it doesn't matter.
+在 iOS 上，没问题。
 
 1061
 00:43:29,651 --> 00:43:32,552
 There's always only one thing in this array, okay, and
+通常这个 array 里只有一个东西，
 
 1062
 00:43:32,554 --> 00:43:34,787
 that's the user's documents directory,
+就是用户的 Documents 目录，
 
 1063
 00:43:34,789 --> 00:43:36,555
 the user's cache's directory.
+用户的缓存目录。
 
 1064
 00:43:36,557 --> 00:43:38,724
 And that's because on iPhone,
+因为在 iPhone 上，
 
 1065
 00:43:38,726 --> 00:43:41,359
 you only have the user's resources.
+你只拥有用户的资源。
 
 1066
 00:43:41,361 --> 00:43:44,929
 But this API works on a Mac as well, and on the Mac,
+不过这个 API 在 Mac 上也能工作， 在 Mac 上，
 
 1067
 00:43:44,931 --> 00:43:48,232
 you might have the user's document history or
+你可能获得用户的文档历史或者
 
 1068
 00:43:48,234 --> 00:43:49,933
 a cache's directory.
+一个缓存目录。
 
 1069
 00:43:49,935 --> 00:43:53,036
 You might have the computers, and then you might even have
+你可能拿到多个电脑， 然后你甚至可能拿到
 
 1070
 00:43:53,038 --> 00:43:55,372
 the networks, okay, the local networks.
+网络信息， 本地网络。
 
 1071
 00:43:55,374 --> 00:43:57,240
 That's why you might get multiple of these.
+这就是为什么你可能拿到多个数据。
 
 1072
 00:43:57,242 --> 00:43:59,675
 So, don't be freaked out by the fact that this returns
+所以， 不要被它返回一个 NSURL 的 array 吓到。
 
 1073
 00:43:59,677 --> 00:44:02,244
 an array of NSURLs, there's always only going to be one.
+通常情况下它只有一个。
 
 1074
 00:44:02,246 --> 00:44:04,246
 You can just use the first one in there.
+你可以使用里面的第一个元素。
 
 1075
 00:44:04,248 --> 00:44:07,716
 And, that is going to be a URL that points to this kind of
+这将是一个指向这类目录的 URL，
 
 1076
 00:44:07,718 --> 00:44:10,585
 directory like the documents directory, or
+比如说 Documents 目录	，
 
 1077
 00:44:10,587 --> 00:44:13,154
 the cache's directory, or whatever.
+或者缓存目录，或者别的。
 
 1078
 00:44:13,156 --> 00:44:16,657
 And, you specify which one you want with that first argument,
+你要指定第一个参数，
 
 1079
 00:44:16,659 --> 00:44:18,191
 NSSearchPathDirectory.
+NSSearchPathDirectory。
 
 1080
 00:44:18,193 --> 00:44:21,461
 And, you have to go look in the documentation and
+你需要去查看一下文档，
 
 1081
 00:44:21,463 --> 00:44:24,097
 see what the special names of them are.
+看看可选择的名称是什么。
 
 1082
 00:44:24,099 --> 00:44:25,898
 But there's, like, NSDocumentsDirectory,
+不过，下面几个可用，比如 NSDocumentsDirectory，
 
 1083
 00:44:25,900 --> 00:44:27,866
+NSCachesDirectory, NSDocumentationDirectory.
 NSCachesDirectory, NSDocumentationDirectory.
 
 1084
 00:44:27,868 --> 00:44:30,702
 By the way, be careful with NSDocumentationDirectory
+顺便提一句， 小心 NSDocumentationDirectory 跟
 
 1085
 00:44:30,704 --> 00:44:32,337
-versus NSDocumentsDirector.
+versus NSDocumentsDirectory.
+NSDocumentsDirectory 的区别。
 
 1086
 00:44:32,339 --> 00:44:35,573
 I can't tell you how many final projects people post in
+我数不清有多少做最终大作业的人公开抱怨，
 
 1087
 00:44:35,575 --> 00:44:39,076
 Piazza, and they'll say, I've been trying to write to my
+说我尝试写入 NSDocumentsDirectory，
 
 1088
 00:44:39,078 --> 00:44:42,513
 NSDocumentsDirectory for days but it says not writable.
+但是出错了，无法写入。
 
 1089
 00:44:42,515 --> 00:44:44,781
 And it's because they've been trying to write to
+原因是他们写入的对象，
 
 1090
 00:44:44,783 --> 00:44:47,350
 the NSDocumentationDirectory, which is read-only.
+实际上是 NSDocumentationDirectory， 这是只读的。
 
 1091
 00:44:47,352 --> 00:44:49,619
 Okay, that's documentation that ships with your app.
+它是跟你的应用一起发布的文档。
 
 1092
 00:44:49,621 --> 00:44:52,221
 So be careful with the escape completion there,
+所以小心那里的自动完成，
 
 1093
 00:44:52,223 --> 00:44:54,123
 NSDocuments is the writeable one,
+NSDocuments 可写的，
 
 1094
 00:44:54,125 --> 00:44:56,558
 okay, NSDocumentation is documentation.
+NSDocumentation 是文档。
 
 1095
 00:44:56,560 --> 00:44:58,193
@@ -5311,154 +5464,192 @@ All right?
 1096
 00:44:58,195 --> 00:45:00,461
 So, now you have the URL to the root of one of these
+所以， 你现在拥有一个指向这些的根目录的 URL，
 
 1097
 00:45:00,463 --> 00:45:02,496
 things, like the document's directory,
+比如存档目录，
 
 1098
 00:45:02,498 --> 00:45:03,697
 the cache's directory.
+缓存目录。
 
 1099
 00:45:03,699 --> 00:45:05,766
 And, now you want to write some files in there.
+现在你想在里面写入一些文件，
 
 1100
 00:45:05,768 --> 00:45:09,302
 Well, you're going to use URLs, NSURLs methods,
+你可以使用 URL， NSURL 的方法，
 
 1101
 00:45:09,304 --> 00:45:11,804
-URL by appending path component, or
+URLByAppendingPathComponent, or
+URLByAppendingPathComponent, 或者
 
 1102
 00:45:11,806 --> 00:45:14,173
-URL by appending path extension.
+URLByAppendingPathExtension.
+URLByAppendingPathExtension.
 
 1103
 00:45:14,175 --> 00:45:18,810
 Some extensions like .jpg, or whatever, .doc,
+比如 .jpg, .doc 这样的扩展名，
 
 1104
 00:45:18,812 --> 00:45:22,313
 got some document format of some sort.
+拿到一些文档格式信息。
 
 1105
 00:45:22,315 --> 00:45:23,981
 And so, that's how you're gonna do that.
+这就是你处理的方法。
 
 1106
 00:45:23,983 --> 00:45:26,550
 And, by appending multiple path components,
+并且， 后面补上多个 path component(目录名外加目录分隔符)，
 
 1107
 00:45:26,552 --> 00:45:29,353
 you can build things inside directories, right?
+你就可以在目录里面创建东西。
 
 1108
 00:45:29,355 --> 00:45:33,056
 So I can say a path component, today's documents.
+比如今天讨论的 path componet， documents.
 
 1109
 00:45:33,058 --> 00:45:37,060
 And then path component foo, and that would be a directory,
+然后再来个 path componet foo， 这会是个目录，
 
 1110
 00:45:37,062 --> 00:45:40,129
 today's documents, and inside foo, okay?
+先是 documents， 然后在 foo 的里面。
 
 1111
 00:45:40,131 --> 00:45:41,530
 So that's how you build up the URL.
+所以这就是创建一个 URL 的方法。
 
 1112
 00:45:41,532 --> 00:45:44,866
 So, once you have a URL, you can find out some things,
+一旦你拥有了一个URL, 你可以发现一些事情，
 
 1113
 00:45:44,868 --> 00:45:47,702
 like, about it, like, is this a file URL, or
+比如， 这是一个文件的 URL，
 
 1114
 00:45:47,704 --> 00:45:49,103
 is this a network URL?
+还是一个网络 URL？
 
 1115
 00:45:49,105 --> 00:45:51,772
 Sometimes, you wanna know that because you're accessing
+有时候你想要知道这些，因为
 
 1116
 00:45:51,774 --> 00:45:54,141
 an image, and you wanna know whether it's on disk or
+在你访问一个图片时，你想要确定它是在本地磁盘上，
 
 1117
 00:45:54,143 --> 00:45:55,542
 whether it's on the network,
+还是在远程网络上。
 
 1118
 00:45:55,544 --> 00:45:56,976
 you might put one in the thread.
+你可以把它放在线程里面。
 
 1119
 00:45:56,978 --> 00:45:58,862
 Cuz some people ask,
+因为有些人问，
 
 1120
 00:45:58,863 --> 00:46:00,747
 should I always access my file system in the thread?
+我是不是应该把访问文件系统的代码都放在线程里？
 
 1121
 00:46:00,749 --> 00:46:02,515
 And the answer is, probably for
+答案是，可能
 
 1122
 00:46:02,517 --> 00:46:06,051
 small files unless they're, you know, megabyte size files.
+对于那些好多MB的大文件需要，小文件不需要。
 
 1123
 00:46:06,053 --> 00:46:08,353
 You're probably fine to access them in the main queue.
+你在 main queue 里访问这些小文件可能没什么问题。
 
 1124
 00:46:08,355 --> 00:46:10,021
 It's pretty fast, that flash memory,
+在闪存里速度相当快，
 
 1125
 00:46:10,023 --> 00:46:11,956
 pretty quick at getting the information back.
+很快就拿回数据，
 
 1126
 00:46:11,958 --> 00:46:13,924
 You probably don't need to do that.
+你可能不需要做更多的事情。
 
 1127
 00:46:13,926 --> 00:46:16,760
 It couldn't hurt, especially, if you already have
+它可能会伤害到体验，特别是，你已经有了
 
 1128
 00:46:16,762 --> 00:46:19,496
 the code to deal with the fact that file might be over
+处理可能存在远程网络的文件的代码，
 
 1129
 00:46:19,498 --> 00:46:22,599
 the network, might as well do it for the local file, too.
+同时也用它来处理本地文件。
 
 1130
 00:46:22,601 --> 00:46:25,468
 There is also a very important method that's a little bit
+有个比较重要的方法被掩盖在
 
 1131
 00:46:25,470 --> 00:46:28,604
 buried in the documentation called resourceValuesForKeys.
+文档之中，叫做 resourceValuesForKeys。
 
 1132
 00:46:28,606 --> 00:46:30,773
 This is how you get things like,
+这是你用于获取类似
 
 1133
 00:46:30,775 --> 00:46:33,108
 when was this file last accessed?
+这个文件最后的访问时间的方法。
 
 1134
 00:46:33,110 --> 00:46:34,443
@@ -5467,102 +5658,127 @@ when was this file last accessed?
 1135
 00:46:34,444 --> 00:46:35,777
 How big is this file in bytes, 'kay?
+也可以获取以byte为单位，文件的大小信息。
 
 1136
 00:46:35,779 --> 00:46:39,681
 That's this NSURL thing, resourceValuesForKeys.
+这就是 NSURL 的 resourceValuesForKeys 方法的作用。
 
 1137
 00:46:39,683 --> 00:46:43,150
 When you give it the keys, like files last change date or
+当你指定了类型， 比如文件最后修改日期或者别的
 
 1138
 00:46:43,152 --> 00:46:46,553
 whatever, and it's going to return in a dictionary,
+相关信息会在返回的字典里提供，
 
 1139
 00:46:46,555 --> 00:46:49,756
 rather, with those keys you gave and the values for
+进一步的，指定更多的类型则返回所有的
 
 1140
 00:46:49,758 --> 00:46:51,458
 all those things, 'kay?
+相关信息。
 
 1141
 00:46:51,460 --> 00:46:52,792
 Permissions, all that stuff.
+权限信息啦，等等。
 
 1142
 00:46:52,794 --> 00:46:56,062
-ResourceValuesForKeys.
+resourceValuesForKeys.
+resourceValuesForKeys.
 
 1143
 00:46:56,064 --> 00:46:58,030
 All right, now, I've got a URL,
+现在我有了一个 URL，
 
 1144
 00:46:58,032 --> 00:47:00,132
-I want to to write to the file system.
+I want to write to the file system.
+我想要写入到文件系统。
 
 1145
 00:47:00,134 --> 00:47:03,801
 How do I write something to the file system given the URL?
+这种情况下我如何把一些内容写入文件系统？
 
 1146
 00:47:03,803 --> 00:47:05,503
 And the answer is usually,
+答案通常是，
 
 1147
 00:47:05,505 --> 00:47:07,738
-you're going to use NS data, okay?
+you're going to use NSData, okay?
+你要使用NSData，okay？
 
 1148
 00:47:07,740 --> 00:47:10,574
 Might use the property list ones, like NSArray and
+也可以使用 property list 支持的类型， 比如 NSArray 跟
 
 1149
 00:47:10,576 --> 00:47:13,343
 NSDictionary and write a property list out to it.
+NSDictionary 然后输出一个 property list 文件。
 
 1150
 00:47:13,345 --> 00:47:16,412
 But you oftentimes can use NSData, cuz you have some
+不过你时常得使用NSData， 因为你有一些图像数据或者
 
 1151
 00:47:16,414 --> 00:47:19,415
 image data or some other data you want to write out,
+其他类型的数据想要输出，
 
 1152
 00:47:19,417 --> 00:47:21,016
 sound files, something.
+比如声音文件，等等。
 
 1153
 00:47:21,018 --> 00:47:24,619
 And so, you do that with NSData's method writeToURL,
+所以， 你只要调用 NSData 的方法，
 
 1154
 00:47:24,621 --> 00:47:26,171
 atomically.
+writeToURL(NSURL, automically: Bool)
 
 1155
 00:47:26,172 --> 00:47:27,722
 And so, writeToURL, you just give it a URL.
+这样， writeToURL, 你只要提供一个 URL。
 
 1156
 00:47:27,724 --> 00:47:30,157
 It will write that file out there.
+它就能把文件写到那里去。
 
 1157
 00:47:30,159 --> 00:47:34,061
 And the atomically means, write a temporary file,
+atomically 参数的意思是，先写一个临时文件，
 
 1158
 00:47:34,063 --> 00:47:36,730
 and then, remove the old file, and
+然后删掉老的文件，
 
 1159
 00:47:36,732 --> 00:47:39,866
 put the new one in an atomic transaction.
+再将新的临时文件移过去，整个过程保持原子级。
 
 1160
 00:47:39,868 --> 00:47:41,401
@@ -5571,10 +5787,12 @@ Okay?
 1161
 00:47:41,402 --> 00:47:42,935
 That way, if something happens in the middle of writing
+这样，如果在写文件的过程种发生了什么，
 
 1162
 00:47:42,937 --> 00:47:44,903
 the file, the file won't be half written.
+文件不会是个半成品。
 
 1163
 00:47:44,905 --> 00:47:46,872
@@ -5583,14 +5801,17 @@ Okay?
 1164
 00:47:46,873 --> 00:47:48,840
 It'll be always a completely written file.
+它永远是个完整的写入文件。
 
 1165
 00:47:48,842 --> 00:47:50,608
 And it'll return a Boolean,
+返回的布尔值，
 
 1166
 00:47:50,610 --> 00:47:52,744
 as to whether that was successful.
+表示操作是否成功。
 
 1167
 00:47:52,746 --> 00:47:53,995
@@ -5599,62 +5820,77 @@ Okay?
 1168
 00:47:53,996 --> 00:47:55,245
 So, that's the primary way you're going to write.
+这是一个首要的写文件的办法。
 
 1169
 00:47:55,248 --> 00:47:56,714
 That's how we're gonna do it in the demo.
+也是我们在 demo 里采用的方式。
 
 1170
 00:47:56,715 --> 00:47:58,181
 That's the number one way you're going to write.
+这是写文件的排行第一的方法。
 
 1171
 00:47:58,184 --> 00:48:00,917
 I told you that NSFileManager could do other things, too,
+我告诉过你们 NSFileManager 也能做别的事情。
 
 1172
 00:48:00,919 --> 00:48:03,319
 manipulate the file system, create directories,
+修改文件系统，创建目录，
 
 1173
 00:48:03,321 --> 00:48:04,370
 things like that.
+这类事情。
 
 1174
 00:48:04,371 --> 00:48:05,420
 You're gonna have to look at the documentation.
+你们必须去查看文档。
 
 1175
 00:48:05,423 --> 00:48:06,689
 There's quite a few functions in there.
+那里有一些函数。
 
 1176
 00:48:06,691 --> 00:48:08,190
 It also has a delegate.
+它也有个 delegate。
 
 1177
 00:48:08,192 --> 00:48:09,958
 Where it'll let you control things.
+可以让你来控制事物。
 
 1178
 00:48:09,960 --> 00:48:12,861
 There's like, should write file at path.
+比如说应该在某个路径写文件。
 
 1179
 00:48:12,863 --> 00:48:16,997
 Something along those lines where it's basically shoulds
+沿着这些是否应该发生的线路，
 
 1180
 00:48:16,999 --> 00:48:20,434
 that you can control whether something happens.
+你可以控制一些事情是否发生。
 
 1181
 00:48:20,436 --> 00:48:22,869
 And, so you can look all that up on documentations really,
+你们可以去查看以上的相关文档，
 
 1182
 00:48:22,871 --> 00:48:24,971
 it doesn't make sense for me to go over it all here.
+我不可能在这里把它们都过一边。
 
 1183
 00:48:24,973 --> 00:48:27,206
@@ -5663,258 +5899,322 @@ it doesn't make sense for me to go over it all here.
 1184
 00:48:27,208 --> 00:48:30,176
 >> Okay, so that's the file system, and
+好了，这些是文件系统。
 
 1185
 00:48:30,178 --> 00:48:33,512
-I will be demoing that in a moment in Tracks.
+I will be demoing that in a moment in Trax.
+待会儿我会在 Trax 里用它们做演示。
 
 1186
 00:48:33,514 --> 00:48:35,547
 But first I want to talk about Core Data,
+不过首先我要讨论一下 Core Data。
 
 1187
 00:48:35,549 --> 00:48:37,082
 the last persistence thing.
+最后的持久存储相关内容。
 
 1188
 00:48:37,084 --> 00:48:39,250
 How many people here are doing Core Data for
+这里有多少人在他们的最终大作业里
 
 1189
 00:48:39,252 --> 00:48:40,418
 their final project?
+使用了 Core Data？
 
 1190
 00:48:40,420 --> 00:48:42,920
 Wow, okay, so half of you.
+Wow， 一半啊。
 
 1191
 00:48:42,922 --> 00:48:44,522
 That's great.
+好现象。
 
 1192
 00:48:44,523 --> 00:48:46,123
 I'm really, really, really happy about that,
+对此我非常非常非常满意。
 
 1193
 00:48:46,125 --> 00:48:48,558
 cuz I didn't teach Core Data in detail this quarter.
+因为我没有在这学期里教授 Core Data 的细节。
 
 1194
 00:48:48,560 --> 00:48:50,126
 So I was hoping a lot of you would do it as your
+我希望你们里面的许多人能
 
 1195
 00:48:50,128 --> 00:48:51,477
 final project.
+在最终大作业里使用它。
 
 1196
 00:48:51,478 --> 00:48:52,827
 Cuz Core Data is actually an important thing to know.
+因为 Core Data 实际上是个很重要的东西。
 
 1197
 00:48:52,830 --> 00:48:54,630
 Not just as a way to store data but
+不仅仅是一种存储的方法，
 
 1198
 00:48:54,632 --> 00:48:57,599
 it's just conceptually understanding a little bit
+它也是概念性地了解部分
 
 1199
 00:48:57,601 --> 00:49:00,335
 more about how iOS works, and things like that.
+iOS 如何工作等相关事情的途径。
 
 1200
 00:49:00,337 --> 00:49:03,004
 Core Data, if you can figure out how to do that,
+如果你搞定了 Core Data，
 
 1201
 00:49:03,006 --> 00:49:06,073
 then you understood a little more about how iOS works.
+你就了解了更多 iOS 工作的原理。
 
 1202
 00:49:06,075 --> 00:49:08,308
 So for those of you who are not doing Core Data, I'll go
+所以对于那些不去接触 Core Data 的同学，
 
 1203
 00:49:08,310 --> 00:49:10,544
 through this quickly since most of you are doing it, but
+既然你们多数人会用到它，我会快速过一遍。
 
 1204
 00:49:10,546 --> 00:49:12,095
 what is Core Data?
+什么是 Core Data ？
 
 1205
 00:49:12,096 --> 00:49:13,645
-It's basically a way to store your data in a sequel
+It's basically a way to store your data in a SQL
+基本上它是一种把你的数据存放在
 
 1206
 00:49:13,648 --> 00:49:16,582
 database, basically, but in a totally object oriented way.
+SQL 数据库的方法， 通过一种完全是面向对象的方式。
 
 1207
 00:49:16,584 --> 00:49:18,651
-So you don't have to issue any sequel commands or
+So you don't have to issue any SQL commands or
+所以你没必要去写 SQL 命令或者
 
 1208
 00:49:18,653 --> 00:49:20,619
 anything like that, create rows and tables.
+类似的东西，创建行啊，表啊什么的。
 
 1209
 00:49:20,621 --> 00:49:22,487
 It's gonna create all that for you.
+它会为你创建这些。
 
 1210
 00:49:22,489 --> 00:49:26,724
 It's completely object-oriented API.
+它完全是面向对象的 API。
 
 1211
 00:49:26,726 --> 00:49:28,492
 It's a very powerful framework in iOS.
+这是个非常强大的 iOS 的 framework。
 
 1212
 00:49:28,494 --> 00:49:29,844
 It has a lot.
+它有很多内容。
 
 1213
 00:49:29,845 --> 00:49:31,195
 Most of you are getting it for your final project,
+大部分人会在最终大作业里使用它，
 
 1214
 00:49:31,197 --> 00:49:33,296
 even though you're only going to touch the basic thing of
+即使你只接触到非常基本的东西，
 
 1215
 00:49:33,298 --> 00:49:34,964
 setting properties and creating entities.
+比如设置 property 跟创建 entity。
 
 1216
 00:49:34,966 --> 00:49:37,567
 But there's a lot of really powerful querying things that.
+它含有很多非常强大的查询相关的东西。
 
 1217
 00:49:37,569 --> 00:49:40,036
 >> [COUGH]. >> Can happen in there.
+可以在这里发生。
 
 1218
 00:49:40,037 --> 00:49:42,504
 Most of the things you can do with SQL, you can do up in
+你用 SQL 可以完成的大多数事情，都可以
 
 1219
 00:49:42,507 --> 00:49:46,608
 the Core Data layer, things like optimistic locking and
+在 Core Data 这一层实现。比如说乐观锁以及
 
 1220
 00:49:46,610 --> 00:49:48,943
 all that stuff is all doable, so
+类似的东西都可以实现，
 
 1221
 00:49:48,945 --> 00:49:51,612
 it's a pretty powerful mechanism.
+所以它是一个非常强大的机制。
 
 1222
 00:49:51,614 --> 00:49:52,646
 It is backed by SQL, but
+它以 SQL 为基础实现，
 
 1223
 00:49:52,648 --> 00:49:54,348
 it can also be backed by other things.
+它也可以用别的来实现，
 
 1224
 00:49:54,350 --> 00:49:56,983
 XML, or you could even actually get involved and
+比如XML， 甚至你可以
 
 1225
 00:49:56,985 --> 00:49:59,052
 store the data in your own format, but
+用你自己实现的数据格式来实现，
 
 1226
 00:49:59,054 --> 00:50:01,020
 that would be very advanced usage.
+不过这些是高级用法。
 
 1227
 00:50:01,022 --> 00:50:01,887
 So how does it work?
+所以它是怎么工作的？
 
 1228
 00:50:01,889 --> 00:50:03,022
 How does Core Data work,
+Core Data 如何工作，
 
 1229
 00:50:03,024 --> 00:50:05,190
 you create this visual mapping in your schema.
+你在你的 schema 里创建可视化的映射。
 
 1230
 00:50:05,192 --> 00:50:08,326
 Okay, it's not like the parse that you saw at the Friday
+这个不像是几周前的周五课程提到的 parse
 
 1231
 00:50:08,328 --> 00:50:11,229
 section a couple weeks ago, that's schemaless.
+那里没有 shema。
 
 1232
 00:50:11,231 --> 00:50:13,698
 It's basically creating its schema on the fly, right?
+那基本上就是凭空创建 schema。
 
 1233
 00:50:13,700 --> 00:50:16,734
 It creates the rows and tables as you ask for them.
+只要你请求，它会创建行和表。
 
 1234
 00:50:16,736 --> 00:50:19,169
-This one you define your scheme upfront.
+This one you define your schema upfront.
+这一回你需要预先定义好 schema。
 
 1235
 00:50:19,171 --> 00:50:20,737
 What are going to be your objects,
+你的对象是什么，
 
 1236
 00:50:20,739 --> 00:50:23,339
 and what are going to be the object's properties on those
+这些对象的属性又是
 
 1237
 00:50:23,341 --> 00:50:25,391
 objects.
+什么。
 
 1238
 00:50:25,392 --> 00:50:27,442
 And then basically tables are kind of like classes if you
+基本上一个表就像是一个类，
 
 1239
 00:50:27,445 --> 00:50:29,278
 want to think of it that way.
+如果你想要用这样的方式去考虑。
 
 1240
 00:50:29,280 --> 00:50:32,848
 And then the columns and the tables are kind of like vars.
+然后表的列(column)就像是实例变量。
 
 1241
 00:50:32,850 --> 00:50:36,384
 Okay and then coordinator provides a way to have these
+然后 coordinator 提供了访问
 
 1242
 00:50:36,386 --> 00:50:40,054
 @NSManaged vars, where literally you just set the var
+@NSManaged 变量的方法，字面意思上你设置了变量值
 
 1243
 00:50:40,056 --> 00:50:43,924
 and it's gonna be go set the information in the database,
+则数据库里相应的信息会被改变，
 
 1244
 00:50:43,926 --> 00:50:47,795
 and of course you can query on all this stored data as well.
+当然你可以查询所有存储的数据。
 
 1245
 00:50:47,797 --> 00:50:50,163
 You create the schema with this visual map.
+你用可视化映射的方式创建了 schema。
 
 1246
 00:50:50,165 --> 00:50:54,667
-You do new file and you create this thing data model.
+You do new file and you create this thing data, which uses the thing data model.
+你操作新文件，于是你用 data model 创建了 data。
 
 1247
 00:50:54,669 --> 00:50:58,070
 You're gonna get this thing, it kinda looks like this.
+你会得到这个，看上去像是这样。
 
 1248
 00:50:58,072 --> 00:50:59,989
@@ -5923,230 +6223,287 @@ Okay?
 1249
 00:50:59,990 --> 00:51:01,907
 It's a graphical, piece of graph paper looking thing, and
+它是图像化的，一张类似图纸的东西，
 
 1250
 00:51:01,909 --> 00:51:04,642
 you can actually create things that look like class like
+你实际上可以创建跟类一样的东西，就像这个例子里的
 
 1251
 00:51:04,644 --> 00:51:06,177
 photo and photographer here.
+photo 跟 photographer 一样。
 
 1252
 00:51:06,179 --> 00:51:08,846
 And then you can create the columns in the database, and
+然后你可以在数据库里创建列，
 
 1253
 00:51:08,848 --> 00:51:10,615
 then you can create
+然后你可以通过
 
 1254
 00:51:10,616 --> 00:51:12,383
 relationships by controlled dragging between them.
+拖拽来建立关联。
 
 1255
 00:51:12,385 --> 00:51:15,452
 So you're gonna create your schema totally
+所以你可以完全用图像化方式
 
 1256
 00:51:15,454 --> 00:51:16,953
 graphically there.
+来创建 schema。
 
 1257
 00:51:16,955 --> 00:51:19,222
 Then you get this UIManagedContext.
+然后你要拿到 UIManagedContext。
 
 1258
 00:51:19,224 --> 00:51:22,858
 That's kind of your handle, your hook, on your database.
+这是你的数据库的handle，或者说hook。
 
 1259
 00:51:22,860 --> 00:51:24,593
 There's a couple different ways to do that.
+有好几种方式去获得。
 
 1260
 00:51:24,595 --> 00:51:27,162
 There's some code that can be generated when you create your
+当你创建工程的时候，有一些代码可以自动生成。
 
 1261
 00:51:27,164 --> 00:51:29,431
 project, you can click on the Use Core Data button and
+你只需要选择 “Use Core Data” 这一选项，
 
 1262
 00:51:29,433 --> 00:51:31,666
 it will create this code for you in your app delegate,
+它就会在 app delegate 里生成相关代码，
 
 1263
 00:51:31,668 --> 00:51:33,801
 and then you will have a method in your app delegate
+你会在 app delegate 里得到一个
 
 1264
 00:51:33,803 --> 00:51:35,202
-called manageObjectContext.
+called managedObjectContext.
+名为 managedObjectContext 的方法。
 
 1265
 00:51:35,204 --> 00:51:36,903
 Now you have a handle to your database and
+现在你有了数据库的一个 handle ，
 
 1266
 00:51:36,905 --> 00:51:38,672
 you can start creating objects in there or
+你可以开始在里面创建对象或者
 
 1267
 00:51:38,674 --> 00:51:39,972
 setting the values of things.
+设置一些东西的值。
 
 1268
 00:51:39,974 --> 00:51:41,707
 There's also another class,
+另外还存在一个类，
 
 1269
 00:51:41,709 --> 00:51:44,410
 an important class called UIManagedDocument,
+一个叫做 UIManagedDocument 的重要的类，
 
 1270
 00:51:44,412 --> 00:51:47,512
 it's a way to encapsulate a Core Data database, okay?
+它是对于一个 Core Data 数据库的封装。
 
 1271
 00:51:47,514 --> 00:51:50,915
 What's really cool about UIManagedDocument, if you use
+UIManagedDocument 最酷的一点是，如果你
 
 1272
 00:51:50,917 --> 00:51:53,851
-data approach versus the Use Core Data approach,
+that approach versus the Use Core Data approach,
+它的方式，相对于使用 Core Data 方式，
 
 1273
 00:51:53,853 --> 00:51:56,754
 is that the iCloud side of it becomes a lot easier.
+iCloud 的部分变得简单得多。
 
 1274
 00:51:56,756 --> 00:51:59,456
-So if you wanted to have your core database work on
+So if you wanted to have your core data database work on
+所以如果你想要在
 
 1275
 00:51:59,458 --> 00:52:02,225
 iCloud so that I could see it on all my devices, and
+iCloud 上使用 Core Data 数据库，以便用户能在所有的设备上
 
 1276
 00:52:02,227 --> 00:52:04,627
 it would be automatically synchronized,
+自动同步数据，
 
 1277
 00:52:04,629 --> 00:52:06,863
 then you wanna use UIManagedDocument.
+那么你最好使用 UIManagedDocument。
 
 1278
 00:52:06,865 --> 00:52:08,898
 So maybe some of you.
+可能你们有些人，
 
 1279
 00:52:08,899 --> 00:52:10,932
 Anybody trying to use UIManagedDocument?
+任何人在尝试使用 UIManagedDocument 吗？
 
 1280
 00:52:10,935 --> 00:52:14,236
 'Kay, so that is kind of like the next step
+这有点像是使用
 
 1281
 00:52:14,238 --> 00:52:17,439
 you would think about doing in Core Data.
+Core Data 后的下一步进阶。
 
 1282
 00:52:17,441 --> 00:52:19,541
 All right, so once you have this context,
+好了， 一旦你们拿到这个 context，
 
 1283
 00:52:19,543 --> 00:52:20,742
 the handle on the deck,
+甲板（口误）上的 handle，
 
 1284
 00:52:20,744 --> 00:52:23,144
-on this core database, you can create objects.
+on this core data database, you can create objects.
+这个 Core Data 数据库的 handle， 你可以创建对象了。
 
 1285
 00:52:23,146 --> 00:52:26,213
 You do that with this NSEntityDescription class
+你可以使用 NSEntityDescription 类的
 
 1286
 00:52:26,215 --> 00:52:29,349
-method called InsertNewObjectForEntityForN-
+method called insertNewObjectForEntityForName,
+insertNewObjectForEntityForName 方法来实现，
 
 1287
 00:52:29,351 --> 00:52:32,852
-ame, and you're basically just specifying the name of
+and you're basically just specifying the name of
+基本上你只要设定表的名称，
 
 1288
 00:52:32,854 --> 00:52:35,254
 the table, which is like a class, and
+就像一个类一样，
 
 1289
 00:52:35,256 --> 00:52:37,990
 you give it the managedObjectContext, and
+然后你再给它一个 managedObjectContext，
 
 1290
 00:52:37,992 --> 00:52:41,893
 it will create a new instance, okay, a new row in that table,
+它就会创建一个实例， 或者，表里的一个新的行，
 
 1291
 00:52:41,895 --> 00:52:44,062
 to use the database terminology.
+用数据库术语是这么描述的。
 
 1292
 00:52:44,064 --> 00:52:47,098
 And it's gonna return to you this NSManagedObject, or
+然后它会把这个 ManagedObject，
 
 1293
 00:52:47,100 --> 00:52:48,199
 subclass thereof.
+或者它的子类返回给你
 
 1294
 00:52:48,201 --> 00:52:51,235
 And it's with this NSManagedObject that you
+拿着这个 NSManagedObject 你可以
 
 1295
 00:52:51,237 --> 00:52:54,538
 can set the columns, set the values in that row.
+设置列， 设置那一行的值。
 
 1296
 00:52:54,540 --> 00:52:55,605
 You can also fetch,
+你也可以查询，
 
 1297
 00:52:55,607 --> 00:52:58,341
 you create these things called NSFetchRequests.
+你创建叫做 NSFetchRequests 的对象。
 
 1298
 00:52:58,343 --> 00:53:01,911
 They basically specify what you're looking for,
+他们基本上指定了你想要搜索的东西，
 
 1299
 00:53:01,913 --> 00:53:05,414
 pretty powerful predicates in there for saying,
+非常强大的谓语表达，比如
 
 1300
 00:53:05,416 --> 00:53:09,151
 well I want all things, all of the rows whose column is
+我想要所有的满足以下条件的事物: 所有的行里，它的列
 
 1301
 00:53:09,153 --> 00:53:11,820
 called name starts with the letter a.
+名称以 a 为首字母。
 
 1302
 00:53:11,822 --> 00:53:14,822
 You can do that kind of fetch request and then you issue
+你可以做这样的查询请求然后你提交
 
 1303
 00:53:14,824 --> 00:53:17,692
-the fetch request and you get it back as an NS Array.
+the fetch request and you get it back as an NSArray.
+这个查询然后你得到一个 NSArray 的结果。
 
 1304
 00:53:17,694 --> 00:53:21,328
-This fetched object thing would be an NS array, or
+This fetched object thing would be an NSArray, or
+这个查询结果是个 NSArray，
 
 1305
 00:53:21,330 --> 00:53:23,764
-an array, of NS managed object.
+an array of NSManaged object.
+一个 NSManaged 对象的数组。
 
 1306
 00:53:23,766 --> 00:53:25,031
@@ -6155,166 +6512,206 @@ Okay?
 1307
 00:53:25,033 --> 00:53:28,801
 And so that's kind of what you can do with a database.
+这就是你对一个数据库可以进行的操作。
 
 1308
 00:53:28,803 --> 00:53:31,737
 Once you have these objects, these NSManaged objects,
+一旦你持有这些对象，这些 NSManaged 对象,
 
 1309
 00:53:31,739 --> 00:53:34,506
 you can use these two methods, the setValueForKey and
-
+你可以使用这两个方法， setValue(, forKey:) 和
 1310
 00:53:34,508 --> 00:53:36,942
 valueForKey to set and get the values in there.
+valueForKey() 来设置跟获得里面的值。
 
 1311
 00:53:36,944 --> 00:53:38,977
 Or even better,
+或者更好地，
 
 1312
 00:53:38,978 --> 00:53:41,011
 you can create subclasses of NSManaged objects.
+你可以创建 NSManaged 对象的子类。
 
 1313
 00:53:41,014 --> 00:53:43,781
 That have these apps on NSManagedObject vars, and
+这些拥有跟 NSManaged 对象同样的成员变量，
 
 1314
 00:53:43,783 --> 00:53:45,916
 Core Data will automatically make it so
+Core Data 会自动生成于是
 
 1315
 00:53:45,918 --> 00:53:48,719
 that if you set that var, it sets it in the database.
+如果你设置了成员变量， 它会改变数据库里对应的值。
 
 1316
 00:53:48,721 --> 00:53:50,954
 And if you get that var,
+如果你要获取成员变量的值，
 
 1317
 00:53:50,956 --> 00:53:54,957
 it'll fetch it from the database, okay?
+它会从数据库了查找对应的值， okay？
 
 1318
 00:53:54,959 --> 00:53:59,294
-So, you use normal SWF notation for that.
+So, you use normal Swift notation for that.
+这里使用了 Swift 的 notation.
 
 1319
 00:53:59,296 --> 00:54:03,431
 Okay, so that's kinda what Core Data's about in its core.
+Okay， 这就是 Core Data 的核心(core)。
 
 1320
 00:54:03,433 --> 00:54:06,334
 Pun intended, no pun intended.
+一语双关，不是含沙射影。
 
 1321
 00:54:06,336 --> 00:54:09,470
 Core Data is also really good at hooking up to table views.
+Core Data 同样非常擅长跟 table view 配合。
 
 1322
 00:54:09,472 --> 00:54:13,307
 Cuz you can imagine you've got these big tables of data in
+想象一下你拿到了一个巨大的 Core Data 的表数据，
 
 1323
 00:54:13,309 --> 00:54:16,976
 Core Data, and it'd be nice to have a table view that is
+那么用一个 table view 去
 
 1324
 00:54:16,978 --> 00:54:18,745
 displaying all the rows or
+显示所有表里所有的行
 
 1325
 00:54:18,747 --> 00:54:21,681
 some subset of the rows based on some query.
+或者行的子集，通过一些查询来处理。
 
 1326
 00:54:21,683 --> 00:54:25,417
 In the table view, and so there's this class called
+在 table view 里，iOS 上存在一个
 
 1327
 00:54:25,419 --> 00:54:29,788
 NSFetchedResultsController in iOS, a super simple class.
+名为 NSFetchedResultsController 的类， 非常简单的类。
 
 1328
 00:54:29,790 --> 00:54:32,390
 It basically, you give it a fetch request, and
+它基本上就是，你给它一个查询请求，
 
 1329
 00:54:32,392 --> 00:54:35,659
 you associate it with a table view, and then that table view
+然后给它关联一个 table view， 然后 table view
 
 1330
 00:54:35,661 --> 00:54:38,662
 will always show what that fetch request would fetch,
+就会永远显示查询请求得到的结果，
 
 1331
 00:54:38,664 --> 00:54:41,298
 even if the database changes out from under it.
+即使数据库发生了改变。
 
 1332
 00:54:41,300 --> 00:54:43,066
 'Kay, cuz you add something, and
+因为你们增加了一些东西，
 
 1333
 00:54:43,068 --> 00:54:45,868
 the thing you added matches that fetch request, boom,
+增加的东西满足查询请求，轰隆，
 
 1334
 00:54:45,870 --> 00:54:48,337
 it will just automatically appear in the table.
+它会自动出现在表里。
 
 1335
 00:54:48,339 --> 00:54:51,106
 'Kay, so you don't have to be doing all, basically,
+所以你什么都不用做，基本上
 
 1336
 00:54:51,108 --> 00:54:54,076
-the FetchedResultController will implement all of your UI
+the FetchedResultController will implement all of your 
+FetchedResultController 会自动实现所有的
 
 1337
 00:54:54,078 --> 00:54:56,211
-table of your data source methods for you.
+UITableViewDatasource methods for you.
+UITableViewDatasource 方法。
 
 1338
 00:54:56,213 --> 00:54:58,446
 How many rows in table, how many rows in section.
+表里有多少行， 每个 section 里有多少 row。
 
 1339
 00:54:58,448 --> 00:55:00,514
 Give me the self or own index path.
+给我 self 或者 自己的 index path，
 
 1340
 00:55:00,516 --> 00:55:02,082
 You have to do your own self or
+你需要去处理自己的 self
 
 1341
 00:55:02,084 --> 00:55:04,251
 own index path to do the UI part of it, but
+或者 自己的 index path 来绘制相关 UI，
 
 1342
 00:55:04,253 --> 00:55:07,387
 there's one method in the FetchResultsController that
+不过 FetchResultsController 一个方法
 
 1343
 00:55:07,389 --> 00:55:10,089
 will tell you which managed object is in this row,
+会告诉你在表里的这一行使用了
 
 1344
 00:55:10,091 --> 00:55:11,824
 in the table.
+哪个 managed 对象。
 
 1345
 00:55:11,825 --> 00:55:13,558
 So if you're doing Core Data for your final project and
+所以如果你在最终大作业里使用了 Core Data 并且
 
 1346
 00:55:13,561 --> 00:55:14,960
 you're doing table views,
+采用了 UITableView，
 
 1347
 00:55:14,962 --> 00:55:18,030
 you definitely want to look up NSFetchedResultsController.
+你绝对应该去看一下 NSFetchedResultsController。
 
 1348
 00:55:18,032 --> 00:55:19,798
@@ -6323,110 +6720,137 @@ Okay.
 1349
 00:55:19,800 --> 00:55:21,899
 All right, so the demo that I'm gonna do,
+好了，这就是我要去做的演示，
 
 1350
 00:55:21,901 --> 00:55:24,735
 I'm not gonna demo Core Data, don't have time for that.
+我不会去演示 Core Data， 没时间了。
 
 1351
 00:55:24,737 --> 00:55:27,104
 So I'm just gonna demo the file system piece.
+所以我只会演示文件系统部分。
 
 1352
 00:55:27,106 --> 00:55:31,074
 And we're gonna do that by making our waypoint.
+我们通过制作我们的 waypoint 来演示。
 
 1353
 00:55:31,076 --> 00:55:35,078
 Store the image that we took with the camera as a JPG in
+把我们拍摄的相片以 JPG 格式存储到
 
 1354
 00:55:35,080 --> 00:55:36,445
 the file system.
+文件系统里。
 
 1355
 00:55:36,447 --> 00:55:38,280
 And then we'll have a URL to it,
+然后我们会有一个指向它的 URL，
 
 1356
 00:55:38,282 --> 00:55:39,881
 we can update the waypoint.
+我们可以更新 waypoint 。
 
 1357
 00:55:39,883 --> 00:55:44,018
-And our new edit away points will work just like the ones
+And our new edited waypoints will work just like the ones
+然后我们新编辑的 waypoint 可以跟
 
 1358
 00:55:44,020 --> 00:55:45,820
 that come in a GPX file.
+来源于 GPX 文件的 waypoint 一样正常工作。
 
 1359
 00:55:45,822 --> 00:55:50,357
 All right, so what do we need to do to do this?
+好了，我们需要那些东西？
 
 1360
 00:55:50,359 --> 00:55:55,261
 Really, all I'm gonna do here when I take a photo, okay,
+实际上，我之遥在这里照个相，okay，
 
 1361
 00:55:55,263 --> 00:55:59,398
 and the information comes back in the delegate,
+然后信息通过 delegate 传回来，
 
 1362
 00:55:59,400 --> 00:56:03,135
-I'm just gonna say SaveImageInWaypoint.
+I'm just gonna say saveImageInWaypoint.
+我把它命名为 saveImageInWaypoint。
 
 1363
 00:56:03,137 --> 00:56:07,672
-'Kay, remember that this NBC, its model.
+'Kay, remember that this MVC, its model.
+'Kay, 记住这个 MVC， 它的 model，
 
 1364
 00:56:07,674 --> 00:56:10,474
 Is the waypoint that we're editing.
+是我们要编辑的 waypoint。
 
 1365
 00:56:10,476 --> 00:56:12,843
 So, I'm just gonna have a little method here,
+我要在这里创建一个小的方法，
 
 1366
 00:56:12,845 --> 00:56:14,111
+saveImageInWaypoint.
 saveImageInWaypoint.
 
 1367
 00:56:14,113 --> 00:56:19,282
 So let's implement that, saveImageInWaypoint.
+所以，我们来实现它。
 
 1368
 00:56:19,284 --> 00:56:22,918
 And all we're gonna do here is we have the image,
+这里需要做的事情是，我们持有图片，
 
 1369
 00:56:22,920 --> 00:56:26,922
 we already got it, put it here in our UI view image, so
+我们已经拿到了，放在 imageView 的 image 里，
 
 1370
 00:56:26,924 --> 00:56:29,257
 I'll just get it out of there.
+所以我只需要把它从那里取出来。
 
 1371
 00:56:29,259 --> 00:56:31,859
 And we're just gonna write it in the file system and
+然后我要把它写到文件系统里，
 
 1372
 00:56:31,861 --> 00:56:34,595
 then we're gonna update the waypoint to use that URL,
+然后我们要根据 URL 来更新 waypoint ，
 
 1373
 00:56:34,597 --> 00:56:35,462
 simple as that.
+就这么简单。
 
 1374
 00:56:35,464 --> 00:56:38,632
 So, if we can get that image, so
+如果我们能拿到那个 image，
 
 1375
 00:56:38,634 --> 00:56:41,668
 if our imageView has an image.
+如果 imageView 持有一个 image。
 
 1376
 00:56:41,670 --> 00:56:42,402
@@ -6435,22 +6859,27 @@ Okay?
 1377
 00:56:42,404 --> 00:56:43,903
 Because they could be nil.
+因为他们可能是 nil。
 
 1378
 00:56:43,905 --> 00:56:46,972
 It might have been set to nil by some means,
+它可能因为一些原因而被设置为 nil，
 
 1379
 00:56:46,974 --> 00:56:50,142
 then I'm gonna get the image data as a JPEG.
+我要以 JPEG 格式获取图片数据。
 
 1380
 00:56:50,144 --> 00:56:54,145
 And the way you do that, there's this cool function,
+为了达到这个目的， 有个酷酷的函数，
 
 1381
 00:56:54,147 --> 00:56:58,516
-UIImageJPEGRepresentatio and you just give it a UIImage.
+UIImageJPEGRepresentation and you just give it a UIImage.
+叫做 UIImageJPEGRepresentation， 你只要给它一个 UIImage。
 
 1382
 00:56:58,518 --> 00:56:59,934
@@ -6459,10 +6888,12 @@ Okay?
 1383
 00:56:59,935 --> 00:57:01,351
 And you give it a compression quality.
+然后指定压缩质量。
 
 1384
 00:57:01,354 --> 00:57:03,520
 So, I'm gonna do really high compression.
+我要使用一个非常高的压缩率。
 
 1385
 00:57:03,522 --> 00:57:05,238
@@ -6471,14 +6902,17 @@ Okay?
 1386
 00:57:05,239 --> 00:57:06,955
 So this is a quality between zero I think,
+我猜测这个质量是介于0，
 
 1387
 00:57:06,958 --> 00:57:10,293
 which is like the most compressed you can do to one,
+也就是你可以对图片进行的最大压缩，和1，
 
 1388
 00:57:10,295 --> 00:57:12,795
 which is like almost no compression.
+也就是几乎不做任何压缩，这两个值之间。
 
 1389
 00:57:12,797 --> 00:57:14,096
@@ -6487,26 +6921,32 @@ Okay?
 1390
 00:57:14,098 --> 00:57:15,597
 I think that's the direction it is,
+我想这就是它的方向，
 
 1391
 00:57:15,599 --> 00:57:17,182
 I hope that is what it is.
+我希望这就是它的含义。
 
 1392
 00:57:17,183 --> 00:57:18,766
 But anyway, so you can look at the documentation for it.
+不过你可以去翻阅相关文档。
 
 1393
 00:57:18,769 --> 00:57:22,036
 But we're gonna turn our image here
+我们在这里转换图片
 
 1394
 00:57:22,038 --> 00:57:24,739
 into by doing this in NSData.
+为 NSData 格式。
 
 1395
 00:57:24,741 --> 00:57:28,275
 So this is going to return in NSData.
+它会返回一段 NSData
 
 1396
 00:57:28,277 --> 00:57:31,678
@@ -6515,106 +6955,132 @@ If we look at the up here, see that is NSData.
 1397
 00:57:31,680 --> 00:57:33,513
 So, it's gonna turn our image into NSData.
+所以，它会把我们的图片转为 NSData。
 
 1398
 00:57:33,515 --> 00:57:36,315
 It's kinda the opposite of NSData contents for URL,
+它是 NSData 的 contentsForURL 的反面，
 
 1399
 00:57:36,317 --> 00:57:38,684
 which is the opposite it would take the URL for
+这是获得 URL 指向的数据
 
 1400
 00:57:38,686 --> 00:57:40,586
 some data and turn it into UIImage.
+然后把数据转换为 UIImage。
 
 1401
 00:57:40,588 --> 00:57:43,588
 This goes back the other way for JPG.
+这个把 JPG 转换回去了。
 
 1402
 00:57:43,590 --> 00:57:46,224
 So, if we're able to do that conversion, then I'm
+所以，如果我们能做这个转换， 我要
 
 1403
 00:57:46,226 --> 00:57:48,860
 gonna get the fileManager here as a local variable.
+在这里以 fileManager 为局部变量。
 
 1404
 00:57:48,862 --> 00:57:51,962
 I could just constantly, I could use the defaultManager
+这里我使用常量， 我要使用 defaultManager
 
 1405
 00:57:51,964 --> 00:57:54,732
 by defaultManager you see I'm in the main thread.
+使用 defaultManager 你明白我在主线程里。
 
 1406
 00:57:54,734 --> 00:57:57,701
 But just in case I ever put this in a separate thread or
+不过以防万一，我把这个放到别的线程，
 
 1407
 00:57:57,703 --> 00:58:01,004
 something, I'll go ahead and use an instance of it here.
+我要在这里使用它的一个实例。
 
 1408
 00:58:01,006 --> 00:58:03,172
 So now I need to get the documents directory,
+这里我需要拿到 Documents 目录，
 
 1409
 00:58:03,174 --> 00:58:04,940
-because these waypoints, really,
+because these waypoints, really
+因为这些 waypoint ，确实是
 
 1410
 00:58:04,942 --> 00:58:07,276
 the user perceives them as their document data.
+用户的存档数据。
 
 1411
 00:58:07,278 --> 00:58:08,610
 That's where you would want to store this.
+那个目录就是用来存储这些的。
 
 1412
 00:58:08,612 --> 00:58:10,612
 It's not like a cache that we can't ever get back.
+这不像是缓存，我们无法重新拿回来。
 
 1413
 00:58:10,614 --> 00:58:12,580
 We need that photo if we lose it.
+如果我们丢失了图片，我们需要它。
 
 1414
 00:58:12,582 --> 00:58:14,949
 It's gone forever.
+它永远消失了。
 
 1415
 00:58:14,950 --> 00:58:17,317
 So, and again, we might really want to be saving this in
+我们可能真的要把它存到
 
 1416
 00:58:17,319 --> 00:58:18,719
 the photo library.
+相片库。
 
 1417
 00:58:18,721 --> 00:58:21,221
 But I'm just trying to demo here how to do the file
+不过我正在演示如何处理文件系统，
 
 1418
 00:58:21,223 --> 00:58:23,489
 system, so that's why we're doing that.
+所以这就是我们的处理方式。
 
 1419
 00:58:23,491 --> 00:58:26,392
 So, I'm gonna get the documents directory and
+所以我要拿到 Documents 目录，
 
 1420
 00:58:26,394 --> 00:58:28,994
 so here's a nice long line of code for you.
+这里有行不错的，长长的代码。
 
 1421
 00:58:28,996 --> 00:58:32,464
 Take the fileManager, we're gonna get the URLs for
+拿着 fileManager， 然后我们要获得
 
 1422
 00:58:32,466 --> 00:58:33,364
 directory.
+URLsForDirectory。
 
 1423
 00:58:33,366 --> 00:58:36,634
@@ -6623,18 +7089,22 @@ Okay?
 1424
 00:58:36,635 --> 00:58:39,903
 The directory we want is the DocumentsDirectory and
+我们想要获得的目录是 DocumentsDirectory，
 
 1425
 00:58:39,905 --> 00:58:45,408
 the domain always on the iPhone is the UserDomain.
+在 iPhone 上 domain 永远是 UserDomain...
 
 1426
 00:58:45,410 --> 00:58:47,543
 More space please.
+把编辑器调大些。
 
 1427
 00:58:47,545 --> 00:58:50,279
 The UserDomainMask here.
+这里 UserDomainMask。
 
 1428
 00:58:50,281 --> 00:58:51,764
@@ -6643,10 +7113,12 @@ Okay?
 1429
 00:58:51,765 --> 00:58:53,248
 So that's gonna get this array of URLs and
+这将会得到一个 URL 的数组，
 
 1430
 00:58:53,250 --> 00:58:55,650
 I'm just gonna get the first one out of there.
+我会取出数组里的第一个元素。
 
 1431
 00:58:55,652 --> 00:58:57,986
@@ -6655,22 +7127,27 @@ Okay?
 1432
 00:58:57,987 --> 00:59:00,321
 And then I'm gonna make sure that it's cast to URL.
+我要确保它被转换成 URL 类型。
 
 1433
 00:59:00,323 --> 00:59:04,592
 So, if all of this succeeds, then I got
+如果这些都成功了，那么
 
 1434
 00:59:04,594 --> 00:59:09,996
 the documents directory and what did I miss here?
+我会拿到 Documents 目录。这里我漏掉了什么？
 
 1435
 00:59:09,998 --> 00:59:14,667
 DocumentsDirectory.
+多了个s。
 
 1436
 00:59:14,669 --> 00:59:15,568
 There we go.
+我们继续。
 
 1437
 00:59:15,570 --> 00:59:18,304
@@ -6679,10 +7156,12 @@ Okay?
 1438
 00:59:18,305 --> 00:59:21,039
 So this will end up being a NSURL that
+所以这里最后得到一个 NSURL，
 
 1439
 00:59:21,041 --> 00:59:25,677
 points to the DocumentDirectory.
+指向存档目录。
 
 1440
 00:59:25,679 --> 00:59:27,145
@@ -6691,58 +7170,72 @@ Okay?
 1441
 00:59:27,146 --> 00:59:28,612
 So now I have a DocumentDirectory,
+现在我有了存档目录，
 
 1442
 00:59:28,614 --> 00:59:31,715
 I need a unique name for this photo that I just took.
+我需要对我刚拍的照片取个唯一的名字。
 
 1443
 00:59:31,717 --> 00:59:34,951
 So, I'm gonna create that by just saying,
+我这么实现：
 
 1444
 00:59:34,953 --> 00:59:38,655
-NSDate.TimeIntervalSinceRefer- enceDate.
+NSDate.timeIntervalSinceReferenceDate
+NSDate.timeIntervalSinceReferenceDate
 
 1445
 00:59:38,657 --> 00:59:40,590
 So this is just a certain number of seconds.
+这是一个关于多少秒的数字，
 
 1446
 00:59:40,592 --> 00:59:42,892
 This is just a unique number.
+是唯一的数字。
 
 1447
 00:59:42,894 --> 00:59:44,193
 It's gonna be a double.
+double 类型。
 
 1448
 00:59:44,195 --> 00:59:47,896
 That unique identifies this photo, because it can't have
+这个唯一确认了这张图， 因为你不可能
 
 1449
 00:59:47,898 --> 00:59:50,765
 two photos taken at the same instance in time.
+用同一实例及时地拍两张照片。
 
 1450
 00:59:50,767 --> 00:59:52,200
 So we got that.
+所以我们搞定了。
 
 1451
 00:59:52,202 --> 00:59:54,886
 And then so
+然后
 
 1452
 00:59:54,887 --> 00:59:57,571
 I'm gonna let the URL for my photo be the docsDir and then
+我要设定我的照片的 URL 为 docsDir 调用
 
 1453
 00:59:57,573 --> 01:00:02,642
 URLByAppendingPathComponent and then I'm just gonna create
+URLByAppendingPathComponent 方法， 我用
 
 1454
 01:00:02,644 --> 01:00:07,347
 a string out of that unique and we'll say that it's a jpg.
+这个唯一数字创建字符串，外加 jpg 扩展名作为参数补在后面。
 
 1455
 01:00:07,349 --> 01:00:08,147
@@ -6751,38 +7244,47 @@ Okay?
 1456
 01:00:08,149 --> 01:00:10,582
 So now I've created a URL,
+现在我创建了一个 URL，
 
 1457
 01:00:10,584 --> 01:00:15,320
 which is just this unique string with JPG on the end.
+就是这个唯一字符串，以 jpg 结尾的。
 
 1458
 01:00:15,322 --> 01:00:17,722
 So now, if I can get the path to that URL.
+所以如果我能拿到 URL 指向的路径。
 
 1459
 01:00:17,724 --> 01:00:19,557
 So this is gonna take the URL and
+这需要拿 URL 转换
 
 1460
 01:00:19,559 --> 01:00:21,325
 turn it into a string, okay?
+成一个字符串，okay？
 
 1461
 01:00:21,327 --> 01:00:23,293
 Cuz URLs are in this URL objects.
+因为 URL 在这个 URL 对象里。
 
 1462
 01:00:23,295 --> 01:00:25,562
 I want the string, you'll see why in a second here.
+我需要的是字符串， 你们马上会看到为什么会这样。
 
 1463
 01:00:25,564 --> 01:00:29,432
-If I can get that, then I'm gonna take that ImageData and
+If I can get that, then I'm gonna take that imageData and
+如果能够拿到，我就用 imageData
 
 1464
 01:00:29,434 --> 01:00:33,435
-write it out to that URL and I'm gonna do it anatomically.
+write it out to that URL and I'm gonna do it atomically.
+向着 URL 输出且要求这是原子级操作。
 
 1465
 01:00:33,437 --> 01:00:34,386
@@ -6791,34 +7293,42 @@ Okay?
 1466
 01:00:34,387 --> 01:00:35,336
 And if that succeeded,
+如果成功，
 
 1467
 01:00:35,339 --> 01:00:37,605
 if I was able to successfully do that,
+如果我成功地完成了这些，
 
 1468
 01:00:37,607 --> 01:00:41,142
 then I can add it to the way point by saying, waypointLink.
+那么我可以把它添加到 waypoint，这么实现: waypointLink..
 
 1469
 01:00:41,144 --> 01:00:44,945
 And I'm just gonna replace all of my waypoint
+我要把我所有的 waypoint 链接
 
 1470
 01:00:44,947 --> 01:00:49,349
 links with a GPX.Link, which is href of that path,
+用 GPX.Link 来替换。href 参数使用刚才得到的 path，
 
 1471
 01:00:49,351 --> 01:00:52,152
 the string version of the NSURL.
+即前一步获取的 NSURL 的字符串版本。
 
 1472
 01:00:52,154 --> 01:00:57,123
 Because GPX.Link, it's a generic GPX parsing thing.
+因为 GPX.Link 有一个泛型的 GPX 解析器。
 
 1473
 01:00:57,125 --> 01:01:01,493
 It takes strings, it takes URLs as strings here.
+它可以接受字符串为参数，也可以接受作为字符串的 URL 为参数。
 
 1474
 01:01:01,495 --> 01:01:02,727
@@ -6827,22 +7337,27 @@ Okay?
 1475
 01:01:02,729 --> 01:01:05,496
 Everyone understand all this code?
+大家都看明白所有代码了吗？
 
 1476
 01:01:05,498 --> 01:01:06,931
 This is typical code for
+这是个典型的
 
 1477
 01:01:06,933 --> 01:01:09,299
 writing something out into your file.
+将一些内容输出到文件的代码。
 
 1478
 01:01:09,301 --> 01:01:11,301
 So come into your Sandbox, in this case,
+所以去你的沙盒里，在这个例子里，
 
 1479
 01:01:11,303 --> 01:01:13,103
 the DocumentDirectory of Sandbox.
+沙盒的存档目录。
 
 1480
 01:01:13,105 --> 01:01:14,404
@@ -6851,14 +7366,17 @@ All right.
 1481
 01:01:14,405 --> 01:01:15,704
 So let's go ahead and run that.
+让我们前进，运行程序。
 
 1482
 01:01:15,707 --> 01:01:20,743
 It's good being
+最好
 
 1483
 01:01:20,745 --> 01:01:26,915
 on the iPhone here.
+在 iPhone 上跑下。
 
 1484
 01:01:26,917 --> 01:01:29,484
@@ -6867,42 +7385,52 @@ Okay.
 1485
 01:01:29,485 --> 01:01:32,052
 So let's drop a pin here and can see that we have our
+我们在这里钉个大头针，可以看到我们的
 
 1486
 01:01:32,055 --> 01:01:35,723
 dropped there and we have no image yet, so
+“Dropped” 在那里而且我们还没有图片。
 
 1487
 01:01:35,725 --> 01:01:40,326
-let's click on our little eye here and get an image.
+let's click on our little i here and get an image.
+所以点击这个小小的 “i” 来得到一张图片。
 
 1488
 01:01:40,328 --> 01:01:44,330
 So, I'm going to click the camera.
+所以，我要点击摄像机。
 
 1489
 01:01:44,332 --> 01:01:49,334
 Let's get a picture of our R2D2 hat here.
+我们来拍一张 R2D2 帽子的照片。
 
 1490
 01:01:49,336 --> 01:01:50,201
 There we go.
+继续。
 
 1491
 01:01:50,203 --> 01:01:51,803
 And we'll use that photo.
+我们使用了这张照片。
 
 1492
 01:01:51,805 --> 01:01:53,304
 And now we have our image.
+现在我们有了图片。
 
 1493
 01:01:53,306 --> 01:01:57,674
 We can even, for example,
+我们甚至可以，举个例子，
 
 1494
 01:01:57,676 --> 01:02:05,815
 change our title here maybe to let's say, R2SF.
+在这里改变我们的标题， 比如改成 R2SF。
 
 1495
 01:02:05,817 --> 01:02:06,515
@@ -6911,18 +7439,22 @@ All right?
 1496
 01:02:06,517 --> 01:02:08,567
 And click Done.
+点击 Done.
 
 1497
 01:02:08,568 --> 01:02:10,618
 Now, if we click on our pin, we can see that the image
+现在如果我们点击我们的大头针，我们可以看到图片
 
 1498
 01:02:10,621 --> 01:02:13,488
 has been saved and we can see it there on the left.
+已经被保存，我们能在左边看到它。
 
 1499
 01:02:13,490 --> 01:02:17,025
 We can even click on it, scroll around on it.
+我们甚至可以点击它，在它上面滚动。
 
 1500
 01:02:17,027 --> 01:02:18,025
@@ -6931,10 +7463,12 @@ Okay?
 1501
 01:02:18,027 --> 01:02:19,727
 Or go back and edit it and
+或者回去修改它，
 
 1502
 01:02:19,729 --> 01:02:22,496
 take a different photo if we wanted to.
+如果需要的话，拍一张不同的照片。
 
 1503
 01:02:22,498 --> 01:02:24,531
@@ -6943,42 +7477,53 @@ take a different photo if we wanted to.
 1504
 01:02:24,533 --> 01:02:29,435
 Now by the way, to make this work I had to make a small
+顺便说一句，要使得这个工作，我需要
 
 1505
 01:02:29,437 --> 01:02:33,538
 change to the code, which is right here and
+对代码做个小改动，就在这里
 
 1506
 01:02:33,540 --> 01:02:36,408
 didSelectAnnotationView.
+这个 didSelectAnnotationView.
+
 
 1507
 01:02:36,410 --> 01:02:39,510
 We just want to make sure that if we have no call out
+我们想要确定我们是不是没有 leftCalloutAccessoryView，
 
 1508
 01:02:39,512 --> 01:02:43,414
 accessory, because we started without one when we drop a new
+因为如果在没有的情况下钉个大头针的话，
 
 1509
 01:02:43,416 --> 01:02:44,581
 pin, like this.
+就像这样。
 
 1510
 01:02:44,583 --> 01:02:45,915
 We have no image and so,
+我们没有图片，
 
 1511
 01:02:45,917 --> 01:02:49,052
 it didn't add the left call out accessory in that case.
+于是它没有添加 leftCalloutAccessoryView。
 
 1512
 01:02:49,054 --> 01:02:51,754
 So just when the annotation's selected,
+所以当 annotation 被选择后，
 
 1513
 01:02:51,756 --> 01:02:54,556
 we're just gonna make sure that it adds it.
+我们要确保它被添加上。
 
 1514
 01:02:54,558 --> 01:02:55,190
@@ -6987,6 +7532,7 @@ Okay.
 1515
 01:02:55,192 --> 01:03:00,061
 Back to our slides.
+回到讲义。
 
 1516
 01:03:00,063 --> 01:03:03,564
@@ -6998,19 +7544,23 @@ Okay.
 
 1518
 01:03:05,784 --> 01:03:08,001
-So the last thing is Embed Segue ways.
+So the last thing is Embed Segues.
+最后的内容是 Embed Segues
 
 1519
 01:03:08,003 --> 01:03:11,504
-So, Embed Segue ways is just taking the view,
+So, Embed Segues is just taking the view,
+Embed Segues 总是将一个 view，
 
 1520
 01:03:11,506 --> 01:03:14,273
 self.view, basically of an MVC and
+self.view, 一个 MVC 的基本要素，
 
 1521
 01:03:14,275 --> 01:03:16,976
 putting it in another MVC's view.
+放到另一个 MVC 的 view 里。
 
 1522
 01:03:16,978 --> 01:03:18,945
@@ -7019,34 +7569,42 @@ Okay?
 1523
 01:03:18,946 --> 01:03:20,913
 So, it's basically embedding one MVC into another.
+所以，基本上它是将一个 MBC 内嵌到另一个 MVC。
 
 1524
 01:03:20,915 --> 01:03:24,049
 It's a pretty powerful encapsulation technique.
+这是个非常强大的封装技术。
 
 1525
 01:03:24,051 --> 01:03:25,583
 The way you do it is really easy.
+使用它非常简单。
 
 1526
 01:03:25,585 --> 01:03:27,519
 In the storyboard,
+在 storyboard 里，
 
 1527
 01:03:27,520 --> 01:03:29,454
 you just drag out this thing called a container view, okay?
+你把一个叫做 container view 的东西拽出来， okay？
 
 1528
 01:03:29,456 --> 01:03:30,388
 You drag the container view out.
+把 container view 拽出来。
 
 1529
 01:03:30,390 --> 01:03:31,922
 It's gonna be a little view and
+它是个小小的 view 并且
 
 1530
 01:03:31,924 --> 01:03:34,157
 it's gonna have a little MVC attached to it.
+我们会给它附加上一个小小的 MVC。
 
 1531
 01:03:34,159 --> 01:03:35,675
@@ -7055,30 +7613,38 @@ All right.
 1532
 01:03:35,676 --> 01:03:37,192
 So, it looks like this when you drag it out.
+当你把它拽出来后，看上去是这个样子。
 
 1533
 01:03:37,195 --> 01:03:39,028
 That little grey thing's the container,
+小的灰色的东西就是 container，
 
 1534
 01:03:39,030 --> 01:03:41,330
 that's the thing I dragged out from the storyboard.
+这就是我从 storyboard 里拽出来的东西。
 
 1535
 01:03:41,332 --> 01:03:44,033
 And then that little arrow there moving,
+在闪动的箭头指向的东西，
+
 
 1536
 01:03:44,035 --> 01:03:45,701
 that's the Embed Segue.
+就是 Embed Segue。
 
 1537
 01:03:45,703 --> 01:03:48,603
 And you can see there's another MVC there and that MVC
+你会发现那里有另一个 MVC 而且那个 MVC
 
 1538
 01:03:48,605 --> 01:03:51,406
 is the one who's self.view is gonna be embedded.
+的 self.view 要被内嵌。
 
 1539
 01:03:51,408 --> 01:03:53,825
@@ -7087,90 +7653,112 @@ All right?
 1540
 01:03:53,826 --> 01:03:56,243
 The timing of this, you've got to be a little careful on
+在它的过程里， 你要小心
 
 1541
 01:03:56,245 --> 01:03:59,113
 prepareForSegue, because this embed all
+prepareForSegue, 因为这个内嵌都
 
 1542
 01:03:59,115 --> 01:04:02,182
 happens before any outlets are set as usual.
+发生在任何 outlets 被正常设置好之前。
 
 1543
 01:04:02,184 --> 01:04:03,850
 And so, it's happening very, very early in the game.
+而且，它发生的非常非常早。
 
 1544
 01:04:03,852 --> 01:04:06,586
 So, usually in our Embed Segue,
+所以通常在 Embed Segue 里，
 
 1545
 01:04:06,588 --> 01:04:09,422
 what we do is we grab onto that MVC.
+我们要做的就是抓住那个 MVC。
 
 1546
 01:04:09,424 --> 01:04:12,057
 Okay, so that we have a handle to it.
+好了， 我们有了它的 handle。
 
 1547
 01:04:12,059 --> 01:04:14,426
 We can talk to it.
+我们可以跟它交流。
 
 1548
 01:04:14,427 --> 01:04:16,794
 We can prepare it, set it up, whatever want later.
+我们可以为它准备， 把它装配好，之后任何想做的。
 
 1549
 01:04:16,797 --> 01:04:20,198
 So this is best shown by just demonstrating it so
+所以这最好是给个证明。
 
 1550
 01:04:20,200 --> 01:04:23,735
-I'm gonna demonstrate that by going to tracks.
+I'm gonna demonstrate that by going to Trax.
+我会在 Trax 里证明这个。
 
 1551
 01:04:23,737 --> 01:04:29,907
-And here's our tracks UI, so tracks right here.
+And here's our Trax UI, so Trax right here.
+这是我们的 Trax 的 UI， 整个工程。
 
 1552
 01:04:29,909 --> 01:04:34,511
 This is our map view right here.
+这是我们的 map view。
 
 1553
 01:04:34,513 --> 01:04:37,780
 And when we click on the left edge of a call out,
+当我们点击(大头钉的) callout 的左侧时，
 
 1554
 01:04:37,782 --> 01:04:40,916
 it brings up this UI image view controller.
+它会调出这个 UI， ImageViewController。
 
 1555
 01:04:40,918 --> 01:04:45,054
 Right, which is currently fully contains an image.
+它目前就完整地包含了一张图片。
 
 1556
 01:04:45,056 --> 01:04:49,024
 And what I'm gonna do is I'm gonna embed in the corner,
+我要做的，是在这个角落，
 
 1557
 01:04:49,026 --> 01:04:53,327
 a little rectangle down here, a little square that contains
+矩形的下方， 内嵌一个正方形，
 
 1558
 01:04:53,329 --> 01:04:57,098
 a little map view, with just the pin for this image.
+里面包含一小块 map view 和这张图片对应的大头针。
 
 1559
 01:04:57,100 --> 01:04:59,266
 So that when I'm look in the image,
+所以当我查看图片时，
 
 1560
 01:04:59,268 --> 01:05:02,502
 especially on the iPad where I've got a big screen,
+特别是在 iPad 这样有大屏幕的设备上，
 
 1561
 01:05:02,504 --> 01:05:05,739
 I can see some context of where this image was taken.
+我能看到这张照片拍摄的位置的一些内容。
 
 1562
 01:05:05,741 --> 01:05:07,552
@@ -7179,62 +7767,77 @@ Right?
 1563
 01:05:07,553 --> 01:05:09,364
 So I'll see them both on time.
+我要准时看到它们两个。
 
 1564
 01:05:09,365 --> 01:05:11,176
 So I'm basically gonna embed another view controller into
+基本上我要把另一个 view controller 内嵌到
 
 1565
 01:05:11,179 --> 01:05:12,545
 this guy right here.
+这里的这家伙上面。
 
 1566
 01:05:12,547 --> 01:05:14,413
 So what do we need to do that?
+我们需要做什么来实现？
 
 1567
 01:05:14,415 --> 01:05:17,549
 The number one thing we need to do when we have an embedded
+当我们有了一个内嵌的 view controller 我们首先要做的是，
 
 1568
 01:05:17,551 --> 01:05:20,218
 view controller is we need to do this segue, and
+我们需要处理这个 segue，
 
 1569
 01:05:20,220 --> 01:05:22,820
 we need this view controller right here to have
+我们需要给这里的 view controller 创建一个
 
 1570
 01:05:22,822 --> 01:05:24,789
 a little subclass to manage that.
+子类来处理。
 
 1571
 01:05:24,791 --> 01:05:27,491
 So right now this view controller, as you know,
+现在这个 view controller， 你们知道的，
 
 1572
 01:05:27,493 --> 01:05:29,126
-is an image view controller.
+is an ImageViewController.
+是一个 ImageViewController
 
 1573
 01:05:29,128 --> 01:05:30,794
 So if we select this,
+如果我们选择了这个，
 
 1574
 01:05:30,795 --> 01:05:32,461
 you can see that its class is ImageViewController.
+你能看到它的类型是 ImageViewController。
 
 1575
 01:05:32,464 --> 01:05:33,763
 So I need to change this.
+我需要修改这个。
 
 1576
 01:05:33,765 --> 01:05:37,199
 I'm gonna change this to be a waypoint image view
+我要把它改成
 
 1577
 01:05:37,201 --> 01:05:38,233
 controller.
+WaypointImageViewController。
 
 1578
 01:05:38,235 --> 01:05:39,685
@@ -7243,18 +7846,22 @@ Okay?
 1579
 01:05:39,686 --> 01:05:41,136
 So a waypoint image view controller's gonna be
+WaypointImageViewController 是
 
 1580
 01:05:41,138 --> 01:05:42,770
 a subclass of ImageViewController.
+ImageViewController 的子类。
 
 1581
 01:05:42,772 --> 01:05:44,538
 So it's gonna do everything this one does.
+所以它可以做父类能做的一切事情。
 
 1582
 01:05:44,540 --> 01:05:48,809
 Plus it's gonna know about how to manage that embed.
+外加如何处理内嵌。
 
 1583
 01:05:48,811 --> 01:05:49,509
@@ -7263,22 +7870,27 @@ Okay?
 1584
 01:05:49,511 --> 01:05:52,111
 So let's create a new class.
+我们创建一个新类。
 
 1585
 01:05:52,113 --> 01:05:53,746
 All right, the Cocoa Touch Class.
+选择 Cocoa Touch Class.
 
 1586
 01:05:53,748 --> 01:05:57,282
 It's gonna be a subclass of ImageViewController,
+它是我们的 ImageViewController，
 
 1587
 01:05:57,284 --> 01:05:58,650
 one of our classes.
+的子类。
 
 1588
 01:05:58,652 --> 01:06:03,388
 And I'm gonna call it WaypointImageViewController.
+我把它命名为 WaypointImageViewController。
 
 1589
 01:06:03,390 --> 01:06:04,388
@@ -7287,18 +7899,22 @@ Okay.
 1590
 01:06:04,390 --> 01:06:06,357
 Put it in the standard place.
+把它放置在标准位置。
 
 1591
 01:06:06,359 --> 01:06:09,192
 'Kay here it is, here's our WaypointImageViewController.
+好了， 这就是我们的 WaypointImageViewController。
 
 1592
 01:06:09,194 --> 01:06:11,861
 This WaypointImageViewController,
+这个 WaypointImageViewController，
 
 1593
 01:06:11,863 --> 01:06:13,730
 its model is the waypoint.
+它的 model 是 waypoint
 
 1594
 01:06:13,732 --> 01:06:15,215
@@ -7307,14 +7923,17 @@ its model is the waypoint.
 1595
 01:06:15,216 --> 01:06:16,699
 This guy's model, did everyone remember what
+这家伙的 model，大家都记得
 
 1596
 01:06:16,701 --> 01:06:18,367
 ImageViewController's model is?
+ImageViewController 的 model 是什么吗？
 
 1597
 01:06:18,369 --> 01:06:19,968
 It's just an image URL.
+它只是个图片 URL。
 
 1598
 01:06:19,970 --> 01:06:21,853
@@ -7323,38 +7942,47 @@ Right?
 1599
 01:06:21,854 --> 01:06:23,737
 So we need a little more powerful model here in our
+这里我们需要一个更强大的 model，
 
 1600
 01:06:23,740 --> 01:06:26,107
 WaypointImageViewCcontroller, so
+在 WaypointImageViewController 里，
 
 1601
 01:06:26,109 --> 01:06:28,442
 I'm just going to have var waypoint.
+所以我定义变量 waypoint。
 
 1602
 01:06:28,444 --> 01:06:30,310
 It's a GPX Waypoint.
+它是 GPX Waypoint 格式的。
 
 1603
 01:06:30,312 --> 01:06:33,046
 It'll work with the editable ones or non-editable ones.
+它可以支持可编辑的和不可编辑的。
 
 1604
 01:06:33,048 --> 01:06:35,415
 And when that waypoint is set,
+在 waypoint 变量被设置时，
 
 1605
 01:06:35,417 --> 01:06:39,418
 I want to make sure that I set my super classes model.
+我要确保父类的 model 也被更新。
 
 1606
 01:06:39,420 --> 01:06:43,989
 So, I'm gonna say my imageURL equals that
+我在这里输入
 
 1607
 01:06:43,991 --> 01:06:46,691
 waypoint's imageURL.
+imageURL = waypoint?.imageURL
 
 1608
 01:06:46,693 --> 01:06:47,291
@@ -7363,118 +7991,147 @@ Okay?
 1609
 01:06:47,293 --> 01:06:50,044
 So, here,
+在这里，
 
 1610
 01:06:50,045 --> 01:06:52,796
 I'm basically setting my super class's URL there.
+基本上我设置了父类的 URL。
 
 1611
 01:06:52,798 --> 01:06:57,701
 And what are we getting this about here?
+这里的错误提示是什么原因？
 
 1612
 01:06:57,703 --> 01:06:59,736
 Oh, okay, we're not there, okay.
+哦，没什么问题。
 
 1613
 01:06:59,738 --> 01:07:03,272
 And then I'm also gonna set my title equal to the waypoint's
+然后我也要把 title 设置为 waypoint 的
 
 1614
 01:07:03,274 --> 01:07:04,606
 name, might as well.
+名字， 顺便。
 
 1615
 01:07:04,608 --> 01:07:08,677
-And them I'm just gonna update my embedded map, okay, because
+And then I'm just gonna update my embedded map, okay, because
+然后我要更新我的内嵌的地图，okay，因为
 
 1616
 01:07:08,679 --> 01:07:12,147
 the whole point of this guy is he has this embedded map.
+这个 view controller 的重点就在于它持有内嵌的地图。
 
 1617
 01:07:12,149 --> 01:07:16,183
 So, we'll have a function here called updateEmbeddedMap, and
+所以我们在这里实现名为 updateEmbeddedMap 的函数，
 
 1618
 01:07:16,185 --> 01:07:18,185
 it's going to update that map.
+这个函数会更新地图。
 
 1619
 01:07:18,187 --> 01:07:21,088
 And we'll talk about how that's going to happen
+我们过一会儿再讨论
 
 1620
 01:07:21,090 --> 01:07:22,322
 a little bit later.
+具体实现。
 
 1621
 01:07:22,324 --> 01:07:25,792
 This isn't optional, that's why, okay.
+这不是 optional， 这就是原因， okay。
 
 1622
 01:07:25,794 --> 01:07:27,026
 All right, so that's it.
+就是这样。
 
 1623
 01:07:27,028 --> 01:07:29,695
 So that's our waypoint image controller,
+这就是我们的 WaypointImageViewController,
 
 1624
 01:07:29,697 --> 01:07:31,163
 kind of its main thing.
+它的主要的事情。
 
 1625
 01:07:31,165 --> 01:07:33,865
 So now we need to go back to our storyboard, and
+我们需要返回到 storyboard，
 
 1626
 01:07:33,867 --> 01:07:37,168
 I'm gonna make this image view controller right here be
+我要把这里的 ImageViewController
 
 1627
 01:07:37,170 --> 01:07:39,270
 a waypoint image view controller.
+换成 WaypointImageViewController.
 
 1628
 01:07:39,272 --> 01:07:41,638
 So I'm just gonna go here to its identity and
+我们来这里查找它的ID，
 
 1629
 01:07:41,640 --> 01:07:45,108
 go down here and say now it's a WaypointImageViewController.
+往下翻，好了，它是个 WaypointImageViewController。
 
 1630
 01:07:45,110 --> 01:07:47,444
 Also, I'm gonna fix this segue.
+同样，我要处理这个 segue。
 
 1631
 01:07:47,446 --> 01:07:49,278
 This is a segue from our map view.
+这是一个来自 map view 的 segue。
 
 1632
 01:07:49,280 --> 01:07:54,016
 I'm gonna just fix this one to prepare this guy by giving
+我要在 prepare 函数里，
 
 1633
 01:07:54,018 --> 01:07:55,350
 his way point.
+提供它的 waypoint 来解决问题。
 
 1634
 01:07:55,352 --> 01:07:59,020
 So that's over here in our GPXViewController,
+我们到 GPXViewController 里，
 
 1635
 01:07:59,022 --> 01:08:00,721
 down here in prepare.
+跳到 prepare 函数里。
 
 1636
 01:08:00,723 --> 01:08:02,890
 Okay, here's where we're preparing
+Okay， 这是我们准备
 
 1637
 01:08:02,892 --> 01:08:04,491
 the ImageViewController.
+ImageViewController 的地方。
 
 1638
 01:08:04,493 --> 01:08:05,258
@@ -7483,58 +8140,72 @@ Okay?
 1639
 01:08:05,260 --> 01:08:06,959
 So here I'm going to say,
+在这里我要输入
 
 1640
 01:08:06,961 --> 01:08:10,363
 if I can let the waypoint image view controller equal
+if let wivc =
 
 1641
 01:08:10,365 --> 01:08:12,998
-the segue destinationVewController,
+the segue destinationViewController,
+segue.destinationViewController
 
 1642
 01:08:13,000 --> 01:08:16,735
 contentViewController as a waypoint view controller.
+.contentViewController as? WaypointImageViewController。
 
 1643
 01:08:16,737 --> 01:08:19,771
 So in other words if it's a waypoint image controller,
+还句话说，它确实是 WaypointImageViewController 类型,
 
 1644
 01:08:19,773 --> 01:08:23,107
 then I'm gonna say waypoint image view controller waypoint
+那么我要把它的 waypoint 变量 
 
 1645
 01:08:23,109 --> 01:08:24,275
 equals my waypoint.
+赋值为这里的 waypoint。
 
 1646
 01:08:24,277 --> 01:08:26,010
 And actually I'll just go ahead and
+实际上我会继续执行，并且
 
 1647
 01:08:26,012 --> 01:08:27,978
 leave this other code in here as an else.
+把原先的代码作为 else 分支。
 
 1648
 01:08:27,980 --> 01:08:30,246
 Else if it's not a waypoint view image controller,
+如果它不是 WaypointImageViewController，
 
 1649
 01:08:30,248 --> 01:08:32,148
 it's just a normal image view controller,
+它只是个普通的 ImageViewController，
 
 1650
 01:08:32,150 --> 01:08:33,749
 we'll still make that work as well.
+我们也要让它正常工作。
 
 1651
 01:08:33,751 --> 01:08:36,552
 But we could delete this code, and it would work fine now.
+不过我们可以删除这段代码， 删除后也能工作正常。
 
 1652
 01:08:36,554 --> 01:08:41,489
 But I'll just leave it in there, just for reference.
+我还是留着它，作为参考。
 
 1653
 01:08:41,491 --> 01:08:43,791
@@ -7543,6 +8214,7 @@ Okay.
 1654
 01:08:43,792 --> 01:08:46,092
 So now we need to go do this embedding business.
+现在我们需要去处理内嵌事务。
 
 1655
 01:08:46,095 --> 01:08:47,673
@@ -7551,50 +8223,62 @@ Okay.
 1656
 01:08:47,674 --> 01:08:49,252
 We need to put this thing in here.
+我们需要把这个放到这里。
 
 1657
 01:08:49,253 --> 01:08:50,831
 Now one thing I'm gonna advise you to do, when you're doing
+现在我要给你们一个建议，当你在实现
 
 1658
 01:08:50,833 --> 01:08:53,266
 embedding, and kind of be a little careful of.
+内嵌时，要稍微留意的事情，
 
 1659
 01:08:53,268 --> 01:08:55,802
 Is when you drag out this Container View,
+是当你拽出这个 container view，
 
 1660
 01:08:55,804 --> 01:08:59,472
 which is at the very bottom, by the way, it's gonna want to
+顺便说一句，它在最底下，它会成为
 
 1661
 01:08:59,474 --> 01:09:02,508
 be a subview of the thing you're dragging it on.
+你放下它时碰到的控件的 subview。
 
 1662
 01:09:02,510 --> 01:09:05,444
 So it keeps trying here to be a subview of that scroll view,
+所以在这里放下会成为那个 scroll view 的 subview，
 
 1663
 01:09:05,446 --> 01:09:08,046
 and I don't want it to be a subview, a scroll view,
+不过我不希望它变成 scroll view 的 subview,
 
 1664
 01:09:08,048 --> 01:09:09,647
 because I want it to sit on top.
+因为我想让它呆在顶层。
 
 1665
 01:09:09,649 --> 01:09:11,049
 Okay, I want it to always be there, and
+Okay，我希望它在那里一直不动，
 
 1666
 01:09:11,051 --> 01:09:12,516
 the scroll view is scrolling behind it.
+scroll view 则在它后面滚动。
 
 1667
 01:09:12,518 --> 01:09:15,119
 I don't want it to be in there scrolling around.
+我不希望它被滑走。
 
 1668
 01:09:15,121 --> 01:09:17,388
@@ -7603,94 +8287,117 @@ Okay?
 1669
 01:09:17,389 --> 01:09:19,656
 So it's really a bit of a pain to do that with this in way.
+所以这样做确实有点麻烦。
 
 1670
 01:09:19,658 --> 01:09:22,559
 So you can just take something like your scroll view, for
+所以你可以把那个控件，比如说这个 srollView，
 
 1671
 01:09:22,561 --> 01:09:25,094
 example, and move it out of the way temporarily.
+临时先挪走。
 
 1672
 01:09:25,096 --> 01:09:26,796
 So I just moved it out of the way.
+所以我把它挪开了。
 
 1673
 01:09:26,798 --> 01:09:29,298
 So now I can put my Container View in here.
+现在我可以把我的 container view 放在这里。
 
 1674
 01:09:29,300 --> 01:09:31,833
 I can put it where I want, probably not
+我可以把它放在任何位置，可能不是
 
 1675
 01:09:31,835 --> 01:09:35,070
 in the very corner there, something like that.
+紧贴着这个角，类似这样。
 
 1676
 01:09:35,072 --> 01:09:41,042
 I can do all my auto layout here.
+我可以在这里设置 autoLayout。
 
 1677
 01:09:41,044 --> 01:09:44,178
 Maybe we'll do this a little, do it higher, yeah,
+我们可以在这里调整一下，高一点儿，耶，
 
 1678
 01:09:44,180 --> 01:09:46,113
 let's do that, bottom space.
+设置一下，底边距。
 
 1679
 01:09:46,115 --> 01:09:50,983
 Probably, I want this container to be a fixed width
+大概，我希望这个 container view 有固定的
 
 1680
 01:09:50,985 --> 01:09:52,952
 and height, okay.
+宽高。
 
 1681
 01:09:52,954 --> 01:09:54,787
 I don't know what width and height I would want.
+我不知道我想要的宽高值。
 
 1682
 01:09:54,789 --> 01:10:00,158
 Maybe like, I don't know, let's say 200
+可能是，我不知道，先假设是 200
 
 1683
 01:10:00,160 --> 01:10:05,296
 by 200, sorry, double-click there.
+x 200， 抱歉， 双击那里。
 
 1684
 01:10:05,298 --> 01:10:06,563
 So let's make it 200 by 200.
+让我们设置它为 200 x 200 的大小。
 
 1685
 01:10:06,565 --> 01:10:10,633
 We could make it whatever size we thought was kind of most
+我们可以把它设置为任何大小，
 
 1686
 01:10:10,635 --> 01:10:12,802
 appropriate for this space.
+只要我们认为在这里尺寸合适。
 
 1687
 01:10:12,804 --> 01:10:15,571
 And then we could put this back, this scroll view back.
+然后我们把它放回去，把 scroll view 恢复回来。
 
 1688
 01:10:15,573 --> 01:10:18,407
 By the way, if you go over here to the document outline,
+顺便说下， 如果你去 document outline 里看看，
 
 1689
 01:10:18,409 --> 01:10:20,676
 you can see the order in the view hierarchy.
+你会发现 view 层级的顺序。
 
 1690
 01:10:20,678 --> 01:10:23,411
 Like this would be behind, and
+这样会在后面，
 
 1691
 01:10:23,413 --> 01:10:26,681
 this is in front of everything else.
+这样是在最前面。
 
 1692
 01:10:26,683 --> 01:10:27,548
@@ -7698,23 +8405,28 @@ Okay.
 
 1693
 01:10:27,550 --> 01:10:29,516
-Scroll view the activity indicator in
+Scroll view the activity indicator and
+顺序从后往前是 scroll view，activity indicator，
 
 1694
 01:10:29,518 --> 01:10:30,717
 this Container View.
+container view。
 
 1695
 01:10:30,719 --> 01:10:33,453
 Now, I dragged this in here, but if we look oh,
+现在，我把这个拽到了这里，但是如果我们仔细看，噢，
 
 1696
 01:10:33,455 --> 01:10:34,554
 look at down here.
+看下面这里。
 
 1697
 01:10:34,556 --> 01:10:35,621
 What's this guy?
+这是什么？
 
 1698
 01:10:35,623 --> 01:10:36,755
@@ -7723,78 +8435,97 @@ Okay.
 1699
 01:10:36,757 --> 01:10:41,593
 See that is the little view controller that could.
+这就是那个小小的 view controller。
 
 1700
 01:10:41,595 --> 01:10:44,228
 This is the little view controller that is going to,
+这是要跳转的小小的 view controller，
 
 1701
 01:10:44,230 --> 01:10:46,163
 whose self.view is gonna be in here.
+他的 self.view 在这里。
 
 1702
 01:10:46,165 --> 01:10:48,832
 So let's do this guy right here, and we need a view
+我们来实现它，我们需要给它定义一个
 
 1703
 01:10:48,834 --> 01:10:51,968
 controller class for this, so I'm going to create that.
+view controller，我马上来创建。
 
 1704
 01:10:51,970 --> 01:10:55,171
 This is gonna be the world's simplest map view controller.
+这会是世界上最简单的 map view controller.
 
 1705
 01:10:55,173 --> 01:10:59,875
 I'm gonna call it, in fact, SimpleMapViewController.
+我干脆把它命名为 SimpleMapViewController。
 
 1706
 01:10:59,877 --> 01:11:02,111
 It's gonna be a UIViewController.
+它继承 UIViewController。
 
 1707
 01:11:02,113 --> 01:11:06,314
 And all this SimpleMapViewController is
+SimpleMapViewController 的所有任务
 
 1708
 01:11:06,316 --> 01:11:11,485
 going to do is to make its map view outlet be public.
+是把它的 map view 的 outlet 公开出来。
 
 1709
 01:11:11,487 --> 01:11:14,221
 So that other people can do whatever the heck they want
+这样别人就能够做他们想做的任何事情，
 
 1710
 01:11:14,223 --> 01:11:16,256
 with the map view that's inside of it.
+用里面的 map view。
 
 1711
 01:11:16,258 --> 01:11:18,591
 So let's put a map view inside of it.
+所以我们先 添加一个 map view。
 
 1712
 01:11:18,593 --> 01:11:19,892
 Let's go back to our storyboard.
+回到 storyboard。
 
 1713
 01:11:19,894 --> 01:11:22,661
 Get this little guy right here.
+拿到这里的这个小家伙。
 
 1714
 01:11:22,663 --> 01:11:25,164
 Okay, I'm gonna, first of all I'm gonna make him be
+首先我要把它变成
 
 1715
 01:11:25,166 --> 01:11:27,165
 a SimpleMapViewController, like that.
+SimpleMapViewController，就像这样。
 
 1716
 01:11:27,167 --> 01:11:31,069
 And then I'm going to put a map view,
+然后添加一个 map view。
 
 1717
 01:11:31,071 --> 01:11:35,005
 which is right here, inside of him.
+放在这里，它的内部。
 
 1718
 01:11:35,007 --> 01:11:36,139
@@ -7803,234 +8534,293 @@ Okay?
 1719
 01:11:36,141 --> 01:11:37,974
 Let's go ahead and go, suggested constraints.
+我们继续，采用 suggested constraints。
 
 1720
 01:11:37,976 --> 01:11:40,843
 Probably, that'll be just fine, yep,
+大概这样就挺好的，
 
 1721
 01:11:40,845 --> 01:11:42,345
 all looks good to me.
+一切看上去都很好。
 
 1722
 01:11:42,347 --> 01:11:47,683
 And so let's just create an outlet for that.
+所以我们来创建它的 outlet。
 
 1723
 01:11:47,685 --> 01:11:51,419
 Whoops, get an outlet here,
+这里创建 outlet，
 
 1724
 01:11:51,421 --> 01:11:55,923
 small screen, there we go, okay.
+屏幕太小，调到这里，okey。
 
 1725
 01:11:55,925 --> 01:11:57,591
 Whoops, SimpleMapViewController,
+选择 SimpleMapViewController，
 
 1726
 01:11:57,593 --> 01:11:59,760
 there it is.
+好了。
 
 1727
 01:11:59,761 --> 01:12:01,928
 Let's Ctrl+drag here, mapView, 'kay?
+我们 Ctrl+拖拽到这里， mapView， okey？
 
 1728
 01:12:01,930 --> 01:12:03,563
 So that's it.
+搞定。
 
 1729
 01:12:03,564 --> 01:12:05,197
 That's the entire implementation of this class.
+这就是这个类的完整实现。
 
 1730
 01:12:05,200 --> 01:12:06,365
 It's just gonna do that.
+这样就完成了。
 
 1731
 01:12:06,367 --> 01:12:08,133
 It does MapKit, so we have to.
+它使用了 MapKit，我们需要声明。
 
 1732
 01:12:08,135 --> 01:12:13,304
 Import MapKit, okay, so this just is public and
+import MapKit，okay，这就把 map view 公开了，
 
 1733
 01:12:13,306 --> 01:12:17,575
 we can do whatever we want with this map.
+我们可以对它进行任何操作。
 
 1734
 01:12:17,577 --> 01:12:19,610
 So, what do we want to do with this map?
+那么，我们要对它干什么呢？
 
 1735
 01:12:19,612 --> 01:12:24,214
 Well, we want this map to show our waypoint in our
+我们用它来展示 waypoint，
 
 1736
 01:12:24,216 --> 01:12:28,151
 waypoint image view controller, okay?
+WaypointImageViewController 里的 waypoint。
 
 1737
 01:12:28,153 --> 01:12:31,787
 So, that's how we're gonna update this embedded map.
+这就是我们在 updateEmbeddedMap 函数里要做的。
 
 1738
 01:12:31,789 --> 01:12:34,456
 We're, can access the map view directly.
+我们直接访问这而过 mapView，
 
 1739
 01:12:34,458 --> 01:12:37,626
 But, the one thing we need to do, first,
+不过，我们先要做的一件事，
 
 1740
 01:12:37,628 --> 01:12:40,528
 is we need to do this segue right here.
+是我们需要在这里处理这个 segue。
 
 1741
 01:12:40,530 --> 01:12:43,031
 So, we need to give this segue an identifier.
+我们需要给这个 segue 一个标识符。
 
 1742
 01:12:43,033 --> 01:12:47,334
 We'll call it the Embed Map segue.
+我们叫它 “Embed Map” segue。
 
 1743
 01:12:47,336 --> 01:12:51,237
 And we need to prepare this segue.
+我们需要为这个 segue 实现 prepare 函数。
 
 1744
 01:12:51,239 --> 01:12:54,540
 And we prepare it here.
+我们在这里做实现。
 
 1745
 01:12:54,542 --> 01:12:57,176
 We're going to prepare it by just by grabbing that map
+prepare 函数里只需要抓取
 
 1746
 01:12:57,178 --> 01:12:58,210
 view, okay?
+map view, okay?
 
 1747
 01:12:58,211 --> 01:12:59,243
 Grabbing that controller, actually,
+抓取那个 controller，
 
 1748
 01:12:59,246 --> 01:13:00,479
 than grabbing the map view out of it.
+然后抓取里面的 map view。
 
 1749
 01:13:00,481 --> 01:13:03,281
 So, I'm gonna prepare for segue here.
+这里实现 prepareForSegue 函数。
 
 1750
 01:13:03,283 --> 01:13:08,352
 I'm gonna say, if the segue's identifier equals,
+输入 if segue.identifier =
 
 1751
 01:13:08,354 --> 01:13:11,889
 and we'll just, no constant here.
+我们这里没有定义常量。
 
 1752
 01:13:11,891 --> 01:13:13,023
 We should do one, but we're not gonna do.
+我们应该这么处理，不过这次不做了。
 
 1753
 01:13:13,025 --> 01:13:15,225
 So, it's the embed segue.
+所以，等于 “Embed Segue”
 
 1754
 01:13:15,227 --> 01:13:19,795
 Then, actually, I'm just gonna create a var here,
+然后，好吧，我要在这里创建一个变量，
 
 1755
 01:13:19,797 --> 01:13:24,333
 which is the SMVC, the simple map view controller.
+名字是 smvc， 意思是 SimpleMapViewController。
 
 1756
 01:13:24,335 --> 01:13:27,969
 Which is a SimpleMapViewController,
+SimpleMapViewController 类型，
 
 1757
 01:13:27,971 --> 01:13:30,538
 optional.
+optional 的。
 
 1758
 01:13:30,539 --> 01:13:33,106
 And, I'm just gonna actually set it inside this prepare for
+我要在这个 prepareForSegue 函数里给它赋值，
 
 1759
 01:13:33,109 --> 01:13:35,609
 segue, so, smvc equals the segue's
+所以，
 
 1760
 01:13:35,611 --> 01:13:39,779
 destinationViewController as a SimpleMapViewController.
+smvc = segue.destinationViewController as? SimpleMapViewController
 
 1761
 01:13:39,781 --> 01:13:41,747
 So, in the set prepare for segue,
+所以在这个函数里，
 
 1762
 01:13:41,749 --> 01:13:45,117
 I've just grabbed onto this SimpleMapViewController.
+我抓取了一个 SimpleMapViewController。
 
 1763
 01:13:45,119 --> 01:13:48,420
 So, now that I have it, okay, let's go ahead and
+我拿到了，okay，我们继续
+
 
 1764
 01:13:48,422 --> 01:13:52,090
 update our embedded map here, and let's do the code for
+在这里更新内嵌的地图，我们来实现
 
 1765
 01:13:52,092 --> 01:13:53,758
 doing the embedded map.
+相关更新代码吧。
 
 1766
 01:13:53,760 --> 01:13:54,825
 Very simple.
+非常简单。
 
 1767
 01:13:54,827 --> 01:13:57,094
 I'm just gonna say,
+我只要输入，
 
 1768
 01:13:57,096 --> 01:14:01,497
 if I can get that map view out of that smvc.
+如果我能拿到 smvc 的 map view。
 
 1769
 01:14:01,499 --> 01:14:09,371
 Okay, then let's set the map view to be mapType Hybrid.
+好了，那么我们就把 map view 的类型设置为 Hybrid。
 
 1770
 01:14:09,373 --> 01:14:12,941
 And, then we want to set the map view's annotations.
+并且设置 map view 的 annotations。
 
 1771
 01:14:12,943 --> 01:14:18,479
 So, let's remove the existing annotations from the map view.
+先删除掉现存的所有的 annotations，
 
 1772
 01:14:18,481 --> 01:14:25,019
-And then, let's MapView.add an annotation for our way point.
+And then, let's MapView.addAnnotation for our way point.
+再把 waypoint 加到 map view 里去。
 
 1773
 01:14:25,021 --> 01:14:27,688
-Okay, which remember, is an MK annotation, so we can do that.
+Okay, which remember, is an MKAnnotation, so we can do that.
+记住 waypoint 是 MKAnnotation 类型，所以我们可以把它作为参数。
 
 1774
 01:14:27,690 --> 01:14:29,589
 And then, let's also zoom in on those.
+然后，我们放大它。
 
 1775
 01:14:29,591 --> 01:14:34,460
 So, showAnnotations, the map view's annotations and yes,
+调用 showAnnotations 函数，参数为 mapView.annotations,
 
 1776
 01:14:34,462 --> 01:14:36,495
 we want it to be animated.
+是的，过程需要动画。
 
 1777
 01:14:36,497 --> 01:14:38,981
@@ -8039,10 +8829,12 @@ Okay?
 1778
 01:14:38,982 --> 01:14:41,466
 So, that's gonna update our embedded map.
+这就更新了内嵌的地图。
 
 1779
 01:14:41,468 --> 01:14:44,469
 Yes, Embed Map.
+哦，纠正一下，“Embed Map”
 
 1780
 01:14:44,471 --> 01:14:47,038
@@ -8051,30 +8843,37 @@ Okay.
 1781
 01:14:47,039 --> 01:14:49,606
 All right, so, now that we're actually embedding the map and
+好了，我们把地图内嵌了，
 
 1782
 01:14:49,609 --> 01:14:52,142
 doing that actual prepare for segue,
+并且为 segue 做了准备工作，
 
 1783
 01:14:52,144 --> 01:14:53,977
 we should get this to work.
+它应该能正常工作。
 
 1784
 01:14:53,979 --> 01:14:55,912
 Here we go, and sure enough, there it is.
+继续，肯定的，这就是了。
 
 1785
 01:14:55,914 --> 01:14:58,214
 And, it's kind of hard to zoom out.
+模拟器上的缩小操作有点麻烦。
 
 1786
 01:14:58,216 --> 01:15:02,918
 Actually, I'm gonna do this on the actual device
+我到真实设备上试一下，
 
 1787
 01:15:02,920 --> 01:15:06,321
 cuz it's a little easier to pinch.
+因为再那上面 pinch 操作更简单。
 
 1788
 01:15:06,323 --> 01:15:16,397
@@ -8083,14 +8882,17 @@ cuz it's a little easier to pinch.
 1789
 01:15:18,434 --> 01:15:20,701
 >> Oh, I didn't hit Play.
+哦 我没有运行程序。
 
 1790
 01:15:20,703 --> 01:15:29,676
 There we
+那么
 
 1791
 01:15:29,678 --> 01:15:34,814
 go.
+走起。
 
 1792
 01:15:34,816 --> 01:15:35,781
@@ -8099,46 +8901,57 @@ All right.
 1793
 01:15:35,783 --> 01:15:38,083
 There we go.
+继续。
 
 1794
 01:15:38,085 --> 01:15:40,285
 Here or there.
+这里或者那里。
 
 1795
 01:15:40,287 --> 01:15:42,186
 We should have our nice image here.
+我们这里有好看的图片。
 
 1796
 01:15:42,188 --> 01:15:46,623
 And inside here, this MVC is a fully operational MVC.
+在这里， 这个 MVC 是个完全可操作的 MVC。
 
 1797
 01:15:46,625 --> 01:15:47,257
 It can be pinched.
+它支持 pinch 操作。
 
 1798
 01:15:47,259 --> 01:15:48,425
 It can scroll around.
+它可以滚动。
 
 1799
 01:15:48,427 --> 01:15:51,594
 It does all the things that it would normally do.
+它支持所有正常支持的东西。
 
 1800
 01:15:51,596 --> 01:15:55,264
 So, we can actually see that we're in
+所以，我们能实际看出来，我们在
 
 1801
 01:15:55,266 --> 01:16:00,168
 the Greenbush area of Greenbush Lake, all right?
+Greenbush..Greenbush Lake 区域，对吗？
 
 1802
 01:16:00,170 --> 01:16:03,038
 Okay, and if we rotate or whatever,
+Okay, 如果我们旋转或者做别的，
 
 1803
 01:16:03,040 --> 01:16:06,107
 a lot of layout works on it, et cetera.
+layout 工作正常，等等。
 
 1804
 01:16:06,109 --> 01:16:07,608
@@ -8147,6 +8960,7 @@ Okay?
 1805
 01:16:07,610 --> 01:16:08,709
 So, that's embedded segue.
+所以，这就是 Embedded Segue。
 
 1806
 01:16:08,711 --> 01:16:10,177
@@ -8156,4 +8970,4 @@ Sorry to run a little bit long.
 1807
 01:16:10,179 --> 01:16:12,278
 If you have any questions, I'll be here as usual.
-如果你有相关的问题，我还是会一如既往的在这儿等待你们提问
+如果你有任何问题，我会一如既往地在这儿等待你们。

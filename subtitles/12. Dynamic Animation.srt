@@ -1,98 +1,122 @@
 1
 00:00:00,001 --> 00:00:04,569
 [MUSIC]
+[音乐]
 
 2
 00:00:04,571 --> 00:00:07,705
 Stanford University.
+斯坦福大学
 
 3
 00:00:07,707 --> 00:00:11,809
 >> Okay, well, welcome to lecture 12 of Stanford CS193P
+欢迎来到 CS193P 课程的第12讲
 
 4
 00:00:11,811 --> 00:00:13,243
 winter of 2015.
+这是 CS193P 在2015年冬季的课程
 
 5
 00:00:13,245 --> 00:00:16,513
 Today we're going to talk about a different kind
+今天我们想要聊一些与上周
 
 6
 00:00:16,515 --> 00:00:17,880
 of animation than we talked about last week,
+讲的不一样的动画效果
 
 7
 00:00:17,882 --> 00:00:20,549
 which is physics-based dynamic animation, it's called.
+叫做，物理动态动画效果（Physics-based Dynamic Animation）
 
 8
 00:00:20,551 --> 00:00:22,418
 And then I'm going to do a big demo of that,
+然后我会做一个大的 Demo
 
 9
 00:00:22,420 --> 00:00:24,119
 which is called Dropit.
+这个 Demo 我想称之为 Dropit
 
 10
 00:00:24,121 --> 00:00:26,254
 First of all, let me say that what we're,
+首先
 
 11
 00:00:26,256 --> 00:00:30,158
 our topic this week is dynamic animation.
+我们这周的话题就是动态动画效果
 
 12
 00:00:30,160 --> 00:00:31,959
 So it's a different kind of animation than we saw
+这与我们上周讲到的动画效果
 
 13
 00:00:31,961 --> 00:00:33,127
 last week.
+有相当的不同
 
 14
 00:00:33,129 --> 00:00:34,961
 It's a physics-based thing.
+它是基于物理效果的
 
 15
 00:00:34,963 --> 00:00:36,963
 Now we're gonna have some fun with it,
+因为是与真实世界的物理效果相同
 
 16
 00:00:36,965 --> 00:00:38,564
 this physics-based thing.
+所以我们能够在这上面做一些有趣的事情
 
 17
 00:00:38,566 --> 00:00:40,333
 And you're gonna write a game with it.
+同时，你们会用这个来编写一个游戏
 
 18
 00:00:40,335 --> 00:00:43,102
 Yeah, I'm not sure you would really use it for that.
+当然，我并不确定你肯定会用到它
 
 19
 00:00:43,104 --> 00:00:44,670
 It's more for things like this.
+但是更多类似于这种的东西
 
 20
 00:00:44,672 --> 00:00:46,604
 You see how when I slide this up,
+比如现在，我上拉 Control Center
 
 21
 00:00:46,606 --> 00:00:49,374
 it kind of bounces a little and wiggles?
+在最后的时刻，它会有一个晃动的弹跳效果
 
 22
 00:00:49,376 --> 00:00:52,109
 See? It doesn't just kind of solid
+看到了吗？这个动画并不是
 
 23
 00:00:52,111 --> 00:00:55,679
 go up and stop, it kind of bounces off the top.
+我直接上拉 Control Center，然后它就停止在最高的点上了
 
 24
 00:00:55,681 --> 00:00:58,515
 Basically what's happening there is that there's gravity
+通常，我们会说，这里有一个仿重力
 
 25
 00:00:58,517 --> 00:00:59,783
@@ -101,94 +125,117 @@ pointing up.
 26
 00:00:59,785 --> 00:01:01,168
 Okay?
+明白了吗？
 
 27
 00:01:01,169 --> 00:01:02,552
 And then there's a little bit of elasticity, and
+同时，这里会有一点点的弹性
 
 28
 00:01:02,554 --> 00:01:06,055
 that view it's just being allowed to fall up and
+所以，这个视图被允许向上滑动
 
 29
 00:01:06,057 --> 00:01:07,723
 bounce off the bottom.
+并在到达起顶部的时候有一个弹跳效果
 
 30
 00:01:07,725 --> 00:01:09,091
 Okay? And that's what we're going to
+明白了吗？
 
 31
 00:01:09,093 --> 00:01:12,360
 learn how to do today is have gravity and bouncing and
+这也就是我们今天想要学习的内容，如何让一个视图
 
 32
 00:01:12,362 --> 00:01:14,429
 all this kind of physics behavior.
+拥有类似的重力效果和弹跳效果，等等类似的物理动画效果
 
 33
 00:01:14,431 --> 00:01:16,230
 But instead of just doing something, you know,
+但是，我们并不想通过一些平时很无聊的 Demo 来学习
 
 34
 00:01:16,232 --> 00:01:19,366
 boring like this, we're going to make a game out of it.
+取而代之的是，我们想要通过这个做一个游戏
 
 35
 00:01:19,368 --> 00:01:21,968
 The game we're going to make is Breakout.
+这个游戏我们想称之为 Breakout
 
 36
 00:01:21,970 --> 00:01:26,339
 Or Brickout, sometimes people call it.
+或者有些人喜欢称之为 Brickout
 
 37
 00:01:27,375 --> 00:01:31,243
 The point is to learn all the APIs of this physics-based
+这个游戏的目的是，学习所有基于这个物理动态引擎
 
 38
 00:01:31,245 --> 00:01:33,212
 dynamic engine.
+的 API
 
 39
 00:01:33,213 --> 00:01:35,180
 But to have some fun along the way, so I've actually made
+想要让这个过程是非常有趣的，我制定了
 
 40
 00:01:35,182 --> 00:01:38,683
 the requirements for the game itself be pretty light, okay?
+一部分很小的对游戏的要求
 
 41
 00:01:38,685 --> 00:01:40,985
 It just basically has to do the basics of the game, and
+最基础的是，必须符合游戏的规则
 
 42
 00:01:40,987 --> 00:01:43,787
 then giving you a lot of room to maneuver on kind of the fun
+其他的地方就留给你们自由发挥的空间
 
 43
 00:01:43,789 --> 00:01:45,589
 features of the game, so.
+你们肯定会很喜欢的
 
 44
 00:01:45,591 --> 00:01:48,191
 So dynamic animation is different
+好的，动态动画效果与我们上周
 
 45
 00:01:48,193 --> 00:01:49,859
 than the animation we talked about last week.
+讲的动画效果是不太一样的
 
 46
 00:01:49,861 --> 00:01:51,861
 Last week, we were talking about taking certain view
+上周我们讲的是，取一些特定的视图属性
 
 47
 00:01:51,863 --> 00:01:54,563
 properties and animating them over time.
+并根据时间来让它动起来
 
 48
 00:01:54,565 --> 00:01:57,366
 Or perhaps animating an entire change to a view
+类似于，将一个视图像卡片一样翻转过来的操作
 
 49
 00:01:57,368 --> 00:02:00,301
@@ -201,58 +248,72 @@ view over, okay?
 51
 00:02:01,438 --> 00:02:03,671
 Or cross-dissolving the entire view.
+还有，Cross-Dissolving 整个视图这样的动画效果
 
 52
 00:02:03,673 --> 00:02:06,840
 This is more where we're going to have our views, and
+但是我们这周讲的是
 
 53
 00:02:06,842 --> 00:02:08,642
 we're going to have them moving around on screen.
+我们如何在屏幕上移动这些视图
 
 54
 00:02:08,644 --> 00:02:10,377
 Maybe running up against other things and
+有可能这些视图于其他的视图之间相互影响
 
 55
 00:02:10,379 --> 00:02:12,745
 bouncing a little bit, that kind of stuff.
+产生一些弹跳效果等类似的东西
 
 56
 00:02:13,681 --> 00:02:15,381
 The way you make this stuff work, okay,
+然而你想做出这样的动画效果
 
 57
 00:02:15,383 --> 00:02:16,715
 it's a multi-step process.
+要经历很多个步骤
 
 58
 00:02:16,717 --> 00:02:18,166
 The firs thing is,
+首先要做的是
 
 59
 00:02:18,167 --> 00:02:19,616
 you're going to need a UIDynamicAnimator.
+你需要一个 UIDynamicAnimator
 
 60
 00:02:19,619 --> 00:02:22,220
 That's the class that really drives the whole thing, so
+这是驱动这些物理动画效果的本源
 
 61
 00:02:22,222 --> 00:02:23,788
 you need one of those.
+所以你需要一个 UIDynamicAnimator 的实例
 
 62
 00:02:23,790 --> 00:02:27,424
 And you'll only have one for any animation that's going on.
+如果你需要一种类似的动画效果，那你就需要一个它的实例
 
 63
 00:02:27,426 --> 00:02:29,993
 You can have multiple UIDynamicAnimators if you had,
+你可以同时有多个 UIDynamicAnimator 的实例
 
 64
 00:02:29,995 --> 00:02:32,028
 for example, another view doing some animation at
+比如，同时有另外的一个视图拥有其他的物理动画效果
 
 65
 00:02:32,030 --> 00:02:32,962
@@ -261,34 +322,42 @@ the same time.
 66
 00:02:32,964 --> 00:02:34,897
 But within your own view,
+但是在你自己的视图里面
 
 67
 00:02:34,898 --> 00:02:36,831
 you're probably just gonna have this one animator.
+你可能只需要一个 UIDynamicAnimator 的实例
 
 68
 00:02:36,834 --> 00:02:38,233
 So you're gonna create this animator,
+首先，你已经创建好了这个 UIDynamicAnimator
 
 69
 00:02:38,235 --> 00:02:41,770
 then you're gonna add dynamic behaviors to it.
+然后你要做的是，向它之上添加一些动态的行为
 
 70
 00:02:41,772 --> 00:02:44,005
 So behaviors are like gravity and
+比如类似于重力的行为
 
 71
 00:02:44,007 --> 00:02:46,774
 collision and things attached to each other.
+或者是碰撞，或是附加在一起的效果
 
 72
 00:02:46,776 --> 00:02:49,343
 It's how the things inside are going to behave, 'Kay?
+这就是你的 UIDynamicAnimator 中的视图相互之间影响的行为，明白了吗？
 
 73
 00:02:49,345 --> 00:02:52,179
 And these are basically physics-based descriptions of
+这就是描述了这些视图物理行为的东西
 
 74
 00:02:52,181 --> 00:02:53,814
@@ -297,90 +366,112 @@ how they're going to behave.
 75
 00:02:53,816 --> 00:02:55,082
 And then, of course,
+当然，接下来
 
 76
 00:02:55,083 --> 00:02:56,349
 there's the things that are going to be animated,
+就是，想要受这些动画影响的视图
 
 77
 00:02:56,351 --> 00:02:59,752
 which for our purposes are always gonna be UIViews.
+目前我们只会用到 UIView 的实例
 
 78
 00:02:59,754 --> 00:03:01,237
 Okay?
+明白了吗？
 
 79
 00:03:01,238 --> 00:03:02,721
 These UIViews, DynamicItems,
+这些视图，Dynamic Items
 
 80
 00:03:02,723 --> 00:03:04,690
 they are going to be affected by the gravity and
+将会受其他对象的重力、碰撞
 
 81
 00:03:04,692 --> 00:03:07,559
 the collisions and all those things.
+或者其他的效果
 
 82
 00:03:07,561 --> 00:03:08,092
 Okay?
+明白了吗？
 
 83
 00:03:08,094 --> 00:03:09,060
 That's it.
+就这些步骤
 
 84
 00:03:09,062 --> 00:03:10,461
 Just create the dynamic animator,
+简单的说，先创建 UIDynamicAnimator 实例
 
 85
 00:03:10,463 --> 00:03:12,396
 create the behaviors you want and
+然后定义你想要的行为
 
 86
 00:03:12,397 --> 00:03:14,330
 configure them, add the items to the behaviors, bam.
+设置受影响的对象，将这些对象加到这个行为中
 
 87
 00:03:14,333 --> 00:03:16,132
 It'll just start automatically animating.
+然后，视图就自动动起来了
 
 88
 00:03:16,134 --> 00:03:17,633
 And if you remove an item from an behavior,
+同样的，当你从一个行为中移走了一个对象
 
 89
 00:03:17,635 --> 00:03:19,001
 it'll stop animating.
+它就停止了它的动画效果
 
 90
 00:03:19,003 --> 00:03:19,668
 Okay?
+明白了吗？
 
 91
 00:03:19,670 --> 00:03:20,535
 Simple as that.
+就是如此的简单
 
 92
 00:03:20,537 --> 00:03:22,137
 So let's look at the steps.
+让我们看一下这些步骤的代码
 
 93
 00:03:22,139 --> 00:03:25,373
 The first step is you need to create a UIDynamicAnimator,
+首先的第一步，创建一个 UIDynamicAnimator 的实例
 
 94
 00:03:25,375 --> 00:03:27,608
 and the dynamic animators we're going to use,
+我们这里想要使用的是 animator 变量
 
 95
 00:03:27,610 --> 00:03:30,444
 I'm only going to talk about ones that animate views.
+这里我们只会使用到视图
 
 96
 00:03:30,446 --> 00:03:32,646
 You can actually use an animator to animate arbitrary
+当然你还可以对一些抽象的东西做动画效果
 
 97
 00:03:32,648 --> 00:03:33,313
@@ -389,54 +480,67 @@ things.
 98
 00:03:33,315 --> 00:03:34,514
 Okay?
+明白了吗？
 
 99
 00:03:34,515 --> 00:03:35,714
 Not even graphical things.
+不一定是要图形上的东西
 
 100
 00:03:35,717 --> 00:03:38,317
 But we're only gonna talk about animating views.
+但是这里我们只会讲到视图的动画
 
 101
 00:03:38,319 --> 00:03:40,302
 Okay?
+明白了吗？
 
 102
 00:03:40,303 --> 00:03:42,286
 So when we create a dynamic animator that animates views,
+我们已经创建了一个 UIDynamicAnimator 来让我们的视图动起来
 
 103
 00:03:42,289 --> 00:03:45,390
 we have to specify the top-level
+我们必须指定最顶层的 UIView
 
 104
 00:03:45,392 --> 00:03:48,927
 UIView, the view at the top of the view hierarchy where our
+也就是在视图系统中最顶层的那个视图
 
 105
 00:03:48,929 --> 00:03:50,061
 animations are occurring in.
+所有动画效果发生在这里面
 
 106
 00:03:50,063 --> 00:03:52,930
 Now animations can occur anywhere deep
+现在，动画效果就可以在视图系统中的任意一个地方
 
 107
 00:03:52,932 --> 00:03:54,765
 down that view hierarchy you want.
+其作用了
 
 108
 00:03:54,767 --> 00:03:57,034
 But we have specified the top-level view.
+所以我们需要指定最顶层的那个视图
 
 109
 00:03:57,036 --> 00:03:59,669
 So, in other words, any view that this dynamic animator's
+换言之，UIDynamicAnimator 所有的动画效果都会
 
 110
 00:03:59,671 --> 00:04:04,540
 going to animate has to be a subview or subview of
+是这个 Reference View 的子视图，或者是子视图的子视图
 
 111
 00:04:04,542 --> 00:04:07,142
@@ -445,18 +549,22 @@ a subview of a subview of this reference view.
 112
 00:04:07,144 --> 00:04:08,810
 Okay? So that's the only argument
+明白了吗？
 
 113
 00:04:08,812 --> 00:04:11,479
 you have to provide when you create a dynamic animator.
+这就是你创建 UIDynamicAnimator 实例唯一需要的参数
 
 114
 00:04:13,116 --> 00:04:14,348
 Then you create these behaviors.
+接下来我们创建一些行为
 
 115
 00:04:14,350 --> 00:04:17,417
 Behaviors are these concrete subclasses of
+行为是一些 UIDynamicBehavior 的子类
 
 116
 00:04:17,419 --> 00:04:19,019
@@ -465,94 +573,117 @@ UIDynamicBehavior.
 117
 00:04:19,021 --> 00:04:21,120
 And so there's like UIGravityBehavior,
+比如说 UIGravityBehavior
 
 118
 00:04:21,122 --> 00:04:23,689
 just say UIGravityBehavior, takes no arguments.
+接受0个参数
 
 119
 00:04:23,691 --> 00:04:25,024
 And in CollisionBehavior,
+在 CollisionBehavior 中
 
 120
 00:04:25,026 --> 00:04:27,259
 I'm going to talk about all of these behaviors you can do,
+我将会讨论所有你能做的行为
 
 121
 00:04:27,261 --> 00:04:30,161
 and you just add them with the method addBehavior
+你只需要使用 addBehavior 来添加它们
 
 122
 00:04:30,163 --> 00:04:31,229
 to your animator.
+到你的动画器（animator）中
 
 123
 00:04:31,231 --> 00:04:32,363
 Simple enough.
+足够简单了吧
 
 124
 00:04:32,365 --> 00:04:34,932
 And then you add the DynamicItems which are gonna
+随后你会在这之上添加 DynamicItem
 
 125
 00:04:34,934 --> 00:04:35,866
 be UIViews.
+它们应该是 UIView
 
 126
 00:04:35,868 --> 00:04:37,734
 Okay? UIDynamicItems
+明白了吗？
 
 127
 00:04:37,736 --> 00:04:39,736
 are really just a protocol I'm gonna talk about in a second,
+我等下会讲，UIDynamicItems 只是一个协议
 
 128
 00:04:39,738 --> 00:04:42,238
 but UIView implements that protocol.
+但是 UIView 实现了这个协议
 
 129
 00:04:42,240 --> 00:04:45,774
 But you just add these items using the method addItem on
+但是你目前不用管这些，你只需要用 UIDynamicBehavior 的 addItem
 
 130
 00:04:45,776 --> 00:04:47,575
 UIDynamicBehavior.
+把这些东西添加进来就可以了
 
 131
 00:04:47,577 --> 00:04:49,444
 So you see how I'm adding the items to the behavior.
+这样你就可以看到我时如何给 item 添加行为的
 
 132
 00:04:49,446 --> 00:04:51,278
 So you don't add the items to the animator,
+不是把这些东西添加到动画器中
 
 133
 00:04:51,280 --> 00:04:52,613
 you add the items to the behavior.
+而是将这些东西添加到行为中
 
 134
 00:04:52,615 --> 00:04:55,215
 You add the behaviors to the animator.
+然后把行为添加到动画器里
 
 135
 00:04:55,217 --> 00:04:57,000
 Okay?
+明白了吗？
 
 136
 00:04:57,001 --> 00:04:58,784
 So in this case up here, item1,
+在这里，item1
 
 137
 00:04:58,787 --> 00:05:02,955
 I added it to gravity and collider.
+我把它添加给了 gravity 和 collider
 
 138
 00:05:02,957 --> 00:05:05,124
 So item1 is going to be affected by the gravity,
+所以 item1 将会受其他对象的重力
 
 139
 00:05:05,126 --> 00:05:07,659
 and it's also going to collide with whatever
+和碰撞的设置所影响
 
 140
 00:05:07,661 --> 00:05:09,227
@@ -561,82 +692,102 @@ the collider sets up.
 141
 00:05:09,229 --> 00:05:11,295
 Item2, is affected by the gravity, but
+item2 将会受其他对象的重力所影响
 
 142
 00:05:11,297 --> 00:05:13,397
 it will not collide with whatever's in the collider.
+但是不会受到碰撞效果的影响
 
 143
 00:05:13,399 --> 00:05:15,933
 It also won't collide with item1, they would pass right
+item2 不会与 item1 相碰撞，它们会相互穿过彼此
 
 144
 00:05:15,935 --> 00:05:18,869
 through each other, because it's not part of the collider.
+因为这不受碰撞效果的影响
 
 145
 00:05:18,871 --> 00:05:21,171
 Okay, so if you want things to interact with each other,
+所以，如果你想要这两者相互产生互动的话
 
 146
 00:05:21,173 --> 00:05:22,839
 they have to both be a part of the same behavior.
+它们都必须添加到一个相同的行为
 
 147
 00:05:25,109 --> 00:05:28,043
 Okay, that protocol is talking about UIDynamicItems
+好的，这个协议讲的是 UIView
 
 148
 00:05:28,045 --> 00:05:29,811
 that UIView implements.
+实现的 UIDynamicItems
 
 149
 00:05:29,813 --> 00:05:34,415
 It just has three properties, actually, bounds.
+它有三个属性，bounds
 
 150
 00:05:34,417 --> 00:05:35,983
 This is read-only, so
+这个属性是只读的
 
 151
 00:05:35,985 --> 00:05:40,320
 the animator cannot animate the size of something.
+动画器无法改变一个东西的大小
 
 152
 00:05:40,322 --> 00:05:41,755
 Okay? Because
+这是因为
 
 153
 00:05:41,756 --> 00:05:43,189
 the bounds part of the protocol is read-only.
+这个协议实现的 bounds 部分是只读的
 
 154
 00:05:44,292 --> 00:05:46,959
 So the two animatable properties are the center, so
+另外两个可以被动画改变的属性是，center
 
 155
 00:05:46,961 --> 00:05:48,193
 that's the position of the thing.
+这定义了一个对象的位置
 
 156
 00:05:48,195 --> 00:05:50,362
 So you can see animators moving things all over
+你可以看到动画效果将对象的位置移动来移动去
 
 157
 00:05:50,364 --> 00:05:52,263
 the place, that's mostly what they do.
+这也就是常用的一些动画
 
 158
 00:05:52,265 --> 00:05:55,700
 And then also a transform, which is AffineTransform.
+还有一个 transform 属性，它是 AffineTransform 类型的
 
 159
 00:05:55,702 --> 00:05:57,601
 Now notice that view UIView already have
+现在，注意到 UIView 已经拥有了这三个属性
 
 160
 00:05:57,603 --> 00:05:59,703
 all three of these properties, so you didn't even have to
+你不需要做任何事情去实现这个协议了
 
 161
 00:05:59,705 --> 00:06:01,271
@@ -645,126 +796,157 @@ do anything to implement this protocol.
 162
 00:06:02,374 --> 00:06:03,406
 That AffineTransform,
+我顺便说一下，这里的 AffineTransform
 
 163
 00:06:03,408 --> 00:06:05,141
 by the way, is only used for rotation.
+是用于旋转的
 
 164
 00:06:06,077 --> 00:06:08,777
 So basically, the animator can rotate the view, or
+大致你可以理解为，这个动画器能够旋转这个视图
 
 165
 00:06:08,779 --> 00:06:10,211
 he can position it.
+或者重新定位这个视图
 
 166
 00:06:10,213 --> 00:06:13,147
 That's something that the animator can do.
+这就是动画器能够做到
 
 167
 00:06:13,149 --> 00:06:16,684
 Okay, now if you change the center or the transform,
+好的，现在，如果你想改变一个视图的中心或者使其变形
 
 168
 00:06:16,686 --> 00:06:18,285
 like you change the frame or
+就像你改变了视图的 frame 或
 
 169
 00:06:18,287 --> 00:06:20,654
 the center of the view to move it and
+视图的中心使其移动位置
 
 170
 00:06:20,656 --> 00:06:23,423
 the animator has a hold of it, you gotta tell the animator
+你告诉拥有这个对象的动画器
 
 171
 00:06:23,425 --> 00:06:26,459
 you did that by calling updateItemUsingCurrentState.
+你使用一个叫做 updateItemUsingCurrentState 的方法
 
 172
 00:06:26,461 --> 00:06:28,060
 You just pass the view.
+传入视图
 
 173
 00:06:28,062 --> 00:06:29,278
 Okay?
+明白了吗？
 
 174
 00:06:29,279 --> 00:06:30,495
 And so the animator can say, oh, that thing moved.
+然后，动画器会知道，这个东西移动了
 
 175
 00:06:30,498 --> 00:06:32,064
 And it will update its internal state
+它会从开始的地方更新内部状态
 
 176
 00:06:32,066 --> 00:06:33,431
 to start from wherever that thing is.
+无论这个东西的位置是哪里
 
 177
 00:06:33,433 --> 00:06:35,233
 Does that make sense?
+我这么说能明白吗？
 
 178
 00:06:35,235 --> 00:06:38,069
 Obviously, if you and the animator are fighting over
+显然的，你和动画器正在争抢
 
 179
 00:06:38,071 --> 00:06:41,638
 who's positioning a view, you have to at least communicate,
+重新定位一个视图的所有权，你需要协调好这个
 
 180
 00:06:41,640 --> 00:06:42,973
 and this is how you do it.
+上面的就是你如何做的过程
 
 181
 00:06:42,975 --> 00:06:43,673
 Okay?
+明白了吗？
 
 182
 00:06:43,675 --> 00:06:44,874
 Simple enough.
+就是如此的简单
 
 183
 00:06:44,876 --> 00:06:45,941
 All right. So let's talk about some of
+好的，让我们再谈谈另外的一些效果
 
 184
 00:06:45,943 --> 00:06:47,276
 these behaviors, the concrete behavior.
+凝聚（concrete）的行为
 
 185
 00:06:47,278 --> 00:06:50,479
 So gravity is very simple behavior.
+重力行为非常的简单
 
 186
 00:06:50,481 --> 00:06:52,147
 It just has an angle.
+就设置一个角度
 
 187
 00:06:52,149 --> 00:06:54,549
 So you can have the gravity be going up the screen or
+之后你就可以在屏幕上看到重力的效果
 
 188
 00:06:54,551 --> 00:06:56,751
 down the screen or to the left or to the right or
+无论是从左到右的重力效果还是
 
 189
 00:06:56,753 --> 00:06:59,820
 any angle you want, and it has a magnitude.
+你想要的任意的角度
 
 190
 00:06:59,822 --> 00:07:02,139
 Okay? So
+明白了吗？
 
 191
 00:07:02,140 --> 00:07:04,457
 the magnitude is in the scale where 1.0 is 1,000
+这里的大小（magnitude）的比例是 1.0:1000
 
 192
 00:07:04,460 --> 00:07:07,127
 points per second per second.
+1000 像素点每二次方秒
 
 193
 00:07:07,129 --> 00:07:08,912
@@ -773,10 +955,12 @@ points per second per second.
 194
 00:07:08,913 --> 00:07:10,696
 You all know that gravity is an acceleration.
+你们都知道重力是一种加速度
 
 195
 00:07:10,699 --> 00:07:13,199
 The acceleration due to gravity on Earth is 9.8
+这个加速度在地球上是 9.8 米每平方秒
 
 196
 00:07:13,201 --> 00:07:15,000
@@ -785,6 +969,7 @@ meters per second squared.
 197
 00:07:15,002 --> 00:07:18,837
 And the acceleration due to gravity in these behaviors is
+这里的重力加速度是 1000 点每平方米秒
 
 198
 00:07:18,839 --> 00:07:21,572
@@ -793,22 +978,27 @@ And the acceleration due to gravity in these behaviors is
 199
 00:07:21,574 --> 00:07:23,240
 'Kay? You can also set this
+明白了吗？当然你可以用一个向量设置
 
 200
 00:07:23,242 --> 00:07:25,109
 as a vector, but angle and magnitude
+但是角度和大小
 
 201
 00:07:25,111 --> 00:07:27,144
 are probably the easiest way to understand this.
+会是一个最简单的弄懂它的方法
 
 202
 00:07:27,146 --> 00:07:29,079
 So you just set the gravity.
+只要设置好重力
 
 203
 00:07:29,080 --> 00:07:31,013
 Now any item you add will start accelerating in
+任意的对象在这个方向上就有一个加速度
 
 204
 00:07:31,016 --> 00:07:31,948
@@ -817,14 +1007,17 @@ that direction.
 205
 00:07:31,950 --> 00:07:33,500
 The instance you add it,
+你添加的那个实例
 
 206
 00:07:33,501 --> 00:07:35,051
 it's gonna start accelerating in that direction,
+会在这个方向上有一个加速度
 
 207
 00:07:35,053 --> 00:07:37,319
 just like gravity were pulling on it.
+就好像重力正在拉它的样子
 
 208
 00:07:37,321 --> 00:07:38,820
@@ -833,86 +1026,107 @@ just like gravity were pulling on it.
 209
 00:07:38,822 --> 00:07:40,622
 Then there's attachment behaviors.
+还有一些附属（attachment）行为的动画效果
 
 210
 00:07:40,624 --> 00:07:43,891
 So attachments you can attach two items, or
+对于附属行为，你可以添加两个对象
 
 211
 00:07:43,893 --> 00:07:46,994
 you can attach an item to an anchor point.
+或者将这两个对象添加到同一个锚点
 
 212
 00:07:46,996 --> 00:07:49,163
 Okay? That item still going to be
+明白了吗？这个东西仍旧会被其他的动作所影响
 
 213
 00:07:49,165 --> 00:07:52,733
 affected by all the other behaviors like gravity, so
+比如说重力
 
 214
 00:07:52,735 --> 00:07:54,167
 if I attached a view.
+但是，当我将一个视图，附属
 
 215
 00:07:54,169 --> 00:07:56,235
 To an anchor point, like this.
+到一个锚点，就像这样
 
 216
 00:07:56,237 --> 00:07:57,970
 And there was gravity on the view.
+由于这个视图上有重力的影响
 
 217
 00:07:57,972 --> 00:07:59,805
 It would swing down like this and
+它会像这样摆动下来
 
 218
 00:07:59,807 --> 00:08:02,140
 stop if there was gravity down, right?
+然后停止，就像重力的作用那样
 
 219
 00:08:02,142 --> 00:08:03,408
 'Cuz the gravity would be pulling it down.
+因为重力正在拉这个视图
 
 220
 00:08:03,410 --> 00:08:05,243
 But the attachment would be holding onto it.
+但是附属却是保持的效果
 
 221
 00:08:05,245 --> 00:08:07,478
 Does that make sense?
+我这么说能明白吗？
 
 222
 00:08:07,480 --> 00:08:08,846
 So the attachment basically.
+所以说，附属的行为基本上是
 
 223
 00:08:08,848 --> 00:08:10,814
 But it's like a bar that's attached.
+好比附着在一个栏（bar）上
 
 224
 00:08:10,816 --> 00:08:12,982
 That bar could be springy also.
+这个栏是有弹性的
 
 225
 00:08:12,984 --> 00:08:15,685
 So if it was a springy bar attachment, then the gravity
+如果是附属在一个弹性的栏上，那么重力会把这个视图向下拉
 
 226
 00:08:15,687 --> 00:08:18,087
 would pull it down, and it would spring like this.
+然后这个视图会在栏附近弹来弹去
 
 227
 00:08:19,090 --> 00:08:20,288
 So you can get a little springy and
+你可以得到一个小小的弹性效果
 
 228
 00:08:20,290 --> 00:08:24,292
 you can control the dampening and all that as well.
+而且你可以控制这个弹性效果反馈的程度
 
 229
 00:08:24,294 --> 00:08:25,893
 You can also control the distance between
+同样可以控制这两个东西之间的距离
 
 230
 00:08:25,895 --> 00:08:28,095
@@ -921,78 +1135,97 @@ those two things.
 231
 00:08:28,096 --> 00:08:30,296
 By the way, that distance is settable while it's animating,
+顺便说一句，这个距离在进行动画的时候还是可以设置的
 
 232
 00:08:30,299 --> 00:08:31,932
 so this thing might be pulling down and
+比方说，这个东西正在被往下拉的时候
 
 233
 00:08:31,934 --> 00:08:33,500
 you might be changing the length and
+你改变了它的长度
 
 234
 00:08:33,502 --> 00:08:34,901
 it might swing way down and
+这样它就会向下摆动
 
 235
 00:08:34,903 --> 00:08:36,635
 then you might pull it back up.
+接着，你有可能向上拉动了一下，它就会向上摆动
 
 236
 00:08:36,637 --> 00:08:38,404
 So you can control all this stuff.
+你可以控制这一切
 
 237
 00:08:38,406 --> 00:08:40,389
 All these things like that,
+类似这样的东西
 
 238
 00:08:40,390 --> 00:08:42,373
 even the anchor point can move while it's animating.
+甚至说是，锚点在进行动画的时候都是可以被改变的
 
 239
 00:08:42,376 --> 00:08:44,642
 And we're gonna actually do that in the demo.
+我们会在 Demo 里实现一下
 
 240
 00:08:44,644 --> 00:08:47,879
 So it's incredibly flexible what you can do when you
+所以在动画进行的过程中
 
 241
 00:08:47,881 --> 00:08:51,148
 can change the attributes of these behaviors on the fly,
+这些属性都是非常自由可调节的
 
 242
 00:08:51,150 --> 00:08:53,750
 while things are happening with gestures or whatever.
+当涉及到手势或者其他类似的东西时
 
 243
 00:08:55,620 --> 00:08:57,854
 Collision behavior is an awesome behavior.
+碰撞效果就非常起作用了
 
 244
 00:08:57,856 --> 00:08:59,588
 You're gonna use that very often.
+你会在之后频繁地使用它
 
 245
 00:09:01,058 --> 00:09:04,593
 It can basically control collisions between items.
+它能够控制对象之间的碰撞
 
 246
 00:09:04,595 --> 00:09:07,328
 And also, between items and a boundary.
+还可以控制对象和一个边界之间的碰撞
 
 247
 00:09:07,330 --> 00:09:09,197
 And you can set up as many boundaries as you want.
+这里的意思是，你可以设置类似的多个边界
 
 248
 00:09:09,199 --> 00:09:10,882
 So, for your assignment five,
+所以，你们的作业五
 
 249
 00:09:10,883 --> 00:09:12,566
 where you're gonna be doing this brickout game or
+你会做一个叫 Brickout 或者是 Breakout 的游戏
 
 250
 00:09:12,568 --> 00:09:13,734
@@ -1001,6 +1234,7 @@ breakout game.
 251
 00:09:13,736 --> 00:09:15,669
 You're probably gonna wanna use boundaries for
+你大概会为你的砖头用到边界这个属性
 
 252
 00:09:15,671 --> 00:09:17,137
@@ -1009,14 +1243,17 @@ all your bricks.
 253
 00:09:17,139 --> 00:09:19,706
 You're not gonna, they'll be UI views cuz you've got to
+由于它们是 UIView，所以你需要手动绘制出它们
 
 254
 00:09:19,708 --> 00:09:22,575
 draw them, but you won't be having those UI views
+但是你不希望这些视图参与到碰撞效果之中去
 
 255
 00:09:22,577 --> 00:09:25,244
 participate in the collisions, cuz then the bricks would
+因为这些砖最后会相互之间飞来飞去，满屏幕都是
 
 256
 00:09:25,246 --> 00:09:27,379
@@ -1025,74 +1262,92 @@ start flying into each other, all over the place.
 257
 00:09:27,381 --> 00:09:29,981
 You just want them to kind of be fixed boundaries, so
+你想要的，应该是一个固定的边界
 
 258
 00:09:29,983 --> 00:09:31,215
 that when the ball hits them,
+当球击中它们的时候
 
 259
 00:09:31,217 --> 00:09:34,151
 then that view animates itself disappearing, okay?
+某个砖的边界才会消失，然后触发碰撞效果，明白了吗？
 
 260
 00:09:35,454 --> 00:09:37,587
 So the way you set these boundaries,
+所以你设置这些边界
 
 261
 00:09:37,589 --> 00:09:39,088
 there's really two ways.
+这里会有两个方法
 
 262
 00:09:39,090 --> 00:09:43,759
 One is you can set a Bezier path, any Bezier path, and it
+一个是，你可以设置一个 UIBezierPath，任意一种贝塞尔曲线
 
 263
 00:09:43,761 --> 00:09:46,795
 will use that Bezier path as the outer edges of a boundary.
+然后，它会使用这个贝塞尔曲线当作它的外部边界
 
 264
 00:09:46,797 --> 00:09:48,513
 'Kay.
+明白了吗？
 
 265
 00:09:48,514 --> 00:09:50,230
 It could be a rectangle or a circle, could be a line.
+它可以是一个矩形或者是一个圆形，甚至是一条直线
 
 266
 00:09:50,233 --> 00:09:53,067
 And you just, things that hit the line bounce off of it.
+你只需要，当东西碰到它的时候，弹回去
 
 267
 00:09:54,270 --> 00:09:57,171
 Or you can set this translatesReferenceBoundsInto-
+或者你可以设置 translatesReferenceBoundsIntoBoundary
 
 268
 00:09:57,173 --> 00:10:00,307
 Boundary, set that to true, and then the outer edges
+方法，设置它为真，然后
 
 269
 00:10:00,309 --> 00:10:03,777
 of the animated reference view will be a boundary.
+动画对象的所有的外边框，就会变成一个边界
 
 270
 00:10:03,779 --> 00:10:05,712
 Now, you can't use that for your homework,
+你在你的作业中不能使用它
 
 271
 00:10:05,713 --> 00:10:07,646
 because of course, the bottom one has to fall through.
+因为，最底下的那个砖必须是掉下来的
 
 272
 00:10:07,649 --> 00:10:10,616
 If your bouncing ball gets past the paddle, it falls off.
+如果你的球穿过去了，它会掉下来
 
 273
 00:10:11,618 --> 00:10:13,051
 So you'll have to use lines.
+这里你只能使用贝塞尔曲线中的线段
 
 274
 00:10:13,053 --> 00:10:14,485
 Bezier curve that's line two,
+线段的贝塞尔曲线
 
 275
 00:10:14,487 --> 00:10:17,588
@@ -1101,38 +1356,47 @@ line two, line two or whatever.
 276
 00:10:17,590 --> 00:10:19,523
 Okay? When you add a boundary
+明白了吗？当你添加一个边界的时候
 
 277
 00:10:19,525 --> 00:10:21,024
 you give it an identifier.
+你要给它一个标识符
 
 278
 00:10:21,026 --> 00:10:23,927
 Now, that identifier is an NSCopying.
+这里的标识符是一个遵循 NSCopying 协议的对象
 
 279
 00:10:23,929 --> 00:10:28,764
 So NSCopying is a protocol that is implemented by
+NSCopying 是一个协议，被 NSString
 
 280
 00:10:28,766 --> 00:10:33,835
 NSString, NSNumber,
+NSNumber 所实现的
 
 281
 00:10:33,837 --> 00:10:36,538
 things like that, so that means String and
+其他的类也可能实现了这个协议，但是这代表
 
 282
 00:10:36,540 --> 00:10:39,840
 Int/Double also can be used as the identifier for a boundary.
+String 类型和 Int/Double 类型都可以作用一个边界的标识符
 
 283
 00:10:40,910 --> 00:10:44,177
 So when you hit a boundary you get this message.
+当你触碰到一个边界的时候，你会得到这个消息
 
 284
 00:10:44,179 --> 00:10:46,780
 You want to se yourself to be the UI collision behaviors
+你想要在碰撞的行为中设置你自己为代理
 
 285
 00:10:46,782 --> 00:10:48,832
@@ -1141,54 +1405,67 @@ delegate.
 286
 00:10:48,833 --> 00:10:50,883
 And when a boundary is hit, it will send this message,
+当一个边界被触及的时候，它会发送这个消息
 
 287
 00:10:50,885 --> 00:10:52,418
 it actually has a few other messages,
+事实上，还有另外一些消息代理可以发送的
 
 288
 00:10:52,420 --> 00:10:55,954
 to its delegates saying, there was a collision
+当一个对象和一个边界发生碰撞的时候
 
 289
 00:10:55,956 --> 00:10:59,091
 between an item and a boundary or between two items.
+或者是两个对象之间发生的时候
 
 290
 00:10:59,093 --> 00:11:02,260
 And it's going to pass back that boundary identifier.
+代理将会传递这个标识符
 
 291
 00:11:02,262 --> 00:11:03,628
 You see that boundary identifier, so
+你看到这里第三个参数了吗？
 
 292
 00:11:03,630 --> 00:11:04,962
 the third argument there in this
+“边界的标识符”（BoundaryIdentifier）
 
 293
 00:11:04,964 --> 00:11:08,365
 method that it's gonna call in its delegate, and
+它会在代理中去调用这个东西
 
 294
 00:11:08,367 --> 00:11:11,468
 you have to cast that thing, cuz it'll be an NSCopying.
+因为这是一个遵循 NSCopying 协议的对象，所以你需要做一个类型转换
 
 295
 00:11:11,470 --> 00:11:13,403
 So you got to cast it to be a string or number or
+所以你将它转换成一个字符串或者是一个数字
 
 296
 00:11:13,405 --> 00:11:16,039
 whatever you put in, cast it to be that back.
+这么说吧，你设置标识符的参数是什么类型的，这里你就转换成什么类型的
 
 297
 00:11:16,041 --> 00:11:17,457
 Okay?
+明白了吗？
 
 298
 00:11:17,458 --> 00:11:18,874
 So it's a little small thing to understand is that
+这里你需要明白一点点类型转换的东西
 
 299
 00:11:18,876 --> 00:11:20,576
@@ -1201,94 +1478,117 @@ Okay?
 301
 00:11:22,612 --> 00:11:24,645
 So that's simple collisions.
+这是简单的碰撞效果
 
 302
 00:11:26,449 --> 00:11:29,150
 The snap behavior is used a lot in UI.
+在用户交互中，Snap 行为经常被使用到
 
 303
 00:11:29,152 --> 00:11:31,185
 You won't be using this in your homework but
+但是你在这个作业中并不会使用到它
 
 304
 00:11:31,187 --> 00:11:33,437
 it's actually used a lot.
+但在其他地方，它经常会被使用
 
 305
 00:11:33,438 --> 00:11:35,688
 It's essentially, you could imagine that you set up four
+而且是很基本的。
 
 306
 00:11:35,691 --> 00:11:40,426
 springs on the corner of a view in a new location.
+你可以想象，你在屏幕的四个角设置了弹性效果
 
 307
 00:11:40,428 --> 00:11:43,662
 The thing will fly to that space
+当这个对象移动到空间的另外一个位置的时候
 
 308
 00:11:43,664 --> 00:11:45,597
 in the middle of the four springs and
+发生了碰撞
 
 309
 00:11:45,599 --> 00:11:47,833
 then the springs will kind of oscillate.
+然后这个弹性效果就会触发类似于震荡一样的效果
 
 310
 00:11:47,835 --> 00:11:49,134
 So snap behavior is basically,
+举例说，Snap 行为
 
 311
 00:11:49,136 --> 00:11:52,170
 move to here, with a little bit of oscillation.
+移到某个地方，发生了碰撞
 
 312
 00:11:52,172 --> 00:11:54,171
 Okay, boing, kind of snapping.
+然后震荡。这就是 Snap 行为
 
 313
 00:11:54,173 --> 00:11:55,456
 Okay, but
+明白了吗？
 
 314
 00:11:55,457 --> 00:11:56,740
 snapping in a way that doesn't disconcert the user,
+但是 Snap 行为在某种程度上说，它并不会让用户分心
 
 315
 00:11:56,742 --> 00:11:59,026
 where things just like, moving.
+因为东西就像，移动
 
 316
 00:11:59,027 --> 00:12:01,311
 It flies across the screen, and then wiggles a little bit.
+然后摇动了一下下
 
 317
 00:12:01,313 --> 00:12:03,296
 So let the user know,
+所以，用户知道
 
 318
 00:12:03,297 --> 00:12:05,280
 there's a little thing just got positioned here.
+东西已经到了这个位置了
 
 319
 00:12:05,283 --> 00:12:07,850
 So, you just specify the point you want it to snap to, and
+实现这个，你只需要指定你想要 Snap 到的点
 
 320
 00:12:07,852 --> 00:12:10,519
 the item you want to snap, and it will zoom over there.
+以及，哪个对象你想要产生 Snap 动作，就够了
 
 321
 00:12:10,521 --> 00:12:13,489
 Okay, and you can control how much the springs spring.
+同样你可以控制这个震荡的效果
 
 322
 00:12:13,491 --> 00:12:15,857
 Is it a big movement or just kinda a small movement?
+是一个比较大的振幅呢还是一个比较小的振幅
 
 323
 00:12:15,859 --> 00:12:18,493
 You can control the damping with that
+通过同样设置这里的 damping 属性
 
 324
 00:12:18,495 --> 00:12:19,293
@@ -1297,54 +1597,67 @@ property there, damping.
 325
 00:12:19,295 --> 00:12:22,329
 Then there's a push behavior.
+另外，还有一个 Push 行为
 
 326
 00:12:22,331 --> 00:12:26,900
 A push behavior means push on this thing in a certain
+一个 Push 行为，代表的意思是，把这个东西推向一个特定的角度
 
 327
 00:12:26,902 --> 00:12:31,437
 angle and magnitude, kind of like gravity.
+或者是一个力度，有点类似于重力
 
 328
 00:12:31,439 --> 00:12:32,738
 The big difference between push and
+但是 Push 和重力效果最大的区别就是
 
 329
 00:12:32,740 --> 00:12:34,440
 gravity, two differences.
+两个地方
 
 330
 00:12:34,442 --> 00:12:37,609
 One, a push can be a one time push, all right.
+一个是，Push 行为可以是一个一次性的效果
 
 331
 00:12:37,611 --> 00:12:41,413
 Just instantaneous push, or it can be a continuous push
+也可以是一个持续性、连续的效果
 
 332
 00:12:41,415 --> 00:12:44,048
 which is not like gravity cuz it's not accelerating.
+不像重力的地方是，它并不会加速
 
 333
 00:12:44,050 --> 00:12:46,584
 It's just a continuous velocity.
+它是以一个恒定的速度
 
 334
 00:12:46,586 --> 00:12:47,551
 Okay? You understand the difference
+明白了吗？
 
 335
 00:12:47,553 --> 00:12:49,686
 between acceleration and velocity.
+你明白加速度和速度之间的区别吗？
 
 336
 00:12:49,688 --> 00:12:52,789
 So push would be, if you had a continuous push it would be
+如果你有一个持续性的 Push 行为
 
 337
 00:12:52,791 --> 00:12:55,591
 a constant velocity.
+那么被 Push 的对象会有一个恒定的速度
 
 338
 00:12:55,593 --> 00:12:56,892
@@ -1353,14 +1666,17 @@ Okay?
 339
 00:12:56,894 --> 00:12:59,962
 Now one thing about push behavior that's interesting is
+另外一个关于 Push 行为的很有意思的事情是
 
 340
 00:12:59,964 --> 00:13:02,764
 when you push, you add this behavior to your animator,
+当你 Push 的时候，你把这个行为添加到你的动画器中
 
 341
 00:13:02,766 --> 00:13:06,134
 it'll cause the items that are in it to be pushed.
+它会影响所有被添加到这个动画器里的东西
 
 342
 00:13:06,136 --> 00:13:07,902

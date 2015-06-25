@@ -1681,10 +1681,12 @@ it'll cause the items that are in it to be pushed.
 342
 00:13:06,136 --> 00:13:07,902
 And then it just kind of sits around there.
+然而它并没有任何实质性的功能
 
 343
 00:13:07,904 --> 00:13:10,071
 Wasted if it's not a continuous push.
+白白占用我们的资源，如果它不是一个持续性的 Push 行为的话
 
 344
 00:13:10,073 --> 00:13:12,106
@@ -1693,14 +1695,17 @@ And sits there, wasting memory.
 345
 00:13:12,107 --> 00:13:14,140
 And I'm going to talk about in a few slides how we can
+我会在之后的一些幻灯片中谈到这个问题
 
 346
 00:13:14,143 --> 00:13:15,575
 get that memory back.
+如何拿回这些占用的资源
 
 347
 00:13:15,577 --> 00:13:18,478
 Okay, and we'll have to do a little memory cycle
+好的，这里我们还需要做一个小小的内存循环保护
 
 348
 00:13:18,480 --> 00:13:20,297
@@ -1709,50 +1714,62 @@ protection there.
 349
 00:13:20,298 --> 00:13:22,115
 Now, there's a special kind of behavior,
+有一种非常特别的行为
 
 350
 00:13:22,117 --> 00:13:23,783
 called a dynamic item behavior.
+称作动态对象行为
 
 351
 00:13:23,785 --> 00:13:26,118
 Don't be confused by dynamic behavior,
+不要被动态行为（Dynamic Behavior）这个词所迷惑
 
 352
 00:13:26,120 --> 00:13:28,286
 which is the super class of all behaviors.
+这是所有行为的父类
 
 353
 00:13:28,288 --> 00:13:29,854
 And dynamic item behavior,
+动态行为
 
 354
 00:13:29,856 --> 00:13:35,126
 which is a sub-class of UIDynamicBehavior.
+本身是一个 UIDynamicBehavior 的子类
 
 355
 00:13:35,128 --> 00:13:37,928
 Item behavior says how does this item or
+对象行为描述了被添加这个行为的对象
 
 356
 00:13:37,930 --> 00:13:39,830
 any of the items added to this behavior,
+或者是一些对象是怎么样的
 
 357
 00:13:39,832 --> 00:13:43,333
 how do they behave when other behaviors make them interact?
+它们会和另外的一些行为如何交互
 
 358
 00:13:43,335 --> 00:13:46,169
 So this is when something smashes into a wall in
+举例来说，如果一个东西撞到一个墙上
 
 359
 00:13:46,171 --> 00:13:50,973
 a collider, in a collision behavior, how springy is it?
+这是一个碰撞效果，然而它的弹性程度是怎么样的？
 
 360
 00:13:50,975 --> 00:13:51,640
 Can it spin?
+这个东西能够旋转吗？
 
 361
 00:13:52,642 --> 00:13:54,676
@@ -1761,162 +1778,202 @@ Okay?
 362
 00:13:54,677 --> 00:13:56,711
 Or does it have to stay un-rotated?
+或者说，它是不是应该保持角度不做旋转？
 
 363
 00:13:56,713 --> 00:13:58,446
 Those kind of things
+如此如此的这一些东西
 
 364
 00:13:58,447 --> 00:14:00,180
 are all specified by this UIDynamicItemBehavior.
+都由这个 UIDynamicItemBehavior 所指定
 
 365
 00:14:00,183 --> 00:14:02,049
 So very often you'll have a gravity behavior,
+通常来说，你会有一个重力行为
 
 366
 00:14:02,051 --> 00:14:03,016
 a collider behavior.
+一个碰撞行为
 
 367
 00:14:03,018 --> 00:14:04,217
 You'll also have a dynamic
+你还会需要一个动态对象行为
 
 368
 00:14:04,219 --> 00:14:06,886
 item behavior to describe how much springiness is.
+来描述这个的弹性程度
 
 369
 00:14:06,888 --> 00:14:08,254
 You can, it also does density,
+你还可以描述密度
 
 370
 00:14:08,256 --> 00:14:10,389
 resistance, other things I haven't mentioned here.
+强度，或者另外一些这里我没有提及的东西
 
 371
 00:14:10,391 --> 00:14:11,623
 You can look in the documentation.
+都可以在文档里找到
 
 372
 00:14:11,625 --> 00:14:14,225
 But it's kind of all the things you would expect if you
+然而，当你需要一个物理引擎的时候，你才需要了解这些东西
 
 373
 00:14:14,227 --> 00:14:16,928
 had a physics-based engine, you need to set the kind of
+你需要设置所有这些属性
 
 374
 00:14:16,930 --> 00:14:20,464
 attributes, the physical attributes of an item.
+对象的物理属性
 
 375
 00:14:20,466 --> 00:14:23,367
 This dynamic item behavior also can report to you
+动态对象行为还可以告诉你
 
 376
 00:14:23,369 --> 00:14:26,870
 the current linear velocity and
+当前对象的线速度
 
 377
 00:14:26,872 --> 00:14:29,472
 angular velocity of this item.
+和角速度
 
 378
 00:14:29,474 --> 00:14:31,140
 So at any time, if you want to know,
+任意时刻都可以获取到
 
 379
 00:14:31,142 --> 00:14:34,076
 how fast is this thing moving and in what direction?
+这样你就可以知道这个东西移动多块、什么方向
 
 380
 00:14:34,078 --> 00:14:35,411
 You can get its linear velocity.
+通过获取其线速度
 
 381
 00:14:35,413 --> 00:14:37,079
 Or if you want to know how fast is this thing is
+而你可以知道这个东西是否在旋转
 
 382
 00:14:37,081 --> 00:14:39,981
 spinning, if at all, you can get its angular velocity.
+通过获取其角速度
 
 383
 00:14:41,051 --> 00:14:45,285
 And you can also add velocity to it in a certain direction.
+甚至说，你还可以在一个特定的方向上添加一个速度
 
 384
 00:14:45,287 --> 00:14:46,820
 So if you had something that was moving, and
+我们假想一下，你有一个正在移动的东西
 
 385
 00:14:46,822 --> 00:14:48,621
 you wanted to stop it, you could.
+你想让它停下，你可以添加一个反方向的速度
 
 386
 00:14:48,623 --> 00:14:50,723
 And then if you wanted to continue,
+如果你想要让停止的对象继续运动
 
 387
 00:14:50,725 --> 00:14:52,158
 you could add the velocity back.
+你把这个速度加回来
 
 388
 00:14:53,160 --> 00:14:55,193
 Just saying is all.
+就是如此
 
 389
 00:14:55,195 --> 00:14:56,428
 Okay.
+好的
 
 390
 00:14:56,429 --> 00:14:57,662
 So that's a dynamic behavior.
+这就是动态行为
 
 391
 00:14:57,664 --> 00:14:59,330
 Now, that's dynamic item behavior.
+现在，这是动态对象行为
 
 392
 00:14:59,332 --> 00:15:00,965
 Now here's UIDynamicBehavior.
+这里是 UIDynamicBehavior
 
 393
 00:15:00,967 --> 00:15:04,201
 This is the superclass of all of these behaviors.
+是所有这些行为的父类
 
 394
 00:15:04,203 --> 00:15:05,936
 And it's kind of an interesting superclass,
+这是一个很有趣的父类
 
 395
 00:15:05,938 --> 00:15:08,138
 because you can actually create a subclass.
+因为，你可以创建一个其子类
 
 396
 00:15:08,140 --> 00:15:10,773
 And in the invitation of the subclass you add
+在创建的子类中，你可以添加子行为
 
 397
 00:15:10,775 --> 00:15:12,942
 child behaviors, you add other behaviors so
+你可以添加其他的行为
 
 398
 00:15:12,944 --> 00:15:15,110
 you can have a composite behavior.
+这样你就可以拥有一个复合行为
 
 399
 00:15:15,112 --> 00:15:16,445
 This is very common to do.
+这是非常常见的做法
 
 400
 00:15:16,447 --> 00:15:18,297
 When you have three or
+当在一个相同集合的对象中
 
 401
 00:15:18,298 --> 00:15:20,148
 four different behaviors all working on the same set
+你想对它们所有添加三个或者是四个的行为
 
 402
 00:15:20,150 --> 00:15:20,782
@@ -1925,30 +1982,37 @@ of items.
 403
 00:15:20,784 --> 00:15:22,667
 A lot of times,
+经常
 
 404
 00:15:22,668 --> 00:15:24,551
 you'll create a subclass in UI dynamic behavior, and in
+你会选择创建一个 UIDynamicBehavior 的子类
 
 405
 00:15:24,554 --> 00:15:28,088
 the init method, you'll call this method addChildBehavior,
+在初始化方法中，你调用这个方法 addChildBehavior
 
 406
 00:15:28,090 --> 00:15:31,391
 and you'll add a gravity of collider, item behavior.
+你可以添加一个重力、碰撞或者是动态对象行为
 
 407
 00:15:31,393 --> 00:15:32,815
 You see what I mean?
+你知道我的意思了吗？
 
 408
 00:15:32,816 --> 00:15:34,238
 You'll add them as child behaviors.
+你可以将它们添加为子行为
 
 409
 00:15:34,239 --> 00:15:35,661
 And now, this behavior will do all the things that those
+现在，这个行为就达到所有你添加的行为的效果了
 
 410
 00:15:35,664 --> 00:15:36,295
@@ -1957,26 +2021,32 @@ behaviors did.
 411
 00:15:38,032 --> 00:15:39,181
 Okay? So,
+明白了吗？
 
 412
 00:15:39,182 --> 00:15:40,331
 you'll have a kind of a big combined behavior.
+所以，你会拥有一个非常庞大的行为
 
 413
 00:15:40,334 --> 00:15:41,800
 And I'll do that in the demo, so
+我会在 Demo 里演示一下
 
 414
 00:15:41,802 --> 00:15:43,335
 you can see what that looks like.
+你可以知道具体是怎么操作的
 
 415
 00:15:43,337 --> 00:15:48,906
 All behaviors, know the dynamic animator they're in.
+接下来，所有的行为
 
 416
 00:15:48,908 --> 00:15:52,042
 And a behavior can only be in one dynamic animator at
+一次只能在一个动画器中
 
 417
 00:15:52,044 --> 00:15:53,644
@@ -1985,22 +2055,27 @@ a time.
 418
 00:15:53,645 --> 00:15:55,245
 So it has a property called dynamicAnimator.
+这里有一个称作 dynamicAnimator 的属性
 
 419
 00:15:55,247 --> 00:15:56,646
 And it's read-only.
+只读的
 
 420
 00:15:56,648 --> 00:15:58,381
 And it will tell you.
+它会告诉你这些
 
 421
 00:15:58,383 --> 00:16:01,250
 You can ask a collider who's animating
+你可以询问一个碰撞行为谁正在进行动画效果
 
 422
 00:16:01,252 --> 00:16:03,919
 right now, and it will tell you that the dynamicAnimator
+它会返回给你正在动画的 dynamicAnimator
 
 423
 00:16:03,921 --> 00:16:05,020
@@ -2009,18 +2084,22 @@ is animating it.
 424
 00:16:05,022 --> 00:16:08,123
 Also, all dynamic behaviors will be sent
+同样，当所有的动态行为被移动到另外一个不同的动画器中
 
 425
 00:16:08,125 --> 00:16:10,625
 the message will be moved to animator
+它们将会发送一个消息
 
 426
 00:16:10,627 --> 00:16:13,060
 when they are going to switch to a different animator.
+willMovedToAnimator
 
 427
 00:16:13,062 --> 00:16:15,696
 Especially this is switching form not having an animator
+尤其是从没有动画器中切换到有动画器的时候
 
 428
 00:16:15,698 --> 00:16:16,763
@@ -2029,54 +2108,67 @@ to having one.
 429
 00:16:16,765 --> 00:16:19,632
 Or from having one to not having one anymore.
+或者是从有动画器中切换到没有动画器的时候
 
 430
 00:16:19,634 --> 00:16:21,067
 Okay?
+明白了吗？
 
 431
 00:16:21,069 --> 00:16:23,269
 That should be UIDynamicAnimator,
+这里会有一个问号，所以是一个可选类型的
 
 432
 00:16:23,271 --> 00:16:25,404
 question mark, that's an optional.
+UIDynamicAnimator
 
 433
 00:16:25,406 --> 00:16:27,172
 Okay? Cuz it might be said,
+明白了吗？因为我们可能会这么调用
 
 434
 00:16:27,174 --> 00:16:29,074
 will move to animator nil,
+willMoveToAnimator(nil)
 
 435
 00:16:29,076 --> 00:16:32,710
 which means you're being taken out of an animator.
+也就是说，我们从一个动画器中移除它
 
 436
 00:16:32,712 --> 00:16:36,847
 Okay, very important property on UIDynamicBehavior called
+在 UIDynamicBehavior 里，有一个非常重要的属性叫
 
 437
 00:16:36,849 --> 00:16:38,281
 action.
+action
 
 438
 00:16:38,283 --> 00:16:41,818
 Action is a function, takes no arguments, returns nothing.
+action 是一个没有参数的函数，并且不返回值
 
 439
 00:16:41,820 --> 00:16:46,722
 99.999% of the time it's set with a closure, okay?
+99.999% 的情况下，它通过一个闭包来设值
 
 440
 00:16:46,724 --> 00:16:50,492
 And this piece of code will be executed every time this
+然后，每次这个行为发生在其对象上的时候
 
 441
 00:16:50,494 --> 00:16:54,562
 behavior acts upon its items.
+这一小段代码都会执行
 
 442
 00:16:54,564 --> 00:16:55,813
@@ -2085,234 +2177,292 @@ behavior acts upon its items.
 443
 00:16:55,814 --> 00:16:57,063
 That means it's called a lot.
+这代表，这个方法会被多次调用
 
 444
 00:16:57,066 --> 00:16:58,365
 Okay?
+明白了吗？
 
 445
 00:16:58,367 --> 00:17:00,467
 Imagine a gravity behavior,
+想象一个重力行为
 
 446
 00:17:00,469 --> 00:17:03,737
 it's constantly accelerating something.
+它以一个恒定的加速度在加速一个对象
 
 447
 00:17:03,739 --> 00:17:05,371
 So it's constantly acting upon it.
+也就是说它持续地 “act”
 
 448
 00:17:05,373 --> 00:17:07,573
 So it's constantly gonna be calling this.
+所以它持续地调用这个方法
 
 449
 00:17:07,575 --> 00:17:09,475
 So whatever code you put here,
+无论你放在闭包里是什么样的代码，它都会持续调用
 
 450
 00:17:09,477 --> 00:17:12,778
 an action wants to be really efficient, okay?
+一个 action 要做到非常高效
 
 451
 00:17:12,780 --> 00:17:15,246
 It wants to be very small, very compact.
+同时长度需要非常短小精悍
 
 452
 00:17:15,248 --> 00:17:17,348
 This is a place to do some optimization,
+这里是需要做一些优化的
 
 453
 00:17:17,350 --> 00:17:19,216
 have a data structure where you can store things, so
+比如用一个数据结构去保存一些参数
 
 454
 00:17:19,218 --> 00:17:20,517
 you don't have to calculate things so much.
+以至于你不需要重新计算它们
 
 455
 00:17:20,519 --> 00:17:22,686
 Cuz this is going to get called a lot, all right?
+因为切记，这会被多次调用
 
 456
 00:17:22,688 --> 00:17:24,254
 And you'll want your animations to be smooth,
+你想要你的动画效果非常的顺畅
 
 457
 00:17:24,256 --> 00:17:27,090
 you don't want them to be bogged down with something
+你不希望它们在每一次交互的时候
 
 458
 00:17:27,092 --> 00:17:30,192
 heavy going on every single time it interacts, okay?
+都进行大量的运算，然后卡住不动了
 
 459
 00:17:31,762 --> 00:17:35,130
 One thing to be careful about this action method,
+关于 action 方法需要非常小心的一点是
 
 460
 00:17:35,132 --> 00:17:38,299
 is that it is a property on the behavior, so
+这是行为上的一个属性
 
 461
 00:17:38,301 --> 00:17:41,135
 if that action method's code refers to the behavior,
+所以如果 action 的代码里参考了这个行为的话
 
 462
 00:17:41,137 --> 00:17:43,437
 you're going to have a memory cycle, and
+你会形成一个 retain cycle
 
 463
 00:17:43,439 --> 00:17:46,173
 so you need to do that unowned thing,
+你需要将参考的类型编程 unowned
 
 464
 00:17:46,175 --> 00:17:49,743
 the capture list that we were taking about.
+我们在捕获列表里讨论过这个
 
 465
 00:17:49,745 --> 00:17:52,945
 You have to do that to break the memory cycle, this is
+你需要用捕获列表打破 retain cycle
 
 466
 00:17:52,947 --> 00:17:55,748
 the case where you've got a property on an object and
+这个技术通常是用于，当你对一个对象中有一个属性的时候
 
 467
 00:17:55,750 --> 00:17:58,050
 the implementation of the closure that you assign often
+而且你对这个属性赋值一个闭包，这个闭包的实现中你通常
 
 468
 00:17:58,052 --> 00:18:00,218
 refers back to the property.
+又参考这个属性本身
 
 469
 00:18:00,220 --> 00:18:01,686
 To the thing that the property is on,
 
+
 470
 00:18:01,688 --> 00:18:03,121
 so be careful about that,
+所以对这个小心点
 
 471
 00:18:03,123 --> 00:18:07,591
 let me show you a quick demo about that in a slide or two.
+这个我稍后会快速做一个 Demo 给你们了解一下
 
 472
 00:18:07,593 --> 00:18:10,327
 The UIDynamicAnimator, it also has a delegate.
+UIDynamicAnimator 同时拥有一个代理对象
 
 473
 00:18:10,329 --> 00:18:11,461
 Just like the CollisionBehavior
+就像碰撞行为一样
 
 474
 00:18:11,463 --> 00:18:13,796
 has a delegate, the animator has a delegate, and
+动画器有一个代理对象
 
 475
 00:18:13,798 --> 00:18:15,264
 it'll tell you only two things.
+它会告诉你两件事情
 
 476
 00:18:15,266 --> 00:18:19,068
 It'll tell you when the animation has reached stasis.
+首先，它会告诉你动画器是否已经停止
 
 477
 00:18:19,070 --> 00:18:23,505
 In other words, none of the behaviors need to do anything.
+换言之，没有另外的行为会继续产生了
 
 478
 00:18:23,507 --> 00:18:24,606
 Okay?
+明白了吗？
 
 479
 00:18:24,607 --> 00:18:25,706
 Nothing is happening in the animator.
+没有东西会在动画器中发生了
 
 480
 00:18:25,709 --> 00:18:27,608
 Everything is still, and
+所有的对象都是出于静止的状态
 
 481
 00:18:27,610 --> 00:18:30,210
 then it'll tell you when that's changed.
+同样的，当这些改变的时候，它同样会告诉你
 
 482
 00:18:30,212 --> 00:18:30,911
 Okay? And now, things
+当它告诉你的时候
 
 483
 00:18:30,913 --> 00:18:32,279
 are animating again.
+这代表，对象又动起来了
 
 484
 00:18:32,280 --> 00:18:33,646
 So every time it pauses, it'll tell you.
+所以，每一次动画暂停的时候，它都会告诉你
 
 485
 00:18:33,648 --> 00:18:35,782
 And then, every time it continues, it'll tell you.
+每一次动画继续的时候，它也会告诉你
 
 486
 00:18:35,784 --> 00:18:37,717
 So that way you can tell what's going on.
+通过这种方式，你能知道正在发生什么事情
 
 487
 00:18:39,854 --> 00:18:43,155
 When you design something that uses this stuff is,
+当你设计利用这个功能的时候
 
 488
 00:18:43,157 --> 00:18:45,557
 you want it to reach stasis.
+你想要它停止
 
 489
 00:18:45,559 --> 00:18:47,492
 You don't ever want it to be just constantly
+你不想要它始终在动画
 
 490
 00:18:47,494 --> 00:18:49,344
 animating, right?
+对吧？
 
 491
 00:18:49,345 --> 00:18:51,195
 You want it to try and reach stasis, if possible.
+你想要它在可能的情况下，达到静止状态
 
 492
 00:18:51,197 --> 00:18:53,130
 'Kay, now there might be cases where you actually
+另外，还有一种情况，这种情况下
 
 493
 00:18:53,132 --> 00:18:55,732
 are constantly animating, something's spinning, and
+你想要你的动画是持续性的，就像什么东西旋转一样
 
 494
 00:18:55,734 --> 00:18:57,534
 it's constantly spinning.
+你希望它一直保持旋转
 
 495
 00:18:57,536 --> 00:19:01,704
 Okay, but you wanna design the system, unless that's really
+你想要设计这个系统，除非你执意不要
 
 496
 00:19:01,706 --> 00:19:05,574
 what you intend, you don't want things, classic one is.
+不想要这些东西，你想用一个比较传统的做法
 
 497
 00:19:05,576 --> 00:19:07,476
 You have something with CollisionBehaviors.
+你有一些个碰撞效果
 
 498
 00:19:07,478 --> 00:19:10,779
 The thing flies off screen outside of the collision area,
+当对象越过屏幕边缘，越过碰撞区域的时候
 
 499
 00:19:10,781 --> 00:19:13,982
 and then now it's flying off into outer space, and
+他向外层的空间飞过去
 
 500
 00:19:13,984 --> 00:19:16,417
 it's gonna continue to animate forever
+它会持续动画，直到它飞过上千万的 point
 
 501
 00:19:16,419 --> 00:19:19,553
@@ -2321,75 +2471,92 @@ as it flies billions of points away, okay.
 502
 00:19:19,555 --> 00:19:22,189
 It's never gonna stop, so you got to be careful about that.
+它永远不会停止，这是你需要关心的情况
 
 503
 00:19:22,191 --> 00:19:25,525
 When things go outside of the area that you're animating,
+当对象在你动画区域之外发生的时候
 
 504
 00:19:25,527 --> 00:19:27,127
 they don't stop animating.
+它们并不会停止动画
 
 505
 00:19:27,129 --> 00:19:29,195
 You need to notice that and
+你需要注意到这个问题
 
 506
 00:19:29,197 --> 00:19:32,064
 take that thing out of the behaviors, so that they're no
+然后你需要从这些对象上移除这些行为
 
 507
 00:19:32,066 --> 00:19:35,300
 longer being accelerated off into nowhere or whatever.
+好让它们不再被持续加速了
 
 508
 00:19:35,302 --> 00:19:36,134
 Okay?
+明白了吗？
 
 509
 00:19:36,135 --> 00:19:36,967
 So be careful about that.
+所以关心一下这个点
 
 510
 00:19:36,970 --> 00:19:38,536
 That can happen in your assignment, of course.
+在你们的作业中可能会发生这样的事情
 
 511
 00:19:38,538 --> 00:19:41,239
 Because the bouncing ball goes off the bottom,
+因为当一个弹性的小球越过底部的时候
 
 512
 00:19:41,241 --> 00:19:42,457
 it'll just keep going.
+它就会一直保持动画
 
 513
 00:19:42,458 --> 00:19:43,674
 Okay? Keep getting animated and
+一直一直
 
 514
 00:19:43,676 --> 00:19:45,209
 never reach stasis.
+永远不会达到一个停止的状态
 
 515
 00:19:45,211 --> 00:19:47,010
 Unless you notice that and
+除非你意识到这个问题
 
 516
 00:19:47,012 --> 00:19:49,079
 take the ball out of the view hierarchy probably.
+并且将小球从视图体系中移走
 
 517
 00:19:49,081 --> 00:19:50,780
 And also away from the behaviors.
+同样也从行为中移走
 
 518
 00:19:51,883 --> 00:19:55,651
 By the way, don't ever put a view into a behavior,
+这里我想另外说一句，永远不要将一个视图放在一个行为中
 
 519
 00:19:55,653 --> 00:19:59,254
 okay, when that view is not on the view hierarchy
-
+好的，当一个视图不在动画器的参考视图的视图体系中
 520
 00:19:59,256 --> 00:20:01,856
 of the reference view of the animator.
@@ -2397,22 +2564,27 @@ of the reference view of the animator.
 521
 00:20:01,858 --> 00:20:04,292
 Obviously, the animator wants to animate the thing, and
+很明显的，动画器想要让某个对象动起来
 
 522
 00:20:04,294 --> 00:20:06,927
 if it's not in its view hierarchy, like it's in any
+如果某个对象不在它的视图体系中
 
 523
 00:20:06,929 --> 00:20:08,362
 view hierarchy or it's in a different one,
+比如某个对象在不同的一个视图体系中
 
 524
 00:20:08,364 --> 00:20:10,664
 the animator will basically crash your program and
+这个动画器就会使你的程序崩溃
 
 525
 00:20:10,666 --> 00:20:11,731
 I tried to animated something,
+永远不要对不在你的视图体系中的对象进行动画操作
 
 526
 00:20:11,733 --> 00:20:13,099
@@ -2421,90 +2593,112 @@ it's not in my view hierarchy anywhere.
 527
 00:20:14,135 --> 00:20:16,051
 So don't do that.
+不要这么做
 
 528
 00:20:16,052 --> 00:20:17,968
 Also, don't animate things that are size 00.
+同样，不要对一个大小为 (0,0) 的对象动画
 
 529
 00:20:19,139 --> 00:20:20,216
 Okay.
+明白了吗？
 
 530
 00:20:20,217 --> 00:20:21,294
 It really doesn't make and
+这么做非常的不合理
 
 531
 00:20:21,295 --> 00:20:22,372
 sense to do that because it's not visible anyway,
+因为它并不是一个可见的对象
 
 532
 00:20:22,375 --> 00:20:23,607
 but don't do that.
+所以不要尝试这么做
 
 533
 00:20:23,609 --> 00:20:24,641
 Animator doesn't like that either.
+动画器也是如此
 
 534
 00:20:25,844 --> 00:20:29,279
 All right, quick sample here of memory cycle avoidance.
+好的，另外这里有一个 retain cycle 的样例
 
 535
 00:20:29,281 --> 00:20:31,647
 I was talking about that action method.
+还记得我之前讲过的 action 方法吗？
 
 536
 00:20:31,649 --> 00:20:34,016
 So here, I'm creating a pushBehavior, and
+这里，我创建一个 Push 行为
 
 537
 00:20:34,018 --> 00:20:35,217
 I told you the pushBehavior,
+我之前说过
 
 538
 00:20:35,219 --> 00:20:37,886
 if it's instantaneous, it just sits around.
+如果不是持续性的话会没有任何的效果
 
 539
 00:20:37,888 --> 00:20:39,587
 Because the way you make a push happen is
+你真正实现一个 Push 动画应该是
 
 540
 00:20:39,589 --> 00:20:42,123
 you create a pushBehavior, and you add it to an animator.
+创建一个 Push 行为，然后添加到一个动画器
 
 541
 00:20:42,125 --> 00:20:45,626
 As soon as you add it, it's gonna push any of its items.
+只要你一添加，它就会推动任何一个对象
 
 542
 00:20:45,628 --> 00:20:47,478
 Okay?
+明白了吗？
 
 543
 00:20:47,479 --> 00:20:49,329
 Well, after it's done, if it's an instantaneous push, not
+如果这个动画完成的话，如果这不是一个持续性的 Push
 
 544
 00:20:49,331 --> 00:20:51,631
 continuous, but instantaneous, well, it just sits there.
+这些东西就会停止
 
 545
 00:20:51,633 --> 00:20:53,266
 Cuz it's been added to the animator.
+但是由于 Push 行为被添加到了一个动画器
 
 546
 00:20:53,268 --> 00:20:54,767
 So it's just wasting space.
+所以它只会白白浪费空间
 
 547
 00:20:54,769 --> 00:20:58,237
 So one of the way you can do this is in the pushBehavior's
+有一个方法可以让你在 Push 行为中的 action 方法做的
 
 548
 00:20:58,239 --> 00:21:01,139
 action, which I told you is called whenever the behavior
+换言之，也就是每次这个行为在一个对象上被调用的时候
 
 549
 00:21:01,141 --> 00:21:02,707
@@ -2513,38 +2707,47 @@ acts on something.
 550
 00:21:02,709 --> 00:21:06,144
 So after the pushBehavior acts and instantaneously pushes,
+所以当一个 Push 行为非持续性推动的时候
 
 551
 00:21:06,146 --> 00:21:09,280
 well, you could just remove the thing from its animator.
+你将它从一个动画器中移除
 
 552
 00:21:09,282 --> 00:21:11,782
 And I told you every behavior knows the animator it's in, so
+我告诉过你，每一个行为都知道它属于哪个动画器
 
 553
 00:21:11,784 --> 00:21:13,417
 that's easy you can just do that one
+所以这里并不难做到
 
 554
 00:21:13,419 --> 00:21:16,119
 line of code in yellow there, pushBehavior, dynamicAnimator,
+这里黄色行的代码，pushBehavior.dynamicAnimator!
 
 555
 00:21:16,121 --> 00:21:19,255
 removeBehavior, pushBehavior myself, okay.
+pushBehavior.dynamicAnimator!.removeBehavior(pushBehavior)
 
 556
 00:21:19,257 --> 00:21:22,658
 But in that closure, I'm referring to myself,
+在这个闭包中参考了对象自身
 
 557
 00:21:22,660 --> 00:21:25,327
 pushBehavior because removing myself, okay.
+即 pushBehavior
 
 558
 00:21:25,329 --> 00:21:27,329
 I'm also referring to myself because I'm getting my
+另外我参考自身是因为我正在获取我自己的 dynamicAnimator
 
 559
 00:21:27,331 --> 00:21:29,130
@@ -2553,10 +2756,12 @@ own dynamicAnimator.
 560
 00:21:29,132 --> 00:21:30,765
 So this is bad.
+这样做是很糟的
 
 561
 00:21:30,766 --> 00:21:32,399
 This is gonna cause a memory cycle here because
+这会在闭包中产生一个 retain cycle
 
 562
 00:21:32,402 --> 00:21:34,235
@@ -2565,94 +2770,117 @@ that action closure.
 563
 00:21:34,237 --> 00:21:36,470
 Right? It is gonna stay in memory,
+对吗？它会一直呆在内存里
 
 564
 00:21:36,472 --> 00:21:39,439
 because the action property is pointing to it.
+因为 action 属性指向了它
 
 565
 00:21:39,441 --> 00:21:41,808
 And this push behavior is gonna stay in memory,
+另外这个 Push 行为也会保留在内存中
 
 566
 00:21:41,810 --> 00:21:43,843
 because that closure is pointing to it.
+因为这个闭包正在指向它
 
 567
 00:21:43,845 --> 00:21:46,379
 So since they're both pointing to each other,
+当它们两个互相引用的时候
 
 568
 00:21:46,381 --> 00:21:47,780
 there's always gonna be a pointer to them.
+它们之间始终有一个指针指向对方
 
 569
 00:21:47,782 --> 00:21:49,748
 They'll always stay in memory forever.
+所以它们就会永远呆在内存中了
 
 570
 00:21:49,750 --> 00:21:52,017
 And I mean forever and ever.
+注意我这里用的词是“永远”
 
 571
 00:21:52,019 --> 00:21:53,017
 Okay? If you can't,
+明白了吗？
 
 572
 00:21:53,019 --> 00:21:54,318
 no way to get rid of them.
+没有打破这个循环引用关系的方式
 
 573
 00:21:54,320 --> 00:21:55,552
 So how do we fix that?
+如何修复这个问题？
 
 574
 00:21:55,554 --> 00:21:57,387
 We put that unowned in there.
+我们在这里写上 unowned
 
 575
 00:21:57,389 --> 00:22:00,323
 So we put this capture list here, say that pushBehavior
+我们在这里放置一个捕获列表
 
 576
 00:22:00,325 --> 00:22:04,627
 inside my closure is unowned, meaning don't capture it.
+表示，Push 行为在我的闭包中是不会被强引用的，所以不要捕获它
 
 577
 00:22:04,629 --> 00:22:07,596
 I promise that it will be there when you want to use it,
+“我保证这个指针在你想使用的时候都是有效且存在的”
 
 578
 00:22:07,598 --> 00:22:08,930
 Mr. Closure says.
+Mr. 闭包这么说
 
 579
 00:22:08,932 --> 00:22:11,800
 You do not have to capture it and keep it in memory.
+你不需要捕获并在内存中保存它
 
 580
 00:22:11,802 --> 00:22:13,518
 Okay? And we know that's fine.
+明白了吗？我们只要知道这么做没问题
 
 581
 00:22:13,519 --> 00:22:15,235
 Because obviously, the action wouldn't even be called if
+因为很明显的，如果视图的 Push 行为都不存在的时候
 
 582
 00:22:15,238 --> 00:22:16,604
 the view's pushBehavior didn't exist.
+action 永远不会被调用
 
 583
 00:22:16,606 --> 00:22:17,971
 So this is good.
+这就很不错
 
 584
 00:22:17,973 --> 00:22:19,006
 This code's for sure going to work.
+这段代码肯定能正常运行
 
 585
 00:22:20,175 --> 00:22:21,274
 Okay? You have to do this a lot
+你将来会在 action 中经常这么做
 
 586
 00:22:21,276 --> 00:22:22,408
@@ -2661,6 +2889,7 @@ with actions.
 587
 00:22:22,409 --> 00:22:23,541
 And you'll probably have to do this in your assignment,
+另外你们可能会在你们的作业中会用到这个
 
 588
 00:22:23,544 --> 00:22:25,277
@@ -2669,46 +2898,57 @@ when you use an action.
 589
 00:22:25,279 --> 00:22:27,446
 Okay? And I encourage you to try and
+我鼓励你去尝试
 
 590
 00:22:27,448 --> 00:22:29,080
 make your pushBehavior do this as well.
+并让你的 Push 行为这么做
 
 591
 00:22:29,082 --> 00:22:31,849
 It's not a required task, but get your pushBehavior to clean
+这不是一个必需的要求，但是这可以让你的 Push 行为
 
 592
 00:22:31,851 --> 00:22:33,517
 itself up after it's done pushing.
+在完成它的使命之后自己清理干净自己
 
 593
 00:22:34,920 --> 00:22:36,053
 All right, so let's do this demo.
+好的，让我们开始 Demo
 
 594
 00:22:39,458 --> 00:22:40,623
 Any questions about all that?
+对以上的东西还有什么疑问吗？
 
 595
 00:22:41,726 --> 00:22:43,359
 Again, feel free to interrupt me.
+再说一遍，请不要害怕打断我，勇敢提出问题
 
 596
 00:22:43,361 --> 00:22:46,561
 Coming up this week, Friday, we're going to learn
+这个周五，我们想要
 
 597
 00:22:46,563 --> 00:22:49,064
 about the Parse framework, which is a way to
+学习解析框架
 
 598
 00:22:49,066 --> 00:22:51,132
 basically store your data on the network.
+这是你处理网络数据的基础
 
 599
 00:22:52,769 --> 00:22:55,302
 So for if you're building some sort of final project, or
+如果你已经在着手做大作业了
 
 600
 00:22:55,304 --> 00:22:57,504

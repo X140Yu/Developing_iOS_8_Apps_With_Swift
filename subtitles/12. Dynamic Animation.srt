@@ -6881,71 +6881,87 @@ these are my Bézier paths I'm going to have.
 1399
 00:56:17,943 --> 00:56:22,645
 It's just going to be a dictionary with strings as
-类型是 string:UIBezierPath 的字典
+类型是 string 为 key
 
 1400
 00:56:22,647 --> 00:56:27,616
 the keys and UIBezierPaths as the argument, okay?
+UIBezierPath 为参数的字典
 
 1401
 00:56:27,618 --> 00:56:29,151
 I'm going to, by the way,
+顺便地
 
 1402
 00:56:29,153 --> 00:56:32,487
 I haven't been doing private in the demo for expediency.
+在 demo 中我还没有使用过 privte 
 
 1403
 00:56:32,489 --> 00:56:34,288
 But, again, private is important and here,
+在这里，privete 是很重要的
 
 1404
 00:56:34,290 --> 00:56:36,457
 I am going to do the right privacy.
+我将使用正确的公私有属性
 
 1405
 00:56:36,459 --> 00:56:39,293
 So now, I'm going to have a function called,
+创建一个方法
 
 1406
 00:56:39,295 --> 00:56:40,811
 what did I call it?
+起名为什么来着
 
 1407
 00:56:40,812 --> 00:56:42,328
 Add path or something like that?
+addPath 之类的？
 
 1408
 00:56:42,331 --> 00:56:44,097
 Yeah, setPath.
+哦，setPath
 
 1409
 00:56:44,099 --> 00:56:46,666
 SetPath, and it's going to take a path,
+参数是 UIBezierPath 类型的
 
 1410
 00:56:46,668 --> 00:56:48,367
 which is a UI Bézier path.
+path
 
 1411
 00:56:48,369 --> 00:56:50,969
 It's going to be optional because we're going to allow
+它是可选的，因为我们可以允许你通过这个方法
 
 1412
 00:56:50,971 --> 00:56:52,537
 you to clear out paths if you want,
+清掉 path 如果你想的话
 
 1413
 00:56:52,539 --> 00:56:54,773
 and then it's also going to let them be named.
+然后需要 name 参数
 
 1414
 00:56:56,009 --> 00:56:58,075
 And I'm just going to put it in that dictionary,
+把它们放入字典中
 
 1415
 00:56:58,077 --> 00:57:00,377
 just going to say Bézier paths.
+bezierPahts[name] = path
 
 1416
 00:57:00,379 --> 00:57:03,847
@@ -6954,62 +6970,77 @@ Path sub name equals the path.
 1417
 00:57:03,849 --> 00:57:07,183
 And of course, I just changed my model basically, so
+刚刚改变了模型
 
 1418
 00:57:07,185 --> 00:57:09,585
 I'm going to just setNeedsDisplay.
+所以现在需要调用 setNeedsDisplay
 
 1419
 00:57:09,587 --> 00:57:13,322
 Okay? Then, to draw this, for
+画出它们
 
 1420
 00:57:13,324 --> 00:57:20,962
 underscore path in my bezierPaths, path.stroke.
+for (_, path) in bezierPahts
 
 1421
 00:57:20,964 --> 00:57:23,181
 Okay, that's it.
+path.stroke
 
 1422
 00:57:23,182 --> 00:57:25,399
 This is the entire implementation of this view.
+这是整个 view 的实现
 
 1423
 00:57:25,402 --> 00:57:26,134
 Okay? It's just going to
+它将会以
 
 1424
 00:57:26,136 --> 00:57:27,201
 stroke them in black.
+空白的方式画出
 
 1425
 00:57:27,203 --> 00:57:28,769
 We could add colors and all this stuff, but
+我们也可以添加颜色
 
 1426
 00:57:28,771 --> 00:57:30,437
 we're just going to stroke them all in black.
+但空白的就行了
 
 1427
 00:57:30,439 --> 00:57:32,038
 This is a numeration of a dictionary,
+这是个字典的遍历
 
 1428
 00:57:32,040 --> 00:57:33,690
 hopefully you recognize that.
+希望你们看出来了
 
 1429
 00:57:33,691 --> 00:57:35,341
 I don't care what the name is here while I'm doing this,
+我不管 name 是什么
 
 1430
 00:57:35,343 --> 00:57:36,575
 I only care the name because
+我需要 name 是因为
 
 1431
 00:57:36,577 --> 00:57:38,677
 I want to keep them unique is all.
+我想让它们每个都是独一无二的
 
 1432
 00:57:38,679 --> 00:57:41,130
@@ -7018,66 +7049,82 @@ Okay?
 1433
 00:57:41,131 --> 00:57:43,582
 So now what I'm going to do is go back to my storyboard, and
+现在回到 storyboard
 
 1434
 00:57:43,584 --> 00:57:45,583
 instead of this being a generic view,
+换掉这个一般的视图
 
 1435
 00:57:45,585 --> 00:57:48,219
 I'm going to go to the identity inspector, and
+去到 identity inspector
 
 1436
 00:57:48,221 --> 00:57:50,888
 turn it into a BezierPathsView.
+把它变成 BezierPathsView
 
 1437
 00:57:50,890 --> 00:57:54,258
 And also in my DropIt controller over here,
+在 DropIt 控制器中
 
 1438
 00:57:54,260 --> 00:57:57,160
 I'm going to change this outlet from being a generic
+把这个出口从一般的 view 改为
 
 1439
 00:57:57,162 --> 00:57:59,062
 UIView from being a BezierPathsView.
+BezierPathsView
 
 1440
 00:57:59,064 --> 00:58:02,231
 So now the view that I'm doing all this animation is in
+现在这个 view 既可以动画
 
 1441
 00:58:02,233 --> 00:58:05,001
 can draw arbitrary Bézier paths, okay?
+又能画任意的 bezierpath
 
 1442
 00:58:05,003 --> 00:58:06,201
 Very convenient because
+非常方便
 
 1443
 00:58:06,203 --> 00:58:08,070
 I'm going to have it draw that circle.
+我可以让它画圆
 
 1444
 00:58:08,072 --> 00:58:10,638
 Okay, that circle that we're having the collider do,
+在这里的圆
 
 1445
 00:58:10,640 --> 00:58:11,906
 which is right here.
+让它产生碰撞
 
 1446
 00:58:11,907 --> 00:58:13,173
 And I can do that with one line of code.
+一行代码就可以实现
 
 1447
 00:58:13,176 --> 00:58:16,444
 I'm just going to say gameView addPath,
+gameView.setPath
 
 1448
 00:58:16,446 --> 00:58:21,314
 or setPath, the same path, and I'll use even the same name,
+和上面相同的 path 和 name
 
 1449
 00:58:21,316 --> 00:58:24,351
@@ -7086,18 +7133,22 @@ PathNames.MiddleBarrier, okay.
 1450
 00:58:24,353 --> 00:58:27,220
 The good thing now is every time viewDidLayoutSubview is
+好的一面就是每次 viewDidLayoutSubview 
 
 1451
 00:58:27,222 --> 00:58:28,921
 called, it'll replace, you know,
+被调用
 
 1452
 00:58:28,923 --> 00:58:32,324
 it'll move it to the middle and redraw it.
+它就会移动到中间然后重新绘制
 
 1453
 00:58:32,326 --> 00:58:33,225
 Okay? So let's now take
+现在看看效果
 
 1454
 00:58:33,227 --> 00:58:33,925
@@ -7106,42 +7157,52 @@ a look at this.
 1455
 00:58:33,927 --> 00:58:36,527
 [COUGH] There it is.
+好了
 
 1456
 00:58:36,529 --> 00:58:37,328
 Now, we can see it.
+现在能看到了
 
 1457
 00:58:37,330 --> 00:58:39,063
 It's still a barrier,
+它仍然是一个 barrier
 
 1458
 00:58:39,065 --> 00:58:42,732
 like it was before, so something hit it, come on.
+和之前一样
 
 1459
 00:58:42,734 --> 00:58:44,300
 There we go, boom, okay?
+其他东西也会撞到它
 
 1460
 00:58:44,302 --> 00:58:46,102
 And, you know, it's a complete barrier.
+它是个完整的 barrier
 
 1461
 00:58:46,104 --> 00:58:50,138
 And it actually is along that Bézier path.
+它实际上是沿着这个 bezierpath
 
 1462
 00:58:50,140 --> 00:58:52,140
 It's not, you know, the square containing it.
+而不是这个圆圈包含着它
 
 1463
 00:58:52,142 --> 00:58:53,742
 It is actually on it.
+它实际上在边缘上
 
 1464
 00:58:53,743 --> 00:58:55,343
 So if I fill up this thing all the way to where it starts
+如果我把这里填满
 
 1465
 00:58:55,345 --> 00:58:56,628
@@ -7150,10 +7211,12 @@ getting to that,
 1466
 00:58:56,629 --> 00:58:57,912
 you'll start seeing them tip right up against.
+你会看到它们完整地贴着它
 
 1467
 00:58:57,914 --> 00:59:01,448
 Do you see how they pile right up against it, there?
+看到了吗？
 
 1468
 00:59:01,450 --> 00:59:02,015
@@ -7162,154 +7225,192 @@ Okay?
 1469
 00:59:03,118 --> 00:59:05,017
 So you can have an arbitrary Bézier path there.
+所以你可以绘制任意的 bezierPath
 
 1470
 00:59:06,487 --> 00:59:07,486
 Okay? And if I rotate.
+如果我旋转
 
 1471
 00:59:08,522 --> 00:59:10,321
 Okay, it'll put it in the middle.
+它将会出现在中间
 
 1472
 00:59:10,323 --> 00:59:11,822
 Okay, it zoomed it out a little bit but
+它放大了一点
 
 1473
 00:59:11,824 --> 00:59:14,792
 some of the things fell off the edge when I rotated that.
+有一些东西在我旋转之后掉出了屏幕
 
 1474
 00:59:14,794 --> 00:59:16,727
 Got to be careful of that in your game too.
+在游戏里也应该注意一下
 
 1475
 00:59:16,729 --> 00:59:19,329
 When you rotate,
+当你旋转的时候
 
 1476
 00:59:19,330 --> 00:59:21,930
 if your bouncing ball is not in the middle area then,
+如果你的球不在屏幕的中间部分
 
 1477
 00:59:21,933 --> 00:59:24,033
 it's going to be outside the boundary and so
+它会跳出边界
 
 1478
 00:59:24,035 --> 00:59:27,502
 it's going to fly off into outer space forever, okay?
+它会一直飞，飞到外太空的
 
 1479
 00:59:28,872 --> 00:59:30,838
 Okay, so that's how we do barriers.
+我们就是这么处理 barrier 的
 
 1480
 00:59:30,840 --> 00:59:32,273
 And you're going to have your bricks are going to
+你们也会创建砖块
 
 1481
 00:59:32,275 --> 00:59:34,659
 be probably not round,
+也许不是圆形的
 
 1482
 00:59:34,660 --> 00:59:37,044
 well they could be round if you want, and you can put as
+如果是圆的也可以
 
 1483
 00:59:37,046 --> 00:59:40,213
 many of these little barriers as you want up here, okay?
+你可以放任意多个障碍物在上面
 
 1484
 00:59:40,215 --> 00:59:42,248
 And when you hit one of these, that delegate method,
+当你击中其中一个的时候，代理方法
 
 1485
 00:59:42,250 --> 00:59:43,816
 you're going to set yourselves a collision delegate.
+你需要先设置代理
 
 1486
 00:59:43,818 --> 00:59:46,285
 I don't really have time to do that, but,
+我没有时间演示了
 
 1487
 00:59:46,287 --> 00:59:50,889
 you know, you could make it do something, flash or
+但你你可以制造一些效果
 
 1488
 00:59:50,891 --> 00:59:53,258
 animate, whatever is required by the required tasks.
+闪或者动，作业的一部分内容
 
 1489
 00:59:54,461 --> 00:59:56,927
 Okay, the last kind of behavior I'm going to show you
+最后一个 behavior 我要介绍给你们的是
 
 1490
 00:59:56,929 --> 00:59:58,262
 is an attachment behavior.
+attachment behavior
 
 1491
 00:59:58,264 --> 01:00:01,098
 So, the way I'm going to do this attachment,
+使用它的方式是
 
 1492
 01:00:01,100 --> 01:00:03,366
 let me show you here, is when a drop comes down,
+当方块掉落下来
 
 1493
 01:00:03,368 --> 01:00:06,002
 I'm going to be able to grab onto it with
+我会抓住它
 
 1494
 01:00:06,004 --> 01:00:09,338
 a piece of string, or more like a metal rod.
+就像抓住一跟金属棒一样
 
 1495
 01:00:09,340 --> 01:00:11,974
 Grab onto it and I can move it around, okay?
+抓住它到处移动
 
 1496
 01:00:11,976 --> 01:00:14,976
 Swing it around in a circle and let it fly if I want.
+让它转圈，或者让它飞走
 
 1497
 01:00:16,079 --> 01:00:17,395
 So, that's what I'm going to do.
+我将会这样实现
 
 1498
 01:00:17,396 --> 01:00:18,712
 I'm going to do that with an attachment behavior.
+利用 attachment behavior
 
 1499
 01:00:18,715 --> 01:00:21,382
 I'm just going to create an attachment from where I start
+先在拖动手势进行的时候
 
 1500
 01:00:21,384 --> 01:00:25,252
 my pan to the middle of the drop, the currently
+创建一个 attachment behavior 在方块中间
 
 1501
 01:00:25,254 --> 01:00:28,988
 dropping drop, or the last dropped drop, basically.
+正在掉落的或者最后一个掉落的
 
 1502
 01:00:28,990 --> 01:00:30,723
 And then as I pan around,
+在我滑动的时候
 
 1503
 01:00:30,725 --> 01:00:33,258
 I'm just going to move the anchor point.
+我会移动它的锚点
 
 1504
 01:00:33,260 --> 01:00:36,194
 And because animation is all happy instantaneously, it's
+因为动画发生在瞬间
 
 1505
 01:00:36,196 --> 01:00:39,197
 just going to all magically animate to adapt to the fact
+所以所有的动画都会神奇般地随着我改变它
 
 1506
 01:00:39,199 --> 01:00:42,833
 that I'm moving the anchor point of this attachment.
+的锚点而有效果
 
 1507
 01:00:42,835 --> 01:00:44,085
@@ -7318,74 +7419,92 @@ Okay?
 1508
 01:00:44,086 --> 01:00:45,336
 And all the other behaviors are still going to work on it,
+其他的 behavior 还是会有效
 
 1509
 01:00:45,338 --> 01:00:47,337
 the gravity, the collisions,
+重力还有碰撞
 
 1510
 01:00:47,339 --> 01:00:48,571
 all still going to work on that thing.
+都会起作用
 
 1511
 01:00:48,573 --> 01:00:50,306
 The attachment's just going to be another behavior.
+连接是另外一个特性
 
 1512
 01:00:50,308 --> 01:00:52,608
 Now I'm going to put this attachment in the controller
+我会在控制器里添加这个attachment
 
 1513
 01:00:52,610 --> 01:00:54,443
 right here instead of in the behavior, just so
+而不是在 behavior 中
 
 1514
 01:00:54,445 --> 01:00:57,813
 you can see it all happening a little better.
+这样你们看得效果更好
 
 1515
 01:00:57,815 --> 01:01:00,715
 So let's do this kind of in multiple steps here.
+这中间有几步过程
 
 1516
 01:01:00,717 --> 01:01:03,818
 Let's go ahead and do the gesture first.
+先添加手势
 
 1517
 01:01:03,820 --> 01:01:07,088
 Okay, so to do the behavior, I need an attachment behavior,
+为了实现这个 behavior，我需要一个 attachment behavior
 
 1518
 01:01:07,090 --> 01:01:09,590
 so I'm going to create an attachment behavior here,
+所以我需要在这里创建一个 attachment behavior
 
 1519
 01:01:09,592 --> 01:01:11,758
 UI attachment behavior.
+类型是 UIAttachmentBehavior
 
 1520
 01:01:11,760 --> 01:01:14,527
 Now, this one's going to be an optional because I only have
+它是可选型的，因为只有我在
 
 1521
 01:01:14,529 --> 01:01:16,829
 this attachment when I'm panning.
+拖动的时候才会有这个属性
 
 1522
 01:01:16,831 --> 01:01:18,397
 Okay? I don't have this attach,
+我没有这个 attach
 
 1523
 01:01:18,399 --> 01:01:21,133
 it's nil basically, if I'm not currently attached to
+它是 nil 的，如果我没拖着什么到处晃
 
 1524
 01:01:21,135 --> 01:01:25,837
 something and panning around, whereas the dropping behavior
+然而 drop behavior 
 
 1525
 01:01:25,839 --> 01:01:27,605
 is happening all the time.
+会一直存在
 
 1526
 01:01:27,607 --> 01:01:29,057
@@ -7394,198 +7513,247 @@ Okay?
 1527
 01:01:29,058 --> 01:01:30,508
 Again, I could put this attachment behavior
+我可以把 attachment behavior
 
 1528
 01:01:30,510 --> 01:01:31,475
 in the dropping behavior.
+放在 drop behavior 里
 
 1529
 01:01:31,477 --> 01:01:32,993
 I could do that.
+我可以这么做
 
 1530
 01:01:32,994 --> 01:01:34,510
 I'm not going to, for kind of seeing it on screen,
+但我不会这么做
 
 1531
 01:01:34,513 --> 01:01:38,148
 the code on screen issue, but I could put it over there.
+把它放到这里看起来更清楚
 
 1532
 01:01:38,150 --> 01:01:39,015
 So I'm going to put it here.
+所以我把它放到这里
 
 1533
 01:01:39,017 --> 01:01:40,550
 So I have this attachment.
+所以我有了 attachment
 
 1534
 01:01:40,551 --> 01:01:42,084
 We're going to have to do some things with this attachment in
+一会儿再对这个 attachment 做些事情
 
 1535
 01:01:42,086 --> 01:01:44,420
 a second, but let's just say we have this attachment.
+但是现在我们已经有了这个 attachment
 
 1536
 01:01:44,422 --> 01:01:47,122
 Let's go add that pan gesture.
+现在添加拖动手势
 
 1537
 01:01:47,124 --> 01:01:50,792
 Okay, so we'll go over here, we'll go to our storyboard.
+去到 storyboard
 
 1538
 01:01:50,794 --> 01:01:53,027
 Here's our storyboard right here.
+这里就是
 
 1539
 01:01:53,029 --> 01:01:55,096
 Let's go down and find pan.
+找到 pan
 
 1540
 01:01:55,098 --> 01:01:56,063
 Where is it?
+在哪呢 
 
 1541
 01:01:56,065 --> 01:01:58,365
 Pan? Right here.
+在这
 
 1542
 01:01:58,367 --> 01:01:59,966
 So let's add pan to this thing.
+给它添加 pan 手势
 
 1543
 01:01:59,968 --> 01:02:01,734
 Here's pan in the document outline.
+在 document outline 有 pan
 
 1544
 01:02:02,737 --> 01:02:05,204
 Let's go ahead and
+现在为 pan gesture
 
 1545
 01:02:05,205 --> 01:02:07,672
 put the pan gesture down here by the drop gesture, I guess.
+设置出口
 
 1546
 01:02:07,675 --> 01:02:09,741
 Okay, put her right there, okay,
+放到这里
 
 1547
 01:02:09,743 --> 01:02:13,645
 it's an action, we'll call it grabDrop.
+它是一个 action，起名为 grabDrop
 
 1548
 01:02:13,647 --> 01:02:14,779
 Okay, because that's what it's going to do,
+这就是它将要做的事情
 
 1549
 01:02:14,781 --> 01:02:17,781
 it's going to grab onto a drop okay, here it is.
+它将会捕获一个方块
 
 1550
 01:02:19,118 --> 01:02:22,385
 All right that's all we need to do in our UI here.
+在 UI 这里只需要做这些工作
 
 1551
 01:02:22,387 --> 01:02:26,722
 Let's go back to our drop the controller.
+回到控制器中
 
 1552
 01:02:26,724 --> 01:02:29,591
 All right, so how are we going to implement this grab drop?
+我们将如何实现这个方法呢
 
 1553
 01:02:29,593 --> 01:02:30,892
 All right, we have that attachment,
+我们有了 attachment
 
 1554
 01:02:30,894 --> 01:02:33,795
 basically all we need to do is, when we first start
+我们需要做的时
 
 1555
 01:02:33,797 --> 01:02:36,464
 our gesture, we need to create that attachment.
+当手势开始的时候，创建 attachment
 
 1556
 01:02:36,466 --> 01:02:37,765
 Then as it moves,
+移动的时候
 
 1557
 01:02:37,766 --> 01:02:39,065
 we're just going to move that anchor point.
+改变锚点的位置
 
 1558
 01:02:39,068 --> 01:02:40,100
 And when it ends,
+结束的时候
 
 1559
 01:02:40,102 --> 01:02:42,602
 we're going to set the attachment back to nil.
+把 attachment 设置为 nil
 
 1560
 01:02:42,604 --> 01:02:45,505
 So, this is incredibly easy to do.
+实现起来很容易
 
 1561
 01:02:45,507 --> 01:02:46,906
 You're finding all this, I hope,
+希望你们都理解
 
 1562
 01:02:46,908 --> 01:02:48,274
 to be pretty straightforward to do.
+这很容易理解
 
 1563
 01:02:48,276 --> 01:02:50,442
 It's a pretty amazing and powerful system.
+iOS 是个非常强大的系统
 
 1564
 01:02:50,444 --> 01:02:51,977
 But in this hand gesture, first,
+在 pan gesture 中
 
 1565
 01:02:51,979 --> 01:02:53,712
 I'm going to get the point.
+首先，获取点
 
 1566
 01:02:53,714 --> 01:02:55,913
 Okay? The gesture point,
+手势的点
 
 1567
 01:02:55,915 --> 01:02:59,116
 that is just the sender's location in our gainView.
+它就是 sender.locationInView 参数为 gameView
 
 1568
 01:03:02,555 --> 01:03:05,722
 All right, so now I know where that pan is.
+所以现在我知道了手势在哪里
 
 1569
 01:03:05,724 --> 01:03:09,225
 And I'm just going to switch on what state we're in with
+现在我需要判断这个手势
 
 1570
 01:03:09,227 --> 01:03:11,227
 this gesture.
+所处的状态
 
 1571
 01:03:11,228 --> 01:03:13,228
 And if we're in began, so if the thing just began,
+如果刚开始
 
 1572
 01:03:13,231 --> 01:03:14,763
 then I'm just going to create the attachment.
+我们需要创建这个 attachment
 
 1573
 01:03:14,765 --> 01:03:18,500
 So I'm going to say attachment equals UIAttachmentBehavior.
+attachment = UIAttachmentBehavior
 
 1574
 01:03:18,502 --> 01:03:20,669
 Now, here's all the ways you can attach things.
+这里是所有的构造方法
 
 1575
 01:03:20,671 --> 01:03:22,804
 You can attach between two items, between an item and
+你可以在两个物体之间连接，在一个物体和一个锚点上连接
 
 1576
 01:03:22,806 --> 01:03:23,771
@@ -7594,438 +7762,547 @@ an anchor.
 1577
 01:03:23,773 --> 01:03:26,106
 You can even attach between two items or
+你也可以连接一个物体
 
 1578
 01:03:26,108 --> 01:03:29,543
 an anchor with offset from the center, which is kind of a fun
+以及一个锚点中心的偏移，这个很有趣
 
 1579
 01:03:29,545 --> 01:03:32,679
 one because if it can rotate, then as it spins around,
+因为它可以旋转
 
 1580
 01:03:32,681 --> 01:03:35,181
 it will be spinning around because the attachment's not
+attachment 并不是死死地
 
 1581
 01:03:35,183 --> 01:03:36,382
 dead in the center, right?
+呆在原点
 
 1582
 01:03:36,384 --> 01:03:38,617
 It's right off onto the side.
+它会在边上有一个偏移
 
 1583
 01:03:38,619 --> 01:03:39,851
 It's not in the middle of the square.
+不会再方块的中间
 
 1584
 01:03:39,853 --> 01:03:41,820
 It might be in the corner and so it kind of rotates.
+它也许在角落，所以可以旋转
 
 1585
 01:03:41,822 --> 01:03:43,238
 So that's kind of fun.
+还是很有趣的
 
 1586
 01:03:43,239 --> 01:03:44,655
 But, we're just going to do to the center here.
+在这里我只会实现在中间的
 
 1587
 01:03:44,657 --> 01:03:47,591
 And so, we need to attach the item.
+我们需要 attach 物体
 
 1588
 01:03:47,593 --> 01:03:49,860
 So we want this one right here to the anchor.
+我们选择这个 attachedToAnchor
 
 1589
 01:03:49,862 --> 01:03:51,061
 This is the one we want.
+这是我们需要的
 
 1590
 01:03:51,063 --> 01:03:53,363
 So the item, what item are we attaching to?
+item，我们需要 attach 什么东西
 
 1591
 01:03:53,365 --> 01:03:55,498
 Well, we're attaching to the last.
+我们将要 attach 最后一个
 
 1592
 01:03:55,500 --> 01:03:57,033
 DroppedView.
+掉落的方块
 
 1593
 01:03:57,035 --> 01:03:59,535
 So I'm gonna have to create a LastDroppedView,
+我会创建一个 LastDroppedView
 
 1594
 01:03:59,537 --> 01:04:01,603
 which will have to go implement.
+一会儿实现
 
 1595
 01:04:01,605 --> 01:04:03,572
 And what anchor?
+哪一点？
 
 1596
 01:04:03,573 --> 01:04:05,540
 Well, I'm gonna anchor it to the gesturePoint, 'kay?
+把它设置为手势的那一点
 
 1597
 01:04:05,542 --> 01:04:07,141
 Wherever that pan gesture is.
+手势在哪，那一点就在哪
 
 1598
 01:04:07,143 --> 01:04:08,709
 So let's do this lastDroppedView.
+现在来处理 lastDroppedView
 
 1599
 01:04:08,711 --> 01:04:10,544
 That's easy.
+这很简单
 
 1600
 01:04:10,545 --> 01:04:12,378
 We'll just say var lastDroppedView.
+创建 lastDroppedView
 
 1601
 01:04:12,381 --> 01:04:15,415
 It's a UIView that can be nil if we're not currently
+类型是 UIView，它可以使 nil 如果现在还没有
 
 1602
 01:04:15,417 --> 01:04:17,184
 dropping.
+掉落的
 
 1603
 01:04:17,185 --> 01:04:18,952
 And then down here in drop or we drop something,
+在这里，掉落的时候
 
 1604
 01:04:18,954 --> 01:04:21,721
 I'm just gonna say that the lastDroppedView equals to
+把 lastDroppedView 等于
 
 1605
 01:04:21,723 --> 01:04:23,389
 the dropView.
+dropView
 
 1606
 01:04:23,390 --> 01:04:25,056
 'Kay, so I'm just keeping track of the lastDroppedView.
+所以我在跟踪这个 lastDroppedView
 
 1607
 01:04:26,193 --> 01:04:28,460
 'Kay, that make sense?
+能说得通吧
 
 1608
 01:04:28,462 --> 01:04:31,463
 An exclamation point, yeah.
+一个感叹号
 
 1609
 01:04:31,465 --> 01:04:32,730
 No, we don't want that.
+不，我不要这样
 
 1610
 01:04:32,732 --> 01:04:36,734
 We want to say.
+我们...
 
 1611
 01:04:36,736 --> 01:04:39,103
 And actually, I guess we'll always have last drop view.
+实际上，我认为我们会一直拥有 lastDropView
 
 1612
 01:04:39,105 --> 01:04:42,572
 This is the kind of one where it's like, if let there, or
+这里应该使用 if let
 
 1613
 01:04:42,574 --> 01:04:44,074
 do I just wanna do it.
+或者直接解包
 
 1614
 01:04:44,076 --> 01:04:45,241
 Actually, I'm just gonna if let.
+实际上我会使用 if let
 
 1615
 01:04:45,243 --> 01:04:46,709
 I just wanna be careful here in case for
+我想在这里小心一点
 
 1616
 01:04:46,711 --> 01:04:48,043
 some reason the last drop view isn't around.
+以防这个 lastDropView 不存在
 
 1617
 01:04:48,045 --> 01:04:52,814
 So I'm gonna say if we can let the viewToAttachTo equal
+if let viewToAttachTo = 
 
 1618
 01:04:52,816 --> 01:04:54,849
 the lastDroppedView,
+lastDroppedView
 
 1619
 01:04:54,851 --> 01:04:57,251
 then we will start this attachment business.
+然后我会开始 attachment 的创建
 
 1620
 01:04:59,521 --> 01:05:02,655
 'Kay, it'll be safe there, because we might change
+现在这里安全了
 
 1621
 01:05:02,657 --> 01:05:04,724
 something in the future where we don't always set the last
+因为我们可能再以后
 
 1622
 01:05:04,726 --> 01:05:07,093
 drop view to something, so I wanna be careful there.
+不总是设置 lastDropView，所以需要小心点
 
 1623
 01:05:07,095 --> 01:05:09,094
 [COUGH] So, we have the attachment.
+所以现在有了 attachment
 
 1624
 01:05:09,096 --> 01:05:11,630
 By the way, I'm also gonna put a feature of my game that once
+游戏中还会添加一个特性
 
 1625
 01:05:11,632 --> 01:05:14,165
 you grab onto something, you can't grab onto it again.
+如果你抓住了某个东西，你不能再次抓住它
 
 1626
 01:05:14,167 --> 01:05:16,267
 Like, if you grab onto it and let it go.
+如果你抓住了它，然后放手
 
 1627
 01:05:16,269 --> 01:05:18,002
 I'm not gonna let you grab onto it again because I might
+我不会再让你抓住它
 
 1628
 01:05:18,004 --> 01:05:20,571
 wanna eventually turn this into a game where you have to
+因为我想把这个游戏变成
 
 1629
 01:05:20,573 --> 01:05:23,206
 like, line the things up into perfect stacks or
+把这些方块排成一列
 
 1630
 01:05:23,208 --> 01:05:25,342
 something like that, and
+之类的
 
 1631
 01:05:25,343 --> 01:05:27,477
 so I can put something in here like this to make my
+增加的这个特性
 
 1632
 01:05:27,479 --> 01:05:29,312
 game a little more challenging where I can't constantly be
+让游戏更有挑战性一点
 
 1633
 01:05:29,314 --> 01:05:33,048
 just regrabbing it until I get exactly where I want, okay.
+我不能一直松开抓住，直到调整为我想要的地方
 
 1634
 01:05:33,050 --> 01:05:34,917
 So that's it.
+好的
 
 1635
 01:05:34,918 --> 01:05:36,785
 All I have to do in began is create that attachment and
+在 .began 只需要做这些事情
 
 1636
 01:05:36,787 --> 01:05:37,986
 then if things change.
+如果手势改变了
 
 1637
 01:05:37,988 --> 01:05:42,123
 [SOUND] All I have to do is change that anchor point.
+我需要做的只有改变锚点
 
 1638
 01:05:42,125 --> 01:05:43,957
 That's the attachment's anchorPoint, and
+这是 attachment 的锚点
 
 1639
 01:05:43,959 --> 01:05:46,093
 if the attachment is nil, this will just do nothing.
+如果 attachment 是 nil，这什么都不会做
 
 1640
 01:05:46,095 --> 01:05:47,160
 That's fine.
+这没关系
 
 1641
 01:05:47,162 --> 01:05:48,594
 So that's the gesturePoint.
+这是 gesturePoint
 
 1642
 01:05:48,596 --> 01:05:52,031
 And when it's all over, 'kay, the span is just gonna say
+当手势结束的时候
 
 1643
 01:05:52,033 --> 01:05:54,667
 attachment equals nil, [COUGH] okay?
+把 attachment 设置为 nil
 
 1644
 01:05:54,669 --> 01:05:57,069
 All done.
+完成
 
 1645
 01:05:57,070 --> 01:05:59,470
 So, and of course, we have the default case,
+当然，还有 default
 
 1646
 01:05:59,473 --> 01:06:04,475
 all the things like the Pan failed or
+手势不完整等等
 
 1647
 01:06:04,477 --> 01:06:06,444
 whatever, I'm just gonna do nothing in that case.
+在这个 case 什么都不做
 
 1648
 01:06:06,446 --> 01:06:08,179
 That's probably not,
+其实也不是
 
 1649
 01:06:08,180 --> 01:06:09,913
 actually, I probably should be doing something here if,
+如果我在一个手势的中间
 
 1650
 01:06:09,915 --> 01:06:11,415
 like if I was in the middle of this and
+突然间一个电话打进来了
 
 1651
 01:06:11,417 --> 01:06:13,650
 a phone call came in and my Pan failed,
+手势没有完成
 
 1652
 01:06:13,652 --> 01:06:17,120
 I probably should be doing attachment equals nil.
+我也许应该把 attachment 设置为 nil
 
 1653
 01:06:17,122 --> 01:06:19,422
 'Kay, so probably attachment equals nil should be
+所以在 default 中 
 
 1654
 01:06:19,424 --> 01:06:21,924
 the default case, but I haven't really analyzed that.
+应该吧 attachment 设置为 nil，但我没有分析过
 
 1655
 01:06:21,926 --> 01:06:24,059
 I haven't done that full design, but
+我没有做完整的设计
 
 1656
 01:06:24,061 --> 01:06:27,495
 that's something you obviously wanna think about if you're
+如果你们需要搭建什么，这些东西
 
 1657
 01:06:27,497 --> 01:06:28,763
 building something.
+是你需要考虑的
 
 1658
 01:06:28,765 --> 01:06:32,199
 Okay, [COUGH] now this attachment we're creating it,
+好的，attachment 创建完了
 
 1659
 01:06:32,201 --> 01:06:35,235
 but notice we never added to the dynamic animator.
+但我们没有把它添加到 dynamic animator 里
 
 1660
 01:06:35,237 --> 01:06:37,771
 So this attachment is not ever actually going to be animated.
+所以这个 attachment 不会有效果
 
 1661
 01:06:37,773 --> 01:06:41,307
 So where we're gonna do that, I'm actually gonna do that in
+应该在哪里处理呢
 
 1662
 01:06:41,309 --> 01:06:46,212
 the will set and did set of the attachment.
+应该在 attachment 的 willSet 和 didSet 里
 
 1663
 01:06:47,181 --> 01:06:49,781
 So in the will set, 'kay, that's this
+在 willSet 中
 
 1664
 01:06:49,783 --> 01:06:52,350
 attachment is about to be set to something new, I'm gonna
+attachment 需要设置到新的物体上了
 
 1665
 01:06:52,352 --> 01:06:58,389
 tell my animator to remove the existing attachment.
+我要告诉 animator 把存在的 attachment 去掉
 
 1666
 01:06:58,391 --> 01:07:00,958
 So if there's an attachment behavior that's existing right
+如果现在上面有一个 attachment behavior
 
 1667
 01:07:00,960 --> 01:07:05,395
 now, remove it, and similarly, as long as [COUGH] I
+删掉它
 
 1668
 01:07:05,397 --> 01:07:09,432
 am setting this to non-nil, if attachment is at nil, okay, so
+在 didSet 中
 
 1669
 01:07:09,434 --> 01:07:11,567
 if the attachment is not nil, then,
+如果 attachment 不是 nil
 
 1670
 01:07:11,569 --> 01:07:14,002
 my animator can have the behavior of the attachment.
+我的 animator 就可以拥有这个 attachment 特性
 
 1671
 01:07:14,004 --> 01:07:16,471
 Okay, this is getting pretty bad, okay.
+这里有点错误
 
 1672
 01:07:16,473 --> 01:07:17,105
 Got it?
+明白了吗？
 
 1673
 01:07:17,107 --> 01:07:17,972
 Sorry about that.
+抱歉
 
 1674
 01:07:17,974 --> 01:07:19,073
 So, get that?
+明白了？
 
 1675
 01:07:19,075 --> 01:07:21,275
 What I'm doing there?
+我在这里做了什么
 
 1676
 01:07:21,276 --> 01:07:23,476
 I'm basically adding and removing from the animator as
+在 attachment 被设置的时候
 
 1677
 01:07:23,479 --> 01:07:25,879
 the attachment is set, or not set.
+我只在 animator 里添加和删除了 attachment
 
 1678
 01:07:25,881 --> 01:07:28,948
 Now, we can go ahead and run this now, and I'm going to,
+现在开始运行程序
 
 1679
 01:07:28,950 --> 01:07:31,183
 we're not gonna be able to see it though,
+但是现在还看不到连接
 
 1680
 01:07:31,185 --> 01:07:34,386
 because we're not setting any Bezier path in our view, but
+因为我们没在 view 中设置 bezierpath
 
 1681
 01:07:34,388 --> 01:07:37,422
 let's go ahead and look at it, see what it looks like.
+但是我们看看效果
 
 1682
 01:07:38,625 --> 01:07:39,690
 Okay, so here's a drop.
+掉落一个
 
 1683
 01:07:39,692 --> 01:07:40,991
 I grabbed it.
+抓住它
 
 1684
 01:07:40,993 --> 01:07:43,527
 Okay, so if you can kind of imagine,
+想象一下
 
 1685
 01:07:43,529 --> 01:07:46,363
 I can even like, balance it on it's little stick.
+就像把它放在一个棍上，让它保持平衡
 
 1686
 01:07:46,365 --> 01:07:47,397
@@ -8034,42 +8311,52 @@ I can even like, balance it on it's little stick.
 1687
 01:07:47,399 --> 01:07:49,416
 >> So you can see I'm at there.
+所以你们能看到，我在这里
 
 1688
 01:07:49,417 --> 01:07:51,434
 And if I let it go, or I can just bounce it off this thing.
+如果甩动它，让它撞击这个
 
 1689
 01:07:51,436 --> 01:07:52,267
 'Kay, it's still attached.
+它仍然连接着
 
 1690
 01:07:53,237 --> 01:07:53,835
 All right, see that.
+好的
 
 1691
 01:07:55,005 --> 01:07:57,505
 And I can let it go, and it'll bounce, 'kay?
+我松手，它仍然会弹跳
 
 1692
 01:07:57,507 --> 01:07:59,206
 I can grab the next one.
+我可以抓住下一个
 
 1693
 01:07:59,208 --> 01:08:01,608
 Now, it would be nicer if we could see this
+如果能看到
 
 1694
 01:08:01,610 --> 01:08:05,078
 little attachment wire that's on here, right?
+它们之间的连线就好了
 
 1695
 01:08:05,080 --> 01:08:08,281
 And we can, because we have this nice view that makes it
+我们也可以这么做
 
 1696
 01:08:08,283 --> 01:08:09,148
 easier to show a path.
+因为我们的 view 让显示 bezierPath 更容易
 
 1697
 01:08:09,150 --> 01:08:10,733
@@ -8078,482 +8365,602 @@ So really,
 1698
 01:08:10,734 --> 01:08:12,317
 what we need to do is we just need to say let path equal
+let path = UIBezierPath
 
 1699
 01:08:12,319 --> 01:08:17,655
 UIBezierPath, and then we just need to say gameView,
+gameView.addPath
 
 1700
 01:08:17,657 --> 01:08:20,958
 addPath, this path, which we're gonna have to create,
+我们创建的这个 path
 
 1701
 01:08:20,960 --> 01:08:23,127
 and then again, we need a name for it, so
+我们还是需要一个 name
 
 1702
 01:08:23,129 --> 01:08:26,764
 we'll call this the attachment path name.
+我们给它起名为 Attachment
 
 1703
 01:08:26,766 --> 01:08:33,203
 Attachment, like that, 'kay, so a pathNames.Attachment.
+PathNames.Attachment
 
 1704
 01:08:33,205 --> 01:08:35,705
 'Kay, so really all we need to do is create
+我们需要做的就是创建这条
 
 1705
 01:08:35,707 --> 01:08:37,807
 that path in here.
+BezierPath
 
 1706
 01:08:37,809 --> 01:08:41,977
 'Kay, the path between the attachment point and
+attachment 点和
 
 1707
 01:08:41,979 --> 01:08:43,178
 the set path.
+抱歉，setPath
 
 1708
 01:08:43,180 --> 01:08:46,214
 [SOUND] Okay, we just need to create this path,
+我们只需要创建这个 path
 
 1709
 01:08:46,216 --> 01:08:49,183
 that goes from the attachment anchor point,
+从 attachment 的锚点
 
 1710
 01:08:49,185 --> 01:08:50,918
 to the middle of the view.
+到 view 的中间点
 
 1711
 01:08:50,920 --> 01:08:53,420
 Well, okay, we need to find that view.
+我们需要先找到这个 view
 
 1712
 01:08:53,422 --> 01:08:54,888
 So, how do we get the view?
+我们怎么能找到呢
 
 1713
 01:08:54,890 --> 01:08:57,457
 All behaviors, most of them anyway
+所有的 behavior，基本都
 
 1714
 01:08:57,459 --> 01:09:01,227
 can tell you the items that they're currently animating.
+基本都可以告诉你它们正在 animate 的东西
 
 1715
 01:09:01,229 --> 01:09:03,762
 All right, they're affecting the behavior of and
+attached behavior 可以
 
 1716
 01:09:03,764 --> 01:09:06,031
 attached behaviors can do that.
+获取得到
 
 1717
 01:09:06,033 --> 01:09:11,669
 [SOUND] So, I'm gonna say if the attachedView equals and
+if attachedView = 
 
 1718
 01:09:11,671 --> 01:09:13,838
 how am I gonna get it?
+如何获取呢
 
 1719
 01:09:13,840 --> 01:09:19,409
 I'm gonna get it by asking the attachments for its items.
+获取 attachment.items
 
 1720
 01:09:19,411 --> 01:09:22,412
 That's all the things that it is attaching, could be two
+这是它正在连接的所有东西
 
 1721
 01:09:22,414 --> 01:09:24,981
 items, could be one item, in our case gonna be one.
+可以使两个也可以是一个，在这里是一个
 
 1722
 01:09:24,983 --> 01:09:27,216
 Since it's one I'm just gonna get the first one.
+因为它只有一个，所以我获取第一个
 
 1723
 01:09:27,218 --> 01:09:31,186
 First is a array method, 'kay?
+first 是一个数组的方法
 
 1724
 01:09:31,188 --> 01:09:34,189
 And I'm gonna make sure that it's UIView,
+我要确保它是个 UIView
 
 1725
 01:09:34,191 --> 01:09:37,091
 it's going to be UIView, but, I'm gonna
+它也会是一个 UIView
 
 1726
 01:09:37,093 --> 01:09:41,228
 make sure it's a UIView so I'm gonna do if let here, 'kay?
+但是我得确保，所以在这里进行 if let
 
 1727
 01:09:41,230 --> 01:09:44,898
 So now I know that I've got the attached view that's going
+所以我获取到了连接到的视图
 
 1728
 01:09:44,900 --> 01:09:48,702
 on, it's in here.
+在这里
 
 1729
 01:09:48,704 --> 01:09:51,104
 So now I can make a connection between these two things.
+所以我现在可以在它们之间做一个连接
 
 1730
 01:09:51,106 --> 01:09:53,906
 I can just say path.moveToPoint,
+path.moveToPoint 
 
 1731
 01:09:53,908 --> 01:09:58,777
 I'll move to the anchor point, so that's the attachment's
+移动到锚点，attachments 的锚点
 
 1732
 01:09:58,779 --> 01:10:03,548
 anchorPoint, and then I'm going to path.addLineTo, and
+接着，path.addLienTo
 
 1733
 01:10:03,550 --> 01:10:08,318
 I'm just going to add a line to the attachedView's center.
+然后把连接视图的中心点传进去
 
 1734
 01:10:08,320 --> 01:10:11,388
 'Kay, so we got that.
+所以我们获取到了
 
 1735
 01:10:12,891 --> 01:10:14,824
 The only thing about this is,
+但出现的问题时
 
 1736
 01:10:14,826 --> 01:10:17,893
 this is only going to work once.
+这只会调用一次
 
 1737
 01:10:17,895 --> 01:10:20,529
 When did set happens of the attachment.
+在 attachment 的 didSet 发生的时候
 
 1738
 01:10:20,531 --> 01:10:22,997
 When I first create that thing it's gonna draw that line,
+当第一次创建它的时候，这条线会出现
 
 1739
 01:10:22,999 --> 01:10:25,366
 that's great but what if line of that moving it around?
+但是在移动的时候呢
 
 1740
 01:10:25,368 --> 01:10:27,702
 'Kay, when I move it around the anchor point moves so
+当我移动的时候，锚点移动了
 
 1741
 01:10:27,704 --> 01:10:29,770
 this is gonna be no good anymore.
+所以这就不好了
 
 1742
 01:10:29,772 --> 01:10:34,174
 So, I actually have to put this code inside of
+所以我需要把这些代码放到
 
 1743
 01:10:34,176 --> 01:10:38,377
 the attachment's action, 'kay?
+attachment.action 里
 
 1744
 01:10:38,379 --> 01:10:42,348
 So the action is just closure, once we put it inside
+action 就是一个闭包
 
 1745
 01:10:42,350 --> 01:10:46,451
 a closure we're gonna have to do self dots in here.
+所以我们需要在这里添加 self
 
 1746
 01:10:46,453 --> 01:10:49,287
 So we can be obvious that we are capturing self
+我们很清楚，当我们这么做的时候
 
 1747
 01:10:49,289 --> 01:10:50,654
 when we do this.
+是在捕获 self
 
 1748
 01:10:50,656 --> 01:10:53,624
 Here's another self dot that we need, and here's another
+这里也需要
 
 1749
 01:10:53,626 --> 01:10:58,795
 self dot and this we'll say question mark, okay?
+这里也需要，添加问号
 
 1750
 01:10:59,798 --> 01:11:00,963
 So here we have this action, so
+所以这里我们有了这个 action
 
 1751
 01:11:00,965 --> 01:11:04,066
 this is good, but, and this will work.
+很好，这也会有效
 
 1752
 01:11:04,068 --> 01:11:06,334
 Let's go ahead and run this.
+运行起来试试看
 
 1753
 01:11:09,139 --> 01:11:12,173
 'Kay, so grabby dots so you can see it works, right.
+抓住一个，可以看到它起作用了
 
 1754
 01:11:12,175 --> 01:11:16,109
 It's showing the connection there, but
+它显示了连接
 
 1755
 01:11:16,111 --> 01:11:17,310
 it doesn't clean up.
+但是它没有被清理
 
 1756
 01:11:17,312 --> 01:11:19,212
 That's no good, 'kay?
+这就不好了
 
 1757
 01:11:19,214 --> 01:11:21,213
 And so what's going on here?
+发生了什么
 
 1758
 01:11:21,215 --> 01:11:22,281
 'Kay, let's fix two problems.
+让我们一起改 bug
 
 1759
 01:11:22,283 --> 01:11:23,782
 One, this cleanup, is no good.
+一，这里需要清理
 
 1760
 01:11:23,784 --> 01:11:26,584
 That's just because in will set right here,
+这是因为在 willSet 里
 
 1761
 01:11:26,586 --> 01:11:31,756
 we need to tell our gameView to
+我们需要告诉 gameView
 
 1762
 01:11:31,758 --> 01:11:37,027
 set that path to nil, for that name, the path name.
+把 path 设置为 nil，对于这个 pathName
 
 1763
 01:11:37,029 --> 01:11:39,646
 Attachment, right?
+这个 attachment
 
 1764
 01:11:39,647 --> 01:11:42,264
 Every time we set a new one, we need to delete the old one.
+每一次我们设置一个新的，我们需要删除旧的
 
 1765
 01:11:42,267 --> 01:11:45,034
 The other thing is we got the memory cycle problem here.
+另一个问题是，在这里有了内存的循环引用
 
 1766
 01:11:45,036 --> 01:11:46,635
 [SOUND] Right?
+对吧
 
 1767
 01:11:46,637 --> 01:11:49,171
 Because this attachment, which self points to, so
+因为 self 指向 attachment 
 
 1768
 01:11:49,173 --> 01:11:50,672
 self points to attachment.
 
+
 1769
 01:11:50,674 --> 01:11:51,873
 Attachment has the action.
+attachments 有 action 
 
 1770
 01:11:51,875 --> 01:11:54,342
 The action points back to self, 'kay?
+在 action 中又指向了 self
 
 1771
 01:11:54,344 --> 01:11:56,877
 'Kay, here's to using it here the attachment itself.
+在这里又指向了自己
 
 1772
 01:11:56,879 --> 01:11:58,145
 But it's pointing back to self, so
+但是它指向了它自己
 
 1773
 01:11:58,147 --> 01:11:59,546
 we got a memory cycle here.
+所以我们有了循环引用
 
 1774
 01:11:59,548 --> 01:12:03,249
 So we have to say, that inside here, self,
+所以在这个闭包里
 
 1775
 01:12:03,251 --> 01:12:09,055
 should be unowned, in this closure, 'kay?
+self 应当为 unowned 
 
 1776
 01:12:09,057 --> 01:12:11,557
 And that means that the system will not
+这表明，系统不会为了这个闭包有效
 
 1777
 01:12:11,559 --> 01:12:14,626
 keep self in memory in order to make this closure work.
+而一直把 self 留在内存里
 
 1778
 01:12:14,628 --> 01:12:16,728
 It will assume the self is always gonna be there,
+它将会假设，self 是一直存在的
 
 1779
 01:12:16,730 --> 01:12:19,263
 which it is always gonna be, because if there's no self,
+其实它也是一直存在的
 
 1780
 01:12:19,265 --> 01:12:20,398
 there's no attachment.
+因为没有 self 就没有 attachment
 
 1781
 01:12:20,400 --> 01:12:22,800
 If there's no attachment, there's no action, so
+没有 attachment 就没有 action 
 
 1782
 01:12:22,802 --> 01:12:25,302
 then there's no closure, 'kay?
+当然也就没有闭包了
 
 1783
 01:12:25,304 --> 01:12:26,536
 So we broke that memory cycle here.
+所以在这里打破了循环
 
 1784
 01:12:26,538 --> 01:12:29,939
 All right, so that fixes both of these problems.
+问题都改好了
 
 1785
 01:12:29,941 --> 01:12:32,375
 So here we go,
+跑起来
 
 1786
 01:12:32,376 --> 01:12:34,810
 drop one, swing it around, well, bang it on here.
+掉下来一个，旋转它
 
 1787
 01:12:34,812 --> 01:12:35,644
 Woops.
+哦~
 
 1788
 01:12:35,646 --> 01:12:36,411
 Like that.
+像这样
 
 1789
 01:12:36,413 --> 01:12:37,712
 Let go.
+松手
 
 1790
 01:12:37,714 --> 01:12:40,448
 'Kay, put a whole bunch of these down here.
+多放几个
 
 1791
 01:12:40,450 --> 01:12:43,283
 'Kay, now notice that it, let's say I have enough of
+我们注意到
 
 1792
 01:12:43,285 --> 01:12:45,485
 these things to make a row disappear, but
+我们有足够多的东西来让一行小时
 
 1793
 01:12:45,487 --> 01:12:48,588
 if I drag onto this and I'm animating, see, the row won't
+如果我拽住一个
 
 1794
 01:12:48,590 --> 01:12:52,024
 disappear because we're never coming to stasis here, 'kay?
+行不会消失，因为没有到稳定的状态
 
 1795
 01:12:52,993 --> 01:12:54,559
 But if I let it come to stasis,
+但如果我让它稳定下来
 
 1796
 01:12:54,561 --> 01:12:56,428
 then we don't have a complete row.
+我们还没有完整的一行
 
 1797
 01:12:56,430 --> 01:12:58,563
 Okay, let's get it clear row.
+让它清除一行
 
 1798
 01:12:58,565 --> 01:13:01,098
 [SOUND] There we go.
+好的
 
 1799
 01:13:01,100 --> 01:13:03,000
 We got one, 'kay?
+我们有了一行
 
 1800
 01:13:03,002 --> 01:13:04,368
 So now we got a complete row there,
+有了一个完整的一行
 
 1801
 01:13:04,370 --> 01:13:06,403
 the third one up from the bottom.
+倒数第三行
 
 1802
 01:13:06,405 --> 01:13:10,539
 And as long we do this, it's not gonna come to stasis,
+只要我们这样做，它就不会是稳定状态
 
 1803
 01:13:10,541 --> 01:13:13,175
 not gonna pause, not gonna do it,
+不会暂停，不会消除
 
 1804
 01:13:13,177 --> 01:13:17,412
 but if we let go, settles down, now it'll do, 'kay?
+如果我们松手，安定下来，现在就会消除了
 
 1805
 01:13:17,414 --> 01:13:19,881
 All right, so that's it for that demo.
+demo 做完了
 
 1806
 01:13:19,883 --> 01:13:22,650
 I should got to show you a lot of different behaviours there.
+我应该展现给你许多不同的 behaviour
 
 1807
 01:13:22,652 --> 01:13:24,284
 I didn't show you push behaviour,
+我还没有展示 push 
 
 1808
 01:13:24,286 --> 01:13:26,920
 which you're gonna need for your assignment.
+你们作业中需要使用到
 
 1809
 01:13:26,922 --> 01:13:28,988
 I didn't show you snap behaviour which is very
+还有 snap
 
 1810
 01:13:28,990 --> 01:13:31,391
 commonly used in the UI, but you don't need it for
+在 UI 中非常常用
 
 1811
 01:13:31,393 --> 01:13:34,060
 your assignment, so I didn't show that one, but
+但是作业中不需要，所以我没展示
 
 1812
 01:13:34,062 --> 01:13:36,195
 I showed you the collider and the gravity.
+但是我展示了 collider 还有 gravity
 
 1813
 01:13:36,197 --> 01:13:39,064
 The gravity is an optional one in your assignment, you might
+在作业中 gravity 是可选的
 
 1814
 01:13:39,066 --> 01:13:41,066
 wanna use gravity, it could be fun, totally up to you.
+你可以使用，会很有趣，根据你来
 
 1815
 01:13:41,068 --> 01:13:43,534
 [SOUND] But that's it.
+好的
 
 1816
 01:13:43,536 --> 01:13:45,169
 So, good luck with assignment five, and
+祝你们作业完成地愉快
 
 1817
 01:13:45,171 --> 01:13:47,271
 if you have any questions, I'll be here as usual.
+如果有问题，过来找我
 
 1818
 01:13:48,374 --> 01:13:48,405

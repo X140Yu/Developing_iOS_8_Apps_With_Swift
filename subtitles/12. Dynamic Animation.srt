@@ -2953,38 +2953,47 @@ So for if you're building some sort of final project, or
 600
 00:22:55,304 --> 00:22:57,504
 you wanna back end or something,
+或者需要后端处理
 
 601
 00:22:57,506 --> 00:23:02,975
 Parse is really simple, nice asynchronous using blocks.
+Parse 是一个非常简单的，使用异步 block 
 
 602
 00:23:02,977 --> 00:23:04,944
 Closure's a way to do that.
+方式处理的
 
 603
 00:23:04,946 --> 00:23:06,011
 And then next week,
+下一周
 
 604
 00:23:06,013 --> 00:23:07,813
 we're gonna talk about a variety of topics.
+我们将讨论多个问题
 
 605
 00:23:07,815 --> 00:23:10,382
 We're finally gonna talk about modal segue way a little bit
+最后会讨论些模态的 segue
 
 606
 00:23:10,384 --> 00:23:11,916
 and the application life cycle.
+还有应用程序生命周期
 
 607
 00:23:12,919 --> 00:23:15,252
 And core motion,
+还有 Core Motion
 
 608
 00:23:15,253 --> 00:23:17,586
 which is the gyro and accelerometer and that stuff.
+陀螺仪，加速器之类的东西
 
 609
 00:23:18,890 --> 00:23:19,455
@@ -2993,182 +3002,227 @@ Okay?
 610
 00:23:19,457 --> 00:23:22,892
 I believe we'll have just enough time for this demo.
+我认为剩下的时间够做这个 demo
 
 611
 00:23:22,894 --> 00:23:27,329
 If I run a little long, you guys know what to do.
+如果我时间花得久了些，你们知道该怎么做
 
 612
 00:23:27,331 --> 00:23:29,330
 So let's start here.
+从这开始
 
 613
 00:23:29,332 --> 00:23:30,465
 Create new project.
+创建一个新工程
 
 614
 00:23:31,467 --> 00:23:33,634
 We always use single view in this class,
+单视图应用
 
 615
 00:23:33,636 --> 00:23:34,868
 we'll call it DropIt.
+起名为 DropIt
 
 616
 00:23:34,870 --> 00:23:36,202
 We're dropping some things.
+我们将会往下掉落些东西
 
 617
 00:23:36,204 --> 00:23:38,838
 I'll put it in the same place we always put it.
+把它放在这里
 
 618
 00:23:38,840 --> 00:23:41,974
 Here we go.
+好了
 
 619
 00:23:41,975 --> 00:23:45,109
 Now I'm going to clean up this stuff.
+把工程清理一下
 
 620
 00:23:45,112 --> 00:23:47,979
 Okay, I don't need this view controller, I'm going to have
+我不需要这个视图控制器
 
 621
 00:23:47,981 --> 00:23:50,615
 a custom view controller, we're not gonna use the one.
+我需要一个自定义的
 
 622
 00:23:50,617 --> 00:23:52,216
 I don't like the name of this, I'm not gonna use.
+我不喜欢这个名字
 
 623
 00:23:52,218 --> 00:23:55,319
 This one.
+我不会用这个
 
 624
 00:23:55,320 --> 00:23:58,421
 My story board right here, I'm going to right off
+这个是 StoryBoard
 
 625
 00:23:58,424 --> 00:24:04,127
 the bat create a new subclass for my view controller.
+我现在新建一个视图控制器的子类
 
 626
 00:24:04,129 --> 00:24:05,995
 So it's going to be a UIViewController.
+类型是 UIViewController
 
 627
 00:24:05,997 --> 00:24:08,630
 I'm gonna call it DropitViewController.
+起名为 DropitViewController
 
 628
 00:24:10,934 --> 00:24:12,434
 Probably could have renamed that other thing.
+应该给它起个更好听的名字
 
 629
 00:24:12,436 --> 00:24:14,569
 It probably would have been just as good.
+不过这个也行
 
 630
 00:24:14,571 --> 00:24:16,037
 So here's Dropit.
+好了
 
 631
 00:24:16,039 --> 00:24:19,907
 I'm gonna get rid of all this in here.
+把这些去掉
 
 632
 00:24:19,909 --> 00:24:25,879
 In my storyboard, let's set the class here to be Dropit.
+在 storyboard 中，把类设置为 Dropit
 
 633
 00:24:25,881 --> 00:24:29,282
 The only UI that my Dropit is gonna have is a custom view,
+在 Dropit 中唯一的 UI 会是一个自定义视图
 
 634
 00:24:29,284 --> 00:24:32,685
 and actually, I'm gonna start out with a generic view.
+我先创建一个一般的视图
 
 635
 00:24:32,687 --> 00:24:34,853
 In your homework assignments, you might be able to get away,
+在作业里你们可能会用别的方式
 
 636
 00:24:34,855 --> 00:24:37,356
 depending on how you architect things, with the generic
+取决于你们怎样通过一般的视图来包含砖块还有球
 
 637
 00:24:37,358 --> 00:24:41,359
 view here to contain your bricks and bouncing ball.
+来搭建界面
 
 638
 00:24:41,361 --> 00:24:43,444
 So I'm going to have this.
+所以我使用一般视图
 
 639
 00:24:43,445 --> 00:24:45,528
 I'm gonna make sure that my constraints are set here.
+设置一下约束
 
 640
 00:24:45,531 --> 00:24:48,832
 So let's Reset to Suggested Constraints.
+使用建议的约束
 
 641
 00:24:48,834 --> 00:24:50,250
 I always like to check them,
+在这里检查一下
 
 642
 00:24:50,251 --> 00:24:51,667
 make sure there's no magic numbers or anything.
+确保没有任何魔法数字
 
 643
 00:24:51,670 --> 00:24:53,336
 That all looks good to me.
+看起来还可以
 
 644
 00:24:53,338 --> 00:24:58,574
 I'm gonna create a outlet to this thing, right there.
+为它创建 outlet
 
 645
 00:24:58,576 --> 00:25:01,910
 I'm gonna call that my game view, so this is going to be
+把它叫做 gameView
 
 646
 00:25:01,912 --> 00:25:04,746
 the view that contains my little Dropit game.
+这就是包含 Dropit 这个小游戏的 View
 
 647
 00:25:04,748 --> 00:25:08,049
 It's not much of a game, but kind of a game.
+算不上游戏，但也有点游戏的意思
 
 648
 00:25:08,051 --> 00:25:09,450
 All right, so there we go.
+好的
 
 649
 00:25:09,452 --> 00:25:12,653
 So, what is my Dropit going to do here?
+Dropit 将要做些什么呢
 
 650
 00:25:12,655 --> 00:25:18,191
 It's going to, along the top of my view, I'm
+在视图的顶部
 
 651
 00:25:18,193 --> 00:25:22,062
 going to drop little squares, okay, right along the top.
+我会向下掉落小方块
 
 652
 00:25:22,064 --> 00:25:23,896
 So first let's just get them dropped along the top.
+所以首先，先让它从顶部掉落砖块
 
 653
 00:25:23,898 --> 00:25:26,365
 And then I'm going to add some gravity, and
+为它们添加重力效果
 
 654
 00:25:26,367 --> 00:25:28,267
 they're going to drop and fall.
+让它们掉落下来
 
 655
 00:25:28,269 --> 00:25:29,034
@@ -3177,70 +3231,87 @@ Okay? That's why
 656
 00:25:29,036 --> 00:25:29,768
 they're called drops.
+这就是起名为 drops 的原因
 
 657
 00:25:29,770 --> 00:25:31,236
 They're going to fall down.
+它们将会掉落
 
 658
 00:25:31,237 --> 00:25:32,703
 So I'm gonna put these drops along the top, and
+先让它们在顶部显示
 
 659
 00:25:32,706 --> 00:25:34,672
 then later we'll add some gravity.
+随后添加重力效果
 
 660
 00:25:34,674 --> 00:25:38,842
 So let's go ahead and do the, putting them along the top
+现在开始做这些
 
 661
 00:25:38,844 --> 00:25:42,545
 first, pretty straightforward to do.
+把它们放到上边
 
 662
 00:25:42,547 --> 00:25:47,149
 So, I'm going to have the drops be evenly spaced along
+现在开始设置方块的尺寸之类的
 
 663
 00:25:47,151 --> 00:25:50,019
 the top, and I'm going to have a public variable, or
+我设置一个公有变量
 
 664
 00:25:50,021 --> 00:25:53,255
 whatever you want to call it, called dropsPerRow.
+起名为 dropsPerRow
 
 665
 00:25:54,257 --> 00:25:56,557
 It's just gonna be an integer that says how many of these
+是一个整型的
 
 666
 00:25:56,559 --> 00:25:58,059
 little squares go across the top.
+表示在顶部有多少方块
 
 667
 00:25:58,061 --> 00:26:00,227
 And so I'll do ten but I can set it to whatever I want.
+先设置为10，也可以设置为任何数值
 
 668
 00:26:00,229 --> 00:26:01,762
 I like my UI to be configurable.
+我希望我的 UI 是可以调整的
 
 669
 00:26:01,764 --> 00:26:04,497
 Of course in your homework you're gonna want that because
+在你们的作业里，你们也得这么做
 
 670
 00:26:04,499 --> 00:26:06,966
 part of your homework is to add a settings panel, but
+因为因为需要一个设置界面
 
 671
 00:26:06,968 --> 00:26:08,768
 you set a lot of configurable things.
+设置一些可以调整的东西
 
 672
 00:26:08,770 --> 00:26:11,437
 So you want to design your code to not be hard-coded all
+你不能一直把代码写得这么死
 
 673
 00:26:11,439 --> 00:26:13,122
@@ -3249,226 +3320,282 @@ the time.
 674
 00:26:13,123 --> 00:26:14,806
 So here I'm going to make this to be number I can set.
+所以在这里我把它调整一个可以设置的数
 
 675
 00:26:14,808 --> 00:26:18,276
 And that lets me have a drop size, okay,
+再来一个变量，dropSize
 
 676
 00:26:18,278 --> 00:26:21,045
 which is going to be the size of each drop.
+是每一个方块的尺寸
 
 677
 00:26:21,047 --> 00:26:22,446
 And I'm gonna calculate that as well.
+这是通过计算得到的
 
 678
 00:26:22,448 --> 00:26:23,947
 I'm gonna have it be a calculator property,
+它是一个计算属性
 
 679
 00:26:23,949 --> 00:26:26,283
 based on this dropsPerRow.
+基于 dropsPerRow 的
 
 680
 00:26:26,285 --> 00:26:28,184
 I'm gonna have it be square.
+它们都是方块
 
 681
 00:26:28,186 --> 00:26:30,687
 So we'll have the width and height be the same.
+所以长和宽都是相同的
 
 682
 00:26:30,689 --> 00:26:34,657
 And I'm gonna make it equal to the gameView's bounds
+让它等于
 
 683
 00:26:34,659 --> 00:26:38,260
 dot size dot width, divided by the dropsPerRow.
+gameView.bounds.size.width 除以 dropsPerRow
 
 684
 00:26:38,262 --> 00:26:43,798
 So I'm just gonna take my width,
+取出游戏视图的宽
 
 685
 00:26:43,800 --> 00:26:46,467
 available width of my view, and just divide it up evenly,
+除以一共有的方块的数量
 
 686
 00:26:46,469 --> 00:26:50,071
 so that the drops exactly fill the space.
+方块就能完整地填满
 
 687
 00:26:50,073 --> 00:26:55,442
 And so now I can return a CGSize that
+现在我就可以返回一个 CGSize
 
 688
 00:26:55,444 --> 00:26:58,878
 is both this width and this height.
+包含相同的长和宽
 
 689
 00:26:58,880 --> 00:27:00,913
 Okay, so now I know my drop size.
+现在我知道了 dropSize
 
 690
 00:27:00,915 --> 00:27:05,651
 I'm going to add a gesture, which is the tap gesture.
+现在添加一个单击手势
 
 691
 00:27:05,653 --> 00:27:07,603
 When I put a tap gesture,
+当我单击的时候
 
 692
 00:27:07,604 --> 00:27:09,554
 I'm gonna put one of these drops into my view.
+我就在视图中放入个方块
 
 693
 00:27:09,556 --> 00:27:10,989
 So let's do that.
+开始实现
 
 694
 00:27:10,991 --> 00:27:12,790
 Let's go here to drag and
+向视图中
 
 695
 00:27:12,792 --> 00:27:17,761
 drop gesture out here, tap gesture right here.
+拖入一个单击手势
 
 696
 00:27:17,763 --> 00:27:20,397
 So I'm gonna drag this on here, and
+放到这里
 
 697
 00:27:20,399 --> 00:27:22,599
 bring up my document outline.
+打开 document outline
 
 698
 00:27:22,601 --> 00:27:24,200
 Here's my tap gesture right here.
+这里是单击手势
 
 699
 00:27:24,202 --> 00:27:25,568
 So I'm gonna control drag.
+CTRL-拖动
 
 700
 00:27:25,570 --> 00:27:29,438
 I'm gonna call this gesture drop.
+把它起名为 drop
 
 701
 00:27:29,440 --> 00:27:31,540
 It's a good name cuz that's what it does.
+这是一个好名字，因为这表明它完成的动作
 
 702
 00:27:31,542 --> 00:27:34,175
 It drops one of these things.
+它会向下掉落一个方块
 
 703
 00:27:34,177 --> 00:27:35,743
 Connect it. So here it is.
+连接，好了
 
 704
 00:27:35,745 --> 00:27:38,245
 I could put the code to do all the dropping here, but
+我可以把所有的掉落代码写在这里
 
 705
 00:27:38,247 --> 00:27:40,847
 I'm actually going to put it in another method.
+但实际上我会在另一个方法中实现
 
 706
 00:27:41,983 --> 00:27:43,316
 Call drop.
+叫做 drop
 
 707
 00:27:43,318 --> 00:27:44,917
 Just because it's not necessarily something
+因为不止单击手势可以
 
 708
 00:27:44,919 --> 00:27:46,185
 that could only be done by gesture.
+激活向下掉落
 
 709
 00:27:46,187 --> 00:27:49,454
 Maybe programmatically one could drop things as well.
+也许你还会通过代码来向下掉落
 
 710
 00:27:49,456 --> 00:27:53,058
 So I don't really want to put inside that gesture.
+所以我不想把它放到手势操作里
 
 711
 00:27:53,060 --> 00:27:55,326
 So all the gesture you're gonna do is do this drop.
+手势需要做的就是这个 drop 方法
 
 712
 00:27:55,328 --> 00:27:57,461
 The drop just needs to figure out where the drop is,
+drop 方法需要做的时，计算 drop 的位置
 
 713
 00:27:57,463 --> 00:28:01,064
 so let's get, actually let's make more space here first.
+先弄出一些空间
 
 714
 00:28:03,635 --> 00:28:06,703
 This, I need a lot more space than that.
+需要大一点地方
 
 715
 00:28:06,705 --> 00:28:08,270
 Okay, so we need to figure out where the drop is.
+需要弄清楚方块的位置
 
 716
 00:28:08,272 --> 00:28:10,506
 So I'm going to make it's frame, which is really easy.
+创建它的 frame，很简单
 
 717
 00:28:10,508 --> 00:28:13,208
 I'm just gonna first of all,
+首先
 
 718
 00:28:13,210 --> 00:28:16,311
 create one that is at zero, zero.
+我现在0，0点创建一个
 
 719
 00:28:16,313 --> 00:28:20,981
 Use this nice CGPointZero by the way, which is zero, zero.
+使用 CGPointZero 参数为0，0
 
 720
 00:28:20,983 --> 00:28:22,783
 And the size is, of course, our dropSize.
+size 当然是 dropSize
 
 721
 00:28:25,120 --> 00:28:27,053
 So now I've got drop at zero, zero.
+现在在0，0点有了一个方块
 
 722
 00:28:27,055 --> 00:28:30,923
 And now, I move it along somewhere along there.
+现在把它移动到别处
 
 723
 00:28:30,925 --> 00:28:35,594
 So, I'm gonna move it to frame dot origin dot x equals
+令它的 frame.origin.x
 
 724
 00:28:35,596 --> 00:28:38,830
 CGFloat dot random, dropsPerRow.
+等于 CGFloat.random(dropsPerRow)
 
 725
 00:28:38,832 --> 00:28:41,299
 And you're probably like whoa, CGFloat dot random,
+你可能会说，哇，CGFloat.random
 
 726
 00:28:41,301 --> 00:28:43,367
 you didn't tell me about that cool function.
+你没有跟我讲过这个很酷的方法
 
 727
 00:28:43,369 --> 00:28:45,936
 Well, that's because there's no such function, but
+这是因为没有这个函数
 
 728
 00:28:45,938 --> 00:28:49,739
 I'm gonna write that function right now, really quick.
+我现在来快速实现这个函数
 
 729
 00:28:49,741 --> 00:28:50,873
 There it is.
+好了
 
 730
 00:28:50,875 --> 00:28:51,707
@@ -3477,94 +3604,117 @@ Okay?
 731
 00:28:51,709 --> 00:28:52,941
 So all it does is,
+这就是它做的事情
 
 732
 00:28:52,943 --> 00:28:56,878
 it just uses arc4random to create a random float
+使用 arc4random 创建一个随机的 float
 
 733
 00:28:56,880 --> 00:28:59,647
 between zero and one less than this maximum.
+在0和最大值之间
 
 734
 00:28:59,649 --> 00:29:02,417
 So here I'm gonna get a random float between zero and
+在这我得到了一个在0和dropsPerRow-1之间
 
 735
 00:29:02,419 --> 00:29:04,485
 dropsPerRow minus one.
+的一个随机的 float
 
 736
 00:29:04,487 --> 00:29:06,120
 Okay, that's cool.
+很酷吧
 
 737
 00:29:06,122 --> 00:29:08,989
 And then I'm gonna multiply that by times dropSize dot
+现在将它与 dropSize.width 相乘
 
 738
 00:29:08,991 --> 00:29:10,457
 width cuz I'm gonna move it off.
+把它移动到这里
 
 739
 00:29:10,459 --> 00:29:12,658
 So I just took my drop, and I made it over.
+我把它创建，将它移动
 
 740
 00:29:12,660 --> 00:29:14,527
 And it would be in a certain spot, so
+它将在某个位置上
 
 741
 00:29:14,529 --> 00:29:16,128
 I'm gonna create my dropView.
+所以我现在创建 dropView
 
 742
 00:29:16,130 --> 00:29:17,696
 It's just gonna be UIView.
+类型是 UIView
 
 743
 00:29:17,698 --> 00:29:20,031
 I'm gonna use the frame initializer here,
+使用 frame 的构造器
 
 744
 00:29:20,033 --> 00:29:22,533
 use that frame I just created above.
+上面创建的那个
 
 745
 00:29:22,535 --> 00:29:27,404
 I'm gonna set the dropView's background color to be UIColor
+把背景颜色设置为随机的
 
 746
 00:29:27,406 --> 00:29:31,875
 random, another thing I added down here below.
+我在下面已经添加这个方法了
 
 747
 00:29:31,877 --> 00:29:36,112
 Just picked one of five random colors there in my rote.
+在五个里面选择一个
 
 748
 00:29:36,114 --> 00:29:37,563
 Notice, by the way,
+主意
 
 749
 00:29:37,564 --> 00:29:39,013
 that when I added these extensions to UIFloat and
+当我给 CGFloat 和 UIColor 添加 extension 的时候
 
 750
 00:29:39,016 --> 00:29:40,849
 UIColor, I made them private.
+是私有的
 
 751
 00:29:40,851 --> 00:29:42,851
 That means only I can use them.
+这表明只有我能使用它们
 
 752
 00:29:42,853 --> 00:29:45,887
 But it also means the name won't conflict with someone
+也意味着命名不会冲突
 
 753
 00:29:45,889 --> 00:29:48,756
 else if someone else writes their own CGFloat dot random
+如果其他人也写了一个 参数为 Int 的 CGFloat.random
 
 754
 00:29:48,758 --> 00:29:50,024
@@ -3573,134 +3723,167 @@ that takes an int.
 755
 00:29:50,026 --> 00:29:51,758
 Theirs will work in their file, and
+它们的会在它们的文件里有效
 
 756
 00:29:51,760 --> 00:29:52,759
 mine will work in my file.
+我的会在我这里有效
 
 757
 00:29:52,761 --> 00:29:55,028
 Okay, so it's private to this file.
+对这个文件来说它是私有的
 
 758
 00:29:55,030 --> 00:29:56,729
 So that's one nice thing about extensions,
+这是 extension 的一个比较好的特性
 
 759
 00:29:56,731 --> 00:29:59,831
 you can kind of control the privacy of extensions.
+你可以控制 extension 的公私有性
 
 760
 00:30:00,801 --> 00:30:02,834
 So there I have my dropView.
+现在我有了 dropView 
 
 761
 00:30:02,835 --> 00:30:04,868
 Now I'm just gonna add it to my gameView, addSubview.
+我把它添加到 gameView 上，通过 addSubview
 
 762
 00:30:04,871 --> 00:30:07,471
 We really haven't had you doing addSubview.
+我们之前还没用过 addSubView
 
 763
 00:30:07,473 --> 00:30:10,607
 But cuz you've been doing all the views in your storyboard.
+因为之前都是在 stroyboard 中添加视图
 
 764
 00:30:10,609 --> 00:30:12,609
 But in your homework you're going to be adding your
+但在作业中，你将使用 addSubView 
 
 765
 00:30:12,611 --> 00:30:16,246
 bricks, views, and all that stuff, using addSubview.
+来添加砖块，视图之类的视图
 
 766
 00:30:16,248 --> 00:30:17,680
 Probably your storyboard's just going to be
+也许你的 storyboard 
 
 767
 00:30:17,682 --> 00:30:18,731
 completely blank.
+会是完全空白的
 
 768
 00:30:18,732 --> 00:30:19,781
 Or maybe you might have the score and
+也许你还有显示分数
 
 769
 00:30:19,784 --> 00:30:21,751
 some other things in there.
+和其他东西
 
 770
 00:30:21,752 --> 00:30:23,719
 But the bricks and the paddle, and ball,
+但是砖块和球之类的东西
 
 771
 00:30:23,721 --> 00:30:24,986
 that's all going to be added.
+都需要通过这种方式添加
 
 772
 00:30:24,988 --> 00:30:26,288
 You're gonna add with addSubview.
+使用 addSubView
 
 773
 00:30:26,289 --> 00:30:27,589
 That's part of what this assignment is about.
+这是这次作业的部分内容
 
 774
 00:30:27,591 --> 00:30:30,324
 So you get some experience creating and
+所以你们会获得一些
 
 775
 00:30:30,326 --> 00:30:31,926
 adding views in code.
+通过代码添加视图的经验
 
 776
 00:30:31,928 --> 00:30:32,993
 Okay? So that's what we're doing.
+这就是我们在做的事情
 
 777
 00:30:32,995 --> 00:30:35,128
 So let's go see what this looks like.
+让我们看看效果
 
 778
 00:30:35,130 --> 00:30:38,198
 Hopefully when we tap we'll get a random square along
+希望在点击过后
 
 779
 00:30:38,200 --> 00:30:41,167
 the top of our view here.
+一个方块会出现在顶部
 
 780
 00:30:41,169 --> 00:30:42,201
 So tap, we got one.
+所以点击，有了一个
 
 781
 00:30:42,203 --> 00:30:43,602
 Good, we're getting them.
+好的，我们已经做到了
 
 782
 00:30:43,604 --> 00:30:45,937
 So here I'm tapping them, this is great.
+我一直点击，很棒
 
 783
 00:30:45,939 --> 00:30:48,106
 Okay, so we're adding these things along the top,
+我们已经在顶部添加了这些
 
 784
 00:30:48,108 --> 00:30:50,041
 now I'm gonna add gravity.
+现在我来添加重力效果
 
 785
 00:30:50,043 --> 00:30:51,776
 Okay, I'm going to add a gravitational field, and
+添加一个重力场
 
 786
 00:30:51,778 --> 00:30:53,177
 it's going to apply to all these things.
+它会适应所有的物体
 
 787
 00:30:53,179 --> 00:30:55,412
 It's going to pull them all down to the bottom of
+会将它们拉到屏幕的底部
 
 788
 00:30:55,414 --> 00:30:56,046
@@ -3713,38 +3896,47 @@ Okay?
 790
 00:30:57,082 --> 00:30:59,682
 So these all will just fall down.
+它们都会掉落下来
 
 791
 00:30:59,684 --> 00:31:03,385
 Turns out this very, very easy to do, okay?
+然而实现起来很简单
 
 792
 00:31:03,387 --> 00:31:06,822
 All I need to do is create a gravitational field so
+创建一个重力场
 
 793
 00:31:06,824 --> 00:31:12,360
 I'm going to say, let gravity equal a UIGravityBehaviour.
+let gravity = UIGravityBehaviour
 
 794
 00:31:12,362 --> 00:31:14,628
 Okay, so boom, I have a UIGravityBehavior.
+boom，我有了一个 UIGravityBehavior
 
 795
 00:31:14,630 --> 00:31:18,332
 I'm gonna take the default magnitude and direction which
+默认的方向是向下
 
 796
 00:31:18,334 --> 00:31:21,735
 is down, at a thousand points per second per second.
+速度是1000点/秒/秒
 
 797
 00:31:21,737 --> 00:31:23,603
 So that's perfectly fine to me.
+对于我来说不错
 
 798
 00:31:23,605 --> 00:31:26,806
 Of course I also need a dynamic animator.
+当然我还需要一个 dynamic animator
 
 799
 00:31:26,808 --> 00:31:28,207
@@ -3753,110 +3945,137 @@ Okay?
 800
 00:31:28,208 --> 00:31:29,607
 So I'm going to create a dynamic animator here.
+在这里创建一个
 
 801
 00:31:31,245 --> 00:31:38,616
 Now, I wanna say this, referenceView is gameView.
+设置它的 referenceView 为 gameView
 
 802
 00:31:38,618 --> 00:31:39,283
 Okay? But I'm not gonna
+但是现在这种
 
 803
 00:31:39,285 --> 00:31:41,802
 be able to do this.
+方式不行
 
 804
 00:31:41,803 --> 00:31:44,320
 Now, a lot of you tripped into this, on your, assignments.
+好多人都在作业里被这一点困住了
 
 805
 00:31:44,323 --> 00:31:45,989
 I saw on Piazza, a lot of questions about this.
+我看到 Piazza 上有好多关于这个的问题
 
 806
 00:31:45,991 --> 00:31:47,591
 You're, like, oh, what, what's going on here?
+到底发生了什么？
 
 807
 00:31:47,593 --> 00:31:49,659
 And you click this warning, and it says,
+点击一下错误
 
 808
 00:31:49,661 --> 00:31:50,960
 gameView is not a part of.
+它说
 
 809
 00:31:50,962 --> 00:31:54,030
 DropitViewController, of course it is, it's right here.
+gameView 不是 DropitViewController 的一部分，当然是，它就在这里
 
 810
 00:31:54,032 --> 00:31:56,598
 What the heck is going on?
+到底发生了什么？
 
 811
 00:31:56,600 --> 00:31:59,134
 And hopefully all of you have figured out that
+希望你们都发现了
 
 812
 00:31:59,136 --> 00:32:00,602
 the reason that's happening is because
+发生这种错误的原因是
 
 813
 00:32:00,604 --> 00:32:03,638
 I'm in the middle of initializing here.
+我在构造
 
 814
 00:32:03,640 --> 00:32:07,208
 Okay, this is initializing this variable.
+这里在构造这个变量
 
 815
 00:32:07,210 --> 00:32:09,877
 And you cannot access your own properties and
+但你不能在这里引用属性和方法
 
 816
 00:32:09,879 --> 00:32:12,746
 methods until you're fully initialized.
+直到你被完整构造出来
 
 817
 00:32:12,748 --> 00:32:14,614
 So obviously, you can't access them while you're
+所以显然
 
 818
 00:32:14,616 --> 00:32:16,916
 initializing, by definition, so that's the problem.
+在这里你不能引用 gameView，这是个问题
 
 819
 00:32:16,918 --> 00:32:18,751
 So, how do I get out of this conundrum?
+怎样能去掉这个错误
 
 820
 00:32:18,753 --> 00:32:22,154
 Because UIDyanmicAnimator needs this game view
+因为 UIDyanmicAnimator 需要这个 gameView 
 
 821
 00:32:22,156 --> 00:32:23,956
 as its reference.
+作为引用
 
 822
 00:32:23,957 --> 00:32:25,757
 Well, one thing is, I could make this an optional and
+我可以把它设置为 optional
 
 823
 00:32:25,759 --> 00:32:28,927
 set to nil, and then the view did load, when I know that's
+在 viewDidLoad 方法中
 
 824
 00:32:28,929 --> 00:32:32,030
 set I could set the, I could create the animator there.
+创建 animator
 
 825
 00:32:32,032 --> 00:32:33,297
 Yeah, you could do that.
+你可以这样做
 
 826
 00:32:33,299 --> 00:32:35,599
 Another way to do it is using a lazy.
+另一种方式是使用 lazy
 
 827
 00:32:35,601 --> 00:32:38,552
@@ -3865,10 +4084,12 @@ Variable. So
 828
 00:32:38,553 --> 00:32:41,504
 I'm gonna make this var lazy and I'm gonna set its initial
+把这个变量变为 lazy
 
 829
 00:32:41,506 --> 00:32:46,075
 value equal to the result of executing a closure.
+把它的初始化变为一个闭包的执行结果
 
 830
 00:32:47,611 --> 00:32:49,244
@@ -3877,62 +4098,77 @@ Okay.
 831
 00:32:49,246 --> 00:32:51,312
 So, this is not gonna happen,
+这里不会调用
 
 832
 00:32:51,314 --> 00:32:53,848
 this is not going to get initialized,
+这里不会初始化
 
 833
 00:32:53,850 --> 00:32:57,385
 until someone actually asks for this animator.
+知道某人引用这个 animator
 
 834
 00:32:57,387 --> 00:33:00,421
 And once they ask for it, I'm gonna execute this closure
+一旦别处引用，这个闭包将被执行
 
 835
 00:33:00,423 --> 00:33:02,456
 by just having the closure with parentheses.
+这个带括号的闭包
 
 836
 00:33:02,458 --> 00:33:05,125
 It takes no arguments, so I just call it with parentheses.
+没有参数，所以只要有括号就可以
 
 837
 00:33:05,127 --> 00:33:06,859
 And it's going to execute this closure.
+它将会执行这个闭包
 
 838
 00:33:06,861 --> 00:33:10,429
 Now, this closure better return a UIDynamicAnimator.
+这个闭包最好返回一个 UIDyanmicAnimator
 
 839
 00:33:10,431 --> 00:33:12,598
 Okay, because I'm setting it equal to the result.
+因为我把它设置为闭包的返回结果
 
 840
 00:33:12,600 --> 00:33:18,136
 And in fact, it's going to, because I'm gonna say, let
+实际上
 
 841
 00:33:18,138 --> 00:33:23,240
 lazilyCreatedDynamicAnimator equal that, okay?
+let UIDyanmicAnimator = 
 
 842
 00:33:23,242 --> 00:33:24,441
 Now, this is inside a closure.
+现在是在闭包内部
 
 843
 00:33:24,443 --> 00:33:28,078
 So I'm gonna want to say self.gameView, right?
+所以需要添加 self
 
 844
 00:33:28,080 --> 00:33:31,014
 And then I'm just going to return
+接着
 
 845
 00:33:31,016 --> 00:33:34,117
 lazilyCreatedDynamicAnimator.
+返回 lazilyCreatedDynamicAnimator
 
 846
 00:33:34,119 --> 00:33:34,917
@@ -3941,34 +4177,42 @@ Okay?
 847
 00:33:34,919 --> 00:33:38,320
 This kind of solves the problem.
+解决了问题
 
 848
 00:33:38,322 --> 00:33:39,654
 Okay? I don't have any warnings,
+没有警告
 
 849
 00:33:39,656 --> 00:33:42,891
 but you gotta be careful you better not call this
+但是你得注意
 
 850
 00:33:42,893 --> 00:33:44,192
 before this gets set.
+最好别在它被设置好之前调用它
 
 851
 00:33:45,261 --> 00:33:46,994
 Because this is going to be nill, you're
+因为它会是 nil
 
 852
 00:33:46,996 --> 00:33:49,062
 going to have a reference view nill, your animator is
+它的引用视图为 nil
 
 853
 00:33:49,064 --> 00:33:50,964
 going to get created with no reference view.
+你的 animator 将不会有引用视图
 
 854
 00:33:50,966 --> 00:33:52,899
 It ain't going to work.
+它不会工作的
 
 855
 00:33:52,901 --> 00:33:54,317
@@ -3977,22 +4221,27 @@ Okay?
 856
 00:33:54,318 --> 00:33:55,734
 So you gotta be careful about when you call this.
+所以在调用的时候得注意一下
 
 857
 00:33:55,737 --> 00:33:57,436
 Okay? When you access this property.
+当你引用这个属性的时候
 
 858
 00:33:57,438 --> 00:33:58,970
 So I'm not gonna act as this property until I
+所以在 viewDidLoad 之前，我不会引用这个变量
 
 859
 00:33:58,972 --> 00:34:01,206
 get to viewDidLoad, cuz then I'll know
+因为我知道
 
 860
 00:34:01,208 --> 00:34:04,208
 that this outlet right here has been set.
+这个 outlet 已经被设置好了
 
 861
 00:34:04,210 --> 00:34:05,927
@@ -4001,170 +4250,212 @@ Okay?
 862
 00:34:05,928 --> 00:34:07,645
 So let's go ahead and do viewDidLoad, in fact.
+现在来实现 viewDidLoad
 
 863
 00:34:07,647 --> 00:34:11,048
 So in viewDidLoad, all I'm gonna do is.
+在这里需要做的是
 
 864
 00:34:12,551 --> 00:34:15,651
 Say animator, add behavior gravity.
+animator.addBehavior(gravity)
 
 865
 00:34:16,620 --> 00:34:19,521
 So now, I have a gravitational field,
+所以现在，我有了重力场
 
 866
 00:34:19,523 --> 00:34:22,157
 I've added it to an animator, so an animator is now going to
+把它添加到了 animator 里，所以 animator 现在会
 
 867
 00:34:22,159 --> 00:34:24,792
 be animating the behavior of items in there.
+发动里面所有的特性
 
 868
 00:34:24,794 --> 00:34:27,395
 The only thing I need to do is say
+我在这里只要指明
 
 869
 00:34:27,397 --> 00:34:30,297
 which items are affected by gravity.
+哪个物体被重力影响
 
 870
 00:34:30,299 --> 00:34:31,431
 So I'm gonna go right down and
+所以到这里
 
 871
 00:34:31,433 --> 00:34:36,402
 say, gravity add item, my drop view.
+gravity.addItem(dropView)
 
 872
 00:34:36,404 --> 00:34:39,839
 Now the instance I say this, the instancy animator,
+这个 animator 的实例
 
 873
 00:34:39,841 --> 00:34:43,375
 the instance the behavior gets added to the animator, all
+behavior 被添加到了 animator 中
 
 874
 00:34:43,377 --> 00:34:46,978
 items in that gravity field are going to start animating.
+所有 gravity 中的物体都会开始动画
 
 875
 00:34:46,980 --> 00:34:49,514
 Now I can add those items later and then they'll start
+添加了之后，它们就会动画
 
 876
 00:34:49,516 --> 00:34:52,383
 animating, I can take them out and it'll stop animating.
+移除了之后，它们就会停止
 
 877
 00:34:52,385 --> 00:34:54,585
 It's all instantaneous, okay.
+这些都是瞬间发生的
 
 878
 00:34:54,587 --> 00:34:57,354
 So if I run now, since I have an animator and
+如果现在运行，我有了 animator 和 
 
 879
 00:34:57,356 --> 00:34:58,889
 a gravitational field and
+重力场
 
 880
 00:34:58,891 --> 00:35:02,492
 I put the items in there, they fall, okay.
+我把方块放进去，它们就会掉落
 
 881
 00:35:02,494 --> 00:35:03,944
 Now they're accelerating.
+它们在加速
 
 882
 00:35:03,945 --> 00:35:05,395
 See how they're getting faster and faster at the bottom?
+它们会在底部变得越来越快
 
 883
 00:35:05,397 --> 00:35:06,495
 They're accelerating due to gravity and
+这是因为重力
 
 884
 00:35:06,497 --> 00:35:08,997
 I can have as many of them as I want.
+我可以添加任意多个
 
 885
 00:35:08,999 --> 00:35:12,768
 Okay and they will accelerate.
+它们都会加速
 
 886
 00:35:12,770 --> 00:35:15,236
 They'll all be accelerating their own
+它们都会以自己的
 
 887
 00:35:15,238 --> 00:35:17,005
 gravitational acceleration.
+重力加速度加速
 
 888
 00:35:17,007 --> 00:35:18,773
 Okay now this is great except for
+都不错，只是
 
 889
 00:35:18,775 --> 00:35:21,075
 they're just falling off the end and they're gone.
+它们掉出了屏幕
 
 890
 00:35:21,077 --> 00:35:23,343
 And really what I want is for them to stay on screen.
+我想要它们呆在屏幕上
 
 891
 00:35:23,345 --> 00:35:26,079
 So I'm gonna create a collision behavior where
+所以我添加碰撞属性
 
 892
 00:35:26,081 --> 00:35:30,282
 the edges of my reference view here are going to.
+在屏幕的底部
 
 893
 00:35:30,284 --> 00:35:33,419
 Stop these things and they are gonna bounce off okay?
+这会使得它们停在那里，并弹起
 
 894
 00:35:33,421 --> 00:35:36,521
 So they are going to collide, again really easy to do,
+它们将会碰撞，很容易实现
 
 895
 00:35:36,523 --> 00:35:39,524
 I'm just gonna go up here and create a collision behavior.
+在上面，创建一个碰撞特性
 
 896
 00:35:39,526 --> 00:35:40,725
 I'm gonna do these same thing here and
+和这里完成的工作一样
 
 897
 00:35:40,727 --> 00:35:42,093
 do a lazy version of this and
+一个 lazy 版本的
 
 898
 00:35:42,095 --> 00:35:43,527
 I'll show you why I'm doing that.
+你们也知道为什么要这样做
 
 899
 00:35:43,529 --> 00:35:45,195
 I'm gonna call it my collider.
+起名为 collider
 
 900
 00:35:45,197 --> 00:35:48,264
 It's a UI collision behavior.
+类型为 UICollisionBehavior
 
 901
 00:35:49,267 --> 00:35:55,137
 I'm gonna set it equal to executing a closure.
+把它设置为闭包执行的结果
 
 902
 00:35:55,139 --> 00:36:01,376
 I'll say let my lazilyCreatedCollider
+let lazilyCreatedCollider
 
 903
 00:36:01,378 --> 00:36:06,146
 equal UICollisionBehavior.
+= UICollisionBehavior
 
 904
 00:36:06,148 --> 00:36:07,080
@@ -4177,26 +4468,32 @@ And.
 906
 00:36:09,517 --> 00:36:12,051
 Then, oops.
+哦
 
 907
 00:36:12,053 --> 00:36:14,687
 Don't want that there cuz I'm not creating it there.
+不在这里加括号，因为不在这里创建
 
 908
 00:36:14,689 --> 00:36:16,555
 There we go.
+好了
 
 909
 00:36:16,557 --> 00:36:19,424
 So, now, the reason I did this is not because I have this
+我没有调用那个构造器
 
 910
 00:36:19,426 --> 00:36:21,859
 reference view problem or anything like that.
+是因为
 
 911
 00:36:21,861 --> 00:36:24,495
 It's just that I wanna configure this thing.
+我想设置一下它的某些属性
 
 912
 00:36:24,497 --> 00:36:25,680
@@ -4205,10 +4502,12 @@ Okay?
 913
 00:36:25,681 --> 00:36:26,864
 And one thing I wanna configure here is
+其中一个是
 
 914
 00:36:26,866 --> 00:36:30,400
 that I want it to translate the reference bounds.
+把屏幕的边界变为边界
 
 915
 00:36:30,402 --> 00:36:31,901
@@ -4217,18 +4516,22 @@ Into a boundary.
 916
 00:36:31,903 --> 00:36:34,670
 That means the edges of my reference view are going to
+这意味着 referenceView 
 
 917
 00:36:34,672 --> 00:36:36,789
 be a boundary.
+将会变为边界
 
 918
 00:36:36,790 --> 00:36:38,907
 So, anything, any items that are in this collider will
+在这个 collider 中的任何物体
 
 919
 00:36:38,909 --> 00:36:41,143
 bounce off of that, those bounds.
+都会在边界弹起来
 
 920
 00:36:41,145 --> 00:36:41,743
@@ -4237,30 +4540,37 @@ Okay?
 921
 00:36:41,745 --> 00:36:42,877
 And now I'll return.
+然后，返回它
 
 922
 00:36:42,879 --> 00:36:45,479
 So here you can see two different reasons.
+所以你可以看到利用闭包使用 lazy
 
 923
 00:36:45,481 --> 00:36:49,249
 That I've used for using this lazy with the closure.
+有两种不同的原因
 
 924
 00:36:49,251 --> 00:36:51,501
 One is,
+一个是
 
 925
 00:36:51,502 --> 00:36:53,752
 there was something I couldn't access during initialization,
+在构造期间有一些东西不能饮用
 
 926
 00:36:53,755 --> 00:36:57,623
 another one is I wanted to initialize some state, okay?
+另一个是构造完毕后设置它的一些属性
 
 927
 00:36:57,625 --> 00:37:01,593
 Those are both valid reasons to do this lazy business.
+这些都是使用 lazy 的正当理由
 
 928
 00:37:01,595 --> 00:37:02,995
@@ -4269,14 +4579,17 @@ Okay?
 929
 00:37:02,996 --> 00:37:04,396
 So, I need to add that to the animator.
+我需要把它添加到 animator 中
 
 930
 00:37:06,433 --> 00:37:10,535
 Collider and of course I need, if I want these drops
+如果我想让这些方块碰撞
 
 931
 00:37:10,537 --> 00:37:13,471
 to collide, they need to be added to the collider as well.
+需要将他们放入 collider 中
 
 932
 00:37:13,473 --> 00:37:16,740
@@ -4285,86 +4598,107 @@ Okay?
 933
 00:37:16,742 --> 00:37:17,874
 And that's it.
+好了
 
 934
 00:37:17,876 --> 00:37:21,077
 That's all, again, this stuff is amazingly simple,
+这些东西非常精简
 
 935
 00:37:21,079 --> 00:37:24,980
 you just add the behaviors and things will start behaving.
+你只需要添加 behavior 就会起作用
 
 936
 00:37:24,982 --> 00:37:26,382
 Okay? So let's watch.
+看看效果
 
 937
 00:37:26,384 --> 00:37:27,582
 What happens here.
+发生了什么
 
 938
 00:37:27,584 --> 00:37:28,216
 So we drop one in.
+掉落一个
 
 939
 00:37:28,218 --> 00:37:29,050
 Oh see?
+看到了吗
 
 940
 00:37:29,052 --> 00:37:30,317
 Bounce at the bottom.
+在底部弹起
 
 941
 00:37:30,319 --> 00:37:33,354
 Didn't bounce very much, it's not a very big bounce, but
+没弹起很高，但是它
 
 942
 00:37:33,356 --> 00:37:34,855
 it did bounce.
+的确弹起来了
 
 943
 00:37:34,856 --> 00:37:36,355
 We're gonna make it bounce some more in a minute here.
+一会我们会让它弹地高一点
 
 944
 00:37:36,358 --> 00:37:38,024
 But again, if I send a whole bunch of them down,
+如果多掉落一些
 
 945
 00:37:38,026 --> 00:37:40,059
 not only do they bounce off the bottom,
+它们不止会在底部弹起
 
 946
 00:37:40,061 --> 00:37:42,361
 they'll bounce off of each other a little bit, too.
+它们之间也会这样
 
 947
 00:37:42,363 --> 00:37:44,430
 And they also can rotate.
+它们也可以旋转
 
 948
 00:37:44,432 --> 00:37:46,365
 So if I send too many of them down here, and
+如果我掉落太多
 
 949
 00:37:46,367 --> 00:37:49,067
 if they're getting a little, oh, look.
+它们就会
 
 950
 00:37:49,069 --> 00:37:50,468
 Oh no!
+哦
 
 951
 00:37:50,470 --> 00:37:52,970
 Okay, oh no, it's collapsed.
+发生跌落了
 
 952
 00:37:52,972 --> 00:37:55,906
 Okay, so these things are allowed to tilt and rotate and
+这些东西都会倾斜，旋转
 
 953
 00:37:55,908 --> 00:37:57,407
 they can all just collapse and fall down.
+跌落
 
 954
 00:37:58,510 --> 00:37:59,509
@@ -4373,14 +4707,17 @@ Okay?
 955
 00:37:59,511 --> 00:38:00,676
 Cuz that's the physics of them.
+这是它们的物理属性
 
 956
 00:38:00,678 --> 00:38:02,878
 When they bounce, they might hit a little ledge and
+当弹起的时候，可能会碰到边角
 
 957
 00:38:02,880 --> 00:38:07,115
 boom, since they can rotate, they'll tilt and tip over.
+旋转，倾斜
 
 958
 00:38:07,117 --> 00:38:07,682
@@ -4389,50 +4726,62 @@ Okay?
 959
 00:38:09,585 --> 00:38:11,051
 All right, so that's that.
+就是这样
 
 960
 00:38:11,053 --> 00:38:16,489
 Now what if I had my game here, and I wanted to not
+如果我的游戏是这样
 
 961
 00:38:16,491 --> 00:38:19,192
 have them tilt like that, I wanted them to stay in their
+我不想让它们倾斜
 
 962
 00:38:19,194 --> 00:38:21,994
 nice neat rows, and also I want them to bounce more.
+我想让它们在列中直直地排列，而且弹起更高
 
 963
 00:38:21,996 --> 00:38:23,829
 I don't want such a little tiny bounce,
+现在的弹跳太不给力了
 
 964
 00:38:23,831 --> 00:38:24,830
 that's not very exciting.
+一点也不爽
 
 965
 00:38:24,832 --> 00:38:26,531
 I want a big old bounce okay?
+我需要一个大跳！
 
 966
 00:38:26,533 --> 00:38:27,699
 Off each other and off the bottom.
+在它们之间还有屏幕底部
 
 967
 00:38:27,701 --> 00:38:28,966
 So how would I do that?
+怎样实现呢？
 
 968
 00:38:28,968 --> 00:38:32,136
 Well I would add a dynamic item behavior that we
+我可以添加一个 behavior
 
 969
 00:38:32,138 --> 00:38:34,671
 talked about in lecture, but it started to get the point
+但是现在 behavior 太多了
 
 970
 00:38:34,673 --> 00:38:37,474
 here where I have an awful lot of different behaviors acting
+这些 behavior 都在这些方块上起作用
 
 971
 00:38:37,476 --> 00:38:39,242
@@ -4441,34 +4790,42 @@ on each of these drops.
 972
 00:38:39,244 --> 00:38:41,310
 So this is the time where I'm probably like,
+所以，我现在想
 
 973
 00:38:41,312 --> 00:38:45,113
 I wanna create my own dynamic behavior that is a composite
+创建一个自己的 dynamic behavior 
 
 974
 00:38:45,115 --> 00:38:46,314
 of all these things.
+把所有的东西添加到那里边
 
 975
 00:38:46,316 --> 00:38:47,682
 The collider, the gravity,
+碰撞，重力
 
 976
 00:38:47,684 --> 00:38:50,785
 and the bounciness and the don't rotate.
+弹跳，不旋转等等
 
 977
 00:38:50,787 --> 00:38:52,386
 All that, so I want it all kind of in one thing.
+把所有的东西放入其中
 
 978
 00:38:52,388 --> 00:38:53,553
 So, let's do that.
+动手实现吧
 
 979
 00:38:53,555 --> 00:38:55,789
 We'll just do that by creating a new file here.
+创建一个新文件
 
 980
 00:38:55,791 --> 00:38:58,558
@@ -4477,10 +4834,12 @@ New > File.
 981
 00:38:58,560 --> 00:39:00,693
 And it's a Cocoa Touch class.
+Cocoa Touch 类
 
 982
 00:39:00,695 --> 00:39:04,229
 It's gonna be a UIDynamicBehavior subclass,
+UIDynamicBehavior 子类
 
 983
 00:39:04,231 --> 00:39:04,796
@@ -4489,62 +4848,77 @@ okay?
 984
 00:39:04,798 --> 00:39:06,364
 I'm gonna call it.
+起名为
 
 985
 00:39:06,366 --> 00:39:08,265
 DropitBehavior, because that's what it is.
+DropitBehavior
 
 986
 00:39:08,267 --> 00:39:11,135
 It's the behavior for these Dropit things.
+它是给 Dropit 提供 behavior 
 
 987
 00:39:11,137 --> 00:39:12,235
 So I could call DropitBehavior.
+所以起名为 DropitBehavior
 
 988
 00:39:12,237 --> 00:39:13,570
 I could maybe call it DropBehavior,
+也可以起名为 DropBehavior
 
 989
 00:39:13,572 --> 00:39:14,604
 I like it DropitBehavior,
+但是我喜欢 DropitBehavior
 
 990
 00:39:14,606 --> 00:39:16,806
 cuz it's really the behavior of my whole,
+因为它是为我这个 Dropit 游戏
 
 991
 00:39:16,808 --> 00:39:19,641
 all the things participating in my Dropit game here.
+提供 behavior 的东西
 
 992
 00:39:19,643 --> 00:39:21,510
 So here's a DropitBehavior.
+这就是 DropitBehavior
 
 993
 00:39:21,512 --> 00:39:23,611
 Doesn't have anything in it to start.
+没有什么东西
 
 994
 00:39:23,613 --> 00:39:26,214
 And all I'm gonna do is basically take
+我现在将这些东西
 
 995
 00:39:26,216 --> 00:39:28,449
 these things like gravity and collider.
+gravity 和 collider 
 
 996
 00:39:28,451 --> 00:39:35,355
 Out of here, okay, and put him over in here like that.
+取出来，放到这里
 
 997
 00:39:35,357 --> 00:39:38,642
 Oops, sorry.
+抱歉
 
 998
 00:39:38,643 --> 00:39:41,928
 And then I'm going to override init from UIDynamicBehavior,
+然后，重写 UIDynamicBehavior 的 init 方法
 
 999
 00:39:41,930 --> 00:39:43,062
@@ -4553,10 +4927,12 @@ right?
 1000
 00:39:43,063 --> 00:39:44,195
 This is a subclass of UIDynamicBehavior.
+这是 UIDynamicBehavior 子类
 
 1001
 00:39:44,198 --> 00:39:46,231
 So I'll call super init.
+所以在 init 中调用 super.init
 
 1002
 00:39:46,233 --> 00:39:50,268

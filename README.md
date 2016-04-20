@@ -5,6 +5,10 @@ iTunes U 课程地址：[iTunes U/Developing iOS 8 Apps Swift](https://itunes.ap
 
 CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanford.edu/class/cs193p/cgi-bin/drupal/)
 
+### 相关链接
+
+[iTunes U/Developing iOS 9 Apps Swift](https://itunes.apple.com/cn/course/developing-ios-9-apps-swift/id1104579961)
+
 ### 翻译进度
 
 翻译已全部完成，如果你发现字幕有哪些不妥，欢迎提 Pull Request。

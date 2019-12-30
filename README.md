@@ -27,7 +27,7 @@ CS193P 课程地址：[CS193P iPhone Application Development](http://web.stanfor
 
 ### 视频及课件第三方网盘下载
 
-[百度网盘](https://pan.baidu.com/s/14nasgwGoYyR4TOmFLvCqtQ)，密码：`wbxz`
+[百度网盘](https://pan.baidu.com/s/18cBhz393KZZiEojYM6n-KQ)，密码：`h9y8`
 
 ### 联系我们
 
